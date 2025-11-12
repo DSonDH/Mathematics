@@ -30,6 +30,7 @@ $$
 - 전사(surjective, onto): $\mathrm{Rng}(f)=Y$.
 - 단사(injective, into): $x_1,x_2\in X,\ f(x_1)=f(x_2)\Rightarrow x_1=x_2$.
 - 전단사(bijective): 전사이면서 단사인 함수(일대일 대응).
+  - 전단사를 ~로 표기함; $f: X \sim \mathbb{N}$
 
 # 여러 가지 함수
 
