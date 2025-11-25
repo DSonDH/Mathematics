@@ -101,7 +101,6 @@ $$
 이면 **순서보존함수**라 한다.  
 입력값 순서가 출력값 순서에도 동일하게 유지되는 것  
 #### ② 순서동형사상 (Order isomorphism)
-
 $$
 f: A \to B \text{ 전단사이며 } x \le y \Rightarrow f(x) \le f(y)
 $$
