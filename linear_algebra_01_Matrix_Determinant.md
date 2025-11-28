@@ -124,7 +124,7 @@ $$
 * $1 \times 1$: $\det(a) = a$
 * $2 \times 2$: $\det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc$  
 
-$M_{ij}$는 i행 j열을 제외한 나머지 행렬성분들로 구성된 행렬 (Minor matrix 약자) 
+$M_{ij}$는 i행 j열을 제외한 나머지 행렬성분들로 구성된 행렬의 행렬식 (Minor matrix 약자) 
 * $3 \times 3$:
   $$
   \det\begin{pmatrix}
@@ -153,7 +153,8 @@ C_{12} & C_{22} & \cdots \\
 \vdots & \vdots & \ddots
 \end{pmatrix}
 $$
-단, $C_{ij} = (-1)^{i+j}M_{ij}$ (여인수, cofactor)
+단, $C_{ij} = (-1)^{i+j}M_{ij}$ (여인수, cofactor)  
+$M_{ij}$ : 소행렬식(minor)  
 
 예:
 $$

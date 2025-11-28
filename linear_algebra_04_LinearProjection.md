@@ -7,8 +7,10 @@ $체 F$-벡터공간 $V,\ W$에 대하여
 $V$의 성질을 보존하는 다음 두 조건을 만족하는 사상을
 $L(Linear):V \to W$라 한다.
 
-1. Additivity: $L(u+v)=L(u)+L(v)$  $(u,v\in V)$
-2. Homogeneity: $L(kv)=kL(v)$  $(k\in F,\ v\in V)$
+1. Additivity(가산성): $L(u+v)=L(u)+L(v)$  $(u,v\in V)$
+2. Homogeneity(동차성): $L(kv)=kL(v)$  $(k\in F,\ v\in V)$  
+(Additivity는 벡터끼리의 덧셈에 대한 성질이고
+Homogeneity는 스칼라배에 대한 성질이므로 다른 개념임)  
 
 ### ② 관련 용어
 선형사상 $L:V\to W$에서
@@ -21,6 +23,8 @@ $L(Linear):V \to W$라 한다.
 
 * **자기사상 (endomorphism)**:
   $V=W$일 때 $L:V\to V$
+  - 두 개의 서로 다른 원소가 같은 결과로 매핑되는 경우는 정의역과 치역이 같더라도
+그 선형사상은 자기사상(endomorphism)은 맞지만, 단사(injective)는 아니다
 
 * **단사사상 (injective map, monomorphism)**:
   $L(u)=L(v)\Rightarrow u=v$인 $L$
@@ -31,6 +35,9 @@ $L(Linear):V \to W$라 한다.
 * **동형사상 (isomorphism)**:
   단사이면서 전사인 사상
   - 대수구조 동일함을 보이는데 필요!
+  - '구조적으로 동일하다'는 뜻이지,
+원소의 내용물 이 반드시 같아야 한다는 뜻은 아니다
+    - domain, codomain 내용물이 같은것은 endomorphism임
 
 * **자기동형사상(automorphism)**:
   자기사상인 동형사상
@@ -49,8 +56,8 @@ $L_2\circ L_1 : V\to W$로 쓴다.
 
 ## (2) 여러 선형사상
 $L : V \to W$가 선형사상이고 $v \in V$일 때,
-1. $L(v) = \mathbf{0}$ : 영사상
-2. $L(v) = v$ : 항등사상
+1. $L(v) = \mathbf{0}$ : 영사상(zero map)
+2. $L(v) = v$ : identity map
 3. $L(v) = kv$  (단, $k$는 스칼라)
 4. $L(v) = Mv$  
    (단, $M \in M_{m \times n}(F)$, $V = F^n$, $W = F^m$)
@@ -92,8 +99,101 @@ $\mathcal{L}(V,W)$라 하고,
    $([L(v_1)]_{B_W},\dots,[L(v_n)]_{B_W})$
    - $[L(v_1)]_{B_W}$는 칼럼벡터고, 그래서 쭉 hstack하면 행렬이 된다.
 
-**결론**  
-f와 g는 동형사상이다. 또한 두 사상 f와 g는 서로 역사상 관계이다.  
+## 증명 
+**증명 스케치**  
+f에 대해 선형사상 증명(additivity, homogeneity 증명)  
+f가 동형사상 증명 (injective, surjective 증명)  
+g에 대해 선형사상 증명(additivity, homogeneity 증명)  
+g가 동형사상 증명 (injective, surjective 증명  
+f와 g는 역사상 관계 증명 ($f\cdot g, g\cdot f$ 항등사상 증명)
+
+: 두 벡터공간 $V,W$ 가 $\dim V=\dim W=n$, 기저 $B_V=\{v_1,\dots,v_n\}$, $B_W=\{w_1,\dots,w_n\}$ 일 때 $f,g$ 를 동형사상으로 구성한다.
+
+**1. $f$가 선형사상:**  
+정의 $f(v_i)=w_i\ (1\le i\le n)$, 선형확장 $f(\sum a_i v_i)=\sum a_i w_i$.
+
+(1) Additivity:
+$$
+f(u+v)=f(\sum a_i v_i+\sum b_i v_i)
+=\sum (a_i+b_i)w_i
+=\sum a_i w_i+\sum b_i w_i
+=f(u)+f(v).
+$$
+
+(2) Homogeneity:
+$$
+f(kv)=f(\sum k a_i v_i)
+=\sum (k a_i) w_i
+=k\sum a_i w_i
+=k f(v).
+$$
+
+**2. $f$가 동형사상:**  
+
+(1) 단사(injective):  
+$f(v_1)=f(v_2)$ 라고 하자.  
+두 벡터를 기저에 대해 전개하면
+$$
+f\left(\sum a_i v_i\right)
+=f\left(\sum b_i v_i\right)
+$$
+즉
+$$
+\sum a_i w_i = \sum b_i w_i.
+$$
+$W$의 기저 $\{w_i\}$ 가 선형독립이므로
+$$
+a_i = b_i \quad (1\le i\le n).
+$$
+따라서
+$$
+\sum a_i v_i = \sum b_i v_i,
+$$
+즉 $v_1=v_2$.  
+따라서 $f$는 단사이다.  
+
+(2) 전사(surjective):  
+임의의 $w\in W$ 대해 $w=\sum b_i w_i$ 이므로
+$$
+w=f\left(\sum b_i v_i\right).
+$$
+즉 $f(V)=W$.
+
+**3. $g$가 선형사상:**  
+정의 $g(w_i)=v_i$.  
+Additivity:
+$$
+g(w+w')=g(\sum c_i w_i+\sum d_i w_i)
+=\sum (c_i+d_i)v_i
+=g(w)+g(w').
+$$
+Homogeneity:
+$$
+g(k w)=g(\sum k c_i w_i)
+=\sum (k c_i)v_i
+=k\sum c_i v_i
+=k g(w).
+$$
+
+**4. $g$가 동형사상:**  
+기저의 대응으로 $g(w_1)=v_1,\dots,g(w_n)=v_n$.  
+$f$와 동일한 방식으로  
+$g(v_1)=g(v_2) \Rightarrow v_1=v_2$ 로 단사,  
+임의의 $v=\sum a_i v_i$ 를 $g(\sum a_i w_i)$ 로 표현하여 전사.
+
+**5. $f,g$가 서로 역함수:**  
+기저에서  
+$$
+g(f(v_i))=g(w_i)=v_i,\qquad f(g(w_i))=f(v_i)=w_i.
+$$
+선형확장으로 모든 $v\in V$, $w\in W$ 대해
+$$
+g(f(v))=v,\qquad f(g(w))=w.
+$$
+즉 $g\circ f=I_V,\ f\circ g=I_W$.
+
+결론: $f,g$는 서로 역사상이며 $V$와 $W$는 동형.
+
 
 # 3. 차원정리 (Rank–Nullity Theorem)
 ## (1) 차원정리

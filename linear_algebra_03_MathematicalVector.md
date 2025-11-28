@@ -96,7 +96,7 @@ $$
 모든 $u,v,w \in V$, $k \in F$에 대해 다음 조건을 만족한다. <>를 범용(실수집합 말고도 복소수 까지도 범용) 내적연산이라고 함. $K \in \{\mathbb{R},\mathbb{C} \}$
 1. $\langle u+v, w \rangle = \langle u,w \rangle + \langle v,w \rangle$
 2. $\langle ku, v \rangle = k \langle u,v \rangle$
-3. $\langle u,v \rangle = \overline{\langle v,u \rangle}$  (bar: 복고수에만 한정. 켤레 복소수. 실수이면 그냥 교환법칙을 의미함)
+3. $\langle u,v \rangle = \overline{\langle v,u \rangle}$  (bar: 복소수에만 한정. 켤레 복소수. 실수이면 그냥 교환법칙을 의미함)
 4. $\langle v,v \rangle > 0$ for $v \neq 0$
 
 ### (3) 유클리드공간 (Euclidean Space)
