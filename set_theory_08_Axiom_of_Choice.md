@@ -5,10 +5,10 @@
 집합 $X \neq \emptyset$의 부분집합족을 ${A_i}$라 할 때,
 
 $$
-\forall i \in I, ; f(A_i) \in A_i \text{인 } f : \{A_i\} \to X
+\forall i \in I, \ f(A_i) \in A_i \text{인 } f : \{A_i\} \to X
 $$
 
-을 **선택함수(choice function)**라 한다.
+을 **선택함수(choice function)** 라 한다.
 
 즉, 각 부분집합 $A_i$에서 **하나의 원소를 선택하는 함수**이다.
 

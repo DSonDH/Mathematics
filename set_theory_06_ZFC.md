@@ -11,14 +11,14 @@ $$
 
 * 집합은 그 집합이 갖는 성질이 아니라, 그 원소들에 의해서만 규정된다.
 * 즉, 같은 원소를 가지면 동일한 집합이다.
-* 집합의 **유일성(identifiability)**을 보장한다.
+* 집합의 **유일성(identifiability)** 을 보장한다.
 
 참고: 외연공리에 의해 $\{A, A\} = \{A\}$
 
 ## ② 쌍 공리 (Axiom of Pairing)
 
 $$
-\forall A, B, \exists C ; s.t.; C = \{A, B\}
+\forall A, B,\ \ \exists C\ s.t.\ C = \{A, B\}
 $$
 
 * 임의의 두 집합으로 구성된 (곱집합) **쌍집합(pair set)** 의 존재를 보장한다.
@@ -26,7 +26,7 @@ $$
 ## ③ 공집합 공리 (Axiom of Empty Set)
 
 $$
-\exists A; s.t.; \forall x,; x \notin A
+\exists A\ s.t.\ \forall x,\ x \notin A
 $$
 
 * 공집합 $\emptyset$의 존재를 보장한다.
@@ -34,7 +34,7 @@ $$
 ## ④ 정칙성 공리 (Axiom of Regularity / Foundation)
 
 $$
-\forall A,; A \neq \emptyset \Rightarrow \exists B \in A; s.t.; A \cap B = \emptyset
+\forall A,\ A \neq \emptyset \Rightarrow \exists B \in A\ s.t.\ A \cap B = \emptyset
 $$
 
 * 모든 비공집합 $A$는 자신과 교집합이 없는 원소 $B$를 가진다.
@@ -45,7 +45,7 @@ $$
 ## ⑤ 합집합 공리 (Axiom of Union)
 
 $$
-\forall A,; \exists B; s.t.; B = \bigcup A
+\forall A,\ \exists B\ s.t.\ B = \bigcup A
 $$
 
 * 임의의 집합 $A$에 대해 모든 원소들의 원소들을 모은 합집합 $\bigcup A$의 존재를 보장한다.
@@ -53,15 +53,15 @@ $$
 ## ⑥ 멱집합 공리 (Axiom of Power Set)
 
 $$
-\forall A,; \exists P; s.t.; \forall B,; B \subset A \Rightarrow B \in P
+\forall A,\ \exists P\ s.t.\ \forall B,\ B \subset A \Rightarrow B \in P
 $$
 
-* 임의의 집합 $A$에 대한 **멱집합 $\mathcal{P}(A)$**의 존재를 보장한다.
+* 임의의 집합 $A$에 대한 **멱집합 $\mathcal{P}(A)$** 의 존재를 보장한다.
 
 ## ⑦ 무한 공리 (Axiom of Infinity)
 
 $$
-\exists A,; \emptyset \in A \land (\forall x \in A)(x \cup {x} \in A)
+\exists A,\ \emptyset \in A \land (\forall x \in A;\ x \cup \{x\} \in A)
 $$
 
 * 공집합을 포함하고, 원소 $x$가 있으면 $x \cup \{x\}$도 포함하는
@@ -71,7 +71,7 @@ $$
 ## ⑧ 치환 공리 (Axiom of Replacement)
 
 $$
-\forall x, \exists !y, s.t.; xRy \Rightarrow \forall A,; \exists B,s.t.; \\ \forall x \in A,, \exists y \in B; s.t.; xRy
+\forall x, \exists !y,\ s.t.\ xRy \Rightarrow \forall A, \exists B,\ s.t.\ \\ \forall x \in A,\ \exists y \in B;\ s.t.\ xRy
 $$
 * !는 유일하게 기호임
 * 주어진 관계 $R$에 따라 집합 $A$의 각 원소를 다른 원소로 대응시킬 때,
@@ -81,7 +81,7 @@ $$
 ## ⑨ 분리 공리 (Axiom Schema of Separation)
 
 $$
-\forall A,; \exists B; s.t.; B = \{x \in A \mid \varphi(x)\}
+\forall A,\ \exists B\ s.t.\ B = \{x \in A \mid \varphi(x)\}
 $$
 
 * 임의의 조건(명제함수) $\varphi(x)$를 만족하는 원소만 모은
@@ -95,7 +95,7 @@ $$
 ## ⑩ 선택 공리 (Axiom of Choice)
 
 $$
-\forall A,; \emptyset \notin A \Rightarrow \exists f: A \to \bigcup A; s.t.; \forall B \in A,; f(B) \in B
+\forall A,\ \emptyset \notin A \Rightarrow \exists f: A \to \bigcup A \ \ s.t. \ \ \forall B \in A,\ f(B) \in B
 $$
 
 * 모든 비공집합들의 모임 $A$에 대해,

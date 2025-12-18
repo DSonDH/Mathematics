@@ -19,50 +19,56 @@
 
 #### ③ 극대원소(Maximal element)와 극소원소(Minimal element)
 
-부분순서집합 $A$에서
+부분순서집합 $A$에서 $a$ in A는 **극대원소**: 
 $$
-\forall x \in A,; a \le x \Rightarrow x = a
+\forall x \in A,\ a \le x \Rightarrow x = a
 $$
-이면 $a$ in A는 **극대원소** 라 한다.  
+
+$a$ in A는 **극소원소**:
 $$
-\forall x \in A,; x \le a \Rightarrow x = a
+\forall x \in A,\ x \le a \Rightarrow x = a
 $$
-이면 $a$ in A는 **극소원소** 라 한다.  
 극대, 극소 원소는 유일하지는 않다.  
 
 예: 멱집합 $\mathcal{P}(X)$에서 $\emptyset, X$
 
 #### ④ 최대원소(Greatest element)와 최소원소(Least element)
 
-부분순서집합 $A$에서
+부분순서집합 $A$,  
+ a in A에서 **최대원소** :
 $$
-\forall x \in A,; x \le a
+\forall x \in A,\ x \le a
 $$
-이면 a in A 를 **최대원소**,
+
+a in A에서 **최소원소** :
 $$
-\forall x \in A,; a \le x
+\forall x \in A,\ a \le x
 $$
-이면 a in A를 **최소원소**라 한다.  
 
 - 극대/극소 원소는 존재가능하지만, 최대/최소 원소는 없을 수 있다: 모든 원소끼리 비교가능하지 않으면 그럼.  
 - 개구간 (0, 1)에서 극대, 극소를 알 수 없음.  
 - 이런 무한 집합에서 극대, 극소 개념이 필요해서 상한, 하한이 도입됨.
 
 ### (3) 상한과 하한
+극대, 극소, 최대원소, 최소원소와 달리, 상한은 $A$ 안에 부분집합 $B$ 에 대해 정의됨  
+
 #### ① 상계(upper bound)와 하계(lower bound)
 
-부분순서집합 $A$의 부분집합 $B$에 대하여
+부분순서집합 $A$의 부분집합 $B$에 대하여  
+$a$ in A가 **상계** : 
 $$
-\forall x \in B,; x \le a
+\forall x \in B,\ x \le a
 $$
-인 $a$ in A를 $B$의 **상계**,
+
+$a$ in A가 **하계** :
 $$
-\forall x \in B,; a \le x
+\forall x \in B,\ a \le x
 $$
-인 $a$ in A를 **하계**라 한다.  
+
 a가 B의 원소일수도, 아닐수도 있음  
 상계, 하계가 없을수도 있음  
-
+상계가 존재하는 A를 위로유계이다 라고 한다.  
+위로 유계, 아래로 유계인 집합을 유계집합이라 한다.  
 #### ② 상한(supremum)과 하한(infimum)
 상계 중 최소인 원소를 **상한**,
 하계 중 최대인 원소를 **하한**이라 한다.
@@ -82,9 +88,9 @@ $$
 
 #### ② 절단 (cut)
 $$
-B \cap C = \emptyset,; B \cup C = A,\\
-x \in B,; y \leq x \Rightarrow y \in B \\
-x \in C,; x \leq y \Rightarrow y \in C
+B \cap C = \emptyset,\ B \cup C = A,\\
+x \in B,\ y \leq x \Rightarrow y \in B \\
+x \in C,\ x \leq y \Rightarrow y \in C
 $$
 를 만족하는 공집합 아닌 부분집합들의 쌍 $(B, C)$를 **절단(cut)** 이라 한다.  
 
@@ -115,7 +121,7 @@ $$ A \cong B $$
 ### (1) 정의
 #### ① 비교가능성
 $$
-\forall x, y \in A,; (x \le y) \lor (y \le x)
+\forall x, y \in A,\ (x \le y) \lor (y \le x)
 $$
 이면 $A$는 **전순서집합(totally ordered set)** 이라 한다.
 
@@ -132,7 +138,7 @@ $A$에서의 **쇄(chain)** 라 한다.
 ### (3) 정렬집합 (Well-ordered Set)
 
 $$
-A \neq \emptyset \Rightarrow \exists a \in A,; a \text{는 최소원소}
+A \neq \emptyset \Rightarrow \exists a \in A,\ a \text{는 최소원소}
 $$
 모든 비공집합이 최소원소를 가지면 $A$는 **정렬집합(well-ordered set)** 이라 한다.  
 정렬의 기준이 되는 최소원소가 있어야 한다는 말.  
@@ -165,7 +171,7 @@ $\omega = o(\mathbb{N})$
 ### (3) 서수의 순서
 정렬집합 $A,B$에 대해
 $$
-o(A)=\alpha,; o(B)=\beta
+o(A)=\alpha,\ o(B)=\beta
 $$
 일 때,
 $A$가 $B$의 절편과 순서동형이면 $\alpha$는 $\beta$보다 작거나 같다고 하며, $\alpha \preceq \beta$라 한다. $\alpha \neq \beta$이면 $\alpha \prec \beta$

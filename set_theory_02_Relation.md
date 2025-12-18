@@ -24,6 +24,9 @@ A에서 B로의 관계 P(x, y)라는 명제함수를 만족해야한다.
 - 반대칭성(antisymmetric): $\forall a,b\in A,\ (a,b)\in R\land (b,a)\in R\Rightarrow a=b$.
 - 추이성(transitive): $\forall a,b,c\in A,\ (a,b)\in R\land(b,c)\in R\Rightarrow (a,c)\in R$.
 - 전체성(total 또는 connex): $\forall a\neq b,\ (a,b)\in R$ 또는 $(b,a)\in R$ 중 하나가 성립.
+  - 집합 안의 어떤 두 원소도 관계로 항상 비교 가능하다는 뜻
+  - 이는 선택성(comparability) 또는 total comparability라고도 함
+  - 전체성을 만족하는 관계는 집합의 원소들을 줄 세울 수 있는 구조를 가짐
 
 기타 성질과 사실:
 - 합성은 결합적(associative): $T\circ(S\circ R)=(T\circ S)\circ R$.
@@ -76,8 +79,12 @@ A에서 B로의 관계 P(x, y)라는 명제함수를 만족해야한다.
 $[x]=\{\,y\in X\mid y\sim x\,\}$ 혹은 
 $E_x=\{\,y\in X\mid xEy\,\}$ 
 로 정의한다.  
-동치류들의 집합 $\{[x]\mid x\in X\}$를 상집합이라 하고 (다른 표현: $X/E = \{E_x|x\in X\}$), 이 상집합은 $X$의 분할(partition, 약자로는 P)을 이룬다. (/는 법 또는 modulo라 부른다)  
-이를 p에 의한 관계, $R_p$ 또는 $X/P$로 표현한다$$X/P = \{(x,y)\mid\exists A\in P, x, y\in A\}$$
+동치류들의 집합 $\{[x]\mid x\in X\}$를 상집합(the set of equivalence classes 또는 the quotient set) 이라 하고 (다른 표현: $X/E = \{E_x|x\in X\}$),  
+이 상집합은 $X$의 분할(partition, 약자로는 P)을 이룬다.  
+($/$는 법 또는 modulo)  
+
+이를 p에 의한 관계, $R_p$로 표현한다$$R_P = \{(x,y)\in X\times X \mid \exists A\in P,\ x,y\in A\}$$
+
 
 - 예제
   - 집합 $X=\{1,2,3,4,5\}$의 분할 $P=\{\{1,2\},\{3\},\{4,5\}\}$에 대하여:
@@ -85,7 +92,7 @@ $E_x=\{\,y\in X\mid xEy\,\}$
     - 각 분할 원소의 P를 나열하면 된다
 $R_P=\{(1,1),(1,2),(2,1),(2,2),(3,3),(4,4),(4,5),(5,4),(5,5)\}$
 
-  - (2) $E=\mathcal{P}(X)$일 때 각 원소의 동치류 $E_i=[i]_{R_P}$  
+  - (2) $R_P$에 대하여 각 원소의 동치류 $[i]_{R_P}$  
     - $E_1=\{1,2\}$  
     - $E_2=\{1,2\}$  
     - $E_3=\{3\}$  
@@ -100,7 +107,7 @@ $R_P=\{(1,1),(1,2),(2,1),(2,2),(3,3),(4,4),(4,5),(5,4),(5,5)\}$
 
 역으로, $X$의 분할 $\mathcal P=\{P_i\}_{i\in I}$가 주어지면 다음과 같이 동치관계를 정의할 수 있다:
 $$
-x\sim y \iff \exists i\in I\ \text{s.t.}\ x\in P_i\ \text{그리고}\ y\in P_i.
+x\sim y \iff \exists i\in I\ \text{s.t.}\ x\in P_i\ \text{and}\ y\in P_i.
 $$
 이 관계는 반사적·대칭적·추이적이므로 동치관계가 된다.
 

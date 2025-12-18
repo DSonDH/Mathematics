@@ -121,7 +121,7 @@ B = P^{-1} A P
 $$
 
 를 만족하면, $A, B$는 서로 닮음(similar)이라고 하고
-$A \sim B$로 표현한다.
+$A \sim B$로 표현한다. 닮음변환 혹은 상사변환이라고도 함  
 
 ## (2) 닮음 불변량 (Similarity Invariants)
 
