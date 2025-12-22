@@ -20,6 +20,23 @@ $n'=n+1$이라 정의할 때, 명제 $P(n)$에 대하여
 
 이 성립하면 $P(n)$은 모든 자연수 $n$에 대하여 참이다.
 
+#### 증명
+페아노 공리 5번을 이용한다.
+
+$S = \{ n \in \mathbb{N} \mid P(n) \text{이 참} \}$ 라고 하자.
+
+조건 1에 의해 $P(1)$이 참이므로 $1 \in S$.
+
+조건 2에 의해 $P(n)$이 참이면 $P(n+1)$이 참이므로, 
+$n \in S \Rightarrow n' = n+1 \in S$.
+
+따라서 페아노 공리 5번에 의해 $\mathbb{N} \subseteq S$.
+
+그런데 $S \subseteq \mathbb{N}$ (정의에 의해) 이므로 $S = \mathbb{N}$.
+
+즉, 모든 자연수 $n$에 대하여 $P(n)$이 참이다. $\blacksquare$
+
+
 ## (2) 자연수의 성질
 **페아노 공리 5가지를 만족하는 무었이던 자연수라고 정의한다.**  
 
@@ -101,7 +118,6 @@ $$
 세 경우를 모두 합쳐서
 $\forall a,b\in\mathbb R,\ a<b \Rightarrow \exists q\in\mathbb Q$ with $a<q<b$ 가 성립한다.
 따라서 유리수의 조밀성이 증명된다.
-
 ### Thm 2. 무리수의 조밀성
 $$
 \forall a,b \in \mathbb R, a<b \Rightarrow \exists \alpha \in \mathbb I \text{ such that } a<\alpha<b.
@@ -131,9 +147,14 @@ $$
 
 따라서 $a$와 $b$ 사이에 무리수 $s$가 존재한다 $\blacksquare$
 
+**Note:** $\sqrt{2}$는 임의의 무리수 상수를 대표하는 예시이다.  
+다른 무리수(예: $\pi$, $e$, $\sqrt{3}$ 등)를 사용해도 동일하게 증명된다.
+$$
+\forall a,b \in \mathbb R, a<b \Rightarrow \exists \alpha \in \mathbb I \text{ such that } a<\alpha<b.
+$$
+
 # 3. 실수
 ## (1) 체 공리 (Field Axioms)
-
 집합 $S$ 위의 두 이항연산 $+$, $\cdot$이 다음 9개의 공리를 만족하면, 대수구조 $(S,+,\cdot)$를 체라고 한다.  
 (덧셈, 곱셈은 닫혀있다 가정)  
 
@@ -195,7 +216,8 @@ iii) $a<b$
 $\mathbb R$의 공집합이 아닌 부분집합이 위로 유계이면 그 부분집합은 상한을 갖는다.  
 
 Def. [상한]  
-부분순서집합 A의 부분집합 B의 상계들의 집합이 최소원소를 가질때, 그 최소원소를 B의 상한이라하고, $supB$로 나타낸다. (supremum)  
+부분순서집합 A의 부분집합 B의 상계들의 집합이 최소원소를 가질때,  
+그 최소원소를 B의 상한이라하고, $supB$로 나타낸다. (supremum)  
 
 (빽빽함 (완전 들어참)을 정의하는 여러 버전 중 하나임.)  
 유리수집합은 이 공리를 만족하지 않음을 아래서 보임.  
@@ -244,6 +266,38 @@ $$
 ---
 Thm 3. $\mathbb{Q}는 완비성을 갖지 않는다$  
 
+#### 증명
+반례를 제시한다.  
+집합 $S = \{ x \in \mathbb{Q} \mid x > 0 \land x^2 < 2 \}$ 를 생각하자.
+
+**Step 1. $S$는 위로 유계이다.**  
+$\forall x \in S, x^2 < 2 < 4 = 2^2$ 이므로 $x < 2$.  
+따라서 $2$는 $S$의 상계이다.
+
+**Step 2. $S$가 $\mathbb{Q}$에서 상한을 가진다고 가정하자.**  
+즉, $\sup_{\mathbb{Q}} S = r \in \mathbb{Q}$ 라 하자.
+
+**Step 3. $r^2 = 2$임을 보인다.**  
+- $r^2 < 2$ 라 가정하면, 충분히 작은 $\varepsilon > 0$에 대해
+   $(r+\varepsilon)^2 < 2$ 가 되도록 할 수 있다.  
+   그러면 $r+\varepsilon \in S$ 이므로 $r < r+\varepsilon$ 인 원소가 $S$에 존재한다.  
+   이는 $r$이 상계라는 가정에 모순.
+
+- $r^2 > 2$ 라 가정하면, 충분히 작은 $\varepsilon > 0$에 대해
+   $(r-\varepsilon)^2 > 2$ 가 되도록 할 수 있다.
+   
+   그러면 $\forall x \in S, x^2 < 2 < (r-\varepsilon)^2$ 이므로 $x < r-\varepsilon$.
+   
+   즉, $r-\varepsilon$이 $r$보다 작은 상계가 되어 모순.
+따라서 $r^2 = 2$.
+
+**Step 4. 모순 도출**  
+그런데 연습문제 2에서 제곱하여 2가 되는 유리수는 존재하지 않는다.  
+따라서 $r \notin \mathbb{Q}$ 이므로 모순.
+
+**결론**  
+$S$는 $\mathbb{Q}$에서 위로 유계이지만 상한을 갖지 않는다.  
+따라서 $\mathbb{Q}$는 완비성 공리를 만족하지 않는다. $\blacksquare$
 
 ## 3) 완비성의 예 – 무한소수
 위로 유계인 임의의 무한소수 부분집합 $A$를 생각한다.

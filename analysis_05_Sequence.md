@@ -407,6 +407,21 @@ $\varepsilon$은 임의이므로 $S = T$이다.
 1. 다음 명제의 참·거짓을 판별하고 설명하시오.  
 (1) $\{a_n\}$이 유계 $\Rightarrow \lim a_n$ 존재  
 (2) $\lim(a_n+b_n)=\infty\Rightarrow \lim a_n=\infty$ 또는 $\lim b_n=\infty$  
+  - 거짓
+  - $$
+    a_n =
+    \begin{cases}
+    n, & n \text{이 홀수일 때} \\
+    0, & n \text{이 짝수일 때}
+    \end{cases}
+    \\
+    b_n =
+    \begin{cases}
+    0, & n \text{이 홀수일 때} \\
+    n, & n \text{이 짝수일 때}
+    \end{cases}
+    $$
+
 (3) $\{a_n\}$이 수렴하는 부분수열을 가지면 유계이다  
 (4) $\{a_n\}$이 수렴 $\Rightarrow \{a_n\}$은 코시수열   
 (5) $\forall n \in \mathbb{N}$, $|a_{n+1}-a_n| \le \frac{1}{n}$이면 $\{a_n\}$은 코시수열이다  
