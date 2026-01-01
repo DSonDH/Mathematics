@@ -563,8 +563,49 @@ $$
 \int_a^b f'g\,dt = f(b)g(b) - f(a)g(a) - \int_a^b fg'\,dt
 $$
 
-요청대로 **그림(강의록)에 나온 수식과 설명을 그대로 반영**하여, 아래 내용을 **엄밀하게 수정**한다.
-불필요한 요약이나 재해석 없이, **정의 구조·경우 구분·표현 방식**을 강의록에 맞춘다.
+
+### 예제 3. $\displaystyle\int x^k e^{-x}\,dx$ (부정적분, $k \in \mathbb{N}$)
+이 적분은 **부분적분**을 반복 적용하여 구할 수 있다.  
+$k=1$인 경우를 먼저 살펴보자.
+
+**$k=1$일 때:**  
+$f(x) = x$, $g'(x) = e^{-x}$로 두면  
+$f'(x) = 1$, $g(x) = -e^{-x}$
+
+부분적분 공식에 의해
+$$
+\int x e^{-x}\,dx = -xe^{-x} - \int (-e^{-x})\,dx = -xe^{-x} - e^{-x} + C = -(x+1)e^{-x} + C
+$$
+
+**일반적인 $k \in \mathbb{N}$인 경우:**  
+$f(x) = x^k$, $g'(x) = e^{-x}$로 두면  
+$f'(x) = kx^{k-1}$, $g(x) = -e^{-x}$
+
+부분적분 공식에 의해
+$$
+\int x^k e^{-x}\,dx = -x^k e^{-x} + k\int x^{k-1} e^{-x}\,dx
+$$
+
+이 과정을 반복하면 최종적으로
+$$
+\int x^k e^{-x}\,dx = -e^{-x}\sum_{j=0}^{k} \frac{k!}{j!}x^j + C
+$$
+
+**정적분 예시:** $\displaystyle\int_0^\infty x^k e^{-x}\,dx$  
+위의 부정적분 결과를 이용하여
+$$
+\int_0^\infty x^k e^{-x}\,dx = \lim_{b\to\infty}\left[-e^{-x}\sum_{j=0}^{k} \frac{k!}{j!}x^j\right]_0^b
+$$
+
+$x \to \infty$일 때 지수함수가 다항식보다 빠르게 증가하므로 $\lim_{x\to\infty} x^j e^{-x} = 0$ (모든 $j$에 대해)
+
+따라서
+$$
+\int_0^\infty x^k e^{-x}\,dx = 0 - \left(-e^0 \cdot \frac{k!}{0!} \cdot 0^0\right) = k!
+$$
+
+이는 **감마함수** $\Gamma(n+1) = n!$ (단, $n \in \mathbb{N}$)의 특수한 경우이다.
+
 
 # 3. 리만적분의 확장 *(Extensions of the Riemann Integral)*
 ## (1) 특이적분 *(Improper Integral)*
