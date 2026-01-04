@@ -88,12 +88,21 @@ $$
 
 # 2. 여러 가지 해석함수의 예 *(Examples of Analytic Functions)*
 다음 함수들은 해당 구간에서 멱급수로 전개되며 해석함수이다.
-
 * **기하급수**
   $$
   \frac{1}{x}
   =\sum_{n=0}^{\infty}(1-x)^n
   \quad (0<x<2)
+  $$
+  $$
+  \frac{1}{1-x}
+  =\sum_{n=0}^{\infty}x^n
+  \quad (-1<x<1)
+  $$
+  $$
+  \frac{1}{1+x}
+  =\sum_{n=0}^{\infty}(-1)^n x^n
+  \quad (-1<x<1)
   $$
 
 * **제곱근 함수**
@@ -102,10 +111,19 @@ $$
   =1-\frac{1-x}{2}-\frac{(1-x)^2}{8}-\frac{(1-x)^3}{16}-\cdots
   \quad (0<x<2)
   $$
+  $$
+  \sqrt{1+x}
+  =1+\frac{x}{2}-\frac{x^2}{8}+\frac{x^3}{16}-\frac{5x^4}{128}+\cdots
+  \quad (-1<x\le 1)
+  $$
 
 * **지수함수**
   $$
   e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!}
+  \quad (-\infty<x<\infty)
+  $$
+  $$
+  e^{-x}=\sum_{n=0}^{\infty}\frac{(-1)^n x^n}{n!}
   \quad (-\infty<x<\infty)
   $$
 
@@ -115,12 +133,57 @@ $$
   =\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}(x-1)^n
   \quad (0<x\le 2)
   $$
+  $$
+  \ln(1+x)
+  =\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}x^n
+  \quad (-1<x\le 1)
+  $$
+  $$
+  \ln(1-x)
+  =-\sum_{n=1}^{\infty}\frac{x^n}{n}
+  \quad (-1\le x<1)
+  $$
 
 * **삼각함수**
   $$
   \sin x=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1},
   \quad
   \cos x=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n}
+  \quad (-\infty<x<\infty)
+  $$
+  $$
+  \tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+\frac{17x^7}{315}+\cdots
+  \quad \left(-\frac{\pi}{2}<x<\frac{\pi}{2}\right)
+  $$
+
+* **쌍곡함수**
+  $$
+  \sinh x=\sum_{n=0}^{\infty}\frac{x^{2n+1}}{(2n+1)!}=x+\frac{x^3}{6}+\frac{x^5}{120}+\cdots
+  \quad (-\infty<x<\infty)
+  $$
+  $$
+  \cosh x=\sum_{n=0}^{\infty}\frac{x^{2n}}{(2n)!}=1+\frac{x^2}{2}+\frac{x^4}{24}+\cdots
+  \quad (-\infty<x<\infty)
+  $$
+
+* **이항급수** *(Binomial Series)*
+  $$
+  (1+x)^{\alpha}=\sum_{n=0}^{\infty}\binom{\alpha}{n}x^n
+  =1+\alpha x+\frac{\alpha(\alpha-1)}{2!}x^2+\frac{\alpha(\alpha-1)(\alpha-2)}{3!}x^3+\cdots
+  \quad (-1<x<1)
+  $$
+  여기서 $\alpha$는 임의의 실수이고, $\binom{\alpha}{n}=\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}$
+
+* **역삼각함수**
+  $$
+  \arctan x=\sum_{n=0}^{\infty}\frac{(-1)^n}{2n+1}x^{2n+1}
+  =x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+\cdots
+  \quad (-1\le x\le 1)
+  $$
+  $$
+  \arcsin x=\sum_{n=0}^{\infty}\frac{(2n)!}{4^n(n!)^2(2n+1)}x^{2n+1}
+  =x+\frac{x^3}{6}+\frac{3x^5}{40}+\cdots
+  \quad (-1\le x\le 1)
   $$
 
 ## 2.1. 기하급수의 증명

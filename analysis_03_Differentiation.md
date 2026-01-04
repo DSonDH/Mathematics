@@ -146,7 +146,7 @@ $$ f'(x)=\frac{df}{dx}
 
 ## (2) 여러 함수의 도함수 *(Derivatives of Elementary Functions)*
 * $(c)'=0$  $(c\in\mathbb{R})$
-* $(x^n)'=nx^{n-1}$
+* $(x^n)'=nx^{n-1}$ ($n\in\mathbb{Z}\setminus\{0\}$)
 * $(e^x)'=e^x$
 * $(a^x)'=a^x\ln a$
 * $(\ln x)'=\frac{1}{x}$
@@ -156,6 +156,7 @@ $$ f'(x)=\frac{df}{dx}
 * $(\cot x)'=-\csc^2 x$
 * $(\sec x)'=\sec x\tan x$
 * $(\csc x)'=-\csc x\cot x$
+* $\left(\frac{f(x)}{g(x)}\right)'= \frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}$
 
 # 3. 평균값 정리 *(Mean Value Theorem)*
 ## (0) 롤의 정리

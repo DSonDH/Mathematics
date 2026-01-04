@@ -1,5 +1,3 @@
-TODO: FIXME: Lipschitz연속, 르벡적분 같은 개념들 추가해서 정리
-
 # 1. 리만적분 *(Riemann Integral)*
 ## (1) 리만적분의 정의 *(Definition of the Riemann Integral)*
 ### 분할과 세분 *(Partition, Refinement)*
@@ -830,5 +828,62 @@ $$
    (2) $\displaystyle\int_2^\infty \frac1{x\ln x}\ dx$  
 
 5. 다음 스틸체스적분을 구하시오.  
-   (1) $\displaystyle\int_0^3 x^2\ de^x$  
-   (2) $\displaystyle\int_2^3 (x-1)\ d(x^2+2)$  
+  (1) $\displaystyle\int_0^3 x^2\ de^x$  
+  (2) $\displaystyle\int_2^3 (x-1)\ d(x^2+2)$  
+
+#### 풀이
+
+**(1)** $\displaystyle\int_0^3 x^2\ de^x$
+
+$f(x) = x^2$, $\alpha(x) = e^x$로 두면 $\alpha'(x) = e^x$이다.
+
+정리에 의해
+$$
+\int_0^3 x^2\ de^x = \int_0^3 x^2 \cdot e^x\ dx
+$$
+
+부분적분을 사용한다. $u = x^2$, $dv = e^x dx$로 두면  
+$du = 2x\,dx$, $v = e^x$
+
+$$
+\int_0^3 x^2 e^x\ dx = [x^2 e^x]_0^3 - \int_0^3 2xe^x\ dx
+$$
+
+다시 부분적분: $u = 2x$, $dv = e^x dx$이면  
+$du = 2\,dx$, $v = e^x$
+
+$$
+\int_0^3 2xe^x\ dx = [2xe^x]_0^3 - \int_0^3 2e^x\ dx = [2xe^x]_0^3 - [2e^x]_0^3
+$$
+
+따라서
+$$
+\int_0^3 x^2 e^x\ dx = [x^2 e^x]_0^3 - ([2xe^x]_0^3 - [2e^x]_0^3)
+$$
+$$
+= [x^2 e^x - 2xe^x + 2e^x]_0^3 = [e^x(x^2 - 2x + 2)]_0^3
+$$
+$$
+= e^3(9 - 6 + 2) - e^0(0 - 0 + 2) = 5e^3 - 2
+$$
+
+**(2)** $\displaystyle\int_2^3 (x-1)\ d(x^2+2)$
+
+$f(x) = x-1$, $\alpha(x) = x^2+2$로 두면 $\alpha'(x) = 2x$이다.
+
+정리에 의해
+$$
+\int_2^3 (x-1)\ d(x^2+2) = \int_2^3 (x-1) \cdot 2x\ dx
+$$
+$$
+= \int_2^3 2x(x-1)\ dx = \int_2^3 (2x^2 - 2x)\ dx
+$$
+$$
+= \left[\frac{2x^3}{3} - x^2\right]_2^3
+$$
+$$
+= \left(\frac{2 \cdot 27}{3} - 9\right) - \left(\frac{2 \cdot 8}{3} - 4\right)
+$$
+$$
+= (18 - 9) - \left(\frac{16}{3} - 4\right) = 9 - \frac{4}{3} = \frac{23}{3}
+$$

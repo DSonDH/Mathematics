@@ -13,7 +13,6 @@
 해석적 관점만 다룸. 기하적 특성은 위상수학에서 다룸.  
 
 ### Def 1. *(수렴과 극한, Limit of a function at a point)*
-
 $f : D \to \mathbb{R},\ a \in D,\ L \in \mathbb{R}$ 라 하자.
 
 $$ \forall \epsilon>0,\ \exists \delta>0\ \text{s.t.}\ \forall x\in D,\\

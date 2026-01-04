@@ -202,16 +202,23 @@ $$A_1\subseteq A_2\subseteq\cdots
 \Rightarrow
 P\Big(\bigcup_{n=1}^\infty A_n\Big)
 =\lim_{n\to\infty}P(A_n)$$
+- 증가열 $C_1 \subseteq C_2 \subseteq \cdots$에 대해 극한집합은 다음과 같이 정의된다:
+   $$\lim_{k\to\infty} C_k = \bigcup_{k=1}^\infty C_k = \{\omega : \exists k_0 \text{ s.t. } \forall k \ge k_0, \omega \in C_k\}$$
+   즉, 어떤 $k_0$부터는 항상 포함되는 원소들의 집합이다.
+- $k=\infin$는 자연수가 아니다. 끝점은 포함시키지 않는다.
 
 (b) 감소열(decreasing sequence)
 $$B_1\supseteq B_2\supseteq\cdots
 \Rightarrow
 P\Big(\bigcap_{n=1}^\infty B_n\Big)
 =\lim_{n\to\infty}P(B_n)$$
+- 감소열 $D_1 \supseteq D_2 \supseteq \cdots$에 대해 극한집합은 다음과 같이 정의된다:
+   $$\lim_{k\to\infty} D_k = \bigcap_{k=1}^\infty D_k = \{\omega : \omega \in D_k \text{ for all } k\}$$
+   즉, 모든 $k$에 대해 항상 포함되는 원소들의 집합이다.
+- $k=\infin$는 자연수가 아니다. 끝점은 포함시키지 않는다.
 
 #### 증명 (Proof)
-**(a) 증가열의 경우**
-
+**(a) 증가열의 경우**  
 $C_1=A_1$, $C_2=A_2-A_1$, $C_3=A_3-A_2$, ..., $C_n=A_n-A_{n-1}$ 로 정의하자.
 
 그러면 각 $C_i$들은 서로소이고
@@ -231,8 +238,7 @@ $$\lim_{n\to\infty}P(A_n)
 =\sum_{i=1}^\infty P(C_i)
 =P\Big(\bigcup_{n=1}^\infty A_n\Big)$$
 
-**(b) 감소열의 경우**
-
+**(b) 감소열의 경우**  
 $B_1\supseteq B_2\supseteq\cdots$ 이면 여사건들은 증가열을 이룬다:
 $$B_1^c\subseteq B_2^c\subseteq\cdots$$
 
@@ -258,6 +264,8 @@ $$P\Big(\bigcap_{n=1}^\infty B_n\Big)
 성질 (a)와 (b)를 다음과 같이 나타낸다
 $$P(\lim_{n\to\infty}{A_n})=\lim_{n\to\infty}P(A_n),\ P(\lim_{n\to\infty}{B_n})=\lim_{n\to\infty}P(B_n)$$
 즉, 포함관계가 커지거나 작아지는 사건들에 대해, 연속인 실수함수와 같이 확률계산이 가능하다는 의미로, probability measure의 연속성이라 함.  
+증가열이나 감소열이 아니면 성립 안함!!!  
+
 확률측도의 연속성은 **집합의 극한과 확률의 극한이 교환 가능함**을 보여준다.  
 - **증가열**: 사건들이 점점 커질 때, 극한 사건의 확률은 각 사건 확률의 극한과 같다
 - **감소열**: 사건들이 점점 작아질 때도 마찬가지로 성립한다
@@ -274,6 +282,8 @@ $$P(\lim_{n\to\infty}{A_n})=\lim_{n\to\infty}P(A_n),\ P(\lim_{n\to\infty}{B_n})=
 
 실해석학의 측도론에서 이를 **측도의 연속성(continuity from below/above)**  이라 하며,
 확률론의 근간이 되는 중요한 성질이다. ∎
+
+
 
 #### 예 1.1.3 (Example)
 표본공간 $S=[0,1]$이고
@@ -828,6 +838,43 @@ $$
   - $E[e^{tX}]$: 적률생성함수
   - $E[g(X)]$: 임의의 함수 $g$에 대한 기댓값
 
+**참고**  
+- 지시함수의 기댓값과 확률의 관계: 지시함수(Indicator Function) **1_A**의 기댓값은 사건 A의 확률과 같다  
+$$E[1_A] = 1 × P(A) + 0 × P(A^c) = P(A) \\ E[1_A​]=P(A)$$
+
+- 이 성질은 확률론에서 기댓값 계산을 단순화하고, 복잡한 확률 문제를 기댓값 문제로 변환할 때 유용하다
+
+- 예: 지시함수 $\mathbf{1}_A$의 기댓값은 사건 $A$의 확률과 같다: $$E[\mathbf{1}_A] = 1 \times P(A) + 0 \times P(A^c) = P(A)$$
+
+   이 성질을 이용하면 비음 확률변수 $X \ge 0$에 대해 다음이 성립한다(비음 확률변수의 적분 표현):  
+   $X \ge 0$이면 모든 $\omega$에 대해
+   $$X(\omega) = \int_0^{\infty} \mathbf{1}_{\{t < X(\omega)\}}\,dt$$
+
+   **직관적 이해**  
+   - $t < X(\omega)$일 때 $\mathbf{1}_{\{t < X(\omega)\}} = 1$
+   - $t \ge X(\omega)$일 때 $\mathbf{1}_{\{t < X(\omega)\}} = 0$
+   - 따라서 적분 구간 $[0, X(\omega))$에서만 1이므로 적분값은 정확히 $X(\omega)$
+
+   **기댓값 계산**  
+   양변에 기댓값을 취하면
+   $$E[X] = E\left[\int_0^{\infty} \mathbf{1}_{\{t < X\}}\,dt\right]$$
+
+   Fubini-Tonelli 정리에 의해 적분과 기댓값의 순서를 교환할 수 있다:
+   $$E[X] = \int_0^{\infty} E[\mathbf{1}_{\{t < X\}}]\,dt$$
+
+   지시함수의 기댓값은 확률이므로
+   $$E[\mathbf{1}_{\{t < X\}}] = P(t < X) = P(X > t)$$
+
+   따라서
+   $$E[X] = \int_0^{\infty} P(X > t)\,dt$$
+
+   **의미**  
+   이 공식은 비음 확률변수의 기댓값을 계산하는 또 다른 방법을 제공한다:
+   - 확률밀도함수를 이용: $E[X] = \int_0^{\infty} x f(x)\,dx$
+   - 생존함수를 이용: $E[X] = \int_0^{\infty} P(X > t)\,dt$
+
+   특히 생존함수 $P(X > t)$가 간단한 형태일 때 유용하다.
+
 #### 예 1.4.2
 동전을 두 번 던져 앞면이 나오는 횟수를 $X$라 하고, 상금을 $X^2$(만원)만큼 받는다고 할 때 기대할 수 있는 상금은 얼마인가?  
 **풀이**  
@@ -972,7 +1019,7 @@ $$
 ## 5. 누적분포함수와 생성함수 (Distribution and Generating Functions)
 확률밀도함수 외에도 확률분포를 나타내는 방법은 여러 가지가 있다.  
 수열에서 일반항, 유한항까지의 합이 서로를 정해줄 수 있듯이,  
-이산현 황률변수의 경우에 누적 확률과 확률밀도함수는 서로를 정해줄 수 있다.  
+이산현 확률변수의 경우에 누적 확률과 확률밀도함수는 서로를 정해줄 수 있다.  
 
 ### 5.1 누적분포함수 (Cumulative Distribution Function, CDF)
 확률변수 $X$의 누적분포함수(cumulative distribution function, CDF)는 다음과 같이 정의된다.
@@ -1020,6 +1067,43 @@ $$
 P(X=a)=F(a)-F(a-)=0
 $$
 이므로 $P(a<X\le b)=P(a\le X\le b)=P(a<X<b)=P(a\le X<b)$가 모두 같다.
+
+#### 일반적인 확률분포에서 CDF로부터 확률 복원
+**불연속점(점질량, atom)에서**
+$$P(X=a) = F(a) - F(a-)$$
+**연속인 구간에서**
+$$f(x) = F'(x) \quad \text{(거의 모든 } x\text{에서)}$$
+이는 **Lebesgue 분해(Lebesgue decomposition)** 에 해당하는 표준적 절차로,
+임의의 확률분포를 이산 부분(discrete part), 절대연속 부분(absolutely continuous part),
+특이연속 부분(singular continuous part)으로 분해할 수 있다는 측도론의 결과이다.
+
+**❌ 흔한 오해**
+> "$F$가 불연속이면 적분이나 $F(b)-F(a)$ 같은 계산은 안 되는 것 아닌가?"
+→ **틀렸다.**
+
+**이유:**  
+우리가 쓰는 $F(b)-F(a)$는
+- 리만적분이 아니라
+- 분포측도 $\mu$의 값을 CDF로 표현한 것일 뿐이다
+
+**정리**
+1. **연속형**: $P(a < X \le b) = F(b) - F(a) = \int_a^b f(x)\,dx$
+   - CDF가 연속이고 미분가능
+   - 확률밀도함수 $f$가 존재
+
+2. **이산형**: $P(a < X \le b) = F(b) - F(a) = \sum_{a < x_k \le b} p(x_k)$
+   - CDF가 계단함수 (불연속)
+   - 확률질량함수 $p$가 존재
+
+3. **혼합형**: $P(a < X \le b) = F(b) - F(a)$
+   - CDF가 일부 점에서 불연속
+   - $F(b) - F(a)$는 항상 잘 정의됨
+
+**핵심**
+- CDF의 불연속성과 무관하게 $P(a < X \le b) = F(b) - F(a)$는 **항상** 성립
+- 이는 확률측도의 정의로부터 나오는 본질적 성질
+- 불연속점에서의 점프 크기 = 그 점에서의 확률질량: $P(X=b) = F(b) - F(b-)$
+- CDF가 불연속이어도 구간 확률 계산에는 문제가 없다. 구간의 열림/닫힘 여부에 따라 $a, b$에서 좌극한 또는 우극한을 적절히 선택하면 된다 (연습문제 1.6, 1.7)
 
 #### 예 1.5.2 표준지수분포(standard exponential distribution)
 확률변수 $X$가 확률밀도함수
@@ -1423,21 +1507,14 @@ $$
 
 멱급수 전개로
 $$
-C(t)=\sum_{r=1}^{\infty}\frac{c_r}{r!}t^r
+C(t)=\log M(t)=\sum_{r=1}^{\infty}\frac{c_r}{r!}t^r
 $$
 
-여기서
+* $c_r$: $c_r(X)$나 $C^{(r)}(t=0)$라고도 하며, X의 **$r$차 누율(cumulant)** 이라고 한다.
 * $c_1=E(X)$
 * $c_2=\mathrm{Var}(X)$
-이다.
 
 #### 누율과 적률의 관계 (Relation between Cumulants and Moments)
-누율생성함수의 멱급수 전개
-$$C(t) = \log M(t) = \sum_{r=1}^{\infty}\frac{c_r}{r!}t^r$$
-에서 계수 $c_r$을 **$r$차 누율(cumulant)** 이라 한다.
-
-누율과 적률의 관계는 다음과 같다:
-
 **저차 누율과 적률**
 - $c_1 = m_1 = E(X)$ (평균)
 - $c_2 = m_2 - m_1^2 = \mathrm{Var}(X)$ (분산)
@@ -1460,17 +1537,7 @@ $$m_2 = M''(0) = C''(0) + [C'(0)]^2 = c_2 + c_1^2$$
 따라서
 $$c_2 = m_2 - m_1^2 = \mathrm{Var}(X)$$
 
-**누율의 유용성**
-1. 독립 확률변수의 합에 대해
-   $$C_{X+Y}(t) = C_X(t) + C_Y(t)$$
-   따라서 누율은 가법적이다: $c_r(X+Y) = c_r(X) + c_r(Y)$
-
-2. 표준화된 확률변수에 대해
-   - $c_1 = 0$ (평균이 0)
-   - $c_2 = 1$ (분산이 1)
-   - $c_3/c_2^{3/2}$: 왜도(skewness)
-   - $c_4/c_2^2$: 초과첨도(excess kurtosis)
-
+> 누율, 적률 관계추가 정보: Statistics_01_추가_표준화 확률변수의 왜도_첨도.md 참고!
 
 #### 예 1.5.8 
 적률생성함수가 $M(t) = \frac{1}{1-2t}$일 때, 누율생성함수와 누율  
@@ -1740,7 +1807,6 @@ $$P(X = \mu) = 1$$
 **(c) 통계적 추정**  
 불편추정량(unbiased estimator) $\hat{\theta}$가 $\mathrm{Var}(\hat{\theta}) = 0$이면,
 이는 완벽한 추정량으로 항상 참값 $\theta$와 같다.
-
 
 추가 노트:  
 ## 측도론적 미묘함: 거의 확실히(Almost Surely)의 의미
