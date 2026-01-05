@@ -283,8 +283,6 @@ $$P(\lim_{n\to\infty}{A_n})=\lim_{n\to\infty}P(A_n),\ P(\lim_{n\to\infty}{B_n})=
 실해석학의 측도론에서 이를 **측도의 연속성(continuity from below/above)**  이라 하며,
 확률론의 근간이 되는 중요한 성질이다. ∎
 
-
-
 #### 예 1.1.3 (Example)
 표본공간 $S=[0,1]$이고
 $$P((a,b))=b-a$$
