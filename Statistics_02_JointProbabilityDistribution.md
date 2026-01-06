@@ -735,17 +735,15 @@ $f_1(x)>0$인 고정된 $x$에 대해 다음이 성립한다.
    $$
 2. 적분이 1
    $$
-   \int_{-\infty}^{\infty} f_{2|1}(y\mid x),dy=1
+   \int_{-\infty}^{\infty} f_{2|1}(y\mid x)dy=1
    $$
 3. 구간확률
    $$
-   P(c\le Y\le d\mid X=x)=\int_c^d f_{2|1}(y\mid x),dy
+   P(c\le Y\le d\mid X=x)=\int_c^d f_{2|1}(y\mid x)dy
    $$
 
 ### 예 2.3.2 
-TODO: 수식전개 따라가면서 머리로 풀기
-
-(교재의 앞 예 2.1.2, 2.1.4에서)
+(예 2.1.2, 2.1.4에서)
 $$
 f_{1,2}(x,y)=2e^{-x-y}\mathbf 1_{(0\le x\le y)} \\
 f_1(x)=2e^{-2x}\mathbf 1_{(x\ge 0)}
@@ -761,53 +759,48 @@ $$
 
 또한 임의의 $c$에 대해
 $$
-P(Y\ge c\mid X=x)=\int_c^\infty f_{2|1}(y\mid x),dy
-=\int_{\max(c,x)}^\infty e^{-(y-x)},dy
+P(Y\ge c\mid X=x)=\int_c^\infty f_{2|1}(y\mid x)dy
+=\int_{\max(c,x)}^\infty e^{-(y-x)}dy
 =e^{-(\max(c,x)-x)}
 $$
 이므로 특히 $c\ge x$이면 $e^{-(c-x)}$가 된다.
 
-## 2.3.3 조건부확률을 이용한 결합확률 계산 *(Computing Joint Probabilities via Conditioning)*
+### 2.3.3 조건부확률을 이용한 결합확률 계산 *(Computing Joint Probabilities via Conditioning)*
 
-### 정리 2.3.1 조건부확률의 성질 *(A Basic Identity for Conditional Probabilities)*
+### 정리 2.3.1 조건부확률의 성질
 임의의 구간 $[a,b]$, $[c,d]$에 대해
-
 * 이산형의 경우
   $$
   P(a\le X\le b,\ c\le Y\le d)
   =
-  \sum_{a\le x\le b} P(c\le Y\le d\mid X=x),f_1(x)
+  \sum_{a\le x\le b} P(c\le Y\le d\mid X=x)f_1(x)
   $$
-
 * 연속형의 경우
   $$
   P(a\le X\le b,\ c\le Y\le d)
   =
-  \int_a^b P(c\le Y\le d\mid X=x),f_1(x),dx
+  \int_a^b P(c\le Y\le d\mid X=x)f_1(x)dx
   $$
-
 가 성립한다.
 
 #### 증명 (연속형)
 연속형에서
 $$
-P(c\le Y\le d\mid X=x)=\int_c^d f_{2|1}(y\mid x),dy
+P(c\le Y\le d\mid X=x)=\int_c^d f_{2|1}(y\mid x)dy
 $$
 이고 $f_{2|1}(y\mid x)=\frac{f_{1,2}(x,y)}{f_1(x)}$이므로,
 $$
-\int_a^b P(c\le Y\le d\mid X=x)f_1(x),dx
-=\int_a^b\left(\int_c^d \frac{f_{1,2}(x,y)}{f_1(x)},dy\right)f_1(x),dx
+\int_a^b P(c\le Y\le d\mid X=x)f_1(x)dx
+=\int_a^b\left(\int_c^d \frac{f_{1,2}(x,y)}{f_1(x)}dy\right)f_1(x)dx
 $$
 $$
-=\int_a^b\int_c^d f_{1,2}(x,y),dy,dx
+=\int_a^b\int_c^d f_{1,2}(x,y)dydx
 =P(a\le X\le b,\ c\le Y\le d)
 $$
 이다. □  
-이산형도 같은 방법을 증명 가능.  
-TODO: 적분연산이 왜 저렇게 변경이 가능한지 설명할 수 있나?
+이산형도 같은 방법으로 증명 가능.  
 
-
-### 예 2.3.3 *(Consistency check using conditioning)*
+#### 예 2.3.3 *(Consistency check using conditioning)*
 앞의 예들과 동일한 상황에서
 $$
 f_1(x)=2e^{-2x}\mathbf 1_{(x\ge 0)},\quad
@@ -815,13 +808,13 @@ P(Y\ge 3\mid X=x)=e^{-(3-x)}\ (x\le 3),\ 1\ (x\ge 3)
 $$
 와 같은 형태를 이용하여
 $$
-P(X\ge 2,\ Y\ge 3)=\int_2^\infty P(Y\ge 3\mid X=x),f_1(x),dx
+P(X\ge 2,\ Y\ge 3)=\int_2^\infty P(Y\ge 3\mid X=x)f_1(x)dx
 $$
 로 계산하면, 교재에서 이전 절(직접 적분)로 구한 값과 일치함을 확인한다.
 
 (이 예제의 목적은 “조건부분포를 알면 결합확률도 쉽게 재구성된다”는 점을 보여주는 데 있다.)
 
-## 2.3.4 조건부평균 *(Conditional Mean)*
+### 2.3.4 조건부평균 *(Conditional Mean)*
 조건부분포는 $X=x$가 주어졌을 때 $Y$의 분포이므로, 그 분포에 대한 평균을 정의할 수 있다.
 
 $X=x$에서의 $Y$의 조건부평균 *(conditional mean of $Y$ given $X=x$)* 을
@@ -829,36 +822,30 @@ $$
 \mu_{2|1}(x)=E(Y\mid X=x)
 $$
 로 표기한다.
-
 * 이산형:
   $$
-  E(Y\mid X=x)=\sum_y y,f_{2|1}(y\mid x)
+  E(Y\mid X=x)=\sum_y yf_{2|1}(y\mid x)
   $$
-
 * 연속형:
   $$
-  E(Y\mid X=x)=\int_{-\infty}^{\infty} y,f_{2|1}(y\mid x),dy
+  E(Y\mid X=x)=\int_{-\infty}^{\infty} yf_{2|1}(y\mid x),dy
   $$
 
-## 2.3.5 조건부기대값 *(Conditional Expectation)*
-조건부평균은 $Y$ 자체의 함수 $g(Y)=Y$에 대한 조건부기대값의 특수한 경우다.
-
-### 조건부기대값의 정의 *(Conditional Expectation)*
+### 2.3.5 조건부기대값 *(Conditional Expectation)*
+조건부평균은 $Y$ 자체의 함수 $g(Y)=Y$에 대한 조건부기대값의 특수한 경우다.  
 $X=x$인 조건에서 $Y$의 조건부밀도/질량함수가 $f_{2|1}(y\mid x)$일 때, 임의의 실값 함수 $g$에 대해
-
 * 이산형:
   $$
-  E(g(Y)\mid X=x)=\sum_y g(y),f_{2|1}(y\mid x)
+  E(g(Y)\mid X=x)=\sum_y g(y)f_{2|1}(y\mid x)
   $$
 
 * 연속형:
   $$
-  E(g(Y)\mid X=x)=\int_{-\infty}^{\infty} g(y),f_{2|1}(y\mid x),dy
+  E(g(Y)\mid X=x)=\int_{-\infty}^{\infty} g(y)f_{2|1}(y\mid x)dy
   $$
-
 로 정의한다.
 
-### 예 2.3.4 *(Conditional mean from a conditional PDF)*
+#### 예 2.3.4 *(Conditional mean from a conditional PDF)*
 (교재의 예 2.2.1–2.2.2 설정)
 $$
 f_{1,2}(x,y)=120xy(1-x-y)\mathbf 1_{(x\ge 0,\ y\ge 0,\ x+y\le 1)}
@@ -878,26 +865,93 @@ $$
 
 이므로 조건부평균은
 $$
-\mu_{2|1}(x)=E(Y\mid X=x)=\int_0^{1-x} y\cdot \frac{6y(1-x-y)}{(1-x)^3},dy
+\mu_{2|1}(x)=E(Y\mid X=x)=\int_0^{1-x} y\cdot \frac{6y(1-x-y)}{(1-x)^3}dy
 =\frac{1-x}{2}
 $$
 가 된다.
 
-## 2.3.6 조건부분산 *(Conditional Variance)*
-조건부기대값이 있으면, 조건부분산도 같은 방식으로 정의한다.
+### 정리 2.3.2 조건부기댓값의 성질
+다음 성질들이 성립한다 (단, 필요한 조건부기대값이 모두 존재한다고 가정).  
 
-### 조건부분산의 정의 *(Conditional Variance)*
+**(1) 선형성 (Linearity)**  
+임의의 상수 $a, b$와 함수 $g_1(Y), g_2(Y)$에 대하여
+$$
+E[ag_1(Y) + bg_2(Y) \mid X=x] = aE[g_1(Y) \mid X=x] + bE[g_2(Y) \mid X=x]
+$$
+
+**(2) $X$의 함수 빼내기 (Taking out what is known)**  
+$X$의 함수 $v(X)$에 대하여
+$$
+E[v(X)g(Y) \mid X=x] = v(x)E[g(Y) \mid X=x]
+$$
+
+**(3) 반복기대값의 법칙 (Law of iterated expectations)**  
+$$
+E[E(g(Y) \mid X)] = E[g(Y)]
+$$
+
+**(4) 단조성 (Monotonicity)**  
+$g_1(Y) \le g_2(Y)$ a.s.이면
+$$
+E[g_1(Y) \mid X=x] \le E[g_2(Y) \mid X=x]
+$$
+
+#### 증명
+**(1)** 조건부확률밀도함수(또는 확률질량함수)에 대한 적분(또는 합)의 선형성에서 직접 따른다.
+
+**(2)** $X=x$가 주어졌을 때, $v(x)$는 상수이므로
+$$
+E[v(x)g(Y) \mid X=x] = v(x)E[g(Y) \mid X=x]
+$$
+
+**(3)** 연속형의 경우,
+$$
+E[E(g(Y) \mid X)] = \int_{-\infty}^{\infty} E[g(Y) \mid X=x]f_1(x)\,dx
+$$
+$$
+= \int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty} g(y)f_{2|1}(y \mid x)\,dy\right)f_1(x)\,dx
+$$
+$$
+= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(y)f_{1,2}(x,y)\,dy\,dx
+$$
+$$
+= \int_{-\infty}^{\infty} g(y)\left(\int_{-\infty}^{\infty} f_{1,2}(x,y)\,dx\right)dy \quad \text{(Fubini 정리에 의해 적분 순서 교환)}
+$$
+$$
+= \int_{-\infty}^{\infty} g(y)f_2(y)\,dy = E[g(Y)]
+$$
+이산형의 경우도 동일한 방식으로 증명된다. □
+
+**(4)** $g_1(Y) \le g_2(Y)$ a.s.이면 $g_2(Y) - g_1(Y) \ge 0$ a.s.이므로
+
+연속형의 경우,
+$$
+E[g_2(Y) - g_1(Y) \mid X=x] = \int_{-\infty}^{\infty} (g_2(y) - g_1(y))f_{2|1}(y \mid x)\,dy \ge 0
+$$
+
+이산형의 경우,
+$$
+E[g_2(Y) - g_1(Y) \mid X=x] = \sum_y (g_2(y) - g_1(y))f_{2|1}(y \mid x) \ge 0
+$$
+
+선형성 **(1)** 을 적용하면
+$$
+E[g_2(Y) \mid X=x] - E[g_1(Y) \mid X=x] \ge 0 \\
+\therefore E[g_1(Y) \mid X=x] \le E[g_2(Y) \mid X=x]
+$$
+□
+
+### 2.3.6 조건부분산 *(Conditional Variance)*
+조건부기대값이 있으면, 조건부분산도 같은 방식으로 정의한다.  
 $X=x$에서 $Y$의 조건부분산 *(conditional variance of $Y$ given $X=x$)* 은
 $$
 \mathrm{Var}(Y\mid X=x)=E\big[(Y-\mu_{2|1}(x))^2\mid X=x\big]
 $$
-로 정의한다.
-
-이를 $\sigma^2_{2|1}(x)$로 표기하기도 한다.
+로 정의한다. 이를 $\sigma^2_{2|1}(x)$로 표기하기도 한다.
 
 ### 정리 2.3.3 조건부분산의 계산공식 *(Computational Formula)*
 $$
-\mathrm{Var}(Y\mid X=x)=E(Y^2\mid X=x)-{E(Y\mid X=x)}^2
+\mathrm{Var}(Y\mid X=x)=E(Y^2\mid X=x)-\{E(Y\mid X=x)\}^2
 $$
 
 #### 증명
@@ -918,7 +972,7 @@ $$
 $$
 이다. □
 
-### 예 2.3.5 *(Conditional variance computation)*
+#### 예 2.3.5 *(Conditional variance computation)*
 예 2.3.4에서
 $$
 E(Y\mid X=x)=\frac{1-x}{2}
@@ -934,9 +988,7 @@ $$
 $$
 이 된다.
 
-## 2.3.7 확률변수로서의 조건부기대값 *(Conditional Expectation as a Random Variable)*
-
-### 정의 및 해석
+### 2.3.7 확률변수로서의 조건부기대값 *(Conditional Expectation as a Random Variable)*
 함수
 $$
 h(x)=E(g(Y)\mid X=x)
@@ -949,53 +1001,47 @@ E(g(Y)\mid X)=h(X)
 $$
 로 표기하며, 이것이 **확률변수로서의 조건부기대값(conditional expectation as a random variable)** 이다.
 
-### 예 2.3.6
-예 2.3.4–2.3.5에서
-$$
-E(Y\mid X=x)=\frac{1-x}{2},\qquad \mathrm{Var}(Y\mid X=x)=\frac{(1-x)^2}{20}
-$$
-이므로,
-$$
-E(Y\mid X)=\frac{1-X}{2},\qquad \mathrm{Var}(Y\mid X)=\frac{(1-X)^2}{20}
-$$
-로 확률변수 형태로 쓸 수 있다.
-
-## 2.3.8 확률변수로서의 조건부기대값의 성질 *(Key Properties)*
-
 ### 정리 2.3.4 *(Properties of $E(Y\mid X)$)*
-(가정: 교재 주석처럼 적절한 적분가능성 조건이 필요하다.)
-
+(가정: 적절한 적분가능성 조건이 필요.)  
 1. 전체기대값의 법칙 *(Law of Total Expectation)*
    $$
    E[E(Y\mid X)]=E(Y)
    $$
 
-2. 직교성/비상관 성질 *(Orthogonality / Uncorrelatedness)*
-   임의의 $v(X)$에 대하여
+2. 타워 성질 *(Tower Property)*
+    $$
+    E[E(Y\mid X)\mid X]=E(Y\mid X)
+    $$
+
+3. 직교성/비상관 성질 *(Orthogonality / Uncorrelatedness)*  
    $$
-   \mathrm{Cov}(Y-E(Y\mid X),\ v(X))=0
+   \forall v(X),\ \mathrm{Cov}(Y-E(Y\mid X),\ v(X))=0
    $$
 
-#### 증명 (연속형)
-(1) 먼저
+#### 증명 
+(1) (연속형)
 $$
 E[E(Y\mid X)]
-=\int_{-\infty}^{\infty} E(Y\mid X=x)f_1(x),dx
-$$
-인데
-$$
-E(Y\mid X=x)=\int_{-\infty}^{\infty} y f_{2|1}(y\mid x),dy
-$$
-이므로
-$$
-E[E(Y\mid X)]
-=\int\left(\int y f_{2|1}(y\mid x),dy\right)f_1(x),dx
-=\int\int y,f_{1,2}(x,y),dy,dx
+=\int\left(\int y f_{2|1}(y\mid x)dy\right)f_1(x)dx
+=\int\int yf_{1,2}(x,y)dydx
 =E(Y)
 $$
-이다.
 
-(2) $Z=Y-E(Y\mid X)$라 두면, 조건부기대값의 정의상
+(2)  
+$E(Y\mid X)$는 $X$의 함수이므로, $X=x$가 주어진 조건에서 $E(Y\mid X)$는 상수 $E(Y\mid x)$가 된다.
+
+따라서
+$$
+E[E(Y\mid X)\mid X=x]=E(Y\mid x)\cdot 1=E(Y\mid x)
+$$
+
+즉, 확률변수로서
+$$
+E[E(Y\mid X)\mid X]=E(Y\mid X)
+$$
+가 성립한다. □
+
+(3) $Z=Y-E(Y\mid X)$라 두면, 조건부기대값의 정의상
 $$
 E(Z\mid X)=E(Y\mid X)-E(E(Y\mid X)\mid X)=E(Y\mid X)-E(Y\mid X)=0
 $$
@@ -1013,36 +1059,10 @@ E[Zv(X)]=E(E[Zv(X)\mid X])=E(v(X)E[Z\mid X])=E(v(X)\cdot 0)=0
 $$
 이다. □
 
-### 예 2.3.7 *(Check of the law of total expectation)*
-
-예 2.3.6에서
-$$
-E(Y\mid X)=\frac{1-X}{2}
-$$
-이므로
-$$
-E[E(Y\mid X)]=E\left(\frac{1-X}{2}\right)=\frac{1-E(X)}{2}
-$$
-이고, 앞 절에서 $E(X)=1/3$이므로
-$$
-E[E(Y\mid X)]=\frac{1-1/3}{2}=\frac{1}{3}
-$$
-인데 이는 $E(Y)=1/3$과 일치한다.
-
-또한
-$$
-\mathrm{Cov}(Y-E(Y\mid X),X)=0
-$$
-을 교재처럼 직접 계산으로도 확인할 수 있다.
-
-## 2.3.9 최소제곱예측자 *(Least Squares Predictor)*
-
 ### 정리 2.3.5 최소제곱예측자 *(Least Squares Predictor)*
-확률변수 $X$의 함수 $u(X)$들 중에서
-$$
-E[(Y-u(X))^2]
-$$
-를 최소로 만드는 함수는
+조건부평균 $E(Y\mid X)$는 $Y$를 예측하는 "가장 좋은" $X$의 함수라는 뜻을 가지고 있고, 흔히 회귀함수(Regression Function)이라 한다.  
+
+확률변수 $X$의 함수 $u(X)$들 중에서 $E[(Y-u(X))^2]$를 최소로 만드는 함수는
 $$
 u(X)=E(Y\mid X)
 $$
@@ -1058,32 +1078,108 @@ E[(Y-E(Y\mid X))^2]=E[\mathrm{Var}(Y\mid X)]
 $$
 이다.
 
-#### 증명(핵심 전개)
-$$
-Y-u(X)=(Y-E(Y\mid X))+(E(Y\mid X)-u(X))
-$$
-로 분해한 뒤 제곱 전개를 하면 교차항의 기대값이 0이 됨을 이용한다.
-교차항이 0이 되는 이유는 앞 정리의 “$\mathrm{Cov}(Y-E(Y\mid X),v(X))=0$” 성질 때문이다. □
+> 앞으로 확률변수의 합을 $X \oplus Y$로 표기할 때에는,  
+> 확률변수 $X$와 $Y$가 서로 **비상관(uncorrelated)**, 즉
+> $$\mathrm{Corr}(X,Y) = 0 \quad (\text{동치로 } \mathrm{Cov}(X,Y) = 0)$$
+> 임을 전제로 한다.
+> 
+> $\oplus$는 단순한 대수적 덧셈 $X+Y$가 아니라,  
+>   **분산이 교차항 없이 분해되는 합**임을 명시적으로 나타내는 기호다.
+> $$ X \oplus Y \implies \mathrm{Var}(X+Y) = \mathrm{Var}(X) + \mathrm{Var}(Y)$$
+> 
+> 이는 일반적인 분산 공식
+> $$ \mathrm{Var}(X+Y) = \mathrm{Var}(X) + \mathrm{Var}(Y) + 2\mathrm{Cov}(X,Y)$$
+> 에서 $\mathrm{Cov}(X,Y)=0$인 경우다.
 
-## 2.3.10 분산의 분해 *(Decomposition of Variance / Law of Total Variance)*
+> **참고:**  
+> - 독립(independence)이면 항상 비상관이지만, 역은 성립하지 않는다.  
+> - $\oplus$ 표기는 독립성을 요구하지 않으며, 오직 비상관성만을 전제로 한다.  
+> - 이 표기는 특히 분산의 가법성(additivity of variance)이 중요한 맥락에서 유용하다.
+
+#### 증명
+임의의 $X$의 함수 $u(X)$에 대하여, 다음과 같이 분해한다.
+$$
+Y-u(X)=(Y-E(Y\mid X))\oplus(E(Y\mid X)-u(X)).
+$$
+이 분해가 $\oplus$로 가능함을 확인하자.  
+$E(Y\mid X)-u(X)$는 $X$의 함수이므로, 정리 2.3.4(직교성 성질)에 의해
+$$
+\mathrm{Cov}(Y-E(Y\mid X),\ E(Y\mid X)-u(X))=0
+$$
+가 성립한다. 따라서 두 항은 서로 비상관이며, $\oplus$ 표기가 정당하다.
+
+이제 양변의 제곱의 기댓값을 취하면, $\oplus$의 정의에 의해 분산이 가법적으로 분해되어
+$$
+E[(Y-u(X))^2]=E[(Y-E(Y\mid X))^2]+E[(E(Y\mid X)-u(X))^2] \\
++ 2E[(Y-E(Y\mid X))(E(Y\mid X)-u(X))] \quad (\text{이 마지막 항은 0임})
+$$
+가 된다.
+
+두 번째 항은 항상 비음이므로
+$$
+E[(Y-u(X))^2]\ge E[(Y-E(Y\mid X))^2]
+$$
+가 성립하며, 등호는
+$$
+E(Y\mid X)-u(X)=0\quad\text{a.s.}
+$$
+
+즉 $u(X)=E(Y\mid X)$일 때, 그리고 그때에만 성립한다.  
+따라서 $E[(Y-u(X))^2]$를 최소화하는 $X$의 함수는
+$$
+u(X)=E(Y\mid X)
+$$
+이다.
+
+마지막으로 최소값은 조건부기대값의 정의를 이용하여
+$$
+E[(Y-E(Y\mid X))^2]=E[E((Y-E(Y\mid X))^2\mid X)]=E[\mathrm{Var}(Y\mid X)]
+$$
+로 주어진다. □
+
+### 2.3.10 분산의 분해 *(Decomposition of Variance / Law of Total Variance)*
 
 ### 정리 2.3.6 분산의 분해 *(Variance Decomposition)*
 $$
 \mathrm{Var}(Y)=E[\mathrm{Var}(Y\mid X)]+\mathrm{Var}(E(Y\mid X))
 $$
 
-#### 증명(교재식 분해)
-$Y-\mu$를
+#### 증명
+$\mu = E(Y)$라 하자.  
+$Y-\mu$를 다음과 같이 분해한다:
 $$
 Y-\mu=(Y-E(Y\mid X))+(E(Y\mid X)-\mu)
 $$
-로 분해한 뒤 제곱해 기대값을 취한다.
-교차항은
+
+양변을 제곱하면
 $$
-E[(Y-E(Y\mid X))(E(Y\mid X)-\mu)]=0
+(Y-\mu)^2=(Y-E(Y\mid X))^2+(E(Y\mid X)-\mu)^2+2(Y-E(Y\mid X))(E(Y\mid X)-\mu)
 $$
-이 되며, 따라서 제곱항 두 개의 합만 남는다.
-또 $E(E(Y\mid X))=\mu$를 이용해 정리하면 위 식을 얻는다. □
+
+양변의 기댓값을 취하면
+$$
+\mathrm{Var}(Y)=E[(Y-E(Y\mid X))^2]+E[(E(Y\mid X)-\mu)^2]+2E[(Y-E(Y\mid X))(E(Y\mid X)-\mu)]
+$$
+
+정리 2.3.4(3)의 직교성 성질에 의해 교차항은
+$$
+E[(Y-E(Y\mid X))(E(Y\mid X)-\mu)]=\mathrm{Cov}(Y-E(Y\mid X),\ E(Y\mid X)-\mu)=0
+$$
+
+또한 정리 2.3.4(1)에 의해 $E(E(Y\mid X))=E(Y)=\mu$이므로
+$$
+E[(E(Y\mid X)-\mu)^2]=\mathrm{Var}(E(Y\mid X))
+$$
+
+그리고
+$$
+E[(Y-E(Y\mid X))^2]=E[\mathrm{Var}(Y\mid X)]
+$$
+
+따라서
+$$
+\mathrm{Var}(Y)=E[\mathrm{Var}(Y\mid X)]+\mathrm{Var}(E(Y\mid X))
+$$
 
 ### 예 2.3.8 *(Verification for the Beta-like example)*
 예 2.3.6에서
@@ -1108,9 +1204,795 @@ E[\mathrm{Var}(Y\mid X)]=E\left(\frac{(1-X)^2}{20}\right)
 $$
 이므로 합을 계산하면 $\mathrm{Var}(Y)$와 일치함을 확인한다(교재 결론과 동일하다).
 
+**참고: 편차의 분해 (Decomposition of Deviation)**
+$$
+Y - E[Y] = (Y - E[Y \mid X]) \oplus (E[Y \mid X] - E[Y])
+$$
+이런 편차 $Y - E[Y]$의 분해는 반응변수 $Y$가 여러 다른 값을 갖게 되는 원인을 설명변수 $X$에 따른 부분 $(E[Y \mid X] - E[Y])$과 그 이외의 부분 $(Y - E[Y \mid X])$으로 나눠 생각하는 것을 수식으로 나타내고 있는 것이다.  
+정리 2.3.4(3)의 직교성 성질에 의해 이 두 항은 서로 비상관이므로 $\oplus$ 표기가 정당하다.  
+- $(E[Y \mid X] - E[Y])$: $X$에 의해 **설명되는(explained)** 부분
+- $(Y - E[Y \mid X])$: $X$로 **설명되지 않는(unexplained)** 잔차(residual) 부분  
 
+이 아이디어는 10장에서 소개되는 회귀분석과 분산분석의 기초가 된다.
 
 
 ## 확률변수의 독립성 *(Independence of Random Variables)*
+확률변수의 독립성은 “한 확률변수에 대한 정보가 다른 확률변수의 분포에 아무런 영향을 주지 않는다”는 개념을 수학적으로 정식화한 것이다.
+이는 조건부확률, 결합분포, 적률, 분산 구조 등 이후의 모든 통계 이론의 핵심 가정으로 작용한다.
+
+### 정의 2.4.1 (확률변수의 독립성)
+두 확률변수 $X, Y$에 대하여, 임의의 실수 $a<b$, $c<d$에 대해
+$$
+P(a \le X \le b,\ c \le Y \le d)
+= P(a \le X \le b),P(c \le Y \le d)
+$$
+가 성립하면, $X$와 $Y$는 **서로 독립(mutually independent)** 이라고 한다.
+
+이는 $X$에 관한 어떤 사건도 $Y$에 관한 사건의 확률을 변화시키지 않음을 의미한다.
+
+### 정리 2.4.1 (독립성의 동치조건)
+다음 조건들은 서로 동치이며, 이 중 하나라도 성립하면 $X$와 $Y$는 독립이다.
+
+(a) 누적분포함수(CDF)
+$$
+F_{X,Y}(x,y)=F_X(x)F_Y(y),
+\quad \forall x,y \in \mathbb{R}
+$$
+
+(b) 확률밀도함수(PDF) 또는 확률질량함수(PMF)
+$$
+f_{X,Y}(x,y)=f_X(x)f_Y(y),
+\quad \forall x,y
+$$
+
+(c) 적률생성함수(MGF) (존재하는 경우)
+$$
+M_{X,Y}(t_1,t_2)=M_X(t_1)M_Y(t_2),
+\quad (t_1,t_2)\text{ in a neighborhood of }(0,0)
+$$
+
+(d) 확률측도 표현
+$$
+P(X\in A,\ Y\in B)=P(X\in A)P(Y\in B),
+\quad \forall A,B \text{ (Borel 집합)}
+$$
+
+**참고**  
+확률밀도함수로 독립을 증명하는 과정에서 반드시 주변확률밀도함수를 구할 필요는 없음.  
+
+**(b') 인수분해 기준 (Factorization Criterion)**  
+결합확률밀도함수(또는 결합확률질량함수)가 $x$만의 함수와 $y$만의 함수의 곱으로 인수분해되면, 즉
+$$
+f_{X,Y}(x,y) = g_1(x) \cdot g_2(y), \quad \forall x,y
+$$
+를 만족하는 비음함수 $g_1(x)$와 $g_2(y)$가 존재하면, $X$와 $Y$는 독립이다.
+
+**증명 (연속형의 경우)**  
+항등식 양변을 모든 $x, y$에 대해 적분하면
+$$
+\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} f_{X,Y}(x,y)\,dy\,dx 
+= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g_1(x)g_2(y)\,dy\,dx = 1
+$$
+이므로
+$$
+\left(\int_{-\infty}^{\infty} g_1(x)\,dx\right)\left(\int_{-\infty}^{\infty} g_2(y)\,dy\right) = 1.
+$$
+
+따라서
+$$
+f_{X,Y}(x,y) = g_1(x)g_2(y) 
+= \left\{\frac{g_1(x)}{\int g_1(x)\,dx}\right\}\left\{\frac{g_2(y)}{\int g_2(y)\,dy}\right\}
+$$
+로 쓸 수 있고, 각 중괄호 안의 함수는 적분이 1인 확률밀도함수이므로
+$$
+f_{X,Y}(x,y) = f_X(x)f_Y(y)
+$$
+가 성립하여 (b)가 성립한다. □
+
+마찬가지로,  
+누적분포함수나 적률생성함수를 이용할 때도, (a), (c)의 항등식 오른쪽 변에 나오는 주변누적분포함수 $F_X(x), F_Y(y)$나 주변적률생성함수 $M_X(t_1), M_Y(t_2)$를 명시적으로 구하지 않고도 독립성 여부를 판단할 수 있다.  
+즉, 결합함수가 $x$의 함수와 $y$의 함수의 곱으로 분해되는지만 확인하면 된다.
+
+#### 독립성 동치조건 증명 (개요)
+* (a) ⇔ (b): CDF와 PDF의 미분 관계로부터 즉시 성립한다.
+* (b) ⇔ (c): MGF는 PDF의 적분 변환이므로 곱 구조가 보존된다.
+* (b) ⇔ (d): 확률측도와 밀도함수는 일대일 대응 관계에 있다.
+* (d) ⇒ 정의: 구간 사건을 대입하면 독립성의 정의를 얻는다.
+* 정의 ⇒ (a): 확률측도의 연속성과 극한을 이용한다. □
+
+#### 예시 2.4.1 (독립인 경우)
+결합확률밀도함수가
+$$
+f_{X,Y}(x,y)=2e^{-x-2y}\mathbf{1}_{{x\ge0,y\ge0}}
+$$
+로 주어졌다고 하자.
+
+주변확률밀도함수는
+$$
+f_X(x)=\int_0^\infty 2e^{-x-2y}dy=e^{-x}\mathbf{1}*{{x\ge0}},
+$$
+$$
+f_Y(y)=\int_0^\infty 2e^{-x-2y}dx=2e^{-2y}\mathbf{1}*{{y\ge0}}.
+$$
+
+따라서
+$$
+f_{X,Y}(x,y)=f_X(x)f_Y(y)
+$$
+이므로 $X$와 $Y$는 서로 독립이다. □
+
+#### 예시 2.4.2 (독립이 아닌 경우)
+결합확률밀도함수가
+$$
+f_{X,Y}(x,y)=2e^{-x-y}\mathbf{1}_{{0\le x\le y}}
+$$
+로 주어졌다고 하자.
+
+주변밀도 $f_X, f_Y$는 각각 존재하지만,
+$$
+f_{X,Y}(x,y)\neq f_X(x)f_Y(y)
+$$
+이므로 $X$와 $Y$는 독립이 아니다. □
+
+### 정리 2.4.2 (독립 확률변수의 함수)
+$X$와 $Y$가 독립이면, 임의의 함수 $g_1, g_2$에 대하여
+확률변수 $g_1(X)$와 $g_2(Y)$도 서로 독립이다.
+
+#### 증명
+임의의 집합 $A,B$에 대해
+$$
+{g_1(X)\in A,\ g_2(Y)\in B}
+= {X\in g_1^{-1}(A),\ Y\in g_2^{-1}(B)}.
+$$
+
+$X,Y$가 독립이므로
+$$
+P(X\in g_1^{-1}(A),Y\in g_2^{-1}(B))
+= P(X\in g_1^{-1}(A))P(Y\in g_2^{-1}(B)).
+$$
+
+이는 곧
+$$
+P(g_1(X)\in A)P(g_2(Y)\in B)
+$$
+이므로 $g_1(X)$와 $g_2(Y)$는 독립이다. □
+
+### 정리 2.4.3 (독립 확률변수의 곱의 기댓값)
+$X$와 $Y$가 독립이고 기댓값이 존재하면,
+$$
+E[g_1(X)g_2(Y)]=E[g_1(X)]E[g_2(Y)]
+$$
+가 성립한다.
+
+### 증명 (연속형)
+$$
+E[g_1(X)g_2(Y)]
+= \int\int g_1(x)g_2(y)f_{X,Y}(x,y)dydx
+$$
+
+독립성이므로 $f_{X,Y}(x,y)=f_X(x)f_Y(y)$이고,
+Fubini 정리에 의해
+$$
+=\left(\int g_1(x)f_X(x),dx\right)
+\left(\int g_2(y)f_Y(y),dy\right).
+$$
+
+즉 $$E[g_1(X)]E[g_2(Y)]$$
+□
+
+### 정리 2.4.4 (독립성과 상관관계)
+$X$와 $Y$가 독립이고 공분산이 존재하면
+$$
+\mathrm{Cov}(X,Y)=0
+$$
+이다.
+
+#### 주의 (역은 성립하지 않음)
+$\mathrm{Cov}(X,Y)=0$이라고 해서 $X,Y$가 독립일 필요는 없다.
+
+#### 예시 2.4.3 (상관계수는 0이나 독립이 아님)
+
+결합확률밀도함수가
+$$
+f_{X,Y}(x,y)=\frac{9}{40}(1+x^2y^2)\mathbf{1}_{{-1\le x\le1,-1\le y\le1}}
+$$
+일 때,
+$$
+E(X)=E(Y)=E(XY)=0 \Rightarrow \mathrm{Cov}(X,Y)=0.
+$$
+
+그러나
+$$
+f_{X,Y}(x,y)\neq f_X(x)f_Y(y)
+$$
+이므로 $X,Y$는 독립이 아니다. □
+
+### 정리 2.4.5 (확률변수의 합의 분산)
+임의의 확률변수 $X,Y$에 대해
+$$
+\mathrm{Var}(X+Y)=\mathrm{Var}(X)+\mathrm{Var}(Y)+2\mathrm{Cov}(X,Y).
+$$
+
+특히 $X,Y$가 독립이면
+$$
+\mathrm{Var}(X+Y)=\mathrm{Var}(X)+\mathrm{Var}(Y).
+$$
+#### 증명
+분산의 정의와 전개를 이용하면
+$$
+\begin{align}
+\mathrm{Var}(X+Y) &= E[(X+Y)^2] - [E(X+Y)]^2 \\
+&= E(X^2 + 2XY + Y^2) - [E(X) + E(Y)]^2 \\
+&= E(X^2) + 2E(XY) + E(Y^2) - [E(X)]^2 - 2E(X)E(Y) - [E(Y)]^2 \\
+&= \mathrm{Var}(X) + \mathrm{Var}(Y) + 2[E(XY) - E(X)E(Y)] \\
+&= \mathrm{Var}(X) + \mathrm{Var}(Y) + 2\mathrm{Cov}(X,Y)
+\end{align}
+$$
+특히 $X$와 $Y$가 독립이면 $\mathrm{Cov}(X,Y) = 0$이므로
+$$
+\mathrm{Var}(X+Y) = \mathrm{Var}(X) + \mathrm{Var}(Y).
+$$
+□
+
 
 ## 다차원 확률변수의 분포 *(Distributions of Multivariate Random Variables)*
+확률변수 $X_1, X_2, \dots, X_k$를 각 성분으로 하는 벡터
+$$
+\mathbf{X}=(X_1, X_2, \dots, X_k)^T
+$$
+를 **$k$차원 확률변수**, 또는 **$k$변량 확률벡터($k$-variate random vector)**라 한다.
+
+이차원 확률변수의 경우와 마찬가지로, 다차원 확률변수도
+**이산형(discrete)**과 **연속형(continuous)**으로 나누어 다룬다.
+
+### 정의 2.5.1 (이산형 다차원 확률변수의 결합확률질량함수)
+이산형 확률벡터 $\mathbf{X}=(X_1,\dots,X_k)^T$의 **결합확률질량함수(joint pmf)**
+$f(x_1,\dots,x_k)$는 다음 성질을 만족한다.
+
+1. **비음성**
+   $$
+   f(x_1,\dots,x_k)\ge 0,\quad \forall x_i\in\mathbb{R}
+   $$
+
+2. **정규화**
+   $$
+   \int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty}
+   f(x_1,\dots,x_k),dx_k\cdots dx_1=1
+   $$
+
+3. **확률 계산**
+   $$
+   P(a_1\le X_1\le b_1,\dots,a_k\le X_k\le b_k)
+   =
+   \int_{a_1}^{b_1}\cdots\int_{a_k}^{b_k}
+   f(x_1,\dots,x_k)dx_k\cdots dx_1
+   $$
+
+#### 예시 2.5.1
+두 개의 흰 공, 세 개의 검은 공, 네 개의 빨간 공, 다섯 개의 노란 공이 들어 있는 상자에서 네 개의 공을 동시에 꺼낸다.  
+흰 공의 개수: $X_1$, 검은 공의 개수: $X_2$, 빨간 공의 개수: $X_3$
+라고 하면,
+$$
+f(x_1,x_2,x_3)
+=
+\frac{\binom{2}{x_1}\binom{3}{x_2}\binom{4}{x_3}\binom{5}{4-x_1-x_2-x_3}}
+{\binom{14}{4}}
+$$
+이며,
+$$
+x_1=0,1,2,\quad x_2=0,1,2,3,\quad x_3=0,1,2,3,4,\quad x_1+x_2+x_3\le4
+$$
+이다. □
+
+### 정의 2.5.2 (연속형 다차원 확률변수의 결합확률밀도함수)
+연속형 확률벡터 $\mathbf{X}=(X_1,\dots,X_k)^T$의
+**결합확률밀도함수(joint pdf)** $f(x_1,\dots,x_k)$는 다음을 만족한다.
+
+1. **비음성**
+   $$
+   f(x_1,\dots,x_k)\ge 0
+   $$
+
+2. **정규화**
+   $$
+   \int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty}
+   f(x_1,\dots,x_k),dx_k\cdots dx_1=1
+   $$
+
+3. **확률 계산**
+   $$
+   P(a_1\le X_1\le b_1,\dots,a_k\le X_k\le b_k)
+   =
+   \int_{a_1}^{b_1}\cdots\int_{a_k}^{b_k}
+   f(x_1,\dots,x_k),dx_k\cdots dx_1
+   $$
+
+#### 예시 2.5.2
+다음 함수가 결합확률밀도함수가 되도록 상수 $c$를 구한다.
+$$
+f(x_1,x_2,x_3)
+=
+c e^{-x_1-x_2-x_3}\mathbf{1}_{(0\le x_1\le x_2\le x_3)}
+$$
+
+**풀이**
+전체 확률이 1이어야 하므로
+$$
+\int_0^\infty\int_{x_1}^\infty\int_{x_2}^\infty
+c e^{-x_1-x_2-x_3}dx_3dx_2dx_1=1
+$$
+계산하면 $c=6$이다. □
+
+### 주변확률밀도함수
+확률벡터 $\mathbf{X}=(X_1,\dots,X_k)^T$의 결합확률밀도함수가 $f$일 때,
+* **이산형**
+  $$
+  f_1(x_1)=\sum_{x_2}\cdots\sum_{x_k} f(x, x_2, \dots,x_k)
+  $$
+* **연속형**
+  $$
+  f_1(x_1)=\int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty}
+  f(x, x_2,\dots,x_k)dx_k\cdots dx_2
+  $$
+
+일반적으로 $(X_1,\dots,X_j)$의 주변확률밀도함수는
+* **이산형**
+  $$
+  f_{1,\dots,j}(x_1,\dots,x_j)=\sum_{x_{j+1}}\cdots\sum_{x_k} f(x_1,\dots,x_k)
+  $$
+* **연속형**
+  $$
+  f_{1,\dots,j}(x_1,\dots,x_j)=\int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty}
+  f(x_1,\dots,x_k)dx_k\cdots dx_{j+1}
+  $$
+로 정의한다. (1~k까지 변수취급, 나머지 $dx_?$로 빠짐)
+
+#### 예시 2.5.3
+예시 2.5.1에서 $(X_1,X_2)$의 주변분포는
+$$
+f_{1,2}(x,y)
+= \sum_{x_3} f(x,y,x_3)
+\frac{\binom{2}{x}\binom{3}{y}\binom{9}{4-x-y}}{\binom{14}{4}},
+\quad x+y\le4
+$$
+이다. □
+
+### 누적분포함수
+다차원의 경우에도 확률밀도함수, 누적분포함수는 일대일로 대응한다.  
+연속형의 경우
+$$
+F(x_1,\dots,x_k)
+= P(X_1\le x_1,\dots,X_k\le x_k)
+= \int_{-\infty}^{x_1}\cdots\int_{-\infty}^{x_k}
+f(t_1,\dots,t_k),dt_k\cdots dt_1
+$$
+
+$f$가 연속인 점에서
+$$
+f(x_1,\dots,x_k)
+=\frac{\partial^k}{\partial x_1\cdots\partial x_k}
+F(x_1,\dots,x_k)
+$$
+가 성립한다.
+
+### 확률벡터의 기댓값
+실수값 함수 $g(x_1,\dots,x_k)$에 대해
+
+* **이산형**
+  $$
+  E[g(X_1,\dots,X_k)]
+  =
+  \sum_{x_1}\cdots\sum_{x_k}
+  g(x_1,\dots,x_k)f(x_1,\dots,x_k)
+  $$
+
+* **연속형**
+  $$
+  E[g(X_1,\dots,X_k)]
+  =
+  \int\cdots\int
+  g(x_1,\dots,x_k)f(x_1,\dots,x_k),dx_k\cdots dx_1
+  $$
+
+#### 예시 2.5.5
+$$
+f(x,y,z)=120x(1-x-y-z)\mathbf{1}_{(x,y,z\ge0,\ x+y+z\le1)}
+$$
+일 때,
+$$
+E(X_1X_2)=\iiint xy\cdot120x(1-x-y-z)\,dz\,dy\,dx
+$$
+적분 영역은 $x,y,z\ge0$, $x+y+z\le1$이므로
+$$
+=\int_0^1\int_0^{1-x}\int_0^{1-x-y} 120x^2y(1-x-y-z)\,dz\,dy\,dx
+$$
+먼저 $z$에 대해 적분하면
+$$
+\int_0^{1-x-y} (1-x-y-z)\,dz = (1-x-y)z - \frac{z^2}{2}\Big|_0^{1-x-y} = \frac{(1-x-y)^2}{2}
+$$
+따라서
+$$
+=\int_0^1\int_0^{1-x} 120x^2y\cdot\frac{(1-x-y)^2}{2}\,dy\,dx
+=\int_0^1\int_0^{1-x} 60x^2y(1-x-y)^2\,dy\,dx
+$$
+$y$에 대해 적분하면($u=1-x-y$로 치환하거나 직접 계산)
+$$
+\int_0^{1-x} y(1-x-y)^2\,dy = \frac{(1-x)^4}{12}
+$$
+따라서
+$$
+=\int_0^1 60x^2\cdot\frac{(1-x)^4}{12}\,dx = 5\int_0^1 x^2(1-x)^4\,dx
+$$
+베타함수 $B(3,5) = \frac{\Gamma(3)\Gamma(5)}{\Gamma(8)} = \frac{2!\cdot4!}{7!} = \frac{1}{105}$를 이용하면
+$$
+=5\cdot\frac{1}{105} = \frac{1}{21}
+$$
+이다. □
+
+### 정리 2.5.1 (기댓값의 성질)
+1차원에서의 기댓값 성질이 다차원에서도 동일하게 성립함.  
+확률벡터 $\mathbf{X}=(X_1,\dots,X_k)^T$와 실수값 함수 $g_1(\mathbf{X}), g_2(\mathbf{X})$에 대하여 기댓값이 존재한다고 하자.
+
+(a) **선형성**  
+임의의 상수 $c_1,c_2$에 대하여
+$$
+E[c_1 g_1(\mathbf{X})+c_2 g_2(\mathbf{X})]
+= c_1 E[g_1(\mathbf{X})]+c_2 E[g_2(\mathbf{X})]
+$$
+
+(b) **단조성**
+$$
+g_1(\mathbf{X})\le g_2(\mathbf{X}) \ \text{이면}\
+E[g_1(\mathbf{X})]\le E[g_2(\mathbf{X})]
+$$
+
+### 평균벡터와 공분산행렬 *(Mean Vector and Covariance Matrix)*
+확률벡터 $\mathbf{X}=(X_1,\dots,X_k)^T$에 대하여, 각 성분의 평균을
+$$
+\mu_i=E(X_i),\quad i=1,\dots,k
+$$
+라 하면, **평균벡터(mean vector)** 는
+$$
+\mu=E(\mathbf{X})=(\mu_1,\dots,\mu_k)^T
+$$
+로 정의된다.
+
+**공분산행렬(covariance matrix)** 또는 **분산–공분산행렬(variance-covariance matrix)** 은
+$$
+\mathrm{Var}(\mathbf{X})
+=(\sigma_{ij})_{1\le i,j\le k},\quad
+\sigma_{ij}=\mathrm{Cov}(X_i,X_j)
+$$
+로 정의되며, 공분산의 정의를 이용하면
+$$
+\mathrm{Var}(\mathbf{X})
+= E[(\mathbf{X}-\mu)(\mathbf{X}-\mu)^T]
+$$
+로도 표현할 수 있다.
+- 대각성분 $\sigma_{ii}=\mathrm{Cov}(X_i,X_i)=\mathrm{Var}(X_i)$는 각 확률변수의 분산이다.
+- 비대각성분 $\sigma_{ij}=\mathrm{Cov}(X_i,X_j)\ (i\neq j)$는 두 확률변수 간의 공분산이다.
+- 공분산행렬은 대칭행렬이며($\sigma_{ij}=\sigma_{ji}$), 항상 양의 준정부호(positive semidefinite) 성질을 갖는다.
+
+> **참고: 분산행렬 표기**  
+> 공분산행렬 $\mathrm{Var}(\mathbf{X})$를 **분산행렬(variance matrix)** 이라고도 부르며,  
+> $\Sigma$ 또는 $V(\mathbf{X})$ 등의 기호로 표기하기도 한다. $\mathrm{Var}(\mathbf{X})$ 표기를 주로 사용한다.
+
+### 정리 2.5.2 (확률변수 행렬의 기댓값의 성질)
+확률변수 행렬 $W = (W_{ij})$의 기댓값은 각 성분의 기댓값을 같은 위치에 배치한 행렬로 정의된다:
+
+$$
+E(W) = E\begin{pmatrix}
+W_{11} & W_{12} & \cdots & W_{1n} \\
+W_{21} & W_{22} & \cdots & W_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+W_{m1} & W_{m2} & \cdots & W_{mn}
+\end{pmatrix}
+=
+\begin{pmatrix}
+E(W_{11}) & E(W_{12}) & \cdots & E(W_{1n}) \\
+E(W_{21}) & E(W_{22}) & \cdots & E(W_{2n}) \\
+\vdots & \vdots & \ddots & \vdots \\
+E(W_{m1}) & E(W_{m2}) & \cdots & E(W_{mn})
+\end{pmatrix}
+$$
+즉, $(E(W))_{ij} = E(W_{ij})$이다.
+
+확률변수 행렬 $V=(V_{ij})$, $W=(W_{ij})$와 원소가 상수인 행렬 $C,D$에 대하여 기댓값이 존재한다고 하자. 그러면 다음과 같은 선형성을 가진다.  
+(a)
+$$
+E(CWD)=CE(W)D
+$$
+
+(b)
+$$
+E(V+W)=E(V)+E(W)
+$$
+
+**설명**
+행렬의 기댓값은 성분별로 정의한다. 즉,
+$$
+E(W)=(E(W_{ij}))
+$$
+로 둔다. 그러면 (a), (b)는 기댓값의 선형성을 성분별로 적용하여 얻는다.
+
+### 분산행렬과 공분산행렬의 표현 방법 정리
+확률벡터 $\mathbf{X}=(X_1,\dots,X_k)^T$에 대하여 공분산행렬(또는 분산행렬)을 표현하는 방법은 다음과 같다.
+
+#### (1) 성분별 정의
+공분산행렬의 $(i,j)$ 성분은
+$$
+(\mathrm{Var}(\mathbf{X}))_{ij} = \mathrm{Cov}(X_i,X_j) = E[(X_i-\mu_i)(X_j-\mu_j)]
+$$
+로 정의된다. 여기서 $\mu_i=E(X_i)$이다.
+
+#### (2) 행렬 표현
+평균벡터를 $\mu=E(\mathbf{X})$라 하면,
+$$
+\mathrm{Var}(\mathbf{X}) = E[(\mathbf{X}-\mu)(\mathbf{X}-\mu)^T]
+$$
+로 표현할 수 있다.
+
+**전개하면**
+$$
+\mathrm{Var}(\mathbf{X}) = E[\mathbf{X}\mathbf{X}^T] - E[\mathbf{X}]E[\mathbf{X}]^T = E[\mathbf{X}\mathbf{X}^T] - \mu\mu^T
+$$
+
+#### (3) 행렬 형태
+공분산행렬은 다음과 같은 대칭행렬이다.
+$$
+\mathrm{Var}(\mathbf{X}) = 
+\begin{pmatrix}
+\mathrm{Var}(X_1) & \mathrm{Cov}(X_1,X_2) & \cdots & \mathrm{Cov}(X_1,X_k) \\
+\mathrm{Cov}(X_2,X_1) & \mathrm{Var}(X_2) & \cdots & \mathrm{Cov}(X_2,X_k) \\
+\vdots & \vdots & \ddots & \vdots \\
+\mathrm{Cov}(X_k,X_1) & \mathrm{Cov}(X_k,X_2) & \cdots & \mathrm{Var}(X_k)
+\end{pmatrix}
+$$
+
+#### (4) 간략 표기
+문헌에 따라 다음과 같은 표기를 사용하기도 한다.
+- $\Sigma = \mathrm{Var}(\mathbf{X})$
+- $V(\mathbf{X}) = \mathrm{Var}(\mathbf{X})$
+- $\mathrm{Cov}(\mathbf{X}) = \mathrm{Var}(\mathbf{X})$ (단, $\mathbf{X}$ 자신과의 공분산)
+
+#### (5) 공분산행렬의 일반화
+두 확률벡터 $\mathbf{X}\in\mathbb{R}^k$, $\mathbf{Y}\in\mathbb{R}^\ell$에 대하여
+$$
+\mathrm{Cov}(\mathbf{X},\mathbf{Y}) = E[(\mathbf{X}-E\mathbf{X})(\mathbf{Y}-E\mathbf{Y})^T]
+$$
+는 $k\times\ell$ 행렬이며,
+$$
+(\mathrm{Cov}(\mathbf{X},\mathbf{Y}))_{ij} = \mathrm{Cov}(X_i,Y_j)
+$$
+이다.
+
+특히 $\mathbf{X}=\mathbf{Y}$인 경우
+$$
+\mathrm{Var}(\mathbf{X}) = \mathrm{Cov}(\mathbf{X},\mathbf{X})
+$$
+가 성립한다.
+
+#### 예시 2.5.6
+확률벡터 $\mathbf{X}=(X_1,X_2,X_3)^T$가
+$$
+E(X_1)=1,\quad E(X_2)=2,\quad E(X_3)=3
+$$
+$$
+\mathrm{Var}(X_1)=4,\quad \mathrm{Var}(X_2)=5,\quad \mathrm{Var}(X_3)=6
+$$
+$$
+\mathrm{Cov}(X_1,X_2)=1,\quad \mathrm{Cov}(X_1,X_3)=2,\quad \mathrm{Cov}(X_2,X_3)=3
+$$
+를 만족할 때, 평균벡터와 공분산행렬은 다음과 같다.
+$$
+E(\mathbf{X})=
+\begin{pmatrix}
+1\\
+2\\
+3
+\end{pmatrix},
+\qquad
+\mathrm{Var}(\mathbf{X})=
+\begin{pmatrix}
+4 & 1 & 2\\
+1 & 5 & 3\\
+2 & 3 & 6
+\end{pmatrix}
+$$
+
+#### 예시 2.5.7
+확률벡터 $\mathbf{X}=(X_1,X_2)^T$의 결합확률밀도함수가
+$$
+f(x,y)=2e^{-x-y}\mathbf{1}_{(0\le x\le y)}
+$$
+일 때(교재 앞 예제들의 계산 결과를 이용하면),
+$$
+E(\mathbf{X})=
+\begin{pmatrix}
+1/2\\
+3/2
+\end{pmatrix},
+\qquad
+\mathrm{Var}(\mathbf{X})=
+\begin{pmatrix}
+1/4 & 1/4\\
+1/4 & 5/4
+\end{pmatrix}
+$$
+
+### 정리 2.5.3 (평균벡터와 공분산행렬의 성질)
+확률벡터 $\mathbf{X}\in\mathbb{R}^k$, $\mathbf{Y}\in\mathbb{R}^\ell$과 상수행렬 $A,C$, 상수벡터 $b,d$에 대하여(필요한 기댓값이 존재한다고 가정한다)
+
+(a)
+$$
+E(A\mathbf{X}+b)=AE(\mathbf{X})+b
+$$
+
+(b)
+$$
+\mathrm{Var}(A\mathbf{X}+b)=A\mathrm{Var}(\mathbf{X})A^T
+$$
+
+(c)
+$$
+\mathrm{Cov}(A\mathbf{X}+b,\ C\mathbf{Y}+d)=A\mathrm{Cov}(\mathbf{X},\mathbf{Y})C^T
+$$
+
+(d)
+$$
+\mathrm{Cov}(\mathbf{X}+\mathbf{Y},\ \mathbf{Z})
+=\mathrm{Cov}(\mathbf{X},\mathbf{Z})+\mathrm{Cov}(\mathbf{Y},\mathbf{Z})
+$$
+또한
+$$
+\mathrm{Cov}(\mathbf{X},\ \mathbf{Z}+\mathbf{W})
+=\mathrm{Cov}(\mathbf{X},\mathbf{Z})+\mathrm{Cov}(\mathbf{X},\mathbf{W})
+$$
+
+(e)
+$$
+\mathrm{Cov}(\mathbf{Y},\mathbf{X})=\mathrm{Cov}(\mathbf{X},\mathbf{Y})^T,
+\qquad
+\mathrm{Var}(\mathbf{X})=\mathrm{Cov}(\mathbf{X},\mathbf{X})
+$$
+
+(f)
+$$
+\mathrm{Var}(\mathbf{X}+\mathbf{Y})
+=
+\mathrm{Var}(\mathbf{X})+\mathrm{Var}(\mathbf{Y})
++\mathrm{Cov}(\mathbf{X},\mathbf{Y})+\mathrm{Cov}(\mathbf{Y},\mathbf{X})
+$$
+
+#### 증명
+공분산행렬의 정의를
+$$
+\mathrm{Cov}(\mathbf{X},\mathbf{Y})
+=E\big[(\mathbf{X}-E\mathbf{X})(\mathbf{Y}-E\mathbf{Y})^T\big]
+$$
+로 두고, 정리 2.5.1의 선형성을 성분별로 적용하면 된다.
+예를 들어 (c)는
+$$
+\mathrm{Cov}(A\mathbf{X}+b,\ C\mathbf{Y}+d)
+=E[(A\mathbf{X}-AE\mathbf{X})(C\mathbf{Y}-CE\mathbf{Y})^T]
+$$
+$$
+=E[A(\mathbf{X}-E\mathbf{X})(\mathbf{Y}-E\mathbf{Y})^T C^T]
+=A\mathrm{Cov}(\mathbf{X},\mathbf{Y})C^T
+$$
+로 얻는다. 나머지도 동일한 방식이다. □
+
+#### 예시 2.5.8
+예시 2.5.7에서
+$$
+E(\mathbf{X})=
+\begin{pmatrix}
+1/2\\
+3/2
+\end{pmatrix},
+\qquad
+\mathrm{Var}(\mathbf{X})=
+\begin{pmatrix}
+1/4 & 1/4\\
+1/4 & 5/4
+\end{pmatrix}
+$$
+라고 하자.
+
+여기서 $\mathbf{Y}=(Y_1,Y_2)^T=(2X_1,\ X_2-X_1)^T$라고 두면
+$$
+\mathbf{Y}=A\mathbf{X},\quad
+A=
+\begin{pmatrix}
+2&0\\
+-1&1
+\end{pmatrix}
+$$
+이다.
+
+정리 2.5.3에 의해
+$$
+E(\mathbf{Y})=AE(\mathbf{X})
+=
+\begin{pmatrix}
+2&0\\
+-1&1
+\end{pmatrix}
+\begin{pmatrix}
+1/2\\
+3/2
+\end{pmatrix}
+=
+\begin{pmatrix}
+1\\
+1
+\end{pmatrix}
+$$
+또한
+$$
+\mathrm{Var}(\mathbf{Y})=A\mathrm{Var}(\mathbf{X})A^T
+=
+\begin{pmatrix}
+1&0\\
+0&1
+\end{pmatrix}
+$$
+이다. □
+
+### 정리 2.5.4 (분산행렬의 성질)
+확률벡터 $\mathbf{X}$의 분산행렬 $\mathrm{Var}(\mathbf{X})$는 대칭이며 음이 아닌 정부호(non-negative definite)이다. 즉
+$$
+\mathrm{Var}(\mathbf{X})=\mathrm{Var}(\mathbf{X})^T,\qquad
+a^T\mathrm{Var}(\mathbf{X})a\ge0\ \ (\forall a\in\mathbb{R}^k)
+$$
+
+#### 증명
+대칭성은
+$$
+\mathrm{Var}(\mathbf{X})=(\mathrm{Cov}(X_i,X_j))
+$$
+에서 $\mathrm{Cov}(X_i,X_j)=\mathrm{Cov}(X_j,X_i)$이므로 즉시 따른다.
+
+이제 임의의 $a\in\mathbb{R}^k$에 대해 $a^T\mathbf{X}$는 실수값 확률변수이므로
+$$
+\mathrm{Var}(a^T\mathbf{X})\ge0
+$$
+
+한편, 분산은 항상 비음이므로 정리 2.5.3(b)에 의해 $$\mathrm{Var(a^T\mathbf{X})} = a^T\mathrm{Var}(\mathbf{X})a \ge0$$  
+
+**참고: Statistics_02_분산행렬의 스펙트럼 분해와 기하학적 해석.md** 
+
+
+
+TODO:
+
+### 다차원 결합적률과 결합적률생성함수
+$r_1,\dots,r_k\in\mathbb{N}$에 대해
+$$
+E(X_1^{r_1}\cdots X_k^{r_k})
+$$
+를 $(r_1,\dots,r_k)$차 **결합적률(joint moment)**이라 한다.
+
+0을 포함하는 열린구간에서
+$$
+M(t_1,\dots,t_k)=E(e^{t_1X_1+\cdots+t_kX_k})
+$$
+가 유한하면 이를 결합적률생성함수라 한다.
+
+결합누율생성함수의 평균, 분산
+
+
+
+
+
+### 정리 2.5.5 결합적률생성함수의 성질
+(a) 결합적률 생성
+(b) 분포 결정성
+
+#### 예 2.5.9
+...
+
+### 다차원 확률변수에 대한 조건부확률밀도함수
+...
+
+### 
