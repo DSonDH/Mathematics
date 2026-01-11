@@ -1,4 +1,3 @@
-
 ### 정리 2.5.5 (분산행렬의 스펙트럼 분해와 기하학적 해석)
 #### 대각화 정리 (Spectral Decomposition Theorem)
 확률벡터 $\mathbf{X}\in\mathbb{R}^k$의 분산행렬 $\Sigma=\mathrm{Var}(\mathbf{X})$는 대칭이며 음이 아닌 정부호(non-negative definite)이므로, 다음과 같은 스펙트럼 분해(spectral decomposition)가 가능하다.

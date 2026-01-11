@@ -391,7 +391,7 @@ $$
 ### 결합적률생성함수 *(Joint Moment Generating Function)*
 0을 포함하는 어떤 열린집합(근방) $U\subset\mathbb R^2$에서
 $$
-M(t_1,t_2)=E!\left(e^{t_1X+t_2Y}\right)
+M(t_1,t_2)=E\left(e^{t_1X+t_2Y}\right)
 $$
 가 유한하면 이를 **결합적률생성함수(joint moment generating function, joint MGF)** 라 한다.
 
@@ -474,8 +474,14 @@ $$
     $$
     c_{1,1} = m_{1,1} - m_{1,0}m_{0,1} = E[XY] - E[X]E[Y] = \mathrm{Cov}(X,Y)
     $$
+  
+  **일반적인 CGF 테일러 전개**  
+  결합누율생성함수 $C(t_1,t_2)$를 $(0,0)$ 근방에서 테일러 전개하면
   $$
-sdf
+  C(t_1,t_2) = E[X]t_1 + E[Y]t_2 + \frac{1}{2}\left(\mathrm{Var}(X)t_1^2 + 2\mathrm{Cov}(X,Y)t_1t_2 + \mathrm{Var}(Y)t_2^2\right) + \cdots
+  $$
+  이 성립한다. 즉, 1차 계수는 평균, 2차 계수는 분산과 공분산으로 직접 주어진다.
+
 ### 정리 2.2.4 결합적률생성함수와 결합누율생성함수의 성질 *(Properties of Joint MGF and Joint CGF)*
 
 확률벡터 $(X,Y)$의 결합적률생성함수를
@@ -828,7 +834,7 @@ $$
   $$
 * 연속형:
   $$
-  E(Y\mid X=x)=\int_{-\infty}^{\infty} yf_{2|1}(y\mid x),dy
+  E(Y\mid X=x)=\int_{-\infty}^{\infty} yf_{2|1}(y\mid x)dy
   $$
 
 ### 2.3.5 조건부기대값 *(Conditional Expectation)*
@@ -1215,6 +1221,83 @@ $$
 
 이 아이디어는 10장에서 소개되는 회귀분석과 분산분석의 기초가 된다.
 
+#### 정리 2.3.7 조건부분산과 전체 분산의 관계 *(Relationship between Conditional and Total Variance)*
+$$
+\mathrm{Var}(X-E(X\mid Y))=E[\mathrm{Var}(X\mid Y)]
+$$
+
+#### 증명
+$\mu = E(X)$라 하자. 정리 2.3.6의 분산의 분해에 의해
+$$
+\mathrm{Var}(X)=E[\mathrm{Var}(X\mid Y)]+\mathrm{Var}(E(X\mid Y))
+$$
+가 성립한다.
+
+한편, $Z=X-E(X\mid Y)$라 두면, 조건부기대값의 성질에 의해
+$$
+E(Z\mid Y)=E(X\mid Y)-E(E(X\mid Y)\mid Y)=E(X\mid Y)-E(X\mid Y)=0
+$$
+이므로
+$$
+E(Z)=E(E(Z\mid Y))=0
+$$
+이다.
+
+따라서
+$$
+\mathrm{Var}(Z)=E(Z^2)-[E(Z)]^2=E(Z^2)
+$$
+$$
+=E[(X-E(X\mid Y))^2]
+$$
+
+이제 조건부기대값을 이용하면
+$$
+E[(X-E(X\mid Y))^2]=E[E((X-E(X\mid Y))^2\mid Y)]
+$$
+
+조건부분산의 정의에 의해
+$$
+E[(X-E(X\mid Y))^2\mid Y]=\mathrm{Var}(X\mid Y)
+$$
+이므로
+$$
+\mathrm{Var}(X-E(X\mid Y))=E[\mathrm{Var}(X\mid Y)]
+$$
+가 성립한다. □
+
+#### 예시
+$$
+\mathrm{Var}(Y+X-E(X\mid Y))=\mathrm{Var}(Y)+E[\mathrm{Var}(X\mid Y)]
+$$
+
+$Z=X-E(X\mid Y)$라 하자. 그러면
+$$
+Y+X-E(X\mid Y)=Y+Z
+$$
+이다.
+
+정리 2.3.4(3)의 직교성 성질에 의해
+$$
+\mathrm{Cov}(Y,Z)=\mathrm{Cov}(Y,X-E(X\mid Y))=0
+$$
+이므로 $Y$와 $Z$는 비상관이다.
+
+따라서 정리 2.4.5에 의해
+$$
+\mathrm{Var}(Y+Z)=\mathrm{Var}(Y)+\mathrm{Var}(Z)
+$$
+
+여기서 정리 2.3.7에 의해
+$$
+\mathrm{Var}(Z)=\mathrm{Var}(X-E(X\mid Y))=E[\mathrm{Var}(X\mid Y)]
+$$
+
+따라서
+$$
+\mathrm{Var}(Y+X-E(X\mid Y))=\mathrm{Var}(Y)+E[\mathrm{Var}(X\mid Y)]
+$$
+□
 
 ## 확률변수의 독립성 *(Independence of Random Variables)*
 확률변수의 독립성은 “한 확률변수에 대한 정보가 다른 확률변수의 분포에 아무런 영향을 주지 않는다”는 개념을 수학적으로 정식화한 것이다.
@@ -1962,37 +2045,394 @@ $$
 
 **참고: Statistics_02_분산행렬의 스펙트럼 분해와 기하학적 해석.md** 
 
-
-
-TODO:
-
-### 다차원 결합적률과 결합적률생성함수
-$r_1,\dots,r_k\in\mathbb{N}$에 대해
+### 다차원 결합적률과 결합적률생성함수 *(Multivariate Joint Moments and Joint Moment Generating Functions)*
+다차원 확률벡터 $\mathbf{X} = (X_1,\dots,X_k)^T$에 대하여, 자연수 $r_1,\dots,r_k \in \mathbb{N}$가 주어졌을 때
 $$
 E(X_1^{r_1}\cdots X_k^{r_k})
 $$
-를 $(r_1,\dots,r_k)$차 **결합적률(joint moment)**이라 한다.
+를 $(r_1,\dots,r_k)$차 **결합적률(joint moment)** 이라 한다.
 
-0을 포함하는 열린구간에서
+이는 단변량 확률변수의 적률(moment)을 다차원으로 확장한 개념이며, 확률벡터의 분포적 특성을 요약하는 기본적인 수치이다.
+
+### 결합적률생성함수 *(Joint Moment Generating Function, Joint MGF)*
+다차원 확률벡터 $\mathbf{X}=(X_1,\dots,X_k)^T$에 대하여,
+$\mathbf{0}$을 포함하는 어떤 열린집합에서
 $$
-M(t_1,\dots,t_k)=E(e^{t_1X_1+\cdots+t_kX_k})
+M(t_1,\dots,t_k)
+=E\left(e^{t_1X_1+\cdots+t_kX_k}\right)
 $$
-가 유한하면 이를 결합적률생성함수라 한다.
+가 유한하면 이를 $\mathbf{X}$의 **결합적률생성함수(joint moment generating function)** 라 한다.  
+즉, 어떤 $h_i>0$가 존재하여 $-h_i<t_i<h_i\quad (i=1,\dots,k)$인 모든 $(t_1,\dots,t_k)$에 대해 $M(t_1,\dots,t_k)<\infty$가 성립하는 경우이다.
 
-결합누율생성함수의 평균, 분산
+### 정리 2.5.5 결합적률생성함수의 성질 *(Properties of the Joint Moment Generating Function)*
 
+#### (a) 결합적률 생성 성질 *(Generation of Joint Moments)*
+다차원 확률벡터 $\mathbf{X}=(X_1,\dots,X_k)^T$의 결합적률생성함수
+$M(t_1,\dots,t_k)=E(e^{t_1X_1+\cdots+t_kX_k})$가 원점을 포함하는 열린집합에서 존재한다고 가정한다.
 
+이때 $\mathbf{X}$의 모든 결합적률이 존재하며,
+$$
+E(X_1^{r_1}\cdots X_k^{r_k})
+=\left[
+\frac{\partial^{r_1+\cdots+r_k}}
+{\partial t_1^{r_1}\cdots \partial t_k^{r_k}}
+M(t_1,\dots,t_k)
+\right]_{t_1=\cdots=t_k=0}
+$$
+가 성립한다.
 
+또한 결합적률생성함수는 다음의 멱급수(power series)로 전개된다.
+$$
+M(t_1,\dots,t_k)
+=\sum_{r_1=0}^{\infty}\cdots\sum_{r_k=0}^{\infty}
+\frac{E(X_1^{r_1}\cdots X_k^{r_k})}
+{r_1!\cdots r_k!}
+t_1^{r_1}\cdots t_k^{r_k}.
+$$
 
+이는 지수함수의 멱급수 전개와 적분–미분 교환의 정당화(예: 지배수렴정리)에 근거한다.
 
-### 정리 2.5.5 결합적률생성함수의 성질
-(a) 결합적률 생성
-(b) 분포 결정성
+#### (b) 분포 결정성 *(Distribution Determination / Uniqueness)*
+다차원 확률벡터
+$\mathbf{X}=(X_1,\dots,X_k)^T,\ \mathbf{Y}=(Y_1,\dots,Y_k)^T$에 대하여 결합적률생성함수
+$$
+M_\mathbf{X}(t_1,\dots,t_k),\quad M_\mathbf{Y}(t_1,\dots,t_k)
+$$
+가 원점을 포함하는 열린집합에서 존재하고,
+$$
+M_\mathbf{X}(t_1,\dots,t_k)=M_\mathbf{Y}(t_1,\dots,t_k)
+$$
+가 성립하면 $\mathbf{X}$와 $\mathbf{Y}$의 확률분포는 동일하다.
 
-#### 예 2.5.9
-...
+즉, 결합확률밀도함수(joint probability density function)와 결합누적분포함수(joint cumulative distribution function)가 일치한다.
 
-### 다차원 확률변수에 대한 조건부확률밀도함수
-...
+### 결합누율생성함수 *(Cumulant Generating Function, CGF)*
+결합적률생성함수 $M(t_1,\dots,t_k)$가 존재할 때
+$$
+C(t_1,\dots,t_k) =\log M(t_1,\dots,t_k)
+=\log E\left(e^{t_1X_1+\cdots+t_kX_k}\right)
+$$
+를 **결합누율생성함수(cumulant generating function)** 라 한다.
 
-### 
+### 결합누율생성함수와 평균, 분산 *(Mean and Covariance via CGF)*
+결합누율생성함수 $C(\mathbf{t})$에 대하여 다음이 성립한다.
+$$
+\left.
+\frac{\partial C(\mathbf{t})}{\partial t_i}
+\right|_{t_1=\cdots=t_k=0}
+=E(X_i),
+$$
+
+$$
+\left.
+\frac{\partial^2 C(\mathbf{t})}{\partial t_i\partial t_j}
+\right|_{t_1=\cdots=t_k=0}
+=\mathrm{Cov}(X_i,X_j).
+$$
+
+일차 편도함수 벡터
+$$
+\nabla C(\mathbf{t}) 
+=\dot C(\mathbf{\mathbf{t}})
+=\left(
+\frac{\partial C}{\partial t_1},\dots,
+\frac{\partial C}{\partial t_k}
+\right)^T
+$$
+를 **기울기 벡터(gradient vector)** 라 하며,
+
+이차 편도함수 행렬
+$$
+\nabla^2 C(\mathbf{t})
+=\ddot C(\mathbf{\mathbf{t}})
+=\left(
+\frac{\partial^2 C}{\partial t_i\partial t_j}
+\right)
+$$
+를 **헤시안 행렬(Hessian matrix)** 이라 한다.
+
+### 예시 2.5.9 *(Computation via CGF)*
+확률벡터 $\mathbf{X}=(X_1,X_2,X_3)^T$의 결합확률밀도함수는
+$$
+f(x_1,x_2,x_3)
+=6e^{-x_1-x_2-x_3}
+\mathbf{1}_{\{0\le x_1\le x_2\le x_3\}}
+$$
+이때 결합적률생성함수는
+$$
+M_\mathbf{X}(t_1,t_2,t_3)
+=\int_0^\infty\int_{x_1}^\infty\int_{x_2}^\infty e^{t_1x_1+t_2x_2+t_3x_3}6e^{-x_1-x_2-x_3}dx_3\,dx_2\,dx_1
+$$
+$$
+= 6\int_0^\infty e^{(t_1-1)x_1}\left[\int_{x_1}^\infty e^{(t_2-1)x_2}\left(\int_{x_2}^\infty e^{(t_3-1)x_3}dx_3\right)dx_2\right]dx_1
+$$
+$$
+=\frac{6}{(3-t_1-t_2-t_3)(2-t_2-t_3)(1-t_3)}
+$$
+이며,$t_1+t_2+t_3<3,\quad t_2+t_3<2,\quad t_3<1$ 에서 정의된다.
+
+따라서 결합누율생성함수는
+$$
+C(\mathbf{t})
+=-\log\left(1-\frac{t_1+t_2+t_3}{3}\right)
+-\log\left(1-\frac{t_2+t_3}{2}\right)
+-\log(1-t_3).
+$$
+
+로그함수의 멱급수 전개
+$$
+-\log(1-A)=A+\frac{A^2}{2}+\frac{A^3}{3}+\cdots
+\quad(-1<A<1)
+$$
+를 이용하여 $C(\mathbf{t})$를 전개하면,
+일차항과 이차항의 계수로부터
+$$
+E(\mathbf{X})
+= 
+\begin{pmatrix}
+1/3\\
+5/6\\
+11/6
+\end{pmatrix},
+$$
+$$
+\mathrm{Var}(\mathbf{X})
+= \frac{1}{36}
+\begin{pmatrix}
+4&4&4\\
+4&13&13\\
+4&13&49
+\end{pmatrix}
+$$
+을 얻는다.
+
+### 다차원 확률변수의 조건부확률밀도함수 *(Conditional Probability Density Function)*
+다차원 확률벡터 $\mathbf{X}=(X_1,\dots,X_k)^T$의 결합확률밀도함수가
+$f_{1,\dots,k}(x_1,\dots,x_k)$이고,
+$X_1$의 주변확률밀도함수가 $f_1(x_1)$일 때,
+$X_1=x_1$이라는 조건 하에서
+$(X_2,\dots,X_k)^T$의 조건부확률밀도함수는
+$$
+f_{2,\dots,k|1}(x_2,\dots,x_k\mid x_1)
+= \frac{f_{1,\dots,k}(x_1,\dots,x_k)}{f_1(x_1)},
+\quad f_1(x_1)>0
+$$
+로 정의된다.  
+
+일반적으로, 확률벡터를 두 부분 $\mathbf{X}=(X_1,\dots,X_j)^T$와 $\mathbf{Y}=(X_{j+1},\dots,X_k)^T$로 나누었을 때,
+$\mathbf{X}=\mathbf{x}$가 주어진 조건 하에서 $\mathbf{Y}$의 조건부확률밀도함수는
+$$
+f_{\mathbf{Y}|\mathbf{X}}(\mathbf{y}|\mathbf{x})
+= \frac{f_{1,\dots,k}(x_1,\dots,x_j,y_1,\dots,y_{k-j})}{f_{1,\dots,j}(x_1,\dots,x_j)},
+\quad f_{1,\dots,j}(\mathbf{x})>0
+$$
+로 정의된다.
+
+이는 이차원 확률변수에서의 조건부확률밀도함수 정의를 그대로 다차원으로 확장한 것이다.
+
+### 다차원 확률변수의 조건부기댓값 *(Conditional Expectation)*
+확률벡터
+$$
+\mathbf{X}=(X_1,\dots,X_k)^T,\quad
+\mathbf{Y}=(Y_1,\dots,Y_\ell)^T
+$$
+에 대하여 $\mathbf{X}=\mathbf{x}$일 때 $\mathbf{Y}$의 조건부확률밀도함수가 $f_{\mathbf{Y}|\mathbf{X}}(\mathbf{y}\mid \mathbf{x})$이면,
+실수값 함수 $g(\mathbf{X},\mathbf{Y})$의 조건부기댓값은
+$$
+E(g(\mathbf{X},\mathbf{Y})\mid \mathbf{X}=\mathbf{x}) = \int\cdots\int g(\mathbf{x},\mathbf{y})\,f_{\mathbf{Y}|\mathbf{X}}(\mathbf{y}\mid \mathbf{x})\,d\mathbf{y}
+$$
+로 정의된다(연속형의 경우).
+
+### 정리 2.5.6 조건부기댓값의 성질 *(Properties of Conditional Expectation)*
+
+#### (a) 반복기댓값의 법칙 *(Law of Iterated Expectations)*
+$$
+E[E(\mathbf{Y}\mid \mathbf{X})] = E(\mathbf{Y}).
+$$
+
+#### (b) 직교성 *(Orthogonality Property)*
+$$
+\forall v(\mathbf{X}), \ \mathrm{Cov}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}),\,v(\mathbf{X}))=\mathbf{0}
+$$
+가 성립한다.  
+이는 조건부기댓값이 $L^2$ 공간에서 $\mathbf{Y}$의 $\mathbf{X}$-가측 함수 공간으로의 정사영(projection)임을 의미한다.
+
+### 정리 2.5.7 분산행렬의 분해 *(Variance Decomposition / Law of Total Variance)*
+$$
+\mathrm{Var}(\mathbf{Y})
+= E[\mathrm{Var}(\mathbf{Y}\mid \mathbf{X})]
++ \mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X})).
+$$
+#### 증명
+$\mu = E(\mathbf{Y})$라 하자. $\mathbf{Y}-\mu$를 다음과 같이 분해한다:
+$$
+\mathbf{Y}-\mu=(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus(E(\mathbf{Y}\mid \mathbf{X})-\mu)
+$$
+
+이 분해가 $\oplus$로 가능함을 확인하자.  
+$E(\mathbf{Y}\mid \mathbf{X})-\mu$는 $\mathbf{X}$의 함수이므로, 정리 2.5.6(b)의 직교성 성질에 의해
+$$
+\mathrm{Cov}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}),\ E(\mathbf{Y}\mid \mathbf{X})-\mu)=\mathbf{0}
+$$
+가 성립한다. 따라서 두 항은 서로 비상관이며, $\oplus$ 표기가 정당하다.
+
+이제 양변에서 분산을 구하면, $\oplus$의 정의에 의해 분산이 가법적으로 분해되어
+$$
+\mathrm{Var}(\mathbf{Y})=\mathrm{Var}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus\mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X})-\mu)
+$$
+$$
+=\mathrm{Var}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))+\mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X}))
+$$
+
+여기서
+$$
+\mathrm{Var}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))
+=E[(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T]
+$$
+
+조건부기댓값의 타워 성질과 정리 2.5.6(a)를 이용하면
+$$
+E[(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T]
+=E[E((\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T\mid \mathbf{X})]
+$$
+$$
+=E[\mathrm{Var}(\mathbf{Y}\mid \mathbf{X})]
+$$
+
+따라서
+$$
+\mathrm{Var}(\mathbf{Y})
+=E[\mathrm{Var}(\mathbf{Y}\mid \mathbf{X})]+\mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X}))
+$$
+□
+
+### 정리 2.5.8 다차원 확률변수의 최소제곱예측자 *(Minimum Mean Square Error Estimator)*
+벡터값 함수 $u(\mathbf{X})$에 대하여
+$$
+E\|\mathbf{Y}-u(\mathbf{X})\|^2 = E[(Y_1-u_1(\mathbf{X}))^2+\cdots+(Y_\ell-u_\ell(\mathbf{X}))^2]
+$$
+를 최소로 하는 함수는
+$$
+u(\mathbf{X})=E(\mathbf{Y}\mid \mathbf{X})
+$$
+이다.
+
+즉, 조건부기댓값은 평균제곱오차(mean squared error) 기준에서 최적 예측자이다.
+
+#### 증명
+임의의 $\mathbf{X}$의 벡터값 함수 $u(\mathbf{X})=(u_1(\mathbf{X}),\dots,u_\ell(\mathbf{X}))^T$에 대하여, 다음과 같이 분해한다.
+$$
+\mathbf{Y}-u(\mathbf{X})=(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus(E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X}))
+$$
+이 분해는 정리 2.5.6(b)의 직교성 성질에 의해 $\oplus$로 가능하다.
+
+이제 양변의 제곱 노름의 기댓값을 취하면
+$$
+E\|\mathbf{Y}-u(\mathbf{X})\|^2
+=E\|(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus(E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X}))\|^2 \\
+=E\|\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X})\|^2+E\|E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X})\|^2
+$$
+
+두 번째 항은 항상 비음이므로
+$$
+E\|\mathbf{Y}-u(\mathbf{X})\|^2\ge E\|\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X})\|^2
+$$
+
+등호는
+$$
+E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X})=\mathbf{0}\quad\text{a.s.}
+$$
+즉 $u(\mathbf{X})=E(\mathbf{Y}\mid \mathbf{X})$일 때, 그리고 그때에만 성립한다. □
+
+### 정리 2.5.9 다차원 확률변수의 독립성 *(Independence of Multivariate Random Variables)*
+다차원 확률벡터 $\mathbf{X}_1,\dots,\mathbf{X}_n$이 서로 독립일 필요충분조건은 다음과 같다.
+
+#### (a) 확률밀도함수에 의한 조건
+$$
+f_{1,\dots,n}(\mathbf{x}_1,\dots,\mathbf{x}_n)
+= f_1(\mathbf{x}_1)\cdots f_n(\mathbf{x}_n).
+$$
+
+#### (b) 적률생성함수에 의한 조건
+$$
+M_{1,\dots,n}(\mathbf{t}_1,\dots,\mathbf{t}_n)
+= M_1(\mathbf{t}_1)\cdots M_n(\mathbf{t}_n)
+$$
+(각 MGF가 원점 근방에서 존재함을 가정).
+
+**참고: 독립성 판정 시 인수분해 기준**  
+독립성을 판정할 때 반드시 주변확률밀도함수나 주변적률생성함수를 명시적으로 구할 필요는 없다.
+
+결합확률밀도함수가 각 확률벡터에만 의존하는 함수들의 곱으로 인수분해되면, 즉
+$$
+f_{1,\dots,n}(\mathbf{x}_1,\dots,\mathbf{x}_n) = g_1(\mathbf{x}_1) \cdot g_2(\mathbf{x}_2) \cdots g_n(\mathbf{x}_n)
+$$
+를 만족하는 비음함수 $g_1,\dots,g_n$이 존재하면, $\mathbf{X}_1,\dots,\mathbf{X}_n$은 서로 독립이다.
+
+이는 2차원의 경우(정리 2.4.1의 인수분해 기준)와 동일한 원리이며, 각 $g_i$를 적절히 정규화하면 주변확률밀도함수를 얻을 수 있다.
+
+마찬가지로 결합적률생성함수가
+$$
+M_{1,\dots,n}(\mathbf{t}_1,\dots,\mathbf{t}_n) = h_1(\mathbf{t}_1) \cdot h_2(\mathbf{t}_2) \cdots h_n(\mathbf{t}_n)
+$$
+형태로 인수분해되면, 각 $h_i$가 주변적률생성함수가 되므로 독립성이 성립한다.
+
+### 정리 2.5.10 독립인 다차원 확률변수들의 성질 *(Properties of Independent Random Variables)*
+* 독립인 확률벡터에 함수 $g_i$를 적용해도 독립성은 유지된다.
+* 곱의 기댓값은 기댓값의 곱으로 분리된다.
+* 서로 다른 성분 사이의 공분산은 0이다.
+
+### 정리 2.5.11 서로 독립인 확률변수의 합 *(Sum of Independent Random Variables)*
+독립인 확률변수 $X_1,\dots,X_n$에 대하여
+$$
+\mathrm{Var}(X_1+\cdots+X_n)
+=\mathrm{Var}(X_1)+\cdots+\mathrm{Var}(X_n),
+$$
+
+$$
+M_{X_1+\cdots+X_n}(t)
+= M_{X_1}(t)\cdots M_{X_n}(t).
+$$
+
+#### 증명
+**분산의 경우**  
+분산은 공분산의 특수한 경우이므로
+$\mathrm{Var}(Y)=\mathrm{Cov}(Y,Y)$
+를 이용한다. 따라서
+$$
+\mathrm{Var}(X_1+\cdots+X_n)
+=\mathrm{Cov}\!\left(\sum_{i=1}^n X_i,\,\sum_{j=1}^n X_j\right).
+$$
+
+공분산의 이중 선형성(bilinearity)에 의해
+$$
+\mathrm{Cov}\!\left(\sum_{i=1}^n X_i,\,\sum_{j=1}^n X_j\right)
+=\sum_{i=1}^n\sum_{j=1}^n \mathrm{Cov}(X_i,X_j).
+$$
+
+독립성에 의해 $i\neq j$이면 $\mathrm{Cov}(X_i,X_j)=0$
+이고, $i=j$이면 $\mathrm{Cov}(X_i,X_i)=\mathrm{Var}(X_i).$
+
+따라서
+$$
+\mathrm{Var}(X_1+\cdots+X_n)
+=\sum_{i=1}^n \mathrm{Var}(X_i).
+$$
+
+**적률생성함수의 경우**  
+적률생성함수의 정의에 의해
+$$
+M_{X_1+\cdots+X_n}(t)
+=E\!\left[e^{t(X_1+\cdots+X_n)}\right]
+=E\!\left[\prod_{i=1}^n e^{tX_i}\right].
+$$
+
+확률변수 $X_1,\dots,X_n$이 서로 독립이므로
+함수 $e^{tX_1},\dots,e^{tX_n}$ 역시 서로 독립이고,
+따라서
+$$
+E\!\left[\prod_{i=1}^n e^{tX_i}\right]
+=\prod_{i=1}^n E[e^{tX_i}]
+=\prod_{i=1}^n M_{X_i}(t).
+$$
+□

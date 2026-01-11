@@ -599,11 +599,45 @@ $x \to \infty$일 때 지수함수가 다항식보다 빠르게 증가하므로 
 
 따라서
 $$
-\int_0^\infty x^k e^{-x}\,dx = 0 - \left(-e^0 \cdot \frac{k!}{0!} \cdot 0^0\right) = k!
+\int_0^\infty x^k e^{-x}dx = 0 - \left(-e^0 \cdot \frac{k!}{0!} \cdot 0^0\right) = k!
 $$
 
 이는 **감마함수** $\Gamma(n+1) = n!$ (단, $n \in \mathbb{N}$)의 특수한 경우이다.
 
+### 예제 4. $\displaystyle\int_0^\infty x^a e^{-bx}\,dx$ (일반화, $a > -1$, $b > 0$)
+
+**치환적분을 이용한 일반화:**  
+$u = bx$로 치환하면 $du = b\,dx$, 즉 $dx = \frac{1}{b}du$
+
+$x = 0$일 때 $u = 0$, $x \to \infty$일 때 $u \to \infty$
+
+따라서
+$$
+\int_0^\infty x^a e^{-bx}\,dx = \int_0^\infty \left(\frac{u}{b}\right)^a e^{-u} \frac{1}{b}\,du = \frac{1}{b^{a+1}}\int_0^\infty u^a e^{-u}\,du
+$$
+
+**$a = k$ (자연수)인 경우:**  
+예제 3의 결과를 이용하면
+$$
+\int_0^\infty u^k e^{-u}\,du = k!
+$$
+
+따라서
+$$
+\int_0^\infty x^k e^{-bx}\,dx = \frac{k!}{b^{k+1}}
+$$
+
+**일반적인 $a > -1$인 경우 (감마함수):**  
+감마함수는 $\Gamma(a+1) = \int_0^\infty u^a e^{-u}\,du$로 정의되며,
+
+- $a$가 자연수일 때: $\Gamma(a+1) = a!$
+- 일반적으로: $\Gamma(a+1) = a\Gamma(a)$ (재귀 관계식)
+- 특히: $\Gamma\left(\frac{1}{2}\right) = \sqrt{\pi}$
+
+따라서 일반적인 결과는
+$$
+\int_0^\infty x^a e^{-bx}\,dx = \frac{\Gamma(a+1)}{b^{a+1}}, \quad (a > -1, b > 0)
+$$
 
 # 3. 리만적분의 확장 *(Extensions of the Riemann Integral)*
 ## (1) 특이적분 *(Improper Integral)*
