@@ -108,12 +108,12 @@ $$
 * **제곱근 함수**
   $$
   \sqrt{x}
-  =1-\frac{1-x}{2}-\frac{(1-x)^2}{8}-\frac{(1-x)^3}{16}-\cdots
+  =1+\frac{1}{2}(x-1)-\frac{1}{2^3}(x-1)^2+\frac{1}{2^4}(x-1)^3-\cdots
   \quad (0<x<2)
   $$
   $$
   \sqrt{1+x}
-  =1+\frac{x}{2}-\frac{x^2}{8}+\frac{x^3}{16}-\frac{5x^4}{128}+\cdots
+  =1+\frac{1}{2}x-\frac{1}{2^3}x^2+\frac{1}{2^4}x^3-\frac{5}{2^7}x^4+\cdots
   \quad (-1<x\le 1)
   $$
 
@@ -129,9 +129,9 @@ $$
 
 * **로그함수**
   $$
-  \ln x
-  =\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}(x-1)^n
-  \quad (0<x\le 2)
+  \ln(1-x)
+  =-\sum_{n=1}^{\infty}\frac{x^n}{n}
+  \quad (-1\le x<1)
   $$
   $$
   \ln(1+x)
@@ -139,9 +139,9 @@ $$
   \quad (-1<x\le 1)
   $$
   $$
-  \ln(1-x)
-  =-\sum_{n=1}^{\infty}\frac{x^n}{n}
-  \quad (-1\le x<1)
+  \ln x
+  =\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}(x-1)^n
+  \quad (0<x\le 2)
   $$
 
 * **삼각함수**

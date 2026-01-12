@@ -314,14 +314,7 @@ $$
 2. $\mathrm{Cov}(X,X)=\mathrm{Var}(X)$
 3. $\mathrm{Cov}(aX+b,cY+d)=ac\mathrm{Cov}(X,Y)$
 4. $\mathrm{Cov}(X,Y)=E(XY)-E(X)E(Y)$
-
-#### 증명
-(4)는
-$$
-E[(X-\mu_X)(Y-\mu_Y)]
-=E(XY)-\mu_X\mu_Y
-$$
-에서 바로 따른다. □
+  - 식 전개하면 바로 나옴: $E[(X-\mu_X)(Y-\mu_Y)]=E(XY)-\mu_X\mu_Y$ □
 
 ### 정리 2.2.3 상관계수의 성질 *(Properties of Correlation)*
 상관계수 $\rho=\mathrm{Corr}(X,Y)$에 대하여
@@ -418,8 +411,6 @@ c_{r,s} = \frac{\partial^{r+s}}{\partial t_1^r \partial t_2^s}C(t_1,t_2)\Big|_{(
 $$
 
 로 정의된다.
-
-
 
 **결합누율, 결합적률 관계식**  
 $M(t_1,t_2) = e^{C(t_1,t_2)}$이므로

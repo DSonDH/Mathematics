@@ -57,7 +57,7 @@ $$
 \det(\Sigma)=\prod_{i=1}^k\lambda_i
 $$
 
-이는 확률분포의 **집중도(concentration)**를 측정하는 지표로 사용되며,
+이는 확률분포의 **집중도(concentration)** 를 측정하는 지표로 사용되며,
 * $\det(\Sigma)=0$이면 분포가 더 낮은 차원의 부분공간에 집중되어 있음을 의미한다.
 * $\det(\Sigma)$가 클수록 분포가 더 퍼져 있음을 의미한다.
 
@@ -131,8 +131,8 @@ $$
 > $$
 > \mathbf{Y}=P^T\mathbf{X}
 > $$
-> 을 **주성분 변환(principal component transformation)**이라 하며,  
-> 변환된 확률벡터 $\mathbf{Y}$의 성분들을 **주성분(principal components)**이라 한다.
+> 을 **주성분 변환(principal component transformation)** 이라 하며,  
+> 변환된 확률벡터 $\mathbf{Y}$의 성분들을 **주성분(principal components)** 이라 한다.
 >
 > 이 변환 후 분산행렬은 대각행렬이 되어
 > $$
