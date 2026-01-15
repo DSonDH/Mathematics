@@ -2054,46 +2054,32 @@ $$
 X_{(r)}=F^{-1}(1-e^{-X_{(r)}})=h\left(\frac{Z_1}{n}+\cdots+\frac{Z_r}{n-r+1}\right)
 $$
 
-TODO: 어제 내용 복습도 해야할듯...
+
 ## 4.4 다변량 정규분포 *(Multivariate Normal Distribution)*
 통계 조사에서는 단일 특성보다 **서로 연관된 여러 특성**을 동시에 관측하는 경우가 많다.
 이러한 다차원 자료에 대한 추론의 기본 모형으로 **다변량 정규분포(multivariate normal distribution)**가 널리 사용된다.
 
 ### 정리 4.4.1 다변량 정규분포의 구성 *(Construction of Multivariate Normal Distribution)*
-
-표준정규분포 $N(0,1)$를 따르고 서로 독립인 확률변수
+표준정규분포 $N(0,1)$를 따르고 서로 독립인 확률변수 $Z_1,Z_2,\dots,Z_n$
+과 $n\times n$ 상수 행렬, $n$차원 벡터
 $$
-Z_1,Z_2,\dots,Z_n
-$$
-과 $n\times n$ 상수 행렬 $A=(a_{ij})_{1\le i,j\le n}$, $n$차원 벡터
-$$
-\mu=(\mu_1,\mu_2,\dots,\mu_n)^T
+A=(a_{ij})_{1\le i,j\le n},\quad \mu=(\mu_1,\mu_2,\dots,\mu_n)^T
 $$
 에 대하여
 $$
 X=AZ+\mu,\quad X=(X_1,\dots,X_n)^T,\quad Z=(Z_1,\dots,Z_n)^T
 $$
-라고 하자.
-
+일때, 다음 두 가지가 성립한다.  
 **(a) 확률밀도함수**  
-행렬 $A$가 **정칙행렬(nonsingular matrix, invertible matrix)**이면
-$$
-X=AZ+\mu
-$$
-의 확률밀도함수는
+행렬 $A$가 **정칙행렬(nonsingular matrix, invertible matrix)** 이면 $X=AZ+\mu$의 확률밀도함수는 ($\Sigma=AA^T$)
 $$
 \text{pdf}_X(x)
 =
 (\det(2\pi\Sigma))^{-1/2}
 \exp\left\{
 -\frac12(x-\mu)^T\Sigma^{-1}(x-\mu)
-\right\},\quad x\in\mathbb{R}^n
+\right\},\quad x\in\mathbb{R}^n \\
 $$
-이며
-$$
-\Sigma=AA^T
-$$
-이다.
 
 **(b) 적률생성함수 *(Moment Generating Function)***
 $$
@@ -2110,7 +2096,6 @@ $$
 \text{pdf}_Z(z)=(2\pi)^{-n/2}\exp\left(-\frac12 z^T z\right),\quad
 \text{mgf}_Z(s)=\exp\left(\frac12 s^T s\right)
 $$
-이다.
 
 **(a)** $X=u(Z)=AZ+\mu$라 하면 $A$가 정칙행렬이므로 $u$는 일대일 함수이며 역변환은
 $$
@@ -2120,16 +2105,11 @@ $$
 $$
 |J_{u^{-1}}|=|\det(A^{-1})|=|\det(A)|^{-1}
 $$
-이다. 
 
 정리 4.1.1의 치환공식에 의해
 $$
-\text{pdf}_X(x)=\text{pdf}_Z(A^{-1}(x-\mu))|\det(A)|^{-1}
-$$
-
-따라서
-$$
-\text{pdf}_X(x)=(2\pi)^{-n/2}\exp\left(-\frac12(A^{-1}(x-\mu))^T(A^{-1}(x-\mu))\right)|\det(A)|^{-1}
+\text{pdf}_X(x)=\text{pdf}_Z(A^{-1}(x-\mu))|\det(A)|^{-1} \\
+=(2\pi)^{-n/2}\exp\left(-\frac12(A^{-1}(x-\mu))^T(A^{-1}(x-\mu))\right)|\det(A)|^{-1}
 $$
 
 여기서 $(A^{-1}(x-\mu))^T(A^{-1}(x-\mu))=(x-\mu)^T(A^{-1})^TA^{-1}(x-\mu)$이고,
@@ -2163,14 +2143,15 @@ $$
 ### 다변량 정규분포의 정의 *(Definition of Multivariate Normal Distribution)*
 $n$차원 확률벡터 $X$가 다음 조건들 중 하나를 만족하면
 $$
-X\sim N_n(\mu,\Sigma)
+X\sim N_n(\mu,\Sigma) \quad \text{or} \quad X\sim N(\mu,\Sigma)
 $$
 라 한다. 여기서 $\mu$는 $n$차원 평균벡터(mean vector)이고, $\Sigma$는 $n\times n$ 공분산행렬(covariance matrix)이다.
 
 1. $X=AZ+\mu$, $Z\sim N_n(0,I)$, $AA^T=\Sigma$
+  - A = nxm행렬이어도 됨
 2. $X=\Sigma^{1/2}Z+\mu$, $Z\sim N_n(0,I)$ (여기서 $\Sigma^{1/2}$는 $\Sigma$의 제곱근 행렬)
 3. $\text{mgf}_X(t)=\exp(\mu^Tt+\frac12 t^T\Sigma t)$
-4. ($\Sigma$가 정칙행렬일 때)
+4. $\Sigma$가 정칙행렬일 때, X의 분포를 정칙다변량정규분포(nonsingular multivariate normal distribution)라 함.
     $$
     \text{pdf}_X(x)
     =
@@ -2179,15 +2160,27 @@ $$
     $$
 
 ### 정리 4.4.2 평균벡터와 분산행렬 *(Mean Vector and Covariance Matrix)*
-
-$X\sim N_n(\mu,\Sigma)$이면
+(a) $X\sim N_n(\mu,\Sigma)$이면
 $$
 E(X)=\mu,\quad \text{Var}(X)=\Sigma
 $$
 
-#### 증명
-$X=AZ+\mu$, $Z\sim N_n(0,I)$의 표현을 이용한다.
+(b)
+$$
+X\sim N(\mu,\Sigma)
+\Leftrightarrow
+X\overset{d}{\equiv}\Sigma^{1/2}Z+\mu,\quad Z\sim N_n(0,I)
+$$
 
+여기서 $\Sigma^{1/2}$는 대칭행렬 $\Sigma$의 **제곱근 행렬(square root matrix)** 로서 $(\Sigma^{1/2})^2=\Sigma^{1/2}\Sigma^{1/2}=\Sigma$를 만족한다.
+  - 분산행렬 $\Sigma$는 음아닌 정부호의 행렬이고, $\Sigma^{1/2}\Sigma^{1/2}=\Sigma$인 $\Sigma^{1/2}$가 존재함
+  - 음 아닌 정부호 행렬의 조건: 실수가 원소인 mxm대칭행렬 $\Sigma$에 대해 $a^T\Sigma a \geq 0, \forall a \in R^m$이면 $\Sigma$가 nonnegative definite행렬이라 한다. 이런 조건과 다음의 각 조건은 동등하다
+    - $\Sigma$의 모든 고유값이 0이상
+    - $\Sigma^{1/2}\Sigma^{1/2}=\Sigma$인 실수가 원소인 대칭행렬 $\Sigma^{1/2}$가 존재함
+    - 참고: Statistics_02_추가_분산행렬의 스펙트럼 분해와 기하학적 해석.md
+
+#### 증명
+**(a)** $X=AZ+\mu$, $Z\sim N_n(0,I)$의 표현을 이용한다.  
 **평균벡터:**
 $$
 E(X)=E(AZ+\mu)=AE(Z)+\mu=A\cdot 0+\mu=\mu
@@ -2206,6 +2199,34 @@ $$
 \text{Var}(X)=AIA^T=AA^T=\Sigma
 $$
 
+**(b)** 다변량 정규분포의 특성화는 적률생성함수로도 가능하다.  
+$(\Rightarrow)$ $X\sim N(\mu,\Sigma)$이면 정리 4.4.1 (b)에 의해
+$$
+\text{mgf}_X(t)=\exp\left(\mu^Tt+\frac12 t^T\Sigma t\right)
+$$
+
+$(\Leftarrow)$ 역으로 $\text{mgf}_X(t)=\exp(\mu^Tt+\frac12 t^T\Sigma t)$이면, $\Sigma$의 제곱근 행렬 $\Sigma^{1/2}$가 존재하므로 $X\overset{d}{\equiv}\Sigma^{1/2}Z+\mu$로 표현할 수 있다. 여기서 $Z\sim N_n(0,I)$이다.
+
+이는 다음과 같이 확인할 수 있다. $Y=\Sigma^{1/2}Z+\mu$로 정의하면
+$$
+\text{mgf}_Y(t)=E[e^{t^TY}]=E[e^{t^T(\Sigma^{1/2}Z+\mu)}]=e^{t^T\mu}E[e^{t^T\Sigma^{1/2}Z}]
+$$
+$$
+=e^{t^T\mu}E[e^{(\Sigma^{1/2}t)^TZ}]=e^{t^T\mu}\text{mgf}_Z(\Sigma^{1/2}t)
+$$
+
+$Z\sim N_n(0,I)$이므로
+$$
+\text{mgf}_Z(s)=\exp\left(\frac12 s^Ts\right)
+$$
+
+따라서
+$$
+\text{mgf}_Y(t)=e^{t^T\mu}\exp\left(\frac12(\Sigma^{1/2}t)^T(\Sigma^{1/2}t)\right)=\exp\left(\mu^Tt+\frac12 t^T\Sigma t\right)
+$$
+
+적률생성함수가 같으므로 $X\overset{d}{\equiv}Y=\Sigma^{1/2}Z+\mu$이고, 따라서 $X\sim N(\mu,\Sigma)$이다.
+
 #### 예 4.4.1 이변량 정규분포 *(Bivariate Normal Distribution)*
 $$
 (X_1,X_2)^T\sim N_2\left(
@@ -2217,15 +2238,32 @@ $$
 \right)
 $$
 
-$-1<\rho<1$일 때 공분산행렬이 정칙이며, 확률밀도함수는
+여기서 공분산행렬의 행렬식을 계산하면
+$$
+\det(\Sigma) = \det\begin{pmatrix}
+\sigma_1^2 & \rho\sigma_1\sigma_2\\
+\rho\sigma_1\sigma_2 & \sigma_2^2
+\end{pmatrix}
+= \sigma_1^2\sigma_2^2 - \rho^2\sigma_1^2\sigma_2^2 = \sigma_1^2\sigma_2^2(1-\rho^2)
+$$
+
+이므로 $-1<\rho<1$일 때 $\det(\Sigma) > 0$이어서 공분산행렬이 정칙이다.
+
+또한 역행렬은
+$$
+\Sigma^{-1} = \frac{1}{\sigma_1^2\sigma_2^2(1-\rho^2)}
+\begin{pmatrix}
+\sigma_2^2 & -\rho\sigma_1\sigma_2\\
+-\rho\sigma_1\sigma_2 & \sigma_1^2
+\end{pmatrix}
+$$
+
+확률밀도함수는
 $$
 f(x_1,x_2)
 =
 \frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}}
-\exp\left(-\frac12 Q\right)
-$$
-이며
-$$
+\exp\left(-\frac12 Q\right) \\
 Q=\frac1{1-\rho^2}
 \left[
 \left(\frac{x_1-\mu_1}{\sigma_1}\right)^2
@@ -2238,6 +2276,21 @@ $$
 $$
 \rho=\frac{\text{Cov}(X_1,X_2)}{\sigma_1\sigma_2}
 $$
+
+상관계수 절댓값이 1인 경우에는 분산행렬 역행렬이 존재하지 않고, 정리2.2.3으로부터 다음과같이 두 변수 사이에 선형관계가 성립하는 것을 알 수 있다.  
+**(i) $\rho=1$인 경우:**
+$$
+P\left(\frac{X_2-\mu_2}{\sigma_2}=\frac{X_1-\mu_1}{\sigma_1}\right)=1
+$$
+즉, $X_2=\mu_2+\frac{\sigma_2}{\sigma_1}(X_1-\mu_1)$ (완전한 양의 선형관계)
+
+**(ii) $\rho=-1$인 경우:**
+$$
+P\left(\frac{X_2-\mu_2}{\sigma_2}=-\frac{X_1-\mu_1}{\sigma_1}\right)=1
+$$
+즉, $X_2=\mu_2-\frac{\sigma_2}{\sigma_1}(X_1-\mu_1)$ (완전한 음의 선형관계)  
+
+이 경우 $(X_1,X_2)$의 결합분포는 일차원 직선 위에 집중되어 있어 2차원 확률밀도함수가 존재하지 않는다.
 
 ### 정리 4.4.3 다변량 정규분포의 성질 *(Properties of Multivariate Normal Distribution)*
 **(a) 선형변환(linear transformation)**  
@@ -2256,14 +2309,7 @@ $$
 이 성립한다. (이는 일반적인 분포에서는 성립하지 않고 **다변량 정규분포에서만** 성립하는 중요한 성질이다.)
 
 **(c) 선형변환의 독립성**  
-$A$, $B$가 상수행렬이고
-$$
-\text{Cov}(AX,BX)=A\Sigma B^T=0
-$$
-이면
-$$
-AX\perp BX
-$$
+$A$, $B$가 상수행렬이고 $\text{Cov}(AX,BX)=A\Sigma B^T=0$ 이면 $AX\perp BX$
 
 #### 증명
 **(a)** $X=\Sigma^{1/2}Z+\mu$, $Z\sim N_n(0,I)$로 표현하면
@@ -2320,7 +2366,7 @@ $$
 
 **(b) 조건부분포(conditional distribution)**
 $$
-X_2\mid X_1=x_1
+X_2\mid (X_1=x_1)
 \sim
 N\left(
 \mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1),
@@ -2334,26 +2380,89 @@ $$
 AX=X_1\sim N(A\mu,A\Sigma A^T)=N(\mu_1,\Sigma_{11})
 $$
 
-**(b)** 조건부분포의 확률밀도함수를 직접 계산하거나, 다음과 같은 변환을 이용한다.
-$$
-Y=X_2-\Sigma_{21}\Sigma_{11}^{-1}X_1
-$$
-로 정의하면, $Y$와 $X_1$의 공분산이
-$$
-\text{Cov}(Y,X_1)=\Sigma_{21}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{11}=0
-$$
-이므로 정리 4.4.3 (b)에 의해 $Y\perp X_1$이다.
+**(b)** 조건부분포를 두 가지 방법으로 유도할 수 있다.  
 
-따라서 $X_1=x_1$이 주어졌을 때 $Y$의 분포는 변하지 않고,
+**방법 1: 조건부 확률밀도함수 직접 계산**  
+결합확률밀도함수를 주변확률밀도함수로 나누어 조건부 확률밀도함수를 구한다.
+
 $$
-X_2=Y+\Sigma_{21}\Sigma_{11}^{-1}X_1
-$$
-이므로
-$$
-X_2\mid X_1=x_1\sim N(\mu_2-\Sigma_{21}\Sigma_{11}^{-1}\mu_1+\Sigma_{21}\Sigma_{11}^{-1}x_1,\Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})
+\text{pdf}_{X_2|X_1}(x_2|x_1) = \frac{\text{pdf}_{X_1,X_2}(x_1,x_2)}{\text{pdf}_{X_1}(x_1)}
 $$
 
-정리하면 주어진 결과를 얻는다.
+결합확률밀도함수는
+$$
+\text{pdf}_{X_1,X_2}(x_1,x_2) = (\det(2\pi\Sigma))^{-1/2}\exp\left\{-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)\right\}
+$$
+
+주변확률밀도함수는 (a)로부터
+$$
+\text{pdf}_{X_1}(x_1) = (\det(2\pi\Sigma_{11}))^{-1/2}\exp\left\{-\frac{1}{2}(x_1-\mu_1)^T\Sigma_{11}^{-1}(x_1-\mu_1)\right\}
+$$
+
+분할된 역행렬 공식(partitioned inverse formula)에 의해
+$$
+\Sigma^{-1} = \begin{pmatrix}
+\Sigma_{11}^{-1}+\Sigma_{11}^{-1}\Sigma_{12}M^{-1}\Sigma_{21}\Sigma_{11}^{-1} & -\Sigma_{11}^{-1}\Sigma_{12}M^{-1} \\
+-M^{-1}\Sigma_{21}\Sigma_{11}^{-1} & M^{-1}
+\end{pmatrix}
+$$
+여기서 $M=\Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}$이다.
+
+이차형식을 전개하면
+$$
+(x-\mu)^T\Sigma^{-1}(x-\mu) = (x_1-\mu_1)^T\Sigma_{11}^{-1}(x_1-\mu_1)
+$$
+$$
++ (x_2-\mu_2-\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1))^TM^{-1}(x_2-\mu_2-\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1))
+$$
+
+따라서
+$$
+\text{pdf}_{X_2|X_1}(x_2|x_1) = (\det(2\pi M))^{-1/2}\exp\left\{-\frac{1}{2}(x_2-\mu_{2|1})^TM^{-1}(x_2-\mu_{2|1})\right\}
+$$
+여기서 $\mu_{2|1}=\mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1)$
+
+즉, $X_2|X_1=x_1 \sim N(\mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1), \Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})$
+
+**방법 2: 선형변환을 이용한 유도**  
+새로운 확률변수를 정의한다:
+$$
+Y = X_2 - \mu_2 - \Sigma_{21}\Sigma_{11}^{-1}(X_1-\mu_1)
+$$
+
+정리 4.4.3 (a)에 의해 $Y$도 정규분포를 따르며, 평균은
+$$
+E(Y) = E(X_2) - \mu_2 - \Sigma_{21}\Sigma_{11}^{-1}E(X_1-\mu_1) = \mu_2 - \mu_2 - 0 = 0
+$$
+
+공분산행렬은
+$$
+\text{Var}(Y) = \text{Var}(X_2) - \Sigma_{21}\Sigma_{11}^{-1}\text{Cov}(X_1,X_2)^T - \text{Cov}(X_1,X_2)\Sigma_{11}^{-1}\Sigma_{21}^T
+$$
+$$
++ \Sigma_{21}\Sigma_{11}^{-1}\text{Var}(X_1)\Sigma_{11}^{-1}\Sigma_{21}^T
+$$
+$$
+= \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12} + \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{11}\Sigma_{11}^{-1}\Sigma_{12}
+$$
+$$
+= \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}
+$$
+
+또한 $Y$와 $X_1$의 공분산을 계산하면
+$$
+\text{Cov}(Y,X_1) = \text{Cov}(X_2,X_1) - \Sigma_{21}\Sigma_{11}^{-1}\text{Var}(X_1) = \Sigma_{21} - \Sigma_{21} = 0
+$$
+
+따라서 정리 4.4.3 (b)에 의해 $Y \perp X_1$이고, 이는 $Y$의 분포가 $X_1$의 값에 무관함을 의미한다.
+
+결과적으로
+$$
+X_2 | X_1=x_1 = Y + \mu_2 + \Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1)
+$$
+$$
+\sim N(0+\mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1), \Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})
+$$
 
 #### 예 4.4.3 이변량 정규분포의 조건부분포
 이변량 정규분포
@@ -2404,6 +2513,9 @@ $$
 Z^TAZ\sim\chi^2(r),\quad r=\text{trace}(A)
 $$
 
+**각주**  
+일반적으로 $x^TAx = x^T\left(\frac{A+A^T}{2}\right)x$이므로 $Z^TAZ$에서 행렬 $A$는 언제나 대칭행렬인 것으로 가정되어 있으며, (b)에서의 조건 $A^2=A$는 $Z^TAZ\sim\chi^2(r)$이기 위한 필요충분조건으로 알려져 있다.
+
 #### 증명
 **(a)** $X=\Sigma^{1/2}Z+\mu$, $Z\sim N_k(0,I)$로 표현하면
 $$
@@ -2415,14 +2527,17 @@ $$
 (X-\mu)^T\Sigma^{-1}(X-\mu)=(\Sigma^{1/2}Z)^T\Sigma^{-1}(\Sigma^{1/2}Z)=Z^T(\Sigma^{1/2})^T\Sigma^{-1}\Sigma^{1/2}Z
 $$
 
-$(\Sigma^{1/2})^T\Sigma^{-1}\Sigma^{1/2}=(\Sigma^{1/2}\Sigma^{1/2})^{-1}=\Sigma^{-1}$이므로... (정정 필요)
-
-더 직접적으로, $\Sigma^{1/2}(\Sigma^{1/2})^T=\Sigma$이고 $\Sigma$가 대칭행렬이므로 $\Sigma^{1/2}=(\Sigma^{1/2})^T$이다.
+$\Sigma^{1/2}$는 대칭행렬이므로 $(\Sigma^{1/2})^T=\Sigma^{1/2}$이고, $\Sigma^{1/2}\Sigma^{1/2}=\Sigma$이므로
 $$
-(X-\mu)^T\Sigma^{-1}(X-\mu)=Z^T(\Sigma^{1/2})^T\Sigma^{-1}\Sigma^{1/2}Z=Z^T Z
+(\Sigma^{1/2})^T\Sigma^{-1}\Sigma^{1/2}=\Sigma^{1/2}\Sigma^{-1}\Sigma^{1/2}=\Sigma^{-1/2}\Sigma\Sigma^{-1/2}=I
 $$
 
-$Z\sim N_k(0,I)$이므로
+따라서
+$$
+(X-\mu)^T\Sigma^{-1}(X-\mu)=Z^TZ=\sum_{i=1}^k Z_i^2
+$$
+
+$Z_i\overset{iid}{\sim} N(0,1)$이므로 카이제곱분포의 정의에 의해
 $$
 Z^TZ=\sum_{i=1}^k Z_i^2\sim\chi^2(k)
 $$
@@ -2431,18 +2546,42 @@ $$
 $$
 A=P\Lambda P^T
 $$
-여기서 $P$는 직교행렬, $\Lambda=\text{diag}(\lambda_1,\ldots,\lambda_n)$는 고유값 행렬이다.
+여기서 $P$는 직교행렬($P^TP=PP^T=I$), $\Lambda=\text{diag}(\lambda_1,\ldots,\lambda_n)$는 고유값 대각행렬이다.
 
-$A^2=A$이므로 $\Lambda^2=\Lambda$, 즉 모든 고유값은 0 또는 1이다.
-$\text{trace}(A)=\sum_{i=1}^n\lambda_i=r$이므로 정확히 $r$개의 고유값이 1이고 나머지는 0이다.
-
-$W=P^TZ\sim N_n(0,I)$이므로
+$A^2=A$이므로
 $$
-Z^TAZ=Z^TP\Lambda P^TZ=W^T\Lambda W=\sum_{i=1}^r W_i^2\sim\chi^2(r)
+P\Lambda P^TP\Lambda P^T=P\Lambda^2P^T=P\Lambda P^T
+$$
+
+양변에 $P^T$를 왼쪽에서, $P$를 오른쪽에서 곱하면 $\Lambda^2=\Lambda$를 얻는다. 따라서 모든 고유값 $\lambda_i$는 $\lambda_i^2=\lambda_i$를 만족하므로 $\lambda_i\in\{0,1\}$이다.
+
+또한 $\text{trace}(A)=\text{trace}(\Lambda)=\sum_{i=1}^n\lambda_i=r$이므로, 정확히 $r$개의 고유값이 1이고 나머지 $n-r$개는 0이다.
+
+일반성을 잃지 않고 처음 $r$개의 고유값이 1이라고 가정하면
+$$
+\Lambda=\begin{pmatrix}I_r & 0\\0 & 0\end{pmatrix}
+$$
+
+$W=P^TZ$로 정의하면, $P$가 직교행렬이고 $Z\sim N_n(0,I)$이므로
+$$
+W\sim N_n(P^T\cdot 0, P^TIP)=N_n(0,I)
+$$
+
+따라서
+$$
+Z^TAZ=Z^TP\Lambda P^TZ=(P^TZ)^T\Lambda(P^TZ)=W^T\Lambda W
+$$
+$$
+=\sum_{i=1}^r W_i^2\cdot 1+\sum_{i=r+1}^n W_i^2\cdot 0=\sum_{i=1}^r W_i^2
+$$
+
+$W_i\overset{iid}{\sim} N(0,1)$이므로 카이제곱분포의 정의에 의해
+$$
+Z^TAZ=\sum_{i=1}^r W_i^2\sim\chi^2(r)
 $$
 
 #### 예 4.4.4 일원분류모형에서의 표본분포 *(Sampling Distribution in One-Way Classification Model)*
-정리 4.2.7의 (a)에 따르면, 일원분류모형에서
+정리 4.2.7의 (a)에 따르면, 일원분류모형(i개 정규분포에서 각각 j개만큼 샘플 뽑아서 ij갯수 샘플이 있음)에서
 정규분포 $N(\mu_i,\sigma^2/n_i)$를 따르는 서로 독립인 표본평균 $\bar{X}_i\ (i=1,\dots,k)$에 대하여
 
 $$
@@ -2526,32 +2665,15 @@ $$
 \bar{X}=\frac1n\sum_{i=1}^n X_i,\quad
 S^2=\frac1{n-1}\sum_{i=1}^n(X_i-\bar{X})^2
 $$
-
-라 하면, $\bar{X}$와 $S^2$는 서로 독립이며
-
-$$
-\frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)
-$$
-
-이다.
+라 하면, $\bar{X}$와 $S^2$는 서로 독립이며 $\frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)$
 
 #### 풀이
-벡터
-$$
-X=(X_1,\dots,X_n)^T
-$$
-에 대하여
-$$
-X\sim N_n(\mu\mathbf{1},\sigma^2I)
-$$
-이다. 여기서 $\mathbf{1}=(1,\ldots,1)^T$이다.
+벡터 $X=(X_1,\dots,X_n)^T$에 대하여 $X\sim N_n(\mu\mathbf{1},\sigma^2I)$  
+여기서 $\mathbf{1}=(1,\ldots,1)^T$이다.
 
 또한
 $$
-\bar{X}=n^{-1}\mathbf{1}^TX
-$$
-
-$$
+\bar{X}=n^{-1}\mathbf{1}^TX \\
 (n-1)S^2=\sum_{i=1}^n(X_i-\bar{X})^2=X^T(I-n^{-1}\mathbf{1}\mathbf{1}^T)X
 $$
 
@@ -2596,28 +2718,87 @@ $$
 \frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)
 $$
 
-#### 예 4.4.6 선형회귀모형 *(Linear Regression Model)*
-**선형회귀모형(linear regression model)**을
-$$
-Y=X\beta+e,\quad e\sim N_n(0,\sigma^2I)
-$$
-라 하자.
+### 선형회귀모형 *(Linear Regression Model)*
+통계조사에서 변수 사이의 함수관계를 파악하고자 할 때가 많은데, 이런 목적에서 가장 기본적으로 사용되는 모형이다.  
+설명변수(explanatory variable) $x_0, x_1, ..., x_p$와 오차항 e에 의해 반응변수(response variable) Y가 정해진다는 전제 하에 그 관계가 선형이라 가정하고 반복 관측된 Y값으로 선형관계의 구체적 형태를 추측하고자 하는 것이다.  
 
-여기서 
-- $Y$는 $n$차원 반응벡터(response vector)
-- $X$는 $n\times(p+1)$ 설계행렬(design matrix)이며 $\text{rank}(X)=p+1$
-- $\beta$는 $(p+1)$차원 회귀계수벡터(regression coefficient vector)
-- $e$는 $n$차원 오차벡터(error vector)
+정규 오차항을 갖는 경우의 관측값은 다음과 같이 표현된다:
+$$
+Y_i = \beta_0x_{i0} + \beta_1 x_{i1} + \cdots + \beta_p x_{ip} + e_i, \quad i=1,\ldots,n
+$$
 
-**최소제곱추정량(least squares estimator)**은
+여기서 오차항은
 $$
-\hat{\beta}=(X^TX)^{-1}X^TY
+e_i \overset{iid}{\sim} N(0,\sigma^2)
 $$
-로 정의한다.
+
+이를 행렬 형태로 정리하면
+$$
+Y = X\beta + e
+$$
+
+여기서
+- $Y = (Y_1,\ldots,Y_n)^T$: $n$차원 반응벡터
+- $X = \begin{pmatrix} 1 & x_{11} & \cdots & x_{1p} \\ \vdots & \vdots & \ddots & \vdots \\ 1 & x_{n1} & \cdots & x_{np} \end{pmatrix}$: $n \times (p+1)$ 설계행렬
+- $\beta = (\beta_0, \beta_1, \ldots, \beta_p)^T$: $(p+1)$차원 회귀계수벡터
+- $e = (e_1,\ldots,e_n)^T \sim N_n(0,\sigma^2 I)$: $n$차원 오차벡터
+
+따라서 $Y \sim N_n(X\beta, \sigma^2 I)$이다.
+
+선형회귀모형에서 $X$는 $n\times(p+1)$ 설계행렬(design matrix)이며, 설계행렬 $X$의 계수(rank)가 $p+1$인 것으로 가정하고, 선형관계의 구체적 형태를 나타내는 $\beta = (\beta_0, \beta_1, \ldots, \beta_p)^T$를 **회귀계수(regression coefficient)** 라 하며, 이의 추측값으로는 흔히
+$$
+\hat{\beta} = (X^TX)^{-1}X^TY
+$$
+로 정의되는 **표본회귀계수(sample regression coefficient)** 또는 **최소제곱추정량(least squares estimator)** 을 사용한다.
+
+이 추정량은 잔차제곱합(residual sum of squares)
+$$
+\text{RSS}(\beta) = (Y-X\beta)^T(Y-X\beta) = \sum_{i=1}^n(Y_i - \beta_0 - \beta_1 x_{i1} - \cdots - \beta_p x_{ip})^2
+$$
+을 최소화하는 $\beta$ 값으로 얻어진다.
+
+#### 예 4.4.6 단순선형회귀모형에서 표본회귀계수
+선형회귀모형에서 $p=1$이고, $x_0 = 1$인 경우, 즉
+$$
+Y_i = \beta_0 + \beta_1 x_i + e_i, \quad i=1,\ldots,n \\
+e_i \overset{iid}{\sim} N(0, \sigma^2)
+$$
+로 나타내어지는 모형을 **단순선형회귀모형(simple linear regression model)** 이라 한다. 이 경우는
+$$
+X = \begin{pmatrix} 1 & x_1 \\ 1 & x_2 \\ \vdots & \vdots \\ 1 & x_n \end{pmatrix}, \quad
+X^TX = \begin{pmatrix} n & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & \sum_{i=1}^n x_i^2 \end{pmatrix}, \quad
+X^TY = \begin{pmatrix} \sum_{i=1}^n Y_i \\ \sum_{i=1}^n x_i Y_i \end{pmatrix}
+$$
+
+$$
+(X^TX)^{-1} = \frac{1}{n\sum_{i=1}^n x_i^2 - (\sum_{i=1}^n x_i)^2} \begin{pmatrix} \sum_{i=1}^n x_i^2 & -\sum_{i=1}^n x_i \\ -\sum_{i=1}^n x_i & n \end{pmatrix}
+$$
+
+이므로 표본회귀계수 $\hat{\beta} = (\hat{\beta}_0, \hat{\beta}_1)^T = (X^TX)^{-1}X^TY$는 다음과 같이 주어진다.
+
+$S_{xx} = \sum_{i=1}^n (x_i - \bar{x})^2 = \sum_{i=1}^n x_i^2 - n\bar{x}^2$, $S_{xy} = \sum_{i=1}^n (x_i - \bar{x})(Y_i - \bar{Y})$로 놓으면
+$$
+\hat{\beta}_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum_{i=1}^n (x_i - \bar{x})Y_i}{\sum_{i=1}^n (x_i - \bar{x})^2}
+$$
+
+$$
+\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1 \bar{x}
+$$
+
+### 평균오차제곱합 *(Mean Squared Error)*
+선형회귀모형에서 오차항의 분산 $\sigma^2$의 추측값으로는 흔히 
+$$
+\hat{\sigma}^2 = \frac{(Y-X\hat{\beta})^T(Y-X\hat{\beta})}{n-p-1} = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0x_{i0} - \hat{\beta}_1 x_{i1} - \cdots - \hat{\beta}_p x_{ip})^2}{n-p-1}
+$$
+로 정의되는 **평균오차제곱합(mean squared error)** 을 사용한다.
+
+예 4.4.6에서의 단순선형회귀모형의 경우 $p=1$이므로
+$$
+\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2}{n-2}
+$$
 
 ### 정리 4.4.6 선형회귀모형에서의 표본분포 *(Sampling Distribution in Linear Regression Model)*
-
-위 모형에서 다음이 성립한다.
+선형회귀모형에서 주어진 상수의 행렬 X의 계수가 p+1이라 가정하면 다음이 성립한다:
 
 **(a)** 회귀계수 추정량의 분포
 $$
@@ -2625,11 +2806,7 @@ $$
 $$
 
 **(b)** 추정량의 독립성  
-$\hat{\beta}$와 오차분산 추정량
-$$
-\hat{\sigma}^2=\frac{(Y-X\hat{\beta})^T(Y-X\hat{\beta})}{n-p-1}
-$$
-는 서로 독립이다.
+$\hat{\beta}$와 오차분산 추정량 $\hat{\sigma}^2$는 서로 독립
 
 **(c)** 오차분산 추정량의 분포
 $$
@@ -2644,8 +2821,13 @@ $$
 $$
 =N_{p+1}(\beta,\sigma^2(X^TX)^{-1})
 $$
+**(b)** 추정량의 독립성  
+투영행렬(projection matrix) $H=X(X^TX)^{-1}X^T$를 정의하면, $H$는 대칭 멱등행렬이다:
+$$
+H^2=H,\quad H^T=H
+$$
 
-**(b)** 투영행렬(projection matrix) $H=X(X^TX)^{-1}X^T$라 하면 $H^2=H$, $H^T=H$이고
+이를 이용하면 예측값과 잔차를 다음과 같이 표현할 수 있다:
 $$
 \hat{Y}=X\hat{\beta}=HY
 $$
@@ -2654,89 +2836,190 @@ $$
 Y-X\hat{\beta}=(I-H)Y
 $$
 
-공분산을 계산하면
+$\hat{\beta}$와 $(I-H)Y$의 공분산을 계산하면
 $$
 \text{Cov}(\hat{\beta},(I-H)Y)=(X^TX)^{-1}X^T\text{Var}(Y)(I-H)^T
 $$
 $$
-=(X^TX)^{-1}X^T\sigma^2I(I-H)=\sigma^2(X^TX)^{-1}X^T(I-H)
+=(X^TX)^{-1}X^T\cdot\sigma^2I\cdot(I-H)=\sigma^2(X^TX)^{-1}X^T(I-H)
 $$
 
-$X^T(I-H)=X^T-X^TH=X^T-X^TX(X^TX)^{-1}X^T=0$이므로
+여기서 중요한 것은
+$$
+X^T(I-H)=X^T-X^TH=X^T-X^TX(X^TX)^{-1}X^T=X^T-X^T=0
+$$
+
+따라서
 $$
 \text{Cov}(\hat{\beta},(I-H)Y)=0
 $$
 
-따라서 정리 4.4.3 (c)에 의해 $\hat{\beta}$와 $(I-H)Y$는 독립이고, 결과적으로 $\hat{\beta}$와 $\hat{\sigma}^2$는 독립이다.
+정리 4.4.3 (c)에 의해, 다변량 정규분포를 따르는 확률변수들의 공분산이 0이면 독립이므로 $\hat{\beta}$와 $(I-H)Y$는 독립이다. $(I-H)Y$의 함수인 $\hat{\sigma}^2$도 $\hat{\beta}$와 독립이다.
 
-**(c)** $Z=(Y-X\beta)/\sigma\sim N_n(0,I)$로 표준화하면
+**(c)** 오차분산 추정량의 분포  
+$Z=(Y-X\beta)/\sigma\sim N_n(0,I)$로 표준화하면
 $$
 \frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}=\frac{1}{\sigma^2}(Y-X\hat{\beta})^T(Y-X\hat{\beta})
 $$
 
-$Y-X\hat{\beta}=(I-H)Y$이고 $(I-H)X\beta=0$이므로
+$Y-X\hat{\beta}=(I-H)Y$이고, $(I-H)$의 성질 $(I-H)X=X-HX=X-X=0$로부터
+$$
+(I-H)X\beta=0
+$$
+
+따라서
+$$
+Y-X\hat{\beta}=(I-H)Y=(I-H)(Y-X\beta)+(I-H)X\beta=(I-H)(Y-X\beta)
+$$
+
+이를 이용하면
 $$
 \frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}=\frac{1}{\sigma^2}(Y-X\beta)^T(I-H)(Y-X\beta)=Z^T(I-H)Z
 $$
 
-$A=I-H$는 대칭 멱등행렬이고
+행렬 $A=I-H$는 대칭 멱등행렬이며:
+- 대칭성: $A^T=(I-H)^T=I-H^T=I-H=A$
+- 멱등성: $A^2=(I-H)^2=I-2H+H^2=I-2H+H=I-H=A$
+
+행렬 $A$의 대각합(trace)은
 $$
-\text{trace}(A)=\text{trace}(I)-\text{trace}(H)=n-\text{trace}(X(X^TX)^{-1}X^T)=n-(p+1)
+\text{trace}(A)=\text{trace}(I-H)=\text{trace}(I)-\text{trace}(H)
 $$
 
-따라서 정리 4.4.5 (b)에 의해
+투영행렬 $H=X(X^TX)^{-1}X^T$의 대각합은
+$$
+\text{trace}(H)=\text{trace}(X(X^TX)^{-1}X^T)=\text{trace}(X^TX(X^TX)^{-1})=\text{trace}(I_{p+1})=p+1
+$$
+
+따라서
+$$
+\text{trace}(A)=n-(p+1)
+$$
+
+정리 4.4.5 (b)에 의해, $Z\sim N_n(0,I)$이고 $A$가 대칭 멱등행렬이면 $Z^TAZ\sim\chi^2(\text{trace}(A))$이므로
 $$
 \frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-p-1)
 $$
 
 #### 예 4.4.7 단순선형회귀모형에서의 표본분포 *(Sampling Distribution in Simple Linear Regression Model)*
-**단순선형회귀모형(simple linear regression model)**
+단순선형회귀모형에서 정리 4.4.6을 적용하면 다음이 성립한다.
+
+예 4.4.6에서 구한
 $$
-Y_i=\beta_0+\beta_1x_i+e_i,\quad e_i\overset{iid}{\sim} N(0,\sigma^2),\quad i=1,\ldots,n
+X^TX = \begin{pmatrix} n & n\bar{x} \\ n\bar{x} & \sum_{i=1}^n x_i^2 \end{pmatrix}, \quad
+S_{xx} = \sum_{i=1}^n (x_i - \bar{x})^2 = \sum_{i=1}^n x_i^2 - n\bar{x}^2
 $$
 
-에서 설계행렬은
+를 이용하면
 $$
-X=\begin{pmatrix}1 & x_1\\1 & x_2\\\vdots & \vdots\\1 & x_n\end{pmatrix}
-$$
-
-$$
-X^TX=\begin{pmatrix}n & \sum x_i\\\sum x_i & \sum x_i^2\end{pmatrix}
+(X^TX)^{-1} = \frac{1}{nS_{xx}} \begin{pmatrix} \sum_{i=1}^n x_i^2 & -n\bar{x} \\ -n\bar{x} & n \end{pmatrix}
+= \frac{1}{S_{xx}} \begin{pmatrix} \sum_{i=1}^n x_i^2/n & -\bar{x} \\ -\bar{x} & 1 \end{pmatrix}
 $$
 
+따라서 정리 4.4.6 (a)에 의해
 $$
-(X^TX)^{-1}=\frac{1}{n\sum x_i^2-(\sum x_i)^2}\begin{pmatrix}\sum x_i^2 & -\sum x_i\\-\sum x_i & n\end{pmatrix}
-$$
-
-$S_{xx}=\sum(x_i-\bar{x})^2=\sum x_i^2-n\bar{x}^2$이므로
-$$
-(X^TX)^{-1}=\frac{1}{nS_{xx}}\begin{pmatrix}\sum x_i^2 & -n\bar{x}\\-n\bar{x} & n\end{pmatrix}=\begin{pmatrix}\frac{1}{n}+\frac{\bar{x}^2}{S_{xx}} & -\frac{\bar{x}}{S_{xx}}\\-\frac{\bar{x}}{S_{xx}} & \frac{1}{S_{xx}}\end{pmatrix}
-$$
-
-따라서
-$$
-\hat{\beta}=
-\begin{pmatrix}
-\hat{\beta}_0\\
-\hat{\beta}_1
-\end{pmatrix}
-\sim
-N\left(
+\hat{\beta} = \begin{pmatrix}\hat{\beta}_0\\\hat{\beta}_1\end{pmatrix}
+\sim N_2\left(
 \begin{pmatrix}\beta_0\\\beta_1\end{pmatrix},
-\sigma^2
+\frac{\sigma^2}{S_{xx}}
 \begin{pmatrix}
-\frac{1}{n}+\frac{\bar{x}^2}{S_{xx}} & -\frac{\bar{x}}{S_{xx}}\\
--\frac{\bar{x}}{S_{xx}} & \frac{1}{S_{xx}}
+\sum_{i=1}^n x_i^2/n & -\bar{x}\\
+-\bar{x} & 1
 \end{pmatrix}
 \right)
 $$
 
-또한
+특히 $\hat{\beta}_1 \sim N\left(\beta_1, \frac{\sigma^2}{S_{xx}}\right)$이다.
+
+정리 4.4.6 (c)에 의해
 $$
 \frac{(n-2)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-2)
 $$
 
-이고 $\hat{\beta}$와 $\hat{\sigma}^2$는 서로 독립이다.
+이고 정리 4.4.6 (b)에 의해 $\hat{\beta}$와 $\hat{\sigma}^2$는 서로 독립이다.
+
+따라서 t분포의 대의적 정의로부터
+$$
+\frac{\hat{\beta}_1-\beta_1}{\sqrt{\hat{\sigma}^2/S_{xx}}}
+= \frac{(\hat{\beta}_1-\beta_1)/\sqrt{\sigma^2/S_{xx}}}{\sqrt{(n-2)\hat{\sigma}^2/\sigma^2/(n-2)}}
+\sim t(n-2)
+$$
+
+이 경우에 평균오차제곱합은 다음의 공식을 이용하여 계산할 수 있다:
+$$
+\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2}{n-2}
+= \frac{S_{YY}-(S_{xY})^2/S_{xx}}{n-2}
+$$
+
+여기서
+$$
+S_{YY}=\sum_{i=1}^n(Y_i-\bar{Y})^2, \quad S_{xY}=\sum_{i=1}^n(x_i-\bar{x})(Y_i-\bar{Y})
+$$
+
+### 다변량 정규분포의 성질 정리
+$X \sim N_n(\mu, \Sigma)$일 때, 다음의 성질들이 성립한다.
+
+**(1) 표준형 표현 *(Standard Form Representation)***
+$$
+X \sim N(\mu, \Sigma) \Leftrightarrow X \overset{d}{\equiv} \Sigma^{1/2}Z + \mu, \quad Z \sim N_n(0,I)
+$$
+
+**(2) 선형변환에 대한 불변성 *(Closure under Linear Transformations)***
+
+임의의 $m \times n$ 상수행렬 $A$와 $m$차원 상수벡터 $b$에 대하여
+$$
+AX+b \sim N_m(A\mu+b, A\Sigma A^T)
+$$
+
+**(3) 독립 다변량 정규분포의 합 *(Sum of Independent Multivariate Normal Distributions)***
+
+$X_1 \sim N_n(\mu_1, \Sigma_1)$, $X_2 \sim N_n(\mu_2, \Sigma_2)$이고 $X_1 \perp X_2$이면
+$$
+X_1 + X_2 \sim N_n(\mu_1+\mu_2, \Sigma_1+\Sigma_2)
+$$
+
+**(4) 공분산과 독립성의 동치 *(Equivalence of Zero Covariance and Independence)***
+
+임의의 상수행렬 $A$, $B$에 대하여
+$$
+AX \perp BX \Leftrightarrow \text{Cov}(AX, BX) = A\Sigma B^T = 0
+$$
+
+**(5) 조건부분포의 정규성 *(Normality of Conditional Distribution)***
+
+$$
+\begin{pmatrix}X_1\\X_2\end{pmatrix}
+\sim
+N\left(
+\begin{pmatrix}\mu_1\\\mu_2\end{pmatrix},
+\begin{pmatrix}
+\Sigma_{11}&\Sigma_{12}\\
+\Sigma_{21}&\Sigma_{22}
+\end{pmatrix}
+\right)
+$$
+
+일 때,
+
+(a) **주변분포:** $X_1 \sim N(\mu_1, \Sigma_{11})$
+
+(b) **조건부분포:** 
+$$
+X_2 \mid X_1=x_1 \sim N\left(\mu_2 + \Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1), \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}\right)
+$$
+
+**(6) 이차형식의 카이제곱분포 *(Chi-squared Distribution of Quadratic Forms)***
+
+$Z \sim N_n(0,I)$이고 $A$가 $n \times n$ 대칭행렬일 때
+$$
+Z^TAZ \sim \chi^2(r) \Leftrightarrow A^2 = A \text{ (멱등성)}, \quad r = \text{trace}(A)
+$$
+
+일반적으로, $X \sim N_n(\mu, \Sigma)$이고 $\Sigma$가 정칙행렬이면
+$$
+(X-\mu)^T\Sigma^{-1}(X-\mu) \sim \chi^2(n)
+$$
+
 
 ## 대표적 표본분포 정리 
 | 분포 (Distribution) | 대의적 정의 및 확률밀도함수 |

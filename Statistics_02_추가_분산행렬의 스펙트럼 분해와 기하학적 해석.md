@@ -144,3 +144,48 @@ $$
 > 이는 고차원 데이터의 차원 축소(dimensionality reduction)와  
 > 특징 추출(feature extraction)의 기초가 되며,  
 > 통계학, 기계학습, 데이터 과학에서 광범위하게 활용된다.
+
+### 정리4.4.2 참고: 음이닌 정부호 행렬과 제곱근 행렬
+실수가 원소인 $m\times m$ 대칭행렬 $\Sigma$에 대하여, 다음 조건들은 서로 동치이다:
+
+1. $a^T\Sigma a \geq 0$ for all $a \in \mathbb{R}^m$ ($\Sigma$가 **음이닌 정부호 행렬(nonnegative definite matrix)**)
+2. $\Sigma$의 모든 고유값이 0 이상
+3. $\Sigma^{1/2}\Sigma^{1/2}=\Sigma$인 실수 대칭행렬 $\Sigma^{1/2}$가 존재
+
+**증명**
+
+**(1) ⇒ (2):**  
+$\lambda$를 $\Sigma$의 고유값, $v$를 대응하는 고유벡터라 하자. 즉 $\Sigma v = \lambda v$, $v \neq 0$이다.
+
+양변에 $v^T$를 왼쪽에서 곱하면
+$$
+v^T\Sigma v = v^T(\lambda v) = \lambda(v^Tv) = \lambda\|v\|^2
+$$
+
+조건 (1)에 의해 $v^T\Sigma v \geq 0$이고, $\|v\|^2 > 0$이므로 $\lambda \geq 0$이다.
+
+**(2) ⇒ (3):**  
+$\Sigma$는 실수 대칭행렬이므로 **스펙트럴 분해(spectral decomposition)**가 가능하다:
+$$
+\Sigma = Q\Lambda Q^T
+$$
+여기서 $Q$는 직교행렬($Q^TQ=I$), $\Lambda=\text{diag}(\lambda_1,\ldots,\lambda_m)$는 고유값 대각행렬이다.
+
+조건 (2)에 의해 모든 $\lambda_i \geq 0$이므로, $\Lambda^{1/2}=\text{diag}(\sqrt{\lambda_1},\ldots,\sqrt{\lambda_m})$를 정의할 수 있다.
+
+이제 $\Sigma^{1/2}=Q\Lambda^{1/2}Q^T$로 정의하면
+$$
+\Sigma^{1/2}\Sigma^{1/2} = (Q\Lambda^{1/2}Q^T)(Q\Lambda^{1/2}Q^T) = Q\Lambda^{1/2}(Q^TQ)\Lambda^{1/2}Q^T = Q\Lambda Q^T = \Sigma
+$$
+
+또한 $(\Sigma^{1/2})^T = (Q\Lambda^{1/2}Q^T)^T = Q(\Lambda^{1/2})^TQ^T = Q\Lambda^{1/2}Q^T = \Sigma^{1/2}$이므로 $\Sigma^{1/2}$는 대칭행렬이다.
+
+**(3) ⇒ (1):**  
+$\Sigma^{1/2}\Sigma^{1/2}=\Sigma$인 실수 대칭행렬 $\Sigma^{1/2}$가 존재한다고 하자.
+
+임의의 $a \in \mathbb{R}^m$에 대하여
+$$
+a^T\Sigma a = a^T(\Sigma^{1/2}\Sigma^{1/2})a = a^T\Sigma^{1/2}(\Sigma^{1/2})^Ta = (\Sigma^{1/2}a)^T(\Sigma^{1/2}a) = \|\Sigma^{1/2}a\|^2 \geq 0
+$$
+
+따라서 $\Sigma$는 음이닌 정부호 행렬이다.
