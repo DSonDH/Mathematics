@@ -10,7 +10,7 @@
 이러한 이유에서 앞으로는 **랜덤표본(random sample)** 이란 서로 독립이고 동일한 분포를 따르는 확률변수들을 뜻한다. 또한 이러한 연구에서 가능한 모집단의 분포들을 모형으로 설정할 때, 모형의 설정에 사용되는 매개변수를 **모수(parameter)** 라고 하며, 가능한 모수 전체의 집합을 **모수공간(parameter space)** 이라고 한다.
 
 #### 예 4.1.1
-(a) 공정의 불량률에 대한 통계 조사의 경우에 모집단분포는 베르누이분포 Bernoulli$(p)$로 나타낼 수 있고, 불량률 $p$가 모수이고 미지인 불량률의 집합
+(a) 공정의 불량률에 대한 통계 조사의 경우에 모집단분포는 베르누이분포 $Bernoulli(p)$로 나타낼 수 있고, 불량률 $p$가 모수이고 미지인 불량률의 집합
 $$
 \Omega=\{p:0\le p\le 1\}
 $$
@@ -32,7 +32,7 @@ $$
 $$
 가 모수공간이다.
 
-이들 예에서 알 수 있듯이, 모수는 모집단 분포를 결정짓는 미지의 특성치로서 흔히 $\theta$로 나타내고, 모수공간은 $\Omega$로 나타내며 모집단 분포는 확률밀도함수 $f(x;\theta)$로 나타낸다. 이러한 미지의 모집단 분포 또는 모수에 대한 추측을 목적으로 사용하는 랜덤표본의 관측 가능한 함수를 **통계량(statistic)** 이라고 한다.
+이들 예에서 알 수 있듯이, 모수는 모집단 분포를 결정짓는 미지의 특성치로서 흔히 $\theta$로 나타내고, 모수공간은 $\Omega$로 나타내며 모집단 분포는 확률밀도함수 $f(x;\theta)$로 나타낸다. 이러한 미지의 모집단 분포 또는 모수에 대한 추측에 사용하는 '랜덤표본의 관측 가능한 함수'를 **통계량(statistic)** 이라고 한다.
 
 ### 랜덤표본과 통계량
 모집단 분포가 확률밀도함수 $f(x;\theta)$, $\theta\in\Omega$인 모집단에서의 랜덤표본 $X_1,X_2,\dots,X_n$이란
@@ -72,11 +72,7 @@ $$
 랜덤표본 $X_1,X_2,\dots,X_n$의 함수인 통계량 $u(X_1,X_2,\dots,X_n)$은 확률변수로서 분포를 가지며, 이는 모집단 분포에 따라 결정된다. 이러한 통계량의 분포를 일반적으로 **표본분포(sampling distribution)** 라고 한다.
 
 #### 예 4.1.3
-(a) 불량률 $p$를 모수로 하는 베르누이분포 Bernoulli$(p)$에서의 랜덤표본을 $X_1,X_2,\dots,X_n$이라고 할 때, 표본 중 불량품의 개수인 $X_1+\cdots+X_n$은 이항분포 $Bin(n,p)$를 갖는다. 따라서 표본비율
-$$
-\hat p=\frac{X_1+\cdots+X_n}{n}
-$$
-은
+(a) 불량률 $p$를 모수로 하는 베르누이분포 Bernoulli$(p)$에서의 랜덤표본을 $X_1,X_2,\dots,X_n$이라고 할 때, 표본 중 불량품의 개수인 $X_1+\cdots+X_n$은 이항분포 $Bin(n,p)$를 갖는다. 따라서 표본비율 $\hat p=\frac{X_1+\cdots+X_n}{n}$은
 $$
 P(\hat p=k/n)=\binom nk p^k(1-p)^{n-k},\quad k=0,1,\dots,n
 $$
@@ -635,6 +631,12 @@ $$
 이 예에서 구한 $Y_1,\dots,Y_k$의 결합분포는 베타분포를 다차원으로 일반화 한 분포로서, Dirichlet분포라 하며 정의는 아래와 같다.  
 ### 디리클레분포의 정의 *(Dirichlet Distribution)*
 모수 $\alpha_1,\ldots,\alpha_{k+1}>0$에 대하여 다음과 같이 정의된다.
+  - 참고: 알파의 의미
+    - **감마분포** $\text{Gamma}(\alpha, \beta)$: 알파: 누적된 사건 수에 대응하는 shape 파라미터, 베타: 단위당 사건 발생률
+    - **디리클레분포** $\text{Dirichlet}(\alpha_1,\ldots,\alpha_{k+1})$: 정규화되기 전 각 범주에 대응하는 감마분포의 shape 파라미터이며,
+통계적으로는 해당 범주의 가상 관측 횟수를 의미
+    - (**베타분포** $\text{Beta}(\alpha_1, \alpha_2)$: 성공 횟수 관련 모수)
+
 
 서로 독립인 $X_1\sim\text{Gamma}(\alpha_1,\beta),\ldots,X_{k+1}\sim\text{Gamma}(\alpha_{k+1},\beta)$에 대하여
 $$
@@ -653,7 +655,7 @@ $$
 \Leftrightarrow
 \text{pdf}_{Y_1,\dots,Y_k}(y_1,\dots,y_k)
 =\\ 
-\frac{\Gamma(\alpha_1+\cdots+\alpha*{k+1})}
+\frac{\Gamma(\alpha_1+\cdots+\alpha_{k+1})}
 {\Gamma(\alpha_1)\cdots\Gamma(\alpha_{k+1})}
 \prod_{i=1}^k y_i^{\alpha_i-1}
 (1-y_1-\cdots-y_k)^{\alpha_{k+1}-1}
@@ -1535,7 +1537,10 @@ t 분포 기반 신뢰구간으로 환원된다.
 $$
 X_{(1)}<X_{(2)}<\cdots<X_{(n)}
 $$
-중 하나이다. 이 절에서는 이러한 순서통계량의 분포에 대하여 알아본다.
+중 하나이다. 이 절에서는 이러한 순서통계량의 분포에 대하여 알아본다.  
+
+**순서통계량은 값의 순서로 정의되며 인덱스가 랜덤이므로,
+예를들어, 두 개의 순서통계량(X1, X2)의 분포를 고려하더라도 나머지 n−2개의 상대적 위치를 함께 고려해야 한다.**
 
 #### 예 4.3.1
 표준지수분포 $\text{Exp}(1)$에서의 랜덤표본 $X_1,X_2,X_3$을 크기 순서로 늘어놓은 순서통계량을 $X_{(1)}<X_{(2)}<X_{(3)}$이라 하자. 이때
@@ -2057,7 +2062,7 @@ $$
 
 ## 4.4 다변량 정규분포 *(Multivariate Normal Distribution)*
 통계 조사에서는 단일 특성보다 **서로 연관된 여러 특성**을 동시에 관측하는 경우가 많다.
-이러한 다차원 자료에 대한 추론의 기본 모형으로 **다변량 정규분포(multivariate normal distribution)**가 널리 사용된다.
+이러한 다차원 자료에 대한 추론의 기본 모형으로 **다변량 정규분포(multivariate normal distribution)** 가 널리 사용된다.
 
 ### 정리 4.4.1 다변량 정규분포의 구성 *(Construction of Multivariate Normal Distribution)*
 표준정규분포 $N(0,1)$를 따르고 서로 독립인 확률변수 $Z_1,Z_2,\dots,Z_n$
@@ -3019,13 +3024,11 @@ $$
 $$
 (X-\mu)^T\Sigma^{-1}(X-\mu) \sim \chi^2(n)
 $$
-
-
 ## 대표적 표본분포 정리 
 | 분포 (Distribution) | 대의적 정의 및 확률밀도함수 |
 |:---|:---|
-| **카이제곱분포**<br>*(Chi-squared distribution)*<br>$X\sim\chi^2(r)$ | **대의적 정의:** $X\overset{d}{\equiv}\sum_{i=1}^r Z_i^2,\quad Z_i\overset{iid}{\sim} N(0,1)$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{1}{\Gamma(r/2)2^{r/2}}x^{r/2-1}e^{-x/2}I_{(0,\infty)}(x)$ |
-| **t 분포**<br>*(Student's t distribution)*<br>$X\sim t(r)$ | **대의적 정의:** $X\overset{d}{\equiv}\frac{Z}{\sqrt{V/r}},\quad Z\sim N(0,1),\ V\sim\chi^2(r),\ Z\perp V$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma((r+1)/2)}{\sqrt{\pi r}\Gamma(r/2)}\left(1+\frac{x^2}{r}\right)^{-(r+1)/2}$ |
-| **F 분포**<br>*(F distribution)*<br>$X\sim F(r_1,r_2)$ | **대의적 정의:** $X\overset{d}{\equiv}\frac{V_1/r_1}{V_2/r_2},\quad V_1\sim\chi^2(r_1),\ V_2\sim\chi^2(r_2),\ V_1\perp V_2$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma((r_1+r_2)/2)}{\Gamma(r_1/2)\Gamma(r_2/2)}\left(\frac{r_1}{r_2}\right)^{r_1/2}\frac{x^{r_1/2-1}}{(1+r_1x/r_2)^{(r_1+r_2)/2}}I_{(0,\infty)}(x)$ |
-| **베타분포**<br>*(Beta distribution)*<br>$X\sim\text{Beta}(\alpha_1,\alpha_2)$ | **대의적 정의:** $X\overset{d}{\equiv}\frac{Y_1}{Y_1+Y_2},\quad Y_i\sim\text{Gamma}(\alpha_i,\beta),\ Y_1\perp Y_2$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma(\alpha_1+\alpha_2)}{\Gamma(\alpha_1)\Gamma(\alpha_2)}x^{\alpha_1-1}(1-x)^{\alpha_2-1}I_{(0,1)}(x)$ |
-| **디리클레분포**<br>*(Dirichlet distribution)*<br>$(Y_1,\ldots,Y_k)\sim$<br>$\text{Dirichlet}(\alpha_1,\ldots,\alpha_{k+1})$ | **대의적 정의:** $(Y_1,\ldots,Y_k)\overset{d}{\equiv}\left(\frac{X_1}{\sum_{j=1}^{k+1}X_j},\ldots,\frac{X_k}{\sum_{j=1}^{k+1}X_j}\right)$<br>$X_i\overset{ind}{\sim}\text{Gamma}(\alpha_i,\beta)$<br><br>**확률밀도함수:**<br>$\text{pdf}(y_1,\ldots,y_k)=\frac{\Gamma(\alpha_1+\cdots+\alpha_{k+1})}{\Gamma(\alpha_1)\cdots\Gamma(\alpha_{k+1})}\prod_{i=1}^k y_i^{\alpha_i-1}(1-y_1-\cdots-y_k)^{\alpha_{k+1}-1}$ |
+| **카이제곱분포**<br>*(Chi-squared distribution)*<br>$X\sim\chi^2(r)$<br>정규오차의 에너지(제곱 크기) | **대의적 정의:** $X\overset{d}{\equiv}\sum_{i=1}^r Z_i^2,\quad Z_i\overset{iid}{\sim} N(0,1)$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{1}{\Gamma(r/2)2^{r/2}}x^{r/2-1}e^{-x/2}I_{(0,\infty)}(x)$ |
+| **t 분포**<br>*(Student's t distribution)*<br>$X\sim t(r)$<br>분산을 모르고 평균을 표준화했을 때의 불확실성 | **대의적 정의:** $X\overset{d}{\equiv}\frac{Z}{\sqrt{V/r}},\quad Z\sim N(0,1),\ V\sim\chi^2(r),\ Z\perp V$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma((r+1)/2)}{\sqrt{\pi r}\Gamma(r/2)}\left(1+\frac{x^2}{r}\right)^{-(r+1)/2}$ |
+| **F 분포**<br>*(F distribution)*<br>$X\sim F(r_1,r_2)$<br>두 변동성의 상대적 크기 비교 | **대의적 정의:** $X\overset{d}{\equiv}\frac{V_1/r_1}{V_2/r_2},\quad V_1\sim\chi^2(r_1),\ V_2\sim\chi^2(r_2),\ V_1\perp V_2$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma((r_1+r_2)/2)}{\Gamma(r_1/2)\Gamma(r_2/2)}\left(\frac{r_1}{r_2}\right)^{r_1/2}\frac{x^{r_1/2-1}}{(1+r_1x/r_2)^{(r_1+r_2)/2}}I_{(0,\infty)}(x)$ |
+| **베타분포**<br>*(Beta distribution)*<br>$X\sim\text{Beta}(\alpha_1,\alpha_2)$<br>성공확률이 얼마일지에 대한 불확실성 | **대의적 정의:** $X\overset{d}{\equiv}\frac{Y_1}{Y_1+Y_2},\quad Y_i\sim\text{Gamma}(\alpha_i,\beta),\ Y_1\perp Y_2$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma(\alpha_1+\alpha_2)}{\Gamma(\alpha_1)\Gamma(\alpha_2)}x^{\alpha_1-1}(1-x)^{\alpha_2-1}I_{(0,1)}(x)$ |
+| **디리클레분포**<br>*(Dirichlet distribution)*<br>$(Y_1,\ldots,Y_k)\sim$<br>$\text{Dirichlet}(\alpha_1,\ldots,\alpha_{k+1})$<br>범주별 성공확률에 대한 불확실성 | **대의적 정의:** $(Y_1,\ldots,Y_k)\overset{d}{\equiv}\left(\frac{X_1}{\sum_{j=1}^{k+1}X_j},\ldots,\frac{X_k}{\sum_{j=1}^{k+1}X_j}\right)$<br>$X_i\overset{ind}{\sim}\text{Gamma}(\alpha_i,\beta)$<br><br>**확률밀도함수:**<br>$\text{pdf}(y_1,\ldots,y_k)=\frac{\Gamma(\alpha_1+\cdots+\alpha_{k+1})}{\Gamma(\alpha_1)\cdots\Gamma(\alpha_{k+1})}\prod_{i=1}^k y_i^{\alpha_i-1}(1-y_1-\cdots-y_k)^{\alpha_{k+1}-1}$ |

@@ -1564,7 +1564,7 @@ $$\left(\frac{1}{r+1}\right)^{1/r} \le \left(\frac{1}{s+1}\right)^{1/s}$$
 
 실제로 $f(r) = (r+1)^{1/r}$는 $r > 0$에서 증가함수이므로 부등식이 성립한다.
 
-### 6.3 Markov, Chebyshev 부등식 (Markov and Chebyshev Inequalities)
+### 1.6.3 Markov, Chebyshev 부등식 (Markov and Chebyshev Inequalities)
 #### 정리 1.6.3 (Markov's Inequality)
 확률변수 $Z$에 대해 $E(|Z|^r) < \infty \quad (r > 0)$이면 임의의 양수 $k$에 대해
 $$P(|Z| \ge k) \le \frac{E[|Z|^r]}{k^r}$$

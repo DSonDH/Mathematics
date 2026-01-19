@@ -1140,23 +1140,22 @@ $$
 
 ## 여러 분포의 정의 정리
 ### 표 3.1 이산확률분포 요약
-
 | 분포 | 확률질량함수 (pmf) | 대의적 정의 | 적률생성함수 (mgf) | 누율생성함수 (cgf) |
 |------|-------------------|-------------|-------------------|-------------------|
-| 베르누이<br>$\text{Bernoulli}(p)$ | $P(X=x)=p^x(1-p)^{1-x}$<br>$x=0,1$ | - | $M_X(t)=pe^t+(1-p)$ | $K_X(t)=\log(pe^t+1-p)$ |
-| 이항분포<br>$B(n,p)$ | $P(X=x)=\binom{n}{x}p^x(1-p)^{n-x}$<br>$x=0,1,\ldots,n$ | $X\overset{d}{\equiv}\sum_{i=1}^n Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Bernoulli}(p)$ | $M_X(t)=(pe^t+1-p)^n$ | $K_X(t)=n\log(pe^t+1-p)$ |
-| 기하분포<br>$\text{Geo}(p)$ | $P(W_1=x)=(1-p)^{x-1}p$<br>$x=1,2,\ldots$ | - | $M_{W_1}(t)=\frac{pe^t}{1-(1-p)e^t}$<br>$t<-\log(1-p)$ | $K_{W_1}(t)=-\log\{1-(1-p)e^t\}+t+\log p$ |
-| 음이항분포<br>$\text{Negbin}(r,p)$ | $P(W_r=x)=\binom{x-1}{r-1}p^r(1-p)^{x-r}$<br>$x=r,r+1,\ldots$ | $W_r\overset{d}{\equiv}\sum_{i=1}^r Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Geo}(p)$ | $M_{W_r}(t)=\left(\frac{pe^t}{1-(1-p)e^t}\right)^r$<br>$t<-\log(1-p)$ | $K_{W_r}(t)=r[-\log\{1-(1-p)e^t\}+t+\log p]$ |
-| 포아송분포<br>$\text{Poisson}(\lambda)$ | $P(X=x)=e^{-\lambda}\frac{\lambda^x}{x!}$<br>$x=0,1,2,\ldots$ | - | $M_X(t)=\exp\{\lambda(e^t-1)\}$<br>$-\infty<t<\infty$ | $K_X(t)=\lambda(e^t-1)$ |
-| 다항분포<br>$\text{Multi}(n;p_1,\ldots,p_k)$ | $P(X_1=x_1,\ldots,X_k=x_k)$<br>$=\frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k}$<br>$\sum x_i=n$ | $X\overset{d}{\equiv}\sum_{i=1}^n Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Multi}(1;p_1,\ldots,p_k)$ | $M_X(t)=\left(\sum_{i=1}^k p_ie^{t_i}\right)^n$<br>$t=(t_1,\ldots,t_k)^t$ | $K_X(t)=n\log\left(\sum_{i=1}^k p_ie^{t_i}\right)$ |
+| 베르누이<br>$\text{Bernoulli}(p)$<br><sub>단일 시행의 성공/실패</sub> | $P(X=x)=p^x(1-p)^{1-x}$<br>$x=0,1$ | - | $M_X(t)=pe^t+(1-p)$ | $K_X(t)=\log(pe^t+1-p)$ |
+| 이항분포<br>$B(n,p)$<br><sub>$n$번 시행 중 성공 횟수</sub> | $P(X=x)=\binom{n}{x}p^x(1-p)^{n-x}$<br>$x=0,1,\ldots,n$ | $X\overset{d}{\equiv}\sum_{i=1}^n Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Bernoulli}(p)$ | $M_X(t)=(pe^t+1-p)^n$ | $K_X(t)=n\log(pe^t+1-p)$ |
+| 기하분포<br>$\text{Geo}(p)$<br><sub>첫 성공까지 시행 횟수</sub> | $P(W_1=x)=(1-p)^{x-1}p$<br>$x=1,2,\ldots$ | - | $M_{W_1}(t)=\frac{pe^t}{1-(1-p)e^t}$<br>$t<-\log(1-p)$ | $K_{W_1}(t)=-\log\{1-(1-p)e^t\}+t+\log p$ |
+| 음이항분포<br>$\text{Negbin}(r,p)$<br><sub>$r$번째 성공까지 시행 횟수</sub> | $P(W_r=x)=\binom{x-1}{r-1}p^r(1-p)^{x-r}$<br>$x=r,r+1,\ldots$ | $W_r\overset{d}{\equiv}\sum_{i=1}^r Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Geo}(p)$ | $M_{W_r}(t)=\left(\frac{pe^t}{1-(1-p)e^t}\right)^r$<br>$t<-\log(1-p)$ | $K_{W_r}(t)=r[-\log\{1-(1-p)e^t\}+t+\log p]$ |
+| 포아송분포<br>$\text{Poisson}(\lambda)$<br><sub>단위 구간 내 사건 발생 횟수</sub> | $P(X=x)=e^{-\lambda}\frac{\lambda^x}{x!}$<br>$x=0,1,2,\ldots$ | - | $M_X(t)=\exp\{\lambda(e^t-1)\}$<br>$-\infty<t<\infty$ | $K_X(t)=\lambda(e^t-1)$ |
+| 다항분포<br>$\text{Multi}(n;p_1,\ldots,p_k)$<br><sub>$k$개 범주별 발생 횟수</sub> | $P(X_1=x_1,\ldots,X_k=x_k)$<br>$=\frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k}$<br>$\sum x_i=n$ | $X\overset{d}{\equiv}\sum_{i=1}^n Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Multi}(1;p_1,\ldots,p_k)$ | $M_X(t)=\left(\sum_{i=1}^k p_ie^{t_i}\right)^n$<br>$t=(t_1,\ldots,t_k)^t$ | $K_X(t)=n\log\left(\sum_{i=1}^k p_ie^{t_i}\right)$ |
 
 ### 표 3.2 연속확률분포 요약
 
 | 분포 | 확률밀도함수 (pdf) | 대의적 정의 | 적률생성함수 (mgf) | 누율생성함수 (cgf) |
 |------|-------------------|-------------|-------------------|-------------------|
-| 지수분포<br>$\text{Exp}(\beta)$ | $f(x)=\frac{1}{\beta}e^{-x/\beta}\mathbf{1}(x\ge 0)$ | - | $M_X(t)=(1-\beta t)^{-1}$<br>$t<1/\beta$ | $K_X(t)=-\log(1-\beta t)$ |
-| 감마분포<br>$\text{Gamma}(\alpha,\beta)$ | $f(x)=\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta}\mathbf{1}(x>0)$ | $X\overset{d}{\equiv}\sum_{i=1}^r Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Exp}(\beta)$<br>(when $\alpha=r\in\mathbb{N}$) | $M_X(t)=(1-\beta t)^{-\alpha}$<br>$t<1/\beta$ | $K_X(t)=-\alpha\log(1-\beta t)$ |
-| 정규분포<br>$N(\mu,\sigma^2)$ | $f(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$<br>$-\infty<x<\infty$ | $X\overset{d}{\equiv}\sigma Z+\mu$<br>$Z\sim N(0,1)$ | $M_X(t)=\exp\left(\mu t+\frac{1}{2}\sigma^2 t^2\right)$<br>$-\infty<t<\infty$ | $K_X(t)=\mu t+\frac{1}{2}\sigma^2 t^2$ |
+| 지수분포<br>$\text{Exp}(\beta)$<br><sub>사건 간 대기시간</sub> | $f(x)=\frac{1}{\beta}e^{-x/\beta}\mathbf{1}(x\ge 0)$ | - | $M_X(t)=(1-\beta t)^{-1}$<br>$t<1/\beta$ | $K_X(t)=-\log(1-\beta t)$ |
+| 감마분포<br>$\text{Gamma}(\alpha,\beta)$<br><sub>$\alpha$개 사건까지 총 대기시간(지수분포 일반화 버전)</sub> | $f(x)=\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta}\mathbf{1}(x>0)$ | $X\overset{d}{\equiv}\sum_{i=1}^r Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Exp}(\beta)$<br>(when $\alpha=r\in\mathbb{N}$) | $M_X(t)=(1-\beta t)^{-\alpha}$<br>$t<1/\beta$ | $K_X(t)=-\alpha\log(1-\beta t)$ |
+| 정규분포<br>$N(\mu,\sigma^2)$<br><sub>대칭적 종 모양 분포</sub> | $f(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$<br>$-\infty<x<\infty$ | $X\overset{d}{\equiv}\sigma Z+\mu$<br>$Z\sim N(0,1)$ | $M_X(t)=\exp\left(\mu t+\frac{1}{2}\sigma^2 t^2\right)$<br>$-\infty<t<\infty$ | $K_X(t)=\mu t+\frac{1}{2}\sigma^2 t^2$ |
 
 ### 표 3.3 주요 분포의 평균과 분산
 

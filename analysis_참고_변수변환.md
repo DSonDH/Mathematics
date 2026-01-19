@@ -92,6 +92,23 @@ $$T(u_1,\dots,u_n)=(x_1,\dots,x_n)$$
 
 답이 바로 **야코비안(Jacobian)** 이다. 야코비안은 **선형변환이 부피를 얼마나 확대/축소하는지**를 측정한다.
 
+### 야코비안의 정의
+변환 $T:(u_1,\dots,u_n)\to(x_1,\dots,x_n)$에 대해 **야코비 행렬(Jacobian matrix)** 은
+$$J_T = \begin{pmatrix}
+\frac{\partial x_1}{\partial u_1} & \cdots & \frac{\partial x_1}{\partial u_n}\\
+\vdots & \ddots & \vdots\\
+\frac{\partial x_n}{\partial u_1} & \cdots & \frac{\partial x_n}{\partial u_n}
+\end{pmatrix}$$
+
+**야코비안(Jacobian determinant)** 또는 **야코비 행렬식**은 이 행렬의 행렬식이다:
+$$J_T(u) = \det(J_T) = \det\left(\frac{\partial(x_1,\dots,x_n)}{\partial(u_1,\dots,u_n)}\right)$$
+
+야코비안은 점 $(u_1,\dots,u_n)$ 근처에서 변환 $T$가 **부피를 몇 배로 확대/축소하는지**를 나타낸다.
+
+* $|J_T|>1$: 부피 확대
+* $|J_T|<1$: 부피 축소
+* $|J_T|=0$: 차원 붕괴 (변환이 특이점)
+
 ## 2.2 쐐기곱으로 본 야코비안
 
 각 좌표에 대해 전미분을 취하면
