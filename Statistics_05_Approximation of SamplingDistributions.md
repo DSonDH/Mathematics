@@ -354,14 +354,11 @@ $$
 또한 이들 확률변수는 $0$ 또는 자연수 값만 가지므로 모든 $x$에 대해
 $$
 \mathrm{cdf}_{X_n}(x)
-=
-\sum_{k:0\le k\le x}P(X_n=k)
+=\sum_{k:0\le k\le x}P(X_n=k)
 \;\xrightarrow[n\to\infty]{}\;
 \sum_{k:0\le k\le x}P(X=k)
-=
-\mathrm{cdf}_X(x)
+=\mathrm{cdf}_X(x)
 $$
-이다.
 
 따라서
 $$
@@ -376,19 +373,14 @@ P\{n(1-U_{(n)})\le x\}
 =
 1-P\left\{U_{(n)}<1-\frac{x}{n}\right\}
 $$
-이며,
-
 $$
 P\left\{U_{(n)}<1-\frac{x}{n}\right\}
-=
-\begin{cases}
+=\begin{cases}
 0, & x>n \\
 \left(1-\frac{x}{n}\right)^n, & 0<x\le n \\
 1, & x\le 0
 \end{cases}
 $$
-이다.
-
 따라서
 $$
 \lim_{n\to\infty}
@@ -504,7 +496,7 @@ $$
 \quad \forall\varepsilon>0
 $$
 
-### 정리 5.2.2. 대수의 법칙 *(Law of Large Numbers)*
+### 정리 5.2.2. 큰수의 법칙 (대수의 법칙) *(Law of Large Numbers)*
 서로 독립이고 동일한 분포를 따르는 확률변수 $X_1,\dots,X_n$에 대해 $E(X_1)$이 존재하면
 $$
 \mathrm{plim}_{n\to\infty}\frac{1}{n}\sum_{i=1}^n X_i = E(X_1)
@@ -520,13 +512,13 @@ P(|\bar X_n-E(X_1)|\ge\varepsilon)
 $$
 이고, $n\to\infty$로 보내면 확률이 $0$으로 수렴한다. $\square$
 
-**대수의 법칙 해석**  
+**큰수의 법칙 해석**  
 랜덤표본 $X_1, \dots, X_n$을 관측할 때, 집합 $A$에 속하는 관측값의 **상대도수(relative frequency)** 는
 $$
 \frac{1}{n}\sum_{i=1}^n I_A(X_i)
 $$
 로 나타낼 수 있다.  
-이 상대도수에 대수의 법칙을 적용하면
+이 상대도수에 큰수의 법칙을 적용하면
 $$
 \mathrm{plim}_{n\to\infty}\frac{1}{n}\sum_{i=1}^n I_A(X_i) = E(I_A(X_1)) = P(X_1 \in A)
 $$
@@ -603,7 +595,7 @@ $$
 
 따라서 (a), (b), (c)는 서로 동치이다. $\square$
 
-### 정리 5.2.4. 다차원 대수의 법칙  
+### 정리 5.2.4. 다차원 큰수의 법칙  
 서로 독립이고 동일한 분포를 따르는 다차원 확률변수  
 $$
 X_1 = (X_{11}, \dots, X_{1k})^T, \dots, X_n = (X_{n1}, \dots, X_{nk})^T
@@ -614,7 +606,7 @@ $$
 $$  
 
 #### 증명  
-각 성분별로 대수의 법칙이 성립하므로, 정리 5.2.3(성분별 확률수렴)에 의해 결론이 성립한다. $\square$
+각 성분별로 큰수의 법칙이 성립하므로, 정리 5.2.3(성분별 확률수렴)에 의해 결론이 성립한다. $\square$
 
 #### 예 5.2.4. 표본적률의 확률수렴
 서로 독립이고 동일한 분포를 따르는 확률변수 $X_1,\dots,X_n$에 대해 $\hat m_r = \frac{1}{n}\sum_{i=1}^{n}X_i^r$을 $k$차 표본적률(sample $k$ th moment)이라 한다.  
@@ -624,7 +616,7 @@ $$
 $$
 즉, $k$차 표본적률이 모집단의 $k$차 모적률(population $k$ th moment)로 확률수렴한다.
 
-이는 $X_1^k,\dots,X_n^k$ 역시 서로 독립이고 동일한 분포를 따르며, $E(|X_1^k|)<\infty$이므로 정리 1.6.2로부터 대수의 법칙을 그대로 적용할 수 있다. 따라서 표본평균 $\frac{1}{n}\sum_{i=1}^n X_i^k$는 모집단의 적률벡터 $E(X_1^k)$에 확률적으로 가까워진다.
+이는 $X_1^k,\dots,X_n^k$ 역시 서로 독립이고 동일한 분포를 따르며, $E(|X_1^k|)<\infty$이므로 정리 1.6.2로부터 큰수의 법칙을 그대로 적용할 수 있다. 따라서 표본평균 $\frac{1}{n}\sum_{i=1}^n X_i^k$는 모집단의 적률벡터 $E(X_1^k)$에 확률적으로 가까워진다.
 
 이 결과는 표본평균뿐만 아니라 표본분산, 표본적률 등 다양한 통계량의 일치성(consistency)을 보장하는 근거가 된다.
 
@@ -690,7 +682,7 @@ S_n^2
 $$
 즉, $(\frac{1}{n}\sum_{i=1}^n X_i,\, \frac{1}{n}\sum_{i=1}^n X_i^2)^T$의 함수로 $S_n^2$를 표현할 수 있다.
 
-한편 예 5.2.4 및 대수의 법칙으로부터, $E(X_1^2)<+\infty$이면
+한편 예 5.2.4 및 큰수의 법칙으로부터, $E(X_1^2)<+\infty$이면
 $$
 \mathrm{plim}_{n\to\infty}\frac{1}{n}\sum_{i=1}^n X_i^2=E(X_1^2),
 \quad
@@ -716,7 +708,7 @@ $$
 $$
 
 ### 정리 5.2.7. 평균제곱수렴과 확률수렴
-대수의 법칙을 적용하기 어려운 경우에 확률수렴을 밝히는 데 유용한 정리다.  
+큰수의 법칙을 적용하기 어려운 경우에 확률수렴을 밝히는 데 유용한 정리다.  
 
 분산이 실수로 정의될 수 있는 확률변수 $X_n,(n=1,2,\dots)$에 대해
 $\lim_{n\to\infty}\mathrm{Var}(X_n)=0,
@@ -977,7 +969,7 @@ $$
 $$
 \sqrt{n}(\bar X_n - \mu) \xrightarrow{d} Z,\quad Z \sim N(0, \sigma^2)
 $$
-이고, 대수의 법칙에 의해
+이고, 큰수의 법칙에 의해
 $$
 \bar X_n - \mu \xrightarrow{P} 0
 $$
@@ -1456,7 +1448,7 @@ $$
 $$
 E[g(X_1)] = \frac{1}{b-a} \int_a^b g(x)\, dx
 $$
-이고, 대수의 법칙에 의해
+이고, 큰수의 법칙에 의해
 $$
 \frac{1}{n} \sum_{i=1}^n g(X_i) \xrightarrow{P} E[g(X_1)]
 $$
@@ -1514,7 +1506,7 @@ $$
 $$
 \hat{p}_n = \frac{1}{n} \sum_{i=1}^n X_i
 $$
-에 대해 대수의 법칙과 중심극한정리에 의해
+에 대해 큰수의 법칙과 중심극한정리에 의해
 $$
 \mathrm{plim}_{n \to \infty} \hat{p}_n = p, \qquad
 \frac{\hat{p}_n - p}{\sqrt{p(1-p)/n}} \xrightarrow{d} N(0, 1)

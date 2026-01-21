@@ -229,8 +229,28 @@ $$\text{tr}(A) = \sum_{i=1}^{n} a_{ii}$$
 * $\text{tr}(A^T) = \text{tr}(A)$
 * $\text{tr}(A + B) = \text{tr}(A) + \text{tr}(B)$
 * $\text{tr}(AB) = \text{tr}(BA)$
-* $\text{tr}(ABC) = \text{tr}(BCA) = \text{tr}(CAB)$ (순환 성질)
-
+* $\text{tr}(ABC) = \text{tr}(BCA) = \text{tr}(CAB)$ (순환 성질)  
+    **증명**:  
+    임의의 $n \times n$ 행렬 $A, B, C$에 대해,
+    $$
+    \text{tr}(ABC) = \sum_{i=1}^n (ABC)_{ii}
+    $$
+    행렬곱의 성분은
+    $$
+    (ABC)_{ii} = \sum_{j=1}^n \sum_{k=1}^n a_{ij}b_{jk}c_{ki}
+    $$
+    따라서,
+    $$
+    \text{tr}(ABC) = \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n a_{ij}b_{jk}c_{ki}
+    $$
+    지수 $i, j, k$를 순환적으로 바꾸면,
+    $$
+    \sum_{i,j,k} a_{ij}b_{jk}c_{ki} = \sum_{j,k,i} b_{jk}c_{ki}a_{ij} = \sum_{k,i,j} c_{ki}a_{ij}b_{jk}
+    $$
+    즉,
+    $$
+    \text{tr}(ABC) = \text{tr}(BCA) = \text{tr}(CAB)
+    $$
 
 ### (3) 행렬의 덧셈
 #### 전치와 덧셈

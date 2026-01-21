@@ -1155,7 +1155,7 @@ $$
 |------|-------------------|-------------|-------------------|-------------------|
 | 지수분포<br>$\text{Exp}(\beta)$<br><sub>사건 간 대기시간</sub> | $f(x)=\frac{1}{\beta}e^{-x/\beta}\mathbf{1}(x\ge 0)$ | - | $M_X(t)=(1-\beta t)^{-1}$<br>$t<1/\beta$ | $K_X(t)=-\log(1-\beta t)$ |
 | 감마분포<br>$\text{Gamma}(\alpha,\beta)$<br><sub>$\alpha$개 사건까지 총 대기시간(지수분포 일반화 버전)</sub> | $f(x)=\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta}\mathbf{1}(x>0)$ | $X\overset{d}{\equiv}\sum_{i=1}^r Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Exp}(\beta)$<br>(when $\alpha=r\in\mathbb{N}$) | $M_X(t)=(1-\beta t)^{-\alpha}$<br>$t<1/\beta$ | $K_X(t)=-\alpha\log(1-\beta t)$ |
-| 정규분포<br>$N(\mu,\sigma^2)$<br><sub>대칭적 종 모양 분포</sub> | $f(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$<br>$-\infty<x<\infty$ | $X\overset{d}{\equiv}\sigma Z+\mu$<br>$Z\sim N(0,1)$ | $M_X(t)=\exp\left(\mu t+\frac{1}{2}\sigma^2 t^2\right)$<br>$-\infty<t<\infty$ | $K_X(t)=\mu t+\frac{1}{2}\sigma^2 t^2$ |
+| 정규분포<br>$N(\mu,\sigma^2)$<br><sub>대칭적 종 모양 분포, 이항분포 누적확률</sub> | $f(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$<br>$-\infty<x<\infty$ | $X\overset{d}{\equiv}\sigma Z+\mu$<br>$Z\sim N(0,1)$ | $M_X(t)=\exp\left(\mu t+\frac{1}{2}\sigma^2 t^2\right)$<br>$-\infty<t<\infty$ | $K_X(t)=\mu t+\frac{1}{2}\sigma^2 t^2$ |
 
 ### 표 3.3 주요 분포의 평균과 분산
 

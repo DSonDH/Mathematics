@@ -1649,6 +1649,188 @@ $$P(|X - 70| \ge 20) \le \frac{100}{400} = 0.25$$
 
 실제로 점수가 정규분포를 따른다면 이 비율은 약 4.6%로 훨씬 낮다.
 
+### 1.6.3(추가) Hölder, Minkowski 부등식 (Hölder's and Minkowski's Inequalities)
+
+#### 정리 1.6.5 (Hölder's Inequality)
+확률변수 $X$, $Y$와 $p, q > 1$ ($1/p + 1/q = 1$)에 대해 $E[|X|^p] < \infty$, $E[|Y|^q] < \infty$이면
+$$
+E[|XY|] \le \left(E[|X|^p]\right)^{1/p} \left(E[|Y|^q]\right)^{1/q}
+$$
+
+**증명 개요**  
+Young의 부등식과 Jensen 부등식을 이용하여 증명한다. (자세한 증명은 생략)
+
+#### 정리 1.6.6 (Minkowski's Inequality)
+$p \ge 1$, $E[|X|^p] < \infty$, $E[|Y|^p] < \infty$일 때
+$$
+\left(E[|X+Y|^p]\right)^{1/p} \le \left(E[|X|^p]\right)^{1/p} + \left(E[|Y|^p]\right)^{1/p}
+$$
+
+이는 $L^p$ 공간에서의 삼각부등식에 해당한다.
+
+#### 예시
+- $p=2$일 때, Minkowski 부등식은 분산의 삼각부등식으로 이어진다.
+- $p=1$일 때, $E[|X+Y|] \le E[|X|] + E[|Y|]$ (기댓값의 삼각부등식).
+
+#### 참고
+- Hölder 부등식은 Schwarz(코시-슈바르츠) 부등식의 일반화이다.
+- $p=q=2$일 때 Hölder 부등식은 코시-슈바르츠 부등식이 된다:
+   $$
+   |E[XY]| \le \sqrt{E[X^2]}\sqrt{E[Y^2]}
+   $$
+
+### 6.5 주요 부등식 정리 (Summary of Key Inequalities)
+
+이 페이지에 이미 등장한 부등식은 생략하고, 증명이나 계산에 자주 쓰이는 대표적 부등식들을 정리한다.
+
+#### 1. 삼각부등식 (Triangle Inequality)
+임의의 실수 $a, b$에 대해
+$$
+|a + b| \leq |a| + |b|
+$$
+확률변수 $X, Y$에 대해서도
+$$
+|X + Y| \leq |X| + |Y| \implies E[|X + Y|] \leq E[|X|] + E[|Y|]
+$$
+
+#### 1-1. 절댓값 차이 부등식
+임의의 실수 $a, b$에 대해
+$$
+||a| - |b|| \leq |a - b|
+$$
+
+**증명**  
+삼각부등식 $|a| \leq |a-b| + |b|$에서 $|a| - |b| \leq |a-b|$이고, $|b| - |a| \leq |b-a| = |a-b|$이므로, 두 경우를 합치면 $||a| - |b|| \leq |a-b|$.
+
+확률변수 $X, Y$에 대해서도
+$$
+||X| - |Y|| \leq |X - Y|
+$$
+#### 1-2. 절댓값의 곱과 합 부등식
+임의의 실수 $a, b$에 대해
+$$
+|ab| \leq \frac{a^2 + b^2}{2}
+$$
+이는 $2ab \leq a^2 + b^2$에서 유도된다.
+
+#### 1-3. 최대/최소와 절댓값 부등식
+임의의 실수 $a, b$에 대해
+$$
+\max(a, b) \leq |a| + |b|,\qquad \min(a, b) \geq -(|a| + |b|)
+$$
+
+#### 5. Bernoulli 부등식 (Bernoulli's Inequality)
+$x > -1$, $r \geq 1$일 때
+$$
+(1 + x)^r \geq 1 + r x
+$$
+
+#### 7. Grönwall 부등식 (Grönwall's Inequality, 적분부등식)
+$u(t) \leq a + b \int_0^t u(s)\,ds$이면
+$$
+u(t) \leq a e^{b t}
+$$
+
+#### 8. Markov의 역부등식 (Reverse Markov Inequality)
+$X \geq 0$, $a < E[X]$이면
+$$
+P(X > a) \geq \frac{E[X] - a}{\sup X - a}
+$$
+(단, $X$의 상한 $\sup X < \infty$일 때)
+
+#### 9. Jensen의 평등조건
+Jensen 부등식에서 등호는 $X$가 상수이거나 $\varphi$가 선형일 때만 성립.
+
+#### 10. Pinsker 부등식 (정보이론)
+두 분포 $P, Q$에 대해 변분거리 $d_{TV}$와 Kullback-Leibler 발산 $D_{KL}$ 사이
+$$
+d_{TV}(P, Q) \leq \sqrt{\frac{1}{2} D_{KL}(P \| Q)}
+$$
+
+#### 11. Chernoff 부등식 (Chernoff Bound)
+$X$ 임의의 확률변수, $t > 0$에 대해
+$$
+P(X \geq a) \leq \frac{E[e^{tX}]}{e^{ta}}
+$$
+
+#### 12. Kolmogorov 부등식 (부분합 최대치)
+$S_n = X_1 + \cdots + X_n$이 독립이고 $E[X_i] = 0$이면
+$$
+P\left(\max_{1 \leq k \leq n} |S_k| \geq \lambda\right) \leq \frac{E[S_n^2]}{\lambda^2}
+$$
+
+#### 13. Paley–Zygmund 부등식
+$X \geq 0$, $E[X^2] < \infty$, $0 < \theta < 1$일 때
+$$
+P(X \geq \theta E[X]) \geq (1-\theta)^2 \frac{(E[X])^2}{E[X^2]}
+$$
+
+#### 14. Jensen–Shannon 부등식 (정보이론)
+두 분포 $P, Q$에 대해
+$$
+\frac{1}{2} D_{KL}(P \| M) + \frac{1}{2} D_{KL}(Q \| M) \leq \log 2
+$$
+($M = \frac{1}{2}(P+Q)$)
+
+#### 15. Log-Sum 부등식
+$a_i, b_i > 0$에 대해
+$$
+\sum_i a_i \log \frac{a_i}{b_i} \geq \left(\sum_i a_i\right) \log \frac{\sum_i a_i}{\sum_i b_i}
+$$
+
+#### 16. Gibbs 부등식 (상대엔트로피 비음성)
+확률분포 $p, q$에 대해
+$$
+D_{KL}(p \| q) \geq 0
+$$
+등호는 $p = q$일 때만 성립.
+
+#### 17. Bonferroni 부등식 (확률의 하한)
+사건 $A_1, \ldots, A_n$에 대해
+$$
+P\left(\bigcup_{i=1}^n A_i\right) \geq \sum_{i=1}^n P(A_i) - \sum_{i<j} P(A_i \cap A_j)
+$$
+
+#### 18. Union Bound (Boole's Inequality)
+임의의 사건 $A_1, \ldots, A_n$에 대해
+$$
+P\left(\bigcup_{i=1}^n A_i\right) \leq \sum_{i=1}^n P(A_i)
+$$
+
+#### 19. FKG 부등식 (양의 상관관계)
+$X, Y$가 증가함수일 때
+$$
+E[XY] \geq E[X] E[Y]
+$$
+
+이 외에도 확률, 정보이론, 해석학 등에서 다양한 부등식이 존재하며, 필요시 각 주제별로 추가할 수 있다.
+
+#### 2. 산술평균-기하평균 부등식 (AM-GM Inequality)
+양수 $x_1, \ldots, x_n > 0$에 대해
+$$
+\frac{x_1 + \cdots + x_n}{n} \geq (x_1 \cdots x_n)^{1/n}
+$$
+등호는 $x_1 = \cdots = x_n$일 때만 성립.
+
+#### 3. 코시-슈바르츠 부등식 (Cauchy-Schwarz Inequality)
+확률변수 $X, Y$에 대해 $E[X^2], E[Y^2] < \infty$이면
+$$
+|E[XY]| \leq \sqrt{E[X^2]} \sqrt{E[Y^2]}
+$$
+
+#### 4. 영(Young)의 부등식 (Young's Inequality)
+$a, b \geq 0$, $p, q > 1$, $1/p + 1/q = 1$일 때
+$$
+ab \leq \frac{a^p}{p} + \frac{b^q}{q}
+$$
+
+#### 6. 기타
+- $|E[X]| \leq E[|X|]$ (기댓값의 절댓값은 절댓값의 기댓값 이하)
+- $E[\max(X, Y)] + E[\min(X, Y)] = E[X] + E[Y]$
+
+이 외의 부등식은 본문 각 절에서 필요할 때마다 증명과 함께 소개됨.
+
+
 ### 6.4 분산이 0이라는 것의 의미
 #### 정리 1.6.5 (Variance Zero Implies Constant)
 $$\mathrm{Var}(X) = 0 \iff P(X = E[X]) = 1$$
