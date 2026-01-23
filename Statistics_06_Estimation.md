@@ -2,7 +2,8 @@
 
 ## 6.1 적률이용 추정법 *(Method of Moments Estimation, MME)*
 
-### 6.1.1 도입 및 기본 개념**적률이용 추정법(Method of Moments Estimation, MME)** 은 모집단의 특성을 나타내는 **모수(parameter)** 를 표본으로부터 추정하는 대표적인 방법 중 하나이다. 이 방법은 모집단의 **적률(moment)** 과 이에 대응하는 **표본적률(sample moment)** 을 일치시키는 방식으로 모수를 추정한다.
+### 6.1.1 도입 및 기본 개념
+**적률이용 추정법(Method of Moments Estimation, MME)** 은 모집단의 특성을 나타내는 **모수(parameter)** 를 표본으로부터 추정하는 대표적인 방법 중 하나이다. 이 방법은 모집단의 **적률(moment)** 과 이에 대응하는 **표본적률(sample moment)** 을 일치시키는 방식으로 모수를 추정한다.
 
 랜덤표본 $X_1, \dots, X_n$이 모집단에서 주어졌다고 하자. 예를 들어, 모평균 $\mu = E(X_1)$를 추정할 때 표본평균 $\bar X = \frac{1}{n}(X_1 + \cdots + X_n)$을 사용하는 것처럼, 모집단의 $r$차 적률 $m_r = E(X_1^r)$을 추정할 때는 표본적률
 $$
@@ -162,6 +163,12 @@ $$
 L(\theta;x) = \prod_{i=1}^n f(x_i;\theta),\quad \theta \in \Omega
 $$
 로 정의된 함수를 **가능도함수(likelihood function)** 또는 우도함수라 한다.
+> **참고: 가능도(likelihood)와 확률(probability)의 차이**
+>
+> - **확률(probability)** 은 모수 $\theta$가 고정되어 있을 때, 어떤 데이터 $x$가 관측될 확률을 의미한다. 즉, $P(X = x \mid \theta)$처럼 **데이터의 함수**이다.
+> - **가능도(likelihood)** 는 관측된 데이터 $x$가 고정되어 있을 때, 모수 $\theta$의 값을 바꿔가며 "이 데이터가 얼마나 그럴듯한가"를 측정하는 함수다. 즉, $L(\theta; x) = f(x; \theta)$처럼 **모수의 함수**이다.
+> - 가능도는 "확률"이 아니며, $0$과 $1$ 사이의 값일 필요도 없다. 단지, 주어진 데이터에서 어떤 $\theta$가 더 그럴듯한지(가능성이 높은지)를 비교하는 기준이다.
+> - 최대가능도 추정(MLE)은 "관측된 데이터를 가장 그럴듯하게 만드는 모수값"을 찾는 방법이다.
 
 그 값이 가장 크게 되는 모수의 값 $\hat\theta(x)$로 추측하자는 것이 **최대가능도 추정법(maximum likelihood estimation, MLE)** 이고, 대응하는 통계량을 최대가능도 추정량이라 한다.
 $$
@@ -1088,7 +1095,6 @@ $$
 
 이는 표본상관계수(sample correlation coefficient)와 일치한다.
 
-TODO:FIXME:
 #### 예시 6.3.6 다항분포에서의 최대가능도 추정 *(MLE for Multinomial Distribution)*
 $(X_1, \dots, X_k) \sim Multin(n; p_1, \dots, p_k), \ \sum_{j=1}^k p_j = 1$
 $$
@@ -1125,14 +1131,6 @@ $$
 $$
 \hat p_j^{\mathrm{MLE}} = \frac{x_j}{n}
 $$
-
-**정리:**  
-다항분포에서 각 $p_j$의 최대가능도 추정량은
-$$
-\boxed{
-\hat p_j^{\mathrm{MLE}} = \frac{x_j}{n}
-}
-$$
 즉, 각 범주의 상대도수(비율)이다.
 
 **풀이 2: 정리 6.3.4의 일대일 모수변환을 이용한 방법**  
@@ -1159,6 +1157,942 @@ $$
 $$
 즉, 일대일 함수 변환을 통해서도 각 범주의 상대도수가 최대가능도 추정량임을 알 수 있다.
 
-## 최대가능도 추정량의 점근적 성질 *(Asymptotic Properties of Maximum Likelihood Estimators)*
+
+## 6.4 최대가능도 추정량의 점근적 성질 *(Asymptotic Properties of Maximum Likelihood Estimators)*
+
+### 6.4.1 도입: 점근적 성질의 필요성
+표본크기 $n$이 커질수록 추정량이 참값에 가까워지는 **일치성(consistency)** 은 추정량의 기본 요건이다.  
+하지만 통계적 추론(신뢰구간, 가설검정 등)을 위해서는 **극한분포(asymptotic distribution)** 까지 알아야 한다.  
+이 절에서는 최대가능도 추정량(MLE)의 일치성과 극한분포를 일반적인 조건과 함께 정리한다. (로그가능도함수의 여러 성질로 최대가능도 추정량의 극한분포를 유도할 수 있음)
+
+#### 예 6.4.1 최대가능도 추정량의 일치성과 극한분포
+**(a) 베르누이 분포 $Bernoulli(p)$, $0 \le p \le 1$**  
+MLE: $\hat p_n^{\mathrm{MLE}} = \bar X = \frac{1}{n}\sum_{i=1}^n X_i$ (예 6.2.2, 6.2.5 참고)
+- 일치성:  
+    $$
+    \hat p_n^{\mathrm{MLE}} \xrightarrow{P_p} p \\
+    \Leftrightarrow \\
+    \lim_{n\to\infty} P_p\left(|\hat p_n^{\mathrm{MLE}} - p| \ge \epsilon\right) = 0 \quad \forall\, \epsilon > 0
+    $$
+- 극한분포:  
+    $$
+    \sqrt{n}(\hat p_n^{\mathrm{MLE}} - p) \xrightarrow{d} N(0, p(1-p))
+    $$
+
+**(b) 포아송 분포 $Poisson(\lambda)$, $\lambda \ge 0$**  
+MLE: $\hat\lambda_n^{\mathrm{MLE}} = \bar X = \frac{1}{n}\sum_{i=1}^n X_i$ (예 6.2.1, 6.2.5)
+- 일치성:  
+    $$
+    \hat\lambda_n^{\mathrm{MLE}} \xrightarrow{P_\lambda} \lambda
+    $$
+- 극한분포:  
+    $$
+    \sqrt{n}(\hat\lambda_n^{\mathrm{MLE}} - \lambda) \xrightarrow{d} N(0, \lambda)
+    $$
+
+**(c) 지수분포 $Exp(\theta)$, $\theta > 0$**  
+MLE: $\hat\theta_n^{\mathrm{MLE}} = \bar X = \frac{1}{n}\sum_{i=1}^n X_i$ (예 6.2.4, 6.2.5)
+- 일치성:  
+    $$
+    \hat\theta_n^{\mathrm{MLE}} \xrightarrow{P_\theta} \theta
+    $$
+- 극한분포:  
+    $$
+    \sqrt{n}(\hat\theta_n^{\mathrm{MLE}} - \theta) \xrightarrow{d} N(0, \theta^2)
+    $$
+
+**(d) 정규분포 $N(\mu, \sigma^2)$**  
+MLE: $
+\hat\mu_n^{\mathrm{MLE}} = \bar X, \
+\hat\sigma_n^{2,\mathrm{MLE}} = \frac{1}{n}\sum_{i=1}^n (X_i - \bar X)^2$ (예 6.3.4)
+
+- 일치성:  
+    $$
+    \hat\mu_n^{\mathrm{MLE}} \xrightarrow{P_\theta} \mu, \qquad
+    \hat\sigma_n^{2,\mathrm{MLE}} \xrightarrow{P_\theta} \sigma^2
+    $$
+- 극한분포:  
+    $$
+    \sqrt{n}(\bar X - \mu) \sim N(0, \sigma^2) \text{  (표본크기 관계없음, 정리6.1.1)}
+    $$
+    $$
+    \frac{n\hat\sigma_n^{2,\mathrm{MLE}}}{\sigma^2} \sim \chi^2(n-1)
+    \text{  (표본크기 관계없음, 정리4.2.2)}
+    $$
+    $$
+    \sqrt{n}(\hat\sigma_n^{2,\mathrm{MLE}} - \sigma^2) \xrightarrow{d} N(0, 2\sigma^4)
+    $$
+
+**(e) 이변량 정규분포 $N(\mu_1, \mu_2; \sigma_1^2, \sigma_2^2, \rho)$**  
+MLE (상관계수, 예 6.3.5):  
+$$
+\hat\rho_n^{\mathrm{MLE}} =
+\frac{\sum_{i=1}^n (X_i - \bar X)(Y_i - \bar Y)}
+{\sqrt{\sum_{i=1}^n (X_i - \bar X)^2} \sqrt{\sum_{i=1}^n (Y_i - \bar Y)^2}}
+$$ (예 6.2.1, 6.2.5)
+
+- 극한분포:  
+    $$
+    \sqrt{n}(\hat\rho_n^{\mathrm{MLE}} - \rho) \xrightarrow{d} N(0, (1-\rho^2)^2)
+    $$
+
+위 경우들은 최대가능도 추정량이 일치정을 갖고 표본분포의 극한분포가 정규분포인 예였다. 이는 최대가능도 추정량이 적률이용추정량과 일치하는 예로, 그 성질 또한 적률이용추정량의 성질에서 밝힌 것이다.  
+아래는 일치하지 않는 경우도 다루며, 일반적인 경우에 최대가능도 추정량이 어떤 성질을 갖는지 소개한다.
+### 최대가능도 추정량의 일치성: 직관적 배경
+로그가능도함수 $\ell_n(\theta) = \sum_{i=1}^n \log f(X_i; \theta), \
+\bar\ell_n(\theta) = \frac{1}{n}\ell_n(\theta)$  
+
+$\theta^0$를 모수의 참값이라 하면, 대수의 법칙(큰수의 법칙)에 의해  
+$$
+\bar\ell_n(\theta) =\frac{1}{n}\sum_{i=1}^n \log f(X_i; \theta)\xrightarrow{P_{\theta^0}} E_{\theta^0}[\log f(X_1; \theta)]
+$$
+따라서, 아래와 같은 추측을 할 수 있다 (최대가능도 추정량이 유일하게 정해질 수 있다는 전제하에 argmax사용가능)  
+$$
+\hat\theta_n = \arg\max_{\theta \in \Omega} \bar\ell_n(\theta)
+\quad\Rightarrow\quad
+\theta^0 = \arg\max_{\theta \in \Omega} E_{\theta^0}[\log f(X_1; \theta)]
+$$
+- 이 추측은 "표본 로그가능도 평균 $\bar\ell_n(\theta)$를 최대화하는 $\hat\theta_n$이, 표본크기 $n$이 커질수록 참값 $\theta^0$에 가까워진다"는 직관을 표현한 것이다.
+- 이 직관을 엄밀화하기 위해 **쿨백–라이블러 괴리도(Kullback–Leibler divergence)** 를 도입한다.
+- 결론은 이 추측은 참으로, 확률수렴하는 일치성을 보여준다.
+### 정리 6.4.1 쿨백–라이블러 괴리도
+두 분포가 서로 다른 정도를 나타내는 측도.  
+확률밀도함수 $f(x; \theta)$, $\theta \in \Omega$가  
+- (R0) **식별가능성**: $f(\cdot; \theta) = f(\cdot; \theta^0) \Rightarrow \theta = \theta^0$  
+- (R1) **공통의 토대**: $\{x: f(x; \theta) > 0\}$이 $\theta$에 의존하지 않음
+
+을 만족하면  
+$$
+KL(\theta, \theta^0) = -E_{\theta^0}\left[\log\frac{f(X; \theta)}{f(X; \theta^0)}\right]
+$$
+라고 하면 다음이 성립한다:
+- $KL(\theta, \theta^0) \ge 0$  
+- $KL(\theta, \theta^0) = 0 \iff \theta = \theta^0$
+
+#### 증명
+(i) **$KL(\theta, \theta^0) \ge 0$의 증명**  
+- (R1) 공통 토대 조건에 의해 $f(x; \theta^0) > 0$이면 $f(x; \theta) > 0$이므로, $T(x) := \frac{f(x; \theta)}{f(x; \theta^0)}$는 $X$에서 양수이고 $P_{\theta^0}$-거의 모든 곳에서 정의된다.
+- 모든 $t > 0$에 대해 $-\log t \ge 1 - t$ (볼록함수의 성질, $t=1$에서 등호).
+- $t = T(X)$를 대입하면 $-\log T(X) \ge 1 - T(X)$.
+- 양변에 $E_{\theta^0}$를 취하면
+    $$
+    KL(\theta, \theta^0) = -E_{\theta^0}\left[\log T(X)\right] \ge 1 - E_{\theta^0}[T(X)]
+    $$
+- $E_{\theta^0}[T(X)] = \int_X \frac{f(x; \theta)}{f(x; \theta^0)} f(x; \theta^0) dx = \int_X f(x; \theta) dx = 1$.
+- 따라서 $KL(\theta, \theta^0) \ge 0$.
+
+(ii) **$KL(\theta, \theta^0) = 0 \iff \theta = \theta^0$의 증명**  
+- 위 부등식에서 등호는 $T(X) = 1$ $P_{\theta^0}$-a.s.일 때만 성립.
+- 즉, $f(X; \theta) = f(X; \theta^0)$ $P_{\theta^0}$-a.s.
+- (R1) 공통 토대에 의해 $P_{\theta^0}$-거의 모든 곳은 $X$ 전체에서 "거의 모든 $x$"와 동치.
+- 따라서 $f(\cdot; \theta) = f(\cdot; \theta^0)$ (거의 모든 $x \in X$).
+- (R0) 식별가능성에 의해 $\theta = \theta^0$.
+- 역방향($\theta = \theta^0 \implies KL(\theta, \theta^0) = 0$)은 정의에서 즉시 성립.
+
+**정리:**  
+쿨백–라이블러 괴리도 $KL(\theta, \theta^0)$는 항상 0 이상이며, 0이 되는 유일한 경우는 $\theta = \theta^0$일 때이다.
+
+### 최대가능도 추정량의 일치성: 일반 조건
+1. **균등 확률수렴**  
+     $$
+     \sup_{|\theta - \theta^0| \le K} \left| \bar\ell_n(\theta) - E_{\theta^0}[\log f(X_1; \theta)] \right| \xrightarrow{P_{\theta^0}} 0, \ \forall K > 0 
+     $$
+2. **기대 로그가능도의 연속성**  
+     $E_{\theta^0}[\log f(X_1; \theta)]$은 $\theta$에 대해 연속
+3. **로그가능도의 단봉성 (순오목 단봉 로그가능도)**  
+     $$
+     c^\top \nabla^2 \ell(\theta) c < 0, \quad \forall c \neq 0, \ \forall \theta \in \Omega, \lim_{\theta \to \partial(\Omega)} l_n(\theta) = - \infin
+     $$
+### 정리 6.4.2 최대가능도 추정량(MLE)의 일치성(consistency)
+모수공간 $\Omega \subset \mathbb{R}^k$에 대해, 다음을 가정한다.
+
+1. **(R0) 식별 가능성(identifiability)**
+    $$
+    f(\cdot;\theta)=f(\cdot;\theta^0)\ \Rightarrow\ \theta=\theta^0
+    $$
+2. **(R1) 공통 토대(common support)**
+    $$
+    \{x:f(x;\theta)>0\}=\mathcal{X}\quad(\theta\in\Omega\ \text{에 의존하지 않음})
+    $$
+3. **(순오목 단봉 로그가능도: strict concavity + boundary condition)**
+    로그가능도함수 $l_n(\theta)$가 $\theta$에 대해 두 번 편미분 가능하고, 이차 편도함수들이 연속함수이며
+    $$
+    c^\top \ddot l_n(\theta)c<0,\quad \forall c\neq 0,\ \forall \theta\in\Omega
+    $$
+    또한 경계로 갈 때
+    $$
+    \lim_{\theta\to \partial(\Omega)} l_n(\theta)=-\infty
+    $$
+4. **(기대 로그가능도의 연속성)**
+    $$
+    \forall \theta^0\in\Omega,\quad E_{\theta^0}[\log f(X_1;\theta)]\ \text{가 존재하고 }\theta\ \text{에 관한 연속함수이다}
+    $$
+
+위 조건이 만족되면, 크기 $n$ 랜덤표본에 대한 최대가능도 추정량 $\hat\theta_n^{\mathrm{MLE}}$는
+
+* **가능도방정식(likelihood equation)의 유일한 근(unique root)** 이며
+    $$
+    i_n(\hat\theta_n^{\mathrm{MLE}})=0
+    $$
+    를 만족한다. (여기서 $i_n(\theta)$는 점수함수(score function), 즉 로그가능도의 기울기 벡터이다.)
+
+* **일치성(consistency)** 을 가진다.
+    $$
+    \hat\theta_n^{\mathrm{MLE}}\xrightarrow{p_{\theta}} \theta,\qquad \forall \theta\in\Omega
+    $$
+
+#### 예 6.4.2 로지스틱분포 모형 $L(\theta,1)$에서 MLE의 일치성
+$-\infty<\theta<\infty$로지스틱분포 $L(\theta,1)$의 확률밀도함수는
+$$
+f(x;\theta)=\frac{e^{x-\theta}}{(1+e^{x-\theta})^2}
+=\frac{e^{-x+\theta}}{(1+e^{-x+\theta})^2},\qquad -\infty<x<\infty
+$$
+표본 $x_1,\dots,x_n$에 대해
+$$
+l_n(\theta)
+= n\bar x-n\theta-2\sum_{i=1}^n \log(1+e^{x_i-\theta})
+= -n\bar x+n\theta-2\sum_{i=1}^n \log(1+e^{-x_i+\theta})\\
+\dot l_n(\theta) = n-2\sum_{i=1}^n \frac{e^{-x_i+\theta}}{1+e^{-x_i+\theta}}=0
+$$
+이 방정식의 근으로 주어지는 $\hat\theta_n^{\mathrm{MLE}}$는 정리 6.4.2의 조건을 만족하므로 **일치성을 가진다**
+
+#### 예 6.4.3 감마분포 모형 $Gamma(\alpha,\beta)$에서 MLE의 일치성
+$\alpha>0,\ \beta>0,\quad \theta=(\alpha,\beta)^\top$ 확률밀도함수
+$$
+f(x;\theta)=\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta},\ \mathbf{1}_{(x>0)} \\
+l_n(\theta)
+=-n\log\Gamma(\alpha)-n\alpha\log\beta
++(\alpha-1)\sum_{i=1}^n \log x_i
+-\sum_{i=1}^n \frac{x_i}{\beta}
+$$
+
+표기 단순화를 위해
+$$
+\overline{\log x}=\frac{1}{n}\sum_{i=1}^n \log x_i,\qquad
+\bar x=\frac{1}{n}\sum_{i=1}^n x_i,\qquad
+\psi(\alpha)=\frac{\partial}{\partial \alpha}\log\Gamma(\alpha)
+$$
+($\psi$는 digamma function이라 부르는 함수이다.)
+$$
+\begin{cases}
+\frac{\partial l_n(\theta)}{\partial \alpha}
+= -n\psi(\alpha)-n\log\beta+n\overline{\log x}=0 \\[6pt]
+\frac{\partial l_n(\theta)}{\partial \beta}
+= -\frac{n\alpha}{\beta}+\frac{n\bar x}{\beta^2}=0
+\end{cases}
+$$
+이 방정식의 근으로 주어지는 $\big(\hat\alpha_n^{\mathrm{MLE}},\hat\beta_n^{\mathrm{MLE}}\big)$는 정리 6.4.2에 의해 **일치성을 가진다**  
+(참고로 두 번째 식은 $\beta=\bar x/\alpha$ 형태로 정리되는 것이 보통이다.)
+
+### 도입설명: 최대가능도 추정량(MLE)의 극한분포를 향한 직관적 전개(점근 정규성의 "아이디어")
+이 절부터는 "왜 $\sqrt{n}(\hat\theta_n-\theta)$가 정규분포로 가는가"를 전개한다.  
+평균 로그가능도: $\bar l_n(\theta)=\frac{1}{n}l_n(\theta)=\frac{1}{n}\sum_{i=1}^n \log f(X_i;\theta)$
+
+**1차 테일러 전개 기반의 핵심 근사**  
+최대가능도 추정량을 $\hat\theta_n$이라 하면(일차원 설명),
+$$
+0=\bar l_n'(\hat\theta_n)\approx \bar l_n'(\theta)+\bar l_n''(\theta)(\hat\theta_n-\theta)
+$$
+따라서
+$$
+\sqrt{n}(\hat\theta_n-\theta)\approx \big(-\bar l_n''(\theta)\big)^{-1}\sqrt{n}\,\bar l_n'(\theta)
+$$
+
+**정보량(information) 정의로의 연결**  
+큰수의 법칙을 쓰면(적절한 조건하에서)
+$$
+-\bar l_n''(\theta)
+=\frac{1}{n}\sum_{i=1}^n\Big[-\frac{\partial^2}{\partial\theta^2}\log f(X_i;\theta)\Big]
+\xrightarrow{p_\theta}
+E_\theta\Big[-\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big]
+$$
+따라서
+$$
+I(\theta)=E_\theta\Big[-\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big]
+$$
+로 둔다.
+
+**점수(score)의 중심극한정리**  
+$\frac{\partial}{\partial\theta}\log f(X_i;\theta)$는 독립 동일분포이므로 중심극한정리에 의해
+$$
+\sqrt{n}\Big(
+    n^{-1}\sum_{i=1}^n \frac{\partial}{\partial\theta}\log f(X_i;\theta) - E_\theta\left[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\right] 
+\Big)
+\ \xrightarrow{d}\
+N\Big(0,\ \mathrm{Var}_\theta\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)\Big) \\
+\therefore 
+\sqrt{n}\Big(
+    \bar l_n'(\theta) - E_\theta\left[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\right]
+\Big)
+\ \xrightarrow{d}\
+N\Big(0,\ \mathrm{Var}_\theta\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)\Big)
+$$
+
+또한 아래에서 보이듯(정리 6.4.3) 적절한 조건하에
+$$
+E_\theta\Big[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big] 
+= \int \left(\frac{\partial}{\partial\theta}\log f(x;\theta) \right) f(x;\theta)\,dx \\
+= \int \left(\frac{1}{f(x;\theta)} \frac{\partial}{\partial\theta} f(x;\theta) \right) f(x;\theta)\,dx \\
+= \int \frac{\partial}{\partial\theta} f(x;\theta)\,dx
+= \frac{\partial}{\partial\theta} \int f(x;\theta)\,dx 
+= \frac{\partial}{\partial\theta} 1 
+= 0
+$$
+이므로
+$$
+\sqrt{n}\,\bar l_n'(\theta)\xrightarrow{d}
+N\Big(0,\ \mathrm{Var}_\theta\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)\Big)
+$$
+
+**결론**:
+$$
+\sqrt{n}(\hat\theta_n-\theta)
+\approx I(\theta)^{-1}\cdot \sqrt{n}\,\bar l_n'(\theta)
+\ \xrightarrow{d}\
+N\Big(0,\ I(\theta)^{-2}\,\mathrm{Var}_\theta\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)\Big)
+$$
+가 된다. 그리고 $\mathrm{Var}(\text{score})=I(\theta)$가 성립하면(정리 6.4.3) 더 단순해진다.
+- 따라서 적절한 조건하에서 최대가능도 추정량의 극한분포가 정규분포가 된다.
+- 이런 성질을 점근정규성(asymptotic normality) 라 한다
+### 최대가능도 추정량의 점근 정규성(asymptotic normality)을 위한 기본 조건 (R0)–(R5)
+아래 조건들은 이후 정리 6.4.3, 6.4.4에서 사용되는 "정규성 전개가 성립하도록 하는" 정칙조건(regularity conditions)이다.
+* **(R0) 식별 가능성(identifiability)**
+    $$
+    f(\cdot;\theta)=f(\cdot;\theta^0)\Rightarrow \theta=\theta^0
+    $$
+* **(R1) 공통 토대(common support)**
+    $$
+    \{x:f(x;\theta)>0\}=\mathcal{X}\quad(\theta\ \text{에 무관})
+    $$
+* **(R2) 열린 모수공간(open parameter space)**
+    $$
+    \Omega\ \text{는 } \mathbb{R}^k\ \text{의 열린집합이다}
+    $$
+* **(R3) 미분가능한 로그가능도(differentiability)**
+    모든 관측결과 $(x_1,\dots,x_n)\in\mathcal{X}^n$에 대해
+    $$
+    l_n(\theta)=\sum_{i=1}^n \log f(x_i;\theta)
+    $$
+    의 1차/2차 편도함수 $l_n'(\theta),\ \ddot l_n(\theta)$가 존재하고 모두 연속함수이다.
+    (다차원에서 $i_n(\theta)$는 score vector, $\ddot l_n(\theta)$는 Hessian matrix이다.)
+* **(R4) 적분(또는 합)과 미분의 교환(interchangeability)**
+    랜덤표본 $X=(X_1,\dots,X_n)^\top$의 함수 $u(X)$에 대해 $E_\theta[u(X)]$가 존재하면, 모수에 관한 미분을 적분/합 안으로 넣을 수 있다고 가정한다.
+
+    * 연속형인 경우:
+        $$
+        \partial_\theta^r E_\theta[u(X)]
+        =\int_{\mathbb{R}^n} u(x)\,\partial_\theta^r(pdf(x;\theta))\,dx
+        $$
+    * 이산형인 경우:
+        $$
+        \partial_\theta^r E_\theta[u(X)]
+        =\sum_{x\in\mathbb{R}^n} u(x)\,\partial_\theta^r(pdf(x;\theta))
+        $$
+        여기서
+        $$
+        pdf(x;\theta)=\prod_{i=1}^n f(x_i;\theta)
+        $$
+* **(R5) 정보량(information)의 존재 및 가역성(invertibility)**
+    모든 $\theta\in\Omega$에 대해
+    $$
+    I(\theta)=\mathrm{Var}_\theta\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)
+    $$
+    가 (스칼라 또는 행렬로) 잘 정의되며, 그 역수(또는 역행렬)가 존재한다.
+
+$l_n'(\theta)$를 점수함수(score function)아라 부른다. 이는 최대가능도 추정량의 성질을 아래 정리와 같이 잘 보여주는 함수다.
+### 정리 6.4.3 점수함수(score function)의 성질
+조건 (R0)–(R5)가 만족되면 다음이 성립한다.
+
+**(a) 점수의 기대값은 0이다**  
+$$
+E_\theta\Big[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big]=0
+$$
+
+**(b) 정보량의 두 표현(바틀렛 항등식 형태, Bartlett identity)**  
+$$
+I(\theta)
+=\mathrm{Var}_\theta\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)
+=E_\theta\Big[-\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big]
+$$
+
+#### 증명
+이산형, 다차원의 경우도 같은 방법으로 증명가능하므로 일차원 연속형만 증명한다.  
+* $ \int_{\mathcal{X}} f(x;\theta)\,dx = 1 $ 양변을 $\theta$로 미분하면
+    $$
+    \int_{\mathcal{X}} \frac{\partial}{\partial\theta}f(x;\theta)\,dx=0
+    $$
+* $\frac{\partial}{\partial\theta}\log f=\frac{f_\theta}{f}$를 이용하면 (R2)–(R4)로
+    $$
+    E_\theta\Big[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big]=0
+    $$
+* 한 번 더 미분하여 정리하면
+    $$
+    E_\theta\Big[\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)^2\Big]
+    =-E_\theta\Big[\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big]
+    $$
+    이고 (a)로 평균이 0이므로 분산과 연결되어 (b)가 나온다.
+
+>조건 (R5)와 정리6.4.3의 $I(\theta)$를 일차원 모수의 경우에는 정보량(information number), 다차원 모수의 경우에는 정보량 행렬이라 하며, >추정량의 효율성을 연구하는 데 매우 중요한 역할을 한다.
+### 정리 6.4.4 최대가능도 추정량의 점근 정규성 (Asymptotic Normality of MLE)
+전제(기본 조건: (R0)~(R5))
+- (R6) **일치성(consistency)** + **가능도방정식의 유일근**
+    $$
+    i_n(\theta)=\sum_{i=1}^n \frac{\partial}{\partial\theta}\log f(X_i;\theta)=0
+    $$
+    의 해 $\hat\theta_n^{\mathrm{MLE}}$가 **단 하나**이고, 또한 일치성을 가진다. 즉
+    $$
+    \hat\theta_n^{\mathrm{MLE}}\xrightarrow{P_\theta}\theta
+    $$
+- (R7) **3차 도함수의 지배(dominating bound for third derivative)**
+    (스칼라 설명 기준) 어떤 확률변수 $M(X_1)$가 존재하여
+    $$
+    \max_{\theta\in\Omega}\left| \partial_\theta^3 \log f(X_1;\theta)\right|\le M(X_1),
+    \qquad E_\theta[M(X_1)]<\infty
+    $$
+
+위 조건들이 만족되면
+$$
+\sqrt{n}\,(\hat\theta_n^{\mathrm{MLE}}-\theta)\ \xrightarrow{d}\ N\left(0\,,\,[I(\theta)]^{-1}\right)
+$$
+#### 증명
+다차원 모수의 경우도 같은 방법으로 밝힐 수 있으므로 일차원의 경우만 증명한다.  
+표현을 간단히 하기 위해 "표본당(per-observation)" 표기를 둔다.
+- $\bar l'_n(\theta)=l'_n(\theta)/n$ (점수의 평균)
+- $\ddot{\bar{l}_n}(\theta) = \frac{1}{n} \ddot{l}_n(\theta)$ (2차 도함수의 평균)
+- $\bar l_n^{(3)}(\theta)=\partial_\theta^3 l_n(\theta)/n$
+
+**(1단계) 가능도방정식의 1차 근사 + 잉여항(remainder)**  
+가능도방정식 $\bar{\dot{l}_n}(\hat\theta_n)=0$에 대해 테일러 전개를 적용하면
+$$
+0 = \bar{\dot{l}_n}(\hat\theta_n)
+= \bar{\dot{l}_n}(\theta)
++ \bar l_n''(\theta)(\hat\theta_n - \theta)
++ \frac{1}{2}\bar l_n^{(3)}(\theta_n^*)(\hat\theta_n - \theta)^2,
+\quad (|\theta_n^* - \theta| \leq |\hat\theta_n - \theta|)
+$$
+
+**(2단계) 잉여항의 확률수렴**  
+$$
+R_n = \frac{1}{2}\,\bar l_n^{(3)}(\theta_n^*)(\hat\theta_n - \theta)
+$$
+라 하면, 임의의 양수 $\epsilon > 0$과 $K > 0$에 대하여
+$$
+P_\theta(|R_n| \geq \epsilon)
+= P_\theta\left(\left|\frac{1}{2}\bar l_n^{(3)}(\theta_n^*)\right| \gt K, |R_n| \geq \epsilon\right) + P_\theta\left(\left|\frac{1}{2}\bar l_n^{(3)}(\theta_n^*)\right| \leq K, |R_n| \geq \epsilon\right) \\
+\leq
+P_\theta\left(|\bar l_n^{(3)}(\theta_n^*)| \geq K\right)
++ P_\theta\left(|\hat\theta_n - \theta| \geq \frac{2\epsilon}{K}\right)
+$$
+
+조건 (R7)과 마르코프 부등식에 의해
+$$
+P_\theta\left(|\bar l_n^{(3)}(\theta_n^*)| \gt K\right)
+\leq
+P_\theta\left(\frac{1}{n}\sum_{i=1}^n M(X_i) \geq K\right)
+\leq
+E_\theta\left[\frac{1}{n}\sum_{i=1}^n M(X_i)\right]/K
+ = \frac{E_\theta[M(X_1)]}{K}
+$$
+
+또한, 조건 (R6)의 일치성에 의해
+$$
+P_\theta\left(|\hat\theta_n - \theta| \geq \frac{2\epsilon}{K}\right) \to 0 \quad (n \to \infty)
+$$
+따라서 $K \to \infty$로 보내면
+$$
+0 \leq \limsup_{n \to \infty} P_\theta(|R_n| \geq \epsilon) \leq \frac{E_\theta[M(X_1)]}{K} \to 0
+$$
+즉,
+$$
+R_n \xrightarrow{P_\theta} 0
+$$
+
+**(3단계) $\hat\theta_n-\theta$를 점수로 표현**  
+(1), (2) 결과를 합치면
+$$
+0=\bar{\dot{l}_n}(\theta)+\big(\bar{\ddot l}_n(\theta)+R_n\big)(\hat\theta_n-\theta), \ R_n \xrightarrow{P_\theta}0
+$$
+조건(R5), 정리6.4.3과 큰수의 법칙을 활용하면,
+$$
+
+-\bar{\ddot l}_n(\theta)=\frac1n\sum_{i=1}^n\Big[-\partial_\theta^2\log f(X_i;\theta)\Big]
+\xrightarrow{P_\theta}E_\theta\Big[-\partial_\theta^2\log f(X_1;\theta)\Big]=I(\theta)
+$$
+$$
+\therefore \sqrt{n}(\hat\theta_n-\theta)=\big(I(\theta)+r_n\big)^{-1}\sqrt{n}\,\bar{\dot{l}_n}(\theta),
+\qquad r_n\xrightarrow{P_\theta}0
+$$
+
+**(4단계) 중심극한정리(CLT) + 슬럿스키(Slutsky)**  
+점수(score) 함수의 평균 $\bar{\dot{l}_n}(\theta)$는 독립 동일분포(i.i.d.) 표본 $X_1, \dots, X_n$에 대해  
+$$
+\bar{\dot{l}_n}(\theta) = \frac{1}{n}\sum_{i=1}^n \frac{\partial}{\partial\theta}\log f(X_i;\theta)
+$$
+각 항 $\frac{\partial}{\partial\theta}\log f(X_i;\theta)$는 평균이 0(정리 6.4.3(a) 참고), 분산 $I(\theta)$를 갖는 i.i.d. 확률변수  
+따라서 중심극한정리(CLT)에 의해  
+$$
+\sqrt{n}\left(\bar{\dot{l}_n}(\theta) - E_\theta\left[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\right]\right)
+= \sqrt{n}\left(\frac{1}{n}\sum_{i=1}^n \frac{\partial}{\partial\theta}\log f(X_i;\theta) - 0\right)
+\xrightarrow{d} N(0, I(\theta))
+$$
+즉, 점수의 표본평균은 $\sqrt{n}$으로 정규화하면 평균 0, 분산 $I(\theta)$인 정규분포로 수렴.  
+
+따라서 3단계의 점수화와 정리5.3.1의 극한분포 계산법으로부터
+$$
+\sqrt{n}(\hat\theta_n-\theta) = (I(\theta)+r_n)^{-1}\sqrt n \bar{\dot{l}_n}(\theta), \quad r_n\xrightarrow{P_\theta}0\\
+\sqrt{n}(\hat\theta_n-\theta) \xrightarrow{d} [I(\theta)]^{-1}Z, \quad Z\sim N(0, I(\theta))\\
+\therefore \sqrt{n}(\hat\theta_n-\theta) \xrightarrow{d}N\left(0,[I(\theta)]^{-1}\right)
+$$
+
+#### 해석
+- 근사식
+    $$
+    \sqrt{n}(\hat\theta_n^{\mathrm{MLE}}-\theta)
+    = [I(\theta)]^{-1}\sqrt{n}\,\bar{\dot{l}_n}(\theta)+o_n, \quad o_n \xrightarrow{P_\theta} 0
+    $$
+    이 성립하는것을 알 수 있다.
+- 즉 **추정오차는 "점수(Score)의 크기"에 의해 결정**되며, **정밀도는 정보량 $I(\theta)$** 가 클수록 좋아진다(분산이 $[I(\theta)]^{-1}$로 감소).
+- 그래서 $\sqrt{n}\bar{\dot{l}_n}(\theta)$를 최대가능도 추정량의 추정점수를 나타내는 점수함수로 부르고, $I(\theta)$를 최대가능도 추정량의 추정 정밀도를 나타내는 정보량이라 부른다.
+
+### 정리 6.4.5 일단계(one-step) 반복법에 의한 MLE 근사
+예 6.4.2나 예 6.4.3처럼 최대가능도 추정량의 구체적인 형태를 모르고 가능도방정식의 근으로 주어지는 경우에는 추정량을 근사해야 한다. 근사하는 방법을 소개한다.  
+
+정리 6.4.4의 조건 (R0)~(R7)을 만족한다고 하고, 추가로 초기값 $\hat\theta_n^{(0)}$이 다음을 만족한다고 둔다.
+
+- (R8) **초기 추정량의 $\sqrt{n}$-수준 안정성**
+    $$
+    \sqrt{n}\,(\hat\theta_n^{(0)}-\theta)\xrightarrow{d}Z
+    $$
+    인 어떤 확률변수 $Z$가 존재한다 (즉, $\hat\theta_n^{(0)}$가 이미 $\sqrt{n}$ 스케일에서 "그럭저럭" 맞는다).
+
+**일단계 갱신(one-step Newton update)**  
+가능도방정식의 1차 근사를 이용해 다음을 정의한다.
+$$
+\hat\theta_n^{(1)}
+=\hat\theta_n^{(0)} +\left[-\bar {\ddot l}_n\big(\hat\theta_n^{(0)}\big)\right]^{-1}\bar{\dot{l}_n}\big(\hat\theta_n^{(0)}\big)
+$$
+(다차원은 역행렬로 동일)
+
+결론: $\hat\theta_n^{(1)}$는 최대가능도 추정량과 같은 극한분포를 갖는다.
+$$
+\sqrt{n}\,(\hat\theta_n^{(1)}-\theta)\xrightarrow{d}N\left(0,[I(\theta)]^{-1}\right)
+$$
+즉, **정확한 MLE를 끝까지 풀지 않아도** "좋은 초기값 + 한 번의 뉴턴 갱신"이면 **점근적으로 MLE와 동등한 효율**을 얻는다.
+
+#### 예 6.4.4 로지스틱 분포 $L(\theta,1)$ (location 모수)
+$$
+f(x;\theta)=\frac{e^{x-\theta}}{(1+e^{x-\theta})^2}
+=\frac{e^{-x+\theta}}{(1+e^{-x+\theta})^2},
+\qquad -\infty<x<\infty \\
+l_n(\theta)=n\bar x-n\theta-2\sum_{i=1}^n\log\big(1+e^{x_i-\theta}\big)
+= -n\bar x+n\theta-2\sum_{i=1}^n\log\big(1+e^{-x_i+\theta}\big) \\
+i_n(\theta)=n-2\sum_{i=1}^n\frac{e^{-x_i+\theta}}{1+e^{-x_i+\theta}}=0 \\
+\ddot l_n(\theta)= -2\sum_{i=1}^n\frac{e^{-x_i+\theta}}{\big(1+e^{-x_i+\theta}\big)^2}
+$$
+따라서 MLE는 위 방정식의 **유일근**으로 주어진다.
+
+초기값을 표본평균으로 두면 $\hat\theta_n^{(0)}=\bar X_n$  
+일단계 갱신:
+$$
+\hat\theta_n^{(1)}
+=\hat\theta_n^{(0)}
++\left[-\bar l_n\big(\hat\theta_n^{(0)}\big)\right]^{-1}\bar{\dot{l}_n}\big(\hat\theta_n^{(0)}\big)
+$$
+
+로지스틱 분포에서 $\mathrm{Var}(X)=\pi^2/3$이므로 점근분포:
+$$
+\sqrt{n}\,(\hat\theta_n^{(0)}-\theta)\xrightarrow{d}N\left(0,\frac{\pi^2}{3}\right)
+$$
+또한 변환 $X_1-\theta=\log\frac{U}{1-U}$, $U\sim U(0,1)$ 및
+$$
+\frac{1}{1+e^{-(X_1-\theta)}}=U
+$$
+를 이용해 정보량을 계산하면
+$$
+I(\theta)=E_\theta[-\ddot l_1(\theta)]
+=2E[U(1-U)]=\frac13
+$$
+따라서 정리 6.4.5에 의해
+$$
+\sqrt{n}\,(\hat\theta_n^{(1)}-\theta)\xrightarrow{d}N(0,3)
+$$
+이 된다. 즉, 일단계 갱신만으로도 MLE 효율($[I(\theta)]^{-1}=3$)을 달성한다.
+
+#### 예 6.4.5 감마 분포 $Gamma(\alpha,\beta)$ (shape-scale)
+$$
+f(x;\theta)=\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta}\mathbf{1}_{(x>0)},
+\qquad \theta=(\alpha,\beta)^\top,\ \alpha>0,\ \beta>0 \\
+l_n(\theta)=
+-n\log\Gamma(\alpha)-n\alpha\log\beta
++(\alpha-1)\sum_{i=1}^n\log x_i
+-\sum_{i=1}^n\frac{x_i}{\beta}
+$$
+요약기호:
+$$
+\overline{\log x}=\frac1n\sum_{i=1}^n\log x_i,\qquad
+\bar x=\frac1n\sum_{i=1}^n x_i,\qquad
+\Psi(\alpha)=\frac{\partial}{\partial\alpha}\log\Gamma(\alpha)
+$$
+($\Psi$는 digamma 함수이다. $\Psi'(\alpha)$는 trigamma이다.)
+
+점수벡터, 헤시안:
+$$
+i_n(\theta)=
+\begin{pmatrix}
+\partial_\alpha l_n(\theta)\\
+\partial_\beta l_n(\theta)
+\end{pmatrix}
+=
+\begin{pmatrix}
+-n\Psi(\alpha)-n\log\beta+n\overline{\log x}\\
+-n\alpha/\beta+n\bar x/\beta^2
+\end{pmatrix} \\
+\ddot l_n(\theta)=
+\begin{pmatrix}
+\partial_{\alpha\alpha}^2l_n & \partial_{\alpha\beta}^2l_n\\
+\partial_{\beta\alpha}^2l_n & \partial_{\beta\beta}^2l_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+-n\Psi'(\alpha) & -n/\beta\\
+-n/\beta & n\alpha/\beta^2-2n\bar x/\beta^3
+\end{pmatrix}
+$$
+
+감마에서 $E[X]=\alpha\beta$, $\mathrm{Var}(X)=\alpha\beta^2$이므로 적률추정량 $\hat\theta_n^{\mathrm{MME}}=(\hat\alpha_n,\hat\beta_n)^\top$는 연립방정식 해로 주어진다:
+$$
+\begin{cases}
+\hat\alpha_n\hat\beta_n=\bar X_n\\
+\hat\alpha_n(\hat\beta_n)^2=\frac1n\sum_{i=1}^n(X_i-\bar X_n)^2
+\end{cases}
+$$
+책에서는 이를 $\hat\theta_n^{(0)}$로 둔다:
+$$
+\hat\theta_n^{(0)}=\hat\theta_n^{\mathrm{MME}}
+$$
+
+정보량 행렬과 역행렬:
+$$
+I(\theta)=E_\theta[-\ddot l_1(\theta)]
+=
+\begin{pmatrix}
+\Psi'(\alpha) & 1/\beta\\
+1/\beta & \alpha/\beta^2
+\end{pmatrix} \\
+[I(\theta)]^{-1}
+=\frac{1}{\alpha\Psi'(\alpha)-1}
+\begin{pmatrix}
+\alpha & -\beta\\
+-\beta & \Psi'(\alpha)\beta^2
+\end{pmatrix}
+$$
+
+결론(일단계 추정량의 점근분포):  
+일단계(one-step)로 만든 $\hat\theta_n^{(1)}=(\hat\alpha_n^{(1)},\hat\beta_n^{(1)})^\top$에 대해
+$$
+\sqrt{n}\big(\hat\theta_n^{(1)}-\theta\big)\xrightarrow{d}N\left(0,[I(\theta)]^{-1}\right)
+$$
+가 성립한다.
+
 
 ## 최소제곱 추정법 *(Least Squares Estimation)*
+### 선형회귀모형과 최소제곱의 목적
+관측치 $i=1,\dots,n$에 대해
+$$
+Y_i = x_{i0}\beta_0 + x_{i1}\beta_1 + \cdots + x_{ip}\beta_p + e_i
+$$
+
+오차항 가정은
+- $E(e_i) = 0$
+- $\operatorname{Var}(e_i) = \sigma^2$
+- $\operatorname{Cov}(e_i, e_j) = 0$ for $i \neq j$
+- $-\infty < \beta_j < \infty$ $(j=0,\dots,p)$, $0 < \sigma^2 < \infty$
+
+여기서 핵심은 **평균반응 $E(Y_i \mid x_{i0},\dots,x_{ip})$** 를 설명변수의 선형함수로 두는 모형이라는 점이다.
+
+**최소제곱(least squares)의 기준**  
+모형이 제시하는 평균반응
+$$
+E(Y_i) = x_{i0}\beta_0 + \cdots + x_{ip}\beta_p
+$$
+가 실제 관측 $Y_i$에 "가깝도록" 만들기 위해, 오차제곱합(SSE)을 최소화한다.
+$$
+\sum_{i=1}^{n} \left\{ Y_i - (x_{i0}\beta_0 + \cdots + x_{ip}\beta_p) \right\}^2
+$$
+를 최소로 하는 $\beta$를 선택한다.
+
+### 행렬(벡터) 표기와 최소제곱 추정량의 정의
+**(1) 행렬 표기**  
+다음을 정의한다.
+
+- 반응변수 벡터  
+    $$
+    Y = (Y_1, \dots, Y_n)^\top
+    $$
+- 설계행렬(design matrix)  
+    $$
+    X =
+    \begin{pmatrix}
+    x_{10} & x_{11} & \cdots & x_{1p} \\
+    \vdots & \vdots &        & \vdots \\
+    x_{n0} & x_{n1} & \cdots & x_{np}
+    \end{pmatrix}
+    \quad (n \times (p+1))
+    $$
+- 회귀계수 벡터  
+    $$
+    \beta = (\beta_0, \dots, \beta_p)^\top
+    $$
+- 오차벡터  
+    $$
+    e = (e_1, \dots, e_n)^\top
+    $$
+
+그러면 모형은
+$$
+Y = X\beta + e
+$$
+이고,
+$$
+E(e) = 0, \quad \operatorname{Var}(e) = \sigma^2 I_n, \quad \operatorname{rank}(X) = p+1
+$$
+로 쓴다. $\operatorname{rank}(X) = p+1$은 $X^\top X$가 가역(invertible)임을 보장하는 핵심 조건이다.
+
+**(2) 최소제곱 추정량(LSE) 정의**  
+오차제곱합은
+$$
+|Y - X\beta|^2
+$$
+이므로 최소제곱 추정량은
+$$
+\hat\beta^{LSE} = \arg\min_{\beta \in \mathbb{R}^{p+1}} |Y - X\beta|^2
+$$
+로 정의된다.
+
+### 정리 6.5.1: 투영(projection) 관점의 최소제곱
+$$
+\Pi = X(X^\top X)^{-1} X^\top
+$$
+를 정의한다. $\Pi$는 $Y$를 $X$의 열공간(column space)으로 직교투영하는 행렬이다.
+
+**(a) 투영행렬의 성질**
+- $\Pi^\top = \Pi$ (대칭)
+- $\Pi^\top (I - \Pi) = 0$ (직교성: $\Pi$ 부분과 $(I-\Pi)$ 부분이 서로 직교)
+- $\Pi X = X$ (열공간에 있는 벡터는 투영해도 그대로)
+
+즉, $\Pi$는 "직교투영"을 정확히 구현하는 행렬이다.
+
+**(b) SSE의 직교분해와 추정량 형태**  
+임의의 $\beta$에 대해 잔차벡터 $Y - X\beta$는
+$$
+Y - X\beta = \Pi(Y - X\beta) + (I - \Pi)Y
+$$
+로 분해되고, (a)의 직교성 때문에 노름제곱이
+$$
+|Y - X\beta|^2 = |\Pi(Y - X\beta)|^2 + |(I - \Pi)Y|^2
+$$
+로 분해된다.
+
+여기서 $|(I - \Pi)Y|^2$는 $\beta$와 무관한 상수항이므로, 최소화를 위해서는 $|\Pi(Y - X\beta)|^2$를 0으로 만들면 된다. 따라서 최적해는
+$$
+X\hat\beta^{LSE} = \Pi Y
+$$
+를 만족해야 하고, $\operatorname{rank}(X) = p+1$이면 해가 유일하여
+$$
+\boxed{
+\hat\beta^{LSE} = (X^\top X)^{-1} X^\top Y
+}
+$$
+가 된다. 또한 적합값(fitted value)은
+$$
+\widehat{Y} = X\hat\beta^{LSE} = \Pi Y
+$$
+이다.
+
+### 오차분산 $\sigma^2$의 추정
+책에서는 오차항 분산의 추정량으로 평균오차제곱(MSE)을 사용한다.
+$$
+\boxed{
+\hat\sigma^2 = \frac{|Y - X\hat\beta^{LSE}|^2}{n - p - 1}
+}
+$$
+분모 $n - p - 1$은 자유도(표본크기 $n$에서 추정한 모수 개수 $p+1$을 뺀 값)이다.
+### 정리 6.5.2: 최소제곱 추정량의 성질(불편성, 분산, 정규성)
+선형회귀모형 $Y = X\beta + e$, $E(e) = 0$, $\operatorname{Var}(e) = \sigma^2 I_n$, $\operatorname{rank}(X) = p+1$에서
+
+**(a) $\hat\beta^{LSE}$의 기댓값과 분산**  
+$$
+E(\hat\beta^{LSE}) = \beta
+$$
+즉, 최소제곱 추정량은 **불편추정량**이다.
+
+또한
+$$
+\operatorname{Var}(\hat\beta^{LSE}) = \sigma^2 (X^\top X)^{-1}
+$$
+
+**해석**  
+- $X^\top X$가 "설명변수 정보량"을 모으는 행렬이고,
+- $(X^\top X)^{-1}$가 커질수록(설명변수들이 서로 비슷하거나, 표본이 부족하거나) 분산이 커진다.
+
+**(b) $\hat\sigma^2$의 불편성**  
+$$
+E(\hat\sigma^2) = \sigma^2
+$$
+즉, 위의 $\hat\sigma^2$도 **불편추정량**이다.
+
+책의 증명 흐름은 다음 아이디어를 쓴다.
+
+- 잔차는 $(I-\Pi)Y = (I-\Pi)e$
+- $\hat\sigma^2 = \frac{e^\top (I-\Pi) e}{n-p-1}$
+- $\operatorname{trace}$ 성질을 이용해 $E(e^\top A e) = \sigma^2 \operatorname{trace}(A)$ 형태로 계산
+- $\operatorname{trace}(I-\Pi) = n-(p+1)$ 임을 이용해 결론 도출
+
+**(c) 오차가 정규분포일 때의 정확한 분포(추론의 기반)**  
+추가로 $e \sim N_n(0, \sigma^2 I_n)$를 가정하면
+
+- $$
+    \hat\beta^{LSE} \sim N\left(\beta,\ \sigma^2 (X^\top X)^{-1}\right)
+    $$
+- $$
+    \frac{(n-p-1)\hat\sigma^2}{\sigma^2} \sim \chi^2(n-p-1)
+    $$
+- 그리고 $\hat\beta^{LSE}$와 $\hat\sigma^2$는 서로 독립이다.
+
+**해석**  
+이 (c)가 회귀분석의 $t$-검정, $F$-검정, 신뢰구간의 표준 결과로 연결되는 출발점이다.
+
+### 설명변수 직교화(orthogonalization) 동기
+- 설명변수 행렬 $X$의 열들이 서로 직교(orthogonal)하면 $X^\top X$가 대각행렬이 되어 계산과 해석이 쉽다.
+- 하지만 일반적으로는 직교하지 않으므로, **열공간을 보존하면서(동일한 모형공간) 직교화된 표현으로 바꾸어** 추정과 해석을 편하게 할 수 있다.
+
+이를 위해 $X$를 두 블록으로 나눈다.
+$$
+X = (X_0, X_1),\quad X_0: n \times p_0,\ X_1: n \times p_1,\ p_0 + p_1 = p+1
+$$
+
+**(1) 부분투영행렬 정의**  
+- $X_0$에 대한 투영:
+        $$
+        \Pi_0 = X_0 (X_0^\top X_0)^{-1} X_0^\top
+        $$
+- $X_1$에서 $X_0$ 성분을 제거한(잔차화한) 행렬:
+        $$
+        X_{1|0} = (I - \Pi_0) X_1
+        $$
+- $X_{1|0}$에 대한 투영:
+        $$
+        \Pi_{1|0} = X_{1|0} (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top
+        $$
+
+이때 $X_0$의 열공간과 $X_{1|0}$의 열공간은 서로 직교가 된다(구성상 $(I-\Pi_0)$로 $X_0$에 직교인 성분만 남겼기 때문).
+
+또한 전체 투영이
+$$
+\Pi = \Pi_0 + \Pi_{1|0}
+$$
+처럼 "서로 직교인 두 투영의 합"으로 분해된다는 점이 핵심이다.
+
+**(2) 평균반응의 재표현**  
+$$
+X\beta = X_0\beta_0 + X_1\beta_1
+$$
+를
+$$
+X\beta = X_0\gamma_0 + X_{1|0}\beta_1
+$$
+꼴로도 쓸 수 있음을 보인다(책에서는 $\gamma_0 = \beta_0 + (X_0^\top X_0)^{-1} X_0^\top X_1 \beta_1$ 형태를 제시한다). 요지는 "$X_1$의 $X_0$방향 성분을 $X_0$로 흡수"하고, 나머지 직교 성분만 $X_{1|0}$가 담당하도록 바꾸는 것이다.
+
+### 정리 6.5.3: 직교화된 표현에서의 최소제곱 결과
+**(a) 적합값의 분해와 각 부분의 추정**  
+최소제곱 적합값은
+$$
+X\hat\beta^{LSE} = X_0\hat\gamma_0^{LSE} + X_{1|0}\hat\beta_1^{LSE}
+$$
+로 분해된다.
+
+그리고 각 항은 단순한 투영 형태로 주어진다.
+$$
+X_0\hat\gamma_0^{LSE} = \Pi_0 Y
+$$
+$$
+X_{1|0}\hat\beta_1^{LSE} = \Pi_{1|0} Y
+$$
+
+또한 $\hat\beta_0^{LSE}$는 $\hat\gamma_0^{LSE}$와 $\hat\beta_1^{LSE}$를 이용해
+$$
+\hat\beta_0^{LSE} = \hat\gamma_0^{LSE} - (X_0^\top X_0)^{-1} X_0^\top X_1 \hat\beta_1^{LSE}
+$$
+처럼 복원된다("흡수했던 성분을 되돌려 원래 계수로 환산"하는 단계이다).
+
+**(b) 공분산 0 및 평균/분산**  
+직교화의 가장 큰 이점은, 두 블록의 추정이 분리되고 상관이 사라진다는 점이다.
+
+$$
+\operatorname{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = 0
+$$
+
+또한
+$$
+E(\hat\gamma_0^{LSE}) = \gamma_0,\quad \operatorname{Var}(\hat\gamma_0^{LSE}) = \sigma^2 (X_0^\top X_0)^{-1}
+$$
+$$
+E(\hat\beta_1^{LSE}) = \beta_1,\quad \operatorname{Var}(\hat\beta_1^{LSE}) = \sigma^2 (X_{1|0}^\top X_{1|0})^{-1}
+$$
+
+즉 $X_1$을 "$X_0$의 영향 제거 후"에 회귀하는 형태로 분산이 정리된다.
+
+#### 예 6.5.1: 절편이 포함된 선형회귀모형(중심화로 직교화)
+평균반응을
+$$
+E(Y_i\mid x_{i1},\dots,x_{ip}) = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}
+$$
+로 둔다. (즉 $x_{i0} = 1$.)
+
+각 설명변수의 표본평균을
+$$
+\bar x_j = \frac{1}{n}\sum_{i=1}^n x_{ij}
+$$
+라 하면, 평균반응을 다음처럼 다시 쓸 수 있다.
+$$
+\beta_0 + \sum_{j=1}^p \beta_j x_{ij}
+= \gamma_0 + \sum_{j=1}^p \beta_j (x_{ij} - \bar x_j)
+$$
+여기서 $\gamma_0 = \beta_0 + \sum_{j=1}^p \beta_j \bar x_j$ 이다.
+
+즉,
+- $X_0 = \mathbf{1}$ (전부 1인 열벡터)
+- $X_{1|0}$는 각 설명변수에서 평균을 뺀 "중심화(centered) 변수"들로 구성된다.
+
+이렇게 하면 중심화된 설명변수 열들은 $\mathbf{1}$과 직교가 된다(각 열의 합이 0이므로).
+
+이 경우 정리 6.5.3(a)에서
+$$
+\hat\gamma_0^{LSE} = \bar Y
+$$
+가 된다(절편 성분은 $Y$의 평균으로 추정된다는 결론).
+
+또한 $X_{1|0}^\top X_{1|0}$와 $X_{1|0}^\top Y$는 "편차곱합"으로 정리된다. 책은
+- $S_{jk} = \sum_{i=1}^n (x_{ij} - \bar x_j)(x_{ik} - \bar x_k)$
+- $S_{jY} = \sum_{i=1}^n (x_{ij} - \bar x_j)(Y_i - \bar Y)$
+
+로 두면
+$$
+X_{1|0}^\top X_{1|0} = (S_{jk}),\quad X_{1|0}^\top Y = (S_{jY})
+$$
+가 되어, 기울기 추정량 $\hat\beta_1, \dots, \hat\beta_p$는
+$$
+\begin{pmatrix}
+S_{11} & \cdots & S_{1p} \\
+\vdots & \ddots & \vdots \\
+S_{p1} & \cdots & S_{pp}
+\end{pmatrix}
+\begin{pmatrix}
+\hat\beta_1 \\ \vdots \\ \hat\beta_p
+\end{pmatrix}
+=
+\begin{pmatrix}
+S_{1Y} \\ \vdots \\ S_{pY}
+\end{pmatrix}
+$$
+을 푸는 것과 같아진다.
