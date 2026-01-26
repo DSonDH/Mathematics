@@ -4,8 +4,8 @@
 
 ### 6.1.1 도입 및 기본 개념
 **적률이용 추정법(Method of Moments Estimation, MME)** 은 모집단의 특성을 나타내는 **모수(parameter)** 를 표본으로부터 추정하는 대표적인 방법 중 하나이다. 이 방법은 모집단의 **적률(moment)** 과 이에 대응하는 **표본적률(sample moment)** 을 일치시키는 방식으로 모수를 추정한다.
-
-랜덤표본 $X_1, \dots, X_n$이 모집단에서 주어졌다고 하자. 예를 들어, 모평균 $\mu = E(X_1)$를 추정할 때 표본평균 $\bar X = \frac{1}{n}(X_1 + \cdots + X_n)$을 사용하는 것처럼, 모집단의 $r$차 적률 $m_r = E(X_1^r)$을 추정할 때는 표본적률
+- 모집단의 이론적 적률(moment)과 표본에서 계산한 적률을 같다고 놓고, 그 등식으로 모수를 푸는 방법
+- 랜덤표본 $X_1, \dots, X_n$이 모집단에서 주어졌다고 하자. 예를 들어, 모평균 $\mu = E(X_1)$를 추정할 때 표본평균 $\bar X = \frac{1}{n}(X_1 + \cdots + X_n)$을 사용하는 것처럼, 모집단의 $r$차 적률 $m_r = E(X_1^r)$을 추정할 때는 표본적률
 $$
 \hat m_r = \frac{1}{n}(X_1^r + \cdots + X_n^r)
 $$
@@ -387,7 +387,7 @@ $$
 \hat\theta^{(0)}=\bar x
 $$
 
-### 정리 6.2.4: 모수의 일대일 변환과 최대가능도 추정 *(Invariance roperty)*
+### 정리 6.2.4: 모수의 일대일 변환과 최대가능도 추정 *(불변성, Invariance property)*
 모수 $\theta$의 최대가능도 추정량 $\hat\theta^{\mathrm{MLE}}$이 존재할 때,  
 $\eta=g(\theta)$가 $\theta$의 **일대일 변환(one-to-one transformation)** 이면  
 $$
@@ -939,6 +939,12 @@ $$
 
 1. 지지집합 $\mathcal{X}$는 $\eta$에 의존하지 않는다.
 2. 모수공간 $N \subset \mathbb{R}^k$는 열린 집합이다.
+  - 모수공간 $N$이 열린집합(open set)이라는 것은, 각 $\eta_1, \dots, \eta_k$를 서로 독립적으로 조금씩 움직일 수 있다는 뜻이다. 즉, 임의의 $\eta = (\eta_1, \dots, \eta_k)^\top \in N$에 대해, 각 방향(각 성분)에 대해 미분이나 테일러 전개가 가능해야 한다. 
+  - 이 조건이 있어야 정보량행렬(information matrix)이 **정칙(non-singular)** 이 되고, 점근 정규성 결과가 성립한다. 
+    $$
+    \sqrt{n}(\hat\eta - \eta_0) \xrightarrow{d} N(0, I(\eta_0)^{-1})
+    $$
+    
 3. 충분통계량 벡터 *(sufficient statistic vector)*
     $$
     T(X_1) = (T_1(X_1), \dots, T_k(X_1))^\top
@@ -1071,7 +1077,6 @@ E_\theta(X_1 Y_1) &= \frac{1}{n}\sum_{i=1}^n X_i Y_i
 \end{aligned}
 $$
 각각의 가능도방정식을 풀면, 최대가능도 추정값은 다음과 같이 주어진다.
-
 - 평균의 최대가능도 추정값:
     $$
     \hat\mu_1 = \bar X = \frac{1}{n}\sum_{i=1}^n X_i, \qquad
@@ -1236,7 +1241,7 @@ $$ (예 6.2.1, 6.2.5)
     \sqrt{n}(\hat\rho_n^{\mathrm{MLE}} - \rho) \xrightarrow{d} N(0, (1-\rho^2)^2)
     $$
 
-위 경우들은 최대가능도 추정량이 일치정을 갖고 표본분포의 극한분포가 정규분포인 예였다. 이는 최대가능도 추정량이 적률이용추정량과 일치하는 예로, 그 성질 또한 적률이용추정량의 성질에서 밝힌 것이다.  
+위 경우들은 최대가능도 추정량이 일치성을 갖고 표본분포의 극한분포가 정규분포인 예였다. 이는 최대가능도 추정량이 적률이용추정량과 일치하는 예로, 그 성질 또한 적률이용추정량의 성질에서 밝힌 것이다.  
 아래는 일치하지 않는 경우도 다루며, 일반적인 경우에 최대가능도 추정량이 어떤 성질을 갖는지 소개한다.
 ### 최대가능도 추정량의 일치성: 직관적 배경
 로그가능도함수 $\ell_n(\theta) = \sum_{i=1}^n \log f(X_i; \theta), \
@@ -1327,14 +1332,15 @@ $$
     $$
     \forall \theta^0\in\Omega,\quad E_{\theta^0}[\log f(X_1;\theta)]\ \text{가 존재하고 }\theta\ \text{에 관한 연속함수이다}
     $$
+    - 여기서 $\theta^0$는 **모수의 참값(true value of the parameter)** 을 의미한다.
 
 위 조건이 만족되면, 크기 $n$ 랜덤표본에 대한 최대가능도 추정량 $\hat\theta_n^{\mathrm{MLE}}$는
 
 * **가능도방정식(likelihood equation)의 유일한 근(unique root)** 이며
     $$
-    i_n(\hat\theta_n^{\mathrm{MLE}})=0
+    \dot l_n(\hat\theta_n^{\mathrm{MLE}})=0
     $$
-    를 만족한다. (여기서 $i_n(\theta)$는 점수함수(score function), 즉 로그가능도의 기울기 벡터이다.)
+    를 만족한다. (여기서 $\dot l(\theta)$는 점수함수(score function), 즉 로그가능도의 기울기 벡터이다.)
 
 * **일치성(consistency)** 을 가진다.
     $$
@@ -1410,7 +1416,6 @@ $$
 $$
 I(\theta)=E_\theta\Big[-\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big]
 $$
-로 둔다.
 
 **점수(score)의 중심극한정리**  
 $\frac{\partial}{\partial\theta}\log f(X_i;\theta)$는 독립 동일분포이므로 중심극한정리에 의해
@@ -1474,7 +1479,7 @@ $$
     l_n(\theta)=\sum_{i=1}^n \log f(x_i;\theta)
     $$
     의 1차/2차 편도함수 $l_n'(\theta),\ \ddot l_n(\theta)$가 존재하고 모두 연속함수이다.
-    (다차원에서 $i_n(\theta)$는 score vector, $\ddot l_n(\theta)$는 Hessian matrix이다.)
+    (다차원에서 $\dot l_n(\theta)$는 score vector, $\ddot l_n(\theta)$는 Hessian matrix이다.)
 * **(R4) 적분(또는 합)과 미분의 교환(interchangeability)**
     랜덤표본 $X=(X_1,\dots,X_n)^\top$의 함수 $u(X)$에 대해 $E_\theta[u(X)]$가 존재하면, 모수에 관한 미분을 적분/합 안으로 넣을 수 있다고 가정한다.
 
@@ -1532,12 +1537,11 @@ $$
     $$
     이고 (a)로 평균이 0이므로 분산과 연결되어 (b)가 나온다.
 
->조건 (R5)와 정리6.4.3의 $I(\theta)$를 일차원 모수의 경우에는 정보량(information number), 다차원 모수의 경우에는 정보량 행렬이라 하며, >추정량의 효율성을 연구하는 데 매우 중요한 역할을 한다.
 ### 정리 6.4.4 최대가능도 추정량의 점근 정규성 (Asymptotic Normality of MLE)
 전제(기본 조건: (R0)~(R5))
 - (R6) **일치성(consistency)** + **가능도방정식의 유일근**
     $$
-    i_n(\theta)=\sum_{i=1}^n \frac{\partial}{\partial\theta}\log f(X_i;\theta)=0
+    \dot l(\theta)=\sum_{i=1}^n \frac{\partial}{\partial\theta}\log f(X_i;\theta)=0
     $$
     의 해 $\hat\theta_n^{\mathrm{MLE}}$가 **단 하나**이고, 또한 일치성을 가진다. 즉
     $$
@@ -1658,7 +1662,7 @@ $$
 예 6.4.2나 예 6.4.3처럼 최대가능도 추정량의 구체적인 형태를 모르고 가능도방정식의 근으로 주어지는 경우에는 추정량을 근사해야 한다. 근사하는 방법을 소개한다.  
 
 정리 6.4.4의 조건 (R0)~(R7)을 만족한다고 하고, 추가로 초기값 $\hat\theta_n^{(0)}$이 다음을 만족한다고 둔다.
-
+- $\hat\theta_n^{(r)}$: r번째 iteration 결과 추정치
 - (R8) **초기 추정량의 $\sqrt{n}$-수준 안정성**
     $$
     \sqrt{n}\,(\hat\theta_n^{(0)}-\theta)\xrightarrow{d}Z
@@ -1686,7 +1690,7 @@ f(x;\theta)=\frac{e^{x-\theta}}{(1+e^{x-\theta})^2}
 \qquad -\infty<x<\infty \\
 l_n(\theta)=n\bar x-n\theta-2\sum_{i=1}^n\log\big(1+e^{x_i-\theta}\big)
 = -n\bar x+n\theta-2\sum_{i=1}^n\log\big(1+e^{-x_i+\theta}\big) \\
-i_n(\theta)=n-2\sum_{i=1}^n\frac{e^{-x_i+\theta}}{1+e^{-x_i+\theta}}=0 \\
+\dot l(\theta)=n-2\sum_{i=1}^n\frac{e^{-x_i+\theta}}{1+e^{-x_i+\theta}}=0 \\
 \ddot l_n(\theta)= -2\sum_{i=1}^n\frac{e^{-x_i+\theta}}{\big(1+e^{-x_i+\theta}\big)^2}
 $$
 따라서 MLE는 위 방정식의 **유일근**으로 주어진다.
@@ -1733,11 +1737,11 @@ $$
 \bar x=\frac1n\sum_{i=1}^n x_i,\qquad
 \Psi(\alpha)=\frac{\partial}{\partial\alpha}\log\Gamma(\alpha)
 $$
-($\Psi$는 digamma 함수이다. $\Psi'(\alpha)$는 trigamma이다.)
+($\Psi$는 digamma 함수, $\Psi'(\alpha)$는 trigamma이다.)
 
 점수벡터, 헤시안:
 $$
-i_n(\theta)=
+\dot l(\theta)=
 \begin{pmatrix}
 \partial_\alpha l_n(\theta)\\
 \partial_\beta l_n(\theta)
@@ -1766,10 +1770,7 @@ $$
 \hat\alpha_n(\hat\beta_n)^2=\frac1n\sum_{i=1}^n(X_i-\bar X_n)^2
 \end{cases}
 $$
-책에서는 이를 $\hat\theta_n^{(0)}$로 둔다:
-$$
-\hat\theta_n^{(0)}=\hat\theta_n^{\mathrm{MME}}
-$$
+이를 $\hat\theta_n^{(0)}$로 둔다: $\hat\theta_n^{(0)}=\hat\theta_n^{\mathrm{MME}}$
 
 정보량 행렬과 역행렬:
 $$
@@ -1796,6 +1797,8 @@ $$
 
 
 ## 최소제곱 추정법 *(Least Squares Estimation)*
+변수 사이의 함수관계를 조사할 때 가장 기본적으로 사용되는 선형회귀 모형에서, 모수의 추정에 사용하는 방법이 최소제곱 추정법이다.
+
 ### 선형회귀모형과 최소제곱의 목적
 관측치 $i=1,\dots,n$에 대해
 $$
@@ -1808,14 +1811,10 @@ $$
 - $\operatorname{Cov}(e_i, e_j) = 0$ for $i \neq j$
 - $-\infty < \beta_j < \infty$ $(j=0,\dots,p)$, $0 < \sigma^2 < \infty$
 
-여기서 핵심은 **평균반응 $E(Y_i \mid x_{i0},\dots,x_{ip})$** 를 설명변수의 선형함수로 두는 모형이라는 점이다.
+**평균반응 $E(Y_i \mid x_{i0},\dots,x_{ip})$** 이 설명변수의 선형함수라는 가정하에서 평균반응을 추정하는게 목적이다. 관측값들과의 거리의 제곱을 최소로 하는것을 찾아 추측에 사용하자는 것이 최소제곱 추정법.
 
 **최소제곱(least squares)의 기준**  
-모형이 제시하는 평균반응
-$$
-E(Y_i) = x_{i0}\beta_0 + \cdots + x_{ip}\beta_p
-$$
-가 실제 관측 $Y_i$에 "가깝도록" 만들기 위해, 오차제곱합(SSE)을 최소화한다.
+모형이 제시하는 평균반응 $E(Y_i) = x_{i0}\beta_0 + \cdots + x_{ip}\beta_p$가 실제 관측 $Y_i$에 "가깝도록" 만들기 위해, 오차제곱합(SSE)을 최소화한다.
 $$
 \sum_{i=1}^{n} \left\{ Y_i - (x_{i0}\beta_0 + \cdots + x_{ip}\beta_p) \right\}^2
 $$
@@ -1825,10 +1824,7 @@ $$
 **(1) 행렬 표기**  
 다음을 정의한다.
 
-- 반응변수 벡터  
-    $$
-    Y = (Y_1, \dots, Y_n)^\top
-    $$
+- 반응변수 벡터 $Y = (Y_1, \dots, Y_n)^\top$
 - 설계행렬(design matrix)  
     $$
     X =
@@ -1839,41 +1835,32 @@ $$
     \end{pmatrix}
     \quad (n \times (p+1))
     $$
-- 회귀계수 벡터  
-    $$
-    \beta = (\beta_0, \dots, \beta_p)^\top
-    $$
-- 오차벡터  
-    $$
-    e = (e_1, \dots, e_n)^\top
-    $$
+- 회귀계수 벡터 $\beta = (\beta_0, \dots, \beta_p)^\top$
+- 오차벡터 $e = (e_1, \dots, e_n)^\top$
 
-그러면 모형은
 $$
-Y = X\beta + e
+Y = X\beta + e \\
+E(e) = 0, \quad \operatorname{Var}(e) = \sigma^2 \dot l, \quad \operatorname{rank}(X) = p+1
 $$
-이고,
-$$
-E(e) = 0, \quad \operatorname{Var}(e) = \sigma^2 I_n, \quad \operatorname{rank}(X) = p+1
-$$
-로 쓴다. $\operatorname{rank}(X) = p+1$은 $X^\top X$가 가역(invertible)임을 보장하는 핵심 조건이다.
+$\operatorname{rank}(X) = p+1$은 $X^\top X$가 가역(invertible)임을 보장한다.
 
 **(2) 최소제곱 추정량(LSE) 정의**  
-오차제곱합은
-$$
-|Y - X\beta|^2
-$$
-이므로 최소제곱 추정량은
+오차제곱합은 $|Y - X\beta|^2$ 이므로 최소제곱 추정량의 정의:
 $$
 \hat\beta^{LSE} = \arg\min_{\beta \in \mathbb{R}^{p+1}} |Y - X\beta|^2
 $$
-로 정의된다.
+
+평균반응의 최소제곱 추정량 정의:
+$$
+\hat \mu^{LSE}(x) = \widehat{E}(Y \mid x) = x^\top \hat\beta^{LSE}
+$$
+즉, 추정된 회귀계수 $\hat\beta^{LSE}$를 이용해 새로운 입력 $x$에 대한 평균반응을 예측할 수 있다.
 
 ### 정리 6.5.1: 투영(projection) 관점의 최소제곱
 $$
 \Pi = X(X^\top X)^{-1} X^\top
 $$
-를 정의한다. $\Pi$는 $Y$를 $X$의 열공간(column space)으로 직교투영하는 행렬이다.
+를 정의한다. $\Pi$는 $Y$를 $X$의 열공간(column space)으로 직교투영(정사영, orthogonal projection)하는 행렬이다.
 
 **(a) 투영행렬의 성질**
 - $\Pi^\top = \Pi$ (대칭)
@@ -1883,16 +1870,10 @@ $$
 즉, $\Pi$는 "직교투영"을 정확히 구현하는 행렬이다.
 
 **(b) SSE의 직교분해와 추정량 형태**  
-임의의 $\beta$에 대해 잔차벡터 $Y - X\beta$는
 $$
-Y - X\beta = \Pi(Y - X\beta) + (I - \Pi)Y
-$$
-로 분해되고, (a)의 직교성 때문에 노름제곱이
-$$
+Y - X\beta = \Pi(Y - X\beta) + (I - \Pi)Y \\
 |Y - X\beta|^2 = |\Pi(Y - X\beta)|^2 + |(I - \Pi)Y|^2
 $$
-로 분해된다.
-
 여기서 $|(I - \Pi)Y|^2$는 $\beta$와 무관한 상수항이므로, 최소화를 위해서는 $|\Pi(Y - X\beta)|^2$를 0으로 만들면 된다. 따라서 최적해는
 $$
 X\hat\beta^{LSE} = \Pi Y
@@ -1907,7 +1888,19 @@ $$
 $$
 \widehat{Y} = X\hat\beta^{LSE} = \Pi Y
 $$
-이다.
+#### 증명
+**(a)**  
+- $\Pi^\top = (X(X^\top X)^{-1} X^\top)^\top = X (X^\top X)^{-1} X^\top = \Pi$
+- $\Pi^\top (I - \Pi) = \Pi (I - \Pi) = \Pi - \Pi^2 = \Pi - \Pi = 0$
+- $\Pi X = X (X^\top X)^{-1} X^\top X = X (X^\top X)^{-1} (X^\top X) = X I = X$
+
+**(b)**  
+- $Y - X\beta = \Pi(Y - X\beta) + (I - \Pi)Y$
+- $|\Pi(Y - X\beta)|^2 = |X(X^\top X)^{-1} X^\top (Y - X\beta)|^2 = |X\gamma|^2$ (for some $\gamma$)
+- $|(I - \Pi)Y|^2$는 $\beta$와 무관
+- $X\hat\beta^{LSE} = \Pi Y$
+- $X^\top X\hat\beta^{LSE} = X^\top Y \implies \hat\beta^{LSE} = (X^\top X)^{-1} X^\top Y$
+- $\widehat{Y} = X\hat\beta^{LSE} = \Pi Y$
 
 ### 오차분산 $\sigma^2$의 추정
 책에서는 오차항 분산의 추정량으로 평균오차제곱(MSE)을 사용한다.
@@ -1918,49 +1911,90 @@ $$
 $$
 분모 $n - p - 1$은 자유도(표본크기 $n$에서 추정한 모수 개수 $p+1$을 뺀 값)이다.
 ### 정리 6.5.2: 최소제곱 추정량의 성질(불편성, 분산, 정규성)
-선형회귀모형 $Y = X\beta + e$, $E(e) = 0$, $\operatorname{Var}(e) = \sigma^2 I_n$, $\operatorname{rank}(X) = p+1$에서
+선형회귀모형 $Y = X\beta + e$,  
+$E(e) = 0$,  
+$\operatorname{Var}(e) = \sigma^2 \dot l$,  
+$\operatorname{rank}(X) = p+1$에서
 
-**(a) $\hat\beta^{LSE}$의 기댓값과 분산**  
-$$
-E(\hat\beta^{LSE}) = \beta
-$$
-즉, 최소제곱 추정량은 **불편추정량**이다.
+**(a)**  
+$E(\hat\beta^{LSE}) = \beta$  
+즉, 최소제곱 추정량은 **불편추정량**이다.  
 
-또한
-$$
-\operatorname{Var}(\hat\beta^{LSE}) = \sigma^2 (X^\top X)^{-1}
-$$
-
-**해석**  
-- $X^\top X$가 "설명변수 정보량"을 모으는 행렬이고,
+$\operatorname{Var}(\hat\beta^{LSE}) = \sigma^2 (X^\top X)^{-1}$  
+- $X^\top X$는 "설명변수 정보량"을 모으는 행렬
 - $(X^\top X)^{-1}$가 커질수록(설명변수들이 서로 비슷하거나, 표본이 부족하거나) 분산이 커진다.
+> **참고: 불편추정량(unbiased estimator)이란?**  
+> 어떤 모수 $\theta$의 추정량 $\hat\theta$가 $E(\hat\theta) = \theta$를 만족하면, $\hat\theta$를 $\theta$의 **불편추정량**이라 한다. 즉, 표본평균적으로 참값과 일치하는 추정량을 의미한다.
 
-**(b) $\hat\sigma^2$의 불편성**  
-$$
-E(\hat\sigma^2) = \sigma^2
-$$
-즉, 위의 $\hat\sigma^2$도 **불편추정량**이다.
+TODO:FIXME: 그럼 항상 모평균을 완벽히 알 수 있나? 어떤경우에 안맞을지 비판적으로 생각해보기
 
-책의 증명 흐름은 다음 아이디어를 쓴다.
-
-- 잔차는 $(I-\Pi)Y = (I-\Pi)e$
-- $\hat\sigma^2 = \frac{e^\top (I-\Pi) e}{n-p-1}$
-- $\operatorname{trace}$ 성질을 이용해 $E(e^\top A e) = \sigma^2 \operatorname{trace}(A)$ 형태로 계산
-- $\operatorname{trace}(I-\Pi) = n-(p+1)$ 임을 이용해 결론 도출
+**(b)**  
+$E(\hat\sigma^2) = \sigma^2$  
+$\hat\sigma^2$도 **불편추정량**이다.
 
 **(c) 오차가 정규분포일 때의 정확한 분포(추론의 기반)**  
-추가로 $e \sim N_n(0, \sigma^2 I_n)$를 가정하면
+추가로 $e \sim N_n(0, \sigma^2 \dot l)$를 가정하면
+- $\hat\beta^{LSE} \sim N\left(\beta,\ \sigma^2 (X^\top X)^{-1}\right)$
+- $\frac{(n-p-1)\hat\sigma^2}{\sigma^2} \sim \chi^2(n-p-1)$
+- $\hat\beta^{LSE}$와 $\hat\sigma^2$는 서로 독립이다.
+- 이는 회귀분석의 $t$-검정, $F$-검정, 신뢰구간의 표준 결과로 연결되는 출발점이다.
 
-- $$
-    \hat\beta^{LSE} \sim N\left(\beta,\ \sigma^2 (X^\top X)^{-1}\right)
-    $$
-- $$
-    \frac{(n-p-1)\hat\sigma^2}{\sigma^2} \sim \chi^2(n-p-1)
-    $$
-- 그리고 $\hat\beta^{LSE}$와 $\hat\sigma^2$는 서로 독립이다.
+#### 증명
+**(a)**  
+$\hat\beta^{LSE} = (X^\top X)^{-1} X^\top Y$이므로  
+$$
+E(\hat\beta^{LSE}) = (X^\top X)^{-1} X^\top E(Y) = (X^\top X)^{-1} X^\top X \beta = \beta
+$$
+즉, 불편추정량이다.
 
-**해석**  
-이 (c)가 회귀분석의 $t$-검정, $F$-검정, 신뢰구간의 표준 결과로 연결되는 출발점이다.
+분산의 경우,  
+$$
+\operatorname{Var}(\hat\beta^{LSE}) = (X^\top X)^{-1} X^\top \operatorname{Var}(Y) X (X^\top X)^{-1}
+= (X^\top X)^{-1} X^\top (\sigma^2 I) X (X^\top X)^{-1}
+= \sigma^2 (X^\top X)^{-1}
+$$
+
+**(b)**  
+정리 6.5.1에서 $Y = X\beta + e$이고, $\Pi = X(X^\top X)^{-1} X^\top$이므로  
+$$
+Y - X\hat\beta^{LSE} = Y - \Pi Y = (I - \Pi)Y = (I - \Pi)e \\
+\therefore \hat\sigma^2 = \frac{|Y - X\hat\beta^{LSE}|^2}{n - p - 1} = \frac{e^\top (I - \Pi) e}{n - p - 1}
+$$
+
+$e^\top (I - \Pi) e = \operatorname{trace}\big((I - \Pi) e e^\top\big)$, $E[e e^\top] = \sigma^2 I_n$ 이므로  
+$$(n - p - 1) E(\hat\sigma^2) = E\big[e^\top (I - \Pi) e\big] = \operatorname{trace}\big((I - \Pi) E[e e^\top]\big) \\
+= \operatorname{trace}\big((I - \Pi) \sigma^2 I_n\big) = \sigma^2 \operatorname{trace}(I - \Pi)
+$$
+한편 $\operatorname{trace}(A + B) = \operatorname{trace}(A) + \operatorname{trace}(B)$, $\operatorname{trace}(AB) = \operatorname{trace}(BA)$ 이므로  
+$$
+\operatorname{trace}(I_n - X(X^\top X)^{-1} X^\top) = n - \operatorname{trace}(X(X^\top X)^{-1} X^\top)
+$$
+$\operatorname{trace}(X(X^\top X)^{-1} X^\top) = \operatorname{trace}((X^\top X)^{-1} X^\top X) = \operatorname{trace}(I_{p+1}) = p+1$  
+따라서  
+$$
+\operatorname{trace}(I_n - \Pi) = n - (p+1) = n - p - 1
+$$
+결국  
+$$
+(n - p - 1) E(\hat\sigma^2) = \sigma^2 (n - p - 1)
+\implies
+E(\hat\sigma^2) = \sigma^2
+$$
+
+**(c)**  
+$e \sim N_n(0, \sigma^2 I)$이므로 $\hat\beta^{LSE}$는 선형변환된 정규분포로  
+$$
+\hat\beta^{LSE} \sim N(\beta, \sigma^2 (X^\top X)^{-1})
+$$
+또한 $(I - \Pi)Y$는 $n - p - 1$차원의 정규분포의 제곱합이므로  
+$$
+\frac{|Y - X\hat\beta^{LSE}|^2}{\sigma^2} = \frac{e^\top (I - \Pi) e}{\sigma^2} \sim \chi^2(n - p - 1)
+$$
+즉,  
+$$
+\frac{(n - p - 1)\hat\sigma^2}{\sigma^2} \sim \chi^2(n - p - 1)
+$$
+$\hat\beta^{LSE}$와 $\hat\sigma^2$는 $e$의 서로 직교 성분에 의해 결정되므로 서로 독립이다.
 
 ### 설명변수 직교화(orthogonalization) 동기
 - 설명변수 행렬 $X$의 열들이 서로 직교(orthogonal)하면 $X^\top X$가 대각행렬이 되어 계산과 해석이 쉽다.
@@ -1991,8 +2025,8 @@ $$
 $$
 \Pi = \Pi_0 + \Pi_{1|0}
 $$
-처럼 "서로 직교인 두 투영의 합"으로 분해된다는 점이 핵심이다.
-
+처럼 "서로 직교인 두 투영의 합"으로 분해된다는 점이 핵심이다.  
+(즉 $\Pi_0^\top \Pi_{1|0} = 0$)  
 **(2) 평균반응의 재표현**  
 $$
 X\beta = X_0\beta_0 + X_1\beta_1
@@ -2001,29 +2035,21 @@ $$
 $$
 X\beta = X_0\gamma_0 + X_{1|0}\beta_1
 $$
-꼴로도 쓸 수 있음을 보인다(책에서는 $\gamma_0 = \beta_0 + (X_0^\top X_0)^{-1} X_0^\top X_1 \beta_1$ 형태를 제시한다). 요지는 "$X_1$의 $X_0$방향 성분을 $X_0$로 흡수"하고, 나머지 직교 성분만 $X_{1|0}$가 담당하도록 바꾸는 것이다.
+꼴로도 쓸 수 있음을 보인다($\gamma_0 = \beta_0 + (X_0^\top X_0)^{-1} X_0^\top X_1 \beta_1$). 요지는 "$X_1$의 $X_0$방향 성분을 $X_0$로 흡수"하고, 나머지 직교 성분만 $X_{1|0}$가 담당하도록 바꾸는 것이다.
 
 ### 정리 6.5.3: 직교화된 표현에서의 최소제곱 결과
 **(a) 적합값의 분해와 각 부분의 추정**  
-최소제곱 적합값은
+정사영 행렬의 분해를 이용하면,
 $$
-X\hat\beta^{LSE} = X_0\hat\gamma_0^{LSE} + X_{1|0}\hat\beta_1^{LSE}
+X\hat\beta^{LSE} = X_0\hat\beta_0^{LSE} + X_{1}\hat\beta_1^{LSE}= X_0\hat\gamma_0^{LSE} + X_{1|0}\hat\beta_1^{LSE}
 $$
-로 분해된다.
-
-그리고 각 항은 단순한 투영 형태로 주어진다.
+로 분해된다. 각 항의 의미:
 $$
-X_0\hat\gamma_0^{LSE} = \Pi_0 Y
-$$
-$$
-X_{1|0}\hat\beta_1^{LSE} = \Pi_{1|0} Y
-$$
-
-또한 $\hat\beta_0^{LSE}$는 $\hat\gamma_0^{LSE}$와 $\hat\beta_1^{LSE}$를 이용해
-$$
+X_0\hat\gamma_0^{LSE} = \Pi_0 Y \\
+X_{1|0}\hat\beta_1^{LSE} = \Pi_{1|0} Y \\
 \hat\beta_0^{LSE} = \hat\gamma_0^{LSE} - (X_0^\top X_0)^{-1} X_0^\top X_1 \hat\beta_1^{LSE}
 $$
-처럼 복원된다("흡수했던 성분을 되돌려 원래 계수로 환산"하는 단계이다).
+("흡수했던 성분을 되돌려 원래 계수로 환산"하는 단계)
 
 **(b) 공분산 0 및 평균/분산**  
 직교화의 가장 큰 이점은, 두 블록의 추정이 분리되고 상관이 사라진다는 점이다.
@@ -2042,18 +2068,13 @@ $$
 
 즉 $X_1$을 "$X_0$의 영향 제거 후"에 회귀하는 형태로 분산이 정리된다.
 
-#### 예 6.5.1: 절편이 포함된 선형회귀모형(중심화로 직교화)
-평균반응을
-$$
-E(Y_i\mid x_{i1},\dots,x_{ip}) = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}
-$$
-로 둔다. (즉 $x_{i0} = 1$.)
+#### 증명
+연습문제 6.21
 
-각 설명변수의 표본평균을
-$$
-\bar x_j = \frac{1}{n}\sum_{i=1}^n x_{ij}
-$$
-라 하면, 평균반응을 다음처럼 다시 쓸 수 있다.
+#### 예 6.5.1: 절편이 포함된 선형회귀모형(중심화로 직교화)
+선형회귀모형에서 평균반응을 $E(Y_i\mid x_{i1},\dots,x_{ip}) = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}$로 둔다. (즉 $x_{i0} = 1$.)
+
+각 설명변수의 표본평균을 $\bar x_j = \frac{1}{n}\sum_{i=1}^n x_{ij}$라 하면, 평균반응을 다음처럼 다시 쓸 수 있다.
 $$
 \beta_0 + \sum_{j=1}^p \beta_j x_{ij}
 = \gamma_0 + \sum_{j=1}^p \beta_j (x_{ij} - \bar x_j)
@@ -2072,7 +2093,7 @@ $$
 $$
 가 된다(절편 성분은 $Y$의 평균으로 추정된다는 결론).
 
-또한 $X_{1|0}^\top X_{1|0}$와 $X_{1|0}^\top Y$는 "편차곱합"으로 정리된다. 책은
+또한 $X_{1|0}^\top X_{1|0}$와 $X_{1|0}^\top Y$는 "편차곱합"으로 정리된다.
 - $S_{jk} = \sum_{i=1}^n (x_{ij} - \bar x_j)(x_{ik} - \bar x_k)$
 - $S_{jY} = \sum_{i=1}^n (x_{ij} - \bar x_j)(Y_i - \bar Y)$
 
@@ -2096,3 +2117,5 @@ S_{1Y} \\ \vdots \\ S_{pY}
 \end{pmatrix}
 $$
 을 푸는 것과 같아진다.
+
+TODO:FIXME: 연습문제 6.22 말고도 더 gpt사용해서 풀어보면서 감 잡아야함
