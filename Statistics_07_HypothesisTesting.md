@@ -294,6 +294,17 @@ $$
 2\bigl(\ell(\hat\theta;x)-\ell(\hat\theta_0;x)\bigr)
 $$
 
+이때, 전체 모수공간 $\Omega$에서의 최대가능도는
+$$
+\max_{\theta\in\Omega} L(\theta;x)
+=
+\max\left\{
+\max_{\theta\in\Omega_0} L(\theta;x),\ 
+\max_{\theta\in\Omega_1} L(\theta;x)
+\right\}
+$$
+와 같이, 귀무가설과 대립가설 각각에서의 최대가능도 중 더 큰 값이 된다.
+
 **기각역의 일반형**  
 유의수준 $\alpha$에서의 최대가능도비 검정의 기각역은
 $$
@@ -311,6 +322,12 @@ P_\theta\bigl((X_1,\dots,X_n)^t\in C_\alpha\bigr)
 \alpha
 $$
   - 필요하면 이 조건을 만족시키기 위하여 예 7.1.4처럼 랜덤화 검정을 고려한다.
+  - 각 가설 하에서의 MLE(최대우도추정량) 계산은 **모수공간의 제약**에 따라 달라진다.  
+    - **전체 모수공간**에서는 $\theta$가 가질 수 있는 모든 값에 대해 가능도함수를 최대화하여 MLE를 구한다. 즉, 제한 없이 최적의 값을 찾는다.
+    - **귀무가설 하**에서는 $\theta$가 반드시 귀무가설이 허용하는 값(예: $\theta = \theta_0$ 또는 $\mu \le \mu_0$ 등)만 가질 수 있으므로, 이 **제약된 모수공간** 내에서만 가능도함수를 최대화한다.
+        - 전체 모수공간에서의 MLE는 **제약이 없는 최적화**의 결과이고,  
+        - 귀무가설 하의 MLE는 **가설이 허용하는 범위 내에서의 최적화** 결과이다.
+        - 이렇게 두 가지 MLE를 비교함으로써, 실제 데이터가 귀무가설 하에서 얼마나 잘 설명되는지(가능도의 손실이 얼마나 큰지)를 판단할 수 있다.
 
 ### 정리: 최대가능도비 검정 (Maximum Likelihood Ratio Test)
 가능도비 검정(likelihood ratio test)나 우도비 검정이라고도 함.  
@@ -321,9 +338,10 @@ H_1:\theta\in\Omega_1$을 검정할 때,
 
 - **검정통계량**: $2\bigl(\ell(\hat\theta)-\ell(\hat\theta_0)\bigr)$
 - **기각역**: $C_\alpha = \left\{x:\ 2(\ell(\hat\theta)-\ell(\hat\theta_0))\ge c\right\}$
+  - 참고: Wilks 정리에 의해, 앞의 2는 ‘$\chi^2$ 근사를 가장 표준적인 형태로 만들기 위한 정규화 상수
 - **상수 $c$** 는 $\max_{\theta\in\Omega_0}P_\theta((X1, \dots, X_n)^T \in C_\alpha)=\alpha$가 되도록 선택
 
-#### 예제 7.2.1 정규분포 평균에 대한 양측 검정
+#### 예 7.2.1 정규분포 평균에 대한 양측 검정
 $$
 X_1,\dots,X_n \sim N(\mu,\sigma^2),\quad n\ge2 \\
 H_0:\mu=\mu_0 \quad\text{vs}\quad H_1:\mu\neq\mu_0
@@ -366,12 +384,7 @@ $$
 > 최대가능도비 검정은 귀무가설 하에서 평균을 $\mu_0$로 고정했을 때, 실제 데이터의 평균과의 차이로 인해 발생하는 가능도(우도)의 손실이 얼마나 큰지를 측정한다. 이 손실이 충분히 크면(즉, $t$-통계량이 임계값을 넘으면) 귀무가설을 기각한다.  
 > 즉, $t$-검정은 최대가능도비 검정의 특수한 경우로 해석할 수 있다.
 
-#### 예제 7.2.2 정규분포 평균에 대한 한쪽 검정
-$$
-H_0:\mu\le\mu_0 \quad\text{vs}\quad H_1:\mu>\mu_0
-$$
-유의수준 $\alpha \ (0 \lt \alpha \lt 1)$의 최대가능도비 검정을 구하라.  
-#### 예제 7.2.2 정규분포 평균에 대한 한쪽 검정
+#### 예 7.2.2 정규분포 평균에 대한 한쪽 검정
 $$
 H_0:\mu\le\mu_0 \quad\text{vs}\quad H_1:\mu>\mu_0
 $$
@@ -400,77 +413,454 @@ $$
     2(\ell(\hat\theta) - \ell(\hat\theta_0)) = n\log\frac{\hat\sigma_0^2}{\hat\sigma^2}
     $$
     - $\bar x \le \mu_0$이면 $\hat\mu_0 = \bar x$이므로 $\hat\sigma_0^2 = \hat\sigma^2$이고, 검정통계량은 0이 되어 기각하지 않음.
-    - $\bar x > \mu_0$이면 $\hat\mu_0 = \mu_0$이므로
+    - $\bar x > \mu_0$이면 $\hat\mu_0 = \mu_0$
+    - $\hat\sigma_0^2 = \frac{1}{n}\left(\sum_{i=1}^n (x_i - \bar x)^2 + n(\bar x - \mu_0)^2\right)$로 분해되므로, 
       $$
       n\log\left(1 + \frac{(\bar x - \mu_0)^2}{\hat\sigma^2}\right)
       $$
+    4. **기각역 도출**  
+        - $S^2$는 표본분산, $S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X)^2$
+        - $\bar x \le \mu_0$이면 기각하지 않음.
+        - $\bar x > \mu_0$이면, 검정통계량
+          $$
+          t = \frac{\bar X - \mu_0}{S/\sqrt{n}}
+          $$
+          을 사용한다.
+        - 자세한 유도과정은 넣지 않았음. 교과서 307~308p 참고
+        - 귀무가설 $H_0$ 하에서 이 $t$-통계량은 자유도 $n-1$의 $t$-분포를 따른다.  
+          따라서, 유의수준 $\alpha$를 만족시키기 위해
+          $$
+          P_{\mu_0}\left( T \ge t_\alpha(n-1) \right) = \alpha
+          $$
+          가 되도록 임계값 $t_\alpha(n-1)$를 선택하여 기각역을 설정한다.
 
-4. **기각역 도출**  
-    - $\bar x \le \mu_0$이면 기각하지 않음.
-    - $\bar x > \mu_0$이면, $t$-통계량
-      $$
-      t = \frac{\bar X - \mu_0}{S/\sqrt{n}}
-      $$
-      이 $t_\alpha(n-1)$ 이상이면 귀무가설을 기각.
+        - 즉, **유의수준 $\alpha$에서의 기각역**은
+          $$
+          \frac{\bar X - \mu_0}{S/\sqrt{n}} \ge t_\alpha(n-1)
+          $$
+          이다.
 
-    따라서, **유의수준 $\alpha$에서의 기각역**은
-    $$
-    \frac{\bar X - \mu_0}{S/\sqrt{n}} \ge t_\alpha(n-1)
-    $$
-    즉, **한쪽(one-sided) $t$-검정**과 완전히 동일하다.
+        - 이는 한쪽(one-sided) $t$-검정과 완전히 동일하며, 실제로 최대가능도비 검정이 한쪽 $t$-검정과 일치함을 의미한다.
 
 > 최대가능도비 검정은 귀무가설 하에서 평균을 $\mu_0$로 고정했을 때 실제 데이터의 평균과의 차이로 인한 가능도 손실이 충분히 크면 귀무가설을 기각한다. 이때의 검정통계량은 한쪽 $t$-검정과 일치한다.
 
-#### 예제 7.2.3 지수분포 평균에 대한 검정
+**양측검정 vs. 한측검정 비교**
+
+| 구분         | 양측검정 (Two-sided)                | 한측검정 (One-sided)                |
+|--------------|-------------------------------------|-------------------------------------|
+| 귀무가설     | $H_0: \mu = \mu_0$                  | $H_0: \mu \le \mu_0$ 또는 $H_0: \mu \ge \mu_0$ |
+| 대립가설     | $H_1: \mu \neq \mu_0$               | $H_1: \mu > \mu_0$ 또는 $H_1: \mu < \mu_0$    |
+| 기각역       | $\|\bar X - \mu_0\| \ge$ 임계값       | $\bar X - \mu_0 \ge$ 임계값 또는 $\bar X - \mu_0 \le$ 임계값 |
+| 검정통계량   | $\|t\| \ge t_{\alpha/2}$              | $t \ge t_\alpha$ 또는 $t \le -t_\alpha$       |
+| 적용 상황    | 평균이 기준값과 다를지(크거나 작을지) 모두 검증 | 평균이 기준값보다 클지/작을지 한 방향만 검증 |
+
+#### 예 7.2.3 지수분포 평균에 대한 검정
 $$
-X_1,\dots,X_n \sim \mathrm{Exp}(\theta)
-$$
-$$
+X_1,\dots,X_n \sim \mathrm{Exp}(\theta) \\
 H_0:\theta=\theta_0 \quad\text{vs}\quad H_1:\theta\neq\theta_0
 $$
 
-**풀이**  
-- 전체공간 MLE: $\hat\theta = \bar X$
-- 귀무가설 하 MLE: $\hat\theta_0 = \theta_0$
-- 검정통계량:
+1. **가능도함수 및 로그가능도함수**  
+$$
+L(\theta; x) = \prod_{i=1}^n \frac{1}{\theta} e^{-x_i/\theta}
+= \theta^{-n} \exp\left(-\frac{\sum x_i}{\theta}\right) \\
+\ell(\theta; x) = -n\log\theta - \frac{\sum x_i}{\theta}
+$$
+
+2. **MLE 계산**  
+- 전체 모수공간($\theta > 0$)에서의 MLE:
     $$
-    2n\left(\frac{\bar X}{\theta_0} - 1 - \log\frac{\bar X}{\theta_0}\right)
+    \frac{\partial \ell}{\partial \theta} = -\frac{n}{\theta} + \frac{\sum x_i}{\theta^2} = 0 \\
+    \Rightarrow \hat\theta = \bar X = \frac{1}{n}\sum x_i
+    $$
+- 귀무가설 하($\theta = \theta_0$)의 MLE: $\hat\theta_0 = \theta_0$
+
+3. **최대가능도비 검정통계량**  
+$$
+2\left(\ell(\hat\theta) - \ell(\hat\theta_0)\right)
+= 2\left[
+    -n\log\bar X - n
+    + n\log\theta_0 + \frac{n\bar X}{\theta_0}
+\right] \\
+= 2n\left(
+    \frac{\bar X}{\theta_0} - 1 - \log\frac{\bar X}{\theta_0}
+\right)
+$$
+
+4. **기각역**  
+- 검정통계량 $2n\left(\frac{\bar X}{\theta_0} - 1 - \log\frac{\bar X}{\theta_0}\right)$이 충분히 크면 $H_0$를 기각한다.
+- 이는 양측 검정(two-sided test)이므로, 임계값 $c$를 정해
+    $$
+    2n\left(\frac{\bar X}{\theta_0} - 1 - \log\frac{\bar X}{\theta_0}\right) \ge c
+    $$
+    이면 $H_0$를 기각한다.
+
+> 참고: 대수의 법칙에 의해 $n$이 충분히 크면 이 검정통계량은 자유도 1의 $\chi^2$ 분포로 근사된다. 따라서 유의수준 $\alpha$에서 임계값 $c = \chi^2_{1,\alpha}$를 사용한다.
+
+#### 예 7.2.4 두 정규분포 평균 비교를 위한 검정
+두 집단에서 각각 랜덤표본 $X_{11},\dots,X_{1n_1} \sim N(\mu_1, \sigma^2)$, $X_{21},\dots,X_{2n_2} \sim N(\mu_2, \sigma^2)$를 관측했다고 하자. 두 집단의 분산은 동일하다고 가정한다.
+- **귀무가설**: $H_0: \mu_1 = \mu_2$
+- **대립가설**: $H_1: \mu_1 \neq \mu_2$
+
+**1. 가능도함수 및 로그가능도함수**  
+$$
+L(\mu_1, \mu_2, \sigma^2) = \prod_{i=1}^{n_1} \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_{1i}-\mu_1)^2}{2\sigma^2}}
+\prod_{j=1}^{n_2} \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_{2j}-\mu_2)^2}{2\sigma^2}}
+$$
+$$
+\ell(\mu_1, \mu_2, \sigma^2) = -\frac{n_1+n_2}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\left(\sum_{i=1}^{n_1}(x_{1i}-\mu_1)^2 + \sum_{j=1}^{n_2}(x_{2j}-\mu_2)^2\right)
+$$
+
+**2. MLE 계산**  
+- 전체 모수공간($\mu_1, \mu_2$ 자유):  
+    $$
+    \hat\mu_1 = \bar X_1 = \frac{1}{n_1}\sum_{i=1}^{n_1} x_{1i}, \quad \hat\mu_2 = \bar X_2 = \frac{1}{n_2}\sum_{j=1}^{n_2} x_{2j}
+    $$
+    $$
+    \hat\sigma^2 = \frac{1}{n_1+n_2}\left(\sum_{i=1}^{n_1}(x_{1i}-\bar X_1)^2 + \sum_{j=1}^{n_2}(x_{2j}-\bar X_2)^2\right)
+    $$
+- 귀무가설 하($\mu_1 = \mu_2 = \mu$):  
+    $$
+    \hat\mu_0 = \frac{n_1\bar X_1 + n_2\bar X_2}{n_1+n_2}
+    $$
+    $$
+    \hat\sigma_0^2 = \frac{1}{n_1+n_2}\left(\sum_{i=1}^{n_1}(x_{1i}-\hat\mu_0)^2 + \sum_{j=1}^{n_2}(x_{2j}-\hat\mu_0)^2\right)
     $$
 
-이는 양측 기각역을 갖는 형태로 나타난다.
-
-#### 7.2.6 두 정규분포 평균 비교
+**3. 최대가능도비 검정통계량**  
 $$
-H_0:\mu_1=\mu_2 \quad\text{vs}\quad H_1:\mu_1\neq\mu_2
+2(\ell(\hat\theta) - \ell(\hat\theta_0)) = (n_1+n_2)\log\frac{\hat\sigma_0^2}{\hat\sigma^2}
 $$
-
-최대가능도비 검정은
+이때 
 $$
-\left|
-\frac{\bar X_1-\bar X_2}
-{S_p\sqrt{n_1^{-1}+n_2^{-1}}}
-\right|
-\ge
-t_{\alpha/2}(n_1+n_2-2)
-$$
-형태의 **두 표본 $t$-검정**과 같다.
-
-#### 7.2.7 분산 비교 검정
-$$
-H_0:\sigma_1^2=\sigma_2^2 \quad\text{vs}\quad H_1:\sigma_1^2\neq\sigma_2^2
+\sum_{i=1}^{n_1}(x_{1i}-\hat\mu_0)^2 = \sum_{i=1}^{n_1}(x_{1i}-\bar X_1)^2 + n_1(\bar X_1 - \hat\mu_0)^2 \\
+\sum_{j=1}^{n_2}(x_{2j}-\hat\mu_0)^2 = \sum_{j=1}^{n_2}(x_{2j}-\bar X_2)^2 + n_2(\bar X_2 - \hat\mu_0)^2
 $$
 
-최대가능도비 검정은
+따라서,
 $$
-\frac{S_1^2}{S_2^2} \le d_1 \quad\text{또는}\quad \frac{S_1^2}{S_2^2} \ge d_2
+\hat\sigma_0^2 = \frac{1}{n_1+n_2} \left[ \sum_{i=1}^{n_1}(x_{1i}-\bar X_1)^2 + \sum_{j=1}^{n_2}(x_{2j}-\bar X_2)^2 + n_1(\bar X_1 - \hat\mu_0)^2 + n_2(\bar X_2 - \hat\mu_0)^2 \right]
 $$
-형태의 **$F$-검정**으로 나타난다.
 
-#### 7.2.8 포아송 분포 평균에 대한 검정과 랜덤화 검정
-정수형 통계량의 경우 유의수준 $\alpha$를 정확히 맞추는 기각역이 존재하지 않을 수 있다.  
-이 경우 **랜덤화 검정**을 도입하여 기각확률의 기대값이 정확히 $\alpha$가 되도록 조정한다.
+또한,
+$$
+n_1(\bar X_1 - \hat\mu_0)^2 + n_2(\bar X_2 - \hat\mu_0)^2 = \frac{n_1 n_2}{n_1+n_2} (\bar X_1 - \bar X_2)^2
+$$
+
+따라서,
+$$
+\hat\sigma_0^2 = \hat\sigma^2 + \frac{n_1 n_2}{n_1+n_2} (\bar X_1 - \bar X_2)^2
+$$
+
+최종적으로 최대가능도비 검정통계량은
+$$
+2(\ell(\hat\theta) - \ell(\hat\theta_0)) = (n_1+n_2)\log\left(1 + \frac{n_1 n_2}{(n_1+n_2)^2} \frac{(\bar X_1 - \bar X_2)^2}{\hat\sigma^2}\right)
+$$
+
+**4. 기각역**  
+최대가능도비 검정의 기각역은
+$$
+\frac{n_1 n_2}{(n_1+n_2)^2} \frac{(\bar X_1 - \bar X_2)^2}{\hat\sigma^2} \ge d
+$$
+와 같이 표현된다. 여기서 $c$ 또는 $d$는 유의수준 $\alpha$에서 정해지는 임계값이다.
+
+**5. $t$-검정과의 연결**  
+이 통계량은 다음과 같이 표준화된 두 표본 평균의 차이로 표현된다.
+$$
+T = \frac{\bar X_1 - \bar X_2}{S_p\sqrt{1/n_1 + 1/n_2}}
+$$
+여기서 $S_p^2$는 두 집단의 결합표본분산(pooled variance)이다.
+$$
+S_p^2 = \frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{n_1+n_2-2}
+$$
+$$
+S_1^2 = \frac{1}{n_1-1}\sum_{i=1}^{n_1}(x_{1i}-\bar X_1)^2, \quad S_2^2 = \frac{1}{n_2-1}\sum_{j=1}^{n_2}(x_{2j}-\bar X_2)^2
+$$
+
+이때, 자유도 $n_1+n_2-2$인 $t$-분포를 사용하여 유의수준 $\alpha$에서의 기각역은
+$$
+\left|T\right| \ge t_{\alpha/2}(n_1+n_2-2)
+$$
+즉, **두 표본 $t$-검정**과 완전히 동일하다.
+
+#### 예 7.2.5 두 정규분포의 분산 비교를 위한 검정
+두 집단에서 각각 $X_{11},\dots,X_{1n_1} \sim N(\mu_1, \sigma_1^2)$, $X_{21},\dots,X_{2n_2} \sim N(\mu_2, \sigma_2^2)$를 관측했다고 하자. $H_0: \sigma_1^2 = \sigma_2^2,\ H_1: \sigma_1^2 \neq \sigma_2^2$
+
+**1. 가능도함수 및 로그가능도함수**  
+$$
+L(\sigma_1^2, \sigma_2^2) = \prod_{i=1}^{n_1} \frac{1}{\sqrt{2\pi\sigma_1^2}} e^{-\frac{(x_{1i}-\mu_1)^2}{2\sigma_1^2}}
+\prod_{j=1}^{n_2} \frac{1}{\sqrt{2\pi\sigma_2^2}} e^{-\frac{(x_{2j}-\mu_2)^2}{2\sigma_2^2}} \\
+\ell(\mu_1, \mu_2, \sigma_1^2, \sigma_2^2) = -\frac{n_1}{2}\log(2\pi\sigma_1^2) - \frac{1}{2\sigma_1^2} \sum_{i=1}^{n_1} (x_{1i} - \mu_1)^2
+- \frac{n_2}{2}\log(2\pi\sigma_2^2) - \frac{1}{2\sigma_2^2} \sum_{j=1}^{n_2} (x_{2j} - \mu_2)^2
+$$
+
+**2. MLE 계산**  
+- 전체 모수공간($\mu_1, \mu_2, \sigma_1^2, \sigma_2^2$ 자유):  
+    $$
+    \hat\mu_1 = \bar X_{1} = \frac{1}{n_1}\sum_{i=1}^{n_1} x_{1i},\quad
+    \hat\mu_2 = \bar X_{2} = \frac{1}{n_2}\sum_{j=1}^{n_2} x_{2j}
+    $$
+    $$
+    \hat\sigma_1^2 = S_1^2 = \frac{1}{n_1}\sum_{i=1}^{n_1} (x_{1i} - \bar X_{1})^2,\quad
+    \hat\sigma_2^2 = S_2^2 = \frac{1}{n_2}\sum_{j=1}^{n_2} (x_{2j} - \bar X_{2})^2
+    $$
+- 귀무가설 하($\sigma_1^2 = \sigma_2^2 = \sigma^2$):  
+    $$
+    \hat\mu_1 = \bar X_{1},\quad \hat\mu_2 = \bar X_{2}
+    $$
+    $$
+    \hat\sigma^2 = S_p^2 = \frac{n_1 S_1^2 + n_2 S_2^2}{n_1 + n_2}
+    $$
+
+**3. 최대가능도비 검정통계량**  
+$$
+2(\ell(\hat\theta) - \ell(\hat\theta_0)) = n_1 \log\frac{S_p^2}{S_1^2} + n_2 \log\frac{S_p^2}{S_2^2}
+$$
+
+**4. 기각역 및 $F$-검정과의 연결**  
+최대가능도비 검정통계량  
+$$
+2(\ell(\hat\theta) - \ell(\hat\theta_0)) = n_1 \log\frac{S_p^2}{S_1^2} + n_2 \log\frac{S_p^2}{S_2^2}
+$$
+은 두 표본 분산의 비로 표현할 수 있다. 여기서 $S_1^2$와 $S_2^2$는 각각 두 집단의 표본분산, $S_p^2$는 결합표본분산이다.
+
+표본분포 이론에 따르면, 귀무가설 $H_0: \sigma_1^2 = \sigma_2^2$가 참일 때  
+$$
+\frac{S_1^2}{S_2^2}
+$$
+는 자유도 $(n_1-1, n_2-1)$의 $F$-분포를 따른다. 즉,
+$$
+\frac{S_1^2/\sigma^2}{S_2^2/\sigma^2} = \frac{S_1^2}{S_2^2} \sim F(n_1-1, n_2-1)
+$$
+이므로, 유의수준 $\alpha$에서의 최대가능도비 검정의 기각역은 다음과 같이 설정된다.
+$$
+\frac{S_1^2}{S_2^2} \ge F_{1-\alpha/2}(n_1-1, n_2-1)\quad \text{또는}\quad \frac{S_1^2}{S_2^2} \le F_{\alpha/2}(n_1-1, n_2-1)
+$$
+즉, 표본분산의 비가 $F$-분포의 양쪽 임계값을 벗어날 때 귀무가설을 기각한다.
+
+**5. $F$-검정과의 관계**  
+이 결과는 바로 두 표본 $F$-검정과 완전히 동일하다. 즉, 두 집단의 분산이 같은지 검정할 때, 표본분산의 비를 $F$-분포 임계값과 비교하는 $F$-검정이 최대가능도비 검정의 특수한 경우임을 알 수 있다.
+
+#### 예 7.2.6 포아송 분포 평균에 대한 검정과 랜덤화 검정
+포아송 분포 $X_1, \dots, X_n \sim \mathrm{Poisson}(\theta)$에서, $H_0: \theta = 0.1, H_1: \theta < 0.1$이고 $n=100$일 때 $\alpha = 0.05$의 최대가능도비 검정을 구해라.
+1. **가능도함수 및 로그가능도함수**
+    $$
+    L(\theta; x) = \prod_{i=1}^{100} \frac{\theta^{x_i} e^{-\theta}}{x_i!} \\
+    \ell(\theta; x) = \sum_{i=1}^{100} x_i \log\theta - 100\theta + \text{상수}
+    $$
+
+2. **MLE 계산**
+    - 전체 모수공간($\theta > 0$)에서의 MLE:
+      $$
+      \frac{\partial \ell}{\partial \theta} = \frac{\sum x_i}{\theta} - 100 = 0 \implies \hat\theta = \bar X
+      $$
+    - 귀무가설 하($\theta = 0.1$)의 MLE: $\hat\theta_0 = 0.1$
+
+3. **최대가능도비 검정통계량**
+    $$
+    2(\ell(\hat\theta) - \ell(\hat\theta_0)) = 2\left[ \sum x_i \log\frac{\bar X}{0.1} - 100(\bar X - 0.1) \right]
+    $$
+
+4. **기각역**
+    - $H_0$ 하에서 $\sum x_i \sim \mathrm{Poisson}(10)$
+    - $\bar X < 0.1$ (즉, $\sum x_i < 10$)일 때 $H_0$에 불리한 증거가 됨
+    - $\sum x_i \le k$인 $k$를 찾아 $P(\sum x_i \le k \mid H_0) \le 0.05$가 되도록 설정
+    - 정확히 $\alpha=0.05$를 맞추기 위해 $k$에서 랜덤화 검정 적용:
+      $$
+      \phi(x) =
+      \begin{cases}
+         1 & \text{if } \sum x_i < k \\
+         \gamma & \text{if } \sum x_i = k \\
+         0 & \text{if } \sum x_i > k
+      \end{cases}
+      $$
+      여기서 $\gamma$는
+      $$
+      P(\sum x_i < k) + \gamma P(\sum x_i = k) = 0.05
+      $$
+      $$
+      \gamma = \frac{0.05 - P(\sum x_i < k)}{P(\sum x_i = k)}
+      $$
 
 
-
+TODO:
 ## 최대가능도 검정법의 근사 *(Asymptotic Likelihood Ratio Tests)*
- 
+표본 크기가 충분히 클 때, 최대가능도 추정량의 극한분포를 이용해 최대가능도비 검정통계량의 분포를 근사할 수 있다. 크기 $n$인 랜덤표본 $X_1,\dots,X_n$에 대해 로그가능도함수와 평균 로그가능도함수는 다음과 같이 정의된다.
+$$
+l(\theta) = \sum_{i=1}^n \log f(X_i;\theta), \qquad
+\bar l(\theta) = \frac{1}{n} \sum_{i=1}^n \log f(X_i;\theta)
+$$
+모수공간 $\Omega$가 $k$차원 열린집합($\Omega \subset \mathbb{R}^k$)이라고 하자.
+
+### 최대가능도 추정량의 점근 전개
+적절한 정규성 조건 하에서, 최대가능도 추정량 $\hat\theta_n$은 다음의 점근 전개를 만족한다.
+$$
+\sqrt{n}(\hat\theta_n - \theta)
+= [I(\theta)]^{-1} \sqrt{n}\, \bar l'(\theta) + o_p(1)
+$$
+여기서
+- $I(\theta)$: 정보량 행렬
+    $$
+    I(\theta) = \mathrm{Var}_\theta\left( \frac{\partial}{\partial\theta} \log f(X_1;\theta) \right)
+    = E_\theta\left[ -\frac{\partial^2}{\partial\theta\partial\theta^t} \log f(X_1;\theta) \right]
+    $$
+- $\bar l'(\theta)$: 평균 점수함수
+    $$
+    \bar l'(\theta) = \left(
+        \frac{\partial}{\partial\theta_1} \bar l(\theta), \dots,
+        \frac{\partial}{\partial\theta_k} \bar l(\theta)
+    \right)^t
+    $$
+
+### 단순 귀무가설에서의 최대가능도비 통계량
+귀무가설이 $H_0: \theta = \theta_0$로 주어질 때, 최대가능도비 검정통계량은
+$$
+2\{l(\hat\theta_n) - l(\theta_0)\}
+$$
+로 정의된다.
+
+### 테일러 전개와 근사
+로그가능도함수를 $\theta_0$에서 $\hat\theta_n$까지 테일러 전개하면,
+$$
+l(\theta_0) \approx l(\hat\theta_n)
++ l'(\hat\theta_n)^t (\theta_0 - \hat\theta_n)
++ \frac{1}{2} (\theta_0 - \hat\theta_n)^t l''(\theta_n^*) (\theta_0 - \hat\theta_n)
+$$
+($\theta_n^*$는 $\theta_0$와 $\hat\theta_n$ 사이의 값)
+
+- $\hat\theta_n$은 가능도방정식의 해이므로 $l'(\hat\theta_n) = 0$
+- $-\frac{1}{n} l''(\theta_n^*) \to I(\theta_0)$ (대수의 법칙)
+
+따라서,
+$$
+l(\theta_0) \approx l(\hat\theta_n) - \frac{n}{2} (\theta_0 - \hat\theta_n)^t I(\theta_0) (\theta_0 - \hat\theta_n)
+$$
+즉,
+$$
+2\{l(\hat\theta_n) - l(\theta_0)\} \approx n (\hat\theta_n - \theta_0)^t I(\theta_0) (\hat\theta_n - \theta_0)
+$$
+
+### 극한분포
+$H_0$가 사실일 때,
+$$
+\sqrt{n}(\hat\theta_n - \theta_0) \xrightarrow{d} N_k(0, [I(\theta_0)]^{-1})
+$$
+따라서,
+$$
+n (\hat\theta_n - \theta_0)^t I(\theta_0) (\hat\theta_n - \theta_0) \xrightarrow{d} \chi^2(k)
+$$
+즉, 최대가능도비 검정통계량은 표본 크기가 충분히 크면 자유도 $k$인 카이제곱 분포로 근사된다.
+
+### 정리 7.3.1 (단순 귀무가설의 최대가능도비 검정)
+확률밀도함수 $f(x;\theta)$, $\theta\in\Omega\subset\mathbb{R}^k$에서 정리 6.4.4의 조건 $(R0)\sim(R7)$이 만족되면,
+$$
+H_0:\theta=\theta_0 \quad \text{vs} \quad H_1:\theta\neq\theta_0
+$$
+에 대한 최대가능도비 검정통계량은
+$$
+2\{l(\hat\theta_n) - l(\theta_0)\} \xrightarrow{d} \chi^2(k)
+$$
+로 수렴한다.
+
+따라서 표본 크기가 충분히 클 때, 유의수준 $\alpha$에서의 기각역은
+$$
+2\{l(\hat\theta_n) - l(\theta_0)\} \ge \chi^2_\alpha(k)
+$$
+로 주어진다.
+
+### Wald 검정과 Rao(Score) 검정
+정리 7.3.1의 근사식을 바탕으로 다음 두 가지 검정통계량을 정의할 수 있다.
+
+- **Wald 검정통계량**
+    $$
+    W_n(\theta_0) = n(\hat\theta_n - \theta_0)^t I(\theta_0) (\hat\theta_n - \theta_0)
+    $$
+
+- **Rao(Score) 검정통계량**
+    $$
+    R_n(\theta_0) = n\, \bar l'(\theta_0)^t [I(\theta_0)]^{-1} \bar l'(\theta_0)
+    $$
+
+$H_0$ 하에서 두 통계량 모두
+$$
+\xrightarrow{d} \chi^2(k)
+$$
+로 근사된다.
+
+### 일반적인 귀무가설의 최대가능도비 검정
+모수 $\theta = (\xi^t, \eta^t)^t \in \Omega \subset \mathbb{R}^k$에서, 일부 성분 $\xi \in \mathbb{R}^{k_1}$에 대해
+$$
+H_0: \xi = \xi_0
+$$
+와 같은 형태의 귀무가설을 고려한다. 이때 귀무가설 하의 모수공간은
+$$
+\Omega_0 = \{ (\xi_0^t, \eta^t)^t : \eta \in \mathbb{R}^{k_0} \}, \qquad k_0 = k - k_1
+$$
+이다.
+
+#### 정리 7.3.2 (일반 귀무가설의 최대가능도비 검정)
+전체 모수공간과 귀무가설 하 모수공간에서의 최대가능도 추정량을 각각 $\hat\theta_n^\Omega$, $\hat\theta_n^{\Omega_0}$라 하면,
+$$
+2\{l(\hat\theta_n^\Omega) - l(\hat\theta_n^{\Omega_0})\} \xrightarrow{d} \chi^2(k - k_0)
+$$
+가 성립한다.
+
+따라서 표본 크기가 충분히 클 때, 유의수준 $\alpha$에서의 기각역은
+$$
+2\{l(\hat\theta_n^\Omega) - l(\hat\theta_n^{\Omega_0})\} \ge \chi^2_\alpha(k - k_0)
+$$
+
+#### 예 7.3.4 분할표에서의 동일성 검정
+$r$개의 집단에서 각각 독립적인 다항분포 랜덤벡터 $X_i = (X_{i1}, \dots, X_{ic})^t \sim \mathrm{Multi}(n_i, p_i)$ $(i=1,\dots,r)$를 관측한다고 하자. 각 집단의 확률벡터는 $p_i = (p_{i1}, \dots, p_{ic})^t$이며, $\sum_{j=1}^c p_{ij} = 1$, $p_{ij} > 0$이다. 전체 표본 크기는 $n = n_1 + \cdots + n_r$이다.
+
+**귀무가설**: $H_0: p_1 = \cdots = p_r$ (모든 집단의 분포가 동일)  
+**대립가설**: $H_1:$ $H_0$가 아님
+
+**1. 로그가능도함수**  
+관측값 $x_{ij}$에 대해, 로그가능도함수(상수 제외)는  
+$$
+l(p) = \sum_{i=1}^r \sum_{j=1}^c x_{ij} \log p_{ij}
+$$
+
+**2. 최대가능도추정값**  
+
+- **(1) 전체 모수공간**: 각 집단별로 $\sum_{j=1}^c p_{ij} = 1$ 제약 하에서  
+    $$
+    \hat p_{ij} = \frac{x_{ij}}{n_i}
+    $$
+- **(2) 귀무가설 $H_0$ 하**: 모든 집단이 동일한 확률벡터 $p$를 가짐  
+    $$
+    \hat p_j^{(0)} = \frac{x_{\cdot j}}{n}, \qquad x_{\cdot j} = \sum_{i=1}^r x_{ij}
+    $$
+
+**3. 최대가능도비 검정통계량**  
+$$
+2\{l(\hat p) - l(\hat p^{(0)})\}
+= 2 \sum_{i=1}^r \sum_{j=1}^c x_{ij} \log \left( \frac{\hat p_{ij}}{\hat p_j^{(0)}} \right )
+= 2 \sum_{i=1}^r \sum_{j=1}^c x_{ij} \log \left( \frac{x_{ij}}{n_i \hat p_j^{(0)}} \right )
+$$
+
+**4. 카이제곱 근사 (피어슨 형태)**  
+표본이 충분히 크면 $\log(1+u) \approx u - \frac{1}{2}u^2$ 근사로 인해  
+$$
+2\{l(\hat p) - l(\hat p^{(0)})\} \approx \sum_{i=1}^r \sum_{j=1}^c \frac{(O_{ij} - E_{ij}^{(0)})^2}{E_{ij}^{(0)}}
+$$
+여기서  
+- $O_{ij} = x_{ij}$ (관측도수)
+- $E_{ij}^{(0)} = n_i \hat p_j^{(0)} = n_i \frac{x_{\cdot j}}{n}$ (기대도수)
+
+**5. 자유도와 기각역**  
+- 전체 모수공간 자유도: $k = r(c-1)$
+- 귀무가설 하 자유도: $k_0 = c-1$
+- 차이: $(r-1)(c-1)$
+
+따라서,  
+- 검정통계량 $2\{l(\hat p) - l(\hat p^{(0)})\}$는 $H_0$ 하에서 자유도 $(r-1)(c-1)$인 $\chi^2$ 분포로 근사
+- 유의수준 $\alpha$에서의 기각역:
+    $$
+    2\{l(\hat p) - l(\hat p^{(0)})\} \ge \chi^2_\alpha((r-1)(c-1))
+    $$
+    또는
+    $$
+    \sum_{i=1}^r \sum_{j=1}^c \frac{(O_{ij} - E_{ij}^{(0)})^2}{E_{ij}^{(0)}} \ge \chi^2_\alpha((r-1)(c-1))
+    $$
