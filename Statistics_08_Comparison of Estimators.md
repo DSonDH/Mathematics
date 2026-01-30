@@ -5,7 +5,7 @@
 ### 평균제곱오차 *(Mean Squared Error, MSE)*
 모집단 분포가 확률밀도함수 $f(x;\theta),\ \theta \in \Omega$로 주어지고, 랜덤표본 $(X_1,\dots,X_n)$을 이용하여 모수 $\theta$ 또는 모수의 함수 $\eta=\eta(\theta)$를 추정한다고 하자.
 
-좋은 추정량이란 참값에 가까운 추정값을 제공하는 추정량이다. 이를 정량적으로 평가하는 가장 보편적인 기준이 **평균제곱오차(MSE)** 이다.
+좋은 추정량이란 참값에 가까운 추정값을 제공하는 추정량이다. 이를 정량적으로 평가하는 가장 보편적인 기준이 **평균제곱오차(Mean Squared Error, MSE)** 이다.
 
 $$
 \mathrm{MSE}(\hat\eta,\theta)
@@ -22,14 +22,10 @@ $$
 - 적률추정량(MME): $\hat\theta^{\mathrm{MME}} = 2\bar X$
 
 각각의 평균제곱오차는
-
 $$
 \mathrm{MSE}(\hat\theta^{\mathrm{MLE}},\theta)
 = E_\theta[(X_{(n)}-\theta)^2]
-= \frac{2}{(n+1)(n+2)}\theta^2
-$$
-
-$$
+= \frac{2}{(n+1)(n+2)}\theta^2 \\
 \mathrm{MSE}(\hat\theta^{\mathrm{MME}},\theta)
 = E_\theta[(2\bar X-\theta)^2]
 = \frac{1}{3n}\theta^2
@@ -89,104 +85,212 @@ E_\theta(\hat\theta^{H}-\theta)^2
 $$
 
 - 평균제곱오차는 $|\sqrt{n}\theta|$의 함수이다.
-- 수렴 속도는 $\mathrm{MSE}(\hat\theta^{H},\theta)\sim n^{-1}$로 $\hat\theta^{\mathrm{MLE}}$와 동일하다.
+- 수렴 속도는 $\mathrm{MSE}(\hat\theta^{H},\theta)\sim n^{-1}$로 $\hat\theta^{\mathrm{MLE}} = \bar X$와 동일하다.
+  - (TMI: Mill's ratio라고 불리는 근사식으로 $\mathrm{MSE}(\hat\theta^{H},\theta)\approx n^{-1}$ 증명 가능)
 - $\theta=0$ 근방에서는 표본평균보다 더 작은 MSE를 가질 수 있다.
+- 표본크기가 크면 혼합추정량이 표본평균과 거의 같은 성능
+- 표본크기가 작으면 거의 모든 경우에 표본평균이 더 좋다
 
+> 미지인 모수값의 범위에 따라 더 우수한 추정량이 바뀌니까 비교가 어렵다. 따라서 모수값에 의존하지 않는 비교기준이 필요하다. 대표적으로 최대평균제곱오차(maximum MSE), 베이지안평균제곱오차(Bayesian MSE)가 있다.
 ### 최대평균제곱오차 *(Maximum Mean Squared Error)*
 모수값에 따라 우열이 바뀌는 문제를 피하기 위해, **모수 전 범위에서의 최악 성능**을 기준으로 비교한다.
 
+평균제곱오차의 최댓값인 최대평균제곱오차
 $$
 \max_{\theta\in\Omega}
 E_\theta[(\hat\eta-\eta(\theta))^2]
 $$
+를 최소화하는 추정량을 **최소최대(minimax) 평균제곱오차 추정량**이라 한다.
 
-이를 최소화하는 추정량을 **최소최대 평균제곱오차 추정량**이라 한다.
+즉, minimax 평균제곱오차 추정량은
+$$
+\max_{\theta\in\Omega} E_\theta[(\hat\eta^*-\eta(\theta))^2] = \min_{\hat\eta} \max_{\theta\in\Omega} E_\theta[(\hat\eta-\eta(\theta))^2]
+$$
 
 ### 베이지안 평균제곱오차 *(Bayesian Mean Squared Error)*
-사전밀도함수(prior) $\pi(\theta)$가 주어질 때, 평균제곱오차의 가중평균을 기준으로 한다.
-
+사전확률분포(사전밀도함수, prior distribution) $\pi(\theta)$가 주어졌다고 하자. 이때, 평균제곱오차(Mean Squared Error, MSE)를 모수공간 전체에 걸쳐 사전확률로 가중평균하여 다음과 같이 정의한다.
 $$
 r(\pi,\hat\eta)
 =\int_\Omega E_\theta[(\hat\eta-\eta(\theta))^2]\pi(\theta)\,d\theta
 $$
+즉, 추정량 $\hat\eta$의 평균제곱오차를 사전확률분포 $\pi(\theta)$로 가중평균한 값을 **베이지안 평균제곱오차(Bayesian Mean Squared Error)** 라 한다.
 
-이를 최소로 하는 추정량을 **베이지안 평균제곱오차 추정량**이라 한다.
+이 값을 최소로 만드는 추정량 $\hat\eta^\pi$을 사전밀도함수 $\pi$에 대한 **베이지안 평균제곱오차 추정량(Bayesian MSE estimator)** 이라고 한다.  
+사전밀도함수 $\pi$는 양수 또는 0의 값을 갖는 함수 또는 확률밀도함수로, 가중치의 정도를 반영하는 함수다. 
 
-### 평균제곱상대오차 *(Mean Squared Relative Error)*
-$\eta(\theta)>0$인 경우, 다음 기준을 사용하기도 한다.
-
-$$
-E_\theta\left[\left(\frac{\hat\eta}{\eta}-1\right)^2\right]
-$$
-
-이에 대응하여 최대평균제곱상대오차, 베이지안 평균제곱상대오차 개념이 정의된다.
+> **(참고) 평균제곱상대오차 *(Mean Squared Relative Error)***  
+> $\eta(\theta)>0$인 경우, 평균제곱오차 대신 **평균제곱상대오차(Mean Squared Relative Error, MSRE)** 기준을 사용하는 경우도 많다. 이는 추정량의 상대적 정확도를 평가할 때 유용하다.  
+> $$
+> E_\theta\left[\left(\frac{\hat\eta}{\eta}-1\right)^2\right]
+> $$
+> 와 같이 정의하며, 최대평균제곱상대오차, 베이지안 평균제곱상대오차 등도 유사하게 정의된다.
 
 #### 예 8.1.3 최대평균제곱상대오차 최소화
-정규분포 $X_i\sim N(\mu,\sigma^2)$에서 분산의 추정량을
+정규분포 $X_i\sim N(\mu,\sigma^2)$에서 모분산의 추정량을
 $$
 \hat\sigma_c^2
-=c\sum_{i=1}^n(X_i-\bar X)^2,\quad c>0
+= c\sum_{i=1}^n(X_i-\bar X)^2,\quad c>0
 $$
-로 둘 때,
-
+로 둘 때, 최대평균제곱상대오차를 최소로 하는 추정량은?
 $$
-\sum_{i=1}^n\frac{(X_i-\bar X)^2}{\sigma^2}
-\sim \chi^2(n-1)
+\max_{\theta \in \Omega} E_\theta\left[\left(\frac{\hat\sigma_c^2}{\sigma^2}-1\right)^2\right]
 $$
 
-따라서 평균제곱상대오차는
-$$
-E_\theta\left[\left(\frac{\hat\sigma_c^2}{\sigma^2}-1\right)^2\right]
-=2(n-1)c^2+((n-1)c-1)^2
-$$
+**풀이**
+1. $\sum_{i=1}^n (X_i - \bar X)^2$는 $\sigma^2$에 대해 $(n-1)$ 자유도를 갖는 카이제곱 분포:
+    $$
+    \sum_{i=1}^n (X_i - \bar X)^2 \sim \sigma^2 \cdot \chi^2_{n-1}
+    $$
+    따라서
+    $$
+    \frac{\hat\sigma_c^2}{\sigma^2} = c \cdot \chi^2_{n-1}
+    $$
+    (여기서 $\chi^2_{n-1}$은 자유도 $n-1$인 표준화된 카이제곱 변수)
 
-이를 최소화하면 $c=\frac{1}{n+1}$
+2. 평균제곱상대오차(MSRE)는
+    $$
+    E_\theta\left[\left(\frac{\hat\sigma_c^2}{\sigma^2}-1\right)^2\right]
+    = E\left[(cY-1)^2\right]
+    $$
+    $\chi^2_k$의 평균은 $k$, 분산은 $2k$이므로, $Y = \frac{1}{n-1}\chi^2_{n-1}$, $E[Y]=1$, $Var(Y)=\frac{2}{n-1}$
 
-즉,
-$$
-\hat\sigma^2=\frac{1}{n+1}\sum_{i=1}^n(X_i-\bar X)^2
-$$
+3. $E[(cY-1)^2] = c^2 E[Y^2] - 2c E[Y] + 1$
+
+    $E[Y^2] = Var(Y) + (E[Y])^2 = \frac{2}{n-1} + 1 = \frac{n+1}{n-1}$
+
+    따라서
+    $$
+    E[(cY-1)^2] = c^2 \frac{n+1}{n-1} - 2c + 1
+    $$
+
+4. 이를 $c>0$에 대해 최소화하면,
+    $$
+    \frac{d}{dc} \left( c^2 \frac{n+1}{n-1} - 2c + 1 \right) = 2c \frac{n+1}{n-1} - 2 = 0
+    $$
+    $$
+    c^* = \frac{n-1}{n+1}
+    $$
+
+5. 결론: **최대평균제곱상대오차를 최소로 하는 $c$는 $c^* = \frac{n-1}{n+1}$** 이고,
+    $$
+    \hat\sigma_{c^*}^2 = \frac{n-1}{n+1} \sum_{i=1}^n (X_i - \bar X)^2
+    $$
 
 ### 불편추정량 *(Unbiased Estimator)*
-$E_\theta[\hat\eta]=\eta(\theta),\quad \forall\theta\in\Omega$
+한편 평균제곱오차를 기준으로 추정량을 비교할 때 비교대상인 추정량을 특정한 성질을 갖는 것으로 제한하여 비교하기도 한다. 특히 
+$$E_\theta[\hat\eta(X_1, \dots, X_n)]=\eta(\theta),\quad \forall\theta\in\Omega$$
+를 만족하는 추정량을 치우침 없는 추정량 또는 **불편추정량(unbiased estimator)** 라 하며, 이들 중에서 평균제곱오차를 최소로 하는 추정량을 찾기도 한다.
+
+>불편추정량임을 나타내는 위 항등식은 간단히
+>$$
+>E_\theta[\hat\eta^{UE}]^{\theta \in \Omega}
+>$$
+>와 같이 표기하기도 한다.
 
 불편추정량의 경우
-$\mathrm{MSE}(\hat\eta,\theta)=\mathrm{Var}_\theta(\hat\eta)$
-이므로, 분산을 최소화하는 것이 곧 MSE를 최소화하는 것이다.
+$$
+\mathrm{MSE}(\hat\eta, \theta) = E_\theta\left[(\hat\eta - \eta(\theta))^2\right]
+= \operatorname{Var}_\theta(\hat\eta) + \left(E_\theta[\hat\eta] - \eta(\theta)\right)^2
+$$
+인데, (bias, variance decomposition!!) 불편추정량이면 $E_\theta[\hat\eta] = \eta(\theta)$이므로  
+$$
+\mathrm{MSE}(\hat\eta, \theta) = \operatorname{Var}_\theta(\hat\eta)
+$$
+즉, 분산을 최소화하는 것이 곧 MSE를 최소화하는 것, 최적의 추정량이다.
 
+>#### 불편추정량의 의의
+>불편추정량은 '장기적으로 평균을 내면 항상 정답을 맞힌다'는 성질을 가진다. 즉, 같은 실험을 무한히 반복했을 때 추정값들의 평균이 항상 참값 $\eta(\theta)$로 수렴한다.
+>
+>- 체계적 오차(편향)가 없으므로, 표본을 아무리 많이 모아도 >평균적으로는 참값에 도달한다.
+>- 추정량 비교의 기준선 역할: "평균적으로는 맞히자"라는 최소한의 공정성 조건을 제공한다.
+>- 이론적으로 MSE가 분산 하나로 환원되어 분석이 단순해진다.
+>
+>**주의점**
+>- 불편성은 좋은 추정량의 충분조건이 아니다. 분산이 너무 크면 실제로는 매우 나쁜 추정량일 수 있다.
+>- 약간의 편향이 있더라도 MSE가 더 작은(즉, 전체적으로 더 나은) 추정량이 존재할 수 있다.
+>- 따라서 불편성은 최적성의 조건이 아니라, 하나의 제약조건에 불과하다.
+
+불편추정량 중에서, 모수 $\theta$의 참값이 무엇이든 그 분산을 최소로 하는 추정량이 있다면, 그 추정량을 전역최소분산불편추정량 **(Uniformly Minimum Variance Unbiased Estimator, UMVUE)** 라 한다
 ### 전역최소분산불편추정량 *(Uniformly Minimum Variance Unbiased Estimator, UMVUE)*
-추정량 $\hat\eta^*$가 다음을 만족하면 UMVUE라 한다.
+추정량 $\hat\eta^*$가 다음을 만족하면 UMVUE라 하고 $\hat\eta^{UMVUE}$로 나타내기도 한다.
 1. $E_\theta[\hat\eta^*]=\eta(\theta)$
 2. 임의의 불편추정량 $\hat\eta^{UE}$에 대해
     $\mathrm{Var}_\theta(\hat\eta^*) \le \mathrm{Var}_\theta(\hat\eta^{UE}),\quad \forall\theta\in\Omega$
 
+>#### UMVUE의 의의
+>UMVUE는 불편추정량 중에서 분산이 가장 작은, 즉 평균적으로는 항상 맞히면서도 가장 덜 흔들리는 추정량이다.  
+>즉, **불편성**이라는 제약을 절대 포기하지 않을 때, 그 안에서 더 이상 개선이 불가능한 "최적의 불편추정량"이 바로 UMVUE다.
+>
+>추후 다양한 이론이 UMVUE에서 시작된다!
+>- UMVUE에서 “Uniformly”란 **특정 $\theta$에서만 좋은 것이 아니라, 모든 $\theta \in \Omega$에 대해 분산이 최소**임을 뜻한다.
+>- 즉, **국소 최적(local optimum)이 아니라 전역 최적(global optimum)** 으로, 모수공간 전체에서 항상 최적의 불편추정량임을 보장한다.
+>- 이는 일부 $\theta$에서만 분산이 최소인 추정량과 구별되는 중요한 특징이다.
+
 ### 정리 8.1.1 최소분산불편추정량의 유일성 *(Uniqueness of UMVUE)*
-UMVUE의 분산이 유한하면, UMVUE는 거의 확실하게 유일하다.
+UMVUE의 분산이 유한하면, UMVUE는 유일하다 (거의 확실하게).
+$$
+P_\theta(\hat\eta_1 = \hat\eta_2) = 1,\quad \forall\theta\in\Omega
+$$
 
 #### 증명
-$\hat\eta_1, \hat\eta_2$가 모두 UMVUE라고 하자.
-$\hat\eta_3 = \frac{\hat\eta_1+\hat\eta_2}{2}$ 역시 불편추정량이다.
+$\hat\eta_1, \hat\eta_2$가 모두 UMVUE라고 하자. 즉, 두 추정량 모두 $\eta(\theta)$의 불편추정량이며, 모든 $\theta \in \Omega$에 대해 분산이 최소이다.
 
-UMVUE의 성질로부터
-$\mathrm{Var}_\theta(\hat\eta_3) \ge \mathrm{Var}_\theta(\hat\eta_1) = \mathrm{Var}_\theta(\hat\eta_2)$
+이제 $\hat\eta_3 = \frac{\hat\eta_1 + \hat\eta_2}{2}$를 고려하자. $\hat\eta_3$ 역시 $\eta(\theta)$의 불편추정량임을 쉽게 확인할 수 있다:
+$$
+E_\theta[\hat\eta_3] = E_\theta\left[\frac{\hat\eta_1 + \hat\eta_2}{2}\right] = \frac{E_\theta[\hat\eta_1] + E_\theta[\hat\eta_2]}{2} = \frac{\eta(\theta) + \eta(\theta)}{2} = \eta(\theta)
+$$
 
-이를 전개하면
-$\mathrm{Var}_\theta(\hat\eta_1-\hat\eta_2)=0$
+UMVUE의 정의에 따라, $\hat\eta_1$과 $\hat\eta_2$는 모두 불편추정량 중에서 분산이 최소이므로,
+$$
+\mathrm{Var}_\theta(\hat\eta_1) \le \mathrm{Var}_\theta(\hat\eta_3), \qquad
+\mathrm{Var}_\theta(\hat\eta_2) \le \mathrm{Var}_\theta(\hat\eta_3)
+$$
+또한, $\hat\eta_1$과 $\hat\eta_2$의 분산은 같으므로(둘 다 UMVUE이므로),
+$$
+\mathrm{Var}_\theta(\hat\eta_1) = \mathrm{Var}_\theta(\hat\eta_2) \le \mathrm{Var}_\theta(\hat\eta_3)
+$$
 
-또한
-$E_\theta(\hat\eta_1-\hat\eta_2)=0$
+한편, $\hat\eta_3$의 분산은 다음과 같다:
+$$
+\mathrm{Var}_\theta(\hat\eta_3) = \mathrm{Var}_\theta\left(\frac{\hat\eta_1 + \hat\eta_2}{2}\right)
+= \frac{1}{4} \mathrm{Var}_\theta(\hat\eta_1 + \hat\eta_2)
+= \frac{1}{4} \left( \mathrm{Var}_\theta(\hat\eta_1) + \mathrm{Var}_\theta(\hat\eta_2) + 2\mathrm{Cov}_\theta(\hat\eta_1, \hat\eta_2) \right)
+$$
+$$
+= \frac{1}{4} \mathrm{Var}_\theta(\hat\eta_1) + \frac{1}{4} \mathrm{Var}_\theta(\hat\eta_2) + \frac{1}{2} \mathrm{Cov}_\theta(\hat\eta_1, \hat\eta_2)
+$$
 
-따라서
-$P_\theta(\hat\eta_1=\hat\eta_2)=1,\quad \forall\theta\in\Omega$
-이다. □
-
+위에서 $\mathrm{Var}_\theta(\hat\eta_1) \le \mathrm{Var}_\theta(\hat\eta_3)$이므로,
+$$
+\mathrm{Var}_\theta(\hat\eta_1) \le \frac{1}{4} \mathrm{Var}_\theta(\hat\eta_1) + \frac{1}{4} \mathrm{Var}_\theta(\hat\eta_2) + \frac{1}{2} \mathrm{Cov}_\theta(\hat\eta_1, \hat\eta_2)
+$$
+즉,
+$$
+\frac{3}{4} \mathrm{Var}_\theta(\hat\eta_1) - \frac{1}{4} \mathrm{Var}_\theta(\hat\eta_2) \le \frac{1}{2} \mathrm{Cov}_\theta(\hat\eta_1, \hat\eta_2) \\
+\therefore \mathrm{Var}_\theta(\hat\eta_1) \le \mathrm{Cov}_\theta(\hat\eta_1, \hat\eta_2)
+$$
+이때,
+$$
+\mathrm{Var}_\theta(\hat\eta_1 - \hat\eta_2)
+= \mathrm{Var}_\theta(\hat\eta_1) + \mathrm{Var}_\theta(\hat\eta_2) - 2\,\mathrm{Cov}_\theta(\hat\eta_1, \hat\eta_2)
+$$
+위에서 $\mathrm{Var}_\theta(\hat\eta_1) \le \mathrm{Cov}_\theta(\hat\eta_1, \hat\eta_2)$, $\mathrm{Var}_\theta(\hat\eta_2) \le \mathrm{Cov}_\theta(\hat\eta_1, \hat\eta_2)$이므로,
+$$
+\mathrm{Var}_\theta(\hat\eta_1 - \hat\eta_2) \le 0 \\
+\therefore \mathrm{Var}_\theta(\hat\eta_1 - \hat\eta_2) = 0
+$$
+정리 1.6.4(분산 0의 의미)에 따라, $\hat\eta_1 - \hat\eta_2 = 0$이 거의 확실하게 성립한다. 즉,
+$$
+P_\theta(\hat\eta_1 = \hat\eta_2) = 1,\quad \forall\theta\in\Omega
+$$
+따라서 UMVUE는 유일하다.
 
 ## 충분통계량 *(Sufficient Statistics)*
 
 ### 충분성의 동기 *(Motivation of Sufficiency)*
 랜덤표본 $X_1,\dots,X_n$을 이용해 모수 $\theta$를 추론할 때, 표본 전체가 아니라 **일부 정보만으로도 동일한 추론 정확도**를 얻을 수 있다면 데이터 저장·계산 측면에서 유리하다.
 
-이러한 **자료 축약(reduction)**의 핵심 개념이 **충분성(sufficiency)**이다.
+이러한 **자료 축약(reduction)** 의 핵심 개념이 **충분성(sufficiency)** 이다.
 
 #### 예 8.2.1 두 번의 베르누이 시행 *(Bernoulli Trials)*
 서로 독립인 $X_1,X_2 \sim \mathrm{Bernoulli}(\theta),\ 0<\theta<1$에서 $(X_1,X_2)$ 대신 $Y=X_1+X_2$만 관측한다고 하자.
@@ -196,29 +300,26 @@ $P_\theta(\hat\eta_1=\hat\eta_2)=1,\quad \forall\theta\in\Omega$
 - $Y=1 \Rightarrow (1,0)$ 또는 $(0,1)$
 
 조건부확률은
-$P_\theta(X_1=1,X_2=0\mid Y=1) = P_\theta(X_1=0,X_2=1\mid Y=1) = \frac12$
+$P_\theta(X_1=1,X_2=0\mid Y=1) = P_\theta(X_1=0,X_2=1\mid Y=1) = \frac12$  
+이는 $\theta$에 의존하지 않는다.  
+즉, 성공 횟수 $Y$만 알면 순서 정보는 $\theta$ 추론에 불필요하다.
 
-이는 $\theta$에 의존하지 않는다.
-
-**결론:** 성공 횟수 $Y$만 알면 순서 정보는 $\theta$ 추론에 불필요하다.
-
+>추가 예시:  
+>$X_1, X_2 \sim N(\mu, 1)$에서 $(X_1, X_2)$ 대신 $Y = X_1 + X_2$만 알 때,  
+>$P_\mu(X_1 = x_1, X_2 = x_2 \mid Y = y)$는 $\mu$에 무관하다.  
+>즉, $Y$만으로 $\mu$ 추론에 필요한 정보가 모두 담겨 있으므로 $Y$는 $\mu$에 대한 충분통계량이다.
 ### 충분통계량의 정의 *(Definition of Sufficient Statistic)*
 모집단 분포가 $f(x;\theta),\ \theta\in\Omega$이고, 통계량 $Y=u(X_1,\dots,X_n)$에 대하여
-
 $$
 P_{\theta_1}\big((X_1,\dots,X_n)\in A\mid Y=y\big)
 =
 P_{\theta_2}\big((X_1,\dots,X_n)\in A\mid Y=y\big)
 $$
-
-가 모든 집합 $A$, 모든 $y$, 모든 $\theta_1,\theta_2\in\Omega$에 대해 성립하면 $Y$를 $\theta$에 대한 **충분통계량**이라 한다.
-
+가 모든 집합 $A$, 모든 $y$, 모든 $\theta_1,\theta_2\in\Omega$에 대해 성립하면 $Y$를 $\theta$에 대한 **충분통계량**이라 한다.  
 즉, **조건부 분포가 모수에 의존하지 않음**.
 
 #### 예 8.2.2 베르누이 독립시행에서의 충분통계량
-$X_1,\dots,X_n \sim \mathrm{Bernoulli}(\theta)$
-
-$Y=\sum_{i=1}^n X_i \sim \mathrm{Binomial}(n,\theta)$
+$X_1,\dots,X_n \sim \mathrm{Bernoulli}(\theta)$, $Y=\sum_{i=1}^n X_i \sim \mathrm{Binomial}(n,\theta)$
 
 조건부확률은
 $$
@@ -226,165 +327,263 @@ P_\theta(X_1=x_1,\dots,X_n=x_n\mid Y=y)
 =
 \binom{n}{y}^{-1} I\Big(\sum x_i=y\Big)
 $$
-
-이는 $\theta$에 무관하다.
-
+이는 $\theta$에 무관하다.  
 **결론:** $Y=\sum_{i=1}^n X_i$는 $\theta\in(0,1)$에 대한 충분통계량이다.
 
-### 분해 정리 *(Factorization Theorem)*
-
-### 정리 8.2.1 분해 정리
+### 정리 8.2.1 분해 정리 *(Factorization Theorem)*
 통계량 $Y=u(X_1,\dots,X_n)$이 $\theta$에 대한 충분통계량일 **필요충분조건**은
-
 $$
 \prod_{i=1}^n f(x_i;\theta) = k_1(u(x),\theta)\,k_2(x)
 $$
+를 만족하는 "함수" $k_1, k_2$가 존재하는 것이다.
 
-를 만족하는 함수 $k_1, k_2$가 존재하는 것이다.
-
-#### 증명 (충분조건)
-결합확률을 분해하면
+**정리 8.2.1 (분해 정리) 증명**
+이산형만 증명하겠다. 일반적으로 성립한다.  
+#### (⇒) 충분조건: 분해형이면 충분통계량이다
+분포를
 $$
-P_\theta(X=x\mid Y=y)
-= \frac{k_1(y,\theta)k_2(x)}{\sum_{z:u(z)=y}k_1(y,\theta)k_2(z)}
-= \frac{k_2(x)}{\sum_{z:u(z)=y}k_2(z)}
+\prod_{i=1}^n f(x_i;\theta) = k_1(u(x),\theta)\,k_2(x)
 $$
-
-$\theta$에 의존하지 않는다.
-
-#### 증명 (필요조건)
-충분성으로부터
-$P_\theta(X=x\mid Y=u(x))=k_2(x)$,
-$P_\theta(Y=u(x))=k_1(u(x),\theta)$
-
-이므로
-$P_\theta(X=x)=k_1(u(x),\theta)k_2(x)$
-
-### 대표적 분포에서의 충분통계량
-
-#### 예 8.2.3 포아송 분포 *(Poisson)*
-$X_i\sim\mathrm{Poisson}(\theta)$
-
+꼴로 쓸 수 있다고 하자. $Y = u(X_1,\dots,X_n)$에 대해, $Y=y$일 때 $X=x$의 조건부확률은
 $$
-\prod f(x_i;\theta)
-= e^{-n\theta}\theta^{\sum x_i}\prod \frac{1}{x_i!}
+P_\theta(X=x \mid Y=y)
+= \frac{P_\theta(X=x)}{P_\theta(Y=y)}
+= \frac{k_1(u(x),\theta)\,k_2(x)}{\sum_{z:u(z)=y} k_1(u(z),\theta)\,k_2(z)}
 $$
-
-따라서 $\sum X_i$는 충분통계량이다.
-
-#### 예 8.2.4 지수분포 *(Exponential)*
-$X_i\sim \mathrm{Exp}(\theta)$
-
+여기서 $u(x)=y$이므로 $k_1(u(x),\theta) = k_1(y,\theta)$로 고정된다:
 $$
-\prod f(x_i;\theta)
-= \theta^{-n}\exp\Big(-\frac{1}{\theta}\sum x_i\Big)\prod I_{(0,\infty)}(x_i)
+= \frac{k_1(y,\theta)\,k_2(x)}{k_1(y,\theta)\sum_{z:u(z)=y} k_2(z)}
+= \frac{k_2(x)}{\sum_{z:u(z)=y} k_2(z)}
 $$
+즉, $\theta$에 무관하다. 따라서 $Y$는 충분통계량이다.
 
-따라서 $\sum X_i$는 충분통계량이다.
-
-#### 예 8.2.5 감마분포 *(Gamma)*
-$X_i \sim \mathrm{Gamma}(\alpha, \beta)$
-
-결합밀도는
-$\left(\sum x_i,\; \prod x_i\right)$
-로 분해 가능하다.
-
-따라서
-$u(X) = \left(\sum X_i,\, \prod X_i\right)$
-는 $(\alpha, \beta)$에 대한 충분통계량이다.
-
-### 지수족에서의 충분통계량 *(Exponential Family)*
-
-### 정리 8.2.2 다중모수 지수족
-확률밀도함수가
+#### (⇐) 필요조건: 충분통계량이면 분해형이 된다
+$Y = u(X_1,\dots,X_n)$이 충분통계량이라고 하자. $x$에 대해 $y = u(x)$로 두고,
 $$
-f(x;\theta) = \exp\left\{ \sum_{j=1}^k g_j(\theta) T_j(x) - A(g(\theta)) + S(x) \right\}
+P_\theta(X=x \mid Y=y) = k_2(x)
 $$
-꼴이면,
+꼴로 쓸 수 있다. $P_\theta(Y=y)$를 $k_1(y,\theta)$로 두면,
 $$
-\sum_{i=1}^n T(X_i)
+P_\theta(X=x) = P_\theta(X=x \mid Y=y) \cdot P_\theta(Y=y)
+= k_2(x)\,k_1(y,\theta)
 $$
-는 충분통계량이다.
-
-### 충분통계량의 함수 *(Function of Sufficient Statistic)*
-
-### 정리 8.2.3
-$Y$가 충분통계량이고 $W = g(Y)$가 **일대일 함수**이면 $W$도 충분통계량이다.
-
-#### 예 8.2.6 정규분포 *(Normal)*
-$X_i \sim N(\mu, \sigma^2)$
-
-충분통계량:
-$\left(\sum X_i,\, \sum X_i^2\right)$
-
-동치 표현:
-$\left(\bar X,\, \sum (X_i - \bar X)^2\right)$
-
-#### 예 8.2.7 베타분포 *(Beta$(\alpha, 1)$)*
-$f(x;\alpha) = \alpha x^{\alpha-1}$
-
-충분통계량:
-$\sum \log X_i$
-또는
-$\overline{\log X}$
-
-#### 예 8.2.8 두 모수 지수분포 *(Shifted Exponential)*
-$f(x;\mu,\sigma) = \frac{1}{\sigma} e^{-(x-\mu)/\sigma} I_{[\mu,\infty)}(x)$
-
-충분통계량:
-$\left(\sum X_i,\, \min X_i\right)$
-
-#### 예 8.2.9 균등분포 $U[\theta_1, \theta_2]$
-$f(x;\theta_1,\theta_2) = (\theta_2-\theta_1)^{-n} I(\theta_1 \le \min X_i,\, \max X_i \le \theta_2)$
-
-충분통계량:
-$(\min X_i,\, \max X_i)$
-
-### 최대가능도추정량과 충분통계량
-
-### 정리 8.2.4
-MLE $\hat\theta^{\mathrm{MLE}}$가 유일하면, 이는 **임의의 충분통계량의 함수**이다.
-
 즉,
 $$
-\hat\theta^{\mathrm{MLE}} = h(S)
+\prod_{i=1}^n f(x_i;\theta) = k_1(u(x),\theta)\,k_2(x)
+$$
+형태로 쓸 수 있다.
+#### 예 8.2.3 포아송 분포 *(Poisson)*  
+$X_i \sim \mathrm{Poisson}(\theta)$의 결합확률질량함수는  
+$$
+\prod_{i=1}^n f(x_i;\theta) = \prod_{i=1}^n \frac{e^{-\theta}\theta^{x_i}}{x_i!} = e^{-n\theta}\theta^{\sum x_i} \prod_{i=1}^n \frac{1}{x_i!}
+$$
+여기서 $k_1\left(\sum x_i,\,\theta\right) = e^{-n\theta}\theta^{\sum x_i}$, $k_2(x) = \prod_{i=1}^n \frac{1}{x_i!}$라 하면, 분해정리에 의해 $\sum X_i$는 $\theta$에 대한 충분통계량이다.
+
+#### 예 8.2.4 지수분포 *(Exponential)*  
+$X_i \sim \mathrm{Exp}(\theta)$의 결합확률밀도함수는  
+$$
+\prod_{i=1}^n f(x_i;\theta) = \prod_{i=1}^n \frac{1}{\theta} \exp\left(-\frac{x_i}{\theta}\right) I_{(0,\infty)}(x_i) = \theta^{-n} \exp\left(-\frac{1}{\theta} \sum x_i\right) \prod_{i=1}^n I_{(0,\infty)}(x_i)
+$$
+여기서 $k_1\left(\sum x_i,\,\theta\right) = \theta^{-n} \exp\left(-\frac{1}{\theta} \sum x_i\right)$, $k_2(x) = \prod_{i=1}^n I_{(0,\infty)}(x_i)$이므로, 분해정리에 의해 $\sum X_i$는 $\theta$에 대한 충분통계량이다.
+
+#### 예 8.2.5 감마분포 *(Gamma)*  
+$X_i \sim \mathrm{Gamma}(\alpha, \beta)$의 결합확률밀도함수는  
+$$
+\prod_{i=1}^n f(x_i;\alpha,\beta) = \prod_{i=1}^n \frac{1}{\Gamma(\alpha)\beta^\alpha} x_i^{\alpha-1} e^{-x_i/\beta}
+= \frac{1}{[\Gamma(\alpha)]^n \beta^{n\alpha}} \left(\prod_{i=1}^n x_i\right)^{\alpha-1} \exp\left(-\frac{1}{\beta} \sum_{i=1}^n x_i\right)
+$$
+여기서 $k_1\left(\sum x_i,\,\sum \log x_i,\,\alpha,\beta\right) = \beta^{-n\alpha} \left(\prod x_i\right)^{\alpha-1} \exp\left(-\frac{1}{\beta} \sum x_i\right)$, $k_2(x) = 1$로 둘 수 있다. 즉, 분해정리에 의해 $u(X) = \left(\sum X_i,\, \sum \log X_i\right)$가 $(\alpha, \beta)$에 대한 충분통계량이다.
+
+#### 증명  
+분해정리(정리 8.2.1)에 따르면, 결합확률밀도함수  
+$$
+\prod_{i=1}^n f(x_i;\theta) = \exp\left\{ \sum_{i=1}^n \sum_{j=1}^k g_j(\theta) T_j(x_i) - nA(g(\theta)) + \sum_{i=1}^n S(x_i) \right\}
+$$  
+에서 $g_j(\theta)\sum_{i=1}^n T_j(x_i)$ 부분이 $\theta$와 $x$를 연결하므로,  
+$$
+\sum_{i=1}^n T(X_i)
+$$  
+가 충분통계량임을 알 수 있다.
+
+### 정리 8.2.3 충분통계량의 일대일 함수 *(Function of Sufficient Statistic)*
+$Y$가 충분통계량이고 $W = g(Y)$가 **일대일 함수**이면 $W$도 충분통계량이다.
+
+#### 증명
+$Y$가 충분통계량이므로, 임의의 집합 $A$와 모든 $y$, $\theta_1, \theta_2$에 대해
+$$
+P_{\theta_1}\big((X_1,\dots,X_n)\in A \mid Y=y\big)
+= P_{\theta_2}\big((X_1,\dots,X_n)\in A \mid Y=y\big)
 $$
 
-### Rao–Blackwell 정리 *(Estimator Improvement)*
+$W = g(Y)$가 일대일 함수이므로, $W=w$일 때 $Y$는 유일하게 결정된다. 즉, $Y = g^{-1}(w)$.
 
-### 정리 8.2.5 Rao–Blackwell 정리
+따라서
+$$
+P_{\theta}\big((X_1,\dots,X_n)\in A \mid W=w\big)
+= P_{\theta}\big((X_1,\dots,X_n)\in A \mid Y=g^{-1}(w)\big)
+$$
+이므로, $W$에 대한 조건부분포 역시 $\theta$에 무관하다.  
+결론적으로, $W$도 충분통계량이다.
+
+#### 예 8.2.6 정규모집단의 경우
+$X_i \sim N(\mu, \sigma^2)$  
+충분통계량: $\left(\sum X_i,\, \sum X_i^2\right)$  
+동치 표현: $\left(\bar X,\, \sum (X_i - \bar X)^2\right)$
+
+#### 예 8.2.7 $Beta(\alpha, 1)$의 경우
+$f(x;\alpha) = \alpha x^{\alpha-1}$  
+충분통계량:
+$\sum \log X_i$ 또는 $\overline{\log X}$
+
+#### 예 8.2.8 두 개의 모수를 갖는 지수분포 *(Shifted Exponential)*
+모집단 분포의 토대가 모수에 의존하면 정리8.2.2를 적용할 수 없지만, 그 토대를 나타내는 지표함수를 고려하여 분해정리를 이용하면 충분통계량을 찾을 수 있다.  
+
+$f(x;\mu,\sigma) = \frac{1}{\sigma} e^{-(x-\mu)/\sigma} I_{[\mu,\infty)}(x)$  
+결합확률밀도함수는
+$$
+\prod_{i=1}^n f(x_i;\mu,\sigma)
+= \prod_{i=1}^n \frac{1}{\sigma} e^{-(x_i-\mu)/\sigma} I_{[\mu,\infty)}(x_i)
+= \sigma^{-n} \exp\left(-\frac{1}{\sigma} \sum_{i=1}^n (x_i-\mu)\right) \prod_{i=1}^n I_{[\mu,\infty)}(x_i)
+$$
+여기서 $\prod_{i=1}^n I_{[\mu,\infty)}(x_i) = I_{[\mu,\infty)}(\min x_i)$이므로,
+$$
+= \sigma^{-n} \exp\left(-\frac{1}{\sigma} \sum_{i=1}^n (x_i-\mu)\right) I_{[\mu,\infty)}(\min x_i)
+$$
+이 등식의 우변을 $k_1\left(\sum x_i,\,\min x_i,\,\mu,\,\sigma\right)$과 $k_2(x_1,\dots,x_n)=1$의 곱으로 나타낼 수 있으므로, 분해정리에 의해  
+$(\sum X_i,\,\min X_i)$는 $(\mu,\sigma)$에 대한 충분통계량이다.
+
+#### 예 8.2.9 균등분포 $U[\theta_1, \theta_2]$에서의 충분통계량
+$X_1, \dots, X_n \sim U[\theta_1, \theta_2]$일 때, 결합확률밀도함수는
+$$
+f(x;\theta_1,\theta_2) = (\theta_2-\theta_1)^{-n} I(\theta_1 \le \min X_i,\, \max X_i \le \theta_2)
+$$
+
+분해정리에 따라, $k_1(\min X_i, \max X_i, \theta_1, \theta_2) = (\theta_2-\theta_1)^{-n} I(\theta_1 \le \min X_i,\, \max X_i \le \theta_2)$, $k_2(x) = 1$로 쓸 수 있으므로,  
+충분통계량은 $(\min X_i,\, \max X_i)$
+
+즉, 표본의 최솟값과 최댓값만 알면 $\theta_1, \theta_2$에 대한 모든 정보가 보존된다.
+
+### 정리 8.2.4 최대가능도추정량과 충분통계량
+MLE $\hat\theta^{\mathrm{MLE}}$가 유일하면, 이는 **임의의 충분통계량 $S=(X_1, \dots, X_n)$** 의 함수다.
+$$
+\hat\theta^{\mathrm{MLE}}(X_1, \dots, X_n) = f(S)
+$$
+
+#### 증명
+MLE $\hat\theta^{\mathrm{MLE}}$는 표본 $(X_1, \dots, X_n)$에서 가능도를 최대화하는 값이다. 충분통계량 $S = S(X_1, \dots, X_n)$이 존재하면, 분해정리에 의해 결합확률(밀도)함수는
+$$
+L(\theta; X_1, \dots, X_n) = k_1(S, \theta) k_2(X_1, \dots, X_n)
+$$
+꼴로 쓸 수 있다. $k_2$는 $\theta$에 무관하므로, $\theta$에 대한 최대화는 $k_1(S, \theta)$만 고려하면 된다. 즉,
+$$
+\hat\theta^{\mathrm{MLE}} = \arg\max_\theta L(\theta; X_1, \dots, X_n) = \arg\max_\theta k_1(S, \theta)
+$$
+따라서 $\hat\theta^{\mathrm{MLE}}$는 $S$의 함수로 표현된다.
+
+### 정리 8.2.5 Rao–Blackwell 정리 *(Estimator Improvement)* 
+정리8.2.4에서 유일하게 존재한다고 가정된 최대가능도 추정량 $Y=\hat\theta^{MLE}(X_1, \dots, X_n)$가 추가적으로 $\theta\in\Omega$에 대한 충분통계량이면, 이는 임의의 다른 충분통계량 $S=u(X_1, \dots, X_n)$의 함수로 나타내지는 충분통계량으로서, 이런 충분통계량을 최소충분통계량(minimal sufficient statistic)라 한다.  
+예8.2.2부터 예8.2.9까지 모형에서의 최대가능도추정량은 모두 유일하게 존재하고 모수에 관한 충분통계량이므로, 이들 모두 모수에 관한 최소충분통계량이다.  
+
 $\hat\eta$가 추정량이고 $Y$가 충분통계량이면
 $$
-\hat\eta^{RB} = E(\hat\eta \mid Y)
+\hat\eta^{RB} = E(\hat\eta(X_1, \dots, X_n) \mid Y)
 $$
 는 항상
 $$
-\mathrm{MSE}(\hat\eta^{RB}, \theta) \le \mathrm{MSE}(\hat\eta, \theta)
+\mathrm{MSE}(\hat\eta^{RB}, \theta) \le \mathrm{MSE}(\hat\eta, \theta), \ \forall \theta \in \Omega
 $$
 
+>Rao–Blackwell 정리의 의의
+>- 임의의 추정량이 주어졌을 때, 충분통계량에 대한 조건부기대값을 취하면 항상 평균제곱오차(MSE)가 감소하거나 같아진다.
+>- 즉, **충분통계량을 활용하면 추정량을 반드시 개선**할 수 있다.
+>- 이 과정을 반복하면, 충분통계량의 함수로 표현되는 "최적의" 추정량(특히 불편추정량의 경우 UMVUE)에 도달할 수 있다.
+>- 실전적으로는, 임의의 불편추정량을 Rao–Blackwell화하면 항상 더 나은(또는 같은) 불편추정량을 얻을 수 있다는 점에서 매우 강력한 추정량 개선 도구이다.
+
+#### 증명
+$\hat\eta^{RB} = E(\hat\eta \mid Y)$로 정의한다. 평균제곱오차(MSE)는
+$$
+\mathrm{MSE}(\hat\eta, \theta) = E_\theta\left[(\hat\eta - \eta(\theta))^2\right]
+$$
+조건부기대값의 분해(분산의 법칙)에 의해
+$$
+E_\theta\left[(\hat\eta - \eta(\theta))^2\right]
+= E_\theta\left[\,E_\theta\left[(\hat\eta - \eta(\theta))^2 \mid Y\right]\,\right]
+$$
+$$
+= E_\theta\left[\,\operatorname{Var}_\theta(\hat\eta \mid Y) + (E_\theta[\hat\eta \mid Y] - \eta(\theta))^2\,\right]
+$$
+$$
+= E_\theta\left[\operatorname{Var}_\theta(\hat\eta \mid Y)\right] + E_\theta\left[(\hat\eta^{RB} - \eta(\theta))^2\right]
+$$
+$$
+\therefore \mathrm{MSE}(\hat\eta, \theta) = E_\theta\left[\operatorname{Var}_\theta(\hat\eta \mid Y)\right] + \mathrm{MSE}(\hat\eta^{RB}, \theta)
+$$
+이고, $E_\theta[\operatorname{Var}_\theta(\hat\eta \mid Y)] \ge 0$이기 때문에
+$$
+\mathrm{MSE}(\hat\eta^{RB}, \theta) \le \mathrm{MSE}(\hat\eta, \theta)
+$$
+즉, 충분통계량에 대한 조건부기대값으로 추정량을 개선하면 항상 MSE가 감소하거나 같아진다.
+
 #### 예 8.2.10 균등분포 $U(0, \theta)$
-초기 추정량:
-$\hat\theta = 2\bar X,\quad \mathrm{MSE} = \frac{\theta^2}{3n}$
+결합확률밀도함수는
+$$
+\prod_{i=1}^n f(x_i;\theta) = \prod_{i=1}^n \frac{1}{\theta} I_{(0,\theta)}(x_i) = \theta^{-n} I_{(0 < \min x_i < \max x_i < \theta)}
+$$
+이므로, 분해정리에 따라 $k_1(\max x_i, \theta) = \theta^{-n} I_{(\max x_i < \theta)}$, $k_2(x) = I_{(0 < \min x_i)}$로 쓸 수 있다. 따라서 $Y = \max X_i$가 $\theta > 0$에 대한 충분통계량이다.
 
-충분통계량:
-$X_{(n)} = \max X_i$
+초기 추정량: $\hat\theta = 2\bar X$이고, $\hat\theta$는 $\theta$의 불편추정량.  
+평균제곱오차(MSE)는
+$$
+\mathrm{MSE}(\hat\theta, \theta) = E_\theta[(2\bar X - \theta)^2] = 4Var_{\theta}(\bar X) = \frac{\theta^2}{3n}
+$$
 
-Rao–Blackwell 개선:
-$\hat\theta^{RB} = \frac{n+1}{n} X_{(n)}$
+**Rao–Blackwell 개선:**  
+Rao–Blackwell 정리에 따라, 충분통계량 $X_{(n)}$에 대한 조건부기대값을 취하면 더 나은 추정량을 얻을 수 있다.
+- 개선된 추정량: $\hat\theta^{RB} = E(2\bar X \mid X_{(n)})$
+- $U(0, \theta)$에서 $X_{(n)} = t$일 때, $X_1, \dots, X_n$의 조건부분포는 $[0, t]$에서 균등하게 분포하며, $X_{(n)} = t$는 $n$개 중 하나가 $t$이고 나머지는 $[0, t]$에서 iid 균등이다.
+- 따라서 $E(\bar X \mid X_{(n)} = t) = \frac{n t}{n+1}$
 
-$\mathrm{MSE}(\hat\theta^{RB}, \theta) = \frac{\theta^2}{n(n+2)} < \frac{\theta^2}{3n}$
+따라서  
+- $X_{(n)} = \max(X_1, \dots, X_n)$일 때, $E(\bar X \mid X_{(n)} = t) = \frac{n t}{n+1}$이므로  
+- Rao–Blackwell 개선 추정량은  
+    $$
+    \hat\theta^{RB} = 2 \cdot \frac{n X_{(n)}}{n+1} = \frac{2n}{n+1} X_{(n)}
+    $$
+- 하지만 실제로 $\frac{n+1}{n} X_{(n)}$가 $\theta$의 불편추정량이므로, Rao–Blackwell 개선 추정량은  
+    $$
+    \hat\theta^{RB} = \frac{n+1}{n} X_{(n)}
+    $$
+즉, 표본의 최댓값에 $(n+1)/n$을 곱한 것이 $\theta$의 불편추정량이자 Rao–Blackwell 개선 추정량이다.
+
+**MSE 개선 전후 비교**  
+$$
+f_{X_{(n)}}(x) = n \frac{x^{n-1}}{\theta^n},\quad 0 < x < \theta
+$$
+- $E[X_{(n)}] = \frac{n}{n+1}\theta$
+- $E[X_{(n)}^2] = \frac{n}{n+2}\theta^2$
+$$
+\mathrm{MSE}(\hat\theta^{RB}, \theta)
+= E\left[\left(\frac{n+1}{n} X_{(n)} - \theta\right)^2\right]
+= \left(\frac{n+1}{n}\right)^2 E[X_{(n)}^2] - 2\theta\frac{n+1}{n} E[X_{(n)}] + \theta^2 \\
+= \left(\frac{n+1}{n}\right)^2 \cdot \frac{n}{n+2}\theta^2 - 2\theta\frac{n+1}{n} \cdot \frac{n}{n+1}\theta + \theta^2 \\
+= \frac{(n+1)^2}{n(n+2)}\theta^2 - 2\theta^2 + \theta^2
+= \frac{(n+1)^2 - 2n(n+2) + n(n+2)}{n(n+2)}\theta^2
+= \frac{\theta^2}{n(n+2)}
+$$
+
+**비교:**  
+$$
+\mathrm{MSE}(\hat\theta^{RB}, \theta) = \frac{\theta^2}{n(n+2)} < \frac{\theta^2}{3n} = \mathrm{MSE}(\hat\theta, \theta)
+$$
+
+즉, Rao–Blackwell 개선을 통해 충분통계량을 사용하면 MSE가 더 작아진다.
 
 
 ## 최소분산불편추정 *(Minimum Variance Unbiased Estimation)*
-앞 절에서 다음 사실을 확인하였다.
-
+앞 절에서 다음 사실을 확인하였다:
 - 충분통계량을 이용하면 추정량을 개선할 수 있다.
-- Rao–Blackwell 정리를 통해 **평균제곱오차(MSE)** 를 감소시킬 수 있다.
-
-이제 관심은 다음 질문으로 수렴한다.
-
-> **불편추정량(unbiased estimator) 중에서, 모든 모수값에 대해 분산이 가장 작은 추정량은 무엇인가?**
-
+- Rao–Blackwell 정리를 통해 **평균제곱오차(MSE)** 를 감소시킬 수 있다.  
+그렇다면, **불편추정량(unbiased estimator) 중에서, 모든 모수값에 대해 분산이 가장 작은 추정량은 무엇인가?**  
 이에 대한 해답이 **최소분산불편추정**이며, 그 궁극적 결과가 **전역최소분산불편추정량(UMVUE)** 이다.
 
 ### 완비통계량 *(Complete Statistic)*
@@ -397,33 +596,18 @@ $$
 - 평균이 0인 함수는 거의 확실하게 0이어야 한다.
 - 즉, $Y$ 안에는 "중복되는 정보"가 존재하지 않는다.
 
-### 완비충분통계량 *(Complete Sufficient Statistic)*
-통계량 $Y$가
-
-- 충분통계량(sufficient statistic)이고
-- 완비통계량(complete statistic)이면
-
-이를 **완비충분통계량**이라 한다.
-
+통계량 $Y$가 충분통계량(sufficient statistic)이며 완비통계량(complete statistic)이면 이를 **완비충분통계량(Complete Sufficient Statistic)**이라 한다.  
 이 개념은 UMVUE 존재·유일성의 핵심 전제이다.
 
-### 전역최소분산불편추정량 *(Uniformly Minimum Variance Unbiased Estimator, UMVUE)*
-모수의 함수 $\eta=\eta(\theta)$에 대한 불편추정량 $\hat\eta^*$가
-$$
-\mathrm{Var}_\theta(\hat\eta^*) \le \mathrm{Var}_\theta(\hat\eta)
-\quad \forall \theta\in\Omega
-$$
-를 모든 불편추정량 $\hat\eta$에 대해 만족하면, $\hat\eta^*$를 **전역최소분산불편추정량(UMVUE)** 라 한다.
+### 정리 8.3.1 완비충분통계량을 이용한 (Uniformly Minimum Variance Unbiased Estimator, UMVUE))
+>모수의 함수 $\eta=\eta(\theta)$에 대한 불편추정량 $\hat\eta^*$가
+>$$
+>\mathrm{Var}_\theta(\hat\eta^*) \le \mathrm{Var}_\theta(\hat\eta)
+>\quad \forall \theta\in\Omega
+>$$
+>를 모든 불편추정량 $\hat\eta$에 대해 만족하면, $\hat\eta^*$를 **전역최소분산불편추정량(UMVUE)** 라 한다.
 
-### 완비충분통계량과 UMVUE
-
-### 정리 8.3.1 완비충분통계량을 이용한 UMVUE
-모집단 분포 $f(x;\theta)$에서 랜덤표본 $(X_1,\dots,X_n)$에 대해 통계량
-$$
-Y = u(X_1,\dots,X_n)
-$$
-이 $\theta$에 대한 **완비충분통계량**이라고 하자.
-
+모집단 분포 $f(x;\theta)$에서 랜덤표본 $(X_1,\dots,X_n)$에 대해 통계량 $Y = u(X_1,\dots,X_n) $이 $\theta$에 대한 **완비충분통계량**이라고 하자.
 - **(a) Rao–Blackwell 형태**  
     $\eta=\eta(\theta)$의 임의의 불편추정량 $\hat\eta^{UE}$에 대해
     $$
@@ -434,10 +618,27 @@ $$
 - **(b) 함수형 UMVUE**  
     $Y$의 함수 $\delta(Y)$가 $\eta(\theta)$의 불편추정량이면, $\delta(Y)$는 $\eta(\theta)$의 UMVUE이다.
 
-**증명의 핵심 논리**
-- Rao–Blackwell 정리에 의해 분산은 감소한다.
-- 완비성에 의해 같은 평균을 가지는 두 함수는 거의 확실하게 동일하다.
-- 따라서 UMVUE는 유일하다.
+#### 증명
+(a) Rao–Blackwell 형태:  
+(1) 조건부기댓값의 성질로부터  
+$$
+E_\theta[\hat\eta^{RB}(Y)] = E_\theta[E(\hat\eta^{UE} \mid Y)] = E_\theta[\hat\eta^{UE}] = \eta(\theta)
+$$
+즉, $\hat\eta^{RB}(Y)$는 $\eta(\theta)$의 불편추정량이다.
+
+(2) 정리 8.2.5(Rao–Blackwell 정리)에 의해, 임의의 불편추정량 $\hat\eta^{UE}$에 대해  
+$$
+\mathrm{Var}_\theta(\hat\eta^{RB}(Y)) \le \mathrm{Var}_\theta(\hat\eta^{UE}),\quad \forall\theta\in\Omega
+$$
+특히, $\hat\eta^{RB}(Y)$는 $Y$의 함수이므로, $Y$의 함수로 표현되는 모든 불편추정량 중에서도 분산이 최소이다.
+
+(3) $Y$가 완비통계량이므로, $Y$의 함수로 표현되는 불편추정량이 둘 이상 존재한다면 그 차이는 0이어야 한다(완비성의 정의). 즉, $\hat\eta^{RB}(Y)$는 유일하다.
+
+따라서 (1), (2), (3)으로부터 $\hat\eta^{RB}(Y)$는 $\eta(\theta)$의 UMVUE이다.
+
+(b) 함수형 UMVUE:  
+(a)의 증명 (2)에서 $\hat\eta^{RB}(Y)$의 역할을 임의의 $Y$의 함수 $\delta(Y)$로 바꾸면, $\delta(Y)$가 $\eta(\theta)$의 불편추정량이면 위와 동일하게 $\delta(Y)$가 UMVUE임을 알 수 있다.
+
 
 #### 예 8.3.1 베르누이 독립시행
 $X_i \sim \mathrm{Bernoulli}(\theta),\ 0<\theta<1$
