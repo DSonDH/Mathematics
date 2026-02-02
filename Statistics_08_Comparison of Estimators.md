@@ -254,9 +254,7 @@ $$
 $$
 \mathrm{Var}_\theta(\hat\eta_3) = \mathrm{Var}_\theta\left(\frac{\hat\eta_1 + \hat\eta_2}{2}\right)
 = \frac{1}{4} \mathrm{Var}_\theta(\hat\eta_1 + \hat\eta_2)
-= \frac{1}{4} \left( \mathrm{Var}_\theta(\hat\eta_1) + \mathrm{Var}_\theta(\hat\eta_2) + 2\mathrm{Cov}_\theta(\hat\eta_1, \hat\eta_2) \right)
-$$
-$$
+= \frac{1}{4} \left( \mathrm{Var}_\theta(\hat\eta_1) + \mathrm{Var}_\theta(\hat\eta_2) + 2\mathrm{Cov}_\theta(\hat\eta_1, \hat\eta_2) \right) \\
 = \frac{1}{4} \mathrm{Var}_\theta(\hat\eta_1) + \frac{1}{4} \mathrm{Var}_\theta(\hat\eta_2) + \frac{1}{2} \mathrm{Cov}_\theta(\hat\eta_1, \hat\eta_2)
 $$
 
@@ -507,15 +505,9 @@ $$
 조건부기대값의 분해(분산의 법칙)에 의해
 $$
 E_\theta\left[(\hat\eta - \eta(\theta))^2\right]
-= E_\theta\left[\,E_\theta\left[(\hat\eta - \eta(\theta))^2 \mid Y\right]\,\right]
-$$
-$$
-= E_\theta\left[\,\operatorname{Var}_\theta(\hat\eta \mid Y) + (E_\theta[\hat\eta \mid Y] - \eta(\theta))^2\,\right]
-$$
-$$
-= E_\theta\left[\operatorname{Var}_\theta(\hat\eta \mid Y)\right] + E_\theta\left[(\hat\eta^{RB} - \eta(\theta))^2\right]
-$$
-$$
+= E_\theta\left[\,E_\theta\left[(\hat\eta - \eta(\theta))^2 \mid Y\right]\,\right] \\
+= E_\theta\left[\,\operatorname{Var}_\theta(\hat\eta \mid Y) + (E_\theta[\hat\eta \mid Y] - \eta(\theta))^2\,\right] \\
+= E_\theta\left[\operatorname{Var}_\theta(\hat\eta \mid Y)\right] + E_\theta\left[(\hat\eta^{RB} - \eta(\theta))^2\right] \\
 \therefore \mathrm{MSE}(\hat\eta, \theta) = E_\theta\left[\operatorname{Var}_\theta(\hat\eta \mid Y)\right] + \mathrm{MSE}(\hat\eta^{RB}, \theta)
 $$
 이고, $E_\theta[\operatorname{Var}_\theta(\hat\eta \mid Y)] \ge 0$이기 때문에
@@ -595,9 +587,16 @@ $$
 
 - 평균이 0인 함수는 거의 확실하게 0이어야 한다.
 - 즉, $Y$ 안에는 "중복되는 정보"가 존재하지 않는다.
-
-통계량 $Y$가 충분통계량(sufficient statistic)이며 완비통계량(complete statistic)이면 이를 **완비충분통계량(Complete Sufficient Statistic)**이라 한다.  
+  - 쓸모없는 흔들림이 없다. (흔들림은 평균하면 0이니까)
+통계량 $Y$가 충분통계량(sufficient statistic)이며 완비통계량(complete statistic)이면 이를 **완비충분통계량(Complete Sufficient Statistic)** 이라 한다.  
 이 개념은 UMVUE 존재·유일성의 핵심 전제이다.
+
+완비통계량은 **최소분산불편추정량(UMVUE)의 존재와 유일성**을 보장하는 핵심 개념이다.  
+- 충분통계량만으로는 UMVUE가 여러 개 존재할 수 있지만, 완비성까지 만족하면 UMVUE가 유일하게 결정된다.
+- 완비충분통계량이 존재하면, 그 함수로 표현되는 불편추정량 중에서 분산이 가장 작은 추정량(UMVUE)을 항상 찾을 수 있다.
+- Rao–Blackwell 정리와 결합하여, 임의의 불편추정량을 완비충분통계량의 함수로 개선하면 반드시 최적(UMVUE)에 도달한다.
+
+즉, **완비통계량은 추정이론에서 "최적의 불편추정량"을 찾는 데 필수적인 역할**을 한다.
 
 ### 정리 8.3.1 완비충분통계량을 이용한 (Uniformly Minimum Variance Unbiased Estimator, UMVUE))
 >모수의 함수 $\eta=\eta(\theta)$에 대한 불편추정량 $\hat\eta^*$가
@@ -641,180 +640,376 @@ $$
 
 
 #### 예 8.3.1 베르누이 독립시행
-$X_i \sim \mathrm{Bernoulli}(\theta),\ 0<\theta<1$
+$X_i \sim \mathrm{Bernoulli}(\theta),\ 0<\theta<1$  
 
-- 충분통계량: $Y = \sum X_i$
-- $Y \sim \mathrm{Binomial}(n, \theta)$  
-    다항식 전개의 유일성으로 $Y$는 완비통계량이다.
+충분통계량: $Y = \sum X_i$ (예8.2.2)
 
+$Y = \sum_{i=1}^n X_i \sim \mathrm{Binomial}(n, \theta)$이므로, $Y$의 확률질량함수는
 $$
-E_\theta(Y/n) = \theta
+P_\theta(Y = y) = \binom{n}{y} \theta^y (1-\theta)^{n-y},\quad y=0,1,\dots,n
 $$
+$Y$가 $\theta$에 대한 완비통계량임을 보이려면, 임의의 함수 $g$에 대해
+$$
+E_\theta[g(Y)] = 0\quad \forall\,\theta\in(0,1)
+$$
+이면 $P_\theta(g(Y)=0)=1$임을 보여야 한다.
 
-따라서
+$E_\theta[g(Y)]$를 전개하면
 $$
-\hat\theta = \frac{1}{n}\sum_{i=1}^n X_i
+E_\theta[g(Y)] = \sum_{y=0}^n g(y) \binom{n}{y} \theta^y (1-\theta)^{n-y} = 0,\quad \forall\,\theta\in(0,1)
 $$
-는 $\theta$의 UMVUE이다.
+이 식은 $\theta$에 대한 다항식(정확히는 $n$차 다항식)이다. 이 다항식이 $(0,1)$의 모든 $\theta$에 대해 0이므로, 계수(즉, $g(y)\binom{n}{y}$)가 모두 0이어야 한다. 즉,
+$$
+g(y)\binom{n}{y} = 0,\quad y=0,1,\dots,n
+$$
+따라서 $g(y)=0$ ($y=0,1,\dots,n$)이고, $Y$가 $\theta$에 대한 완비충분통계량이다. 
+
+정리 8.3.1에 따르면, $Y$의 함수로 표현되는 $\theta$의 불편추정량은 곧 $\theta$의 UMVUE가 된다. 실제로 $E_\theta(Y/n) = \theta$이므로, $\hat\theta = Y/n = \frac{1}{n}\sum_{i=1}^n X_i$는 $\theta$의 UMVUE임이 엄밀히 성립한다.
 
 #### 예 8.3.2 포아송 분포
 $X_i \sim \mathrm{Poisson}(\theta),\ \theta>0$
 
 - 충분통계량: $Y = \sum X_i$
-- $Y \sim \mathrm{Poisson}(n\theta)$  
-    멱급수 전개의 유일성으로 $Y$는 완비통계량이다.
-
-$$
-E_\theta(Y/n) = \theta
-$$
-
-따라서
-$$
-\hat\theta = \frac{1}{n}\sum_{i=1}^n X_i
-$$
-는 UMVUE이다.
+- $Y \sim \mathrm{Poisson}(n\theta)$이므로, $Y$의 확률질량함수는
+    $$
+    P_\theta(Y = y) = \frac{(n\theta)^y}{y!} e^{-n\theta},\quad y=0,1,2,\dots
+    $$
+- $Y$가 $\theta$에 대한 완비통계량임을 보이려면, 임의의 함수 $g$에 대해
+    $$
+    E_\theta[g(Y)] = 0\quad \forall\,\theta>0
+    $$
+    이면 $P_\theta(g(Y)=0)=1$임을 보여야 한다.
+- $E_\theta[g(Y)]$를 전개하면
+    $$
+    E_\theta[g(Y)] = \sum_{y=0}^\infty g(y) \frac{(n\theta)^y}{y!} e^{-n\theta} = 0,\quad \forall\,\theta>0
+    $$
+    이 식은 $\theta$에 대한 멱급수이므로, 모든 $\theta>0$에서 0이 되려면 각 계수 $g(y)/y!$가 모두 0이어야 한다. 즉,
+    $$
+    g(y) = 0,\quad y=0,1,2,\dots
+    $$
+    따라서 $Y$는 $\theta$에 대한 완비충분통계량이다.
+- $\theta$의 불편추정량은 $E_\theta(Y/n) = \theta$이므로, $\hat\theta = Y/n = \frac{1}{n}\sum_{i=1}^n X_i$가 $\theta$의 UMVUE이다.
 
 #### 예 8.3.3 지수분포
 $X_i \sim \mathrm{Exp}(\theta),\ \theta>0$
 
 - 충분통계량: $Y = \sum X_i$
-- $Y \sim \mathrm{Gamma}(n, \theta)$  
-    라플라스 변환의 유일성으로 $Y$는 완비통계량이다.
+- $Y \sim \mathrm{Gamma}(n, \theta)$이므로, $Y$의 확률밀도함수는
+    $$
+    f_Y(y;\theta) = \frac{1}{\Gamma(n)\theta^n} y^{n-1} e^{-y/\theta},\quad y>0
+    $$
+- $Y$가 $\theta$에 대한 완비통계량임을 보이려면, 임의의 함수 $g$에 대해
+    $$
+    E_\theta[g(Y)] = 0\quad \forall\,\theta>0
+    $$
+    이면 $P_\theta(g(Y)=0)=1$임을 보여야 한다.
 
-$$
-E_\theta(Y/n) = \theta
-$$
-
-따라서 표본평균은 UMVUE이다.
-
-### 다중모수 지수족에서의 완비성
+- $E_\theta[g(Y)]$를 전개하면
+    $$
+    E_\theta[g(Y)] = \int_0^\infty g(y) \frac{1}{\Gamma(n)\theta^n} y^{n-1} e^{-y/\theta} dy = 0,\quad \forall\,\theta>0
+    $$
+- 변수변환 $t = y/\theta$를 하면 $y = t\theta$, $dy = \theta dt$이므로
+    $$
+    E_\theta[g(Y)] = \int_0^\infty g(t\theta) \frac{1}{\Gamma(n)} t^{n-1} e^{-t} dt = 0,\quad \forall\,\theta>0
+    $$
+- 이 식이 모든 $\theta>0$에서 0이 되려면, $g(y)$가 거의 모든 $y>0$에 대해 0이어야 한다(라플라스 변환의 유일성). 즉, $g(Y)=0$이 거의 확실하게 성립한다.
+  - 라플라스 변환 $L_T(s)$:
+    $$
+    L_T(s) := E[e^{-sT}] = \int_0^\infty e^{-st} f_T(t)\,dt,\quad s \ge 0
+    $$
+   - 라플라스 변환은 함수 f와 일대일 대응이라 알려져 있다.
+- 따라서 $Y$는 $\theta$에 대한 완비충분통계량이다.
+- $E_\theta(Y/n) = \theta$이므로, 표본평균 $\bar X = Y/n$은 $\theta$의 불편추정량이자 UMVUE이다.
 
 ### 정리 8.3.2 다중모수 지수족의 완비충분통계량
 확률밀도함수가
 $$
 f(x;\eta) = \exp\left\{ \sum_{j=1}^k \eta_j T_j(x) - A(\eta) + S(x) \right\}
 $$
-꼴이고,  
-1. 분포의 토대가 모수에 의존하지 않음  
-2. 모수공간이 열린 직사각형을 포함  
+꼴이고, 조건 1,2,3을 만족하면  
+1. 분포의 토대$\{x:f(x;\eta)>0\}$가 모수에 의존하지 않음  
+2. 모수공간$N$이 $k$차원 공간 $R^k$의 열린구간 다면체 $(a_1,b_1)\times \dots \times (a_k,b_k)$를 포함
 3. $(T_1,\dots,T_k)$의 비자명한 선형결합이 상수가 아님  
+3. $a_1 T_1(x) + \dots + a_k T_k(x)$가 상수 함수가 되려면 $a_1 = \dots = a_k = 0$이어야 한다.
+
 이면
 $$
-\sum_{i=1}^n T(X_i)
+\sum_{i=1}^n T(X_i) = \left(\sum_{i=1}^n T_1(X_i),\; \dots,\; \sum_{i=1}^n T_k(X_i)\right)^T
 $$
-는 **완비충분통계량**이다.
+는 $\eta$에 관한 **완비충분통계량**이다.
 
-#### 예 8.3.4 정규분포
-$X_i \sim N(\mu, \sigma^2)$
+이 정리를 적용할 때 지수족의 표현에 사용되는 모수$\eta$는 
+$\eta = g(\theta) = (g_1(\theta), \dots, g_k(\theta))^T, \theta \in \Omega$
+와 같은 일대일변환을 통해 정의되는 모수다. 즉 이 정리의 확률밀도함수가 
+$$
+pdf(x;\theta) = \exp\left\{ \sum_{j=1}^k g_j(\theta) T_j(x) - A(g(\theta)) + S(x) \right\}
+$$
+의 꼴로 모수 $\theta \in \Omega$를 이용하여 주어진다. 따라서 조건2는 
+$$\{(g_1(\theta), \dots, g_k(\theta))^T : \theta \in \Omega \}\supseteq(a_1,b_1)\times \dots \times(a_k,b_k)$$
+를 만족시키는 열린구간 다면체 $(a_1,b_1)\times \dots \times(a_k,b_k)$가 존재하는 것을 뜻한다.
 
-- 완비충분통계량: $\left(\sum X_i,\; \sum X_i^2\right)$  
-- 동치 표현: $(\bar X,\; S^2)$
+(증명은 라플라스 변환의 유일성을 이용, 책의 범위를 넘으므로 생략)
 
-따라서  
-- $\bar X$는 $\mu$의 UMVUE  
-- $S^2$는 $\sigma^2$의 UMVUE
+#### 예 8.3.4 정규모집단에서 랜덤표본으로부터의 완비충분통계량
+$X_i \sim N(\mu, \sigma^2)$에서 완비충분통계량과 UMVUE를 구하라.
 
-이다.
+**1. 충분통계량 찾기**  
+정규분포의 결합확률밀도함수는
+$$
+\prod_{i=1}^n f(x_i;\mu,\sigma^2) = (2\pi\sigma^2)^{-n/2} \exp\left(-\frac{1}{2\sigma^2}\sum_{i=1}^n (x_i-\mu)^2\right)
+$$
+이를 분해정리(정리 8.2.1) 형태로 쓰면,
+$$
+= (2\pi\sigma^2)^{-n/2} \exp\left(-\frac{1}{2\sigma^2}\left(\sum x_i^2 - 2\mu\sum x_i + n\mu^2\right)\right)
+$$
+즉, $\sum x_i$와 $\sum x_i^2$만 알면 결합확률밀도함수를 모두 표현할 수 있으므로,  
+$Y = (\sum X_i,\, \sum X_i^2)$는 $(\mu, \sigma^2)$에 대한 충분통계량이다.
+
+**2. 완비성 확인**  
+정규분포는 지수족이며, $T_1(x) = x$, $T_2(x) = x^2$로 표현된다.  
+정리 8.3.2의 조건(모수공간이 열린집합 포함, 비자명한 선형결합이 상수 아님 등)을 모두 만족하므로,  
+$Y = (\sum X_i,\, \sum X_i^2)$는 $(\mu, \sigma^2)$에 대한 완비충분통계량이다.
+
+**3. UMVUE 구하기**  
+- $\mu$의 불편추정량: 표본평균 $\bar X = \frac{1}{n}\sum X_i$  
+    $E[\bar X] = \mu$이므로 $\bar X$는 $\mu$의 UMVUE이다.
+- $\sigma^2$의 불편추정량: $S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X)^2$  
+    $E[S^2] = \sigma^2$이므로 $S^2$는 $\sigma^2$의 UMVUE이다.
 
 #### 예 8.3.5 제한된 모수공간을 갖는 정규모집단의 경우
 $X_1,\dots,X_n \sim N(\mu, \mu^2),\ \mu>0$
 
-- 지수족 표현에서 $\eta_1 = 1/\mu,\ \eta_2 = -1/(2\mu^2)$,  
-    모수공간 $\mathcal N = \{ (\eta_1, \eta_2): \eta_2 = -\tfrac12 \eta_1^2,\ \eta_1>0 \}$은 2차원 열린집합을 포함하지 않음.
-- 정리 8.3.2를 적용할 수 없음.
-- 실제로 $Y = (\sum X_i,\, \sum X_i^2)$에 대해
-    $$
-    \mathbb E_\mu\left[\frac{1}{2n}Y_2 - \frac{1}{n(n+1)}Y_1^2\right] = 0\quad(\forall\mu>0)
-    $$
-    인 비자명한 함수가 존재.
+**1. 지수족 표현**  
+$$
+f(x;\mu) = \frac{1}{\sqrt{2\pi}\mu} \exp\left(-\frac{(x-\mu)^2}{2\mu^2}\right) \\
+= \exp\left(-\frac{1}{2}\log(2\pi) - \log\mu - \frac{(x-\mu)^2}{2\mu^2}\right) \\
+= \exp\left(-\frac{1}{2}\log(2\pi) - \log\mu - \frac{x^2 - 2\mu x + \mu^2}{2\mu^2}\right) \\
+= \exp\left(-\frac{1}{2}\log(2\pi) - \log\mu - \frac{x^2}{2\mu^2} + \frac{x}{\mu} - \frac{1}{2}\right)
+$$
+즉, $T_1(x) = x$, $T_2(x) = x^2$, $g_1(\mu) = 1/\mu$, $g_2(\mu) = -1/(2\mu^2)$
 
-**결론:**  
-$Y$는 $\mu$에 대한 완비통계량이 아니며, 표본평균 $\bar X$는 $\mu$의 UMVUE가 아니다.
+**2. 모수공간 확인**  
+모수공간 $\mathcal N = \{ (\eta_1, \eta_2): \eta_1 = 1/\mu > 0,\ \eta_2 = -1/(2\mu^2) \}$은  
+$\eta_2 = -\frac12 \eta_1^2$로 $\eta_1>0$에서 1차원 곡선만을 이룸(2차원 열린집합 아님).  
+따라서 정리 8.3.2(완비성 보장)를 적용할 수 없다.
+
+**3. 실제로 완비성 불만족 확인**  
+$Y_1 = \sum X_i$, $Y_2 = \sum X_i^2$에 대해
+$$
+\mathbb E_\mu\left[\frac{1}{2n}Y_2 - \frac{1}{n(n+1)}Y_1^2\right] = 0\quad(\forall\mu>0)
+$$
+즉, $g(Y_1, Y_2) = \frac{1}{2n}Y_2 - \frac{1}{n(n+1)}Y_1^2$는 평균이 0이지만, $g$가 항상 0은 아니므로 완비성 불만족.  
+따라서 $Y = (\sum X_i,\, \sum X_i^2)$는 $\mu$에 대한 완비통계량이 아니고, $\bar X$는 $\mu$의 UMVUE가 아니다.
 
 #### 예 8.3.6 균등분포 $U[0,\theta]$에서의 완비충분통계량
 $X_1,\dots,X_n \sim U[0,\theta],\ \theta>0$
 
-- 충분통계량: $Y = \max_{1\le i\le n} X_i$
-- $Y$의 밀도:
-    $$
-    f_Y(y;\theta) = \frac{n}{\theta^n} y^{n-1} \mathbf{1}_{[0,\theta]}(y)
-    $$
-- $E_\theta[g(Y)] = 0\ \forall\theta>0$이면 $g(Y)=0$이므로 $Y$는 완비충분통계량.
+**1. 충분통계량**  
+결합밀도는
+$$
+f(x_1,\dots,x_n;\theta) = \theta^{-n} \mathbf{1}_{0 < x_{(1)} < x_{(n)} < \theta}
+$$
+즉, $Y = X_{(n)} = \max X_i$만 알면 $\theta$에 대한 정보가 모두 보존됨.
 
-또한
+**2. 완비성 확인**  
+$Y$의 밀도는
 $$
-\mathbb E_\theta\left(\frac{n+1}{n}Y\right) = \theta
+f_Y(y;\theta) = \frac{n}{\theta^n} y^{n-1} \mathbf{1}_{[0,\theta]}(y)
 $$
+임의의 함수 $g$에 대해
+$$
+E_\theta[g(Y)] = \int_0^\theta g(y) \frac{n}{\theta^n} y^{n-1} dy = 0\quad\forall\theta>0
+$$
+이 식이 모든 $\theta>0$에서 0이 되려면 $g(y)=0$ (거의 모든 $y$에 대해)이어야 하므로 완비성 성립.
 
-따라서
+**3. UMVUE 구하기**  
 $$
-\hat\theta^{UMVUE} = \frac{n+1}{n} \max_{1\le i\le n} X_i
+E_\theta[Y] = \int_0^\theta y \cdot \frac{n}{\theta^n} y^{n-1} dy = \frac{n}{\theta^n} \int_0^\theta y^n dy \\
+= \frac{n}{\theta^n}\left[ \frac{y^{n+1}}{n+1} \right]_0^\theta
+= \frac{n}{n+1} \theta
 $$
+이므로, $\frac{n+1}{n}Y$는 $\theta$의 불편추정량이자 UMVUE.
+- 완비충분통계량: $Y = \max X_i$
+- $\hat\theta^{UMVUE} = \frac{n+1}{n} \max X_i$
 
 #### 예 8.3.7 베르누이 분포에서 모분산의 불편추정
 $X_1,\dots,X_n \sim \mathrm{Bernoulli}(\theta),\ 0<\theta<1$
 
-- 완비충분통계량: $Y = \sum_{i=1}^n X_i$
-- 모분산: $\eta = \theta(1-\theta)$
-- 불편추정량: $\hat\eta^{UE} = X_1(1-X_2)$
+**1. 완비충분통계량**  
+$Y = \sum_{i=1}^n X_i$ (예 8.3.1에서 이미 완비충분통계량임을 확인)
 
-Rao–Blackwell 개선:
+**2. 모분산의 불편추정량**  
+모분산: $\eta = \theta(1-\theta)$
+
+불편추정량 후보로 $X_1(1-X_2)$를 생각할 수 있다.  
 $$
-\hat\eta^{RB}(Y) = \mathbb E[X_1(1-X_2)\mid Y] = \frac{n}{n-1}\hat\theta(1-\hat\theta),\quad \hat\theta = \frac{Y}{n}
+E[X_1(1-X_2)] = E[X_1] - E[X_1 X_2] = \theta - \theta^2 = \theta(1-\theta)
+$$
+즉, $X_1(1-X_2)$는 $\theta(1-\theta)$의 불편추정량이다.
+
+**3. Rao–Blackwell 개선**  
+Rao–Blackwell 정리에 따라, 완비충분통계량 $Y$에 대한 조건부기대값을 취하면 UMVUE를 얻을 수 있다.
+$$
+\hat\eta^{RB}(Y) = E[X_1(1-X_2)\mid Y]
 $$
 
-따라서
+$Y$가 주어졌을 때, $X_1$과 $X_2$의 조건부분포는 교환가능하다. $Y=y$일 때, $n$개 중 $y$개가 1이고 $n-y$개가 0이다.
+
+- $X_1$이 1일 확률: $P(X_1=1\mid Y=y) = \frac{y}{n}$
+- $X_2$가 0일 확률 (단, $X_1=1$로 이미 1개 사용): $P(X_2=0\mid X_1=1, Y=y) = \frac{n-y}{n-1}$
+
+따라서,
 $$
-\hat\eta^{UMVUE} = \frac{n}{n-1}\hat\theta(1-\hat\theta)
+E[X_1(1-X_2)\mid Y=y] = P(X_1=1\mid Y=y) \cdot P(X_2=0\mid X_1=1, Y=y)
+= \frac{y}{n} \cdot \frac{n-y}{n-1}
 $$
+
+이를 $\hat\theta = Y/n$으로 쓰면,
+$$
+E[X_1(1-X_2)\mid Y] = \frac{n}{n-1}\hat\theta(1-\hat\theta)
+$$
+
+$\therefore \boxed{\hat\eta^{UMVUE} = \frac{n}{n-1}\hat\theta(1-\hat\theta)}$  
 
 #### 예 8.3.8 포아송 분포에서 모평균의 함수의 불편추정
 $X_1,\dots,X_n \sim \mathrm{Poisson}(\theta),\ \theta>0$
 
-- 완비충분통계량: $Y = \sum_{i=1}^n X_i \sim \mathrm{Poisson}(n\theta)$
-- 추정 대상: $\eta = e^{-2\theta}$
+**1. 완비충분통계량**  
+포아송 분포의 완비충분통계량은 $Y = \sum_{i=1}^n X_i$이다.  
+$Y \sim \mathrm{Poisson}(n\theta)$
 
-멱급수 전개의 유일성을 이용하면
-$$
-\hat\eta^{UMVUE} = (1-2/n)^Y
-$$
+**2. 추정 대상**  
+$\eta = e^{-2\theta}$
 
-- $n=1$에서는 $(-1)^{X_1}$ 형태의 비직관적 추정량이 됨
+**3. UMVUE 구하기**  
+$Y$의 확률질량함수는 $P(Y=y) = \frac{(n\theta)^y}{y!}e^{-n\theta}$이다.  
+
+여기서 $e^{-2\theta}$의 불편추정량을 찾기 위해, $Y$의 함수 $(1-2/n)^Y$를 고려한다. 왜냐하면, 포아송 분포의 적률생성함수(MGF)는 $M_Y(t) = E[e^{tY}] = \exp(n\theta(e^t-1))$이므로, $E[a^Y] = \exp(n\theta(a-1))$ 형태로 쉽게 계산할 수 있다. $a = 1-2/n$을 대입하면,
+$$
+E[(1-2/n)^Y] = \exp(n\theta((1-2/n)-1)) = \exp(-2\theta)
+$$
+즉, $(1-2/n)^Y$는 $e^{-2\theta}$의 불편추정량이 된다.
+
+- $n=1$이면 $(1-2/1)^{X_1} = (-1)^{X_1}$로, $X_1$이 홀수면 $-1$, 짝수면 $1$이 된다.
+  - 즉, 맹목적인 불편추정은 특이한 결과를 가져오기도 한다.
 
 #### 예 8.3.9 정규분포에서 신뢰도의 불편추정
-- 모형: $X_1,\dots,X_n \sim N(\theta,1),\quad n\ge2$
-- 완비충분통계량: $\bar X$
-- 추정 대상: $\eta = P_\theta(X_1 > a)$
-- 불편추정량: $\mathbf{1}_{(a,\infty)}(X_1)$
-- Rao–Blackwell 개선:
+$X_1,\dots,X_n \sim N(\theta,1),\ n\ge2$
+
+**1. 완비충분통계량**  
+정규분포에서 평균 $\theta$의 완비충분통계량은 표본평균 $\bar X$이다.
+
+**2. 추정 대상**  
+신뢰도: $\eta = P_\theta(X_1 > a)$
+
+**3. 불편추정량 및 Rao–Blackwell 개선**  
+- $X_1$만 이용한 불편추정량은 $\mathbf{1}_{(a,\infty)}(X_1)$이다.  
+    $E[\mathbf{1}_{(a,\infty)}(X_1)] = P_\theta(X_1 > a) = 1 - \Phi(a-\theta)$
+
+- Rao–Blackwell 정리에 따라, 완비충분통계량 $\bar X$에 대한 조건부기대값을 취하면 UMVUE가 된다:
+        $$
+        \hat\eta^{UMVUE} = E[\mathbf{1}_{(a,\infty)}(X_1) \mid \bar X]
+        $$
+- $X_1$과 $\bar X$의 결합분포에서, $X_1 - \bar X$와 $\bar X$는 서로 독립이다.  
+    - 왜냐하면 $X_1 - \bar X$는 $X_1$과 $X_2,\dots,X_n$의 선형결합이고, $\bar X$는 $X_1,\dots,X_n$의 평균이므로, 정규분포의 성질(공분산 계산)로부터 두 변수는 공분산이 0이고, 정규분포에서는 공분산 0이면 독립이다.
+    - 즉, $X_1 - \bar X$와 $\bar X$는 독립인 정규분포이다.
+- 따라서 $X_1 = \bar X + (X_1 - \bar X)$이고, $\bar X$가 주어졌을 때 $X_1$의 조건부분포는  
+    $X_1 \mid \bar X \sim N\left(\bar X,\,\frac{n-1}{n}\right)$  (즉, $\bar X$를 중심으로 분산 $\frac{n-1}{n}$인 정규분포)
+- 이제 $P_\theta(X_1 > a \mid \bar X = y)$를 계산하면,
+    $$
+    P(X_1 > a \mid \bar X = y)
+    = P(X_1 - \bar X > a - y \mid \bar X = y)
+    $$
+    $X_1 - \bar X \mid \bar X = y \sim N(0,\,\frac{n-1}{n})$이므로,
+    $$
+    = P\left(Z > \sqrt{\frac{n}{n-1}}(a - y)\right)
+    $$
+    여기서 $Z \sim N(0,1)$.
+- 즉,
+    $$
+    P(X_1 > a \mid \bar X = y) = 1 - \Phi\left(\sqrt{\frac{n}{n-1}}(a - y)\right)
+    $$
+- 따라서 Rao–Blackwell 개선 추정량은
     $$
     \hat\eta^{UMVUE}
-    = P(X_1 > a \mid \bar X)
     = 1 - \Phi\left(\sqrt{\frac{n}{n-1}}(a - \bar X)\right)
     $$
 
 ### 정리 8.3.3 완비충분통계량과 보조통계량의 독립성
 - 통계량 $Z = v(X_1,\dots,X_n)$의 분포가 $\theta$에 의존하지 않으면 $Z$는 **보조통계량(ancillary statistic)** 이다.
+  - 모수 $\theta$에 의존하지 않는 분포를 갖는 통계량을 $\theta$에 관한 보조통계량이라 한다
 - $Y$가 $\theta$에 대한 완비충분통계량이면 $Z \perp Y$ (독립).
-- 핵심 결과: 완비충분통계량이 주어지면, 그와 독립인 보조통계량을 이용해 조건부기대값 계산이 단순해진다.
+- 의의: 완비충분통계량이 주어지면, 그와 독립인 보조통계량을 이용해 조건부기대값 계산이 단순해진다.
+
+#### 증명
+$Z = v(X_1, \dots, X_n)$의 분포가 $\theta$에 의존하지 않으므로, 임의의 집합 $B$에 대해
+$$
+P_\theta(Z \in B) = P(Z \in B), \quad \forall \theta \in \Omega
+$$
+
+또한, $Y = u(X_1, \dots, X_n)$가 $\theta$에 대한 완비충분통계량이라고 하자. 조건부확률을 생각하면,
+$$
+P_\theta(Z \in B \mid Y) = P(v(X_1, \dots, X_n) \in B \mid Y)
+$$
+이 값이 $\theta$에 의존할 수도 있지만, 아래와 같이 보조통계량의 정의와 완비성으로부터 독립임을 보일 수 있다.
+
+조건부기대값의 성질로,
+$$
+E_\theta[P(Z \in B \mid Y)] = E_\theta[E[I_B(Z) \mid Y]] = E_\theta[I_B(Z)] = P_\theta(Z \in B) = P(Z \in B)
+$$
+즉, $g(Y) := P(Z \in B \mid Y) - P(Z \in B)$로 두면,
+$$
+E_\theta[g(Y)] = 0, \quad \forall \theta \in \Omega
+$$
+$Y$가 완비통계량이므로, $g(Y) = 0$이 거의 확실하게 성립한다. 즉,
+$$
+P(Z \in B \mid Y) = P(Z \in B)
+$$
+따라서 $Z$와 $Y$는 독립이다.
 
 #### 예 8.3.10 지수분포에서 신뢰도의 불편추정
-- 모형: $X_1,\dots,X_n \sim \mathrm{Exp}(\theta),\ \theta>0$
-- 완비충분통계량: $Y = \sum_{i=1}^n X_i$
-- 추정 대상: $\eta = P_\theta(X_1 > a) = e^{-a/\theta}$
-- 보조통계량: $\frac{X_1}{\sum_{i=1}^n X_i} \sim \mathrm{Beta}(1, n-1)$
-- 독립성 $\left(\frac{X_1}{\sum X_i}\right) \perp Y$를 이용하면
+- **모형:** $X_1,\dots,X_n \sim \mathrm{Exp}(\theta),\ \theta>0$
+- **완비충분통계량:** $Y = \sum_{i=1}^n X_i$
+- **추정 대상:a에서의 신뢰도** $\eta = P_\theta(X_1 > a) = e^{-a/\theta}$
+
+1. **불편추정량 후보:**  
+    $X_1$만 이용하면, $\mathbf{1}_{(a,\infty)}(X_1)$이 $\eta$의 불편추정량이다.  
+    $E_\theta[\mathbf{1}_{(a,\infty)}(X_1)] = P_\theta(X_1 > a) = e^{-a/\theta}$
+2. **보조통계량 활용:**  
+    $Y = \sum X_i$는 완비충분통계량이고, $\frac{X_1}{Y}$는 $\theta$에 무관한 보조통계량($\mathrm{Beta}(1, n-1)$ 분포)이며 $Y$와 독립이다 (정리8.3.3).
+3. **UMVUE 계산:**  
+    $X_1 = uY$로 두면, $P(X_1 > a \mid Y = y) = P(u > a/y) = \int_{a/y}^1 (n-1)(1-u)^{n-2} du = (1 - a/y)^{n-1}$ ($a < y$일 때).
+    - 여기서 $X_1 = uY$로 두었으므로, $X_1 > a$는 $uY > a$와 동치이고, $Y = y$이므로 $u > a/y$가 된다. 즉, $P(X_1 > a \mid Y = y) = P(u > a/y)$로 쓸 수 있다.
+    - $u = X_1/Y$는 $Y$와 독립이며, $u \sim \mathrm{Beta}(1, n-1)$ 분포를 따른다. 따라서 $P(u > a/y)$는 $u$의 누적분포함수를 이용해 계산할 수 있다.
+
+    따라서
     $$
-    \hat\eta^{UMVUE}
-    = \left(1 - \frac{a}{n\bar X}\right)^{n-1}
-    \mathbf{1}_{(a/n,\infty)}(\bar X)
+    \hat\eta^{UMVUE} = \left(1 - \frac{a}{Y}\right)^{n-1} \mathbf{1}_{(a, \infty)}(Y)
     $$
-- $n$이 크면 $\hat\eta^{UMVUE} \to e^{-a/\bar X}$로 MLE와 동일한 극한거동을 가진다.
+    또는 $Y = n\bar X$이므로,
+    $$
+    \hat\eta^{UMVUE} = \left(1 - \frac{a}{n\bar X}\right)^{n-1} \mathbf{1}_{(a/n, \infty)}(\bar X)
+    $$
+4. **점근적 거동:**  
+    $n \to \infty$에서 $\left(1 - \frac{a}{n\bar X}\right)^{n-1} \to e^{-a/\bar X}$ (MLE와 동일).
+
+**정리:**  
+- UMVUE:  
+  $$
+  \boxed{
+     \hat\eta^{UMVUE} = \left(1 - \frac{a}{n\bar X}\right)^{n-1} \mathbf{1}_{(a/n, \infty)}(\bar X)
+  }
+  $$
+- $n \to \infty$에서 $e^{-a/\bar X}$로 수렴 (MLE와 동일)
+
 
 ## 8.4 추정량의 점근적 비교 *(Asymptotic Comparison of Estimators)*
 - 표본크기 $n$이 커질 때 추정량 $\hat\eta_n$의 **극한분포(asymptotic distribution)** 로 성능을 비교한다.
-- 보통 $\sqrt{n}(\hat\eta_n - \eta(\theta)) \xrightarrow{d} N(0,\,\sigma^2(\theta))$ 꼴이면, $\sigma^2(\theta)$가 작을수록 점근적으로 효율적이다.
+- 보통 $\sqrt{n}(\hat\eta_n - \eta(\theta)) \xrightarrow{d} N(0,\,\sigma^2(\theta))$ 꼴이면, $\sigma^2(\theta)$가 작을수록 점근적으로 효율적이다 (추정 오차가 작은것을 뜻한다).
 - 평균제곱오차는 $MSE_\theta(\hat\eta_n) = E_\theta[(\hat\eta_n - \eta(\theta))^2] = \mathrm{Var}_\theta(\hat\eta_n) + \mathrm{Bias}_\theta(\hat\eta_n)^2$로 분해된다.
+  - bias: 편의 또는 바이어스
+  - bias term은 $n^{-2}$의 속도로 0에 가까워지고 variance term은 $n^{-1}$의 속도로 0에 가까워지므로 표본분포가 커지면 극한분포의 분산을 비교기준으로 한다
+- 그래서, 극한분포의 분산을 이용한 추정량의 비교에 대해 알아보자!
 
 #### 예 8.4.1 로지스틱분포에서의 추정량 비교
 - 모형: $L(\theta,1)$, $-\infty < \theta < \infty$ (위치모수)
@@ -823,18 +1018,21 @@ $$
     - 표본평균: $\hat\theta_n^{mean} = \bar X$
     - 최대가능도추정량(MLE): $\hat\theta_n^{MLE}$
 - 점근분포:
+  - 예5.3.8
     $$
     \sqrt{n}(\hat\theta_n^{med} - \theta) \xrightarrow{d} N(0, 4)
     $$
+  - 중심극한정리, 예5.4.3
     $$
     \sqrt{n}(\hat\theta_n^{mean} - \theta) \xrightarrow{d} N\left(0, \frac{\pi^2}{3}\right)
     $$
+  - 예6.4.4
     $$
     \sqrt{n}(\hat\theta_n^{MLE} - \theta) \xrightarrow{d} N(0, 3)
     $$
 - 점근분산이 작은 순(효율이 좋은 순): $\hat\theta_n^{MLE}\ (3) < \hat\theta_n^{mean}\ \left(\frac{\pi^2}{3}\right) < \hat\theta_n^{med}\ (4)$
 
-### 점근상대효율성(ARE, asymptotic relative efficiency) 정의
+### 점근상대효율성(ARE, asymptotic relative efficiency)
 - 두 추정량 $\hat\theta_n^{1}, \hat\theta_n^{2}$에 대해
     $$
     \sqrt{n}(\hat\theta_n^{i} - \theta) \xrightarrow{d} N(0, \sigma_i^2(\theta)),\quad i=1,2
@@ -844,12 +1042,15 @@ $$
     ARE(\hat\theta_n^1, \hat\theta_n^2) = \frac{\sigma_1^{-2}(\theta)}{\sigma_2^{-2}(\theta)}
     $$
 - $ARE > 1$이면 1번이 더 효율적(점근분산이 더 작음)이라는 뜻.
+- 점근상대효울성이 커진다는 것은 표본크기가 커지면서 추정의 정밀도가 상대적으로 높아지는 것
+- 더 적은 샘플크기로도 요구되는 추정오차한계를 만족시킬 수 있음
 
 #### 예 8.4.2 로지스틱분포에서 추정오차한계와 점근상대효율성
 - 표본중앙값으로 95% 점근신뢰구간:
     $$
     \theta \in \left[\hat\theta_n^{med} - 1.96\sqrt{\frac{4}{n}},\ \hat\theta_n^{med} + 1.96\sqrt{\frac{4}{n}}\right]
     $$
+    - $1.96\sqrt{\frac{4}{n}}$: 표본중앙값의 95%점근추정오차한계
 - 이를 $d$ 이하로 만들기 위한 표본크기:
     $$
     n_{med} \simeq \left(\frac{1.96}{d}\right)^2 \cdot 4
@@ -862,64 +1063,83 @@ $$
     $$
     \frac{n_{mean}^{-1}}{n_{med}^{-1}} = \frac{12}{\pi^2} \approx 1.2 = ARE(\hat\theta_n^{mean}, \hat\theta_n^{med})
     $$
-- 해석: 같은 오차한계를 달성하려면 **표본중앙값이 표본평균보다 대략 1.2배 더 많은 표본**을 필요로 한다.
+- 즉, 같은 오차한계를 달성하려면 **표본중앙값이 표본평균보다 대략 1.2배 더 많은 표본**을 필요로 한다.
 
 #### 예 8.4.3 위치모수 모형에서 중앙값/평균/MLE 비교
-- 연속형 위치모수 모형: 밀도 $f(x-\theta)$, 대칭 $f(-x)=f(x)$
+예 8.4.1 처럼 모집단분포가 연속형이고, 확률밀도함수가 $f(x)=f(x-\theta)$ 즉 대칭이다.  
+랜덤표본 $X_1, \dots, X_n$을 이용한 $\theta$추정량으로서 표본중앙값, 표본평균, 최대가능도추정량을 비교해본다.
 - 점근분산
-    - 표본중앙값: $\sqrt{n}(\hat\theta_n^{med} - \theta) \xrightarrow{d} N\left(0,\, (4f^2(0))^{-1}\right)$
+    - 표본중앙값: 예5.3.7결과: $\sqrt{n}(\hat\theta_n^{med} - \theta) \xrightarrow{d} N\left(0,\, (4f^2(0))^{-1}\right)$
     - 표본평균(2차모멘트 존재): $\sqrt{n}(\hat\theta_n^{mean} - \theta) \xrightarrow{d} N(0, \sigma_f^2)$, $\sigma_f^2 = \int_{-\infty}^{\infty} x^2 f(x)\,dx$
-    - MLE(정규성 조건): $\sqrt{n}(\hat\theta_n^{MLE} - \theta) \xrightarrow{d} N(0, I_f^{-1})$, $I_f = \int_{-\infty}^{\infty} \left(\frac{f'(x)}{f(x)}\right)^2 f(x)\,dx$
+    - MLE(정규성 조건): 정리6.4.4조건 만족 시 $\sqrt{n}(\hat\theta_n^{MLE} - \theta) \xrightarrow{d} N(0, I_f^{-1})$, $I_f = \int_{-\infty}^{\infty} \left(\frac{f'(x)}{f(x)}\right)^2 f(x)\,dx$
 
-#### 표 8.4.1 (점근분산 값 요약)
-| 분포 | $(4f^2(0))^{-1}$ | $\sigma_f^2$ | $I_f^{-1}$ |
-|------|------------------|--------------|------------|
-| $N(\theta,1)$ | $\pi/2$ | $1$ | $1$ |
-| $L(\theta,1)$ | $4$ | $\pi^2/3$ | $3$ |
-| $DE(\theta,1)$ | $1$ | $2$ | $1$ |
+**표 8.4.1 (점근분산 값 요약)**  
+| 분포             | $N(\theta,1)$ | $L(\theta,1)$ | $DE(\theta,1)$ |
+|------------------|:-------------:|:-------------:|:--------------:|
+| $(4f^2(0))^{-1}$ | $\pi/2$       | $4$           | $1$            |
+| $\sigma_f^2$     | $1$           | $\pi^2/3$     | $2$            |
+| $I_f^{-1}$       | $1$           | $3$           | $1$            |
 
-#### 표 8.4.2 (ARE 요약)
-- $ARE(\hat\theta_n^{mean}, \hat\theta_n^{med})$
-    - $N(\theta,1)$: $\pi/2$
-    - $L(\theta,1)$: $12/\pi^2$
-    - $DE(\theta,1)$: $1/2$
-- $ARE(\hat\theta_n^{mean}, \hat\theta_n^{MLE})$
-    - $N(\theta,1)$: $1$
-    - $L(\theta,1)$: $9/\pi^2$
-    - $DE(\theta,1)$: $1/2$
-- $ARE(\hat\theta_n^{med}, \hat\theta_n^{MLE})$
-    - $N(\theta,1)$: $2/\pi$
-    - $L(\theta,1)$: $3/4$
-    - $DE(\theta,1)$: $1$
+**표 8.4.2 (ARE 요약)**  
+| 분포            | $N(\theta,1)$ | $L(\theta,1)$ | $DE(\theta,1)$ |
+|-----------------|:-------------:|:-------------:|:--------------:|
+| $ARE(\hat\theta_n^{mean}, \hat\theta_n^{med})$ | $\pi/2$        | $12/\pi^2$    | $1/2$           |
+| $ARE(\hat\theta_n^{mean}, \hat\theta_n^{MLE})$ | $1$            | $9/\pi^2$     | $1/2$           |
+| $ARE(\hat\theta_n^{med}, \hat\theta_n^{MLE})$  | $2/\pi$        | $3/4$         | $1$             |
 
 #### 예 8.4.4 베타분포 $\mathrm{Beta}(\alpha,1)$에서 추정량 비교
 - 모형: $X_i \sim \mathrm{Beta}(\alpha,1)$, $\alpha>0$, 밀도 $f(x;\alpha)=\alpha x^{\alpha-1}I_{(0,1)}(x)$
 - 모평균: $m_1 = \frac{\alpha}{\alpha+1}$
 
-### 적률이용추정량(MME)
+**적률이용추정량(MME)**  
 $$
-\hat\alpha_n^{\mathrm{MME}} = \frac{\bar X}{1-\bar X}
-$$
-
-$$
-\sqrt{n}(\hat\alpha_n^{\mathrm{MME}}-\alpha) \xrightarrow{d} N\left(0,\, \frac{\alpha(\alpha+1)^2}{\alpha+2}\right)
+\hat\alpha_n^{\mathrm{MME}} = \frac{\bar X}{1-\bar X} \\
 $$
 
-### 최대가능도추정량(MLE)
-가능도방정식:
+모평균 $m_1 = \frac{\alpha}{\alpha+1}$의 적률추정량 $\bar X$는 중심극한정리에 의해
 $$
-\sum_{i=1}^n \log X_i + \frac{n}{\alpha} = 0
+\sqrt{n}(\bar X - m_1) \xrightarrow{d} N(0,\,\sigma^2)
 $$
+여기서 $\sigma^2 = \mathrm{Var}(X_1) = E[X_1^2] - (E[X_1])^2$이다.
+
+$\mathrm{Beta}(\alpha,1)$에서
+- $E[X_1] = m_1 = \frac{\alpha}{\alpha+1}$
+- $E[X_1^2] = \frac{\alpha}{\alpha+2}$
+
 따라서
 $$
-\hat\alpha_n^{\mathrm{MLE}} = \frac{1}{-\overline{\log X}}
+\sigma^2 = \frac{\alpha}{\alpha+2} - \left(\frac{\alpha}{\alpha+1}\right)^2
+$$
+
+적률이용추정량은 $g(\bar X)$ 꼴로, $g(m_1) = \frac{m_1}{1-m_1} = \alpha$이다.
+
+델타 방법에 의해
+$$
+\sqrt{n}(g(\bar X) - g(m_1)) \xrightarrow{d} N(0,\, [g'(m_1)]^2 \sigma^2)
+$$
+여기서
+$$
+g'(x) = \frac{1}{(1-x)^2},\quad g'(m_1) = \frac{1}{(1-m_1)^2} = (\alpha+1)^2
+$$
+
+따라서
+$$
+\sqrt{n}(\hat\alpha_n^{\mathrm{MME}}-\alpha) \xrightarrow{d} N\left(0,\, (g'(m_1))^2 \sigma^2\right)
+= N\left(0,\, (\alpha+1)^4 \left[\frac{\alpha}{\alpha+2} - \left(\frac{\alpha}{\alpha+1}\right)^2\right]\right) \\
+= N\left(0,\, \frac{\alpha(\alpha+1)^2}{\alpha+2}\right)
+$$
+
+**최대가능도추정량(MLE)**  
+가능도방정식: $\sum_{i=1}^n \log X_i + \frac{n}{\alpha} = 0$
+$$
+\therefore \hat\alpha_n^{\mathrm{MLE}} = \frac{1}{-\overline{\log X}}
 $$
 
 $$
 \sqrt{n}(\hat\alpha_n^{\mathrm{MLE}}-\alpha) \xrightarrow{d} N(0,\,\alpha^2)
 $$
 
-### 점근상대효율성
+**점근상대효율성**  
 $$
 ARE(\hat\alpha_n^{\mathrm{MME}},\,\hat\alpha_n^{\mathrm{MLE}})
 = \frac{\alpha(\alpha+2)}{(\alpha+1)^2}
@@ -928,6 +1148,7 @@ $$
 따라서 MLE가 점근적으로 더 효율적이다.
 
 ### 정리 8.4.1 정보량 부등식 *(information inequality, Cramér–Rao 유형)*
+위의 예들에서 점근상대효율성이 가장 큰 추정량은 최대가능도추정량이었다. 이런 최대가능도추정량의 점근적 효율성은 아래 정보량 부등식으로 설명할 수도 있다.
 - (MLE 점근정규성 조건들과 유사한 정칙성) 하에서, 실수값 모수 $\eta=\eta(\theta)$의 추정량 $\hat\eta_n$에 대해
 $$
 \mathrm{Var}_\theta(\hat\eta_n) \ge
@@ -937,18 +1158,89 @@ $$
 \quad \forall\theta
 $$
 
-#### 증명 아이디어:
-    - 점수함수(score) $\dot l_n(\theta)=\frac{\partial}{\partial\theta}\sum_{i=1}^n \log f(X_i;\theta)$를 두고
-    - 코시–슈바르츠 부등식으로 $\mathrm{Var}(\hat\eta_n)\,\mathrm{Var}(\dot l_n)\ge \mathrm{Cov}(\hat\eta_n,\dot l_n)^2$를 적용하여 도출
-
-- 다차원 모수의 경우도 유사하게
+- 다차원 모수의 경우도 유사하게 아래 부등식이 성립
 $$
 c^t\left(\mathrm{Var}_\theta(\hat\eta_n)-
 \left(\frac{\partial}{\partial\theta}E_\theta(\hat\eta_n)\right)^{\!t}
 [nI(\theta)]^{-1}
 \left(\frac{\partial}{\partial\theta}E_\theta(\hat\eta_n)\right)\right)c \ge 0
 $$
-형태가 성립
+
+#### 증명
+점수함수(score function)와 코시–슈바르츠 부등식을 이용한다.
+정보량 부등식의 증명에는 다음과 같은 정칙성 조건이 필요하다:
+- **(R1) 지지집합(support)이 $\theta$에 의존하지 않음:**  
+    $f(x;\theta)$의 정의역(지지집합)이 $\theta$에 따라 변하지 않는다.
+
+- **(R2) 미분과 적분의 교환 가능:**  
+    $\frac{\partial}{\partial\theta} \log f(x;\theta)$가 존재하고,  
+    $$
+    \frac{\partial}{\partial\theta} \int g(x) f(x;\theta)\,dx = \int g(x) \frac{\partial}{\partial\theta} f(x;\theta)\,dx
+    $$
+    가 성립한다.
+
+- **(R3) 점수함수의 평균이 0:**  
+    $$
+    E_\theta[\dot l_n(\theta)] = 0
+    $$
+
+이제 증명을 정리하면 다음과 같다:
+1. **점수함수 정의**  
+        $$
+        \dot l_n(\theta) = \frac{\partial}{\partial\theta} \sum_{i=1}^n \log f(X_i;\theta)
+        $$
+        (다변수의 경우 $\theta=(\theta_1,\dots,\theta_k)^t$는 $k$차원 벡터, $\dot l_n(\theta)$도 $k$차원 벡터)
+
+2. **코시–슈바르츠 부등식 적용**  
+        임의의 추정량 $\hat\eta_n$에 대해,
+        $$
+        \operatorname{Var}_\theta(\hat\eta_n)\,\operatorname{Var}_\theta(\dot l_n(\theta)) \ge \operatorname{Cov}_\theta(\hat\eta_n,\,\dot l_n(\theta))^2
+        $$
+        (다변수의 경우, 임의의 벡터 $a$, $b$에 대해  
+        $$
+        a^t \mathrm{Var}_\theta(\hat\eta_n) a \cdot b^t \mathrm{Var}_\theta(\dot l_n(\theta)) b \ge \left(a^t \mathrm{Cov}_\theta(\hat\eta_n, \dot l_n(\theta)) b\right)^2
+        $$)
+
+3. **공분산 계산**  
+        $$
+        \operatorname{Cov}_\theta(\hat\eta_n,\,\dot l_n(\theta))
+        = E_\theta\left[(\hat\eta_n - E_\theta[\hat\eta_n])\,\dot l_n(\theta)\right]
+        $$
+        정칙성 조건(R2)에 의해,
+        $$
+        E_\theta\left[\hat\eta_n\,\dot l_n(\theta)\right]
+        = \frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]
+        $$
+        따라서,
+        $$
+        \operatorname{Cov}_\theta(\hat\eta_n,\,\dot l_n(\theta))
+        = \frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]
+        $$
+        (다변수의 경우, $\mathrm{Cov}_\theta(\hat\eta_n, \dot l_n(\theta)) = \frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]$는 $m\times k$ 행렬)
+
+4. **정보량 대입**  
+        점수함수의 분산은 정보량 $I_n(\theta)$와 같다:
+        $$
+        \operatorname{Var}_\theta(\dot l_n(\theta)) = nI(\theta)
+        $$
+        ($I(\theta)$는 $k\times k$ 양정정부호 행렬)
+
+5. **최종 부등식**  
+        위 결과들을 코시–슈바르츠 부등식에 대입하면,
+        $$
+        \operatorname{Var}_\theta(\hat\eta_n) \ge
+        \frac{\left(\frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]\right)^2}{nI(\theta)}
+        $$
+        (다변수/행렬의 경우,
+        $$
+        \mathrm{Var}_\theta(\hat\eta_n) \succeq
+        \left(\frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]\right)
+        [nI(\theta)]^{-1}
+        \left(\frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]\right)^t
+        $$
+        여기서 $\succeq$는 정부호(positive semidefinite) 관계)
+
+즉, 단변수/다변수 모두 정보량 부등식이 성립한다.
 
 ### 정리 8.4.2 불편추정량에 대한 정보량 부등식
 - $\theta=(\theta_1,\dots,\theta_k)^t$의 **불편추정량** $\hat\theta_n^{\mathrm{UE}}$에 대해
@@ -959,29 +1251,30 @@ $$
 
 - 행렬로 쓰면 $\mathrm{Var}_\theta(\hat\theta_n^{\mathrm{UE}})-I^{-1}(\theta)/n$이 음이 아닌 정부호(positive semidefinite)임을 의미
 
-#### 예 8.4.5 $\mathrm{Beta}(\alpha,1)$에서의 불편추정과 정보량 부등식
-- $\mathrm{Beta}(\alpha,1)$는 지수족이며
+#### 증명
+$\hat\theta_n^{\mathrm{UE}}$가 $\theta$의 불편추정량이므로 $E_\theta[\hat\theta_n^{\mathrm{UE}}]=\theta$이다.  
+정리 8.4.1(정보량 부등식)에 $\eta(\theta)=\theta$를 대입하면
 $$
-Y = \sum_{i=1}^n \log X_i
+\mathrm{Var}_\theta(\hat\theta_n^{\mathrm{UE}}) \ge [nI(\theta)]^{-1}
 $$
-가 $\alpha$에 대한 완비충분통계량임
+(다변수의 경우 $c^t\mathrm{Var}_\theta(\hat\theta_n^{\mathrm{UE}})c \ge \frac{1}{n}c^tI^{-1}(\theta)c$).  
+이는 $\frac{\partial}{\partial\theta}E_\theta[\hat\theta_n^{\mathrm{UE}}]=I$ (항등행렬)이므로 바로 성립한다.
 
+#### 예 8.4.5 $\mathrm{Beta}(\alpha,1)$에서의 불편추정과 정보량 부등식
+- $\mathrm{Beta}(\alpha,1)$는 지수족으로 정리8.3.2의 조건을 만족함
+- 통계량 $Y = \sum_{i=1}^n \log X_i$가 $\alpha$에 대한 완비충분통계량임
 - 변환 아이디어:
     - $X_i^\alpha \sim U(0,1) \implies -\alpha\log X_i \sim \mathrm{Exp}(1) \implies -\alpha\sum\log X_i \sim \mathrm{Gamma}(n,1)$
 
 - 계산 결과:
 $$
-E_\alpha\left[\frac{1}{-\sum\log X_i}\right]=\frac{\alpha}{n-1}\quad (n\ge 2)
-$$
-$$
+E_\alpha\left[\frac{1}{-\sum\log X_i}\right]=\frac{\alpha}{n-1}\quad (n\ge 2) \\
 \mathrm{Var}_\alpha\left[\frac{1}{-\sum\log X_i}\right]=\frac{\alpha^2}{(n-1)^2(n-2)}\quad (n\ge 3)
 $$
 
 - 따라서 UMVUE:
 $$
-\hat\alpha_n^{\mathrm{UMVUE}} = \frac{n-1}{-\sum_{i=1}^n \log X_i}
-$$
-$$
+\hat\alpha_n^{\mathrm{UMVUE}} = \frac{n-1}{-\sum_{i=1}^n \log X_i} \\
 \mathrm{Var}_\alpha(\hat\alpha_n^{\mathrm{UMVUE}}) = \frac{\alpha^2}{n-2}
 $$
 
@@ -994,47 +1287,47 @@ $$
 \lim_{n\to\infty}\frac{\mathrm{Var}_\alpha(\hat\alpha_n^{\mathrm{UMVUE}})}{[nI(\alpha)]^{-1}}=1
 $$
 
-- 또한 MLE와의 관계:
+- 또한 예8.4.4로부터 MLE와의 관계:
 $$
 \hat\alpha_n^{\mathrm{UMVUE}} = \frac{n-1}{n}\hat\alpha_n^{\mathrm{MLE}}
 $$
+이고, 최소분산불편추정량은 최대가능도추정량과 같은 극한분포를 갖는다.
+즉, $\sqrt{n}(\hat\theta_n^{\mathrm{MLE}} - \theta) \xrightarrow{d} N(0,\,\alpha^2)$와 같이 두 추정량은 점근적으로 동일한 효율성을 가진다.
 
-### (정리 8.4.2 이후) 점근분산 하한과 Fisher의 추측
-- 정리 8.4.2로부터 (일차원 모수에서) 점근정규성
-    $\sqrt{n}(\hat\theta_n-\theta)\Rightarrow N(0,\sigma^2(\theta))$를 갖는 추정량은 대략
+### 피셔의 추측 (Fisher's conjecture)
+정리 8.4.2에 따르면, 일차원 모수의 경우
 $$
-\sigma^2(\theta) \ge \frac{1}{I(\theta)}
+\operatorname{Var}_\theta\left(\sqrt{n}(\hat\theta_n - \theta)\right) \geq \frac{1}{I(\theta)}
 $$
-같은 하한을 "추측"할 수 있다.
+임을 알 수 있다. 이로부터, 점근정규성을 갖는 임의의 추정량 $\hat\theta_n$의 극한분포 분산 $\sigma^2(\theta)$에 대해
+$$
+\sigma^2(\theta) \geq \frac{1}{I(\theta)}
+$$
+라는 하한을 "추측"할 수 있다.
 
-- 한편 MLE는
+한편, 정리 6.4.4에 의해 최대가능도추정량(MLE)의 경우
 $$
-\sqrt{n}(\hat\theta_n^{\mathrm{MLE}}-\theta)\Rightarrow N\left(0,\frac{1}{I(\theta)}\right)
+\sqrt{n}(\hat\theta_n^{\mathrm{MLE}} - \theta) \xrightarrow{d} N\left(0,\,\frac{1}{I(\theta)}\right)
 $$
-이므로, "점근정규성을 갖는 추정량들 중 MLE가 최소 극한분산을 갖는다"는 형태의 추측을 **Fisher의 추측(Fisher’s conjecture)** 이라 한다.
+가 성립하므로, 점근정규성을 갖는 추정량들 중에서 MLE가 최소의 극한분포 분산을 갖는다고 볼 수 있다.
 
-- 이 추측은 일반적으로는 성립하지 않고, 추가적인 **균등수렴(uniform convergence)** 조건 하에서만 성립함이 알려져 있다.
+이러한 내용을 **피셔의 추측(Fisher's conjecture)** 라 하며, "점근정규성을 갖는 추정량들 중 MLE가 최소 극한분산을 갖는다"는 형태의 주장이다. 다만, 이 추측은 일반적으로는 항상 성립하지 않고, 추가적인 **균등수렴(uniform convergence)** 조건이 만족될 때에만 성립함이 알려져 있다.
+
+즉, 최대가능도추정량은 이러한 조건 하에서 **점근적으로 효율적인 추정량(asymptotically efficient estimator)** 이라 하며, 이러한 점근적 효율성은 다차원 모수함수의 추정에도 확장된다.
 
 #### 예 8.4.6 감마분포 $\mathrm{Gamma}(\alpha,\beta)$에서의 추정량 비교
 - 모형: $\mathrm{Gamma}(\alpha,\beta)$, $\theta=(\alpha,\beta)^t$
 - MLE는 가능도방정식을 푸는 수치적 방법(일단계 반복법, one-step iteration)으로 근사
 
-초기값: 적률이용추정량(MME)
-
-$$
-\hat\theta_n^{\mathrm{MME}} = (\hat\alpha_n, \hat\beta_n)^t
-$$
+초기값: 적률이용추정량(MME) $\hat\theta_n^{\mathrm{MME}} = (\hat\alpha_n, \hat\beta_n)^t$
 는 연립방정식
 $$
 \hat\alpha_n\hat\beta_n = \bar X_n,\qquad
 \hat\alpha_n(\hat\beta_n)^2 = \frac{1}{n}\sum_{i=1}^n (X_i-\bar X_n)^2
 $$
-의 해로 주어진다.
-
+의 해로 주어지고, 정리6.1.2로부터 그 극한분포를 구하면:
 $$
-\sqrt{n}(\hat\theta_n^{\mathrm{MME}}-\theta)\xrightarrow{d}N(0,\Sigma(\theta))
-$$
-$$
+\sqrt{n}(\hat\theta_n^{\mathrm{MME}}-\theta)\xrightarrow{d}N(0,\Sigma(\theta)) \\
 \Sigma(\theta)=
 \begin{pmatrix}
 2\alpha(\alpha+1) & -2(\alpha+1)\beta \\
@@ -1043,7 +1336,6 @@ $$
 $$
 
 정보량 행렬과 역행렬
-
 $$
 I(\theta) = E_\theta[-\ddot l_1(\theta)] =
 \begin{pmatrix}
@@ -1057,9 +1349,9 @@ I^{-1}(\theta) = \frac{1}{\alpha\Psi'(\alpha)-1}
 -\beta & \Psi'(\alpha)\beta^2
 \end{pmatrix}
 $$
+(참고: $\Psi'(\alpha)$와 $\Psi''(\alpha)$는 각각 다이감마(digamma), 트라이감마(trigamma) 함수로, 로그감마함수 $\log\Gamma(\alpha)$의 1차, 2차 도함수다.)
 
 일단계 반복법(one-step) 추정량
-
 - $\hat\theta_n^{(0)}=\hat\theta_n^{\mathrm{MME}}$에서 시작해 뉴턴 형태로 한 번 갱신한 $\hat\theta_n^{(1)}$에 대해
 $$
 \sqrt{n}(\hat\theta_n^{(1)}-\theta)\xrightarrow{d}N(0,I^{-1}(\theta))
@@ -1080,4 +1372,4 @@ ARE(\hat\beta_n^{\mathrm{MME}},\,\hat\beta_n^{\mathrm{MLE}})
 = \frac{[\Psi'(\alpha)\beta^2/(\alpha\Psi'(\alpha)-1)]^{-1}}{[(2+3/\alpha)\beta^2]^{-1}}
 $$
 
-#### 표 두개
+- (표 생략) 적률이용추정량은 최대가능도추정량에 비해 점근적으로 효율성이 낮다. 이는 일반적으로 성립하며, 최대가능도추정량이 점근적으로 가장 효율적인 추정량임이 알려져 있다!
