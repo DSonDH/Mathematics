@@ -7,3 +7,7 @@
 ## 분산분석에서의 검정력 함수 *(Power Functions in ANOVA)*
 
 ## 회귀분석 *(Regression Analysis)*
+
+
+
+#TODO: 이거 끝나면 부록 내용도 쭉 같이 정리

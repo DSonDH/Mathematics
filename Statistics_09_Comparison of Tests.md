@@ -797,6 +797,7 @@ $$
 
 > 이와 같이 $S_n$을 사용하여 연속형 분포의 중앙값에 대한 검정을 하는 방법을 **부호검정(sign test)** 이라고 한다.
 > 
+> 분포의 대칭성은 중앙값을 위치모수로 해석하기 위해 흔히 가정되는데, 필수는 아님.
 > 부호검정은 모집단 분포에 특정한 함수 형태를 가정하지 않고 사용할 수 있는 반면(범용성, robustness가 있다), 특정 모집단에 적용하면 효율성이 떨어질 수 있다. 이런 효율성 판단에는 특정 대립가설에서의 검정력을 일정 수준으로 유지하기 위한 표본크기를 비교기준으로 한다.
 
 #### 예 9.3.2 위치모수 모형에서 부호검정의 검정력 근사
@@ -809,37 +810,81 @@ $$
 S_n \ge c_n,\quad
 c_n \simeq n p(\theta_0) + \sqrt{n} \sigma(\theta_0) z_\alpha,\quad p(\theta_0) = 1/2,\ \sigma(\theta_0) = 1/2
 $$
-대립가설 $\theta = \theta_1 (\theta_1 > \theta_0)$에서의 검정력 근사:
+대립가설 $\theta = \theta_1 (\theta_1 > \theta_0)$에서 
+$$
+c_n \simeq n p(\theta_0) + \sqrt{n} \sigma(\theta_0) z_\alpha
+\Rightarrow \frac{c_n - n p(\theta_1)}{\sqrt{n \sigma^2(\theta_1)}} \simeq \frac{n (p(\theta_0) - p(\theta_1)) + \sqrt{n} \sigma(\theta_0) z_\alpha}{\sqrt{n \sigma^2(\theta_1)}} \\
+$$
+이므로 검정력 근사는 
 $$
 \gamma_n(\theta_1) = P_{\theta_1}(S_n \ge c_n)
+= P_{\theta_1}\left( \frac{S_n - n p(\theta_1)}{\sqrt{n \sigma^2(\theta_1)}} \ge \frac{c_n - n p(\theta_1)}{\sqrt{n \sigma^2(\theta_1)}} \right) \\
+\simeq P\left( Z \ge \frac{c_n - n p(\theta_1)}{\sqrt{n \sigma^2(\theta_1)}} \right),\quad Z \sim N(0,1) \\
+= 1 - \Phi\left(-\sqrt{n} \frac{p(\theta_1) - p(\theta_0)}{\sigma(\theta_1)} + \frac{\sigma(\theta_0)}{\sigma(\theta_1)} z_\alpha \right)
 $$
-$$
-\simeq 1 - \Phi\left(
--\sqrt{n} \frac{p(\theta_1) - p(\theta_0)}{\sigma(\theta_1)}
-+ \frac{\sigma(\theta_0)}{\sigma(\theta_1)} z_\alpha
-\right)
-$$
-고정된 대립가설 $\theta = \theta_1$에 대해
+그러므로 고정된 대립가설 $\theta = \theta_1$에 대해
 $$
 \lim_{n\to\infty} \gamma_n(\theta_1) = 1
 $$
-귀무가설에 가까운 대립가설 $\theta_{1n} \simeq \theta_0 + K/\sqrt{n}$ ($K>0$)에 대해
+
+> **왜 대립가설을 $θ_{1n} ≃ θ_0 + K/√n$ 형태로 두는가? (문맥/흐름 정리)**
+> 
+> 이 형태의 대립가설은 **귀무가설 H0: θ=θ0에 “가까워지는” 대립가설**, 즉 *local alternatives* (특히 **Pitman local alternatives**)를 다루기 위해 등장한다.
+> 
+> 1) “가까운 대립가설”이 갑자기 나오는 이유  
+> 큰 표본(n→∞)에서는 대부분의 일관적인 검정이, **고정된 대립가설(θ1 ≠ θ0)** 에 대해 검정력이 1로 수렴한다.
+> - 그러면 서로 다른 검정들을 비교할 때, “어차피 다 1로 가는데?”라는 문제가 생겨 **검정력 비교가 무의미**해진다.
+> - 따라서 **H0에 점점 가까워지는** 대립가설을 설정해서, 큰 표본에서도 **검정력이 0과 1 사이의 비자명한 값**으로 남도록 만들어 검정들을 비교한다.
+> 
+> 2) 왜 하필 $1/\sqrt n$ 스케일인가?  
+> 추정량/검정통계량은 보통
+> - (추정량 − θ0) 같은 차이가 **표준오차가 O(1/√n)** 으로 줄어들고,
+> - 중심극한정리/점근정규성에서 (·)×√n 스케일이 자연스럽게 등장한다.
+> 
+> 그래서 대립가설의 차이도
+> - $θ_{1n} − θ0 = K/√n$ 로 두면,
+> - $√n(θ_{1n} − θ0) = K$ 가 **상수로 남아** 검정통계량의 점근분포가
+>     - H0에서는 평균 0,
+>     - local alternative에서는 평균이 K만큼 이동한 형태(“shift”)가 되어,
+>     **점근적 검정력(power) 근사식**을 깔끔하게 얻을 수 있다.
+> 
+> > 더 빠르게 가까워지면(예: 1/n) 차이를 검정이 거의 못 느껴 power≈α로 가고,  
+> > 더 느리게 가까워지면(예: 상수 차이) power→1로 가서 비교가 다시 무의미해진다.  
+> > 1/√n은 “비자명한(0<power<1)” 비교가 가능해지는 대표적인 임계 스케일이다.
+> 
+> ### 3) 이걸 왜 고려하나? (비교의 목적)
+> “Comparison of Tests(검정 비교)” 문맥에서는 보통
+> - 같은 유의수준 α에서 어떤 검정이 **H0 근처의 미세한 차이**를 더 잘 잡는지,
+> - 즉 **점근상대효율(ARE)** 같은 개념으로 검정의 성능을 비교하려고 한다.
+> 
+> local alternatives를 쓰면 각 검정의
+> - 점근적 분포(shift된 정규 등) → 점근적 검정력 함수 →  효율/우수성 비교  
+> 라는 흐름으로 자연스럽게 이어진다.
+> 
+> 요약: $θ_{1n} = θ0 + K/√n$은 “큰 표본에서도 검정력 비교가 의미 있게 남도록” H0 근처에서의 성능을 분석하기 위한 표준 설정이다.
+
+귀무가설에 가까이 접근하는 대립가설 $\theta_{1n} \simeq \theta_0 + K/\sqrt{n} \quad (K>0)$에 대해 아래 근사식이 성립한다.
 $$
 \gamma_n(\theta_{1n}) \simeq 1 - \Phi\left(
 -\sqrt{n} (\theta_{1n} - \theta_0) \dot{p}(\theta_0)/\sigma(\theta_0) + z_\alpha
 \right),\quad
 \dot{p}(\theta) = \frac{d}{d\theta}p(\theta) = f(\theta_0 - \theta)
 $$
-따라서 $\gamma_n(\theta_{1n}) \simeq \gamma$가 되기 위한 표본크기는 근사적으로
+따라서 $\gamma_n(\theta_{1n}) \simeq \gamma$가 되기 위한 표본크기는 근사적으로 아래와 같이 구할 수 있다
+  - 이때 $\gamma$는 상수. 통계적 검정에서 표본 크기 $n$에 따라 검정의 힘(power) 또는 임계값이 특정 값 $\gamma$에 근접하도록 하는 조건이다. 즉, 주어진 표본 크기에서 검정의 성능이 목표하는 수준 $\gamma$에 도달하도록 표본 크기를 근사적으로 결정하는 과정에 대한 논의다. 이 식은 검정의 효율성이나 신뢰도를 평가할 때 사용된다.
 $$
-n = (2f(0))^{-2} \left( \frac{z_\alpha + z_{1-\gamma}}{\theta_{1n} - \theta_0} \right)^2
+\sqrt{n} (\theta_{1n} - \theta_0) \dot{p}(\theta_0)/\sigma(\theta_0) - z_\alpha \simeq z_{1-\gamma} \\
+\therefore n = \left( \frac{z_\alpha + z_{1-\gamma}}{2f(0)(\theta_{1n} - \theta_0)} \right)^2
 $$
+> **정리: $z_{1-\gamma}$의 의미 (표준정규 분위수)**  
+> 표준정규분포 $Z\sim N(0,1)$의 누적분포함수 $\Phi$에 대해  
+> $$\Phi\!\left(z_{1-\gamma}\right)=1-\gamma \quad\Big(\Leftrightarrow\ P(Z\le z_{1-\gamma})=1-\gamma\Big)$$
+> 따라서 오른쪽 꼬리확률은  
+> $$P(Z>z_{1-\gamma})=\gamma$$
+> 예: $\gamma=0.05$이면 $z_{0.95}\approx 1.645$.
 
-### 정리 9.3.1 검정력의 근사와 표본크기
-실수 모수 $\theta$에 관한 가설
-$$
-H_0(\theta_0):\theta=\theta_0 \quad\text{vs}\quad H_1:\theta>\theta_0
-$$
+### 정리 9.3.1 검정력의 근사와 표본크기 *(Power Approximation and Sample Size)*
+실수 모수 $\theta$에 관한 가설 $H_0(\theta_0):\theta=\theta_0 \quad\text{vs}\quad H_1:\theta>\theta_0$  
 을 유의수준 $\alpha$에서 검정할 때, 크기 $n$인 랜덤표본에 기초한 검정통계량 $T_n$을 이용한 크기 $\alpha$의 기각역이
 $$
 \sqrt{n} \frac{T_n - \mu(\theta_0)}{\sigma(\theta_0)} \ge t_n
@@ -848,10 +893,13 @@ $$
 $$
 \sqrt{n} \frac{T_n - \mu(\theta)}{\sigma(\theta)} \xrightarrow{d} N(0,1)
 $$
-과 같은 점근정규성이 성립한다고 하자.
+과 같은 점근정규성이 성립한다고 하자
+  - $\mu(\theta), \sigma(\theta)$는 각각 미분가능하고 연속인 함수라 가정
+  - 엄밀하게는 $\theta_{1n} \simeq \theta_0 + K/\sqrt{n}$ ($K>0$)에서의 점근정규성을 필요로 하며
+  - 이는 $\theta_0$근방의 열린구간에서의 $\theta$들에 대한 균등점근정규성(uniform asymptotic normality)가 성립되면 충분하다.
 
 (a) **검정력 근사**  
-귀무가설에 가까운 대립가설 $\theta_{1n} \simeq \theta_0 + K/\sqrt{n}$ ($K>0$)에서
+귀무가설에 가까운 대립가설 $\theta_{1n} \simeq \theta_0 + K/\sqrt{n}$ ($K>0$)에서 아래와 같은 검정력의 근사식이 성립함
 $$
 \gamma_n(\theta_{1n}) \simeq 1 - \Phi\left(
 -\sqrt{n} (\theta_{1n} - \theta_0) \dot{\mu}(\theta_0)/\sigma(\theta_0) + z_\alpha
@@ -860,42 +908,134 @@ $$
 $$
 
 (b) **표본크기 근사**  
-$\gamma_n(\theta_{1n}) \simeq \gamma$가 되기 위한 표본크기 근사:
+(a)에서 대립가설하의 모수 $\theta_{1n}$에서의 검정력이 $\gamma_n(\theta_{1n}) \simeq \gamma$가 되기 위한 표본크기 $N(T_n;\gamma,\theta_{1n})$근사:
 $$
 N(T_n;\gamma,\theta_{1n}) \simeq \left( \frac{\dot{\mu}(\theta_0)}{\sigma(\theta_0)} \right)^{-2} \left( \frac{z_\alpha + z_{1-\gamma}}{\theta_{1n} - \theta_0} \right)^2
 $$
 
-**[증명]**
-검정의 크기가 $\alpha$이므로
+**[증명]**  
+가설검정의 기각역이 $\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n$
+이고 검정의 크기(size)가 $\alpha$이므로
 $$
-P_{\theta_0}\left( \sqrt{n} \frac{T_n - \mu(\theta_0)}{\sigma(\theta_0)} \ge t_n \right) = \alpha
+P_{\theta_0}\!\left(\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n\right)=\alpha
 $$
+가 되도록 $t_n$을 정한다.
+
+**1) $t_n\simeq z_\alpha$ (임계값의 근사)**  
+정리의 가정(점근정규성)으로부터
 $$
-t_n \simeq z_\alpha
+\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ \xrightarrow{d}\ N(0,1)
 $$
-대립가설 $\theta = \theta_1$에서의 검정력 근사:
+이므로 큰 $n$에서
+$$
+P_{\theta_0}\!\left(\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n\right)
+\approx P(Z\ge t_n)=1-\Phi(t_n).
+$$
+왼쪽이 $\alpha$가 되게 하려면 $1-\Phi(t_n)\approx \alpha$, 즉
+$$
+t_n \approx \Phi^{-1}(1-\alpha)=z_\alpha
+$$
+이 된다. 따라서 $t_n\simeq z_\alpha$.
+
+**2) 고정된 대립가설 $\theta=\theta_1$에서의 검정력 근사**  
+검정력은
+$$
+\gamma_n(\theta_1)=P_{\theta_1}\!\left(\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n\right)
+$$
+이때
+$$
+\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n
+\iff
+\sqrt{n}\frac{T_n-\mu(\theta_1)}{\sigma(\theta_1)}
+\ge
+\frac{\sigma(\theta_0)}{\sigma(\theta_1)}t_n
+-\sqrt{n}\frac{\mu(\theta_1)-\mu(\theta_0)}{\sigma(\theta_1)}.
+$$
+이고, 점근정규성으로 $\sqrt{n}\frac{T_n-\mu(\theta_1)}{\sigma(\theta_1)}\approx Z\sim N(0,1)$ 이므로
+$$
+\gamma_n(\theta_1)
+\approx
+P\!\left(
+Z \ge
+\frac{\sigma(\theta_0)}{\sigma(\theta_1)}t_n
+-\sqrt{n}\frac{\mu(\theta_1)-\mu(\theta_0)}{\sigma(\theta_1)}
+\right)
+=
+1-\Phi\!\left(
+\frac{\sigma(\theta_0)}{\sigma(\theta_1)}t_n
+-\sqrt{n}\frac{\mu(\theta_1)-\mu(\theta_0)}{\sigma(\theta_1)}
+\right).
+$$
+여기서 $t_n\simeq z_\alpha$를 대입하면
 $$
 \gamma_n(\theta_1) \simeq 1 - \Phi\left(
 -\sqrt{n} \frac{\mu(\theta_1) - \mu(\theta_0)}{\sigma(\theta_1)} + \frac{\sigma(\theta_0)}{\sigma(\theta_1)} z_\alpha
-\right)
-$$
-$\theta_{1n} \simeq \theta_0 + K/\sqrt{n}$에서
-$$
-\gamma_n(\theta_{1n}) \simeq 1 - \Phi\left(
--\sqrt{n} (\theta_{1n} - \theta_0) \dot{\mu}(\theta_0)/\sigma(\theta_0) + z_\alpha
-\right)
-$$
-표본크기 근사:
-$$
-N(T_n;\gamma,\theta_{1n}) \simeq \left( \frac{\dot{\mu}(\theta_0)}{\sigma(\theta_0)} \right)^{-2} \left( \frac{z_\alpha + z_{1-\gamma}}{\theta_{1n} - \theta_0} \right)^2
+\right).
 $$
 
-### 점근상대효율성
-실수 모수 $\theta$에 관한 가설
+**3) 로컬 대립가설 $\theta_{1n}\simeq \theta_0+\dfrac{K}{\sqrt{n}}$에서의 근사**  
+$\mu,\sigma$가 $\theta_0$에서 미분가능이므로 테일러 전개로
 $$
-H_0(\theta_0):\theta=\theta_0 \quad\text{vs}\quad H_1:\theta>\theta_0
+\mu(\theta_{1n})-\mu(\theta_0)
+=
+\dot\mu(\theta_0)(\theta_{1n}-\theta_0)+o(\theta_{1n}-\theta_0),
+\qquad
+\sigma(\theta_{1n})=\sigma(\theta_0)+o(1).
 $$
-을 유의수준 $\alpha$에서 검정할 때, 크기 $n$인 랜덤표본에 기초한 검정통계량 $T_{in}$ ($i=1,2$)들이 정리 9.3.1의 조건을 만족한다고 하자. 대립가설 $\theta_{1n} \simeq \theta_0 + K/\sqrt{n}$에서 검정력이 $\gamma$가 되기 위한 표본크기를 $N(T_{in};\gamma,\theta_{1n})$라 할 때, 이들 표본크기의 역수의 극한값
+또한 $\theta_{1n}-\theta_0=O(n^{-1/2})$이므로
+$$
+\sqrt{n}\big(\mu(\theta_{1n})-\mu(\theta_0)\big)
+=
+\sqrt{n}(\theta_{1n}-\theta_0)\dot\mu(\theta_0)+o(1),
+\qquad
+\frac{\sigma(\theta_0)}{\sigma(\theta_{1n})}=1+o(1).
+$$
+이를 (2)의 검정력 근사식에 대입하면
+$$
+\gamma_n(\theta_{1n})
+\simeq
+1-\Phi\left(
+-\sqrt{n}(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}
++z_\alpha
+\right).
+$$
+
+**4) 목표 검정력 $\gamma$를 위한 표본크기 근사**  
+$$
+\gamma_n(\theta_{1n})\simeq \gamma
+\iff
+1-\Phi(A)\simeq \gamma
+\iff
+\Phi(A)\simeq 1-\gamma
+\iff
+A\simeq z_{1-\gamma},
+$$
+여기서
+$$
+A=
+-\sqrt{n}(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}
++z_\alpha.
+$$
+따라서
+$$
+-\sqrt{n}(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}+z_\alpha
+\simeq z_{1-\gamma}
+$$
+이고, 이를 $n$에 대해 풀면
+$$
+\sqrt{n}\,(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}
+\simeq z_\alpha+z_{1-\gamma}.
+$$
+결국
+$$
+N(T_n;\gamma,\theta_{1n})
+\simeq
+\left(\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}\right)^{-2}
+\left(\frac{z_\alpha+z_{1-\gamma}}{\theta_{1n}-\theta_0}\right)^2.
+$$
+
+### 점근상대효율성 (asymptotic relative efficiency, ARE)
+실수 모수 $\theta$에 관한 가설 $H_0(\theta_0):\theta=\theta_0 \quad\text{vs}\quad H_1:\theta>\theta_0$을 유의수준 $\alpha$에서 검정할 때, 크기 $n$인 랜덤표본에 기초한 검정통계량 $T_{in}$ ($i=1,2$)들이 정리 9.3.1의 조건을 만족한다고 하자. 대립가설 $\theta_{1n} \simeq \theta_0 + K/\sqrt{n}$에서 검정력이 $\gamma$가 되기 위한 표본크기를 $N(T_{in};\gamma,\theta_{1n})$라 할 때, 이들 표본크기의 역수의 극한값
 $$
 \lim_{n\to\infty} \frac{N^{-1}(T_{1n};\gamma,\theta_{1n})}{N^{-1}(T_{2n};\gamma,\theta_{1n})}
 $$
@@ -904,17 +1044,20 @@ $$
 $$
 \mathrm{ARE}(T_{1n}, T_{2n}) = \frac{(\dot{\mu}_1(\theta_0)/\sigma_1(\theta_0))^2}{(\dot{\mu}_2(\theta_0)/\sigma_2(\theta_0))^2}
 $$
+> **관례적 약기(abuse of notation)**  
+> 여기서 $\mathrm{ARE}(T_{1n},T_{2n})$의 $T_{in}$은 “통계량”을 뜻하는 기호이지만, 실제로는 각 $n$에 대해 $T_{in}$으로 **정의되는 검정 절차(임계값 선택까지 포함한 크기 $\alpha$의 검정) 전체의 열** $\{\phi_{i,n}\}_{n\ge1}$을 대표해서 적는 관례적 표기이다.  
+> 즉, 엄밀히는
+> $$
+> \mathrm{ARE}\big(\{\phi_{1,n}\},\{\phi_{2,n}\}\big)
+> $$
+> 처럼 “검정들의 열”에 대한 점근 비교이지만, 독자가 “ARE는 점근 개념이며 $n$에 따른 절차의 열을 비교한다”는 전제를 안다고 보고 교재에서는 중괄호(또는 $\{\cdot\}$ 표기)를 생략해 $\mathrm{ARE}(T_{1n},T_{2n})$로 쓴다.
 
 #### 예 9.3.3 부호검정의 $t$-검정에 대한 점근상대효율성
 모집단 분포가 연속형이고 $\mu$에 대해 대칭이며 확률밀도함수가
 $$
 \frac{1}{\sigma} f\left(\frac{x-\mu}{\sigma}\right),\quad -\infty<\mu<+\infty,\ \sigma>0
 $$
-인 경우, 가설
-$$
-H_0(\mu_0):\mu=\mu_0 \quad\text{vs}\quad H_1:\mu>\mu_0
-$$
-을 유의수준 $\alpha\ (0<\alpha<1)$에서 검정할 때, 통계량
+인 경우, 가설 $H_0(\mu_0):\mu=\mu_0 \quad\text{vs}\quad H_1:\mu>\mu_0$ 을 유의수준 $\alpha\ (0<\alpha<1)$에서 검정할 때, 통계량
 $$
 S_n = \sum_{i=1}^n I(X_i > \mu_0)
 $$
@@ -922,24 +1065,96 @@ $$
 $$
 N(S_n;\gamma,\mu_{1n}) \simeq \left( \frac{2f(0)}{\sigma} \right)^{-2} \left( \frac{z_\alpha + z_{1-\gamma}}{\mu_{1n} - \mu_0} \right)^2
 $$
-로 주어진다.
 
-한편 모집단이 정규분포라면
-$$
-\sqrt{n}(\bar{X} - \mu_0)/S \ge t_\alpha(n-1)
-$$
-로 주어지는 $t$-검정을 사용한다. $t$-검정의 통계량
-$$
-T_n = \sqrt{n}(\bar{X} - \mu_0)/S
-$$
-에 대해 점근정규성이 성립하며,
-$$
-\sqrt{n}\left( \frac{\bar{X} - \mu_0}{S} - \frac{\mu_{1n} - \mu_0}{\sqrt{\mathrm{Var}(X_1)}} \right) \xrightarrow{d} N(0,1)
-$$
-여기서
-$$
-\sqrt{\mathrm{Var}(X_1)} = \sigma \left( \int_{-\infty}^{+\infty} z^2 f(z)\,dz \right)^{1/2}
-$$
+한편 모집단분포가 정규분포면 $\sqrt n(\bar X -\mu_0)/S \geq t_\alpha(n-1)$로 주어지는 t검정을 사용할 것이다. 이런 t검정의 통계량 $T_n = \sqrt n(\bar X -\mu_0)/S$에 대한 점근정규성 성립은 아래 증명과정을 따른다. (좀 김)
+> **로컬 대립가설 $\mu_{1n}\simeq \mu_0+K/\sqrt{n}$에서 $t$-검정 통계량의 점근정규성 유도**  
+> $t$-검정 통계량을
+> $$
+> T_n=\sqrt{n}\frac{\bar X-\mu_0}{S}
+> $$
+> 로 두고, 로컬 대립가설을 $\mu=\mu_{1n}=\mu_0+K/\sqrt{n}$로 둔다.
+> 
+> **1) 표본평균의 CLT (로컬 대립가설 하에서도 동일)**  
+> $$
+> \sqrt{n}\frac{\bar X-\mu_{1n}}{\tau}\ \xrightarrow{d}\ N(0,1).
+> $$
+> (이유: $X_i-\mu_{1n}$은 평균 $0$, 분산 $\tau^2$이며 $n$에 따라 분포가 변하지 않으므로 CLT 적용)
+> 
+> **2) 표본표준편차의 일치성**  
+> $$
+> S \xrightarrow{p} \tau
+> \quad\Rightarrow\quad
+> \frac{\tau}{S}\xrightarrow{p}1,\qquad \frac{1}{S}-\frac{1}{\tau}\xrightarrow{p}0.
+> $$
+> (이유: $S^2$는 $\mathrm{Var}(X_1)=\tau^2$의 일치추정량)
+> 
+> **3) 목표 식의 변형**  
+> $$
+> A_n:=\sqrt{n}\left(\frac{\bar X-\mu_0}{S}-\frac{\mu_{1n}-\mu_0}{\tau}\right)
+> $$
+> 라 하자. $\bar X-\mu_0=(\bar X-\mu_{1n})+(\mu_{1n}-\mu_0)$이므로
+> $$
+> \frac{\bar X-\mu_0}{S}-\frac{\mu_{1n}-\mu_0}{\tau}
+> =
+> \frac{\bar X-\mu_{1n}}{S}
+> +(\mu_{1n}-\mu_0)\left(\frac{1}{S}-\frac{1}{\tau}\right) \\
+> \therefore A_n = \underbrace{\sqrt{n}\frac{\bar X-\mu_{1n}}{S}}_{(I)}
+> +
+> \underbrace{\sqrt{n}(\mu_{1n}-\mu_0)\left(\frac{1}{S}-\frac{1}{\tau}\right)}_{(II)}.
+> $$
+> 
+> **4) 각 항의 극한분포/확률수렴**  
+> **(I)항:** 곱의 형태로 쓴다.
+> $$
+> \sqrt{n}\frac{\bar X-\mu_{1n}}{S}
+> =
+> \left(\sqrt{n}\frac{\bar X-\mu_{1n}}{\tau}\right)\left(\frac{\tau}{S}\right).
+> $$
+> 여기서
+> $$
+> \sqrt{n}\frac{\bar X-\mu_{1n}}{\tau}\xrightarrow{d}N(0,1),\qquad \frac{\tau}{S}\xrightarrow{p}1.
+> $$
+> 슬럿츠키 정리에 의해
+> $$
+> (I)\ \xrightarrow{d}\ N(0,1).
+> $$
+> 
+> **(II)항:** 로컬 대립가설에서
+> $$
+> \sqrt{n}(\mu_{1n}-\mu_0)\to K \quad(\text{상수}),
+> $$
+> 또한 $\left(\frac{1}{S}-\frac{1}{\tau}\right)\xrightarrow{p}0$이므로
+> $$
+> (II)\ \xrightarrow{p}\ 0.
+> $$
+> 
+> **5) 결론 (슬럿츠키 정리)**  
+> $$
+> A_n=(I)+(II)\ \xrightarrow{d}\ N(0,1).
+> $$
+> 즉,
+> $$
+> \boxed{
+> \sqrt{n}\left( \frac{\bar{X} - \mu_0}{S} - \frac{\mu_{1n} - \mu_0}{\sqrt{\mathrm{Var}(X_1)}} \right) \xrightarrow{d} N(0,1)
+> }
+> $$
+> 이며,
+> $$
+> \boxed{
+> \sqrt{\mathrm{Var}(X_1)}=\sigma\left(\int_{-\infty}^{\infty} z^2 f(z)\,dz\right)^{1/2}.
+> }
+> $$
+> 
+> (참고) $T_n$ 자체로 쓰면 $\sqrt{n}(\mu_{1n}-\mu_0)\to K$이므로
+> $$
+> T_n
+> =
+> \sqrt{n}\frac{\bar X-\mu_{1n}}{S}
+> +\sqrt{n}\frac{\mu_{1n}-\mu_0}{S}
+> \Rightarrow N\!\left(\frac{K}{\tau},\,1\right)
+> $$
+> 의 shifted normal 형태가 된다.
+
 따라서 $t$-검정의 표본크기 근사식은
 $$
 N(T_n;\gamma,\mu_{1n}) \simeq \left( \frac{1}{\sqrt{\mathrm{Var}(X_1)}} \right)^{-2} \left( \frac{z_\alpha + z_{1-\gamma}}{\mu_{1n} - \mu_0} \right)^2
@@ -957,17 +1172,8 @@ $$
 - 모집단 분포 $DE(\mu,\sigma)$: $2$
 
 부호검정처럼 모집단 분포의 형태를 가정하지 않고 사용할 수 있는 검정 방법을 **비모수적(nonparametric) 검정**이라 하며, 모집단 분포에 대한 가정이 어려운 경우에 유용하다. 대표적 비모수적 검정인 크기 순서를 이용하는 방법을 살펴보자.
-
 #### 예 9.3.4 위치모수 모형에서 부호순위 검정통계량
-모집단 분포가 연속형이고 확률밀도함수가
-$$
-f(x-\theta),\quad -\infty<\theta<+\infty
-$$
-의 꼴로서 $\theta$에 대해 대칭($f(-x)=f(x)$)인 경우, 랜덤표본 $X_1,\dots,X_n$을 이용하여
-$$
-H_0(\theta_0):\theta=\theta_0 \quad\text{vs}\quad H_1:\theta>\theta_0
-$$
-을 검정한다. 이때 $|X_1-\theta_0|,\dots,|X_n-\theta_0|$을 크기순으로 나열할 때 $|X_i-\theta_0|$의 순위를 $R(|X_i-\theta_0|)$라 하며,
+모집단 분포가 연속형이고 확률밀도함수가 $f(x-\theta),\quad -\infty<\theta<+\infty$의 꼴로서 $\theta$에 대해 대칭($f(-x)=f(x)$)인 경우, 랜덤표본 $X_1,\dots,X_n$을 이용하여 $H_0(\theta_0):\theta=\theta_0 \quad\text{vs}\quad H_1:\theta>\theta_0$을 검정한다. 이때 $|X_1-\theta_0|,\dots,|X_n-\theta_0|$을 크기순으로 나열할 때 $|X_i-\theta_0|$의 순위를 $R(|X_i-\theta_0|)$라 하며,
 $$
 R(|X_i-\theta_0|) = 1 + \sum_{j=1}^n I(|X_j-\theta_0| < |X_i-\theta_0|)
 $$
@@ -977,55 +1183,177 @@ W_n = \sum_{i=1}^n \operatorname{sgn}(X_i-\theta_0) R(|X_i-\theta_0|)
 $$
 여기서 $\operatorname{sgn}(x)$는 $x$의 부호 함수이다.
 
+#### 예: 부호순위(signed rank) 통계량 계산 예시
+$$
+X=(2.1,\ -0.4,\ 1.3,\ -2.0,\ 0.7)
+$$
+| $i$ | $X_i$ | $\operatorname{sgn}(X_i)$ | $\lvert X_i\rvert$ | 순위 $R(\lvert X_i\rvert)$ | $\operatorname{sgn}(X_i)\,R(\lvert X_i\rvert)$ |
+|---:|---:|:---:|---:|---:|---:|
+| 1 | 2.1  | $+1$ | 2.1 | 5 | 5  |
+| 2 | -0.4 | $-1$ | 0.4 | 1 | -1 |
+| 3 | 1.3  | $+1$ | 1.3 | 4 | 4  |
+| 4 | -2.0 | $-1$ | 2.0 | 3 | -3 |
+| 5 | 0.7  | $+1$ | 0.7 | 2 | 2  |  
+
+$$
+W_5=5+(-1)+4+(-3)+2=7.
+$$
+
 ### 정리 9.3.2 부호순위 검정통계량의 귀무가설하의 분포
 귀무가설 $H_0(\theta_0):\theta=\theta_0$ 하에서 부호순위 검정통계량의 분포는 다음과 같다.
 
 (a)
 $$
-W_n \overset{d}{=} \sum_{j=1}^n j S(j),\quad S(j):\text{iid},\ P(S(j)=-1)=P(S(j)=+1)=1/2
+W_n \overset{d}{\equiv} \sum_{j=1}^n j S(j),\quad S(j):\text{iid},\ P(S(j)=-1)=P(S(j)=+1)=1/2
 $$
 
 (b)
 $$
-\frac{W_n - E_{\theta_0} W_n}{\sqrt{\mathrm{Var}_{\theta_0}(W_n)}} \xrightarrow{d} N(0,1)
-$$
-$$
+\frac{W_n - E_{\theta_0} W_n}{\sqrt{\mathrm{Var}_{\theta_0}(W_n)}} \xrightarrow{d} N(0,1) \\
 E_{\theta_0}(W_n) = 0,\quad \mathrm{Var}_{\theta_0}(W_n) = \sum_{j=1}^n j^2 = \frac{n(n+1)(2n+1)}{6}
 $$
 
+#### 증명
+연속형 분포이므로 $|X_i-\theta_0|$에 동점이 생길 확률은 $0$이라 가정해도 무방하다.
+
+**(a)** $|X_i-\theta_0|$를 오름차순으로 정렬했을 때 $j$번째로 작은 값을 갖는 표본의 인덱스를 $i(j)$라 두면 (즉, $R(|X_{i(j)}-\theta_0|)=j$),
+$$
+W_n=\sum_{j=1}^n \operatorname{sgn}(X_{i(j)}-\theta_0)\, j.
+$$
+귀무가설 $H_0(\theta_0)$ 하에서 $X_i-\theta_0$의 분포는 $0$을 중심으로 대칭이므로
+$$
+P(\operatorname{sgn}(X_i-\theta_0)=+1)=P(\operatorname{sgn}(X_i-\theta_0)=-1)=\tfrac12.
+$$
+연속형이고 $\theta_0$에 대해 대칭인 분포에서 $Y:=X_1-\theta_0$라 두면 $Y$의 밀도는 $f_Y(y)=f_Y(-y)$이고 $P(Y=0)=0$이다. 임의의 $x\ge 0$에 대해  
+$$
+P_{\theta_0}\big(|X_1-\theta_0|\le x,\ \operatorname{sgn}(X_1-\theta_0)=+1\big)
+= P(0<Y\le x)
+= \int_0^x f_Y(y)\,dy. \\
+P_{\theta_0}(|X_1-\theta_0|\le x)=P(|Y|\le x)=\int_{-x}^x f_Y(y)\,dy
+=2\int_0^x f_Y(y)\,dy,
+$$
+그리고 대칭성으로  
+$$
+P_{\theta_0}\big(\operatorname{sgn}(X_1-\theta_0)=+1\big)=P(Y>0)=\tfrac12. \\
+\therefore P_{\theta_0}\big(|X_1-\theta_0|\le x,\ \operatorname{sgn}(X_1-\theta_0)=+1\big)
+=\frac12\,P_{\theta_0}(|X_1-\theta_0|\le x) \\
+= P_{\theta_0}(|X_1-\theta_0|\le x)\,P_{\theta_0}(\operatorname{sgn}(X_1-\theta_0)=+1),
+$$
+즉 $|X_1-\theta_0|$와 $\operatorname{sgn}(X_1-\theta_0)$는 독립이다. ($-1$에 대해서도 동일하게 성립)
+
+또한 $X_1,\dots,X_n$이 iid이므로 $Y_i:=X_i-\theta_0$들도 서로 독립이고, $S_i:=\operatorname{sgn}(Y_i)$는 $Y_i$의 함수이므로 $S_1,\dots,S_n$도 서로 독립이다 (정리 2.4.2). 더 나아가 앞에서 보인 것처럼 각 $i$에 대해 $|Y_i|$와 $S_i$는 독립이므로, 정렬 인덱스 $i(j)$ (즉 $|Y_{i(j)}|$가 $j$번째로 작은 표본) 는 오직 $\{|Y_i|\}$에 의해서만 결정되고 $\{S_i\}$와 독립이다. 따라서 정렬 후 부호열
+$$
+S(j):=\operatorname{sgn}(Y_{i(j)})\quad (j=1,\dots,n)
+$$
+은 $\{S_i\}$의 임의 재배열과 동일한 분포를 가지며, 서로 iid이고 $P(S(j)=\pm1)=1/2$를 만족한다.
+
+정렬은 오직 $|X_i-\theta_0|$들에 의해 결정되므로, 정렬된 순서에 붙는 부호열
+$$
+S(j):=\operatorname{sgn}(X_{i(j)}-\theta_0)\quad (j=1,\dots,n)
+$$
+은 서로 iid이고 $P(S(j)=\pm1)=1/2$를 만족한다. 따라서
+$$
+W_n \ \overset{d}{\equiv}\ \sum_{j=1}^n j\,S(j)
+$$
+가 성립한다.
+
+**(b)** (a)의 표현으로부터
+$$
+E_{\theta_0}(W_n)=\sum_{j=1}^n j\,E(S(j))=0,
+\qquad
+\mathrm{Var}_{\theta_0}(W_n)=\sum_{j=1}^n j^2\,\mathrm{Var}(S(j))=\sum_{j=1}^n j^2
+=\frac{n(n+1)(2n+1)}{6}.
+$$
+또한 $jS(j)$들은 독립이고
+$$
+\frac{\max_{1\le j\le n} j^2}{\sum_{j=1}^n j^2}=\frac{n^2}{n(n+1)(2n+1)/6}\to 0
+$$
+이므로 (예: Lindeberg–Feller 또는 Lyapunov CLT) 중심극한정리를 적용할 수 있다. 따라서
+$$
+\frac{W_n-E_{\theta_0}(W_n)}{\sqrt{\mathrm{Var}_{\theta_0}(W_n)}}\xrightarrow{d}N(0,1)
+$$
+이 성립한다.
+
+TODO: 교재의 증명방법은 조금 다른데, 한번 읽어보기
+
 ### 정리 9.3.3 부호순위 검정통계량의 표현
-- 표기
-    - $R(|X_i-\theta_0|)$: $|X_1-\theta_0|,\dots,|X_n-\theta_0|$의 순위
-    - $\operatorname{sgn}(x)$: 부호 함수
-    - 부호순위 검정통계량
-        $$
-        W_n = \sum_{i=1}^n \operatorname{sgn}(X_i-\theta_0) R(|X_i-\theta_0|),\qquad
-        W_n^+ = \sum_{i=1}^n \mathbf{1}(X_i-\theta_0 > 0) R(|X_i-\theta_0|)
-        $$
-- (a) $W_n$과 $W_n^+$의 관계
+$R(|X_i-\theta_0|)$를 $|X_1-\theta_0|,\dots,|X_n-\theta_0|$의 순위라 하고,  
+$\operatorname{sgn}(x)$를 부호 함수라 하고,  
+부호순위 검정통계량을 아래로 정의하자.
+$$
+W_n = \sum_{i=1}^n \operatorname{sgn}(X_i-\theta_0) R(|X_i-\theta_0|),\qquad
+W_n^+ = \sum_{i=1}^n \mathbf{1}(X_i-\theta_0 > 0) R(|X_i-\theta_0|)
+$$
+그러면 아래 두 가지가 성립한다.  
+(a) $W_n$과 $W_n^+$의 관계
     $$
     W_n = 2W_n^+ - \frac{n(n+1)}{2}
     $$
 
-- (b) 귀무가설 $H_0(\theta_0):\theta=\theta_0$ 하에서의 분포 및 정규근사
+(b) 귀무가설 $H_0(\theta_0):\theta=\theta_0$ 하에서의 분포 및 정규근사
     $$
-    W_n^+ \overset{d}{=} \sum_{j=1}^n j B_j,\qquad B_j \overset{iid}{\sim} \mathrm{Bernoulli}(1/2)
+    W_n^+ \overset{d}{\equiv} \sum_{j=1}^n j B_j,\qquad B_j \overset{iid}{\sim} \mathrm{Bernoulli}(1/2)
     $$
     $$
     \frac{W_n^+ - n(n+1)/4}{\sqrt{n(n+1)(2n+1)/24}} \overset{d}{\to} N(0,1)\quad(n\to\infty)
     $$
 
-- 참고 항등식 (연속형이면 동점확률 0)
-    $$
-    \operatorname{sgn}(X_i-\theta_0) = 2\mathbf{1}(X_i-\theta_0 > 0) - 1
-    $$
+#### 증명
+**(a)** 각 관측치에 대해
+$$
+\operatorname{sgn}(X_i-\theta_0)=
+\begin{cases}
++1,& X_i-\theta_0>0\\
+-1,& X_i-\theta_0<0
+\end{cases}
+=
+2\mathbf{1}(X_i-\theta_0>0)-1 \\
+\begin{aligned}
+\therefore W_n
+&=\sum_{i=1}^n\big(2\mathbf{1}(X_i-\theta_0>0)-1\big)\,R(|X_i-\theta_0|)\\
+&=2W_n^+-\sum_{i=1}^n R(|X_i-\theta_0|).
+\end{aligned}
+$$
+순위의 합은 항상 $1+2+\cdots+n=n(n+1)/2$ 이므로
+$$
+W_n=2W_n^+-\frac{n(n+1)}{2}.
+$$
 
+**(b)** 
+$$
+W_n \ \overset{d}{\equiv}\ \sum_{j=1}^n j\,S(j),\qquad S(j)\ \text{iid},\ P(S(j)=\pm1)=\tfrac12 \\
+W_n^+=\frac{W_n+\frac{n(n+1)}{2}}{2}
+\ \overset{d}{\equiv}\
+\sum_{j=1}^n j\,\frac{S(j)+1}{2}.
+$$
+여기서
+$$
+B_j:=\frac{S(j)+1}{2}\in\{0,1\},\qquad
+P(B_j=1)=P(S(j)=1)=\tfrac12
+$$
+이므로 $B_j \overset{iid}{\sim}\mathrm{Bernoulli}(1/2)$. 따라서
+$$
+W_n^+ \ \overset{d}{\equiv}\ \sum_{j=1}^n j\,B_j.
+$$
+
+또한 $E(B_j)=\tfrac12,\ \mathrm{Var}(B_j)=\tfrac14$ 이고 서로 독립이므로
+$$
+E_{\theta_0}(W_n^+)=\sum_{j=1}^n j\,E(B_j)=\frac12\sum_{j=1}^n j=\frac{n(n+1)}{4}, \\
+\mathrm{Var}_{\theta_0}(W_n^+)=\sum_{j=1}^n j^2\,\mathrm{Var}(B_j)
+=\frac14\sum_{j=1}^n j^2
+=\frac{n(n+1)(2n+1)}{24}.
+$$
+가중합 $\sum_{j=1}^n j(B_j-\tfrac12)$에 중심극한정리를 적용하면
+$$
+\frac{W_n^+ - n(n+1)/4}{\sqrt{n(n+1)(2n+1)/24}}
+\ \overset{d}{\to}\ N(0,1)\quad(n\to\infty)
+$$
+
+TODO: sdfsdfsdf
 ### 정리 9.3.4 한쪽 가설에 대한 부호순위 검정
+정리9.3.2로부터 귀무가설 $H_0(\theta_0): \theta = \theta_0$하에서 부호순위 검정통계량 $W_n$의 분포는 모집단분포의 확률밀도함수 형태와 관계없다는 것을 알 수 있고, $W_n$의 큰 값은 대립가설에 대한 증거라 할 수 있다. 따라서  
 - 모형(위치모수, 대칭): 모집단 밀도 $f(x-\theta)$, $-\infty<\theta<\infty$, $f(-x)=f(x)$
-- 가설
-    $$
-    H_0:\theta\le \theta_0\quad \text{vs}\quad H_1:\theta>\theta_0
-    $$
+- 가설은 $H_0:\theta\le \theta_0\quad \text{vs}\quad H_1:\theta>\theta_0$
 - 유의수준 $\alpha$의 부호순위 검정(임계값 $c$, 랜덤화 $\gamma\in[0,1]$)
     $$
     \phi_{SR}(X_1,\dots,X_n)=
@@ -1036,7 +1364,7 @@ $$
     \end{cases}
     \qquad E_{\theta_0}[\phi_{SR}(X)] = \alpha
     $$
-    또는 $W_n^+$로 동치 표현:
+    또는 $W_n^+$로 동치 표현 (정리 9.3.3):
     $$
     \phi_{SR}(X_1,\dots,X_n)=
     \begin{cases}
@@ -1046,21 +1374,83 @@ $$
     \end{cases}
     \qquad E_{\theta_0}[\phi_{SR}(X)] = \alpha
     $$
-
-- 성질
+>    - (참고: 정리 9.3.2, 정리 9.3.3으로부터 정규근사에 의한 큰 표본 기각역)
+>        $$
+>        \frac{W_n}{\sqrt{n(n+1)(2n+1)/6}} \ge z_\alpha
+>        \quad\text{또는}\quad
+>        \frac{W_n^+ - n(n+1)/4}{\sqrt{n(n+1)(2n+1)/24}} \ge z_\alpha
+>        $$
+- 위 상황에서, 아래 성질이 성립한다.
+    - (U-통계량 표현 / 단조성) 연속형 분포(동점 확률 0)에서
+        $$
+        W_n^+ \;=\; \sum_{1\le i\le j\le n}\mathbf{1}\!\left(X_i+X_j>2\theta_0\right)
+        $$
+        이므로 $W_n^+$ (따라서 $W_n$도)는 각 성분 $X_k$에 대한 **증가함수**이고, 기각역 $\{W_n^+\ge c^+\}$ (또는 $\{W_n\ge c\}$)는 상향집합(upward closed set)이다.
     - 검정력 함수 $\gamma_{\phi_{SR}}(\theta) = E_\theta[\phi_{SR}(X)]$는 $\theta$의 증가함수
     - 따라서
         $$
         \max_{\theta\le \theta_0} E_\theta[\phi_{SR}(X)] = E_{\theta_0}[\phi_{SR}(X)] = \alpha
         $$
-    - (정규근사에 의한 큰 표본 기각역)
-        $$
-        \frac{W_n}{\sqrt{n(n+1)(2n+1)/6}} \ge z_\alpha
-        \quad\text{또는}\quad
-        \frac{W_n^+ - n(n+1)/4}{\sqrt{n(n+1)(2n+1)/24}} \ge z_\alpha
-        $$
+
+#### 증명
+**(a)** $Y_i:=X_i-\theta_0$라 두고, $R_i:=R(|Y_i|)$로 쓰자(연속형이므로 $|Y_i|$의 동점확률은 $0$). 그러면
+$$
+W_n^+=\sum_{i=1}^n \mathbf{1}(Y_i>0)R_i \\
+=\sum_{i=1}^n \mathbf{1}(Y_i>0)\left(1+\sum_{j\ne i}\mathbf{1}(|Y_j|<|Y_i|)\right) \\
+=\sum_{i=1}^n \mathbf{1}(Y_i>0)\;+\;\sum_{i\ne j}\mathbf{1}(Y_i>0,\ |Y_j|<|Y_i|).
+$$
+두 번째 항을 $i<j$에 대해 묶으면
+$$
+\sum_{i\ne j}\mathbf{1}(Y_i>0,\ |Y_j|<|Y_i|)
+=\sum_{1\le i<j\le n}\Big(\mathbf{1}(Y_i>0,\ |Y_j|<|Y_i|)
++\mathbf{1}(Y_j>0,\ |Y_i|<|Y_j|)\Big).
+$$
+동점이 없으므로 각 쌍 $(i,j)$에 대해 정확히 하나만 성립하며, 괄호 안은 “절댓값이 더 큰 쪽의 부호가 $+$인지”의 지시함수와 같다. 그런데 $|Y_i|\ne |Y_j|$이면
+
+- $|Y_i|>|Y_j|$일 때 $Y_i+Y_j$의 부호는 $Y_i$의 부호와 같고,
+- $|Y_j|>|Y_i|$일 때 $Y_i+Y_j$의 부호는 $Y_j$의 부호와 같으므로,
+
+$$
+\mathbf{1}(Y_i>0,\ |Y_j|<|Y_i|)
++\mathbf{1}(Y_j>0,\ |Y_i|<|Y_j|)
+=\mathbf{1}(Y_i+Y_j>0).
+$$
+또한
+$$
+\sum_{i=1}^n \mathbf{1}(Y_i>0)=\sum_{i=1}^n \mathbf{1}(Y_i+Y_i>0).
+$$
+따라서
+$$
+W_n^+=\sum_{1\le i\le j\le n}\mathbf{1}(Y_i+Y_j>0)
+=\sum_{1\le i\le j\le n}\mathbf{1}(X_i+X_j>2\theta_0).
+$$
+
+**(b)** 부호순위 검정의 정의상 $\phi_{SR}(X)$는 $W_n^+$에 대한 (비감소) 함수이다. 그리고 (a)에서
+$$
+W_n^+=\sum_{1\le i\le j\le n}\mathbf{1}(X_i+X_j>2\theta_0)
+$$
+로 나타났으므로, 각 항 $\mathbf{1}(X_i+X_j>2\theta_0)$는 $(X_1,\dots,X_n)$의 각 성분에 대한 증가함수이고, 합 $W_n^+$ 역시 각 성분에 대한 증가함수이다. 따라서 $\phi_{SR}(X)$도 각 성분에 대한 증가함수이다.
+
+이제 위치모수 모형에서 $X_i=\theta+Z_i$ ($Z_i$ iid, 밀도 $f$)로 둘 수 있다. $\theta'<\theta''$에 대해 같은 $Z=(Z_1,\dots,Z_n)$로 결합(coupling)하면
+$$
+X(\theta'')=\theta''+Z \ \ge\ \theta'+Z=X(\theta') \quad(\text{성분별}),
+$$
+그리고 $\phi_{SR}$가 증가함수이므로
+$$
+\phi_{SR}(X(\theta''))\ge \phi_{SR}(X(\theta')).
+$$
+양변에 기댓값을 취하면
+$$
+E_{\theta''}[\phi_{SR}(X)]\ge E_{\theta'}[\phi_{SR}(X)],
+$$
+즉 검정력 함수 $\gamma_{\phi_{SR}}(\theta)=E_\theta[\phi_{SR}(X)]$는 $\theta$의 증가함수이다. 그러므로
+$$
+\max_{\theta\le \theta_0}E_\theta[\phi_{SR}(X)]=E_{\theta_0}[\phi_{SR}(X)]=\alpha
+$$
+가 된다(임계값 $c,\gamma$를 $E_{\theta_0}[\phi_{SR}(X)]=\alpha$가 되도록 잡았으므로). 따라서 $\phi_{SR}$는 유의수준 $\alpha$의 검정이다.
 
 ### 정리 9.3.5 부호순위 검정의 점근정규성
+정리9.3.4에서 알 수 있듯이, 연속형 대칭인 분포의 중앙값에 대한 한쪽가설이나 양쪽가설의 검정에 부호순위 검정을 사용할 수 있고, 이는 비모수적 검정이다. 이런 부호순위 검정의 효율성을 알아보려면 아래 정리와 같은 점근 정규성이 필요하다. 이 정리의 증명은 이 책의 수준을 넘으므로 생략한다.
 - (a) 점근정규성
     $$
     \frac{W_n^+ - E_\theta(W_n^+)}{\sqrt{\mathrm{Var}_\theta(W_n^+)}} \overset{d}{\to} N(0,1)
@@ -1068,13 +1458,10 @@ $$
 - (b) 평균/분산 근사
     $$
     \mu(\theta) = \frac{1}{2} P_\theta(X_1 + X_2 > 2\theta_0),\qquad
-    \sigma^2(\theta) = \mathrm{Cov}_\theta\left( \mathbf{1}(X_1 + X_2 > 2\theta_0),\ \mathbf{1}(X_1 + X_3 > 2\theta_0) \right)
+    \sigma^2(\theta) = \mathrm{Cov}_\theta\left( \mathbf{1}(X_1 + X_2 > 2\theta_0),\ \mathbf{1}(X_1 + X_3 > 2\theta_0) \right) \\
+    \Rightarrow E_\theta(W_n^+) \simeq n^2 \mu(\theta),\qquad \mathrm{Var}_\theta(W_n^+) \simeq n^3 \sigma^2(\theta)
     $$
-    이때
-    $$
-    E_\theta(W_n^+) \simeq n^2 \mu(\theta),\qquad \mathrm{Var}_\theta(W_n^+) \simeq n^3 \sigma^2(\theta)
-    $$
-    따라서 $W_n^+/n^2$에 대해 앞의 점근적 검정력/표본크기 근사 공식을 적용할 수 있다.
+    따라서 $W_n^+/n^2$에 대해 앞의 점근적 검정력/표본크기 근사 공식을 적용할 수 있으므로 부호순위검정의 검정력에 대한 근사식을 아래 정리와 같이 구할 수 있다.
 
 ### 정리 9.3.6 부호순위 검정의 검정력 근사와 표본크기
 - 정리 9.3.4의 가정(대칭 위치모수 모형) 하에서, 대립가설이
@@ -1097,6 +1484,95 @@ $$
     $$
     N(W_n^+;\gamma,\theta_{1n}) \simeq \left( \sqrt{12} \int_{-\infty}^{\infty} f^2(x)\,dx \right)^{-2} \left( \frac{z_\alpha + z_{1-\gamma}}{\theta_{1n} - \theta_0} \right)^2
     $$
+
+#### 증명
+정리 9.3.5로부터
+$$
+\frac{W_n^+-E_\theta(W_n^+)}{\sqrt{\mathrm{Var}_\theta(W_n^+)}}\ \overset{d}{\to}\ N(0,1),
+\qquad
+E_\theta(W_n^+)\simeq n^2\mu(\theta),\quad \mathrm{Var}_\theta(W_n^+)\simeq n^3\sigma^2(\theta)
+$$
+이므로
+$$
+T_n:=\frac{W_n^+}{n^2}
+$$
+에 대해
+$$
+E_\theta(T_n)\simeq \mu(\theta),\qquad \mathrm{Var}_\theta(T_n)\simeq \frac{\sigma^2(\theta)}{n},
+$$
+따라서
+$$
+\sqrt{n}\,\frac{T_n-\mu(\theta)}{\sigma(\theta)}
+=\frac{W_n^+-n^2\mu(\theta)}{n^{3/2}\sigma(\theta)}
+\ \overset{d}{\to}\ N(0,1)
+$$
+가 성립한다. 즉 $T_n$은 정리 9.3.1의 점근정규성 가정을 만족한다(여기서 정리 9.3.1의 $\mu(\theta),\sigma(\theta)$에 각각 위 $\mu(\theta),\sigma(\theta)$를 대응시킨다).
+
+이제 대칭 위치모수 모형에서 $X_i=\theta+Z_i$ ($Z_i$ iid, 밀도 $f$, $f(z)=f(-z)$)라 두면
+$$
+\mu(\theta)=\frac12P_\theta(X_1+X_2>2\theta_0)
+=\frac12P(Z_1+Z_2>2(\theta_0-\theta)).
+$$
+$Y:=Z_1+Z_2$의 밀도를 $g$라 하면(컨볼루션)
+$$
+g(t)=(f*f)(t)=\int_{-\infty}^{\infty} f(u)f(t-u)\,du.
+$$
+또한 $a(\theta):=2(\theta_0-\theta)$라 두면
+$$
+\mu(\theta)=\frac12P(Y>a(\theta))=\frac12\{1-G(a(\theta))\},
+$$
+이므로(연쇄법칙)
+$$
+\dot\mu(\theta)=\frac12\cdot\{-g(a(\theta))\}\cdot a'(\theta)
+=\frac12\cdot(-g(a(\theta)))\cdot(-2)=g(a(\theta)).
+$$
+따라서
+$$
+\dot\mu(\theta_0)=g(0)=(f*f)(0)=\int_{-\infty}^{\infty} f(u)f(-u)\,du=\int_{-\infty}^{\infty} f^2(u)\,du.
+$$
+
+한편 귀무가설($\theta=\theta_0$) 하에서 정리 9.3.3의 표현을 쓰면
+$$
+W_n^+ \overset{d}{\equiv}\sum_{j=1}^n jB_j,\qquad B_j\overset{iid}{\sim}\mathrm{Bernoulli}(1/2),
+$$
+따라서
+$$
+\mathrm{Var}_{\theta_0}(W_n^+)=\sum_{j=1}^n j^2\mathrm{Var}(B_j)=\frac14\sum_{j=1}^n j^2
+=\frac{n(n+1)(2n+1)}{24}\sim \frac{n^3}{12}.
+$$
+정리 9.3.5의 근사 $\mathrm{Var}_\theta(W_n^+)\simeq n^3\sigma^2(\theta)$와 비교하면
+$$
+\sigma^2(\theta_0)=\frac{1}{12}.
+$$
+
+이제 정리 9.3.1을 $T_n=W_n^+/n^2$에 적용하면, 로컬 대립가설 $\theta_{1n}\simeq \theta_0+K/\sqrt{n}$에서
+
+(a) (검정력 근사)
+$$
+\gamma_{\phi_{SR}}(\theta_{1n})
+\simeq
+1-\Phi\!\left(
+-\sqrt{n}(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}+z_\alpha
+\right)
+$$
+이고, 위에서 구한
+$$
+\dot\mu(\theta_0)=\int f^2(x)\,dx,\qquad \sigma^2(\theta_0)=\frac{1}{12}
+$$
+를 대입하면 정리의 (a)가 된다.
+
+(b) (표본크기 근사)
+정리 9.3.1의 표본크기 근사식을 그대로 적용하여
+$$
+N(W_n^+;\gamma,\theta_{1n})
+\simeq
+\left(\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}\right)^{-2}
+\left(\frac{z_\alpha+z_{1-\gamma}}{\theta_{1n}-\theta_0}\right)^2
+=
+\left(\sqrt{12}\int f^2(x)\,dx\right)^{-2}
+\left(\frac{z_\alpha+z_{1-\gamma}}{\theta_{1n}-\theta_0}\right)^2
+$$
+를 얻는다.
 
 #### 예 9.3.5 부호순위 검정의 $t$-검정에 대한 점근상대효율성(ARE)
 - 대칭 위치-척도 모형:
@@ -1126,10 +1602,13 @@ $$
     \mathrm{ARE}(W_n, T_n) = 12 \left( \int f^2(z)\,dz \right)^2 \left( \int z^2 f(z)\,dz \right)
     $$
 
+- 아래 표와 부호검정에 대한 표 9.3.1을 비교해보면 부호순위 검정의 상대효율성이 부호검정에 비해 매우 높은 것을 알 수 있다. 즉 부호순위 검정은 범용성과 더불어 효율성도 비교적 높아서 매우 유용한 검정 방법이다.
 - **표 9.3.2: $\mathrm{ARE}(W_n, T_n)$**
     - $N(\mu,\sigma^2)$: $3/\pi \approx 0.954$
     - $L(\mu,\sigma)$: $\pi^2/9 \approx 1.096$
     - $DE(\mu,\sigma)$: $1.5$
+
+
 
 
 FIXME:
