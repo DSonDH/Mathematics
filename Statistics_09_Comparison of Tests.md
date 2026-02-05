@@ -1349,7 +1349,6 @@ $$
 \ \overset{d}{\to}\ N(0,1)\quad(n\to\infty)
 $$
 
-TODO: sdfsdfsdf
 ### 정리 9.3.4 한쪽 가설에 대한 부호순위 검정
 정리9.3.2로부터 귀무가설 $H_0(\theta_0): \theta = \theta_0$하에서 부호순위 검정통계량 $W_n$의 분포는 모집단분포의 확률밀도함수 형태와 관계없다는 것을 알 수 있고, $W_n$의 큰 값은 대립가설에 대한 증거라 할 수 있다. 따라서  
 - 모형(위치모수, 대칭): 모집단 밀도 $f(x-\theta)$, $-\infty<\theta<\infty$, $f(-x)=f(x)$
@@ -1381,7 +1380,7 @@ TODO: sdfsdfsdf
 >        \frac{W_n^+ - n(n+1)/4}{\sqrt{n(n+1)(2n+1)/24}} \ge z_\alpha
 >        $$
 - 위 상황에서, 아래 성질이 성립한다.
-    - (U-통계량 표현 / 단조성) 연속형 분포(동점 확률 0)에서
+    - (U-통계량 표현 / 단조성) 연속형 분포에서
         $$
         W_n^+ \;=\; \sum_{1\le i\le j\le n}\mathbf{1}\!\left(X_i+X_j>2\theta_0\right)
         $$
@@ -1393,36 +1392,43 @@ TODO: sdfsdfsdf
         $$
 
 #### 증명
-**(a)** $Y_i:=X_i-\theta_0$라 두고, $R_i:=R(|Y_i|)$로 쓰자(연속형이므로 $|Y_i|$의 동점확률은 $0$). 그러면
+**(a)** 연속형 분포를 가정하면 $|Y_i|$에 동점이 생길 확률은 $0$이므로(거의 surely) 순위가 잘 정의된다.  
+$Y_i:=X_i-\theta_0$라 두고, $|Y_i|$의 오름차순 정렬 인덱스를 $i(1),\dots,i(n)$이라 하며
 $$
-W_n^+=\sum_{i=1}^n \mathbf{1}(Y_i>0)R_i \\
-=\sum_{i=1}^n \mathbf{1}(Y_i>0)\left(1+\sum_{j\ne i}\mathbf{1}(|Y_j|<|Y_i|)\right) \\
-=\sum_{i=1}^n \mathbf{1}(Y_i>0)\;+\;\sum_{i\ne j}\mathbf{1}(Y_i>0,\ |Y_j|<|Y_i|).
+Y_{(k)}:=Y_{i(k)}\quad(k=1,\dots,n)
 $$
-두 번째 항을 $i<j$에 대해 묶으면
+로 쓰면 $R(|Y_{(k)}|)=k$이다. 이제 $W_n^+$를 다음과 같이 변형한다:
 $$
-\sum_{i\ne j}\mathbf{1}(Y_i>0,\ |Y_j|<|Y_i|)
-=\sum_{1\le i<j\le n}\Big(\mathbf{1}(Y_i>0,\ |Y_j|<|Y_i|)
-+\mathbf{1}(Y_j>0,\ |Y_i|<|Y_j|)\Big).
-$$
-동점이 없으므로 각 쌍 $(i,j)$에 대해 정확히 하나만 성립하며, 괄호 안은 “절댓값이 더 큰 쪽의 부호가 $+$인지”의 지시함수와 같다. 그런데 $|Y_i|\ne |Y_j|$이면
-
-- $|Y_i|>|Y_j|$일 때 $Y_i+Y_j$의 부호는 $Y_i$의 부호와 같고,
-- $|Y_j|>|Y_i|$일 때 $Y_i+Y_j$의 부호는 $Y_j$의 부호와 같으므로,
-
-$$
-\mathbf{1}(Y_i>0,\ |Y_j|<|Y_i|)
-+\mathbf{1}(Y_j>0,\ |Y_i|<|Y_j|)
-=\mathbf{1}(Y_i+Y_j>0).
-$$
-또한
-$$
-\sum_{i=1}^n \mathbf{1}(Y_i>0)=\sum_{i=1}^n \mathbf{1}(Y_i+Y_i>0).
-$$
-따라서
-$$
-W_n^+=\sum_{1\le i\le j\le n}\mathbf{1}(Y_i+Y_j>0)
-=\sum_{1\le i\le j\le n}\mathbf{1}(X_i+X_j>2\theta_0).
+\begin{aligned}
+W_n^+
+&=\sum_{i=1}^n \mathbf{1}(Y_i>0)\,R(|Y_i|)\\
+&=\sum_{k=1}^n \mathbf{1}(Y_{(k)}>0)\Big(1+\sum_{\ell<k}1\Big)\\
+&=\sum_{k=1}^n \mathbf{1}(Y_{(k)}>0)
+\;+\;
+\sum_{k=1}^n\sum_{\ell<k}\mathbf{1}(Y_{(k)}>0)\\
+&=\sum_{k=1}^n \mathbf{1}(Y_{(k)}>0)
+\;+\;
+\sum_{k=1}^n\sum_{\ell<k}\mathbf{1}\!\big(Y_{(k)}>0,\ |Y_{(\ell)}|<|Y_{(k)}|\big)
+&&\text{(정렬로 }\ell<k\Rightarrow |Y_{(\ell)}|<|Y_{(k)}|\text{)}\\
+&=\sum_{k=1}^n \mathbf{1}(Y_{(k)}>0)
+\;+\;
+\sum_{k=1}^n\sum_{\ell<k}\mathbf{1}\!\big(Y_{(k)}>0,\ -Y_{(k)}<Y_{(\ell)}<Y_{(k)}\big)
+&&\text{( }Y_{(k)}>0\Rightarrow |Y_{(\ell)}|<Y_{(k)}\iff -Y_{(k)}<Y_{(\ell)}<Y_{(k)}\text{)}\\
+&=\sum_{k=1}^n \mathbf{1}\!\big(Y_{(k)}+Y_{(k)}>0\big)
+\;+\;
+\sum_{k=1}^n\sum_{\ell<k}\mathbf{1}\!\big(Y_{(k)}+Y_{(\ell)}>0\big)
+&&\text{(앞 항은 }Y_{(k)}>0\iff 2Y_{(k)}>0;\\
+&&&\quad \ell<k\text{이면 }|Y_{(\ell)}|<Y_{(k)}\Rightarrow Y_{(\ell)}<Y_{(k)}\text{라 상한은 자동)}\\
+&=\sum_{1\le \ell\le k\le n}\mathbf{1}\!\big(Y_{(k)}+Y_{(\ell)}>0\big)
+&&\text{(대각 }\ell=k\text{ 항과 }\ell<k\text{ 항을 합쳐 하나의 이중합으로 결합)}\\
+&=\sum_{1\le i\le j\le n}\mathbf{1}(Y_i+Y_j>0)
+&&\text{( }(Y_{(1)},\dots,Y_{(n)})\text{는 }(Y_1,\dots,Y_n)\text{의 재배열이므로 지표합은 불변)}.
+\end{aligned} \\
+\therefore \boxed{
+W_n^+ \;=\; \sum_{1\le i\le j\le n}\mathbf{1}(Y_i+Y_j>0)
+\;=\;
+\sum_{1\le i\le j\le n}\mathbf{1}(X_i+X_j>2\theta_0)
+}.
 $$
 
 **(b)** 부호순위 검정의 정의상 $\phi_{SR}(X)$는 $W_n^+$에 대한 (비감소) 함수이다. 그리고 (a)에서
@@ -1464,13 +1470,13 @@ $$
     따라서 $W_n^+/n^2$에 대해 앞의 점근적 검정력/표본크기 근사 공식을 적용할 수 있으므로 부호순위검정의 검정력에 대한 근사식을 아래 정리와 같이 구할 수 있다.
 
 ### 정리 9.3.6 부호순위 검정의 검정력 근사와 표본크기
-- 정리 9.3.4의 가정(대칭 위치모수 모형) 하에서, 대립가설이
+- 정리 9.3.4의 가정(대칭 위치모수 모형) 하에서, 대립가설하의 모수
     $$
     \theta_{1n} \simeq \theta_0 + \frac{K}{\sqrt{n}}\quad(K>0)
     $$
-    처럼 귀무가설에 근접할 때,
+    이 귀무가설에 근접할 때, 
 
-- (a) 검정력 근사
+- (a) 검정력이 근사한다
     $$
     \gamma_{\phi_{SR}}(\theta_{1n}) \simeq 1 - \Phi\left( -\sqrt{n} (\theta_{1n} - \theta_0) \frac{\dot\mu(\theta_0)}{\sigma(\theta_0)} + z_\alpha \right)
     $$
@@ -1579,17 +1585,13 @@ $$
     $$
     \frac{1}{\sigma} f\left(\frac{x-\mu}{\sigma}\right),\quad -\infty<\mu<\infty,\ \sigma>0
     $$
-    에서
-    $$
-    H_0(\mu_0):\mu=\mu_0\quad \text{vs}\quad H_1:\mu>\mu_0
-    $$
-
-- 부호순위 검정의 표본크기 근사(로컬 대립 $\mu_{1n} \simeq \mu_0 + K/\sqrt{n}$)
+    가설: $H_0(\mu_0):\mu=\mu_0\quad \text{vs}\quad H_1:\mu>\mu_0$
+- 통계량 $W_n := \sum_{i=1}^n \operatorname{sgn}(X_i-\theta_0)\,R(|X_i-\theta_0|)$
+- 부호순위 검정의 표본크기 근사(로컬 대립 $\mu_{1n} \simeq \mu_0 + K/\sqrt{n}$) (정리9.3.6)
     $$
     N(W_n;\gamma,\mu_{1n}) \simeq \left( \sqrt{12} \frac{\int f^2(z)\,dz}{\sigma} \right)^{-2} \left( \frac{z_\alpha + z_{1-\gamma}}{\mu_{1n} - \mu_0} \right)^2
     $$
-
-- 정규모형에서의 $t$-검정 표본크기 근사
+- 정규모형에서의 $t$-검정 표본크기 근사 (정리9.3.3)
     $$
     N(T_n;\gamma,\mu_{1n}) \simeq \left( \frac{1}{\sqrt{\mathrm{Var}(X_1)}} \right)^{-2} \left( \frac{z_\alpha + z_{1-\gamma}}{\mu_{1n} - \mu_0} \right)^2
     $$
