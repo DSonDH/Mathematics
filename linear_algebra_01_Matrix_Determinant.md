@@ -1082,7 +1082,106 @@ $$\sum_{i=1}^n e_i(A)^2 = \|A\|_F^2 = \text{tr}(A^TA)$$
 > 💡 **응용**: Frobenius 노름과 고유값 관계, 분산 총합 분석
 
 
+## rank 
+### rank(계수)의 정의
+행렬 $A\in\mathbb{R}^{m\times n}$의 **rank**는 다음과 같은 “서로 같은 값”으로 정의/해석된다.
 
+- $\mathrm{rank}(A)=\dim(\mathrm{Col}(A))$ (열공간의 차원)
+- $\mathrm{rank}(A)=\dim(\mathrm{Row}(A))$ (행공간의 차원)
+- $\mathrm{rank}(A)=$ 피벗(pivot)의 개수
+- $\mathrm{rank}(A)=$ 0이 아닌 특이값(singular value)의 개수
+
+>**왜 $\mathrm{rank}(I-P)=n-\mathrm{rank}(P)$ 가 성립하나?**  
+>이 등식은 **$P$가 사영행렬(projection matrix)**, 즉 **멱등행렬(idempotent)**일 때 성립한다.
+>
+>(가정) $P$가 멱등행렬
+>$$
+>P^2=P
+>$$
+>
+>1) $I-P$도 멱등행렬이다:
+>$$
+>(I-P)^2 = I - 2P + P^2 = I - 2P + P = I-P
+>$$
+>
+>2) 멱등행렬의 핵심 성질:  
+>멱등행렬 $K$는 고유값이 $0$ 또는 $1$만 가능하므로,
+>- $\mathrm{rank}(K)=\#\{\text{고유값이 }1\}$
+>- $\mathrm{tr}(K)=\sum \text{고유값}=\#\{\text{고유값이 }1\}$
+>
+>따라서
+>$$
+>\mathrm{rank}(K)=\mathrm{tr}(K)
+>\quad(\text{멱등행렬에서 성립})
+>$$
+>
+>3) 위 성질을 $P$, $I-P$에 적용하면
+>$$
+>\mathrm{rank}(I-P)=\mathrm{tr}(I-P)=\mathrm{tr}(I)-\mathrm{tr}(P)=n-\mathrm{tr}(P)=n-\mathrm{rank}(P)
+>$$
+>
+>4) 추가로 $\mathrm{rank}(P)=p+1$이라면
+>$$
+>\mathrm{rank}(I-P)=n-(p+1)=n-p-1
+>$$
+>
+>> 실무 통계(회귀)에서는 $P$가 “hat matrix”처럼 $X$의 열공간으로의 직교사영인 경우가 많고, 이때 $\mathrm{rank}(P)=\mathrm{rank}(X)$이며 (절편 포함 시) 보통 $p+1$이 된다.
+
+### rank의 중요한 성질 총정리
+#### (1) 기본 성질
+- $0 \le \mathrm{rank}(A) \le \min(m,n)$
+- $\mathrm{rank}(A)=\mathrm{rank}(A^T)$
+- $A$가 가역(정칙) $n\times n$이면 $\mathrm{rank}(A)=n$
+
+#### (2) 랭크-널리티 정리 (Rank–Nullity)
+$A\in\mathbb{R}^{m\times n}$에 대해
+$$
+\mathrm{rank}(A)+\mathrm{nullity}(A)=n
+$$
+여기서 $\mathrm{nullity}(A)=\dim(\ker(A))$.
+
+#### (3) 곱과 rank
+- $\mathrm{rank}(AB)\le \min(\mathrm{rank}(A),\mathrm{rank}(B))$
+- $A$가 가역이면 $\mathrm{rank}(AB)=\mathrm{rank}(B)$, $\mathrm{rank}(BA)=\mathrm{rank}(B)$
+- **Sylvester 부등식** (차원 맞을 때):
+$$
+\mathrm{rank}(AB)\ge \mathrm{rank}(A)+\mathrm{rank}(B)-n
+\quad (A\in\mathbb{R}^{m\times n},\,B\in\mathbb{R}^{n\times p})
+$$
+
+#### (4) 합과 rank (상계)
+- $\mathrm{rank}(A+B)\le \mathrm{rank}(A)+\mathrm{rank}(B)$
+
+#### (5) 선형변환 관점 (공간 포함관계)
+- $\mathrm{Col}(AB)\subseteq \mathrm{Col}(A)$ 이므로 $\mathrm{rank}(AB)\le \mathrm{rank}(A)$
+- $\mathrm{Row}(AB)\subseteq \mathrm{Row}(B)$ 이므로 $\mathrm{rank}(AB)\le \mathrm{rank}(B)$
+
+#### (6) Gram 행렬 / 정규방정식에 자주 쓰는 성질
+- $\mathrm{rank}(A^TA)=\mathrm{rank}(A)$
+- $\mathrm{rank}(AA^T)=\mathrm{rank}(A)$
+
+#### (7) 특수행렬에서의 rank
+
+**(a) 멱등행렬 $K^2=K$**
+- $\mathrm{rank}(K)=\mathrm{tr}(K)$
+- $I-K$도 멱등, $\mathrm{rank}(I-K)=n-\mathrm{rank}(K)$
+
+**(b) 사영행렬(직교사영)**
+보통 $P^2=P$이고 $P^T=P$ (대칭)인 경우가 많다.
+- $\mathrm{rank}(P)=\dim(\text{사영되는 부분공간})$
+- $\ker(P)=\mathrm{Col}(P)^\perp$ (직교사영일 때)
+- $\mathrm{rank}(P)+\mathrm{rank}(I-P)=n$
+
+**(c) 블록 대각행렬**
+$$
+\mathrm{rank}\!\begin{pmatrix}A&0\\0&B\end{pmatrix}
+=\mathrm{rank}(A)+\mathrm{rank}(B)
+$$
+
+### (자주 쓰는 요약 한 줄)
+- 가역행렬로 좌우 곱해도 rank 불변  
+- $A^TA$, $AA^T$는 rank 보존  
+- 멱등(=사영)에서는 $\mathrm{rank}=\mathrm{tr}$, 따라서 $\mathrm{rank}(I-P)=n-\mathrm{rank}(P)$
 
 
 ## 📘 연습문제
