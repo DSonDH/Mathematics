@@ -266,12 +266,10 @@ $$
 $$
 f(x_\alpha) = f(x_\beta) \Rightarrow x_\alpha = x_\beta
 $$
-
 따라서
 $$
 x_\alpha = x_\beta = x_0 \quad (\forall \alpha,\beta \in I)
 $$
-
 즉,
 $$
 \exists x_0 \in \bigcap_{\alpha\in I} A_\alpha
@@ -283,6 +281,40 @@ $$
 $$
 y \in f\Big(\bigcap_{\alpha\in I}A_\alpha\Big)
 $$
+
+
+## 추가정리: f(A₁ - A₂)와 f(A₁) - f(A₂)의 관계
+함수 $f: X \to Y$에서 $A_1, A_2 \subset X$일 때 다음이 성립한다:
+$$f(A_1 - A_2) \supseteq f(A_1) - f(A_2)$$
+
+**증명**  
+$$y \in f(A_1) - f(A_2)$$
+$$\Leftrightarrow y \in f(A_1) \land y \notin f(A_2)$$
+$$\Leftrightarrow \exists x_1 \in A_1 \text{ s.t. } y = f(x_1) \land \forall x_2 \in A_2, f(x_2) \neq y$$
+
+$x_1 \in A_1$이고 모든 $x_2 \in A_2$에 대해 $f(x_1) \neq f(x_2)$이므로 $x_1 \notin A_2$
+
+따라서 $x_1 \in A_1 - A_2$이고 $y = f(x_1)$이므로
+
+$$y \in f(A_1 - A_2)$$
+
+**$f$가 단사이면 등호가 성립한다:**
+
+$$f(A_1 - A_2) = f(A_1) - f(A_2)$$
+
+**증명**
+
+위의 포함관계는 항상 성립한다. 반대 방향을 보이자.
+
+$$y \in f(A_1 - A_2)$$
+$$\Leftrightarrow \exists x \in A_1 - A_2 \text{ s.t. } y = f(x)$$
+$$\Leftrightarrow \exists x \in A_1, x \notin A_2 \text{ s.t. } y = f(x)$$
+
+$x \in A_1$이므로 $y \in f(A_1)$이다. $x \notin A_2$인데 $f$가 단사이므로, $y = f(x) \in f(A_2)$이면 $x \in A_2$여야 한다. 이는 모순이므로 $y \notin f(A_2)$
+
+따라서 $y \in f(A_1) - f(A_2)$ $\blacksquare$
+
+
 # 연습문제
 
 1. $X=\{1,2,3,4\}$일 때, $X$에서 $X$로의

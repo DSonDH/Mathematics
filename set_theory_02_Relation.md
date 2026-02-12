@@ -49,6 +49,14 @@ A에서 B로의 관계 P(x, y)라는 명제함수를 만족해야한다.
 
 관계의 종류(정의):
 - 동치관계 (equivalence relation): $R$가 반사적, 대칭적, 추이적일 때. 대문자 E로 표현하기도 한다. 중요한 개념!
+  - 동치관계는 다음 세 성질을 만족한다.
+    1. 자기 포함성(reflexivity of classes): $\forall a\in X,\ a\in[a]$.
+         - 동치관계의 반사성으로부터 $a\sim a$이므로 정의에 의해 $a\in[a]$.
+    2. 동치 ⟺ 동치류 동일: $a\sim b \iff [a]=[b]$.
+         - ($\Rightarrow$) $a\sim b$이고 $x\in[a]$이면 $x\sim a$. 추이성으로 $x\sim b$이므로 $[a]\subseteq[b]$. 대칭성으로 반대도 성립하여 $[a]=[b]$.
+         - ($\Leftarrow$) $[a]=[b]$이고 $a\in[a]$이므로 $a\in[b]$. 따라서 $a\sim b$.
+    3. 동치류의 분할성(disjointness): $[a]\cap[b]\neq\varnothing \Rightarrow [a]=[b]$.
+         - 따라서 $[a]\cap[b]=\varnothing$ 또는 $[a]=[b]$ 중 정확히 하나가 성립하여 동치류들은 서로소(disjoint).
 - 부분순서 (partial order, poset): 집합 $P$에서 $(P,\le)$이고 $\le$가 반사적, 반대칭적, 추이적일 때.
 - 전순서 (total/linear order): 부분순서이면서 모든 쌍이 비교 가능한 경우, 즉 $\forall x,y\in P,\ x\le y\lor y\le x$.
 - 준순서 (preorder): 반사적, 추이적(반대칭성 요구하지 않음).

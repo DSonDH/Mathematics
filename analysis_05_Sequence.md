@@ -11,7 +11,7 @@ $$
 $$
 를 $\{a_n\}$의 **부분수열**이라 한다.
  - ex: $n_k = \{1, 3, 5, ...\}$, $\{a_{n_k}\} = \{a_1, a_3, a_5, ... \}$
-### Def. 3. [증가(감소)수열] *(Monotone Sequence)*
+### 추가: [증가(감소)수열] *(Monotone Sequence)*
 1. $\forall n\in\mathbb N,\ a_n\le a_{n+1}$이면 $\{a_n\}$을 **단조증가수열** *(monotone increasing sequence)* 이라 한다.  
 - ($a_n<a_{n+1}$이면 **순증가수열**)
 
@@ -19,9 +19,28 @@ $$
    *(monotone decreasing sequence)* 이라 한다.
 
 ### Def. 4. [유계인 수열] *(Bounded Sequence)*
-
 $\exists M>0$ s.t. $\forall n\in\mathbb N,\ |a_n|\le M$이면
 $\{a_n\}$을 **유계 수열**이라 한다.
+
+### Thm. 유계인 단조 실수열은 항상 수렴한다.
+#### 증명
+$\{a_n\}$이 단조증가하고 유계인 경우만 증명한다. (감소의 경우도 유사)  
+
+$\{a_n\}$이 단조증가하고 유계라고 하자.
+$A = \{a_n : n \in \mathbb{N}\}$라 하면, $A$는 공집합이 아니고 위로 유계이므로
+실수의 완비성에 의해 상한 $\alpha = \sup A$가 존재한다.
+이제 $\lim_{n\to\infty} a_n = \alpha$임을 보이자.
+$\varepsilon > 0$이 주어졌을 때, $\alpha - \varepsilon$은 $A$의 상한이 아니므로
+$$
+\exists N \in \mathbb{N} \text{ s.t. } a_N > \alpha - \varepsilon
+$$
+따라서 모든 $n \ge N$에 대하여
+$$
+\alpha - \varepsilon < a_N \le a_n \le \alpha \lt \alpha + \varepsilon
+$$
+즉, $|a_n - \alpha| < \varepsilon$이다.
+따라서 $\lim_{n\to\infty} a_n = \alpha$.
+
 
 ## (2) 수열의 극한 *(Limit of a Sequence)*
 ### Def. 1. [수열의 수렴] *(Convergence of a Sequence)*
@@ -43,12 +62,148 @@ ${a_n}$은 **발산**한다고 한다.
 ### Thm. 1. [수열 극한의 유일성] *(Uniqueness of Limit)*
 수열 $\{a_n\}$이 수렴하면 그 극한은 유일하다.
 
-### Thm. 2. [수열 극한의 연산] *(Limit Laws for Sequences)*
+#### 증명
+만일 $\lim_{n\to\infty} a_n = a$이고 $\lim_{n\to\infty} a_n = b$라고 하자.
+$a \ne b$라고 하면, $\varepsilon = \frac{|a-b|}{3} > 0$에 대하여
+$$
+\exists N_1 \in \mathbb{N} \text{ s.t. } \forall n \ge N_1, |a_n - a| < \varepsilon \\
+\exists N_2 \in \mathbb{N} \text{ s.t. } \forall n \ge N_2, |a_n - b| < \varepsilon
+$$
+$n \ge \max\{N_1, N_2\}$일 때
+$$
+|a - b| = |a - a_n + a_n - b| \le |a - a_n| + |a_n - b| < 2\varepsilon = \frac{2|a-b|}{3}
+$$
+이는 모순이다. 따라서 $a = b$이다.
+
+### Thm. 2. 수렴하는 수열은 유계이다. *(A Convergent Sequence is Bounded)*
+증명  
+$\lim_{n\to\infty} a_n = a$이라 하자. $\varepsilon = 1$이라 하면,
+$$
+\exists N \in \mathbb{N} \text{ s.t. } \forall n \ge N, |a_n - a| < 1
+$$
+따라서 $n \ge N$일 때 $|a_n| < |a| + 1$이다.
+또한, $n = 1, 2, \ldots, N-1$에 대하여
+$$
+M_1 = \max\{ |a_1|, |a_2|, \ldots, |a_{N-1}| \}
+$$
+이라 하면, 모든 $n \in \mathbb{N}$에 대하여
+$$
+|a_n| \le \max\{ M_1, |a| + 1 \}
+$$
+이므로 $\{a_n\}$은 유계이다.
+
+### Thm. 3. [수열 극한의 연산] *(Limit Laws for Sequences)*
 $\lim a_n=a$, $\lim b_n=b$이면 다음이 성립한다.
 1. $\lim(a_n\pm b_n)=a\pm b$
 2. $\lim(a_nb_n)=ab$
 3. $\lim\dfrac{a_n}{b_n}=\dfrac ab$
    (단, $b\ne0$, $\forall n,\ b_n\ne0$)
+
+>### 추가: 실수 수열의 상한과 하한 *(Supremum and Infimum)*
+>실수 수열 $\{a_n\}_{n\in\mathbb{N}}\subset\mathbb{R}$의 값집합을
+>$$A:=\{a_n:n\in\mathbb{N}\}\subset\mathbb{R}$$
+>이라 하자.
+>
+>**1. 상한 (Supremum)**  
+>수열의 상한은 집합 $A$의 상한으로 정의한다: $\sup a_n := \sup A$
+>
+>(1) 상방유계: $\sup a_n < \infty \Leftrightarrow \exists M\in\mathbb{R}$ s.t. $\forall n\in\mathbb{N}, a_n\le M$
+>
+>(2) 양의 무한대: $\sup a_n = +\infty \Leftrightarrow \forall K\in\mathbb{R}, \exists n\in\mathbb{N}$ s.t. $a_n > K$
+>
+>(3) 유한한 상한: $u\in\mathbb{R}$에 대하여 $\sup a_n = u$  
+>$\Leftrightarrow \forall n\in\mathbb{N}, a_n \le u$이고 $\forall K\in\mathbb{R}$, $a_n \le K$ (모든 $n$) $\Rightarrow u \le K$  
+>$\Leftrightarrow \forall n\in\mathbb{N}, a_n \le u$이고 $ \forall \varepsilon > 0, \exists n\in\mathbb{N}$ s.t. $a_n > u - \varepsilon$  
+>  - $\forall n\in\mathbb{N}, a_n \le u$를 상계 조건이라 한다
+>  - $\forall K\in\mathbb{R}$, $a_n \le K$ (모든 $n$) $\Rightarrow u \le K$를 최소성 조건이라 한다
+>
+>**2. 하한 (Infimum)**  
+>마찬가지로 $\inf a_n := \inf A$로 정의한다.
+>
+>(1) 하방유계: $\inf a_n > -\infty \Leftrightarrow \exists m\in\mathbb{R}$ s.t. $\forall n\in\mathbb{N}, a_n\ge m$  
+>
+>(2) 음의 무한대: $\inf a_n = -\infty \Leftrightarrow \forall K\in\mathbb{R}, \exists n\in\mathbb{N}$ s.t. $a_n < K$
+>(3) 유한한 하한: $\ell\in\mathbb{R}$에 대하여 $\inf a_n = \ell$  
+>$\Leftrightarrow \forall n\in\mathbb{N}, a_n \ge \ell$이고 $\forall K\in\mathbb{R}$, $a_n \ge K$ (모든 $n$) $\Rightarrow \ell \ge K$  
+>$\Leftrightarrow \forall n\in\mathbb{N}, a_n \ge \ell$이고 $\forall \varepsilon > 0, \exists n\in\mathbb{N}$ s.t. $a_n < \ell + \varepsilon$  
+>  - $\forall n\in\mathbb{N}, a_n \ge \ell$를 하계 조건이라 한다
+>  - $\forall K\in\mathbb{R}$, $a_n \ge K$ (모든 $n$) $\Rightarrow \ell \ge K$를 최대성 조건이라 한다
+>
+>#### 예시
+>**1. $a_n = 1 - \frac{1}{n}$**  
+>값집합: $A = \{0, \frac{1}{2}, \frac{2}{3}, \frac{3}{4}, \ldots\}$
+>- $\sup a_n = 1$ (상방유계, 극한값)
+>- $\inf a_n = 0$ (최솟값)
+>
+>**2. $a_n = \frac{(-1)^n}{n}$**  
+>값집합: $A = \{-1, \frac{1}{2}, -\frac{1}{3}, \frac{1}{4}, \ldots\}$
+>- $\sup a_n = \frac{1}{2}$ (최댓값)
+>- $\inf a_n = -1$ (최솟값)
+>
+>**3. $a_n = (-1)^n n$**  
+>값집합: $A = \{-1, 2, -3, 4, -5, 6, \ldots\}$
+>- $\sup a_n = +\infty$ (위로 무한)
+>- $\inf a_n = -\infty$ (아래로 무한)
+>
+>**4. $a_n = n\left(-\frac{1}{2}\right)^n$**  
+>값집합: $A = \{-\frac{1}{2}, \frac{1}{2}, -\frac{3}{8}, \frac{1}{4}, \ldots\}$
+>- $\sup a_n = \frac{1}{2}$ (최댓값, $n=2$일 때)
+>- $\inf a_n = -\frac{1}{2}$ (최솟값, $n=1$일 때)
+>
+>### 추가: 실수 수열의 상극한과 하극한 *(Limit Superior and Limit Inferior)*
+>실수 수열 $\{a_n\}$에 대하여
+>
+>**상극한 (Limit Superior)**
+>각 $n$에 대하여 $M_n := \sup_{k\ge n} a_k$로 정의하면, $\{M_n\}$은 단조감소수열이다. 따라서 $\{M_n\}$이 아래로 유계이면 수렴하며, 이 극한을 상극한이라 정의한다:
+>$$
+>\limsup_{n\to\infty} a_n := \overline{\lim_{n\to\infty}} a_n = \lim_{n\to\infty} \sup_{k\ge n} a_k
+>$$
+>
+>**상극한의 다른 정의**  
+>상극한의 정의로부터 다음이 성립한다:
+>$$\limsup_{n\to\infty} a_n = \bar{l} \in \mathbb{R} \Leftrightarrow \forall \varepsilon > 0, \begin{cases} a_n < \bar{l} + \varepsilon & \text{a.b.f.}(n) \\ a_n > \bar{l} - \varepsilon & \text{i.o.}(n) \end{cases}$$
+>- a.b.f. (almost but finitely): 유한개를 제외한 모든 $n$에 대해, 즉 $\exists N$ s.t. $\forall n \ge N$
+>- i.o. (infinitely often): 무한히 많은 $n$에 대해
+>
+>**하극한 (Limit Inferior)**
+>$$
+>\liminf_{n\to\infty} a_n := \underline{\lim_{n\to\infty}} a_n = \lim_{n\to\infty} \inf_{k\ge n} a_k
+>$$
+>
+>**하극한의 다른 정의**  
+>$$\liminf_{n\to\infty} a_n = \underline{l} \in \mathbb{R} \Leftrightarrow \forall \varepsilon > 0, \begin{cases} a_n > \underline{l} - \varepsilon & \text{a.b.f.}(n) \\ a_n < \underline{l} + \varepsilon & \text{i.o.}(n) \end{cases}$$
+>
+>#### 예제
+>**$a_n = \begin{cases} 2^n & n = 1, 2, \ldots, 10 \\ (-1)^n & n \geq 11 \end{cases}$**
+>
+>값집합: $A = \{2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, -1, 1, -1, 1, \ldots\}$
+>
+>- $M_n = \sup_{k \geq n} a_k$:
+>  - $n \le 10$일 때: $M_n = \sup\{a_n, a_{n+1}, \ldots, a_{10}, -1, 1, -1, 1, \ldots\} = 2^{10} = 1024$
+>  - $n > 10$일 때: $M_n = \sup\{-1, 1, -1, 1, \ldots\} = 1$
+>  - $\{M_n\} = \{1024, 1024, \ldots, 1024, 1, 1, 1, \ldots\}$ (단조감소)
+>  - $\limsup a_n = \lim_{n\to\infty} M_n = 1$
+>
+>- $m_n = \inf_{k \geq n} a_k$:
+>  - $n \le 10$일 때: $m_n = \inf\{2^n, 2^{n+1}, \ldots, 2^{10}, -1, 1, -1, 1, \ldots\} = -1$
+>  - $n > 10$일 때: $m_n = \inf\{-1, 1, -1, 1, \ldots\} = -1$
+>  - $\{m_n\} = \{-1, -1, -1, \ldots\}$ (단조증가)
+>  - $\liminf a_n = \lim_{n\to\infty} m_n = -1$
+>
+>- 결론: $\liminf a_n = -1 < 1 = \limsup a_n$ (수렴하지 않음. 수열은 처음에는 기하급수적으로 증가했다가 $n > 10$부터 $-1$과 $1$을 진동)
+>
+>### 상극한과 하극한의 성질
+>1. $\liminf a_n \le \limsup a_n$
+>2. $\limsup a_n = -\liminf(-a_n)$ and $\liminf a_n = -\limsup(-a_n)$
+>3. $\limsup_{n\to\infty} (a_n+b_n) \le \limsup_{n\to\infty} a_n + \limsup_{n\to\infty} b_n$  
+>$\liminf_{n\to\infty} (a_n+b_n) \ge \liminf_{n\to\infty} a_n + \liminf_{n\to\infty} b_n$
+>4. $a_n \le b_n$ a.b.f.(n)이면 $\liminf a_n \le \liminf b_n$, $\limsup a_n \le \limsup b_n$
+>#### 예시
+>**4. $a_n = n\left(-\frac{1}{2}\right)^n$**  
+>- $\lim_{k\to\infty} (2k-1)\left(\frac{1}{2}\right)^{2k-1} = \lim_{k\to\infty} \frac{2k-1}{2^{2k-1}} = 0$
+>- $\lim_{k\to\infty} 2k\left(\frac{1}{2}\right)^{2k} = \lim_{k\to\infty} \frac{2k}{4^k} = 0$  
+>따라서 $\lim_{n\to\infty} a_n = 0$
+
 
 ## (3) 코시수열 *(Cauchy Sequence)*
 ### Def. 1. [코시수열] *(Cauchy Sequence)*
@@ -249,6 +404,10 @@ S_n=\sum_{k=1}^n a_k
 $$
 라 한다.
 
+### 정리 부분합수열이 유계인 양수항 급수는 수렴한다.
+증명: $\{a_n\}$이 양수항 수열이고, 부분합수열 $\{S_n\}$이 유계라고 하자.
+$\{S_n\}$은 단조증가수열이므로 단조수렴정리에 의해 수렴한다.
+
 ### Def. 2. [재배열급수] *(Rearranged Series)*
 $f:\mathbb N\to\mathbb N$이 전단사 함수일 때
 $$
@@ -402,6 +561,62 @@ $$
 $$
 
 $\varepsilon$은 임의이므로 $S = T$이다.
+
+### Thm. 4. [상극한의 특성화] *(Characterization of Limit Superior)*
+유계실수열 $\{x_n\}$의 상극한이 $\alpha \in \mathbb{R}$이면 다음 두 성질이 성립한다.
+
+1. 임의의 $\varepsilon > 0$에 대하여, $\exists N \in \mathbb{N}$ s.t. $\forall n \ge N$, $x_n < \alpha + \varepsilon$
+  (즉, 유한개를 제외한 모든 $n$에 대해 $x_n < \alpha + \varepsilon$)
+
+2. 임의의 $\varepsilon > 0$에 대하여, 무한히 많은 $n$에 대하여 $x_n > \alpha - \varepsilon$
+
+역으로, 유계수열 $\{x_n\}$이 어떤 실수 $\alpha \in \mathbb{R}$에 대하여 위 두 성질을 만족하면, $\limsup_{n\to\infty} x_n = \alpha$이다.
+
+#### 증명
+**($\Rightarrow$ 방향)** $\limsup_{n\to\infty} x_n = \alpha$라고 하자.
+
+정의에 의해 $M_n := \sup_{k \ge n} x_k$로 정의하면, $\{M_n\}$은 단조감소하고 $\lim_{n\to\infty} M_n = \alpha$이다.
+
+**성질 1 증명:**  
+임의의 $\varepsilon > 0$에 대해, $\lim_{n\to\infty} M_n = \alpha$이므로
+$$
+\exists N \in \mathbb{N} \text{ s.t. } \forall n \ge N, |M_n - \alpha| < \varepsilon
+$$
+
+$M_n = \sup_{k \ge n} x_k$이므로 $x_k \le M_n < \alpha + \varepsilon$이다.
+따라서 모든 $n \ge N$에 대해 $x_n < \alpha + \varepsilon$이다.
+
+**성질 2 증명:**  
+임의의 $\varepsilon > 0$에 대해, $M_n = \sup_{k \ge n} x_k$의 정의에 의해
+$$
+M_n > \alpha - \varepsilon \text{ (왜냐하면 } M_n \to \alpha)
+$$
+
+따라서 상한의 정의에 의해
+$$
+\exists k \ge n \text{ s.t. } x_k > \alpha - \varepsilon
+$$
+
+이를 각 $n$에 대해 반복하면, $\alpha - \varepsilon$보다 큰 항이 무한히 많이 존재한다.
+
+$(\Leftarrow$ 방향) 주어진 두 성질을 만족한다고 하자.
+
+성질 1에 의해 $M := \inf_{n} M_n \le \alpha$이다.
+(왜냐하면 $M_n \ge \alpha - \varepsilon$ for all $\varepsilon > 0$)
+
+성질 2에 의해 $M \ge \alpha$이다.
+(왜냐하면 $\alpha - \varepsilon$보다 큰 항이 무한히 많으므로 $M_n \ge \alpha - \varepsilon$)
+
+따라서 $M = \alpha$이고, $\limsup_{n\to\infty} x_n = \alpha$이다.
+
+### Thm. 5. [하극한의 특성화] *(Characterization of Limit Inferior)*
+유계실수열 $\{x_n\}$의 하극한이 $\beta \in \mathbb{R}$이면 다음 두 성질이 성립한다.
+1. 임의의 $\varepsilon > 0$에 대하여, $\exists N \in \mathbb{N}$ s.t. $\forall n \ge N$, $x_n > \beta - \varepsilon$
+  (즉, 유한개를 제외한 모든 $n$에 대해 $x_n > \beta - \varepsilon$)
+2. 임의의 $\varepsilon > 0$에 대하여, 무한히 많은 $n$에 대하여 $x_n < \beta + \varepsilon$
+역으로, 유계수열 $\{x_n\}$이 어떤 실수 $\beta \in \mathbb{R}$에 대하여 위 두 성질을 만족하면, $\liminf_{n\to\infty} x_n = \beta$이다.
+
+
 
 # [연습문제]
 1. 다음 명제의 참·거짓을 판별하고 설명하시오.  

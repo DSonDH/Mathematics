@@ -34,6 +34,69 @@ $\sigma$-대수라 하며 $\mathcal E$로 나타낸다.
    \bigcup_{n=1}^\infty A_n\in\mathcal E$$
   - 사건들의 합집합도 사건이다
 
+#### 예 증가열과 감소열의 극한집합
+**(a) 증가열: $A_n = (1/n, 1]$**  
+명백히 $A_1 \subseteq A_2 \subseteq A_3 \subseteq \cdots$ 이므로 증가열이다.
+
+**극한집합 계산**
+$$\lim_{n\to\infty} A_n = \bigcup_{n=1}^{\infty} A_n = (0, 1]$$
+- $x \in (0,1]$이면, 아르키메데스 성질에 의해 $1/n < x$인 $n$이 존재한다.
+   따라서 충분히 큰 $n$부터는 $x \in (1/n, 1]$이므로 $x \in \bigcup_{n=1}^{\infty} A_n$.
+
+- 역으로 $x \in \bigcup_{n=1}^{\infty} A_n$이면 어떤 $n$에 대해 $x \in (1/n, 1]$이다.
+   따라서 $x > 1/n \ge 0$이고 $x \le 1$이므로 $x \in (0, 1]$.
+
+따라서 $\lim_{n\to\infty} A_n = (0, 1]$. ∎
+
+**(b) 증가열: $A_n = [1/n, 1]$**
+명백히 $A_1 \subseteq A_2 \subseteq A_3 \subseteq \cdots$ 이므로 증가열이다.
+
+**극한집합**
+$$\lim_{n\to\infty} A_n = \bigcup_{n=1}^{\infty} A_n = (0, 1]$$
+- $x \in (0,1]$이면, 아르키메데스 성질에 의해 $1/n < x \le x$인 $n$이 존재한다.
+   따라서 충분히 큰 $n$부터는 $x \in [1/n, 1]$이므로 $x \in \bigcup_{n=1}^{\infty} A_n$.
+
+- 역으로 $x \in \bigcup_{n=1}^{\infty} A_n$이면 어떤 $n$에 대해 $x \in [1/n, 1]$이다.
+   따라서 $x \ge 1/n > 0$이고 $x \le 1$이므로 $x \in (0, 1]$.
+
+따라서 $\lim_{n\to\infty} A_n = (0, 1]$. ∎
+
+**비교**  
+$(0, 1/n, 1]$과 $[1/n, 1]$ 모두 극한집합이 $(0, 1]$로 동일하다.
+이는 변계점의 포함/제외가 극한집합에 영향을 주지 않음을 보여준다.
+
+**(c) 감소열: $B_n = [-1/n, 1]$**  
+명백히 $B_1 \supseteq B_2 \supseteq B_3 \supseteq \cdots$ 이므로 감소열이다.
+
+**극한집합 계산**
+$$\lim_{n\to\infty} B_n = \bigcap_{n=1}^{\infty} B_n = [0, 1]$$
+- $x \in [0, 1]$이면, 모든 $n$에 대해 $-1/n < 0 \le x$이고 $x \le 1$이다.
+   따라서 $x \in [-1/n, 1]$ for all $n$, 즉 $x \in \bigcap_{n=1}^{\infty} B_n$.
+
+- 역으로 $x \in \bigcap_{n=1}^{\infty} B_n$이면, 모든 $n$에 대해 $-1/n \le x \le 1$이다.
+   특히 $n \to \infty$일 때 $-1/n \to 0^-$이므로 $x \ge 0$.
+   또한 모든 $n$에 대해 $x \le 1$이므로 $x \in [0, 1]$.
+
+따라서 $\lim_{n\to\infty} B_n = [0, 1]$. ∎
+
+**(d) 감소열: $B_n = (-1/n, 1]$**  
+명백히 $B_1 \supseteq B_2 \supseteq B_3 \supseteq \cdots$ 이므로 감소열이다.
+
+**극한집합**
+$$\lim_{n\to\infty} B_n = \bigcap_{n=1}^{\infty} B_n = [0, 1]$$
+- $x \in [0, 1]$이면, 모든 $n$에 대해 $-1/n < 0 \le x$이고 $x \le 1$이다.
+   따라서 $x \in (-1/n, 1]$ for all $n$, 즉 $x \in \bigcap_{n=1}^{\infty} B_n$.
+
+- 역으로 $x \in \bigcap_{n=1}^{\infty} B_n$이면, 모든 $n$에 대해 $-1/n < x \le 1$이다.
+   특히 $n \to \infty$일 때 $-1/n \to 0^-$이므로 $x \ge 0$.
+   또한 모든 $n$에 대해 $x \le 1$이므로 $x \in [0, 1]$.
+
+따라서 $\lim_{n\to\infty} B_n = [0, 1]$. ∎
+
+**비교**  
+(c)의 $[-1/n, 1]$과 (d)의 $(-1/n, 1]$ 모두 극한집합이 $[0, 1]$로 동일하다.
+이는 경계점 $-1/n \to 0$에서의 포함/제외가 극한집합에 영향을 주지 않음을 보여준다.
+
 ### 1.3 확률의 정의 (Kolmogorov Axioms)
 확률은 다음과 같은 함수로 정의된다.
 
