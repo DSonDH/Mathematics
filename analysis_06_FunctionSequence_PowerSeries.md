@@ -37,6 +37,8 @@ $$
 
 - 함수 $f$가 열린구간 $I$의 모든 점에서 해석적이면  
 멱급수의 미분, 적분 등의 성질을 이용하여 함수의 성질을 분석할 수 있다
+
+
 # 2. 점별수렴과 균등수렴 *(Pointwise and Uniform Convergence)*
 ## (1) 함수열의 수렴
 - 함수열과 극한함수 간 성질이 항상 보존되지 않는 문제가 있었음
@@ -698,6 +700,111 @@ $$
 \int_a^b f(x)\,dx = \sum_{n=0}^\infty a_n\int_a^b (x-c)^n\,dx
 $$
 □
+
+# 4. 다변수 함수의 멱급수 *(Power Series of Multivariable Functions)*
+
+## Def. [다변수 멱급수] *(Power Series in Multiple Variables)*
+중심점 $\mathbf{c}=(c_1,c_2,\ldots,c_m)\in\mathbb{R}^m$과 계수 $a_{\mathbf{n}}$ (단, $\mathbf{n}=(n_1,n_2,\ldots,n_m)\in\mathbb{N}^m$)에 대하여 다음 멱급수
+$$
+f(\mathbf{x}) = \sum_{n_1=0}^\infty \sum_{n_2=0}^\infty \cdots \sum_{n_m=0}^\infty a_{n_1,n_2,\ldots,n_m}(x_1-c_1)^{n_1}(x_2-c_2)^{n_2}\cdots(x_m-c_m)^{n_m}
+$$
+을 **다변수 멱급수** *(power series in multiple variables)* 라 한다.
+
+간단히 표기하면
+$$
+f(\mathbf{x}) = \sum_{\mathbf{n}\in\mathbb{N}^m} a_{\mathbf{n}}(\mathbf{x}-\mathbf{c})^{\mathbf{n}}
+$$
+여기서 $(\mathbf{x}-\mathbf{c})^{\mathbf{n}} = (x_1-c_1)^{n_1}(x_2-c_2)^{n_2}\cdots(x_m-c_m)^{n_m}$이다.
+
+### Thm. [다변수 멱급수의 성질] *(Properties of Multivariable Power Series)*
+다변수 멱급수가 중심점 주변의 열린 구간에서 절대수렴하면, 그 합 $f(\mathbf{x})$는 다음을 만족한다:
+
+① $f(\mathbf{x})$는 무한번 미분가능하다.
+
+② 모든 혼합 편미분이 항별미분으로 계산 가능하다:
+$$
+\frac{\partial^{n_1+n_2+\cdots+n_m}}{\partial x_1^{n_1}\partial x_2^{n_2}\cdots\partial x_m^{n_m}}f(\mathbf{x}) = \sum_{k_1=0}^\infty \sum_{k_2=0}^\infty \cdots \sum_{k_m=0}^\infty a_{k_1+n_1,k_2+n_2,\ldots,k_m+n_m}(x_1-c_1)^{k_1}\cdots(x_m-c_m)^{k_m}
+$$
+
+③ $\mathbf{a}=(a_1,a_2,\ldots,a_m)$를 중심점 근처의 점이라 하면, **테일러 급수 전개**가 성립한다:
+$$
+f(\mathbf{x}) = f(\mathbf{a}) + \sum_{r=1}^\infty \frac{1}{r!}\sum_{n_1+n_2+\cdots+n_m=r} \frac{r!}{n_1!n_2!\cdots n_m!}\left[\frac{\partial^r f}{\partial x_1^{n_1}\partial x_2^{n_2}\cdots\partial x_m^{n_m}}\right]_{\mathbf{x}=\mathbf{a}}(x_1-a_1)^{n_1}\cdots(x_m-a_m)^{n_m}
+$$
+
+특히 1차 근사는
+$$
+f(\mathbf{x}) \approx f(\mathbf{a}) + \nabla f(\mathbf{a}) \cdot (\mathbf{x}-\mathbf{a})
+$$
+
+### 예제: $e^{x_1+x_2}$의 멱급수 전개
+**방법 1: 곱셈 공식**  
+일변수 지수함수의 멱급수로부터
+$$
+e^{x_1+x_2} = e^{x_1} \cdot e^{x_2} = \left(\sum_{n_1=0}^\infty \frac{x_1^{n_1}}{n_1!}\right)\left(\sum_{n_2=0}^\infty \frac{x_2^{n_2}}{n_2!}\right)
+$$
+
+이를 전개하면
+$$
+e^{x_1+x_2} = \sum_{n_1=0}^\infty \sum_{n_2=0}^\infty \frac{x_1^{n_1}x_2^{n_2}}{n_1!n_2!}
+$$
+
+**방법 2: 다항정리 (Multinomial Theorem)**  
+$e^t = \sum_{n=0}^\infty \frac{t^n}{n!}$에서 $t = x_1 + x_2$로 대입하면
+$$
+e^{x_1+x_2} = \sum_{n=0}^\infty \frac{(x_1+x_2)^n}{n!}
+$$
+
+다항정리에 의해
+$$(x_1+x_2)^n = \sum_{n_1+n_2=n} \binom{n}{n_1}x_1^{n_1}x_2^{n_2} = \sum_{n_1=0}^n \frac{n!}{n_1!n_2!}x_1^{n_1}x_2^{n_2}$$
+
+따라서
+$$
+e^{x_1+x_2} = \sum_{n=0}^\infty \frac{1}{n!}\sum_{n_1=0}^n \frac{n!}{n_1!n_2!}x_1^{n_1}x_2^{n_2} = \sum_{n_1=0}^\infty \sum_{n_2=0}^\infty \frac{x_1^{n_1}x_2^{n_2}}{n_1!n_2!}
+$$
+
+**수렴영역**: 모든 $(x_1,x_2) \in \mathbb{R}^2$에서 수렴 (수렴반경: $R_1=R_2=\infty$)
+
+### (3) 예제: $-\log(1-x_1-x_2)$의 멱급수 전개
+일변수 로그함수의 멱급수로부터
+$$
+-\log(1-t) = \sum_{n=1}^\infty \frac{t^n}{n}, \quad |t|<1
+$$
+
+$t = x_1 + x_2$로 치환하면
+$$
+-\log(1-x_1-x_2) = \sum_{n=1}^\infty \frac{(x_1+x_2)^n}{n}
+$$
+
+다항정리에 의해
+$$(x_1+x_2)^n = \sum_{n_1+n_2=n} \binom{n}{n_1}x_1^{n_1}x_2^{n_2}$$
+
+따라서
+$$
+-\log(1-x_1-x_2) = \sum_{n=1}^\infty \frac{1}{n}\sum_{n_1=0}^n \binom{n}{n_1}x_1^{n_1}x_2^{n_2}
+$$
+
+모든 항을 명시적으로 나열하면
+$$
+-\log(1-x_1-x_2) = \sum_{n_1=1}^\infty \sum_{n_2=0}^\infty \frac{1}{n_1+n_2}\binom{n_1+n_2}{n_1}x_1^{n_1}x_2^{n_2}
+$$
+
+**낮은 차수 항 예시:**
+$$
+\begin{align*}
+&= (x_1 + x_2) + \frac{1}{2}(x_1^2 + 2x_1x_2 + x_2^2)\\
+&\quad + \frac{1}{3}(x_1^3 + 3x_1^2x_2 + 3x_1x_2^2 + x_2^3) + \cdots
+\end{align*}
+$$
+
+**수렴영역**
+
+수렴하려면 $|x_1+x_2|<1$이어야 하므로
+$$
+\{(x_1,x_2) : |x_1+x_2|<1\}
+$$
+
+이는 기울기가 $\pm 1$인 두 직선 사이의 영역이다.
+
 
 
 # [연습문제]

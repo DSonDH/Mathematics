@@ -527,6 +527,52 @@ $$
 = \int_{g(a)}^{g(b)} f(x)\,dx - \int_{g(a)}^{g(a)} f(x)\,dx = \int_{g(a)}^{g(b)} f(x)\,dx
 $$
 
+**다변수 치환적분 *(Change of Variables in Multiple Integrals)***  
+$Y$를 $\mathbb{R}^n$의 열린집합이고, $w: Y \to X$가 일대일 대응이며 미분가능하고 1차 편도함수가 연속이며, 야코비안 행렬식
+$$
+J_w(y) = \det\left(\frac{\partial w(y)}{\partial y}\right) \neq 0, \quad \forall y \in Y
+$$
+일 때, $f$가 $w(Y)$에서 적분가능하면
+$$
+\int_{w(Y)} f(x)\,dx = \int_Y f(w(y))\left|\det\left(\frac{\partial w(y)}{\partial y}\right)\right|\,dy
+$$
+
+**역함수를 이용한 계산:**  
+치환 $y = u(x)$의 역함수 $w(y) = u^{-1}(y)$로 나타낼 때, **역함수 정리**로부터
+$$
+\frac{\partial w(y)}{\partial y} = \left(\frac{\partial u(x)}{\partial x}\right)^{-1}, \quad x = w(y)
+$$
+
+따라서 야코비안 행렬식은
+$$
+\det\left(\frac{\partial w(y)}{\partial y}\right) = \frac{1}{\det\left(\frac{\partial u(x)}{\partial x}\right)}
+$$
+
+이를 이용하면 치환 공식을
+$$
+\int_{\text{w.r.t. } y} f(u(x))\,dx = \int_{\text{w.r.t. } x} f(u(x))\left|\det\left(\frac{\partial u(x)}{\partial x}\right)\right|^{-1}\,dy
+$$
+로 표현할 수 있다.
+
+**예: 극좌표 변환을 이용한 가우스 적분**  
+$I = \int_{-\infty}^{\infty} e^{-x^2/2}\,dx$를 구하자.
+
+$$I^2 = \left(\int_{-\infty}^{\infty} e^{-x^2/2}\,dx\right)^2 = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} e^{-(x_1^2+x_2^2)/2}\,dx_1\,dx_2$$
+
+let $x_1 = r\cos\theta, \quad x_2 = r\sin\theta$이면 
+$$J = \begin{vmatrix} \frac{\partial x_1}{\partial r} & \frac{\partial x_1}{\partial \theta} \\ \frac{\partial x_2}{\partial r} & \frac{\partial x_2}{\partial \theta} \end{vmatrix} = \begin{vmatrix} \cos\theta & -r\sin\theta \\ \sin\theta & r\cos\theta \end{vmatrix} = r$$
+
+따라서 $dx_1\,dx_2 = r\,dr\,d\theta$ 이므로
+$$I^2 = \int_0^{2\pi}\int_0^{\infty} e^{-r^2/2} \cdot r\,dr\,d\theta = \int_0^{2\pi}d\theta \int_0^{\infty} re^{-r^2/2}\,dr$$
+내부 적분: $u = r^2/2$로 치환하면 $du = r\,dr$
+
+$$\int_0^{\infty} re^{-r^2/2}\,dr = \int_0^{\infty} e^{-u}\,du = [-e^{-u}]_0^{\infty} = 1 \\
+\therefore I^2 = \int_0^{2\pi}1\,d\theta = 2\pi$$
+따라서
+$$I = \int_{-\infty}^{\infty} e^{-x^2/2}\,dx = \sqrt{2\pi}$$
+
+
+
 ### 부분적분 *(Integration by Parts)*
 $f,g$가 $[a,b]$에서 연속, $(a, b)$에서 미분가능하며  
 $f', g'\in \mathcal{R}[a,b]$이면
@@ -669,6 +715,18 @@ $$
 로 정의한다.
 
 - 즉 한 포인트를 걸러주는게 얼마든지 가능하다
+
+#### 예시
+1. $$\int_1^\infty x^{-n} dx < +\infty \Leftrightarrow n > 1$$
+2. $$\int_0^1 x^{\alpha-1} dx < +\infty \Leftrightarrow \alpha > 0$$
+3. $$\int_{-\infty}^{\infty} \frac{x}{1+x^2} dx$$
+   - **양의 부분**: $f^+(x) = \max\left(\frac{x}{1+x^2}, 0\right)$
+     $$\int_0^{\infty} \frac{x}{1+x^2} dx = \infty$$
+   - **음의 부분**: $f^-(x) = \max\left(-\frac{x}{1+x^2}, 0\right)$
+     $$\int_{-\infty}^{0} \frac{x}{1+x^2} dx = \infty$$
+   - **결론**: 둘 다 무한대이므로 $\int f^+ d\mu - \int f^- d\mu = \infty - \infty$ (부정형)
+   - 따라서 **적분 불가능** (발산)
+   - 주의: 리만 적분에서 Cauchy principal value로는 0이지만, 르벡 적분으로는 정의 불가
 
 ### Def. 2. $[a,\infty)$ 또는 $(-\infty,b]$의 경우
 
@@ -826,6 +884,85 @@ $$
 \int_a^b f\ d\alpha =
 \int_a^b f(x)\alpha'(x)\ dx
 $$
+
+
+# 참고: 이중합, 이중적분
+## 토넬리 정리 (Tonelli's Theorem)
+$f(x_1, x_2)$가 $[a,b] \times [c,d]$에서 비음수인 유계함수일 때:  
+$$\int_{a}^{b} \int_{c}^{d} f(x_1, x_2) \, dx_2 \, dx_1 = \int_{c}^{d} \int_{a}^{b} f(x_1, x_2) \, dx_1 \, dx_2 = \int_{[a,b] \times [c,d]} f(x_1, x_2) \, d(x_1, x_2)$$
+
+- **의미**: 비음수 함수의 이중적분은 반복적분으로 계산 가능
+- **순서 교환**: 적분 순서를 자유롭게 바꿀 수 있음
+- **조건**: $f(x_1, x_2) \geq 0$이면 충분 (적분 순서 교환 가능)
+
+**이중합 버전 (Double Sum)**  
+가산개의 비음수 항 $a_{i,j} \geq 0$ (단, $i, j \in \mathbb{N}$)에 대해:
+
+$$\sum_{i=1}^{\infty} \sum_{j=1}^{\infty} a_{i,j} = \sum_{j=1}^{\infty} \sum_{i=1}^{\infty} a_{i,j} = \sum_{(i,j) \in \mathbb{N}^2} a_{i,j}$$
+
+- **합의 순서 무관**: 비음수 이중합은 합의 순서와 무관하게 같음
+- **부분합의 수렴**: 어떤 합의 순서로 진행하든 같은 값으로 수렴
+- **반례**: 항이 음수를 포함하면 순서에 따라 값이 달라질 수 있음
+
+**일반적인 함수의 이중합과 이중적분**  
+$f$가 $[a,b] \times [c,d]$에서 정의된 함수일 때, $f$의 양수부분과 음수부분을 다음과 같이 정의한다:
+$$
+f^+(x_1, x_2) = \max(f(x_1, x_2), 0), \quad f^-(x_1, x_2) = \max(-f(x_1, x_2), 0)
+$$
+
+그러면 $f = f^+ - f^-$이고, $f^+ \geq 0$, $f^- \geq 0$이다.
+
+**절대수렴 조건 하에서 이중적분:**
+
+$f(x_1, x_2)$가 $[a,b] \times [c,d]$에서 절대수렴, 즉
+$$
+\int_{a}^{b} \int_{c}^{d} |f(x_1, x_2)| \, dx_2 \, dx_1 < \infty
+$$
+일 때, 다음이 성립한다:
+$$
+\int_{[a,b] \times [c,d]} f \, d(x_1, x_2) = \int_{[a,b] \times [c,d]} f^+ \, d(x_1, x_2) - \int_{[a,b] \times [c,d]} f^- \, d(x_1, x_2)
+$$
+
+그리고 반복적분도 같은 값으로 수렴한다:
+$$
+\int_{a}^{b} \int_{c}^{d} f(x_1, x_2) \, dx_2 \, dx_1 = \int_{c}^{d} \int_{a}^{b} f(x_1, x_2) \, dx_1 \, dx_2
+$$
+
+**이중합 버전 (일반적인 경우):**
+
+$\{a_{i,j}\}_{i,j \in \mathbb{N}}$이 절대수렴, 즉
+$$
+\sum_{i=1}^{\infty} \sum_{j=1}^{\infty} |a_{i,j}| < \infty
+$$
+일 때:
+$$
+\sum_{i=1}^{\infty} \sum_{j=1}^{\infty} a_{i,j} = \sum_{j=1}^{\infty} \sum_{i=1}^{\infty} a_{i,j} = \sum_{(i,j) \in \mathbb{N}^2} a_{i,j}
+$$
+
+이는 다음과 같이 양수부분과 음수부분으로 분해하여 증명할 수 있다:
+$$
+\sum_{i,j} a_{i,j} = \sum_{i,j} a_{i,j}^+ - \sum_{i,j} a_{i,j}^-
+$$
+
+여기서 $a_{i,j}^+ = \max(a_{i,j}, 0)$, $a_{i,j}^- = \max(-a_{i,j}, 0)$이고, 비음수 항들의 합은 순서와 무관하다.
+
+## 후비니 정리 *(Fubini's Theorem)*
+$f$가 $[a,b] \times [c,d]$에서 적분가능하면
+$$
+\int_{[a,b] \times [c,d]} f \, d(x,y) = \int_a^b \int_c^d f(x,y) \, dy \, dx = \int_c^d \int_a^b f(x,y) \, dx \, dy
+$$
+
+**특수한 경우:**
+- $f(x,y) = g(x)h(y)$ (곱셈 가능)이면
+$$
+\int_a^b \int_c^d f(x,y) \, dy \, dx = \left(\int_a^b g(x) \, dx\right)\left(\int_c^d h(y) \, dy\right)
+$$
+
+**적용 조건:**
+- 절대수렴할 때만 적분순서 교환 가능
+- 음수항이 있으면 반드시 절대수렴 확인 필요
+
+
 
 # [연습문제]
 

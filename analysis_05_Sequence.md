@@ -22,7 +22,7 @@ $$
 $\exists M>0$ s.t. $\forall n\in\mathbb N,\ |a_n|\le M$이면
 $\{a_n\}$을 **유계 수열**이라 한다.
 
-### Thm. 유계인 단조 실수열은 항상 수렴한다.
+### Thm. ⭐유계인 단조 실수열은 항상 수렴한다. **[Monotone Convergence Theorem]**
 #### 증명
 $\{a_n\}$이 단조증가하고 유계인 경우만 증명한다. (감소의 경우도 유사)  
 
@@ -41,6 +41,9 @@ $$
 즉, $|a_n - \alpha| < \varepsilon$이다.
 따라서 $\lim_{n\to\infty} a_n = \alpha$.
 
+- 부분합 수열의 수렴성을 직접 증명할 필요 없이, 단조성과 유계성만 확인하면 수렴을 보장한다.
+- 실수의 완비성(completeness)과의 깊은 연결을 보여준다.
+- 수열의 극한값을 구체적으로 몰라도 수열의 수렴성을 확인할 수 있다.
 
 ## (2) 수열의 극한 *(Limit of a Sequence)*
 ### Def. 1. [수열의 수렴] *(Convergence of a Sequence)*
@@ -199,10 +202,104 @@ $\lim a_n=a$, $\lim b_n=b$이면 다음이 성립한다.
 >$\liminf_{n\to\infty} (a_n+b_n) \ge \liminf_{n\to\infty} a_n + \liminf_{n\to\infty} b_n$
 >4. $a_n \le b_n$ a.b.f.(n)이면 $\liminf a_n \le \liminf b_n$, $\limsup a_n \le \limsup b_n$
 >#### 예시
->**4. $a_n = n\left(-\frac{1}{2}\right)^n$**  
+>**$a_n = n\left(-\frac{1}{2}\right)^n$**  
 >- $\lim_{k\to\infty} (2k-1)\left(\frac{1}{2}\right)^{2k-1} = \lim_{k\to\infty} \frac{2k-1}{2^{2k-1}} = 0$
 >- $\lim_{k\to\infty} 2k\left(\frac{1}{2}\right)^{2k} = \lim_{k\to\infty} \frac{2k}{4^k} = 0$  
 >따라서 $\lim_{n\to\infty} a_n = 0$
+
+### Thm. 4. [상극한의 특성화] *(Characterization of Limit Superior)*
+유계실수열 $\{x_n\}$의 상극한이 $\alpha \in \mathbb{R}$이면 다음 두 성질이 성립한다.
+
+1. 임의의 $\varepsilon > 0$에 대하여, $\exists N \in \mathbb{N}$ s.t. $\forall n \ge N$, $x_n < \alpha + \varepsilon$
+  (즉, 유한개를 제외한 모든 $n$에 대해 $x_n < \alpha + \varepsilon$)
+
+2. 임의의 $\varepsilon > 0$에 대하여, 무한히 많은 $n$에 대하여 $x_n > \alpha - \varepsilon$
+
+역으로, 유계수열 $\{x_n\}$이 어떤 실수 $\alpha \in \mathbb{R}$에 대하여 위 두 성질을 만족하면, $\limsup_{n\to\infty} x_n = \alpha$이다.
+
+#### 증명
+**($\Rightarrow$ 방향)** $\limsup_{n\to\infty} x_n = \alpha$라고 하자.
+
+정의에 의해 $M_n := \sup_{k \ge n} x_k$로 정의하면, $\{M_n\}$은 단조감소하고 $\lim_{n\to\infty} M_n = \alpha$이다.
+
+**성질 1 증명:**  
+임의의 $\varepsilon > 0$에 대해, $\lim_{n\to\infty} M_n = \alpha$이므로
+$$
+\exists N \in \mathbb{N} \text{ s.t. } \forall n \ge N, |M_n - \alpha| < \varepsilon
+$$
+
+$M_n = \sup_{k \ge n} x_k$이므로 $x_k \le M_n < \alpha + \varepsilon$이다.
+따라서 모든 $n \ge N$에 대해 $x_n < \alpha + \varepsilon$이다.
+
+**성질 2 증명:**  
+임의의 $\varepsilon > 0$에 대해, $M_n = \sup_{k \ge n} x_k$의 정의에 의해
+$$
+M_n > \alpha - \varepsilon \text{ (왜냐하면 } M_n \to \alpha)
+$$
+
+따라서 상한의 정의에 의해
+$$
+\exists k \ge n \text{ s.t. } x_k > \alpha - \varepsilon
+$$
+
+이를 각 $n$에 대해 반복하면, $\alpha - \varepsilon$보다 큰 항이 무한히 많이 존재한다.
+
+$(\Leftarrow$ 방향) 주어진 두 성질을 만족한다고 하자.
+
+성질 1에 의해 $M := \inf_{n} M_n \le \alpha$이다.
+(왜냐하면 $M_n \ge \alpha - \varepsilon$ for all $\varepsilon > 0$)
+
+성질 2에 의해 $M \ge \alpha$이다.
+(왜냐하면 $\alpha - \varepsilon$보다 큰 항이 무한히 많으므로 $M_n \ge \alpha - \varepsilon$)
+
+따라서 $M = \alpha$이고, $\limsup_{n\to\infty} x_n = \alpha$이다.
+
+### Thm. 5. [하극한의 특성화] *(Characterization of Limit Inferior)*
+유계실수열 $\{x_n\}$의 하극한이 $\beta \in \mathbb{R}$이면 다음 두 성질이 성립한다.
+
+1. 임의의 $\varepsilon > 0$에 대하여, $\exists N \in \mathbb{N}$ s.t. $\forall n \ge N$, $x_n > \beta - \varepsilon$
+  (즉, 유한개를 제외한 모든 $n$에 대해 $x_n > \beta - \varepsilon$)
+
+2. 임의의 $\varepsilon > 0$에 대하여, 무한히 많은 $n$에 대하여 $x_n < \beta + \varepsilon$
+
+역으로, 유계수열 $\{x_n\}$이 어떤 실수 $\beta \in \mathbb{R}$에 대하여 위 두 성질을 만족하면, $\liminf_{n\to\infty} x_n = \beta$이다.
+
+#### 증명
+**($\Rightarrow$ 방향)** $\liminf_{n\to\infty} x_n = \beta$라고 하자.
+
+정의에 의해 $m_n := \inf_{k \ge n} x_k$로 정의하면, $\{m_n\}$은 단조증가하고 $\lim_{n\to\infty} m_n = \beta$이다.
+
+**성질 1 증명:**  
+임의의 $\varepsilon > 0$에 대해, $\lim_{n\to\infty} m_n = \beta$이므로
+$$
+\exists N \in \mathbb{N} \text{ s.t. } \forall n \ge N, |m_n - \beta| < \varepsilon
+$$
+
+$m_n = \inf_{k \ge n} x_k$이므로 $x_k \ge m_n > \beta - \varepsilon$이다.
+따라서 모든 $n \ge N$에 대해 $x_n > \beta - \varepsilon$이다.
+
+**성질 2 증명:**  
+임의의 $\varepsilon > 0$에 대해, $m_n = \inf_{k \ge n} x_k$의 정의에 의해
+$$
+m_n < \beta + \varepsilon \text{ (왜냐하면 } m_n \to \beta)
+$$
+
+따라서 하한의 정의에 의해
+$$
+\exists k \ge n \text{ s.t. } x_k < \beta + \varepsilon
+$$
+
+이를 각 $n$에 대해 반복하면, $\beta + \varepsilon$보다 작은 항이 무한히 많이 존재한다.
+
+$(\Leftarrow$ 방향) 주어진 두 성질을 만족한다고 하자.
+
+성질 1에 의해 $m := \sup_{n} m_n \ge \beta$이다.
+(왜냐하면 $m_n \le \beta + \varepsilon$ for all $\varepsilon > 0$)
+
+성질 2에 의해 $m \le \beta$이다.
+(왜냐하면 $\beta + \varepsilon$보다 작은 항이 무한히 많으므로 $m_n \le \beta + \varepsilon$)
+
+따라서 $m = \beta$이고, $\liminf_{n\to\infty} x_n = \beta$이다.
 
 
 ## (3) 코시수열 *(Cauchy Sequence)*
@@ -215,6 +312,90 @@ $$
 
 ### Thm. 1. [코시수열과 수렴성] *(Cauchy Criterion)*
 $\{a_n\}$이 코시수열이면 $\{a_n\}$은 수렴한다.
+
+#### 증명
+$\{a_n\}$이 코시수열이라고 하자.
+
+**Step 1.** $\{a_n\}$이 유계임을 보이자.  
+$\varepsilon = 1$이라 하면, 코시수열의 정의에 의해
+$$
+\exists N \in \mathbb{N} \text{ s.t. } \forall m, n \ge N, |a_m - a_n| < 1
+$$
+
+특히 $n \ge N$일 때 $|a_n - a_N| < 1$이므로
+$$
+|a_n| \le |a_N| + 1
+$$
+
+따라서
+$$
+M = \max\{|a_1|, |a_2|, \ldots, |a_{N-1}|, |a_N| + 1\}
+$$
+라 하면, 모든 $n \in \mathbb{N}$에 대해 $|a_n| \le M$이므로 $\{a_n\}$은 유계이다.
+
+**Step 2.** 수렴하는 부분수열이 존재함을 보이자.
+
+$\{a_n\}$이 유계이므로 Bolzano–Weierstrass 정리에 의해
+수렴하는 부분수열 $\{a_{n_k}\}$가 존재한다. $\lim_{k\to\infty} a_{n_k} = a$라 하자.
+
+**Step 3.** $\lim_{n\to\infty} a_n = a$임을 보이자.
+
+임의의 $\varepsilon > 0$에 대해, 코시수열의 정의에 의해
+$$
+\exists N_1 \in \mathbb{N} \text{ s.t. } \forall m, n \ge N_1, |a_m - a_n| < \frac{\varepsilon}{2}
+$$
+
+또한 $\{a_{n_k}\}$가 $a$로 수렴하므로
+$$
+\exists K \in \mathbb{N} \text{ s.t. } \forall k \ge K, |a_{n_k} - a| < \frac{\varepsilon}{2}
+$$
+
+$n_k \ge N_1$인 $K$를 택하면, $n \ge N_1$일 때
+$$
+|a_n - a| \le |a_n - a_{n_k}| + |a_{n_k} - a| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+$$
+
+따라서 $\lim_{n\to\infty} a_n = a$이다.
+
+### Thm. 2. 수렴하는 수열은 코시수열이다. *(A Convergent Sequence is a Cauchy Sequence)*
+$\lim_{n\to\infty} a_n = a$이면 $\{a_n\}$은 코시수열이다.
+
+#### 증명
+$\lim_{n\to\infty} a_n = a$라고 하자.
+
+임의의 $\varepsilon > 0$에 대해, 수열의 극한 정의에 의해
+$$
+\exists N \in \mathbb{N} \text{ s.t. } \forall n \ge N, |a_n - a| < \frac{\varepsilon}{2}
+$$
+
+$m, n \ge N$일 때
+$$
+|a_m - a_n| = |a_m - a + a - a_n| \le |a_m - a| + |a - a_n| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+$$
+
+따라서 $\{a_n\}$은 코시수열이다.
+
+### 보조정리. 코시수열은 유계이다. *(A Cauchy Sequence is Bounded)*
+$\{a_n\}$이 코시수열이면 $\{a_n\}$은 유계이다.
+
+#### 증명
+$\{a_n\}$이 코시수열이라고 하자.
+
+$\varepsilon = 1$이라 하면, 코시수열의 정의에 의해
+$$
+\exists N \in \mathbb{N} \text{ s.t. } \forall m, n \ge N, |a_m - a_n| < 1
+$$
+
+특히 $n \ge N$일 때 $|a_n - a_N| < 1$이므로
+$$
+|a_n| \le |a_N| + 1
+$$
+
+따라서
+$$
+M = \max\{|a_1|, |a_2|, \ldots, |a_{N-1}|, |a_N| + 1\}
+$$
+라 하면, 모든 $n \in \mathbb{N}$에 대해 $|a_n| \le M$이므로 $\{a_n\}$은 유계이다.
 
 ### 참고) Def. 2. [실수의 구성적 정의] *(Construction of $\mathbb R$)*
 1. 유리수 코시수열의 집합 $\mathbb R^*$에 대해
@@ -230,6 +411,7 @@ $\{a_n\}$이 코시수열이면 $\{a_n\}$은 수렴한다.
 ### 참고) Thm. 2. [실수의 완비성] *(Completeness of $\mathbb R$)*
 $\mathbb R$의 공집합이 아닌 부분집합이 위로 유계이면
 그 부분집합은 **상한** *(supremum)* 을 갖는다.
+
 
 # 2. 주요 정리 *(Main Theorems)*
 ## (1) 단조수렴정리 *(Monotone Convergence Theorem)*

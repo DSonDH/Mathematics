@@ -1,5 +1,5 @@
+# 이항계수
 ## 정의 (Definition)
-
 $n \choose k$, 서로 다른 $n$개 중에서 순서 없이 $k$개를 고르는 경우의 수의 실수 확장버전.  
 
 실수(또는 복소수) $\alpha$와 음이 아닌 정수 $k\ge 0$에 대해
@@ -143,3 +143,90 @@ $n$개의 원소 중 $x$개를 선택하고, 그 중에서 순서를 고려하�
 - **방법 2**: 먼저 $n$개 중 $r$개를 순서대로 선택($n(n-1)\cdots(n-r+1)$), 나머지 $n-r$개 중 $x-r$개를 선택($\binom{n-r}{x-r}$)
 
 두 방법 모두 같은 결과를 세므로 등식이 성립한다. □
+
+# 특수함수
+## 베타 함수
+[자세히 보기](https://namu.wiki/w/%EB%B2%A0%ED%83%80%20%ED%95%A8%EC%88%98)
+
+베타 함수 $B(x, y)$는 다음과 같은 적분으로 정의되는 특수 함수입니다.
+
+$$
+B(x, y) = \int_0^1 t^{x-1} (1-t)^{y-1} \, dt
+$$
+
+여기서 $x$와 $y$는 모두 0보다 큰 값입니다. 베타 함수는 감마 함수와 다음과 같은 관계를 가집니다.
+
+$$
+B(x, y) = \frac{\Gamma(x)\,\Gamma(y)}{\Gamma(x+y)}
+$$
+
+베타 함수는 베타 분포, 베이지안 통계 등 다양한 분야에서 활용됩니다.
+
+## 감마 함수
+[자세히 보기](https://namu.wiki/w/%EA%B0%90%EB%A7%88%20%ED%95%A8%EC%88%98)
+
+감마 함수 $\Gamma(z)$는 다음과 같은 적분으로 정의됩니다.
+
+$$
+\Gamma(z) = \int_0^{\infty} e^{-t} t^{z-1} \, dt
+$$
+
+여기서 $z$는 0보다 큰 실수 또는 복소수입니다. 감마 함수는 팩토리얼 함수의 확장으로, 자연수 $n$에 대해 $\Gamma(n) = (n-1)!$가 성립합니다. 감마 함수는 확률론, 통계학, 복소 해석 등 다양한 수학 분야에서 중요한 역할을 합니다.
+
+### 스털링의 근사법 (Stirling's approximation)
+큰 $n$에 대해 팩토리얼을 근사하는 공식으로, 감마 함수의 점근 전개에서 유도됩니다.
+
+$$n! \approx \sqrt{2\pi n} \left(\frac{n}{e}\right)^n$$
+
+또는 로그 형태로
+$$\ln(n!) \approx n\ln(n) - n + \frac{1}{2}\ln(2\pi n)$$
+
+이 공식은 조합론, 확률론, 통계학에서 큰 $n$의 이항계수나 확률을 근사할 때 매우 유용합니다.
+
+#### 증명
+Stirling의 공식은 감마 함수의 적분 표현에서 라플라스 방법(Laplace's method)을 적용하여 유도됩니다.
+
+$$m! = \Gamma(m+1) = \int_0^{\infty} x^m e^{-x} \, dx$$
+
+지수를 정리하면
+$$\int_0^{\infty} e^{m\ln x - x} \, dx$$
+
+라플라스 방법: 피적분함수 $e^{m\ln x - x}$는 $x = m$에서 최댓값을 가집니다. $z = \sqrt{m}(x - m)$으로 치환하면, $x = m + \frac{z}{\sqrt{m}}$이고
+
+$$m! = \int_{-\infty}^{\infty} e^{m\ln(m + z/\sqrt{m}) - (m + z/\sqrt{m})} \, \frac{dz}{\sqrt{m}}$$
+
+$\ln(m + z/\sqrt{m}) \approx \ln m + \frac{z}{m\sqrt{m}} - \frac{z^2}{2m^2}$ 근처에서 테일러 전개하면
+
+$$m! \approx m^m e^{-m} \sqrt{m} \int_{-\infty}^{\infty} e^{-z^2/(2m)} \, dz = m^m e^{-m} \sqrt{m} \cdot \sqrt{2\pi m}$$
+
+따라서
+$$m! \sim \sqrt{2\pi m} \left(\frac{m}{e}\right)^m, \quad m \to \infty$$
+
+이항분포 $B(n, p)$의 누적확률은 정규분포로 근사되며, Stirling의 공식을 이용하면 이 근사의 오차를 정량화할 수 있습니다.
+
+### 이항확률의 정규 근사
+**(a) 이항확률의 정규근사**  
+$q = 1 - p$라 할 때, $a \le \frac{x-np}{\sqrt{npq}} \le b$인 $x$에 대해
+
+$$P(X=x) = \binom{n}{x} p^x q^{n-x} \sim \frac{1}{\sqrt{2\pi npq}} e^{-\frac{(x-np)^2}{2npq}}, \quad n \to \infty$$
+
+**(b) 누적확률의 정규근사**  
+$$\sum_{\substack{x: a \le \frac{x-np}{\sqrt{npq}} \le b}} P(X=x) 
+= \sum_{\substack{x: a \le \frac{x-np}{\sqrt{npq}} \le b}} \binom{n}{x} p^x q^{n-x} \sim \int_a^b \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}z^2} \, dz, \quad n \to \infty$$
+
+이는 **중심극한정리**의 직접적인 결과이며, $n$이 충분히 클 때 이항분포 $B(n,p)$를 정규분포 $N(np, npq)$로 근사할 수 있음을 의미합니다.
+
+#### 증명
+$X_1, X_2, \ldots, X_n$을 독립적인 베르누이 확률변수라 하고, $X = \sum_{i=1}^n X_i$라 하면 $X \sim B(n,p)$입니다.
+
+중심극한정리에 의해
+$$Z_n = \frac{X - np}{\sqrt{npq}} \xrightarrow{d} N(0,1), \quad n \to \infty$$
+
+따라서 충분히 큰 $n$에 대해
+$$P\left(a \le \frac{X-np}{\sqrt{npq}} \le b\right) \approx \Phi(b) - \Phi(a) = \int_a^b \frac{1}{\sqrt{2\pi}} e^{-z^2/2} \, dz$$
+
+여기서 $\Phi$는 표준정규분포의 누적분포함수입니다.
+
+(a)의 경우, Stirling 공식을 이용하여 $\binom{n}{x}p^x q^{n-x}$의 합을 리만 합 근사로 적분으로 변환할 수 있습니다. $x$가 $np$ 근처에서 $\sqrt{npq}$ 스케일로 변할 때, 
+$$\binom{n}{x}p^x q^{n-x} \approx \frac{1}{\sqrt{2\pi npq}} \exp\left(-\frac{(x-np)^2}{2npq}\right)$$
+가 성립하며, 이를 이용하여 (b)의 적분 표현을 얻습니다. □

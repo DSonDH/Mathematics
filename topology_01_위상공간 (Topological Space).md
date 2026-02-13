@@ -1,3 +1,5 @@
+https://www.youtube.com/watch?v=ZKL0VJaiW4A&list=PLU5W5tML9wAGi03AZjmNUVXKrpOYZjqTk&index=4 
+
 # Chapter 1 위상공간 (Topological Space)
 ## 1.1 위상공간 (Topology, Topological Space)
 

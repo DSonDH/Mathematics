@@ -709,6 +709,34 @@ $$J_{\mathbf{f}}(x) = \frac{\partial \mathbf{f}}{\partial x^T} = \begin{pmatrix}
 \frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \cdots & \frac{\partial f_m}{\partial x_n}
 \end{pmatrix}$$
 
+>**예**: 극좌표 변환  
+>극좌표 $(r, \theta)$에서 직교좌표 $(x, y)$로의 변환:
+>$$
+>\begin{cases}
+>x = r\cos\theta \\
+>y = r\sin\theta
+>\end{cases}
+>$$
+>
+>야코비 행렬:
+>$$
+>J = \begin{pmatrix}
+>\frac{\partial x}{\partial r} & \frac{\partial x}{\partial \theta} \\
+>\frac{\partial y}{\partial r} & \frac{\partial y}{\partial \theta}
+>\end{pmatrix}
+>= \begin{pmatrix}
+>\cos\theta & -r\sin\theta \\
+>\sin\theta & r\cos\theta
+>\end{pmatrix}
+>$$
+>
+>야코비안(행렬식):
+>$$
+>\det(J) = \cos\theta \cdot r\cos\theta - (-r\sin\theta) \cdot \sin\theta = r\cos^2\theta + r\sin^2\theta = r
+>$$
+>**응용**: 이중적분에서 $dxdy = r \, dr d\theta$
+
+
 #### 헤시안 행렬 (Hessian Matrix)
 스칼라 함수 $f: \mathbb{R}^n \rightarrow \mathbb{R}$의 2차 편미분 행렬:
 $$H_f(x) = \frac{\partial^2 f}{\partial x \partial x^T} = \begin{pmatrix}
@@ -922,7 +950,6 @@ $$\frac{\partial \text{tr}(X^TX)}{\partial X} = 2X$$
 **주의사항**:
 - 행렬에 대한 행렬의 미분은 고차원 텐서 구조를 가지므로, 실용적으로는 벡 연산자를 사용하여 다루는 경우가 많다
 - $\frac{\partial \text{vec}(Y)}{\partial (\text{vec}(X))^T}$ 형태로 표현하면 야코비 행렬 형태가 되어 다루기 쉽다
-
 
 
 #### 행렬식의 미분
