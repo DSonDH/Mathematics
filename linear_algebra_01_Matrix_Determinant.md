@@ -1002,91 +1002,111 @@ $$A^{1/2} = (X^TX)^{1/2}$$
 - **행렬 지수**: $e^A = Q e^{\Lambda} Q^T$ (대칭행렬)
 
 
-TODO:
 ## (9) 정사영행렬 (Projection Matrix)
-**정의**: 정사각행렬 $P$가 **정사영행렬(orthogonal projection matrix)**이 되기 위한 필요충분조건은
+**정의**: 정사각행렬 $P$가 **정사영행렬(orthogonal projection matrix)** 이 되기 위한 필요충분조건은
 $$P^2 = P \text{ 이고 } P^T = P$$
-
 즉, 멱등이면서 대칭인 행렬이다.
-### 기하학적 의미
-정사영행렬 $P$는 벡터 $x$를 어떤 부분공간 $S$에 수직으로 투영(projection)하는 선형변환을 나타낸다. 멱등이므로, 자신의 열공간으로의 정사영 행렬이다. 
+
+**기하학적 의미** : 정사영행렬 $P$는 벡터 $x$를 어떤 부분공간 $S$에 수직으로 투영(projection)하는 선형변환을 나타낸다. 멱등이므로, 자신의 열공간으로의 정사영 행렬이다. 
 - $\text{range}(P) = S$ (사영되는 부분공간)
 - $\text{null}(P) = S^\perp$ (직교여공간)
 
-**기본 성질**:
-* 멱등행렬은 대칭행렬이 아닐수도 있다
-* $P^k = P$ (모든 양의 정수 $k \geq 1$)
-* $P$의 고유값은 0 또는 1만 가능
-* $\text{rank}(P) = \text{tr}(P)$ (멱등행렬의 특수성질)
-* $I - P$도 멱등행렬: $(I-P)^2 = I - 2P + P^2 = I - P$
-* $\text{rank}(P) + \text{rank}(I-P) = n$
+### 정사영의 유일성과 표현
+임의의 벡터 $x \in \mathbb{R}^m$에 대해 $x = x_1 + x_2$ 를 만족하는 $x_1 \in \text{Col}(A)$, $x_2 \perp \text{Col}(A)$ (즉, $x_2^T A = 0$)인 쌍 $(x_1, x_2)$가 유일하게 존재한다.
 
-**증명** (고유값이 0 또는 1):  
-$P^2 = P$에서 고유값 $\lambda$에 대응하는 고유벡터 $v \neq 0$라 하면:
-$$P v = \lambda v\\ 
-P^2 v = P(\lambda v) = \lambda P v = \lambda^2 v$$
-한편 $P^2 = P$이므로:
-$$P^2 v = P v = \lambda v$$
-따라서 $\lambda^2 v = \lambda v$, 즉 $\lambda(\lambda - 1)v = 0$
+>**유일성 증명**:  
+>$x = x_1 + x_2 = x_1' + x_2'$인 두 분해가 존재한다고 하자. 그러면:
+>$$x_1 - x_1' = x_2' - x_2$$
+>좌변은 $\text{Col}(A)$에 속하고 우변은 $\text{Col}(A)^\perp$에 속한다. 따라서:
+>$$x_1 - x_1' \in \text{Col}(A) \cap \text{Col}(A)^\perp = \{\mathbf{0}\}$$
+>그러므로 $x_1 = x_1'$이고 $x_2 = x_2'$로 유일하다.
 
-$v \neq 0$이므로 $\lambda = 0$ 또는 $\lambda = 1$  
+**명시적 표현**:
+$$x_1 = P_Ax, \quad x_2 = (I - P_A)x$$
 
-#### 대칭 멱등행렬의 특성
-대칭행렬 $P$가 멱등이면 ($P^T = P$이고 $P^2 = P$):
+여기서 $P_A = A(A^TA)^{-1}A^T$는 열공간 $\text{Col}(A)$로의 정사영행렬이다.
+- $x_1 \in \text{Col}(A)$: $x_1 = P_Ax = A(A^TA)^{-1}A^Tx = A\beta$ (단, $\beta = (A^TA)^{-1}A^Tx$)
+- $x_2 \perp \text{Col}(A)$: $A^T x_2 = A^T(I - P_A)x = [A^T - A^TP_A]x = [A^T - A^T]x = 0$
+- **기하학적 의미**: $x_1 = P_Ax$는 벡터 $x$를 열공간 $\text{Col}(A)$에 **수직으로 투영**한 것이며, $x_2 = (I - P_A)x$는 투영되지 않은 **직교 잔차 성분**을 나타낸다.
+- 직교 직합 표기하면, $x = x_1 \oplus x_2$
 
-**성질 1**: $P$는 **직교대각화 가능**
-$$P = Q\Lambda Q^T$$
-여기서 $\Lambda = \text{diag}(1, 1, \ldots, 1, 0, 0, \ldots, 0)$ (고유값이 모두 0 또는 1)  
-Q는 직교행렬이라 $Q^T Q = Q Q^T = I$  
-따라서 $P^2 = P \Leftrightarrow \text{diag}(\Lambda_i^2) = \text{diag}(\Lambda_i)$
+### 정사영행렬의 성질
+정사영행렬 $P$에 대해 다음이 성립한다:
 
-**성질 2**: $\text{rank}(P) = \text{tr}(P)$  
-대각화 형태 $P = Q\Lambda Q^T$에서:
-$$\text{tr}(P) = \text{tr}(\Lambda) = \#\{\text{고유값 }1\} = \text{rank}(P)$$
+**성질 1: 사영의 불변성**  
+$x \in \text{range}(P)$이면 $Px = x$
+>**증명**: $x = Pw$인 $w$가 존재하므로 $Px = P(Pw) = P^2w = Pw = x$
 
-**성질 3**: $\text{range}(P) \perp \text{null}(P)$ (직교성)  
-$P^2 = P$이고 $P^T = P$일 때, $u \in \text{range}(P)$, $v \in \text{null}(P)$라 하면:
-- $u = Pw$ for some $w$
-- $Pv = 0$
+**성질 2: 직교성**  
+모든 $x$에 대해 $(x - Px) \perp \text{range}(P)$
+>**증명**: $y \in \text{range}(P)$이면 $y = Pz$. 따라서:
+>$$(x - Px)^T y = (x - Px)^T Pz = x^TPz - (Px)^TPz = x^TPz - x^TP^TPz$$
+>$P = P^T$이므로 $= x^TPz - x^TPz = 0$
 
-따라서: $u^T v = (Pw)^T v = w^T P^T v = w^T P v = 0$
+**성질 3: 거리 최소성**  
+$\|x - Px\| = \min_{y \in \text{range}(P)} \|x - y\|$
+>**증명**: $y \in \text{range}(P)$이면 $y = Pw$. $z = x - Px$라 하면:
+>$$\|x - y\|^2 = \|z + (Px - y)\|^2$$
+>$z \perp \text{range}(P)$이고 $(Px - y) \in \text{range}(P)$이므로 (피타고라스 정리):
+>$$\|x - y\|^2 = \|z\|^2 + \|Px - y\|^2 \geq \|z\|^2 = \|x - Px\|^2$$
+>등호는 $y = Px$일 때 성립.
 
-### 정사영행렬 (Orthogonal Projection Matrix)
-**정의**: 정사각행렬 $P_n \times n$이 **정사영행렬(orthogonal projection matrix)**
-$$\Leftrightarrow P^2 = P \text{ 이고 } P^T = P$$
+**성질 4: 여사영의 정사영성**  
+$P_\perp := I - P$도 정사영행렬
+>**증명**:
+>- 멱등성: $(I-P)^2 = I - 2P + P^2 = I - 2P + P = I - P$
+>- 대칭성: $(I-P)^T = I - P^T = I - P$
 
-즉, 멱등이면서 대칭인 행렬.
+**성질 5: 고유값**  
+정사영행렬 $P$의 고유값은 1 또는 0 (멱등성에 의해)
+- 고유값 1: $\text{range}(P)$의 방향
+- 고유값 0: $\text{null}(P) = \text{range}(I-P)$의 방향
 
-**해석**: $P$는 어떤 부분공간 $S$로의 정사영을 나타낸다.
-- $\text{range}(P) = S$ (사영되는 부분공간)
-- $\text{null}(P) = S^\perp$ (직교여공간)
+**성질 6: 계수와 대각합의 관계**  
+$$\text{rank}(P) = \text{tr}(P)$$
 
-#### 기본 성질
-정사영행렬 $P$에 대해:
+>**증명**: 정사영행렬은 대칭이므로 정실수 고유값을 가지며, 특히 0과 1만 가짐. 
 
-1. **사영의 불변성**: $Px = x$ for $x \in \text{range}(P)$
-2. **직교성**: $x - Px \perp \text{range}(P)$ for all $x$
-3. **거리 최소성**: $\|x - Px\| = \min_{y \in \text{range}(P)} \|x - y\|$
-4. **여사영**: $P_\perp := I - P$도 정사영행렬
-5. **고유값**: 1 또는 0
-6. **계수 성질**: $\text{rank}(P) = \text{tr}(P)$
+### 벡터의 직교 분해
+**피타고라스 정리의 일반화**: 임의의 벡터 $x$에 대해
+$$\|x\|_2^2 = \|Px\|_2^2 + \|(I-P)x\|_2^2$$
 
-**증명 (거리 최소성)**:  
-$y \in \text{range}(P)$이면 $y = Pw$ for some $w$. $z = x - Px$라 하면:
-$$\|x - y\|^2 = \|(x - Px) + (Px - y)\|^2 = \|z + (Pw - y)\|^2$$
-
-$z \perp \text{range}(P)$이고 $(Pw - y) \in \text{range}(P)$이므로:
-$$\|x - y\|^2 = \|z\|^2 + \|Pw - y\|^2 \geq \|z\|^2 = \|x - Px\|^2$$
-
-등호는 $Pw = y$일 때 성립하므로 최소값은 $\|x - Px\|$.
+**증명**: $Px$와 $(I-P)x$는 직교하므로 (성질 2에서):
+$$\|x\|^2 = \|Px + (I-P)x\|^2 = \|Px\|^2 + 2(Px)^T(I-P)x + \|(I-P)x\|^2$$
+중간항을 계산하면: $$(Px)^T(I-P)x = x^TP(I-P)x = x^T(P - P^2)x = 0$$ 
+($P = P^T$, $P^2 = P$ 이용)  
 
 ### 열벡터공간으로의 정사영행렬
-
-#### 열 최대계수 행렬을 통한 정사영
-$X$가 $m \times p$ 열 최대계수 행렬 (즉, $\text{rank}(X) = p \leq m$)일 때:
-
-**정사영행렬**:
+**열 최대계수 행렬을 통한 정사영**  
+$X$가 $m \times p$ 열 최대계수 행렬 (즉, $\text{rank}(X) = p \leq m$)일 때, 정사열행렬은:
 $$P_X = X(X^T X)^{-1}X^T$$
+
+>**참고: 열최대계수 행렬 (Full Column Rank Matrix)**  
+>$X$가 $m \times n$ 행렬일 때, $\text{rank}(X) = n \leq m$이면 $X$를 **열최대계수 행렬(full column rank matrix)** 이라고 한다.
+>* 모든 열벡터가 선형독립이다
+>* $X^TX$는 정칙이다 ($\det(X^TX) > 0$)
+>* $(X^TX)^{-1}$이 존재한다
+>* 따라서 정사영행렬 $P_X = X(X^TX)^{-1}X^T$가 유일하게 정의된다
+>
+>**반대 개념**: 
+>$\text{rank}(X) = m < n$이면 $X$를 **행최대계수 행렬(full row rank matrix)** 이라 한다.
+
+>**참고: 하한 이하의 계수를 가지는 경우**  
+>$X$가 $m \times n$ 행렬이고 $\text{rank}(X) = r < n$일 때, 정사영행렬은 **일반화역행렬(generalized inverse)** 을 사용하여 표현된다.
+>
+>**분해 방법**:  
+>$X = (X_1 \mid X_2)$로 분할하되:
+>* $X_1$: $m \times r$ 행렬이고 $\text{rank}(X_1) = r$ (최대 선형독립 열들)
+>* $X_2$: $m \times (n-r)$ 행렬 (나머지 열들)
+>
+>**정사영행렬의 표현**:
+>$$P_X = X \begin{pmatrix} (X_1^T X_1)^{-1} & 0 \\ 0 & 0 \end{pmatrix} X^T$$
+>
+>여기서 블록 대각행렬을 $(X^TX)^-$로 표기하며, 이를 $X^TX$의 **일반화역행렬(generalized inverse)** 이라 하고, 간단히 표기하면
+>$$P_X = X(X^TX)^- X^T$$
+>**성질**:
+>* $(X^TX)^-$는 유일하지 않다 (하지만 $X(X^TX)^-X^T$는 유일하다)
+>* $\text{rank}(X(X^TX)^-X^T) = \text{rank}(X) = r$
 
 **성질**:
 * $P_X^2 = P_X$ (멱등성)
@@ -1095,98 +1115,158 @@ $$P_X = X(X^T X)^{-1}X^T$$
 * $\text{range}(P_X) = \text{Col}(X)$ (X의 열공간)
 * $\text{null}(P_X) = \text{Col}(X)^\perp$ (X의 열공간의 직교여공간)
 
-**증명** (멱등성):
-$$P_X^2 = X(X^T X)^{-1}X^T X(X^T X)^{-1}X^T = X(X^T X)^{-1}X^T = P_X$$
+### 증명: 정사영행렬이 열벡터공간으로의 정사영을 수행함
+>$\Pi = X(X^TX)^{-1}X^T$가 $X$의 열벡터공간 $\text{Col}(X)$로의 정사영행렬임을 보이기 위해서는 다음 두 가지를 증명해야 한다:
+>
+>1. **$\Pi$는 정사영행렬이다**: $\Pi^2 = \Pi$이고 $\Pi^T = \Pi$
+>2. **$\text{Col}(\Pi) = \text{Col}(X)$**: 사영의 치역이 $X$의 열공간과 같다
+>
+>**Step 1: 정사영행렬의 성질 증명**
+>
+>멱등성:
+>$$\Pi^2 = X(X^TX)^{-1}X^T X(X^TX)^{-1}X^T = X(X^TX)^{-1}X^T = \Pi$$
+>
+>대칭성:
+>$$\Pi^T = [X(X^TX)^{-1}X^T]^T = X[(X^TX)^{-1}]^T X^T = X(X^TX)^{-1}X^T = \Pi$$
+>
+>**Step 2: 열공간의 동치성 증명**  
+>**(1) $\text{Col}(\Pi) \subseteq \text{Col}(X)$ 증명**  
+>$y \in \text{Col}(\Pi)$이면 어떤 벡터 $v$에 대해:
+>$$y = \Pi v = X(X^TX)^{-1}X^T v$$
+>
+>$X(X^TX)^{-1}X^T v = X\beta$ (단, $\beta = (X^TX)^{-1}X^T v$)로 쓸 수 있으므로:
+>$$y = X\beta \in \text{Col}(X)$$
+>
+>따라서 $\text{Col}(\Pi) \subseteq \text{Col}(X)$
+>
+>**(2) $\text{Col}(X) \subseteq \text{Col}(\Pi)$ 증명**  
+>$x \in \text{Col}(X)$이면 어떤 벡터 $w$에 대해 $x = Xw$이므로  
+>$$\Pi x = X(X^TX)^{-1}X^T Xw = X(X^TX)^{-1}(X^TX)w = Xw = x$$
+>
+>즉, $\Pi x = x$이므로 $x = \Pi u \quad (\text{단, } u = x)$  
+>따라서 $x \in \text{Col}(\Pi)$이고, $\text{Col}(X) \subseteq \text{Col}(\Pi)$
+>
+>두 포함관계로부터 $$\text{Col}(\Pi) = \text{Col}(X)$$
+>
+>**기하학적 해석**  
+>$\Pi = X(X^TX)^{-1}X^T$는 $X$의 열벡터공간 $\text{Col}(X)$로의 정사영행렬이며:
+>- 모든 $x \in \text{Col}(X)$에 대해 $\Pi x = x$ (이미 부분공간에 있으면 불변)
+>- 모든 $y \notin \text{Col}(X)$에 대해 $\Pi y \in \text{Col}(X)$이며, $\Pi y = 0$은 $y \in \text{Col}(X)^\perp$일 때만 성립
+>- 직교성: $(x - \Pi x) \perp \text{Col}(X)$ (잔차는 직교)
 
-**증명** (대칭성):
-$$P_X^T = [X(X^T X)^{-1}X^T]^T = X(X^T X)^{-T}X^T = X(X^T X)^{-1}X^T = P_X$$
-
-($(X^T X)^{-1}$은 대칭이므로 $(X^T X)^{-T} = (X^T X)^{-1}$)
-
-#### 직교행렬을 통한 정사영 (특수한 경우)
-$Q$가 $m \times p$ 정직교열 행렬 ($Q^T Q = I_p$)일 때:
-
-**정사영행렬**:
-$$P_Q = QQ^T$$
-
-이는 위의 일반 공식에서 $X^T X = I$인 특수한 경우.
-
-**특징**: 계산이 간단하고 수치적으로 안정적
-
-**예제**:
-$$Q = \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{pmatrix}$$
-
-일 때, 1차원 부분공간 $\text{span}(Q)$로의 정사영:
-$$P_Q = QQ^T = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$$
-
-### 직교여공간 (Orthogonal Complement)
-
-#### 정의
+TODO: 
+#### 직교여공간 (Orthogonal Complement)
 벡터공간 $V \subseteq \mathbb{R}^n$의 **직교여공간**:
 $$V^\perp = \{x \in \mathbb{R}^n : x^T v = 0 \text{ for all } v \in V\}$$
 
-#### 성질
+**성질**  
 1. $V^\perp$는 $\mathbb{R}^n$의 부분공간
 2. $(V^\perp)^\perp = V$ (이중 직교 여공간)
 3. $\dim(V) + \dim(V^\perp) = n$ (차원 분해)
 4. $V \cap V^\perp = \{\mathbf{0}\}$ (교집합)
 5. $V \oplus V^\perp = \mathbb{R}^n$ (직합 분해)
-
-#### 행렬 관점에서의 직교여공간
-
-**행공간과 영공간의 직교성**:
-$$\text{Row}(A) \perp \text{null}(A)$$
-
-**증명**:  
-$v \in \text{null}(A)$이면 $Av = 0$. 임의의 행벡터 $a^T$ (A의 전치의 열)에 대해:
-$$a^T v = 0$$
-
-따라서 $v \perp \text{Row}(A)$.
-
-**열공간과 영공간(좌영공간)의 직교성**:
-$$\text{Col}(A) \perp \text{null}(A^T)$$
+- $\text{Col}(A) \perp \text{null}(A^T)$ (열공간과 영공간(좌영공간)의 직교성)
+- $\text{Row}(A) \perp \text{null}(A)$ (행공간과 영공간의 직교성)
 
 #### 부분공간 연관 관계
 행렬 $A$ ($m \times n$)에 대해:
 
 $$\mathbb{R}^n = \text{Col}(A^T) \oplus \text{null}(A) = \text{Row}(A) \oplus \text{null}(A)$$
-
 $$\mathbb{R}^m = \text{Col}(A) \oplus \text{null}(A^T)$$
 
 ### 열벡터공간의 직교 분해 (Orthogonal Decomposition)
+분할 정사영행렬 (Partitioned Projection Matrix)  
+$X$가 $n \times k$ 행렬이고 $\text{rank}(X) = k$일 때, 다음과 같이 분할한다:
+$$X = (X_0 \mid X_1)$$
+- $X_0$: $n \times r$ 열 최대계수 행렬 ($r < k$)
+- $X_1$: $n \times (k-r)$ 행렬
 
-#### 기본 분해
-$X$가 $m \times p$ 열 최대계수 행렬일 때, 그람-슈미트 정규직교화를 통해:
+### 주요 정의
 
-$$X = QR$$
+**전체 정사영행렬**:
+$$\Pi_{0,1} = X(X^TX)^{-1}X^T$$
 
-여기서:
-- $Q$: $m \times p$ 정직교열 행렬
-- $R$: $p \times p$ 상삼각행렬
+**$X_0$로의 정사영행렬**:
+$$\Pi_0 = X_0(X_0^TX_0)^{-1}X_0^T$$
 
-**분해의 의미**:
-$$\text{Col}(X) = \text{Col}(Q) = \text{span}(q_1, q_2, \ldots, q_p)$$
+**$X_0$에 직교하는 성분**:
+$$X_{1\mid0} = (I - \Pi_0)X_1$$
 
-#### 임의의 벡터 분해
-임의의 벡터 $y \in \mathbb{R}^m$에 대해:
+**$X_{1\mid0}$의 열공간으로의 정사영행렬**:
+$$\Pi_{1\mid 0} = X_{1\mid0}(X_{1\mid0}^TX_{1\mid0})^{-}X_{1\mid0}^T$$
 
-$$y = P_X y + (I - P_X)y = \hat{y} + e$$
+여기서 $(·)^-$는 일반화역행렬(generalized inverse)를 나타낸다.
 
-여기서:
-- $\hat{y} = P_X y \in \text{Col}(X)$ (사영 성분)
-- $e = (I - P_X)y \in \text{Col}(X)^\perp$ (잔차 성분)
+### 주요 성질
 
-**직교성**: $\hat{y}^T e = 0$
+#### 성질 1: 열공간의 동치성
+$$\text{Col}(X_0, X_1) = \text{Col}(X_0, X_{1\mid0})$$
 
-**증명**:
-$$\hat{y}^T e = (P_X y)^T [(I - P_X)y] = y^T P_X(I - P_X)y$$
+>**증명**:
+>$Y = (y_1, \ldots, y_n)^T \in \text{Col}(X_0, X_1)$이면 어떤 벡터 $\beta_0, \beta_1$에 대해:
+>$$Y = X_0\beta_0 + X_1\beta_1$$
+>$X_{1\mid0} = (I - \Pi_0)X_1$이므로:
+>$$Y = X_0\beta_0 + X_1\beta_1 = \Pi_0 X_0\beta_0 + (I - \Pi_0)X_0\beta_0 + X_1\beta_1$$
+>$(\Pi_0 X_0\beta_0 + (I - \Pi_0)X_0\beta_0)$의 첫 번째 항은 $\Pi_0 X_0 = X_0(X_0^TX_0)^{-1}X_0^T X_0 = X_0$이므로:
+>$$Y = X_0\beta_0 + (I - \Pi_0)[X_0\beta_0 + X_1\beta_1]$$
+>
+>$X_0\beta_0 \in \text{Col}(X_0)$이므로 $(I - \Pi_0)X_0\beta_0 = 0$. 따라서:
+>$$Y = X_0\beta_0 + (I - \Pi_0)X_1\beta_1 = X_0\beta_0 + X_{1\mid0}\beta_1$$
+>따라서 $Y \in \text{Col}(X_0, X_{1\mid0})$. 반대 방향도 마찬가지로 성립한다.
 
-$P_X^2 = P_X$이므로 $P_X(I - P_X) = P_X - P_X^2 = 0$:
-$$\hat{y}^T e = 0$$
+#### 성질 2: 직교여공간 분해
+$$\text{Col}(X_0, X_{1\mid0})^\perp = \text{Col}(X_0)^\perp \cap \text{Col}(X)^\perp$$
+
+더 정확히, $X_0$의 열공간에 직교하는 $(X_0, X_1)$의 열공간 내의 모든 벡터는 $X_{1\mid0}$의 열공간에 속한다.
+
+**기하학적 의미**:
+$$\text{Col}(X_0, X_1) = \text{Col}(X_0) \oplus \text{Col}(X_{1\mid0})$$
+
+즉, $(X_0, X_1)$의 열공간은 $X_0$의 열공간과 $X_{1\mid0}$의 열공간의 직합(orthogonal direct sum)으로 표현된다.
+
+#### 성질 3: 정사영행렬의 분해
+$$\Pi_{0,1} = \Pi_0 + \Pi_{1\mid0} \\ \Pi_0 \Pi_{1\mid0} = 0$$
+>**증명**:
+>분할된 정사영행렬의 성질을 이용한다. $\Pi_{0,1}$를 계산하기 위해, $(X_0, X_1)$을 블록 형태로 다루면:
+>
+>$$X^TX = \begin{pmatrix} X_0^TX_0 & X_0^TX_1 \\ X_1^TX_0 & X_1^TX_1 \end{pmatrix}$$
+>
+>역행렬은 (슈어 보수행렬 공식 사용):
+>$$(X^TX)^{-1} = \begin{pmatrix} (X_0^TX_0)^{-1} + (X_0^TX_0)^{-1}X_0^TX_1S^{-1}X_1^TX_0(X_0^TX_0)^{-1} & -(X_0^TX_0)^{-1}X_0^TX_1S^{-1} \\ -S^{-1}X_1^TX_0(X_0^TX_0)^{-1} & S^{-1} \end{pmatrix}$$
+>
+>여기서 $S = X_{1\mid0}^TX_{1\mid0}$는 슈어 보수행렬이다.
+>
+>따라서:
+>$$\Pi_{0,1} = \begin{pmatrix} X_0 & X_1 \end{pmatrix}(X^TX)^{-1}\begin{pmatrix} X_0^T \\ X_1^T \end{pmatrix}$$
+>
+>계산 결과:
+>$$\Pi_{0,1} = X_0(X_0^TX_0)^{-1}X_0^T + (I - \Pi_0)X_1[(I - \Pi_0)X_1]^T(I - \Pi_0)X_1]^{-}(I - \Pi_0)X_1^T$$
+>$$= \Pi_0 + \Pi_{1\mid0}$$
+>
+>직교성:
+>$$\Pi_0 \Pi_{1\mid0} = X_0(X_0^TX_0)^{-1}X_0^T \cdot X_{1\mid0}[X_{1\mid0}^TX_{1\mid0}]^{-}X_{1\mid0}^T$$
+>
+>$X_{1\mid0} = (I - \Pi_0)X_1$이므로 $X_0^T X_{1\mid0} = 0$. 따라서:
+>$$\Pi_0 \Pi_{1\mid0} = 0$$
+
+### 응용: 순차적 분할 정사영
+#### 호텔링 여인수 (Hotelling Deflation)
+회귀분석에서 $X_0$의 영향을 제거한 후 $X_1$의 영향을 추정할 때 사용:
+$$\hat{\beta}_1 = (X_{1\mid0}^TX_{1\mid0})^{-}X_{1\mid0}^T(I - \Pi_0)Y$$
+
+#### 분산 분해
+총 변량을 $X_0$에 의한 설명 부분과 나머지 부분으로 분해:
+$$Y^T\Pi_{0,1}Y = Y^T\Pi_0 Y + Y^T\Pi_{1\mid0}Y$$
+이는 ANOVA나 순차적 모형 비교에서 핵심적으로 사용된다.
+
+#### 부분상관(Partial Correlation)
+$X_0$의 효과를 제거한 후 $X_1$과 $Y$의 상관을 구할 때:
+$$r_{\text{partial}} = \frac{\text{Cov}[(I - \Pi_0)Y, (I - \Pi_0)X_1]}{\sqrt{\text{Var}[(I - \Pi_0)Y] \cdot \text{Var}[(I - \Pi_0)X_1]}}$$
+
 
 ### 정사영의 직교 분해
+분해 정리
 
-#### 분해 정리
 정사영행렬 $P_X$에 대해:
 
 $$\mathbb{R}^m = \text{Col}(P_X) \oplus \text{Col}(I - P_X)$$
