@@ -528,8 +528,8 @@ $A$가 대칭이므로:
 $$\mathbf{v}_j^TA\mathbf{v}_i = (A\mathbf{v}_j)^T\mathbf{v}_i = \lambda_j\mathbf{v}_j^T\mathbf{v}_i$$
 
 따라서:
-$$\lambda_i\mathbf{v}_j^T\mathbf{v}_i = \lambda_j\mathbf{v}_j^T\mathbf{v}_i$$
-$$(\lambda_i - \lambda_j)\mathbf{v}_j^T\mathbf{v}_i = 0$$
+$$\lambda_i\mathbf{v}_j^T\mathbf{v}_i = \lambda_j\mathbf{v}_j^T\mathbf{v}_i \\
+(\lambda_i - \lambda_j)\mathbf{v}_j^T\mathbf{v}_i = 0$$
 
 $\lambda_i \neq \lambda_j$이므로 $\mathbf{v}_i \perp \mathbf{v}_j$
 
@@ -555,8 +555,8 @@ $$\mathbf{q}_i = \frac{\mathbf{v}_i}{\|\mathbf{v}_i\|}$$
 **예제**: $A = \begin{pmatrix} 1 & 2 \\ 2 & 1 \end{pmatrix}$를 대각화하시오.
 
 **1단계**: 고유값 구하기
-$$\det(A - \lambda I) = \det\begin{pmatrix} 1-\lambda & 2 \\ 2 & 1-\lambda \end{pmatrix}$$
-$$= (1-\lambda)^2 - 4 = \lambda^2 - 2\lambda - 3 = (\lambda - 3)(\lambda + 1) = 0$$
+$$\det(A - \lambda I) = \det\begin{pmatrix} 1-\lambda & 2 \\ 2 & 1-\lambda \end{pmatrix} \\
+= (1-\lambda)^2 - 4 = \lambda^2 - 2\lambda - 3 = (\lambda - 3)(\lambda + 1) = 0$$
 
 따라서 $\lambda_1 = 3$, $\lambda_2 = -1$
 
@@ -777,20 +777,20 @@ $$\mathbf{u}_k = \mathbf{v}_k - \sum_{i=1}^{k-1} (\mathbf{v}_k \cdot \mathbf{q}_
 $$\mathbf{v}_1 = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}, \quad \mathbf{v}_2 = \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}, \quad \mathbf{v}_3 = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$$
 
 **Step 1**: 
-$$\mathbf{u}_1 = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}, \quad \|\mathbf{u}_1\| = \sqrt{2}$$
-$$\mathbf{q}_1 = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}$$
+$$\mathbf{u}_1 = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}, \quad \|\mathbf{u}_1\| = \sqrt{2} \\
+\mathbf{q}_1 = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}$$
 
 **Step 2**:
-$$\mathbf{v}_2 \cdot \mathbf{q}_1 = \frac{1}{\sqrt{2}}(1 + 0) = \frac{1}{\sqrt{2}}$$
-$$\mathbf{u}_2 = \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} - \frac{1}{\sqrt{2}} \cdot \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 1/2 \\ 1 \\ -1/2 \end{pmatrix}$$
-$$\|\mathbf{u}_2\| = \sqrt{1/4 + 1 + 1/4} = \sqrt{3/2} = \frac{\sqrt{6}}{2}$$
-$$\mathbf{q}_2 = \frac{1}{\sqrt{6}}\begin{pmatrix} 1 \\ 2 \\ -1 \end{pmatrix}$$
+$$\mathbf{v}_2 \cdot \mathbf{q}_1 = \frac{1}{\sqrt{2}}(1 + 0) = \frac{1}{\sqrt{2}} \\
+\mathbf{u}_2 = \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} - \frac{1}{\sqrt{2}} \cdot \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 1/2 \\ 1 \\ -1/2 \end{pmatrix} \\
+\|\mathbf{u}_2\| = \sqrt{1/4 + 1 + 1/4} = \sqrt{3/2} = \frac{\sqrt{6}}{2} \\
+\mathbf{q}_2 = \frac{1}{\sqrt{6}}\begin{pmatrix} 1 \\ 2 \\ -1 \end{pmatrix}$$
 
 **Step 3**: 
-$$\mathbf{v}_3 \cdot \mathbf{q}_1 = \frac{1}{\sqrt{2}}, \quad \mathbf{v}_3 \cdot \mathbf{q}_2 = \frac{1}{\sqrt{6}}$$
-$$\mathbf{u}_3 = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} - \frac{1}{\sqrt{2}} \cdot \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} - \frac{1}{\sqrt{6}} \cdot \frac{1}{\sqrt{6}}\begin{pmatrix} 1 \\ 2 \\ -1 \end{pmatrix}$$
-$$= \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} - \begin{pmatrix} 1/2 \\ 0 \\ 1/2 \end{pmatrix} - \begin{pmatrix} 1/6 \\ 1/3 \\ -1/6 \end{pmatrix} = \begin{pmatrix} -2/3 \\ 2/3 \\ 2/3 \end{pmatrix}$$
-$$\mathbf{q}_3 = \frac{1}{\sqrt{3}}\begin{pmatrix} -1 \\ 1 \\ 1 \end{pmatrix}$$
+$$\mathbf{v}_3 \cdot \mathbf{q}_1 = \frac{1}{\sqrt{2}}, \quad \mathbf{v}_3 \cdot \mathbf{q}_2 = \frac{1}{\sqrt{6}} \\
+\mathbf{u}_3 = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} - \frac{1}{\sqrt{2}} \cdot \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} - \frac{1}{\sqrt{6}} \cdot \frac{1}{\sqrt{6}}\begin{pmatrix} 1 \\ 2 \\ -1 \end{pmatrix} \\
+= \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} - \begin{pmatrix} 1/2 \\ 0 \\ 1/2 \end{pmatrix} - \begin{pmatrix} 1/6 \\ 1/3 \\ -1/6 \end{pmatrix} = \begin{pmatrix} -2/3 \\ 2/3 \\ 2/3 \end{pmatrix} \\
+\mathbf{q}_3 = \frac{1}{\sqrt{3}}\begin{pmatrix} -1 \\ 1 \\ 1 \end{pmatrix}$$
 
 **응용**  
 **(1) QR 분해**
@@ -1040,8 +1040,7 @@ $x \in \text{range}(P)$이면 $Px = x$
 **성질 2: 직교성**  
 모든 $x$에 대해 $(x - Px) \perp \text{range}(P)$
 >**증명**: $y \in \text{range}(P)$이면 $y = Pz$. 따라서:
->$$(x - Px)^T y = (x - Px)^T Pz = x^TPz - (Px)^TPz = x^TPz - x^TP^TPz$$
->$P = P^T$이므로 $= x^TPz - x^TPz = 0$
+>$$(x - Px)^T y = (x - Px)^T Pz = x^TPz - x^TP^TPz = x^TPz - x^TPz = 0$$
 
 **성질 3: 거리 최소성**  
 $\|x - Px\| = \min_{y \in \text{range}(P)} \|x - y\|$
@@ -1115,6 +1114,25 @@ $$P_X = X(X^T X)^{-1}X^T$$
 * $\text{range}(P_X) = \text{Col}(X)$ (X의 열공간)
 * $\text{null}(P_X) = \text{Col}(X)^\perp$ (X의 열공간의 직교여공간)
 
+### 증명
+정사영행렬 $P_X = X(X^TX)^{-1}X^T$의 유도
+
+**Step 1**: 정사영의 정의
+$$\hat{y} \in \text{Col}(X), \quad (y - \hat{y}) \perp \text{Col}(X)$$
+
+**Step 2**: 선형결합 표현 및 직교 조건
+$$\hat{y} = X\beta \\
+X^T(y - X\beta) = 0$$
+- $\beta$: 열 최대계수 행렬 $X$의 열벡터들의 선형결합 계수 벡터
+
+**Step 3**: 정규방정식 풀이
+$$X^TXβ = X^Ty \\
+\beta = (X^TX)^{-1}X^Ty \quad (\text{단, } X \text{는 열최대계수})$$
+
+**Step 4**: 정사영행렬 도출
+$$\hat{y} = X(X^TX)^{-1}X^Ty \\
+\therefore P_X = X(X^TX)^{-1}X^T$$
+
 ### 증명: 정사영행렬이 열벡터공간으로의 정사영을 수행함
 >$\Pi = X(X^TX)^{-1}X^T$가 $X$의 열벡터공간 $\text{Col}(X)$로의 정사영행렬임을 보이기 위해서는 다음 두 가지를 증명해야 한다:
 >
@@ -1154,7 +1172,6 @@ $$P_X = X(X^T X)^{-1}X^T$$
 >- 모든 $y \notin \text{Col}(X)$에 대해 $\Pi y \in \text{Col}(X)$이며, $\Pi y = 0$은 $y \in \text{Col}(X)^\perp$일 때만 성립
 >- 직교성: $(x - \Pi x) \perp \text{Col}(X)$ (잔차는 직교)
 
-TODO: 
 #### 직교여공간 (Orthogonal Complement)
 벡터공간 $V \subseteq \mathbb{R}^n$의 **직교여공간**:
 $$V^\perp = \{x \in \mathbb{R}^n : x^T v = 0 \text{ for all } v \in V\}$$
@@ -1168,79 +1185,69 @@ $$V^\perp = \{x \in \mathbb{R}^n : x^T v = 0 \text{ for all } v \in V\}$$
 - $\text{Col}(A) \perp \text{null}(A^T)$ (열공간과 영공간(좌영공간)의 직교성)
 - $\text{Row}(A) \perp \text{null}(A)$ (행공간과 영공간의 직교성)
 
-#### 부분공간 연관 관계
+**부분공간 연관 관계**  
 행렬 $A$ ($m \times n$)에 대해:
-
-$$\mathbb{R}^n = \text{Col}(A^T) \oplus \text{null}(A) = \text{Row}(A) \oplus \text{null}(A)$$
-$$\mathbb{R}^m = \text{Col}(A) \oplus \text{null}(A^T)$$
+$$\mathbb{R}^n = \text{Col}(A^T) \oplus \text{null}(A) = \text{Row}(A) \oplus \text{null}(A) \\
+\mathbb{R}^m = \text{Col}(A) \oplus \text{null}(A^T)$$
 
 ### 열벡터공간의 직교 분해 (Orthogonal Decomposition)
-분할 정사영행렬 (Partitioned Projection Matrix)  
-$X$가 $n \times k$ 행렬이고 $\text{rank}(X) = k$일 때, 다음과 같이 분할한다:
-$$X = (X_0 \mid X_1)$$
+분할 정사영행렬 (Partitioned Projection Matrix) $X$가 $n \times k$ 행렬이고 $\text{rank}(X) = k$일 때,  
+다음과 같이 분할한다: $X = (X_0 \mid X_1)$
 - $X_0$: $n \times r$ 열 최대계수 행렬 ($r < k$)
 - $X_1$: $n \times (k-r)$ 행렬
 
-### 주요 정의
-
-**전체 정사영행렬**:
+**용어: 전체 정사영행렬**:
 $$\Pi_{0,1} = X(X^TX)^{-1}X^T$$
-
-**$X_0$로의 정사영행렬**:
+**용어: $X_0$로의 정사영행렬**:
 $$\Pi_0 = X_0(X_0^TX_0)^{-1}X_0^T$$
-
-**$X_0$에 직교하는 성분**:
+**용어: $X_0$에 직교하는 성분**:
 $$X_{1\mid0} = (I - \Pi_0)X_1$$
-
-**$X_{1\mid0}$의 열공간으로의 정사영행렬**:
+**용어: $X_{1\mid0}$의 열공간으로의 정사영행렬**:
 $$\Pi_{1\mid 0} = X_{1\mid0}(X_{1\mid0}^TX_{1\mid0})^{-}X_{1\mid0}^T$$
-
 여기서 $(·)^-$는 일반화역행렬(generalized inverse)를 나타낸다.
 
-### 주요 성질
-
-#### 성질 1: 열공간의 동치성
-$$\text{Col}(X_0, X_1) = \text{Col}(X_0, X_{1\mid0})$$
+**성질 1: 열공간의 동치성**  
+$$\text{Col}((X_0, X_1)) = \text{Col}((X_0, X_{1\mid0}))$$
 
 >**증명**:
->$Y = (y_1, \ldots, y_n)^T \in \text{Col}(X_0, X_1)$이면 어떤 벡터 $\beta_0, \beta_1$에 대해:
->$$Y = X_0\beta_0 + X_1\beta_1$$
->$X_{1\mid0} = (I - \Pi_0)X_1$이므로:
->$$Y = X_0\beta_0 + X_1\beta_1 = \Pi_0 X_0\beta_0 + (I - \Pi_0)X_0\beta_0 + X_1\beta_1$$
->$(\Pi_0 X_0\beta_0 + (I - \Pi_0)X_0\beta_0)$의 첫 번째 항은 $\Pi_0 X_0 = X_0(X_0^TX_0)^{-1}X_0^T X_0 = X_0$이므로:
->$$Y = X_0\beta_0 + (I - \Pi_0)[X_0\beta_0 + X_1\beta_1]$$
+>**(1) $\text{Col}(X_0, X_1) \subseteq \text{Col}(X_0, X_{1\mid0})$ 증명**
 >
->$X_0\beta_0 \in \text{Col}(X_0)$이므로 $(I - \Pi_0)X_0\beta_0 = 0$. 따라서:
->$$Y = X_0\beta_0 + (I - \Pi_0)X_1\beta_1 = X_0\beta_0 + X_{1\mid0}\beta_1$$
->따라서 $Y \in \text{Col}(X_0, X_{1\mid0})$. 반대 방향도 마찬가지로 성립한다.
+>$Y \in \text{Col}(X_0, X_1)$이면 어떤 벡터 $\beta_0, \beta_1$에 대해:
+>$$Y = X_0\beta_0 + X_1\beta_1$$
+>
+>이를 다음과 같이 다시 쓸 수 있다:
+>$$Y = X_0\beta_0 + \Pi_0 X_1\beta_1 + (I - \Pi_0)X_1\beta_1$$
+>$$= X_0\beta_0 + X_0(X_0^TX_0)^{-1}X_0^T X_1\beta_1 + (I - \Pi_0)X_1\beta_1$$
+>$$= X_0[\beta_0 + (X_0^TX_0)^{-1}X_0^T X_1\beta_1] + X_{1\mid0}\beta_1$$
+>
+>첫 번째 항은 $\text{Col}(X_0)$에 속하고, 두 번째 항은 $\text{Col}(X_{1\mid0})$에 속하므로:
+>$$Y \in \text{Col}(X_0, X_{1\mid0})$$
+>
+>**(2) $\text{Col}(X_0, X_{1\mid0}) \subseteq \text{Col}(X_0, X_1)$ 증명**
+>
+>$X_{1\mid0} = (I - \Pi_0)X_1$이고 $(I - \Pi_0)$는 멱등행렬이므로:
+>$$Y = X_0\alpha + X_{1\mid0}\beta = X_0\alpha + (I - \Pi_0)X_1\beta \in \text{Col}(X_0, X_1)$$
+>
+>따라서 두 열공간이 같다: $\text{Col}(X_0, X_1) = \text{Col}(X_0, X_{1\mid0})$
 
-#### 성질 2: 직교여공간 분해
-$$\text{Col}(X_0, X_{1\mid0})^\perp = \text{Col}(X_0)^\perp \cap \text{Col}(X)^\perp$$
-
-더 정확히, $X_0$의 열공간에 직교하는 $(X_0, X_1)$의 열공간 내의 모든 벡터는 $X_{1\mid0}$의 열공간에 속한다.
-
-**기하학적 의미**:
+**성질 2: 직교여공간 분해**  
+- $(X_0, X_1)$의 열공간은 $X_0$의 열공간과 $X_{1\mid0}$의 열공간의 직합(orthogonal direct sum)으로 표현된다.
 $$\text{Col}(X_0, X_1) = \text{Col}(X_0) \oplus \text{Col}(X_{1\mid0})$$
 
-즉, $(X_0, X_1)$의 열공간은 $X_0$의 열공간과 $X_{1\mid0}$의 열공간의 직합(orthogonal direct sum)으로 표현된다.
-
-#### 성질 3: 정사영행렬의 분해
+**성질 3: 정사영행렬의 분해**  
 $$\Pi_{0,1} = \Pi_0 + \Pi_{1\mid0} \\ \Pi_0 \Pi_{1\mid0} = 0$$
 >**증명**:
+>성질1, 2로부터 자명하지만, 수식으로 증명하면 아래와 같다.  
 >분할된 정사영행렬의 성질을 이용한다. $\Pi_{0,1}$를 계산하기 위해, $(X_0, X_1)$을 블록 형태로 다루면:
 >
 >$$X^TX = \begin{pmatrix} X_0^TX_0 & X_0^TX_1 \\ X_1^TX_0 & X_1^TX_1 \end{pmatrix}$$
 >
 >역행렬은 (슈어 보수행렬 공식 사용):
 >$$(X^TX)^{-1} = \begin{pmatrix} (X_0^TX_0)^{-1} + (X_0^TX_0)^{-1}X_0^TX_1S^{-1}X_1^TX_0(X_0^TX_0)^{-1} & -(X_0^TX_0)^{-1}X_0^TX_1S^{-1} \\ -S^{-1}X_1^TX_0(X_0^TX_0)^{-1} & S^{-1} \end{pmatrix}$$
->
->여기서 $S = X_{1\mid0}^TX_{1\mid0}$는 슈어 보수행렬이다.
->
+>여기서 $S = X_{1\mid0}^TX_{1\mid0}$는 슈어 보수행렬이다.  
 >따라서:
->$$\Pi_{0,1} = \begin{pmatrix} X_0 & X_1 \end{pmatrix}(X^TX)^{-1}\begin{pmatrix} X_0^T \\ X_1^T \end{pmatrix}$$
->
->계산 결과:
->$$\Pi_{0,1} = X_0(X_0^TX_0)^{-1}X_0^T + (I - \Pi_0)X_1[(I - \Pi_0)X_1]^T(I - \Pi_0)X_1]^{-}(I - \Pi_0)X_1^T$$
+>$$\Pi_{0,1} = \begin{pmatrix} X_0 & X_1 \end{pmatrix}(X^TX)^{-1}\begin{pmatrix} X_0^T \\ X_1^T \end{pmatrix} \\
+>= X_0(X_0^TX_0)^{-1}X_0^T + (I - \Pi_0)X_1[(I - \Pi_0)X_1]^T(I - \Pi_0)X_1]^{-}(I - \Pi_0)X_1^T$$
 >$$= \Pi_0 + \Pi_{1\mid0}$$
 >
 >직교성:
@@ -1264,56 +1271,129 @@ $X_0$의 효과를 제거한 후 $X_1$과 $Y$의 상관을 구할 때:
 $$r_{\text{partial}} = \frac{\text{Cov}[(I - \Pi_0)Y, (I - \Pi_0)X_1]}{\sqrt{\text{Var}[(I - \Pi_0)Y] \cdot \text{Var}[(I - \Pi_0)X_1]}}$$
 
 
-### 정사영의 직교 분해
-분해 정리
+### 대칭 멱등행렬의 동등 조건
+$n \times n$ 실수 대칭행렬 $A, B$에 대해 다음 세 조건은 동등하다:
+1. $A, B$가 멱등행렬이고 $AB = 0$
+2. $A+B$가 멱등행렬이고 $\text{rank}(A+B) = \text{rank}(A) + \text{rank}(B)$
+3. $A+B, A$가 멱등행렬이고 $B$는 음아닌 정부호 행렬
 
-정사영행렬 $P_X$에 대해:
+#### 증명: (1) ⟹ (2)
+**가정**: $A^2 = A$, $B^2 = B$, $AB = 0$
 
-$$\mathbb{R}^m = \text{Col}(P_X) \oplus \text{Col}(I - P_X)$$
+$(A+B)^2 = A^2 + AB + BA + B^2$
 
-즉, $\mathbb{R}^m$은 두 개의 직교하는 부분공간으로 분해된다:
-- $\text{Col}(P_X) = \text{Col}(X)$ (사영 공간)
-- $\text{Col}(I - P_X) = \text{Col}(X)^\perp$ (직교 여공간)
+$AB = 0$이고 $A, B$가 대칭이므로 $BA = (AB)^T = 0$
 
-#### 벡터의 정사영 분해
-임의의 벡터 $y \in \mathbb{R}^m$:
+따라서:
+$$(A+B)^2 = A + B$$
 
-$$y = \underbrace{P_X y}_{\text{사영}} + \underbrace{(I - P_X)y}_{\text{직교성분}}$$
+즉, $A+B$는 멱등행렬이다.
 
-두 성분의 성질:
-1. $P_X y \in \text{Col}(X)$
-2. $(I - P_X)y \in \text{Col}(X)^\perp$
-3. $[P_X y]^T[(I - P_X)y] = 0$
-4. $\|y\|^2 = \|P_X y\|^2 + \|(I - P_X)y\|^2$ (피타고라스 정리)
+**계수 조건 증명**:
 
-#### 예제: 최소제곱 문제에서의 분해
-회귀 문제에서 $y = X\beta + e$라 할 때:
+$A$가 멱등행렬이면 $\text{rank}(A) = \text{tr}(A)$ (멱등행렬의 성질)  
+마찬가지로 $\text{rank}(B) = \text{tr}(B)$  
+$A+B$도 멱등이므로:
+$$\text{rank}(A+B) = \text{tr}(A+B) = \text{tr}(A) + \text{tr}(B) = \text{rank}(A) + \text{rank}(B)$$
 
-- $\hat{y} = P_X y = X\hat{\beta}$ (적합값)
-- $e = (I - P_X)y$ (잔차)
-- $\|y\|^2 = \|X\hat{\beta}\|^2 + \|e\|^2$ (변량 분해)
+#### 증명: (2) ⟹ (3)
+**가정**: $(A+B)^2 = A+B$, $\text{rank}(A+B) = \text{rank}(A) + \text{rank}(B)$
 
-#### 다중 부분공간의 직교 분해
-$V_1, V_2, \ldots, V_k$가 서로 직교하는 부분공간이고 $\mathbb{R}^n = V_1 \oplus V_2 \oplus \cdots \oplus V_k$일 때:
+$(A+B)^2 = A^2 + AB + BA + B^2 = A+B$  
+$A, B$가 대칭이므로:
+$$A^2 + AB + BA + B^2 = A + B \\
+A^2 - A + B^2 - B + AB + AB = 0 \\
+A(A-I) + B(B-I) + 2AB = 0 \quad \cdots (*)$$
 
-임의의 $x \in \mathbb{R}^n$:
-$$x = \sum_{i=1}^k P_{V_i} x$$
+멱등행렬 $A$는 고유값이 0 또는 1이므로:
+$$A = QA_D Q^T, \quad A_D = \text{diag}(I_r, 0)$$
+(단, $r = \text{rank}(A)$, $Q$는 직교행렬)
 
-여기서 $P_{V_i}$는 $V_i$로의 정사영행렬.
+계수 조건 $\text{rank}(A+B) = \text{rank}(A) + \text{rank}(B)$는 $A$와 $B$의 치역이 직교함을 의미한다:
+$$\text{range}(B) \subseteq \text{null}(A) \subseteq \text{range}(I-A)$$
 
-**정사영 행렬들의 성질**:
-- $P_{V_i}^2 = P_{V_i}$
-- $P_{V_i}^T = P_{V_i}$
-- $P_{V_i} P_{V_j} = 0$ for $i \neq j$ (직교성)
-- $\sum_{i=1}^k P_{V_i} = I_n$
+$AB = 0$이므로 $(*)$에서:
+$$A(A-I) + B(B-I) = 0$$
 
-#### 응용: 변량 분해 (ANOVA 유형)
-총 변량을 직교하는 성분들로 분해:
+$A-I$는 고유값이 -1 또는 0인 행렬이고, $I-A$는 멱등이다.
 
-$$\sum \|y_i\|^2 = \sum \|\hat{y}_i\|^2 + \sum \|e_i\|^2$$
+두 항이 합쳐져 0이 되려면, $B(B-I) = 0$ (∵ $A(A-I) = -A(I-A)$이고 치역이 직교)
 
-이는 정사영의 직교 분해를 이용한 것으로, 각 항이 서로 독립적인 정보를 나타낸다.
+$B$가 대칭이고 $B(B-I) = B^2 - B = 0$이므로 $B^2 = B$ (멱등성)
 
+$(A+B)^2 = A+B$와 $A^2 = A, B^2 = B$로부터:
+$$AB + BA = 0$$
+$A, B$가 대칭이므로 $2AB = 0$, 즉 $AB = 0$
+
+**$B$가 음아닌 정부호임 증명**:  
+대칭멱등행렬 $B$는 고유값이 0 또는 1이므로 모든 고유값이 음아닌 실수이다.  
+따라서 $B$는 음아닌 정부호 행렬이다.  
+$A+B$가 멱등이면서 $A, B$가 모두 멱등이므로:(대각화 후 합)
+$$A+B = A_D + B_D$$
+
+#### 증명: (3) ⟹ (1)
+**가정**: $(A+B)^2 = A+B$, $A^2 = A$, $B \succeq 0$
+
+$(A+B)^2 = A^2 + AB + BA + B^2 = A + B$  
+$A^2 = A$이므로:
+$$AB + BA + B^2 = B$$
+$A, B$가 대칭이므로:
+$$2AB + B^2 = B \\
+B^2 - B + 2AB = 0 \quad \cdots (**)$$
+$B \succeq 0$이고 대칭이므로 $B = Q\Lambda Q^T$ (단, $\Lambda = \text{diag}(\lambda_1, \ldots, \lambda_n)$, $\lambda_i \geq 0$)  
+멱등행렬 $A$는 $A = Q_A \text{diag}(I_r, 0) Q_A^T$ 형태
+
+$(**)$에서:
+$$B^2 - B + 2AB = 0$$
+
+**Step 1: $B$의 고유값 분석**  
+$B \succeq 0$이고 대칭이므로 $B = Q\Lambda Q^T$ (단, $\Lambda = \text{diag}(\lambda_1, \ldots, \lambda_n)$, $\lambda_i \geq 0$)
+
+이를 $(**)$에 대입하면:
+$$Q\Lambda^2 Q^T - Q\Lambda Q^T + 2AQ\Lambda Q^T = 0$$
+
+양쪽에 $Q^T$를 우측에서 곱하면:
+$$\Lambda^2 - \Lambda + 2Q^TAQ\Lambda = 0$$
+
+**Step 2: 각 고유값에 대한 조건**  
+$\tilde{A} = Q^TAQ$라 하면:
+$$\Lambda^2 - \Lambda + 2\tilde{A}\Lambda = 0$$
+
+$i$번째 고유값 $\lambda_i$에 대해:
+$$\lambda_i^2 - \lambda_i + 2(\tilde{A}\Lambda)_{ii} = 0$$
+
+$(\tilde{A}\Lambda)_{ii} = \sum_{j} \tilde{a}_{ij}\lambda_j$이므로:
+$$\lambda_i^2 - \lambda_i + 2\sum_{j} \tilde{a}_{ij}\lambda_j = 0$$
+
+**Step 3: 고유값의 제약 조건**  
+$\lambda_i = 0$인 경우:
+$$0 - 0 + 2\sum_{j \neq i} \tilde{a}_{ij}\lambda_j = 0$$
+
+$\lambda_i = 1$인 경우:
+$$1 - 1 + 2\sum_{j} \tilde{a}_{ij}\lambda_j = 0\\
+\sum_{j} \tilde{a}_{ij}\lambda_j = 0$$
+
+$0 < \lambda_i < 1$인 경우는 존재 불가:
+$$\lambda_i^2 - \lambda_i = -2\sum_{j} \tilde{a}_{ij}\lambda_j$$
+
+좌변: $\lambda_i(\lambda_i - 1) < 0$ (∵ $0 < \lambda_i < 1$)  
+우변: $-2\sum_{j} \tilde{a}_{ij}\lambda_j$
+
+그런데 $(A+B)^2 = A+B$이고 $A^2 = A$로부터 분석하면, $A$는 멱등이므로 고유값이 0 또는 1이다.  
+따라서 $\tilde{A}$도 고유값이 0 또는 1이므로 우변의 부호가 제약되어, 이 경우는 불가능하다.
+
+**Step 4: 결론**  
+위 분석으로부터 $B$는 오직 고유값 0과 1만 가질 수 있다.
+
+따라서 $B^2 = B$ (멱등성)
+
+$(A+B)^2 = A+B$와 $A^2 = A, B^2 = B$로부터:
+$$A^2 + AB + BA + B^2 = A + B\\
+A + AB + BA + B = A + B\\
+AB + BA = 0$$
+$A, B$가 대칭이므로 $AB = BA$이고, $2AB = 0$에서 **$AB = 0$**
+
+∴ $A, B$는 멱등행렬이고 $AB = 0$
 
 
 # 6. 행렬미적분 (Matrix Calculus)
