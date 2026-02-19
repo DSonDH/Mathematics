@@ -1,0 +1,7 @@
+# Chapter 13 편의추정 (Biased Estimation)
+13.1 다중공선성의 문제 (Multicollinearity)
+13.2 능형회귀 (Ridge Regression)
+13.3 주성분회귀 (Principal Component Regression, PCR)
+13.4 부분최소제곱 회귀 (Partial Least Squares Regression, PLS)
+13.5 제한회귀 (Restricted Regression)
+13.6 R 실습 (R Practice)

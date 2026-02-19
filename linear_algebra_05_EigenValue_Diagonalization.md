@@ -349,6 +349,30 @@ $$\mathbf{v}_2^T\mathbf{v}_1 = 0$$
 **보조정리:**  
 $n \times n$ 행렬 $B$에 대하여, $B\mathbf{x} = \mathbf{0}$의 해공간에서 서로 직교하는 기저를 항상 찾을 수 있다.
 
+### 닮음과 직교변환의 고유치 불변성
+**정리:**
+$A$를 $n \times n$ 행렬, $C$를 $n \times n$ 가역행렬이라 하자.
+
+**(1) 닮음 변환에서의 고유치 불변성:**
+행렬 $A$와 $CAC^{-1}$은 같은 고유치를 갖는다.
+
+**증명:**
+$\det(\lambda I - CAC^{-1}) = \det(C(\lambda I - A)C^{-1}) = \det(C)\det(\lambda I - A)\det(C^{-1}) = \det(\lambda I - A)$
+
+따라서 $A$와 $CAC^{-1}$의 고유다항식이 동일하므로, 고유치도 같다. $\square$
+
+**(2) 직교변환에서의 고유치 불변성:**
+$C$가 직교행렬(orthogonal matrix)이면, 즉 $CC^T = C^TC = I$를 만족하면, 행렬 $A$와 $CAC^T$는 같은 고유치를 갖는다.
+
+**증명:**
+직교행렬 $C$에 대해 $C^{-1} = C^T$이므로
+$$\det(\lambda I - CAC^T) = \det(\lambda I - CAC^{-1}) = \det(\lambda I - A)$$
+
+따라서 $A$와 $CAC^T$의 고유다항식이 동일하고, 고유치도 같다. $\square$
+
+**참고:**
+이 성질은 대칭행렬의 직교 대각화 $A = P\Lambda P^T$에서 $P$가 직교행렬이므로, $A$와 대각행렬 $\Lambda$가 같은 고유치를 갖는다는 사실을 설명한다.
+
 ### 스펙트럼 분해 정리 (Spectral Decomposition Theorem)
 **정리 4 (스펙트럼 분해):**  
 $A$를 $n \times n$ 차 대칭행렬이라 하자. 그러면 다음 식을 만족하는 직교행렬 $P$가 존재한다:
@@ -408,6 +432,14 @@ $$\text{rank}(A) = \text{rank}(\Lambda) = \text{(0이 아닌 대각원소의 개
 - 비음정치 행렬: 모든 고유치 ≥ 0 ⇔ $\text{rank}(A) = $ (양의 고유치 개수)
 - 음정치 행렬: 모든 고유치 < 0
 - 부정치 행렬: 양수와 음수 고유치가 모두 존재
+
+
+### LU분해 (어디에 넣을지 고민...)
+응용: auto regressive model, 중회귀분석
+
+### QR분해 (어디에 넣을지 고민...)
+응용: 고유값 계산, 선형회귀분석, 최소제곱문제
+
 
 ## (7) 정규행렬 (Normal Matrix)
 **정의:**  
@@ -589,6 +621,7 @@ $$A = P\begin{pmatrix} D & 0 \end{pmatrix}Q^T$$
 - $0$은 $m \times (n-m)$ 영행렬이다.
 - $D$의 양의 대각원소들은 $A^TA$ (또는 $AA^T$)의 양의 고유치들의 양의 제곱근이며, 이들을 $A$의 **특이치(singular value)** 라 한다.
 - $m = n$인 경우, $P^TAQ = D$이다.
+- $A$가 대칭인 경우 $P = Q$이고, $D$의 대각원소들은 $A$의 고유치들의 절댓값과 같다.
 
 **관례:**
 - 특이치는 보통 크기 순서대로 배열한다: $d_1 \geq d_2 \geq \cdots \geq d_r > 0$
@@ -613,6 +646,103 @@ $$A = U\Sigma V^T$$
 - $U$: $m \times m$ 직교행렬 (좌특이벡터들)
 - $\Sigma$: $m \times n$ 직사각 대각행렬 (특이치들)
 - $V$: $n \times n$ 직교행렬 (우특이벡터들)
+
+## 이차형식 (Quadratic Form)
+벡터 $x$와 대칭행렬 $A$에 대한 스칼라 함수
+$$Q(x) = x^TAx = \sum_{i=1}^{n}\sum_{j=1}^{n} a_{ij}x_ix_j$$
+
+### 이차형식의 표현
+대칭행렬 $A = (a_{ij})$에 대해:
+$$x^TAx = \sum_{i=1}^{n} a_{ii}x_i^2 + 2\sum_{i<j} a_{ij}x_ix_j$$
+
+### 이차형식의 미분
+$$
+\frac{\partial (x^TAx)}{\partial x} = (A + A^T)x = 2Ax$$ 
+(단, $A$가 대칭행렬일 때)
+
+## 양정치행렬 (Positive Definite Matrix)
+정의: 대칭행렬 $A$에 대해 모든 $x \neq 0$에 대해 $x^TAx > 0$ 이면,
+* 즉 x가 0일때만 0이 되면,
+* 이런 이차형식을 양정치(positive definite)이라 한다
+* 이때의 A를 양정치행렬(positive definite matrix)라 한다
+* $>$가 아니라 $\geq$면 positive semidefinite(양반정치)이라 한다. positive definite이 아니라
+* 양정치던 양반정치던, nonnegative definite (n.n.d, 정부호)라 한다.
+
+**참고) 이차형식과 대칭행렬의 관계**
+
+임의의 이차형식은 항상 대칭행렬로 나타낼 수 있다.
+
+일반적인 행렬 $B$에 대해 $x^TBx$가 주어졌을 때, 이를 대칭행렬로 변환할 수 있다:
+$$x^TBx = x^T\left(\frac{B + B^T}{2}\right)x$$
+
+**증명**:  
+$x^TBx$는 스칼라이므로 전치해도 같다:
+$$x^TBx = (x^TBx)^T = x^TB^Tx$$
+따라서:
+$$x^TBx = \frac{1}{2}(x^TBx + x^TB^Tx) = \frac{1}{2}x^T(B + B^T)x = x^T\left(\frac{B + B^T}{2}\right)x$$
+여기서 $A = \frac{B + B^T}{2}$는 대칭행렬이다:
+$$A^T = \left(\frac{B + B^T}{2}\right)^T = \frac{B^T + B}{2} = A$$
+따라서 모든 이차형식은 대칭행렬을 이용해 표현할 수 있으며, 이차형식을 다룰 때는 항상 대칭행렬을 사용하는 것이 표준이다.
+> 💡 **결론**: 이차형식을 표현할 때는 항상 대칭행렬을 사용하는 것이 표준이며, 비대칭 행렬로 주어진 경우에도 대칭화하여 다룬다.
+
+### 관련 개념
+* **양반정치 (positive semi-definite)**: 모든 $x$에 대해 $x^TAx \geq 0$
+* **음정치 (negative definite)**: 모든 $x \neq 0$에 대해 $x^TAx < 0$
+* **음반정치 (negative semi-definite)**: 모든 $x$에 대해 $x^TAx \leq 0$
+* **부정치 (indefinite)**: 위의 어느 것에도 해당하지 않음
+
+### 양정치행렬의 판정
+대칭행렬 $A$가 양정치가 되기 위한 필요충분조건:
+* **모든 고유값이 양수이다**  
+  **증명**: 대칭행렬은 대각화 가능하고, $A = Q\Lambda Q^T$ (스펙트럼 정리)에서 $\Lambda = \text{diag}(\lambda_1, \ldots, \lambda_n)$이고 $Q$는 직교행렬이면, $x^TAx = x^TQ\Lambda Q^Tx = y^T\Lambda y = \sum \lambda_i y_i^2$ (여기서 $y = Q^Tx$는 치환)이다. 모든 $x \neq 0$에 대해 $x^TAx > 0$ $\Leftrightarrow$ 모든 $\lambda_i > 0$
+
+* **모든 주 소행렬식(leading principal minor)이 양수이다**   
+  **증명**: $k \times k$ 좌상단 부분행렬 $A_k$는 양정치이고, 귀납적으로 $\det(A_k) > 0$임을 보인다. (Sylvester 판정법)
+
+* **$A = B^TB$로 표현될 때 $B$가 열 최대계수 행렬이다**   
+  **증명**: $A$가 양정치이면 $A = Q\Lambda Q^T$에서 $B = Q\Lambda^{1/2}$로 놓으면 $B^TB = \Lambda^{1/2}Q^TQ\Lambda^{1/2} = A$. $B$의 계수는 $\Lambda^{1/2}$의 0이 아닌 대각원소 개수이며, 모든 $\lambda_i > 0$이므로 $\text{rank}(B) = n$ (열 최대계수)
+
+* **$\Sigma = \Sigma^{1/2} (\Sigma^{1/2})^T$ 인 실수가 원소인 대칭행렬 $\Sigma^{1/2}$가 존재한다**    
+  **증명**: 위의 세 번째 조건과 동일하다. $\Sigma^{1/2}$는 $A$의 제곱근 행렬이고, 대칭인 양정치 행렬의 제곱근 역시 대칭 양정치이다.
+
+### 양정치행렬의 성질
+* 양정치행렬은 항상 정칙행렬이다 ($\det(A) > 0$)
+* 양정치행렬의 역행렬도 양정치이다
+* 양정치행렬의 고유치는 모두 양수이다
+  - 음정치행렬의 고유치는 모두 음수이다
+* 양정치행렬의 대각성분은 모두 양수이다
+  - 음정치행렬의 대각성분은 모두 음수이다
+* $A$, $B$가 양정치이면 $A + B$도 양정치이다
+* $A$가 양정치이고 $C$가 열 최대계수 행렬이면 $C^TAC$도 양정치이다
+* 대칭행렬 A가 양정치행렬이 되기위한 필요충분조건은 정칙행렬 C가 존재하며 $A = C^TC$로 표현될 수 있는 것이다. (위의 세 번째 조건과 동일)
+* 어떤 정칙행렬 $C$에 대해 행렬$A$가 양정치행렬이면 $C^TAC$도 양정치행렬이다. (위의 네 번째 조건과 동일)
+  - $A$가 양반정치행렬이면 $C^TAC$도 양반정치행렬이다.
+* **Sylvester 판정법 (선행 주 소행렬식 판정법):**
+  
+  $n \times n$ 대칭행렬 $A$의 선행 주 소행렬식(leading principal minor)을 다음과 같이 정의한다:
+  $$D_k = \det(A_k), \quad k = 1, 2, \ldots, n$$
+  여기서 $A_k$는 $A$의 좌상단 $k \times k$ 부분행렬이다.
+  
+  **양정치 판정:**
+  $$D_1 > 0, D_2 > 0, \ldots, D_n > 0 \quad \Leftrightarrow \quad A \text{는 양정치행렬}$$
+  
+  **음정치 판정:**
+  $$D_1 < 0, D_2 > 0, D_3 < 0, \ldots, (-1)^n D_n > 0 \quad \Leftrightarrow \quad A \text{는 음정치행렬}$$
+  (즉, 선행 주 소행렬식의 부호가 교대로 나타나고, $(-1)^n D_n > 0$를 만족)
+
+  **예시:**
+  - $2 \times 2$ 양정치: $a_{11} > 0$이고 $\det(A) > 0$
+  - $2 \times 2$ 음정치: $a_{11} < 0$이고 $\det(A) > 0$
+  - $3 \times 3$ 음정치: $D_1 < 0$, $D_2 > 0$, $D_3 < 0$
+
+  **주의:** 양반정치 또는 음반정치의 판정은 $\geq$ 또는 $\leq$로 판정하며, 하나 이상의 부등호가 등호로 바뀐다.
+
+### 그람 행렬 (Gram Matrix)
+$A = X^TX$ 형태의 행렬을 그람 행렬이라 하며:
+* 항상 양반정치이다
+* $X$가 열 최대계수 행렬이면 양정치이다
+* $XX^T$도 그람 행렬이며, $X^TX$와 같은 양정치성질을 갖는다
+
 
 
 # 3. 중복도(Multiplicity)

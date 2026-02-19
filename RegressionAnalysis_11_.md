@@ -1,0 +1,6 @@
+# Chapter 11 가변수 (Dummy Variables)
+11.1 설명변수로 한 개의 가변수를 갖는 경우 (Single Dummy Variable)
+11.2 설명변수로 여러 개의 가변수를 갖는 경우 (Multiple Dummy Variables)
+11.3 구간별 선형회귀 (Segmented Regression)
+11.4 반응변수가 가변수인 경우 (Binary Response Case)
+11.5 R 실습 (R Practice)

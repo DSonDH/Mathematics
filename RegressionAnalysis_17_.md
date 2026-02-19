@@ -1,0 +1,8 @@
+# Chapter 17 교차검증 (Cross-Validation)
+17.1 들어가기 (Introduction)
+17.2 예측오차 (Prediction Error)
+17.3 하나빼기 교차검증 (Leave-One-Out Cross Validation, LOOCV)
+17.4 K겹 교차검증 (K-Fold Cross Validation)
+17.5 능형회귀의 조절모수 선택 (Tuning Parameter Selection for Ridge)
+17.6 조절모수 선택에서의 1-표준오차 규칙 (One-Standard-Error Rule)
+17.7 R 실습 (R Practice)

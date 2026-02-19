@@ -1,0 +1,6 @@
+# Chapter 18 4차 산업혁명과 빅데이터 (Fourth Industrial Revolution and Big Data)
+18.1 4차 산업혁명 (Fourth Industrial Revolution)
+18.2 빅데이터 (Big Data)
+18.3 빅데이터의 주요 도구 (Major Tools for Big Data)
+18.4 빅데이터를 연구하는 데이터 과학의 발전 (Development of Data Science)
+18.5 빅데이터의 활용 사례들 (Applications of Big Data)

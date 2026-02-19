@@ -1,0 +1,6 @@
+# Chapter 12 분산분석의 응용 (Applications of ANOVA)
+12.1 일원배치법 (One-Way ANOVA)
+12.2 반복이 없는 이원배치법 (Two-Way ANOVA without Replication)
+12.3 반복이 있는 이원배치법 (Two-Way ANOVA with Replication)
+12.4 모수의 재조정법 (Reparameterization)
+12.5 R 실습 (R Practice)

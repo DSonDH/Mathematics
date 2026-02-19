@@ -1,0 +1,6 @@
+# Chapter 14 로지스틱 회귀분석 (Logistic Regression)
+14.1 단순 로지스틱 회귀 (Simple Logistic Regression)
+14.2 로지스틱 모형의 추정 (Estimation of Logistic Model)
+14.3 2×2 분할표의 로지스틱 회귀 (Logistic Regression for 2×2 Tables)
+14.4 로지스틱 모형을 이용한 분류분석 (Classification using Logistic Model)
+14.5 R 실습 (R Practice)

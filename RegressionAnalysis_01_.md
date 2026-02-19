@@ -1,0 +1,11 @@
+# Chapter 1 단순회귀분석 (Simple Linear Regression)
+1.1 서론 (Introduction)
+1.2 회귀분석의 기본개념 (Basic Concepts of Regression Analysis)
+1.3 회귀선의 추정 (Estimation of Regression Line)
+1.4 회귀선의 정도 (Goodness of Fit)
+1.5 상관분석 (Correlation Analysis)
+1.6 분산분석 (Analysis of Variance, ANOVA)
+1.7 원점을 지나는 회귀 (Regression Through the Origin)
+1.8 가중회귀 (Weighted Regression)
+1.9 R 실습 (R Practice)
+

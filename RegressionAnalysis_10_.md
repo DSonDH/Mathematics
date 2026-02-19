@@ -1,0 +1,6 @@
+# Chapter 10 일반화 회귀분석 (Generalized Regression Analysis)
+10.1 일반화최소제곱추정 (Generalized Least Squares, GLS)
+10.2 일반화최소제곱추정량의 특성 (Properties of GLS Estimator)
+10.3 다변량회귀 (Multivariate Regression)
+10.4 자기상관 (Autocorrelation)
+10.5 R 실습 (R Practice)

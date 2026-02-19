@@ -1,0 +1,7 @@
+# Chapter 7 다항회귀 (Polynomial Regression)
+7.1 다항회귀모형 (Polynomial Regression Model)
+7.2 모형의 타당성 (Model Adequacy)
+7.3 직교다항회귀 (Orthogonal Polynomial Regression)
+7.4 조각다항회귀 (Piecewise Polynomial Regression)
+7.5 최소실험계획 (Optimal Experimental Design)
+7.6 R 실습 (R Practice)

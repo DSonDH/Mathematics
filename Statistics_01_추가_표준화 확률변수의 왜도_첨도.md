@@ -1,4 +1,3 @@
-
 ### 6.5 표준화 확률변수의 적률과 누율 (Moments and Cumulants of Standardized Variables)
 
 #### 표준화 확률변수의 정의

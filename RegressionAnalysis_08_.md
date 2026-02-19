@@ -1,0 +1,7 @@
+# Chapter 8 회귀진단 (Regression Diagnostics)
+8.1 기본적인 개념 (Basic Concepts)
+8.2 지렛대점의 검출 (Detection of Leverage Points)
+8.3 이상점 탐색 (Outlier Detection)
+8.4 영향점 탐색 (Influential Points)
+8.5 이상한 관측값 탐지: 지렛대점, 이상점과 영향점 (Detection of Leverage, Outliers, and Influential Points)
+8.6 R 실습 (R Practice)

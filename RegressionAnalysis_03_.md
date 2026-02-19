@@ -1,0 +1,11 @@
+
+# Chapter 3 기초적 회귀분석의 기타 논제 (Additional Topics in Basic Regression)
+3.1 모형의 변환 (Model Transformation)
+3.2 x의 측정오차 (Measurement Error in X)
+3.3 x의 수준 선택 (Choice of Levels of X)
+3.4 두 회귀선의 비교 (Comparison of Two Regression Lines)
+3.5 이차항식의 분포 (Distribution of Quadratic Forms)
+3.6 평균제곱의 기대값 (Expected Mean Squares)
+3.7 반복측정값의 회귀분석 (Regression with Replicated Observations)
+3.8 고차원 회귀에서의 단순 선형회귀 (Simple Linear Regression in Higher Dimensions)
+3.9 R 실습 (R Practice)

@@ -68,7 +68,9 @@ $L : V \to W$가 선형사상이고 $v \in V$일 때,
 
 등등  
 
-# 2. 선형대수학의 기본정리
+# 2. 선형대수학의 기본정리 (추상대수/벡터공간론의 기본정리)
+**유한차원 벡터공간 사이의 선형사상은 기저를 고정하면 행렬과 일대일 대응한다**
+
 $F$-벡터공간 $V,\ W$에 대해
 $V$에서 $W$로의 선형사상들의 집합을
 $\mathcal{L}(V,W)$라 하고,
@@ -87,7 +89,6 @@ $\mathcal{L}(V,W)$라 하고,
 * $g:M_{m\times n}(F)\to \mathcal{L}(V,W)$
 
 * $g(M)=L_M \quad {이때} \big(\,\left[L_M(v)\right]_{B_W}=M\left[v\right]_{B_V}\,\big)$
-
 
 **기호 정의** 
 1. $B_V$는 $V$의 기저, $B_W$는 $W$의 기저
@@ -349,6 +350,32 @@ $$
 
 (차원정리와 대꾸됨!)
 
+## 선형대수학의 기본정리 (Fundamental Theorem of Linear Algebra, Strang 계열)
+
+### (1) 네 부분공간(Four Fundamental Subspaces)
+행렬 $A \in \mathbb{R}^{m \times n}$에 대하여 다음 네 가지 부분공간이 정의된다:
+
+| 부분공간 | 기호 | 정의 | 차원 |
+|---------|------|------|------|
+| **열공간** | $\mathrm{Col}(A)$ | $A$의 열벡터들이 생성하는 $\mathbb{R}^m$의 부분공간 | $\mathrm{rank}(A)$ |
+| **행공간** | $\mathrm{Row}(A)$ | $A^T$의 열공간 = $A$의 행벡터들이 생성하는 $\mathbb{R}^n$의 부분공간 | $\mathrm{rank}(A)$ |
+| **영공간** | $\mathrm{Null}(A)$ | $A\mathbf{x}=\mathbf{0}$의 해공간 | $\mathrm{nullity}(A)$ |
+| **좌영공간** | $\mathrm{Null}(A^T)$ | $A^T\mathbf{y}=\mathbf{0}$의 해공간 | $m - \mathrm{rank}(A)$ |
+
+### (2) 기본정리의 핵심 관계식
+$$
+\begin{align}
+\dim(\mathrm{Col}(A)) + \dim(\mathrm{Null}(A^T)) &= m \\
+\dim(\mathrm{Row}(A)) + \dim(\mathrm{Null}(A)) &= n
+\end{align}
+$$
+
+### (3) 직교 관계 (Orthogonal Complements)
+- $\mathrm{Row}(A) \perp \mathrm{Null}(A)$ 
+- $\mathrm{Col}(A) \perp \mathrm{Null}(A^T)$
+- $\mathrm{Null}(A) = (\mathrm{Row}(A))^\perp$
+- $\mathrm{Null}(A^T) = (\mathrm{Col}(A))^\perp$
+
 
 # rank 
 ## rank(계수)의 정의
@@ -441,8 +468,22 @@ $$
 - $\mathrm{Row}(AB)\subseteq \mathrm{Row}(B)$ 이므로 $\mathrm{rank}(AB)\le \mathrm{rank}(B)$
 
 ### (6) Gram 행렬 / 정규방정식에 자주 쓰는 성질
-- $\mathrm{rank}(A^TA)=\mathrm{rank}(A)$
-- $\mathrm{rank}(AA^T)=\mathrm{rank}(A)$
+- $\mathrm{rank}(A^TA)=\mathrm{rank}(A) = \mathrm{rank}(AA^T)=\mathrm{rank}(A^T)$
+
+**선형방정식의 해의 존재성 (Consistency Condition)**  
+선형방정식 $A\beta = b$가 해를 가지기 위한 필요충분조건은:
+$$\mathrm{rank}(A) = \mathrm{rank}([A|b])$$
+
+**증명 스케치:**
+- $A\beta = b$가 해를 가진다 ⟺ $b \in \mathrm{Col}(A)$
+- $b \in \mathrm{Col}(A)$ ⟺ $b$가 $A$의 열벡터들의 선형결합으로 표현됨
+- 이는 $A$의 열공간과 $[A|b]$의 열공간이 같음을 의미
+- 따라서 $\mathrm{rank}(A) = \mathrm{rank}([A|b])$
+
+**증명**  
+$$\mathrm{rank}(X) = \mathrm{rank}(X^TX) \le \mathrm{rank}([X^TX | X^Ty]) \le \mathrm{rank}(X^T) \\
+\therefore \mathrm{rank}(X^TX) = \mathrm{rank}([X^TX | X^Ty])$$
+가 성립하며, 선형대수 기본정리의 일관성 조건을 만족하여 해 $\hat{\beta}$가 존재함이 보장된다.
 
 ### (7) 특수행렬에서의 rank
 

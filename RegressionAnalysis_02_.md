@@ -1,0 +1,7 @@
+# Chapter 2 단순회귀에 관한 추론 (Inference for Simple Linear Regression)
+2.1 구간추정 (Interval Estimation)
+2.2 가설검정 (Hypothesis Testing)
+2.3 상관계수의 검정 (Test of Correlation Coefficient)
+2.4 모형의 타당성 (Model Adequacy)
+2.5 오차의 자기상관 (Autocorrelation of Errors)
+2.6 R 실습 (R Practice)
