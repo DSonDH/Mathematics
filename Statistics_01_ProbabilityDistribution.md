@@ -1,11 +1,13 @@
+**통계학의 정의**  
+사회, 자연 및 인간 생활의 온갖 현상을 연구하기 위하여 불확실성이 내포된 자료의 수집, 탐색, 분석 및 추정을 통해 의사결정에 필요한 정보획득과 처리방법을 연구하는 학문
+- 확률 이론과 밀접한 관계가 있다
+
 # 확률분포 (Probability Distributions)
 
 ## 1. 확률의 뜻과 성질 (Meaning and Axioms of Probability)
 
 ### 1.1 표본공간과 사건 (Sample Space and Events)
-과학적 실험이나 자연현상 또는 사회현상을 관측할 때,
-가능한 모든 관측 결과들의 집합을 **표본공간**
-(sample space)이라 하고 이를
+과학적 실험이나 자연현상 또는 사회현상을 관측할 때, 가능한 모든 관측 결과들의 집합을 **표본공간**(sample space)이라 하고 이를
 $$S \quad (\text{또는 } \Omega)$$
 로 나타낸다.
 
@@ -120,10 +122,9 @@ $$P : \mathcal E \to [0,1]$$
    $$P(A_1\cup A_2\cup\cdots)
    =P(A_1)+P(A_2)+\cdots$$
 
-### 1.3 확률의 기본 성질 (Basic Properties of Probability)
+### 정리 1.1.1 확률의 (BasicProperties of Probability)
 아래 정리들은 확률의 공리로 유도 가능하다.
 
-#### 정리 1.1.1 (Fundamental Properties of Probability)
 (a) 각 사건 $A$에 대하여
 $$0\le P(A)\le 1,\qquad P(\varnothing)=0$$
 
@@ -1001,7 +1002,7 @@ $$
 ## 5. 누적분포함수와 생성함수 (Distribution and Generating Functions)
 확률밀도함수 외에도 확률분포를 나타내는 방법은 여러 가지가 있다.  
 수열에서 일반항, 유한항까지의 합이 서로를 정해줄 수 있듯이,  
-이산현 확률변수의 경우에 누적 확률과 확률밀도함수는 서로를 정해줄 수 있다.  
+이상형 확률변수의 경우에 누적 확률과 확률밀도함수는 서로를 정해줄 수 있다.  
 
 ### 5.1 누적분포함수 (Cumulative Distribution Function, CDF)
 확률변수 $X$의 누적분포함수(cumulative distribution function, CDF)는 다음과 같이 정의된다.
@@ -1152,7 +1153,7 @@ $$\bigcap_{n=1}^{\infty} B_n = \{X \le x\}$$
 $$\lim_{h \downarrow 0} F(x+h) = \lim_{n \to \infty} P(X \le x + \tfrac{1}{n}) = P(X \le x) = F(x)$$
 
 **(4) 한 점에서의 확률**  
-증가열 $A_n = \{X \le a - \frac{1}{n}\}$에 대해
+감소열 $A_n = \{X \le a - \frac{1}{n}\}$에 대해
 $$\bigcup_{n=1}^{\infty} A_n = \{X < a\}$$
 
 정리 1.1.3(a)에 의해
@@ -1167,19 +1168,26 @@ G(s)=E[s^X]=\sum_{k=0}^{\infty}s^kP(X=k)
 $$
 로 정의된다. 여기서 $|s| \le 1$일 때 이 급수가 수렴한다.
 
-#### 성질
-(a) **확률질량함수 복원**
-$$
-P(X=k)=\frac{G^{(k)}(0)}{k!}, \quad k=0,1,2,\ldots
-$$
+#### 성질 (Properties of PGF)
+(a) **확률질량함수 복원 (PMF Recovery)**  
+$$P(X=k)=\frac{G^{(k)}(0)}{k!}, \quad k=0,1,2,\ldots$$
 
-(b) **적률 계산**
+확률생성함수의 멱급수 전개를 $k$번 미분하면
+$$G(s)=\sum_{k=0}^{\infty}P(X=k)s^k \\
+G^{(k)}(s)=\sum_{j=k}^{\infty}j(j-1)\cdots(j-k+1)P(X=j)s^{j-k}$$
+$s=0$을 대입하면 $j=k$인 항만 남으므로
+$$G^{(k)}(0)=k!P(X=k)$$
+
+(b) **적률 계산**  
 $$
 E[X]=G'(1), \quad \mathrm{Var}(X)=G''(1)+G'(1)-[G'(1)]^2
 $$
 
-(c) **분포 결정성**
+(c) **분포 결정성**  
 $G_X(s)=G_Y(s)$이면 $X$와 $Y$의 분포는 동일하다.
+- 증명: 멱급수의 **유일성(uniqueness of power series)** 활용
+   - 수렴하는 멱급수 $\sum_{k=0}^{\infty} a_k s^k = \sum_{k=0}^{\infty} b_k s^k$이 $|s| < r$ (for some $r > 0$)에서 성립하면, 모든 $k$에 대해 $a_k = b_k$이다.
+   - 확률생성함수는 $|s| \le 1$에서 수렴하므로 이 원리를 적용할 수 있다.
 
 #### 예 1.5.3
 $P(X=k)=(1/2)^k$, $k=1,2,\ldots$ 일 때
@@ -1200,6 +1208,14 @@ G(s)=(1-p)+ps=1-p(1-s)
 $$
 
 ### 5.3 적률생성함수 (Moment Generating Function, MGF)
+
+>**Moment(적률)의 정의**  
+>확률론과 통계학에서 **moment(적률)** 는 확률분포의 특성을 나타내는 수치로, 확률변수의 거듭제곱에 대한 기댓값입니다. 확률변수 $X$의 **$k$차 적률(k-th moment)** 은 다음과 같이 정의됩니다:
+>$$m_k = E[X^k]$$
+>
+>**용어의 유래**  
+>"moment"는 물리학의 **moment(모멘트, 회전력)** 개념에서 비롯되었습니다. 확률분포의 형태와 흩어짐을 나타내는 방식이 물리학의 질량 분포와 유사하기 때문입니다.
+
 확률생성함수 $G(s)$에서 $s>0$이면
 $$
 G(s)=E(s^X)=E(e^{X\log s})=E(e^{tX}), \quad t=\log s
@@ -1209,8 +1225,7 @@ $$
 $$
 E(e^{tX})<\infty \quad \forall t\in(-h,h)\ (\exists h>0)
 $$
-일 때 $M(t) = E(e^{tX})$를 확률변수 $X$의 적률생성함수
-(moment generating function, mgf)라 한다.
+일 때 $M(t) = E(e^{tX})$를 확률변수 $X$의 적률생성함수 (moment generating function, mgf)라 한다.
 
 #### 예 1.5.5
 앞면이 나올 때까지 동전을 던질 때
@@ -1265,35 +1280,14 @@ $$
 여기서 $M^{(k)}(0)$는 $t=0$에서의 $k$차 도함수이다.
 
 **증명**  
-적률생성함수의 멱급수 전개
-$$M(t) = \sum_{k=0}^{\infty} \frac{t^k}{k!} E(X^k)$$
-를 $k$번 미분하면
-$$M^{(k)}(t) = \sum_{j=k}^{\infty} \frac{t^{j-k}}{(j-k)!} E(X^j)$$
-$t=0$을 대입하면
-$$M^{(k)}(0) = \sum_{j=k}^{\infty} \frac{0^{j-k}}{(j-k)!} E(X^j)$$
-
+적률생성함수의 멱급수를 $k$번 미분하면
+$$M^{(k)}(t) = \sum_{j=k}^{\infty} \frac{t^{j-k}}{(j-k)!} E(X^j) = \sum_{j=k}^{\infty} \frac{0^{j-k}}{(j-k)!} E(X^j)$$
 이 무한합에서 $j=k$인 항만 0이 아니므로
 $$M^{(k)}(0) = \frac{0^0}{0!} E(X^k) = E(X^k)$$
 
 따라서 $k$차 적률은 적률생성함수의 $k$차 도함수를 $t=0$에서 구한 값과 같다. ∎
 
->참고: $0^0 = 1$의 관례 (Convention $0^0 = 1$)
->확률론과 조합론에서는 일반적으로 $0^0 = 1$로 정의한다.
->1. **조합론적 해석**
->   - $n^k$는 $k$개 위치에 $n$개 원소를 배치하는 경우의 수
->   - $0^0$은 0개 위치에 0개 원소를 배치하는 경우의 수
->   - "아무것도 선택하지 않는" 방법은 정확히 한 가지 (공집합)
->
->2. **멱급수의 연속성**
->   - $e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!}$에서 $x=0$일 때
->   - 첫 항: $\frac{0^0}{0!} = 1$ (이래야 $e^0 = 1$)
->
->주의사항
->- 해석학에서 극한 $\lim_{x \to 0^+} x^x = 1$이지만
->- 이중극한 $\lim_{(x,y) \to (0,0)} x^y$는 경로에 따라 다른 값
->- 따라서 문맥에 따라 $0^0$을 정의하거나 미정의로 남겨둠
-
-**다른 증명 적률생성함수의 멱급수 전개**  
+**다른 증명: 적률생성함수의 멱급수 전개**  
 적률생성함수
 $M(t)=E(e^{tX})$가 어떤 $h>0$에 대해 $-h<t<h$
 에서 존재한다고 가정한다.
@@ -1470,7 +1464,6 @@ $$
 * $c_2=\mathrm{Var}(X)$
 
 #### 누율과 적률의 관계 (Relation between Cumulants and Moments)
-**저차 누율과 적률**
 - $c_1 = m_1 = E(X)$ (평균)
 - $c_2 = m_2 - m_1^2 = \mathrm{Var}(X)$ (분산)
 - $c_3 = m_3 - 3m_2m_1 + 2m_1^3$ (왜도 관련)
@@ -1517,10 +1510,9 @@ $$c_r = \frac{r! \cdot 2^r}{r} = (r-1)! \cdot 2^r$$
 ## 6. 여러 부등식 (Inequalities in Probability)
 산술평균, 기하평균의 대소관계같이 항상 성립하는 부등식은 증명에 유용하다. 이런 부등식들을 추가로 정리했다.  
 
-### 6.1 Jensen(젠센) 부등식 (Jensen's Inequality)
-볼록함수(convex function)와 확률변수의 기댓값 사이의 관계를 나타내는 중요한 부등식이다.
+### 정리 1.6.1 Jensen(젠센) 부등식 (Jensen's Inequality)
+볼정리 1.6.1(ction와 확률변수의 기댓값 사이의 관계를 나타내는 중요한 부등식이다.
 
-#### 정리 1.6.1 (Jensen's Inequality)
 함수 $\varphi: \mathbb{R} \to \mathbb{R}$가 볼록함수이고, $E[|X|] < \infty$, $E[|\varphi(X)|] < \infty$이면
 $$\varphi(E[X]) \le E[\varphi(X)]$$
 
@@ -1574,41 +1566,42 @@ $$\log E[X] \ge E[\log X] \\
 특히 이산형인 경우
 $$\frac{x_1 + x_2 + \cdots + x_n}{n} \ge \sqrt[n]{x_1 x_2 \cdots x_n}$$
 
+>**참고: 산술-기하-조화 평균 부등식 (AM-GM-HM Inequality)**  
+>양수 $x_1, x_2, \ldots, x_n$에 대해 다음이 성립한다:
+>
+>$$\text{HM} \le \text{GM} \le \text{AM}$$
+>즉,
+>$$\frac{n}{\frac{1}{x_1}+\frac{1}{x_2}+\cdots+\frac{1}{x_n}} \le \sqrt[n]{x_1 x_2 \cdots x_n} \le \frac{x_1+x_2+\cdots+x_n}{n}$$
+>- **AM (Arithmetic Mean)**: $\frac{x_1+\cdots+x_n}{n}$ (산술평균)
+>- **GM (Geometric Mean)**: $\sqrt[n]{x_1 \cdots x_n}$ (기하평균)  
+>- **HM (Harmonic Mean)**: $\frac{n}{\sum_{i=1}^n \frac{1}{x_i}}$ (조화평균)
+>- 등호는 $x_1 = x_2 = \cdots = x_n$일 때만 성립한다.
+>
+>**기하학적 의미**
+>- 반지름이 $\sqrt{ab}$인 원 (기하평균)
+>- 반경이 $\frac{a+b}{2}$인 외접 정사각형 (산술평균)
+>- 반지름이 $\frac{2ab}{a+b}$인 내접 원 (조화평균)
+
 **(b) 분산의 비음성**  
 $\varphi(x) = x^2$ (볼록함수)에 Jensen 부등식을 적용하면
 $$[E(X)]^2 = \varphi(E[X]) \le E[\varphi(X)] = E[X^2] \\
 \therefore \mathrm{Var}(X) = E[X^2] - [E(X)]^2 \ge 0$$
 
-### 6.2 Liapounov(리아푸노프) 부등식 (Lyapunov's Inequality)
+### 정리 1.6.2 리아푸노프 부등식 (Lyapunov's Inequality)
 적률 간의 크기 관계를 나타내는 부등식으로, Jensen 부등식의 응용이다.
 
-#### 정리 1.6.2 (Lyapunov's Inequality)
 $0 < r < s$이고 $E[|X|^s] < \infty$이면
 $$[E(|X|^r)]^{1/r} \le [E(|X|^s)]^{1/s}$$
 
 또한 등호는 $P(|X| = c) = 1$ (거의 확실히 상수)일 때만 성립한다.
 
 #### 증명 (Proof)
-$t = s/r > 1$로 놓으면 $\varphi(x) = x^t$ ($x \ge 0$)는 볼록함수이다.
-
+$t = s/r > 1$로 놓으면 $\varphi(x) = x^t$ ($x \ge 0$)는 볼록함수이다.  
 확률변수 $Y = |X|^r$에 Jensen 부등식을 적용하면
 $$[E(Y)]^t \le E[Y^t]$$
-
 즉,
 $$[E(|X|^r)]^{s/r} \le E[(|X|^r)^{s/r}] = E[|X|^s]$$
-
 양변에 $r/s$ 제곱을 취하면 $$[E(|X|^r)]^{1/r} \le [E(|X|^s)]^{1/s}$$
-∎
-
-#### 특수한 경우들
-**(a) $r=1, s=2$인 경우**  
-$$E[|X|] \le \sqrt{E[X^2]}$$
-
-즉, 평균의 절댓값은 제곱평균제곱근(RMS) 이하이다.
-
-**(b) 일반화된 평균의 순서**
-$0 < r_1 < r_2 < r_3$에 대해
-$$[E(|X|^{r_1})]^{1/r_1} \le [E(|X|^{r_2})]^{1/r_2} \le [E(|X|^{r_3})]^{1/r_3}$$
 
 #### 예 1.6.2
 $X$가 $[0,1]$ 구간의 균등분포를 따를 때, Lyapunov 부등식을 확인해보자.
@@ -1621,10 +1614,7 @@ $$[E(|X|^r)]^{1/r} = \left(\frac{1}{r+1}\right)^{1/r}$$
 $r < s$일 때
 $$\left(\frac{1}{r+1}\right)^{1/r} \le \left(\frac{1}{s+1}\right)^{1/s}$$
 
-실제로 $f(r) = (r+1)^{1/r}$는 $r > 0$에서 증가함수이므로 부등식이 성립한다.
-
-### 1.6.3 Markov, Chebyshev 부등식 (Markov and Chebyshev Inequalities)
-#### 정리 1.6.3 (Markov's Inequality)
+### 정리 1.6.3 마르코프 부등식 (Markov's Inequality)
 확률변수 $Z$에 대해 $E(|Z|^r) < \infty \quad (r > 0)$이면 임의의 양수 $k$에 대해
 $$P(|Z| \ge k) \le \frac{E[|Z|^r]}{k^r}$$
 
@@ -1640,44 +1630,42 @@ $$\mathbf{1}_{\{|Z| \ge k\}} \le \frac{|Z|^r}{k^r}$$
 양변에 기댓값을 취하면 (기댓값의 단조성, 정리 1.4.1(c))
 $$P(|Z| \ge k) = E[\mathbf{1}_{\{|Z| \ge k\}}] \le E\left[\frac{|Z|^r}{k^r}\right] = \frac{E[|Z|^r]}{k^r}$$
 
-**참고: 일반화의 의미**
-- $r=1$: 기본 Markov 부등식
-- $r=2$: $(Z-\mu)^2$에 적용하면 Chebyshev 부등식 유도
-- 형태상 더 빠른 $k^{-r}$ 감쇠를 제공하나, 해당 적률이 유한할 때만 적용 가능
+>**참고: 일반화의 의미**
+>- 형태상 더 빠른 $k^{-r}$ 감쇠를 제공하나, 해당 적률이 유한할 때만 적용 가능
+>- $r=2$: Chebyshev 부등식
+> ### Chebyshev 부등식 (Chebyshev's Inequality)
+>확률변수 $X$의 평균을 $\mu = E[X]$, 분산을 $\sigma^2 = \mathrm{Var}(X)\lt \infin$라 할 때, 임의의 $k > 0$에 대해
+>$$P(|X - \mu| \ge k) \le \frac{\sigma^2}{k^2}$$
+>
+>**증명 1 (Markov 부등식 이용)**  
+>$(X-\mu)^2 \ge 0$에 Markov 부등식을 적용하면
+>$$P((X-\mu)^2 \ge k^2) \le \frac{E[(X-\mu)^2]}{k^2} = \frac{\sigma^2}{k^2}$$
+>
+>$\{(X-\mu)^2 \ge k^2\} = \{|X-\mu| \ge k\}$이므로
+>$$P(|X - \mu| \ge k) \le \frac{\sigma^2}{k^2}$$
+>
+>**증명 2 (직접 계산 - 연속형)**  
+>확률밀도함수를 $f(x)$라 하면
+>$$P(|X-\mu| \ge k) = \int_{|x-\mu| \ge k} f(x)\,dx$$
+>
+>$|x-\mu| \ge k$인 영역에서 $\frac{(x-\mu)^2}{k^2} \ge 1$이므로
+>$$P(|X-\mu| \ge k) \le \int_{|x-\mu| \ge k} \frac{(x-\mu)^2}{k^2} f(x)\,dx \le \frac{1}{k^2}\int_{-\infty}^{\infty} (x-\mu)^2 f(x)\,dx = \frac{\sigma^2}{k^2}$$
+>
+>#### 다른 표현
+>**(a) 표준편차의 배수로 표현**  
+>$k = c\sigma$ ($c > 0$)로 놓으면
+>$$P(|X - \mu| \ge c\sigma) \le \frac{1}{c^2}$$
+>
+>예를 들어:
+>- $c=2$: $P(|X-\mu| \ge 2\sigma) \le 1/4 = 0.25$
+>- $c=3$: $P(|X-\mu| \ge 3\sigma) \le 1/9 \approx 0.111$
+>
+>**(b) 여사건으로 표현**  
+>$$P(|X - \mu| < k) \ge 1 - \frac{\sigma^2}{k^2}$$
+>
+>즉, 평균 근처에 있을 확률의 하한을 제공한다.
 
-#### 정리 1.6.4 (Chebyshev's Inequality)
-확률변수 $X$의 평균을 $\mu = E[X]$, 분산을 $\sigma^2 = \mathrm{Var}(X)\lt \infin$라 할 때, 임의의 $k > 0$에 대해
-$$P(|X - \mu| \ge k) \le \frac{\sigma^2}{k^2}$$
-
-**증명 1 (Markov 부등식 이용)**  
-$(X-\mu)^2 \ge 0$에 Markov 부등식을 적용하면
-$$P((X-\mu)^2 \ge k^2) \le \frac{E[(X-\mu)^2]}{k^2} = \frac{\sigma^2}{k^2}$$
-
-$\{(X-\mu)^2 \ge k^2\} = \{|X-\mu| \ge k\}$이므로
-$$P(|X - \mu| \ge k) \le \frac{\sigma^2}{k^2}$$
-
-**증명 2 (직접 계산 - 연속형)**  
-확률밀도함수를 $f(x)$라 하면
-$$P(|X-\mu| \ge k) = \int_{|x-\mu| \ge k} f(x)\,dx$$
-
-$|x-\mu| \ge k$인 영역에서 $\frac{(x-\mu)^2}{k^2} \ge 1$이므로
-$$P(|X-\mu| \ge k) \le \int_{|x-\mu| \ge k} \frac{(x-\mu)^2}{k^2} f(x)\,dx \le \frac{1}{k^2}\int_{-\infty}^{\infty} (x-\mu)^2 f(x)\,dx = \frac{\sigma^2}{k^2}$$
-
-#### 다른 표현
-**(a) 표준편차의 배수로 표현**  
-$k = c\sigma$ ($c > 0$)로 놓으면
-$$P(|X - \mu| \ge c\sigma) \le \frac{1}{c^2}$$
-
-예를 들어:
-- $c=2$: $P(|X-\mu| \ge 2\sigma) \le 1/4 = 0.25$
-- $c=3$: $P(|X-\mu| \ge 3\sigma) \le 1/9 \approx 0.111$
-
-**(b) 여사건으로 표현**  
-$$P(|X - \mu| < k) \ge 1 - \frac{\sigma^2}{k^2}$$
-
-즉, 평균 근처에 있을 확률의 하한을 제공한다.
-
-#### 예 1.6.1 (6시그마 법칙)
+#### 예 1.6.3 (6시그마 법칙)
 확률변수 $X$의 평균과 표준편차를 각각 $\mu$, $\sigma$라 하자.
 
 Chebyshev 부등식에서 $k = 6\sigma$로 놓으면
@@ -1692,12 +1680,7 @@ $$P(|X-\mu| \ge 6\sigma) \le \frac{\sigma^2}{(6\sigma)^2} = \frac{1}{36} \approx
    - 공정의 변동을 $\pm 6\sigma$ 범위 내로 유지
    - 실제로는 정규분포를 가정하여 더 엄격한 기준 적용
 
-**Chebyshev 부등식의 한계**  
-- 분포의 형태를 고려하지 않으므로 매우 보수적(conservative)인 상한
-- 정규분포, 지수분포 등 특정 분포에서는 훨씬 정확한 확률 계산 가능
-- 그러나 분포를 모르는 경우에도 사용할 수 있다는 장점
-
-#### 예 1.6.3
+#### 예 1.6.4
 어떤 시험의 평균 점수가 70점, 표준편차가 10점일 때, 50점 이하 또는 90점 이상을 받을 학생의 비율은?
 
 **풀이**  
@@ -1708,18 +1691,12 @@ $$P(|X - 70| \ge 20) \le \frac{100}{400} = 0.25$$
 
 실제로 점수가 정규분포를 따른다면 이 비율은 약 4.6%로 훨씬 낮다.
 
-### 1.6.3(추가) Hölder, Minkowski 부등식 (Hölder's and Minkowski's Inequalities)
-
-#### 정리 1.6.5 (Hölder's Inequality)
+### 정리 1.6.4 (추가: Minkowski 부등식 (Hölder's and Minkowski's Inequalities)
 확률변수 $X$, $Y$와 $p, q > 1$ ($1/p + 1/q = 1$)에 대해 $E[|X|^p] < \infty$, $E[|Y|^q] < \infty$이면
 $$
 E[|XY|] \le \left(E[|X|^p]\right)^{1/p} \left(E[|Y|^q]\right)^{1/q}
 $$
-
-**증명 개요**  
-Young의 부등식과 Jensen 부등식을 이용하여 증명한다. (자세한 증명은 생략)
-
-#### 정리 1.6.6 (Minkowski's Inequality)
+정리 1.6.6 개요의부등식과 Jensen 부등식을 이용하여 증명한다. (자세한 증명은 생략)  
 $p \ge 1$, $E[|X|^p] < \infty$, $E[|Y|^p] < \infty$일 때
 $$
 \left(E[|X+Y|^p]\right)^{1/p} \le \left(E[|X|^p]\right)^{1/p} + \left(E[|Y|^p]\right)^{1/p}
@@ -1738,11 +1715,12 @@ $$
    |E[XY]| \le \sqrt{E[X^2]}\sqrt{E[Y^2]}
    $$
 
-### 6.5 주요 부등식 정리 (Summary of Key Inequalities)
+
+### 주요 부등식 정리 (Summary of Key Inequalities)
 
 이 페이지에 이미 등장한 부등식은 생략하고, 증명이나 계산에 자주 쓰이는 대표적 부등식들을 정리한다.
 
-#### 1. 삼각부등식 (Triangle Inequality)
+#### 삼각부등식 (Triangle Inequality)
 임의의 실수 $a, b$에 대해
 $$
 |a + b| \leq |a| + |b|
@@ -1752,7 +1730,7 @@ $$
 |X + Y| \leq |X| + |Y| \implies E[|X + Y|] \leq E[|X|] + E[|Y|]
 $$
 
-#### 1-1. 절댓값 차이 부등식
+#### 절댓값 차이 부등식
 임의의 실수 $a, b$에 대해
 $$
 ||a| - |b|| \leq |a - b|
@@ -1765,137 +1743,119 @@ $$
 $$
 ||X| - |Y|| \leq |X - Y|
 $$
-#### 1-2. 절댓값의 곱과 합 부등식
+#### 절댓값의 곱과 합 부등식
 임의의 실수 $a, b$에 대해
 $$
 |ab| \leq \frac{a^2 + b^2}{2}
 $$
 이는 $2ab \leq a^2 + b^2$에서 유도된다.
 
-#### 1-3. 최대/최소와 절댓값 부등식
+#### 최대/최소와 절댓값 부등식
 임의의 실수 $a, b$에 대해
 $$
 \max(a, b) \leq |a| + |b|,\qquad \min(a, b) \geq -(|a| + |b|)
 $$
 
-#### 5. Bernoulli 부등식 (Bernoulli's Inequality)
+#### Bernoulli 부등식 (Bernoulli's Inequality)
 $x > -1$, $r \geq 1$일 때
 $$
 (1 + x)^r \geq 1 + r x
 $$
 
-#### 7. Grönwall 부등식 (Grönwall's Inequality, 적분부등식)
+#### Grönwall 부등식 (Grönwall's Inequality, 적분부등식)
 $u(t) \leq a + b \int_0^t u(s)\,ds$이면
 $$
 u(t) \leq a e^{b t}
 $$
 
-#### 8. Markov의 역부등식 (Reverse Markov Inequality)
+#### Markov의 역부등식 (Reverse Markov Inequality)
 $X \geq 0$, $a < E[X]$이면
 $$
 P(X > a) \geq \frac{E[X] - a}{\sup X - a}
 $$
 (단, $X$의 상한 $\sup X < \infty$일 때)
 
-#### 9. Jensen의 평등조건
-Jensen 부등식에서 등호는 $X$가 상수이거나 $\varphi$가 선형일 때만 성립.
-
-#### 10. Pinsker 부등식 (정보이론)
+#### Pinsker 부등식 (정보이론)
 두 분포 $P, Q$에 대해 변분거리 $d_{TV}$와 Kullback-Leibler 발산 $D_{KL}$ 사이
 $$
 d_{TV}(P, Q) \leq \sqrt{\frac{1}{2} D_{KL}(P \| Q)}
 $$
 
-#### 11. Chernoff 부등식 (Chernoff Bound)
+#### Chernoff 부등식 (Chernoff Bound)
 $X$ 임의의 확률변수, $t > 0$에 대해
 $$
 P(X \geq a) \leq \frac{E[e^{tX}]}{e^{ta}}
 $$
 
-#### 12. Kolmogorov 부등식 (부분합 최대치)
+#### Kolmogorov 부등식 (부분합 최대치)
 $S_n = X_1 + \cdots + X_n$이 독립이고 $E[X_i] = 0$이면
 $$
 P\left(\max_{1 \leq k \leq n} |S_k| \geq \lambda\right) \leq \frac{E[S_n^2]}{\lambda^2}
 $$
 
-#### 13. Paley–Zygmund 부등식
+#### Paley–Zygmund 부등식
 $X \geq 0$, $E[X^2] < \infty$, $0 < \theta < 1$일 때
 $$
 P(X \geq \theta E[X]) \geq (1-\theta)^2 \frac{(E[X])^2}{E[X^2]}
 $$
 
-#### 14. Jensen–Shannon 부등식 (정보이론)
+#### Jensen–Shannon 부등식 (정보이론)
 두 분포 $P, Q$에 대해
 $$
 \frac{1}{2} D_{KL}(P \| M) + \frac{1}{2} D_{KL}(Q \| M) \leq \log 2
 $$
 ($M = \frac{1}{2}(P+Q)$)
 
-#### 15. Log-Sum 부등식
+#### Log-Sum 부등식
 $a_i, b_i > 0$에 대해
 $$
 \sum_i a_i \log \frac{a_i}{b_i} \geq \left(\sum_i a_i\right) \log \frac{\sum_i a_i}{\sum_i b_i}
 $$
 
-#### 16. Gibbs 부등식 (상대엔트로피 비음성)
+#### Gibbs 부등식 (상대엔트로피 비음성)
 확률분포 $p, q$에 대해
 $$
 D_{KL}(p \| q) \geq 0
 $$
 등호는 $p = q$일 때만 성립.
 
-#### 17. Bonferroni 부등식 (확률의 하한)
+#### Bonferroni 부등식 (확률의 하한)
 사건 $A_1, \ldots, A_n$에 대해
 $$
 P\left(\bigcup_{i=1}^n A_i\right) \geq \sum_{i=1}^n P(A_i) - \sum_{i<j} P(A_i \cap A_j)
 $$
 
-#### 18. Union Bound (Boole's Inequality)
+#### Union Bound (Boole's Inequality)
 임의의 사건 $A_1, \ldots, A_n$에 대해
 $$
 P\left(\bigcup_{i=1}^n A_i\right) \leq \sum_{i=1}^n P(A_i)
 $$
 
-#### 19. FKG 부등식 (양의 상관관계)
+#### FKG 부등식 (양의 상관관계)
 $X, Y$가 증가함수일 때
 $$
 E[XY] \geq E[X] E[Y]
 $$
 
-이 외에도 확률, 정보이론, 해석학 등에서 다양한 부등식이 존재하며, 필요시 각 주제별로 추가할 수 있다.
-
-#### 2. 산술평균-기하평균 부등식 (AM-GM Inequality)
-양수 $x_1, \ldots, x_n > 0$에 대해
-$$
-\frac{x_1 + \cdots + x_n}{n} \geq (x_1 \cdots x_n)^{1/n}
-$$
-등호는 $x_1 = \cdots = x_n$일 때만 성립.
-
-#### 3. 코시-슈바르츠 부등식 (Cauchy-Schwarz Inequality)
+#### 코시-슈바르츠 부등식 (Cauchy-Schwarz Inequality)
 확률변수 $X, Y$에 대해 $E[X^2], E[Y^2] < \infty$이면
 $$
 |E[XY]| \leq \sqrt{E[X^2]} \sqrt{E[Y^2]}
 $$
 
-#### 4. 영(Young)의 부등식 (Young's Inequality)
+#### 영(Young)의 부등식 (Young's Inequality)
 $a, b \geq 0$, $p, q > 1$, $1/p + 1/q = 1$일 때
 $$
 ab \leq \frac{a^p}{p} + \frac{b^q}{q}
 $$
 
-#### 6. 기타
-- $|E[X]| \leq E[|X|]$ (기댓값의 절댓값은 절댓값의 기댓값 이하)
-- $E[\max(X, Y)] + E[\min(X, Y)] = E[X] + E[Y]$
+### 정리 1.6.5 분산 0이면 상수 (Variance Zero Implies Constant)
+확률변수 $X$의 평균이 $\mu = E(X)$이고 $\mathrm{Var}(X) = 0$이면
+$$P(X = \mu) = 1$$
 
-이 외의 부등식은 본문 각 절에서 필요할 때마다 증명과 함께 소개됨.
+즉, $X$는 거의 확실히(almost surely) 상수 $\mu$이다.
 
-
-### 6.4 분산이 0이라는 것의 의미
-#### 정리 1.6.5 (Variance Zero Implies Constant)
-$$\mathrm{Var}(X) = 0 \iff P(X = E[X]) = 1$$
-즉, 분산이 0이면 확률변수는 **거의 확실히(almost surely)** 상수이다.
-
-#### 증명 (Proof)
+#### 증명
 **($\Leftarrow$) 상수이면 분산이 0**  
 $P(X = c) = 1$이면 $E[X] = c$이고
 $$\mathrm{Var}(X) = E[(X-c)^2] = 0^2 \cdot 1 = 0$$
@@ -1940,6 +1900,7 @@ $$P(X = \mu) = 1$$
 불편추정량(unbiased estimator) $\hat{\theta}$가 $\mathrm{Var}(\hat{\theta}) = 0$이면,
 이는 완벽한 추정량으로 항상 참값 $\theta$와 같다.
 
+---
 추가 노트:  
 ## 측도론적 미묘함: 거의 확실히(Almost Surely)의 의미
 

@@ -1,4 +1,27 @@
 # 제6장 추정 *(Statistical Estimation)*
+점추정(Point Estimation)과 구간추정(Interval Estimation)은 통계적 추정의 두 가지 주요 형태이다.
+점추정이란 모집단의 특성을 나타내는 모수(parameter)를 하나의 값으로 추정하는 방법을 말한다.
+구간추정이란 모수를 하나의 값이 아니라 구간으로 추정하는 방법을 말한다.
+
+추정량이 갖춰야할 바람직한 다섯가지 조건은 다음과 같다:
+1. 불편성(unbiasedness)
+  - 추정량의 기댓값이 추정대상과 일치하는 성질
+2. 일치성(consistency)
+    - 표본크기가 커질수록 추정량이 추정대상에 확률수렴하는 성질
+    - $\lim_{n\to\infty} P(|\hat\eta_n - \eta| \ge \epsilon) = 0$ for all $\epsilon > 0$
+
+3. 충분성(sufficiency)
+    - 추정량이 모집단의 모든 정보를 포함하는 성질
+    - 모수 $\theta$의 추정량 $\hat\theta$가 주어질 때 조건부 확률분포 $f(x_1, \dots, x_n \mid \hat\theta)$가 $\theta$를 포함하지 않으면 충분추정량
+    - 결합확률밀도함수가 $f(x_1, x_2, \dots, x_n; \theta) = f_1(x_1, \dots, x_n \mid \hat\theta) \cdot f_2(\hat\theta; \theta)$로 분해될 수 있으면 $\hat\theta$는 $\theta$의 충분추정량
+
+4. 최소분산성(minimum variance)
+    - 동일한 불편성을 가진 추정량 중에서 분산이 가장 작은 성질
+    - $E[(\hat\eta - E[\hat\eta])^2] \le E[(\hat\eta' - E[\hat\eta'])^2]$ for all 불편추정량 $\hat\eta'$
+
+5. 최소평균제곱오차(minimum mean squared error)
+    - 동일한 일치성을 가진 추정량 중에서 평균제곱오차가 가장 작은 성질
+    - $E[(\hat\eta - \eta)^2] \le E[(\hat\eta' - \eta)^2]$ for all 일치추정량 $\hat\eta'$
 
 ## 6.1 적률이용 추정법 *(Method of Moments Estimation, MME)*
 
