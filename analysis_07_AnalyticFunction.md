@@ -120,11 +120,10 @@ $$
 * **지수함수**
   $$
   e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!}
-  \quad (-\infty<x<\infty)
-  $$
-  $$
+  \quad (-\infty<x<\infty) \\
   e^{-x}=\sum_{n=0}^{\infty}\frac{(-1)^n x^n}{n!}
-  \quad (-\infty<x<\infty)
+  \quad (-\infty<x<\infty) \\
+  a^x=\sum_{n=0}^{\infty}\frac{(\ln a)^n}{n!}x^n
   $$
 
 * **로그함수**
