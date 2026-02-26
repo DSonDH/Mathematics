@@ -1845,8 +1845,6 @@ $$
 
 ### 행렬(벡터) 표기와 최소제곱 추정량의 정의
 **(1) 행렬 표기**  
-다음을 정의한다.
-
 - 반응변수 벡터 $Y = (Y_1, \dots, Y_n)^\top$
 - 설계행렬(design matrix)  
     $$
@@ -1863,7 +1861,7 @@ $$
 
 $$
 Y = X\beta + e \\
-E(e) = 0, \quad \operatorname{Var}(e) = \sigma^2 \dot l, \quad \operatorname{rank}(X) = p+1
+E(e) = 0, \quad \operatorname{Var}(e) = \sigma^2 I_n, \quad \operatorname{rank}(X) = p+1
 $$
 $\operatorname{rank}(X) = p+1$은 $X^\top X$가 가역(invertible)임을 보장한다.
 
