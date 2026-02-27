@@ -33,29 +33,20 @@ $$
 이 모집단의 분포는 값 $1$에 확률 $p$, 값 $0$에 확률 $1-p$를 대응시키는 분포다.
 
 ### 초기하분포의 정의
-위와 같은 모집단에서 $n$개를 단순랜덤추출할 때,
-표본에 포함된 $1$의 개수를 확률변수 $X$라 하자.
-
+위와 같은 모집단에서 $n$개를 단순랜덤추출할 때, 표본에 포함된 $1$의 개수를 확률변수 $X$라 하자.  
 그러면 $X$의 확률질량함수는 다음과 같다.
-
 $$
-P(X=x)
-= \frac{\binom{D}{x}\binom{N-D}{n-x}}{\binom{N}{n}},
-\quad
-0 \le x \le D,; 0 \le n-x \le N-D
+P(X=x) = \frac{\binom{D}{x}\binom{N-D}{n-x}}{\binom{N}{n}},
+\quad 0 \le x \le D, \quad 0 \le n-x \le N-D
 $$
-
 이와 같은 분포를 **초기하분포** (hypergeometric distribution)라 하며,
-기호로
-
+기호는
 $$
 X \sim H(n; N, D)
 $$
 
-와 같이 나타낸다.
 ### 정리 3.1.1 (초기하분포의 평균과 분산)
 $X \sim H(n; N, D)$이고 $p=D/N$이면
-
 $$
 E(X) = np, \qquad \mathrm{Var}(X) = \frac{N-n}{N-1} \cdot np(1-p)
 $$
@@ -63,7 +54,7 @@ $$
 #### 증명
 **(평균)** 조합 항등식 $x\binom{D}{x} = D\binom{D-1}{x-1}$과 $\sum_x \binom{D-1}{x-1}\binom{N-D}{n-x} = \binom{N-1}{n-1}$을 이용하면
 $$
-E(X) = D \frac{\binom{N-1}{n-1}}{\binom{N}{n}} = \frac{nD}{N} = np
+E(X) = \sum_x x \frac{\binom{D}{x}\binom{N-D}{n-x}}{\binom{N}{n}} = D \frac{\binom{N-1}{n-1}}{\binom{N}{n}} = \frac{nD}{N} = np
 $$
 
 **(분산)** 항등식 $x(x-1)\binom{D}{x} = D(D-1)\binom{D-2}{x-2}$로부터
@@ -91,17 +82,11 @@ $$
 \frac{\binom{6}{x}\binom{54}{5-x}}{\binom{60}{5}}
 \ge 0.99
 $$
-
 을 만족하는 최소의 $c$를 찾는다.
-
-계산 결과
 * $c=1$: $P(X\le 1)=0.92648$
 * $c=2$: $P(X\le 2)=0.99461$
-이므로
 
-$$
-c=2
-$$
+이므로 $c=2$
 
 ### 초기하분포와 이항분포의 근사
 모집단 크기 $N$이 표본 크기 $n$에 비해 충분히 크면,
@@ -110,30 +95,23 @@ $$
 \approx \binom{n}{x}\left(\frac{D}{N}\right)^x
 \left(1-\frac{D}{N}\right)^{n-x}
 $$
-이 된다.
-
 이는 **복원추출** (sampling with replacement)에서의 확률과 동일하며,
 이 경우 초기하분포는 이항분포로 근사된다.
 
 ## 3.2 이항분포와 다항분포 (Binomial and Multinomial Distributions)
 
 ### 이항분포 (Binomial Distribution)
-모집단에서 한 개체를 복원추출할 때, 결과가
-* $1$일 확률 $p$
-* $0$일 확률 $1-p$
-
-두가지 인 경우, 이를 **베르누이 시행** (Bernoulli trial)이라 한다.
+모집단에서 한 개체를 복원추출할 때, 결과가 $1$일 확률 $p$, $0$일 확률 $1-p$ 두가지 인 경우, 이를 **베르누이 시행** (Bernoulli trial)이라 한다.
 
 서로 독립인 $n$번의 베르누이 시행에서 성공($1$)의 개수를 $X$라 하면,
 $$
 P(X=x)=\binom{n}{x}p^x(1-p)^{n-x},\quad x=0,1,\dots,n
 $$
 
-이고, 이를 **이항분포** (binomial distribution)라 하며
+이고, 이를 **이항분포** (binomial distribution)라 하며, 기호 표기는
 $$
 X \sim B(n,p)
 $$
-로 표기한다.
 
 ### 이항분포의 평균과 분산
 $$
@@ -145,24 +123,16 @@ $X$를 $n$개의 독립인 베르누이 확률변수 $Z_1, \ldots, Z_n$의 합�
 $$
 X = Z_1 + \cdots + Z_n, \quad Z_i \sim \text{Bernoulli}(p)
 $$
-
 각 $Z_i$에 대해 $E(Z_i) = p$, $\text{Var}(Z_i) = p(1-p)$이므로,
 독립합의 성질에 의해
-
 $$
-E(X) = \sum_{i=1}^n E(Z_i) = np
-$$
-
-$$
+E(X) = \sum_{i=1}^n E(Z_i) = np \\
 \text{Var}(X) = \sum_{i=1}^n \text{Var}(Z_i) = np(1-p)
 $$
-□
 
 ### 이항분포의 **대의적 정의** (representational definition)
 $$
-B(n,p) \overset{d}{\equiv} \mathrm{Bernoulli}_1(p) \oplus \cdots \oplus \mathrm{Bernoulli}_n(p)
-$$
-$$
+B(n,p) \overset{d}{\equiv} \mathrm{Bernoulli}_1(p) \oplus \cdots \oplus \mathrm{Bernoulli}_n(p) \\
 X \sim B(n,p) \Leftrightarrow X \overset{d}{\equiv} Z_1+\cdots+Z_n,
 \quad Z_i \overset{iid}\sim \mathrm{Bernoulli}(p)
 $$
@@ -213,7 +183,6 @@ $n = \sum_{i=1}^N X_i$, $D \leq N$라 하면
 $$
 \sum_{i=1}^D X_i \,\bigg|\, \sum_{i=1}^N X_i = n \sim H(n; N, D)
 $$
-
 임을 보이자.
 
 **증명**
@@ -223,64 +192,54 @@ $Y = \sum_{i=1}^D X_i$라 하고, $S = \sum_{i=1}^N X_i = n$이라 하자.
 $$
 P(Y = y \mid S = n) = \frac{P(Y = y, S = n)}{P(S = n)}
 $$
-
 **분자:** $Y = y$이고 $S = n$이면 $\sum_{i=D+1}^N X_i = n - y$이어야 한다.
 $X_i$들이 독립이므로
 $$
 P(Y = y, S = n) = P(Y = y) \cdot P\left(\sum_{i=D+1}^N X_i = n-y\right)
 $$
-
 $Y \sim B(D, p)$이고 $\sum_{i=D+1}^N X_i \sim B(N-D, p)$이므로
 $$
-P(Y = y, S = n) = \binom{D}{y}p^y(1-p)^{D-y} \cdot \binom{N-D}{n-y}p^{n-y}(1-p)^{N-D-n+y}
-$$
-$$
+P(Y = y, S = n) = \binom{D}{y}p^y(1-p)^{D-y} \cdot \binom{N-D}{n-y}p^{n-y}(1-p)^{N-D-n+y} \\
 = \binom{D}{y}\binom{N-D}{n-y} p^n(1-p)^{N-n}
 $$
-
 **분모:** $S = \sum_{i=1}^N X_i \sim B(N, p)$이므로
 $$
 P(S = n) = \binom{N}{n}p^n(1-p)^{N-n}
 $$
-
 따라서
 $$
 P(Y = y \mid S = n) = \frac{\binom{D}{y}\binom{N-D}{n-y} p^n(1-p)^{N-n}}{\binom{N}{n}p^n(1-p)^{N-n}} = \frac{\binom{D}{y}\binom{N-D}{n-y}}{\binom{N}{n}}
 $$
-
 이는 $H(n; N, D)$의 확률질량함수이다. □
 
 ### 다항분포 (Multinomial Distribution)
 각 시행의 결과가 $k$개의 범주 중 하나로 나타나고,
 각 범주의 확률이 $p_1,\dots,p_k$ ($\sum p_i=1$)일 때,
 $n$번의 독립 시행에서 각 범주의 발생 횟수를
-
 $$
 X=(X_1,\dots,X_k)^t
 $$
 라 하면,
-
 $$
 P(X_1=x_1,\dots,X_k=x_k)
 =\frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k},
 \quad \sum_{i=1}^k x_i=n
 $$
-이다.
-  - $\frac{n!}{x_1!\cdots x_k!} = \binom{D}{x_1x_2 \dots x_k}$: multinomial coefficient  
+  - $\frac{n!}{x_1!\cdots x_k!} = \binom{n}{x_1, x_2, \dots, x_k}$: multinomial coefficient  
   - 여러 유형으로 분류되는 모집단에서 한 개씩 추출하여 관측하는것을 다항시행 (multinomial trial)이라 한다
 
-이를 **다항분포** (multinomial distribution)라 하며
+이를 **다항분포** (multinomial distribution)라 하며, 기호 표기는
 $$
 X \sim \mathrm{Multi}(n; p_1,\dots,p_k)
 $$
-로 나타낸다.
+
 ### 다항분포의 **대의적 정의** (representational definition)
 $$
 \mathrm{Multi}(n, p) \overset{d}{\equiv} \mathrm{Multi}_1(1,p) \oplus \cdots \oplus \mathrm{Multi}_n(1,p) \\
 X \sim \mathrm{Multi}(n; p_1,\dots,p_k) \Leftrightarrow X \overset{d}{\equiv} Z_1+\cdots+Z_n,
 \quad Z_i \overset{iid}\sim \mathrm{Multi}(1; p_1,\dots,p_k)
 $$
-- $Z_i = (Z_{i1}, \dots, Z_{ik})^t$는 하나의 다항시행 결과를 나타내는 벡터
+- $Z_i = (Z_{i1}, \dots, Z_{ik})^\top$는 하나의 다항시행 결과를 나타내는 벡터
 - 각 $Z_i$는 정확히 하나의 성분만 1이고 나머지는 0
 
 ### 정리 3.2.2 다항분포의 성질
@@ -289,7 +248,7 @@ $X\sim \mathrm{Multi}(n;p_1,\dots,p_k)$이면
 * $E(X_i)=np_i$
 * $\mathrm{Var}(X_i)=np_i(1-p_i)$
 * $\mathrm{Cov}(X_i,X_j)=-np_ip_j\quad(i\ne j)$
-* $M_X(t) = \left(\sum_{i=1}^k p_i e^{t_i}\right)^n$ (적률생성함수, $t=(t_1,\dots,t_k)^t$)
+* $M_X(t) = \left(\sum_{i=1}^k p_i e^{t_i}\right)^n$ (적률생성함수, $t=(t_1,\dots,t_k)^\top$)
 이다.
 
 #### 증명
@@ -310,15 +269,11 @@ $$
 $$
 P(W_1=x)=(1-p)^{x-1}p,\quad x=1,2,\dots
 $$
-이러한 확률분포를 **기하분포**라 하며,
+이러한 확률분포를 **기하분포**라 하며, 기호로는
 $$
 W_1\sim \mathrm{Geo}(p)
 $$
-로 나타낸다.
-
-> 각주
-> 무한급수 $\sum_{x=1}^\infty q^{x-1}$을 기하급수라고 부르며,
-> 이로부터 기하분포라는 명칭이 유래하였다. 여기서 $q=1-p$이다.
+>각주: 무한급수 $\sum_{x=1}^\infty (1-p)^{x-1}$을 기하급수라고 부르며, 이로부터 기하분포라는 명칭이 유래하였다.
 
 ### 정리 3.3.1 기하분포의 성질
 $W_1\sim \mathrm{Geo}(p)$이면 다음이 성립한다.
@@ -339,12 +294,7 @@ $$
 $$
 \mathrm{mgf}_{W_1}(t)=E(e^{tW_1})
 =\sum_{x=1}^\infty e^{tx}(1-p)^{x-1}p \\
-p e^t \sum_{x=1}^\infty \big((1-p)e^t\big)^{x-1}
-$$
-
-기하급수의 합 공식을 이용하면
-$$
-\mathrm{mgf}_{W_1}(t)
+= p e^t \sum_{x=1}^\infty \big((1-p)e^t\big)^{x-1} \\
 =\frac{p e^t}{1-(1-p)e^t},
 \quad t<-\log(1-p)
 $$
@@ -356,25 +306,21 @@ $$
 =\log \mathrm{mgf}_{W_1}(t)
 = -\log\{1-(1-p)e^t\}+t+\log p
 $$
-
 로그함수의 멱급수 전개
 $$
 -\log(1-A)=A+\frac{A^2}{2}+\frac{A^3}{3}+\cdots \quad(|A|<1)
 $$
 를 이용하여 전개하고 $t$의 멱차수별로 정리하면
-
 $$
 \mathrm{cgf}_{W_1}(t)
 =\frac{1}{p}t+\frac{1-p}{2p^2}t^2+\cdots
 $$
-
 따라서
 $$
 E(W_1)=\mathrm{cgf}'_{W_1}(0)=\frac{1}{p},
 \qquad
 \mathrm{Var}(W_1)=\mathrm{cgf}''_{W_1}(0)=\frac{1-p}{p^2}
 $$
-이다. □
 
 ### 음이항분포 (Negative binomial distribution)
 이번에는 서로 독립이고 성공확률이 $p$인 베르누이 시행에서, $r$번째 성공이 관측될 때까지의 **시행 횟수**를 $W_r$라 하자.
@@ -389,16 +335,13 @@ P(W_r=x)
 =\binom{x-1}{r-1}p^{r}(1-p)^{x-r},
 \quad x=r,r+1,\dots
 $$
-
-이며, 이 분포를 **음이항분포**라 하고
+이며, 이 분포를 **음이항분포**라 하고, 기호로는
 $$
 W_r\sim \mathrm{Negbin}(r,p)
 $$
-로 쓴다.
 
 ### 참고: 음이항분포의 명칭 유래
-음이항분포라는 명칭은 **음의 지수를 갖는 이항전개식**으로부터 유래하였다.
-
+음이항분포라는 명칭은 **음의 지수를 갖는 이항전개식**으로부터 유래하였다.  
 이항정리의 일반화로부터
 $$
 (1+t)^{-r} = \sum_{k=0}^{\infty} \binom{-r}{k} t^k
@@ -408,8 +351,6 @@ $$
 $$
 \binom{-r}{k} = \frac{(-r)(-r-1)\cdots(-r-k+1)}{k!} = (-1)^k \binom{r+k-1}{k}
 $$
-이다.
-
 이제 우변의 무한합에서 $x = r+k$로 치환하면 $k = x-r$이고,
 $$
 (1+t)^{-r} = \sum_{x=r}^{\infty} \binom{x-1}{r-1} (-t)^{x-r}
@@ -442,10 +383,7 @@ $$
 **(a) 평균과 분산**  
 대의적 정의와 기댓값, 분산의 가법성으로부터
 $$
-E(W_r)=E(Z_1+\cdots+Z_r)=rE(Z_1)=\frac{r}{p}
-$$
-
-$$
+E(W_r)=E(Z_1+\cdots+Z_r)=rE(Z_1)=\frac{r}{p} \\
 \mathrm{Var}(W_r)
 =\mathrm{Var}(Z_1)+\cdots+\mathrm{Var}(Z_r)
 =r\frac{1-p}{p^2}
@@ -462,33 +400,37 @@ $$
 
 **(c) 닫힘성 (가법성)**  
 $X_1\sim \mathrm{Negbin}(r_1,p)$,
-$X_2\sim \mathrm{Negbin}(r_2,p)$가 서로 독립이면
-
-각각을 기하분포의 합으로 표현할 수 있으므로
+$X_2\sim \mathrm{Negbin}(r_2,p)$가 서로 독립이면 각각을 기하분포의 합으로 표현할 수 있으므로
 $$
 X_1+X_2\sim \mathrm{Negbin}(r_1+r_2,p)
 $$
 
 
 ## 포아송분포 (Poisson Distribution)
+참고 [링크](https://ko.wikipedia.org/wiki/%ED%91%B8%EC%95%84%EC%86%A1_%EB%B6%84%ED%8F%AC)  
+
+포아송분포는 고정된 구간에서 발생하는 사건 횟수를 모델링하는 이산 확률분포다.
+- 시간 $t$가 증가하면 모수 $\lambda t$가 증가하여 평균과 분산이 선형적으로 커진다
+- 포아송분포의 x축은 사건증가 횟수(구간 내 사건 발생 횟수)다 (0만큼 증가, 1만큼 증가, ... 무한대로 증가) 
+- **단위 구간의 평균 발생률 $\lambda$가 고정**되어 있다
+- 따라서 시간 $t$가 증가하면 평균과 분산이 선형적으로 증가하지만, 장기적으로는 $X(t)/t \to \lambda$가 되어 일정한 비율을 유지한다.
+
+이항분포 $B(n, p_n)$에서 시행 횟수 $n$이 매우 크고 각 시행의 성공확률 $p_n$이 매우 작지만, 평균 성공 횟수 $np_n$이 상수 $\lambda$로 수렴할 때, 사건의 발생 횟수는 포아송분포로 근사된다. 이는 매우 많은 독립 시행 중에서 매우 드물게 성공하는 현상을 잘 설명한다.
+
 이항분포 $X_n \sim \mathrm{Bin}(n,p_n)$에서 시행횟수 $n$이 매우 크고 성공확률 $p_n$이 매우 작아
 $$
 n p_n \to \lambda \quad(\lambda>0)
 $$
 일 때, 특정 사건의 발생 횟수는 다음 분포로 근사된다.
-> 이 극한 계산에서 사용되는 기본 결과는
-> $\lim_{n\to\infty}(1+a_n/n)^n=e^a$ 이다.
 $$
 P(X=x)=e^{-\lambda}\frac{\lambda^x}{x!},
 \quad x=0,1,2,\dots
 $$
-
-이 분포를 **포아송분포**라 하며
+이 분포를 **포아송분포**라 하며, 기호로는
 $$
 X\sim \mathrm{Poisson}(\lambda)
 $$
-로 나타낸다.
-
+  
 >포아송분포는 다음과 같은 상황을 모델링한다.
 >* 단위 시간 또는 단위 공간에서
 >* 개별 사건은 드물게 발생하며
@@ -503,32 +445,20 @@ $$
 P(X_n=x)
 =\binom{n}{x}p_n^x(1-p_n)^{n-x}
 $$
-이다.
-
 여기서 $p_n=\lambda/n$으로 두면
-$$
-\binom{n}{x}
-=\frac{n(n-1)\cdots(n-x+1)}{x!}
-$$
-이므로
 $$
 P(X_n=x)
 =\frac{n(n-1)\cdots(n-x+1)}{x!}
 \left(\frac{\lambda}{n}\right)^x
 \left(1-\frac{\lambda}{n}\right)^{n-x}
 $$
-
 $n\to\infty$로 보내면
 $$
 \frac{n(n-1)\cdots(n-x+1)}{n^x}\to1,
 \qquad
-\left(1-\frac{\lambda}{n}\right)^n\to e^{-\lambda}
+\left(1-\frac{\lambda}{n}\right)^n\to e^{-\lambda} \\
+\therefore P(X_n=x)\to e^{-\lambda}\frac{\lambda^x}{x!}
 $$
-이므로
-$$
-P(X_n=x)\to e^{-\lambda}\frac{\lambda^x}{x!}
-$$
-가 된다.
 
 ### 정리 3.4.1 포아송분포의 성질
 $X \sim \mathrm{Poisson}(\lambda)$이면 다음이 성립한다.
@@ -568,21 +498,18 @@ $$
 $$
 
 **(c) 재생성**  
-$X_1 \sim \mathrm{Poisson}(\lambda_1)$,
-$X_2 \sim \mathrm{Poisson}(\lambda_2)$가 서로 독립이면
-
-적률생성함수의 곱셈 성질로부터
+$X_1 \sim \mathrm{Poisson}(\lambda_1)$, $X_2 \sim \mathrm{Poisson}(\lambda_2)$가 서로 독립이면, 적률생성함수의 곱셈 성질로부터
 $$
 M_{X_1+X_2}(t)
 = M_{X_1}(t) \cdot M_{X_2}(t)
 = \exp\{(\lambda_1+\lambda_2)(e^t-1)\} \\
 \therefore X_1 + X_2 \sim \mathrm{Poisson}(\lambda_1+\lambda_2)
 $$
-□
 
 ### 포아송과정
-**포아송과정** (Poisson process)은 시간 또는 공간에서 사건이 발생하는 현상을 모델링하는 확률과정이다.
+**포아송과정 (Poisson process)** 은 시간 또는 공간에서 사건이 발생하는 현상(갯수)을 모델링하는 확률과정이다.
 시간 $t \geq 0$에서 발생한 사건의 누적 개수를 $N_t$라 할 때, 다음 성질을 만족하면 $\{N_t, t \geq 0\}$를 **강도** (intensity) $\lambda > 0$인 포아송과정이라 한다.
+  - 의의: 포아송과정은 단위 시간당 평균 $\lambda$개의 사건이 발생하는 모형으로, 사건 발생이 드물고 서로 간섭하지 않는 상황을 모델링한다.
 
 **(1) 정상성 (Stationarity)**  
 임의의 시간 구간 $(s, s+t]$에서 발생하는 사건의 개수 $N_{s+t} - N_s$의 분포는 구간의 길이 $t$에만 의존하고 시작 시점 $s$와는 무관하다.
@@ -608,6 +535,7 @@ P(N_{t+h} - N_t \geq 2) = o(h)
 $$
 
 이러한 성질로부터 구간 $(0,t]$에서 발생하는 사건의 개수 $N_t$는 모수 $\lambda t$인 포아송분포를 따르게 된다.
+- 포아송과정은 작은 시간 구간에서는 0 또는 1번 발생하는 베르누이적 구조를 가지며, 이를 연속시간 극한으로 확장한 결과 고정된 구간에서 사건 횟수가 0 이상의 정수를 가지는 포아송분포로 나타난다.
 
 ### 정리 3.4.2 포아송과정에서 발생횟수의 분포
 $$
@@ -628,23 +556,18 @@ P_n(t+h) = P(N_{t+h} = n) \\
 = P(N_t = n, N_{t+h} - N_t = 0) + P(N_t = n-1, N_{t+h} - N_t = 1) + \cdots \\
 = P_n(t) \cdot (1-\lambda h + o(h)) + P_{n-1}(t) \cdot (\lambda h + o(h)) + o(h)
 $$
-
 정리하면
 $$
 P_n(t+h) - P_n(t) = -\lambda h P_n(t) + \lambda h P_{n-1}(t) + o(h)
 $$
-
 양변을 $h$로 나누고 $h \to 0$으로 극한을 취하면
 $$
 P_n'(t) = -\lambda P_n(t) + \lambda P_{n-1}(t)
 $$
 
-초기조건 $P_0(0) = 1$, $P_n(0) = 0$ ($n \geq 1$)과 함께 이 미분방정식을 풀면
-
-$n=0$일 때: $P_0'(t) = -\lambda P_0(t)$이므로 $P_0(t) = e^{-\lambda t}$
-
-귀납적으로 $P_n(t) = e^{-\lambda t} \frac{(\lambda t)^n}{n!}$을 얻는다.
-
+초기조건 $P_0(0) = 1$, $P_n(0) = 0$ ($n \geq 1$)과 함께 이 미분방정식을 풀면  
+$n=0$일 때: $P_0'(t) = -\lambda P_0(t)$이므로 $P_0(t) = e^{-\lambda t}$  
+귀납적으로 $P_n(t) = e^{-\lambda t} \frac{(\lambda t)^n}{n!}$을 얻는다.  
 따라서 $N_t \sim \mathrm{Poisson}(\lambda t)$이다. □
 
 #### 예제 3.4.1 (포아송과정에서 결점 수의 확률 계산)
@@ -655,23 +578,16 @@ $n=0$일 때: $P_0'(t) = -\lambda P_0(t)$이므로 $P_0(t) = e^{-\lambda t}$
 $$
 X \sim \mathrm{Poisson}(\lambda t) = \mathrm{Poisson}(0.05 \times 100) = \mathrm{Poisson}(5)
 $$
-를 따른다.
 
 따라서 구하고자 하는 확률은
 $$
 P(X \geq 10) = 1 - P(X \leq 9) = 1 - \sum_{x=0}^{9} e^{-5}\frac{5^x}{x!}
 $$
-
 포아송 누적확률표나 계산을 통해
 $$
-P(X \leq 9) \approx 0.9682
+P(X \leq 9) \approx 0.9682 \\
+\therefore P(X \geq 10) \approx 1 - 0.9682 = 0.0318
 $$
-이므로
-$$
-P(X \geq 10) \approx 1 - 0.9682 = 0.0318
-$$
-
-즉, 100단위 길이의 전선에서 10개 이상의 결점이 나타날 확률은 약 3.18%이다.
 
 
 ## 지수분포와 감마분포 (Exponential and Gamma Distributions)
@@ -697,11 +613,15 @@ $$
 $$
 f_{W_1}(t)=\lambda e^{-\lambda t}\mathbf{1}(t\ge 0)
 $$
-가 된다. 즉 $W_1$은 지수분포(exponential distribution)를 따르며 
+가 된다. 즉 $W_1$은 지수분포(exponential distribution)를 따르며, 기호로는
 $$
 W_1\sim \mathrm{Exp}(1/\lambda)\quad (\lambda>0)
 $$
-로 나타낸다.
+
+- 포아송분포와 지수분포의 차이: 
+  - 포아송분포는 단위 시간당 사건의 개수를 모델링하는 반면, 
+  - 지수분포는 사건 사이의 대기시간을 모델링한다. 
+  - 포아송과정에서 사건이 발생하는 간격은 지수분포를 따르며, 사건의 개수는 포아송분포를 따른다.
 
 ### 정리 3.5.1 지수분포의 성질
 **(a) 적률생성함수(mgf)**  
@@ -709,7 +629,6 @@ $W_1\sim \mathrm{Exp}(1/\lambda)$이면
 $$
 \mathrm{mgf}_{W_1}(t)=E(e^{tW_1})=(1-t/\lambda)^{-1},\quad t<\lambda
 $$
-이다.
 
 **증명** 
 $$
@@ -721,14 +640,12 @@ $$
 $$
 E(e^{tW_1})=\frac{\lambda}{\lambda-t}=\left(1-\frac{t}{\lambda}\right)^{-1}
 $$
-이다. □
 
 **(b) 평균과 분산**  
 $W_1\sim \mathrm{Exp}(1/\lambda)$이면
 $$
 E(W_1)=\frac{1}{\lambda},\qquad \mathrm{Var}(W_1)=\frac{1}{\lambda^2}
 $$
-이다.
 
 **증명** 
 $$
@@ -740,14 +657,10 @@ $$
 $$
 를 $A=t/\lambda$에 적용하면
 $$
-\mathrm{cgf}_{W_1}(t)=\frac{t}{\lambda}+\frac{1}{2}\left(\frac{t}{\lambda}\right)^2+\cdots
-$$
-따라서
-$$
-E(W_1)=\mathrm{cgf}'_{W_1}(0)=\frac{1}{\lambda},\qquad
+\mathrm{cgf}_{W_1}(t)=\frac{t}{\lambda}+\frac{1}{2}\left(\frac{t}{\lambda}\right)^2+\cdots \\
+\therefore E(W_1)=\mathrm{cgf}'_{W_1}(0)=\frac{1}{\lambda},\qquad
 \mathrm{Var}(W_1)=\mathrm{cgf}''_{W_1}(0)=\frac{1}{\lambda^2}
 $$
-□
 
 ### 감마분포 (Gamma distribution)의 도입: $r$번째 사건까지의 대기시간
 포아송과정에서 $r$번째 사건이 시각 $t$ 이후에 발생한다는 것은, 시각 $t$까지 사건이 $r-1$번 이하로 발생했다는 것과 동치이므로
@@ -763,16 +676,13 @@ $$
 $$
 f_{W_r}(t)=\frac{\lambda^r t^{r-1}e^{-\lambda t}}{(r-1)!},\quad t>0
 $$
-가 되어
+이고, 기호로 나타내면
 $$
 W_r\sim \mathrm{Gamma}(r,1/\lambda)
 $$
-로 나타낸다.
-
 감마분포의 모양은 모수 $r$에 따라 달라진다. 여기서 $r$을 형상모수, shape parameter라고 하고, $\beta=1/\lambda$를 척도모수, scale parameter로 둔다. 일반적으로는 shape가 자연수로 제한되지 않고 양수(real positive)일 수 있으므로 $r$ 대신 $\alpha$를 쓰기도 한다.
 
 ### 감마함수 (Gamma function)와 일반형 감마분포
-
 $\alpha>0$에 대해 감마함수는
 $$
 \Gamma(\alpha)=\int_{0}^{\infty} x^{\alpha-1}e^{-x}\,dx
@@ -781,14 +691,10 @@ $$
 $$
 f(x)=\frac{1}{\Gamma(\alpha)\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta}\mathbf{1}(x>0)
 $$
-로 쓸 수 있다.
-
-감마함수의 성질로
+감마함수의 성질들:
 * $\Gamma(\alpha)=(\alpha-1)\Gamma(\alpha-1)$ ($\alpha>1$)
 * 특히 자연수 $n$에 대해 $\Gamma(n)=(n-1)!$
 * $\Gamma(1/2)=\sqrt{\pi}$
-
-가 주어진다.
 
 ### 정리 3.5.2 감마분포의 성질
 **(a) 평균과 분산**  
@@ -822,8 +728,6 @@ E(X)=\frac{1}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty (\beta y)^{\alpha}e^{-y}\
 =\frac{\beta}{\Gamma(\alpha)}\int_0^\infty y^{\alpha}e^{-y}\,dy
 =\frac{\beta\Gamma(\alpha+1)}{\Gamma(\alpha)}=\alpha\beta
 $$
-이다(감마함수 점화식 사용).
-
 또한
 $$
 E(X^2)=\int_0^\infty x^2 f(x)\,dx
@@ -839,7 +743,6 @@ $$
 $$
 \mathrm{Var}(X)=E(X^2)-\{E(X)\}^2=\alpha(\alpha+1)\beta^2-(\alpha\beta)^2=\alpha\beta^2
 $$
-이다. □
 
 **(b) 적률생성함수(mgf)**  
 $$
@@ -853,7 +756,6 @@ $$
 =\frac{1}{\beta^\alpha(1/\beta-t)^\alpha}
 =(1-\beta t)^{-\alpha}
 $$
-이다. □
 
 **(c) 같은 $\beta$를 갖는 감마분포의 합**  
 $$
@@ -863,12 +765,12 @@ $$
 이므로 mgf의 분포결정성으로 결론이 성립한다. □
 
 ### 형상모수가 자연수인 감마분포의 대의적 정의
-shape 모수 $r$이 자연수이면
 $$
 \mathrm{Gamma}(r,\beta)\ \overset{d}{\equiv}\ \mathrm{Exp}_1(\beta)\oplus\cdots\oplus \mathrm{Exp}_r(\beta) \\
 X\sim \mathrm{Gamma}(r,\beta)\iff X\overset{d}{\equiv}Z_1+\cdots+Z_r,\quad Z_i\stackrel{\text{iid}}{\sim}\mathrm{Exp}(\beta)
 $$
 포아송과정에서는 "사건 사이 대기시간"들이 서로 독립이고 동일한 지수분포를 따르므로, $r$번째 사건까지의 총 대기시간 $W_r$가 감마분포를 따른다는 직관과도 일치한다.
+
 
 ## 정규분포 (Normal Distribution)
 **이항분포의 정규근사(De Moivre–Laplace approximation)**  
@@ -897,18 +799,11 @@ $$
 $$
 M_{Z_n}(t) = e^{-\mu t/\sigma} \left(pe^{t/\sigma} + 1-p\right)^n
 $$
-
 $pe^{t/\sigma} + 1-p$를 테일러 전개하면
 $$
-pe^{t/\sigma} + 1-p = 1 + p\left(\frac{t}{\sigma} + \frac{t^2}{2\sigma^2} + O(t^3/\sigma^3)\right)
-$$
-$$
-= 1 + \frac{pt}{\sigma} + \frac{pt^2}{2\sigma^2} + O(t^3/\sigma^3)
-$$
-
-$\mu/\sigma = np/\sigma$, $\sigma^2 = np(1-p)$를 이용하여 정리하면
-$$
-\log M_{Z_n}(t) = -\frac{\mu t}{\sigma} + n\log\left(1 + \frac{pt}{\sigma} + \frac{pt^2}{2\sigma^2} + O(t^3/\sigma^3)\right)
+pe^{t/\sigma} + 1-p = 1 + p\left(\frac{t}{\sigma} + \frac{t^2}{2\sigma^2} + O(t^3/\sigma^3)\right) \\
+= 1 + \frac{pt}{\sigma} + \frac{pt^2}{2\sigma^2} + O(t^3/\sigma^3) \\
+\therefore \log M_{Z_n}(t) = -\frac{\mu t}{\sigma} + n\log\left(1 + \frac{pt}{\sigma} + \frac{pt^2}{2\sigma^2} + O(t^3/\sigma^3)\right)
 $$
 
 $\log(1+A) = A - A^2/2 + O(A^3)$를 적용하고 $n\to\infty$일 때 주도항만 남기면
@@ -922,13 +817,9 @@ $$
 $$
 I = \int_{-\infty}^{\infty} \phi(z)\,dz = \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-z^2/2}\,dz
 $$
-를 계산한다.
-
 양변을 제곱하면
 $$
-I^2 = \left(\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-x^2/2}\,dx\right)\left(\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-y^2/2}\,dy\right)
-$$
-$$
+I^2 = \left(\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-x^2/2}\,dx\right)\left(\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-y^2/2}\,dy\right) \\
 = \frac{1}{2\pi}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} e^{-(x^2+y^2)/2}\,dx\,dy
 $$
 
@@ -939,10 +830,8 @@ $$
 
 $u = r^2/2$로 치환하면 $du = r\,dr$이므로
 $$
-I^2 = \frac{1}{2\pi}\int_{0}^{2\pi}\,d\theta \int_{0}^{\infty} e^{-u}\,du = \frac{1}{2\pi} \cdot 2\pi \cdot 1 = 1
+\therefore I^2 = \frac{1}{2\pi}\int_{0}^{2\pi}\,d\theta \int_{0}^{\infty} e^{-u}\,du = \frac{1}{2\pi} \cdot 2\pi \cdot 1 = 1
 $$
-
-따라서 $I = 1$이다. □
 
 ### 정규분포의 정의
 일반적인 정규분포 $N(\mu,\sigma^2)$의 pdf는
@@ -963,21 +852,18 @@ $X\sim N(\mu,\sigma^2)$이면
 $$
 E(X)=\mu,\qquad \mathrm{Var}(X)=\sigma^2
 $$
-이다.
 
 **(b) 적률생성함수(mgf)**  
 $X\sim N(\mu,\sigma^2)$이면
 $$
 \mathrm{mgf}_X(t)=\exp\left(\mu t+\frac{1}{2}\sigma^2 t^2\right),\quad -\infty<t<\infty
 $$
-이다.
 
 **(c) 독립 정규의 합**  
 $X_1\sim N(\mu_1,\sigma_1^2)$, $X_2\sim N(\mu_2,\sigma_2^2)$이고 서로 독립이면
 $$
 X_1+X_2\sim N(\mu_1+\mu_2,\ \sigma_1^2+\sigma_2^2)
 $$
-이다.
 
 #### 증명
 **(a) 평균과 분산**  
@@ -1064,9 +950,9 @@ $$
 $$
 \Phi(-z)=1-\Phi(z)
 $$
-이다. 표준정규표로 예시값 $\Phi(1.64)=0.9495$, $\Phi(1.65)=0.9505$, $\Phi(1.96)=0.9750$ 등을 확인할 수 있다. **two tailed**  
+이다. 표준정규표로 예시값 $\Phi(1.64)=0.9495$, $\Phi(1.65)=0.9505$, $\Phi(1.96)=0.9750$ 등을 확인할 수 있다. 
 
-### 예 3.6.1
+#### 예 3.6.1
 $X\sim N(3,4)$에서 $Z=(X-3)/\sqrt{4}=(X-3)/2\sim N(0,1)$로 표준화하여 계산.
 
 **(a)** $P(5<X\le 7)$
@@ -1104,7 +990,7 @@ P(X>\mu+\sigma z_\alpha)=\alpha
 $$
 가 성립하므로 분위수 계산에 사용한다.
 
-### 예 3.6.2
+#### 예 3.6.2
 $X\sim N(3,4)$에서 $\mu=3,\sigma=2$이다.
 
 **(a)** $q_{0.95}$ (95 분위수): $P(X\le q_{0.95})=0.95$는 $P(X>q_{0.95})=0.05$와 같으므로
@@ -1137,37 +1023,24 @@ $$
 X_1 \oplus X_2 \sim N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)
 $$
 
+## 주요 확률분포 요약
 
-## 여러 분포의 정의 정리
 ### 표 3.1 이산확률분포 요약
-| 분포 | 확률질량함수 (pmf) | 대의적 정의 | 적률생성함수 (mgf) | 누율생성함수 (cgf) |
-|------|-------------------|-------------|-------------------|-------------------|
-| 베르누이<br>$\text{Bernoulli}(p)$<br><sub>단일 시행의 성공/실패</sub> | $P(X=x)=p^x(1-p)^{1-x}$<br>$x=0,1$ | - | $M_X(t)=pe^t+(1-p)$ | $K_X(t)=\log(pe^t+1-p)$ |
-| 이항분포<br>$B(n,p)$<br><sub>$n$번 시행 중 성공 횟수</sub> | $P(X=x)=\binom{n}{x}p^x(1-p)^{n-x}$<br>$x=0,1,\ldots,n$ | $X\overset{d}{\equiv}\sum_{i=1}^n Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Bernoulli}(p)$ | $M_X(t)=(pe^t+1-p)^n$ | $K_X(t)=n\log(pe^t+1-p)$ |
-| 기하분포<br>$\text{Geo}(p)$<br><sub>첫 성공까지 시행 횟수</sub> | $P(W_1=x)=(1-p)^{x-1}p$<br>$x=1,2,\ldots$ | - | $M_{W_1}(t)=\frac{pe^t}{1-(1-p)e^t}$<br>$t<-\log(1-p)$ | $K_{W_1}(t)=-\log\{1-(1-p)e^t\}+t+\log p$ |
-| 음이항분포<br>$\text{Negbin}(r,p)$<br><sub>$r$번째 성공까지 시행 횟수</sub> | $P(W_r=x)=\binom{x-1}{r-1}p^r(1-p)^{x-r}$<br>$x=r,r+1,\ldots$ | $W_r\overset{d}{\equiv}\sum_{i=1}^r Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Geo}(p)$ | $M_{W_r}(t)=\left(\frac{pe^t}{1-(1-p)e^t}\right)^r$<br>$t<-\log(1-p)$ | $K_{W_r}(t)=r[-\log\{1-(1-p)e^t\}+t+\log p]$ |
-| 포아송분포<br>$\text{Poisson}(\lambda)$<br><sub>단위 구간 내 사건 발생 횟수</sub> | $P(X=x)=e^{-\lambda}\frac{\lambda^x}{x!}$<br>$x=0,1,2,\ldots$ | - | $M_X(t)=\exp\{\lambda(e^t-1)\}$<br>$-\infty<t<\infty$ | $K_X(t)=\lambda(e^t-1)$ |
-| 다항분포<br>$\text{Multi}(n;p_1,\ldots,p_k)$<br><sub>$k$개 범주별 발생 횟수</sub> | $P(X_1=x_1,\ldots,X_k=x_k)$<br>$=\frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k}$<br>$\sum x_i=n$ | $X\overset{d}{\equiv}\sum_{i=1}^n Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Multi}(1;p_1,\ldots,p_k)$ | $M_X(t)=\left(\sum_{i=1}^k p_ie^{t_i}\right)^n$<br>$t=(t_1,\ldots,t_k)^t$ | $K_X(t)=n\log\left(\sum_{i=1}^k p_ie^{t_i}\right)$ |
+| 분포 | 지지집합 (support) | 확률질량함수 (pmf) | 대의적 정의 | 평균 $E(X)$ | 분산 $\mathrm{Var}(X)$ | 적률생성함수 (mgf) |
+|------|---------------------|-------------------|-------------|-------------|------------------------|-------------------|
+| 베르누이<br>$\mathrm{Bernoulli}(p)$<br><sub>단일 시행의 성공/실패</sub> | $\{0,1\}$ | $P(X=x)=p^x(1-p)^{1-x}$<br>$x=0,1$ | - | $p$ | $p(1-p)$ | $M_X(t)=pe^t+(1-p)$ |
+| 이항분포<br>$B(n,p)$<br><sub>$n$번 시행 중 성공 횟수</sub> | $\{0,1,\ldots,n\}$ | $P(X=x)=\binom{n}{x}p^x(1-p)^{n-x}$<br>$x=0,1,\ldots,n$ | $X\overset{d}{\equiv}\sum_{i=1}^n Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\mathrm{Bernoulli}(p)$ | $np$ | $np(1-p)$ | $M_X(t)=(pe^t+1-p)^n$ |
+| 초기하분포<br>$H(n;N,D)$<br><sub>비복원추출에서 성공 개수</sub> | $x_{\min}\le x\le x_{\max}$<br>$x_{\min}=\max(0,\ n-(N-D))$<br>$x_{\max}=\min(n,\ D)$ | $P(X=x)=\dfrac{\binom{D}{x}\binom{N-D}{n-x}}{\binom{N}{n}}$ | - | $np$<br>($p=D/N$) | $\dfrac{N-n}{N-1}\,np(1-p)$ | - |
+| 기하분포<br>$\mathrm{Geo}(p)$<br><sub>첫 성공까지 시행 횟수</sub> | $\{1,2,\ldots\}$ | $P(W_1=x)=(1-p)^{x-1}p$<br>$x=1,2,\ldots$ | - | $\dfrac{1}{p}$ | $\dfrac{1-p}{p^2}$ | $M_{W_1}(t)=\dfrac{pe^t}{1-(1-p)e^t}$<br>$t<-\log(1-p)$ |
+| 음이항분포<br>$\mathrm{Negbin}(r,p)$<br><sub>$r$번째 성공까지 시행 횟수</sub> | $\{r,r+1,\ldots\}$ | $P(W_r=x)=\binom{x-1}{r-1}p^r(1-p)^{x-r}$<br>$x=r,r+1,\ldots$ | $W_r\overset{d}{\equiv}\sum_{i=1}^r Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\mathrm{Geo}(p)$ | $\dfrac{r}{p}$ | $\dfrac{r(1-p)}{p^2}$ | $M_{W_r}(t)=\left(\dfrac{pe^t}{1-(1-p)e^t}\right)^r$<br>$t<-\log(1-p)$ |
+| 포아송분포<br>$\mathrm{Poisson}(\lambda)$<br><sub>단위 구간 내 사건 발생 횟수</sub> | $\{0,1,2,\ldots\}$ | $P(X=x)=e^{-\lambda}\dfrac{\lambda^x}{x!}$<br>$x=0,1,2,\ldots$ | - | $\lambda$ | $\lambda$ | $M_X(t)=\exp\{\lambda(e^t-1)\}$<br>$-\infty<t<\infty$ |
+| 다항분포<br>$\mathrm{Multi}(n;p_1,\ldots,p_k)$<br><sub>$k$개 범주별 발생 횟수</sub> | $x_i\in\{0,1,2,\ldots\}$<br>$\sum_{i=1}^k x_i=n$ | $P(X_1=x_1,\ldots,X_k=x_k)$<br>$=\dfrac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k}$ | $X\overset{d}{\equiv}\sum_{i=1}^n Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\mathrm{Multi}(1;p_1,\ldots,p_k)$ | $E(X_i)=np_i$ | $\mathrm{Var}(X_i)=np_i(1-p_i)$<br>$\mathrm{Cov}(X_i,X_j)=-np_ip_j\ (i\ne j)$ | $M_X(t)=\left(\sum_{i=1}^k p_ie^{t_i}\right)^n$<br>$t=(t_1,\ldots,t_k)^\top$ |
+
+> 참고(중요 성질): 기하분포/지수분포는 무기억성(memoryless)을 가지며, 다항분포는 서로 다른 범주 간 공분산이 음수이다.
 
 ### 표 3.2 연속확률분포 요약
-
-| 분포 | 확률밀도함수 (pdf) | 대의적 정의 | 적률생성함수 (mgf) | 누율생성함수 (cgf) |
-|------|-------------------|-------------|-------------------|-------------------|
-| 지수분포<br>$\text{Exp}(\beta)$<br><sub>사건 간 대기시간</sub> | $f(x)=\frac{1}{\beta}e^{-x/\beta}\mathbf{1}(x\ge 0)$ | - | $M_X(t)=(1-\beta t)^{-1}$<br>$t<1/\beta$ | $K_X(t)=-\log(1-\beta t)$ |
-| 감마분포<br>$\text{Gamma}(\alpha,\beta)$<br><sub>$\alpha$개 사건까지 총 대기시간(지수분포 일반화 버전)</sub> | $f(x)=\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta}\mathbf{1}(x>0)$ | $X\overset{d}{\equiv}\sum_{i=1}^r Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\text{Exp}(\beta)$<br>(when $\alpha=r\in\mathbb{N}$) | $M_X(t)=(1-\beta t)^{-\alpha}$<br>$t<1/\beta$ | $K_X(t)=-\alpha\log(1-\beta t)$ |
-| 정규분포<br>$N(\mu,\sigma^2)$<br><sub>대칭적 종 모양 분포, 이항분포 누적확률</sub> | $f(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$<br>$-\infty<x<\infty$ | $X\overset{d}{\equiv}\sigma Z+\mu$<br>$Z\sim N(0,1)$ | $M_X(t)=\exp\left(\mu t+\frac{1}{2}\sigma^2 t^2\right)$<br>$-\infty<t<\infty$ | $K_X(t)=\mu t+\frac{1}{2}\sigma^2 t^2$ |
-
-### 표 3.3 주요 분포의 평균과 분산
-
-| 분포 | 평균 $E(X)$ | 분산 $\text{Var}(X)$ | 비고 |
-|------|-------------|---------------------|------|
-| $\text{Bernoulli}(p)$ | $p$ | $p(1-p)$ | |
-| $B(n,p)$ | $np$ | $np(1-p)$ | |
-| $H(n;N,D)$ | $np$ ($p=D/N$) | $\frac{N-n}{N-1}\cdot np(1-p)$ | 초기하분포 |
-| $\text{Geo}(p)$ | $\frac{1}{p}$ | $\frac{1-p}{p^2}$ | |
-| $\text{Negbin}(r,p)$ | $\frac{r}{p}$ | $\frac{r(1-p)}{p^2}$ | |
-| $\text{Poisson}(\lambda)$ | $\lambda$ | $\lambda$ | |
-| $\text{Multi}(n;p_1,\ldots,p_k)$ | $E(X_i)=np_i$ | $\text{Var}(X_i)=np_i(1-p_i)$<br>$\text{Cov}(X_i,X_j)=-np_ip_j$ | 다항분포 |
-| $\text{Exp}(\beta)$ | $\beta$ | $\beta^2$ | $\beta=1/\lambda$ |
-| $\text{Gamma}(\alpha,\beta)$ | $\alpha\beta$ | $\alpha\beta^2$ | |
-| $N(\mu,\sigma^2)$ | $\mu$ | $\sigma^2$ | |
+| 분포 | 지지집합 (support) | 확률밀도함수 (pdf) | 대의적 정의 | 평균 $E(X)$ | 분산 $\mathrm{Var}(X)$ | 적률생성함수 (mgf) |
+|------|---------------------|-------------------|-------------|-------------|------------------------|-------------------|
+| 지수분포<br>$\mathrm{Exp}(\beta)$<br><sub>사건 간 대기시간</sub> | $[0,\infty)$ | $f(x)=\dfrac{1}{\beta}e^{-x/\beta}\mathbf{1}(x\ge 0)$ | - | $\beta$ | $\beta^2$ | $M_X(t)=(1-\beta t)^{-1}$<br>$t<1/\beta$ |
+| 감마분포<br>$\mathrm{Gamma}(\alpha,\beta)$<br><sub>$\alpha$개 사건까지 총 대기시간</sub> | $(0,\infty)$ | $f(x)=\dfrac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta}\mathbf{1}(x>0)$ | $X\overset{d}{\equiv}\sum_{i=1}^r Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\mathrm{Exp}(\beta)$<br>(when $\alpha=r\in\mathbb{N}$) | $\alpha\beta$ | $\alpha\beta^2$ | $M_X(t)=(1-\beta t)^{-\alpha}$<br>$t<1/\beta$ |
+| 정규분포<br>$N(\mu,\sigma^2)$<br><sub>대칭적 종 모양 분포</sub> | $\mathbb{R}$ | $f(x)=\dfrac{1}{\sqrt{2\pi}\sigma}\exp\!\left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right)$ | $X\overset{d}{\equiv}\sigma Z+\mu$<br>$Z\sim N(0,1)$ | $\mu$ | $\sigma^2$ | $M_X(t)=\exp\!\left(\mu t+\dfrac{1}{2}\sigma^2 t^2\right)$<br>$-\infty<t<\infty$ |
