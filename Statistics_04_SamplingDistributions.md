@@ -61,7 +61,7 @@ X_{(1)}<X_{(2)}<\cdots<X_{(n)}
 $$
 이라고 할 때 이를 **순서통계량(order statistics)** 이라고 한다. 또한 이들 크기의 가운데를 나타내는 통계량
 $$
-\text{med},X_i=
+\text{med}X_i=
 \begin{cases}
 X_{(m+1)}, & n=2m+1 \\
 \frac{X_{(m)}+X_{(m+1)}}{2}, & n=2m
@@ -72,14 +72,15 @@ $$
 랜덤표본 $X_1,X_2,\dots,X_n$의 함수인 통계량 $u(X_1,X_2,\dots,X_n)$은 확률변수로서 분포를 가지며, 이는 모집단 분포에 따라 결정된다. 이러한 통계량의 분포를 일반적으로 **표본분포(sampling distribution)** 라고 한다.
 
 #### 예 4.1.3
-(a) 불량률 $p$를 모수로 하는 베르누이분포 Bernoulli$(p)$에서의 랜덤표본을 $X_1,X_2,\dots,X_n$이라고 할 때, 표본 중 불량품의 개수인 $X_1+\cdots+X_n$은 이항분포 $Bin(n,p)$를 갖는다. 따라서 표본비율 $\hat p=\frac{X_1+\cdots+X_n}{n}$은
+(a) 불량률 $p$를 모수로 하는 베르누이분포 $Bernoulli(p)$ 에서의 랜덤표본을 $X_1,X_2,\dots,X_n$이라고 할 때, 표본 중 불량품의 개수인 $X_1+\cdots+X_n$은 이항분포 $Bin(n,p)$를 갖는다. 따라서 표본비율 $\hat p=\frac{X_1+\cdots+X_n}{n}$은
 $$
 P(\hat p=k/n)=\binom nk p^k(1-p)^{n-k},\quad k=0,1,\dots,n
 $$
 으로 주어지는 분포를 가지며 그 평균과 분산은 각각
 $$
-E(\hat p)=p,\qquad \text{Var}(\hat p)=\frac{p(1-p)}n
-$$ 즉 표본비율 $\hat p$는 표본크기가 커짐에 따라 모비율 $p$ 주위에 집중되는 분포를 갖는다.
+E(\hat p)=p,\qquad \text{Var}(\hat p)=\frac{p(1-p)}{n}
+$$
+즉 표본비율 $\hat p$는 표본크기가 커짐에 따라 모비율 $p$ 주위에 집중되는 분포를 갖는다.
 
 (b) 단위 부피당 평균 부유생물의 수가 $\lambda$인 포아송분포 $Poisson(\lambda)$에서의 랜덤표본을 $X_1,X_2,\dots,X_n$이라고 할 때, 정리 3.4.1로부터 표본 중 부유생물의 합계 $X_1+\cdots+X_n$은 포아송분포 $Poisson(n\lambda)$를 갖는다. 따라서 표본평균 $\bar X$는
 $$
@@ -92,26 +93,26 @@ $$ 즉 표본평균 $\bar X$는 표본크기가 커짐에 따라 모평균 $\lam
 
 이제 랜덤표본의 함수인 통계량의 분포를 일반적인 경우에 구하는 방법을 알아보자. 일반적으로 확률변수
 $$
-X=(X_1,\dots,X_n)^T
+\mathbf{X}=(X_1,\dots,X_n)^T
 $$
-의 분포로부터 $X$의 함수인
+의 분포로부터 $\mathbf{X}$의 함수인
 $$
-Y=u(X)
+Y=u(\mathbf{X})
 $$
-의 분포를 구하려면, $Y$에 관한 확률을 대응하는 $X$에 관한 확률로 바꾸어 계산해야 한다.
+의 분포를 구하려면, $Y$에 관한 확률을 대응하는 $\mathbf{X}$에 관한 확률로 바꾸어 계산해야 한다.
 
 ### (a) 이산형 경우
 $$
-P(Y=y)=P(u(X)=y)=\sum_{x:u(x)=y}P(X=x) \\
-\therefore \text{pdf}_Y(y)=\sum_{x:u(x)=y}\text{pdf}_X(x)
+P(Y=y)=P(u(\mathbf{X})=y)=\sum_{\mathbf{x}:u(\mathbf{x})=y}P(\mathbf{X}=\mathbf{x}) \\
+\therefore \text{pdf}_Y(y)=\sum_{\mathbf{x}:u(\mathbf{x})=y}\text{pdf}_X(\mathbf{x})
 $$
 
 ### (b) 연속형 경우
 $$
-P(Y\in y\pm|\Delta y|)=P(u(X)\in y\pm|\Delta y|)
-\approx\sum_{x:u(x)=y}P(X\in x\pm|\Delta x|) \\
+P(Y\in y\pm|\Delta y|)=P(u(\mathbf{X})\in y\pm|\Delta y|)
+\approx\sum_{\mathbf{x}:u(\mathbf{x})=y}P(\mathbf{X}\in \mathbf{x}\pm|\Delta \mathbf{x}|) \\
 \therefore \text{pdf}_Y(y)|\Delta y|
-\approx\sum_{x:u(x)=y}\text{pdf}_X(x)|\Delta x|
+\approx\sum_{\mathbf{x}:u(\mathbf{x})=y}\text{pdf}_X(\mathbf{x})|\Delta \mathbf{x}|
 $$
 
 #### 예 4.1.4
@@ -154,53 +155,53 @@ $$
 ### 정리 4.1.1 (연속형 변수의 일대일 변환과 확률밀도함수)
 연속형 $k$차원 확률변수
 $$
-X=(X_1,\dots,X_k)^T
+\mathbf{X}=(X_1,\dots,X_k)^T
 $$
 와 함수
 $$
-u=(u_1,\dots,u_k)^T:\mathcal X\to\mathcal Y
+\mathbf{u}=(u_1,\dots,u_k)^T:\mathcal X\to\mathcal Y
 $$
 에 대하여 다음이 성립한다고 하자.
 
-(a) $P(X\in\mathcal X)=1$  
-(b) $u$는 정의역 $\mathcal X$, 치역 $\mathcal Y$인 일대일 함수  
-(c) $\mathcal X$는 열린집합이고 $u$는 미분 가능하며 야코비안
+(a) $P(\mathbf{X}\in\mathcal X)=1$  
+(b) $\mathbf{u}$는 정의역 $\mathcal X$, 치역 $\mathcal Y$인 일대일 함수  
+(c) $\mathcal X$는 열린집합이고 $\mathbf{u}$는 미분 가능하며 야코비안
 $$
-J_u(x)=\det\left(\frac{\partial y}{\partial x}\right)\neq0
+J_\mathbf{u}(\mathbf{x})=\det\left(\frac{\partial \mathbf{y}}{\partial \mathbf{x}}\right)\neq0
 $$
-
-이때 $Y=u(X)$의 확률밀도함수는
+이때 $Y=\mathbf{u}(\mathbf{X})$의 확률밀도함수는
 $$
-\text{pdf}_Y(y)=\text{pdf}_X(x)\left|\det\left(\frac{\partial y}{\partial x}\right)\right|^{-1}
+\text{pdf}_Y(\mathbf{y})=\text{pdf}_X(\mathbf{x})\left|\det\left(\frac{\partial \mathbf{y}}{\partial \mathbf{x}}\right)\right|^{-1}
 $$
-
-#### 참고: 치환적분
-정의역 $\mathcal Y$가 $n$차원 공간 $\mathbb{R}^n$에서의 열린 집합인 함수 $w:\mathcal Y\to\mathcal X$가 미분가능하고, 1차 편도함수가 연속함수로서 야코비안 행렬식
-$$
-J_w(y)=\det\left(\frac{\partial w(y)}{\partial y}\right)
-$$
-이 정의역에서 0이 아닐 때, 함수 $w$의 치역에서 정의된 적분가능한 함수 $f$에 대해 다음이 성립한다.
-$$
-\int_A f(x)dx = \int_{w^{-1}(A)}f(w(y))\left|J_w(y)\right|dy
-$$
-
-위 치환적분 공식을 간략하게
-$$
-f(x)dx = f(w(y))\left|\det\left(\frac{\partial w(y)}{\partial y}\right)\right|dy
-$$
-로 나타내기도 하며, 실제 적용할 때는 함수 $y=u(x)$의 역함수인 $w(y) = u^{-1}(y)$로 치환하는 경우가 많다. 이런 경우에는 역함수 정리로부터
-$$
-\frac{\partial}{\partial y}u^{-1}(y) = \left(\frac{\partial}{\partial x}u(x)\right)^{-1},\quad y=u(x)
-$$
-임을 이용하여 야코비안 행렬식을 계산할 수도 있다.
 
 #### 증명
 치환적분법으로부터
 $$
-P(Y\in B)=\int_{x\in u^{-1}(B)}\text{pdf}_X(x)dx
-=\int_{y\in B}\text{pdf}_X(u^{-1}(y))|J_{u^{-1}}(y)|dy
+P(Y\in B)=\int_{\mathbf{x}\in \mathbf{u}^{-1}(B)}\text{pdf}_\mathbf{X}(\mathbf{x})d\mathbf{x}
+=\int_{\mathbf{y}\in B}\text{pdf}_\mathbf{X}(\mathbf{u}^{-1}(\mathbf{y}))|J_{\mathbf{u}^{-1}}(\mathbf{y})|d\mathbf{y}
 $$
 
+>#### 참고: 치환적분
+>정의역 $\mathcal Y$가 $n$차원 공간 $\mathbb{R}^n$에서의 열린 집합인 함수 $w:\mathcal Y\to\mathcal X$가 미분가능하고, 1차 편도함수가 연속함수로서 야코비안 행렬식
+>$$
+>J_w(y)=\det\left(\frac{\partial w(y)}{\partial y}\right)
+>$$
+>이 정의역에서 0이 아닐 때, 함수 $w$의 치역에서 정의된 적분가능한 함수 $f$에 대해 다음이 성립한다.
+>$$
+>\int_A f(\mathbf{x})d\mathbf{x} = \int_{w^{-1}(A)}f(w(\mathbf{y}))\left|J_w(\mathbf{y})\right|d\mathbf{y}
+>$$
+>
+>위 치환적분 공식을 간략하게
+>$$
+>f(\mathbf{x})d\mathbf{x} = f(w(\mathbf{y}))\left|\det\left(\frac{\partial w(\mathbf{y})}{\partial \mathbf{y}}\right)\right|d\mathbf{y}
+>$$
+>로 나타내기도 하며, 실제 적용할 때는 함수 $\mathbf{y}=\mathbf{u}(\mathbf{x})$의 역함수인 $\mathbf{w}(\mathbf{y}) = \mathbf{u}^{-1}(\mathbf{y})$로 치환하는 경우가 많다. 이런 경우에는 역함수 정리로부터
+>$$
+>\frac{\partial}{\partial \mathbf{y}}\mathbf{u}^{-1}(\mathbf{y}) = \left(\frac{\partial}{\partial \mathbf{x}}\mathbf{u}(\mathbf{x})\right)^{-1},\quad \mathbf{y}=\mathbf{u}(\mathbf{x})
+>$$
+>임을 이용하여 야코비안 행렬식을 계산할 수도 있다.
+
+TODO:
 #### 예 4.1.5  위치모수와 척도모수를 이용한 확률분포
 연속형 확률변수 $Z$의 확률밀도함수가 $f(z)$일 때, 양수 $\sigma$와 실수 $\mu$에 대하여
 $$
@@ -218,10 +219,7 @@ $$
 
 (a) **정규분포** $N(\mu,\sigma^2)$
 $$
-N(\mu,\sigma^2)\ \overset{d}{\equiv}\ \sigma N(0,1)+\mu
-$$
-
-$$
+N(\mu,\sigma^2)\ \overset{d}{\equiv}\ \sigma N(0,1)+\mu\\
 \text{pdf}_X(x)
 =\frac{1}{\sigma}\phi\left(\frac{x-\mu}{\sigma}\right),
 \qquad
@@ -234,10 +232,7 @@ $$
 
 (b) **로지스틱분포** $L(\mu,\sigma)$
 $$
-L(\mu,\sigma)\ \overset{d}{\equiv}\ \sigma L(0,1)+\mu
-$$
-
-$$
+L(\mu,\sigma)\ \overset{d}{\equiv}\ \sigma L(0,1)+\mu\\
 \text{pdf}_X(x)
 =\frac{1}{\sigma}f\left(\frac{x-\mu}{\sigma}\right),
 \qquad
@@ -250,10 +245,7 @@ $$
 
 (c) **이중지수분포**(double exponential distribution) $DE(\mu,\sigma)$
 $$
-DE(\mu,\sigma)\ \overset{d}{\equiv}\ \sigma DE(0,1)+\mu
-$$
-
-$$
+DE(\mu,\sigma)\ \overset{d}{\equiv}\ \sigma DE(0,1)+\mu\\
 \text{pdf}_X(x)
 =\frac{1}{\sigma}f\left(\frac{x-\mu}{\sigma}\right),
 \qquad
@@ -266,10 +258,7 @@ $$
 
 (d) **코시(Cauchy)분포** $C(\mu,\sigma)$
 $$
-C(\mu,\sigma)\ \overset{d}{\equiv}\ \sigma C(0,1)+\mu
-$$
-
-$$
+C(\mu,\sigma)\ \overset{d}{\equiv}\ \sigma C(0,1)+\mu\\
 \text{pdf}_X(x)
 =\frac{1}{\sigma}f\left(\frac{x-\mu}{\sigma}\right),
 \qquad
@@ -282,10 +271,7 @@ $$
 
 (e) **지수분포** $\mathrm{Exp}(\sigma)$
 $$
-\mathrm{Exp}(\sigma)\ \overset{d}{\equiv}\ \sigma \mathrm{Exp}(1)
-$$
-
-$$
+\mathrm{Exp}(\sigma)\ \overset{d}{\equiv}\ \sigma \mathrm{Exp}(1) \\
 \text{pdf}_X(x)
 =\frac{1}{\sigma}f\left(\frac{x}{\sigma}\right),
 \qquad
@@ -297,10 +283,7 @@ $$
 
 (f) **감마분포** $\mathrm{Gamma}(\alpha,\beta)$
 $$
-\mathrm{Gamma}(\alpha,\beta)\ \overset{d}{\equiv}\ \beta,\mathrm{Gamma}(\alpha,1)
-$$
-
-$$
+\mathrm{Gamma}(\alpha,\beta)\ \overset{d}{\equiv}\ \beta,\mathrm{Gamma}(\alpha,1) \\
 \text{pdf}_X(x)
 =\frac{1}{\beta}f\left(\frac{x}{\beta}\right),
 \qquad

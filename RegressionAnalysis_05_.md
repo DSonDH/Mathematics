@@ -153,9 +153,9 @@ $$t_0=\frac{\hat y_0-\eta}{\sqrt{\mathbf{x}^T (\mathbf{X}^T\mathbf{X})^{-1} \mat
 2. 유의수준 $\alpha$를 정하고, 표준정규분포표와 t-분포표에 기각치 $z_{\alpha/2}$ 또는 $t_{\alpha/2}(n-p-1)$를 찾는다.
 3. $\sigma^2$가 알려진 경우 $|z_0| > z_{\alpha/2}$이면 귀무가설 기각, 그렇지 않으면 채택한다. $\sigma^2$가 미지인 경우 $|t_0| > t_{\alpha/2}(n-p-1)$이면 귀무가설 기각, 그렇지 않으면 채택한다.
 
-TODO:
+
 ## 5.4 가설 $(\mathbf{C}\mathbf{\beta}=\mathbf{m})$의 검정 (Test of Linear Hypothesis $(\mathbf{C}\mathbf{\beta}=\mathbf{m})$)
-여러 개의 선형제약을 동시에 검정한다.
+$k$개의 선형제약을 동시에 검정한다.
 $$\mathbf{C}\mathbf{\beta} = \mathbf{m}$$
 
 * $\mathbf{C}$: $k\times(p+1)$ 행렬
@@ -169,44 +169,90 @@ $$\mathbf{C}\mathbf{\beta} = \mathbf{m}$$
 
 예시2: $H_0: \beta_1-\beta_2 = 0, \beta_3-2\beta_4 = 0$ 라는 가설은 $\mathbf{C}=\begin{bmatrix}0 & 1 & -1 & 0 & \cdots & 0 \\ 0 & 0 & 0 & 1 & -2 & \cdots & 0\end{bmatrix}$, $\mathbf{m}=\begin{bmatrix}0 \\ 0\end{bmatrix}$로 표현할 수 있다.
 
+검정하는 방법에는 크게 두 가지가 있다
+- 제한최소제곱법 (Restricted Least Squares via Lagrange Multipliers)
+- 축소모형 접근 (Reduced Model Approach)
+
 ### 5.4.1 방법 I: 제한최소제곱법 (Restricted Least Squares via Lagrange Multipliers)
-제한조건 $\mathbf{C}\mathbf{\beta}=\mathbf{m}$을 만족하는 $\beta$ 중에서 잔차제곱합이 최소가 되는 $\beta$를 구한다.
+제한조건 $\mathbf{C}\mathbf{\beta}=\mathbf{m}$을 만족하는 $\mathbf\beta$ 중에서 잔차제곱합이 최소가 되는 $\mathbf{\tilde\beta}$를 구한다.
 
 문제:
-$$\min_\beta (\mathbf{y}-\mathbf{X}\beta)^T(\mathbf{y}-\mathbf{X}\beta) \quad \text{s.t. } \mathbf{C}\mathbf{\beta}=\mathbf{m}$$
+$$\min_\beta (\mathbf{y}-\mathbf{X} \mathbf{\tilde\beta})^T(\mathbf{y}-\mathbf{X}\mathbf{\tilde\beta}) \quad \text{s.t. } \mathbf{C}\mathbf{\tilde\beta}=\mathbf{m}$$
 
-라그랑지안:
-$$L=(\mathbf{y}-\mathbf{X}\beta)^T(\mathbf{y}-\mathbf{X}\beta)+2\theta^T(\mathbf{C}\mathbf{\beta}-\mathbf{m})$$
+라그랑지안 (Lagrange 배수법, Lagrange multipliers)를 이용하여 다음과 같이 문제를 풀 수 있다:
+$$L=(\mathbf{y}-\mathbf{X}\mathbf{\tilde\beta})^T(\mathbf{y}-\mathbf{X}\mathbf{\tilde\beta})+2\mathbf{\theta}^T(\mathbf{C}\mathbf{\tilde\beta}-\mathbf{m})$$
+
+- $\mathbf{\theta}$는 $k \times 1$ 라그랑지 승수 벡터이다.
+- 함수 $L$을 $\mathbf{\tilde\beta}$에 대해 편미분하여 0으로 놓는다.
+$$ 
+\frac{\partial L}{\partial \mathbf{\tilde\beta}} = -2\mathbf{X}^T(\mathbf{y}-\mathbf{X}\mathbf{\tilde\beta}) + 2\mathbf{C}^T \mathbf{\theta} = 0 \\
+\frac{\partial L}{\partial \mathbf{\theta}} = 2(\mathbf{C}\mathbf{\tilde\beta}-\mathbf{m}) = 0 \\
+$$
+$$
+\therefore \mathbf{X}^T\mathbf{X}\mathbf{\tilde\beta} + \mathbf{C}^T \mathbf{\theta} = \mathbf{X}^T\mathbf{y} \\
+\mathbf{C}\mathbf{\tilde\beta} = \mathbf{m}
+$$
 
 정리하면 제한추정량:
-$$\tilde\beta = \hat\beta - (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}(\mathbf{C}\hat\beta-\mathbf{m})$$
+$$\mathbf{\tilde\beta} = \mathbf{\hat\beta} - (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}(\mathbf{C}\mathbf{\hat\beta}-\mathbf{m})$$
 
 **SSE 증가량**  
-$$Q = (\mathbf{C}\hat\beta-\mathbf{m})^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}(\mathbf{C}\hat\beta-\mathbf{m})$$
+$\mathbf{\beta}$가 $\mathbf{\tilde\beta}$를 취할 때 잔차제곱합 $SSE_R$와 $\mathbf{\hat\beta}$를 취할 때 잔차제곱합 $SSE_F$의 차이는 다음과 같다 (자세한 유도는 교재 참조):
+$$Q = (\mathbf{C}\mathbf{\hat\beta}-\mathbf{m})^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}(\mathbf{C}\mathbf{\hat\beta}-\mathbf{m})$$
+이 값은 $SSE_R - SSE_F$와 같다. 즉, 제한조건을 만족하도록 모수를 추정할 때 잔차제곱합이 얼마나 증가하는지를 나타낸다.
 
-**분포**  
-$$\frac{Q}{\sigma^2} \sim \chi^2(k,\lambda)$$
-귀무가설 하에서 $\lambda=0$.
+**$Q$의 분포**  
+중회귀모형 $\mathbf{y}=\mathbf{X}\beta + \varepsilon$에서 $\varepsilon \sim N(0,\sigma^2 I)$이므로, $\mathbf{y}, \mathbf{\hat{\beta}}, \mathbf{C}\mathbf{\hat{\beta}}$의 확률분포는
+$$
+\mathbf{y} \sim N(\mathbf{X}\beta, \sigma^2 I)\\
+\mathbf{\hat{\beta}} \sim N(\beta, \sigma^2 (\mathbf{X}^T\mathbf{X})^{-1})\\
+\mathbf{C}\mathbf{\hat{\beta}} \sim N(\mathbf{C}\beta, \sigma^2 \mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T)
+$$
+따라서 정리3.3을 이용하면
+$$\frac{Q}{\sigma^2} = (\mathbf{C}\mathbf{\hat\beta}-\mathbf{m})^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}(\mathbf{C}\mathbf{\hat\beta}-\mathbf{m}) \
+ \sim \chi^2(k,\lambda)$$
+- $\lambda = \frac{1}{\sigma^2}(\mathbf{C}\beta - \mathbf{m})^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}(\mathbf{C}\beta - \mathbf{m})$는 비중심성 매개변수(non-centrality parameter)이다.
+- $rank([\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]) = rank(\mathbf{C})=k$
 
-또한
-$$\frac{SSE}{\sigma^2} \sim \chi^2(n-p-1)$$
-이며 서로 독립이다.
+다음으로 $Q$와 $SSE$가 서로 독립임을 보이자. 
+$$SSE = (\mathbf{y}-\mathbf{X}\hat{\beta})^T(\mathbf{y}-\mathbf{X}\hat{\beta})$$
+$$Q = (\mathbf{C}\mathbf{\hat\beta}-\mathbf{m}) 
+[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}(\mathbf{C}\mathbf{\hat\beta}-\mathbf{m}) \\
+= \mathbf{y}^T \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T \mathbf{y} \\- 2\mathbf{m}^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T \mathbf{y} + \mathbf{m}^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}\mathbf{m}$$
+이며 $[I_n - \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T]\mathbf{X} = 0$이므로 정리3.5, 정리3.6을 이용해서 $SSE$와 $Q$는 서로 독립임을 보일 수 있다. 따라서
+$$F_0 = \frac{Q/k}{MSE} = \frac{Q/k}{SSE/(n-p-1)} \sim F(k,n-p-1,\lambda)$$
+- $\lambda= \frac{1}{2\sigma^2}(\mathbf{C}\beta - \mathbf{m})^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}(\mathbf{C}\beta - \mathbf{m})$는 F-분포의 비중심성 매개변수이다.
 
 **F-통계량**  
-$$F_0 = \frac{Q/k}{MSE} \sim F(k,n-p-1)$$
+귀무가설이 참일 때 $\lambda=0$이므로, 귀무가설이 참인 경우의 검정통계량은 다음과 같다.
+$$F_0 = \frac{Q/k}{SSE/(n-p-1)} = \frac{Q/k}{MSE} \sim F(k,n-p-1)$$
 
 기각규칙:
 $$F_0 > F_\alpha(k,n-p-1)$$
 
 ### 5.4.2 방법 II: 축소모형 접근 (Reduced Model Approach)
-제한조건 $\mathbf{C}\mathbf{\beta}=\mathbf{m}$을 만족하는 $\beta$로 모수를 재정의하여 축소모형을 만든다.
+제한조건 $\mathbf{C}\mathbf{\beta}=\mathbf{m}$을 만족하는 $\beta$로 모수를 재정의하여 축소모형을 만든다. $\mathbf{\beta_j}$간의 종속관계를 반영하여 모수의 재조정을 통해 축소모형을 만든다. 예를 들어, $H_0: \beta_1 = \beta_2 = 0$ 라는 가설은 $\beta_1$과 $\beta_2$가 0이 되도록 모수를 재정의하여 축소모형을 만든다.
+
+예를들어, $\beta_1 = \beta2, \beta_3 = 2\beta_4$ 라는 가설은 $\beta_1$과 $\beta_3$를 각각 $\beta_2$와 $\beta_4$로 표현하여 모수를 재정의하여 축소모형을 만든다.
+$$
+y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i3} + \beta_4 x_{i4} + \cdots + \varepsilon_i \\
+\text{제한조건: } \beta_1 = \beta_2, \beta_3 = 2\beta_4 \\
+\text{축소모형: } y_i = \beta_0 + \beta_1 x_{i1} + \beta_1 x_{i2} + 2\beta_4 x_{i3} + \beta_4 x_{i4} + \cdots + \varepsilon_i \\
+\text{즉, } y_i = \beta_0 + \beta_1 (x_{i1} + x_{i2}) + \beta_4 (2x_{i3} + x_{i4}) + \cdots + \varepsilon_i $$
 
 귀무가설을 반영하여 모수를 재정의한 축소모형을 만든다.
 완전모형(full model)과 축소모형(reduced model)의 잔차제곱합 비교:
-$$F_0 = \frac{SSE(R)-SSE(F)}{k} \Big/ MSE(F)$$
-이는 방법 I의 통계량과 동일하다.
+  - 완전모형의 잔차제곱합: $SSE_F$
+  - 축소모형의 잔차제곱합: $SSE_R$
+  - 잔차제곱합의 증가량: $SSE_R - SSE_F$은 귀무가설이 맞는 경우에는 0에 가까울 것이고, 귀무가설이 틀린 경우에는 양수로 커질 것이다.
+$$\mathbf{\tilde\beta} = \arg\min_{\beta: \mathbf{C}\beta=\mathbf{m}} (\mathbf{y}-\mathbf{X}\beta)^T(\mathbf{y}-\mathbf{X}\beta)$$
+$$F_0 
+= \frac{SSE(R)-SSE(F)}{k} \Big/ \frac{SSE(F)}{n-p-1} = \frac{SSE(R)-SSE(F)}{k} \Big/ MSE(F)$$
+이는 방법 I의 통계량과 동일하고, $Q$를 구하는 방법의 차이인 것이다.
 
 ### 절편 없는 경우
+방법I, II의 모든 절차는 절편이 있는 경우와 같고, 자유도만 유의하면 된다.
+
 절편이 없는 모형:
 $$\mathbf{y}=\mathbf{X}\beta+\mathbf{\varepsilon}$$
 이면 자유도는 $n-p$가 된다.
@@ -215,73 +261,39 @@ $$F_0 \sim F(k,n-p)$$
 
 ## 5.5 적합결여검정 (Lack-of-Fit Test)
 모형이 실제 평균구조를 충분히 설명하는지 검정한다.
+$$
+\hat y_i = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip} = \mathbf{x}_i^T \mathbf{\hat\beta}
+$$
 
 **잔차 분해**  
-잔차:
-$$e_i=y_i-\hat y_i$$
-
-이를
-$$e_i=\underbrace{y_i-E(y_i|x_i)}_{\text{순오차 (pure error)}}+\underbrace{E(y_i|x_i)-\hat y_i}_{\text{적합결여오차 (lack-of-fit error)}}$$
+$$e_i=y_i-\hat y_i =\underbrace{y_i-E(y_i|x_i)}_{\text{순오차 (pure error)}}+\underbrace{E(y_i|x_i)-\hat y_i}_{\text{적합결여오차 (lack-of-fit error)}}$$
 로 분해할 수 있다.
 
+- 순오차: 실험적 변동을 나타내며, 같은 $x$값에서 반복측정이 존재할 때 측정값들 사이의 변동을 나타낸다.
+- 적합결여오차: 모형의 구조적 부적합을 나타내며, 모형이 실제 평균구조를 충분히 설명하지 못할 때 발생한다.
+
 **반복관측이 있을 때**  
-같은 $x$값에서 반복측정이 존재하면
-총잔차제곱합을
+순오차를 데이터로부터 직접 추정하기 위해서는 같은 $x$값에서 반복측정이 존재해야 한다. 같은 $\mathbf{x}$값에서 반복측정이 존재하면 총잔차제곱합을
 $$SSE = SS_{PE}+SS_{LOF}$$
 로 분해 가능하다.
 
 * $SS_{PE}$: 순오차제곱합
 * $SS_{LOF}$: 적합결여제곱합
 
-**검정통계량**  
-$$F_0 = \frac{SS_{LOF}/(g-p-1)}{SS_{PE}/(n-g)} \sim F(g-p-1,n-g)$$
-* $g$: 서로 다른 설계점의 수
+$$
+(x_11, \dots, x_{1p}) \to y_{11}, \dots, y_{1n_1} \\
+(x_21, \dots, x_{2p}) \to y_{21}, \dots, y_{2n_2} \\
+\vdots \\
+(x_{k1}, \dots, x_{kp}) \to y_{k1}, \dots, y_{kn_k} \\
+\hat y_{ij} = \hat y_i = \mathbf{x}_i^T \hat{\beta}
+$$
+라 하면 잔차제곱합은
+$$SSE = \sum_{i=1}^k \sum_{j=1}^{n_i} (y_{ij}-\hat y_i)^2$$
+이고, $\bar y_i = \frac{1}{n_i} \sum_{j=1}^{n_i} y_{ij}$ 라 하면
+$$SSE = \sum_{i=1}^k \sum_{j=1}^{n_i} (y_{ij}-\bar y_i)^2 + \sum_{i=1}^k n_i (\bar y_i - \hat y_i)^2 = SS_{PE} + SS_{LOF}$$
 
-**해석**  
-* $F_0$가 크면 모형의 구조적 부적합 존재
-* 작으면 모형 적합성 유지
-
-
-## 5.5 적합결여검정 (Lack-of-Fit Test)
-중회귀모형이 자료의 평균구조를 충분히 설명하는지를 검정하는 절차이다.
-핵심 아이디어는 잔차제곱합을
-* 순오차(pure error)
-* 적합결여오차(lack-of-fit error)
-로 분해하는 것이다.
-
-### 5.5.1 잔차의 분해
-모형:
-$$y_i = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip} + \varepsilon_i$$
-
-적합값:
-$$\hat y_i = x_i^T \hat\beta$$
-
-잔차:
-$$e_i = y_i - \hat y_i$$
-
-이를 다음과 같이 분해할 수 있다.
-$$e_i=\underbrace{y_i - E(y_i|x_i)}_{\text{순오차}}+\underbrace{E(y_i|x_i) - \hat y_i}_{\text{적합결여오차}}$$
-* 첫 번째 항: 실험적 변동
-* 두 번째 항: 모형의 구조적 부적합
-
-### 5.5.2 반복관측이 있는 경우
-같은 설계점 $x_i$에서 $n_i$번 반복측정이 존재한다고 하자.
-$$\bar y_i = \frac{1}{n_i}\sum_{j=1}^{n_i} y_{ij}$$
-총 잔차제곱합:
-$$SSE = \sum_{i=1}^k \sum_{j=1}^{n_i} (y_{ij}-\hat y_{ij})^2$$
-이를 다음과 같이 분해한다.
-$$SSE = SSPE + SSLF$$
-
-**(1) 순오차제곱합**  
-$$SSPE = \sum_{i=1}^k \sum_{j=1}^{n_i} (y_{ij}-\bar y_i)^2$$
-
-자유도:
-$$df_{PE} = \sum (n_i-1) = n-k$$
-
-**(2) 적합결여제곱합**  
-$$SSLF = \sum_{i=1}^k n_i(\bar y_i-\hat y_i)^2$$
-자유도:
-$$df_{LF} = (n-p-1)-(n-k) = k-p-1$$
+$SS_{PE}$는 순오차제곱합으로, 같은 $x$값에서 반복측정이 존재할 때 측정값들 사이의 변동을 나타낸다. 자유도는 $df_{PE} = n-k$이다.
+$SS_{LOF}$는 적합결여제곱합으로, 모형의 구조적 부적합을 나타낸다. 자유도는 $SSE$의 자유도에서 $SS_{PE}$의 자유도를 뺀 값으로, $df_{LOF} = k-p-1$이다.
 
 ### 5.5.3 F-검정
 평균제곱:
@@ -291,31 +303,47 @@ MSLF = \frac{SSLF}{k-p-1}$$
 검정통계량:
 $$F_0 = \frac{MSLF}{MSPE} \sim F(k-p-1, n-k)$$
 
-#### 해석
-* $F_0$가 크면 → 모형 구조가 잘못되었을 가능성
-* 작으면 → 현재 모형 유지 가능
-즉, 적합결여오차가 순오차에 비해 유의하게 크면 모형 부적합이다.
+**분산분석표 (ANOVA Table for Lack-of-Fit Test)**
+
+| 요인 | 제곱합 | 자유도 | 평균제곱 | $F_0$ |
+|------|--------|--------|---------|-------|
+| 회귀 | $SSR$ | $p$ | $MSR=\frac{SSR}{p}$ | |
+| 잔차 | $SSE$ | $n-p-1$ | $MSE=\frac{SSE}{n-p-1}$ | |
+| 　 순오차 | $SS_{PE}$ | $n-k$ | $MSPE=\frac{SS_{PE}}{n-k}$ | |
+| 　 적합결여 | $SS_{LOF}$ | $k-p-1$ | $MSLOF=\frac{SS_{LOF}}{k-p-1}$ | $F_L=\frac{MSLOF}{MSPE}$ |
+| 계 | $SST$ | $n-1$ | | |
+
+- 가정된 회귀모형이 적합한가의 검정은 위 표의 $F_L$를 이용하여 검정한다.
+  - 분산분석표의 $F_L$값과 $F_L$의 기각치$F_\alpha(k-p-1, n-k)$를 비교하여 검정한다.
+  - $F_L$가 크면 → 모형 구조가 잘못되었을 가능성
+  - 작으면 → 현재 모형 유지 가능
+  - 즉, 적합결여오차가 순오차에 비해 유의하게 크면 모형 부적합이다.
 
 
 ## 5.6 잔차의 검토 (Residual Analysis)
 잔차분석은 회귀가정의 타당성을 진단하는 절차이다.
 
 ### 5.6.1 잔차의 기본 성질
-정규방정식:
-$$X^TX\hat\beta = X^Ty$$
-로부터 다음이 성립한다.
+정규방정식: $X^TX\hat\beta = X^Ty$로부터 다음이 성립한다.
 
 **(1) 잔차의 합**  
 $$\sum e_i = 0$$
 
-**(2) 설명변수와의 직교성**  
+**(2) 잔차들의 $x_{ij}$에 대한 가중합은 0 (잔차와 설명변수의 직교성)**
 $$\sum x_{ij} e_i = 0, \quad j=1,\dots,p$$
 즉, 잔차는 설계행렬 $X$의 열공간과 직교한다.
 
-**(3) 적합값과도 직교**  
+**(3) 잔차들의 $\hat y_i$에 대한 가중합은 0 (잔차와 예측값의 직교성)**
 $$\sum \hat y_i e_i = 0$$
 
+**(4) 잔차 $\varepsilon_i$간 상관관계 존재**
+$\mathbf{e} = \mathbf{y} - \mathbf{X}\hat{\beta} = [I - X(X^TX)^{-1}X^T]\mathbf{y}$이므로, 
+$$ E(\mathbf{e}) = 0, \quad Var(\mathbf{e}) = \sigma^2 [I - X(X^TX)^{-1}X^T]$$
+이므로 $Var(\mathbf{e})$는 일반적으로 대각행렬이 아니어서 잔차들 사이에는 공분산이 존재한다.
+- 이 상관계수는 $\rho_{ij} = \frac{Cov(e_i,e_j)}{\sqrt{Var(e_i)Var(e_j)}}$로 정의할 수 있다. 이 값은 $\sigma^2$에 의존하지 않고 설계행렬 $X$에 의해 결정된다.
+
 ### 5.6.2 잔차의 분산–공분산 구조
+잔차의 산점도를 그려봄으로써 중회귀모형의 가정을 점검할 수 있다. 잔차의 분산–공분산 구조는 다음과 같다.
 $$e = y-\hat y = [I - X(X^TX)^{-1}X^T]y$$
 따라서
 $$E(e)=0\\
@@ -333,14 +361,17 @@ $$\rho_{ij} = \frac{Cov(e_i,e_j)}{\sqrt{Var(e_i)Var(e_j)}}$$
 * 시간에 대해 (시계열의 경우)
 그려서 모형가정을 점검한다.
 
-**(a) 무작위 분포**  
-→ 가정 위반 없음
+* $\hat y$에 대해
+  - 무작위로 흩어져 있으면 → 등분산성 가정 만족
+  - 사다리꼴로 분산이 점점 커지는 패턴을 보이면 → 이분산성 가능성
+  - 동일분산으로 상승/하강하는 패턴을 보이면 → 절편이 필요한데 절편이 없는 모형을 사용했을 가능성
+  - 특정한 패턴(y=-x^2같은)을 보이면 → 모형의 구조적 부적합 가능성
+    - 설명변수의 제곱항이나 교호작용항이 필요할 수 있다.
 
-**(b) 부채꼴 모양**  
-→ 이분산성 (heteroscedasticity)
-
-**(c) 선형 패턴**  
-→ 절편 누락 가능
-
-**(d) 곡선 패턴**  
-→ 비선형항(제곱항 등) 필요
+* 각 $x_j$에 대해
+  - 무작위로 흩어져 있으면 → 선형성 가정 만족
+  - 사다리꼴로 분산이 커지는 패턴을 보이면 → 가중회귀를 쓰거나 $y_i$에 대한 변환이 필요할 수 있다.
+  - 동일분산으로 상승/하강하는 패턴을 보이면 → $x_{ij}$의 선형효과가 적절히 취급되지 않음. x항을 빼먹은 실수를 하거나 계산상 실수
+  - 특정한 패턴(y=-x^2같은)을 보이면 → 모형의 구조적 부적합 가능성
+    - 설명변수의 제곱항이나 교호작용항이 필요할 수 있다.
+    

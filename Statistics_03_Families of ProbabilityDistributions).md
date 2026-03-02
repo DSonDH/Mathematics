@@ -322,6 +322,17 @@ E(W_1)=\mathrm{cgf}'_{W_1}(0)=\frac{1}{p},
 \mathrm{Var}(W_1)=\mathrm{cgf}''_{W_1}(0)=\frac{1-p}{p^2}
 $$
 
+### 기하분포의 무기억증 (Memoryless Property)
+기하분포는 **무기억증** (memoryless property)을 가진다. 즉, $W_1$이 $s$보다 큰 조건부 분포는 $W_1$의 원래 분포와 동일하다.
+$$P(W_1 > s+t \mid W_1 > s) = P(W_1 > t)$$
+
+#### 증명
+$W_1 > s+t$이면서 $W_1 > s$이면 $W_1 > s+t$이므로
+$$
+P(W_1 > s+t \mid W_1 > s) = \frac{P(W_1 > s+t)}{P(W_1 > s)}
+= \frac{(1-p)^{s+t}}{(1-p)^s} = (1-p)^t = P(W_1 > t)
+$$
+
 ### 음이항분포 (Negative binomial distribution)
 이번에는 서로 독립이고 성공확률이 $p$인 베르누이 시행에서, $r$번째 성공이 관측될 때까지의 **시행 횟수**를 $W_r$라 하자.
 $W_r=x$라는 사건은 다음을 의미한다.

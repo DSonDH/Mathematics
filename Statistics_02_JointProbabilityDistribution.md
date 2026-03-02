@@ -967,7 +967,7 @@ $$
 
 ### 정리 2.3.4 *(Properties of $E(Y\mid X)$)*
 (가정: 적절한 적분가능성 조건이 필요.)  
-1. 전체기대값의 법칙 *(Law of Total Expectation)*
+1. 전체기대값의 법칙 *(총기대값의 법칙, Law of Total Expectation)*
    $$
    E[E(Y\mid X)]=E(Y)
    $$
@@ -977,7 +977,12 @@ $$
     E[E(Y\mid X)\mid X]=E(Y\mid X)
     $$
 
-3. 직교성/비상관 성질 *(Orthogonality / Uncorrelatedness)*  
+3. 임의의 확률변수 $W_1, W_2$에 대하여 (필요한 기댓값이 존재한다고 가정하면)
+  $$
+  E[W_1 W_2] = E[W_1 E(W_2 \mid W_1)]
+  $$
+
+4. 직교성/비상관 성질 *(Orthogonality / Uncorrelatedness)*  
    $$
    \forall v(X),\ \mathrm{Cov}(Y-E(Y\mid X),\ v(X))=0
    $$
@@ -999,6 +1004,20 @@ E[E(Y\mid X)\mid X=x]=E(Y\mid x)\cdot 1=E(Y\mid x)
 $$
 
 (3)  
+임의의 확률변수 $W_1, W_2$에 대하여, 반복기대값의 법칙을 적용하면
+$$
+E[W_1 W_2] = E[E[W_1 W_2 \mid W_1]].
+$$
+$W_1$이 주어진 조건 하에서, $W_1$은 상수이므로 조건부기대값의 성질 (2)에 의해
+$$
+E[W_1 W_2 \mid W_1] = W_1 E[W_2 \mid W_1].
+$$
+따라서
+$$
+E[W_1 W_2] = E[W_1 E[W_2 \mid W_1]].
+$$
+
+(4)  
 $Z=Y-E(Y\mid X)$라 두면, 조건부기대값의 정의상
 $$
 E(Z\mid X)=E(Y\mid X)-E(E(Y\mid X)\mid X)=E(Y\mid X)-E(Y\mid X)=0
