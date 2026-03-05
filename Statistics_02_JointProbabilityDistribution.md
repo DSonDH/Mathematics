@@ -2129,12 +2129,9 @@ $$
 조건부기댓값의 타워 성질과 정리 2.5.6(a)를 이용하면
 $$
 E[(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T]
-=E[E((\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T\mid \mathbf{X})]
-$$
-$$
+=E[E((\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T\mid \mathbf{X})] \\
 =E[\mathrm{Var}(\mathbf{Y}\mid \mathbf{X})]
 $$
-
 따라서
 $$
 \mathrm{Var}(\mathbf{Y})
@@ -2164,7 +2161,6 @@ E\|\mathbf{Y}-u(\mathbf{X})\|^2
 =E\|(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus(E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X}))\|^2 \\
 =E\|\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X})\|^2+E\|E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X})\|^2
 $$
-
 두 번째 항은 항상 비음이므로
 $$
 E\|\mathbf{Y}-u(\mathbf{X})\|^2\ge E\|\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X})\|^2

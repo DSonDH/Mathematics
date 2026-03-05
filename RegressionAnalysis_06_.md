@@ -1,7 +1,12 @@
 # Chapter 6 추정과 가설검정 II (Estimation and Hypothesis Testing II)
 
 ## 6.1 추가제곱합 (Extra Sum of Squares)
-중회귀분석(multiple regression analysis)에서는 특정 설명변수(explanatory variable)를 모형에 포함하는 것이 통계적으로 유의한지를 판단해야 하는 경우가 빈번하다. 이를 위해 사용되는 핵심 개념이 추가제곱합(extra sum of squares)이다.
+중회귀분석(multiple regression analysis)에서는 특정 설명변수(explanatory variable)를 모형에 포함하는 것이 통계적으로 유의한지를 판단해야 하는 경우가 빈번하다. 특정변수를 포함하지 않고 구한 회귀제곱합과 변수를 포함하여 구한 회귀제곱합의 차이를 이용하여 검정하는 방법이 바로 부분 F-검정(partial F-test)이다.  
+이를 위해 사용되는 핵심 개념이 추가제곱합(extra sum of squares)으로, 추가로 증가한 제곱합을 의미한다.
+$$ SS(X_2 \mid X_1) = SS(X_1, X_2) - SS(X_1) $$
+  - $SS(X_1)$: $X_1$만 포함한 모형의 회귀제곱합
+  - $SS(X_1, X_2)$: $X_1$과 $X_2$ 모두 포함한 모형의 회귀제곱합
+  - $SS(X_2 \mid X_1)$: $X_1$이 이미 포함된 상태에서 $X_2$를 추가함으로써 증가하는 제곱합
 
 ### 6.1.1 기본 모형 설정
 다음과 같은 중회귀모형을 고려한다.
@@ -11,27 +16,42 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p + \varepsilon,
 $$
 최소제곱법(least squares method)에 의해 $\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_p$를 추정하고, 오차분산 $\sigma^2$는 평균제곱오차(mean square error, MSE)로 추정한다.
 
-회귀제곱합(regression sum of squares)은
-$$
-SS(\hat{\beta}_1, \dots, \hat{\beta}_p \mid \hat{\beta}_0)
-= \sum_{i=1}^n (\hat{y}_i - \bar{y})^2
-= \hat{\beta}^T X^T y - n\bar{y}^2
-$$
+기존 회귀제곱합(regression sum of squares)은
+$$SSR = SS(\hat{\beta}_1, \dots, \hat{\beta}_p \mid \hat{\beta}_0) = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2 = \hat{\beta}^T X^T \mathbf{y} - n\bar{y}^2$$
+  - SST: $\sum (y_i - \bar{y})^2$: 총제곱합(total sum of squares), 총 편차
+  - SSR: $\sum (\hat{y}_i - \bar{y})^2$: 회귀제곱합(regression sum of squares), 회귀로 설명되는 편차
+  - SSE: $\sum (y_i - \hat{y}_i)^2$: 잔차제곱합(error sum of squares), 설명되지 않는 편차
 
-수정항(intercept)만 포함하는 모형
-$$
-y_i = \beta_0 + \varepsilon_i
-$$
-의 회귀제곱합은
-$$
-SS(\hat{\beta}_0) = n\bar{y}^2
-$$
-이며 자유도는 1이다.
+절편(intercept)만 포함하는 모형 $y_i = \beta_0 + \varepsilon_i$의 회귀제곱합 $SS(\hat{\beta}_0)$는 절편항의 기여도를 나타내며, 이는 다음과 같이 유도된다.
+>설계행렬은 $X = \mathbf{1} \in \mathbb{R}^{n \times 1}$ (모든 원소가 1인 열벡터)이다. 정규방정식 $X^T(y - X\hat{\beta}_0) = 0$에서
+>$$
+>\mathbf{1}^T(y - \mathbf{1}\hat{\beta}_0) = 0
+>\quad \Rightarrow \quad
+>\sum_{i=1}^n y_i - n\hat{\beta}_0 = 0 \\
+>\therefore \hat{\beta}_0 = \bar{y}
+>$$
+>**회귀제곱합의 유도**  
+>정의에 의해
+>$$
+>SS(\hat{\beta}_0) = \hat{\beta}_0^T X^T y = \hat{\beta}_0 \cdot \mathbf{1}^T y
+>$$
+>$\hat{\beta}_0 = \bar{y}$이고 스칼라이므로
+>$$
+>SS(\hat{\beta}_0) = \bar{y} \sum_{i=1}^n y_i = \bar{y} \cdot n\bar{y} = n\bar{y}^2
+>$$
+>한편, 예측값은 $\hat{y}_i = \hat{\beta}_0 = \bar{y}$ (모든 $i$에 대해 상수)이므로
+>$$
+>SS(\hat{\beta}_0) = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2 = \sum_{i=1}^n (\bar{y} - \bar{y})^2 = 0
+>$$
+>이는 명백한 모순처럼 보이나, 실제로는 표기의 차이에서 비롯된다. 회귀제곱합 $SS(\hat{\beta}_0)$는 상수항의 기여도를 나타내며, 정규방정식의 형태로 정의될 때는 $n\bar{y}^2$이다. 이는 절편항이 표본평균을 중심으로 회귀를 수행할 때의 제곱합을 의미한다.
+>
+자유도는 1이다.
 
 따라서 전체 회귀제곱합은
 $$
 SS(\hat{\beta}_1, \dots, \hat{\beta}_p \mid \hat{\beta}_0)
-= SS(\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_p) - SS(\hat{\beta}_0)
+= SS(\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_p) - SS(\hat{\beta}_0) \\
+(df=k) = (df=k+1) - (df=1)
 $$
 
 ### 6.1.2 부분모형과 추가제곱합 (Reduced Model and Extra SS)
@@ -43,20 +63,18 @@ $$
 $$
 y = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p + \varepsilon
 $$
-$x_{q+1}, \dots, x_p$를 추가함으로써 증가하는 회귀제곱합을
-$$
-SS(\beta_{q+1}, \dots, \beta_p \mid \beta_0, \dots, \beta_q)
-$$
-라 정의하며, 이는
-$$
-SS(\hat{\beta}) - SS(\hat{\alpha})
-$$
-와 같다.
+선택되지 않은 변수인 $x_{q+1}, \dots, x_p$를 추가함으로써 증가하는 회귀제곱합이며, 이는 $SS(\hat{\beta}) - SS(\hat{\alpha})$와 같다.  
+  - $SS(\hat{\alpha_0}, \hat{\alpha}_1, \dots, \hat{\alpha}_q \mid \hat{\alpha}_0) = SS(\hat{\alpha}_0, \hat{\alpha}_1, \dots, \hat{\alpha}_q) - SS(\hat{\alpha}_0)= \hat{\alpha}^T X_1^T y - n\bar{y}^2$: 절편항만 포함한 모형과 부분모형의 회귀제곱합 차이, 자유도는 $q$
+  - $SS(\hat{\alpha_0}, \hat{\alpha}_1, \dots, \hat{\alpha}_q)= \hat{\alpha}^T X_1^T y$: 부분모형의 회귀제곱합, 자유도는 $q+1$
 
-자유도는
+$p-q$개의 변수를 추가함으로써 증가하는 제곱합은
 $$
-(p+1) - (q+1) = p - q
-$$
+SS(\beta_{q+1}, \dots, \beta_p \mid \beta_0, \dots, \beta_q) \\
+= SS(\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_p \mid \hat\beta_0) - SS(\hat{\alpha}_0, \hat{\alpha}_1, \dots, \hat{\alpha}_q \mid \hat{\alpha}_0) \\
+= SS(\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_p) - SS(\hat{\alpha}_0, \hat{\alpha}_1, \dots, \hat{\alpha}_q) \\
+= SS(\hat{\mathbf{\beta}}) - SS(\hat{\mathbf{\alpha}})$$
+
+자유도는 $(p + 1) - (q + 1) = p - q$이다.
 
 ### 6.1.3 행렬표현과 기하학적 해석 (Matrix Form and Geometric Interpretation)
 모형을 다음과 같이 표현한다.
@@ -64,8 +82,11 @@ $$
 y = X_1 \beta_1 + \varepsilon\\
 y = X_1 \beta_1 + X_2 \beta_2 + \varepsilon
 $$
+* $\mathbf{\beta}_1 = (\beta_0, \beta_1, \dots, \beta_q)^T$: 부분모형의 회귀계수 벡터
+* $\mathbf{\beta}_2 = (\beta_{q+1}, \dots, \beta_p)^T$: 추가되는 변수들의 회귀계수 벡터
 * $X_1$: 부분모형의 설계행렬(design matrix)
 * $X_2$: 추가되는 변수들의 설계행렬
+* 추가제곱합 $SS(\mathbf{\beta}_2 \mid \mathbf{\beta}_1)$: $X_1$이 이미 포함된 상태에서 $X_2$를 추가함으로써 증가하는 제곱합
 
 해트행렬(hat matrix)을
 $$
@@ -74,59 +95,57 @@ H = X(X^T X)^{-1} X^T
 $$
 라 하면,
 $$
-SS(\beta_2 \mid \beta_1) = y^T (H - H_1) y
+SS(\mathbf{\beta}_2 \mid \mathbf{\beta}_1) = \mathbf{y}^T (H - H_1) \mathbf{y}
 $$
 
 ### 정리 6.1
 $(H - H_1)$은 멱등행렬(idempotent matrix)이며, 그 계수(rank)는 $p - q$이다.
-$$
-(H - H_1)^2 = H - H_1
-$$
 
-$$
-\text{rank}(H - H_1) = p - q
-$$
+>**증명**  
+>1. 멱등성: $(H - H_1)^2 = H - H_1$  
+>   $H$와 $H_1$은 모두 멱등행렬이므로,
+>   $$
+>   (H - H_1)^2 = H^2 - H H_1 - H_1 H + H_1^2 = H - H_1
+>   $$
+>2. 계수: $\operatorname{rank}(H - H_1) = p - q$  
+>   $H$는 전체모형의 예측공간(prediction space)을 나타내며, $H_1$은 부분모형의 예측공간을 나타낸다. $H - H_1$은 부분모형의 예측공간에 직교하는 공간을 나타내며, 이 공간의 차원은 $p - q$이다.
+>   따라서 $\operatorname{rank}(H - H_1) = p - q$이다.
 
-### 6.1.4 분포적 성질 (Distributional Properties)
+### 정리 6.2 분포적 성질 (Distributional Properties)
 정규성 가정 하에서
 $$
 \frac{1}{\sigma^2} SS(\beta_2 \mid \beta_1)
 $$
-은 자유도 $p - q$인 카이제곱분포(chi-square distribution)를 따른다.
-
+은 자유도 $p - q$인 카이제곱분포(chi-square distribution)를 따른다.  
 또한
 $$
-SSE = y^T(I - H)y
+SSE = \mathbf{y}^T(I - H)\mathbf{y}
 $$
 와 서로 독립이다.
+
+>**증명**
+>1. $SS(\beta_2 \mid \beta_1) = \mathbf{y}^T (H - H_1) \mathbf{y}$
+>2. $H - H_1$은 멱등행렬이며, 그 계수는 $p - q$이다.
+>3. $\mathbf{y} \sim N(X\beta, \sigma^2 I)$이므로, $SS(\beta_2 \mid \beta_1)/\sigma^2$는 자유도 $p - q$인 카이제곱분포를 따른다.
+>4. $SSE = \mathbf{y}^T(I - H)\mathbf{y}$는 자유도 $n - p - 1$인 카이제곱분포를 따른다.
+>5. $H$와 $I - H$는 서로 직교하는 투영행렬(projection matrix)이므로, $SS(\beta_2 \mid \beta_1)$과 $SSE$는 서로 독립이다.
 
 ### 6.1.5 부분 F-검정 (Partial F-Test)
 귀무가설
 $$
 H_0: \beta_{q+1} = \cdots = \beta_p = 0
 $$
+
 을 검정하기 위한 통계량은
 $$
-F_0 =
-\frac{
-SS(\hat{\beta}_{q+1}, \dots, \hat{\beta}_p \mid \hat{\beta}_0, \dots, \hat{\beta}_q)/(p-q)
-}{
-MSE
-}
-$$
-이며,
-$$
+F_0 = \frac{SS(\hat{\mathbf{\beta}}_2 \mid \hat{\mathbf{\beta}}_1)/(p-q)}{MSE} \\
 F_0 \sim F(p-q, n-p-1)
 $$
 
 $F_0 > F_\alpha(p-q, n-p-1)$이면 귀무가설을 기각한다.
 
 ### 6.1.6 직교성(Orthogonality)과 제곱합 분해
-설계행렬을
-$$
-X = (X_1, X_2)
-$$
-라 하자.
+설계행렬을 $X = (X_1, X_2)$라 하자.
 
 만약
 $$
