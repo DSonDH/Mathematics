@@ -1180,7 +1180,6 @@ $$
 
 따라서 $t^2_{\alpha/2}(r) = F_\alpha(1,r)$
 
-TODO:
 ### 정리 4.2.6 두 정규모집단 모분산 비교
 두 정규모집단
 $N(\mu_1,\sigma_1^2)$, $N(\mu_2,\sigma_2^2)$에서 서로 독립이고 각각 크기 $n_1$, $n_2$인 랜덤표본
@@ -1880,6 +1879,29 @@ $$
 $$
 X_{(r)}=F^{-1}(1-e^{-X_{(r)}})=h\left(\frac{Z_1}{n}+\cdots+\frac{Z_r}{n-r+1}\right)
 $$
+
+### 순서통계량 분석의 여사건 접근법 *(Complement Event Approach for Order Statistics)*
+순서통계량의 분포, 특히 최소값(minimum)과 최대값(maximum)을 분석할 때 직접 누적분포함수 $F_Y(y) = P(Y \le y)$를 계산하기보다는 **여사건을 이용한 생존함수(survival function)** $\bar{F}_Y(y) = P(Y > y)$를 먼저 계산하는 것이 효율적이다.
+
+**최소값의 경우**  
+$X_{(1)} = \min(X_1, \ldots, X_n)$에 대하여
+$$
+P(X_{(1)} > y) = P(X_1 > y, \ldots, X_n > y) = \prod_{i=1}^n P(X_i > y) = [1-F(y)]^n \\
+\therefore F_{X_{(1)}}(y) = 1 - [1-F(y)]^n \\
+\text{pdf}_{X_{(1)}}(y) = n[1-F(y)]^{n-1}f(y)
+$$
+
+**최대값의 경우**  
+$X_{(n)} = \max(X_1, \ldots, X_n)$에 대하여
+$$
+P(X_{(n)} \le y) = P(X_1 \le y, \ldots, X_n \le y) = \prod_{i=1}^n P(X_i \le y) = [F(y)]^n \\
+\therefore F_{X_{(n)}}(y) = [F(y)]^n \\
+\text{pdf}_{X_{(n)}}(y) = n[F(y)]^{n-1}f(y)
+$$
+**여사건 접근의 장점**  
+- **직관적 해석:** 최소값이 $y$보다 크다는 것은 "모든 표본이 $y$보다 크다"는 뜻으로 명확함
+- **계산의 용이성:** 독립 표본들의 곱셈 법칙이 자연스럽게 적용됨
+- **일반화 가능성:** $r$번째 순서통계량의 분포 유도에도 직접 확장 가능
 
 
 ## 4.4 다변량 정규분포 *(Multivariate Normal Distribution)*
