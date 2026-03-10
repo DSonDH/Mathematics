@@ -1192,8 +1192,7 @@ F(x)=\int_{-\infty}^x f(t)\,dt
 =\int_0^x e^{-t}\,dt
 =[-e^{-t}]_0^x
 =1-e^{-x} \\
-=
-\begin{cases}
+= \begin{cases}
 0, & x<0 \\
 1-e^{-x}, & x\ge 0
 \end{cases}

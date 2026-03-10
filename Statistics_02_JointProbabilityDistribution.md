@@ -570,13 +570,17 @@ $$
 즉, $Y$는 $X$의 선형함수이다. □
 
 >참고: Cauchy–Schwarz 부등식
+>
 >$$
 >|E(VW)|\le\sqrt{E(V^2)}\sqrt{E(W^2)}
 >$$
+>
 >여기서 $V=\frac{X-\mu_X}{\sigma_X}$, $W=\frac{Y-\mu_Y}{\sigma_Y}$로 두면
+>
 >$$
 >\left|E\left(\frac{X-\mu_X}{\sigma_X}\cdot\frac{Y-\mu_Y}{\sigma_Y}\right)\right|\le\sqrt{E\left[(\frac{X-\mu_X}{\sigma_X})^2\right]}\sqrt{E\left[(\frac{Y-\mu_Y}{\sigma_Y})^2\right]}=1
 >$$
+>
 >이 되고, 이는 $|\rho|\le 1$과 동일하다.  
 >즉, 정리(2)의 상관계수 부등식은 코시-슈바르츠 부등식으로도 유도할 수 있다.
 
@@ -1210,8 +1214,7 @@ $$
 
 $$
 P(a_1\le X_1\le b_1,\dots,a_k\le X_k\le b_k)
-=
-\int_{a_1}^{b_1}\cdots\int_{a_k}^{b_k}
+= \int_{a_1}^{b_1}\cdots\int_{a_k}^{b_k}
 f(x_1,\dots,x_k)dx_k\cdots dx_1
 $$
 
@@ -1223,8 +1226,7 @@ $$
 
 $$
 f(x_1,x_2,x_3)
-=
-\frac{\binom{2}{x_1}\binom{3}{x_2}\binom{4}{x_3}\binom{5}{4-x_1-x_2-x_3}}
+= \frac{\binom{2}{x_1}\binom{3}{x_2}\binom{4}{x_3}\binom{5}{4-x_1-x_2-x_3}}
 {\binom{14}{4}}
 $$
 
@@ -1256,8 +1258,7 @@ $$
 
 $$
 P(a_1\le X_1\le b_1,\dots,a_k\le X_k\le b_k)
-=
-\int_{a_1}^{b_1}\cdots\int_{a_k}^{b_k}
+=\int_{a_1}^{b_1}\cdots\int_{a_k}^{b_k}
 f(x_1,\dots,x_k)dx_k\cdots dx_1
 $$
 
@@ -1267,8 +1268,7 @@ $$
 
 $$
 f(x_1,x_2,x_3)
-=
-c e^{-x_1-x_2-x_3}\mathbf{1}_{(0\le x_1\le x_2\le x_3)}
+=c e^{-x_1-x_2-x_3}\mathbf{1}_{(0\le x_1\le x_2\le x_3)}
 $$
 
 **풀이**  
@@ -1356,8 +1356,7 @@ $$
 
 $$
 E[g(X_1,\dots,X_k)]
-=
-\sum_{x_1}\cdots\sum_{x_k}
+= \sum_{x_1}\cdots\sum_{x_k}
 g(x_1,\dots,x_k)f(x_1,\dots,x_k)
 $$
 
@@ -1365,8 +1364,7 @@ $$
 
 $$
 E[g(X_1,\dots,X_k)]
-=
-\int\cdots\int
+= \int\cdots\int
 g(x_1,\dots,x_k)f(x_1,\dots,x_k)dx_k\cdots dx_1
 $$
 
@@ -1491,8 +1489,7 @@ W_{21} & W_{22} & \cdots & W_{2n} \\
 \vdots & \vdots & \ddots & \vdots \\
 W_{m1} & W_{m2} & \cdots & W_{mn}
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 E(W_{11}) & E(W_{12}) & \cdots & E(W_{1n}) \\
 E(W_{21}) & E(W_{22}) & \cdots & E(W_{2n}) \\
 \vdots & \vdots & \ddots & \vdots \\
@@ -1755,8 +1752,7 @@ $$
 
 $$
 E(\mathbf{Y})=AE(\mathbf{X})
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 2&0\\
 -1&1
 \end{pmatrix}
@@ -1764,14 +1760,12 @@ E(\mathbf{Y})=AE(\mathbf{X})
 1/2\\
 3/2
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 1\\
 1
 \end{pmatrix} \\
 \mathrm{Var}(\mathbf{Y})=A\mathrm{Var}(\mathbf{X})A^T
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 1&0\\
 0&1
 \end{pmatrix}
