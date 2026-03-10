@@ -266,8 +266,7 @@ $$
 전체 공간에서의 최대가능도는 두 값 중 큰 값이 된다.
 $$
 \max_{\theta\in\Omega}L(\theta;x)
-=
-\max\left\{
+= \max\left\{
 \max_{\theta\in\Omega_0}L(\theta;x),\
 \max_{\theta\in\Omega_1}L(\theta;x)
 \right\}
@@ -277,9 +276,7 @@ $$
 관측값 $x$에 대해 **최대가능도비**를 다음과 같이 정의한다.
 $$
 \Lambda(x)
-=
-\frac{\max_{\theta\in\Omega_0}L(\theta;x)}
-    {\max_{\theta\in\Omega}L(\theta;x)}
+= \frac{\max_{\theta\in\Omega_0}L(\theta;x)}{\max_{\theta\in\Omega}L(\theta;x)}
 $$
 
 - $\Lambda(x)$가 **작을수록** 귀무가설 하 최대가능도가 상대적으로 작으므로, 귀무가설에 불리한 증거가 된다.
@@ -293,15 +290,13 @@ $$
 $$
 $$
 -2\log\Lambda(x)
-=
-2\bigl(\ell(\hat\theta;x)-\ell(\hat\theta_0;x)\bigr)
+= 2\bigl(\ell(\hat\theta;x)-\ell(\hat\theta_0;x)\bigr)
 $$
 
 이때, 전체 모수공간 $\Omega$에서의 최대가능도는
 $$
 \max_{\theta\in\Omega} L(\theta;x)
-=
-\max\left\{
+= \max\left\{
 \max_{\theta\in\Omega_0} L(\theta;x),\ 
 \max_{\theta\in\Omega_1} L(\theta;x)
 \right\}
@@ -312,17 +307,13 @@ $$
 유의수준 $\alpha$에서의 최대가능도비 검정의 기각역은
 $$
 C_\alpha
-=
-\left\{
+= \left\{
 x:\ 2\bigl(\ell(\hat\theta;x)-\ell(\hat\theta_0;x)\bigr)\ge c
 \right\}
 $$
 여기서 상수 $c$는 다음 **유의수준 조건**을 만족하도록 정한다.
 $$
-\max_{\theta\in\Omega_0}
-P_\theta\bigl((X_1,\dots,X_n)^t\in C_\alpha\bigr)
-=
-\alpha
+\max_{\theta\in\Omega_0} P_\theta\bigl((X_1,\dots,X_n)^t\in C_\alpha\bigr) = \alpha
 $$
   - 필요하면 이 조건을 만족시키기 위하여 예 7.1.4처럼 랜덤화 검정을 고려한다.
   - 각 가설 하에서의 MLE(최대우도추정량) 계산은 **모수공간의 제약**에 따라 달라진다.  

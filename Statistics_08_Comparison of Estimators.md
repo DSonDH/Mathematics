@@ -310,8 +310,7 @@ $P_\theta(X_1=1,X_2=0\mid Y=1) = P_\theta(X_1=0,X_2=1\mid Y=1) = \frac12$
 모집단 분포가 $f(x;\theta),\ \theta\in\Omega$이고, 통계량 $Y=u(X_1,\dots,X_n)$에 대하여
 $$
 P_{\theta_1}\big((X_1,\dots,X_n)\in A\mid Y=y\big)
-=
-P_{\theta_2}\big((X_1,\dots,X_n)\in A\mid Y=y\big)
+= P_{\theta_2}\big((X_1,\dots,X_n)\in A\mid Y=y\big)
 $$
 가 모든 집합 $A$, 모든 $y$, 모든 $\theta_1,\theta_2\in\Omega$에 대해 성립하면 $Y$를 $\theta$에 대한 **충분통계량**이라 한다.  
 즉, **조건부 분포가 모수에 의존하지 않음**.
@@ -322,8 +321,7 @@ $X_1,\dots,X_n \sim \mathrm{Bernoulli}(\theta)$, $Y=\sum_{i=1}^n X_i \sim \mathr
 조건부확률은
 $$
 P_\theta(X_1=x_1,\dots,X_n=x_n\mid Y=y)
-=
-\binom{n}{y}^{-1} I\Big(\sum x_i=y\Big)
+= \binom{n}{y}^{-1} I\Big(\sum x_i=y\Big)
 $$
 이는 $\theta$에 무관하다.  
 **결론:** $Y=\sum_{i=1}^n X_i$는 $\theta\in(0,1)$에 대한 충분통계량이다.

@@ -182,8 +182,7 @@ X_2^T X_1 & X_2^T X_2
 \mathbf{\hat{\beta}_1} \\
 \mathbf{\hat{\beta}_2}
 \end{pmatrix}
-=
-\begin {pmatrix}
+= \begin {pmatrix}
 X_1^T \mathbf{y} \\
 X_2^T \mathbf{y}
 \end{pmatrix}
@@ -194,8 +193,7 @@ $$
 \mathbf{\hat{\beta}_1} \\
 \mathbf{\hat{\beta}_2}
 \end{pmatrix}
-=
-\begin {pmatrix}
+= \begin {pmatrix}
 (X_1^T X_1)^{-1} O_{(p-q)\times (q+1)} \\
 O_{(q+1)\times (p-q)} (X_2^T X_2)^{-1}
 \end{pmatrix}^{-1}
@@ -203,8 +201,7 @@ O_{(q+1)\times (p-q)} (X_2^T X_2)^{-1}
 X_1^T \mathbf{y} \\
 X_2^T \mathbf{y}
 \end{pmatrix}
-=
-\begin {pmatrix}
+= \begin {pmatrix}
 (X_1^T X_1)^{-1} X_1^T \mathbf{y} \\
 (X_2^T X_2)^{-1} X_2^T \mathbf{y}
 \end{pmatrix}
@@ -504,16 +501,13 @@ $$
 
 또한
 $$
-X^T y 
-= 
-\begin{pmatrix}
+X^T y = \begin{pmatrix}
 \frac{\sum_i w_{i1} (y_i - \bar{y})}{\sqrt{S_{11} S_{yy}}} \\
 \frac{\sum_i w_{i2} (y_i - \bar{y})}{\sqrt{S_{22} S_{yy}}} \\
 \vdots \\
 \frac{\sum_i w_{ip} (y_i - \bar{y})}{\sqrt{S_{pp} S_{yy}}}
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 r_{1y} \\
 r_{2y} \\
 \vdots \\
@@ -537,8 +531,7 @@ r_{p1} & r_{p2} & \cdots & 1
 \vdots \\
 \hat a_p
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 r_{1y} \\
 r_{2y} \\
 \vdots \\
@@ -564,8 +557,7 @@ r_{12} & 1
 \hat a_1 \\
 \hat a_2
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 r_{1y} \\
 r_{2y}
 \end{pmatrix}
@@ -584,8 +576,7 @@ $$
 \hat{a}_1 \\
 \hat{a}_2
 \end{pmatrix}
-=
-\sigma^2
+= \sigma^2
 \begin{pmatrix}
 1 & r_{12} \\
 r_{12} & 1
@@ -604,9 +595,7 @@ $$
 ### 6.3.6 원래 계수로의 환원 (Back Transformation)
 표준화 회귀계수로부터 원래 계수는
 $$
-\hat{\beta}_j
-=
-\hat{a}_j
+\hat{\beta}_j = \hat{a}_j
 \sqrt{\frac{S_{yy}}{S_{jj}}},
 \quad j=1,\dots,p \\
 \hat{\beta}_0
@@ -632,8 +621,7 @@ $$
 (\hat{\mathbf{\beta}}-\mathbf{\beta})^T
 \mathbf{X}^T \mathbf{X}
 (\hat{\mathbf{\beta}}-\mathbf{\beta})
-=
-\frac{1}{\sigma^2}
+= \frac{1}{\sigma^2}
 \varepsilon^T \mathbf{H} \varepsilon
 $$
 여기서 $\mathbf{H} = \mathbf{X}(\mathbf{X}^T \mathbf{X})^{-1}\mathbf{X}^T$는 hat matrix이다.

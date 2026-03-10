@@ -94,8 +94,7 @@ $$
 이고, 모집단 결합적률을 표본결합적률로 대체하면,
 $$
 \hat\rho_n^{\mathrm{MME}} = \frac{\frac{1}{n}\sum_{i=1}^n X_iY_i - \bar X\bar Y}{\sqrt{\frac{1}{n}\sum_{i=1}^n X_i^2 - (\bar X)^2}\sqrt{\frac{1}{n}\sum_{i=1}^n Y_i^2 - (\bar Y)^2}} \\
-= 
-\frac{\frac{1}{n}\sum_{i=1}^n (X_i-\bar X)(Y_i-\bar Y)}{\sqrt{\frac{1}{n}\sum_{i=1}^n (X_i-\bar X)^2}\sqrt{\frac{1}{n}\sum_{i=1}^n (Y_i-\bar Y)^2}}
+= \frac{\frac{1}{n}\sum_{i=1}^n (X_i-\bar X)(Y_i-\bar Y)}{\sqrt{\frac{1}{n}\sum_{i=1}^n (X_i-\bar X)^2}\sqrt{\frac{1}{n}\sum_{i=1}^n (Y_i-\bar Y)^2}}
 $$
 가 되며, 모상관계수의 적률이용추정량은 표본상관계수와 동일하다.
 
@@ -470,8 +469,7 @@ $$
 ### 정리 6.2.5: 지수족에서의 최대가능도 추정 *(Exponential Family)*
 $$
 pdf(x;\eta)
-=
-\exp\{\eta T(x)-A(\eta)+S(x)\},
+= \exp\{\eta T(x)-A(\eta)+S(x)\},
 \quad x\in\mathcal X,\ \eta\in N
 $$
 확률밀도함수 형태이 이러하며, 다음을 만족한다고 하자.
@@ -530,8 +528,7 @@ $$
 모두 지수족에 속하며,  
 $$
 E_\theta[T(X_1)]
-=
-\frac{1}{n}\sum_{i=1}^n T(x_i)
+= \frac{1}{n}\sum_{i=1}^n T(x_i)
 $$
 형태의 가능도방정식을 갖는다.
 
@@ -791,8 +788,7 @@ $$
 \hat\mu^{\mathrm{MLE}} \\
 \hat\sigma^{\mathrm{MLE}}
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 X_{(m+1)} \\
 \frac{1}{n} \sum_{i=1}^n |X_i - X_{(m+1)}|
 \end{pmatrix}
@@ -835,8 +831,7 @@ $$
 \hat\mu^{\mathrm{MLE}} \\
 \hat\sigma^{2,\mathrm{MLE}}
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 \bar X \\
 \frac{1}{n}\sum_{i=1}^n (X_i-\bar X)^2
 \end{pmatrix}
@@ -1769,8 +1764,7 @@ $$
 \partial_\alpha l_n(\theta)\\
 \partial_\beta l_n(\theta)
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 -n\Psi(\alpha)-n\log\beta+n\overline{\log x}\\
 -n\alpha/\beta+n\bar x/\beta^2
 \end{pmatrix} \\
@@ -1779,8 +1773,7 @@ $$
 \partial_{\alpha\alpha}^2l_n & \partial_{\alpha\beta}^2l_n\\
 \partial_{\beta\alpha}^2l_n & \partial_{\beta\beta}^2l_n
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 -n\Psi'(\alpha) & -n/\beta\\
 -n/\beta & n\alpha/\beta^2-2n\bar x/\beta^3
 \end{pmatrix}
@@ -1798,8 +1791,7 @@ $$
 정보량 행렬과 역행렬:
 $$
 I(\theta)=E_\theta[-\ddot l_1(\theta)]
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 \Psi'(\alpha) & 1/\beta\\
 1/\beta & \alpha/\beta^2
 \end{pmatrix} \\
@@ -2132,8 +2124,7 @@ S_{p1} & \cdots & S_{pp}
 \begin{pmatrix}
 \hat\beta_1 \\ \vdots \\ \hat\beta_p
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 S_{1Y} \\ \vdots \\ S_{pY}
 \end{pmatrix}
 $$

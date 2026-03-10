@@ -2266,6 +2266,7 @@ $$
 ## 4.4 다변량 정규분포 *(Multivariate Normal Distribution)*
 통계 조사에서는 단일 특성보다 **서로 연관된 여러 특성**을 동시에 관측하는 경우가 많다.
 이러한 다차원 자료에 대한 추론의 기본 모형으로 **다변량 정규분포(multivariate normal distribution)** 가 널리 사용된다.
+
 ### 정리 4.4.1 다변량 정규분포의 구성 *(Construction of Multivariate Normal Distribution)*
 
 표준정규분포 $N(0,1)$를 따르고 서로 독립인 확률변수 $Z_1,Z_2,\dots,Z_n$
@@ -3304,4 +3305,3 @@ $$(X-\mu)^T\Sigma^{-1}(X-\mu) \sim \chi^2(n)$$
 | **F 분포**<br>*(F distribution)*<br>$X\sim F(r_1,r_2)$<br>두 변동성의 상대적 크기 비교 | **대의적 정의:** $X\overset{d}{\equiv}\frac{V_1/r_1}{V_2/r_2},\quad V_1\sim\chi^2(r_1),\ V_2\sim\chi^2(r_2),\ V_1\perp V_2$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma((r_1+r_2)/2)}{\Gamma(r_1/2)\Gamma(r_2/2)}\left(\frac{r_1}{r_2}\right)^{r_1/2}\frac{x^{r_1/2-1}}{(1+r_1x/r_2)^{(r_1+r_2)/2}}I_{(0,\infty)}(x)$ | $E(X)=\frac{r_2}{r_2-2}$ $(r_2>2)$ | $\text{Var}(X)=\frac{2r_2^2(r_1+r_2-2)}{r_1(r_2-2)^2(r_2-4)}$ $(r_2>4)$ |
 | **베타분포**<br>*(Beta distribution)*<br>$X\sim\text{Beta}(\alpha_1,\alpha_2)$<br>성공확률이 얼마일지에 대한 불확실성 | **대의적 정의:** $X\overset{d}{\equiv}\frac{Y_1}{Y_1+Y_2},\quad Y_i\sim\text{Gamma}(\alpha_i,\beta),\ Y_1\perp Y_2$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma(\alpha_1+\alpha_2)}{\Gamma(\alpha_1)\Gamma(\alpha_2)}x^{\alpha_1-1}(1-x)^{\alpha_2-1}I_{(0,1)}(x)$ | $E(X)=\frac{\alpha_1}{\alpha_1+\alpha_2}$ | $\text{Var}(X)=\frac{\alpha_1\alpha_2}{(\alpha_1+\alpha_2)^2(\alpha_1+\alpha_2+1)}$ |
 | **디리클레분포**<br>*(Dirichlet distribution)*<br>$(Y_1,\ldots,Y_k)\sim$<br>$\text{Dirichlet}(\alpha_1,\ldots,\alpha_{k+1})$<br>범주별 성공확률에 대한 불확실성 | **대의적 정의:** $(Y_1,\ldots,Y_k)\overset{d}{\equiv}\left(\frac{X_1}{\sum_{j=1}^{k+1}X_j},\ldots,\frac{X_k}{\sum_{j=1}^{k+1}X_j}\right)$<br>$X_i\overset{ind}{\sim}\text{Gamma}(\alpha_i,\beta)$<br><br>**확률밀도함수:**<br>$\text{pdf}(y_1,\ldots,y_k)=\frac{\Gamma(\alpha_1+\cdots+\alpha_{k+1})}{\Gamma(\alpha_1)\cdots\Gamma(\alpha_{k+1})}\prod_{i=1}^k y_i^{\alpha_i-1}(1-y_1-\cdots-y_k)^{\alpha_{k+1}-1}$ | $E(Y_i)=\frac{\alpha_i}{\alpha_0}$<br>$(\alpha_0=\sum_{j=1}^{k+1}\alpha_j)$ | $\text{Var}(Y_i)=\frac{\alpha_i(\alpha_0-\alpha_i)}{\alpha_0^2(\alpha_0+1)}$ |
-

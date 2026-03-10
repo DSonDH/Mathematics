@@ -680,6 +680,18 @@ $$C_n = I_n - \bar{\mathbf{J}}_n = I_n - \frac{1}{n}\mathbf{J}_n$$
 * 평균: $\bar{x} = \frac{1}{n}\mathbf{1}_n^T x = \frac{1}{n}x^T\mathbf{J}_n x$
 * 편차의 제곱합: $\sum(x_i - \bar{x})^2 = x^T C_n x$
 
+**예제 2: 편차제곱합의 행렬 표현**
+
+벡터 $W=(W_1,\dots,W_n)^T$, 합벡터 $\mathbf{1}=(1,\dots,1)^T$, 평균 $\bar W=\frac{1}{n}\mathbf{1}^TW$라 하면
+
+$$S_{WW} = \sum_{i=1}^n (W_i-\bar W)^2 = W^TW-\frac{(\mathbf{1}^TW)^2}{\mathbf{1}^T\mathbf{1}}$$
+
+또한 $\mathbf{1}^T\mathbf{1}=n$이므로
+
+$$S_{WW} = W^T\!\left(I-\mathbf{1}(\mathbf{1}^T\mathbf{1})^{-1}\mathbf{1}^T\right)\!W = W^T\!\left(I-\frac{1}{n}\mathbf{1}\mathbf{1}^T\right)\!W = W^T C_n W$$
+
+즉, 편차제곱합은 중심화행렬 $C_n$에 의한 이차형식으로 정리된다.
+
 
 ## (3) 멱등행렬 (Idempotent Matrix)
 자신의 제곱이 자신과 같은 행렬

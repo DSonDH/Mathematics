@@ -297,11 +297,9 @@ $$
 가능도비:
 $$
 \frac{pdf(x;\theta_1)}{pdf(x;\theta_0)}
-=
-e^{-100(\theta_1-\theta_0)}
+= e^{-100(\theta_1-\theta_0)}
 \left(\frac{\theta_1}{\theta_0}\right)^{\sum x_i}
-=
-e^5 (1/2)^{\sum x_i}
+= e^5 (1/2)^{\sum x_i}
 $$
 
 따라서 최강력 검정은
@@ -392,8 +390,7 @@ $$
 을 검정할 때, 네이만–피어슨 정리에 따라 최강력 검정은 가능도비  
 $$
 \frac{pdf(x;\mu_1)}{pdf(x;\mu_0)}
-=
-\exp\left[
+= \exp\left[
 n(\mu_1-\mu_0)
 \left(
 \bar{x}-\frac{\mu_1+\mu_0}{2}
@@ -475,8 +472,7 @@ $$
 모집단 분포의 확률밀도함수가
 $$
 f(x;\theta)
-=
-\exp\{g(\theta)T(x)-B(\theta)+S(x)\},
+= \exp\{g(\theta)T(x)-B(\theta)+S(x)\},
 \quad
 x\in\mathcal{X},\ \theta\in\Omega\subset\mathbb{R}
 $$
@@ -960,8 +956,7 @@ Z \ge
 \frac{\sigma(\theta_0)}{\sigma(\theta_1)}t_n
 -\sqrt{n}\frac{\mu(\theta_1)-\mu(\theta_0)}{\sigma(\theta_1)}
 \right)
-=
-1-\Phi\!\left(
+= 1-\Phi\!\left(
 \frac{\sigma(\theta_0)}{\sigma(\theta_1)}t_n
 -\sqrt{n}\frac{\mu(\theta_1)-\mu(\theta_0)}{\sigma(\theta_1)}
 \right).
@@ -977,16 +972,14 @@ $$
 $\mu,\sigma$가 $\theta_0$에서 미분가능이므로 테일러 전개로
 $$
 \mu(\theta_{1n})-\mu(\theta_0)
-=
-\dot\mu(\theta_0)(\theta_{1n}-\theta_0)+o(\theta_{1n}-\theta_0),
+= \dot\mu(\theta_0)(\theta_{1n}-\theta_0)+o(\theta_{1n}-\theta_0),
 \qquad
 \sigma(\theta_{1n})=\sigma(\theta_0)+o(1).
 $$
 또한 $\theta_{1n}-\theta_0=O(n^{-1/2})$이므로
 $$
 \sqrt{n}\big(\mu(\theta_{1n})-\mu(\theta_0)\big)
-=
-\sqrt{n}(\theta_{1n}-\theta_0)\dot\mu(\theta_0)+o(1),
+= \sqrt{n}(\theta_{1n}-\theta_0)\dot\mu(\theta_0)+o(1),
 \qquad
 \frac{\sigma(\theta_0)}{\sigma(\theta_{1n})}=1+o(1).
 $$
@@ -1306,8 +1299,7 @@ $$
 +1,& X_i-\theta_0>0\\
 -1,& X_i-\theta_0<0
 \end{cases}
-=
-2\mathbf{1}(X_i-\theta_0>0)-1 \\
+= 2\mathbf{1}(X_i-\theta_0>0)-1 \\
 \begin{aligned}
 \therefore W_n
 &=\sum_{i=1}^n\big(2\mathbf{1}(X_i-\theta_0>0)-1\big)\,R(|X_i-\theta_0|)\\
@@ -1574,8 +1566,7 @@ N(W_n^+;\gamma,\theta_{1n})
 \simeq
 \left(\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}\right)^{-2}
 \left(\frac{z_\alpha+z_{1-\gamma}}{\theta_{1n}-\theta_0}\right)^2
-=
-\left(\sqrt{12}\int f^2(x)\,dx\right)^{-2}
+= \left(\sqrt{12}\int f^2(x)\,dx\right)^{-2}
 \left(\frac{z_\alpha+z_{1-\gamma}}{\theta_{1n}-\theta_0}\right)^2
 $$
 를 얻는다.

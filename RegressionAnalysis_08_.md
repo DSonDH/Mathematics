@@ -130,8 +130,7 @@ X_{2j}\\
 \vdots\\
 X_{nj}
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 X_{1j}\\
 X_{2j}\\
 \vdots\\

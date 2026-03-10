@@ -323,10 +323,8 @@ $$
 $$
 l(\hat\theta)=-\frac{n}{2}\Big(1+\log(2\pi)+\log(\hat\sigma^2)\Big) \\
 \therefore 2\{l(\hat\theta_\Omega)-l(\hat\theta_0)\}
-=
--n\Big(\log(SSW/n)-\log((SSW+SSB)/n)\Big)
-=
-n\log\!\left(1+\frac{SSB}{SSW}\right).
+= -n\Big(\log(SSW/n)-\log((SSW+SSB)/n)\Big)
+= n\log\!\left(1+\frac{SSB}{SSW}\right).
 $$
 $\log$는 단조증가함수이므로 LRT의 기각역은 $\frac{SSB}{SSW}$가 큰 경우와 동치이고, 이는 (상수배/자유도 조정까지 포함해) 통상적인 ANOVA의
 $$
@@ -386,8 +384,7 @@ $$
 따라서 $F$-분포의 정의로부터
 $$
 F_n=\frac{SSB/(k-1)}{SSW/(n-k)}
-=
-\frac{(SSB/\sigma^2)/(k-1)}{(SSW/\sigma^2)/(n-k)}
+= \frac{(SSB/\sigma^2)/(k-1)}{(SSW/\sigma^2)/(n-k)}
 \sim F(k-1,n-k)
 $$
 이고, 기각역은 $F_n$의 큰 값으로 주어진다.  
@@ -659,9 +656,7 @@ $$
 ### 정리 10.2.4 균형된 이원분류정규분포모형에서 교호작용효과의 유의성 검정 *(F-test for interaction effect)*
 > 참고: 이런 최대가능도비 검정은 $n_{ij}=n_{i.}n_{.j}/n$를 만족시키는 이원분류정규분포모형의 경우에도 성립한다.
 $$
-SS_{AB}
-=
-\sum_{i=1}^a\sum_{j=1}^b
+SS_{AB} = \sum_{i=1}^a\sum_{j=1}^b
 r(\bar X_{ij\cdot}-\bar X_{i\cdot\cdot}-\bar X_{\cdot j\cdot}+\bar X_{\cdots})^2
 $$
 $$
@@ -669,9 +664,7 @@ SSE=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (X_{ijk}-\bar X_{ij\cdot})^2
 $$
 이라고 하면, 검정통계량과 기각역은
 $$
-F_n
-=
-\frac{SS_{AB}/((a-1)(b-1))}
+F_n = \frac{SS_{AB}/((a-1)(b-1))}
 {SSE/(n-ab)}
 \sim F((a-1)(b-1),n-ab) \\
 F_n\ge F_\alpha((a-1)(b-1),n-ab).
@@ -682,8 +675,7 @@ $$
 정규모형에서 로그가능도와 각 모수공간에서의 최대가능도추정값을 대입하면(상수항 제외)
 $$
 l(\theta)
-=
--\frac{1}{2\sigma^2}\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-\mu_{ij})^2
+= -\frac{1}{2\sigma^2}\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-\mu_{ij})^2
 -\frac{n}{2}\log(2\pi\sigma^2),
 \qquad n=rab.
 $$
@@ -708,14 +700,12 @@ $$
 이고, 해당 평균의 MLE(최소제곱 적합값)는
 $$
 \hat\mu_{ij}^{\Omega_0}
-=
-\bar x_{i\cdot\cdot}+\bar x_{\cdot j\cdot}-\bar x_{\cdots},
+= \bar x_{i\cdot\cdot}+\bar x_{\cdot j\cdot}-\bar x_{\cdots},
 $$
 이므로 잔차제곱합은
 $$
 \sum_{i,j,k}\big(x_{ijk}-\hat\mu_{ij}^{\Omega_0}\big)^2
-=
-SSE+SS_{AB}.
+= SSE+SS_{AB}.
 $$
 따라서
 $$
@@ -785,9 +775,7 @@ Z_{ijk}=\frac{X_{ijk}-(\bar\mu+\alpha_i+\beta_j)}{\sigma}
 $$
 라 두면 $Z=(Z_{111},\dots,Z_{abr})^\top\sim N_n(0,I_n)$이다. 위의 $SS_{AB}$는 평균항이 투영에서 소거되므로
 $$
-\frac{SS_{AB}}{\sigma^2}
-=
-Z^\top \Pi Z.
+\frac{SS_{AB}}{\sigma^2} = Z^\top \Pi Z.
 $$
 이제 정리 4.4.5(정규벡터 이차형식의 분포: $A^2=A$이면 $Z^\top A Z\sim\chi^2(\mathrm{trace}(A))$)를 적용하면
 $$
@@ -898,7 +886,6 @@ f_Y(y)=\sum_{k=0}^\infty \Pr(K=k)\, f_{\chi^2(r+2k)}(y),
 \qquad K\sim \mathrm{Poisson}(\delta/2).
 $$
 즉, 비중심 카이제곱분포는 **자유도가 증가하는 중심 카이제곱분포의 Poisson 혼합**으로 표현된다.
-
 #### 증명
 증명은 적률생성함수(mgf)와 그 로그(cgf)를 계산한 뒤, 급수 전개 및 mgf의 유일성으로 결론을 얻는다.
 
@@ -1286,11 +1273,7 @@ $$
 
 유의수준 $\alpha$에서 기각역은 $F_n\ge F_\alpha(k-1,n-k)$이고, 검정력 함수는
 $$
-\boxed{\ \mathrm{Power}(\delta)
-=
-P_\delta\!\left(
-F_n \ge F_\alpha(k-1,n-k)
-\right)\ }.
+\boxed{\ \mathrm{Power}(\delta) = P_\delta\!\left(F_n \ge F_\alpha(k-1,n-k)\right)\ }.
 $$
 성질(해석)
 * $\mathrm{Power}(\delta)$는 $\delta$의 **증가함수**이다. (효과가 커질수록/표본이 커질수록 검정력 증가)
@@ -1349,8 +1332,7 @@ $$
 유의수준 $\alpha$에서 기각역은 $F_n\ge F_\alpha((a-1)(b-1),n-ab)$이고, 검정력 함수는
 $$
 \boxed{\ \mathrm{Power}_{AB}(\delta_{AB})
-=
-P_{\delta_{AB}}\!\left(
+= P_{\delta_{AB}}\!\left(
 F_n\ge F_\alpha((a-1)(b-1),n-ab)
 \right)\ }.
 $$
@@ -1731,11 +1713,7 @@ $$
 $$
 즉
 $$
-\min_{\beta_0}\|Y-X_0\beta_0\|^2
-=
-Y^\top\Pi_{1|0}Y
-+
-Y^\top(I-\Pi_0-\Pi_{1|0})Y.
+\min_{\beta_0}\|Y-X_0\beta_0\|^2 = Y^\top\Pi_{1|0}Y + Y^\top(I-\Pi_0-\Pi_{1|0})Y
 $$
 한편 전체모형 $Y=X_0\beta_0+X_1\beta_1+e$에서의 최소제곱 잔차제곱합은
 $$
@@ -1743,10 +1721,7 @@ $$
 $$
 이므로 결론적으로
 $$
-\min_{\beta_0}\|Y-X_0\beta_0\|^2
-=
-\min_{\beta_0,\beta_1}\|Y-X_0\beta_0-X_1\beta_1\|^2
-+Y^\top\Pi_{1|0}Y
+\min_{\beta_0}\|Y-X_0\beta_0\|^2 = \min_{\beta_0,\beta_1}\|Y-X_0\beta_0-X_1\beta_1\|^2 + Y^\top\Pi_{1|0}Y
 $$
 가 성립한다.
 
@@ -1812,8 +1787,7 @@ $$
 $$
 \boxed{\ 
 \min_{\beta:\,C^\top\beta=0}\ \|Y-X\beta\|^2
-=
-\min_{\beta}\ \|Y-X\beta\|^2
+= \min_{\beta}\ \|Y-X\beta\|^2
 +
 Y^\top\Pi_{1|0}Y\ }.
 $$
@@ -1822,10 +1796,8 @@ $$
 $$
 \boxed{\ 
 \frac{Y^\top\Pi_{1|0}Y}{\sigma^2}
-=
-(C^\top\hat\beta)^\top\Big(\sigma^2\,C^\top(X^\top X)^{-1}C\Big)^{-1}(C^\top\hat\beta)
-=
-(C^\top\hat\beta)^\top\big[\mathrm{Var}(C^\top\hat\beta)\big]^{-1}(C^\top\hat\beta)\ }.
+= (C^\top\hat\beta)^\top\Big(\sigma^2\,C^\top(X^\top X)^{-1}C\Big)^{-1}(C^\top\hat\beta)
+= (C^\top\hat\beta)^\top\big[\mathrm{Var}(C^\top\hat\beta)\big]^{-1}(C^\top\hat\beta)\ }.
 $$
 **(b) 검정통계량**  
 * 전체 모형의 정사영행렬 $\Pi_{1,0}=X(X^\top X)^{-1}X^\top,\quad R(1|0)=Y^\top\Pi_{1|0}Y,\quad, SSE=Y^\top(I-\Pi_{1,0})Y$ 이라 하면, 검정통계량과 기각역은 다음과 같다:
@@ -1879,10 +1851,7 @@ $$
 $$
 따라서
 $$
-\tilde\beta
-=
-\hat\beta
--(X^\top X)^{-1}C\Big(C^\top(X^\top X)^{-1}C\Big)^{-1}C^\top\hat\beta.
+\tilde\beta = \hat\beta -(X^\top X)^{-1}C\Big(C^\top(X^\top X)^{-1}C\Big)^{-1}C^\top\hat\beta.
 $$
 
 **2) SSE의 증가량(추가 제약의 비용)**  
@@ -1892,8 +1861,7 @@ SSE=\min_\beta\|Y-X\beta\|^2=\|MY\|^2=Y^\top MY.
 $$
 제약모형의 잔차제곱합을 $SSE_0:=\|Y-X\tilde\beta\|^2$라 하면, 표준적인 최소제곱의 직교분해 성질로
 $$
-SSE_0 - SSE
-= (\hat\beta-\tilde\beta)^\top X^\top X (\hat\beta-\tilde\beta).
+SSE_0 - SSE = (\hat\beta-\tilde\beta)^\top X^\top X (\hat\beta-\tilde\beta).
 $$
 위에서 구한 $\hat\beta-\tilde\beta=(X^\top X)^{-1}C\lambda$를 대입하면
 $$
@@ -1904,14 +1872,11 @@ $$
 또한 $\hat\beta=(X^\top X)^{-1}X^\top Y$이므로
 $$
 (C^\top\hat\beta)^\top\Big(C^\top(X^\top X)^{-1}C\Big)^{-1}(C^\top\hat\beta)
-=
-Y^\top \Pi_{1|0}Y
+= Y^\top \Pi_{1|0}Y
 $$
 가 되며, 여기서 $\Pi_{1|0}$는 정리에 제시된 행렬이다. 따라서
 $$
-\min_{\beta:\,C^\top\beta=0}\|Y-X\beta\|^2
-=
-\min_\beta\|Y-X\beta\|^2 + Y^\top\Pi_{1|0}Y
+\min_{\beta:\,C^\top\beta=0}\|Y-X\beta\|^2 = \min_\beta\|Y-X\beta\|^2 + Y^\top\Pi_{1|0}Y
 $$
 가 성립한다.
 
@@ -1923,8 +1888,7 @@ $$
 따라서 정규벡터의 이차형식 성질로
 $$
 \frac{R(1|0)}{\sigma^2}
-=
-\frac{(C^\top\hat\beta)^\top\big(C^\top(X^\top X)^{-1}C\big)^{-1}(C^\top\hat\beta)}{\sigma^2}
+= \frac{(C^\top\hat\beta)^\top\big(C^\top(X^\top X)^{-1}C\big)^{-1}(C^\top\hat\beta)}{\sigma^2}
 \sim \chi^2(r).
 $$
 또한
@@ -1947,10 +1911,8 @@ $$
 \frac{R(1|0)}{\sigma^2}\sim \chi^2\!\big(r;\delta\big),
 \qquad
 \delta
-=
-\frac{(C^\top\beta)^\top\big(C^\top(X^\top X)^{-1}C\big)^{-1}(C^\top\beta)}{\sigma^2}
-=
-\frac{\beta^\top C\big(C^\top(X^\top X)^{-1}C\big)^{-1}C^\top\beta}{\sigma^2}.
+= \frac{(C^\top\beta)^\top\big(C^\top(X^\top X)^{-1}C\big)^{-1}(C^\top\beta)}{\sigma^2}
+= \frac{\beta^\top C\big(C^\top(X^\top X)^{-1}C\big)^{-1}C^\top\beta}{\sigma^2}.
 $$
 한편 $SSE/\sigma^2\sim\chi^2(n-p-1)$는 여전히 중심 카이제곱이고, 위와 같은 직교투영 구조로 독립성이 유지된다. 따라서 비중심 $F$의 정의로
 $$

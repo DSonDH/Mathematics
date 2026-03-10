@@ -295,8 +295,7 @@ $$
 
 $$
 \mathrm{cdf}_{X_n}(x)
-=
-\begin{cases}
+= \begin{cases}
 0, & x<0 \\
 \dfrac{1}{2}\dfrac{x}{1+n^{-1}}, & 0\le x<1+n^{-1} \\
 1, & x\ge 1+n^{-1}
@@ -307,8 +306,7 @@ $$
 
 $$
 G(x)=\lim_{n\to\infty}\mathrm{cdf}_{X_n}(x)
-=
-\begin{cases}
+= \begin{cases}
 0, & x<0 \\
 \dfrac{1}{2}x, & 0\le x\le 1 \\
 1, & x>1
@@ -377,13 +375,11 @@ $$
 
 $$
 P(X_n=k)
-=
-\binom{n}{k}\left(\frac{\lambda}{n}\right)^k
+= \binom{n}{k}\left(\frac{\lambda}{n}\right)^k
 \left(1-\frac{\lambda}{n}\right)^{n-k}
 \;\xrightarrow[n\to\infty]{}\;
 \frac{\lambda^k e^{-\lambda}}{k!}
-=
-P(X=k)
+= P(X=k)
 $$
 
 가 성립한다.
@@ -410,8 +406,7 @@ $$
 
 $$
 P\{n(1-U_{(n)})\le x\}
-=
-1-P\left\{U_{(n)}<1-\frac{x}{n}\right\}
+= 1-P\left\{U_{(n)}<1-\frac{x}{n}\right\}
 $$
 
 $$
@@ -428,8 +423,7 @@ $$
 $$
 \lim_{n\to\infty}
 P\left\{U_{(n)}<1-\frac{x}{n}\right\}
-=
-\begin{cases}
+= \begin{cases}
 e^{-x}, & x>0 \\
 1, & x\le 0
 \end{cases}
@@ -440,8 +434,7 @@ $$
 $$
 \lim_{n\to\infty}
 P\{n(1-U_{(n)})\le x\}
-=
-\begin{cases}
+= \begin{cases}
 1-e^{-x}, & x\ge 0 \\
 0, & x<0
 \end{cases}
@@ -615,8 +608,7 @@ $$
 
 $$
 |X_n-c|
-=
-\sqrt{(X_{n1}-c_1)^2+\cdots+(X_{nk}-c_k)^2}
+= \sqrt{(X_{n1}-c_1)^2+\cdots+(X_{nk}-c_k)^2}
 $$
 
 로 정의하면,
@@ -823,8 +815,7 @@ $$
 
 $$
 \mathrm{plim}_{n\to\infty} S_n^2
-=
-1\times\{E(X_1^2)-[E(X_1)]^2\}
+= 1\times\{E(X_1^2)-[E(X_1)]^2\}
 =\mathrm{Var}(X_1)=\sigma^2
 $$
 
@@ -866,8 +857,7 @@ $$
 
 $$
 E[(X_n-a)^2]
-=
-\mathrm{Var}(X_n)+\{E(X_n)-a\}^2
+= \mathrm{Var}(X_n)+\{E(X_n)-a\}^2
 $$
 
 이고, 가정에 의해 $\lim_{n\to\infty}E[(X_n-a)^2]=0$
@@ -946,8 +936,7 @@ $$
 
 $$
 Y_n
-=
-\frac{1}{n}Z_1+\cdots+\frac{1}{n-r_n+1}Z_{r_n}
+= \frac{1}{n}Z_1+\cdots+\frac{1}{n-r_n+1}Z_{r_n}
 $$
 
 에 대해
@@ -986,8 +975,7 @@ $$
 $$
 \mathrm{plim}_{n\to\infty}
 h(Y_n)
-=
-h(-\log(1-\alpha))
+= h(-\log(1-\alpha))
 =F^{-1}(\alpha)
 $$
 
@@ -1228,8 +1216,7 @@ $$
 
 $$
 P(X_{n1}=x_1,\dots,X_{nk}=x_k)
-=
-\frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k},
+= \frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k},
 \quad
 \sum_{j=1}^k x_j=n
 $$
@@ -1241,8 +1228,7 @@ $$
 
 $$
 Z_n
-=
-\left(
+= \left(
 \frac{X_{n1}-np_1}{\sqrt n},\dots,
 \frac{X_{nk}-np_k}{\sqrt n}
 \right)^t.
@@ -1253,8 +1239,7 @@ $$
 
 $$
 \Sigma
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 p_1(1-p_1) & -p_1p_2 & \cdots & -p_1p_k \\
 -p_2p_1 & p_2(1-p_2) & \cdots & -p_2p_k \\
 \vdots & \vdots & \ddots & \vdots \\
@@ -1276,16 +1261,14 @@ $$
 
 $$
 Q_n
-=
-\sum_{j=1}^k \frac{(X_{nj}-np_j)^2}{np_j}.
+= \sum_{j=1}^k \frac{(X_{nj}-np_j)^2}{np_j}.
 $$
 
 이를 $Z_n$을 이용하여 쓰면
 
 $$
 Q_n
-=
-Z_n^t D^{-1} Z_n,
+= Z_n^t D^{-1} Z_n,
 \quad
 D=\mathrm{diag}(p_1,\dots,p_k).
 $$
@@ -1828,4 +1811,3 @@ $$
 은 $\pi/4$의 근삿값이 되며, $4\hat{p}_n$은 $\pi$의 근삿값으로 사용될 수 있다.
 
 또한 예 5.4.4에서 얻은 점근 신뢰구간을 이용하여 $\pi$에 대한 근사의 정확도를 평가할 수 있다.
-
