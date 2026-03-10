@@ -13,6 +13,7 @@ $$
 
 #### 음이 아닌 정부호 행렬의 조건
 정리 2.5.4에 의해 $\Sigma$는 음이 아닌 정부호이므로, 모든 고유값이 음이 아니다.
+
 $$
 \lambda_i\ge 0,\quad i=1,\dots,k
 $$
@@ -37,6 +38,7 @@ $$
 
 **(2) 산포의 크기(Magnitude of Dispersion)**  
 고유값 $\lambda_i$는 $p_i$ 방향으로의 **분산의 크기**를 나타낸다.
+
 $$
 \mathrm{Var}(p_i^T\mathbf{X})=p_i^T\Sigma p_i=p_i^T(P\Lambda P^T)p_i=\lambda_i
 $$
@@ -45,6 +47,7 @@ $$
 
 **(3) 총변동(Total Variation)**  
 분산행렬의 대각합(trace)은 총변동을 나타낸다.
+
 $$
 \mathrm{tr}(\Sigma)=\sum_{i=1}^k\mathrm{Var}(X_i)=\sum_{i=1}^k\lambda_i
 $$
@@ -53,6 +56,7 @@ $$
 
 **(4) 일반화된 분산(Generalized Variance)**  
 행렬식(determinant)은 다차원 산포의 부피를 나타낸다.
+
 $$
 \det(\Sigma)=\prod_{i=1}^k\lambda_i
 $$
@@ -63,6 +67,7 @@ $$
 
 #### 예시 2.5.9 (분산행렬의 고유분석)
 예시 2.5.7에서 얻은 분산행렬
+
 $$
 \Sigma=
 \begin{pmatrix}
@@ -73,6 +78,7 @@ $$
 의 고유값과 고유벡터를 구하자.
 
 특성방정식(characteristic equation)은
+
 $$
 \det(\Sigma-\lambda I)
 =\det\begin{pmatrix}
@@ -83,22 +89,26 @@ $$
 $$
 
 전개하면
+
 $$
 \lambda^2-\frac{3}{2}\lambda+\frac{1}{4}=0
 $$
 
 근의 공식으로
+
 $$
 \lambda=\frac{3/2\pm\sqrt{9/4-1}}{2}=\frac{3\pm\sqrt{5}}{4}
 $$
 
 따라서 고유값은
+
 $$
 \lambda_1=\frac{3+\sqrt{5}}{4}\approx 1.309,\quad
 \lambda_2=\frac{3-\sqrt{5}}{4}\approx 0.191
 $$
 
 각 고유값에 대응하는 정규화된 고유벡터는
+
 $$
 p_1=\frac{1}{\sqrt{2+2\sqrt{5}}}
 \begin{pmatrix}
@@ -158,6 +168,7 @@ $$
 $\lambda$를 $\Sigma$의 고유값, $v$를 대응하는 고유벡터라 하자. 즉 $\Sigma v = \lambda v$, $v \neq 0$이다.
 
 양변에 $v^T$를 왼쪽에서 곱하면
+
 $$
 v^T\Sigma v = v^T(\lambda v) = \lambda(v^Tv) = \lambda\|v\|^2
 $$
@@ -166,14 +177,17 @@ $$
 
 **(2) ⇒ (3):**  
 $\Sigma$는 실수 대칭행렬이므로 **스펙트럴 분해(spectral decomposition)**가 가능하다:
+
 $$
 \Sigma = Q\Lambda Q^T
 $$
+
 여기서 $Q$는 직교행렬($Q^TQ=I$), $\Lambda=\text{diag}(\lambda_1,\ldots,\lambda_m)$는 고유값 대각행렬이다.
 
 조건 (2)에 의해 모든 $\lambda_i \geq 0$이므로, $\Lambda^{1/2}=\text{diag}(\sqrt{\lambda_1},\ldots,\sqrt{\lambda_m})$를 정의할 수 있다.
 
 이제 $\Sigma^{1/2}=Q\Lambda^{1/2}Q^T$로 정의하면
+
 $$
 \Sigma^{1/2}\Sigma^{1/2} = (Q\Lambda^{1/2}Q^T)(Q\Lambda^{1/2}Q^T) = Q\Lambda^{1/2}(Q^TQ)\Lambda^{1/2}Q^T = Q\Lambda Q^T = \Sigma
 $$
@@ -184,6 +198,7 @@ $$
 $\Sigma^{1/2}\Sigma^{1/2}=\Sigma$인 실수 대칭행렬 $\Sigma^{1/2}$가 존재한다고 하자.
 
 임의의 $a \in \mathbb{R}^m$에 대하여
+
 $$
 a^T\Sigma a = a^T(\Sigma^{1/2}\Sigma^{1/2})a = a^T\Sigma^{1/2}(\Sigma^{1/2})^Ta = (\Sigma^{1/2}a)^T(\Sigma^{1/2}a) = \|\Sigma^{1/2}a\|^2 \geq 0
 $$
