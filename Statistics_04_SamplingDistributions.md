@@ -1617,8 +1617,7 @@ $$
 
 (b)  
 $Z_i = U_{(i)} - U_{(i-1)}, \quad i=1,\ldots,n$
-로 정의하자. 여기서 $U_{(0)}=0$로 정의한다.
-
+로 정의하자. 여기서 $U_{(0)}=0$로 정의한다.  
 그러면 $(Z_1,\ldots,Z_{n}) \sim \text{Dirichlet}(1,\ldots,1)$이다. 즉, 
 $$
 \text{pdf}_{Z}(z_1,\ldots,z_{n}) = \frac{\Gamma(n+1)}{\Gamma(1)\cdots\Gamma(1)} I_{(z_i>0, \sum_{i=1}^{n}z_i<1)}
