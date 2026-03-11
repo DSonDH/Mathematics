@@ -1,7 +1,6 @@
+# 다차원 확률변수의 확률분포 *(Multivariate Random Variables and Their Distributions)*
 
-## 다차원 확률변수의 확률분포 *(Multivariate Random Variables and Their Distributions)*
-
-### 2.1 두 확률변수의 분포
+## 2.1 두 확률변수의 분포
 일반적으로 랜덤한 실험에서 관심의 대상이 되는 확률변수는 여러 개다. 이 절에서는 두 확률변수의 분포를 나타내는 방법을 정리한다.
 
 #### 예시 2.1.1 (공 추출: 이산형 결합분포)
@@ -391,7 +390,7 @@ $$
 
 로 주어진다.
 
-## 결합확률분포의 특성치 *(Characteristics of Joint Distributions)*
+## 2.2 결합확률분포의 특성치 *(Characteristics of Joint Distributions)*
 
 ### 결합확률분포에 대한 기대값 *(Expectation with Respect to a Joint Distribution)*
 이변량 확률변수 $(X,Y)$의 결합분포는 각 주변분포가 제공하지 못하는
