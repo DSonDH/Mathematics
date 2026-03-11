@@ -152,8 +152,18 @@ $$|J|=4n\sum (x_i-\bar{x})^2>0$$
 
 #### 3) 최소제곱추정량 (Least Squares Estimators)
 정규방정식을 풀면
-$$\hat{\beta}_1=\frac{\sum x_i y_i-\frac{(\sum x_i)(\sum y_i)}{n}}{\sum x_i^2-\frac{(\sum x_i)^2}{n}}=\frac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sum (x_i-\bar{x})^2}$$
-$$\hat{\beta}_0=\bar{y}-\hat{\beta}_1\bar{x}$$
+$$\hat{\beta}_1=\frac{\sum x_i y_i-\frac{(\sum x_i)(\sum y_i)}{n}}{\sum x_i^2-\frac{(\sum x_i)^2}{n}}$$
+
+$$=\frac{\sum x_i y_i - n(\sum x_i/n)(\sum y_i/n)}{\sum x_i^2 - n(\sum x_i/n)^2} = \frac{\sum x_i y_i - n \bar{x} \bar{y}}{\sum x_i^2 - n \bar{x}^2}$$
+
+$$= \frac{\sum x_i y_i - n \bar{x} \bar{y} - n \bar{x} \bar{y} + n \bar{x} \bar{y}}{\sum x_i^2 - n \bar{x}^2 - n \bar{x}^2 + n \bar{x}^2} $$
+
+$$= \frac{\sum x_i y_i - \sum{x_i} \bar{y} - \bar{x} \sum{y_i} + n \bar{x} \bar{y}}{\sum x_i^2 - \sum{x_i} \bar{x} - \bar{x} \sum{x_i} + n \bar{x}^2}$$
+
+$$=\frac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sum (x_i-\bar{x})^2}$$
+
+$$\hat{\beta}_0
+=\bar{y}-\hat{\beta}_1\bar{x}$$
 
 다음 기호를 정의하면
 $$S_{xx}=\sum (x_i-\bar{x})^2\\
@@ -171,6 +181,8 @@ $$\hat{y}=\bar{y}+\hat{\beta}_1(x-\bar{x})$$
 $$\hat{y}-\bar{y}=\hat{\beta}_1(x-\bar{x})$$
 이 식은 추정된 회귀선이 항상 평균점 $(\bar{x},\bar{y})$을 지난다는 것을 의미한다.
 
+FIXME: 수식 $$ ... $$ 전후 한줄씩 띄우기
+TODO: 
 ### 1.3.2 최대가능도추정법 (Method of Maximum Likelihood Estimation)
 회귀선 추정의 두 번째 방법이다. 최소제곱추정량에 정규성 가정을 추가하여 최대가능도추정량(MLE)을 구하는 방법이다. 즉,
 $$\varepsilon_i\sim N(0,\sigma^2)$$

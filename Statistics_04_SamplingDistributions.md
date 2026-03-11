@@ -2262,7 +2262,7 @@ $$
 - **계산의 용이성:** 독립 표본들의 곱셈 법칙이 자연스럽게 적용됨
 - **일반화 가능성:** $r$번째 순서통계량의 분포 유도에도 직접 확장 가능
 
-
+FIXME: 내용 암기하듯이 쓰면서 복습
 ## 4.4 다변량 정규분포 *(Multivariate Normal Distribution)*
 통계 조사에서는 단일 특성보다 **서로 연관된 여러 특성**을 동시에 관측하는 경우가 많다.
 이러한 다차원 자료에 대한 추론의 기본 모형으로 **다변량 정규분포(multivariate normal distribution)** 가 널리 사용된다.
@@ -2673,10 +2673,11 @@ $$
 E(Y) = E(X_2) - \mu_2 - \Sigma_{21}\Sigma_{11}^{-1}E(X_1-\mu_1) = \mu_2 - \mu_2 - 0 = 0
 $$
 
-공분산행렬은
+분산행렬은 ($\text{Var}(A+CB)=\text{Var}(A)+C\text{Var}(B)C^T+\text{Cov}(A,B)C^T+C\text{Cov}(B,A)$)이므로
 
 $$
-\text{Var}(Y) = \text{Var}(X_2) - \Sigma_{21}\Sigma_{11}^{-1}\text{Cov}(X_1,X_2)^T - \text{Cov}(X_1,X_2)\Sigma_{11}^{-1}\Sigma_{21}^T\\
+\text{Var}(Y) = \text{Var}(X_2 - \Sigma_{21}\Sigma_{11}^{-1}(X_1-\mu_1)) \\
+= \text{Var}(X_2) - \Sigma_{21}\Sigma_{11}^{-1}\text{Cov}(X_1,X_2)^T - \text{Cov}(X_2,X_1)\Sigma_{11}^{-1}\Sigma_{21}^T\\
 + \Sigma_{21}\Sigma_{11}^{-1}\text{Var}(X_1)\Sigma_{11}^{-1}\Sigma_{21}^T\\
 = \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12} + \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{11}\Sigma_{11}^{-1}\Sigma_{12}\\
 = \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}
@@ -2691,8 +2692,7 @@ $$
 따라서 정리 4.4.3 (b)에 의해 $Y \perp X_1$이고, 이는 $Y$의 분포가 $X_1$의 값에 무관함을 의미한다.
 
 $$
-\therefore X_2 | X_1=x_1 = Y + \mu_2 + \Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1) \\
-\sim N(0+\mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1), \Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})
+\therefore X_2 | X_1=x_1 = Y + \mu_2 + \Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1) \sim N(0+\mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1), \Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})
 $$
 
 #### 예 4.4.3 이변량 정규분포의 조건부분포
@@ -2737,26 +2737,6 @@ $$
 
 ### 정리 4.4.5 이차형식의 분포 *(Distribution of Quadratic Forms)*
 
-**(a) 이차형식의 카이제곱분포**  
-$X\sim N_k(\mu,\Sigma)$이고 $\Sigma$가 정칙행렬이면
-
-$$
-(X-\mu)^T\Sigma^{-1}(X-\mu)\sim\chi^2(k)
-$$
-
-**(b) 멱등행렬과 이차형식**  
-$Z\sim N_n(0,I)$이고 $A$가 대칭 멱등행렬(symmetric idempotent matrix), 즉 $A^2=A$, $A^T=A$이면
-
-$$
-Z^TAZ\sim\chi^2(r),\quad r=\text{trace}(A)
-$$
-
-**각주**  
-일반적으로 $x^TAx = x^T\left(\frac{A+A^T}{2}\right)x$이므로 $Z^TAZ$에서 행렬 $A$는 언제나 대칭행렬인 것으로 가정되어 있으며, (b)에서의 조건 $A^2=A$는 $Z^TAZ\sim\chi^2(r)$이기 위한 필요충분조건으로 알려져 있다.
-
-
-#### 정리 4.4.5 이차형식의 분포 *(Distribution of Quadratic Forms)*
-
 **(a) 이차형식의 카이제곱분포**
 
 $X\sim N_k(\mu,\Sigma)$이고 $\Sigma$가 정칙행렬이면
@@ -2799,6 +2779,7 @@ $$
 Z^TZ=\sum_{i=1}^k Z_i^2\sim\chi^2(k)
 $$
 
+TODO:  
 **(b)** $A$가 대칭 멱등행렬이므로 스펙트럴 분해(spectral decomposition)를 이용하면
 
 $$
@@ -2806,8 +2787,6 @@ A=P\Lambda P^T
 $$
 
 여기서 $P$는 직교행렬($P^TP=PP^T=I$), $\Lambda=\text{diag}(\lambda_1,\ldots,\lambda_n)$는 고유값 대각행렬이다.
-
-$A^2=A$이므로
 
 $$
 P\Lambda P^TP\Lambda P^T=P\Lambda^2P^T=P\Lambda P^T
@@ -2837,6 +2816,7 @@ $$
 Z^TAZ=\sum_{i=1}^r W_i^2\sim\chi^2(r)
 $$
 
+TODO:  
 #### 예 4.4.4 일원분류모형에서의 표본분포 *(Sampling Distribution in One-Way Classification Model)*
 
 정리 4.2.7의 (a)에 따르면, 일원분류모형(i개 정규분포에서 각각 j개만큼 샘플 뽑아서 ij갯수 샘플이 있음)에서
@@ -3098,6 +3078,8 @@ $$\hat{\sigma}^2 = \frac{(Y-X\hat{\beta})^T(Y-X\hat{\beta})}{n-p-1} = \frac{\sum
 
 로 정의되는 **평균오차제곱합(mean squared error)** 을 사용한다.
 
+> n - p - 1인 이유: 회귀계수 추정에 사용된 자유도(p+1)를 제외한 나머지 자유도를 사용하기 때문
+
 예 4.4.6에서의 단순선형회귀모형의 경우 $p=1$이므로
 
 $$\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2}{n-2}$$
@@ -3105,6 +3087,9 @@ $$\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2
 ### 정리 4.4.6 선형회귀모형에서의 표본분포 *(Sampling Distribution in Linear Regression Model)*
 
 선형회귀모형에서 주어진 상수의 행렬 X의 계수가 p+1이라 가정하면 다음이 성립한다:
+
+> rank가 p+1이라는 말은, 설계행렬 X의 열들이 선형독립이라는 말로, 즉 회귀계수 $\beta$의 모든 원소가 모형에서 유의미한 역할을 한다는 것을 의미한다.  
+> 이는 회귀계수 추정량 $\hat{\beta}$가 고유하게 정의되는 것을 보장한다. 만약 X의 계수가 p+1보다 작다면, 즉 X의 열들이 선형종속이라면, 회귀계수 $\beta$의 일부 원소는 모형에서 유의미한 역할을 하지 않게 되고, 이로 인해 $\hat{\beta}$가 고유하게 정의되지 않게 된다.
 
 **(a)** 회귀계수 추정량의 분포
 
@@ -3150,6 +3135,7 @@ $$\text{Cov}(\hat{\beta},(I-H)Y)=0$$
 
 정리 4.4.3 (c)에 의해, 다변량 정규분포를 따르는 확률변수들의 공분산이 0이면 독립이므로 $\hat{\beta}$와 $(I-H)Y$는 독립이고, $(I-H)Y$의 함수인 $\hat{\sigma}^2$도 $\hat{\beta}$와 독립이다.
 
+TODO: 살짝 긴 호흡 증명   
 **(c)** 오차분산 추정량의 분포
 
 $Z=(Y-X\beta)/\sigma\sim N_n(0,I)$로 표준화하면

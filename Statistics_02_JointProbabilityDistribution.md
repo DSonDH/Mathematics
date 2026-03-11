@@ -1698,6 +1698,22 @@ $$
 = \mathrm{Var}(\mathbf{X})+\mathrm{Var}(\mathbf{Y}) +\mathrm{Cov}(\mathbf{X},\mathbf{Y})+\mathrm{Cov}(\mathbf{Y},\mathbf{X})
 $$
 
+> #### 추가 정리
+>
+>확률벡터 $\mathbf{A}, \mathbf{B}$와 상수행렬 $C$에 대해 다음이 성립한다.
+>
+>$$
+>\mathrm{Var}(\mathbf{A}+C\mathbf{B})
+>=\mathrm{Var}(\mathbf{A})+C\mathrm{Var}(\mathbf{B})C^T
+>+\mathrm{Cov}(\mathbf{A},\mathbf{B})C^T+C\mathrm{Cov}(\mathbf{B},\mathbf{A})
+>$$
+>
+>$$
+>\mathrm{Var}(\mathbf{A}-C\mathbf{B})
+>=\mathrm{Var}(\mathbf{A})+C\mathrm{Var}(\mathbf{B})C^T
+>-\mathrm{Cov}(\mathbf{A},\mathbf{B})C^T-C\mathrm{Cov}(\mathbf{B},\mathbf{A})
+>$$
+
 #### 증명
 
 공분산행렬의 정의를
@@ -1718,6 +1734,40 @@ $$
 $$
 
 로 얻는다. 나머지도 동일한 방식이다. □
+
+**추가정리 증명**
+
+$\mathbf{Z}=\mathbf{A}+C\mathbf{B}$라 하면, 분산의 정의에 의해
+
+$$
+\mathrm{Var}(\mathbf{Z})
+=E[(\mathbf{Z}-E\mathbf{Z})(\mathbf{Z}-E\mathbf{Z})^T]
+$$
+
+여기서 $E(\mathbf{Z})=E(\mathbf{A})+CE(\mathbf{B})$이므로
+
+$$
+\mathbf{Z}-E\mathbf{Z}
+=(\mathbf{A}+C\mathbf{B})-(E\mathbf{A}+CE\mathbf{B})
+=(\mathbf{A}-E\mathbf{A})+C(\mathbf{B}-E\mathbf{B})
+$$
+
+따라서
+
+$$
+\begin{align}
+\mathrm{Var}(\mathbf{A}+C\mathbf{B})
+&= E[(\mathbf{A}-E\mathbf{A}+C(\mathbf{B}-E\mathbf{B}))(\mathbf{A}-E\mathbf{A}+C(\mathbf{B}-E\mathbf{B}))^T] \\
+&= E[(\mathbf{A}-E\mathbf{A})(\mathbf{A}-E\mathbf{A})^T + (\mathbf{A}-E\mathbf{A})(\mathbf{B}-E\mathbf{B})^TC^T \\
+&\quad + C(\mathbf{B}-E\mathbf{B})(\mathbf{A}-E\mathbf{A})^T + C(\mathbf{B}-E\mathbf{B})(\mathbf{B}-E\mathbf{B})^TC^T] \\
+&= \mathrm{Var}(\mathbf{A}) + E[(\mathbf{A}-E\mathbf{A})(\mathbf{B}-E\mathbf{B})^T]C^T \\
+&\quad + CE[(\mathbf{B}-E\mathbf{B})(\mathbf{A}-E\mathbf{A})^T] + C\mathrm{Var}(\mathbf{B})C^T \\
+&= \mathrm{Var}(\mathbf{A}) + \mathrm{Cov}(\mathbf{A},\mathbf{B})C^T + C\mathrm{Cov}(\mathbf{B},\mathbf{A}) + C\mathrm{Var}(\mathbf{B})C^T
+\end{align}
+$$
+
+뺄셈의 경우도 동일한 방법으로 증명된다. □
+
 
 #### 예시 2.5.8
 
