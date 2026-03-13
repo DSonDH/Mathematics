@@ -40,24 +40,26 @@ $$
 
 
 # 2. 점별수렴과 균등수렴 *(Pointwise and Uniform Convergence)*
-## (1) 함수열의 수렴
+## (1) 함수열의 수렴 
 - 함수열과 극한함수 간 성질이 항상 보존되지 않는 문제가 있었음
    - 각 함수는 연속인데 극한함수는 불연속
    - 각 함수는 미분가능인데 극한함수는 미분불가능
 - 이를 분석하여 어떤 조건에서 성질이 보존되는지 바이어슈트라스가 밝혀냈고, 여기서 점별수렴과 균등수렴이 핵심 개념임
+
 ### Def. [점별수렴과 균등수렴] *(Pointwise Convergence and Uniform Convergence)*
 $\{f_n\}$과 $f$가 $D$에서 정의된 함수열과 함수라 하자.
 
 ① 임의의 $x\in D$와 $\varepsilon>0$에 대하여
+
+$$\exists N\in\mathbb N\ \text{s.t.}\ n\ge N \Rightarrow |f_n(x)-f(x)|<\varepsilon
 $$
-\exists N\in\mathbb N\ \text{s.t.}\ n\ge N \Rightarrow |f_n(x)-f(x)|<\varepsilon
-$$
+
 이면 $\{f_n\}$은 $D$에서 $f$로 **점별수렴** *(pointwise convergence)* 한다.
 
 ② 임의의 $\varepsilon>0$에 대하여
-$$
-\exists N\in\mathbb N\ \text{s.t.}\ \forall x\in D,\ n\ge N \Rightarrow |f_n(x)|<\varepsilon
-$$
+
+$$\exists N\in\mathbb N\ \text{s.t.}\ \forall x\in D,\ n\ge N \Rightarrow |f_n(x)-f(x)|<\varepsilon$$
+
 이면 $\{f_n\}$은 $D$에서 $f$로 **균등수렴** *(uniform convergence)* 한다.
    - ①은 각 $x$마다 서로 다른 $N$을 선택 가능
    - ②는 ①과 달리 $N$이 $x$에 무관하게 존재

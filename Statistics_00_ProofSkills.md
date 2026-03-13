@@ -330,3 +330,86 @@ $$\frac{d}{d\theta}\int g(x;\theta)f(x)dx = \int \frac{\partial g(x;\theta)}{\pa
 ### 특수 경우: Leibniz Rule
 
 $$\frac{d}{d\theta}\int_{a(\theta)}^{b(\theta)} g(x;\theta)dx = \int_{a(\theta)}^{b(\theta)} \frac{\partial g}{\partial\theta}dx + g(b;\theta)b'(\theta) - g(a;\theta)a'(\theta)$$
+
+
+## 24. 사건 포함관계로 확률을 쪼개는 트릭 (Event Inclusion Bound)
+
+확률수렴, Slutsky류 증명에서 자주 쓰는 트릭.  
+핵심은 **복잡한 사건을 더 다루기 쉬운 두 사건의 합집합으로 포함시키는 것**이다.
+
+### 기본 형태
+
+임의의 $\varepsilon>0$, $M>0$에 대해  
+$$
+\{|X_n Z_n|>\varepsilon\}
+\subset
+\{|X_n|>M\} \cup \left\{|Z_n|>\frac{\varepsilon}{M}\right\}
+$$
+
+다르게 표현하면,
+
+$$
+\{|X_n Z_n|>\varepsilon\} \subset \{|X_n Z_n| > \varepsilon, |X_n| \le M\} \cup \{|X_n Z_n| > \varepsilon, |X_n| > M\} \\
+\subset \{|Z_n| > \varepsilon/M\} \cup \{|X_n| > M\}
+$$
+
+### 확장: 합/차/몫 사건 분해
+
+곱뿐 아니라 합, 차, 몫 등도 비슷하게 분해 가능.
+
+- **합/차**
+  $$
+  \{|X_n + Y_n| > \varepsilon\} \subset \{|X_n| > \varepsilon/2\} \cup \{|Y_n| > \varepsilon/2\}
+  $$
+  $$
+  \{|X_n - Y_n| > \varepsilon\} \subset \{|X_n| > \varepsilon/2\} \cup \{|Y_n| > \varepsilon/2\}
+  $$
+
+- **몫**  
+  $Y_n$이 0에 가까워지는 경우를 제외하면,
+  $$
+  \left\{\left|\frac{X_n}{Y_n}\right| > \varepsilon\right\} \subset \{|X_n| > \varepsilon M\} \cup \{|Y_n| < 1/M\}
+  $$
+  (단, $|Y_n| > 1/M$로 제한)
+
+### 왜 성립하는가
+
+**대우(contrapositive)** 를 사용하면 간단하다.  
+예를 들어, $|X_n| \le M$이고 $|Z_n| \le \frac{\varepsilon}{M}$이면  
+
+$$|X_n Z_n| \le M \cdot \frac{\varepsilon}{M} = \varepsilon$$
+
+즉, $|X_n Z_n| > \varepsilon$가 되려면 둘 중 하나는 반드시 조건을 벗어나야 한다.
+
+### 바로 나오는 확률 상계
+
+union bound를 적용하면
+
+$$P(|X_n Z_n|>\varepsilon) \le P(|X_n|>M) + P\left(|Z_n|>\frac{\varepsilon}{M}\right)$$
+
+합/차:
+
+$$P(|X_n + Y_n| > \varepsilon) \le P(|X_n| > \varepsilon/2) + P(|Y_n| > \varepsilon/2)$$
+
+몫:
+
+$$P\left(\left|\frac{X_n}{Y_n}\right| > \varepsilon\right) \le P(|X_n| > \varepsilon M) + P(|Y_n| < 1/M)$$
+
+### 전형적 사용 패턴
+
+1. $M$ 또는 $\varepsilon/2$ 등 임계값을 잡아 각 항의 확률을 분리
+2. 각각의 확률이 0으로 가는지 확인
+3. union bound로 전체 사건의 확률을 상계
+
+### 기억 포인트
+
+> **합/차/곱/몫이 크려면, 적어도 하나의 성분이 충분히 커야 한다.**
+
+복잡한 연산의 사건을 각각의 크기 조건으로 분해하는 것이 핵심.
+
+### 관련 증명 습관
+
+- 직접 증명보다 **대우**를 먼저 본다.
+- 사건 포함관계를 만들면 곧바로 **확률 부등식**으로 바꾼다.
+- 임의의 $M$을 도입해 **bounded part**와 **small remainder**를 분리한다.
+- 이후 union bound, convergence in probability, tightness와 연결한다.
