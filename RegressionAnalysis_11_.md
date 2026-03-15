@@ -59,11 +59,7 @@ $$E(y)=\beta_0+\beta_1 x_1$$
 
 **여자인 경우**: $x_2=1$이므로
 
-$$E(y)=\beta_0+\beta_1 x_1+\beta_2$$
-
-즉
-
-$$E(y)=(\beta_0+\beta_2)+\beta_1 x_1$$
+$$E(y)=\beta_0+\beta_1 x_1+\beta_2 =(\beta_0+\beta_2)+\beta_1 x_1$$
 
 따라서 남자와 여자에 대한 두 개의 회귀직선(regression line)은 **기울기(slope)** 는 동일하지만 **절편(intercept)** 이 서로 다른 두 직선이 된다.
 
@@ -94,10 +90,6 @@ $$
 **여자**: $\hat{y}=(33.8741+8.0555)-0.1017x_1$  
 즉 $\hat{y}=41.9296-0.1017x_1$
 
-
-**회귀계수 해석 (Interpretation of Regression Coefficients)**  
-각 회귀계수의 의미는 다음과 같다.
-
 **(1) $\beta_1$**  
 적성검사 점수 $x_1$이 증가할 때 프로그램을 익히는 데 걸리는 평균 시간이 어떻게 변하는지를 나타낸다. $\hat{\beta}_1=-0.1017$ 이므로 적성검사 점수가 높을수록 프로그램을 더 빠르게 익힌다고 해석할 수 있다. 예를 들어 점수가 **100점 높아질 경우 평균 소요시간은 약 10시간 감소**한다.
 
@@ -107,7 +99,6 @@ $$
 또한 두 회귀직선의 기울기가 동일하므로 적성검사 점수에 관계없이 남녀 간 평균 차이는 일정하다.
 
 **분산분석 (Analysis of Variance, ANOVA)**  
-모형에 대한 분산분석표는 다음과 같다.
 
 | 요인 | 제곱합 | 자유도 | 평균제곱 | F |
 |---|---:|---:|---:|---:|
@@ -133,8 +124,7 @@ $$E(y)=\beta_0+\beta_1 x_1+\beta_2 x_2+\beta_3 x_1x_2$$
 성별에 따른 반응함수는 다음과 같다.
 
 **남자**: $E(y)=\beta_0+\beta_1 x_1$  
-**여자**: $E(y)=\beta_0+\beta_1 x_1+\beta_2+\beta_3 x_1$  
-즉 $E(y)=(\beta_0+\beta_2)+(\beta_1+\beta_3)x_1$
+**여자**: $E(y)=\beta_0+\beta_1 x_1+\beta_2+\beta_3 x_1 =(\beta_0+\beta_2)+(\beta_1+\beta_3)x_1$
 
 따라서
 
@@ -162,8 +152,8 @@ $$
 따라서 추정된 회귀식은 $\hat{y}=33.8384-0.1015x_1+8.1313x_2-0.0004x_1x_2$
 
 **교호작용 검정 (Interaction Test)**  
-교호작용 효과가 존재하는지 검정하기 위하여 다음의 가설을 고려한다.
-$H_0:\beta_3=0$ 검정통계량은 
+교호작용 효과가 존재하는지 검정하는 가설: $H_0:\beta_3=0$  
+검정통계량은 
 
 $$t_0=\frac{\hat{\beta}_3}{\sqrt{\operatorname{Var}(\hat{\beta}_3)}}$$
 
@@ -280,32 +270,26 @@ $$E(y)=\beta_0+\beta_1x_1+\beta_2x_2+\beta_3x_3$$
 로 해석할 수 있다.
 
 **교호작용이 존재하는 경우 (Interaction Model)**  
-학력과 적성검사점수 사이에 **교호작용(interaction)** 이 존재할 수도 있다. 즉 적성검사점수와 소요시간 사이의 관계가 학력에 따라 달라질 수 있다.  
-이 경우 모형은 다음과 같이 확장된다.
+학력과 적성검사점수 사이에 **교호작용(interaction)** 이 존재할 수도 있다. 즉 적성검사점수와 소요시간 사이의 관계가 학력에 따라 달라질 수 있다. 이 경우 모형은 다음과 같이 확장된다.
 
 $$y_i =\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i3} + \beta_4 x_{i1}x_{i2} + \beta_5 x_{i1}x_{i3} + \varepsilon_i$$
 
-각 학력 집단에 대한 반응함수는 다음과 같다.
-
-**고등학교 졸업 ($E_1$)**: $E(y)=(\beta_0+\beta_2)+(\beta_1+\beta_4)x_1$
-
-**대학교 졸업 ($E_2$)**: $E(y)=(\beta_0+\beta_3)+(\beta_1+\beta_5)x_1$
-
+각 학력 집단에 대한 반응함수는 다음과 같다.  
+**고등학교 졸업 ($E_1$)**: $E(y)=(\beta_0+\beta_2)+(\beta_1+\beta_4)x_1$  
+**대학교 졸업 ($E_2$)**: $E(y)=(\beta_0+\beta_3)+(\beta_1+\beta_5)x_1$  
 **대학원 이상 ($E_3$)**: $E(y)=\beta_0+\beta_1x_1$  
 
 따라서 교호작용을 포함하면 **학력에 따라 절편(intercept)과 기울기(slope)가 모두 달라질 수 있다.**
 
 ### 11.2.2 두 개 이상의 질적변수 (Two or More Qualitative Variables)
 
-앞 절에서는 하나의 질적변수만을 고려하였다. 그러나 실제 분석에서는 **여러 개의 질적 설명변수(multiple qualitative explanatory variables)**가 동시에 포함될 수 있다.
-
-예를 들어 프로그램 학습시간 데이터가 다음 변수들과 함께 수집되었다고 하자.
+앞 절에서는 하나의 질적변수만을 고려하였다. 그러나 실제 분석에서는 **여러 개의 질적 설명변수(multiple qualitative explanatory variables)** 가 동시에 포함될 수 있다. 예를 들어 프로그램 학습시간 데이터가 다음 변수들과 함께 수집되었다고 하자.
 
 * $x_1$ : 적성검사점수
 * $x_2$ : 성별 (남/여)
 * $x_3, x_4$ : 학력 (고등학교, 대학교, 대학원)
 
-이 경우 여러 개의 가변수를 이용하여 다음과 같은 **중회귀모형(multiple regression model)**을 구성할 수 있다.
+이 경우 여러 개의 가변수를 이용하여 다음과 같은 **중회귀모형(multiple regression model)** 을 구성할 수 있다.
 
 $$ y_i = \beta_0  + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i3} + \beta_4 x_{i4} + \varepsilon_i $$
 
@@ -331,9 +315,7 @@ $$T_j(x-a_j)$$
 를 이용하여 구간별 회귀모형을 설명하였다. 여기서는 **가변수(dummy variable)** 를 이용하여 같은 모형을 표현하는 방법을 설명한다.
 
 예를 들어 설명변수 $x$가 어떤 기준점 $x_0$을 기준으로 두 구간으로 나누어진다고 하자.
-
-* $x < x_0$
-* $x \ge x_0$
+* $x < x_0,\quad x \ge x_0$
 
 이 경우 다음과 같은 가변수를 정의한다.
 
@@ -349,60 +331,44 @@ $$
 
 $$y = \beta_0 + \beta_1 x + \beta_2 z + \beta_3 xz + \varepsilon$$
 
-이때 두 구간에서의 반응함수는 다음과 같다.
-
+이때 두 구간에서의 반응함수는  
 **첫 번째 구간**: $E(y)=\beta_0+\beta_1x$  
 **두 번째 구간**: $E(y)=(\beta_0+\beta_2)+(\beta_1+\beta_3)x$
 
 따라서
-
 * $\beta_2$ → 절편 변화(intercept shift)
 * $\beta_3$ → 기울기 변화(slope change)
-
-를 의미한다.
 
 이와 같이 가변수를 이용하면 구간별 회귀모형을 매우 간단하게 표현할 수 있으며, 구조적 변화(structural change)나 정책 변화(policy intervention) 분석에 자주 사용된다.
 
 
 ## 11.4 반응변수가 가변수인 경우 (Binary Response Case)
 
-앞 절들에서는 **설명변수(explanatory variable)** 가 가변수(dummy variable)인 경우를 다루었다. 그러나 실제 데이터 분석에서는 **반응변수(response variable)** 자체가 가변수인 경우도 자주 발생한다.
-
-예를 들어 다음과 같은 경우가 있다.
+앞 절들에서는 **설명변수(explanatory variable)** 가 가변수(dummy variable)인 경우를 다루었다. 그러나 실제 데이터 분석에서는 **반응변수(response variable)** 자체가 가변수인 경우도 자주 발생한다. 예를들어, 
 * 제조업체에서 **통계적 공정관리(statistical process control; SPC)** 활동을 실시하고 있는지 여부
-* 개인이 **생명보험(life insurance)**에 가입했는지 여부
+* 개인이 **생명보험(life insurance)** 에 가입했는지 여부  
 
-이와 같은 경우 반응변수는 두 가지 결과만 가질 수 있으므로 **이진형 변수(binary variable)** 가 된다.
-
-예를 들어 SPC 활동 여부를 반응변수 $y$로 정의하면 다음과 같이 나타낼 수 있다.
+이와 같은 경우 반응변수는 두 가지 결과만 가질 수 있으므로 **이진형 변수(binary variable)** 가 된다. 이러한 경우 반응변수는 **0 또는 1의 값만을 가지는 가변수**가 된다.
 
 $$
 y = \begin{cases}
 1, & \text{SPC 활동을 하는 경우} \\
 0, & \text{SPC 활동을 하지 않는 경우}
-\end{cases}
-$$
+\end{cases} \\
 
-또 다른 예로 개인의 소득 $x$에 따른 생명보험 가입 여부를 다음과 같이 정의할 수 있다.
-
-$$
 y = \begin{cases}
 1, & \text{생명보험에 가입한 경우} \\
 0, & \text{생명보험에 가입하지 않은 경우}
 \end{cases}
 $$
 
-이러한 경우 반응변수는 **0 또는 1의 값만을 가지는 가변수**가 된다.
-
 ### 11.4.1 반응함수의 의미 (Meaning of the Response Function)
 
 단순회귀모형(simple regression model)에서 반응변수가 가변수라고 하자. 그러면 모형은 다음과 같이 표현된다.
 
-$$y_i = \beta_0 + \beta_1 x_i + \varepsilon_i, \qquad y_i = 0,1$$
+$$y_i = \beta_0 + \beta_1 x_i + \varepsilon_i, \quad y_i = 0,1$$
 
-여기서 $E(\varepsilon_i)=0$ 이라고 하면 평균 반응함수(mean response function)는 $E(y_i)=\beta_0+\beta_1 x_i$ 로 표현된다.
-
-반응변수 $y_i$는 0 또는 1의 값을 가지므로 **베르누이 확률분포(Bernoulli distribution)** 를 따른다고 가정할 수 있다. $P(y_i=1)=p_i, P(y_i=0)=1-p_i=q_i$ 따라서 $p_i+q_i=1$ 이 성립한다. 이때 기대값은 $E(y_i)=p_i$ 이므로 평균 반응함수는 
+여기서 $E(\varepsilon_i)=0$ 이라고 하면 평균 반응함수(mean response function)는 $E(y_i)=\beta_0+\beta_1 x_i$ 로 표현된다. 반응변수 $y_i$는 0 또는 1의 값을 가지므로 **베르누이 확률분포(Bernoulli distribution)** 를 따른다고 가정할 수 있다. $P(y_i=1)=p_i, P(y_i=0)=1-p_i=q_i$ 따라서 $p_i+q_i=1$ 이 성립한다. 이때 기대값은 $E(y_i)=p_i$ 이므로 평균 반응함수는 
 
 $$E(y_i)=\beta_0+\beta_1 x_i=p_i$$
 
@@ -421,21 +387,16 @@ $$E(y)=\beta_0+\beta_1 x$$
 
 ### 11.4.2 반응변수가 가변수인 경우의 문제점 (Problems with Binary Response in Linear Regression)
 
-설명변수가 범주형인 경우와 달리 반응변수가 범주형일 때 **선형회귀모형(linear regression model)**을 그대로 적용하면 몇 가지 문제가 발생한다.
+설명변수가 범주형인 경우와 달리 반응변수가 범주형일 때 **선형회귀모형(linear regression model)** 을 그대로 적용하면 몇 가지 문제가 발생한다.
 
-특히 다음 세 가지 문제가 중요한 통계적 문제를 일으킨다.
-
+특히 다음 세 가지 문제가 중요한 통계적 문제를 일으킨다.  
 1. **오차의 비정규성 (Non-normality of errors)**
 2. **오차의 이분산성 (Heteroscedasticity; unequal variance of errors)**
 3. **반응함수의 제약성 (Constraint on response function)**
 
 #### (1) 오차의 비정규성 (Non-normality of errors)
 
-모형 $y_i=\beta_0+\beta_1 x_i+\varepsilon_i$ 에서 오차는
-
-$$\varepsilon_i=y_i-(\beta_0+\beta_1 x_i) $$
-
-그러나 $y_i$는 0 또는 1만을 가지므로 오차는 다음 두 값만을 취한다.
+모형 $y_i=\beta_0+\beta_1 x_i+\varepsilon_i$ 에서 오차는 $\varepsilon_i=y_i-(\beta_0+\beta_1 x_i) $ 그러나 $y_i$는 0 또는 1만을 가지므로 오차는 다음 두 값만을 취한다.
 
 $$
 \varepsilon_i=
@@ -445,34 +406,26 @@ $$
 \end{cases}
 $$
 
-즉 오차항은 **두 개의 값만을 가지는 이산분포(discrete distribution)** 를 따르며 **정규분포(normal distribution)** 를 따르지 않는다.
-
-따라서 선형회귀분석에서 사용하는 t 검정, F 검정 (F-test) 등의 통계적 검정이 이론적으로 성립하지 않는다.
+즉 오차항은 **두 개의 값만을 가지는 이산분포(discrete distribution)** 를 따르며 **정규분포(normal distribution)** 를 따르지 않는다. 따라서 선형회귀분석에서 사용하는 t 검정, F 검정 (F-test) 등의 통계적 검정이 이론적으로 성립하지 않는다.
 
 #### (2) 오차의 이분산성 (Heteroscedasticity)
 
 오차의 분산을 계산하면 $Var(\varepsilon_i)=Var(y_i)$ 이고 $Var(y_i)=E[(y_i-E(y_i))^2]$ 베르누이 분포의 성질에 의해 $Var(y_i)=p_i(1-p_i)$
-따라서 $Var(\varepsilon_i)=p_i(1-p_i)$
-
-단순회귀모형에서는 $p_i=\beta_0+\beta_1 x_i$ 이므로
+따라서 $Var(\varepsilon_i)=p_i(1-p_i)$ 단순회귀모형에서는 $p_i=\beta_0+\beta_1 x_i$ 이므로
 
 $$ Var(\varepsilon_i)=(\beta_0+\beta_1 x_i)(1-\beta_0-\beta_1 x_i)$$
 
-따라서 오차의 분산은 $x_i$에 의존하며 **이분산(heteroscedasticity)** 을 가진다.  
-즉 $Var(\varepsilon_i) \neq Var(\varepsilon_j)$ 이므로 오차는 **등분산성(homoscedasticity)** 을 만족하지 않는다.
+따라서 오차의 분산은 $x_i$에 의존하며 **이분산(heteroscedasticity)** 을 가진다. 즉 $Var(\varepsilon_i) \neq Var(\varepsilon_j)$ 이므로 오차는 **등분산성(homoscedasticity)** 을 만족하지 않는다.
 
 #### (3) 반응함수의 제약성 (Constraint on Response Function)
 
-평균 반응함수는 $E(y)=p$ 이며 이는 **확률(probability)** 이므로 $0 \le p \le 1$ 의 범위를 가져야 한다. 그러나 선형회귀모형 $E(y)=\beta_0+\beta_1 x$ 은 이 범위를 벗어날 수 있다.
-
-예를 들어 $x$가 충분히 커지면 $E(y)>1$ 이 될 수 있으며 이는 확률로 해석할 수 없다. 따라서 반응변수가 가변수인 경우 선형회귀모형을 그대로 사용하는 것은 이론적으로 타당하지 않다.
-
+평균 반응함수는 $E(y)=p$ 이며 이는 **확률(probability)** 이므로 $0 \le p \le 1$ 의 범위를 가져야 한다. 그러나 선형회귀모형 $E(y)=\beta_0+\beta_1 x$ 은 이 범위를 벗어날 수 있다.  
+예를 들어 $x$가 충분히 커지면 $E(y)>1$ 이 될 수 있으며 이는 확률로 해석할 수 없다. 따라서 반응변수가 가변수인 경우 선형회귀모형을 그대로 사용하는 것은 이론적으로 타당하지 않다.  
 이 문제는 이후 **로지스틱 회귀모형(logistic regression model)** 에서 보다 적절하게 해결된다.
 
 ### 11.4.3 추정방법 (Estimation Method)
 
-비록 오차항이 정규분포를 따르지 않지만 **최소제곱추정량(ordinary least squares estimator)** $\hat{\beta}=(X^TX)^{-1}X^Ty$ 은 여전히 **불편추정량(unbiased estimator)**의 성질을 유지한다. 또한 표본의 크기가 충분히 크면 $\hat{\beta}$ 는 **점근적으로 정규분포(asymptotically normal distribution)** 를 따른다.
-
+비록 오차항이 정규분포를 따르지 않지만 **최소제곱추정량(ordinary least squares estimator)** $\hat{\beta}=(X^TX)^{-1}X^Ty$ 은 여전히 **불편추정량(unbiased estimator)** 의 성질을 유지한다. 또한 표본의 크기가 충분히 크면 $\hat{\beta}$ 는 **점근적으로 정규분포(asymptotically normal distribution)** 를 따른다.  
 그러나 오차의 분산이 일정하지 않기 때문에 이론적으로는 **일반화 최소제곱추정법(generalized least squares; GLS)** 을 사용하는 것이 더 적절하다.
 
 오차의 분산-공분산행렬은 다음과 같이 표현된다.
@@ -494,7 +447,7 @@ $$\hat{\beta}^*=(X^T V^{-1} X)^{-1}X^T V^{-1}y$$
 
 그러나 실제로는 $p_i$가 알려져 있지 않기 때문에 다음과 같은 절차를 사용한다.
 
-1. **최소제곱추정(OLS)**으로 $(\hat{\beta}_0,\hat{\beta}_1)$을 구한다.
+1. 최소제곱추정(OLS)으로 $(\hat{\beta}_0,\hat{\beta}_1)$을 구한다.
 
 2. $\hat{p}_i=\hat{\beta}_0+\hat{\beta}_1 x_i$ 를 계산한다.
 
@@ -508,9 +461,21 @@ $$\hat{V}=\operatorname{diag}(\hat{p}_1(1-\hat{p}_1),\dots,\hat{p}_n(1-\hat{p}_n
 
 $$\hat{\beta}^*=(X^T \hat{V}^{-1}X)^{-1}X^T \hat{V}^{-1}y$$
 
-로 추정한
+를 계산한다.
 
-이 방법은 **가중회귀(weighted regression)**와 동일한 방법이다.
+$\hat{\beta}^*$ 를 구한후에 $Var(\hat{\beta}^*)=(X^T \hat{V}^{-1}X)^{-1}$ 이므로 행렬 $V$의 $p_i$에 $\hat{\beta}_0^*+\hat{\beta}_1^* x_i$ 를 대입하여 행렬$V$의 대각원소를 구한다.
+
+$$
+\hat{V}^*= \begin{bmatrix}
+\hat{p}_1^*(1-\hat{p}_1^*) & 0 & \cdots & 0 \\
+0 & \hat{p}_2^*(1-\hat{p}_2^*) & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\ 
+0 & 0 & \cdots & \hat{p}_n^*(1-\hat{p}_n^*)
+\end{bmatrix}
+$$
+
+를 계산하고, $\widehat{Var}(\hat{\beta}^*)=(X^T \hat{V}^{*-1}X)^{-1}$ 을 계산하여 추정된 회귀계수의 분산을 구한다.
+
 
 #### 예제 11.1
 
@@ -521,17 +486,11 @@ $$\hat{\beta}^*=(X^T \hat{V}^{-1}X)^{-1}X^T \hat{V}^{-1}y$$
 
 를 조사한 결과이다.
 
-SPC 활동이 활발한 기업에는 $y=1$을 부여하고 그렇지 않은 기업에는 $y=0$ 을 부여하였다.  
-먼저 최소제곱추정에 의해 회귀계수를 추정하면 $\hat{\beta}_0=-0.0922,\quad \hat{\beta}_1=0.0315$ 가 된다.  
-따라서 추정된 반응함수는 $\hat{E}(y)=-0.0922+0.0315x$
+SPC 활동이 활발한 기업에는 $y=1$을 부여하고 그렇지 않은 기업에는 $y=0$ 을 부여하였다. 먼저 최소제곱추정에 의해 회귀계수를 추정하면 $\hat{\beta}_0=-0.0922,\quad \hat{\beta}_1=0.0315$ 가 된다. 따라서 추정된 반응함수는 $\hat{E}(y)=-0.0922+0.0315x$
 
-예를 들어 매출액이 1000억 원인 기업의 경우 $x=10$이므로 $\hat{p}=-0.0922+0.0315(10)=0.2228 $
+예를 들어 매출액이 1000억 원인 기업의 경우 $x=10$이므로 $\hat{p}=-0.0922+0.0315(10)=0.2228$ 즉 해당 기업이 SPC 활동을 수행할 확률은 약 **0.2228**이다.
 
-즉 해당 기업이 SPC 활동을 수행할 확률은 약 **0.2228**이다.
-
-그러나 매출액이 매우 큰 경우 $\hat{p}>1$ 이 될 수 있어 확률로 해석할 수 없는 문제가 발생한다.
-
-이를 개선하기 위하여 **일반화 최소제곱추정(GLS)**을 적용하면
+그러나 매출액이 매우 큰 경우 $\hat{p}>1$ 이 될 수 있어 확률로 해석할 수 없는 문제가 발생한다. 이를 개선하기 위하여 일반화 최소제곱추정(GLS)을 적용하면
 
 $$ \hat{\beta}_0^*=-0.1171,\quad \hat{\beta}_1^*=0.0327 $$
 
@@ -546,6 +505,5 @@ $$ \hat{E}(y)=-0.1171+0.0327x$$
 | 최소제곱추정 (OLS)    | -0.0922 | 0.0315 |
 | 일반화최소제곱추정 (GLS) | -0.1171 | 0.0327 |
 
-분산 비교 결과 **GLS 추정량의 분산이 더 작다**는 것을 확인할 수 있다.
-
-따라서 반응변수가 가변수인 경우에는 **가중회귀(weighted regression)** 또는 **일반화 최소제곱법(GLS)**을 사용하는 것이 보다 효율적인 추정방법이 된다.
+분산 비교 결과 **GLS 추정량의 분산이 더 작다**는 것을 확인할 수 있다.  
+따라서 반응변수가 가변수인 경우에는 **가중회귀(weighted regression)** 또는 **일반화 최소제곱법(GLS)** 을 사용하는 것이 보다 효율적인 추정방법이 된다.
