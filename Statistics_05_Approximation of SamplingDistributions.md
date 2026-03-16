@@ -980,9 +980,7 @@ $$\left(\bar X_n - z_{\alpha/2} \frac{S_n}{\sqrt{n}},\;\; \bar X_n + z_{\alpha/2
 
 모평균이 $\mu$, 모표준편차가 $\sigma\ (0<\sigma<+\infty)$인 모집단에서 랜덤표본 $X_1,\dots,X_n$을 추출할 때, 표본분산 $S_n^2$의 극한분포를 구해보자. 표본평균을 $\bar X_n$이라 하면
 
-$$S_n^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar X_n)^2 = \frac{1}{n-1} \sum_{i=1}^n \left\{ (X_i - \mu) - (\bar X_n - \mu) \right\}^2$$
-
-$$= \frac{1}{n-1} \left\{ \sum_{i=1}^n (X_i - \mu)^2 - n(\bar X_n - \mu)^2 \right\} = \frac{n}{n-1} \left\{ \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 - (\bar X_n - \mu)^2 \right\}$$
+$$S_n^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar X_n)^2 = \frac{1}{n-1} \sum_{i=1}^n \left\{ (X_i - \mu) - (\bar X_n - \mu) \right\}^2\\ = \frac{1}{n-1} \left\{ \sum_{i=1}^n (X_i - \mu)^2 - n(\bar X_n - \mu)^2 \right\} = \frac{n}{n-1} \left\{ \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 - (\bar X_n - \mu)^2 \right\}$$
 
 이제 $Y_i = (X_i - \mu)^2$라 하면 $Y_1, \dots, Y_n$은 서로 독립이고 동일한 분포를 따르며
 
