@@ -305,6 +305,38 @@ $$\int_{-\infty}^{\infty} x \phi(x)dx = 0 \quad (\phi: \text{대칭 pdf})$$
 * 기댓값 계산 단순화
 * 모멘트 계산
 
+
+## 23. 부등식의 기댓값 보존 (Jensen's Inequality & Monotone Expectation)
+
+**핵심**: 모든 $t > 0$에 대해 $f(t) \ge g(t)$이면, 양의 확률변수 $X$에 대해
+$$E[f(X)] \ge E[g(X)]$$
+(기댓값이 존재할 때)
+
+### 예시
+
+$-\log t \ge 1 - t$ (모든 $t > 0$)이면, $X > 0$에 대해
+$$E[-\log X] \ge E[1-X] = 1 - E[X]$$
+
+### 일반 원리: Monotone Expectation
+
+$$f \le g \text{ (pointwise)} \implies E[f(X)] \le E[g(X)]$$
+
+조건: $f, g$가 가측(measurable)이고 기댓값이 존재해야 함.
+
+### 주요 활용
+
+* Jensen's Inequality: 볼록/오목함수 이용
+* 확률수렴 증명: 부등식 → 확률 상계
+* Information theory: KL divergence 비음성 증명
+* MLE 수렴: 로그우도 하한 제시
+
+### 관련 개념
+
+- **Jensen's Inequality** ($\phi$ 볼록): $\phi(E[X]) \le E[\phi(X)]$
+- **Fatou's Lemma**: $\liminf$ 하에서 기댓값 순서 보존
+- **Dominated/Monotone Convergence**: 극한 순서 바꾸기
+
+
 ## 23. 기댓값의 미분적분 (Differentiation Under Integration)
 
 조건이 만족될 때, 미분과 적분 순서를 바꿀 수 있다.

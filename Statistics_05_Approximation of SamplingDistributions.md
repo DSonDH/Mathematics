@@ -67,6 +67,10 @@ P\!\left(
 \quad \forall x\in\mathbb{R}
 $$
 
+> 극한분포로 표기하면,  
+> 
+> $$\frac{\sqrt{n}(\bar X_n-\mu)}{\sigma} \xrightarrow{d} N(0,1)$$
+
 #### 증명 (적률생성함수 방법)
 이 정리는 주어진 조건보다 더 일반적인 조건에서도 성립하지만, 여기서는 추가 조건으로 $X_1$의 적률생성함수(mgf, moment generating function)가 존재하는 경우만 다룬다.
 
