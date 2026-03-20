@@ -685,6 +685,25 @@ $$
 \int_0^\infty x^a e^{-bx}\,dx = \frac{\Gamma(a+1)}{b^{a+1}}, \quad (a > -1, b > 0)
 $$
 
+
+### 예제 5. $\displaystyle\int \ln x\,dx$ (부정적분)
+
+부분적분을 이용하여 계산한다. $u = \ln x$, $dv = dx$로 두면 $du = \frac{1}{x}dx$, $v = x$
+
+부분적분 공식에 의해
+
+$$\int \ln x\,dx = x\ln x - \int x \cdot \frac{1}{x}\,dx = x\ln x - \int 1\,dx$$
+
+따라서
+
+$$\int \ln x\,dx = x\ln x - x + C = x(\ln x - 1) + C$$
+
+**정적분 예시:** $\displaystyle\int_1^e \ln x\,dx$
+
+위의 부정적분 결과를 이용하면 $\int_1^e \ln x\,dx = [x\ln x - x]_1^e = (e\ln e - e) - (1\ln 1 - 1) \\ = (e \cdot 1 - e) - (0 - 1) = 0 + 1 = 1$
+
+
+
 # 3. 리만적분의 확장 *(Extensions of the Riemann Integral)*
 ## (1) 특이적분 *(Improper Integral)*
 적분 구간에 개구간이 포함되면 어떻게 정의하는지 살펴보자.  

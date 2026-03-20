@@ -4,6 +4,7 @@
 
 ### 5.1.1 이항분포와 정규근사
 이항분포의 누적확률은 적절한 표준화를 거치면 표준정규분포의 누적확률로 근사될 수 있다. 즉, 다음과 같은 근사식이 성립한다.
+
 $$
 \sum_{x:\, a \le \frac{x-np}{\sqrt{np(1-p)}} \le b}
 \binom{n}{x}p^x(1-p)^{n-x}
@@ -18,9 +19,7 @@ $$
 확률변수 $X_1, X_2, \dots, X_n$이 서로 독립이고 동일한 베르누이분포 Bernoulli$(p)$를 따른다고 하자.
 이때 불량품의 총 개수는
 
-$$
-X_1 + \cdots + X_n \sim \text{Binomial}(n,p)
-$$
+$$X_1 + \cdots + X_n \sim \text{Binomial}(n,p)$$
 
 를 따른다.
 
@@ -76,30 +75,17 @@ $$
 
 표준화된 표본평균을
 
-$$
-\frac{\sqrt{n}(\bar X_n-\mu)}{\sigma}
-= \frac{(X_1+\cdots+X_n)/n - \mu}{\sigma/\sqrt{n}}
-$$
+$$\frac{\sqrt{n}(\bar X_n-\mu)}{\sigma} = \frac{(X_1+\cdots+X_n)/n - \mu}{\sigma/\sqrt{n}}$$
 
 이라 하자.
 
 누적분포함수 대신 적률생성함수를 이용하여, 위 확률변수의 적률생성함수가 표준정규분포의 적률생성함수
 
-$$
-\mathrm{mgf}_Z(t)=\exp(t^2/2)
-$$
+$$\mathrm{mgf}_Z(t)=\exp(t^2/2)$$
 
-로 수렴함을 보이면 충분하다.
+로 수렴함을 보이면 충분하다. 즉,
 
-즉,
-
-$$
-\lim_{n\to\infty}
-\mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t)
-= \mathrm{mgf}_Z(t) = \exp(t^2/2)
-$$
-
-를 보인다.
+$$\lim_{n\to\infty} \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t) = \mathrm{mgf}_Z(t) = \exp(t^2/2)$$
 
 독립성에 의해
 
@@ -114,8 +100,6 @@ $$
 \mathrm{mgf}_{(X_1-\mu)/\sigma}\!\left(\frac{t}{\sqrt{n}}\right)
 \right]^n
 $$
-
-라 하자.
 
 $m(s)=\mathrm{mgf}_{(X_1-\mu)/\sigma}(s)$라 두면 $Y=\frac{X_1-\mu}{\sigma}$라 하면 $m_Y^{(k)}(s) = E(Y^k e^{sY})$이므로, 테일러 전개로
 
@@ -837,11 +821,7 @@ $$ X_{(r_n)} \overset{d}{\equiv}
 h\left(\frac{1}{n}Z_1+\cdots+\frac{1}{n-r_n+1}Z_{r_n} \right),
 \quad Z_i\overset{iid}{\sim}\mathrm{Exp}(1)$$
 
-여기서
-
-$$ h(y)=F^{-1}(1-e^{-y}),\quad y>0 $$
-
-표준지수분포의 평균과 분산이 $1$이므로
+여기서 $ h(y)=F^{-1}(1-e^{-y}),\quad y>0 $ 표준지수분포의 평균과 분산이 $1$이므로
 
 $$ Y_n = \frac{1}{n}Z_1+\cdots+\frac{1}{n-r_n+1}Z_{r_n} $$
 
@@ -854,13 +834,9 @@ $$
 
 이 합들을 적분으로 근사하면
 
-$$ E(Y_n)\sim \int_0^\alpha \frac{1}{1-x}\,dx=-\log(1-\alpha) $$
-
-$$\mathrm{Var}(Y_n)\sim \int_0^\alpha \frac{1}{n(1-x)^2}\,dx=\frac{1}{n}\cdot\frac{\alpha}{1-\alpha}$$
-
-따라서
-
-$$ \lim_{n\to\infty}\mathrm{Var}(Y_n)=0, \quad \lim_{n\to\infty}E(Y_n)=-\log(1-\alpha) $$
+$$ E(Y_n)\sim \int_0^\alpha \frac{1}{1-x}\,dx=-\log(1-\alpha) \\
+\mathrm{Var}(Y_n)\sim \int_0^\alpha \frac{1}{n(1-x)^2}\,dx=\frac{1}{n}\cdot\frac{\alpha}{1-\alpha}\\
+\therefore \lim_{n\to\infty}\mathrm{Var}(Y_n)=0, \quad \lim_{n\to\infty}E(Y_n)=-\log(1-\alpha) $$
 
 이고, 정리 5.2.7에 의해
 
@@ -912,9 +888,8 @@ $$P(X_n \le z - c - \varepsilon) \le P(X_n + Y_n \le z) \le P(X_n \le z - c + \v
 
 $Y_n \xrightarrow{P} c$이므로 $P(|Y_n - c| \ge \varepsilon) \to 0$, $X_n \xrightarrow{d} Z$이므로 $P(X_n \le x) \to P(Z \le x)$이다. 따라서
 
-$$\limsup_{n \to \infty} P(X_n + Y_n \le z) \le P(Z \le z - c + \varepsilon)$$
-
-$$\liminf_{n \to \infty} P(X_n + Y_n \le z) \ge P(Z \le z - c - \varepsilon)$$
+$$\limsup_{n \to \infty} P(X_n + Y_n \le z) \le P(Z \le z - c + \varepsilon) \\
+\liminf_{n \to \infty} P(X_n + Y_n \le z) \ge P(Z \le z - c - \varepsilon)$$
 
 $F_Z$가 연속이므로 $\varepsilon \downarrow 0$으로 보내면
 
@@ -1049,7 +1024,7 @@ $$\sqrt{n}(S_n^2 - \sigma^2) \xrightarrow{d} N\left(0,\, (\rho_4 + 2)\sigma^4\ri
 여기서 $\rho_4$는 모집단의 **첨도(kurtosis)** 이며, 정규분포에서는 $\rho_4 = 0$이다.
 
 
-### 정리 5.3.2 연속함수와 극한분포
+### 정리 5.3.2 연속함수와 극한분포 (연속함수 정리, Continuous Mapping Theorem)
 
 **정리:**  
 다차원 확률변수 $X_n \xrightarrow{d} Z$이고, 함수 $g$가 연속이면
@@ -1144,7 +1119,7 @@ $$ \sum_{j=1}^k \frac{(X_{nj}-np_j)^2}{np_j} \xrightarrow{d} \chi^2(k-1) $$
 
 이 결과는 다항분포에 기초한 적합도 검정에서 사용되는 카이제곱 근사의 이론적 근거를 제공한다.
 
-TODO: 
+TODO: 극한분포, CLT, Slutsky, Continuous Mapping Theorem, Delta Method 들의 관계 정리
 ### 정리 5.3.3 일차근사를 이용한 극한분포 계산: 델타 방법 (Delta Method)
 
 다차원 확률변수 $X_n$에 대해
@@ -1188,6 +1163,23 @@ $X_n \xrightarrow{P} \theta$이므로 $|X_n - \theta| \xrightarrow{P} 0$, $r_n =
 또한 $\sqrt{n}(X_n - \theta) \xrightarrow{d} Z$이므로, 슬럿츠키의 정리에 의해 $\sqrt{n} r_n \xrightarrow{P} 0$이 되어 전체 극한분포는 $g'(\theta)Z$가 된다.
 
 (다차원 $X_n$의 경우도, $g$의 그레디언트 $\nabla g(\theta)$를 사용하여 동일하게 증명된다.)
+
+>### 추가: 극한분포 계산의 핵심 도구들의 관계
+>**중심극한정리(CLT)와 델타 방법(Delta Method)의 역할 구분**
+>
+>통계량의 극한분포를 구하는 과정은 다음과 같이 단계적으로 진행된다:
+>
+>1. **중심극한정리의 역할**: 표본평균과 같은 기본 통계량이 asymptotic normal을 따름을 보장한다. 즉, 표본으로부터 만든 추정량 $T_n$에 대해 
+>$$\sqrt{n}(T_n - \theta) \xrightarrow{d} N(0, \sigma^2)$$
+>의 선형구조를 제시한다.
+>
+>2. **델타 방법의 역할**: $T_n$이 asymptotic normal일 때, 이를 미분가능한 smooth 함수 $g$에 적용한 $g(T_n)$의 극한분포까지 확장한다. 1차 테일러 전개를 통해
+>$$\sqrt{n}(g(T_n) - g(\theta)) \xrightarrow{d} g'(\theta) Z, \quad Z \sim N(0, \sigma^2)$$
+>의 비선형구조를 다룬다.
+>
+>**한 줄 요약**: CLT는 선형 구조까지 극한분포를 설명하고, 델타 방법은 그 위의 smooth한 비선형 변환까지 확장하는 도구이다.
+>
+>**적용 제약**: 델타 방법이 유효하려면 (1) 함수 $g$가 $\theta$에서 미분가능, (2) 수렴 속도가 $\sqrt{n}$, (3) 극한분포가 normal이어야 한다는 조건을 만족해야 한다.
 
 #### 5.3.5 예시: 표본표준편차의 극한분포
 

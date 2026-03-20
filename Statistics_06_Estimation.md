@@ -11,6 +11,15 @@
     - 표본크기가 커질수록 추정량이 추정대상에 확률수렴하는 성질
     - $\lim_{n\to\infty} P(|\hat\eta_n - \eta| \ge \epsilon) = 0$ for all $\epsilon > 0$
 
+>**일치성(Consistency)과 불편성(Unbiasedness)의 관계**  
+>추정량이 갖춰야 할 두 가지 중요한 성질인 **일치성**과 **불편성**은 서로 독립적인 개념이다.  
+>- 일치성은 표본크기 $n$이 커질수록 추정량 $\hat\theta_n$이 참값 $\theta$로 확률수렴하는 성질 $\hat\theta_n \xrightarrow{P} \theta$를 의미하며,  
+>- 불편성은 모든 표본크기에서 $E[\hat\theta_n] = \theta$가 성립하는 성질을 의미한다. 중요한 점은 **일치성과 불편성 사이에는 함축 관계가 없다** 는 것이다.  
+>
+>즉, 일치적이지만 편향된(biased) 추정량이 매우 흔하게 존재한다. 예를 들어, 정규분포에서 표본분산 $S_n^2 = \frac{1}{n}\sum_{i=1}^n (X_i - \bar X)^2$는 모분산 $\sigma^2$에 대해 불편추정량이 아니지만(분모가 $n$이므로), 표본크기가 커질수록 $\sigma^2$에 수렴하므로 일치성을 가진다. 반대로 $\hat\sigma^2_{\mathrm{MME}} = \frac{1}{n}\sum_{i=1}^n (X_i - \bar X)^2$는 편향되어 있지만 일치적이며, 표본분산 $S_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X)^2$는 모든 $n$에 대해 불편이지만 일치적이다. 
+>
+>따라서 추정량을 평가할 때는 **큰 표본에서의 수렴 성질(일치성)** 과 **고정된 표본크기에서의 평균적 성질(불편성)** 을 모두 고려하여, 상황에 맞는 최적의 추정량을 선택해야 한다.
+
 3. 충분성(sufficiency)
     - 추정량이 모집단의 모든 정보를 포함하는 성질
     - 모수 $\theta$의 추정량 $\hat\theta$가 주어질 때 조건부 확률분포 $f(x_1, \dots, x_n \mid \hat\theta)$가 $\theta$를 포함하지 않으면 충분추정량
@@ -23,6 +32,7 @@
 5. 최소평균제곱오차(minimum mean squared error)
     - 동일한 일치성을 가진 추정량 중에서 평균제곱오차가 가장 작은 성질
     - $E[(\hat\eta - \eta)^2] \le E[(\hat\eta' - \eta)^2]$ for all 일치추정량 $\hat\eta'$
+
 
 ## 6.1 적률이용 추정법 *(Method of Moments Estimation, MME)*
 
@@ -157,6 +167,42 @@ $$
 \sigma^2 = (\nabla g(m))^\top \Sigma \nabla g(m), \quad \Sigma = (m_{r+s} - m_rm_s)
 $$
 
+#### 증명
+
+$i=1,\dots,n$에 대해 $Y_i=(X_i,\dots,X_i^k)^\top\in\mathbb{R}^k$ 로 두면 $E(Y_i)=m$이고 \\ $\operatorname{Cov}(Y_i)=\Sigma, \Sigma_{rs}=\operatorname{Cov}(X_i^r,X_i^s)=E(X_i^{r+s})-E(X_i^r)E(X_i^s)=m_{r+s}-m_rm_s$ 가 된다. 가정 $E(X_1^{2k})<\infty$로 각 성분의 2차 모멘트가 유한하므로 다변량 중심극한정리에 의해
+
+$$ \sqrt n(\hat m-m) =\sqrt n\!\left(\frac1n\sum_{i=1}^n Y_i-E(Y_1)\right) \xrightarrow{d}N_k(0,\Sigma).$$
+
+이제 $\hat\eta_n-\eta=g(\hat m)-g(m)$에 대해, $g$의 미분 가능성을 이용하면 (delta method)
+
+$$ g(\hat m)-g(m) =\nabla g(m)^\top(\hat m-m)+r_n,\quad
+\frac{r_n}{\|\hat m-m\|}\xrightarrow{p}0.$$
+
+따라서
+$$\sqrt n(\hat\eta_n-\eta) =\nabla g(m)^\top\sqrt n(\hat m-m)+\sqrt n\,r_n.$$
+
+또한 $\hat m\xrightarrow{p}m$이므로 $\hat m-m=O_p(n^{-1/2})$, hence $\sqrt n\,r_n=o_p(1)$. Slutsky 정리에 의해
+
+$$\sqrt n(\hat\eta_n-\eta)
+\xrightarrow{d}\nabla g(m)^\top Z,\quad Z\sim N_k(0,\Sigma).$$
+
+정규벡터의 선형결합은 정규분포이므로
+
+$$\nabla g(m)^\top Z\sim N\!\left(0,(\nabla g(m))^\top\Sigma\nabla g(m)\right).$$
+
+즉,
+
+$$\sqrt n(\hat\eta_n-\eta)\xrightarrow{d}N(0,\sigma^2),\quad \sigma^2=(\nabla g(m))^\top\Sigma\nabla g(m).$$
+
+>추가: 참고
+>| 항목     | MOM              | MLE       |
+>| ------ | ---------------- | --------- |
+>| 구조     | (g(\bar X))      | score = 0 |
+>| 비선형성   | 명시적으로 존재         | 내부적으로 처리됨 |
+>| CLT 적용 | (\bar X)에만 직접 적용 | score에 적용 |
+>| 추가 도구  | delta method 필요  | 불필요       |
+
+
 
 ## 6.2 최대가능도 추정법 *(Maximum Likelihood Estimation, MLE)*
 
@@ -290,7 +336,7 @@ $$l(\alpha \theta_1 + (1-\alpha)\theta_2) > \alpha l(\theta_1) + (1-\alpha) l(\t
 
 하지만 가능도방정식의 구체적 풀이가 어려울 때도 많고, 그런 경우엔 아래 정리가 매우 유용하다.
 
-### 정리 6.2.3: 해의 존재와 유일성 *(Existence and Uniqueness of the LE)*
+### 정리 6.2.2: 해의 존재와 유일성 *(Existence and Uniqueness of the LE)*
 
 수직선 위의 열린구간 $\Omega_0$에서 정의된 함수 $l(\theta)$가 다음을 만족한다고 하자.
 
@@ -316,7 +362,7 @@ $$l(\hat\theta)=\max_{\theta\in\Omega_0} l(\theta)$$
 $\ell(\theta)$는 $\ddot l(\theta)<0$이므로 순오목 함수이다. 또한 $\lim_{\theta\to\pm\infty} l(\theta) = -\infty$이므로, $l(\theta)$는 $\mathbb{R}$ 전체에서 최대값을 갖는다. 순오목 함수의 최대점은 유일하므로, $\dot l(\theta)=0$의 해 $\hat\theta$가 존재하며 유일하다.  
 따라서 $l(\hat\theta)=\max_{\theta\in\Omega_0} l(\theta)$가 성립한다.
 
-정리 6.2.3에서 $\ell(\theta)$가 순오목(strictly concave)이므로, 만약 $\hat\theta_1 \neq \hat\theta_2$에서 모두 최대값을 가진다면,
+정리 6.2.2에서 $\ell(\theta)$가 순오목(strictly concave)이므로, 만약 $\hat\theta_1 \neq \hat\theta_2$에서 모두 최대값을 가진다면,
 $\ell(\hat\theta_1) = \ell(\hat\theta_2) = M$ 이고, $0 < \alpha < 1$에 대해 $\theta^* = \alpha\hat\theta_1 + (1-\alpha)\hat\theta_2$라 하면,
 
 $$\ell(\theta^*) > \alpha \ell(\hat\theta_1) + (1-\alpha)\ell(\hat\theta_2) = M$$
@@ -335,7 +381,7 @@ $$\hat\theta^{(r+1)} = \hat\theta^{(r)} - \left[\ddot l(\hat\theta^{(r)})\right]
 
 이를 **뉴턴–랩슨 방법(Newton–Raphson method)** 또는 **일단계 반복법(one-step iteration)** 이라 한다. 초기값 $\hat\theta^{(0)}$로는 흔히 **적률이용 추정값(MME)** 을 사용한다.
 
-#### 예 6.2.3: 로지스틱분포에서의 최대가능도 추정
+#### 예 6.2.2: 로지스틱분포에서의 최대가능도 추정
 
 로지스틱분포 $L(\theta,1)$ $( -\infty<\theta<\infty )$에서의 랜덤표본 $X_1,\dots,X_n$에 대하여
 
@@ -343,7 +389,7 @@ $$pdf(x;\theta) = \frac{e^{x-\theta}}{(1+e^{x-\theta})^2} =\frac{e^{-x+\theta}}{
 l(\theta) = n\bar x - n\theta - 2\sum_{i=1}^n \log(1+e^{x_i-\theta}) \\
 \dot l(\theta) = n - 2\sum_{i=1}^n \frac{e^{-x_i+\theta}}{1+e^{-x_i+\theta}}, \quad \ddot l(\theta) = -2\sum_{i=1}^n \frac{e^{-x_i+\theta}}{(1+e^{-x_i+\theta})^2} < 0$$
 
-또한 $\lim_{\theta\to\pm\infty} l(\theta) = -\infty$ 이므로 **정리 6.2.3**을 적용할 수 있다.  
+또한 $\lim_{\theta\to\pm\infty} l(\theta) = -\infty$ 이므로 **정리 6.2.2**을 적용할 수 있다.  
 따라서 최대가능도 추정값은 가능도방정식
 
 $$n - 2\sum_{i=1}^n \frac{e^{-x_i+\theta}}{1+e^{-x_i+\theta}}=0$$
@@ -352,7 +398,7 @@ $$n - 2\sum_{i=1}^n \frac{e^{-x_i+\theta}}{1+e^{-x_i+\theta}}=0$$
 
 $$\hat\theta^{(r+1)} = \hat\theta^{(r)} - \left[\ddot l(\hat\theta^{(r)})\right]^{-1} \dot l(\hat\theta^{(r)}), \quad \hat\theta^{(0)}=\bar x$$
 
-### 정리 6.2.4: 모수의 일대일 변환과 최대가능도 추정 *(불변성, Invariance property)*
+### 정리 6.2.3: 모수의 일대일 변환과 최대가능도 추정 불변성 *(Invariance property)*
 
 모수 $\theta$의 최대가능도 추정량 $\hat\theta^{\mathrm{MLE}}$이 존재할 때,  
 $\eta=g(\theta)$가 $\theta$의 **일대일 변환(one-to-one transformation)** 이면
@@ -372,15 +418,15 @@ $$pdf(x;\theta)=\frac{1}{\theta}e^{-x/\theta},\quad x>0 \\
 l(\theta) = -n\log\theta - \frac{n\bar x}{\theta}\\
 \ddot l(\theta) = \frac{n}{\theta^2} - \frac{2n\bar x}{\theta^3}$$
 
-로, $\theta > 0$에서 항상 음이 아님을 알 수 있다. 즉, $\bar x > \theta/2$일 때만 $\ddot l(\theta) < 0$이므로, 전체 구간에서 순오목함수가 아니다. 따라서 $\theta$에 대해 정리 6.2.3을 바로 적용할 수 없고, 증가·감소를 직접 조사해야 한다.  
+로, $\theta > 0$에서 항상 음이 아님을 알 수 있다. 즉, $\bar x > \theta/2$일 때만 $\ddot l(\theta) < 0$이므로, 전체 구간에서 순오목함수가 아니다. 따라서 $\theta$에 대해 정리 6.2.2을 바로 적용할 수 없고, 증가·감소를 직접 조사해야 한다.  
 
 이때 $\lambda = 1/\theta$로 치환하면
 
 $$l(\lambda) = n\log\lambda - n\bar x\lambda \\ \ddot l(\lambda) = -\frac{n}{\lambda^2} < 0$$
 
-로, $\lambda > 0$에서 항상 음이므로 순오목함수가 된다. 따라서 정리 6.2.3을 적용할 수 있다.
+로, $\lambda > 0$에서 항상 음이므로 순오목함수가 된다. 따라서 정리 6.2.2을 적용할 수 있다.
 
-가능도방정식 $\frac{d}{d\lambda} l(\lambda) = \frac{n}{\lambda} - n\bar x = 0$ 의 해는 $\hat\lambda^{\mathrm{MLE}} = \frac{1}{\bar X}$ 이고, 정리 6.2.4(불변성)에 의해
+가능도방정식 $\frac{d}{d\lambda} l(\lambda) = \frac{n}{\lambda} - n\bar x = 0$ 의 해는 $\hat\lambda^{\mathrm{MLE}} = \frac{1}{\bar X}$ 이고, 정리 6.2.3(불변성)에 의해
 
 $$\hat\theta^{\mathrm{MLE}} = \bar X$$
 
@@ -397,7 +443,7 @@ $$\hat\theta^{\mathrm{MLE}} = \bar X$$
 > **지수족의 예시:** 베르누이, 포아송, 지수, 정규(평균 또는 분산 고정), 감마, 이항, 다항, 기하, 파레토 등 많은 분포가 있다.  
 > **지수족의 장점:** 충분통계량이 존재하고, 최대가능도 추정이 단순해지며, 통계적 추론이 수학적으로 다루기 쉬워짐.
 
-### 정리 6.2.5: 지수족에서의 최대가능도 추정 *(Exponential Family)*
+### 정리 6.2.4: 지수족에서의 최대가능도 추정 *(Exponential Family)*
 
 $$pdf(x;\eta) = \exp\{\eta T(x)-A(\eta)+S(x)\}, \quad x\in\mathcal X,\ \eta\in N$$
 
@@ -432,16 +478,16 @@ $$\frac{d}{d\eta} l(\eta) = n\bar T - nA'(\eta)$$
 
 #### 지수족에서 모수의 일대일 변환과 가능도방정식
 
-$$pdf(x;\theta) = \exp\{g(\theta) T(x) - A(\eta(\theta)) + S(x)\}$$
+$$pdf(x;\theta) = \exp\{g(\theta) T(x) - A(g(\theta)) + S(x)\}$$
 
-이고, $\eta = g(\theta)$로 모수화하여 정리 6.2.5의 조건이 만족되면, $\theta$를 직접 모수로 쓸 때도 가능도방정식은
+이고, $\eta = g(\theta)$로 모수화하여 정리 6.2.4의 조건이 만족되면, $\theta$를 직접 모수로 쓸 때도 가능도방정식은
 
 $$E_\theta[T(X_1)] = \frac{1}{n}\sum_{i=1}^n T(x_i)$$
 
 즉, $\theta$에 대한 가능도방정식의 해 $\hat\theta$가 존재하면, $\hat\theta$는 $\theta$의 최대가능도 추정값이 된다.  
-불변성 정리(정리 6.2.4)에 의해, $g = g(\theta)$의 최대가능도 추정량은 $g(\hat\theta)$로 얻어진다.
+불변성 정리(정리 6.2.3)에 의해, $g = g(\theta)$의 최대가능도 추정량은 $g(\hat\theta)$로 얻어진다.
 
-#### 예 6.2.5: 정리6.2.5 조건을 만족시키는 지수족의 구체적 예
+#### 예 6.2.5: 정리 6.2.4 조건을 만족시키는 지수족의 구체적 예
 
 - 베르누이 분포 $Bernoulli(p)$
 - 포아송 분포 $Poisson(\lambda)$
@@ -1222,10 +1268,8 @@ $$\overline{\log x}=\frac{1}{n}\sum_{i=1}^n \log x_i,\qquad
 ($\psi$는 digamma function이라 부르는 함수이다.)
 
 $$\begin{cases}
-\frac{\partial l_n(\theta)}{\partial \alpha}
-= -n\psi(\alpha)-n\log\beta+n\overline{\log x}=0 \\[6pt]
-\frac{\partial l_n(\theta)}{\partial \beta}
-= -\frac{n\alpha}{\beta}+\frac{n\bar x}{\beta^2}=0
+\frac{\partial l_n(\theta)}{\partial \alpha} = -n\psi(\alpha)-n\log\beta+n\overline{\log x}=0 \\
+\frac{\partial l_n(\theta)}{\partial \beta} = -\frac{n\alpha}{\beta}+\frac{n\bar x}{\beta^2}=0
 \end{cases}$$
 
 이 방정식의 근으로 주어지는 $\big(\hat\alpha_n^{\mathrm{MLE}},\hat\beta_n^{\mathrm{MLE}}\big)$는 정리 6.4.2에 의해 **일치성을 가진다**  
@@ -1688,6 +1732,57 @@ $$\hat\sigma^2 = \frac{|\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE}|^2
 
 분모 $n - p - 1$은 자유도(표본크기 $n$에서 추정한 모수 개수 $p+1$을 뺀 값)이다.
 
+#### 증명
+
+오차분산 $\sigma^2$의 추정에서, 정리 6.5.2(b)에 증명된 바와 같이 $E(\hat\sigma^2) = \sigma^2$임을 보이기 위해 다음과 같이 전개한다.
+
+정리 6.5.1의 결과로부터
+
+$$\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = (\mathbf{X}\boldsymbol{\beta} + \mathbf{e}) - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = \mathbf{X}(\boldsymbol{\beta} - \hat{\boldsymbol{\beta}}^{LSE}) + \mathbf{e}$$
+
+정리 6.5.1(b)에서 $\mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = \Pi \mathbf{Y}$이고, $\Pi \mathbf{X} = \mathbf{X}$ (투영행렬의 성질)이므로
+
+$$\mathbf{X}(\boldsymbol{\beta} - \hat{\boldsymbol{\beta}}^{LSE}) = \mathbf{X}\boldsymbol{\beta} - \Pi \mathbf{Y} = \mathbf{X}\boldsymbol{\beta} - \Pi(\mathbf{X}\boldsymbol{\beta} + \mathbf{e})\\
+= \mathbf{X}\boldsymbol{\beta} - \Pi \mathbf{X}\boldsymbol{\beta} - \Pi\mathbf{e} = (I - \Pi)\mathbf{X}\boldsymbol{\beta} - \Pi\mathbf{e}$$
+
+따라서
+
+$$\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = (I - \Pi)\mathbf{X}\boldsymbol{\beta} - \Pi\mathbf{e} + \mathbf{e}\\
+= (I - \Pi)\mathbf{X}\boldsymbol{\beta} + (I - \Pi)\mathbf{e}\\
+= (I - \Pi)(\mathbf{X}\boldsymbol{\beta} + \mathbf{e}) = (I - \Pi)\mathbf{Y}$$
+
+>또는 직접적으로, $\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{e}$로부터
+>
+>$$\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = (I - \Pi)\mathbf{Y} = (I - \Pi)(\mathbf{X}\boldsymbol{\beta} + \mathbf{e}) = (I - \Pi)\mathbf{e}$$
+>
+>마지막 등호는 $(I - \Pi)\mathbf{X} = 0$이므로($(I-\Pi)$는 $\mathbf{X}$의 열공간에 직교) 성립한다.
+
+여기서 $\Pi = \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top$는 투영행렬이고, $(I-\Pi)$는 직교투영행렬이다.  
+따라서 오차제곱합은
+
+$$|\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE}|^2 = \mathbf{e}^\top (I - \Pi)^\top (I - \Pi) \mathbf{e} = \mathbf{e}^\top (I - \Pi) \mathbf{e}$$
+
+기댓값을 구하면, 행렬의 대각합(trace) 성질을 이용하여
+
+$$E[\mathbf{e}^\top (I - \Pi) \mathbf{e}] = \operatorname{trace}[(I - \Pi) E[\mathbf{e} \mathbf{e}^\top]] = \operatorname{trace}[(I - \Pi) \sigma^2 I_n]$$
+
+$$= \sigma^2 \operatorname{trace}(I - \Pi)$$
+
+투영행렬의 성질에 의해
+
+$$\operatorname{trace}(\Pi) = \operatorname{trace}[\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top] = \operatorname{trace}[(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{X}] = \operatorname{trace}(I_{p+1}) = p+1$$
+
+따라서 $\operatorname{trace}(I - \Pi) = n - (p+1) = n - p - 1$  
+결과적으로
+
+$$E[|\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE}|^2] = \sigma^2(n - p - 1)$$
+
+양변을 $n - p - 1$로 나누면
+
+$$E(\hat\sigma^2) = E\left[\frac{|\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE}|^2}{n - p - 1}\right] = \sigma^2$$
+
+따라서 $\hat\sigma^2$는 $\sigma^2$의 **불편추정량(unbiased estimator)** 이다.
+
 ### 정리 6.5.2: 최소제곱 추정량의 성질(불편성, 분산, 정규성)
 
 선형회귀모형 $\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{e}$,
@@ -1857,15 +1952,3 @@ $$X_{1|0}^\top X_{1|0} = (S_{jk}),\quad X_{1|0}^\top Y = (S_{jY})$$
 $$\begin{pmatrix} S_{11} & \cdots & S_{1p} \\ \vdots & \ddots & \vdots \\ S_{p1} & \cdots & S_{pp} \end{pmatrix} \begin{pmatrix} \hat\beta_1 \\ \vdots \\ \hat\beta_p \end{pmatrix} = \begin{pmatrix} S_{1Y} \\ \vdots \\ S_{pY} \end{pmatrix}$$
 
 을 푸는 것과 같아진다.
-
-TODO:FIXME: 연습문제 6.22 말고도 더 gpt사용해서 풀어보면서 감 잡아야함
-
-
->### 일치성(Consistency)과 불편성(Unbiasedness)의 관계
->추정량이 갖춰야 할 두 가지 중요한 성질인 **일치성**과 **불편성**은 서로 독립적인 개념이다.  
->- 일치성은 표본크기 $n$이 커질수록 추정량 $\hat\theta_n$이 참값 $\theta$로 확률수렴하는 성질 $\hat\theta_n \xrightarrow{P} \theta$를 의미하며,  
->- 불편성은 모든 표본크기에서 $E[\hat\theta_n] = \theta$가 성립하는 성질을 의미한다. 중요한 점은 **일치성과 불편성 사이에는 함축 관계가 없다** 는 것이다.  
->
->즉, 일치적이지만 편향된(biased) 추정량이 매우 흔하게 존재한다. 예를 들어, 정규분포에서 표본분산 $S_n^2 = \frac{1}{n}\sum_{i=1}^n (X_i - \bar X)^2$는 모분산 $\sigma^2$에 대해 불편추정량이 아니지만(분모가 $n$이므로), 표본크기가 커질수록 $\sigma^2$에 수렴하므로 일치성을 가진다. 반대로 $\hat\sigma^2_{\mathrm{MME}} = \frac{1}{n}\sum_{i=1}^n (X_i - \bar X)^2$는 편향되어 있지만 일치적이며, 표본분산 $S_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X)^2$는 모든 $n$에 대해 불편이지만 일치적이다. 
->
->따라서 추정량을 평가할 때는 **큰 표본에서의 수렴 성질(일치성)** 과 **고정된 표본크기에서의 평균적 성질(불편성)** 을 모두 고려하여, 상황에 맞는 최적의 추정량을 선택해야 한다.
