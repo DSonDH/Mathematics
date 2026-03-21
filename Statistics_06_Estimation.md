@@ -1822,6 +1822,8 @@ $$E(\hat\beta^{LSE}) = (X^\top X)^{-1} X^\top E(Y) = (X^\top X)^{-1} X^\top X \b
 
 $$\operatorname{Var}(\hat{\boldsymbol{\beta}}^{LSE}) = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \operatorname{Var}(\mathbf{Y}) \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top (\sigma^2 I) \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} = \sigma^2 (\mathbf{X}^\top \mathbf{X})^{-1}$$
 
+> $\operatorname{Var}(Y) = \operatorname{Var}(X\beta + e) = \operatorname{Var}(e) = \sigma^2 I$
+
 **(b)**
 
 정리 6.5.1에서 $\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{e}$이고, $\Pi = \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top$이므로
@@ -1851,7 +1853,14 @@ $e \sim N_n(0, \sigma^2 I)$이므로 $\hat\beta^{LSE}$는 선형변환된 정규
 $$\frac{|Y - X\hat\beta^{LSE}|^2}{\sigma^2} = \frac{e^\top (I - \Pi) e}{\sigma^2} \sim \chi^2(n - p - 1) \\
 \therefore \frac{(n - p - 1)\hat\sigma^2}{\sigma^2} \sim \chi^2(n - p - 1)$$
 
-$\hat\beta^{LSE}$와 $\hat\sigma^2$는 $e$의 서로 직교 성분에 의해 결정되므로 서로 독립이다.
+$\hat\beta^{LSE}$와 $\hat\sigma^2$는 서로 독립이다. 왜냐하면 $\hat\beta^{LSE}$는 $\Pi Y$에 의해 결정되고, $\hat\sigma^2$는 $(I - \Pi)Y$에 의해 결정되는데, $\Pi$와 $(I - \Pi)$가 서로 직교이므로 이 둘은 서로 독립이 된다.
+
+수식으로 표현하면, 
+
+$$ \operatorname{Cov}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top Y, (I - \Pi)Y) \\
+= \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \operatorname{Var}(Y) (I - \Pi)^\top
+= 0
+$$
 
 ### 설명변수 직교화(orthogonalization) introduction
 설명변수 행렬 $X$의 열들이 서로 직교(orthogonal)하면 $X^\top X$가 대각행렬이 되어 계산과 해석이 쉽다. 하지만 일반적으로는 직교하지 않으므로, **열공간을 보존하면서(동일한 모형공간) 직교화된 표현으로 바꾸어** 추정과 해석을 편하게 할 수 있다.
@@ -1874,18 +1883,46 @@ $$X_{1|0} = (I - \Pi_0) X_1$$
 
 $$\Pi_{1|0} = X_{1|0} (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top$$
 
-이때 $X_0$의 열공간과 $X_{1|0}$의 열공간은 서로 직교가 된다(구성상 $(I-\Pi_0)$로 $X_0$에 직교인 성분만 남겼기 때문).
-
-또한 전체 투영이
+이때 $X_0$의 열공간과 $X_{1|0}$의 열공간은 서로 직교가 된다(구성상 $(I-\Pi_0)$로 $X_0$에 직교인 성분만 남겼기 때문). 또한 전체 투영이
 
 $$\Pi = \Pi_0 + \Pi_{1|0}$$
 
 처럼 "서로 직교인 두 투영의 합"으로 분해된다는 점이 핵심이다.
 (즉 $\Pi_0^\top \Pi_{1|0} = 0$)
 
+#### 보조정리: $\Pi=\Pi_0+\Pi_{1|0}$ 증명
+let 
+
+$$\Pi_0=X_0(X_0^\top X_0)^{-1}X_0^\top,\quad X_{1|0}=(I-\Pi_0)X_1,\quad \Pi_{1|0}=X_{1|0}(X_{1|0}^\top X_{1|0})^{-1}X_{1|0}^\top, \quad P:=\Pi_0+\Pi_{1|0}$$
+
+먼저 $X_{1|0}=(I-\Pi_0)X_1$ 이므로 $X_{1|0}$의 열들은 $C(X_0)$에 직교한다. 따라서 $X_0^\top X_{1|0}=0$ 이고, 이로부터
+
+$$\Pi_0\Pi_{1|0} = X_0(X_0^\top X_0)^{-1}(X_0^\top X_{1|0})(X_{1|0}^\top X_{1|0})^{-1}X_{1|0}^\top =0$$
+
+가 된다. 마찬가지로 $\Pi_{1|0}\Pi_0=0$
+
+또 $\Pi_0,\Pi_{1|0}$는 각각 직교투영행렬이므로 대칭이고 멱등이다. 따라서
+
+$$ P^\top = (\Pi_0+\Pi_{1|0})^\top = \Pi_0^\top+\Pi_{1|0}^\top=\Pi_0+\Pi_{1|0}=P \\ 
+P^2 = (\Pi_0+\Pi_{1|0})^2 = \Pi_0^2+\Pi_{1|0}^2+\Pi_0\Pi_{1|0}+\Pi_{1|0}\Pi_0 = \Pi_0+\Pi_{1|0} = P $$
+
+이므로 $P$는 대칭 멱등행렬, 즉 직교투영행렬이다.
+
+이제 $P$의 상을 보면, $\operatorname{Im}(P) = C(X_0)+C(X_{1|0})$ 이다. 한편
+
+$$X_{1|0}=(I-\Pi_0)X_1=X_1-\Pi_0X_1$$
+
+이므로 $C(X_{1|0}) \subset C(X_0,X_1)=C(X)$이고, 또한 $X_1=\Pi_0X_1+X_{1|0}$ 이므로 $C(X_1)\subset C(X_0)+C(X_{1|0})$이다. 따라서
+
+$$C(X_0)+C(X_{1|0})=C(X_0,X_1)=C(X)$$
+
+결국 $P$는 $C(X)$로의 직교투영행렬이다. 그런데 $C(X)$로의 직교투영행렬은 유일하므로
+
+$$P=\Pi \\ \therefore \Pi=\Pi_0+\Pi_{1|0}.$$
+
 **(2) 평균반응의 재표현**
 
-$X\beta = X_0\beta_0 + X_1\beta_1$를 $X\beta = X_0\gamma_0 + X_{1|0}\beta_1$ 꼴로도 쓸 수 있음을 보인다($\gamma_0 = \beta_0 + (X_0^\top X_0)^{-1} X_0^\top X_1 \beta_1$).  
+$X\beta = X_0\beta_0 + X_1\beta_1$를 $X\beta = X_0\gamma_0 + X_{1|0}\beta_1$ 꼴로도 쓸 수 있음을 보인다 ($\gamma_0 = \beta_0 + (X_0^\top X_0)^{-1} X_0^\top X_1 \beta_1$).  
 요지는 "$X_1$의 $X_0$방향 성분을 $X_0$로 흡수"하고, 나머지 직교 성분만 $X_{1|0}$가 담당하도록 바꾸는 것이다.
 
 ### 정리 6.5.3: 직교화된 표현에서의 최소제곱 결과
@@ -1916,8 +1953,40 @@ E(\hat\beta_1^{LSE}) = \beta_1,\quad \operatorname{Var}(\hat\beta_1^{LSE}) = \si
 즉 $X_1$을 "$X_0$의 영향 제거 후"에 회귀하는 형태로 분산이 정리된다.
 
 #### 증명
+**(a)**  
+$X\hat\beta^{LSE} = \Pi Y$이므로, $\Pi = \Pi_0 + \Pi_{1|0}$에서 
 
-연습문제 6.21
+$$X\hat\beta^{LSE} = \Pi Y = \Pi_0 Y + \Pi_{1|0} Y$$
+
+$\Pi_0 Y = X_0\hat\gamma_0^{LSE}$이므로 $\hat\gamma_0^{LSE} = (X_0^\top X_0)^{-1} X_0^\top Y$,  
+$\Pi_{1|0} Y = X_{1|0}\hat\beta_1^{LSE}$이므로 $\hat\beta_1^{LSE} = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top Y$가 된다.  
+
+$\hat\beta_0^{LSE}$ 유도: 
+
+$$
+\begin{aligned}
+X\hat\beta^{LSE} 
+&= X_0\hat\gamma_0^{LSE} + X_{1|0}\hat\beta_1^{LSE} \\
+&= X_0\hat\gamma_0^{LSE} + X_1\hat\beta_1^{LSE} - X_0(X_0^\top X_0)^{-1}X_0^\top X_1\hat\beta_1^{LSE} \\
+&= X_0\left[\hat\gamma_0^{LSE} - (X_0^\top X_0)^{-1}X_0^\top X_1\hat\beta_1^{LSE}\right] + X_1\hat\beta_1^{LSE}.
+\end{aligned}
+$$
+
+**(b)**  
+$\operatorname{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = \operatorname{Cov}((X_0^\top X_0)^{-1} X_0^\top Y, (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top Y)$이므로 $Y$의 공분산이 $\sigma^2 I$이므로 
+
+$$\operatorname{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top \sigma^2 I X_{1|0} (X_{1|0}^\top X_{1|0})^{-1} \\ 
+= \sigma^2 (X_0^\top X_0)^{-1} X_0^\top X_{1|0} (X_{1|0}^\top X_{1|0})^{-1}
+= 0
+$$
+
+> 이때 $X_{1|0} = (I - \Pi_0) X_1$이므로 $X_0^\top X_{1|0} = X_0^\top (I - \Pi_0) X_1 = X_0^\top X_1 - X_0^\top \Pi_0 X_1$ 이다. $\Pi_0$는 $X_0$의 열공간으로의 투영이므로 $X_0^\top \Pi_0 = X_0^\top$ 이고, 따라서 $X_0^\top \Pi_0 X_1 = X_0^\top X_1$이 된다. 결국 $X_0^\top X_{1|0} = 0$이므로 $\operatorname{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = 0$이 된다.
+
+$E(\hat\gamma_0^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top E(Y) = (X_0^\top X_0)^{-1} X_0^\top X\beta = (X_0^\top X_0)^{-1} X_0^\top(X_0\gamma_0 + X_{1|0}\beta_1) = \gamma_0$,  
+$E(\hat\beta_1^{LSE}) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top E(Y) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top X\beta = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top(X_0\gamma_0 + X_{1|0}\beta_1) = \beta_1$
+
+$\operatorname{Var}(\hat\gamma_0^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top \sigma^2 I X_0 (X_0^\top X_0)^{-1} = \sigma^2 (X_0^\top X_0)^{-1}$,  
+$\operatorname{Var}(\hat\beta_1^{LSE}) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top \sigma^2 I X_{1|0} (X_{1|0}^\top X_{1|0})^{-1} = \sigma^2 (X_{1|0}^\top X_{1|0})^{-1}$
 
 #### 예 6.5.1: 절편이 포함된 선형회귀모형(중심화로 직교화)
 
@@ -1926,14 +1995,11 @@ E(\hat\beta_1^{LSE}) = \beta_1,\quad \operatorname{Var}(\hat\beta_1^{LSE}) = \si
 
 $$\beta_0 + \sum_{j=1}^p \beta_j x_{ij} = \gamma_0 + \sum_{j=1}^p \beta_j (x_{ij} - \bar x_j)$$
 
-여기서 $\gamma_0 = \beta_0 + \sum_{j=1}^p \beta_j \bar x_j$ 이다.  
-즉,
-- $X_0 = \mathbf{1}$ (전부 1인 열벡터)
-- $X_{1|0}$는 각 설명변수에서 평균을 뺀 "중심화(centered) 변수"들로 구성된다.
+여기서 $\gamma_0 = \beta_0 + \sum_{j=1}^p \beta_j \bar x_j$ 이다. 즉,
+- $X_0 = (1, \dots, 1)^\top$ (절편 성분, 전부 1)
+- $X_{1|0}$는 각 설명변수에서 평균을 뺀 "중심화(centered) 변수"들: $X_{1|0} = (x_{i1} - \bar x_1, \dots, x_{ip} - \bar x_p)_{1\leq i \leq n}^\top$
 
-이렇게 하면 중심화된 설명변수 열들은 $\mathbf{1}$과 직교가 된다(각 열의 합이 0이므로).
-
-이 경우 정리 6.5.3(a)에서
+이렇게 하면 중심화된 설명변수 열들은 $\mathbf{1}$과 직교가 된다(각 열의 합이 0이므로). 이 경우 정리 6.5.3(a)에서
 
 $$\hat\gamma_0^{LSE} = \bar Y$$
 
@@ -1949,6 +2015,12 @@ $$X_{1|0}^\top X_{1|0} = (S_{jk}),\quad X_{1|0}^\top Y = (S_{jY})$$
 
 가 되어, 기울기 추정량 $\hat\beta_1, \dots, \hat\beta_p$는
 
-$$\begin{pmatrix} S_{11} & \cdots & S_{1p} \\ \vdots & \ddots & \vdots \\ S_{p1} & \cdots & S_{pp} \end{pmatrix} \begin{pmatrix} \hat\beta_1 \\ \vdots \\ \hat\beta_p \end{pmatrix} = \begin{pmatrix} S_{1Y} \\ \vdots \\ S_{pY} \end{pmatrix}$$
+$$\begin{pmatrix} 
+S_{11} & \cdots & S_{1p} \\ 
+\vdots & \ddots & \vdots \\ 
+S_{p1} & \cdots & S_{pp} 
+\end{pmatrix} 
+\begin{pmatrix} \hat\beta_1 \\ \vdots \\ \hat\beta_p \end{pmatrix} 
+= \begin{pmatrix} S_{1Y} \\ \vdots \\ S_{pY} \end{pmatrix}$$
 
 을 푸는 것과 같아진다.

@@ -40,7 +40,6 @@ $m \times n$ 행렬 $A = (a_{ij})$, $n \times r$ 행렬 $B = (b_{jk})$일 때
 $$AB = (c_{ik}), \quad c_{ik} = \sum_{j=1}^{n} a_{ij}b_{jk}$$
 
 > ⚠️ 행렬의 곱셈은 **교환법칙이 성립하지 않는다.**
-> ⚠️ 행렬의 곱셈은 **교환법칙이 성립하지 않는다.**  
 > 즉, $AB \neq BA$인 경우가 일반적이다.
 
 >**주의: 행렬의 거듭제곱 표기**
@@ -75,6 +74,7 @@ x \\ y
 5 \\ 8
 \end{pmatrix}
 $$
+
 으로 표현된다.
 
 ### (2) 가우스 조던 소거법 (Gauss–Jordan Elimination)
@@ -125,7 +125,9 @@ $$
 #### 기본 성질
 * $0 \times 0$: $\det() = 0$
 * $1 \times 1$: $\det(a) = a$
-* $2 \times 2$: $\det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc$  
+* $2 \times 2$: 
+
+$$\det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc$$
 
 $M_{ij}$는 i행 j열을 제외한 나머지 행렬성분들로 구성된 행렬의 행렬식 (Minor matrix 약자) 
 * $3 \times 3$:
@@ -220,6 +222,7 @@ $$\det A = \sum_{j=1}^{n} a_{ij}C_{ij} = \sum_{i=1}^{n} a_
 $\det(A) \neq 0$일 때, 역행렬의 $(i,j)$ 성분은:
 
 $$(A^{-1})_{ij} = \frac{(-1)^{i+j}M_{ji}}{\det(A)}$$
+
 즉, $j$행 $i$열을 제거한 소행렬식에 부호를 붙이고 $\det(A)$로 나눈 값이다.  
 **행렬 형태**:
 
@@ -228,7 +231,6 @@ C_{11} & C_{21} & \cdots & C_{n1} \\
 C_{12} & C_{22} & \cdots & C_{n2} \\
 \vdots & \vdots & \ddots & \vdots \\
 C_{1n} & C_{2n} & \cdots & C_{nn}
-
 \end{pmatrix}$$
 
 여기서 $C_{ij} = (-1)^{i+j}M_{ij}$는 여인수(cofactor)이며, **여인수행렬의 전치**를 $\det(A)$로 나눈다.
@@ -254,7 +256,6 @@ $$V = \begin{pmatrix}
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 1 & x_n & x_n^2 & \cdots & x_n^{n-1}
 \end{pmatrix} \\
-
 \det(V) = \prod_{1 \leq i < j \leq n} (x_j - x_i)$$
 
 **성질 및 응용**
@@ -287,6 +288,7 @@ $A = \begin{pmatrix} A_{11} & A_{12} \\ A_{21} & A_{22} \end{pmatrix}$, $B = \be
 
 $$AB = \begin{pmatrix} A_{11}B_{11} + A_{12}B_{21} & A_{11}B_{12} + A_{12}B_{22} \\ A_{21}B_{11} + A_{22}B_{21} & A_
 {21}B_{12} + A_{22}B_{22} \end{pmatrix}$$
+
 단, 인접한 블록의 차원이 곱셈 조건을 만족해야 한다.
 
 #### 분할행렬의 행렬식
@@ -305,6 +307,7 @@ $$\det(A) = \det(A_{22})\det(A_{11} - A_{12}A_{22}^{-1}A_
 * $A_{12} = 0$ (또는 $A_{21} = 0$)인 블록 삼각행렬: 
 
 $$\det(A) = \det(A_{11})\det(A_{22})$$
+
 **참고**: 우변의 $A_{22} - A_{21}A_{11}^{-1}A_{12}$ 또는 $A_{11} - A_{12}A_{22}^{-1}A_{21}$를 **슈어 보수행렬(Schur complement)** 이라 한다.
 
 **증명** ($A_{11}$이 정칙인 경우):  
@@ -342,7 +345,6 @@ $A = \begin{pmatrix} A_{11} & A_{12} \\ A_{21} & A_{22} \end{pmatrix}$이고 $A_
 $$
 A^{-1} = \begin{pmatrix} A_{11}^{-1} + A_{11}^{-1}A_{12}S^{-1}A_{21}A_{11}^{-1} & -A_{11}^{-1}A_{12}S^{-1} \\ -S^{-1}A_{21}A_{11}^{-1} & S^{-1} \end{pmatrix} \\
 = \begin{pmatrix} G & - GA_{12}A_{22}^{-1} \\ -A_{22}^{-1}A_{21}G & A_{22}^{-1} + A_{22}^{-1}A_{21}GA_{12}A_{22}^{-1} \end{pmatrix} 
-
 $$
 
 **증명**:
@@ -499,7 +501,6 @@ $$E[\text{RSS}] = E[\mathbf{e}^\top (I - \Pi_X) \mathbf{e}] = \operatorname{trac
 
 $$\hat{\sigma}^2 = \frac{\text{RSS}}{n-p}$$
 
-
 ### 전치와 덧셈
 
 $$(A + B)^T = A^T + B^T$$
@@ -546,8 +547,7 @@ $$A \otimes B = \begin{pmatrix}
 a_{11}B & a_{12}B & \cdots & a_{1q}B \\
 a_{21}B & a_{22}B & \cdots & a_{2q}B \\
 \vdots & \vdots & \ddots & \vdots \\
-a_{p1}B & a_{p2}B & \cdots & a_{pq}B
-\end{pmatrix}$$
+a_{p1}B & a_{p2}B & \cdots & a_{pq}B\end{pmatrix}$$
 
 #### 직적의 성질
 * **전치**: $(A \otimes B)^T = A^T \otimes B^T$
@@ -642,6 +642,7 @@ $$PXX^T = QXX^T \Rightarrow PX = QX$$
 $i$번째 성분만 1이고 나머지는 0인 벡터
 
 $$\mathbf{e}_i = (0, \ldots, 0, 1, 0, \ldots, 0)^T$$
+
 **성질**:
 * $\mathbf{e}_i^T \mathbf{e}_j = \delta_{ij}$ (크로네커 델타)
 * $\mathbf{I}_n = [\mathbf{e}_1\ \mathbf{e}_2\ \cdots\ \mathbf{e}_n]$
@@ -658,7 +659,7 @@ $$A^T = -A$$
 * 왜대칭행렬의 대각성분은 모두 0이다
 * 임의의 정사각행렬 $A$는 대칭행렬과 왜대칭행렬의 합으로 표현할 수 있다:
    
-   $$A = \frac{1}{2}(A + A^T) + \frac{1}{2}(A - A^T)$$
+$$A = \frac{1}{2}(A + A^T) + \frac{1}{2}(A - A^T)$$
 
 ### 대칭행렬의 대각화
 #### (1) 스펙트럼 정리 (Spectral Theorem)
@@ -667,6 +668,7 @@ $$A^T = -A$$
 $A$가 $n \times n$ 대칭행렬이면, 다음을 만족하는 직교행렬 $Q$와 대각행렬 $\Lambda$가 존재한다:
 
 $$A = Q\Lambda Q^T$$
+
 - $Q = [\mathbf{q}_1 \ \mathbf{q}_2 \ \cdots \ \mathbf{q}_n]$: 정규 고유벡터들로 이루어진 직교행렬
 - $\Lambda = \text{diag}(\lambda_1, \lambda_2, \ldots, \lambda_n)$: 고유값들의 대각행렬
 - $Q^TQ = QQ^T = I$ (직교성)
@@ -682,18 +684,15 @@ $$\mathbf{v}^*A\mathbf{v} = \lambda\mathbf{v}^*\mathbf{v}$$
 
 양변의 켤레 전치를 취하면:
 
-$$\mathbf{v}^TA^T\mathbf{v} = \bar{\lambda}\mathbf{v}
-^T\mathbf{v}$$
+$$\mathbf{v}^TA^T\mathbf{v} = \bar{\lambda}\mathbf{v}^T\mathbf{v}$$
 
 $A = A^T$이므로:
 
-$$\mathbf{v}^TA\mathbf{v} = \bar{\lambda}\mathbf{v}
-^T\mathbf{v}$$
+$$\mathbf{v}^TA\mathbf{v} = \bar{\lambda}\mathbf{v}^T\mathbf{v}$$
 
 따라서:
 
-$$\lambda\mathbf{v}^T\mathbf{v} = \bar{\lambda}\mathbf{v}
-^T\mathbf{v}$$
+$$\lambda\mathbf{v}^T\mathbf{v} = \bar{\lambda}\mathbf{v}^T\mathbf{v}$$
 
 $\mathbf{v} \neq 0$이므로 $\mathbf{v}^T\mathbf{v} > 0$, 그러므로 $\lambda = \bar{\lambda}$, 즉 $\lambda \in \mathbb{R}$
 
@@ -706,13 +705,11 @@ _j = \lambda_j\mathbf{v}_j$$
 
 첫 번째 식에 $\mathbf{v}_j^T$를 좌측에서 곱하면:
 
-$$\mathbf{v}_j^TA\mathbf{v}_i = \lambda_i\mathbf{v}
-_j^T\mathbf{v}_i$$
+$$\mathbf{v}_j^TA\mathbf{v}_i = \lambda_i\mathbf{v}_j^T\mathbf{v}_i$$
 
 $A$가 대칭이므로:
 
-$$\mathbf{v}_j^TA\mathbf{v}_i = (A\mathbf{v}_j)^T\mathbf{v}
-_i = \lambda_j\mathbf{v}_j^T\mathbf{v}_i$$
+$$\mathbf{v}_j^TA\mathbf{v}_i = (A\mathbf{v}_j)^T\mathbf{v}_i = \lambda_j\mathbf{v}_j^T\mathbf{v}_i$$
 
 따라서:
 
@@ -876,8 +873,7 @@ $$C_n = I_n - \bar{\mathbf{J}}_n = I_n - \frac{1}{n}\mathbf{J}_n$$
 
 벡터 $W=(W_1,\dots,W_n)^T$, 합벡터 $\mathbf{1}=(1,\dots,1)^T$, 평균 $\bar W=\frac{1}{n}\mathbf{1}^TW$라 하면
 
-$$S_{WW} = \sum_{i=1}^n (W_i-\bar W)^2 = W^TW-\frac
-{(\mathbf{1}^TW)^2}{\mathbf{1}^T\mathbf{1}}$$
+$$S_{WW} = \sum_{i=1}^n (W_i-\bar W)^2 = W^TW-\frac{(\mathbf{1}^TW)^2}{\mathbf{1}^T\mathbf{1}}$$
 
 또한 $\mathbf{1}^T\mathbf{1}=n$이므로
 
@@ -939,6 +935,7 @@ $A^TA = AA^T = I$를 만족하는 정사각행렬, 즉 $A^T = A^{-1}$
 **성질 1: 고유값의 절댓값**
 
 $$|\lambda| = 1$$
+
 즉, 직교행렬의 모든 고유값은 단위원 위에 있다.
 
 **성질 2: 대각합 불변성**
@@ -975,12 +972,14 @@ $$\cos\theta = \frac{(P\mathbf{x})^T(P\mathbf{y})}{\|P\mathbf{x}\|_2 \|P\mathbf{
 $P_{r \times c}$의 행벡터들이 정직교집합을 이룰 때, $P$는 **정직교 행을 가진다**(has orthonormal rows)고 하며, 이때
 
 $$PP^T = I_r$$
+
 이 성립한다. 그러나 일반적으로 $P^TP \neq I_c$이다.
 
 **정직교 열을 가지는 행렬**  
 $P_{r \times c}$의 열벡터들이 정직교집합을 이룰 때, $P$는 **정직교 열을 가진다**(has orthonormal columns)고 하며, 이때
 
 $$P^TP = I_c$$
+
 이 성립한다. 그러나 일반적으로 $PP^T \neq I_r$이다.
 
 **직교행렬로의 확장**  
@@ -1062,6 +1061,7 @@ $$\mathbf{v}_3 \cdot \mathbf{q}_1 = \frac{1}{\sqrt{2}}, \quad \mathbf{v}_3 \cdot
 **(1) QR 분해**
 
 $$A = QR$$
+
 여기서 $Q = [\mathbf{q}_1\ \mathbf{q}_2\ \cdots\ \mathbf{q}_n]$ (정직교 열), $R$은 상삼각행렬
 
 **(2) 정사각행렬의 직교대각화**
@@ -1088,7 +1088,6 @@ $$R = \begin{pmatrix}
 0 & \|\mathbf{u}_2\| & \mathbf{v}_3 \cdot \mathbf{q}_2 & \cdots \\
 0 & 0 & \|\mathbf{u}_3\| & \cdots \\
 \vdots & \vdots & \vdots & \ddots
-
 \end{pmatrix}$$
 
 ### 직교행렬 예시
@@ -1096,6 +1095,7 @@ $$R = \begin{pmatrix}
 행렬 $A$가 $n \times p$ 차원이고 계수 $p$ ($n \geq p$)를 가진다고 하자. 그러면 다음을 만족하는 행렬들이 존재한다:
 
 $$A = QR$$
+
 * $Q$: $n \times p$ 차원이며 정직교 열을 가지는 행렬 ($Q^TQ = I_p$)
 * $R$: $p \times p$ 차원 상삼각행렬 (upper triangular matrix)
 
@@ -1117,7 +1117,6 @@ $$H_3 = \begin{pmatrix}
 \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} \\
 \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 \\
 \frac{1}{\sqrt{6}} & \frac{1}{\sqrt{6}} & -\frac{2}{\sqrt{6}}
-
 \end{pmatrix}$$
 
 검증: 각 행의 norm이 1이고 서로 직교하므로 $H_3^TH_3 = I_3$
@@ -1133,7 +1132,6 @@ $$G(i,j,\theta) = \begin{pmatrix}
 0 & \cdots & \sin\theta & \cdots & \cos\theta & \cdots & 0 \\
 \vdots & & \vdots & & \vdots & \ddots & \vdots \\
 0 & \cdots & 0 & \cdots & 0 & \cdots & 1
-
 \end{pmatrix}$$
 
 주로 QR 분해나 고유값 계산에서 특정 성분을 0으로 만드는 데 사용된다.
@@ -1148,9 +1146,8 @@ $$H = I - 2vv^T$$
 
 $$H^TH = (I - 2vv^T)^T(I - 2vv^T) = (I - 2vv^T)(I - 2vv^T)\\
 = I - 4vv^T + 4vv^Tvv^T \\= I - 4vv^T + 4v(v^Tv)v^T \\ 
-= I - 4vv^T + 4vv^T = I
+= I - 4vv^T + 4vv^T = I$$
 
-$$ 
 하우스홀더 행렬은 대칭이면서 직교행렬이므로 $H^T = H = H^{-1}$이다. 주로 벡터를 좌표축 방향으로 반사시켜 QR 분해를 수행하는 데 활용된다.
 
 ## (8) 제곱근 행렬 (Matrix Square Root)
@@ -1161,6 +1158,7 @@ $$
 대칭인 양정치행렬 $A \succ 0$에 대해 고유값 분해 $A = Q\Lambda Q^T$를 이용하면:
 
 $$A^{1/2} = Q\Lambda^{1/2}Q^T$$
+
 여기서 $\Lambda^{1/2} = \text{diag}(\sqrt{\lambda_1}, \sqrt{\lambda_2}, \ldots, \sqrt{\lambda_n})$이고, 모든 $\lambda_i > 0$이므로 항상 존재하며 유일하다 (양정치 범위에서).
 
 **일반 행렬의 경우**:
@@ -1190,12 +1188,14 @@ $$A = \begin{pmatrix} 4 & 0 \\ 0 & 9 \end{pmatrix} \Rightarrow A^{1/2} = \begin{
 초기값 $X_0 = I$로 시작하여:
 
 $$X_{n+1} = \frac{1}{2}\left(X_n + X_n^{-1}A\right)$$
+
 이 반복은 $A^{1/2}$로 수렴한다.
 
 **방법 3: Cholesky 분해**
 양정치행렬 $A$에 대해 Cholesky 분해 $A = LL^T$를 이용하면:
 
 $$A^{1/2} = L$$
+
 여기서 $L$은 하삼각 분해 행렬이다.
 
 ### 응용
@@ -1212,6 +1212,7 @@ $$X \sim N(\mu, \Sigma) \Rightarrow \Sigma^{-1/2}(X - \mu)
 $A = X^TX$ (Gram 행렬)에 대해:
 
 $$A^{1/2} = (X^TX)^{1/2}$$
+
 이는 $X$의 특이값과 관련된다.
 
 ### 관련 행렬 함수
@@ -1224,6 +1225,7 @@ $$A^{1/2} = (X^TX)^{1/2}$$
 **정의**: 정사각행렬 $P$가 **정사영행렬(orthogonal projection matrix)** 이 되기 위한 필요충분조건은
 
 $$P^2 = P \text{ 이고 } P^T = P$$
+
 즉, 멱등이면서 대칭인 행렬이다.
 
 **기하학적 의미** : 정사영행렬 $P$는 벡터 $x$를 어떤 부분공간 $S$에 수직으로 투영(projection)하는 선형변환을 나타낸다. 멱등이므로, 자신의 열공간으로의 정사영 행렬이다. 
@@ -1235,12 +1237,13 @@ $$P^2 = P \text{ 이고 } P^T = P$$
 
 >**유일성 증명**:  
 >$x = x_1 + x_2 = x_1' + x_2'$인 두 분해가 존재한다고 하자. 그러면:
-
+>
 >$$x_1 - x_1' = x_2' - x_2$$
+>
 >좌변은 $\text{Col}(A)$에 속하고 우변은 $\text{Col}(A)^\perp$에 속한다. 따라서:
-
->$$x_1 - x_1' \in \text{Col}(A) \cap \text{Col}(A)^\perp = 
-\{\mathbf{0}\}$$
+>
+>$$x_1 - x_1' \in \text{Col}(A) \cap \text{Col}(A)^\perp = \{\mathbf{0}\}$$
+>
 >그러므로 $x_1 = x_1'$이고 $x_2 = x_2'$로 유일하다.
 
 **명시적 표현**:
@@ -1263,19 +1266,21 @@ $x \in \text{range}(P)$이면 $Px = x$
 **성질 2: 직교성**  
 모든 $x$에 대해 $(x - Px) \perp \text{range}(P)$
 >**증명**: $y \in \text{range}(P)$이면 $y = Pz$. 따라서:
-
+>
 >$$(x - Px)^T y = (x - Px)^T Pz = x^TPz - x^TP^TPz = x^TPz 
 - x^TPz = 0$$
 
 **성질 3: 거리 최소성**  
 $\|x - Px\| = \min_{y \in \text{range}(P)} \|x - y\|$
 >**증명**: $y \in \text{range}(P)$이면 $y = Pw$. $z = x - Px$라 하면:
-
+>
 >$$\|x - y\|^2 = \|z + (Px - y)\|^2$$
+>
 >$z \perp \text{range}(P)$이고 $(Px - y) \in \text{range}(P)$이므로 (피타고라스 정리):
-
+>
 >$$\|x - y\|^2 = \|z\|^2 + \|Px - y\|^2 \geq \|z\|^2 = \|x 
 - Px\|^2$$
+>
 >등호는 $y = Px$일 때 성립.
 
 **성질 4: 여사영의 정사영성**  
@@ -1305,8 +1310,10 @@ $$\|x\|_2^2 = \|Px\|_2^2 + \|(I-P)x\|_2^2$$
 $$\|x\|^2 = \|Px + (I-P)x\|^2 = \|Px\|^2 + 2(Px)^T(I-P)x + 
 \|(I-P)x\|^2$$
 
-중간항을 계산하면: $$(Px)^T(I-P)x = x^TP(I-P)x = x^T(P - 
-P^2)x = 0$$ 
+중간항을 계산하면: 
+
+$$(Px)^T(I-P)x = x^TP(I-P)x = x^T(P -P^2)x = 0$$
+
 ($P = P^T$, $P^2 = P$ 이용)  
 
 ### 열벡터공간으로의 정사영행렬
@@ -1334,13 +1341,15 @@ $$P_X = X(X^T X)^{-1}X^T$$
 >* $X_2$: $m \times (n-r)$ 행렬 (나머지 열들)
 >
 >**정사영행렬의 표현**:
-
+>
 >$$P_X = X \begin{pmatrix} (X_1^T X_1)^{-1} & 0 \\ 0 & 0 
 \end{pmatrix} X^T$$
 >
+>
 >여기서 블록 대각행렬을 $(X^TX)^-$로 표기하며, 이를 $X^TX$의 **일반화역행렬(generalized inverse)** 이라 하고, 간단히 표기하면
-
+>
 >$$P_X = X(X^TX)^- X^T$$
+>
 >**성질**:
 >* $(X^TX)^-$는 유일하지 않다 (하지만 $X(X^TX)^-X^T$는 유일하다)
 >* $\text{rank}(X(X^TX)^-X^T) = \text{rank}(X) = r$
@@ -1362,9 +1371,8 @@ $$\hat{y} \in \text{Col}(X), \quad (y - \hat{y}) \perp
 
 **Step 2**: 선형결합 표현 및 직교 조건
 
-$$\hat{y} = X\beta \\
+$$\hat{y} = X\beta \\ X^T(y - X\beta) = 0$$
 
-X^T(y - X\beta) = 0$$
 - $\beta$: 열 최대계수 행렬 $X$의 열벡터들의 선형결합 계수 벡터
 
 **Step 3**: 정규방정식 풀이
@@ -1375,9 +1383,7 @@ $$X^TXβ = X^Ty \\
 
 **Step 4**: 정사영행렬 도출
 
-$$\hat{y} = X(X^TX)^{-1}X^Ty \\
-
-\therefore P_X = X(X^TX)^{-1}X^T$$
+$$\hat{y} = X(X^TX)^{-1}X^Ty \\ \therefore P_X = X(X^TX)^{-1}X^T$$
 
 ### 증명: 정사영행렬이 열벡터공간으로의 정사영을 수행함
 >$\Pi = X(X^TX)^{-1}X^T$가 $X$의 열벡터공간 $\text{Col}(X)$로의 정사영행렬임을 보이기 위해서는 다음 두 가지를 증명해야 한다:
@@ -1388,38 +1394,43 @@ $$\hat{y} = X(X^TX)^{-1}X^Ty \\
 >**Step 1: 정사영행렬의 성질 증명**
 >
 >멱등성:
-
+>
 >$$\Pi^2 = X(X^TX)^{-1}X^T X(X^TX)^{-1}X^T = X(X^TX)^{-1}
 X^T = \Pi$$
 >
+>
 >대칭성:
-
+>
 >$$\Pi^T = [X(X^TX)^{-1}X^T]^T = X[(X^TX)^{-1}]^T X^T = X
 (X^TX)^{-1}X^T = \Pi$$
+>
 >
 >**Step 2: 열공간의 동치성 증명**  
 >**(1) $\text{Col}(\Pi) \subseteq \text{Col}(X)$ 증명**  
 >$y \in \text{Col}(\Pi)$이면 어떤 벡터 $v$에 대해:
-
+>
 >$$y = \Pi v = X(X^TX)^{-1}X^T v$$
 >
+>
 >$X(X^TX)^{-1}X^T v = X\beta$ (단, $\beta = (X^TX)^{-1}X^T v$)로 쓸 수 있으므로:
-
+>
 >$$y = X\beta \in \text{Col}(X)$$
+>
 >
 >따라서 $\text{Col}(\Pi) \subseteq \text{Col}(X)$
 >
 >**(2) $\text{Col}(X) \subseteq \text{Col}(\Pi)$ 증명**  
 >$x \in \text{Col}(X)$이면 어떤 벡터 $w$에 대해 $x = Xw$이므로  
-
->$$\Pi x = X(X^TX)^{-1}X^T Xw = X(X^TX)^{-1}(X^TX)w = Xw = 
-x$$
+>
+>$$\Pi x = X(X^TX)^{-1}X^T Xw = X(X^TX)^{-1}(X^TX)w = Xw = x$$
+>
 >
 >즉, $\Pi x = x$이므로 $x = \Pi u \quad (\text{단, } u = x)$  
 >따라서 $x \in \text{Col}(\Pi)$이고, $\text{Col}(X) \subseteq \text{Col}(\Pi)$
 >
-
+>
 >두 포함관계로부터 $$\text{Col}(\Pi) = \text{Col}(X)$$
+>
 >
 >**기하학적 해석**  
 >$\Pi = X(X^TX)^{-1}X^T$는 $X$의 열벡터공간 $\text{Col}(X)$로의 정사영행렬이며:
@@ -1458,16 +1469,20 @@ $$\mathbb{R}^n = \text{Col}(A^T) \oplus \text{null}(A) = \text{Row}(A) \oplus \t
 **용어: 전체 정사영행렬**:
 
 $$\Pi_{0,1} = X(X^TX)^{-1}X^T$$
+
 **용어: $X_0$로의 정사영행렬**:
 
 $$\Pi_0 = X_0(X_0^TX_0)^{-1}X_0^T$$
+
 **용어: $X_0$에 직교하는 성분**:
 
 $$X_{1\mid0} = (I - \Pi_0)X_1$$
+
 **용어: $X_{1\mid0}$의 열공간으로의 정사영행렬**:
 
 $$\Pi_{1\mid 0} = X_{1\mid0}(X_{1\mid0}^TX_{1\mid0})^{-}X_
 {1\mid0}^T$$
+
 여기서 $(·)^-$는 일반화역행렬(generalized inverse)를 나타낸다.
 
 **성질 1: 열공간의 동치성**  
@@ -1478,30 +1493,34 @@ $$\text{Col}((X_0, X_1)) = \text{Col}((X_0, X_{1\mid0}))$$
 >**(1) $\text{Col}(X_0, X_1) \subseteq \text{Col}(X_0, X_{1\mid0})$ 증명**
 >
 >$Y \in \text{Col}(X_0, X_1)$이면 어떤 벡터 $\beta_0, \beta_1$에 대해:
-
+>
 >$$Y = X_0\beta_0 + X_1\beta_1$$
 >
+>
 >이를 다음과 같이 다시 쓸 수 있다:
-
+>
 >$$Y = X_0\beta_0 + \Pi_0 X_1\beta_1 + (I - \Pi_0)
 X_1\beta_1$$
-
+>
 >$$= X_0\beta_0 + X_0(X_0^TX_0)^{-1}X_0^T X_1\beta_1 + (I 
 - \Pi_0)X_1\beta_1$$
-
+>
 >$$= X_0[\beta_0 + (X_0^TX_0)^{-1}X_0^T X_1\beta_1] + X_
 {1\mid0}\beta_1$$
 >
+>
 >첫 번째 항은 $\text{Col}(X_0)$에 속하고, 두 번째 항은 $\text{Col}(X_{1\mid0})$에 속하므로:
-
+>
 >$$Y \in \text{Col}(X_0, X_{1\mid0})$$
+>
 >
 >**(2) $\text{Col}(X_0, X_{1\mid0}) \subseteq \text{Col}(X_0, X_1)$ 증명**
 >
 >$X_{1\mid0} = (I - \Pi_0)X_1$이고 $(I - \Pi_0)$는 멱등행렬이므로:
-
+>
 >$$Y = X_0\alpha + X_{1\mid0}\beta = X_0\alpha + (I - 
 \Pi_0)X_1\beta \in \text{Col}(X_0, X_1)$$
+>
 >
 >따라서 두 열공간이 같다: $\text{Col}(X_0, X_1) = \text{Col}(X_0, X_{1\mid0})$
 
@@ -1515,31 +1534,34 @@ $$\text{Col}(X_0, X_1) = \text{Col}(X_0) \oplus \text{Col}
 
 $$\Pi_{0,1} = \Pi_0 + \Pi_{1\mid0} \\ \Pi_0 \Pi_{1\mid0} = 
 0$$
+>
 >**증명**:
 >성질1, 2로부터 자명하지만, 수식으로 증명하면 아래와 같다.  
 >분할된 정사영행렬의 성질을 이용한다. $\Pi_{0,1}$를 계산하기 위해, $(X_0, X_1)$을 블록 형태로 다루면:
 >
-
+>
 >$$X^TX = \begin{pmatrix} X_0^TX_0 & X_0^TX_1 \\ 
 X_1^TX_0 & X_1^TX_1 \end{pmatrix}$$
 >
+>
 >역행렬은 (슈어 보수행렬 공식 사용):
-
+>
 >$$(X^TX)^{-1} = \begin{pmatrix} (X_0^TX_0)^{-1} + (X_0^TX_0)^{-1}X_0^TX_1S^{-1}X_1^TX_0(X_0^TX_0)^{-1} & -(X_0^TX_0)^{-1}X_0^TX_1S^{-1} \\ -S^{-1}X_1^TX_0(X_0^TX_0)^
 {-1} & S^{-1} \end{pmatrix}$$
+>
 >여기서 $S = X_{1\mid0}^TX_{1\mid0}$는 슈어 보수행렬이다.  
 >따라서:
 
->$$\Pi_{0,1} = \begin{pmatrix} X_0 & X_1 \end{pmatrix}(X^TX)^{-1}\begin{pmatrix} X_0^T \\ X_1^T \end{pmatrix} \\
->= X_0(X_0^TX_0)^{-1}X_0^T + (I - \Pi_0)X_1[(I - \Pi_0)X_1]
-^T(I - \Pi_0)X_1]^{-}(I - \Pi_0)X_1^T$$
-
+>$$\Pi_{0,1} = \begin{pmatrix} X_0 & X_1 \end{pmatrix}(X^TX)^{-1}\begin{pmatrix} X_0^T \\ X_1^T \end{pmatrix} \\ = X_0(X_0^TX_0)^{-1}X_0^T + (I - \Pi_0)X_1[(I - \Pi_0)X_1]^T(I - \Pi_0)X_1]^{-}(I - \Pi_0)X_1^T$$
+>
 >$$= \Pi_0 + \Pi_{1\mid0}$$
 >
+>
 >직교성:
-
+>
 >$$\Pi_0 \Pi_{1\mid0} = X_0(X_0^TX_0)^{-1}X_0^T \cdot X_
 {1\mid0}[X_{1\mid0}^TX_{1\mid0}]^{-}X_{1\mid0}^T$$
+>
 >
 >$X_{1\mid0} = (I - \Pi_0)X_1$이므로 $X_0^T X_{1\mid0} = 0$. 따라서:
 
@@ -1556,6 +1578,7 @@ $$\hat{\beta}_1 = (X_{1\mid0}^TX_{1\mid0})^{-}X_{1\mid0}^T
 총 변량을 $X_0$에 의한 설명 부분과 나머지 부분으로 분해:
 
 $$Y^T\Pi_{0,1}Y = Y^T\Pi_0 Y + Y^T\Pi_{1\mid0}Y$$
+
 이는 ANOVA나 순차적 모형 비교에서 핵심적으로 사용된다.
 
 #### 부분상관(Partial Correlation)
@@ -1601,12 +1624,12 @@ $A, B$가 대칭이므로:
 
 $$A^2 + AB + BA + B^2 = A + B \\
 A^2 - A + B^2 - B + AB + AB = 0 \\
-
 A(A-I) + B(B-I) + 2AB = 0 \quad \cdots (*)$$
 
 멱등행렬 $A$는 고유값이 0 또는 1이므로:
 
 $$A = QA_D Q^T, \quad A_D = \text{diag}(I_r, 0)$$
+
 (단, $r = \text{rank}(A)$, $Q$는 직교행렬)
 
 계수 조건 $\text{rank}(A+B) = \text{rank}(A) + \text{rank}(B)$는 $A$와 $B$의 치역이 직교함을 의미한다:
@@ -1627,6 +1650,7 @@ $B$가 대칭이고 $B(B-I) = B^2 - B = 0$이므로 $B^2 = B$ (멱등성)
 $(A+B)^2 = A+B$와 $A^2 = A, B^2 = B$로부터:
 
 $$AB + BA = 0$$
+
 $A, B$가 대칭이므로 $2AB = 0$, 즉 $AB = 0$
 
 **$B$가 음아닌 정부호임 증명**:  
@@ -1643,11 +1667,11 @@ $(A+B)^2 = A^2 + AB + BA + B^2 = A + B$
 $A^2 = A$이므로:
 
 $$AB + BA + B^2 = B$$
+
 $A, B$가 대칭이므로:
 
-$$2AB + B^2 = B \\
+$$2AB + B^2 = B \\ B^2 - B + 2AB = 0 \quad \cdots (**)$$
 
-B^2 - B + 2AB = 0 \quad \cdots (**)$$
 $B \succeq 0$이고 대칭이므로 $B = Q\Lambda Q^T$ (단, $\Lambda = \text{diag}(\lambda_1, \ldots, \lambda_n)$, $\lambda_i \geq 0$)  
 멱등행렬 $A$는 $A = Q_A \text{diag}(I_r, 0) Q_A^T$ 형태
 
@@ -1711,8 +1735,8 @@ $(A+B)^2 = A+B$와 $A^2 = A, B^2 = B$로부터:
 
 $$A^2 + AB + BA + B^2 = A + B\\
 A + AB + BA + B = A + B\\
-
 AB + BA = 0$$
+
 $A, B$가 대칭이므로 $AB = BA$이고, $2AB = 0$에서 **$AB = 0$**
 
 ∴ $A, B$는 멱등행렬이고 $AB = 0$
@@ -1729,8 +1753,7 @@ $$f: \mathbb{R}^{m \times n} \rightarrow \mathbb{R}^{p
 ### 행렬의 거듭제곱 함수
 정사각행렬 $A$에 대해:
 
-$$f(A) = A^k = \underbrace{A \cdot A \cdots A}_{k\text{번}}
-$$
+$$f(A) = A^k = \underbrace{A \cdot A \cdots A}_{k\text{번}}$$
 
 ### 행렬의 지수함수
 
@@ -1789,7 +1812,6 @@ $$J_{\mathbf{f}}(x) = \frac{\partial \mathbf{f}}{\partial x^T} = \begin{pmatrix}
 \frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \cdots & \frac{\partial f_2}{\partial x_n} \\
 \vdots & \vdots & \ddots & \vdots \\
 \frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \cdots & \frac{\partial f_m}{\partial x_n}
-
 \end{pmatrix}$$
 
 >**예**: 극좌표 변환  
@@ -1801,6 +1823,7 @@ $$J_{\mathbf{f}}(x) = \frac{\partial \mathbf{f}}{\partial x^T} = \begin{pmatrix}
 >y = r\sin\theta
 >\end{cases}
 >$$
+>
 >
 >야코비 행렬:
 >
@@ -1815,11 +1838,13 @@ $$J_{\mathbf{f}}(x) = \frac{\partial \mathbf{f}}{\partial x^T} = \begin{pmatrix}
 >\end{pmatrix}
 >$$
 >
+>
 >야코비안(행렬식):
 >
 >$$
 >\det(J) = \cos\theta \cdot r\cos\theta - (-r\sin\theta) \cdot \sin\theta = r\cos^2\theta + r\sin^2\theta = r
 >$$
+>
 >
 >**응용**: 이중적분에서 $dxdy = r \, dr d\theta$
 
@@ -1831,7 +1856,6 @@ $$H_f(x) = \frac{\partial^2 f}{\partial x \partial x^T} = \begin{pmatrix}
 \frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2^2} & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n} \\
 \vdots & \vdots & \ddots & \vdots \\
 \frac{\partial^2 f}{\partial x_n \partial x_1} & \frac{\partial^2 f}{\partial x_n \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_n^2}
-
 \end{pmatrix}$$
 
 **성질**:
@@ -1863,8 +1887,7 @@ $$\nabla f = \frac{\partial f}{\partial x} = \begin{pmatrix}
 \frac{\partial f}{\partial x_1} \\
 \frac{\partial f}{\partial x_2} \\
 \vdots \\
-\frac{\partial f}{\partial x_n}
-\end{pmatrix}$$
+\frac{\partial f}{\partial x_n}\end{pmatrix}$$
 
 ### 벡터 미분 공식
 **기본 공식**:
@@ -1962,12 +1985,14 @@ $$\text{vech}(A) = \begin{pmatrix} a_{11} \\ a_{21} \\ a_{22} \\ a_{31} \\ a_{32
 대칭행렬 $A$에 대해, 복제행렬(duplication matrix) $D_n$을 이용하여:
 
 $$\text{vec}(A) = D_n \text{vech}(A)$$
+
 여기서 $D_n$은 $n^2 \times \frac{n(n+1)}{2}$ 크기의 행렬이다.
 
 주요 성질: **교환 항등식 (Commutation Identity)**  
 : 벡-치환 행렬을 이용한 크로네커 곱의 교환
 
 $$B \otimes A = K_{n,m}(A \otimes B)K_{p,q}$$
+
 $A$는 $m \times p$ 행렬, $B$는 $n \times q$ 행렬
 
 ### 벡-치환 행렬 (Vec-Permutation Matrix)
@@ -2011,7 +2036,6 @@ $$\frac{\partial f}{\partial X} = \begin{pmatrix}
 \frac{\partial f}{\partial x_{21}} & \frac{\partial f}{\partial x_{22}} & \cdots & \frac{\partial f}{\partial x_{2n}} \\
 \vdots & \vdots & \ddots & \vdots \\
 \frac{\partial f}{\partial x_{m1}} & \frac{\partial f}{\partial x_{m2}} & \cdots & \frac{\partial f}{\partial x_{mn}}
-
 \end{pmatrix}$$
 
 **예제**: $f(X) = \text{tr}(X)$일 때
