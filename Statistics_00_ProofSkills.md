@@ -6,11 +6,7 @@
 
 $$x_i=(x_i-\bar{x})+\bar{x}$$
 
-이를 이용하면
-
-$$\sum (x_i-\bar{x})=0$$
-
-가 성립한다.
+이를 이용하면 $\sum (x_i-\bar{x})=0$ 가 성립한다.
 
 ### 대표 활용
 
@@ -22,6 +18,7 @@ $$\sum (x_i-\bar{x})=0$$
 ### 예
 
 $$\sum (x_i-\bar{x})(y_i-\bar{y}) = \sum x_i y_i - n\bar{x}\bar{y}$$
+
 
 ## 2. 제곱합 분해 (Sum of Squares Decomposition)
 
@@ -155,6 +152,76 @@ $$(I-H)^2=I-H$$
 * residual 분산
 * 영향점 분석
 * F-test
+
+책 문맥(가중 제곱합 → 투영행렬 → χ² 분포)과 정확히 일치하도록 **노트 형태로 정리**한다. 불필요한 일반화 없이, 해당 풀이에서 실제로 쓰이는 구조만 남긴다.
+
+## Quadratic Form Decomposition 
+아래 식이 성립한다.
+
+$$\frac{n(\hat\theta^0-\theta^0)^2}{\theta^0} = \frac{(w^T Z)^2}{w^T w}$$
+
+이때 
+
+$$\hat\theta = (\hat\theta_1,\dots,\hat\theta_k)^T, \quad \hat\theta^0 = \frac{\sum_{i=1}^k n_i \hat\theta_i}{\sum_{i=1}^k n_i}, \quad w = (\sqrt{n_1},\dots,\sqrt{n_k})^T,\quad n = \sum_{i=1}^k n_i$$
+
+**표준화 변수 정의:**
+
+$$Z_i = \frac{\sqrt{n_i}(\hat\theta_i-\theta^0)}{\sqrt{\theta^0}},
+\quad Z = (Z_1,\dots,Z_k)^T$$
+
+**핵심 분해 (가중 제곱합)**
+
+$$\sum_{i=1}^k n_i(\hat\theta_i-\hat\theta_i^0)^2
+= \sum_{i=1}^k n_i(\hat\theta_i-\theta^0)^2 - n(\hat\theta^0-\theta^0)^2$$
+
+* 좌변: "각 그룹별 편차"
+* 우변: "전체 편차 − 평균 방향 성분"
+
+**벡터 형태로 변환**  
+(1) 전체 제곱합
+
+$$\frac{1}{\theta^0} \sum_{i=1}^k n_i(\hat\theta_i-\theta^0)^2
+= Z^T Z$$
+
+(2) 평균 방향 성분
+
+$$\hat\theta^0-\theta^0
+= \frac{1}{n}\sum n_i(\hat\theta_i-\theta^0)
+= \frac{\sqrt{\theta^0}}{n} w^T Z \\
+\therefore \frac{n(\hat\theta^0-\theta^0)^2}{\theta^0} = \frac{(w^T Z)^2}{w^T w}$$
+
+$$\therefore \frac{1}{\theta^0}
+\sum_{i=1}^k n_i(\hat\theta_i-\hat\theta_i^0)^2
+= Z^T Z - \frac{(w^T Z)^2}{w^T w} 
+=Z^T\left(I - \frac{w w^T}{w^T w}\right)Z$$
+
+**해석 (핵심 구조)**
+
+$$P_w = \frac{w w^T}{w^T w}$$
+
+* $P_w$: $(w)$ 방향으로의 직교투영
+* $(I - P_w)$: 그 직교보공간으로의 투영
+
+따라서 $Z^T(I - P_w)Z$ 는
+
+> "전체 벡터 (Z)에서 평균 방향((w))을 제거한 잔차 제곱합"
+
+왜 자유도가 (k-1)인가?
+* $Z \sim N(0, I_k)$
+* $A = I - \frac{w w^T}{w^T w}$
+
+성질:
+* $A^2 = A$ (idempotent)
+* $\text{rank}(A)=k-1$
+
+따라서 $Z^T A Z \sim \chi^2(k-1)$  
+* $w=(\sqrt{n_1},\dots,\sqrt{n_k})$  → "가중 평균 방향"
+* 제거되는 성분 → "공통 평균 이동"
+* 남는 성분 → "집단 간 차이"
+
+이 구조는 ANOVA의 "between vs within decomposition"과 완전히 동일한 선형대수 표현이다.
+즉 이 식을 이해하면 이후 LRT, score test, Wald test에서 등장하는 모든 χ² 구조를 거의 동일한 방식으로 해석할 수 있다.
+
 
 ## 26. 기댓값과 대각합(trace) 연산 순서 교환 (Expectation-Trace Interchange)
 

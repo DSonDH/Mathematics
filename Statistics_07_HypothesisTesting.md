@@ -11,11 +11,11 @@
 >  - 통계적 가설검정은 모집단에 대한 확률모형을 설정하고, 관측된 자료가 해당 모형과 얼마나 부합하는지 평가하여 귀무가설을 기각할지 채택할지 결정하는 절차. 
 >  - 이 과정에서 기각역과 채택역은 서로 여집합 관계로, 기각역은 유의수준(제1종 오류 확률) 제약을 만족해야 하고, 그 범위 내에서 대립가설에 대한 검정력이 최대가 되도록 선택된다. 
 >  - 즉, 기각역은 임의로 정할 수 없고, 오류 가능성을 고려해 통계적으로 최적화되어야 한다.
->    - **검정력(power)**: 모수 $\theta$에 대해, 검정력은 $\theta$가 대립가설 영역($\Omega_1$)에 있을 때 귀무가설이 기각될 확률로 정의된다.
+>    - **검정력(power)**: 모수 $\theta$에 대해, $\theta$가 대립가설 영역($\Omega_1$)에 있을 때 귀무가설이 기각될 확률로 정의된다.
 >        
 >        $$\text{검정력}(\theta) = P_\theta(\text{귀무가설 기각}) = P_\theta(X \in C),\quad \theta \in \Omega_1$$
 >
->        여기서 $C$는 기각역이다. 검정력은 대립가설이 참일 때 올바르게 귀무가설을 기각할 확률을 의미한다.
+>        여기서 $C$는 기각역이다. 
 >    - 검정 설계에서 제1종 오류 확률은 반드시 $\alpha$ 이하로 고정되며, 이 제약 하에서 제2종 오류 $1-\text{검정력}$을 최소화하는 것이 목표다. 최적 검정에서는 제1종 오류 확률이 정확히 $\alpha$가 되도록 기각역이 선택된다.
 >- 관측값이 기각역에 들어왔을 때, 허용되는 결론 문장
 >    - **유의수준 $\alpha$에서 귀무가설을 기각할 충분한 통계적 근거가 있다.**
@@ -62,11 +62,9 @@
   
   $$H_0 : \mu = 30$$
 
-
 * 대립가설:
 
   $$H_1 : \mu < 30$$
-
 
 이 예제에서 관심사는 새로운 진통제가 기존 제품보다 **더 빠르다는 증거가 충분한지** 여부이다.
 
@@ -190,8 +188,7 @@ $$\gamma_\phi(\theta) = E_\theta[\phi(X_1,\dots,X_n)], \quad \theta \in \Omega$$
 
 $$\sup_{\theta \in \Omega_0} \gamma_\phi(\theta) = \max_{\theta \in \Omega_0} E_\theta(\phi(X_1, \dots, X_n))$$
 
-이며, 유의수준 $\alpha$ 이하인 검정을 유의수준 $\alpha$의 검정이라 한다.
-
+이며, 유의수준 $\alpha$ 이하인 검정을 유의수준 $\alpha$의 검정이라 한다.  
 이런 유의수준을 만족시키는 검정 중에서 제 2종 오류를 작게 하는 것이 좋으므로, 가능한 기각확률을 크게 주기 위하여 그 크기가 지정된 유의수준과 같게되는, 즉 
 
 $$\max_{\theta \in \Omega_0} E_\theta(\phi(X_1, \dots, X_n)) = \alpha$$
@@ -346,7 +343,6 @@ $$H_0:\mu\le\mu_0 \quad\text{vs}\quad H_1:\mu>\mu_0$$
     
     $$\ell(\mu, \sigma^2) = -\frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \mu)^2 - \frac{n}{2}\log\sigma^2 + \text{상수}$$
 
-
 2. **MLE 계산**  
     - 전체 모수공간($\mu \in \mathbb{R}$)에서의 MLE:
       
@@ -358,7 +354,6 @@ $$H_0:\mu\le\mu_0 \quad\text{vs}\quad H_1:\mu>\mu_0$$
       
       $$\hat\mu_0 = \min(\bar x, \mu_0), \quad \hat\sigma_0^2 = \frac{1}{n}\sum_{i=1}^n (x_i - \hat\mu_0)^2$$
 
-
 3. **가능도비 검정통계량**  
     
     $$2(\ell(\hat\theta) - \ell(\hat\theta_0)) = n\log\frac{\hat\sigma_0^2}{\hat\sigma^2}$$
@@ -369,23 +364,23 @@ $$H_0:\mu\le\mu_0 \quad\text{vs}\quad H_1:\mu>\mu_0$$
       
       $$n\log\left(1 + \frac{(\bar x - \mu_0)^2}{\hat\sigma^2}\right)$$
 
-    4. **기각역 도출**  
-        - 표본분산 $S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X)^2$
-        - $\bar x \le \mu_0$이면 기각하지 않음.
-        - $\bar x > \mu_0$이면, 검정통계량 $t = \frac{\bar X - \mu_0}{S/\sqrt{n}}$ 을 사용한다.
-        - 자세한 유도과정은 넣지 않았음. 교과서 307~308p 참고
-        - 귀무가설 $H_0$ 하에서 이 $t$-통계량은 자유도 $n-1$의 $t$-분포를 따른다.  
-          따라서, 유의수준 $\alpha$를 만족시키기 위해
-          
-          $$P_{\mu_0}\left( T \ge t_\alpha(n-1) \right) = \alpha$$
+4. **기각역 도출**  
+    - 표본분산 $S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X)^2$
+    - $\bar x \le \mu_0$이면 기각하지 않음.
+    - $\bar x > \mu_0$이면, 검정통계량 $t = \frac{\bar X - \mu_0}{S/\sqrt{n}}$ 을 사용한다.
+    - 자세한 유도과정은 넣지 않았음. 교과서 307~308p 참고
+    - 귀무가설 $H_0$ 하에서 이 $t$-통계량은 자유도 $n-1$의 $t$-분포를 따른다.  
+        따라서, 유의수준 $\alpha$를 만족시키기 위해
+        
+        $$P_{\mu_0}\left( T \ge t_\alpha(n-1) \right) = \alpha$$
 
-          가 되도록 임계값 $t_\alpha(n-1)$를 선택하여 기각역을 설정한다.
+        가 되도록 임계값 $t_\alpha(n-1)$를 선택하여 기각역을 설정한다.
 
-        - 즉, **유의수준 $\alpha$에서의 기각역**은
-          
-          $$\frac{\bar X - \mu_0}{S/\sqrt{n}} \ge t_\alpha(n-1)$$
+    - 즉, **유의수준 $\alpha$에서의 기각역**은
+        
+        $$\frac{\bar X - \mu_0}{S/\sqrt{n}} \ge t_\alpha(n-1)$$
 
-        - 이는 한쪽(one-sided) $t$-검정과 완전히 동일하며, 실제로 최대가능도비 검정이 한쪽 $t$-검정과 일치함을 의미한다.
+    - 이는 한쪽(one-sided) $t$-검정과 완전히 동일하며, 실제로 최대가능도비 검정이 한쪽 $t$-검정과 일치함을 의미한다.
 
 > 최대가능도비 검정은 귀무가설 하에서 평균을 $\mu_0$로 고정했을 때 실제 데이터의 평균과의 차이로 인한 가능도 손실이 충분히 크면 귀무가설을 기각한다. 이때의 검정통계량은 한쪽 $t$-검정과 일치한다.
 
@@ -467,7 +462,13 @@ $$\hat\sigma_0^2 = \frac{1}{n_1+n_2} \left[ \sum_{i=1}^{n_1}(x_{1i}-\bar X_1)^2 
 
 또한, $\hat\mu_0 = \frac{n_1\bar X_1 + n_2\bar X_2}{n_1+n_2}$이므로,
 
-$$\hat\sigma_0^2 = \hat\sigma^2 + \frac{n_1 n_2}{n_1+n_2} (\bar X_1 - \bar X_2)^2$$
+$$\hat\sigma_0^2
+= \hat\sigma^2 + \frac{1}{n_1+n_2}\left[n_1(\bar X_1 - \hat\mu_0)^2 + n_2(\bar X_2 - \hat\mu_0)^2\right] \\
+= \hat\sigma^2 + \frac{1}{(n_1+n_2)^3}\left[n_1(\bar X_1 - \frac{n_1\bar X_1 + n_2\bar X_2}{n_1+n_2})^2 + n_2(\bar X_2 - \frac{n_1\bar X_1 + n_2\bar X_2}{n_1+n_2})^2\right] \\
+= \hat\sigma^2 + \frac{1}{(n_1+n_2)^3}\left[n_1(n_2(\bar X_1 - \bar X_2))^2 + n_2(n_1(\bar X_2 - \bar X_1))^2\right] \\
+= \hat\sigma^2 + \frac{n_1 n_2}{(n_1+n_2)^3}\left[n_2(\bar X_1 - \bar X_2)^2 + n_1(\bar X_2 - \bar X_1)^2\right] \\
+
+= \hat\sigma^2 + \frac{n_1 n_2}{(n_1+n_2} (\bar X_1 - \bar X_2)^2$$
 
 최종적으로 최대가능도비 검정통계량은
 
@@ -805,13 +806,13 @@ $Z_1,\dots,Z_n \sim \mathrm{Multi}(1,(p_1,\dots,p_k)^t)$에서 $H_0:p=p_0 \quad\
 예7.2.1에서 처럼, 모수는 여러개 이지만 귀무가설은 모수 중 일부만 관여하는 경우가 있다. 이러첨 다차원 모수 중 일부에 관한 귀무가설을 검증하는 경우에도 최대가능도비 검정통계량의 근사가 다음처럼 가능하다.  
 
 정리 6.4.4의 조건 $R_0$ ~ $R_7$이 만족되고,
-모수 $\theta = (\xi^t, \eta^t)^t \in \Omega \subset \mathbb{R}^k$에서, 일부 성분 $\xi \in \mathbb{R}^{k_1}$에 대해
+모수 $\theta = (\xi^t, \eta^t)^t \in \Omega \subset \mathbb{R}^k$에서, 일부 성분 $\xi \in \mathbb{R}^{k_1}$에 대해 ($\xi$, $\eta$ 합쳐서 $k$차원)
 
 $$H_0: \xi = \xi_0$$
 
 와 같은 형태의 귀무가설을 고려한다. 이때 귀무가설 하의 모수공간은
 
-$$\Omega_0 = \{ (\xi_0^t, \eta^t)^t \in \Omega : \eta \in \mathbb{R}^{k_0} \}, \qquad k_0 = k - k_1$$
+$$\Omega_0 = \{ (\xi_0^t, \eta^t)^t \in \Omega : \eta \in \mathbb{R}^{k_0} \}, \quad k_0 = k - k_1$$
 
 로서 $k_0$차원의 열린집합.
 
@@ -822,7 +823,6 @@ $$\Omega_0 = \{ (\xi_0^t, \eta^t)^t \in \Omega : \eta \in \mathbb{R}^{k_0} \}, \
 > 표본이 충분히 크면 그 분포가 $\chi^2(k - k_0)$로 근사된다.
 > 제곱합이므로 $\chi^2$분포를 따른다.
 
-TODO:
 ### 정리 7.3.2 (일반 귀무가설의 최대가능도비 검정)
 전체 모수공간과 귀무가설 하 모수공간에서의 최대가능도 추정량을 각각 $\hat\theta_n^\Omega$, $\hat\theta_n^{\Omega_0}$라 하면,  
 **(1) $H_0:\xi=\xi_0$이 사실일 때**  
@@ -836,36 +836,27 @@ $$2\{l(\hat\theta_n^\Omega) - l(\hat\theta_n^{\Omega_0})\} \ge \chi^2_\alpha(k -
 
 **(2) $H_0:\xi=\xi_0$이 사실이고 $\theta_0 = (\xi_0^t, \eta_0^t)^t \in \Omega_0$일때**  
 
-$$2\{l(\hat\theta_n^\Omega) - l(\hat\theta_n^{\Omega_0})\} = n(\hat\theta_n^{\Omega_0} - \theta_0)^T I(\theta_0) (\hat\theta_n^{\Omega_0} - \theta_0) + r_n$$
+$$2\{l(\hat\theta_n^\Omega) - l(\hat\theta_n^{\Omega_0})\} = n(\hat\theta_n^{\Omega} - \hat\theta_n^{\Omega_0})^T I(\theta_0) (\hat\theta_n^{\Omega} - \hat\theta_n^{\Omega_0}) + r_n$$
 
 여기서 $r_n \xrightarrow{P_{\theta_0}} 0$이므로, 표본 크기가 충분히 크면 근사적으로
 
-$$n(\hat\theta_n^{\Omega_0} - \theta_0)^T I(\theta_0) (\hat\theta_n^{\Omega_0} - \theta_0) \ge \chi^2_\alpha(k - k_0)$$
+$$n(\hat\theta_n^{\Omega} - \hat\theta_n^{\Omega_0})^T I(\theta_0) (\hat\theta_n^{\Omega} - \hat\theta_n^{\Omega_0}) \ge \chi^2_\alpha(k - k_0)$$
 
 인 경우 $H_0$를 기각한다.
 
 **(3) $H_0:\xi=\xi_0$이 사실이고 $\theta_0 = (\xi_0^t, \eta_0^t)^t \in \Omega_0$일때**  
-평균 로그가능도함수 $\bar l(\theta)$의 점수벡터를
 
-$$\bar l'(\theta) = \begin{pmatrix} \bar l'_\xi(\theta) \\ \bar l'_\eta(\theta) \end{pmatrix}$$
+>(2), (3)에서 $\theta_0$는 미지의 $\eta_0$를 포함하는 모수값이므로, 실제로는 $\hat\theta_n^{\Omega_0}$로 대체하여 검정통계량을 계산한다.
 
-로, 정보행렬 $I(\theta)$를
+$$2\{l(\hat\theta_n^\Omega) - l(\hat\theta_n^{\Omega_0})\} =  n\, \bar l'(\hat\theta_n^{\Omega_0})^T \left[ I(\theta_0) \right]^{-1} \bar l'(\hat\theta_n^{\Omega_0}) + r_n$$
 
-$$I(\theta) = \begin{pmatrix}
-I_{\xi\xi}(\theta) & I_{\xi\eta}(\theta) \\
-I_{\eta\xi}(\theta) & I_{\eta\eta}(\theta)
+여기서 $\bar l'_\xi(\hat\theta_n^{\Omega_0})$는 $\xi$에 대한 점수함수의 $\hat\theta_n^{\Omega_0}$에서의 값이다. $r_n \xrightarrow{P_{\theta_0}} 0$이므로, 표본 크기가 충분히 크면 근사적으로 유의수준 $\alpha$에서의 기각역은
+$$n\, \bar l'_\xi(\hat\theta_n^{\Omega_0})^T \left[ I(\theta_0) \right]^{-1} \bar l'_\xi(\hat\theta_n^{\Omega_0}) \ge \chi^2_\alpha(k - k_0)$$
+
+$$I_(\theta_0) = \begin{pmatrix}
+I_{\xi\xi}(\theta_0) & I_{\xi\eta}(\theta_0) \\
+I_{\eta\xi}(\theta_0) & I_{\eta\eta}(\theta_0)
 \end{pmatrix}$$
-
-와 같이 블록 행렬로 분해한다.  
-Rao(Score) 검정통계량은 $H_0$가 사실이고 $\theta_0 = (\xi_0^t, \eta_0^t)^t \in \Omega_0$일 때,
-
-$$S = n\, \bar l'_\xi(\theta_0)^T \left[ I_{\xi\xi}(\theta_0) - I_{\xi\eta}(\theta_0) I_{\eta\eta}(\theta_0)^{-1} I_{\eta\xi}(\theta_0) \right]^{-1} \bar l'_\xi(\theta_0)$$
-
-정규성 조건이 만족되면, $H_0$ 하에서 $S \xrightarrow{d} \chi^2(k_1)$ 이므로, 유의수준 $\alpha$에서의 기각역은
-
-$$S \ge \chi^2_\alpha(k_1)$$
-
-즉, Rao(Score) 검정은 일부 모수에 대한 귀무가설을 점수함수와 정보행렬의 블록 구조를 이용해 검정하며, 표본이 충분히 크면 자유도 $k_1$인 카이제곱 분포로 근사된다.
 
 (증명스케치는 교과서 참고)
 
@@ -885,7 +876,7 @@ $$S \ge \chi^2_\alpha(k_1)$$
 > **참고: 이원분류**  
 > - **이원분류(two-way classification)**: 두 범주형 변수(행 $r$개, 열 $c$개)에 따라 관측값을 분류
 > - **분할표(contingency table)**: 이원분류 결과를 $r \times c$ 표로 정리, 각 셀 $(i,j)$에 관측도수 $X_{ij}$ 기록
-> - **$X_{ij}$의 의미**: 행 $i$ 범주와 열 $j$ 범주에 모두 속하는 관측값의 개수
+> - **$X_{ij}$의 의미**: 행 $i$ 범주와 열 $j$ 범주에 모두 속하는 관측값의 개수  
 > 예를 들어, 두 가지 약물(A, B)의 효과(효과 있음/없음)를 조사한 결과가 다음과 같이 분할표로 정리되었다고 하자.
 > 
 > |           | 효과 있음 | 효과 없음 | 합계 |
@@ -904,38 +895,28 @@ $$S \ge \chi^2_\alpha(k_1)$$
 > - $E_{22} = \dfrac{50 \times 60}{100} = 30$
 > 
 > 피어슨 카이제곱 통계량:
-
-> $$\chi^2 = \frac{(30-20)^2}{20} + \frac{(20-30)^2}{30} + \frac{(10-20)^2}{20} + \frac{(40-30)^2}{30} = \frac{100}{20} + \frac{100}{30} + \frac{100}{20} + \frac{100}{30} = 5 + 3.33 + 5 + 3.33 = 16.66$$
-
+> $$\chi^2 = \frac{(30-20)^2}{20} + \frac{(20-30)^2}{30} + \frac{(10-20)^2}{20} + \frac{(40-30)^2}{30} \\ = \frac{100}{20} + \frac{100}{30} + \frac{100}{20} + \frac{100}{30} = 5 + 3.33 + 5 + 3.33 = 16.66$$
 > 
-> 자유도 $(2-1)(2-1)=1$, 유의수준 $\alpha=0.05$에서 임계값 $\chi^2_{0.05}(1) \approx 3.84$.
-> 
+> 자유도 $(2-1)(2-1)=1$, 유의수준 $\alpha=0.05$에서 임계값 $\chi^2_{0.05}(1) \approx 3.84$.  
 > 따라서 $16.66 > 3.84$이므로, 두 약물의 효과와 약물 종류는 독립이 아니라고 결론내린다.
 
-$$X = (X_{ij}) \sim \mathrm{Multi}(n, (p_{ij})), \qquad \sum_{i=1}^r \sum_{j=1}^c p_{ij} = 1,\quad p_{ij} > 0$$
+$$X = (X_{ij}) \sim \mathrm{Multi}(n, (p_{ij})), \quad \sum_{i=1}^r \sum_{j=1}^c p_{ij} = 1,\quad p_{ij} > 0$$
 
-**귀무가설**: 두 분류가 서로 독립이다.
-
-$$H_0: p_{ij} = p_{i\cdot} p_{\cdot j}$$
-
+**귀무가설**: 두 분류가 서로 독립이다. $H_0: p_{ij} = p_{i\cdot} p_{\cdot j}$
 - $p_{i\cdot} = \sum_{j=1}^c p_{ij}$ (행합 확률)
 - $p_{\cdot j} = \sum_{i=1}^r p_{ij}$ (열합 확률)
 
 **대립가설**: $H_1:$ $H_0$가 아니다 (즉, 독립이 아님).
 
 **풀이**
-1. **로그가능도함수**
+1. **로그가능도함수**: $l(p) = \sum_{i=1}^r \sum_{j=1}^c X_{ij} \log p_{ij}$
     
-    $$l(p) = \sum_{i=1}^r \sum_{j=1}^c X_{ij} \log p_{ij}$$
-    
-    2. **최대가능도추정값(MLE)**
+2. **최대가능도추정값(MLE)**
     - **전체 모수공간**: $\hat p_{ij} = \dfrac{X_{ij}}{n}$
-      - 왜 이렇게 되는지는 예6.3.6나 예7.3.2 참고
+        - 왜 이렇게 되는지는 예6.3.6나 예7.3.2 참고
     - **귀무가설 $H_0$ 하**: $p_{ij} = p_{i\cdot} p_{\cdot j}$ 형태이므로,
-      
-      $$\hat p_{i\cdot} = \frac{X_{i\cdot}}{n},\qquad \hat p_{\cdot j} = \frac{X_{\cdot j}}{n}$$
-      
-      $$\hat p_{ij}^{(0)} = \hat p_{i\cdot} \hat p_{\cdot j} = \frac{X_{i\cdot} X_{\cdot j}}{n^2}$$
+
+    $$\hat p_{i\cdot} = \frac{X_{i\cdot}}{n},\quad \hat p_{\cdot j} = \frac{X_{\cdot j}}{n}, \quad  \hat p_{ij}^{(0)} = \hat p_{i\cdot} \hat p_{\cdot j} = \frac{X_{i\cdot} X_{\cdot j}}{n^2}$$
 
 3. **최대가능도비 검정통계량**
     
@@ -974,9 +955,23 @@ $$\sum_{i=1}^r \sum_{j=1}^c \frac{(X_{ij} - E_{ij})^2}{E_{ij}} \ge \chi^2_\alpha
 >
 > 와 같이 나타내며, 여기서 $O_{ij} = X_{ij}$는 관측도수, $\hat E_{ij}^{(0)}$는 귀무가설 하에서의 기대도수를 의미한다. 이러한 검정을 분할표에서의 **카이제곱 검정**(chi-squared test)이라고 한다.
 
-### 일반적인 경우의 최대가능도를 이용한 추정, 검정
-서로 독립인 관측값 $X_1, \dots, X_n$에 대해, 적절한 정규성 조건이 만족되면 정리 7.3.1, 7.3.2와 유사하게 최대가능도비 검정통계량의 극한분포를 얻을 수 있다.
+한편, 귀무가설 하에 모수 $p^0 = (p_{i\cdot}^0p_{\cdot j}^0)$가 특정값으로 지정되었다면, 즉 $H_0(p^0): p_{ij} = p_{i\cdot}^0 p_{\cdot j}^0$인 경우에는, 예 7.3.2에서처럼 왈드, 라오 검정통계량은 모두
 
+$$W_n(p^0) = R_n(p^0) = \sum_{i=1}^r \sum_{j=1}^c \frac{(X_{ij} - n p_{i\cdot}^0 p_{\cdot j}^0)^2}{n p_{i\cdot}^0 p_{\cdot j}^0}$$
+
+그러므로 정리7.3.2에서 처럼 미지의 $p^0$를 귀무가설하에서의 추정값인 $\hat p^0$으로 대입하면 다음과 같은 검정통계량을 얻는다:
+
+$$W_n(\hat p^0) = R_n(\hat p^0) = \sum_{i=1}^r \sum_{j=1}^c \frac{(X_{ij} - n \hat p_{i\cdot}^0 \hat p_{\cdot j}^0)^2}{n \hat p_{i\cdot}^0 \hat p_{\cdot j}^0}$$
+
+이 경우 전체 모수공간과 귀무가설 하의 모수공간은 각각
+
+$$\Omega = \left\{(p_{ij}) \mid \sum_{i=1}^r \sum_{j=1}^c p_{ij} = 1, \, p_{ij} > 0 \right\}, \\ 
+\Omega_0 = \left\{p_{i\cdot} p_{\cdot j}\mid \, \sum_{i=1}^r p_{i\cdot} =1, \sum_{j=1}^c p_{\cdot j} = 1, \, p_{i\cdot} > 0, p_{\cdot j} > 0 \right\}$$
+
+이고 각각의 차원은 $k=rc-1, k_0 = (r-1) + (c-1)$이므로, 자유도는 $k-k_0 = (r-1)(c-1)$이 된다. 따라서 정리 7.3.2의 결과에 따라, 표본 크기가 충분히 크면 Wald, Rao 검정통계량 모두 자유도 $(r-1)(c-1)$의 카이제곱 분포로 근사된다.
+
+### 일반적인 경우의 최대가능도를 이용한 추정, 검정
+서로 독립인 관측값 $X_1, \dots, X_n$에 대해, 적절한 정규성 조건이 만족되면 정리 7.3.1, 7.3.2와 유사하게 최대가능도비 검정통계량의 극한분포를 얻을 수 있다.  
 이 경우에도 가능도 및 로그가능도 함수의 정의는 동일하며, 정보량 행렬은 다음과 같이 정의된다.
 
 $$I_n(\theta) = E_\theta\left[ -\frac{\partial^2}{\partial\theta^2} \sum_{i=1}^n \log f(X_i;\theta) \right], \qquad \bar{I}_n(\theta) = \frac{I_n(\theta)}{n}$$
@@ -984,67 +979,65 @@ $$I_n(\theta) = E_\theta\left[ -\frac{\partial^2}{\partial\theta^2} \sum_{i=1}^n
 귀무가설 $H_0: \theta = \theta_0$의 경우, 표본 크기가 충분히 크면 Wald 또는 Rao(Score) 검정통계량을 다음과 같이 쓸 수 있다.
 - **Wald 검정통계량**:
     
-    $$W_n(\theta_0) = n\, (\hat\theta_n - \theta_0)^T\, \bar{I}_n(\theta_0)\, (\hat\theta_n - \theta_0)$$
+    $$W_n(\theta_0) = n\, (\hat\theta_n^{\Omega} - \theta_0)^T\, \bar{I}_n(\theta_0)\, (\hat\theta_n^{\Omega} - \theta_0)$$
 
 - **Rao(Score) 검정통계량**:
     
     $$R_n(\theta_0) = n\, \bar{l}'(\theta_0)^T\, [\bar{I}_n(\theta_0)]^{-1}\, \bar{l}'(\theta_0)$$
 
-    여기서 $\hat\theta_n$은 전체 모수공간에서의 최대가능도추정량, $\bar{l}'(\theta_0)$는 평균 점수함수이다.
+    여기서 $\hat\theta_n^{\Omega}$은 전체 모수공간에서의 최대가능도추정량, $\bar{l}'(\theta_0)$는 평균 점수함수이다.
 
 일반적인 귀무가설(예: 일부 모수만 고정된 경우)에서는, 미지의 $\theta_0$ 대신 귀무가설 하에서의 최대가능도추정값 $\hat\theta_n^{(0)}$를 사용하여 검정통계량을 구성한다. 이때도 정리 7.3.2와 같이 근사적으로 $\chi^2$ 분포를 이용한 검정이 가능하다.
 
 #### 예 7.3.4 분할표에서의 동일성 검정
 $r$개의 집단에서 각각 독립적인 다항분포 랜덤벡터 $X_i = (X_{i1}, \dots, X_{ic})^t \sim \mathrm{Multi}(n_i, p_i)$ $(i=1,\dots,r)$를 관측한다고 하자. 각 집단의 확률벡터는 $p_i = (p_{i1}, \dots, p_{ic})^t$이며, $\sum_{j=1}^c p_{ij} = 1$, $p_{ij} > 0$이다. 전체 표본 크기는 $n = n_1 + \cdots + n_r$이다.
 
-(TODO: 교재 풀이 나중에 참고)
-
 **귀무가설**: $H_0: p_1 = \cdots = p_r$ (모든 집단의 분포가 동일)  
 **대립가설**: $H_1:$ $H_0$가 아님
 
-**1. 로그가능도함수**  
-관측값 $x_{ij}$에 대해, 로그가능도함수(상수 제외)는  
+**1. 최대가능도비 검정통계량**  
 
-$$l(p) = \sum_{i=1}^r \sum_{j=1}^c x_{ij} \log p_{ij}$$
+$$2\{l(\hat p) - l(\hat p^0)\}
+= 2 \sum_{i=1}^r \sum_{j=1}^c x_{ij} \log \left( \frac{\hat p_{ij}}{\hat p_j^0} \right )
+= 2 \sum_{i=1}^r \sum_{j=1}^c x_{ij} \log \left( \frac{x_{ij}}{n_i \hat p_j^0} \right ) \\
+\hat p_{1j}^0=\cdots = \hat p_{rj}^0 = \hat p_j^0 = \frac{x_{\cdot j}}{n} = \sum_{i=1}^r \frac{X_{ij}}{n}
+$$
 
+**2. 왈드, 라오 검정통계량**
 
-**2. 최대가능도추정값**  
+$$W_n(\hat p^0) = R_n(\hat p^0)  = \sum_{i=1}^r \sum_{j=1}^c \frac{(X_{ij} - n_i \hat p_j^0)^2}{n_i \hat p_j^0}$$
 
-- **(1) 전체 모수공간**: 각 집단별로 $\sum_{j=1}^c p_{ij} = 1$ 제약 하에서  
-    
-    $$\hat p_{ij} = \frac{x_{ij}}{n_i}$$
+$$ n_i \to \infty \text{ for all } i=1,\dots,r \implies \gamma_i (0 < \gamma_i < 1) \text{ such that } \frac{n_i}{n} \to \gamma_i$$
 
-- **(2) 귀무가설 $H_0$ 하**: 모든 집단이 동일한 확률벡터 $p$를 가짐  
-    
-    $$\hat p_j^{(0)} = \frac{x_{\cdot j}}{n}, \qquad x_{\cdot j} = \sum_{i=1}^r x_{ij}$$
+- $2\{l(\hat p) - l(\hat p^0)\}$:  
+$$l(\theta) = \sum_{i=1}^r \sum_{j=1}^c x_{ij} \log p_{ij} \\
+\hat p_i= \left(\frac{X_{i1}}{n_i}, \dots, \frac{X_{ic}}{n_i}\right)^t, \\ 
+\hat p_1^0 = \cdots = \hat p_r^0 = \hat p^0 = \left(\frac{x_{\cdot 1}}{n}, \dots, \frac{x_{\cdot c}}{n}\right)^t = \frac{(x_1 + \cdots + x_r)}{n}$$
 
-**3. 최대가능도비 검정통계량**  
+- $2\{l(\hat p) - l(\hat p^0)\}$의 근사:  
 
-$$2\{l(\hat p) - l(\hat p^{(0)})\}
-= 2 \sum_{i=1}^r \sum_{j=1}^c x_{ij} \log \left( \frac{\hat p_{ij}}{\hat p_j^{(0)}} \right )
-= 2 \sum_{i=1}^r \sum_{j=1}^c x_{ij} \log \left( \frac{x_{ij}}{n_i \hat p_j^{(0)}} \right )$$
+$$2\{l(\hat p) - l(\hat p^0)\} = 2\sum_{i=1}^r \sum_{j=1}^c n_i\hat p_{ij} \log \left( \frac{\hat p_{ij}}{\hat p_j^0} \right ) \\
+\simeq \sum_{i=1}^r \sum_{j=1}^c n_i \hat p_{ij}^0 \left( \frac{\hat p_{ij} - \hat p_j^0}{\hat p_j^0} + \frac{1}{2} \left( \frac{\hat p_{ij} - \hat p_j^0}{\hat p_j^0} \right )^2 \right ) \\
+= \sum_{i=1}^r \sum_{j=1}^c \frac{(O_{ij} - \hat E_{ij}^0)^2}{\hat E_{ij}^0} \\
+O_{ij} = X_{ij}, \quad \hat E_{ij}^0 = n_i \hat p_{ij}^0 = n_i \sum_i x_{ij}/n$$
 
+- $H_0 = p_1 = \cdots = p_r \equiv p^0$하에서의 분포 근사: 귀무가설하에서 $\hat p_i^0 \simeq p^0$이므로, 
 
-**4. 카이제곱 근사 (피어슨 형태)**  
-표본이 충분히 크면 $\log(1+u) \approx u - \frac{1}{2}u^2$ 근사로 인해  
+$$\sum_{i=1}^r \sum_{j=1}^c \frac{(O_{ij} - \hat E_{ij}^0)^2}{\hat E_{ij}^0} = \sum_{i=1}^r \sum_{j=1}^c n_i\frac{(\hat p_{ij} - \hat p_{ij}^0)^2}{\hat p_{ij}^0} \\
+\simeq \sum_{i=1}^r \sum_{j=1}^c n_i\frac{(\hat p_{ij} - \hat p_{ij}^0)^2}{p_{ij}^0} = \sum_{i=1}^r n_i(\hat \theta_i - \hat \theta^0_i)^T \Sigma_0^{-1} (\hat \theta_i - \hat \theta^0_i) $$
 
-$$2\{l(\hat p) - l(\hat p^{(0)})\} \approx \sum_{i=1}^r \sum_{j=1}^c \frac{(O_{ij} - E_{ij}^{(0)})^2}{E_{ij}^{(0)}}$$
+여기서 $\hat \theta_i, \hat \theta_i^0$는 각각 $\hat p_i, \hat p_i^0$에서 마지막 성분을 제외한 벡터, $\Sigma_0 = diag(p^0) - p^0 (p^0)^T, \quad \theta^0 = (p_1^0, \dots, p_{c-1}^0)^T$는 $p^0$에 대한 공분산행렬의 마지막 행과 열을 제거한 $(c-1)\times (c-1)$ 행렬이다.
 
-여기서  
-- $O_{ij} = x_{ij}$ (관측도수)
-- $E_{ij}^{(0)} = n_i \hat p_j^{(0)} = n_i \frac{x_{\cdot j}}{n}$ (기대도수)
+이제 $Z_i = \Sigma_0^{-1/2}\sqrt{n_i}(\hat \theta_i - \theta^0)$라 하면, $Z_i$는 서로 독립이고 귀무가설하에서 표준정규분포를 따르므로, 
 
-**5. 자유도와 기각역**  
-- 전체 모수공간 자유도: $k = r(c-1)$
-- 귀무가설 하 자유도: $k_0 = c-1$
-- 차이: $(r-1)(c-1)$
+$$ Z_i \sim N_{c-1}(0, I) \\
+\hat \theta_i^0 - \theta^0 = \sum_{l=1}^r \frac{n_l}{n} (\hat \theta_l - \theta^0) = \sum_{l=1}^r \sqrt{n_l}\Sigma_0^{1/2} Z_l / n \\ 
+\therefore \Sigma_0^{-1/2} (\hat \theta_i^0 - \theta^0) = \sum_{l=1}^r \sqrt{n_l} Z_l / n$$
 
-따라서,  
-- 검정통계량 $2\{l(\hat p) - l(\hat p^{(0)})\}$는 $H_0$ 하에서 자유도 $(r-1)(c-1)$인 $\chi^2$ 분포로 근사
-- 유의수준 $\alpha$에서의 기각역:
-    
-    $$2\{l(\hat p) - l(\hat p^{(0)})\} \ge \chi^2_\alpha((r-1)(c-1))$$
+이때, $ A\otimes B = (a_{ij}B)_{i,j}$로 정의되는 텐서곱으로 멱등행렬 $I_r \otimes I_d - w(w^\top w)^{-1}w^\top \otimes I_d$를 사용하면
 
-    또는
-    
-    $$\sum_{i=1}^r \sum_{j=1}^c \frac{(O_{ij} - E_{ij}^{(0)})^2}{E_{ij}^{(0)}} \ge \chi^2_\alpha((r-1)(c-1))$$
+$$ \sum_{i=1}^r n_i(\hat \theta_i - \hat \theta_i^0)^T \Sigma_0^{-1} (\hat \theta_i - \hat \theta_i^0) = Z^T (I_r \otimes I_d - w(w^\top w)^{-1}w^\top \otimes I_d) Z$$
+
+여기서 $w = (n_1^{1/2}, \dots, n_r^{1/2})^T$이고, $Z = (Z_1^T, \dots, Z_r^T)^T$이다.
+
+그런데 $(Z_1^\top, \dots, Z_r^\top)^\top \sim N_{r(c-1)}(0, I)$이므로, $Z^T (I_r \otimes I_d - w(w^\top w)^{-1}w^\top \otimes I_d) Z$는 자유도 $rd-d = (r-1)(c-1)$의 카이제곱 분포로 근사된다.

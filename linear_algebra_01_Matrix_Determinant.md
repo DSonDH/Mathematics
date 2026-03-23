@@ -1366,24 +1366,60 @@ $$P_X = X(X^T X)^{-1}X^T$$
 
 **Step 1**: 정사영의 정의
 
-$$\hat{y} \in \text{Col}(X), \quad (y - \hat{y}) \perp 
-\text{Col}(X)$$
+벡터 $y \in \mathbb{R}^m$을 $X$의 열공간 $\text{Col}(X)$에 정사영하면:
+
+$$\hat{y} \in \text{Col}(X), \quad (y - \hat{y}) \perp \text{Col}(X)$$
+
+기하학적으로 $\hat{y}$는 $y$에서 $\text{Col}(X)$로의 최단거리 점이다.
 
 **Step 2**: 선형결합 표현 및 직교 조건
 
-$$\hat{y} = X\beta \\ X^T(y - X\beta) = 0$$
+$\hat{y} \in \text{Col}(X)$이므로 어떤 계수벡터 $\beta$가 존재하여:
 
-- $\beta$: 열 최대계수 행렬 $X$의 열벡터들의 선형결합 계수 벡터
+$$\hat{y} = X\beta$$
+
+정사영의 필수조건은 잔차 $y - \hat{y}$가 $\text{Col}(X)$에 직교해야 한다는 것이다. 즉, 모든 $\text{Col}(X)$의 벡터는 $X$의 열벡터들의 선형결합이므로:
+
+$$X^T(y - \hat{y}) = 0 \\
+X^T(y - X\beta) = 0$$
 
 **Step 3**: 정규방정식 풀이
 
-$$X^TXβ = X^Ty \\
-\beta = (X^TX)^{-1}X^Ty \quad (\text{단, } X \text{는 
-열최대계수})$$
+위 식을 전개하면:
+
+$$X^Ty - X^TX\beta = 0 \\
+X^TX\beta = X^Ty$$
+
+$X$가 열 최대계수 행렬이면 $X^TX$는 $p \times p$ 정칙행렬이므로 $(X^TX)^{-1}$이 존재한다. 따라서:
+
+$$\beta = (X^TX)^{-1}X^Ty$$
 
 **Step 4**: 정사영행렬 도출
 
-$$\hat{y} = X(X^TX)^{-1}X^Ty \\ \therefore P_X = X(X^TX)^{-1}X^T$$
+정사영 벡터를 $\beta$ 형태로 표현하면:
+
+$$\hat{y} = X\beta = X(X^TX)^{-1}X^Ty$$
+
+정사영행렬은 이 변환을 나타내므로:
+
+$$P_X = X(X^TX)^{-1}X^T$$
+
+**Step 5**: 정사영행렬의 성질 검증
+
+**멱등성**:
+$$P_X^2 = X(X^TX)^{-1}X^T \cdot X(X^TX)^{-1}X^T = X(X^TX)^{-1}(X^TX)(X^TX)^{-1}X^T = X(X^TX)^{-1}X^T = P_X$$
+
+**대칭성**:
+$$P_X^T = [X(X^TX)^{-1}X^T]^T = X[(X^TX)^{-1}]^TX^T = X(X^TX)^{-1}X^T = P_X$$
+
+이는 $X^T$와 $(X^TX)^{-1}$이 모두 대칭이기 때문이다.
+
+**Step 6**: 기하학적 해석
+
+- 모든 $x \in \text{Col}(X)$에 대해: $P_X x = x$ (이미 부분공간에 있으면 불변)
+- 모든 $y$에 대해: $P_X y \in \text{Col}(X)$ (사영은 항상 열공간에 속함)
+- 잔차: $(I - P_X)y \perp \text{Col}(X)$ (직교 성분 보존)
+- 직합 분해: $y = P_X y \oplus (I - P_X)y$
 
 ### 증명: 정사영행렬이 열벡터공간으로의 정사영을 수행함
 >$\Pi = X(X^TX)^{-1}X^T$가 $X$의 열벡터공간 $\text{Col}(X)$로의 정사영행렬임을 보이기 위해서는 다음 두 가지를 증명해야 한다:

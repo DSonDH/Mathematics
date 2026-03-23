@@ -720,8 +720,7 @@ $$\hat\mu = \bar x = \frac{1}{n}\sum_{i=1}^n x_i$$
 
 에서 최대가 된다.
 
-(2) $\sigma^2$에 대한 최대화:
-
+(2) $\sigma^2$에 대한 최대화:  
 $\mu = \hat\mu$로 고정하고 $\sigma^2$에 대해 미분하면,
 
 $$\frac{\partial}{\partial\sigma^2}l(\hat\mu,\sigma^2) = -\frac{1}{2(\sigma^2)^2}\sum_{i=1}^n (x_i-\bar x)^2 - \frac{n}{2\sigma^2}$$
@@ -1110,17 +1109,11 @@ $$
 
 - 극한분포:  
 
-$$
-\sqrt{n}(\bar X - \mu) \sim N(0, \sigma^2) \text{  (표본크기 관계없음, 정리6.1.1)}
-$$
+$$\sqrt{n}(\bar X - \mu) \sim N(0, \sigma^2) \text{  (표본크기 관계없음, 정리6.1.1)}$$
 
-$$
-\frac{n\hat\sigma_n^{2,\mathrm{MLE}}}{\sigma^2} \sim \chi^2(n-1) \text{  (표본크기 관계없음, 정리4.2.2)}
-$$
+$$\frac{n\hat\sigma_n^{2,\mathrm{MLE}}}{\sigma^2} \sim \chi^2(n-1) \text{  (표본크기 관계없음, 정리4.2.2)}$$
 
-$$
-\sqrt{n}(\hat\sigma_n^{2,\mathrm{MLE}} - \sigma^2) \xrightarrow{d} N(0, 2\sigma^4)
-$$
+$$\sqrt{n}(\hat\sigma_n^{2,\mathrm{MLE}} - \sigma^2) \xrightarrow{d} N(0, 2\sigma^4)$$
 
 **(e) 이변량 정규분포 $N(\mu_1, \mu_2; \sigma_1^2, \sigma_2^2, \rho)$**  
 

@@ -12,31 +12,23 @@
 #### 예 4.1.1
 (a) 공정의 불량률에 대한 통계 조사의 경우에 모집단분포는 베르누이분포 $Bernoulli(p)$로 나타낼 수 있고, 불량률 $p$가 모수이고 미지인 불량률의 집합
 
-$$
-\Omega=\{p:0\le p\le 1\}
-$$
+$$\Omega=\{p:0\le p\le 1\}$$
 
 가 모수공간이다.
 
 (b) 하천의 오염도를 조사할 때 하천 물의 단위 부피당 부유생물의 수에 대한 모형으로 포아송분포 $Poisson(\lambda)$ 를 설정한다면, 평균 부유생물의 수 $\lambda$가 모수이고 미지인 $\lambda$의 집합
 
-$$
-\Omega=\{\lambda:\lambda\ge 0\}
-$$
+$$\Omega=\{\lambda:\lambda\ge 0\}$$
 
 가 모수공간이다.
 
 (c) 많은 과학 실험에서 오차의 분포에 대한 모형으로 정규분포 Normal $N(\mu,\sigma^2)$를 모형으로 설정한다. 이 경우에는 평균과 분산을 나타내는
 
-$$
-\theta=(\mu,\sigma^2)
-$$
+$$\theta=(\mu,\sigma^2)$$
 
 가 모수이고, 미지의 평균과 분산의 집합
 
-$$
-\Omega=\{(\mu,\sigma^2):-\infty<\mu<+\infty,\ \sigma^2>0\}
-$$
+$$\Omega=\{(\mu,\sigma^2):-\infty<\mu<+\infty,\ \sigma^2>0\}$$
 
 가 모수공간이다.
 
@@ -46,9 +38,7 @@ $$
 
 모집단 분포가 확률밀도함수 $f(x;\theta)$, $\theta\in\Omega$인 모집단에서의 랜덤표본 $X_1,X_2,\dots,X_n$이란
 
-$$
-X_1,X_2,\dots,X_n \overset{iid}{\sim} f(x;\theta),\quad \theta\in\Omega
-$$
+$$X_1,X_2,\dots,X_n \overset{iid}{\sim} f(x;\theta),\quad \theta\in\Omega$$
 
 를 뜻하고, 통계량 $u(X_1,X_2,\dots,X_n)$이란 랜덤표본의 함수로서 랜덤표본의 값이 주어지면 그 값이 정해지는 함수를 뜻한다.
 
@@ -64,18 +54,13 @@ $$
 
 (b) 랜덤표본 $X_1,X_2,\dots,X_n$의 함수로서
 
-$$
-\bar X=\frac1n(X_1+X_2+\cdots+X_n),\qquad
-S^2=\frac1{n-1}\sum_{i=1}^n(X_i-\bar X)^2
-$$
+$$\bar X=\frac1n(X_1+X_2+\cdots+X_n),\quad S^2=\frac1{n-1}\sum_{i=1}^n(X_i-\bar X)^2$$
 
 를 각각 표본평균(sample mean), 표본분산(sample variance)이라고 하며, 모평균과 모분산의 추측에 사용되는 통계량이다.
 
 (c) 모집단 분포가 연속형인 경우에 이 모집단에서의 랜덤표본 $X_1,X_2,\dots,X_n$을 크기 순서로 늘어놓은 것을
 
-$$
-X_{(1)}<X_{(2)}<\cdots<X_{(n)}
-$$
+$$X_{(1)}<X_{(2)}<\cdots<X_{(n)}$$
 
 이라고 할 때 이를 **순서통계량(order statistics)** 이라고 한다. 또한 이들 크기의 가운데를 나타내는 통계량
 
@@ -95,43 +80,31 @@ $$
 
 (a) 불량률 $p$를 모수로 하는 베르누이분포 $Bernoulli(p)$ 에서의 랜덤표본을 $X_1,X_2,\dots,X_n$이라고 할 때, 표본 중 불량품의 개수인 $X_1+\cdots+X_n$은 이항분포 $Bin(n,p)$를 갖는다. 따라서 표본비율 $\hat p=\frac{X_1+\cdots+X_n}{n}$은
 
-$$
-P(\hat p=k/n)=\binom nk p^k(1-p)^{n-k},\quad k=0,1,\dots,n
-$$
+$$P(\hat p=k/n)=\binom nk p^k(1-p)^{n-k},\quad k=0,1,\dots,n$$
 
 으로 주어지는 분포를 가지며 그 평균과 분산은 각각
 
-$$
-E(\hat p)=p,\qquad \text{Var}(\hat p)=\frac{p(1-p)}{n}
-$$
+$$E(\hat p)=p,\qquad \text{Var}(\hat p)=\frac{p(1-p)}{n}$$
 
 즉 표본비율 $\hat p$는 표본크기가 커짐에 따라 모비율 $p$ 주위에 집중되는 분포를 갖는다.
 
 (b) 단위 부피당 평균 부유생물의 수가 $\lambda$인 포아송분포 $Poisson(\lambda)$에서의 랜덤표본을 $X_1,X_2,\dots,X_n$이라고 할 때, 정리 3.4.1로부터 표본 중 부유생물의 합계 $X_1+\cdots+X_n$은 포아송분포 $Poisson(n\lambda)$를 갖는다. 따라서 표본평균 $\bar X$는
 
-$$
-P(\bar X=k/n)=e^{-n\lambda}\frac{(n\lambda)^k}{k!},\quad k=0,1,\dots
-$$
+$$P(\bar X=k/n)=e^{-n\lambda}\frac{(n\lambda)^k}{k!},\quad k=0,1,\dots$$
 
 으로 주어지는 분포를 가지며
 
-$$
-E(\bar X)=\lambda,\qquad \text{Var}(\bar X)=\frac{\lambda}{n}
-$$
+$$E(\bar X)=\lambda,\qquad \text{Var}(\bar X)=\frac{\lambda}{n}$$
 
 즉 표본평균 $\bar X$는 표본크기가 커짐에 따라 모평균 $\lambda$ 주위에 집중되는 분포를 갖는다.
 
 이제 랜덤표본의 함수인 통계량의 분포를 일반적인 경우에 구하는 방법을 알아보자. 일반적으로 확률변수
 
-$$
-\mathbf{X}=(X_1,\dots,X_n)^T
-$$
+$$\mathbf{X}=(X_1,\dots,X_n)^T$$
 
 의 분포로부터 $\mathbf{X}$의 함수인
 
-$$
-Y=u(\mathbf{X})
-$$
+$$Y=u(\mathbf{X})$$
 
 의 분포를 구하려면, $Y$에 관한 확률을 대응하는 $\mathbf{X}$에 관한 확률로 바꾸어 계산해야 한다.
 
@@ -157,15 +130,11 @@ $$
 #### 예 4.1.4
 (a) 서로 독립이고 각각 이항분포 $Bin(n_1,p)$, $Bin(n_2,p)$를 따르는 확률변수 $X_1,X_2$에 대하여 $Y=X_1+X_2$의 확률밀도함수는
 
-$$
-Y\sim \text{Bin}(n_1+n_2,p)
-$$
+$$Y\sim \text{Bin}(n_1+n_2,p)$$
 
 (b) 서로 독립이고 각각 포아송분포 $Poisson(\lambda_1)$, $Poisson(\lambda_2)$를 따르는 확률변수 $X_1,X_2$에 대하여
 
-$$
-Y=X_1+X_2\sim \text{Poisson}(\lambda_1+\lambda_2)
-$$
+$$Y=X_1+X_2\sim \text{Poisson}(\lambda_1+\lambda_2)$$
 
 (c) 표준정규분포를 따르는 확률변수 $X$에 대하여 $Y=X^2$이면
 
@@ -176,42 +145,30 @@ $$
 #### (c) 증명
 $Y = X^2$이므로 $y > 0$에 대하여
 
-$$
-F_Y(y) = P(Y \le y) = P(X^2 \le y) = P(-\sqrt{y} \le X \le \sqrt{y})
-$$
+$$F_Y(y) = P(Y \le y) = P(X^2 \le y) = P(-\sqrt{y} \le X \le \sqrt{y})$$
 
 확률밀도함수를 구하기 위해 미분하면
 
-$$
-f_Y(y) = \frac{d}{dy}F_Y(y) = f_X(\sqrt{y})\cdot\frac{1}{2\sqrt{y}} + f_X(-\sqrt{y})\cdot\frac{1}{2\sqrt{y}}
-$$
+$$f_Y(y) = \frac{d}{dy}F_Y(y) = f_X(\sqrt{y})\cdot\frac{1}{2\sqrt{y}} + f_X(-\sqrt{y})\cdot\frac{1}{2\sqrt{y}}$$
 
 $X \sim N(0,1)$이므로 $f_X(x) = \frac{1}{\sqrt{2\pi}}e^{-x^2/2}$이고, 대칭성에 의해 $f_X(\sqrt{y}) = f_X(-\sqrt{y})$이므로
 
-$$
-f_Y(y) = 2 \cdot \frac{1}{\sqrt{2\pi}}e^{-y/2} \cdot \frac{1}{2\sqrt{y}} = \frac{1}{\sqrt{2\pi y}}e^{-y/2}, \quad y > 0
-$$
+$$f_Y(y) = 2 \cdot \frac{1}{\sqrt{2\pi}}e^{-y/2} \cdot \frac{1}{2\sqrt{y}} = \frac{1}{\sqrt{2\pi y}}e^{-y/2}, \quad y > 0$$
 
 이는 $Gamma\left(\frac{1}{2}, 2\right)$의 확률밀도함수
 
-$$
-f(y) = \frac{1}{\Gamma(1/2) \cdot 2^{1/2}}y^{-1/2}e^{-y/2} = \frac{1}{\sqrt{2\pi y}}e^{-y/2}
-$$
+$$f(y) = \frac{1}{\Gamma(1/2) \cdot 2^{1/2}}y^{-1/2}e^{-y/2} = \frac{1}{\sqrt{2\pi y}}e^{-y/2}$$
 
 와 일치한다. (단, $\Gamma(1/2) = \sqrt{\pi}$)
 
 ### 정리 4.1.1 (연속형 변수의 일대일 변환과 확률밀도함수)
 연속형 $k$차원 확률변수
 
-$$
-\mathbf{X}=(X_1,\dots,X_k)^T
-$$
+$$\mathbf{X}=(X_1,\dots,X_k)^T$$
 
 와 함수
 
-$$
-\mathbf{u}=(u_1,\dots,u_k)^T:\mathcal X\to\mathcal Y
-$$
+$$\mathbf{u}=(u_1,\dots,u_k)^T:\mathcal X\to\mathcal Y$$
 
 에 대하여 다음이 성립한다고 하자.
 
@@ -221,15 +178,11 @@ $$
 
 (c) $\mathcal X$는 열린집합이고 $\mathbf{u}$는 미분 가능하며 야코비안
 
-$$
-J_\mathbf{u}(\mathbf{x})=\det\left(\frac{\partial \mathbf{y}}{\partial \mathbf{x}}\right)\neq0
-$$
+$$J_\mathbf{u}(\mathbf{x})=\det\left(\frac{\partial \mathbf{y}}{\partial \mathbf{x}}\right)\neq0$$
 
 이때 $Y=\mathbf{u}(\mathbf{X})$의 확률밀도함수는
 
-$$
-\text{pdf}_Y(\mathbf{y})=\text{pdf}_X(\mathbf{x})\left|\det\left(\frac{\partial \mathbf{y}}{\partial \mathbf{x}}\right)\right|^{-1}
-$$
+$$\text{pdf}_Y(\mathbf{y})=\text{pdf}_X(\mathbf{x})\left|\det\left(\frac{\partial \mathbf{y}}{\partial \mathbf{x}}\right)\right|^{-1}$$
 
 #### 증명
 치환적분법으로부터
@@ -270,20 +223,13 @@ $$
 위치모수와 척도모수를 이용한 확률분포
 연속형 확률변수 $Z$의 확률밀도함수가 $f(z)$일 때, 양수 $\sigma$와 실수 $\mu$에 대하여
 
-$$
-X=\sigma Z+\mu
-$$
+$$X=\sigma Z+\mu$$
 
 로 정의된 확률변수 $X$의 확률밀도함수는
 
-$$
-\text{pdf}_X(x)
-= f(z)\left|\frac{dx}{dz}\right|^{-1},\quad x=\sigma z+\mu
-$$
-
-$$
-=\frac{1}{\sigma}f\left(\frac{x-\mu}{\sigma}\right)
-$$
+$$\text{pdf}_X(x)
+= f(z)\left|\frac{dx}{dz}\right|^{-1},\quad x=\sigma z+\mu \\
+=\frac{1}{\sigma}f\left(\frac{x-\mu}{\sigma}\right)$$
 
 로 주어진다. 이러한 꼴의 확률밀도함수에서 $\mu$와 $\sigma$를 각각 **위치모수**(location parameter)와 **척도모수**(scale parameter)라고 한다.
 
@@ -372,18 +318,14 @@ $$
 #### 예 4.1.6
 서로 독립이고 각각 감마분포 $Gamma(\alpha_1,\beta)$, $Gamma(\alpha_2,\beta)$를 따르는 확률변수 $X_1,X_2$에 대하여
 
-$$
-Y_1=\frac{X_1}{X_1+X_2},\quad Y_2=X_1+X_2
-$$
+$$Y_1=\frac{X_1}{X_1+X_2},\quad Y_2=X_1+X_2$$
 
 일 때 $Y_1,Y_2$의 결합확률밀도함수와 주변확률밀도함수는?
 
 **풀이**
 $y_1 = \frac{x_1}{x_1+x_2}, \quad y_2 = x_1+x_2$ 역변환을 구하면
 
-$$
-x_1 = y_1 y_2, \quad x_2 = (1-y_1)y_2
-$$
+$$x_1 = y_1 y_2, \quad x_2 = (1-y_1)y_2$$
 
 야코비안을 계산하면
 
@@ -2741,17 +2683,13 @@ $$
 
 $X\sim N_k(\mu,\Sigma)$이고 $\Sigma$가 정칙행렬이면
 
-$$
-(X-\mu)^T\Sigma^{-1}(X-\mu)\sim\chi^2(k)
-$$
+$$(X-\mu)^T\Sigma^{-1}(X-\mu)\sim\chi^2(k)$$
 
 **(b) 멱등행렬과 이차형식**
 
 $Z\sim N_n(0,I)$이고 $A$가 대칭 멱등행렬(symmetric idempotent matrix), 즉 $A^2=A$, $A^T=A$이면
 
-$$
-Z^TAZ\sim\chi^2(r),\quad r=\text{trace}(A)
-$$
+$$Z^TAZ\sim\chi^2(r),\quad r=\text{trace}(A)$$
 
 **각주**
 
@@ -2775,22 +2713,16 @@ $$
 
 $Z_i\overset{iid}{\sim} N(0,1)$이므로 카이제곱분포의 정의에 의해
 
-$$
-Z^TZ=\sum_{i=1}^k Z_i^2\sim\chi^2(k)
-$$
+$$Z^TZ=\sum_{i=1}^k Z_i^2\sim\chi^2(k)$$
 
 TODO:  
 **(b)** $A$가 대칭 멱등행렬이므로 스펙트럴 분해(spectral decomposition)를 이용하면
 
-$$
-A=P\Lambda P^T
-$$
+$$A=P\Lambda P^T$$
 
 여기서 $P$는 직교행렬($P^TP=PP^T=I$), $\Lambda=\text{diag}(\lambda_1,\ldots,\lambda_n)$는 고유값 대각행렬이다.
 
-$$
-P\Lambda P^TP\Lambda P^T=P\Lambda^2P^T=P\Lambda P^T
-$$
+$$P\Lambda P^TP\Lambda P^T=P\Lambda^2P^T=P\Lambda P^T$$
 
 양변에 $P^T$를 왼쪽에서, $P$를 오른쪽에서 곱하면 $\Lambda^2=\Lambda$를 얻는다. 따라서 모든 고유값 $\lambda_i$는 $\lambda_i^2=\lambda_i$를 만족하므로 $\lambda_i\in\{0,1\}$이다.
 
