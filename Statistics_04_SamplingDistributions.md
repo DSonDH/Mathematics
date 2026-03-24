@@ -3218,6 +3218,7 @@ $$(X-\mu)^T\Sigma^{-1}(X-\mu) \sim \chi^2(n)$$
 ## 대표적 표본분포 정리 
 | 분포 (Distribution) | 대의적 정의 및 확률밀도함수 | 평균 | 분산 |
 |:---|:---|:---|:---|
+| **균등분포**<br>*(Uniform distribution)*<br>$X\sim U(a,b)$<br>구간 $(a,b)$에서의 균등한 확률분포 | **확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{1}{b-a}I_{(a,b)}(x)$ | $E(X)=\frac{a+b}{2}$ | $\text{Var}(X)=\frac{(b-a)^2}{12}$ |
 | **카이제곱분포**<br>*(Chi-squared distribution)*<br>$X\sim\chi^2(r)$<br>정규오차의 에너지(제곱 크기) | **대의적 정의:** $X\overset{d}{\equiv}\sum_{i=1}^r Z_i^2,\quad Z_i\overset{iid}{\sim} N(0,1)$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{1}{\Gamma(r/2)2^{r/2}}x^{r/2-1}e^{-x/2}I_{(0,\infty)}(x)$ | $E(X)=r$ | $\text{Var}(X)=2r$ |
 | **t 분포**<br>*(Student's t distribution)*<br>$X\sim t(r)$<br>분산을 모르고 평균을 표준화했을 때의 불확실성 | **대의적 정의:** $X\overset{d}{\equiv}\frac{Z}{\sqrt{V/r}},\quad Z\sim N(0,1),\ V\sim\chi^2(r),\ Z\perp V$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma((r+1)/2)}{\sqrt{\pi r}\Gamma(r/2)}\left(1+\frac{x^2}{r}\right)^{-(r+1)/2}$ | $E(X)=0$ $(r>1)$ | $\text{Var}(X)=\frac{r}{r-2}$ $(r>2)$ |
 | **F 분포**<br>*(F distribution)*<br>$X\sim F(r_1,r_2)$<br>두 변동성의 상대적 크기 비교 | **대의적 정의:** $X\overset{d}{\equiv}\frac{V_1/r_1}{V_2/r_2},\quad V_1\sim\chi^2(r_1),\ V_2\sim\chi^2(r_2),\ V_1\perp V_2$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma((r_1+r_2)/2)}{\Gamma(r_1/2)\Gamma(r_2/2)}\left(\frac{r_1}{r_2}\right)^{r_1/2}\frac{x^{r_1/2-1}}{(1+r_1x/r_2)^{(r_1+r_2)/2}}I_{(0,\infty)}(x)$ | $E(X)=\frac{r_2}{r_2-2}$ $(r_2>2)$ | $\text{Var}(X)=\frac{2r_2^2(r_1+r_2-2)}{r_1(r_2-2)^2(r_2-4)}$ $(r_2>4)$ |

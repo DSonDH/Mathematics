@@ -1029,37 +1029,27 @@ $$
 (a)  
 a, b는 확률변수가 아닌 상수일 때
 
-$$
-\mathrm{Var}(aX+b)=a^2\mathrm{Var}(X)
-$$
+$$\mathrm{Var}(aX+b)=a^2\mathrm{Var}(X)$$
 
 (b)
 
-$$
-\mathrm{Var}(X)=E(X^2)-{E(X)}^2
-$$
+$$\mathrm{Var}(X)=E(X^2)-{E(X)}^2$$
 
 #### 예 1.4.5 확률변수의 표준화
 평균이 $\mu$, 표준편차가 $\sigma>0$일 때
 
-$$
-Z=\frac{X-E(X)}{\sqrt{\mathrm{Var}(X)}}=\frac{X-\mu}{\sigma}
-$$
+$$Z=\frac{X-E(X)}{\sqrt{\mathrm{Var}(X)}}=\frac{X-\mu}{\sigma}$$
 
 라 하면
 
-$$
-E(Z)=0,\quad \mathrm{Var}(Z)=1
-$$
+$$E(Z)=0,\quad \mathrm{Var}(Z)=1$$
 
 이때 $Z$를 $X$를 **표준화한 확률변수**라 한다.  
 
 TODO:
 한편 다음과 같은 확률분포를 갖는 확률변수에 대해서는 평균이나 분산이 실수로 정의되지 않을 수 있다.
 
-$$
-f(k)=P(X=k)=\frac1{k(k+1)},\quad k=1,2,\ldots
-$$
+$$f(k)=P(X=k)=\frac1{k(k+1)},\quad k=1,2,\ldots$$
 
 절대수렴하는, **두터운 꼬리 분포(heavy-tailed distribution)** 가 아니라서 그렇다.  
 적분 방법을 바꾼다고 해결되는 문제가 아니라 분포 자체의 본질적 성질이다.  
@@ -1078,16 +1068,12 @@ $$
 ### 5.1 누적분포함수 (Cumulative Distribution Function, CDF)
 확률변수 $X$의 누적분포함수(cumulative distribution function, CDF)는 다음과 같이 정의된다.
 
-$$
-F(x)=P(X\le x)
-$$
+$$F(x)=P(X\le x)$$
 
 #### 이산형 확률변수의 경우
 확률변수 $X$가 이산형이고 확률질량함수가 $p(x)$일 때, 누적분포함수는
 
-$$
-F(x)=\sum_{k:x_k\le x}p(x_k)=\sum_{k:x_k\le x}P(X=x_k)
-$$
+$$F(x)=\sum_{k:x_k\le x}p(x_k)=\sum_{k:x_k\le x}P(X=x_k)$$
 
 여기서 합은 $x_k\le x$를 만족하는 모든 가능한 값에 대해 취한다.  
 이산형의 경우 CDF는 계단함수(step function) 형태를 가지며, 각 가능한 값에서 불연속점을 갖는다.
@@ -1095,44 +1081,32 @@ $$
 #### 예 1.5.1
 앞면이 나올 때까지 동전을 던질 때 시행 횟수 $X$에 대하여
 
-$$
-P(X=k)=(1/2)^k,\quad k=1,2,\dots
-$$
+$$P(X=k)=(1/2)^k,\quad k=1,2,\dots$$
 
 누적분포함수는
 
-$$
-F(n)=1-(1/2)^n
-$$
+$$F(n)=1-(1/2)^n$$
 
 이다.
 
 #### 연속형 확률변수의 경우
 확률변수 $X$가 연속형이고 확률밀도함수가 $f(x)$일 때, 누적분포함수는
 
-$$
-F(x)=\int_{-\infty}^x f(t)\,dt
-$$
+$$F(x)=\int_{-\infty}^x f(t)\,dt$$
 
 연속형의 경우 CDF는 연속함수이며, 미분 가능한 점에서는
 
-$$
-F'(x)=f(x)
-$$
+$$F'(x)=f(x)$$
 
 가 성립한다. 즉, 확률밀도함수는 누적분포함수의 도함수이다.  
 
 또한 연속형 확률변수의 경우
 
-$$
-P(a<X\le b)=F(b)-F(a)=\int_a^b f(x)\,dx
-$$
+$$P(a<X\le b)=F(b)-F(a)=\int_a^b f(x)\,dx$$
 
 이고, 한 점에서의 확률은
 
-$$
-P(X=a)=F(a)-F(a-)=0
-$$
+$$P(X=a)=F(a)-F(a-)=0$$
 
 이므로 $P(a<X\le b)=P(a\le X\le b)=P(a<X<b)=P(a\le X<b)$가 모두 같다.
 
@@ -1172,13 +1146,10 @@ $$f(x) = F'(x) \quad \text{(거의 모든 } x\text{에서)}$$
 #### 예 1.5.2 표준지수분포(standard exponential distribution)
 확률변수 $X$가 확률밀도함수
 
-$$
-f(x)=
-\begin{cases}
+$$f(x)= \begin{cases}
 e^{-x}, & x\ge 0 \\
 0, & x<0
-\end{cases}
-$$
+\end{cases}$$
 
 를 가질 때, 누적분포함수를 구하여라.
 
@@ -1200,34 +1171,24 @@ $$
 
 또는 지표함수를 사용하여
 
-$$
-F(x)=(1-e^{-x})\mathbf{1}_{[0,\infty)}(x)
-$$
+$$F(x)=(1-e^{-x})\mathbf{1}_{[0,\infty)}(x)$$
 
 #### 누적분포함수의 성질 (정리 1.5.1)
 * 단조증가:
 
-$$
-x_1<x_2 \Rightarrow F(x_1)\le F(x_2)
-$$
+$$x_1<x_2 \Rightarrow F(x_1)\le F(x_2)$$
 
 * 전체 변동:
 
-$$
-\lim_{x\to-\infty}F(x)=0,\quad \lim_{x\to\infty}F(x)=1
-$$
+$$\lim_{x\to-\infty}F(x)=0,\quad \lim_{x\to\infty}F(x)=1$$
 
 * 오른쪽 연속성:
 
-$$
-\lim_{h\downarrow 0}F(x+h)=F(x)
-$$
+$$\lim_{h\downarrow 0}F(x+h)=F(x)$$
 
 또한,
 
-$$
-F(a)-F(a^-)=P(X=a)
-$$
+$$F(a)-F(a^-)=P(X=a)$$
 
 가 성립한다.
 
@@ -1265,9 +1226,7 @@ $$F(a-) = \lim_{n \to \infty} F(a - \tfrac{1}{n}) = P(X < a)$$
 ### 5.2 확률생성함수 (Probability Generating Function, PGF)
 음이 아닌 정수 값을 갖는 이산형 확률변수 $X$에 대해 확률생성함수는
 
-$$
-G(s)=E[s^X]=\sum_{k=0}^{\infty}s^kP(X=k)
-$$
+$$G(s)=E[s^X]=\sum_{k=0}^{\infty}s^kP(X=k)$$
 
 로 정의된다. 여기서 $|s| \le 1$일 때 이 급수가 수렴한다.
 
@@ -1287,9 +1246,7 @@ $$G^{(k)}(0)=k!P(X=k)$$
 
 (b) **적률 계산**  
 
-$$
-E[X]=G'(1), \quad \mathrm{Var}(X)=G''(1)+G'(1)-[G'(1)]^2
-$$
+$$E[X]=G'(1), \quad \mathrm{Var}(X)=G''(1)+G'(1)-[G'(1)]^2$$
 
 (c) **분포 결정성**  
 $G_X(s)=G_Y(s)$이면 $X$와 $Y$의 분포는 동일하다.
@@ -1300,9 +1257,7 @@ $G_X(s)=G_Y(s)$이면 $X$와 $Y$의 분포는 동일하다.
 #### 예 1.5.3
 $P(X=k)=(1/2)^k$, $k=1,2,\ldots$ 일 때
 
-$$
-G(s)=\sum_{k=1}^{\infty}s^k(1/2)^k=\frac{s/2}{1-s/2}, \quad |s|<2
-$$
+$$G(s)=\sum_{k=1}^{\infty}s^k(1/2)^k=\frac{s/2}{1-s/2}, \quad |s|<2$$
 
 - 이 예에서 처럼, 1보다 큰 s값에 대해서도 절대수렴할 수 있다
 - PGF가 $|s|>1$에서도 수렴한다는 사실은 
@@ -1313,9 +1268,7 @@ $$
 #### 예 1.5.4
 베르누이 확률변수 $X\sim\mathrm{Bernoulli}(p)$에 대해
 
-$$
-G(s)=(1-p)+ps=1-p(1-s)
-$$
+$$G(s)=(1-p)+ps=1-p(1-s)$$
 
 ### 5.3 적률생성함수 (Moment Generating Function, MGF)
 
@@ -1328,15 +1281,11 @@ $$
 
 확률생성함수 $G(s)$에서 $s>0$이면
 
-$$
-G(s)=E(s^X)=E(e^{X\log s})=E(e^{tX}), \quad t=\log s
-$$
+$$G(s)=E(s^X)=E(e^{X\log s})=E(e^{tX}), \quad t=\log s$$
 
 일반적으로, 0을 포함하는 열린구간 $(-h,h)$에서
 
-$$
-E(e^{tX})<\infty \quad \forall t\in(-h,h)\ (\exists h>0)
-$$
+$$E(e^{tX})<\infty \quad \forall t\in(-h,h)\ (\exists h>0)$$
 
 일 때 $M(t) = E(e^{tX})$를 확률변수 $X$의 적률생성함수 (moment generating function, mgf)라 한다.
 
