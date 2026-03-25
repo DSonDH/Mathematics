@@ -2057,6 +2057,10 @@ $$
 |E[XY]| \leq \sqrt{E[X^2]} \sqrt{E[Y^2]}
 $$
 
+Variance, Covariance 관련 부등식으로 표현하면, 
+
+$$Var(X) \geq 0, \quad |Cov(X,Y)| \leq \sqrt{Var(X)} \sqrt{Var(Y)}$$
+
 #### 영(Young)의 부등식 (Young's Inequality)
 $a, b \geq 0$, $p, q > 1$, $1/p + 1/q = 1$일 때
 

@@ -495,9 +495,85 @@ $$
 4. $\mathrm{Cov}(X,Y)=E(XY)-E(X)E(Y)$
   - 식 전개하면 바로 나옴: $E[(X-\mu_X)(Y-\mu_Y)]=E(XY)-\mu_X\mu_Y$ □
 5. $\mathrm{Cov}(X \pm Y,Z)=\mathrm{Cov}(X,Z)\pm\mathrm{Cov}(Y,Z)$
+  - 코시-슈바르츠 부등식 (Cauchy–Schwarz inequality)
 6. $\mathrm{Cov}(X,Y)^2\le\mathrm{Var}(X)\mathrm{Var}(Y)$
-  - Cauchy–Schwarz 부등식으로 증명 가능
 7. $\mathrm{Cov}\left(\sum_i a_i X_i, \sum_j b_j Y_j\right) = \sum_i \sum_j a_i b_j \mathrm{Cov}(X_i, Y_j)$
+
+**(5) 증명**  
+공분산의 정의와 기댓값의 선형성을 이용한다.
+
+$$
+\mathrm{Cov}(X + Y,Z)=E[(X+Y-\mu_{X+Y})(Z-\mu_Z)]
+$$
+
+여기서 $\mu_{X+Y}=E(X+Y)=E(X)+E(Y)=\mu_X+\mu_Y$이므로
+
+$$
+\begin{align}
+\mathrm{Cov}(X + Y,Z) &= E[(X-\mu_X+Y-\mu_Y)(Z-\mu_Z)] \\
+&= E[(X-\mu_X)(Z-\mu_Z)+(Y-\mu_Y)(Z-\mu_Z)] \\
+&= E[(X-\mu_X)(Z-\mu_Z)]+E[(Y-\mu_Y)(Z-\mu_Z)] \\
+&= \mathrm{Cov}(X,Z)+\mathrm{Cov}(Y,Z)
+\end{align}
+$$
+
+$\mathrm{Cov}(X - Y,Z)$의 경우도 동일한 방법으로 증명된다.
+
+**(6) 증명**
+
+코시–슈바르츠 부등식을 $U=X-\mu_X$, $V=Y-\mu_Y$에 적용하면
+
+$$
+|E(UV)|\le\sqrt{E(U^2)}\sqrt{E(V^2)}
+$$
+
+즉
+
+$$
+|E[(X-\mu_X)(Y-\mu_Y)]|\le\sqrt{E[(X-\mu_X)^2]}\sqrt{E[(Y-\mu_Y)^2]}
+$$
+
+따라서
+
+$$
+|\mathrm{Cov}(X,Y)|\le\sqrt{\mathrm{Var}(X)}\sqrt{\mathrm{Var}(Y)}
+$$
+
+양변을 제곱하면
+
+$$
+\mathrm{Cov}(X,Y)^2\le\mathrm{Var}(X)\mathrm{Var}(Y)
+$$
+
+**(7) 증명**  
+공분산의 성질 **(5)** 를 반복 적용하여 증명한다.
+
+먼저 첫 번째 합에 대해 성질 **(5)** 를 적용하면
+
+$$
+\mathrm{Cov}\left(\sum_i a_i X_i, \sum_j b_j Y_j\right) 
+= \sum_i a_i \mathrm{Cov}\left(X_i, \sum_j b_j Y_j\right)
+$$
+
+다음으로 두 번째 합에 대해서도 성질 **(5)**를 적용한다. 
+고정된 $i$에 대하여
+
+$$
+\mathrm{Cov}\left(X_i, \sum_j b_j Y_j\right) 
+= \sum_j b_j \mathrm{Cov}(X_i, Y_j)
+$$
+
+따라서 이 두 결과를 결합하면
+
+$$
+\mathrm{Cov}\left(\sum_i a_i X_i, \sum_j b_j Y_j\right) 
+= \sum_i a_i \sum_j b_j \mathrm{Cov}(X_i, Y_j) 
+= \sum_i \sum_j a_i b_j \mathrm{Cov}(X_i, Y_j)
+$$
+
+**참고**: 이 성질은 공분산의 이중 선형성(bilinearity)을 나타내며, 
+$g(X)=\sum_i a_i X_i$, $h(Y)=\sum_j b_j Y_j$와 같이 선형결합으로 이루어진 
+확률변수들 간의 공분산을 계산할 때 매우 유용하다.
 
 ### 정리 2.2.3 상관계수의 성질 *(Properties of Correlation)*
 상관계수 $\rho=\mathrm{Corr}(X,Y)$에 대하여
@@ -533,6 +609,18 @@ $$
 (1)에서 분산은 항상 비음이므로 $1-\rho^2\ge 0$, 즉 $\rho^2\le 1$이다.  
 따라서 $-1\le\rho\le 1$이다.
 
+>참고: Cauchy–Schwarz (코시 슈바르츠)부등식을 활용한 증명
+>
+>$$|E(VW)|\le\sqrt{E(V^2)}\sqrt{E(W^2)}$$
+>
+>여기서 $V=\frac{X-\mu_X}{\sigma_X}$, $W=\frac{Y-\mu_Y}{\sigma_Y}$로 두면
+>
+>$$
+>\left|E\left(\frac{X-\mu_X}{\sigma_X}\cdot\frac{Y-\mu_Y}{\sigma_Y}\right)\right|\le\sqrt{E\left[(\frac{X-\mu_X}{\sigma_X})^2\right]}\sqrt{E\left[(\frac{Y-\mu_Y}{\sigma_Y})^2\right]}=1
+>$$
+>
+>이 되고, 이는 $|\rho|\le 1$과 동일하다. 
+
 **(3) 증명**  
 ($\Leftarrow$) $Y=aX+b$ (a.s.)이면  
 
@@ -567,71 +655,6 @@ Y=\mu_Y+\rho\sigma_Y\frac{X-\mu_X}{\sigma_X}=\left(\rho\frac{\sigma_Y}{\sigma_X}
 $$
 
 즉, $Y$는 $X$의 선형함수이다. □
-
->참고: Cauchy–Schwarz 부등식
->
->$$
->|E(VW)|\le\sqrt{E(V^2)}\sqrt{E(W^2)}
->$$
->
->여기서 $V=\frac{X-\mu_X}{\sigma_X}$, $W=\frac{Y-\mu_Y}{\sigma_Y}$로 두면
->
->$$
->\left|E\left(\frac{X-\mu_X}{\sigma_X}\cdot\frac{Y-\mu_Y}{\sigma_Y}\right)\right|\le\sqrt{E\left[(\frac{X-\mu_X}{\sigma_X})^2\right]}\sqrt{E\left[(\frac{Y-\mu_Y}{\sigma_Y})^2\right]}=1
->$$
->
->이 되고, 이는 $|\rho|\le 1$과 동일하다.  
->즉, 정리(2)의 상관계수 부등식은 코시-슈바르츠 부등식으로도 유도할 수 있다.
-
-**(5) 증명**  
-공분산의 정의와 기댓값의 선형성을 이용한다.
-
-$$
-\mathrm{Cov}(X + Y,Z)=E[(X+Y-\mu_{X+Y})(Z-\mu_Z)]
-$$
-
-여기서 $\mu_{X+Y}=E(X+Y)=E(X)+E(Y)=\mu_X+\mu_Y$이므로
-
-$$
-\begin{align}
-\mathrm{Cov}(X + Y,Z) &= E[(X-\mu_X+Y-\mu_Y)(Z-\mu_Z)] \\
-&= E[(X-\mu_X)(Z-\mu_Z)+(Y-\mu_Y)(Z-\mu_Z)] \\
-&= E[(X-\mu_X)(Z-\mu_Z)]+E[(Y-\mu_Y)(Z-\mu_Z)] \\
-&= \mathrm{Cov}(X,Z)+\mathrm{Cov}(Y,Z)
-\end{align}
-$$
-
-$\mathrm{Cov}(X - Y,Z)$의 경우도 동일한 방법으로 증명된다.
-
-**(7) 증명**  
-공분산의 성질 **(5)** 를 반복 적용하여 증명한다.
-
-먼저 첫 번째 합에 대해 성질 **(5)** 를 적용하면
-
-$$
-\mathrm{Cov}\left(\sum_i a_i X_i, \sum_j b_j Y_j\right) 
-= \sum_i a_i \mathrm{Cov}\left(X_i, \sum_j b_j Y_j\right)
-$$
-
-다음으로 두 번째 합에 대해서도 성질 **(5)**를 적용한다. 
-고정된 $i$에 대하여
-
-$$
-\mathrm{Cov}\left(X_i, \sum_j b_j Y_j\right) 
-= \sum_j b_j \mathrm{Cov}(X_i, Y_j)
-$$
-
-따라서 이 두 결과를 결합하면
-
-$$
-\mathrm{Cov}\left(\sum_i a_i X_i, \sum_j b_j Y_j\right) 
-= \sum_i a_i \sum_j b_j \mathrm{Cov}(X_i, Y_j) 
-= \sum_i \sum_j a_i b_j \mathrm{Cov}(X_i, Y_j)
-$$
-
-**참고**: 이 성질은 공분산의 이중 선형성(bilinearity)을 나타내며, 
-$g(X)=\sum_i a_i X_i$, $h(Y)=\sum_j b_j Y_j$와 같이 선형결합으로 이루어진 
-확률변수들 간의 공분산을 계산할 때 매우 유용하다.
 
 ### 결합적률 *(Joint Moments)*
 상관계수, 공분산처럼 결합확률분포의 특성을 나타내는 또 다른 개념이다.  

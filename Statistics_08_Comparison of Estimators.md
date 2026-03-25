@@ -933,43 +933,32 @@ $$P(Z \in B \mid Y) - P(Z \in B) = 0$$
 #### 예 8.3.10 지수분포에서 신뢰도의 불편추정
 - **모형:** $X_1,\dots,X_n \sim \mathrm{Exp}(\theta),\ \theta>0$
 - **완비충분통계량:** $Y = \sum_{i=1}^n X_i$
-- **추정 대상:a에서의 신뢰도** $\eta = P_\theta(X_1 > a) = e^{-a/\theta}$
+- **추정 대상: a에서의 신뢰도** $\eta = P_\theta(X_1 > a) = e^{-a/\theta}$
 
-1. **불편추정량 후보:**  
-    $X_1$만 이용하면, $\mathbf{1}_{(a,\infty)}(X_1)$이 $\eta$의 불편추정량이다.  
-    $E_\theta[\mathbf{1}_{(a,\infty)}(X_1)] = P_\theta(X_1 > a) = e^{-a/\theta}$
-2. **보조통계량 활용:**  
-    $Y = \sum X_i$는 완비충분통계량이고, $\frac{X_1}{Y}$는 $\theta$에 무관한 보조통계량($\mathrm{Beta}(1, n-1)$ 분포)이며 $Y$와 독립이다 (정리8.3.3).
-3. **UMVUE 계산:**  
-    $X_1 = uY$로 두면, $P(X_1 > a \mid Y = y) = P(u > a/y) = \int_{a/y}^1 (n-1)(1-u)^{n-2} du = (1 - a/y)^{n-1}$ ($a < y$일 때).
-    - 여기서 $X_1 = uY$로 두었으므로, $X_1 > a$는 $uY > a$와 동치이고, $Y = y$이므로 $u > a/y$가 된다. 즉, $P(X_1 > a \mid Y = y) = P(u > a/y)$로 쓸 수 있다.
-    - $u = X_1/Y$는 $Y$와 독립이며, $u \sim \mathrm{Beta}(1, n-1)$ 분포를 따른다. 따라서 $P(u > a/y)$는 $u$의 누적분포함수를 이용해 계산할 수 있다.
+**불편추정량 후보:**  
+$\eta = P_\theta(X_1 > a) = E_\theta[\mathbf{1}_{(a,\infty)}(X_1)]$ 이므로 $\hat\eta_0^{UE} = \mathbf{1}_{(a,\infty)}(X_1)$는 $\eta$의 불편추정량이다.
 
-    따라서
+정리8.3.1로부터 $\hat\eta_0^{RB}(Y) = E_\theta[\mathbf{1}_{(a,\infty)}(X_1) \mid Y] = P(X_1 > a \mid Y)$는 $\eta$의 UMVUE이다.
 
-    $$
-    \hat\eta^{UMVUE} = \left(1 - \frac{a}{Y}\right)^{n-1} \mathbf{1}_{(a, \infty)}(Y)
-    $$
-    
-    또는 $Y = n\bar X$이므로,
-    
-    $$
-    \hat\eta^{UMVUE} = \left(1 - \frac{a}{n\bar X}\right)^{n-1} \mathbf{1}_{(a/n, \infty)}(\bar X)
-    $$
+한편 지수분포의 대의적 정의로부터
 
-4. **점근적 거동:**  
-    $n \to \infty$에서 $\left(1 - \frac{a}{n\bar X}\right)^{n-1} \to e^{-a/\bar X}$ (MLE와 동일).
+$$(X_i)_{1\leq i \leq n} \equiv (\theta Z_i)_{1\leq i \leq n}, Z_i \sim \mathrm{Exp}(1) \\
+\therefore \frac{X_1}{X_1 + \dots + X_n} = \frac{Z_1}{Z_1 + \dots + Z_n}$$
 
-**정리:**  
-- UMVUE:  
-  
-  $$
-  \boxed{
-     \hat\eta^{UMVUE} = \left(1 - \frac{a}{n\bar X}\right)^{n-1} \mathbf{1}_{(a/n, \infty)}(\bar X)
-  }
-  $$
+따라서 $X_1/\sum_i X_i$ $\theta>0$에 관한 보조통계량이고, 정리 8.3.3에 따라 완비충분량 $Y=\sum_i X_i$와 독립이다.  
+$\hat\eta_0^{RB}(Y) = P(X_1 > a \mid Y)$는 이런 독립성을 이용하여 다음과 같이 구할 수 있다
 
-- $n \to \infty$에서 $e^{-a/\bar X}$로 수렴 (MLE와 동일)
+$$P(X_1 > a \mid Y = y) = P(u > a/y) = P\left(\frac{X_1}{\sum_i X_i} > \frac{a}{y} \mid Y = y\right) \\
+= P\left(\frac{X_1}{\sum_i X_i} > \frac{a}{y}\right) = P(Z>a/y), Z \sim Beta(1, n-1)$$
+
+$$\therefore P(X_1 > a \mid Y = y) = \int_{a/y}^1 \frac{\Gamma(n)}{\Gamma(1)\Gamma(n-1)} z^{1-1} (1-z)^{n-1-1} dzI_{a/y<1} = \left(1 - \frac{a}{y}\right)^{n-1} \mathbf{1}_{(a, \infty)}(y)$$
+
+$$
+\therefore \hat\eta^{RB} = \left(1 - \frac{a}{n\bar X}\right)^{n-1} \mathbf{1}_{(a/n, \infty)}(\bar X)
+$$
+
+**점근적 거동:**  
+$n \to \infty$에서 $\left(1 - \frac{a}{n\bar X}\right)^{n-1} \to e^{-a/\bar X}$ (MLE와 동일).
 
 
 ## 8.4 추정량의 점근적 비교 *(Asymptotic Comparison of Estimators)*
@@ -987,23 +976,9 @@ $$P(Z \in B \mid Y) - P(Z \in B) = 0$$
     - 표본평균: $\hat\theta_n^{mean} = \bar X$
     - 최대가능도추정량(MLE): $\hat\theta_n^{MLE}$
 - 점근분포:
-  - 예5.3.8
-    
-    $$
-    \sqrt{n}(\hat\theta_n^{med} - \theta) \xrightarrow{d} N(0, 4)
-    $$
-  
-  - 중심극한정리, 예5.4.3
-    
-    $$
-    \sqrt{n}(\hat\theta_n^{mean} - \theta) \xrightarrow{d} N\left(0, \frac{\pi^2}{3}\right)
-    $$
-  
-  - 예6.4.4
-    
-    $$
-    \sqrt{n}(\hat\theta_n^{MLE} - \theta) \xrightarrow{d} N(0, 3)
-    $$
+  - 예5.3.8: $\sqrt{n}(\hat\theta_n^{med} - \theta) \xrightarrow{d} N(0, 4)$
+  - 중심극한정리, 예5.4.3: $\sqrt{n}(\hat\theta_n^{mean} - \theta) \xrightarrow{d} N\left(0, \frac{\pi^2}{3}\right)$
+  - 예6.4.4: $\sqrt{n}(\hat\theta_n^{MLE} - \theta) \xrightarrow{d} N(0, 3)$
 
 - 점근분산이 작은 순(효율이 좋은 순): $\hat\theta_n^{MLE}\ (3) < \hat\theta_n^{mean}\ \left(\frac{\pi^2}{3}\right) < \hat\theta_n^{med}\ (4)$
 
@@ -1017,7 +992,7 @@ $$\sqrt{n}(\hat\theta_n^{i} - \theta) \xrightarrow{d} N(0, \sigma_i^2(\theta)),\
 $$ARE(\hat\theta_n^1, \hat\theta_n^2) = \frac{\sigma_1^{-2}(\theta)}{\sigma_2^{-2}(\theta)}$$
 
 - $ARE > 1$이면 1번이 더 효율적(점근분산이 더 작음)이라는 뜻.
-- 점근상대효울성이 커진다는 것은 표본크기가 커지면서 추정의 정밀도가 상대적으로 높아지는 것
+- 점근상대효율성이 커진다는 것은 표본크기가 커지면서 추정의 정밀도가 상대적으로 높아지는 것을 의미한다.
 - 더 적은 샘플크기로도 요구되는 추정오차한계를 만족시킬 수 있음
 
 #### 예 8.4.2 로지스틱분포에서 추정오차한계와 점근상대효율성
@@ -1027,24 +1002,14 @@ $$ARE(\hat\theta_n^1, \hat\theta_n^2) = \frac{\sigma_1^{-2}(\theta)}{\sigma_2^{-
     \theta \in \left[\hat\theta_n^{med} - 1.96\sqrt{\frac{4}{n}},\ \hat\theta_n^{med} + 1.96\sqrt{\frac{4}{n}}\right]
     $$
     
-    - $1.96\sqrt{\frac{4}{n}}$: 표본중앙값의 95%점근추정오차한계
-- 이를 $d$ 이하로 만들기 위한 표본크기:
-    
-    $$
-    n_{med} \simeq \left(\frac{1.96}{d}\right)^2 \cdot 4
-    $$
+    - $1.96\sqrt{\frac{4}{n}}$: 표본중앙값의 95%점근추정오차한계 (추정값과 추정대상의 차이 한계)
+- 이를 $d$ 이하로 만들기 위한 표본크기: $n_{med} \simeq \left(\frac{1.96}{d}\right)^2 \cdot 4$
 
-- 표본평균의 경우:
-    
-    $$
-    n_{mean} \simeq \left(\frac{1.96}{d}\right)^2 \cdot \frac{\pi^2}{3}
-    $$
+- 표본평균의 경우: $n_{mean} \simeq \left(\frac{1.96}{d}\right)^2 \cdot \frac{\pi^2}{3}$
 
-- 따라서
-
-    $$
-    \frac{n_{mean}^{-1}}{n_{med}^{-1}} = \frac{12}{\pi^2} \approx 1.2 = ARE(\hat\theta_n^{mean}, \hat\theta_n^{med})
-    $$
+$$
+\frac{n_{mean}^{-1}}{n_{med}^{-1}} = \frac{12}{\pi^2} \approx 1.2 = ARE(\hat\theta_n^{mean}, \hat\theta_n^{med})
+$$
 
 - 즉, 같은 오차한계를 달성하려면 **표본중앙값이 표본평균보다 대략 1.2배 더 많은 표본**을 필요로 한다.
 
@@ -1071,36 +1036,23 @@ $$ARE(\hat\theta_n^1, \hat\theta_n^2) = \frac{\sigma_1^{-2}(\theta)}{\sigma_2^{-
 | $ARE(\hat\theta_n^{med}, \hat\theta_n^{MLE})$  | $2/\pi$        | $3/4$         | $1$             |
 
 #### 예 8.4.4 베타분포 $\mathrm{Beta}(\alpha,1)$에서 추정량 비교
-- 모형: $X_i \sim \mathrm{Beta}(\alpha,1)$, $\alpha>0$, 밀도 $f(x;\alpha)=\alpha x^{\alpha-1}I_{(0,1)}(x)$
+- 모형: $X_i \sim \mathrm{Beta}(\alpha,1)$, $\alpha>0$, 확률밀도함수: $f(x;\alpha)=\alpha x^{\alpha-1}I_{(0,1)}(x)$
 - 모평균: $m_1 = \frac{\alpha}{\alpha+1}$
 
-**적률이용추정량(MME)**  
-
-$$\hat\alpha_n^{\mathrm{MME}} = \frac{\bar X}{1-\bar X} $$
-
+**적률이용추정량(MME):**  $\hat\alpha_n^{\mathrm{MME}} = \frac{\bar X}{1-\bar X} $  
 모평균 $m_1 = \frac{\alpha}{\alpha+1}$의 적률추정량 $\bar X$는 중심극한정리에 의해
 
 $$\sqrt{n}(\bar X - m_1) \xrightarrow{d} N(0,\,\sigma^2)$$
 
-여기서 $\sigma^2 = \mathrm{Var}(X_1) = E[X_1^2] - (E[X_1])^2$이다.
-
-$\mathrm{Beta}(\alpha,1)$에서
-- $E[X_1] = m_1 = \frac{\alpha}{\alpha+1}$
-- $E[X_1^2] = \frac{\alpha}{\alpha+2}$
-
-따라서
-
-$$\sigma^2 = \frac{\alpha}{\alpha+2} - \left(\frac{\alpha}{\alpha+1}\right)^2$$
+$\mathrm{Beta}(\alpha,1)$에서 $E[X_1] = m_1 = \frac{\alpha}{\alpha+1}$, $E[X_1^2] = \frac{\alpha}{\alpha+2}$  
+따라서 $\sigma^2 = \frac{\alpha}{\alpha+2} - \left(\frac{\alpha}{\alpha+1}\right)^2$
 
 적률이용추정량은 $g(\bar X)$ 꼴로, $g(m_1) = \frac{m_1}{1-m_1} = \alpha$이다.
 
 델타 방법에 의해
 
-$$\sqrt{n}(g(\bar X) - g(m_1)) \xrightarrow{d} N(0,\, [g'(m_1)]^2 \sigma^2)$$
-
-여기서
-
-$$g'(x) = \frac{1}{(1-x)^2},\quad g'(m_1) = \frac{1}{(1-m_1)^2} = (\alpha+1)^2$$
+$$\sqrt{n}(g(\bar X) - g(m_1)) \xrightarrow{d} N(0,\, [g'(m_1)]^2 \sigma^2) \\
+g'(x) = \frac{1}{(1-x)^2},\quad g'(m_1) = \frac{1}{(1-m_1)^2} = (\alpha+1)^2$$
 
 따라서
 
@@ -1111,11 +1063,11 @@ $$
 $$
 
 **최대가능도추정량(MLE)**  
-가능도방정식: $\sum_{i=1}^n \log X_i + \frac{n}{\alpha} = 0$
+가능도방정식: $\sum_{i=1}^n \log X_i + \frac{n}{\alpha} = 0$ 이므로 $\hat\alpha_n^{\mathrm{MLE}} = \frac{1}{-\overline{\log X}}$
 
-$$\therefore \hat\alpha_n^{\mathrm{MLE}} = \frac{1}{-\overline{\log X}}$$
-
-$$\sqrt{n}(\hat\alpha_n^{\mathrm{MLE}}-\alpha) \xrightarrow{d} N(0,\,\alpha^2)$$
+$$\sqrt{n}(\hat\alpha_n^{\mathrm{MLE}}-\alpha) \xrightarrow{d} N(0,I^{-1}(\alpha)), \quad I(\alpha) = E_{\alpha}\left[-\frac{\partial^2}{\partial\alpha^2} \log f(X;\alpha)\right] \\
+\therefore \sqrt{n}(\hat\alpha_n^{\mathrm{MLE}}-\alpha) \xrightarrow{d} N(0,\alpha^2)
+$$
 
 **점근상대효율성**  
 
@@ -1126,14 +1078,15 @@ $$ARE(\hat\alpha_n^{\mathrm{MME}},\,\hat\alpha_n^{\mathrm{MLE}})
 
 ### 정리 8.4.1 정보량 부등식 *(information inequality, Cramér–Rao 유형)*
 위의 예들에서 점근상대효율성이 가장 큰 추정량은 최대가능도추정량이었다. 이런 최대가능도추정량의 점근적 효율성은 아래 정보량 부등식으로 설명할 수도 있다.
-- (MLE 점근정규성 조건들과 유사한 정칙성) 하에서, 실수값 모수 $\eta=\eta(\theta)$의 추정량 $\hat\eta_n$에 대해
+- (MLE 점근정규성 조건들과 유사한 정칙성) 하에서, 실수값 모수 $\eta=\eta(\theta)$의 추정량 $\hat\eta_n$의 분산에 대해 다음 부등식이 성립:
+> 크라메-라오(Cramer-Rao) 부등식이라고도 함
 
 $$
 \mathrm{Var}_\theta(\hat\eta_n) \ge
 \left(\frac{\partial}{\partial\theta}E_\theta(\hat\eta_n)\right)^{\!t}
 [nI(\theta)]^{-1}
 \left(\frac{\partial}{\partial\theta}E_\theta(\hat\eta_n)\right),
-\quad \forall\theta
+\quad \forall\theta \in \Omega
 $$
 
 - 다차원 모수의 경우도 유사하게 아래 부등식이 성립
@@ -1142,98 +1095,80 @@ $$
 c^t\left(\mathrm{Var}_\theta(\hat\eta_n)-
 \left(\frac{\partial}{\partial\theta}E_\theta(\hat\eta_n)\right)^{\!t}
 [nI(\theta)]^{-1}
-\left(\frac{\partial}{\partial\theta}E_\theta(\hat\eta_n)\right)\right)c \ge 0
+\left(\frac{\partial}{\partial\theta}E_\theta(\hat\eta_n)\right)\right)c \ge 0, \quad \forall c, \forall \theta \in \Omega
 $$
 
 #### 증명
-점수함수(score function)와 코시–슈바르츠 부등식을 이용한다.
-정보량 부등식의 증명에는 다음과 같은 정칙성 조건이 필요하다:
-- **(R1) 지지집합(support)이 $\theta$에 의존하지 않음:**  
-    $f(x;\theta)$의 정의역(지지집합)이 $\theta$에 따라 변하지 않는다.
+점수함수(score function)와 코시–슈바르츠 부등식을 이용한다. 정보량 부등식의 증명에는 다음과 같은 정칙성 조건이 필요하다 (정리 6.4.3):
 
-- **(R2) 미분과 적분의 교환 가능:**  
-    $\frac{\partial}{\partial\theta} \log f(x;\theta)$가 존재하고,  
-    
-    $$
-    \frac{\partial}{\partial\theta} \int g(x) f(x;\theta)\,dx = \int g(x) \frac{\partial}{\partial\theta} f(x;\theta)\,dx
-    $$
-    
-    가 성립한다.
+- **(R1) 지지집합(support)이 $\theta$에 의존하지 않음:** : $f(x;\theta)$의 정의역(지지집합)이 $\theta$에 따라 변하지 않는다.
 
-- **(R3) 점수함수의 평균이 0:**  
+- **(R2) 미분과 적분의 교환 가능:** : $\frac{\partial}{\partial\theta} \log f(x;\theta)$가 존재하고, 다음이 성립한다:
     
-    $$E_\theta[\dot l_n(\theta)] = 0$$
+    $$\frac{\partial}{\partial\theta} \int g(x) f(x;\theta)\,dx = \int g(x) \frac{\partial}{\partial\theta} f(x;\theta)\,dx$$
+    
+- **(R3) 점수함수의 평균이 0, 점수함수 정의**  
+    
+    $$ \dot l_n(\theta) = \frac{\partial}{\partial\theta} \sum_{i=1}^n \log f(X_i;\theta) \\
+    E_\theta[\dot l_n(\theta)]=E_{\theta}\left[\sum_{i=1}^n \frac{\partial}{\partial\theta} \log f(X_i;\theta)\right] = nE_\theta\left[\frac{\partial}{\partial\theta} \log f(X_1;\theta)\right] = 0$$
+
+>(다변수의 경우 $\theta=(\theta_1,\dots,\theta_k)^t$는 $k$차원 벡터, $\dot l_n(\theta)$도 $k$차원 벡터)  
+>$\Sigma_{11} = \operatorname{Var}_\theta(\hat\eta_n)$, $\Sigma_{22} = \operatorname{Var}_\theta(\dot l_n(\theta))$, $\Sigma_{12} = \operatorname{Cov}_\theta(\hat\eta_n, \dot l_n(\theta)), \Sigma_{21} = \Sigma_{12}^t$라고 하자.
 
 이제 증명을 정리하면 다음과 같다:
-1. **점수함수 정의**  
-        
-        $$
-        \dot l_n(\theta) = \frac{\partial}{\partial\theta} \sum_{i=1}^n \log f(X_i;\theta)
-        $$
-        
-        (다변수의 경우 $\theta=(\theta_1,\dots,\theta_k)^t$는 $k$차원 벡터, $\dot l_n(\theta)$도 $k$차원 벡터)
+1. **코시–슈바르츠 부등식 적용**: 임의의 추정량 $\hat\eta_n$에 대해,
+    
+    $$
+    \operatorname{Var}_\theta(\hat\eta_n)\,\operatorname{Var}_\theta(\dot l_n(\theta)) \ge \operatorname{Cov}_\theta(\hat\eta_n,\,\dot l_n(\theta))^2
+    $$
+    
+>    (다변수의 경우, 임의의 벡터 $a$, $b$에 대해)  
+>    
+>    $$
+>    a^t \mathrm{Var}_\theta(\hat\eta_n) a \cdot b^t \mathrm{Var}_\theta(\dot l_n(\theta)) b \ge \left(a^t \mathrm{Cov}_\theta(\hat\eta_n, \dot l_n(\theta)) b\right)^2
+>    $$
 
-2. **코시–슈바르츠 부등식 적용**  
-        임의의 추정량 $\hat\eta_n$에 대해,
-        
-        $$
-        \operatorname{Var}_\theta(\hat\eta_n)\,\operatorname{Var}_\theta(\dot l_n(\theta)) \ge \operatorname{Cov}_\theta(\hat\eta_n,\,\dot l_n(\theta))^2
-        $$
-        
-        (다변수의 경우, 임의의 벡터 $a$, $b$에 대해)  
-        
-        $$
-        a^t \mathrm{Var}_\theta(\hat\eta_n) a \cdot b^t \mathrm{Var}_\theta(\dot l_n(\theta)) b \ge \left(a^t \mathrm{Cov}_\theta(\hat\eta_n, \dot l_n(\theta)) b\right)^2
-        $$
+2. **공분산 계산**: 조건(R4) 활용 
+    
+    $$
+    \operatorname{Cov}_\theta(\hat\eta_n,\,\dot l_n(\theta))
+    = E_\theta(\hat\eta_n\,\dot l_n(\theta)) - E_\theta[\hat\eta_n]E_\theta[\dot l_n(\theta)]
+    = E_\theta(\hat\eta_n\,\dot l_n(\theta)) \\
+    = E_\theta \left[\hat\eta_n \frac{\partial}{\partial\theta}  \log \prod_{i=1}^n f(X_i;\theta)\right]
 
-3. **공분산 계산**  
-        
-        $$
-        \operatorname{Cov}_\theta(\hat\eta_n,\,\dot l_n(\theta))
-        = E_\theta\left[(\hat\eta_n - E_\theta[\hat\eta_n])\,\dot l_n(\theta)\right]
-        $$
-        
-        정칙성 조건(R2)에 의해,
-        
-        $$
-        E_\theta\left[\hat\eta_n\,\dot l_n(\theta)\right]
-        = \frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]
-        $$
-        
-        따라서,
-        
-        $$
-        \operatorname{Cov}_\theta(\hat\eta_n,\,\dot l_n(\theta))
-        = \frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]
-        $$
-        
-        (다변수의 경우, $\mathrm{Cov}_\theta(\hat\eta_n, \dot l_n(\theta)) = \frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]$는 $m\times k$ 행렬)
+    = \frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]
+    $$
+    
+ >   (다변수의 경우, $\Sigma_{12} = \mathrm{Cov}_\theta(\hat\eta_n, \dot l_n(\theta)) = \frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]^\top$는 $m\times k$ 행렬, $\Sigma_{21} = \Sigma_{12}^t$, $\Sigma_{22} = \operatorname{Var}_\theta(\dot l_n(\theta)) =nI(\theta)$)
+>
 
-4. **정보량 대입**  
-        점수함수의 분산은 정보량 $I_n(\theta)$와 같다:
-        
-        $$\operatorname{Var}_\theta(\dot l_n(\theta)) = nI(\theta)$$
-        
-        ($I(\theta)$는 $k\times k$ 양정정부호 행렬)
+3. **분산 계산**: 
 
-5. **최종 부등식**  
-        위 결과들을 코시–슈바르츠 부등식에 대입하면,
-        
-        $$
-        \operatorname{Var}_\theta(\hat\eta_n) \ge
-        \frac{\left(\frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]\right)^2}{nI(\theta)}
-        $$
-        
-        (다변수/행렬의 경우,
-        
-        $$
-        \mathrm{Var}_\theta(\hat\eta_n) \succeq
-        \left(\frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]\right)
-        [nI(\theta)]^{-1}
-        \left(\frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]\right)^t
-        $$
-        
-        여기서 $\succeq$는 정부호(positive semidefinite) 관계)
+    $$\operatorname{Var}_\theta(\dot l_n(\theta)) 
+    = \operatorname{Var}_\theta\left(\sum_{i=1}^n \frac{\partial}{\partial\theta} \log f(X_i;\theta)\right) 
+    = n\operatorname{Var}_\theta\left(\frac{\partial}{\partial\theta} \log f(X_1;\theta)\right)
+    = nI(\theta)$$
+    
+    ($I(\theta)$는 $k\times k$ 양정정부호 행렬)
+
+4. **최종 부등식**: 위 분산, 공분산을 코시–슈바르츠 부등식에 대입하면,
+    
+    $$
+    \operatorname{Var}_\theta(\hat\eta_n) \ge
+    \frac{\left(\frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]\right)^2}{nI(\theta)}, \quad \forall \theta \in \Omega
+    $$
+    
+>    (다변수/행렬의 경우,
+>    $\Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}$이 양정정부호 행렬임을 보이는 것과 동치)
+>    
+>    $$
+>    \mathrm{Var}_\theta(\hat\eta_n) \succeq
+>    \left(\frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]\right)
+>    [nI(\theta)]^{-1}
+>    \left(\frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]\right)^t
+>    $$
+>    
+>    여기서 $\succeq$는 정부호(positive semidefinite) 관계)
 
 즉, 단변수/다변수 모두 정보량 부등식이 성립한다.
 
@@ -1242,45 +1177,44 @@ $$
 
 $$
 c^t\mathrm{Var}_\theta(\hat\theta_n^{\mathrm{UE}})c \ge \frac{1}{n}c^tI^{-1}(\theta)c,
-\quad \forall c,\ \forall\theta
+\quad \forall c,\ \forall\theta \in \Omega
 $$
 
+- $\theta$가 일차원 모수이면, $Var_\theta(\hat\theta_n^{\mathrm{UE}}) \ge \frac{1}{nI(\theta)}$
 - 행렬로 쓰면 $\mathrm{Var}_\theta(\hat\theta_n^{\mathrm{UE}})-I^{-1}(\theta)/n$이 음이 아닌 정부호(positive semidefinite)임을 의미
 
 #### 증명
-$\hat\theta_n^{\mathrm{UE}}$가 $\theta$의 불편추정량이므로 $E_\theta[\hat\theta_n^{\mathrm{UE}}]=\theta$이다.  
-정리 8.4.1(정보량 부등식)에 $\eta(\theta)=\theta$를 대입하면
+$\eta = c^\top \theta$로 정의하자. $\hat\eta_n^{\mathrm{UE}} = c^\top \hat\theta_n^{\mathrm{UE}}$는 $\eta$의 불편추정량이므로, 정리 8.4.1의 정보량 부등식에 의해
 
-$$\mathrm{Var}_\theta(\hat\theta_n^{\mathrm{UE}}) \ge [nI(\theta)]^{-1}$$
+$$c^t\mathrm{Var}_\theta(\hat\theta_n^{\mathrm{UE}})c \ge \frac{1}{n}c^tI^{-1}(\theta)c \\
+\frac{\partial}{\partial\theta} E_\theta[\hat\eta_n^{\mathrm{UE}}] = \frac{\partial}{\partial\theta} E_\theta[c^t \hat\theta_n^{\mathrm{UE}}] = c^t \frac{\partial}{\partial\theta} E_\theta[\hat\theta_n^{\mathrm{UE}}] = c^t I
+$$
 
-(다변수의 경우 $c^t\mathrm{Var}_\theta(\hat\theta_n^{\mathrm{UE}})c \ge \frac{1}{n}c^tI^{-1}(\theta)c$).  
-이는 $\frac{\partial}{\partial\theta}E_\theta[\hat\theta_n^{\mathrm{UE}}]=I$ (항등행렬)이므로 바로 성립한다.
+- $\frac{\partial}{\partial\theta}E_\theta[\hat\theta_n^{\mathrm{UE}}]=I$
+  - 왜냐면, $\hat\theta_n^{\mathrm{UE}}$는 $\theta$의 불편추정량이므로 $E_\theta[\hat\theta_n^{\mathrm{UE}}] = \theta$이므로, $\frac{\partial}{\partial\theta} E_\theta[\hat\theta_n^{\mathrm{UE}}] = I$가 된다.
 
 #### 예 8.4.5 $\mathrm{Beta}(\alpha,1)$에서의 불편추정과 정보량 부등식
 - $\mathrm{Beta}(\alpha,1)$는 지수족으로 정리8.3.2의 조건을 만족함
 - 통계량 $Y = \sum_{i=1}^n \log X_i$가 $\alpha$에 대한 완비충분통계량임
-- 변환 아이디어:
-    - $X_i^\alpha \sim U(0,1) \implies -\alpha\log X_i \sim \mathrm{Exp}(1) \implies -\alpha\sum\log X_i \sim \mathrm{Gamma}(n,1)$
 
-- 계산 결과:
+이때, $X_i^\alpha \sim U(0,1) \implies -\alpha\log X_i \sim \mathrm{Exp}(1) \implies -\alpha\sum\log X_i \sim \mathrm{Gamma}(n,1)$
 
 $$
-E_\alpha\left[\frac{1}{-\sum\log X_i}\right]=\frac{\alpha}{n-1}\quad (n\ge 2) \\
-\mathrm{Var}_\alpha\left[\frac{1}{-\sum\log X_i}\right]=\frac{\alpha^2}{(n-1)^2(n-2)}\quad (n\ge 3)
+\therefore E_\alpha\left[\frac{1}{-\sum\log X_i}\right]
+= \alpha\Gamma(n-1)/\Gamma(n) =\frac{\alpha}{n-1}\quad (n\ge 2)\\
+\mathrm{Var}_\alpha\left[\frac{1}{-\sum\log X_i}\right]
+= \alpha^2\left(\frac{\Gamma(n-2)}{\Gamma(n)} - \left(\frac{\Gamma(n-1)}{\Gamma(n)}\right)^2\right)
+=\frac{\alpha^2}{(n-1)^2(n-2)}\quad (n\ge 3)
 $$
 
-- 따라서 UMVUE:
+따라서 정리 8.3.1로부터 UMVUE:
 
 $$
-\hat\alpha_n^{\mathrm{UMVUE}} = \frac{n-1}{-\sum_{i=1}^n \log X_i} \\
+\hat\alpha_n^{\mathrm{UMVUE}} = \frac{n-1}{-\sum_{i=1}^n \log X_i}, \quad
 \mathrm{Var}_\alpha(\hat\alpha_n^{\mathrm{UMVUE}}) = \frac{\alpha^2}{n-2}
 $$
 
-- 정보량 부등식의 하한:
-
-$$[nI(\alpha)]^{-1} = \frac{\alpha^2}{n}$$
-
-보다 크지만, 점근적으로는 같아진다:
+- 정보량 부등식의 하한: $[nI(\alpha)]^{-1} = \frac{\alpha^2}{n}$ 보다 크지만, 점근적으로는 같아진다:
 
 $$
 \lim_{n\to\infty}\frac{\mathrm{Var}_\alpha(\hat\alpha_n^{\mathrm{UMVUE}})}{[nI(\alpha)]^{-1}}=1
@@ -1299,16 +1233,14 @@ $$
 정리 8.4.2에 따르면, 일차원 모수의 경우
 
 $$
-\operatorname{Var}_\theta\left(\sqrt{n}(\hat\theta_n - \theta)\right) \geq \frac{1}{I(\theta)}
+\operatorname{Var}_\theta\left(\sqrt{n}(\hat\theta_n^{\mathrm{UE}} - \theta)\right) \geq \frac{1}{I(\theta)}
 $$
 
 임을 알 수 있다. 이로부터, 점근정규성을 갖는 임의의 추정량 $\hat\theta_n$의 극한분포 분산 $\sigma^2(\theta)$에 대해
 
 $$\sigma^2(\theta) \geq \frac{1}{I(\theta)}$$
 
-라는 하한을 "추측"할 수 있다.
-
-한편, 정리 6.4.4에 의해 최대가능도추정량(MLE)의 경우
+라는 하한을 "추측"할 수 있다. 한편, 정리 6.4.4에 의해 최대가능도추정량(MLE)의 경우
 
 $$
 \sqrt{n}(\hat\theta_n^{\mathrm{MLE}} - \theta) \xrightarrow{d} N\left(0,\,\frac{1}{I(\theta)}\right)
@@ -1318,22 +1250,31 @@ $$
 
 이러한 내용을 **피셔의 추측(Fisher's conjecture)** 라 하며, "점근정규성을 갖는 추정량들 중 MLE가 최소 극한분산을 갖는다"는 형태의 주장이다. 다만, 이 추측은 일반적으로는 항상 성립하지 않고, 추가적인 **균등수렴(uniform convergence)** 조건이 만족될 때에만 성립함이 알려져 있다.
 
+> 균등수렴 정의: $\hat\theta_n$이 $\theta$에 대해 균등수렴한다는 것은, 모든 $\epsilon > 0$에 대해
+>
+>$$\sup_{\theta \in \Omega} P_\theta(|\hat\theta_n - \theta| > \epsilon) \to 0 \quad \text{as } n \to \infty$$
+>
+> 즉, $\hat\theta_n$이 모든 $\theta$에 대해 확률적으로 $\theta$에 가까워지는 것을 의미한다.
+
 즉, 최대가능도추정량은 이러한 조건 하에서 **점근적으로 효율적인 추정량(asymptotically efficient estimator)** 이라 하며, 이러한 점근적 효율성은 다차원 모수함수의 추정에도 확장된다.
 
 #### 예 8.4.6 감마분포 $\mathrm{Gamma}(\alpha,\beta)$에서의 추정량 비교
-- 모형: $\mathrm{Gamma}(\alpha,\beta)$, $\theta=(\alpha,\beta)^t$
-- MLE는 가능도방정식을 푸는 수치적 방법(일단계 반복법, one-step iteration)으로 근사
+모형: $\mathrm{Gamma}(\alpha,\beta)$, $\theta=(\alpha,\beta)^t$으로 다중모수 지수족이며, 정리 6.4.4의 조건들을 만족한다.
+
+$$ f(x;\theta) = \frac{1}{\Gamma(\alpha)\beta^\alpha} x^{\alpha-1} e^{-x/\beta} I_{(0,\infty)}(x) $$
+
+- 예 6.4.5에서는 가능도방정식의 근으로 주어지는 $\theta$의 최대가능도추정량을 일단계 반복법 (one-step iteration)으로 근사해서 구했다
 
 초기값: 적률이용추정량(MME) $\hat\theta_n^{\mathrm{MME}} = (\hat\alpha_n, \hat\beta_n)^t$
 는 연립방정식
 
-$$\hat\alpha_n\hat\beta_n = \bar X_n,\qquad
+$$\hat\alpha_n\hat\beta_n = \bar X_n,\quad
 \hat\alpha_n(\hat\beta_n)^2 = \frac{1}{n}\sum_{i=1}^n (X_i-\bar X_n)^2$$
 
 의 해로 주어지고, 정리6.1.2로부터 그 극한분포를 구하면:
 
 $$
-\sqrt{n}(\hat\theta_n^{\mathrm{MME}}-\theta)\xrightarrow{d}N(0,\Sigma(\theta)) \\
+\sqrt{n}(\hat\theta_n^{\mathrm{MME}}-\theta)\xrightarrow{d}N(0,\Sigma(\theta)), \quad  
 \Sigma(\theta)=
 \begin{pmatrix}
 2\alpha(\alpha+1) & -2(\alpha+1)\beta \\
@@ -1341,7 +1282,7 @@ $$
 \end{pmatrix}
 $$
 
-정보량 행렬과 역행렬
+한편, 다른 접근법인 정보량 행렬과 역행렬
 
 $$
 I(\theta) = E_\theta[-\ddot l_1(\theta)] =
@@ -1357,25 +1298,20 @@ I^{-1}(\theta) = \frac{1}{\alpha\Psi'(\alpha)-1}
 \end{pmatrix}
 $$
 
-(참고: $\Psi'(\alpha)$와 $\Psi''(\alpha)$는 각각 다이감마(digamma), 트라이감마(trigamma) 함수로, 로그감마함수 $\log\Gamma(\alpha)$의 1차, 2차 도함수다.)
+>(참고: $\Psi'(\alpha)$와 $\Psi''(\alpha)$는 각각 다이감마(digamma), 트라이감마(trigamma) 함수로, 로그감마함수 $\log\Gamma(\alpha)$의 1차, 2차 도함수다.)
 
-일단계 반복법(one-step) 추정량
+일단계 반복법(one-step) 추정량 ($\hat\theta_n^{(1)} = (\hat\alpha_n^{(1)}, \hat\beta_n^{(1)})^t$)의 극한분포
 - $\hat\theta_n^{(0)}=\hat\theta_n^{\mathrm{MME}}$에서 시작해 뉴턴 형태로 한 번 갱신한 $\hat\theta_n^{(1)}$에 대해
 
 $$\sqrt{n}(\hat\theta_n^{(1)}-\theta)\xrightarrow{d}N(0,I^{-1}(\theta))$$
 
 가 성립 (즉, $\hat\theta_n^{(1)}$의 극한분포가 MLE의 극한분포와 동일)
 
-성분별 점근상대효율성
-
-- $\alpha$에 대해
+성분별 점근상대효율성 (ARE)
 
 $$ARE(\hat\alpha_n^{\mathrm{MME}},\,\hat\alpha_n^{\mathrm{MLE}})
-= \frac{[\alpha/(\alpha\Psi'(\alpha)-1)]^{-1}}{[2\alpha(\alpha+1)]^{-1}}$$
-
-- $\beta$에 대해
-
-$$ARE(\hat\beta_n^{\mathrm{MME}},\,\hat\beta_n^{\mathrm{MLE}})
+= \frac{[\alpha/(\alpha\Psi'(\alpha)-1)]^{-1}}{[2\alpha(\alpha+1)]^{-1}} \\
+ARE(\hat\beta_n^{\mathrm{MME}},\,\hat\beta_n^{\mathrm{MLE}})
 = \frac{[\Psi'(\alpha)\beta^2/(\alpha\Psi'(\alpha)-1)]^{-1}}{[(2+3/\alpha)\beta^2]^{-1}}$$
 
 - (표 생략) 적률이용추정량은 최대가능도추정량에 비해 점근적으로 효율성이 낮다. 이는 일반적으로 성립하며, 최대가능도추정량이 점근적으로 가장 효율적인 추정량임이 알려져 있다!
