@@ -427,7 +427,7 @@ $$P_{\theta_1}\big((X_1,\dots,X_n)\in A \mid Y=y\big) = P_{\theta_2}\big((X_1,\d
 즉, 모든 y값에 대해 모수 $\theta \in \Omega$에 의존하지 않는다. 그런데 $W = g(Y)$가 일대일 함수이므로, $W=w$일 때 $Y$는 유일하게 결정된다. 즉, $Y = g^{-1}(w)$.  
 따라서
 
-$$P_{\theta}\big((X_1,\dots,X_n)\in A \mid W=w\big) = P_{\theta}\big((X_1,\dots,X_n)\in A \mid Y=g^{-1}(w)\big)$$
+$$P_{\theta}\big((X_1,\dots,X_n)\in A \mid W=w\big) = P_{\theta}\big((X_1,\dots,X_n)\in A \midㄷ Y=g^{-1}(w)\big)$$
 
 $W$에 대한 조건부분포 역시 $\theta$에 무관하다. 결론적으로, $W$도 $\theta$에 관한 충분통계량이다.
 
@@ -584,9 +584,13 @@ $$E_\theta[g(Y)] = 0,\ \forall\theta\in\Omega \implies P_\theta(g(Y)=0) = 1,\ \f
 
 이면 $Y$를 $\theta$에 대한 **완비통계량**이라 한다.
 
+- 하나의 함수가 아니라, $\theta$로 index된 함수족 전체에 대해 직교
 - 평균이 0인 함수는 거의 확실하게 0이어야 한다.
 - 즉, $Y$ 안에는 "중복되는 정보"가 존재하지 않는다.
   - 쓸모없는 흔들림이 없다. (흔들림은 평균하면 0이니까)
+- 증명 방법1: 멱급수 전개 이용 계수비교, discrete함수일때
+- 증명 방법2: 라플라스 변환을 이용, continuous함수일때
+- 증명 방버3: 직접 선형독립성 증명
 
 통계량 $Y$가 충분통계량(sufficient statistic)이며 완비통계량(complete statistic)이면 이를 **완비충분통계량(Complete Sufficient Statistic)** 이라 한다. 이 개념은 UMVUE 존재·유일성의 핵심 전제이다.
 
@@ -597,7 +601,7 @@ $$E_\theta[g(Y)] = 0,\ \forall\theta\in\Omega \implies P_\theta(g(Y)=0) = 1,\ \f
 
 즉, **완비통계량은 추정이론에서 "최적의 불편추정량"을 찾는 데 필수적인 역할**을 한다.
 
-### 정리 8.3.1 완비충분통계량을 이용한 (Uniformly Minimum Variance Unbiased Estimator, UMVUE))
+### 정리 8.3.1 완비충분통계량을 이용한 (Uniformly Minimum Variance Unbiased Estimator, UMVUE), Lehmann–Scheffé theorem)
 >모수의 함수 $\eta=\eta(\theta)$에 대한 불편추정량 $\hat\eta^*$가
 >
 >$$\mathrm{Var}_\theta(\hat\eta^*) \le \mathrm{Var}_\theta(\hat\eta)
@@ -657,7 +661,11 @@ $$g(y)\binom{n}{y} = 0,\quad y=0,1,\dots,n$$
 
 따라서 $g(y)=0$ ($y=0,1,\dots,n$)이고, $Y$가 $\theta$에 대한 완비충분통계량이다. 
 
-정리 8.3.1에 따르면, $Y$의 함수로 표현되는 $\theta$의 불편추정량은 곧 $\theta$의 UMVUE가 된다. 실제로 $E_\theta(Y/n) = \theta$이므로, $\hat\theta = Y/n = \frac{1}{n}\sum_{i=1}^n X_i$는 $\theta$의 UMVUE임이 엄밀히 성립한다.
+정리 8.3.1에 따르면, $Y$의 함수로 표현되는 $\theta$의 불편추정량은 곧 $\theta$의 UMVUE가 된다. 실제로 $E_\theta(Y/n) = \theta$이므로, 
+
+> $E(\hat\theta) = \theta$꼴이 unbiased estimator의 정의다. 그런데 $E_\theta(Y) = n\theta$이므로, 양변에 n을 나누고 $E_\theta(Y/n) = \theta$다.
+
+$\hat\theta = Y/n$라고 하면, $\hat\theta = \frac{1}{n}\sum_{i=1}^n X_i$는 $\theta$의 UMVUE임이 엄밀히 성립한다.
 
 #### 예 8.3.2 포아송 분포
 $X_i \sim \mathrm{Poisson}(\theta),\ \theta>0$  
@@ -677,7 +685,7 @@ $$E_\theta[g(Y)] = \sum_{y=0}^\infty g(y) \frac{(n\theta)^y}{y!} e^{-n\theta} = 
 $$g(y) = 0,\quad y=0,1,2,\dots$$
     
 따라서 $Y$는 $\theta$에 대한 완비충분통계량이다.  
-$\theta$의 불편추정량은 $E_\theta(Y/n) = \theta$이므로, 포아송분포의 평균 공식에 따라, $\hat\theta = Y/n = \frac{1}{n}\sum_{i=1}^n X_i$가 $\theta$의 UMVUE이다.
+포아송분포의 평균 공식에 따라, $\theta$의 불편추정량은 $E_\theta(Y/n) = \theta$이므로, $\hat\theta = Y/n = \frac{1}{n}\sum_{i=1}^n X_i$가 $\theta$의 UMVUE이다.
 
 #### 예 8.3.3 지수분포
 $X_i \sim \mathrm{Exp}(\theta),\ \theta>0$ : 충분통계량: $Y = \sum X_i$  
@@ -702,7 +710,7 @@ $$E_\theta[g(Y)] = \int_0^\infty g(t\theta) \frac{1}{\Gamma(n)} t^{n-1} e^{-t} d
    
 라플라스 변환은 함수 f와 일대일 대응이라 알려져 있다. 따라서 $Y$는 $\theta$에 대한 완비충분통계량이다.
 
-$E_\theta(Y/n) = \theta$이므로, 표본평균 $\bar X = Y/n$은 $\theta$의 불편추정량이자 UMVUE이다.
+감마분포의 특성에 따라 $E_\theta(Y) = n\theta$이므로, $E_\theta(Y/n) = \theta$이고, 표본평균 $\bar X = Y/n$은 $\theta$의 불편추정량이자 UMVUE이다.
 
 ### 정리 8.3.2 다중모수 지수족의 완비충분통계량
 확률밀도함수가

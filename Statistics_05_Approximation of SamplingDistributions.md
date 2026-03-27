@@ -1023,7 +1023,6 @@ $$\sqrt{n}(S_n^2 - \sigma^2) \xrightarrow{d} N\left(0,\, (\rho_4 + 2)\sigma^4\ri
 
 여기서 $\rho_4$는 모집단의 **첨도(kurtosis)** 이며, 정규분포에서는 $\rho_4 = 0$이다.
 
-
 ### 정리 5.3.2 연속함수와 극한분포 (연속함수 정리, Continuous Mapping Theorem)
 
 **정리:**  

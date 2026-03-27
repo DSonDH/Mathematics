@@ -9,7 +9,7 @@
 검정 문제: $H_0: \theta = \theta_0 \quad \text{vs} \quad H_1: \theta = \theta_1$
 
 **[복합 가설(composite hypothesis)]**  
-단순 가설과 달리, 귀무가설 또는 대립가설이 하나의 확률분포가 아니라 여러 개의 모수값(즉, 여러 확률분포)으로 정의되는 경우를 **복합 가설(composite hypothesis)**이라 한다.  
+단순 가설과 달리, 귀무가설 또는 대립가설이 하나의 확률분포가 아니라 여러 개의 모수값(즉, 여러 확률분포)으로 정의되는 경우를 **복합 가설(composite hypothesis)** 이라 한다.  
 - 예시: $H_0: \theta \leq \theta_0$ 또는 $H_1: \theta > \theta_0$  
     이 경우 $H_0$는 $\theta$가 $\theta_0$ 이하인 모든 값을 포함하므로, 하나의 확률분포가 아니라 여러 분포의 집합이 된다.
 - 일반적으로 실제 통계적 검정에서는 복합가설이 더 자주 등장한다.
@@ -627,7 +627,7 @@ $$H_0:\mu=\mu_0 ,\quad H_1:\mu\ne\mu_0$$
 **풀이**  
 전역최강력 검정(UMP test)이 존재한다면, 모든 $\mu_1 < \mu_0 < \mu_2$에 대해  
 
-$$H_0:\mu=\mu_0\ \text{vs}\ H_1:\mu=\mu_1, \qquadH_0:\mu=\mu_0\ \text{vs}\ H_1:\mu=\mu_2$$
+$$H_0:\mu=\mu_0\ \text{vs}\ H_1:\mu=\mu_1, \quad H_0:\mu=\mu_0\ \text{vs}\ H_1:\mu=\mu_2$$
 
 각각에 대해 유의수준 $\alpha$의 최강력 검정(MP test)이 되어야 한다.
 

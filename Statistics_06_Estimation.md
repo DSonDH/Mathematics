@@ -119,11 +119,7 @@ $$\hat m_r = \frac{1}{n}\sum_{i=1}^n X_i^r \quad (r=1,\dots,k)$$
 
 과 모수 $\eta = g(m_1,\dots,m_k)$ 에 대하여, 함수 $g$가 연속이면
 
-$$\hat\eta_n^{\mathrm{MME}} = g(\hat m_1,\dots,\hat m_k)$$
-
-는
-
-$$\hat\eta_n^{\mathrm{MME}} \xrightarrow{p} \eta$$
+$$\hat\eta_n^{\mathrm{MME}} = g(\hat m_1,\dots,\hat m_k)\xrightarrow{p} \eta$$
 
 즉, **확률수렴**한다.
 

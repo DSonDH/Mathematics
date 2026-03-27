@@ -265,6 +265,25 @@ $$
 
 이는 $H(n; N, D)$의 확률질량함수이다. □
 
+### 추가: 스털링(Stirling) 의 공식
+이항분포의 확률질량함수는 스털링의 근사공식을 이용하여 적분으로 근사할 수 있다.
+
+$$m! \sim m^{m+1/2} e^{-m}\sqrt{2\pi},\quad m \to \infin$$
+
+#### 증명
+$$m! = \Gamma(m+1) = \int_0^\infty x^m e^{-x} dx = \int_0^\infty e^{m \log x - x} dx \\
+= \int_0^\infty e^{m \log my - my} m\ dy = m^{m+1} \int_0^\infty e^{m(\log y - y)} dy \\
+m^{m+1}e^{-m} \int_0^\infty e^{m(\log y - y + 1)} dy \\
+= m^{m+1}e^{-m} \int_0^\infty exp\left [m\left(-\frac{(y-1)^2}{2} + \frac{(y-1)^3}{3} - \cdots\right) \right ] dy \\
+= m^{m+1}e^{-m} \int_0^\infty e^{-\frac{m(y-1)^2}{2}} exp\left [m\left(\frac{(y-1)^3}{3} - \cdots\right) \right ] dy $$
+
+여기서 $z=\sqrt{m}(y-1)$로 치환하면
+
+$$= m^{m+1}e^{-m} \int_{-\sqrt{m}}^\infty e^{-\frac{z^2}{2}} exp\left [m\left(\frac{(z/\sqrt{m})^3}{3} - \frac{(z/\sqrt{m})^4}{4} + \cdots\right) \right ] \frac{dz}{\sqrt{m}} \\
+= m^{m+1/2}e^{-m} \sqrt{2\pi} \cdot \int_{-\sqrt{m}}^\infty \frac{1}{\sqrt{2\pi}} e^{-\frac{z^2}{2}} \times \left[ 1 + \frac{m}{3}\left(\frac{z}{\sqrt{m}}\right)^3 - \frac{m}{4}\left(\frac{z}{\sqrt{m}}\right)^4 + \cdots \right] dz \\
+\sim m^{m+1/2}e^{-m} \sqrt{2\pi}, \quad m \to \infty
+$$
+
 ### 다항분포 (Multinomial Distribution)
 
 각 시행의 결과가 $k$개의 범주 중 하나로 나타나고,
