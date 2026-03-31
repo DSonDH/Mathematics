@@ -34,7 +34,9 @@ $N\times N$의 동치관계
 $$
 E : (m,n) E (m',n') \iff m+n' = m'+n
 $$
+
 의 동치류 
+
 $$
 [(m,n)] =
 \begin{cases}
@@ -61,9 +63,11 @@ $$
 ## (3) 유리수의 구성
 ### Def 1. (유리수의 구성적 정의)
 $\mathbb{Z}\times(\mathbb{Z}-\{0\})$의 동치관계
+
 $$
 E : (a,b)E(a',b') \iff a b' = a' b
 $$
+
 의 동치류 $[(a,b)]$를 유리수라 하며, 이들의 집합을 $\mathbb{Q}$ 로 표현한다.
 
 ### Def 2. (유리수의 연산)
@@ -127,9 +131,11 @@ $C, D \in \mathbb{R}$에 대해 $CD$ 혹은 $C \times D$를 다음과 같이 정
    $CD = 0'$
 
 * 실수 $1'$은
+   
    $$
    1' = \{ x \in \mathbb{Q} \mid x < 1 \}
    $$
+   
    로 정의한다.
 
 * $C \in \mathbb{R}$에 대해
@@ -137,6 +143,7 @@ $C, D \in \mathbb{R}$에 대해 $CD$ 혹은 $C \times D$를 다음과 같이 정
    \frac{1}{C}
    = \{ d \in \mathbb{Q} \mid \forall c \in C,\ \exists d \text{ s.t. } d < d' \ \text{with}\ cd' < 1 \}
    $$
+   
    로 정의한다.
 
 # 3. 실수체계의 성질

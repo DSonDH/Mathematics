@@ -46,9 +46,11 @@ $n \in S \Rightarrow n' = n+1 \in S$.
   - 즉, 상계가 없다. 자연수를 벗어난 더 큰 값이 없다
 
 3. 아르키메데스 성질 (Archimedean property)
+   
    $$
    \forall \varepsilon > 0, \exists n \in \mathbb N \text{ such that } \frac{1}{n} < \varepsilon.
    $$
+   
    - 증명: 위에 유계 성질, 귀류법 활용해서 쉽게 증명 가능
 
 
@@ -63,9 +65,11 @@ $$\mathbb Q = \left\{ \frac{m}{n} \middle| m,n \in \mathbb Z, n\ne 0 \right\} $$
 
 ## (2) 조밀성 (Density)
 ### Thm 1. 유리수의 조밀성
+
 $$
-\forall a,b \in \mathbb R, a<b \Rightarrow \exists q \in \mathbb Q \text{ such that } a<q<b.
+\forall a,b \in \mathbb R, a<b \Rightarrow \exists q \in \mathbb Q \text{ such that } a<q<b
 $$
+
 어떻게든 작은 간격을 잡아도, 그 사이에 또 다른 유리수가 존재함.  
 
 #### 증명
@@ -82,14 +86,17 @@ $m$이 $S$의 최소원소이므로 $m-1 \notin S$ 이고, 따라서 $m-1 \le na
 $\Leftrightarrow \dfrac{m-1}{n} \le a$.
 
 이제
+
 $$
 a < \frac{m}{n} \le a+\frac{1}{n} < b
 $$
+
 가 된다. (마지막 부등식은 $\frac{1}{n} < b-a$ 사용)
 
 따라서
+
 $$
-\exists q=\frac{m}{n}\in\mathbb{Q}\ \text{s.t.}\ a<q<b.
+\exists q=\frac{m}{n}\in\mathbb{Q}\ \text{s.t.}\ a<q<b
 $$
 
 **case 2) $a<0<b$**  
@@ -100,35 +107,37 @@ $a<q<b$ 를 만족한다.
 부호를 바꾸면 $0<-b<-a$이므로 $-b$와 $-a$는 양수이고 $-b < -a$ 이다.
 
 따라서 case 1을 $(-b,-a)$에 적용하면
+
 $$
-\exists r\in\mathbb Q \ \text{s.t.}\ -b<r<-a.
+\exists r\in\mathbb Q \ \text{s.t.}\ -b<r<-a
 $$
 
 유리수는 음수에 대해서도 닫혀 있으므로 $q=-r \in \mathbb Q$ 이고,
-부호를 다시 바꾸면
-$$
-a< -r < b.
-$$
+부호를 다시 바꾸면 $a< -r < b$
 
 즉
+
 $$
-\exists q\in\mathbb Q\ \text{s.t.}\ a<q<b.
+\exists q\in\mathbb Q\ \text{s.t.}\ a<q<b
 $$
 
 세 경우를 모두 합쳐서
 $\forall a,b\in\mathbb R,\ a<b \Rightarrow \exists q\in\mathbb Q$ with $a<q<b$ 가 성립한다.
 따라서 유리수의 조밀성이 증명된다.
 ### Thm 2. 무리수의 조밀성
+
 $$
-\forall a,b \in \mathbb R, a<b \Rightarrow \exists \alpha \in \mathbb I \text{ such that } a<\alpha<b.
+\forall a,b \in \mathbb R, a<b \Rightarrow \exists \alpha \in \mathbb I \text{ such that } a<\alpha<b
 $$
+
 어떻게든 작은 간격을 잡아도, 그 사이에 또 다른 무리수가 존재함.  
 
 #### 증명  
 $a<b \Longleftrightarrow a+\sqrt{2} < b+\sqrt{2}$  
 유리수의 조밀성에 의해
+
 $$
-\exists r\in\mathbb Q\ \text{s.t.}\ a+\sqrt{2} < r < b+\sqrt{2}.
+\exists r\in\mathbb Q\ \text{s.t.}\ a+\sqrt{2} < r < b+\sqrt{2}
 $$
 
 Let $s = r - \sqrt{2}$  
@@ -136,21 +145,24 @@ Let $s = r - \sqrt{2}$
 $s = r - \sqrt{2} \in \mathbb I.$
 
 부등식에 $-\sqrt{2}$ 를 더하면
+
 $$
 a < r-\sqrt{2} < b
 $$
 
 즉,
+
 $$
-a < s < b.
+a < s < b
 $$
 
 따라서 $a$와 $b$ 사이에 무리수 $s$가 존재한다 $\blacksquare$
 
 **Note:** $\sqrt{2}$는 임의의 무리수 상수를 대표하는 예시이다.  
-다른 무리수(예: $\pi$, $e$, $\sqrt{3}$ 등)를 사용해도 동일하게 증명된다.
+다른 무리수(예: $\pi$, $e$, $\sqrt{3}$ 등)를 사용해도 동일하게 증명된다
+
 $$
-\forall a,b \in \mathbb R, a<b \Rightarrow \exists \alpha \in \mathbb I \text{ such that } a<\alpha<b.
+\forall a,b \in \mathbb R, a<b \Rightarrow \exists \alpha \in \mathbb I \text{ such that } a<\alpha<b
 $$
 
 # 3. 실수
@@ -256,12 +268,11 @@ Thm 2. $s\in\mathbb{R}$가 집합 $S$의 상계일 때, 다음 세 명제는 동
 >가정 (2)에 의해 $\exists x\in S \text{ such that } x > s-\varepsilon.$
 >
 >그런데 
->$$
->s-\varepsilon
+>
+>$$s-\varepsilon
 >= s - \frac{s-\sup S}{2}
 >= \frac{s+\sup S}{2}
->> \sup S.
->$$
+>> \sup S$$
 >
 >따라서 $x > s-\varepsilon > \sup S.$  
 >이는 상계의 정의 $\forall y\in S, y \le \sup S$ 와 모순.  
@@ -303,19 +314,22 @@ $S$는 $\mathbb{Q}$에서 위로 유계이지만 상한을 갖지 않는다.
 따라서 $\mathbb{Q}$는 완비성 공리를 만족하지 않는다. $\blacksquare$
 
 ### Thm. [아르키메데스 성질 – 실수 버전]
+
 $$
-\forall \varepsilon > 0, M \in \mathbb R \Rightarrow \exists N \in \mathbb N \text{ such that } N\varepsilon > M.
+\forall \varepsilon > 0, M \in \mathbb R \Rightarrow \exists N \in \mathbb N \text{ such that } N\varepsilon > M
 $$
 
 #### 증명
 $\varepsilon > 0$이고 $M \in \mathbb R$이라 하자.
 
 $\frac{M}{\varepsilon}$는 실수이므로, 자연수는 위로 유계가 아니라는 성질에 의해
+
 $$
-\exists N \in \mathbb N \text{ such that } N > \frac{M}{\varepsilon}.
+\exists N \in \mathbb N \text{ such that } N > \frac{M}{\varepsilon}
 $$
 
 양변에 $\varepsilon > 0$을 곱하면
+
 $$
 N\varepsilon > M. \blacksquare
 $$
@@ -325,22 +339,23 @@ $$
 
 ### 추가: 정리
 양수의 집합이 각각 P_F, P_G로 주어진 두 순서체 F, G가 완비성공리를 만족한다 하자. 그러면 전단사함수 f: F → G 가 존재하여 모든 x,y ∈ F 에 대하여 다음이 성립한다.
-1. f(x + y) = f(x) + f(y), f(xy) = f(x)f(y)
-2. f(P_F) = P_G
+1. $f(x + y) = f(x) + f(y), f(xy) = f(x)f(y)$
+2. $f(P_F) = P_G$
 
 (해석개론 김김계, 13p)
 
 ### 추가: 상한, 하한 관련 성질
-실수의 두 집합 A, B에 대하여 S + T = { s + t | s ∈ S, t ∈ T }, S·T = { s·t | s ∈ S, t ∈ T }라 하면
-1. sup(A + B) = sup A + sup B
-2. inf(A + B) = inf A + inf B
-3. sup(A·B) = (sup A)(sup B), if A, B ⊆ ℝ^+ (양의 실수)
-4. inf(A·B) = (inf A)(inf B), if A, B ⊆ ℝ^+ (양의 실수)
-5. 주의: 임의의 집합 X에서 정의된 실함수 f,g: X → ℝ에 대하여 sup{ f(x) + g(x) | x ∈ X } \leq sup{ f(x) | x ∈ X } + sup{ g(x) | x ∈ X } 
+실수의 두 집합 A, B에 대하여 $S + T = \{ s + t \mid s \in S, t \in T \}, S\cdot T = \{ s\cdot t \mid s \in S, t \in T \}$라 하면
+1. $\sup(A + B) = \sup A + \sup B$
+2. $\inf(A + B) = \inf A + \inf B$
+3. $\sup(A\cdot B) = (\sup A)(\sup B), \text{if } A, B \subseteq \mathbb{R}^+ \text{ (양의 실수)}$
+4. $\inf(A\cdot B) = (\inf A)(\inf B), \text{if } A, B \subseteq \mathbb{R}^+ \text{ (양의 실수)}$
+5. 주의: 임의의 집합 X에서 정의된 실함수 $f,g: X \to \mathbb{R}$에 대하여 $\sup\{ f(x) + g(x) \mid x \in X \} \leq \sup\{ f(x) \mid x \in X \} + \sup\{ g(x) \mid x \in X \}$
 
 
 ## 3) 완비성의 예 – 무한소수
-위로 유계인 임의의 무한소수 부분집합 $A$를 생각한다.
+위로 유계인 임의의 무한소수 부분집합 $A$를 생각한다
+
 $$
 a_0 = \max \{ x_0 \mid x_0.x_1x_2x_3\ldots \in A \} \\ 
 a_1 = \max \{ x_1 \mid a_0.x_1 x_2 x_3 \cdots \in A \} \\

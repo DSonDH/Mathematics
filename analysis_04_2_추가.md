@@ -3,6 +3,7 @@
 ## Lipschitz 연속 (Lipschitz Continuity)
 함수 $f: X \to Y$가 **Lipschitz 연속**이라는 것은 다음을 만족하는 상수 $K \geq 0$가 존재하는 것이다:  
 ($d_X$와 $d_Y$는 각각 공간 $X$와 $Y$의 거리 함수 (metric))  
+
 $$d_Y(f(x_1), f(x_2)) \leq K \cdot d_X(x_1, x_2), \quad \forall x_1, x_2 \in X$$
 
 ### 주요 성질
@@ -44,19 +45,22 @@ $$d_Y(f(x_1), f(x_2)) \leq K \cdot d_X(x_1, x_2), \quad \forall x_1, x_2 \in X$$
 **기본 구조**:
 1. **단순 함수로 시작**: 값이 유한개인 계단 함수 사용
 2. **각 함숫값에 대해 계산**:
-   $$(\text{함숫값}) \times (\text{그 값을 갖는 집합의 측도})$$
+   $(\text{함숫값}) \times (\text{그 값을 갖는 집합의 측도})$
 3. **근사의 극한**: 점점 더 정교한 단순 함수로 근사하여 극한을 취함
 
 ### 단순 함수 (Simple Function)
+
 $$s(x) = \sum_{i=1}^{n} a_i \chi_{E_i}(x)$$
 
 여기서:
 - $a_i \in \mathbb{R}$는 **함수가 가지는 유한개의 상수 값**
 - $E_i$는 서로소인 **가측 집합** (measurable set): 측도를 잴 수 있는 집합
 - $\chi_{E_i}$는 **특성 함수** (characteristic function): 
+  
   $$\chi_{E_i}(x) = \begin{cases} 1 & x \in E_i \\ 0 & x \notin E_i \end{cases}$$
 
 단순 함수의 르벡 적분:
+
 $$\int s \, d\mu = \sum_{i=1}^{n} a_i \mu(E_i)$$
 
 ### 비음 가측 함수의 적분

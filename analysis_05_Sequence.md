@@ -87,13 +87,17 @@ $$\exists N \in \mathbb{N} \text{ s.t. } \forall n \ge N, |a_n - a| < 1$$
 
 따라서 $n \ge N$일 때 $|a_n| < |a| + 1$이다.
 또한, $n = 1, 2, \ldots, N-1$에 대하여
+
 $$
 M_1 = \max\{ |a_1|, |a_2|, \ldots, |a_{N-1}| \}
 $$
+
 이라 하면, 모든 $n \in \mathbb{N}$에 대하여
+
 $$
 |a_n| \le \max\{ M_1, |a| + 1 \}
 $$
+
 이므로 $\{a_n\}$은 유계이다.
 
 ### Thm. 3. [수열 극한의 연산] *(Limit Laws for Sequences)*
@@ -105,7 +109,9 @@ $\lim a_n=a$, $\lim b_n=b$이면 다음이 성립한다.
 
 >### 추가: 실수 수열의 상한과 하한 *(Supremum and Infimum)*
 >실수 수열 $\{a_n\}_{n\in\mathbb{N}}\subset\mathbb{R}$의 값집합을
+>
 >$$A:=\{a_n:n\in\mathbb{N}\}\subset\mathbb{R}$$
+>
 >이라 하자.
 >
 >**1. 상한 (Supremum)**  
@@ -159,22 +165,24 @@ $\lim a_n=a$, $\lim b_n=b$이면 다음이 성립한다.
 >
 >**상극한 (Limit Superior)**
 >각 $n$에 대하여 $M_n := \sup_{k\ge n} a_k$로 정의하면, $\{M_n\}$은 단조감소수열이다. 따라서 $\{M_n\}$이 아래로 유계이면 수렴하며, 이 극한을 상극한이라 정의한다:
+>
 >$$
->\limsup_{n\to\infty} a_n := \overline{\lim_{n\to\infty}} a_n = \lim_{n\to\infty} \sup_{k\ge n} a_k
->$$
+>\limsup_{n\to\infty} a_n := \overline{\lim_{n\to\infty}} a_n = \lim_{n\to\infty} \sup_{k\ge n} a_k$$
 >
 >**상극한의 다른 정의**  
 >상극한의 정의로부터 다음이 성립한다:
+>
 >$$\limsup_{n\to\infty} a_n = \bar{l} \in \mathbb{R} \Leftrightarrow \forall \varepsilon > 0, \begin{cases} a_n < \bar{l} + \varepsilon & \text{a.b.f.}(n) \\ a_n > \bar{l} - \varepsilon & \text{i.o.}(n) \end{cases}$$
+>
 >- a.b.f. (almost but finitely): 유한개를 제외한 모든 $n$에 대해, 즉 $\exists N$ s.t. $\forall n \ge N$
 >- i.o. (infinitely often): 무한히 많은 $n$에 대해
 >
 >**하극한 (Limit Inferior)**
->$$
->\liminf_{n\to\infty} a_n := \underline{\lim_{n\to\infty}} a_n = \lim_{n\to\infty} \inf_{k\ge n} a_k
->$$
+>
+>$$\liminf_{n\to\infty} a_n := \underline{\lim_{n\to\infty}} a_n = \lim_{n\to\infty} \inf_{k\ge n} a_k$$
 >
 >**하극한의 다른 정의**  
+>
 >$$\liminf_{n\to\infty} a_n = \underline{l} \in \mathbb{R} \Leftrightarrow \forall \varepsilon > 0, \begin{cases} a_n > \underline{l} - \varepsilon & \text{a.b.f.}(n) \\ a_n < \underline{l} + \varepsilon & \text{i.o.}(n) \end{cases}$$
 >
 >#### 예제
@@ -233,6 +241,7 @@ $M_n = \sup_{k \ge n} x_k$이므로 $x_k \le M_n < \alpha + \varepsilon$이다.
 
 **성질 2 증명:**  
 임의의 $\varepsilon > 0$에 대해, $M_n = \sup_{k \ge n} x_k$의 정의에 의해
+
 $$
 M_n > \alpha - \varepsilon \text{ (왜냐하면 } M_n \to \alpha)
 $$
@@ -437,7 +446,6 @@ $$\lim_{n\to\infty} a_n = \alpha$$
 2. $[a_{n+1},b_{n+1}]\subset[a_n,b_n]$이며
 3. $\lim(b_n-a_n)=0$이면
 
-
 $$\bigcap_{n=1}^\infty[a_n,b_n]=\{\alpha\}$$
 
 인 $\alpha\in\mathbb R$가 존재한다.
@@ -497,6 +505,7 @@ $n_2 > n_1$인 $a_{n_2} \in I_3$를 선택한다.
 
 임의의 $\varepsilon > 0$에 대해, 충분히 큰 $K$를 선택하면 $I_K$의 길이가 $\varepsilon$보다 작고,
 $k \ge K$일 때 $a_{n_k}, \alpha \in I_K\subset I_K$이므로
+
 $$
 |a_{n_k} - \alpha| < \varepsilon
 $$
@@ -506,6 +515,7 @@ $$
 ### Cor. [최대 최소정리] *(Extreme Value Theorem)*
 $f$가 $[a,b]$에서 연속이면
 $\exists a_0,b_0\in[a,b]$ s.t.
+
 $$
 f(a_0)\le f(x)\le f(b_0)\quad(\forall x\in[a,b])
 $$
@@ -807,6 +817,7 @@ $(\Leftarrow$ 방향) 주어진 두 성질을 만족한다고 하자.
 (1) $\{a_n\}$이 유계 $\Rightarrow \lim a_n$ 존재  
 (2) $\lim(a_n+b_n)=\infty\Rightarrow \lim a_n=\infty$ 또는 $\lim b_n=\infty$  
   - 거짓
+
   - $$
     a_n =
     \begin{cases}
@@ -830,6 +841,7 @@ $(\Leftarrow$ 방향) 주어진 두 성질을 만족한다고 하자.
 2. $a_1=1$, $a_{n+1}=\sqrt{1+a_n}$으로 정의된 수열의 수렴성을 판별하시오.
 
 3. 다음 급수의 수렴성을 조사하시오.
+
    $$
    1-\frac12+\frac13-\frac14+\cdots
    $$

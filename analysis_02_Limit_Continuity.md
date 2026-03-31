@@ -26,6 +26,7 @@ $\lim_{x\to a} f(x)=L$ 로 표기한다.
 
 #### 예제1
 함수
+
 $$
 f(x)=
 \begin{cases}
@@ -33,6 +34,7 @@ x, & x\neq 0 \\
 1, & x=0
 \end{cases}
 $$
+
 에 대하여 $\lim_{x\to 0} f(x)=0$ 임을 보인다.
 
 **증명**  
@@ -45,12 +47,14 @@ $x\neq 0$ 이므로 $|f(x)|=|x|.$
 따라서 $|f(x)-0|=|x|<\varepsilon.$  
 즉, $0<|x-0|<\delta \Rightarrow |f(x)-0|<\varepsilon.$
 그러므로
+
 $$
 \lim_{x\to 0} f(x)=0.
 $$
 
 #### 예제 2 (Dirichlet function)
 함수
+
 $$
 f(x)=
 \begin{cases}
@@ -58,6 +62,7 @@ f(x)=
 0, & x\in \mathbb{I}
 \end{cases}
 $$
+
 에 대하여 $\lim_{x\to 0} f(x)$는 존재하지 않음을 보인다.
 
 **증명**  
@@ -134,31 +139,35 @@ $A, B \in \mathbb{R}$ 이고 $f,g : D\to \mathbb{R},\ a\in D$라 하자. $\lim_{
 $\lim_{x\to a} f(x)=A$ 이므로 $\exists\delta_1>0$ s.t. $|x-a|<\delta_1 \Rightarrow |f(x)-A|<\frac{\varepsilon}{2}.$  
 $\lim_{x\to a} g(x)=B$ 이므로 $\exists\delta_2>0$ s.t. $|x-a|<\delta_2 \Rightarrow |g(x)-B|<\frac{\varepsilon}{2}.$ 
 $\delta=\min\{\delta_1,\delta_2\}$로 두면,
+
 $$
-|x-a|<\delta \Rightarrow
-|(f(x)+g(x))-(A+B)|
-$$
-$$
-\le |f(x)-A|+|g(x)-B|<\varepsilon.
+|x-a|<\delta \Rightarrow |(f(x)+g(x))-(A+B)|
+\\ \le |f(x)-A|+|g(x)-B|<\varepsilon.
 $$
 
-3.
-  - 임의의 $\varepsilon>0$를 잡는다.  삼각부등식에 의해, $$ |f(x)g(x)-AB|=|f(x)g(x)-Ag(x)+Ag(x)-AB| \\ \leq |fg-Ag| + |Ag-AB|= |g||f-A| + |A||g-B| $$
+3. 임의의 $\varepsilon>0$를 잡는다.  삼각부등식에 의해, 
+
+$$ |f(x)g(x)-AB|=|f(x)g(x)-Ag(x)+Ag(x)-AB| \\ \leq |fg-Ag| + |Ag-AB|= |g||f-A| + |A||g-B| $$
 
 $\lim_{x\to a} g(x)=B$ 이므로  
 $\exists\delta_0>0$ s.t. $|x-a|<\delta_0 \Rightarrow |g(x)-B|<1$  
 따라서 $|g(x)|\le |B|+1.$  
 
 이제 임의의 $\varepsilon>0$에 대해  
+
 $$|f(x)-A|<\frac{\varepsilon}{2(|B|+1)},\quad
 |g(x)-B|<\frac{\varepsilon}{2(|A|+1)}$$
+
 가 되도록 $\delta_1,\delta_2$를 잡는다.  
 $\delta=\min\{\delta_0,\delta_1,\delta_2\}$ 이면  
+
 $$|f(x)g(x)-AB| < |g||f-A| + |A||g-B| < \varepsilon/2 + \varepsilon/2$$
- $$\therefore |f(x)g(x)-AB|<\varepsilon.$$
+
+$$\therefore |f(x)g(x)-AB|<\varepsilon.$$
 
 4.
   - 임의의 $\varepsilon>0$를 잡는다.  
+
 $$
 \left|\frac{f(x)}{g(x)}-\frac{A}{B}\right|
 =\left|\frac{Bf(x)-Ag(x)}{Bg(x)}\right|
@@ -166,11 +175,13 @@ $$
 $$
 
 $\lim_{x\to a} g(x)=B\ne0$ 이므로 $\exists\delta_0>0$ s.t.
+
 $$
 |x-a|<\delta_0 \Rightarrow |g(x)|>\frac{|B|}{2}.
 $$
 
 따라서
+
 $$
 \left|\frac{f(x)}{g(x)}-\frac{A}{B}\right|
 \le \frac{2}{|B|^2}\Big(|B||f(x)-A|+|A||g(x)-B|\Big).
@@ -180,12 +191,14 @@ $$
 $|A||g(x)-B|<\frac{|B|^2\varepsilon}{4}$ 가 되도록 $\delta_2>0$ 을 택한다.  
 
 $\delta=\min\{\delta_0,\delta_1,\delta_2\}$ 로 두면 $|x-a|<\delta$ 일 때
+
 $$
 \left|\frac{f(x)}{g(x)}-\frac{A}{B}\right|
 \le \frac{2}{|B|^2}\left(\frac{|B|^2\varepsilon}{4}+\frac{|B|^2\varepsilon}{4}\right)=\varepsilon.
 $$
 
 즉,
+
 $$
 \lim_{x\to a}\frac{f(x)}{g(x)}=\frac{A}{B}.
 $$
@@ -205,6 +218,7 @@ $|x-a|<\delta_1 \Rightarrow |f(x)-L|<\varepsilon/2$.
 $|x-a|<\delta_2 \Rightarrow |f(x)-M|<\varepsilon/2$.
 
 $\delta=\min\{\delta_1,\delta_2\}$로 두면 $|x-a|<\delta$에서
+
 $$
 |L-M|
 = |L-f(x)+f(x)-M|
@@ -230,6 +244,7 @@ $|x-a|<\delta_2 \Rightarrow |h(x)-L|<\varepsilon$, 즉
 $L-\varepsilon<h(x)<L+\varepsilon$.
 
 $\delta=\min\{\delta_1,\delta_2\}$로 두면 $|x-a|<\delta$에서
+
 $$
 L-\varepsilon<f(x)\le g(x)\le h(x)<L+\varepsilon.
 $$
@@ -250,6 +265,7 @@ $\frac{\sin x}{x} < 1 < \frac{\tan x}{x}.$
 $1 < \frac{1}{\cos x}$
 
 따라서
+
 $$
 \cos x < \frac{\sin x}{x} < 1 \quad (0<x<\tfrac{\pi}{2})
 $$
@@ -289,10 +305,12 @@ $|x-2|<\delta$ 를 만족하는 경우는 오직 $x=2$ 뿐이다.
 따라서 $|x-2|<\delta$ 이면 반드시 $x=2$이고,
 $|f(x)-f(2)| = |1-1| = 0 < \varepsilon$  
 즉,
+
 $$
 \forall \varepsilon>0,\ \exists\delta>0\ \text{s.t.}\
 |x-2|<\delta \Rightarrow |f(x)-f(2)|<\varepsilon.
 $$
+
 그러므로 $f$는 $x=2$에서 연속이다.
 
 **개념적으로 중요한 점**  
@@ -330,6 +348,7 @@ $f: D\to \mathbb{R}, X \subseteq D$라 하자.
 임의의 $a\in X$를 잡는다. 즉, $a>0$이다.
 임의의 $\varepsilon>0$를 잡는다.
 Then $\forall x\in(0, \infty)$, with $|x-a|<\delta$
+
 $$
 |f(x)-f(a)| =|x^2-a^2| =|x-a||x+a|
 $$
@@ -341,14 +360,17 @@ $|x-a|<1$ 이면 $a-1 < x < a+1$ 이므로 $|x+a| < 2a+1$
 
 이제 $\delta = \min\{1, \frac{\varepsilon}{2a+1}\}$
 로 두면, $|x-a|<\delta\leq \frac{\varepsilon}{2a+1}$
+
 $$
 \therefore |f(x)-f(a)|<\varepsilon.
 $$
 
 즉,
+
 $$
 \forall \varepsilon>0,\ \exists\delta>0\ \text{s.t.}\ |x-a|<\delta \Rightarrow |f(x)-f(a)|<\varepsilon.
 $$
+
 따라서 $f$는 임의의 $a>0$에서 연속이다.  
 $a$가 $X$의 임의의 원소였으므로, $f$는 $x>0$에서 연속이다.
 
@@ -359,10 +381,16 @@ $a$가 $X$의 임의의 원소였으므로, $f$는 $x>0$에서 연속이다.
 
 $f: D\to \mathbb{R}, a \in D$라 하자. (즉 함숫값이 존재할 때)  
 (제 1종 불연속점)  
-  - 제거가능(removable discontinuity) 불연속점 $$x=a \quad \text{s.t. }\lim_{x\to a^+}f(x)=\lim_{x\to a^-}f(x)\neq f(a)$$
+  - 제거가능(removable discontinuity) 불연속점 
+  
+  $$x=a \quad \text{s.t. }\lim_{x\to a^+}f(x)=\lim_{x\to a^-}f(x)\neq f(a)$$
+  
     - 이 값만 대체하면 연속이 되므로
 
-  - 비약 불연속점 (jump discontinuity) $$x=a \quad \text{s.t. }\lim_{x\to a^+}f(x)\neq\lim_{x\to a^-}f(x)$$
+  - 비약 불연속점 (jump discontinuity) 
+  
+  $$x=a \quad \text{s.t. }\lim_{x\to a^+}f(x)\neq\lim_{x\to a^-}f(x)$$
+  
     - 좌극한, 우극한 이지러진 경우
 
 (제 2종 불연속점)  
