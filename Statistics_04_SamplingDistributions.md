@@ -1113,27 +1113,6 @@ $$
 
 **(a) 표본평균**
 
-$$
-\bar X=\frac{X_1+\cdots+X_n}{n}\text{의 분포는}\quad\bar X\sim N(\mu,\sigma^2/n)
-$$
-
-**(b) 표본분산과 표본평균의 독립성**
-
-$$
-S^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar X)^2\text{와 표본평균 } \bar X\text{는 서로 독립이다.}
-$$
-
-**(c) 표본분산의 분포**
-
-$$
-\frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)
-$$
-
-### 정리 4.2.2 정규모집단 경우의 표본분포에 관한 기본 정리
-정규분포 $N(\mu,\sigma^2)$에서의 랜덤표본을 $X_1,\dots,X_n$이라 할 때, 다음이 성립한다.
-
-**(a) 표본평균**
-
 $$\bar X=\frac{X_1+\cdots+X_n}{n}\text{의 분포는}\quad\bar X\sim N(\mu,\sigma^2/n)$$
 
 **(b) 표본분산과 표본평균의 독립성**
