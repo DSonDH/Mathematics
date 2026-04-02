@@ -161,8 +161,8 @@ $$\text{Var}(X) = E[\text{Var}(X|Z)] + \text{Var}(E[X|Z])$$
 $$E[\text{Var}(X|Z)] = (1-\epsilon)\sigma_1^2 + \epsilon\sigma_2^2$$
 
 두 번째 항:
-$$\text{Var}(E[X|Z]) = \text{Var}((1-\epsilon)\mu_1 + \epsilon\mu_2)$$
-$$= (1-\epsilon)\epsilon(\mu_1-\mu_2)^2$$
+$$\text{Var}(E[X|Z]) = \text{Var}((1-\epsilon)\mu_1 + \epsilon\mu_2)\\
+= (1-\epsilon)\epsilon(\mu_1-\mu_2)^2$$
 
 따라서 합하면 위 공식을 얻는다.
 
@@ -386,6 +386,74 @@ $$P_w = \frac{w w^T}{w^T w}$$
 
 이 구조는 ANOVA의 "between vs within decomposition"과 완전히 동일한 선형대수 표현이다.
 즉 이 식을 이해하면 이후 LRT, score test, Wald test에서 등장하는 모든 χ² 구조를 거의 동일한 방식으로 해석할 수 있다.
+
+### 정규분포의 **이차형식의 독립성** 특성
+
+정규벡터 $\mathbf{Z} \sim N(\mathbf{0}, I_n)$에서 두 개의 idempotent 행렬 $A, B$에 대해
+
+$$\mathbf{Z}^T A \mathbf{Z} \perp \mathbf{Z}^T B \mathbf{Z}$$
+
+(독립)이 되는 필요충분조건은 $AB = 0$
+
+#### 증명
+
+**필요조건**: $AB = 0$이면 독립임을 보인다.
+
+$\mathbf{Z} \sim N(\mathbf{0}, I_n)$일 때, $A, B$가 idempotent ($A^2=A, B^2=B$)이면
+
+$\mathbb{E}[\mathbf{Z}^T A \mathbf{Z} \cdot \mathbf{Z}^T B \mathbf{Z}]$를 계산한다.
+
+>$X$와 $Y$가 독립이면, 임의의 함수 $g_1, g_2$에 대하여 확률변수 $g_1(X)$와 $g_2(Y)$도 서로 독립이다.
+
+$AB = 0$이면 $A\mathbf{Z}$와 $B\mathbf{Z}$는 **직교**(orthogonal)이고, 정규성에 의해 **독립**이다.
+
+더 정확히: 정규벡터의 선형변환 $A\mathbf{Z}$와 $B\mathbf{Z}$가 uncorrelated이면 독립.
+
+$$\text{Cov}(A\mathbf{Z}, B\mathbf{Z}) = A \mathbb{E}[\mathbf{Z}\mathbf{Z}^T] B^T = AB$$
+
+따라서 $AB = 0 \Rightarrow \text{Cov}(A\mathbf{Z}, B\mathbf{Z}) = 0$ 이고, 정규성에 의해 독립.
+
+**충분조건**: 이차형식들이 독립이면 $AB = 0$임을 보인다.
+
+만약 $AB \ne 0$이면, 공분산이 0이 아니므로 독립이 아님.
+
+### 예시: ANOVA/회귀분석 χ² 분해의 직교투영 해석
+
+다변량 정규분포에서 이차형식의 독립성을 이용하면, 회귀분석의 분산분해 구조를 엄밀하게 증명할 수 있다.
+
+#### 설정
+
+- $\mathbf{Y} = (Y_1, \ldots, Y_n)^T \sim N(\mathbf{X}\boldsymbol{\beta}, \sigma^2 I_n)$
+- $\mathbf{X} = [\mathbf{X}_0 \mid \mathbf{X}_1]$ (부분모형 비교)
+- $\Pi_0 = \mathbf{X}_0(\mathbf{X}_0^T\mathbf{X}_0)^{-1}\mathbf{X}_0^T$ (귀무모형 투영)
+- $\Pi_{0,1} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T$ (전체모형 투영)
+- $\Pi_{1|0} = \Pi_{0,1} - \Pi_0$ (제거 효과 투영, idempotent)
+
+#### 핵심: 직교성과 독립성
+
+**Step 1: 투영행렬의 직교성**
+
+$$\Pi_{1|0}(I - \Pi_{0,1}) = 0$$
+
+**증명**: $(I - \Pi_{0,1})$은 $\text{range}(\mathbf{X})$의 직교여공간으로의 투영이고, $\Pi_{1|0}$는 $\text{range}(\mathbf{X})$ 내의 연산이므로
+
+$$\Pi_{1|0}(I - \Pi_{0,1}) = (\Pi_{0,1} - \Pi_0)(I - \Pi_{0,1})\\
+= \Pi_{0,1} - \Pi_{0,1}^2 - \Pi_0 + \Pi_0\Pi_{0,1}\\
+= \Pi_{0,1} - \Pi_{0,1} - \Pi_0 + \Pi_0 = 0$$
+
+**Step 2: 이차형식의 독립성 적용**
+
+$\mathbf{Y}$를 표준화하면 $\mathbf{Z} = (\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})/\sigma \sim N(\mathbf{0}, I_n)$
+
+두 idempotent 행렬 $A = \Pi_{1|0}$, $B = I - \Pi_{0,1}$에 대해
+
+$$AB = 0 \implies \mathbf{Z}^T A \mathbf{Z} \perp \mathbf{Z}^T B \mathbf{Z}$$
+
+(정규벡터의 이차형식 독립성 원리)
+
+이를 원래 변수로 돌리면
+
+$$R(1|0) = \mathbf{Y}^T\Pi_{1|0}\mathbf{Y} \perp SSE = \mathbf{Y}^T(I-\Pi_{0,1})\mathbf{Y}$$
 
 
 ## 26. 기댓값과 대각합(trace) 연산 순서 교환 (Expectation-Trace Interchange)

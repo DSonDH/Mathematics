@@ -1046,6 +1046,53 @@ $$
 
 ## 정규분포 (Normal Distribution)
 
+>### 참고: 정규분포의 근본적 의의
+>
+>#### (1) 최대 엔트로피 원리
+>
+>주어진 평균 $E[X]=\mu$와 분산 $\mathrm{Var}(X)=\sigma^2$ 제약 조건 하에서 엔트로피
+>
+>$$H(f) = -\int_{-\infty}^{\infty} f(x) \log f(x) \, dx$$
+>
+>를 최대화하는 분포는 무엇인가?
+>
+>라그랑주 승수법을 적용하면, 최적해는
+>
+>$$\log f(x) = \lambda_0 + \lambda_1 x + \lambda_2 x^2$$
+>
+>형태이며, 이를 정리하면
+>
+>$$f(x) \propto \exp\left(-a x^2 + bx\right)$$
+>
+>이는 정규분포의 확률밀도함수와 정확히 일치한다. **즉, 평균과 분산만 고정하고 추가 정보가 없으면, 정규분포가 가장 "비정보적"이고 "덜 가정된" 분포이다.**
+>
+>#### (2) 중심극한정리 (Central Limit Theorem)
+>
+>서로 독립이고 동일한 분포를 따르는 확률변수 $X_1, X_2, \ldots$의 표준화합
+>
+>$$Z_n = \frac{\sum_{i=1}^n X_i - n\mu}{\sqrt{n\sigma^2}}$$
+>
+>은 $n \to \infty$일 때 표준정규분포 $N(0,1)$으로 분포수렴한다.
+>
+>**이 현상이 나타나는 이유:**
+>
+>각 $X_i$의 누율생성함수(cumulant generating function)는
+>
+>$$\kappa(t) = \log M_{X_i}(t) = \mu t + \frac{1}{2}\sigma^2 t^2 + \frac{\kappa_3}{6}t^3 + \cdots$$
+>
+>합 $\sum_{i=1}^n X_i$의 누율생성함수는 $n\kappa(t/\sqrt{n})$이고, $n \to \infty$일 때 표준화하면:
+>
+>$$\log M_{Z_n}(t) = n\kappa(t/\sqrt{n}) = \frac{1}{2}t^2 + O(n^{-1/2})$$
+>
+>**고차 항이 $n^{-1/2}$로 빠르게 소거**되고, **2차항만 남는 테일러 전개 구조**가 정규분포를 만든다.
+>
+>**해석:** 개별 분포의 형태와 무관하게, 합과정에서 1차(평균) 및 2차(분산)만 영향을 미치고 고차 모멘트의 기여는 무시되므로, 극한에서 정규분포로 수렴한다. 이것이 정규분포가 통계학에서 가장 광범위하게 나타나는 이유이다.
+>
+>정규분포는 다음 세 구조의 교차점이다:  
+>① additive structure: 합 → CLT  
+>② quadratic structure: entropy / likelihood  
+>③ symmetry: rotation invariance  
+
 **이항분포의 정규근사(De Moivre–Laplace approximation)**
 
 이항분포 누적확률을 적분으로 근사하는 식:
@@ -1399,5 +1446,5 @@ $$
 | 분포 | 지지집합 (support) | 확률밀도함수 (pdf) | 대의적 정의 | 평균 $E(X)$ | 분산 $\mathrm{Var}(X)$ | 적률생성함수 (mgf) |
 |------|---------------------|-------------------|-------------|-------------|------------------------|-------------------|
 | 지수분포<br>$\mathrm{Exp}(\beta)$<br><sub>사건 간 대기시간</sub> | $[0,\infty)$ | $f(x)=\dfrac{1}{\beta}e^{-x/\beta}\mathbf{1}(x\ge 0)$ | - | $\beta$ | $\beta^2$ | $M_X(t)=(1-\beta t)^{-1}$<br>$t<1/\beta$ |
-| 감마분포<br>$\mathrm{Gamma}(\alpha,\beta)$<br><sub>$\alpha$개 사건까지 총 대기시간</sub> | $(0,\infty)$ | $f(x)=\dfrac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta}\mathbf{1}(x>0)$ | $X\overset{d}{\equiv}\sum_{i=1}^r Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\mathrm{Exp}(\beta)$<br>(when $\alpha=r\in\mathbb{N}$) | $\alpha\beta$ | $\alpha\beta^2$ | $M_X(t)=(1-\beta t)^{-\alpha}$<br>$t<1/\beta$ |
-| 정규분포<br>$N(\mu,\sigma^2)$<br><sub>대칭적 종 모양 분포</sub> | $\mathbb{R}$ | $f(x)=\dfrac{1}{\sqrt{2\pi}\sigma}\exp\!\left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right)$ | $X\overset{d}{\equiv}\sigma Z+\mu$<br>$Z\sim N(0,1)$ | $\mu$ | $\sigma^2$ | $M_X(t)=\exp\!\left(\mu t+\dfrac{1}{2}\sigma^2 t^2\right)$<br>$-\infty<t<\infty$ |
+| 감마분포<br>$\mathrm{Gamma}(\alpha,\beta)$<br><sub>$\alpha$개 사건까지 총 대기시간</sub> | $(0,\infty)$ | $f(x)=\dfrac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta}\mathbf{1}(x>0)$ | $X\overset{d}{\equiv}\sum_{i=1}^\alpha Z_i$<br>$Z_i\stackrel{\text{iid}}{\sim}\mathrm{Exp}(\beta)$ | $\alpha\beta$ | $\alpha\beta^2$ | $M_X(t)=(1-\beta t)^{-\alpha}$<br>$t<1/\beta$ |
+| 정규분포<br>$N(\mu,\sigma^2)$<br><sub> '합의 극한', '최대 엔트로피', '회전대칭성'이라는 서로 다른 원리에서 공통적으로 도출되는 유일한 2차 지수형 분포 </sub> | $\mathbb{R}$ | $f(x)=\dfrac{1}{\sqrt{2\pi}\sigma}\exp\!\left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right)$ | $X\overset{d}{\equiv}\sigma Z+\mu$<br>$Z\sim N(0,1)$ | $\mu$ | $\sigma^2$ | $M_X(t)=\exp\!\left(\mu t+\dfrac{1}{2}\sigma^2 t^2\right)$<br>$-\infty<t<\infty$ |

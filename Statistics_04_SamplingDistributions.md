@@ -486,6 +486,155 @@ $$
 
 한편, 일반적인 구간 $(a,b)$에서의 균등분포는 다음과 같이 정의한다.
 
+>## (추가) 표본분포 간 생성 구조와 해석: 지수 → 감마 → 베타 계보
+>
+>### 서론: 단순 계보를 넘어 "의미 있는 해석"으로
+>
+>표본분포들(지수, 감마, 베타)은 단순한 수학적 정의가 아니라 **구조적 생성 관계(construction)**와 **우도-켤레성(likelihood-conjugacy)**에 의해 연결되어 있다. 각 단계에서 파라미터가 무엇을 의미하는지 이해하면, "성공확률의 불확실성"이라는 해석이 단순 비유가 아닌 수학적 필연이 됨을 알 수 있다.
+>
+>## 1단계: 지수분포 → 감마분포 "대기시간의 누적"
+>
+>### 지수분포의 역할
+>
+>$$X \sim \text{Exp}(\lambda), \quad \text{pdf}_X(x) = \lambda e^{-\lambda x}I_{(0,\infty)}(x)$$
+>
+>**파라미터 의미:**
+>* **λ (rate parameter)**: 단위시간당 사건 발생률
+>* **X**: 첫 번째 사건까지의 대기시간
+>
+>**성질:**
+>* Memoryless property: $P(X > s+t \mid X > s) = P(X > t)$
+>* 포아송 과정의 기본 구성 요소
+>
+>### 감마분포의 생성
+>
+>$$T = X_1 + X_2 + \cdots + X_{\alpha}, \quad X_i \overset{iid}{\sim} \text{Exp}(\lambda)$$
+>
+>$$\therefore T \sim \text{Gamma}(\alpha, \lambda)$$
+>
+>$$\text{pdf}_T(t) = \frac{\lambda^{\alpha}}{\Gamma(\alpha)}t^{\alpha-1}e^{-\lambda t}I_{(0,\infty)}(t)$$
+>
+>**파라미터 의미:**
+>* **α (shape)**: **사건 개수** — 누적하는 지수분포의 개수
+>* **λ (rate)**: 각 지수분포의 발생률 (변하지 않음)
+>
+>**결과적 의미:**
+>$$T = \text{α번째 사건까지의 총 대기시간}$$
+>
+>**핵심 구조:** 시간 축에서의 누적(random accumulation)
+>
+>## 2단계: 감마분포 → 베타분포 "비율의 확률화"
+>
+>### 베타분포의 핵심 생성 공식
+>
+>두 개의 독립 감마분포를 정의하되, **척도 모수를 1로 동일화**:
+>
+>$$X \sim \text{Gamma}(\alpha, 1), \quad Y \sim \text{Gamma}(\beta, 1), \quad X \perp Y$$
+>
+>**비율 정의:**
+>$$P := \frac{X}{X+Y}$$
+>
+>**결과:**
+>$$P \sim \text{Beta}(\alpha, \beta)$$
+>
+>$$\text{pdf}_P(p) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}p^{\alpha-1}(1-p)^{\beta-1}I_{(0,1)}(p)$$
+>
+>### 직관적 해석
+>
+>* **X**: 성공에 해당하는 누적 사건 발생량
+>* **Y**: 실패에 해당하는 누적 사건 발생량  
+>* **X + Y**: 전체 누적 사건 발생량
+>
+>따라서:
+>$$P = \frac{X}{X+Y} = \frac{\text{성공 누적량}}{\text{전체 누적량}}$$
+>
+>→ **전체 중 성공이 차지하는 비율**
+>
+>## 3단계: 베타분포 ↔ 베르누이 모델 "켤레성의 정당화"
+>
+>### 베르누이/이항 모델
+>
+>$$X_i \sim \text{Bernoulli}(p), \quad i=1,\ldots,n$$
+>
+>* **p (unknown)**: 성공확률 자체
+>* 우도함수: $L(p \mid \text{data}) \propto p^s(1-p)^f$ (s: 성공 개수, f: 실패 개수)
+>
+>### 베타 사전분포(Prior)
+>
+>$$p \sim \text{Beta}(\alpha, \beta)$$
+>
+>사전분포 형태:
+>$$\pi(p) \propto p^{\alpha-1}(1-p)^{\beta-1}$$
+>
+>**파라미터 의미:**
+>* **α**: 사전에 가정하는 성공의 pseudo-count
+>* **β**: 사전에 가정하는 실패의 pseudo-count
+>
+>### 사후분포(Posterior)
+>
+>베이즈 정리 적용:
+>
+>$$p \mid \text{data} \sim \text{Beta}(\alpha + s, \beta + f)$$
+>
+>**핵심:**
+>$$\text{사후 파라미터} = \text{사전 파라미터} + \text{데이터 정보}$$
+>
+>### 켤레성의 수학적 본질
+>
+>베타 사전과 베르누이 우도의 결합:
+>
+>$$\pi(p) \cdot L(p \mid \text{data}) \propto p^{\alpha-1}(1-p)^{\beta-1} \cdot p^s(1-p)^f$$
+>
+>$$= p^{\alpha+s-1}(1-p)^{\beta+f-1}$$
+>
+>→ **동일한 함수 형태** (Functional Form)
+>
+>이것이 바로:
+>* 베타분포가 **베르누이likelihood에 대한 켤레 사전(conjugate prior)**인 이유
+>* "성공확률의 분포"가 되는 수학적 필연성
+>
+>## 최종 통합: "의미 있는" 계보 구조
+>
+>### 표 형식으로 정리
+>
+>| 단계 | 분포 | 생성 방식 | 파라미터 | 의미 | 우도 연결 |
+>|:---:|:---:|:---:|:---:|:---:|:---:|
+>| **1** | 지수 | 기본 | λ (rate) | 사건 간 대기시간 | 포아송 |
+>| **2** | 감마 | 지수 합 | α (개수), λ | α番째 사건까지의 시간 | 포아송 개수 |
+>| **3** | 베타 | 감마 비율 | α, β (counts) | 성공/전체 비율 | **베르누이** |
+>
+>### 연쇄적 논리
+>
+>1. **지수 → 감마**: 독립 대기시간의 누적
+>  - $T = \sum_{i=1}^{\alpha} X_i$
+>
+>2. **감마 → 베타**: 두 누적량의 정규화된 비율
+>  - $P = \frac{X}{X+Y}$
+>
+>3. **베타 ↔ 베르누이**: 함수 형태의 일치
+>  - $f(p) \propto p^{\alpha-1}(1-p)^{\beta-1}$
+>  - $L(p) \propto p^s(1-p)^f$
+>  - → **켤레성 성립**
+>
+>## 실적용 예시
+>
+>### 신칼 콘텍스트
+>
+>품질관리에서 불량률 $p$를 추정하는 상황:
+>
+>1. **사전 정보**: "과거 데이터에서 불량 100개, 정상 900개"
+>  - 사전: $p \sim \text{Beta}(100, 900)$
+>
+>2. **새 데이터 관측**: 100개 추출 중 불량 10개, 정상 90개
+>  - 우도: $L(p) \propto p^{10}(1-p)^{90}$
+>
+>3. **사후 추론**:
+>  - 사후: $p \mid \text{new data} \sim \text{Beta}(110, 990)$
+>  - 사후 평균: $\frac{110}{110+990} = 0.0991$
+>
+>→ 베타분포의 파라미터가 실제로 "누적된 성공/실패 정보"를 표현함
+>
+
 ### 균등분포의 정의
 $$
 U(a,b)\ \overset{d}{\equiv}\ (b-a)U(0,1)+a \\
@@ -1451,7 +1600,7 @@ $$
 
 확률식은 위 분포식에 양변을 적절히 변형하여 얻는다.
 
-
+TODO: 손으로 쓰기
 ### 정리 4.2.7 여러 개의 정규모집단에서 모평균의 비교
 
 다음의 **일원분류모형(one-way classification model)** 에서, 다음이 성립한다.
@@ -2287,13 +2436,21 @@ $$
 라 한다. 여기서 $\mu$는 $n$차원 평균벡터(mean vector)이고, $\Sigma$는 $n\times n$ 공분산행렬(covariance matrix)이다.
 
 1. $X=AZ+\mu$, $Z\sim N_n(0,I)$, $AA^T=\Sigma$
-  - A = nxm행렬이어도 됨
-2. $X=\Sigma^{1/2}Z+\mu$, $Z\sim N_n(0,I)$ (여기서 $\Sigma^{1/2}$는 $\Sigma$의 제곱근 행렬)
+    - A = nxm행렬이어도 됨
+2. $X=\Sigma^{1/2}Z+\mu$, $Z\sim N_n(0,I)$
 3. $\text{mgf}_X(t)=\exp(\mu^Tt+\frac12 t^T\Sigma t)$
 4. $\Sigma$가 정칙행렬일 때, X의 분포를 정칙다변량정규분포(nonsingular multivariate normal distribution)라 함.
+    - $\Sigma$가 정칙행렬이 아니면: 특이다변량정규분포(singular multivariate normal distribution)라 함. 이 경우 확률밀도함수가 존재하지 않음 (대학원 수준에선 있긴함.)
+
+>여기서 $\Sigma^{1/2}$는 대칭행렬 $\Sigma$의 **제곱근 행렬(square root matrix)** 로서 $(\Sigma^{1/2})^2=\Sigma^{1/2}\Sigma^{1/2}=\Sigma$를 만족한다.
+>  - 분산행렬 $\Sigma$는 음아닌 정부호의 행렬이고, $\Sigma^{1/2}\Sigma^{1/2}=\Sigma$인 $\Sigma^{1/2}$가 존재함
+>  - 음 아닌 정부호 행렬의 조건: 실수가 원소인 mxm대칭행렬 $\Sigma$에 대해 $a^T\Sigma a \geq 0, \forall a \in R^m$이면 $\Sigma$가 nonnegative definite행렬이라 한다. 이런 조건과 다음의 각 조건은 동등하다
+>  - $\Sigma$의 모든 고유값이 0이상
+>  - $\Sigma^{1/2}\Sigma^{1/2}=\Sigma$인 실수가 원소인 대칭행렬 $\Sigma^{1/2}$가 존재함
+>  - 참고: Statistics_02_추가_분산행렬의 스펙트럼 분해와 기하학적 해석.md
 
 $$
-\text{pdf}_X(x) = (\det(2\pi\Sigma))^{-1/2} \exp\left\{-\frac12(x-\mu)^T\Sigma^{-1}(x-\mu)\right\}
+\text{pdf}_X(x) = (\det(2\pi\Sigma))^{-1/2} \exp\left\{-\frac12(x-\mu)^T\Sigma^{-1}(x-\mu)\right\},\quad x\in\mathbb{R}^n
 $$
 
 ### 정리 4.4.2 평균벡터와 분산행렬 *(Mean Vector and Covariance Matrix)*
@@ -2309,13 +2466,6 @@ $$
 $$
 X\sim N(\mu,\Sigma) \Leftrightarrow X\overset{d}{\equiv}\Sigma^{1/2}Z+\mu,\quad Z\sim N_n(0,I)
 $$
-
-여기서 $\Sigma^{1/2}$는 대칭행렬 $\Sigma$의 **제곱근 행렬(square root matrix)** 로서 $(\Sigma^{1/2})^2=\Sigma^{1/2}\Sigma^{1/2}=\Sigma$를 만족한다.
-  - 분산행렬 $\Sigma$는 음아닌 정부호의 행렬이고, $\Sigma^{1/2}\Sigma^{1/2}=\Sigma$인 $\Sigma^{1/2}$가 존재함
-  - 음 아닌 정부호 행렬의 조건: 실수가 원소인 mxm대칭행렬 $\Sigma$에 대해 $a^T\Sigma a \geq 0, \forall a \in R^m$이면 $\Sigma$가 nonnegative definite행렬이라 한다. 이런 조건과 다음의 각 조건은 동등하다
-  - $\Sigma$의 모든 고유값이 0이상
-  - $\Sigma^{1/2}\Sigma^{1/2}=\Sigma$인 실수가 원소인 대칭행렬 $\Sigma^{1/2}$가 존재함
-  - 참고: Statistics_02_추가_분산행렬의 스펙트럼 분해와 기하학적 해석.md
 
 #### 증명
 
@@ -2386,8 +2536,7 @@ $$
 \det(\Sigma) = \det\begin{pmatrix} \sigma_1^2 & \rho\sigma_1\sigma_2\\ \rho\sigma_1\sigma_2 & \sigma_2^2 \end{pmatrix} = \sigma_1^2\sigma_2^2 - \rho^2\sigma_1^2\sigma_2^2 = \sigma_1^2\sigma_2^2(1-\rho^2)
 $$
 
-이므로 $-1<\rho<1$일 때 $\det(\Sigma) > 0$이어서 공분산행렬이 정칙이다.
-
+이므로 $-1<\rho<1$일 때 $\det(\Sigma) > 0$이어서 공분산행렬이 정칙이다.  
 또한 역행렬은
 
 $$
@@ -2535,7 +2684,7 @@ $$
 AX=X_1\sim N(A\mu,A\Sigma A^T)=N(\mu_1,\Sigma_{11})
 $$
 
-**(b)** 조건부분포를 두 가지 방법으로 유도할 수 있다.  
+**(b)** 조건부분포를 두 가지 방법으로 유도할 수 있다. 책에선 두가지 모두 소개함.  
 
 **방법 1: 조건부 확률밀도함수 직접 계산**  
 결합확률밀도함수를 주변확률밀도함수로 나누어 조건부 확률밀도함수를 구한다.
@@ -2729,19 +2878,17 @@ $$
 TODO:  
 #### 예 4.4.4 일원분류모형에서의 표본분포 *(Sampling Distribution in One-Way Classification Model)*
 
-정리 4.2.7의 (a)에 따르면, 일원분류모형(i개 정규분포에서 각각 j개만큼 샘플 뽑아서 ij갯수 샘플이 있음)에서
-정규분포 $N(\mu_i,\sigma^2/n_i)$를 따르는 서로 독립인 표본평균 $\bar{X}_i\ (i=1,\dots,k)$에 대하여
+정리 4.2.7의 (a)에 따르면, 일원분류모형(i개 정규분포에서 각각 j개만큼 샘플 뽑아서 ij갯수 샘플이 있음)에서 정규분포 $N(\mu_i,\sigma^2/n_i)$를 따르는 서로 독립인 표본평균 $\bar{X}_i\ (i=1,\dots,k)$에 대하여
 
 $$
 \sum_{i=1}^k n_i(\bar{X}_i-\bar{X}-(\mu_i-\bar{\mu}))^2/\sigma^2 \sim \chi^2(k-1)
 $$
 
-가 성립한다. 이를 **정리 4.4.5**를 이용하여 유도한다.
+가 성립한다. 이를 **정리 4.4.5**를 이용하여 증명하라
 
 **풀이**
 
-벡터 $Y=(\bar{X}_1,\dots,\bar{X}_k)^T$는 다변량 정규분포를 따른다: $Y\sim N_k(\mu,\Sigma)$
-
+벡터 $Y=(\bar{X}_1,\dots,\bar{X}_k)^T$는 다변량 정규분포를 따른다: $Y\sim N_k(\mu,\Sigma)$  
 여기서 $\mu=(\mu_1,\dots,\mu_k)^T$이고, $\bar{X}_i$들이 서로 독립이므로
 
 $$
@@ -2980,7 +3127,7 @@ $$\hat{\beta}_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum_{i=1}^n (x_i - \bar{x})Y_i}
 - $S_{xx} = \sum_{i=1}^n (x_i - \bar{x})^2 = \sum_{i=1}^n x_i^2 - n\bar{x}^2$
 - $S_{xy} = \sum_{i=1}^n (x_i - \bar{x})(Y_i - \bar{Y})$
 
-### 평균오차제곱합 *(Mean Squared Error)*
+#### 예4.4.7 단순선형회귀모형에서 평균오차제곱합 *(Mean Squared Error)*
 
 선형회귀모형에서 오차항의 분산 $\sigma^2$의 추측값으로는 흔히
 
@@ -3005,9 +3152,7 @@ $$\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2
 
 $$\hat{\beta}\sim N_{p+1}(\beta,\sigma^2(X^TX)^{-1})$$
 
-**(b)** 추정량의 독립성
-
-$\hat{\beta}$와 오차분산 추정량 $\hat{\sigma}^2$는 서로 독립
+**(b)** 추정량의 독립성: $\hat{\beta}$와 오차분산 추정량 $\hat{\sigma}^2$는 서로 독립
 
 **(c)** 오차분산 추정량의 분포
 
@@ -3023,8 +3168,7 @@ $$=N_{p+1}(\beta,\sigma^2(X^TX)^{-1})$$
 
 **(b)** 추정량의 독립성
 
-투영행렬(projection matrix) $H=X(X^TX)^{-1}X^T$를 정의하면, $H$는 대칭 멱등행렬이다
-
+투영행렬(projection matrix) $H=X(X^TX)^{-1}X^T$를 정의하면, $H$는 대칭 멱등행렬이다.  
 이를 이용하면 예측값과 잔차를 다음과 같이 표현할 수 있다:
 
 $$\hat{Y}=X\hat{\beta}=HY, \quad Y-X\hat{\beta}=(I-H)Y$$
@@ -3045,7 +3189,6 @@ $$\text{Cov}(\hat{\beta},(I-H)Y)=0$$
 
 정리 4.4.3 (c)에 의해, 다변량 정규분포를 따르는 확률변수들의 공분산이 0이면 독립이므로 $\hat{\beta}$와 $(I-H)Y$는 독립이고, $(I-H)Y$의 함수인 $\hat{\sigma}^2$도 $\hat{\beta}$와 독립이다.
 
-TODO: 살짝 긴 호흡 증명   
 **(c)** 오차분산 추정량의 분포
 
 $Z=(Y-X\beta)/\sigma\sim N_n(0,I)$로 표준화하면
@@ -3068,27 +3211,22 @@ $$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}=\frac{1}{\sigma^2}(Y-X\beta)^T(I-H)(Y-X
 - 대칭성: $A^T=(I-H)^T=I-H^T=I-H=A$
 - 멱등성: $A^2=(I-H)^2=I-2H+H^2=I-2H+H=I-H=A$
 
-행렬 $A$의 대각합(trace)은
-
-$$\text{trace}(A)=\text{trace}(I-H)=\text{trace}(I)-\text{trace}(H)$$
-
-투영행렬 $H=X(X^TX)^{-1}X^T$의 대각합은
-
-$$\text{trace}(H)=\text{trace}(X(X^TX)^{-1}X^T)=\text{trace}(X^TX(X^TX)^{-1})=\text{trace}(I_{p+1})=p+1$$
-
-따라서
-
-$$\text{trace}(A)=n-(p+1)$$
+이때 $\text{trace}(A)=\text{trace}(I-H)=\text{trace}(I)-\text{trace}(H)$ 이고  
+$\text{trace}(H)=\text{trace}(X(X^TX)^{-1}X^T)=\text{trace}(X^TX(X^TX)^{-1})=\text{trace}(I_{p+1})=p+1$  
+따라서 $\text{trace}(A)=n-(p+1)$
 
 정리 4.4.5 (b)에 의해, $Z\sim N_n(0,I)$이고 $A$가 대칭 멱등행렬이면 $Z^TAZ\sim\chi^2(\text{trace}(A))$이므로
 
 $$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-p-1)$$
 
-#### 예 4.4.7 단순선형회귀모형에서의 표본분포 *(Sampling Distribution in Simple Linear Regression Model)*
+#### 예 4.4.8 단순선형회귀모형에서의 표본분포 *(Sampling Distribution in Simple Linear Regression Model)*
 
 단순선형회귀모형에서 정리 4.4.6을 적용하면 다음이 성립한다.
 
-예 4.4.6에서 구한
+$$\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2}{n-2}
+= \sum_{i=1}^n(Y_i - \bar Y - \hat{\beta}_1 (x_{i1} - \bar{x_1}))^2/(n-2)$$
+
+증명: 예 4.4.6에서 구한
 
 $$X^TX = \begin{pmatrix} n & n\bar{x} \\ n\bar{x} & \sum_{i=1}^n x_i^2 \end{pmatrix}, \quad
 S_{xx} = \sum_{i=1}^n (x_i - \bar{x})^2 = \sum_{i=1}^n x_i^2 - n\bar{x}^2$$
@@ -3108,19 +3246,14 @@ $$\hat{\beta} = \begin{pmatrix}\hat{\beta}_0\\\hat{\beta}_1\end{pmatrix}
 \sum_{i=1}^n x_i^2/n & -\bar{x}\\
 -\bar{x} & 1
 \end{pmatrix}
-\right)$$
-
-특히
-
-$$\hat{\beta}_1 \sim N\left(\beta_1, \frac{\sigma^2}{S_{xx}}\right)$$
+\right) \\
+\hat{\beta}_1 \sim N\left(\beta_1, \frac{\sigma^2}{S_{xx}}\right)$$
 
 정리 4.4.6 (c)에 의해
 
 $$\frac{(n-2)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-2)$$
 
-이고 정리 4.4.6 (b)에 의해 $\hat{\beta}$와 $\hat{\sigma}^2$는 서로 독립이다.
-
-따라서 t분포의 대의적 정의로부터
+이고 정리 4.4.6 (b)에 의해 $\hat{\beta}$와 $\hat{\sigma}^2$는 서로 독립이다. 따라서 t분포의 대의적 정의로부터
 
 $$\frac{\hat{\beta}_1-\beta_1}{\sqrt{\hat{\sigma}^2/S_{xx}}}
 = \frac{(\hat{\beta}_1-\beta_1)/\sqrt{\sigma^2/S_{xx}}}{\sqrt{(n-2)\hat{\sigma}^2/\sigma^2/(n-2)}}
@@ -3128,12 +3261,8 @@ $$\frac{\hat{\beta}_1-\beta_1}{\sqrt{\hat{\sigma}^2/S_{xx}}}
 
 이 경우에 평균오차제곱합은 다음의 공식을 이용하여 계산할 수 있다:
 
-$$\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2}{n-2}
-= \frac{S_{YY}-(S_{xY})^2/S_{xx}}{n-2}$$
-
-여기서
-
-$$S_{YY}=\sum_{i=1}^n(Y_i-\bar{Y})^2, \quad S_{xY}=\sum_{i=1}^n(x_i-\bar{x})(Y_i-\bar{Y})$$
+$$\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2}{n-2} = \frac{S_{YY}-(S_{xY})^2/S_{xx}}{n-2} \\
+\text{where} \ S_{YY}=\sum_{i=1}^n(Y_i-\bar{Y})^2, \quad S_{xY}=\sum_{i=1}^n(x_i-\bar{x})(Y_i-\bar{Y})$$
 
 ### 다변량 정규분포의 성질 정리
 

@@ -1409,7 +1409,7 @@ $$Y = \mathbf{X}\boldsymbol\beta + e,\quad e\sim N_n(0,\sigma^2 I),\quad \mathrm
 
     $$\widehat{c^\top\beta}=c^\top \boldsymbol{\hat\beta},\quad \boldsymbol{\hat\beta}=(\mathbf{X}^\top \mathbf{X})^{-1}\mathbf{X}^\top Y$$
 
-* 오차분산의 불편추정량
+* 분산의 불편추정량
 
     $$\hat\sigma^2=\frac{\|Y-\mathbf{X}\boldsymbol{\hat\beta}\|^2}{n-p-1} =\frac{(Y-\mathbf{X}\boldsymbol{\hat\beta})^\top(Y-\mathbf{X}\boldsymbol{\hat\beta})}{n-p-1}$$
 
@@ -1425,7 +1425,6 @@ $$\boldsymbol{\hat\beta} \perp \hat\sigma^2$$
 
 $$\frac{(n-p-1)\hat\sigma^2}{\sigma^2}\sim \chi^2(n-p-1)$$
 
-TODO: FIXME:
 #### 증명
 이 경우에 $Y$의 확률밀도함수는 $\theta=(\boldsymbol\beta^\top,\sigma^2)^\top\in \mathbb{R}^{p+1}\times(0,\infty)$를 모수로 하여
 
@@ -1445,8 +1444,6 @@ $$
 한편 정리 6.5.2로부터 $c^\top\hat\beta$과 $\hat\sigma^2$은 각각 $c^\top\beta$와 $\sigma^2$의 불편추정량이다. 따라서 완비충분통계량의 함수인 $c^\top\hat\beta$과 $\hat\sigma^2$은 각각 $c^\top\beta$와 $\sigma^2$의 전역최소분산불편 추정량이다.
 
 표본분포에 관한 (b), (c), (d)의 증명은 정리 4.4.6에 주어져 있다.
-
-TODO: 예4.4.5 ~ 4.4.8까지 정주행
 
 ### 정리 10.4.2 선형회귀정규분포모형에서의 신뢰집합과 동시신뢰구간
 계수가 $r$인 $(p+1)\times r$ 행렬 $C$에 대해, $C$의 열공간을 $\mathrm{col}(C) = \{Ca: a \in \mathbb{R}^r\}$라 하자.
@@ -1472,39 +1469,27 @@ $$
 
 * 해석: $c$를 $C$의 열공간 안에서 움직이는 "많은" 선형결합에 대해 한 번에 커버리지를 보장하는 구간이다.
 
+TODO:
 ### 정리 10.4.3 선형회귀정규분포모형에서 회귀계수의 유의성 검정
 회귀계수 전체의 유의성보단 일부의 유의성에 대한 판단이 필요한 경우가 많다. 예6.5.1처럼 절편$\beta_0$을 제외 한 회귀계수가 관심의 대상인 것 처럼. 이런 경우 가설 검정을 아래와 같이 할 수 있다.  
 
-일부 회귀계수 블록 검정 *(partial/regression block test)*  
-* 설계행렬을 블록으로 쪼갠다:
-    
-    $$
-    Y=\mathbf{X}_0\boldsymbol\beta_0 + \mathbf{X}_1\boldsymbol\beta_1 + e \\
-    \boldsymbol\beta_0\in\mathbb{R}^{p_0},\quad \boldsymbol\beta_1\in\mathbb{R}^{p_1},\quad
-    \mathbf{X}_0\in\mathbb{R}^{n\times p_0},\quad \mathbf{X}_1\in\mathbb{R}^{n\times p_1}, \\
-    e\sim N_n(0,\sigma^2 I_n),\quad \sigma^2>0 \\
-    \mathrm{rank}(\mathbf{X}_0,\mathbf{X}_1)=p_0+p_1,\quad \mathrm{rank}(\mathbf{X}_0)=p_0,\quad \mathrm{rank}(\mathbf{X}_1)=p_1.
-    $$
+**일부 회귀계수 블록 검정 *(partial/regression block test)***   
 
-* 회귀계수 유의성에 대한 가설:
-    
-    $$H_0:\boldsymbol\beta_1=0\quad \text{vs}\quad H_1:\boldsymbol\beta_1\neq 0$$
+$$
+Y=\mathbf{X}_0\boldsymbol\beta_0 + \mathbf{X}_1\boldsymbol\beta_1 + e, \quad
+\boldsymbol\beta_0\in\mathbb{R}^{p_0},\quad \boldsymbol\beta_1\in\mathbb{R}^{p_1},\quad
+\mathbf{X}_0\in\mathbb{R}^{n\times p_0},\quad \mathbf{X}_1\in\mathbb{R}^{n\times p_1}, \\
+e\sim N_n(0,\sigma^2 I_n),\quad \sigma^2>0, \quad
+\mathrm{rank}(\mathbf{X}_0,\mathbf{X}_1)=p_0+p_1,\quad \mathrm{rank}(\mathbf{X}_0)=p_0,\quad \mathrm{rank}(\mathbf{X}_1)=p_1
+$$
 
-가설의 최대가능도비 검정에 대해 아래가 성립한다.  
+회귀계수 유의성에 대한 가설: $H_0:\boldsymbol\beta_1=0\quad \text{vs}\quad H_1:\boldsymbol\beta_1\neq 0$
+
+위 가설의 최대가능도비 검정에 대해 아래가 성립한다.  
 **(a) 투영행렬과 분해**  
-* let $\mathbf{X}_0$로의 정사영행렬
-    
-    $$\Pi_0 = \mathbf{X}_0(\mathbf{X}_0^\top \mathbf{X}_0)^{-1}\mathbf{X}_0^\top$$
-
-* let $\mathbf{X}_0$를 제거한 $\mathbf{X}_1$
-    
-$$
-\mathbf{X}_{1|0}=(I-\Pi_0)\mathbf{X}_1
-$$
-
-* let 그 열공간으로의 정사영행렬
-    
-$$\Pi_{1|0}=\mathbf{X}_{1|0}(\mathbf{X}_{1|0}^\top \mathbf{X}_{1|0})^{-1}\mathbf{X}_{1|0}^\top$$
+* $\mathbf{X}_0$로의 정사영행렬: $\Pi_0 = \mathbf{X}_0(\mathbf{X}_0^\top \mathbf{X}_0)^{-1}\mathbf{X}_0^\top$
+* $\mathbf{X}_0$를 제거한 $\mathbf{X}_1$: $\mathbf{X}_{1|0}=(I-\Pi_0)\mathbf{X}_1$
+* 그 열공간으로의 정사영행렬: $\Pi_{1|0}=\mathbf{X}_{1|0}(\mathbf{X}_{1|0}^\top \mathbf{X}_{1|0})^{-1}\mathbf{X}_{1|0}^\top$
 
 이면,     
 
@@ -1515,29 +1500,21 @@ $$
 $$
 
 **(b) 검정통계량 (최대가능도비 검정과 동치 형태)**  
-* let 회귀로 설명되는 제곱합(추가 설명력)
-    
-$$R(1|0)=Y^\top\Pi_{1|0}Y$$
+* 회귀로 설명되는 제곱합: $R(1|0)=Y^\top\Pi_{1|0}Y$
+  * 즉, 추가 설명력 
+  * (R: regression sum of squares)
+* 오차제곱합: $SSE = Y^\top(I-\Pi_0-\Pi_{1|0})Y$
 
-* let 오차제곱합
-    
-$$SSE = Y^\top(I-\Pi_0-\Pi_{1|0})Y$$
-
-이면 검정통계량 $F$-통계량은
+검정통계량 $F$-통계량은
 
 $$F_n=\frac{R(1|0)/p_1}{SSE/(n-p_0-p_1)}$$
 
-이고, 수준 $\alpha$의 기각역은
-
-$$
-F_n \ge F_\alpha(p_1,\ n-p_0-p_1)
-$$
+이고, 수준 $\alpha$의 기각역은 $F_n \ge F_\alpha(p_1,\ n-p_0-p_1)$
 
 **(c) 대립가설 하 분포와 검정력 *(power)***  
 * 대립가설 하에서 검정통계량에 대해
     
-    $$
-    F_n = \frac{R(1|0)/p_1}{SSE/(n-p_0-p_1)} \sim F(p_1,\ n-p_0-p_1;\ \delta)$$
+    $$F_n = \frac{R(1|0)/p_1}{SSE/(n-p_0-p_1)} \sim F(p_1,\ n-p_0-p_1;\ \delta)$$
 
     이 성립하고, 여기서 $\delta$는 비중심도모수 *(noncentrality parameter)*:
     
@@ -1545,11 +1522,7 @@ $$
     \delta = \frac{\beta_1^\top X_1^\top\Pi_{1|0}X_1\beta_1}{\sigma^2}
     $$
 
-* 검정력 함수는 $\delta$의 증가함수다.
-
-    $$
-    \pi(\delta)=P_\delta\!\left(F_n\ge F_\alpha(p_1,n-p_0-p_1)\right)
-    $$
+* 검정력 함수는 $\delta$의 증가함수다: $\pi(\delta)=P_\delta\!\left(F_n\ge F_\alpha(p_1,n-p_0-p_1)\right)$
     
     * 해석: 효과크기($\beta_1$)가 커지거나, 잡음($\sigma^2$)이 작아지거나, 설계가 좋아져 $\Pi_{1|0}$ 방향으로 신호가 커질수록 검정력이 증가한다.
 
@@ -1558,28 +1531,28 @@ $Y=X_0\boldsymbol\beta_0 + X_1\boldsymbol\beta_1 + e$, $e\sim N_n(0,\sigma^2 I)$
 이 경우에 $X=(X_0,X_1),\ \Pi_{0,1}=X(X^tX)^{-1}X^t,\ \Pi_0=X_0(X_0^tX_0)^{-1}X_0^t$라고 하면 $\Pi_{0,1},\ \Pi_0,\ \Pi_{1|0}$는 모두 정사영행렬이고 다음이 성립하는 것을 정리 6.5.3에서 알고 있다.
 
 $$
-\Pi_{0,1}=\Pi_0+\Pi_{1|0},\qquad \Pi_0^t\Pi_{1|0}=0
+\Pi_{0,1}=\Pi_0+\Pi_{1|0},\qquad \Pi_0^t\Pi_{1|0}=0 \\
+\therefore I-\Pi_0=(I-\Pi_{0,1})+\Pi_{1|0}
 $$
 
-따라서
+아래 두 식의 증명은 정리 6.5.1을 따른다.
 
 $$
-I-\Pi_0=(I-\Pi_{0,1})+\Pi_{1|0}
-$$
-
-이고, (a)가 성립하는 것은 다음으로부터 명백하다.
-
-$$
+\min_{\beta_0\in R^{p_0},\beta_1\in R^{p_1}}|Y-X_0\beta_0|^2 =Y^t(I-\Pi_0)Y \\
 \min_{\beta_0\in R^{p_0},\beta_1\in R^{p_1}}|Y-X_0\beta_0-X_1\beta_1|^2 =Y^t(I-\Pi_{0,1})Y
 $$
 
-한편, 이 경우에 로그가능도는
+따라서 두 식의 관계에 따라 (a)가 성립한다.
+
+한편, 이 경우에 $Y \sim N_n(X_0\beta_0+X_1\beta_1, \sigma^2 I_n)$이므로 로그가능도는
 
 $$
-l(\theta)=-\frac{1}{2\sigma^2}|y-X_0\beta_0-X_1\beta_1|^2-\frac{n}{2}\log(2\pi\sigma^2)
+l(\theta)=-\frac{1}{2\sigma^2}|y-X_0\beta_0-X_1\beta_1|^2-\frac{n}{2}\log(2\pi\sigma^2) \\
+\dot l(\theta) = \begin{pmatrix}\frac{\partial l}{\partial \beta_0} \\ \frac{\partial l}{\partial \beta_1} \\ \frac{\partial l}{\partial \sigma^2}\end{pmatrix}
+= \begin{pmatrix} \frac{1}{\sigma^2}X_0^t(y-X_0\beta_0-X_1\beta_1) \\ \frac{1}{\sigma^2}X_1^t(y-X_0\beta_0-X_1\beta_1) \\ -\frac{n}{2\sigma^2}+\frac{1}{2\sigma^4}|y-X_0\beta_0-X_1\beta_1|^2 \end{pmatrix}
 $$
 
-이므로, $\sigma^2$에 대한 전체 모수공간과 귀무가설하에서의 최대가능도 추정량은 다음과 같다.
+이므로, $\sigma^2$에 관해 미분하여 얻은 전체 모수공간과 귀무가설하에서의 최대가능도 추정량:
 
 $$
 \hat\sigma^2_\Omega=\min_{\beta_0\in R^{p_0},\beta_1\in R^{p_1}}|Y-X_0\beta_0-X_1\beta_1|^2/n=SSE/n \\
@@ -1589,67 +1562,34 @@ $$
 =n\log\left(1+\frac{Y^t\Pi_{1|0}Y}{SSE}\right)
 $$
 
+이는 $Y^t\Pi_{1|0}Y/SSE$의 증가함수이므로, 최대가능도비 검정과 $F_n$ 검정은 동치이다.  
 따라서 검정통계량은 $F_n$으로 주어지고 기각역은 $F_n$의 큰 값으로 주어진다.
 
-한편 $\Pi_{1|0}$가 멱등행렬이고
+한편 $\Pi_{1|0}$가 멱등행렬이고  
+$\mathrm{trace}(\Pi_{1|0}) =\mathrm{trace}{X_{1|0}(X_{1|0}^tX_{1|0})^{-1}X_{1|0}^t} =\mathrm{trace}{(X_{1|0}^tX_{1|0})^{-1}X_{1|0}^tX_{1|0}} =p_1$ 이므로,  
+
+정리 10.3.2로부터  
+$R(1|0)/\sigma^2=Y^t\Pi_{1|0}Y/\sigma^2\sim\chi^2(p_1;\delta),\quad
+\delta=(X_0\beta_0+X_1\beta_1)^t\Pi_{1|0}(X_0\beta_0+X_1\beta_1)/\sigma^2$  
+그런데 $\Pi_{1|0}X_0=0$이므로 $\delta=\beta_1^tX_1^t\Pi_{1|0}X_1\beta_1/\sigma^2$  
+또한 같은 방법으로 $SSE/\sigma^2=Y^t(I-\Pi_{0,1})Y/\sigma^2\sim\chi^2(n-p_0-p_1)$  
+
+이때 $\Pi_{1|0}(I-\Pi_{0,1}) =\Pi_{1|0}(I-\Pi_0-\Pi_{1|0}) = \Pi_{1|0}-0-\Pi_{1|0}^2= \Pi_{1|0} - \Pi_{1|0} = 0$ 이므로 $\Pi_{1|0}Y$와 $(I-\Pi_{0,1})Y$는 공분산이 0이다.  
+또한 $Y$가 정규분포를 따르므로 두 벡터는 결합정규분포(jointly normal)이고, 따라서 서로 독립이다: $\Pi_{1|0}Y \perp\!\!\!\perp (I-\Pi_{0,1})Y$  
+그러므로 각각의 제곱노름인 $R(1|0)=Y^\top\Pi_{1|0}Y$와 $SSE=Y^\top(I-\Pi_{0,1})^\top(I-\Pi_{0,1})Y$도 독립이다: 
 
 $$
-\mathrm{trace}(\Pi_{1|0})
-=\mathrm{trace}{X_{1|0}(X_{1|0}^tX_{1|0})^{-1}X_{1|0}^t}
-=\mathrm{trace}{(X_{1|0}^tX_{1|0})^{-1}X_{1|0}^tX_{1|0}}
-=p_1
+R(1|0)=Y^t\Pi_{1|0}Y \perp SSE=Y^t(I-\Pi_0-\Pi_{1|0})Y
 $$
 
-이므로, 정리 10.3.2로부터 다음이 성립하는 것을 알 수 있다.
-
-$$
-R(1|0)/\sigma^2=Y^t\Pi_{1|0}Y/\sigma^2\sim\chi^2(p_1;\delta),\qquad
-\delta=(X_0\beta_0+X_1\beta_1)^t\Pi_{1|0}(X_0\beta_0+X_1\beta_1)/\sigma^2
-$$
-
-그런데 $\Pi_{1|0}X_0=0$이므로
-
-$$
-\delta=\beta_1^tX_1^t\Pi_{1|0}X_1\beta_1/\sigma^2
-$$
-
-또한 같은 방법으로
-
-$$
-SSE/\sigma^2=Y^t(I-\Pi_{0,1})Y/\sigma^2\sim\chi^2(n-p_0-p_1)
-$$
-
-임을 알 수 있고,
-
-$$
-\Pi_{1|0}(I-\Pi_{0,1}) =\Pi_{1|0}(I-\Pi_0-\Pi_{1|0})=0
-$$
-
-이므로
-
-$$
-R(1|0)=Y^t\Pi_{1|0}Y\ \text{와}\ SSE=Y^t(I-\Pi_0-\Pi_{1|0})Y
-$$
-
-가 서로 독립이다. 따라서 일반적으로
+따라서 일반적으로
 
 $$
 F_n=\frac{R(1|0)/p_1}{SSE/(n-p_0-p_1)} \sim F(p_1,n-p_0-p_1;\delta)
 $$
 
-이다. 한편 귀무가설 $H_0:\beta_1=0$하에서는
-
-$$
-\delta=\beta_1^tX_1^t\Pi_{1|0}X_1\beta_1/\sigma^2=0
-$$
-
-이므로 크기 $\alpha(0<\alpha<1)$인 기각역은 (b)에서와 같이
-
-$$
-F_n\ge F_\alpha(p_1,n-p_0-p_1)
-$$
-
-로 주어진다.
+한편 귀무가설 $H_0:\beta_1=0$하에서는 $\Pi_{1|0}X_0=0$이므로 $\delta=\beta_1^tX_0^t\Pi_{1|0}X_0\beta_1/\sigma^2=0$  
+따라서 크기 $\alpha(0<\alpha<1)$인 기각역은 (b)에서와 같이 $F_n\ge F_\alpha(p_1,n-p_0-p_1)$ 로 주어진다.
 
 또한 예 10.3.1과 같은 방법으로 이 검정의 검정력 함수가 $\delta$의 증가함수인 것을 밝힐 수 있다.
 
@@ -1699,7 +1639,8 @@ F_n\sim F(r,\ n-p-1;\ \delta), \quad \delta = \frac{\beta^\top C\Big(C^\top(X^\t
 $$
 
 #### 증명
-증명의 핵심은 이 정리에서의 가설 검정을 <정리 10.4.3>의 가설 검정으로 대응하여 인지하는 것이다. 이러한 대응을 이해하기 위하여, 행렬 $C$의 열벡터공간의 정규직교기저(orthonormal basis) 벡터를 열로 갖는 $(p+1)\times r$ 행렬을 $C_1$이라고 하고 이를 확장하여 $\mathbb{R}^{p+1}$의 정규직교기저 벡터를 열로 갖는 $(p+1)\times(p+1)$ 행렬을 $(C_0\ C_1)$이라고 하자. 즉
+증명의 핵심은 이 정리에서의 가설 검정을 <정리 10.4.3>의 가설 검정으로 대응하여 인지하는 것이다. 이러한 대응을 이해하기 위하여, 행렬 $C$의 열벡터공간의 정규직교기저(orthonormal basis) 벡터를 열로 갖는 $(p+1)\times r$ 행렬을 $C_1$이라고 하고 이를 확장하여 $\mathbb{R}^{p+1}$의 정규직교기저 벡터를 열로 갖는 $(p+1)\times(p+1)$ 행렬을 $(C_0\ C_1)$이라고 하자. $C_0$는 $C$의 열벡터공간의 정규직교기저 벡터를 열로 갖는 $(p+1)\times(p+1-r)$ 행렬이다.
+즉
 
 $$
 C_0^t C_0 = I_{p+1-r},\quad C_1^t C_1 = I_r,\quad C_0^t C_1 = 0
@@ -1709,8 +1650,8 @@ $$
 
 $$
 \begin{cases}
-X\beta = X(C_0\ C_1)(C_0\ C_1)^t \beta = D_0 \gamma_0 + D_1 \gamma_1 \
-D_0 = X C_0,\quad D_1 = X C_1,\quad \gamma_0 = C_0^t \beta,\quad \gamma_1 = C_1^t \beta \
+X\beta = X(C_0\ C_1)(C_0\ C_1)^t \beta = D_0 \gamma_0 + D_1 \gamma_1 \\
+D_0 = X C_0,\quad D_1 = X C_1,\quad \gamma_0 = C_0^t \beta,\quad \gamma_1 = C_1^t \beta \\
 \operatorname{rank}(D_0) = p+1-r,\quad \operatorname{rank}(D_1) = r,\quad \operatorname{rank}(D_0, D_1) = p+1
 \end{cases}
 $$
@@ -1756,11 +1697,11 @@ $$
 의 열벡터공간임을 다음으로부터 알 수 있다.
 
 $$
-\operatorname{col}(D_{1|0}) = {a \in \operatorname{col}((D_0, D_1)) : a^t D_0 = 0} \\
-= {a \in \operatorname{col}(X) : a^t X C_0 = 0} \\
-= {X\beta : \beta^t X^t X C_0 = 0} \\
-= {X\beta : X^t X \beta \in \operatorname{col}(C)} \\
-= {X(X^t X)^{-1} C \xi : \xi \in \mathbb{R}^r} \\
+\operatorname{col}(D_{1|0}) = \{a \in \operatorname{col}((D_0, D_1)) : a^t D_0 = 0\} \\
+= \{a \in \operatorname{col}(X) : a^t X C_0 = 0\} \\
+= \{X\beta : \beta^t X^t X C_0 = 0\} \\
+= \{X\beta : X^t X \beta \in \operatorname{col}(C)\} \\
+= \{X(X^t X)^{-1} C \xi : \xi \in \mathbb{R}^r\} \\
 = \operatorname{col}(X(X^t X)^{-1} C)
 $$
 
@@ -1831,27 +1772,15 @@ $$
 \text{(상수항 열)}=\sum_{i=1}^k \text{(집단 }i\text{ 더미 열)}
 $$
 
-따라서
-
-$$
-\mathrm{rank}(X)=k<k+1,\qquad X^\top X\ \text{는 정칙이 아니며 }(X^\top X)^{-1}\text{가 존재하지 않는다.}
-$$
+따라서 $\mathrm{rank}(X)=k<k+1$이고 $X^\top X$ 는 정칙이 아니며 $(X^\top X)^{-1}$가 존재하지 않는다.
 
 **3) 제약조건 $c^\top\beta=0$를 추가한 "선형모형 관점 (식별성)**  
 
 이 경우 책에서처럼 모수에 제약을 추가하여 모형을 식별한다.  
-일원분류모형의 제약 $\sum_i n_i\alpha_i=0$는
+일원분류모형의 제약 $\sum_i n_i\alpha_i=0$는 $c^\top\beta=0,\quad c^\top=(0,\ n_1,\dots,n_k)$ 로 쓸 수 있다. 즉,
 
 $$
-c^\top\beta=0,\qquad c^\top=(0,\ n_1,\dots,n_k)
-$$
-
-로 쓸 수 있다. 즉,
-
-$$
-\boxed{
-Y=X\beta+e,\quad c^\top\beta=0,\quad e\sim N_n(0,\sigma^2I)
-}
+\boxed{Y=X\beta+e,\quad c^\top\beta=0,\quad e\sim N_n(0,\sigma^2I)}
 $$
 
 가 "제약조건이 있는 선형모형(linear model with constraints)의 형태다.
