@@ -112,7 +112,8 @@ $$
 ### Thm. 1. [코시판정법] *(Cauchy Criterion for Series of Functions)*
 
 $f_n:D\to\mathbb R$라 할 때, 다음을 만족하면
-$\sum_{n=1}^\infty f_n$은 $D$에서 균등수렴한다.  
+$\sum_{n=1}^\infty f_n$은 $D$에서 균등수렴한다.
+  
 $$
 \forall\varepsilon>0,\ \exists N\in\mathbb N\ \text{s.t.}\
 \forall m>n\ge N,\ \forall x\in D,\\
@@ -455,6 +456,7 @@ $$
 $$
 f(x)=\sum_{n=0}^\infty a_n(x-c)^n
 $$
+
 는 수렴구간에서 연속이다.
 
 #### 증명

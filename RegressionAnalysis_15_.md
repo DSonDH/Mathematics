@@ -199,6 +199,7 @@ $$
 
 $p>n$인 경우 $j=n+1,\dots,p$에 대하여 $(D^TD)_j=0$이므로, 해당 방향에서는 분산 기여가 0이 된다.  
 능형회귀추정량의 평균제곱오차 (mean squared error, MSE)는
+
 $$
 \mathrm{MSE}[\hat{\boldsymbol{\beta}}(k)]
 = E\big[(\hat{\boldsymbol{\beta}}(k)-\boldsymbol{\beta})^T(\hat{\boldsymbol{\beta}}(k)-\boldsymbol{\beta})\big] \\
@@ -280,6 +281,7 @@ $$\hat{\boldsymbol{\alpha}}_g =(D_g^TD_g)^{-1}D_g^TU^T\mathbf{y}$$
 $$\hat{\boldsymbol{\beta}}_g=P_g\hat{\boldsymbol{\alpha}}_g = P_g(D_g^TD_g)^{-1}D_g^TU^T\mathbf{y} \tag{17.8}$$
 
 이 식을 최소제곱추정량
+
 $$\hat{\boldsymbol{\beta}}=P(D^TD)^{-1}D^TU^T\mathbf{y}$$
 
 와 비교하면, 주성분회귀는 전체 $p$개의 방향을 사용하는 대신 그 중 상위 $g$개 방향만을 사용한다는 차이가 있다. 즉, 고유값이 큰 방향만을 남기고 작은 방향은 완전히 제거하는 방법이다.  

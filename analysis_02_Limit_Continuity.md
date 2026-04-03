@@ -13,8 +13,7 @@
 해석적 관점만 다룸. 기하적 특성은 위상수학에서 다룸.  
 
 ### Def 1. *(수렴과 극한, Limit of a function at a point)*
-$f : D \to \mathbb{R},\ a \in D,\ L \in \mathbb{R}$ 라 하자.
-
+$f : D \to \mathbb{R},\ a \in D,\ L \in \mathbb{R}$ 라 하자
 $$ \forall \epsilon>0,\ \exists \delta>0\ \text{s.t.}\ \forall x\in D,\\
 0 < |x-a| < \delta \Rightarrow |f(x)-L|<\epsilon $$
 
@@ -49,7 +48,7 @@ $x\neq 0$ 이므로 $|f(x)|=|x|.$
 그러므로
 
 $$
-\lim_{x\to 0} f(x)=0.
+\lim_{x\to 0} f(x)=0
 $$
 
 #### 예제 2 (Dirichlet function)
@@ -142,7 +141,7 @@ $\delta=\min\{\delta_1,\delta_2\}$로 두면,
 
 $$
 |x-a|<\delta \Rightarrow |(f(x)+g(x))-(A+B)|
-\\ \le |f(x)-A|+|g(x)-B|<\varepsilon.
+\\ \le |f(x)-A|+|g(x)-B|<\varepsilon
 $$
 
 3. 임의의 $\varepsilon>0$를 잡는다.  삼각부등식에 의해, 
@@ -163,7 +162,7 @@ $\delta=\min\{\delta_0,\delta_1,\delta_2\}$ 이면
 
 $$|f(x)g(x)-AB| < |g||f-A| + |A||g-B| < \varepsilon/2 + \varepsilon/2$$
 
-$$\therefore |f(x)g(x)-AB|<\varepsilon.$$
+$$\therefore |f(x)g(x)-AB|<\varepsilon$$
 
 4.
   - 임의의 $\varepsilon>0$를 잡는다.  
@@ -171,20 +170,19 @@ $$\therefore |f(x)g(x)-AB|<\varepsilon.$$
 $$
 \left|\frac{f(x)}{g(x)}-\frac{A}{B}\right|
 =\left|\frac{Bf(x)-Ag(x)}{Bg(x)}\right|
-\le \frac{|B||f(x)-A|+|A||g(x)-B|}{|B||g(x)|}.
+\le \frac{|B||f(x)-A|+|A||g(x)-B|}{|B||g(x)|}
 $$
 
-$\lim_{x\to a} g(x)=B\ne0$ 이므로 $\exists\delta_0>0$ s.t.
-
+$\lim_{x\to a} g(x)=B\ne0$ 이므로 $\exists\delta_0>0$ s.t
 $$
-|x-a|<\delta_0 \Rightarrow |g(x)|>\frac{|B|}{2}.
+|x-a|<\delta_0 \Rightarrow |g(x)|>\frac{|B|}{2}
 $$
 
 따라서
 
 $$
 \left|\frac{f(x)}{g(x)}-\frac{A}{B}\right|
-\le \frac{2}{|B|^2}\Big(|B||f(x)-A|+|A||g(x)-B|\Big).
+\le \frac{2}{|B|^2}\Big(|B||f(x)-A|+|A||g(x)-B|\Big)
 $$
 
 이제 $|B||f(x)-A|<\frac{|B|^2\varepsilon}{4}$ 가 되도록 $\delta_1>0$ 을 택하고,  
@@ -194,13 +192,13 @@ $\delta=\min\{\delta_0,\delta_1,\delta_2\}$ 로 두면 $|x-a|<\delta$ 일 때
 
 $$
 \left|\frac{f(x)}{g(x)}-\frac{A}{B}\right|
-\le \frac{2}{|B|^2}\left(\frac{|B|^2\varepsilon}{4}+\frac{|B|^2\varepsilon}{4}\right)=\varepsilon.
+\le \frac{2}{|B|^2}\left(\frac{|B|^2\varepsilon}{4}+\frac{|B|^2\varepsilon}{4}\right)=\varepsilon
 $$
 
 즉,
 
 $$
-\lim_{x\to a}\frac{f(x)}{g(x)}=\frac{A}{B}.
+\lim_{x\to a}\frac{f(x)}{g(x)}=\frac{A}{B}
 $$
 
 ## (4) 주요 정리
@@ -223,7 +221,7 @@ $$
 |L-M|
 = |L-f(x)+f(x)-M|
 \le |f(x)-L|+|f(x)-M|
-< \varepsilon.
+< \varepsilon
 $$
 
 임의의 $\varepsilon>0$에 대해 $|L-M|<\varepsilon$이므로 $L=M$이다.
@@ -246,7 +244,7 @@ $L-\varepsilon<h(x)<L+\varepsilon$.
 $\delta=\min\{\delta_1,\delta_2\}$로 두면 $|x-a|<\delta$에서
 
 $$
-L-\varepsilon<f(x)\le g(x)\le h(x)<L+\varepsilon.
+L-\varepsilon<f(x)\le g(x)\le h(x)<L+\varepsilon
 $$
 
 따라서 $|g(x)-L|<\varepsilon$가 되어 $\lim_{x\to a} g(x)=L$이다.
@@ -308,7 +306,7 @@ $|f(x)-f(2)| = |1-1| = 0 < \varepsilon$
 
 $$
 \forall \varepsilon>0,\ \exists\delta>0\ \text{s.t.}\
-|x-2|<\delta \Rightarrow |f(x)-f(2)|<\varepsilon.
+|x-2|<\delta \Rightarrow |f(x)-f(2)|<\varepsilon
 $$
 
 그러므로 $f$는 $x=2$에서 연속이다.
@@ -362,13 +360,13 @@ $|x-a|<1$ 이면 $a-1 < x < a+1$ 이므로 $|x+a| < 2a+1$
 로 두면, $|x-a|<\delta\leq \frac{\varepsilon}{2a+1}$
 
 $$
-\therefore |f(x)-f(a)|<\varepsilon.
+\therefore |f(x)-f(a)|<\varepsilon
 $$
 
 즉,
 
 $$
-\forall \varepsilon>0,\ \exists\delta>0\ \text{s.t.}\ |x-a|<\delta \Rightarrow |f(x)-f(a)|<\varepsilon.
+\forall \varepsilon>0,\ \exists\delta>0\ \text{s.t.}\ |x-a|<\delta \Rightarrow |f(x)-f(a)|<\varepsilon
 $$
 
 따라서 $f$는 임의의 $a>0$에서 연속이다.  

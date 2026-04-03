@@ -636,6 +636,7 @@ $$
 >
 
 ### 균등분포의 정의
+
 $$
 U(a,b)\ \overset{d}{\equiv}\ (b-a)U(0,1)+a \\
 X\sim U(a,b)

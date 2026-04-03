@@ -500,6 +500,7 @@ $$\mathrm{MSE}(\hat\eta^{RB}, \theta) = E_{\theta}\left[(\hat\eta^{RB} - \eta(\t
 $$\mathrm{MSE}(\hat\eta, \theta) = E_\theta\left[(\hat\eta - \eta(\theta))^2\right]$$
 
 조건부기대값의 분해(분산의 법칙)에 의해
+
 $$
 E_\theta\left[(\hat\eta - \eta(\theta))^2\right]
 = E_\theta\left[E_\theta [(\hat\eta - \eta(\theta))^2 \mid Y]\right] \\

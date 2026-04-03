@@ -167,28 +167,29 @@ $$
 
 $i=1,\dots,n$에 대해 $Y_i=(X_i,\dots,X_i^k)^\top\in\mathbb{R}^k$ 로 두면 $E(Y_i)=m$이고 \\ $\operatorname{Cov}(Y_i)=\Sigma, \Sigma_{rs}=\operatorname{Cov}(X_i^r,X_i^s)=E(X_i^{r+s})-E(X_i^r)E(X_i^s)=m_{r+s}-m_rm_s$ 가 된다. 가정 $E(X_1^{2k})<\infty$로 각 성분의 2차 모멘트가 유한하므로 다변량 중심극한정리에 의해
 
-$$ \sqrt n(\hat m-m) =\sqrt n\!\left(\frac1n\sum_{i=1}^n Y_i-E(Y_1)\right) \xrightarrow{d}N_k(0,\Sigma).$$
+$$ \sqrt n(\hat m-m) =\sqrt n\!\left(\frac1n\sum_{i=1}^n Y_i-E(Y_1)\right) \xrightarrow{d}N_k(0,\Sigma)$$
 
 이제 $\hat\eta_n-\eta=g(\hat m)-g(m)$에 대해, $g$의 미분 가능성을 이용하면 (delta method)
 
 $$ g(\hat m)-g(m) =\nabla g(m)^\top(\hat m-m)+r_n,\quad
-\frac{r_n}{\|\hat m-m\|}\xrightarrow{p}0.$$
+\frac{r_n}{\|\hat m-m\|}\xrightarrow{p}0$$
 
 따라서
-$$\sqrt n(\hat\eta_n-\eta) =\nabla g(m)^\top\sqrt n(\hat m-m)+\sqrt n\,r_n.$$
+
+$$\sqrt n(\hat\eta_n-\eta) =\nabla g(m)^\top\sqrt n(\hat m-m)+\sqrt n\,r_n$$
 
 또한 $\hat m\xrightarrow{p}m$이므로 $\hat m-m=O_p(n^{-1/2})$, hence $\sqrt n\,r_n=o_p(1)$. Slutsky 정리에 의해
 
 $$\sqrt n(\hat\eta_n-\eta)
-\xrightarrow{d}\nabla g(m)^\top Z,\quad Z\sim N_k(0,\Sigma).$$
+\xrightarrow{d}\nabla g(m)^\top Z,\quad Z\sim N_k(0,\Sigma)$$
 
 정규벡터의 선형결합은 정규분포이므로
 
-$$\nabla g(m)^\top Z\sim N\!\left(0,(\nabla g(m))^\top\Sigma\nabla g(m)\right).$$
+$$\nabla g(m)^\top Z\sim N\!\left(0,(\nabla g(m))^\top\Sigma\nabla g(m)\right)$$
 
 즉,
 
-$$\sqrt n(\hat\eta_n-\eta)\xrightarrow{d}N(0,\sigma^2),\quad \sigma^2=(\nabla g(m))^\top\Sigma\nabla g(m).$$
+$$\sqrt n(\hat\eta_n-\eta)\xrightarrow{d}N(0,\sigma^2),\quad \sigma^2=(\nabla g(m))^\top\Sigma\nabla g(m)$$
 
 >추가: 참고
 >| 항목     | MOM              | MLE       |
@@ -1907,7 +1908,7 @@ $$C(X_0)+C(X_{1|0})=C(X_0,X_1)=C(X)$$
 
 결국 $P$는 $C(X)$로의 직교투영행렬이다. 그런데 $C(X)$로의 직교투영행렬은 유일하므로
 
-$$P=\Pi \\ \therefore \Pi=\Pi_0+\Pi_{1|0}.$$
+$$P=\Pi \\ \therefore \Pi=\Pi_0+\Pi_{1|0}$$
 
 **(2) 평균반응의 재표현**
 

@@ -204,7 +204,7 @@ $$
 $f$가 $[a,b]$에서 연속이면
 
 $$
-f\in\mathcal R[a,b].
+f\in\mathcal R[a,b]
 $$
 
 * 불연속인데 리만적분 가능한 경우도 있긴 함! 
@@ -247,7 +247,7 @@ $f$가 $[a,b]$에서 연속이면
 
 $$
 \exists c\in(a,b)\text{ s.t. }
-\int_a^b f(x),dx=f(c)(b-a).
+\int_a^b f(x),dx=f(c)(b-a)
 $$
 
 #### 증명
@@ -573,7 +573,7 @@ $g'\in\mathcal R[a,b]$,
 $f$는 $g([a,b])$에서 연속이면
 
 $$
-\int_a^b f(g(t))g'(t),dt=\int_{g(a)}^{g(b)} f(x),dx.
+\int_a^b f(g(t))g'(t),dt=\int_{g(a)}^{g(b)} f(x),dx
 $$
 
 - 증명  
@@ -633,8 +633,7 @@ $$
 로 표현할 수 있다.
 
 **예: 극좌표 변환을 이용한 가우스 적분**  
-$I = \int_{-\infty}^{\infty} e^{-x^2/2}\,dx$를 구하자.
-
+$I = \int_{-\infty}^{\infty} e^{-x^2/2}\,dx$를 구하자
 $$I^2 = \left(\int_{-\infty}^{\infty} e^{-x^2/2}\,dx\right)^2 = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} e^{-(x_1^2+x_2^2)/2}\,dx_1\,dx_2$$
 
 let $x_1 = r\cos\theta, \quad x_2 = r\sin\theta$이면 
@@ -1047,8 +1046,7 @@ $$
 f\in\mathcal R_\alpha[a,b]
 $$
 
-이고 다음이 성립한다.
-
+이고 다음이 성립한다
 $$
 \int_a^b f\ d\alpha =
 \int_a^b f(x)\alpha'(x)\ dx

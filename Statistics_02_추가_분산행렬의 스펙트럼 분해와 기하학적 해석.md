@@ -75,6 +75,7 @@ $$
 1/4 & 5/4
 \end{pmatrix}
 $$
+
 의 고유값과 고유벡터를 구하자.
 
 특성방정식(characteristic equation)은

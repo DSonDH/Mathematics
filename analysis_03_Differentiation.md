@@ -148,7 +148,7 @@ $$
 \lim_{x\to a}\frac{g(f(x))-g(f(a))}{x-a}
 =\lim_{x\to a}\psi(f(x))\phi(x)
 =\psi(f(a))\phi(a)
-=g'(f(a))f'(a).
+=g'(f(a))f'(a)
 $$
 
 즉 $(g\circ f)$는 $a$에서 미분가능하고
@@ -336,13 +336,13 @@ $$
 가 성립한다. $f(a)=g(a)=0$이므로
 
 $$
-\frac{f(x)}{g(x)}=\frac{f'(c)}{g'(c)}.
+\frac{f(x)}{g(x)}=\frac{f'(c)}{g'(c)}
 $$
 
 이제 $x\to a$일 때, $c$는 $a$와 $x$ 사이에 있으므로 $c\to a$이다. 엄밀히는 임의의 수열 $x_n\to a$($x_n\neq a$)를 택하면, 이에 대응하는 $c_n$은 $c_n\to a$이며
 
 $$
-\frac{f(x_n)}{g(x_n)}=\frac{f'(c_n)}{g'(c_n)}.
+\frac{f(x_n)}{g(x_n)}=\frac{f'(c_n)}{g'(c_n)}
 $$
 
 (H4)로부터 $c_n\to a$이면
@@ -354,13 +354,13 @@ $$
 이므로
 
 $$
-\frac{f(x_n)}{g(x_n)}\to L.
+\frac{f(x_n)}{g(x_n)}\to L
 $$
 
 임의의 수열에 대해 성립하므로
 
 $$
-\lim_{x\to a}\frac{f(x)}{g(x)}=L.
+\lim_{x\to a}\frac{f(x)}{g(x)}=L
 $$
 
 #### Case 2: $\infty/\infty$ 꼴
@@ -379,20 +379,20 @@ $$
 코시 평균값정리를 $[y,x]$에 적용하면 어떤 $c$가 $y$와 $x$ 사이에 존재하여
 
 $$
-\frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f'(c)}{g'(c)}.
+\frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f'(c)}{g'(c)}
 $$
 
 정리하면
 
 $$
-f(x)=f(y)+\frac{f'(c)}{g'(c)}(g(x)-g(y)).
+f(x)=f(y)+\frac{f'(c)}{g'(c)}(g(x)-g(y))
 $$
 
 양변에서 $L g(x)$를 빼고 $g(x)$로 나누면
 
 $$
 \frac{f(x)}{g(x)}-L
-=\frac{f(y)}{g(x)}+\left(\frac{f'(c)}{g'(c)}-L\right)\frac{g(x)-g(y)}{g(x)}-L\frac{g(y)}{g(x)}.
+=\frac{f(y)}{g(x)}+\left(\frac{f'(c)}{g'(c)}-L\right)\frac{g(x)-g(y)}{g(x)}-L\frac{g(y)}{g(x)}
 $$
 
 절댓값을 취하고 삼각부등식을 쓰면
@@ -402,13 +402,13 @@ $$
 \le
 \left|\frac{f(y)}{g(x)}\right|
 + \left|\frac{f'(c)}{g'(c)}-L\right|\left|\frac{g(x)-g(y)}{g(x)}\right|
-+ |L|\left|\frac{g(y)}{g(x)}\right|.
++ |L|\left|\frac{g(y)}{g(x)}\right|
 $$
 
 이제 $x\to a$로 보낸다. $|g(x)|\to\infty$이므로 (고정된 $y$에 대해)
 
 $$
-\left|\frac{f(y)}{g(x)}\right|\to 0,\qquad \left|\frac{g(y)}{g(x)}\right|\to 0.
+\left|\frac{f(y)}{g(x)}\right|\to 0,\qquad \left|\frac{g(y)}{g(x)}\right|\to 0
 $$
 
 또한 $c$는 $x$와 $y$ 사이에 있으므로 $x\to a$이면 $c\to a$가 된다(여기서 $y$는 $a$에 매우 가깝게 고정했으므로 $x,y\to a$를 함께 만족시키는 셈이다). 따라서 $x$를 충분히 $a$에 가깝게 잡으면 $c$도 $a$에 가까워져서

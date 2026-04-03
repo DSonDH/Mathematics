@@ -443,9 +443,11 @@ $$
 단순 가설 $H_0:\theta=\theta_0,\quad H_1:\theta=\theta_1$에서 검정 $\phi^{MP}_\alpha(X)$가 다음을 만족하면 **최강력 검정**(Most Powerful Test, MP test)이라 한다.
 
 1. **(유의수준 조건)**
+
     $$E_{\theta_0}[\phi^{MP}_\alpha(X)] \le \alpha \quad (0<\alpha<1)$$
 
 2. **(최대 검정력 조건)**
+
     $$E_{\theta_1}[\phi^{MP}_\alpha(X)] \ge E_{\theta_1}[\phi(X)] \quad \forall \phi: E_{\theta_0}[\phi(X)] \le \alpha$$
 
 ### 정리 9.1.2 단순 가설의 최강력 검정 (Neyman–Pearson Lemma, 네이만–피어슨 정리)

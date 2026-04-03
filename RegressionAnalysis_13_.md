@@ -35,6 +35,7 @@ $$\tilde{\beta}_0 = \bar{y}-\sum_{j=1}^{p}\tilde{\beta}_j\frac{s_y}{s_j}\bar{x}_
 \qquad j=1,2,\dots,p
 \tag{15.1}
 $$
+
 * $\bar{y}$ : 반응변수(response variable)의 표본평균(sample mean)
 * $s_y^2$ : 반응변수의 표본분산(sample variance)
 * $\bar{x}_j$ : $j$번째 설명변수의 표본평균
@@ -235,7 +236,6 @@ $$
 
 어떤 $\boldsymbol{\alpha}=(\alpha_1,\alpha_2,\cdots,\alpha_p)^T$가 존재하여 아래를 만족시킨다. 이때 능형회귀추정량의 평균제곱오차는
 > 주석: $X^TX$의 고윳값분해로 얻은 직교행렬 $P$에 대해 $\boldsymbol{\alpha}=P^T\boldsymbol{\beta}$로 둘 수 있다.
-
 
 $$
 \begin{aligned}
@@ -685,8 +685,7 @@ $$\hat{\phi}_{1j}=\frac{\mathbf{v}_{1j}^T\mathbf{u}_1}{\mathbf{v}_{1j}^T\mathbf{
 그러나 각 설명변수에 대해 단순회귀모형을 적합하는 방식은 설명변수들 사이의 연관성(association)을 고려하지 못한다. 따라서 각 회귀계수 추정값에 다시 가중치 $w_{1j}$를 부여하여 최종적으로 첫 번째 성분 $T_1$을 다음과 같이 정한다.
 
 $$
-T_1=\sum_{j=1}^{p}w_{1j}\hat{\phi}_{1j}V_{1j}
-\tag{15.38}
+T_1=\sum_{j=1}^{p}w_{1j}\hat{\phi}_{1j}V_{1j} \tag{15.38}
 $$
 
 TODO:FIXME: 이게 왠지 엄청 중요한 인과추론 관련 내용일 것 같은 느낌?!

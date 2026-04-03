@@ -1071,7 +1071,7 @@ Z_n
 = \left(
 \frac{X_{n1}-np_1}{\sqrt n},\dots,
 \frac{X_{nk}-np_k}{\sqrt n}
-\right)^\top.
+\right)^\top
 $$
 
 다차원 중심극한정리에 의해 $Z_n\xrightarrow{d}Z$

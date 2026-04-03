@@ -3,35 +3,44 @@
 #### 표준화 확률변수의 정의
 확률변수 $X$의 평균을 $\mu = E[X]$, 표준편차를 $\sigma = \sqrt{\mathrm{Var}(X)} > 0$이라 할 때,
 표준화 확률변수 $Z$는
+
 $$Z = \frac{X - \mu}{\sigma}$$
+
 로 정의되며, $E[Z] = 0$, $\mathrm{Var}(Z) = 1$을 만족한다.
 
 #### 정리 1.6.6 (표준화 확률변수의 누율과 적률)
 표준화 확률변수 $Z = \frac{X-\mu}{\sigma}$에 대해 다음이 성립한다:
 
 **(a) 저차 누율**
+
 $$c_1(Z) = 0, \quad c_2(Z) = 1$$
 
 **(b) 3차 누율과 적률**
+
 $$c_3(Z) = m_3(Z) = E[Z^3]$$
 
 **(c) 4차 누율과 적률**
+
 $$c_4(Z) = m_4(Z) - 3$$
 
 #### 증명 (Proof)
 
 **준비: 일반 누율과 적률의 관계**  
 5.5절의 누율생성함수로부터
+
 $$C(t) = \log M(t) = \sum_{r=1}^{\infty}\frac{c_r}{r!}t^r$$
 
 양변을 지수화하면
+
 $$M(t) = e^{C(t)} = \exp\left(\sum_{r=1}^{\infty}\frac{c_r}{r!}t^r\right)$$
 
 한편 적률생성함수의 정의로부터
+
 $$M(t) = \sum_{k=0}^{\infty}\frac{m_k}{k!}t^k$$
 
 **(a) 1차, 2차 누율**  
 표준화의 정의로부터
+
 $$c_1(Z) = E[Z] = E\left[\frac{X-\mu}{\sigma}\right] = \frac{1}{\sigma}(E[X] - \mu) = 0$$
 
 $$c_2(Z) = \mathrm{Var}(Z) = \mathrm{Var}\left(\frac{X-\mu}{\sigma}\right) = \frac{1}{\sigma^2}\mathrm{Var}(X) = 1$$
@@ -40,18 +49,23 @@ $$c_2(Z) = \mathrm{Var}(Z) = \mathrm{Var}\left(\frac{X-\mu}{\sigma}\right) = \fr
 $M(t) = e^{C(t)}$를 세 번 미분하면
 
 첫 번째 미분:
+
 $$M'(t) = C'(t)M(t)$$
 
 두 번째 미분:
+
 $$M''(t) = C''(t)M(t) + [C'(t)]^2M(t)$$
 
 세 번째 미분:
+
 $$M'''(t) = C'''(t)M(t) + 3C''(t)C'(t)M(t) + [C'(t)]^3M(t)$$
 
 $t=0$에서 평가하면 ($M(0) = 1$, $C'(0) = c_1 = 0$, $C''(0) = c_2 = 1$):
+
 $$m_3 = M'''(0) = C'''(0) + 3C''(0) \cdot 0 + 0 = c_3$$
 
 따라서 표준화 확률변수에 대해
+
 $$c_3(Z) = m_3(Z) = E[Z^3]$$
 
 **(c) 4차 누율과 적률의 관계**  
@@ -64,9 +78,11 @@ M^{(4)}(t) &= C^{(4)}(t)M(t) + C'''(t)M'(t) \\
 \end{aligned}$$
 
 $t=0$에서 평가하면 ($C'(0) = 0$, $C''(0) = 1$):
+
 $$m_4 = M^{(4)}(0) = C^{(4)}(0) + 3[C''(0)]^2 = c_4 + 3$$
 
 따라서
+
 $$c_4(Z) = m_4(Z) - 3$$
 
 이는 표준화 확률변수의 4차 누율이 4차 적률보다 정확히 3만큼 작음을 의미한다. ∎
@@ -107,6 +123,7 @@ $$c_4(Z) = m_4(Z) - 3$$
 
 **(a) 왜도(Skewness)**  
 분포의 비대칭성을 측정하는 지표로, 다음과 같이 정의된다:
+
 $$\gamma_1 = \frac{c_3}{\sigma^3} = \frac{E[(X-\mu)^3]}{\sigma^3} = E[Z^3] = c_3(Z)$$
 
 **해석**
@@ -123,14 +140,17 @@ $$\gamma_1 = \frac{c_3}{\sigma^3} = \frac{E[(X-\mu)^3]}{\sigma^3} = E[Z^3] = c_3
 분포의 뾰족한 정도와 꼬리의 두께를 측정하는 지표이다.
 
 **초과첨도(Excess Kurtosis)**
+
 $$\gamma_2 = \frac{c_4}{\sigma^4} = \frac{m_4(Z) - 3}{\sigma^4} = c_4(Z)$$
 
 여기서 3을 빼는 이유는 표준정규분포의 4차 적률이 3이기 때문이다.
 
 **전체 첨도(Kurtosis)**
+
 $$\beta_2 = \frac{m_4}{\sigma^4} = \frac{E[(X-\mu)^4]}{\sigma^4} = E[Z^4] = m_4(Z)$$
 
 관계식:
+
 $$\gamma_2 = \beta_2 - 3 = c_4(Z)$$
 
 **해석**
@@ -147,36 +167,46 @@ $$\gamma_2 = \beta_2 - 3 = c_4(Z)$$
 
 **(a) 선형변환 불변성**  
 $Y = aX + b$ ($a \neq 0$)일 때
+
 $$\gamma_1(Y) = \text{sgn}(a) \cdot \gamma_1(X), \quad \gamma_2(Y) = \gamma_2(X)$$
+
 여기서 $\text{sgn}(a)$는 $a$의 부호이다.
 
-**증명**  
+**증명** 
+ 
 $$Z_Y = \frac{Y - E[Y]}{\sigma_Y} = \frac{aX + b - (a\mu + b)}{|a|\sigma} = \text{sgn}(a) \cdot Z_X$$
 
 따라서
+
 $$\gamma_1(Y) = E[Z_Y^3] = [\text{sgn}(a)]^3 E[Z_X^3] = \text{sgn}(a) \cdot \gamma_1(X)$$
+
 $$\gamma_2(Y) = E[Z_Y^4] = E[Z_X^4] = \gamma_2(X)$$
 
 **(b) 독립 확률변수의 합**  
 $X$와 $Y$가 독립이고 $Z = X + Y$일 때
+
 $$c_r(Z) = c_r(X) + c_r(Y), \quad r = 1, 2, 3, 4$$
 
 이는 누율의 가법성으로부터 바로 얻어진다.
 
 특히 표준화된 합 $Z = \frac{X+Y - (\mu_X + \mu_Y)}{\sqrt{\sigma_X^2 + \sigma_Y^2}}$에 대해
+
 $$c_3(Z) = \frac{c_3(X) + c_3(Y)}{(\sigma_X^2 + \sigma_Y^2)^{3/2}}$$
 
 #### 예 1.6.4 균등분포의 왜도와 첨도
 $X \sim \text{Uniform}[0,1]$일 때, $\mu = 1/2$, $\sigma^2 = 1/12$
 
 **3차 적률**
+
 $$m_3(X) = E[(X-1/2)^3] = \int_0^1 (x-1/2)^3\,dx = 0$$
 (피적분함수가 기함수이므로)
 
 따라서
+
 $$\gamma_1 = \frac{0}{(1/12)^{3/2}} = 0$$
 
 **4차 적률**
+
 $$m_4(X) = E[(X-1/2)^4] = \int_0^1 (x-1/2)^4\,dx = \frac{1}{80}$$
 
 $$\beta_2 = \frac{1/80}{(1/12)^2} = \frac{1/80}{1/144} = \frac{144}{80} = 1.8$$

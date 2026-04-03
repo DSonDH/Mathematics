@@ -20,11 +20,13 @@
 #### ③ 극대원소(Maximal element)와 극소원소(Minimal element)
 
 부분순서집합 $A$에서 $a$ in A는 **극대원소**: 
+
 $$
 \forall x \in A,\ a \le x \Rightarrow x = a
 $$
 
 $a$ in A는 **극소원소**:
+
 $$
 \forall x \in A,\ x \le a \Rightarrow x = a
 $$
@@ -36,11 +38,13 @@ $$
 
 부분순서집합 $A$,  
  a in A에서 **최대원소** :
+
 $$
 \forall x \in A,\ x \le a
 $$
 
 a in A에서 **최소원소** :
+
 $$
 \forall x \in A,\ a \le x
 $$
@@ -56,11 +60,13 @@ $$
 
 부분순서집합 $A$의 부분집합 $B$에 대하여  
 $a$ in A가 **상계** : 
+
 $$
 \forall x \in B,\ x \le a
 $$
 
 $a$ in A가 **하계** :
+
 $$
 \forall x \in B,\ a \le x
 $$
@@ -72,6 +78,7 @@ a가 B의 원소일수도, 아닐수도 있음
 #### ② 상한(supremum)과 하한(infimum)
 상계 중 최소인 원소를 **상한**,
 하계 중 최대인 원소를 **하한**이라 한다.
+
 $$\sup B, \quad \inf B$$
 
 예: $A = [0,1)$이면 $\sup A = 1, \inf A = 0$
@@ -92,6 +99,7 @@ B \cap C = \emptyset,\ B \cup C = A,\\
 x \in B,\ y \leq x \Rightarrow y \in B \\
 x \in C,\ x \leq y \Rightarrow y \in C
 $$
+
 를 만족하는 공집합 아닌 부분집합들의 쌍 $(B, C)$를 **절단(cut)** 이라 한다.  
 
 어떤 것 기준으로 작은 것들, 어떤 것 기준으로 큰 것을이 나뉘고 그 둘이 전체를 구성한다.  
@@ -104,15 +112,19 @@ $$
 $$
 f: A \to B,\quad \forall x, y \in A, \quad x \le y \Rightarrow f(x) \le f(y)
 $$
+
 이면 **순서보존함수**라 한다.  
 입력값 순서가 출력값 순서에도 동일하게 유지되는 것  
 #### ② 순서동형사상 (Order isomorphism)
 $$
 f: A \to B \text{ 전단사이며 } x \le y \Rightarrow f(x) \le f(y)
 $$
+
 이면 **순서동형사상(order isomorphism)** 이라 한다.
 이때 $A, B$가 순서동형이면
+
 $$ A \cong B $$
+
 로 나타낸다.
 
 예: 항등함수 $I_A : A \to A$
@@ -123,6 +135,7 @@ $$ A \cong B $$
 $$
 \forall x, y \in A,\ (x \le y) \lor (y \le x)
 $$
+
 이면 $A$는 **전순서집합(totally ordered set)** 이라 한다.
 
 #### ② 전순서집합
@@ -152,6 +165,7 @@ $$
 * 모든 순서수 $\alpha$에 대해 $o(A) = \alpha$인 정렬집합 A가 존재한다. 
   - o 또는 ord는 서수를 나타내는 기호
   $$ A \cong \alpha $$
+
 1) $A \cong B \iff o(A) = o(B)$
 
 2) $A = \emptyset \iff o(A) = 0$
@@ -170,9 +184,11 @@ $\omega = o(\mathbb{N})$
 
 ### (3) 서수의 순서
 정렬집합 $A,B$에 대해
+
 $$
 o(A)=\alpha,\ o(B)=\beta
 $$
+
 일 때,
 $A$가 $B$의 절편과 순서동형이면 $\alpha$는 $\beta$보다 작거나 같다고 하며, $\alpha \preceq \beta$라 한다. $\alpha \neq \beta$이면 $\alpha \prec \beta$
 

@@ -89,7 +89,7 @@ $$
 따라서  
 
 $$
-\int_0^{+\infty} c e^{-2x}\,dx = c\left[-\dfrac{e^{-2x}}{2}\right]_0^{+\infty}=\dfrac{c}{2}=1,
+\int_0^{+\infty} c e^{-2x}\,dx = c\left[-\dfrac{e^{-2x}}{2}\right]_0^{+\infty}=\dfrac{c}{2}=1
 $$
 
 이므로 $c=2$이다.
@@ -117,7 +117,7 @@ $$
 계산하면  
 
 $$
-\int_2^3 2e^{-x-3}\,dx = 2e^{-3}[-e^{-x}]_2^3 = 2(e^{-5}-e^{-6}),
+\int_2^3 2e^{-x-3}\,dx = 2e^{-3}[-e^{-x}]_2^3 = 2(e^{-5}-e^{-6})
 $$
 
 $$
@@ -317,7 +317,7 @@ $$
 $F(x,y)=\left\{1-e^{-2(x\wedge y)}+2e^{-y}\left(e^{-(x\wedge y)}-1\right)\right\}\mathbf{1}_{\{x\ge 0,\ y\ge 0\}}$로부터
 
 $$
-F_1(x)=\lim_{y\to +\infty}F(x,y)=(1-e^{-2x})\mathbf{1}_{\{x\ge 0\}},
+F_1(x)=\lim_{y\to +\infty}F(x,y)=(1-e^{-2x})\mathbf{1}_{\{x\ge 0\}}
 $$
 
 $$
@@ -2540,6 +2540,7 @@ $$
 \frac{\partial C(\mathbf{t})}{\partial t_i}
 \right|_{t_1=\cdots=t_k=0}
 =E(X_i),
+
 $$
 
 $$

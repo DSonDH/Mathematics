@@ -56,8 +56,7 @@ $$X = (X_k, X_r) \\
 완전모형에서 $\beta$의 최소제곱추정량 (least squares estimator)을 $\hat{\boldsymbol{\beta}}$라고 하자. 이를 분할하면
 
 $$\hat{\boldsymbol{\beta}}
-=
-\begin{bmatrix}
+= \begin{bmatrix}
 \hat{\boldsymbol{\beta}}_k \\
 \hat{\boldsymbol{\beta}}_r
 \end{bmatrix}
@@ -225,7 +224,9 @@ $$\text{MSE}(\tilde{y}_k)=\sigma^2 \mathbf{x}_k^T (X_k^TX_k)^{-1} \mathbf{x}_k+(
 ### 정리 9.1
 
 행렬
+
 $$\text{Var}(\hat{\boldsymbol{\beta}}_k) - \text{Var}(\tilde{\boldsymbol{\beta}}_k)$$
+
 은 양반정치행렬 (positive semi-definite matrix)이다.
 
 
@@ -241,10 +242,15 @@ $$\text{Var}(\hat{y}) \ge \text{Var}(\tilde{y}_k)$$
 ### 정리 9.3
 
 만약 행렬
+
 $$\text{Var}(\hat{\boldsymbol{\beta}}_r) - \boldsymbol{\beta}_r\boldsymbol{\beta}_r^T$$
+
 이 양반정치행렬이면,
+
 $$\text{Var}(\hat{y}) - \text{MSE}(\tilde{y}_k)$$
+
 도 양반정치행렬이며, 따라서
+
 $$\text{Var}(\hat{y}) \ge \text{MSE}(\tilde{y}_k)$$
 
 이 정리는 변수제거의 이론적 근거를 제시하는 중요한 정리다.
@@ -258,6 +264,7 @@ $$\text{Var}(\hat{y}) \ge \text{MSE}(\tilde{y}_k)$$
 ### 평균제곱오차의 해석: 분산과 편향의 제곱의 합
 
 예를 들어 축소모형 예측량 $\tilde{y}_k$의 평균제곱오차는
+
 $$\text{MSE}(\tilde{y}_k)=\text{Var}(\tilde{y}_k)+[\text{Bias}(\tilde{y}_k)]^2$$
 
 여기서 편향은

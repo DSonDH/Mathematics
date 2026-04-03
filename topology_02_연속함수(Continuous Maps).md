@@ -40,6 +40,7 @@ $f: X \to Y$가 연속 $\Leftrightarrow$ 모든 $x \in X$에서 점별 연속이
 
 ### 정의 2.6: 상공간과 상위상 (quotient space and quotient topology)
 $f: X \to Y$가 전사함수일 때, $Y$의 상위상(quotient topology)은:
+
 $$\mathscr{T}_Y = \{U \subset Y : f^{-1}(U) \in \mathscr{T}_X\}$$
 
 순서쌍 $(Y, \mathscr{T}_Y)$를 상공간(quotient space)이라 하고, $f$를 상사상(quotient map)이라 한다.

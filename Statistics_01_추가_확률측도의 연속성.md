@@ -14,10 +14,13 @@
 $$
 C_1 \subseteq C_2 \subseteq \cdots
 $$
+
 에 대해
+
 $$
 \lim_{k\to\infty} C_k = \bigcup_{k=1}^\infty C_k
 $$
+
 이다.
 
 이때
@@ -36,6 +39,7 @@ $$
 ### 1. 집합의 극한은 “모든 $k$”에 대한 개념이다
 
 증가열의 극한은 다음과 같이 **정의**된다.
+
 $$
 \lim_{k\to\infty} C_k
 := {\omega : \exists k_0 \text{ s.t. } \omega\in C_{k_0}}
@@ -47,25 +51,30 @@ $$
 * “큰 $k$만 보자”가 아니다.
 
 즉,
+
 $$
-\omega\in C_1 \quad\text{도}\quad \lim C_k \text{에 포함되어야 한다}.
+\omega\in C_1 \quad\text{도}\quad \lim C_k \text{에 포함되어야 한다}
 $$
 
 ### 2. $C_1, C_2$를 빼면 같은 집합이 아닐 수도 있다
 
 예를 들어
+
 $$
 C_k = {X \le k}
 $$
+
 라면
+
 $$
-\bigcup_{k=1}^\infty C_k = {X<\infty}.
+\bigcup_{k=1}^\infty C_k = {X<\infty}
 $$
 
 하지만 만약
 $$
 \bigcup_{k=3}^\infty C_k
 $$
+
 만 취하면, **정의상 다른 집합**이다.
 $우연히 같을 수는 있지만, 같아야 할 이유는 없다.$
 
@@ -76,7 +85,9 @@ $우연히 같을 수는 있지만, 같아야 할 이유는 없다.$
 ## 4. 확률론에서 더 중요한 이유
 
 확률의 연속성 정리는
+
 $$P!\left(\bigcup_{k=1}^\infty C_k\right)= \lim_{k\to\infty} P(C_k)$$
+
 라는 **가산 구조** 위에서 성립한다.
 
 여기서

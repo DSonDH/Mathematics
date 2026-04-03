@@ -18,9 +18,11 @@
 
 제한과 확대  
 $f:X\to Y$에서 $A\subset X$이면 제한함수(restriction)는
+
 $$
-f|_A=\{(x,y)\in f\mid x\in A\}.
+f|_A=\{(x,y)\in f\mid x\in A\}
 $$
+
 만약 $g=f|_A$이면 $f$는 $g$의 확대함수(extension)이다.
 
 # 함수의 성질
@@ -73,9 +75,11 @@ $$
 - 포함함수(inclusion): $i_A:A\to X$, $\forall x\in A,\ i_A(x)=x$.
   - 항등함수의 축소된 함수. $I_x|A$
 - 특성함수(characteristic function): $\chi_A:X\to\{0,1\}$로
+
 $$
-\chi_A(x)=\begin{cases}1,&x\in A\\0,&x\notin A\end{cases}.
+\chi_A(x)=\begin{cases}1,&x\in A\\0,&x\notin A\end{cases}
 $$
+
 - 선택함수(selection function): $X\neq\varnothing$인 집합의 부분집합족 $\{A_i\}$에 대해 각 $A_i$에서 하나씩 원소를 선택하는 함수 $f:\{A_i\}\to X$ (즉 $f(A_i)\in A_i$).
 ![alt text](image-1.png) 
 
@@ -247,6 +251,7 @@ $$
 $$
 
 3. 만약 $f$가 단사이면 등호가 성립한다:
+
 $$
 f\Big(\bigcap_{\alpha\in I}A_\alpha\Big)=\bigcap_{\alpha\in I}f(A_\alpha)
 $$
@@ -263,14 +268,19 @@ $$
 $$
 
 단사성이므로
+
 $$
 f(x_\alpha) = f(x_\beta) \Rightarrow x_\alpha = x_\beta
 $$
+
 따라서
+
 $$
 x_\alpha = x_\beta = x_0 \quad (\forall \alpha,\beta \in I)
 $$
+
 즉,
+
 $$
 \exists x_0 \in \bigcap_{\alpha\in I} A_\alpha
 \quad\text{이고}\quad
@@ -278,6 +288,7 @@ y = f(x_0)
 $$
 
 따라서
+
 $$
 y \in f\Big(\bigcap_{\alpha\in I}A_\alpha\Big)
 $$
@@ -285,11 +296,15 @@ $$
 
 ## 추가정리: f(A₁ - A₂)와 f(A₁) - f(A₂)의 관계
 함수 $f: X \to Y$에서 $A_1, A_2 \subset X$일 때 다음이 성립한다:
+
 $$f(A_1 - A_2) \supseteq f(A_1) - f(A_2)$$
 
-**증명**  
+**증명** 
+ 
 $$y \in f(A_1) - f(A_2)$$
+
 $$\Leftrightarrow y \in f(A_1) \land y \notin f(A_2)$$
+
 $$\Leftrightarrow \exists x_1 \in A_1 \text{ s.t. } y = f(x_1) \land \forall x_2 \in A_2, f(x_2) \neq y$$
 
 $x_1 \in A_1$이고 모든 $x_2 \in A_2$에 대해 $f(x_1) \neq f(x_2)$이므로 $x_1 \notin A_2$
@@ -307,7 +322,9 @@ $$f(A_1 - A_2) = f(A_1) - f(A_2)$$
 위의 포함관계는 항상 성립한다. 반대 방향을 보이자.
 
 $$y \in f(A_1 - A_2)$$
+
 $$\Leftrightarrow \exists x \in A_1 - A_2 \text{ s.t. } y = f(x)$$
+
 $$\Leftrightarrow \exists x \in A_1, x \notin A_2 \text{ s.t. } y = f(x)$$
 
 $x \in A_1$이므로 $y \in f(A_1)$이다. $x \notin A_2$인데 $f$가 단사이므로, $y = f(x) \in f(A_2)$이면 $x \in A_2$여야 한다. 이는 모순이므로 $y \notin f(A_2)$
@@ -330,6 +347,7 @@ x^2-5,& x\ge 1,\\[4pt]
 3-2x,& x<1
 \end{cases}
 $$
+
 일 때
      - $f(\{-5,2,4\})$
      - $f^{-1}(\{-1,3,7\})$

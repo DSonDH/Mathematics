@@ -126,7 +126,7 @@ $$
 >
 >즉 $\hat\mu=(\bar X_1,\dots,\bar X_k)^\top$의 공분산행렬은
 >
->$$\mathrm{Var}(\hat\mu) =\mathrm{diag}\!\left(\frac{\sigma^2}{n_1},\dots,\frac{\sigma^2}{n_k}\right) =\sigma^2\,\mathrm{diag}(1/n_i),$$
+>$$\mathrm{Var}(\hat\mu) =\mathrm{diag}\!\left(\frac{\sigma^2}{n_1},\dots,\frac{\sigma^2}{n_k}\right) =\sigma^2\,\mathrm{diag}(1/n_i)$$
 
 라 하자. 그러면 일원분류정규분포모형에서 다음이 성립한다.
 

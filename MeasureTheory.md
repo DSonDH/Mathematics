@@ -35,9 +35,11 @@ $\sigma$-대수는 가산 교집합에 대해서도 닫혀 있다.
 #### Def. 1. 측도 *(Measure)*
 
 $(\Omega,\mathcal F)$ 위의 함수
+
 $$
 \mu:\mathcal F\to[0,\infty]
 $$
+
 가
 
 1. $\mu(\varnothing)=0$
@@ -79,6 +81,7 @@ $A\subset B \Rightarrow \mu(A)\le\mu(B)$
 $$
 \mu^*(A)=\mu^*(A\cap E)+\mu^*(A\cap E^c)
 $$
+
 를 모든 $A\subset\Omega$에 대해 만족하면 $E$는 $\mu^*$-가측이다.
 
 **증명**
@@ -93,6 +96,7 @@ $$
 #### Def. 르베그 외측도 *(Lebesgue Outer Measure)*
 
 $E\subset\mathbb R$에 대해
+
 $$
 m^*(E)=\inf\left{\sum_{n=1}^\infty |I_n| \mid E\subset\bigcup I_n\right}
 $$
@@ -120,6 +124,7 @@ $f:(\Omega,\mathcal F)\to(\mathbb R,\mathcal B)$가
 $$
 f^{-1}((-\infty,a))\in\mathcal F
 $$
+
 를 모든 $a\in\mathbb R$에 대해 만족하면 **가측**이라 한다.
 
 #### Thm.
@@ -140,6 +145,7 @@ $$
 $$
 \varphi=\sum_{k=1}^n a_k\mathbf 1_{A_k}
 $$
+
 형태의 가측함수를 단순함수라 한다.
 
 #### Lemma.
@@ -158,6 +164,7 @@ $$
 #### Def. 비음수함수의 적분 *(Integral of Nonnegative Functions)*
 
 단순함수 $\varphi$에 대해
+
 $$
 \int \varphi,d\mu=\sum a_k\mu(A_k)
 $$
@@ -169,6 +176,7 @@ $f=f^+-f^-$로 분해하여 정의한다.
 #### Thm. (Monotone Convergence Theorem, MCT)
 
 $f_n\uparrow f$이면
+
 $$
 \int f_n d\mu \uparrow \int f d\mu
 $$
@@ -191,6 +199,7 @@ $$
 #### Thm. (Dominated Convergence Theorem, DCT)
 
 $|f_n|\le g\in L^1$이고 $f_n\to f$ a.e.이면
+
 $$
 \lim\int f_n d\mu=\int f d\mu
 $$

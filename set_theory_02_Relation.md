@@ -1,4 +1,5 @@
 # 관계 (Relation)
+
 $$R = (A, B, P(x, y))$$
 두 집합 $A,B$ 사이의 관계 $R$은 곱집합 $A\times B$의 부분집합으로 정의된다.  곱집합 중에서 관계 R의 해집합은  
 $$\{(x, y) | x \in A, y\in B, P(x,y)는 참\}$$
@@ -114,9 +115,11 @@ $R_P=\{(1,1),(1,2),(2,1),(2,2),(3,3),(4,4),(4,5),(5,4),(5,5)\}$
 - (서로소) 만약 $[x]\cap[y]\neq\varnothing$이면 $[x]=[y]$ (교집합이 비어있지 않으면 같은 동치류이다).
 
 역으로, $X$의 분할 $\mathcal P=\{P_i\}_{i\in I}$가 주어지면 다음과 같이 동치관계를 정의할 수 있다:
+
 $$
-x\sim y \iff \exists i\in I\ \text{s.t.}\ x\in P_i\ \text{and}\ y\in P_i.
+x\sim y \iff \exists i\in I\ \text{s.t.}\ x\in P_i\ \text{and}\ y\in P_i
 $$
+
 이 관계는 반사적·대칭적·추이적이므로 동치관계가 된다.
 
 정리(동치관계 ↔ 분할).

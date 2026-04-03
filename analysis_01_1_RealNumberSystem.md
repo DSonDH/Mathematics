@@ -58,7 +58,9 @@ $n \in S \Rightarrow n' = n+1 \in S$.
 ## (1) 집합의 구성
 * 정수집합: $\mathbb Z = (-\mathbb N)\cup{0}\cup \mathbb N$
 * 유리수집합:
+
 $$\mathbb Q = \left\{ \frac{m}{n} \middle| m,n \in \mathbb Z, n\ne 0 \right\} $$
+
 * 무리수집합: $\mathbb I = \mathbb R - \mathbb Q$
   * 실수집합 갑툭튀?: 자연수 집합은 페아노 공리계로. 실수집합은 또 다른 공리계로 설명가능함. 그래서 실수집합은 따로 정의하게 되서 갑툭튀임.
   * (자연수 집합으로 실수집합을 만들 수는 있는데 나중에 나올거임)

@@ -42,32 +42,32 @@ $$-\theta \log\sum X_i = \sum Y_i \sim \text{Gamma}(n, \theta)$$
 
 $-2\sum \log X_i$의 $\chi^2$ 분포 유도: 앞에서 $Y_i=-\theta\log X_i\sim \mathrm{Exp}(\theta)$ (scale $\theta$) 이므로
 
-$$S:=\sum_{i=1}^n Y_i \sim \mathrm{Gamma}(n,\theta).$$
+$$S:=\sum_{i=1}^n Y_i \sim \mathrm{Gamma}(n,\theta)$$
 
 감마분포의 스케일 성질 $cS\sim \mathrm{Gamma}(n,c\theta)$ ($c>0$)를 쓰면
 
-$$2S=-2\theta\sum_{i=1}^n\log X_i \sim \mathrm{Gamma}(n,2\theta).$$
+$$2S=-2\theta\sum_{i=1}^n\log X_i \sim \mathrm{Gamma}(n,2\theta)$$
 
 여기서 $\chi^2$와의 정확한 연결은 다음과 같다.
 
-$$\chi^2(\nu)\equiv \mathrm{Gamma}\!\left(\frac{\nu}{2},\,2\right).$$
+$$\chi^2(\nu)\equiv \mathrm{Gamma}\!\left(\frac{\nu}{2},\,2\right)$$
 
 따라서 $\mathrm{Gamma}(n,2\theta)$가 $\chi^2(2n)$와 **동일**하려면 $\theta=1$이어야 한다.  
 일반 $\theta$에 대해 $\chi^2$ 피벗은 $\theta$로 나눈 형태이다:
 
-$$\frac{2S}{\theta}=\frac{-2\theta\sum \log X_i}{\theta}=-2\sum_{i=1}^n \log X_i.$$
+$$\frac{2S}{\theta}=\frac{-2\theta\sum \log X_i}{\theta}=-2\sum_{i=1}^n \log X_i$$
 
 그런데 $Z_i:=-\log X_i\sim \mathrm{Exp}(1)$, 독립이므로
 
-$$\sum_{i=1}^n Z_i \sim \mathrm{Gamma}(n,1)\quad\Rightarrow\quad 2\sum_{i=1}^n Z_i \sim \mathrm{Gamma}(n,2)=\chi^2(2n).$$
+$$\sum_{i=1}^n Z_i \sim \mathrm{Gamma}(n,1)\quad\Rightarrow\quad 2\sum_{i=1}^n Z_i \sim \mathrm{Gamma}(n,2)=\chi^2(2n)$$
 
 즉 최종적으로
 
-$$-2\sum_{i=1}^n \log X_i \sim \chi^2(2n),$$
+$$-2\sum_{i=1}^n \log X_i \sim \chi^2(2n)$$
 
 그리고 동치로
 
-$$-2\theta\sum_{i=1}^n \log X_i \sim \mathrm{Gamma}(n,2\theta).$$
+$$-2\theta\sum_{i=1}^n \log X_i \sim \mathrm{Gamma}(n,2\theta)$$
 
 **베타-감마 관계 증명**: $Y_1 \sim \text{Gamma}(\alpha,\theta)$, $Y_2 \sim \text{Gamma}(\beta,\theta)$ 독립이면, $U = \frac{Y_1}{Y_1+Y_2}$는 $\text{Beta}(\alpha,\beta)$를 따른다.
 
@@ -158,9 +158,11 @@ $$\text{Var}(X) = (1-\epsilon)\text{Var}(X|F_1) + \epsilon\text{Var}(X|F_2) + (1
 $$\text{Var}(X) = E[\text{Var}(X|Z)] + \text{Var}(E[X|Z])$$
 
 첫 번째 항:
+
 $$E[\text{Var}(X|Z)] = (1-\epsilon)\sigma_1^2 + \epsilon\sigma_2^2$$
 
 두 번째 항:
+
 $$\text{Var}(E[X|Z]) = \text{Var}((1-\epsilon)\mu_1 + \epsilon\mu_2)\\
 = (1-\epsilon)\epsilon(\mu_1-\mu_2)^2$$
 
@@ -766,7 +768,7 @@ $$u=x^\theta \;\Rightarrow\; du=\theta x^{\theta-1}dx,\quad \log x=\frac1\theta\
 \int_0^1 \log x\cdot \theta x^{\theta-1}dx
 = \frac1\theta\int_0^1 \log u\,du
 = \frac1\theta(-1)
-= -\frac1\theta.$$
+= -\frac1\theta$$
 
 ### 빠른 유도 2 (파라미터 미분)
 
@@ -774,11 +776,11 @@ $$\int_0^1 x^{\theta-1}dx=\frac1\theta$$
 
 양변을 $\theta$로 미분하면
 
-$$\int_0^1 x^{\theta-1}\log x\,dx=-\frac1{\theta^2}.$$
+$$\int_0^1 x^{\theta-1}\log x\,dx=-\frac1{\theta^2}$$
 
 여기에 $\theta$를 곱해
 
-$$\int_0^1 \log x\cdot \theta x^{\theta-1}dx=-\frac1\theta.$$
+$$\int_0^1 \log x\cdot \theta x^{\theta-1}dx=-\frac1\theta$$
 
 ### 활용 포인트
 

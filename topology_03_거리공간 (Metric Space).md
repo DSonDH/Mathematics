@@ -14,10 +14,12 @@
 
 ### 정의 3.2: 열린공(open ball)
 거리공간 $(X, d)$에서 점 $x \in X$와 $r > 0$에 대해, 열린공(open ball)을 다음과 같이 정의한다:
+
 $$B_d(x, r) = \{y \in X : d(x,y) < r\}$$
 
 ### 정의 3.3: 거리위상 (metric topology)
 거리공간 $(X, d)$에서 거리위상 $\mathscr{T}_d$는 열린공들을 기저로 하는 위상이다:
+
 $$\mathscr{T}_d = \{U \subset X : \forall x \in U, \exists r > 0 \text{ s.t. } B_d(x,r) \subset U\}$$
 
 ## 3.2 거리공간의 기본 성질 (Basic Properties)
@@ -28,13 +30,16 @@ $$\mathscr{T}_d = \{U \subset X : \forall x \in U, \exists r > 0 \text{ s.t. } B
 1. 각 점 $x \in X$에 대해 $\{B_d(x, 1/n) : n \in \mathbb{N}\}$은 $x$의 가산국소기저이다.
 
 2. 부분집합 $A \subset X$의 폐포는 다음과 같이 표현된다:
+
 $$\overline{A} = \{x \in X : d(x, A) = 0\}$$
+
 여기서 $d(x, A) = \inf\{d(x,a) : a \in A\}$는 점 $x$에서 집합 $A$까지의 거리이다.
 
 3. 유한부분집합은 항상 닫힌집합이다.
 
 ### 정리 3.6: 서로소 폐집합의 분리
 거리공간에서 $A, B$가 공집합이 아닌 서로소 닫힌집합이면, 다음을 만족하는 서로소 열린집합 $U, V$가 존재한다:
+
 $$A \subset U, \quad B \subset V, \quad U \cap V = \emptyset$$
 
 즉, 거리공간은 정규공간이다.

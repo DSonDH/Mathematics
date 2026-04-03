@@ -124,6 +124,7 @@ OLS는 $V=I_n$인 특수한 경우이다.
 $$\mathbf{e}^* = \mathbf{y} - X\hat{\boldsymbol{\beta}}^* \\
 = \mathbf{y} - X(X^\top V^{-1}X)^{-1}X^\top V^{-1}\mathbf{y} \\
 = \left[I_n - X(X^\top V^{-1}X)^{-1}X^\top V^{-1}\right]\mathbf{y} $$
+
 로 $\mathbf{y} \sim N(X\boldsymbol{\beta}, \sigma^2 V)$이므로, $\mathbf{e}^*$의 기댓값 벡터와 분산 공분산 행렬이 각각
 
 $$
@@ -389,8 +390,7 @@ $$\hat{\boldsymbol{\beta}}=
 \vdots\\
 \hat{\boldsymbol{\beta}}_g
 \end{bmatrix}
-=
-\begin{bmatrix}
+= \begin{bmatrix}
 (X^TX)^{-1}X^T\mathbf{y}_1\\
 (X^TX)^{-1}X^T\mathbf{y}_2\\
 \vdots\\
@@ -400,8 +400,7 @@ $$\hat{\boldsymbol{\beta}}=
 이 식은 블록행렬로 다시 쓰면
 
 $$\hat{\boldsymbol{\beta}}
-=
-\begin{bmatrix}
+= \begin{bmatrix}
 X^TX & O_{p+1} & \cdots & O_{p+1}\\
 O_{p+1} & X^TX & \cdots & O_{p+1}\\
 \vdots & \vdots & \ddots & \vdots\\
@@ -422,8 +421,7 @@ y_g
 
 이고, 이는 간단히
 
-$$\hat{\boldsymbol{\beta}}=(Z^TZ)^{-1}Z^T\mathbf{y}
-\tag{10.21}$$
+$$\hat{\boldsymbol{\beta}}=(Z^TZ)^{-1}Z^T\mathbf{y} \tag{10.21}$$
 
 즉, 각 방정식별 OLS 추정량을 쌓은 벡터는 전체 시스템에 대해 $\Omega$를 무시하고 OLS를 적용한 것과 동일하다.
 
@@ -526,6 +524,7 @@ $$\hat{\boldsymbol{\beta}}^{*}=(Z^T\Omega^{-1}Z)^{-1}Z^T\Omega^{-1}\mathbf{y} \t
 이번에는 일반적으로
 
 $$\hat{\boldsymbol{\beta}}^{*}\neq \hat{\boldsymbol{\beta}}$$
+
 즉, 각 방정식별 OLS를 따로 한 결과를 단순히 묶는 것으로는 더 이상 BLUE를 얻지 못한다. 이 경우에는 GLS를 사용해야 한다.
 
 이것이 바로 **겉보기에는 서로 무관해 보이는 회귀식들이 오차 상관 때문에 사실상 정보를 공유한다**는 점이다. 방정식별 설명변수가 다르면, 다른 방정식의 정보가 해당 방정식의 추정 정밀도를 개선할 수 있다. 이것이 SUR(Seemingly Unrelated Regression)류 모형의 핵심 직관이다.
@@ -620,6 +619,7 @@ $$\text{Var}(\boldsymbol{\varepsilon})=\sigma_\varepsilon^2 V = \frac{\sigma_\de
 즉, 같은 대각선에서는 1이고, 시차가 1이면 $\rho$, 시차가 2이면 $\rho^2$, 일반적으로 시차가 $k$이면 $\rho^k$가 된다. 이 구조는 AR(1)형 오차의 전형적인 공분산 구조이다.
 
 $$\text{Var}(\varepsilon_i)=\frac{\sigma_\delta^2}{1-\rho^2}=\sigma_\varepsilon^2$$
+
 따라서 $(\beta_0,\beta_1)$의 BLUE(best linear unbiased estimator)는 OLS가 아니라 GLS로 얻어야 한다.
 
 $$ \hat{\boldsymbol{\beta}}^{*}=(X^TV^{-1}X)^{-1}X^TV^{-1}\mathbf{y} \tag{10.29}$$
@@ -652,7 +652,8 @@ $$ \hat{V}=
 0 & 0 & 0 & \cdots & 1
 \end{bmatrix}$$
 
-따라서 실행가능 GLS (feasible GLS, FGLS) 추정량은 
+따라서 실행가능 GLS (feasible GLS, FGLS) 추정량은
+ 
 $$\tilde{\boldsymbol{\beta}}=[X^T\hat{V}^{-1}X]^{-1}X^T\hat{V}^{-1}\mathbf{y} \tag{10.31}$$
 
 하지만, BLUE가 아니며, 표본크기 $n$이 커질수록 계산이 복잡해지므로 이 공식을 사용하지 않고 데이터 변환(transformation)을 이용하여 OLS로 추정하는 방법이 더 실용적이다. 다음 절에서 그 방법을 설명한다.
@@ -749,19 +750,20 @@ $$\bar{x}'=\frac{1}{n}\sum_{i=1}^{n}x_i',\qquad
 
 >#### 정리
 >1. 원모형:
+>
 >    $$y_i=\beta_0+\beta_1x_i+\varepsilon_i$$
 >
 >2. 한 시점 전 식에 $\rho$를 곱함:
+>
 >    $$\rho y_{i-1}=\rho\beta_0+\rho\beta_1x_{i-1}+\rho\varepsilon_{i-1}$$
 >
 >3. 두 식을 뺌:
->    $$y_i-\rho y_{i-1}
->    = \beta_0(1-\rho)+\beta_1(x_i-\rho x_{i-1})+(\varepsilon_i-\rho\varepsilon_{i-1})$$
+>
+>    $$y_i-\rho y_{i-1} = \beta_0(1-\rho)+\beta_1(x_i-\rho x_{i-1})+(\varepsilon_i-\rho\varepsilon_{i-1})$$
 >
 >4. 새 변수 정의:
->    $$y_i'=y_i-\rho y_{i-1},\quad
->    x_i'=x_i-\rho x_{i-1},\quad
->    \varepsilon_i'=\varepsilon_i-\rho\varepsilon_{i-1}$$
+>
+>    $$y_i'=y_i-\rho y_{i-1},\quad x_i'=x_i-\rho x_{i-1},\quad \varepsilon_i'=\varepsilon_i-\rho\varepsilon_{i-1}$$
 >
 >그러면
 >

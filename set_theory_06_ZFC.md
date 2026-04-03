@@ -73,6 +73,7 @@ $$
 $$
 \forall x, \exists !y,\ s.t.\ xRy \Rightarrow \forall A, \exists B,\ s.t.\ \\ \forall x \in A,\ \exists y \in B;\ s.t.\ xRy
 $$
+
 * !는 유일하게 기호임
 * 주어진 관계 $R$에 따라 집합 $A$의 각 원소를 다른 원소로 대응시킬 때,
   그 결과로 얻어진 집합 $B$도 집합임을 보장한다.

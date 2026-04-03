@@ -96,6 +96,7 @@ $\mathcal{L}(V,W)$라 하고,
 2. 벡터 $v\in V$가
    $v=k_1v_1+\cdots+k_nv_n$이라면
    $$[v]_{B_V}=(k_1,\dots,k_n)^T$$
+
   - 즉 $v$의 원소들을 $B_V$의 기저벡터들로 표현한 계수들의 tuple을 column으로 표현한 것
 
 3. $[L]^{B_V}_{B_W}$는
@@ -116,19 +117,21 @@ f와 g는 역사상 관계 증명 ($f\cdot g, g\cdot f$ 항등사상 증명)
 정의 $f(v_i)=w_i\ (1\le i\le n)$, 선형확장 $f(\sum a_i v_i)=\sum a_i w_i$.
 
 (1) Additivity:
+
 $$
 f(u+v)=f(\sum a_i v_i+\sum b_i v_i)
 =\sum (a_i+b_i)w_i
 =\sum a_i w_i+\sum b_i w_i
-=f(u)+f(v).
+=f(u)+f(v)
 $$
 
 (2) Homogeneity:
+
 $$
 f(kv)=f(\sum k a_i v_i)
 =\sum (k a_i) w_i
 =k\sum a_i w_i
-=k f(v).
+=k f(v)
 $$
 
 **2. $f$가 동형사상:**  
@@ -136,46 +139,59 @@ $$
 (1) 단사(injective):  
 $f(v_1)=f(v_2)$ 라고 하자.  
 두 벡터를 기저에 대해 전개하면
+
 $$
 f\left(\sum a_i v_i\right)
 =f\left(\sum b_i v_i\right)
 $$
+
 즉
+
 $$
-\sum a_i w_i = \sum b_i w_i.
+\sum a_i w_i = \sum b_i w_i
 $$
+
 $W$의 기저 $\{w_i\}$ 가 선형독립이므로
+
 $$
-a_i = b_i \quad (1\le i\le n).
+a_i = b_i \quad (1\le i\le n)
 $$
+
 따라서
+
 $$
 \sum a_i v_i = \sum b_i v_i,
+
 $$
+
 즉 $v_1=v_2$.  
 따라서 $f$는 단사이다.  
 
 (2) 전사(surjective):  
 임의의 $w\in W$ 대해 $w=\sum b_i w_i$ 이므로
+
 $$
-w=f\left(\sum b_i v_i\right).
+w=f\left(\sum b_i v_i\right)
 $$
+
 즉 $f(V)=W$.
 
 **3. $g$가 선형사상:**  
 정의 $g(w_i)=v_i$.  
 Additivity:
+
 $$
 g(w+w')=g(\sum c_i w_i+\sum d_i w_i)
 =\sum (c_i+d_i)v_i
-=g(w)+g(w').
+=g(w)+g(w')
 $$
 Homogeneity:
+
 $$
 g(k w)=g(\sum k c_i w_i)
 =\sum (k c_i)v_i
 =k\sum c_i v_i
-=k g(w).
+=k g(w)
 $$
 
 **4. $g$가 동형사상:**  
@@ -187,12 +203,15 @@ $g(v_1)=g(v_2) \Rightarrow v_1=v_2$ 로 단사,
 **5. $f,g$가 서로 역함수:**  
 기저에서  
 $$
-g(f(v_i))=g(w_i)=v_i,\qquad f(g(w_i))=f(v_i)=w_i.
+g(f(v_i))=g(w_i)=v_i,\qquad f(g(w_i))=f(v_i)=w_i
 $$
+
 선형확장으로 모든 $v\in V$, $w\in W$ 대해
+
 $$
-g(f(v))=v,\qquad f(g(w))=w.
+g(f(v))=v,\qquad f(g(w))=w
 $$
+
 즉 $g\circ f=I_V,\ f\circ g=I_W$.
 
 결론: $f,g$는 서로 역사상이며 $V$와 $W$는 동형.
@@ -201,6 +220,7 @@ $$
 # 3. 차원정리 (Rank–Nullity Theorem)
 ## (1) 차원정리
 유한차원 벡터공간 $V$와 선형사상 $L:V\to W$에 대해:
+
 $$
 \dim(V)=\dim(\ker L)+\dim(\operatorname{im}L)
 $$
@@ -296,18 +316,24 @@ $\Rightarrow v_1 = v_2$
 $\dim(\ker L) = 0$.
 
 Rank–Nullity 정리에 의해,
+
 $$
 n = 0 + \dim(\operatorname{im}L)
 $$
+
 따라서,
+
 $$
-\dim(\operatorname{im}L) = n.
+\dim(\operatorname{im}L) = n
 $$
+
 그런데 $\operatorname{im}L \subseteq W$ 이고,
 $\dim(W)=n$ 이므로,
+
 $$
-\operatorname{im}L = W.
+\operatorname{im}L = W
 $$
+
 즉, $L$은 전사이다.
 
 ### ② 비둘기집 원리
@@ -363,6 +389,7 @@ $$
 | **좌영공간** | $\mathrm{Null}(A^T)$ | $A^T\mathbf{y}=\mathbf{0}$의 해공간 | $m - \mathrm{rank}(A)$ |
 
 ### (2) 기본정리의 핵심 관계식
+
 $$
 \begin{align}
 \dim(\mathrm{Col}(A)) + \dim(\mathrm{Null}(A^T)) &= m \\
@@ -452,9 +479,11 @@ $$
     **증명**: 정칙행렬은 열 소거를 통해 열 공간을 보존하므로, $A$의 rank는 불변이다.
 
 **일반적 성질**:
+
 $$\mathrm{rank}(AB) + \mathrm{rank}(BC) \le \mathrm{rank}(B) + \mathrm{rank}(ABC)$$
 (Sylvester 부등식의 확장)
 - **Sylvester 부등식** (차원 맞을 때):
+
 $$
 \mathrm{rank}(AB)\ge \mathrm{rank}(A)+\mathrm{rank}(B)-n
 \quad (A\in\mathbb{R}^{m\times n},\,B\in\mathbb{R}^{n\times p})
@@ -472,6 +501,7 @@ $$
 
 **선형방정식의 해의 존재성 (Consistency Condition)**  
 선형방정식 $A\beta = b$가 해를 가지기 위한 필요충분조건은:
+
 $$\mathrm{rank}(A) = \mathrm{rank}([A|b])$$
 
 **증명 스케치:**
@@ -480,9 +510,11 @@ $$\mathrm{rank}(A) = \mathrm{rank}([A|b])$$
 - 이는 $A$의 열공간과 $[A|b]$의 열공간이 같음을 의미
 - 따라서 $\mathrm{rank}(A) = \mathrm{rank}([A|b])$
 
-**증명**  
+**증명** 
+ 
 $$\mathrm{rank}(X) = \mathrm{rank}(X^TX) \le \mathrm{rank}([X^TX | X^Ty]) \le \mathrm{rank}(X^T) \\
 \therefore \mathrm{rank}(X^TX) = \mathrm{rank}([X^TX | X^Ty])$$
+
 가 성립하며, 선형대수 기본정리의 일관성 조건을 만족하여 해 $\hat{\beta}$가 존재함이 보장된다.
 
 ### (7) 특수행렬에서의 rank
@@ -498,6 +530,7 @@ $$\mathrm{rank}(X) = \mathrm{rank}(X^TX) \le \mathrm{rank}([X^TX | X^Ty]) \le \m
 - $\mathrm{rank}(P)+\mathrm{rank}(I-P)=n$
 
 **(c) 블록 대각행렬**
+
 $$
 \mathrm{rank}\!\begin{pmatrix}A&0\\0&B\end{pmatrix}
 =\mathrm{rank}(A)+\mathrm{rank}(B)

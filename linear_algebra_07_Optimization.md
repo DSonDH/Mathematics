@@ -24,8 +24,7 @@ $$
 \begin{pmatrix}
 a_0\\ a_1\\ a_2\\ a_3
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 y_1\\ y_2\\ y_3\\ y_4
 \end{pmatrix}
 $$
@@ -103,6 +102,7 @@ $$
 
 #### Step 2
 정규방정식 $A^TAX=A^TB$를 구성한다.
+
 $$
 A^TA=
 \begin{pmatrix}
@@ -119,8 +119,7 @@ $$
 
 $$
 (A^TA)^{-1}
-=
-\frac1{10}
+= \frac1{10}
 \begin{pmatrix}
 7 & -3\\
 -3 & 2
@@ -172,6 +171,7 @@ B=
 y_1\\ y_2\\ \vdots\\ y_m
 \end{pmatrix}
 $$
+
 으로 설정하면 된다.
 
 ## (3) 두 방법의 비교
@@ -253,12 +253,14 @@ $
 
 #### Step 2
 행렬
+
 $$
 A=\begin{pmatrix}
 5 & 2\\
 2 & 5
 \end{pmatrix}
 $$
+
 의 고윳값과 고유벡터를 구한다.  
 $\lambda_1=7,\quad v_1 = (1,1)$  
 $\lambda_2=3,\quad v_2 = (-1,1)$

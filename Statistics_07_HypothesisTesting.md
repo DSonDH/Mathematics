@@ -851,6 +851,7 @@ $$n(\hat\theta_n^{\Omega} - \hat\theta_n^{\Omega_0})^T I(\theta_0) (\hat\theta_n
 $$2\{l(\hat\theta_n^\Omega) - l(\hat\theta_n^{\Omega_0})\} =  n\, \bar l'(\hat\theta_n^{\Omega_0})^T \left[ I(\theta_0) \right]^{-1} \bar l'(\hat\theta_n^{\Omega_0}) + r_n$$
 
 여기서 $\bar l'_\xi(\hat\theta_n^{\Omega_0})$는 $\xi$에 대한 점수함수의 $\hat\theta_n^{\Omega_0}$에서의 값이다. $r_n \xrightarrow{P_{\theta_0}} 0$이므로, 표본 크기가 충분히 크면 근사적으로 유의수준 $\alpha$에서의 기각역은
+
 $$n\, \bar l'_\xi(\hat\theta_n^{\Omega_0})^T \left[ I(\theta_0) \right]^{-1} \bar l'_\xi(\hat\theta_n^{\Omega_0}) \ge \chi^2_\alpha(k - k_0)$$
 
 $$I_(\theta_0) = \begin{pmatrix}

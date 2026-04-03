@@ -271,8 +271,7 @@ $$s = \sqrt{\frac{\mathbf{e}^T\mathbf{e}}{n-p-1}} = \sqrt{\frac{\mathbf{y}^T(I_n
 
 로 대체한다. 그러면 표준화 잔차(standardized residual)
 
-$$r_i=\frac{e_i}{s\sqrt{1-h_{ii}}}
-\tag{8.20}$$
+$$r_i=\frac{e_i}{s\sqrt{1-h_{ii}}} \tag{8.20}$$
 
 를 얻는다. 다만 이 $r_i$의 표본분포(sampling distribution)는 단순한 $t$-분포로 근사할 수 없다. 이유는 분자 $e_i$와 분모 $s$가 서로 독립이 아니기 때문이다. 특히 $|e_i|$가 크면 $s$ 역시 커지는 경향이 있다.  
 식 (8.20)의 $r_i$를 **내적 스튜던트화 잔차(internally studentized residual)** 라고도 부른다.
@@ -280,16 +279,14 @@ $$r_i=\frac{e_i}{s\sqrt{1-h_{ii}}}
 #### 스튜던트화 잔차 (Studentized Residual)
 표준화 잔차의 한계를 보완하기 위해, $i$번째 관측값 $y_i$를 제외한 나머지 $n-1$개 자료로부터 오차표준편차(error standard deviation)를 추정한다. 즉, 식 (8.20)의 $s$ 대신, $i$번째 관측값을 제외하고 계산한 $s(i)$를 사용한다. 그러면 스튜던트화 잔차(studentized residual)
 
-$$r_i^*=\frac{e_i}{s(i)\sqrt{1-h_{ii}}}
-\tag{8.21}$$
+$$r_i^*=\frac{e_i}{s(i)\sqrt{1-h_{ii}}} \tag{8.21}$$
 
 를 얻는다. 이를 $r_i$와 구별하여 **외적 스튜던트화 잔차(externally studentized residual)** 라고 부른다. 직관적으로는 $i$번째 관측값이 이상점이면 그 점 자체가 전체 오차분산 추정에 영향을 미치므로, 그 점을 뺀 뒤 분산을 다시 추정하는 것이 더 공정한 판단 기준이 된다.
 
 #### $s(i)^2$와 $\hat{\beta}(i)$의 관계 (Relations for $s(i)^2$ and $\hat{\beta}(i)$)
 처음에는 $r_i^*$를 계산하려면 $i=1,\dots,n$ 각각에 대해 별도의 회귀모형을 $n$번 적합해야 할 것처럼 보인다. 그러나 그럴 필요는 없다: 다음 관계식이 성립한다.
 
-$$s^2(i) = \frac{(n-p-1)s^2-\dfrac{e_i^2}{1-h_{ii}}}{n-p-2}
-\tag{8.22}$$
+$$s^2(i) = \frac{(n-p-1)s^2-\dfrac{e_i^2}{1-h_{ii}}}{n-p-2} \tag{8.22}$$
 
 즉, 전체 자료를 한 번만 적합한 결과로부터 각 $s(i)$를 모두 계산할 수 있다.  
 또한 $i$번째 관측값 $y_i$와 설명변수 벡터 $\mathbf{x}_i=(1,x_{i1},x_{i2},\dots,x_{ip})^T$를 제외한 $n-1$개의 관측값으로 구한 회귀계수추정량을 $\hat{\boldsymbol{\beta}}(i)$라 하면,
@@ -317,8 +314,7 @@ $$\mathrm{Var}(\tilde{y}_i) = \mathbf{x}_i^T\left[X(i)^TX(i)\right]^{-1}\mathbf{
 
 $$\mathrm{Var}(y_i-\tilde{y}_i)
 = \sigma^2 \left\{1+\mathbf{x}_i^T\left[X(i)^TX(i)\right]^{-1}\mathbf{x}_i
-\right\}
-\tag{8.24}$$
+\right\} \tag{8.24}$$
 
 가 되므로, $\sigma^2$ 대신 $s^2(i)$를 대입하면 이상점이 아닐 때
 
@@ -329,14 +325,12 @@ $$t_i= \frac{y_i-\tilde{y}_i}{s(i)\sqrt{1+\mathbf{x}_i^T[X(i)^TX(i)]^{-1}\mathbf
 #### $t_i$와 스튜던트화 잔차의 동치성 (Equivalence of $t_i$ and the Studentized Residual)
 식 (8.24)는 계산상 복잡해 보이지만, Beckman과 Trussell은 다음 관계를 밝혔다.
 
-$$t_i = r_i \left( \frac{n-p-2}{n-p-1-r_i^2} \right)^{1/2} 
-\tag{8.25}$$
+$$t_i = r_i \left( \frac{n-p-2}{n-p-1-r_i^2} \right)^{1/2} \tag{8.25}$$
 
 그리고 식 (8.20), (8.21), (8.22), (8.25)의 관계를 이용하면
 
 $$r_i^* = \frac{e_i}{s(i)\sqrt{1-h_{ii}}} = r_i \left( \frac{n-p-2}{n-p-1-r_i^2} \right)^{1/2}
-= t_i
-\tag{8.26}$$
+= t_i \tag{8.26}$$
 
 즉, **외적 스튜던트화 잔차(externally studentized residual) $r_i^*$** 는 $t_i$와 동일하며, 자유도 $n-p-2$인 $t$-분포를 따른다. 따라서 $i$번째 관측값 $y_i$가 이상점인지 검정하는 방법은
 
@@ -384,9 +378,7 @@ $\hat{y}_i = 109.874 - 1.127x_i$를 얻는다.
 | 계 (total)       |                 3912 |       20 |                    |       |
 
 여기서 $F_0 = 13.20 > F_{0.05}(1,19)=4.38$이므로 회귀직선은 유의하다(significant).  
-또한 잔차의 평균제곱(mean square error, MSE)이 121.505이므로 $\sigma$의 추정값은
-
-$$s=\sqrt{MSE}=\sqrt{121.505}=11.0229$$
+또한 잔차의 평균제곱(mean square error, MSE)이 121.505이므로 $\sigma$의 추정값은 $s=\sqrt{MSE}=\sqrt{121.505}=11.0229$
 
 
 이제 해트 행렬의 대각원소 $h_{ii}$, 잔차 $e_i$, 표준화 잔차 $r_i$, 스튜던트화 잔차 $r_i^*$를 구하면 표와 같은 결과를 얻는다.
@@ -457,14 +449,12 @@ $$\mathrm{DFFITS}(i) = \operatorname{sgn}(e_i)\cdot
 $$\mathrm{DFFITS}(i)
 = \operatorname{sgn}(e_i)
 \frac{\left[(\hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}(i))^TX^TX(\hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}(i))\right]^{1/2}}
-{s(i)}
-\tag{8.28}$$
+{s(i)} \tag{8.28}$$
 
 또한 Belsley 등은 이것이 다음과 동치임을 보였다.
 
 $$\mathrm{DFFITS}(i) = \frac{\hat{y}_i-\tilde{y}_i(i)}
-{\sqrt{\mathrm{Var}(\hat{y}_i)\text{의 추정값}}}
-\tag{8.29}$$
+{\sqrt{\mathrm{Var}(\hat{y}_i)\text{의 추정값}}} \tag{8.29}$$
 
 여기서 $\tilde{y}_i(i)=x_i^T\hat{\boldsymbol{\beta}}(i)$는 $i$번째 데이터를 제외한 $n-1$개 자료에서 얻은 적합값(fitted value)이다.  
 이 값은 계산 편의상 다음처럼 더 간단히 표현된다.
@@ -602,33 +592,44 @@ Belsley 등은 다음 기준을 제안하였다.
 #### 이상한 관측값 탐지에 사용되는 척도 정리 (Summary of Measures)
 **지렛대점 (Leverage Point)**
 1. 해트 행렬 $(H)$의 대각원소(diagonal element)
+
     $$h_{ii}$$
 2. 
 마할라노비스 거리(Mahalanobis distance)
-    $$M(i)=(n-1)\left(h_{ii}-\frac{1}{n}\right)    $$
+
+    $$M(i)=(n-1)\left(h_{ii}-\frac{1}{n}\right)$$
 
 
 **이상점 (Outlier)**
 1. 표준화 잔차(standardized residual)
-    $$r_i=\frac{e_i}{s\sqrt{1-h_{ii}}}    $$
+
+    $$r_i=\frac{e_i}{s\sqrt{1-h_{ii}}}$$
 2. 
 스튜던트화 잔차(studentized residual)
+
     $$r_i^*=\frac{e_i}{s(i)\sqrt{1-h_{ii}}}
-    = r_i \left( \frac{n-p-2}{n-p-1-r_i^2} \right)^{1/2}    $$
+    = r_i \left( \frac{n-p-2}{n-p-1-r_i^2} \right)^{1/2}$$
 
 
 **영향점 (Influential Point)**
 1. DFFITS
+
     $$\mathrm{DFFITS}(i)= \left(\frac{h_{ii}}{1-h_{ii}}\right)^{1/2}r_i^* $$
 
 2. Cook의 통계량(Cook's statistic)
+
     $$D(i)=\frac{h_{ii}}{(p+1)(1-h_{ii})}r_i^2 $$
 
 3. Andrews-Pregibon의 통계량(Andrews-Pregibon statistic)
+
     $$AP(i)=1-h_{ii}-\frac{e_i^2}{(n-p-1)s^2} $$
+
 4. COVRATIO
+    
     $$\mathrm{COVRATIO}(i) = \frac{1} {\left[1+\dfrac{(r_i^*)^2-1}{n-p-1}\right]^{p+1}(1-h_{ii})} $$
+
 5. FVARATIO
+    
     $$\mathrm{FVARATIO}(i) = \frac{e_i^2}{(r_i^*)^2(1-h_{ii})^2s^2} $$
 
 
@@ -706,40 +707,28 @@ Belsley 등은 다음 기준을 제안하였다.
 
 (1) 예제 8.1의 결과에 의해 **19번째 관측값은 이상점(outlier)**이다.
 
-(2) $h_{ii}$의 값을 보면
-$$h_{ii}\ge 2(p+1)/n = 2(1+1)/21 = 0.1905$$
+(2) $h_{ii}$의 값을 보면  $h_{ii}\ge 2(p+1)/n = 2(1+1)/21 = 0.1905$
 
 인 관측값은 **18번째 관측값뿐**이다. 또한 18번째 관측값은 가장 큰 $M(i)$ 값을 가진다. 실제로 18번째 관측값은 $x=42$로 다른 $x$들로부터 멀리 떨어져 있으므로 **지렛대점(leverage point)**이라 판단할 수 있다.
 
-(3) DFFITS를 보면
-$$|\mathrm{DFFITS}(i)|\ge 2\sqrt{(p+1)/n} = 2\sqrt{(1+1)/21} \approx 0.6172$$
+(3) DFFITS를 보면 $|\mathrm{DFFITS}(i)|\ge 2\sqrt{(p+1)/n} = 2\sqrt{(1+1)/21} \approx 0.6172$
 
 인 경우는 **18번째와 19번째 관측값**이고, 그중 18번째가 조금 더 크다.
 
-(4) $D(i)$를 보면
-$$F_{0.50}(2,19)=0.719$$
-
-이므로, 18번째 관측값은 Cook의 통계량 기준에서 영향점에 가장 가까운 값으로 볼 수 있다. 즉 영향을 주는 측정값에 가장 근사하다
+(4) $D(i)$를 보면 $F_{0.50}(2,19)=0.719$ 이므로, 18번째 관측값은 Cook의 통계량 기준에서 영향점에 가장 가까운 값으로 볼 수 있다. 즉 영향을 주는 측정값에 가장 근사하다
 
 (5) $AP(i)$는 값이 작을수록 영향을 크게 주는 관측값인데, **18번째 관측값**이 가장 작은 $AP(i)$를 가진다.
 
-(6) COVRATIO는
-$$\mathrm{COVRATIO}(i)\ge 1+\frac{3(p+1)}{n} = 1+\frac{3(1+1)}{21} \approx 1.2857$$
+(6) COVRATIO는 $\mathrm{COVRATIO}(i)\ge 1+\frac{3(p+1)}{n} = 1+\frac{3(1+1)}{21} \approx 1.2857$
 
-이거나
-$$\mathrm{COVRATIO}(i)\le 1-\frac{3(p+1)}{n} \approx 0.7143$$
+이거나 $\mathrm{COVRATIO}(i)\le 1-\frac{3(p+1)}{n} \approx 0.7143$
 
 
 이면 영향을 크게 주는 관측값으로 볼 수 있다. 표에서는 **18번째와 19번째 관측값**이 모두 해당한다.
 
-(7) 마지막으로 FVARATIO는
-$$1-\frac{3}{n}=1-\frac{3}{21}=0.8571$$
+(7) 마지막으로 FVARATIO는 $1-\frac{3}{n}=1-\frac{3}{21}=0.8571$
 
-보다 작거나,
-$$1+\frac{2p+3}{n} = 1+\frac{2+3}{21} \approx 1.2381$$
-
-
-보다 크면 영향을 크게 주는 관측값으로 판정할 수 있다. 여기에서도 **18번째와 19번째 관측값**이 모두 해당한다.
+보다 작거나, $1+\frac{2p+3}{n} = 1+\frac{2+3}{21} \approx 1.2381$ 보다 크면 영향을 크게 주는 관측값으로 판정할 수 있다. 여기에서도 **18번째와 19번째 관측값**이 모두 해당한다.
 
 위 결과를 종합하면 다음 결론을 얻는다.
 

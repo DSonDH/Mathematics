@@ -30,6 +30,7 @@ $v_j = \sum_{j=1}^n a_{ij}$ (즉, 한 행 값들 더함: 보낸값)
 ## (2) 순위평가 원리 (Ranking Principle)
 순위평가 반복식의 정규화 표현:  
 인접행렬 $A$와 초기권위벡터 $u_0$, 초기허브벡터 $v_0$에 대하여 정규화된 권위벡터 $u_k$는
+
 $$
 u_k =
 \begin{cases}
@@ -47,6 +48,7 @@ v_k =
 \dfrac{A u_{k-1}}{|A u_{k-1}|}, & k>0
 \end{cases}
 $$
+
 이다.  
 정규화는 크기가 너무 커지거나 작아지는걸 방지하기 위함임.  
 
@@ -69,14 +71,18 @@ A^T
 $$
 
 즉,
+
 $$
 u_k=
 \frac{(A^T A)u_{k-1}}{|(A^T A)u_{k-1}|}
 $$
+
 이고,
+
 $$
 v_k=\frac{(A A^T)v_{k-1}}{|(A A^T)v_{k-1}|}
 $$
+
 이다.  
 (이 식을 코딩해서 쭉 돌리고,) 이 벡터들이 안정화되었다고 판단되는 시점부터
 각각 최종 중요도(final importance)로 판단한다.
@@ -220,9 +226,11 @@ v_2^T \\
 v_r^T
 \end{pmatrix}
 $$
+
 $r$은 랭크(rank)이다.
 
 축소된 특잇값 분해를 사용하면
+
 $$
 A = \sigma_1 u_1 v_1^T + \sigma_2 u_2 v_2^T + \cdots + \sigma_r u_r v_r^T
 $$
@@ -233,17 +241,23 @@ $m\times n$을 $k\times n$으로 줄일 수 있다.
 ## (3) 자료압축 원리 (Principle of Compression)
 압축되지 않은 $m\times n$ 행렬 $A$를 저장하기 위한 공간은 $mn$이다.  
 축소된 특잇값 분해를 사용하여
+
 $$
 A \approx \sigma_1 u_1 v_1^T + \cdots + \sigma_k u_k v_k^T
 $$
+
 라 하면, 저장해야 하는 용량은
+
 $$
 k + km + kn = k(1+m+n)
 $$
+
 이다.
 
 $k$가 충분히 작으면
+
 $$
 k(1+m+n) \ll mn
 $$
+
 이므로 자료압축이 가능하다.
