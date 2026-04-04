@@ -1,3 +1,5 @@
+TODO:FIXME: ancova 같은 실무에서 쓰는 테크닉들 빠지거나 키워드만 있는 경우 많음. 
+
 # 1. 측정과 자료의 기초
 
 ## 1.1 변수(variable)와 관측값(observation)

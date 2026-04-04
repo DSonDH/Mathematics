@@ -828,6 +828,8 @@ $$f(A) = Qf(\Lambda)Q^T = Q\begin{pmatrix} f(\lambda_1) & & \\ & \ddots & \\ & &
 | **직교대각화** | $A = Q\Lambda Q^T$ (일반 대각화 $A = PDP^{-1}$와 다름) |
 | **계산 효율** | 행렬식 $\det(A) = \prod \lambda_i$, 대각합 $\text{tr}(A) = \sum \lambda_i$ 쉽게 계산 |
 
+
+
 ## (2) 합벡터 (Summing Vector)
 모든 성분이 1인 벡터 $\mathbf{1}_n = (1, 1, \ldots, 1)^T$
 
@@ -1424,7 +1426,7 @@ $$P_X^T = [X(X^TX)^{-1}X^T]^T = X[(X^TX)^{-1}]^TX^T = X(X^TX)^{-1}X^T = P_X$$
 - 잔차: $(I - P_X)y \perp \text{Col}(X)$ (직교 성분 보존)
 - 직합 분해: $y = P_X y \oplus (I - P_X)y$
 
-### 증명: 정사영행렬이 열벡터공간으로의 정사영을 수행함
+**증명: 정사영행렬이 열벡터공간으로의 정사영을 수행**  
 >$\Pi = X(X^TX)^{-1}X^T$가 $X$의 열벡터공간 $\text{Col}(X)$로의 정사영행렬임을 보이기 위해서는 다음 두 가지를 증명해야 한다:
 >
 >1. **$\Pi$는 정사영행렬이다**: $\Pi^2 = \Pi$이고 $\Pi^T = \Pi$
@@ -1477,7 +1479,7 @@ X^T = \Pi$$
 >- 모든 $y \notin \text{Col}(X)$에 대해 $\Pi y \in \text{Col}(X)$이며, $\Pi y = 0$은 $y \in \text{Col}(X)^\perp$일 때만 성립
 >- 직교성: $(x - \Pi x) \perp \text{Col}(X)$ (잔차는 직교)
 
-#### 직교여공간 (Orthogonal Complement)
+**직교여공간 (Orthogonal Complement)**  
 벡터공간 $V \subseteq \mathbb{R}^n$의 **직교여공간**:
 
 $$V^\perp = \{x \in \mathbb{R}^n : x^T v = 0 \text{ for 
@@ -1541,8 +1543,7 @@ $$\text{Col}((X_0, X_1)) = \text{Col}((X_0, X_{1\mid0}))$$
 >$$Y = X_0\beta_0 + \Pi_0 X_1\beta_1 + (I - \Pi_0)
 X_1\beta_1$$
 >
->$$= X_0\beta_0 + X_0(X_0^TX_0)^{-1}X_0^T X_1\beta_1 + (I 
-- \Pi_0)X_1\beta_1$$
+>$$= X_0\beta_0 + X_0(X_0^TX_0)^{-1}X_0^T X_1\beta_1 + (I - \Pi_0)X_1\beta_1$$
 >
 >$$= X_0[\beta_0 + (X_0^TX_0)^{-1}X_0^T X_1\beta_1] + X_
 {1\mid0}\beta_1$$
@@ -1585,42 +1586,38 @@ X_1^TX_0 & X_1^TX_1 \end{pmatrix}$$
 >
 >역행렬은 (슈어 보수행렬 공식 사용):
 >
->$$(X^TX)^{-1} = \begin{pmatrix} (X_0^TX_0)^{-1} + (X_0^TX_0)^{-1}X_0^TX_1S^{-1}X_1^TX_0(X_0^TX_0)^{-1} & -(X_0^TX_0)^{-1}X_0^TX_1S^{-1} \\ -S^{-1}X_1^TX_0(X_0^TX_0)^
-{-1} & S^{-1} \end{pmatrix}$$
+>$$(X^TX)^{-1} = \begin{pmatrix} (X_0^TX_0)^{-1} + (X_0^TX_0)^{-1}X_0^TX_1S^{-1}X_1^TX_0(X_0^TX_0)^{-1} & -(X_0^TX_0)^{-1}X_0^TX_1S^{-1} \\ -S^{-1}X_1^TX_0(X_0^TX_0)^{-1} & S^{-1} \end{pmatrix}$$
 >
 >여기서 $S = X_{1\mid0}^TX_{1\mid0}$는 슈어 보수행렬이다.  
 >따라서:
-
+>
 >$$\Pi_{0,1} = \begin{pmatrix} X_0 & X_1 \end{pmatrix}(X^TX)^{-1}\begin{pmatrix} X_0^T \\ X_1^T \end{pmatrix} \\ = X_0(X_0^TX_0)^{-1}X_0^T + (I - \Pi_0)X_1[(I - \Pi_0)X_1]^T(I - \Pi_0)X_1]^{-}(I - \Pi_0)X_1^T$$
 >
 >$$= \Pi_0 + \Pi_{1\mid0}$$
->
 >
 >직교성:
 >
 >$$\Pi_0 \Pi_{1\mid0} = X_0(X_0^TX_0)^{-1}X_0^T \cdot X_
 {1\mid0}[X_{1\mid0}^TX_{1\mid0}]^{-}X_{1\mid0}^T$$
 >
->
->$X_{1\mid0} = (I - \Pi_0)X_1$이므로 $X_0^T X_{1\mid0} = 0$. 따라서:
+>$X_{1\mid0} = (I - \Pi_0)X_1$이므로 $X_0^T X_{1\mid0} = 0$.  
+>따라서 $\Pi_0 \Pi_{1\mid0} = 0$
 
->$$\Pi_0 \Pi_{1\mid0} = 0$$
-
-### 응용: 순차적 분할 정사영
-#### 호텔링 여인수 (Hotelling Deflation)
+#### 응용: 순차적 분할 정사영
+**호텔링 여인수 (Hotelling Deflation)**  
 회귀분석에서 $X_0$의 영향을 제거한 후 $X_1$의 영향을 추정할 때 사용:
 
 $$\hat{\beta}_1 = (X_{1\mid0}^TX_{1\mid0})^{-}X_{1\mid0}^T
 (I - \Pi_0)Y$$
 
-#### 분산 분해
+**분산 분해**  
 총 변량을 $X_0$에 의한 설명 부분과 나머지 부분으로 분해:
 
 $$Y^T\Pi_{0,1}Y = Y^T\Pi_0 Y + Y^T\Pi_{1\mid0}Y$$
 
 이는 ANOVA나 순차적 모형 비교에서 핵심적으로 사용된다.
 
-#### 부분상관(Partial Correlation)
+**부분상관(Partial Correlation)**  
 $X_0$의 효과를 제거한 후 $X_1$과 $Y$의 상관을 구할 때:
 
 $$r_{\text{partial}} = \frac{\text{Cov}[(I - \Pi_0)Y, (I - \Pi_0)X_1]}{\sqrt{\text{Var}[(I - \Pi_0)Y] \cdot \text{Var}
@@ -1702,83 +1699,30 @@ $$A+B = A_D + B_D$$
 #### 증명: (3) ⟹ (1)
 **가정**: $(A+B)^2 = A+B$, $A^2 = A$, $B \succeq 0$
 
-$(A+B)^2 = A^2 + AB + BA + B^2 = A + B$  
-$A^2 = A$이므로:
+가정에 의해, $A+B$는 멱등행렬이므로 고유값이 0 또는 1이다. $I_r$을 $r$개의 1과 나머지 0으로 이루어진 대각행렬로 생각하면, 직교행렬 $P$가 존재하여 다음과 같이 대각화할 수 있다:
 
-$$AB + BA + B^2 = B$$
+$$
+P(A+B)P^\top = \begin{pmatrix} I_r & 0 \\ 0 & 0 \end{pmatrix}, \quad P^\top P = PP^\top = I, \quad r = \text{rank}(A+B)
+$$
 
-$A, B$가 대칭이므로:
+이제 
+$$PBP^\top = \begin{pmatrix} C_{11} & C_{12} \\ C_{21} & C_{22} \end{pmatrix}$$
 
-$$2AB + B^2 = B \\ B^2 - B + 2AB = 0 \quad \cdots (**)$$
+이고 $C_{11}$이 $r\times r$행렬이라 하면, 
 
-$B \succeq 0$이고 대칭이므로 $B = Q\Lambda Q^T$ (단, $\Lambda = \text{diag}(\lambda_1, \ldots, \lambda_n)$, $\lambda_i \geq 0$)  
-멱등행렬 $A$는 $A = Q_A \text{diag}(I_r, 0) Q_A^T$ 형태
+$$ \begin{pmatrix} I_r - C_{11} & -C_{12} \\ -C_{21} & -C_{22} \end{pmatrix} = P(A+B)P^\top - PBP^\top = PAP^\top$$
 
-$(**)$에서:
+$A$가 멱등행렬이므로 $PAP^\top$도 멱등행렬이다. 따라서  
+$I_r - C_{11} = (I_r -C_{11})^2 + C_{12}C_{21}, \quad C_{22} = -(C_{12}^\top C_{12} + C_{22}C_{22}^\top)$
 
-$$B^2 - B + 2AB = 0$$
+$$ \therefore 0 \leq \begin{pmatrix} 0 & a^\top \end{pmatrix} \begin{pmatrix} C_{11} & C_{12} \\ C_{21} & C_{22} \end{pmatrix} \begin{pmatrix} 0 \\ a \end{pmatrix} = a^\top C_{22} a = -(a^\top C_{12}^\top C_{12} a + a^\top C_{22}C_{22}^\top a) \leq 0, \quad \forall a \\
 
-**Step 1: $B$의 고유값 분석**  
-$B \succeq 0$이고 대칭이므로 $B = Q\Lambda Q^T$ (단, $\Lambda = \text{diag}(\lambda_1, \ldots, \lambda_n)$, $\lambda_i \geq 0$)
+\therefore C_{12} = C_{22} = 0, \quad I_r - C_{11} = (I_r -C_{11})^2, \quad C^2_{11} = C_{11}\\
 
-이를 $(**)$에 대입하면:
+\therefore PBP^\top = \begin{pmatrix} C_{11} & 0 \\ 0 & 0 \end{pmatrix}, \quad C^2_{11} = C_{11}
+$$
 
-$$Q\Lambda^2 Q^T - Q\Lambda Q^T + 2AQ\Lambda Q^T = 0$$
-
-양쪽에 $Q^T$를 우측에서 곱하면:
-
-$$\Lambda^2 - \Lambda + 2Q^TAQ\Lambda = 0$$
-
-**Step 2: 각 고유값에 대한 조건**  
-$\tilde{A} = Q^TAQ$라 하면:
-
-$$\Lambda^2 - \Lambda + 2\tilde{A}\Lambda = 0$$
-
-$i$번째 고유값 $\lambda_i$에 대해:
-
-$$\lambda_i^2 - \lambda_i + 2(\tilde{A}\Lambda)_{ii} = 0$$
-
-$(\tilde{A}\Lambda)_{ii} = \sum_{j} \tilde{a}_{ij}\lambda_j$이므로:
-
-$$\lambda_i^2 - \lambda_i + 2\sum_{j} \tilde{a}_{ij}
-\lambda_j = 0$$
-
-**Step 3: 고유값의 제약 조건**  
-$\lambda_i = 0$인 경우:
-
-$$0 - 0 + 2\sum_{j \neq i} \tilde{a}_{ij}\lambda_j = 0$$
-
-$\lambda_i = 1$인 경우:
-
-$$1 - 1 + 2\sum_{j} \tilde{a}_{ij}\lambda_j = 0\\
-
-\sum_{j} \tilde{a}_{ij}\lambda_j = 0$$
-
-$0 < \lambda_i < 1$인 경우는 존재 불가:
-
-$$\lambda_i^2 - \lambda_i = -2\sum_{j} \tilde{a}_{ij}
-\lambda_j$$
-
-좌변: $\lambda_i(\lambda_i - 1) < 0$ (∵ $0 < \lambda_i < 1$)  
-우변: $-2\sum_{j} \tilde{a}_{ij}\lambda_j$
-
-그런데 $(A+B)^2 = A+B$이고 $A^2 = A$로부터 분석하면, $A$는 멱등이므로 고유값이 0 또는 1이다.  
-따라서 $\tilde{A}$도 고유값이 0 또는 1이므로 우변의 부호가 제약되어, 이 경우는 불가능하다.
-
-**Step 4: 결론**  
-위 분석으로부터 $B$는 오직 고유값 0과 1만 가질 수 있다.
-
-따라서 $B^2 = B$ (멱등성)
-
-$(A+B)^2 = A+B$와 $A^2 = A, B^2 = B$로부터:
-
-$$A^2 + AB + BA + B^2 = A + B\\
-A + AB + BA + B = A + B\\
-AB + BA = 0$$
-
-$A, B$가 대칭이므로 $AB = BA$이고, $2AB = 0$에서 **$AB = 0$**
-
-∴ $A, B$는 멱등행렬이고 $AB = 0$
+따라서 $PBP^\top$와 $B$가 멱등행렬이다. 또한 (2) -> (1)의 증명에서와 같이 $AB= 0$임을 증명할 수 있다.
 
 
 # 6. 행렬미적분 (Matrix Calculus)
@@ -2233,6 +2177,7 @@ $$\langle x, y \rangle = x^*y = \sum_{i=1}^{n} \overline
 * **유클리드 노름**: $\|x\|_2 = \sqrt{x^*x} = \sqrt{\sum_{i=1}^{n} |x_i|^2}$
 * **프로베니우스 노름**: $\|A\|_F = \sqrt{\text{tr}(A^*A)} = \sqrt{\sum_{i,j} |a_{ij}|^2}$
 
+
 ## (9) 행렬부등식 (Matrix Inequalities)
 통계학과 최적화에서 자주 사용되는 행렬부등식들을 정리한다.
 
@@ -2289,6 +2234,15 @@ $$(u^Tv)^2 \leq (u^TAu)(v^TA^{-1}v)$$
 등호 성립 $\Leftrightarrow$ $Au = \lambda v$
 
 > 💡 **응용**: 최적 추정 방향, 크래머-라오 하한(Cramér-Rao lower bound) 증명
+
+**증명**  
+$A$가 양정치행렬이므로 $A = LL^T$로 분해할 수 있다.  
+$u^TAu = u^TLL^Tu = (L^Tu)^T(L^Tu) = \|L^Tu\|_2^2$  
+$v^TA^{-1}v = v^T(L^{-1})^TL^{-1}v = (L^{-1}v)^T(L^{-1}v) = \|L^{-1}v\|_2^2$  
+$u^Tv = (L^Tu)^T(L^{-1}v)$  
+따라서:
+
+$$(u^Tv)^2 = [(L^Tu)^T(L^{-1}v)]^2 \leq \|L^Tu\|_2^2 \cdot \|L^{-1}v\|_2^2 = (u^TAu)(v^TA^{-1}v)$$
 
 ### 아다마르 부등식 (Hadamard Inequality)
 $A \succeq 0$이면:

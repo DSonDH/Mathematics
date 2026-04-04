@@ -560,6 +560,32 @@ $A$가 계수 $r$을 갖는 $n \times n$ 차 양반정치행렬이라면, $A = M
 **설명:**  
 이러한 분해는 스펙트럼 분해를 이용하여 구성할 수 있다. $A = Q\Lambda Q^T$에서 $\Lambda = \text{diag}(\lambda_1, \dots, \lambda_r, 0, \dots, 0)$이고 모든 $\lambda_i > 0$이면, $\Lambda^{1/2} = \text{diag}(\sqrt{\lambda_1}, \dots, \sqrt{\lambda_r}, 0, \dots, 0)$로 정의하여 $L = Q\Lambda^{1/2}$로 구성할 수 있다.
 
+### 정리 (멱등대칭행렬의 특성, Characterization of Idempotent Symmetric Matrices)
+$A$가 대칭행렬이고 멱등행렬($A^2 = A$)이면, $A$의 고유치는 0 또는 1이다.
+
+**증명:**  
+$A$는 대칭행렬이므로 $A = Q\Lambda Q^T$로 직교대각화된다. 여기서 $\Lambda = \text{diag}(\lambda_1, \lambda_2, \ldots, \lambda_n)$.  
+$A^2 = A$에서
+
+$$Q\Lambda Q^T \cdot Q\Lambda Q^T = Q\Lambda Q^T \\ Q\Lambda^2 Q^T = Q\Lambda Q^T$$
+
+양변에 왼쪽에서 $Q^T$를, 오른쪽에서 $Q$를 곱하면 $\Lambda^2 = \Lambda$  
+따라서 각 대각원소에 대해 $\lambda_i^2 = \lambda_i$, 즉 $\lambda_i(\lambda_i - 1) = 0$.  
+그러므로 모든 $\lambda_i \in \{0, 1\}$. $\square$
+
+**응용: rank와 nullity의 관계**  
+대칭행렬 $A$가 $A^2 = A$를 만족할 때,
+
+$$\text{rank}(A) = \#\{\lambda_i \neq 0\}, \quad \text{rank}(I - A) = \#\{\lambda_i \neq 1\}$$
+
+두 식을 더하면 $\text{rank}(A) + \text{rank}(I - A) = n$  
+이는 각 고유치가 반드시 0 또는 1이어야 함을 의미한다.
+
+**예시:**  
+행렬 $P = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$는 대칭이고 $P^2 = P$를 만족한다.  
+고유치: $\lambda_1 = 1, \lambda_2 = 0$  
+따라서 $\text{rank}(P) = 1$, $\text{rank}(I - P) = 1$이고, $1 + 1 = 2 = n$. ✓
+
 ## 직적과 직합의 고유치
 ### 크로네커 곱의 고유치
 **정리 (직적의 고유치):**  
@@ -820,6 +846,7 @@ $A = X^TX$ 형태의 행렬을 그람 행렬이라 하며:
 1. $A$는 대각화 가능하다.
 2. 모든 고윳값에 대하여
    기하적 중복도 = 대수적 중복도.
+
 
 # 4. 닮음(Similarity) 불변량 (Invariants under Similarity)
 ## (1) 정의

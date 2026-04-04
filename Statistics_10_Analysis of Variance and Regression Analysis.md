@@ -1,6 +1,6 @@
 # 제10장 분산분석과 회귀분석 *(Analysis of Variance and Regression Analysis)*
 
-## 일원분류모형의 분산분석 *(One-Way Analysis of Variance)*
+## 10.1 일원분류모형의 분산분석 *(One-Way Analysis of Variance)*
 여러 모집단의 평균을 비교할 때 가장 흔히 사용하는 모형으로 **일원분류 정규분포 모형(one-way normal model)** 을 둔다.
 
 > 참고: 4장 일원분류모형(one-way classification model)
@@ -11,14 +11,12 @@
 * 집합(group, 집단): 레벨 $i$에서의 관측치 $j=1,\dots,n_i$
     * 총 표본수 $n=\sum_{i=1}^k n_i$
 * 주의: 선형회귀에서는 $X_{ij}$가 설명변수의 관측값이지만, 일원분류모형에서는 $X_{ij}$가 반응변수의 관측값이다.
-    * $n_i$들은 평균은 $\mu_i$, 표준편차$\sigma$의 분포를 따른다
 * 모형:
     
 $$X_{ij}=\mu_i+e_{ij},\qquad e_{ij}\stackrel{iid}{\sim}N(0,\sigma^2) \\ -\infty<\mu_i<\infty,\quad \sigma^2>0$$
 
 * 주된 목적: 가설 $H_0:\mu_1=\cdots=\mu_k$ (또는 $\alpha_1=\cdots=\alpha_k=0$)를 **ANOVA의 $F$-검정**으로 검정하고, 필요한 경우 대비(contrast) 및 동시신뢰구간으로 수준 간 차이를 정량화한다.
 
-**모수의 재표현 *(overall mean and treatment effects)***  
 전반적인 처리 평균(가중 평균)과 처리 효과를 다음과 같이 정의할 수 있다.
 
 $$\bar\mu=\frac{1}{n}\sum_{i=1}^k n_i\mu_i,\qquad \alpha_i=\mu_i-\bar\mu$$
@@ -36,7 +34,7 @@ $$
 \hat\mu_i=\bar X_i=\frac{1}{n_i}\sum_{j=1}^{n_i}X_{ij}\qquad(i=1,\dots,k) \\
 \hat{\bar\mu}=\frac{1}{n}\sum_{i=1}^k n_i \hat\mu_i \quad (n = \sum_{i=1}^k n_i) \\
 \hat\alpha_i=\hat\mu_i-\hat{\bar\mu}\qquad(i=1,\dots,k) \\
-\hat\sigma^2=\frac{1}{n-k}\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2
+\hat{\sigma^2}=\frac{1}{n-k}\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2
 $$
 
 #### 증명
@@ -53,7 +51,7 @@ $$
 \Big(\bar X_1,\dots,\bar X_k,\ \sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2\Big)^t
 $$
     
-로 잡을 수 있고, 이의 함수로 표현되는 불편추정량은 UMVUE가 된다. 위에 제시된 $\hat\mu_i,\hat{\bar\mu},\hat\alpha_i,\hat\sigma^2$는 모두 불편이며 위 완비충분통계량의 함수이므로 UMVUE이다.  
+로 잡을 수 있고, 이의 함수로 표현되는 불편추정량은 UMVUE가 된다. 위에 제시된 $\hat\mu_i,\hat{\bar\mu},\hat\alpha_i,\hat{\sigma^2}$는 모두 불편이며 위 완비충분통계량의 함수이므로 UMVUE이다.  
 또한 모분산의 최대가능도 추정량은
 
 $$
@@ -63,33 +61,29 @@ $$
 이며, $\sigma^2$만 분모가 $n$과 $n-k$로 달라짐을 확인할 수 있다.
 
 ### 정리 10.1.2  일원분류 정규분포모형에서의 표본분포에 관한 기본 정리 *(basic sampling distributions)*
-(a) 집단별 표본평균 $\bar X_i$들은 서로 독립이며
+(a) 집단별 표본평균 $\bar X_i$들은 서로 독립이며, $\bar X_i\sim N\!\left(\mu_i,\frac{\sigma^2}{n_i}\right)\qquad(i=1,\dots,k)$
 
-$$\bar X_i\sim N\!\left(\mu_i,\frac{\sigma^2}{n_i}\right)\qquad(i=1,\dots,k)$$
-
-(b)모분산 추정량 $\hat\sigma^2=\dfrac{1}{n-k}\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2$와 $(\bar X_1,\dots,\bar X_k)$는 서로 독립이다.
+(b)모분산 추정량 $\hat{\sigma^2}=\dfrac{1}{n-k}\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2$와 $(\bar X_1,\dots,\bar X_k)$는 서로 독립이다.
 
 (c)
 
-$$\frac{(n-k)\hat\sigma^2}{\sigma^2}\sim\chi^2(n-k)$$
+$$\frac{(n-k)\hat{\sigma^2}}{\sigma^2}\sim\chi^2(n-k)$$
 
 #### 증명
-정리 4.2.2 적용: 각 집단 $i$에서 $(X_{i1},\dots,X_{in_i})$는 $N(\mu_i,\sigma^2)$의 랜덤표본이므로 정규표본의 성질에 의해 $\bar X_i$와 $SS_i=\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2$
-는 독립이고 
+정리 4.2.2 적용: 각 집단 $i$에서 $(X_{i1},\dots,X_{in_i})$는 $N(\mu_i,\sigma^2)$의 랜덤표본이므로 정규표본의 성질에 의해 $\bar X_i$와 $SS_i=\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2$ 는 독립이며, 
 
 $$\bar X_i\sim N(\mu_i,\sigma^2/n_i),\quad SS_i/\sigma^2\sim\chi^2(n_i-1)$$
 
 또한 서로 다른 집단의 표본은 독립이므로 $(\bar X_1,\dots,\bar X_k)$는 서로 독립이다. 한편
 
-$$(n-k)\hat\sigma^2=\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2=\sum_{i=1}^k SS_i$$
+$$(n-k)\hat{\sigma^2}=\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2=\sum_{i=1}^k SS_i$$
 
 이므로 카이제곱분포의 가법성과 독립성으로부터 (b), (c)가 성립한다.
 
 ### 정리 10.1.3  일원분류 정규분포모형에서의 신뢰집합과 동시신뢰구간 *(confidence region & simultaneous confidence intervals)*
 정리10.1.2로부터 모평균 $\mu_i$들의 선형결합에 대한 신뢰집합을 구할 수 있고, 이런 신뢰집합을 아래와 같이 **동시신뢰구간(simultaneous confidence interval)** 로 나타낼 수 있다.  
 
->참고: 동시신뢰구간  
->개별 신뢰구간을 $m$개 만들고 각각
+>참고) 동시신뢰구간: 개별 신뢰구간을 $m$개 만들고 각각
 >
 >$$P(L_j\in CI_j)=1-\alpha\qquad (j=1,\dots,m)$$
 >
@@ -135,7 +129,7 @@ $$
 $$
 P_{\mu,\sigma^2}\!\left(
 (C^t\mu-C^t\hat\mu)^t(C^tDC)^{-1}(C^t\mu-C^t\hat\mu)
-\le r\hat\sigma^2\, F_\alpha(r,n-k)
+\le r\hat{\sigma^2}\, F_\alpha(r,n-k)
 \right)=1-\alpha
 $$
 
@@ -147,7 +141,7 @@ $$
     $(C^t\mu-C^t\hat\mu)^t(C^tDC)^{-1}(C^t\mu-C^t\hat\mu)$ 는  
     $C^\top\mu$가 $C^\top\hat\mu$에서 얼마나 떨어졌는지를 재는 **가중(공분산 보정) 제곱거리**(마할라노비스 거리 형태).
 - **스케일(scale)과 임계값(threshold)**:  
-    $\hat\sigma^2$로 미지의 $\sigma^2$를 대체하고, $F_\alpha(r,n-k)$를 써서 **커버리지 $1-\alpha$가 되도록** 반지름(경계)을 정함.
+    $\hat{\sigma^2}$로 미지의 $\sigma^2$를 대체하고, $F_\alpha(r,n-k)$를 써서 **커버리지 $1-\alpha$가 되도록** 반지름(경계)을 정함.
 - **확률 해석(coverage)**:  
     위 부등식을 만족하는 영역을 $R$이라 하면, 반복 표본추출 시
 
@@ -158,14 +152,14 @@ $$
 $$
 P_{\mu,\sigma^2}\!\left(
 |c^t\mu-c^t\hat\mu|
-\le \sqrt{c^\top D c\ \hat\sigma^2}\,\sqrt{rF_\alpha(r,n-k)},
+\le \sqrt{c^\top D c\ \hat{\sigma^2}}\,\sqrt{rF_\alpha(r,n-k)},
 \ \forall c\in\mathrm{col}(C)
 \right)=1-\alpha
 $$
 
 - **무엇에 대한 구간?**: $c^\top\mu$ (즉 $\mu$의 **선형결합 1개**)에 대한 신뢰구간이지만, $c$를 $\mathrm{col}(C)$ 안에서 움직여도 **동시에(∀)** 성립하게 만든 **동시신뢰구간**.
 - **중심(center)**: $c^\top\hat\mu$, 관심 모수 $c^\top\mu$의 추정치.
-- **표준오차(SE) 역할**: $\sqrt{\sum_i \frac{c_i^2\hat\sigma^2}{n_i}}=\sqrt{c^\top D c\ \hat\sigma^2}$ (여기서 $D=\mathrm{diag}(1/n_i)$) — 선형결합 $c^\top\hat\mu$의 변동성을 반영.
+- **표준오차(SE) 역할**: $\sqrt{\sum_i \frac{c_i^2\hat{\sigma^2}}{n_i}}=\sqrt{c^\top D c\ \hat{\sigma^2}}$ (여기서 $D=\mathrm{diag}(1/n_i)$) — 선형결합 $c^\top\hat\mu$의 변동성을 반영.
 - **임계값(동시 보정)**: $\sqrt{rF_\alpha(r,n-k)}$: 보통의 $t$-임계값 대신, **여러 방향($c$들)을 한꺼번에 보장**하기 위해 $F$-기반 반지름을 사용.
 - **확률 해석(coverage)**: 반복 표본추출 시, **모든** $c\in\mathrm{col}(C)$에 대해 위 부등식이 동시에 성립할 확률이 $1-\alpha$.
 
@@ -177,7 +171,7 @@ C^t\hat\mu\sim N\!\left(C^t\mu,\ (C^tDC)\sigma^2\right) \\
 \therefore (C^t\hat\mu-C^t\mu)^t(C^tDC\sigma^2)^{-1}(C^t\hat\mu-C^t\mu)\sim\chi^2(r)
 $$
 
-또한 정리 10.1.2로부터 $((n-k)\hat\sigma^2/\sigma^2\sim\chi^2(n-k))$이고 위 $\chi^2(r)$와 서로 독립이므로 F-분포의 정의로 (a)가 성립한다.  
+또한 정리 10.1.2로부터 $((n-k)\hat{\sigma^2}/\sigma^2\sim\chi^2(n-k))$이고 위 $\chi^2(r)$와 서로 독립이므로 F-분포의 정의로 (a)가 성립한다.  
 
 (b)는 아래 등식으로부터, (a)를 다르게 표현한 것임을 알 수 있다.
 
@@ -189,15 +183,9 @@ $$
 $$
 
 ### 대비 *(contrast)*
-모평균들의 선형결합 $c_1\mu_1+\cdots+c_k\mu_k \quad (c_1+\cdots+c_k=0)$ 중 **계수합이 0인 경우** 를 **대비(contrast)** 라 한다. 대비는 처리 효과 비교에 자주 쓰이며, $\alpha_i=\mu_i-\bar\mu$를 사용하면
-
-$$
-c_1\mu_1+\cdots+c_k\mu_k=c_1\alpha_1+\cdots+c_k\alpha_k\qquad(c_1+\cdots+c_k=0)
-$$
-
-로도 쓸 수 있다. 특히 어떤 두 계수가 1, -1 $(c_i=1,c_j=-1)$이고 나머지 계수가 0인 대비는 기본대비라 하며 처리효과의 비교에 흔히 사용된다.  
+모평균들의 선형결합 $c_1\mu_1+\cdots+c_k\mu_k$ 중 **계수합이 0인 경우 (** $c_1+\cdots+c_k=0$ **)** 를 **대비(contrast)** 라 한다. 대비는 처리 효과 비교에 자주 쓰이며, 특히 어떤 두 계수가 1, -1 $(c_i=1,c_j=-1)$이고 나머지 계수가 0인 대비는 기본대비라 하며 처리효과의 비교에 흔히 사용된다.  
 이런 대비는 흔히
-$\alpha_i = \mu_i -\bar\mu$를 사용하여 $c_1\alpha_1+\cdots+c_k\alpha_k\qquad(c_1+\cdots+c_k=0)$ 또는 $\alpha_i-\alpha_j$로 나타낸다.
+$\alpha_i = \mu_i -\bar\mu$를 사용하여 $c_1\alpha_1+\cdots+c_k\alpha_k\quad(c_1+\cdots+c_k=0)$ 또는 $\alpha_i-\alpha_j$로 나타낸다.
   - 의의: 모든 $\mu_i$에 동일한 상수 $c$를 더하더라도, (예: 분산분석에서) 관심 대상이 되는 값/통계량은 변하지 않는다. 즉, 전체 평균 수준(location) 에 의존하지 않고 상대적 차이만 남는다.
 
 이런 대비에 대한 동시신뢰구간은 아래와 같다
@@ -206,7 +194,7 @@ $\alpha_i = \mu_i -\bar\mu$를 사용하여 $c_1\alpha_1+\cdots+c_k\alpha_k\qqua
 
 $$
 P_{\mu,\sigma^2}\!\left(
-|c^t\alpha-c^t\hat\alpha| \le \sqrt{\sum_{i=1}^k \frac{c_i^2\hat\sigma^2}{n_i}}\, \sqrt{(k-1)F_\alpha(k-1,n-k)},\ \forall c:\sum c_i=0
+|c^t\alpha-c^t\hat\alpha| \le \sqrt{\sum_{i=1}^k \frac{c_i^2\hat{\sigma^2}}{n_i}}\, \sqrt{(k-1)F_\alpha(k-1,n-k)},\ \forall c:\sum c_i=0
 \right) = 1-\alpha
 $$
 
@@ -215,7 +203,7 @@ $$
 $$
 P_{\mu,\sigma^2}\!\left(
 |(\alpha_i-\alpha_j)-(\hat\alpha_i-\hat\alpha_j)|
-\le \sqrt{\left(\frac1{n_i}+\frac1{n_j}\right)\hat\sigma^2}\,
+\le \sqrt{\left(\frac1{n_i}+\frac1{n_j}\right)\hat{\sigma^2}}\,
 \sqrt{(k-1)F_\alpha(k-1,n-k)},\ \forall i\neq j
 \right) \ge 1-\alpha
 $$
@@ -224,7 +212,7 @@ $$
 
 $$
 P_{\mu,\sigma^2}\!\left(|(\alpha_i-\alpha_j)-(\hat\alpha_i-\hat\alpha_j)|
-\le \sqrt{\left(\frac1{n_i}+\frac1{n_j}\right)\hat\sigma^2}\,
+\le \sqrt{\left(\frac1{n_i}+\frac1{n_j}\right)\hat{\sigma^2}}\,
 t_{\alpha^*/2}(n-k),\ \forall i\neq j\right)\ge 1-\alpha
 $$
 
@@ -254,7 +242,7 @@ $$
 
 $$
 P_{\mu,\sigma^2}\!\left(
-\big|(\alpha_i-\alpha_j)-(\hat\alpha_i-\hat\alpha_j)\big| \le \sqrt{\left(\frac1{n_i}+\frac1{n_j}\right)\hat\sigma^2}\, t_{\alpha^*/2}(n-k)
+\big|(\alpha_i-\alpha_j)-(\hat\alpha_i-\hat\alpha_j)\big| \le \sqrt{\left(\frac1{n_i}+\frac1{n_j}\right)\hat{\sigma^2}}\, t_{\alpha^*/2}(n-k)
 \right) = 1-\alpha^*,
 \quad \forall\, i\ne j
 $$
@@ -292,14 +280,11 @@ $$
 >(표기에서 **SS**는 *Sum of Squares* = 제곱합을 뜻한다.)
 >* **SSB** (*Sum of Squares Between groups*): **집단 간 제곱합** (*between-group sum of squares*)
 >* **SSW** (*Sum of Squares Within groups*): **집단 내 제곱합** (*within-group sum of squares*, 흔히 *SSE*라고도 표기)  
->
->참고로 전체 제곱합은 보통
->* **SST** (*Total Sum of Squares*): **전체 제곱합**
->으로 두며, 일원분산분석에서는 보통 \(SST = SSB + SSW\)로 분해된다.
+>* **SST** (*Total Sum of Squares*): **전체 제곱합** (*Total Sum of Squares*), 일원분산분석에서는 보통 \(SST = SSB + SSW\)로 분해된다.
 
 $$
 SSB=\sum_{i=1}^k n_i(\bar X_i-\bar X)^2,\quad
-SSW=\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2=(n-k)\hat\sigma^2, \\
+SSW=\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2=(n-k)\hat{\sigma^2}, \quad
 \bar X=\frac{1}{n}\sum_{i=1}^k\sum_{j=1}^{n_i}X_{ij}
 $$
 
@@ -411,7 +396,7 @@ $$
 $$
 \frac{SSW}{\sigma^2}
 =\sum_{i=1}^k\sum_{j=1}^{n_i}\frac{(X_{ij}-\bar X_i)^2}{\sigma^2}
-=\frac{(n-k)\hat\sigma^2}{\sigma^2}
+=\frac{(n-k)\hat{\sigma^2}}{\sigma^2}
 \sim \chi^2(n-k)
 $$
 
@@ -443,6 +428,12 @@ $$
 
 처럼 쓰기도 한다(가중치 $n_i$가 아닌 단순합 제약). 이때의 유의성 검정 귀무가설도 결국 $H_0:\mu_1=\cdots=\mu_k$와 동치이므로 동일한 $F$-검정으로 처리한다.
 
+이때의 확률밀도함수:
+
+$$
+f(x_{ij}|\tilde\mu,\tilde\alpha_1,\dots,\tilde\alpha_k,\sigma^2) = \prod_{i=1}^k\prod_{j=1}^{n_i}\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x_{ij}-\tilde\mu-\tilde\alpha_i)^2}{2\sigma^2}\right)
+$$
+
 또한 $c_1 + \cdots + c_k = 0$ 일때 
 
 $$ \sum_{i=1}^k c_i\tilde\alpha_i= \sum_{i=1}^k c_i\mu_i = \sum_{i=1}^k c_i\alpha_i $$
@@ -464,7 +455,7 @@ $$
 P_{\mu,\sigma^2}\!\left(
 |\widehat{\tilde\alpha}_i|
 \le
-\sqrt{\frac{\big((k-1)^2n_i^{-1}+\sum_{j\ne i}n_j^{-1}\big)\hat\sigma^2}{k^2}}\,
+\sqrt{\frac{\big((k-1)^2n_i^{-1}+\sum_{j\ne i}n_j^{-1}\big)\hat{\sigma^2}}{k^2}}\,
 \sqrt{(k-1)F_\alpha(k-1,n-k)},
 \ \forall i
 \right)\ge 1-\alpha
@@ -476,14 +467,14 @@ $$
 P_{\mu,\sigma^2}\!\left(
 |\hat\alpha_i|
 \le
-\sqrt{(n_i^{-1}-n^{-1})\hat\sigma^2}\,
+\sqrt{(n_i^{-1}-n^{-1})\hat{\sigma^2}}\,
 \sqrt{(k-1)F_\alpha(k-1,n-k)},
 \ \forall i
 \right)\ge 1-\alpha
 $$
 
 
-## 이원분류모형의 분산분석 *(Two-Way Analysis of Variance)*
+## 10.2 이원분류모형의 분산분석 *(Two-Way Analysis of Variance)*
 두 개의 요인(*factor*) $A, B$가 각각 $a, b$개의 수준(*level*)을 가질 때, 각 수준 조합을 **처리(treatment)** 라 하고, 처리 효과를 분석하기 위해 **이원분류 정규분포 모형(two-way normal model)** 을 설정한다.
 
 ### 모형 설정 *(Two-way normal model)*
@@ -508,16 +499,14 @@ $$
 * 모분산 추정량:
     
     $$
-    \hat\sigma^2
+    \hat{\sigma^2}
     = \frac{1}{n-ab}
     \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^{n_{ij}}
     (X_{ijk}-\bar X_{ij\cdot})^2,
     \qquad n=\sum_{i=1}^a\sum_{j=1}^b n_{ij}
     $$
 
-    - ab가 빠지는 이유:
-        - 모형을 가법모형(additive model, 상호작용 없음)으로 가정하면 A×B 상호작용항(ab)은 포함하지 않는다.
-        - 또는 각 처리조합(셀)당 반복이 없어 상호작용을 따로 추정할 수 없는 경우, ab 성분이 오차(잔차)로 흡수되어 분해식/자유도에서 별도 항으로 나타나지 않는다
+    - ab가 빠지는 이유: 각 셀의 평균을 추정하는 데 사용된 자유도를 고려하여 모분산의 불편추정량을 계산하기 위해 분모에서 ab를 뺀다.
 
 **(b) 표본평균**  
 * $\hat\mu_{ij}=\bar X_{ij\cdot}$들은 서로 독립이고
@@ -526,11 +515,11 @@ $$\hat\mu_{ij}\sim N\!\left(\mu_{ij},\frac{\sigma^2}{n_{ij}}\right)$$
     
 **(c) 모분산 추정량**  
 
-$$\hat\sigma^2 \perp\!\!\!\perp\ (\hat\mu_{11},\dots,\hat\mu_{ab})$$
+$$\hat{\sigma^2} \perp\!\!\!\perp\ (\hat\mu_{11},\dots,\hat\mu_{ab})$$
 
 **(d) 분포**  
 
-$$\frac{(n-ab)\hat\sigma^2}{\sigma^2}\sim\chi^2(n-ab)$$
+$$\frac{(n-ab)\hat{\sigma^2}}{\sigma^2}\sim\chi^2(n-ab)$$
 
 #### 증명
 각 셀 $(i,j)$에서 $(X_{ij1},\dots,X_{ijn_{ij}})$는 정규표본이므로, 정규표본의 기본 성질을 각 셀에 적용하면 바로 성립한다. 서로 다른 셀의 표본이 독립이라는 점을 이용하면 전체 결과가 따른다.
@@ -542,9 +531,9 @@ $$\frac{(n-ab)\hat\sigma^2}{\sigma^2}\sim\chi^2(n-ab)$$
 >
 >임이 명백하다. 또한 모분산의 최대가능도추정량은
 >
->$$ {\hat\sigma^2}^{\mathrm{MLE}} =\frac{1}{n}\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^{n_{ij}}(X_{ijk}-\bar X_{ij\cdot})^2$$
+>$$ {\hat{\sigma^2}}^{\mathrm{MLE}} =\frac{1}{n}\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^{n_{ij}}(X_{ijk}-\bar X_{ij\cdot})^2$$
 >
->로 주어진다. 따라서 정리 10.2.1의 불편추정량 $\hat\sigma^2$와는 분모만 $n$ vs. $n-ab$로 다르다.
+>로 주어진다. 따라서 정리 10.2.1의 불편추정량 $\hat{\sigma^2}$와는 분모만 $n$ vs. $n-ab$로 다르다.
 
 ### 정리 10.2.2 이원분류정규분포모형에서의 신뢰집합과 동시신뢰구간 *(Confidence regions and simultaneous confidence intervals)*
 계수가 $p$인 $(ab)\times p$ 행렬 $C$에 대해, $C$의 열벡터공간(column space)을
@@ -563,7 +552,7 @@ P_{\mu,\sigma^2}\!\left(
 (C^t\mu-C^t\hat\mu)^t
 (C^tDC)^{-1}
 (C^t\mu-C^t\hat\mu)
-\le p\hat\sigma^2 F_\alpha(p,n-ab)
+\le p\hat{\sigma^2} F_\alpha(p,n-ab)
 \right)
 =1-\alpha
 $$
@@ -574,7 +563,7 @@ $$
 P_{\mu,\sigma^2}\!\left(
 |c^t\mu-c^t\hat\mu|
 \le
-\sqrt{\sum_{i,j}\frac{c_{ij}^2\hat\sigma^2}{n_{ij}}}\,
+\sqrt{\sum_{i,j}\frac{c_{ij}^2\hat{\sigma^2}}{n_{ij}}}\,
 \sqrt{pF_\alpha(p,n-ab)},
 \ \forall c\in\mathrm{col}(C)
 \right)
@@ -598,7 +587,8 @@ n = n_{11} + \cdots + n_{ab},\\
 \gamma_{ij} = \mu_{ij} - \mu_{i\cdot} - \mu_{\cdot j} + \bar\mu_{..}
 $$
 
-와 같이 정의한다. $\mu_{..}$는 전반 평균(overall mean), $\mu_{i\cdot}$는 요인 $A$의 수준 $i$의 평균, $\mu_{\cdot j}$는 요인 $B$의 수준 $j$의 평균, $\alpha_i$는 요인 $A$의 주효과(main effect), $\beta_j$는 요인 $B$의 주효과(main effect), $\gamma_{ij}$는 교호작용효과(interaction effect)로 해석된다.
+와 같이 정의한다. $\bar\mu_{..}$는 전반 평균(overall mean), $\bar\mu_{i\cdot}$는 요인 $A$의 수준 $i$의 평균, $\bar\mu_{\cdot j}$는 요인 $B$의 수준 $j$의 평균,  
+$\alpha_i$는 요인 $A$의 주효과(main effect), $\beta_j$는 요인 $B$의 주효과(main effect), $\gamma_{ij}$는 교호작용효과(interaction effect)로 해석된다.
 
 * **주효과(main effect)** : 각 요인이 단독으로 평균에 미치는 영향으로, 위의 $\alpha_i$, $\beta_j$를 각각 요인 $A$, $B$의 주효과라 부른다.
 
@@ -606,7 +596,7 @@ $$
     
     특히 **가법모형(additive model, 상호작용 없음)** 은 $\gamma_{ij}=0\ \ \forall i,j$ 인 경우를 의미한다.
 
-반복 횟수가 모든 셀에서 같을 때: $n_{ij}=r,\quad n=rab$ 라 하면 **균형된 이원분류모형**이라 한다. 이 경우 해석과 분해가 아래와 같이 단순해진다.
+여기서 더 간소화된 버전의 모델로서, 반복 횟수가 모든 셀에서 같을 때($n_{ij}=r$), $n=rab$ 라 하면 **균형된 이원분류모형**이라 한다. 이 경우 해석과 분해가 아래와 같이 단순해진다.
 
 $$
 \bar\mu_{..}=\frac{1}{ab}\sum_{i=1}^a\sum_{j=1}^b\mu_{ij},
@@ -627,10 +617,10 @@ $$
 
 $$
 X_{ijk}=\bar\mu_{..}+\alpha_i+\beta_j+\gamma_{ij}+e_{ijk}, \quad e_{ijk} \sim N(0, \sigma^2) \text{ i.i.d.} \\
-\sum_i\alpha_i=0,\quad
-\sum_j\beta_j=0,\quad
-\sum_i\gamma_{ij}=0,\quad
-\sum_j\gamma_{ij}=0
+\sum_i^a\alpha_i=0,\quad
+\sum_j^b\beta_j=0,\quad
+\sum_i^a\gamma_{ij}=0 (j=1,\dots,b),\quad
+\sum_j^b\gamma_{ij}=0 (i=1,\dots,a)
 $$
 
 균형된 이원분류모형에서는 각 모수(주효과, 교호작용효과)가 셀 평균 $\mu_{ij}$들의 **선형결합**으로 표현된다. 따라서 관심 있는 효과(예: 주효과의 차이, 교호작용 유무)에 대한 추정과 추론은
@@ -664,7 +654,7 @@ $$
 P_{\mu,\sigma^2}\!\left(
 |(\alpha_i-\alpha_\ell)-(\hat\alpha_i-\hat\alpha_\ell)|
 \le
-\sqrt{\left(\frac1{n_{i.}}+\frac1{n_{\ell.}}\right)\hat\sigma^2}\,
+\sqrt{\left(\frac1{n_{i.}}+\frac1{n_{\ell.}}\right)\hat{\sigma^2}}\,
 \sqrt{(a-1)F_\alpha(a-1,n-ab)},
 \ \forall i\neq\ell
 \right)
@@ -674,7 +664,7 @@ $$
 (b) $a^*=\alpha/m, m = a(a-1)/2$라 하면 
 
 $$
-P_{\mu, \sigma^2} \left( {|(\alpha_i-\alpha_\ell)-(\hat\alpha_i-\hat\alpha_\ell)| \leq \sqrt{\frac1{n_{i.}}+\frac1{n_{\ell.}}\hat\sigma^2} t_{\alpha^*/2}(n-ab), \forall i \neq \ell} \right)
+P_{\mu, \sigma^2} \left( {|(\alpha_i-\alpha_\ell)-(\hat\alpha_i-\hat\alpha_\ell)| \leq \sqrt{\frac1{n_{i.}}+\frac1{n_{\ell.}}\hat{\sigma^2}} t_{\alpha^*/2}(n-ab), \forall i \neq \ell} \right)
 \geq 1-\alpha
 $$
 
@@ -694,6 +684,7 @@ H_0^{AB}:\mu_{ij}\text{가 $i$의 함수와 $j$의 함수의 합으로 표현된
 $$
 
 라는 가설과 동치이며, 최대가능도비 검정은 아래와 같다.
+TODO:
 ### 정리 10.2.4 균형된 이원분류정규분포모형에서 교호작용효과의 유의성 검정 *(F-test for interaction effect)*
 > 참고: 이런 최대가능도비 검정은 $n_{ij}=n_{i.}n_{.j}/n$를 만족시키는 이원분류정규분포모형의 경우에도 성립한다.
 
@@ -705,12 +696,11 @@ r(\bar X_{ij\cdot}-\bar X_{i\cdot\cdot}-\bar X_{\cdot j\cdot}+\bar X_{\cdots})^2
 SSE=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (X_{ijk}-\bar X_{ij\cdot})^2
 $$
 
-이라고 하면, 검정통계량과은
+($SS_{AB}$는 교호작용 제곱합(interaction sum of squares), $SSE$는 오차 제곱합(error sum of squares))
+이라고 하면, 검정통계량은
 
 $$
-F_n = \frac{SS_{AB}/((a-1)(b-1))}
-{SSE/(n-ab)}
-\sim F((a-1)(b-1),n-ab)
+F_n = \frac{SS_{AB}/((a-1)(b-1))}{SSE/(n-ab)} \sim F((a-1)(b-1),n-ab)
 $$
 
 크기 $\alpha (0 < \alpha < 1)$의 유의수준에서의 기각역은
@@ -721,44 +711,32 @@ $$
 
 #### 증명  
 **(1) 최대가능도비 검정(LRT)와 제곱합 분해**  
-정규모형에서 로그가능도와 각 모수공간에서의 최대가능도추정값을 대입하면(상수항 제외)
+정규모형에서 로그가능도와 각 모수공간에서의 최대가능도추정값을 대입하면
 
 $$
 l(\theta)
-= -\frac{1}{2\sigma^2}\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-\mu_{ij})^2
--\frac{n}{2}\log(2\pi\sigma^2),
-\quad n=rab
+= -\frac{1}{2\sigma^2}\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-\bar\mu_{..}-\alpha_i-\beta_j-\gamma_{ij})^2 -\frac{n}{2}\log(2\pi\sigma^2), \quad n=rab \\
+\theta = (\mu_{11}, \dots, \mu_{ab}, \sigma^2)^\top, \quad \mu_{ij} = \bar\mu_{..} + \alpha_i + \beta_j + \gamma_{ij}, \\
+\hat\theta^\Omega = (\bar X_{11\cdot}, \dots, \bar X_{ab\cdot}, {\hat{\sigma^2}}^\Omega)^\top, \quad {\hat{\sigma^2}}^\Omega = \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-\bar x_{ij\cdot})^2/n \\   
+
+\hat\theta^0 = (\hat{\bar\mu}_{11}^0, \dots, \hat{\bar\mu}_{ab}^0, {\hat{\sigma^2}}^0)^\top, \quad \hat{\bar{\mu}_{..}}^0 = \bar x_{...},\quad \hat \alpha_i^0 = \bar x_{i\cdot\cdot} - \bar x_{...}, \quad \hat \beta_j^0 = \bar x_{\cdot j\cdot} - \bar x_{...}, \quad \hat \gamma_{ij}^0 = 0 \\
+{\hat{\sigma^2}}^0 = \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-\bar x_{i..\cdot}-\bar x_{\cdot j\cdot}+\bar x_{...})^2/n = \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-\hat{\bar\mu}_{..}^0-\hat \alpha_i^0-\hat \beta_j^0)^2/n
 $$
 
-교호작용을 포함한 모형공간 $\Omega$에서는 $(\mu_{ij})$가 자유모수이므로
-
-$$
-\hat\mu_{ij}^\Omega=\bar x_{ij\cdot}, \qquad
-{\hat\sigma^2}^\Omega
-=\frac{1}{n}\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-\bar x_{ij\cdot})^2 =\frac{SSE}{n} \\
-\therefore \hat\theta^\Omega=\big(\bar x_{11\cdot},\dots,\bar x_{ab\cdot},\ {\hat\sigma^2}^\Omega\big)
-$$
-
-한편 $H_0^{AB}$ 하의 가법모형(교호작용 없음)에서는 
-
-$$
-{\hat{\bar\mu}_{..}}^0 = \bar x_{\cdot\cdot\cdot}=\frac{1}{n}\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r x_{ijk} \\
-{\hat\alpha_i}^0 = \bar x_{i\cdot\cdot}-\bar x_{\cdot\cdot\cdot}, \quad {\hat\beta_j}^0 = \bar x_{\cdot j\cdot}-\bar x_{\cdot\cdot\cdot}, \quad {\hat\gamma_{ij}}^0 = 0 \\
-{\hat\sigma^2}^0 =\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-{\hat{\bar\mu}_{..}}^0-{\hat\alpha_i}^0-{\hat\beta_j}^0)^2
-$$
-
-정규모형에서 MLE를 대입한 로그가능도는 $l(\hat\theta)= -\frac{n}{2}\Big(1+\log(2\pi)+\log(\hat\sigma^2)\Big)$ 꼴이므로, 위 식들을 대입하면 다음의 LRT 표현으로:
+정규모형에서 MLE를 대입한 로그가능도는 $l(\hat\theta)= -\frac{n}{2}\Big(1+\log(2\pi)+\log(\hat{\sigma^2})\Big)$ 꼴이므로, 위 식들을 대입하면 다음의 LRT 표현으로:
 
 $$
 2\{l(\hat\theta^\Omega)-l(\hat\theta^{0})\}
-=n\log\!\left(\frac{{\hat\sigma^2}^0}{{\hat\sigma^2}^\Omega}\right)
+=n\log\!\left(\frac{{\hat{\sigma^2}}^0}{{\hat{\sigma^2}}^\Omega}\right)
 $$
 
-$\log$는 단조증가함수이므로 LRT의 기각역은 ${\hat\sigma^2}^0/{\hat\sigma^2}^\Omega$가 큰 경우와 동치이다. 이때,
+$\log$는 단조증가함수이므로 LRT의 기각역은 ${\hat{\sigma^2}}^0/{\hat{\sigma^2}}^\Omega$가 큰 경우와 동치이다. 이때,
 
 $$
-n{\hat\sigma^2}^0 = \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-\bar{x_{i..}}-\bar{x_{.j.}} + \bar{x_{...}})^2 =\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-{\hat{\bar\mu}_{..}}^0-{\hat\alpha_i}^0-{\hat\beta_j}^0)^2 \\ = SS_{AB}+SSE\\
-n{\hat\sigma^2}^\Omega = \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-\bar x_{ij\cdot})^2 = SSE
+n{\hat{\sigma^2}}^0 =\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-\bar x_{i\cdot\cdot}-\bar x_{\cdot j\cdot}+\bar x_{\cdots})^2 \\ 
+= \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r \Big((\bar x_{ij\cdot}-\bar x_{i\cdot\cdot}-\bar x_{\cdot j\cdot}+\bar x_{\cdots})+(x_{ijk}-\bar x_{ij\cdot})\Big)^2 
+= SS_{AB}+SSE\\
+n{\hat{\sigma^2}}^\Omega = \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (x_{ijk}-\bar x_{ij\cdot})^2 = SSE
 $$
 
 이므로, 검정통계량은 
@@ -839,7 +817,7 @@ $$
 이고, 이는 셀 내부(within-cell) 편차만으로 구성되어
 
 $$
-\frac{SSE}{\sigma^2}\sim \chi^2(n-ab) = (n-ab)\frac{\hat\sigma^2}{\sigma^2}
+\frac{SSE}{\sigma^2}\sim \chi^2(n-ab) = (n-ab)\frac{\hat{\sigma^2}}{\sigma^2}
 $$
 
 가 성립한다(각 셀에서 자유도 $r-1$짜리 카이제곱이 합쳐져 $ab(r-1)=n-ab$).
@@ -870,6 +848,12 @@ $$
 
 ### 정리 10.2.5 균형된 이원분류정규분포모형에서 주효과의 유의성 검정 *(Tests for main effects)*
 $n_{ij} = r$인 균형된 이원분류정규분포모형에서  
+
+$$ SS_A = \sum_{i=1}^a br(\bar X_{i\cdot\cdot}-\bar X_{\cdots})^2, \quad SS_B = \sum_{j=1}^b ar(\bar X_{\cdot j\cdot}-\bar X_{\cdots})^2, \quad SSE = \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^r (X_{ijk}-\bar X_{ij\cdot})^2
+$$
+
+라고 하면, 다음의 검정이 각각 요인 $A$, $B$의 주효과에 대한 최대가능도비 검정과 동일하다.
+
 **(a) 요인 $A$의 주효과**  
 
 $$
@@ -893,7 +877,7 @@ $$
 $$F_n \ge F_\alpha((b-1), n-ab)$$
 
 
-## 분산분석에서의 검정력 함수 *(Power Functions in Analysis of Variance)*
+## 10.3 분산분석에서의 검정력 함수 *(Power Functions in Analysis of Variance)*
 분산분석에서 유의성 검정에 사용되는 F-통계량은 **귀무가설 하에서는 중심 F 분포**, **대립가설 하에서는 비중심 F 분포**를 따른다. 검정력 함수는 이 비중심성모수(noncentrality parameter)를 통해 표현된다.
 
 서로 독립인 $X_i \sim N(\mu_i,1),\quad i=1,\dots,r$에 대해 $Y=\sum_{i=1}^r X_i^2$ 의 분포를 **자유도 $r$**, **비중심성모수** $\delta=\sum_{i=1}^r \mu_i^2$
@@ -971,15 +955,11 @@ $$
 
 >이때 $-\log(1-x)=\sum_{k=1}^\infty \frac{x^k}{k} \quad(|x|<1)$ 이므로, $x=2t$를 대입하면
 >
->$$
->-\log(1-2t)=\sum_{k=1}^\infty \frac{(2t)^k}{k}
->$$
+>$$-\log(1-2t)=\sum_{k=1}^\infty \frac{(2t)^k}{k}$$
 >
 >또한 $\frac{1}{1-2t}=\sum_{m=0}^\infty (2t)^m \quad(|2t|<1)$ 이므로
 >
->$$
->\frac{t}{1-2t} =t\sum_{m=0}^\infty (2t)^m =\frac12 \sum_{k=1}^\infty (2t)^k
->$$
+>$$\frac{t}{1-2t} =t\sum_{m=0}^\infty (2t)^m =\frac12 \sum_{k=1}^\infty (2t)^k$$
 >
 
 $$
@@ -1411,19 +1391,19 @@ $$Y = \mathbf{X}\boldsymbol\beta + e,\quad e\sim N_n(0,\sigma^2 I),\quad \mathrm
 
 * 분산의 불편추정량
 
-    $$\hat\sigma^2=\frac{\|Y-\mathbf{X}\boldsymbol{\hat\beta}\|^2}{n-p-1} =\frac{(Y-\mathbf{X}\boldsymbol{\hat\beta})^\top(Y-\mathbf{X}\boldsymbol{\hat\beta})}{n-p-1}$$
+    $$\hat{\sigma^2}=\frac{\|Y-\mathbf{X}\boldsymbol{\hat\beta}\|^2}{n-p-1} =\frac{(Y-\mathbf{X}\boldsymbol{\hat\beta})^\top(Y-\mathbf{X}\boldsymbol{\hat\beta})}{n-p-1}$$
 
 **(b) $\hat\beta$의 분포**  
 
 $$\boldsymbol{\hat\beta} = (\mathbf{X}^\top \mathbf{X})^{-1}\mathbf{X}^\top Y \sim N_{p+1}\!\big(\boldsymbol\beta,\ \sigma^2(\mathbf{X}^\top \mathbf{X})^{-1}\big)$$
 
-**(c) $\hat\beta$와 $\hat\sigma^2$의 독립성**  
+**(c) $\hat\beta$와 $\hat{\sigma^2}$의 독립성**  
 
-$$\boldsymbol{\hat\beta} \perp \hat\sigma^2$$
+$$\boldsymbol{\hat\beta} \perp \hat{\sigma^2}$$
 
-**(d) $\hat\sigma^2$의 카이제곱 분포**  
+**(d) $\hat{\sigma^2}$의 카이제곱 분포**  
 
-$$\frac{(n-p-1)\hat\sigma^2}{\sigma^2}\sim \chi^2(n-p-1)$$
+$$\frac{(n-p-1)\hat{\sigma^2}}{\sigma^2}\sim \chi^2(n-p-1)$$
 
 #### 증명
 이 경우에 $Y$의 확률밀도함수는 $\theta=(\boldsymbol\beta^\top,\sigma^2)^\top\in \mathbb{R}^{p+1}\times(0,\infty)$를 모수로 하여
@@ -1436,14 +1416,14 @@ $$
 와 같이 나타내어지고 정리 8.3.2의 조건을 만족시키는 지수족의 경우이다. 따라서 $(\mathbf{X}^\top Y, Y^\top Y)$가 $\theta=(\boldsymbol\beta^\top,\sigma^2)^\top\in\mathbb{R}^{p+1}\times(0,\infty)$에 관한 완비충분통계량이다. 그런데
 
 $$
-\mathbf{X}^\top Y=(\mathbf{X}^\top \mathbf{X})\hat\beta, \qquad Y^\top Y=(n-p-1)\hat\sigma^2+\hat\beta^\top(\mathbf{X}^\top \mathbf{X})\hat\beta
+\mathbf{X}^\top Y=(\mathbf{X}^\top \mathbf{X})\hat\beta, \qquad Y^\top Y=(n-p-1)\hat{\sigma^2}+\hat\beta^\top(\mathbf{X}^\top \mathbf{X})\hat\beta
 $$
 
-이므로 $(\hat\beta,\hat\sigma^2)$은 $(\mathbf{X}^\top Y, Y^\top Y)$의 일대일 함수로서 이 역시 $\theta$에 관한 완비충분통계량이다.
+이므로 $(\hat\beta,\hat{\sigma^2})$은 $(\mathbf{X}^\top Y, Y^\top Y)$의 일대일 함수로서 이 역시 $\theta$에 관한 완비충분통계량이다.
 
-한편 정리 6.5.2로부터 $c^\top\hat\beta$과 $\hat\sigma^2$은 각각 $c^\top\beta$와 $\sigma^2$의 불편추정량이다. 따라서 완비충분통계량의 함수인 $c^\top\hat\beta$과 $\hat\sigma^2$은 각각 $c^\top\beta$와 $\sigma^2$의 전역최소분산불편 추정량이다.
+한편 정리 6.5.2로부터 $c^\top\hat\beta$과 $\hat{\sigma^2}$은 각각 $c^\top\beta$와 $\sigma^2$의 불편추정량이다. 따라서 완비충분통계량의 함수인 $c^\top\hat\beta$과 $\hat{\sigma^2}$은 각각 $c^\top\beta$와 $\sigma^2$의 전역최소분산불편 추정량이다.
 
-표본분포에 관한 (b), (c), (d)의 증명은 정리 4.4.6에 주어져 있다.
+(b), (c), (d)의 증명은 정리 4.4.6 참고.
 
 ### 정리 10.4.2 선형회귀정규분포모형에서의 신뢰집합과 동시신뢰구간
 계수가 $r$인 $(p+1)\times r$ 행렬 $C$에 대해, $C$의 열공간을 $\mathrm{col}(C) = \{Ca: a \in \mathbb{R}^r\}$라 하자.
@@ -1453,7 +1433,7 @@ $$
 $$
 P_{\boldsymbol\beta,\sigma^2}\!\left(
 (C^\top\boldsymbol\beta-C^\top \boldsymbol{\hat\beta})^\top\Big(C^\top(\mathbf{X}^\top \mathbf{X})^{-1}C\Big)^{-1}(C^\top\boldsymbol\beta-C^\top\boldsymbol{\hat\beta})
-\le r\hat\sigma^2\,F_\alpha(r,n-p-1)
+\le r\hat{\sigma^2}\,F_\alpha(r,n-p-1)
 \right)=1-\alpha
 $$
 
@@ -1462,7 +1442,7 @@ $$
 $$
 P_{\boldsymbol\beta,\sigma^2}\!\left(
 |c^\top\boldsymbol\beta-c^\top\boldsymbol{\hat\beta}|
-\le \sqrt{c^\top(\mathbf{X}^\top \mathbf{X})^{-1}c\ \hat\sigma^2}\ \sqrt{rF_\alpha(r,n-p-1)},
+\le \sqrt{c^\top(\mathbf{X}^\top \mathbf{X})^{-1}c\ \hat{\sigma^2}}\ \sqrt{rF_\alpha(r,n-p-1)},
 \ \forall c\in \mathrm{col}(C)
 \right)=1-\alpha
 $$
@@ -1491,7 +1471,7 @@ $$
 * $\mathbf{X}_0$를 제거한 $\mathbf{X}_1$: $\mathbf{X}_{1|0}=(I-\Pi_0)\mathbf{X}_1$
 * 그 열공간으로의 정사영행렬: $\Pi_{1|0}=\mathbf{X}_{1|0}(\mathbf{X}_{1|0}^\top \mathbf{X}_{1|0})^{-1}\mathbf{X}_{1|0}^\top$
 
-이면,     
+이면, 
 
 $$
 \boxed{\ \min_{\boldsymbol\beta_0}\|Y-\mathbf{X}_0\boldsymbol\beta_0\|^2
@@ -1555,10 +1535,10 @@ $$
 이므로, $\sigma^2$에 관해 미분하여 얻은 전체 모수공간과 귀무가설하에서의 최대가능도 추정량:
 
 $$
-\hat\sigma^2_\Omega=\min_{\beta_0\in R^{p_0},\beta_1\in R^{p_1}}|Y-X_0\beta_0-X_1\beta_1|^2/n=SSE/n \\
-\hat\sigma^2_0=\min_{\beta_0\in R^{p_0}}|Y-X_0\beta_0|^2/n=(SSE+Y^t\Pi_{1|0}Y)/n \\
+\hat{\sigma^2}_\Omega=\min_{\beta_0\in R^{p_0},\beta_1\in R^{p_1}}|Y-X_0\beta_0-X_1\beta_1|^2/n=SSE/n \\
+\hat{\sigma^2}_0=\min_{\beta_0\in R^{p_0}}|Y-X_0\beta_0|^2/n=(SSE+Y^t\Pi_{1|0}Y)/n \\
 \therefore\ 2\bigl(l(\hat\theta_\Omega)-l(\hat\theta_0)\bigr)
-=n\log(\hat\sigma^2_0/\hat\sigma^2_\Omega)
+=n\log(\hat{\sigma^2}_0/\hat{\sigma^2}_\Omega)
 =n\log\left(1+\frac{Y^t\Pi_{1|0}Y}{SSE}\right)
 $$
 

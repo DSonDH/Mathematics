@@ -287,6 +287,13 @@ $$\max_{\theta\in\Omega_0} P_\theta\bigl((X_1,\dots,X_n)^t\in C_\alpha\bigr) = \
 - **기각역**: $C_\alpha = \left\{x:\ 2(\ell(\hat\theta)-\ell(\hat\theta_0))\ge c\right\}$
 - **상수 $c$** 는 $\max_{\theta\in\Omega_0}P_\theta((X1, \dots, X_n)^T \in C_\alpha)=\alpha$가 되도록 선택
 
+> 참고: **왜 검정에서는 MME보다 LRT(likelihood ratio test)를 주로 사용할까?**  
+> 최대가능도비 검정(LRT)은  
+> $$\Lambda(x)=\frac{\sup_{\theta\in\Omega_0}L(\theta;x)}{\sup_{\theta\in\Omega}L(\theta;x)}$$
+> 처럼 **가능도함수 자체**를 비교하므로, 각 모수공간에서의 **MLE**가 직접 필요하다. MLE는 전체 모수공간에서의 최적화 결과이므로, 귀무가설과 대립가설 각각에서의 최대가능도를 정확히 계산하여 비교할 수 있다.  
+>
+> 반면 **MME(moment method)** 는 일부 모멘트만 맞추고, 전체 분포 구조를 충분히 반영하지 못하므로, 검정에 필요한 **모형 전체의 적합도 비교** 를 자연스럽게 제공하지 못한다.  
+
 #### 예 7.2.1 정규분포 평균에 대한 양측 검정
 
 $$X_1,\dots,X_n \sim N(\mu,\sigma^2),\quad n\ge2 \\ H_0:\mu=\mu_0 \quad\text{vs}\quad H_1:\mu\neq\mu_0 $$
