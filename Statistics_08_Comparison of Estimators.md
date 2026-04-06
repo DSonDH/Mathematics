@@ -235,7 +235,7 @@ $$\mathrm{MSE}(\hat\eta, \theta) = \operatorname{Var}_\theta(\hat\eta)$$
 >즉, **불편성**이라는 제약을 절대 포기하지 않을 때, 그 안에서 더 이상 개선이 불가능한 "최적의 불편추정량"이 바로 UMVUE다.
 >
 >추후 다양한 이론이 UMVUE에서 시작된다!
->- UMVUE에서 “Uniformly”란 **특정 $\theta$에서만 좋은 것이 아니라, 모든 $\theta \in \Omega$에 대해 분산이 최소**임을 뜻한다.
+>- UMVUE에서 "Uniformly"란 **특정 $\theta$에서만 좋은 것이 아니라, 모든 $\theta \in \Omega$에 대해 분산이 최소**임을 뜻한다.
 >- 즉, **국소 최적(local optimum)이 아니라 전역 최적(global optimum)** 으로, 모수공간 전체에서 항상 최적의 불편추정량임을 보장한다.
 >- 이는 일부 $\theta$에서만 분산이 최소인 추정량과 구별되는 중요한 특징이다.
 

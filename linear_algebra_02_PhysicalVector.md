@@ -134,7 +134,7 @@ $$
 참고) 외적: 텐서곱  
 참고) wedge product, $\wedge$  
 $\mathbf{u}\wedge\mathbf{v}$는 벡터가 아니라 2차 텐서(또는 2-형식) 로,
-두 벡터로 생성되는 “평면의 방향과 넓이”를 나타낸다.  
+두 벡터로 생성되는 "평면의 방향과 넓이"를 나타낸다.  
 이는 외미분기하학(differential forms), 선형대수학, 기하대수(Geometric Algebra) 에서 핵심 개념이다.
 
 # 3. 벡터의 응용

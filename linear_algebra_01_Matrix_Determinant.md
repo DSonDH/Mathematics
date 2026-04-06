@@ -879,7 +879,7 @@ $$S_{WW} = \sum_{i=1}^n (W_i-\bar W)^2 = W^TW-\frac{(\mathbf{1}^TW)^2}{\mathbf{1
 
 또한 $\mathbf{1}^T\mathbf{1}=n$이므로
 
-$$S_{WW} = W^T\!\left(I-\mathbf{1}(\mathbf{1}^T\mathbf{1})^{-1}\mathbf{1}^T\right)\!W = W^T\!\left(I-\frac{1}{n} \mathbf{1}\mathbf{1}^T\right)\!W = W^T C_n W$$
+$$S_{WW} = W^T \left(I-\mathbf{1}(\mathbf{1}^T\mathbf{1})^{-1}\mathbf{1}^T\right)W = W^T\left(I-\frac{1}{n} \mathbf{1}\mathbf{1}^T\right)W = W^T C_n W$$
 
 즉, 편차제곱합은 중심화행렬 $C_n$에 의한 이차형식으로 정리된다.
 

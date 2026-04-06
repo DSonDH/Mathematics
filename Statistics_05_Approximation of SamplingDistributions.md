@@ -27,7 +27,7 @@ $$X_1 + \cdots + X_n \sim \text{Binomial}(n,p)$$
 
 $$
 \lim_{n\to\infty}
-P\!\left(
+P\left(
 a \le \frac{X_1+\cdots+X_n-np}{\sqrt{np(1-p)}} \le b
 \right)
 = P(a \le Z \le b)
@@ -37,7 +37,7 @@ $$
 
 $$
 \lim_{n\to\infty}
-P\!\left(
+P\left(
 a \le \frac{\hat p - p}{\sqrt{p(1-p)/n}} \le b
 \right)
 = P(a \le Z \le b)
@@ -59,7 +59,7 @@ $$
 
 $$
 \lim_{n\to\infty}
-P\!\left(
+P\left(
 \frac{(X_1+\cdots+X_n)/n - \mu}{\sigma/\sqrt{n}} \le x
 \right)
 = P(Z \le x),
@@ -91,19 +91,19 @@ $$\lim_{n\to\infty} \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t) = \mathrm{mg
 
 $$
 \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t)
-= E\!\left[
-\exp\!\left(
+= E\left[
+\exp\left(
 \frac{t}{\sqrt{n}}\sum_{i=1}^n \frac{X_i-\mu}{\sigma}
 \right)
 \right]
 = \left[
-\mathrm{mgf}_{(X_1-\mu)/\sigma}\!\left(\frac{t}{\sqrt{n}}\right)
+\mathrm{mgf}_{(X_1-\mu)/\sigma}\left(\frac{t}{\sqrt{n}}\right)
 \right]^n
 $$
 
 $m(s)=\mathrm{mgf}_{(X_1-\mu)/\sigma}(s)$라 두면 $Y=\frac{X_1-\mu}{\sigma}$라 하면 $m_Y^{(k)}(s) = E(Y^k e^{sY})$이므로, 테일러 전개로
 
-$$m\!\left(\frac{t}{\sqrt{n}}\right)
+$$m\left(\frac{t}{\sqrt{n}}\right)
 = m(0) + \frac{m'(0)}{1!}\frac{t}{\sqrt{n}} + \frac{m''(0)}{2!}\left(\frac{t}{\sqrt{n}}\right)^2 + R_{n,t}$$
 
 $$= 1 + E(\frac{X_1-\mu}{\sigma})\frac{t}{1!\sqrt{n}} + E\left(\frac{X_1-\mu}{\sigma}\right)^2\frac{t^2}{2!n} + R_{n,t}$$
@@ -116,7 +116,7 @@ $$= 1+\frac{1}{2}\frac{t^2}{n}+R_{n,t},\quad \lim_{n\to\infty} nR_{n,t}=0$$
 
 $$
 \log \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t)
-= n\log\!\left(1+\frac{1}{2n}t^2+R_{n,t}\right)
+= n\log\left(1+\frac{1}{2n}t^2+R_{n,t}\right)
 = \frac{1}{2}t^2 + nr_{n,t},
 \quad \lim_{n\to\infty}nr_{n,t}=0
 $$
@@ -154,7 +154,7 @@ $$
 
 $$
 \lim_{n\to\infty}
-P\!\left(
+P\left(
 \frac{(X_1+\cdots+X_n)/n-\lambda}{\sqrt{\lambda/n}} \le x
 \right)
 = P(Z\le x)
@@ -174,8 +174,8 @@ $$
 $$
 P(a<Y_n\le b)
 \approx
-\Phi\!\left(\frac{b-n}{\sqrt{n}}\right)
-- \Phi\!\left(\frac{a-n}{\sqrt{n}}\right)
+\Phi\left(\frac{b-n}{\sqrt{n}}\right)
+- \Phi\left(\frac{a-n}{\sqrt{n}}\right)
 $$
 
 (각주: 이런 근사계산은 중심극한정리에서 정규분포로의 수렴이 균등수렴이므로 가능한 것이다.)
@@ -192,7 +192,7 @@ $$
 
 $$
 \lim_{n\to\infty}
-P\!\left(
+P\left(
 \frac{(X_1+\cdots+X_n)/n-\alpha\beta}{\sqrt{\alpha\beta^2/n}} \le x
 \right)
 = P(Z\le x)
@@ -202,7 +202,7 @@ $$
 
 $$
 \lim_{n\to\infty}
-P\!\left(
+P\left(
 \frac{Y_n-n}{\sqrt{2n}} \le x
 \right)
 = P(Z\le x)
@@ -226,7 +226,7 @@ $$
 
 $$
 \lim_{n\to\infty}
-P\!\left(
+P\left(
 \sqrt{n}\left(\frac{X_{1j}+\cdots+X_{nj}}{n}-\mu_j\right)
 \le x_j,\; j=1,\dots,k
 \right)
@@ -237,7 +237,7 @@ $$
 
 $$
 \lim_{n\to\infty}
-P\!\left(
+P\left(
 \sqrt{n}(\bar X_n - \mu) \le x
 \right)
 = P(Z \le x),
@@ -265,7 +265,7 @@ $$
 
 $$
 \lim_{n\to\infty}
-P\!\left(
+P\left(
 \frac{X_n-np}{\sqrt{n}} \le x
 \right)
 = P(Z\le x),\quad

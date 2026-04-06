@@ -5,7 +5,7 @@ $$R = (A, B, P(x, y))$$
 $$\{(x, y) | x \in A, y\in B, P(x,y)는 참\}$$
 A에서 B로의 관계 P(x, y)라는 명제함수를 만족해야한다.  
 이때, $P(x,y)$: x는 y의 약수이다 같이 어떤 명제를 뜻한다.  
-즉, $R\subseteq A\times B$이고 $(a,b)\in R$일 때 “$a$는 $b$와 관계가 있다”고 쓴다.  
+즉, $R\subseteq A\times B$이고 $(a,b)\in R$일 때 "$a$는 $b$와 관계가 있다"고 쓴다.  
 이를 $xRy$라고 쓰기도 한다.  
 특히 한 집합 $A$ 위의 관계는 $R\subseteq A\times A$인 경우이다.
 

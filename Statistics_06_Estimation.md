@@ -167,7 +167,7 @@ $$
 
 $i=1,\dots,n$에 대해 $Y_i=(X_i,\dots,X_i^k)^\top\in\mathbb{R}^k$ 로 두면 $E(Y_i)=m$이고 \\ $\operatorname{Cov}(Y_i)=\Sigma, \Sigma_{rs}=\operatorname{Cov}(X_i^r,X_i^s)=E(X_i^{r+s})-E(X_i^r)E(X_i^s)=m_{r+s}-m_rm_s$ 가 된다. 가정 $E(X_1^{2k})<\infty$로 각 성분의 2차 모멘트가 유한하므로 다변량 중심극한정리에 의해
 
-$$ \sqrt n(\hat m-m) =\sqrt n\!\left(\frac1n\sum_{i=1}^n Y_i-E(Y_1)\right) \xrightarrow{d}N_k(0,\Sigma)$$
+$$ \sqrt n(\hat m-m) =\sqrt n\left(\frac1n\sum_{i=1}^n Y_i-E(Y_1)\right) \xrightarrow{d}N_k(0,\Sigma)$$
 
 이제 $\hat\eta_n-\eta=g(\hat m)-g(m)$에 대해, $g$의 미분 가능성을 이용하면 (delta method)
 
@@ -185,7 +185,7 @@ $$\sqrt n(\hat\eta_n-\eta)
 
 정규벡터의 선형결합은 정규분포이므로
 
-$$\nabla g(m)^\top Z\sim N\!\left(0,(\nabla g(m))^\top\Sigma\nabla g(m)\right)$$
+$$\nabla g(m)^\top Z\sim N\left(0,(\nabla g(m))^\top\Sigma\nabla g(m)\right)$$
 
 즉,
 

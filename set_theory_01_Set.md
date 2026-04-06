@@ -1,5 +1,5 @@
 항진인 조건문 p -> q를 논리적 함의라 하고, p=>q로 나타내며 p는 q의 충분조건, q는 p의 필요조건이라 한다.  
-항진인 쌍조건문은 두 명제의 동치(iff)로, $p\leftrightarrow q$ 또는 $p\Leftrightarrow q$로 쓰며 “$p$와 $q$는 서로의 필요·충분조건”이라 한다.
+항진인 쌍조건문은 두 명제의 동치(iff)로, $p\leftrightarrow q$ 또는 $p\Leftrightarrow q$로 쓰며 "$p$와 $q$는 서로의 필요·충분조건"이라 한다.
 
 $p\to q$는 논리식으로 $\neg p\lor q$와 같다.
 

@@ -354,7 +354,9 @@ $$
 (만약 delta = 1이었으면, 즉 $|x-a|<1$이라고 추가로 가정하면)  
 $|x-a|<1$ 이면 $a-1 < x < a+1$ 이므로 $|x+a| < 2a+1$
 
-따라서 $$ |f(x)-f(a)| < (2a+1)|x-a|$$
+따라서 
+
+$$ |f(x)-f(a)| < (2a+1)|x-a|$$
 
 이제 $\delta = \min\{1, \frac{\varepsilon}{2a+1}\}$
 로 두면, $|x-a|<\delta\leq \frac{\varepsilon}{2a+1}$

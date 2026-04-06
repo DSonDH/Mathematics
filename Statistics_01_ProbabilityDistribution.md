@@ -1,194 +1,70 @@
-
 **통계학의 정의**  
-사회, 자연 및 인간 생활의 온갖 현상을 연구하기 위하여 불확실성이 내포된 자료의 수집, 탐색, 분석 및 추정을 통해 의사결정에 필요한 정보획득과 처리방법을 연구하는 학문
-- 확률 이론과 밀접한 관계가 있다
+사회, 자연 및 인간 생활의 온갖 현상을 연구하기 위하여 불확실성이 내포된 자료의 수집, 탐색, 분석 및 추정을 통해 의사결정에 필요한 정보획득과 처리방법을 연구하는 학문으로, 확률 이론과 밀접한 관계가 있다.
 
-# 확률분포 (Probability Distributions)
 
-## 1. 확률의 뜻과 성질 (Meaning and Axioms of Probability)
+## 1.1 확률의 뜻과 성질 (Meaning and Axioms of Probability)
 
-### 1.1 표본공간과 사건 (Sample Space and Events)
+### 1.1.1 표본공간과 사건 (Sample Space and Events)
 과학적 실험이나 자연현상 또는 사회현상을 관측할 때, 가능한 모든 관측 결과들의 집합을 **표본공간**(sample space)이라 하고 이를
 
 $$S \quad (\text{또는 } \Omega)$$
 
-로 나타낸다.
-
-표본공간 $S$의 부분집합인 특정 결과들의 집합을 **사건** (event)이라 한다.  
-
-각 사건 $A$의 가능성을 수량화한 값을 **확률**
-(probability)이라 하며, 이를 $P(A)$로 나타낸다.
+로 나타낸다. 표본공간 $S$의 부분집합인 특정 결과들의 집합을 **사건** (event)이라 한다.  
+각 사건 $A$의 가능성을 수량화한 값을 **확률** (probability)이라 하며, 이를 $P(A)$로 나타낸다.
 
 확률이 엄밀하게 정의되기 전에는 상대도수(relative frequency)의 극한으로 이해되었으나,
 러시아의 수학자 **Kolmogorov (1903–1987)** 는 이를 공리적으로 정식화하였다.
 
-### 1.2 사건의 정의 (Definition of Events, σ-field)
+### 1.1.2 사건의 정의 (Definition of Events, σ-field)
 표본공간 $S$의 부분집합들 중 다음 조건을 만족하는 집합들의 모임을
 **사건의 집합체** (sigma field of events) 또는
 $\sigma$-대수라 하며 $\mathcal E$로 나타낸다.
 
-1. **전체사건 (Sure Event)**
+1. **전체사건 (Sure Event)**: $S\in\mathcal E$
+- 표본공간 $S$는 사건이다
 
-   $$S\in\mathcal E$$
+2. **여사건 (Complement)**: $A\in\mathcal E \Rightarrow A^c\in\mathcal E$
 
-  - 표본공간 $S$는 사건이다
-
-2. **여사건 (Complement)**
-
-   $$A\in\mathcal E \Rightarrow A^c\in\mathcal E$$
-
-3. **가산합사건 (Countable Union)**
-
-   $$A_1,A_2,\dots\in\mathcal E
-   \Rightarrow
-   \bigcup_{n=1}^\infty A_n\in\mathcal E$$
-
+3. **가산합사건 (Countable Union)**: $A_1,A_2,\dots\in\mathcal E \Rightarrow \bigcup_{n=1}^\infty A_n\in\mathcal E$
   - 사건들의 합집합도 사건이다
 
-#### 예 증가열과 감소열의 극한집합
-**(a) 증가열: $A_n = (1/n, 1]$**  
-명백히 $A_1 \subseteq A_2 \subseteq A_3 \subseteq \cdots$ 이므로 증가열이다.
-
-**극한집합 계산**
-
-$$\lim_{n\to\infty} A_n = \bigcup_{n=1}^{\infty} A_n = (0, 1]$$
-
-- $x \in (0,1]$이면, 아르키메데스 성질에 의해 $1/n < x$인 $n$이 존재한다.
-   따라서 충분히 큰 $n$부터는 $x \in (1/n, 1]$이므로 $x \in \bigcup_{n=1}^{\infty} A_n$.
-
-- 역으로 $x \in \bigcup_{n=1}^{\infty} A_n$이면 어떤 $n$에 대해 $x \in (1/n, 1]$이다.
-   따라서 $x > 1/n \ge 0$이고 $x \le 1$이므로 $x \in (0, 1]$.
-
-따라서 $\lim_{n\to\infty} A_n = (0, 1]$. ∎
-
-**(b) 증가열: $A_n = [1/n, 1]$**
-명백히 $A_1 \subseteq A_2 \subseteq A_3 \subseteq \cdots$ 이므로 증가열이다.
-
-**극한집합**
-
-$$\lim_{n\to\infty} A_n = \bigcup_{n=1}^{\infty} A_n = (0, 1]$$
-
-- $x \in (0,1]$이면, 아르키메데스 성질에 의해 $1/n < x \le x$인 $n$이 존재한다.
-   따라서 충분히 큰 $n$부터는 $x \in [1/n, 1]$이므로 $x \in \bigcup_{n=1}^{\infty} A_n$.
-
-- 역으로 $x \in \bigcup_{n=1}^{\infty} A_n$이면 어떤 $n$에 대해 $x \in [1/n, 1]$이다.
-   따라서 $x \ge 1/n > 0$이고 $x \le 1$이므로 $x \in (0, 1]$.
-
-따라서 $\lim_{n\to\infty} A_n = (0, 1]$. ∎
-
-**비교**  
-$(0, 1/n, 1]$과 $[1/n, 1]$ 모두 극한집합이 $(0, 1]$로 동일하다.
-이는 변계점의 포함/제외가 극한집합에 영향을 주지 않음을 보여준다.
-
-**(c) 감소열: $B_n = [-1/n, 1]$**  
-명백히 $B_1 \supseteq B_2 \supseteq B_3 \supseteq \cdots$ 이므로 감소열이다.
-
-**극한집합 계산**
-
-$$\lim_{n\to\infty} B_n = \bigcap_{n=1}^{\infty} B_n = [0, 1]$$
-
-- $x \in [0, 1]$이면, 모든 $n$에 대해 $-1/n < 0 \le x$이고 $x \le 1$이다.
-   따라서 $x \in [-1/n, 1]$ for all $n$, 즉 $x \in \bigcap_{n=1}^{\infty} B_n$.
-
-- 역으로 $x \in \bigcap_{n=1}^{\infty} B_n$이면, 모든 $n$에 대해 $-1/n \le x \le 1$이다.
-   특히 $n \to \infty$일 때 $-1/n \to 0^-$이므로 $x \ge 0$.
-   또한 모든 $n$에 대해 $x \le 1$이므로 $x \in [0, 1]$.
-
-따라서 $\lim_{n\to\infty} B_n = [0, 1]$. ∎
-
-**(d) 감소열: $B_n = (-1/n, 1]$**  
-명백히 $B_1 \supseteq B_2 \supseteq B_3 \supseteq \cdots$ 이므로 감소열이다.
-
-**극한집합**
-
-$$\lim_{n\to\infty} B_n = \bigcap_{n=1}^{\infty} B_n = [0, 1]$$
-
-- $x \in [0, 1]$이면, 모든 $n$에 대해 $-1/n < 0 \le x$이고 $x \le 1$이다.
-   따라서 $x \in (-1/n, 1]$ for all $n$, 즉 $x \in \bigcap_{n=1}^{\infty} B_n$.
-
-- 역으로 $x \in \bigcap_{n=1}^{\infty} B_n$이면, 모든 $n$에 대해 $-1/n < x \le 1$이다.
-   특히 $n \to \infty$일 때 $-1/n \to 0^-$이므로 $x \ge 0$.
-   또한 모든 $n$에 대해 $x \le 1$이므로 $x \in [0, 1]$.
-
-따라서 $\lim_{n\to\infty} B_n = [0, 1]$. ∎
-
-**비교**  
-(c)의 $[-1/n, 1]$과 (d)의 $(-1/n, 1]$ 모두 극한집합이 $[0, 1]$로 동일하다.
-이는 경계점 $-1/n \to 0$에서의 포함/제외가 극한집합에 영향을 주지 않음을 보여준다.
-
-### 1.3 확률의 정의 (Kolmogorov Axioms)
-확률은 다음과 같은 함수로 정의된다.
-
-$$P : \mathcal E \to [0,1]$$
-
+### 1.1.3 확률의 정의 (Kolmogorov Axioms)
+확률은 다음과 같은 함수로 정의된다. $P : \mathcal E \to [0,1]$  
 여기서 $\mathcal E$는 사건들의 집합이며, 확률은 다음의 공리를 만족한다고 가정한다.
 
-#### 확률의 공리 (Axioms of Probability)
-확률의 공리에서 전제하는 것: 사건이란 확률을 정해줄 수 있는 부분집합.
+**확률의 공리 (Axioms of Probability)**  
+전제: 사건이란 확률을 정해줄 수 있는 부분집합.
 
-1. **확률의 범위 (Non-negativity)**
-   $$\forall A\in\mathcal E, P(A)\ge 0 \quad$$
+1. **확률의 범위 (Non-negativity)**: $\forall A\in\mathcal E, P(A)\ge 0$
 
-2. **전체의 확률 (Normalization)**
-   $$P(S)=1$$
+2. **전체의 확률 (Normalization)**: $P(S)=1$
 
-3. **가산가법성 (Countable Additivity)**  
-   서로소 사건 $A_1, A_2, \dots$ 에 대하여
-   $$A_i\cap A_j=\varnothing \;(i\neq j)$$
-   이면
-   $$P(A_1\cup A_2\cup\cdots)
-   =P(A_1)+P(A_2)+\cdots$$
+3. **가산가법성 (Countable Additivity)**: 서로소 사건 $A_1, A_2, \dots$ 에 대하여 $A_i\cap A_j=\varnothing \;(i\neq j)$ 이면 $P(A_1\cup A_2\cup\cdots) = P(A_1)+P(A_2)+\cdots$
 
-### 정리 1.1.1 확률의 (BasicProperties of Probability)
+### 정리 1.1.1 확률의 기본 성질 (Basic Properties of Probability)
 아래 정리들은 확률의 공리로 유도 가능하다.
 
-(a) 각 사건 $A$에 대하여
+(a) 각 사건 $A$에 대하여 $0\le P(A)\le 1,\quad P(\varnothing)=0$
 
-$$0\le P(A)\le 1,\qquad P(\varnothing)=0$$
+(b) **여사건의 확률 (Complement Rule)**: $P(A^c)=1-P(A)$
 
-(b) **여사건의 확률 (Complement Rule)**
-
-$$P(A^c)=1-P(A)$$
-
-(c) **단조성 (Monotonicity)**
-
-$$A\subseteq B \;\Rightarrow\; P(A)\le P(B)$$
+(c) **단조성 (Monotonicity)**: $A\subseteq B \;\Rightarrow\; P(A)\le P(B)$
 
 #### 증명 (Proof)
-다음의 집합 관계를 이용한다.
-
-$$A\cap A^c=\varnothing,\quad
-A\cup A^c=S,\quad
-\varnothing=S^c$$
-
-또한 $A\subset B$이면
-
-$$A\cap(B-A)=\varnothing,\quad
-A\cup(B-A)=B$$
-
+다음의 집합 관계를 이용한다: $A\cap A^c=\varnothing,\quad A\cup A^c=S,\quad \varnothing=S^c$  
+또한 $A\subset B$이면 $A\cap(B-A)=\varnothing,\quad A\cup(B-A)=B$  
 가산가법성(countable additivity)과
 전체 확률 공리를 적용하면 (a), (b), (c)가 모두 성립한다. ∎
 
-#### 예: 베르누이 시행 (Bernoulli Trial)
-(a) 공정한 동전을 던져 앞면 $H$, 뒷면 $T$를 관측할 때
+#### 예제 1.1.1 베르누이 시행 (Bernoulli Trial)
+(a) 공정한 동전을 던져 앞면 $H$, 뒷면 $T$를 관측할 때: $S=\{H,T\},\quad P(\{H\})=\frac12,\quad P(\{T\})=\frac12$
 
-$$S=\{H,T\},\qquad
-P(\{H\})=\frac12,\quad
-P(\{T\})=\frac12$$
+(b) 관측 결과가 두 가지뿐인 실험을 **베르누이 시행 (Bernoulli trial)** 이라 한다. 성공(success)을 $s$, 실패(failure)를 $f$라 하면
 
-(b) 관측 결과가 두 가지뿐인 실험을
-**베르누이 시행 (Bernoulli trial)** 이라 한다.
-
-성공(success)을 $s$, 실패(failure)를 $f$라 하면
-
-$$S=\{s,f\},\qquad
-P(\{s\})=p,\quad
-P(\{f\})=1-p,\quad 0\le p\le1$$
+$$S=\{s,f\},\quad P(\{s\})=p,\quad P(\{f\})=1-p,\quad 0\le p\le1$$
 
 ### 정리 1.1.2 (합사건의 확률 (Probability of Unions))
-(a)
-
-$$P(A_1\cup A_2) = P(A_1)+P(A_2)-P(A_1\cap A_2)$$
+(a) $P(A_1\cup A_2) = P(A_1)+P(A_2)-P(A_1\cap A_2)$
 
 (b)
 
@@ -209,14 +85,11 @@ $$P\Big(\bigcup_{i=1}^n A_i\Big)
 
 (d) **가산반가법성 (Countable Subadditivity)**
 
-$$P(A_1\cup A_2\cup\cdots)
-\le
-P(A_1)+P(A_2)+\cdots$$
+$$P(A_1\cup A_2\cup\cdots)\le P(A_1)+P(A_2)+\cdots$$
 
 #### 증명 (Proof)
 
-$$A_1\cup A_2
-=(A_1-A_2)\cup(A_2-A_1)\cup(A_1\cap A_2)$$
+$$A_1\cup A_2 =(A_1-A_2)\cup(A_2-A_1)\cup(A_1\cap A_2)$$
 
 세 집합은 서로소이므로 가산가법성을 적용하면 (a)가 성립한다.  
 
@@ -229,25 +102,15 @@ $B_i\cap B_j=\varnothing$ ($i \neq j$) 이고
 $\bigcup B_i=\bigcup A_i$ 이므로 $P(A_1 \cup A_2 \cup \dots) = P(B_1 \cup B_2 \cup \dots)=P(B_1)+P(B_1)+\dots$ 이다.  
 이때 $B_n \subseteq A_n$ 이므로 단조성(monoticity)을 적용하면 얻어진다. ∎
 
-#### 예: 짝 짓기 확률
+#### 예제 1.1: 짝 짓기 확률
 n쌍의 부부가 남편은 남편끼리, 부인은 부인끼리 두 줄로 랜덤하게 늘어 설 때, 적어도 한 쌍의 부부가 서로마주보고 서게 될 확률?
 
-**풀이 (Solution)**  
-$A_i$를 "$i$번째 부부가 마주보는 사건"이라 하자.
-
-구하는 확률은
-
-$$P(A_1\cup A_2\cup\cdots\cup A_n)$$
-
+**풀이**  
+$A_i$를 "$i$번째 부부가 마주보는 사건"이라 하자. 구하는 확률은 $P(A_1\cup A_2\cup\cdots\cup A_n)$  
 포함-배제 원리(inclusion-exclusion principle)를 적용하면
 
-$$P\Big(\bigcup_{i=1}^n A_i\Big)
-=\sum_i P(A_i)
--\sum_{i<j}P(A_i\cap A_j)
-+\cdots
-+(-1)^{n-1}P(A_1\cap\cdots\cap A_n)$$
+$$P\Big(\bigcup_{i=1}^n A_i\Big) =\sum_i P(A_i) -\sum_{i<j}P(A_i\cap A_j) +\cdots +(-1)^{n-1}P\Big(\bigcap_{i=1}^n A_i\Big)$$
 
-각 항을 계산하면:
 - $P(A_i)=\frac{1}{n}$ (남편 위치가 정해지면 부인이 마주볼 확률)
 - $P(A_i\cap A_j)=\frac{1}{n(n-1)}$ (두 쌍이 모두 마주볼 확률)
 - 일반적으로 $P(A_{i_1}\cap\cdots\cap A_{i_k})=\frac{1}{n(n-1)\cdots(n-k+1)}$
@@ -256,11 +119,8 @@ $$P\Big(\bigcup_{i=1}^n A_i\Big)
 
 $$\begin{aligned}
 P\Big(\bigcup_{i=1}^n A_i\Big)
-&=\binom{n}{1}\frac{1}{n}
--\binom{n}{2}\frac{1}{n(n-1)}
-+\binom{n}{3}\frac{1}{n(n-1)(n-2)}
--\cdots\\[5pt]
-&=1-\frac{1}{2!}+\frac{1}{3!}-\cdots+(-1)^{n-1}\frac{1}{n!}\\[5pt]
+&=\binom{n}{1}\frac{1}{n} -\binom{n}{2}\frac{1}{n(n-1)} +\binom{n}{3}\frac{1}{n(n-1)(n-2)} -\cdots\\
+&=1-\frac{1}{2!} + \frac{1}{3!}-\cdots+(-1)^{n-1}\frac{1}{n!}\\
 &=1-\sum_{k=2}^{n}\frac{(-1)^k}{k!}
 \end{aligned}$$
 
@@ -269,45 +129,40 @@ $n\to\infty$일 때 이 확률은 $1-e^{-1}\approx 0.632$로 수렴한다.
 #### 다른 풀이: 여사건 이용
 아무도 마주보지 않을 확률을 먼저 구한 뒤, 여사건을 취할 수도 있다.  
 $n$쌍의 부부가 모두 마주보지 않을 확률은 **완전순열(derangement)** 문제와 동일하다.
-부인들의 순열 중 어떤 부인도 자신의 남편과 마주보지 않는 경우의 수를 $D_n$이라 하면  
+부인들의 순열 중 어떤 부인도 자신의 남편과 마주보지 않는 경우의 수를 $D_n$이라 하면
+  
 $$P(\text{아무도 안 마주봄})=\frac{D_n}{n!}$$
+
 완전순열의 개수는
 
 $$D_n=n!\sum_{k=0}^n\frac{(-1)^k}{k!}$$
 
 따라서
 
-$$P(\text{적어도 한 쌍 마주봄})
-=1-\frac{D_n}{n!}
-=1-\sum_{k=0}^n\frac{(-1)^k}{k!}$$
+$$P(\text{적어도 한 쌍 마주봄}) =1-\frac{D_n}{n!} =1-\sum_{k=0}^n\frac{(-1)^k}{k!}$$
 
-$n\to\infty$일 때
-
-$$\sum_{k=0}^\infty\frac{(-1)^k}{k!}=e^{-1}$$
-
-이므로 확률은 $1-e^{-1}\approx 0.632$로 수렴한다.  
-이는 포함-배제 원리로 구한 결과와 일치한다.
+$n\to\infty$일 때 $\sum_{k=0}^\infty\frac{(-1)^k}{k!}=e^{-1}$ 이므로 확률은 $1-e^{-1}\approx 0.632$로 수렴한다. 이는 포함-배제 원리로 구한 결과와 일치한다.
 
 ### 정리 1.1.3 (확률측도의 연속성 (Continuity of Probability Measure))
 (a) 증가열(increasing sequence)
-$$A_1\subseteq A_2\subseteq\cdots
-\Rightarrow
-P\Big(\bigcup_{n=1}^\infty A_n\Big)
-=\lim_{n\to\infty}P(A_n)$$
+
+$$A_1\subseteq A_2\subseteq\cdots \Rightarrow P\Big(\bigcup_{n=1}^\infty A_n\Big) =\lim_{n\to\infty}P(A_n)$$
 
 - 증가열 $C_1 \subseteq C_2 \subseteq \cdots$에 대해 극한집합은 다음과 같이 정의된다:
+
    $$\lim_{k\to\infty} C_k = \bigcup_{k=1}^\infty C_k = \{\omega : \exists k_0 \text{ s.t. } \forall k \ge k_0, \omega \in C_k\}$$
+
    즉, 어떤 $k_0$부터는 항상 포함되는 원소들의 집합이다.
 - $k=\infin$는 자연수가 아니다. 끝점은 포함시키지 않는다.
 
 (b) 감소열(decreasing sequence)
-$$B_1\supseteq B_2\supseteq\cdots
-\Rightarrow
-P\Big(\bigcap_{n=1}^\infty B_n\Big)
-=\lim_{n\to\infty}P(B_n)$$
+
+$$B_1\supseteq B_2\supseteq\cdots \Rightarrow P\Big(\bigcap_{n=1}^\infty B_n\Big) =\lim_{n\to\infty}P(B_n)$$
 
 - 감소열 $D_1 \supseteq D_2 \supseteq \cdots$에 대해 극한집합은 다음과 같이 정의된다:
+
    $$\lim_{k\to\infty} D_k = \bigcap_{k=1}^\infty D_k = \{\omega : \omega \in D_k \text{ for all } k\}$$
+
    즉, 모든 $k$에 대해 항상 포함되는 원소들의 집합이다.
 - $k=\infin$는 자연수가 아니다. 끝점은 포함시키지 않는다.
 
@@ -321,9 +176,7 @@ $$\bigcup_{n=1}^\infty C_n = \bigcup_{n=1}^\infty A_n$$
 
 가산가법성에 의해
 
-$$P\Big(\bigcup_{n=1}^\infty A_n\Big)
-=P\Big(\bigcup_{n=1}^\infty C_n\Big)
-=\sum_{n=1}^\infty P(C_n)$$
+$$P\Big(\bigcup_{n=1}^\infty A_n\Big) = P\Big(\bigcup_{n=1}^\infty C_n\Big) =\sum_{n=1}^\infty P(C_n)$$
 
 한편 $A_n = \bigcup_{i=1}^n C_i$ 이므로
 
@@ -331,10 +184,7 @@ $$P(A_n)=\sum_{i=1}^n P(C_i)$$
 
 따라서
 
-$$\lim_{n\to\infty}P(A_n)
-=\lim_{n\to\infty}\sum_{i=1}^n P(C_i)
-=\sum_{i=1}^\infty P(C_i)
-=P\Big(\bigcup_{n=1}^\infty A_n\Big)$$
+$$\lim_{n\to\infty}P(A_n) =\lim_{n\to\infty}\sum_{i=1}^n P(C_i) =\sum_{i=1}^\infty P(C_i) =P\Big(\bigcup_{n=1}^\infty A_n\Big)$$
 
 **(b) 감소열의 경우**  
 $B_1\supseteq B_2\supseteq\cdots$ 이면 여사건들은 증가열을 이룬다:
@@ -343,33 +193,26 @@ $$B_1^c\subseteq B_2^c\subseteq\cdots$$
 
 (a)를 적용하면
 
-$$P\Big(\bigcup_{n=1}^\infty B_n^c\Big)
-=\lim_{n\to\infty}P(B_n^c)$$
+$$P\Big(\bigcup_{n=1}^\infty B_n^c\Big)=\lim_{n\to\infty}P(B_n^c)$$
 
 드모르간 법칙(De Morgan's law)에 의해
 
-$$\bigcup_{n=1}^\infty B_n^c
-=\Big(\bigcap_{n=1}^\infty B_n\Big)^c$$
+$$\bigcup_{n=1}^\infty B_n^c =\Big(\bigcap_{n=1}^\infty B_n\Big)^c$$
 
 따라서
 
-$$P\Big(\Big(\bigcap_{n=1}^\infty B_n\Big)^c\Big)
-=\lim_{n\to\infty}P(B_n^c)
-=\lim_{n\to\infty}(1-P(B_n))
-=1-\lim_{n\to\infty}P(B_n)$$
+$$P\Big(\Big(\bigcap_{n=1}^\infty B_n\Big)^c\Big) =\lim_{n\to\infty}P(B_n^c) =\lim_{n\to\infty}(1-P(B_n)) =1-\lim_{n\to\infty}P(B_n)$$
 
 양변에 여사건을 취하면
 
-$$P\Big(\bigcap_{n=1}^\infty B_n\Big)
-=\lim_{n\to\infty}P(B_n)$$
+$$P\Big(\bigcap_{n=1}^\infty B_n\Big) =\lim_{n\to\infty}P(B_n)$$
 
 #### 확률측도의 연속성 의미 (Interpretation of Continuity)
 성질 (a)와 (b)를 다음과 같이 나타낸다
 
 $$P(\lim_{n\to\infty}{A_n})=\lim_{n\to\infty}P(A_n),\ P(\lim_{n\to\infty}{B_n})=\lim_{n\to\infty}P(B_n)$$
 
-즉, 포함관계가 커지거나 작아지는 사건들에 대해, 연속인 실수함수와 같이 확률계산이 가능하다는 의미로, probability measure의 연속성이라 함.  
-증가열이나 감소열이 아니면 성립 안함!!!  
+즉, 포함관계가 커지거나 작아지는 사건들에 대해, 연속인 실수함수와 같이 확률계산이 가능하다는 의미로, probability measure의 연속성이라 함. 증가열이나 감소열이 아니면 성립 안함!!!  
 
 확률측도의 연속성은 **집합의 극한과 확률의 극한이 교환 가능함**을 보여준다.  
 - **증가열**: 사건들이 점점 커질 때, 극한 사건의 확률은 각 사건 확률의 극한과 같다
@@ -377,25 +220,14 @@ $$P(\lim_{n\to\infty}{A_n})=\lim_{n\to\infty}P(A_n),\ P(\lim_{n\to\infty}{B_n})=
 
 이는 확률이 **연속적인 측도(continuous measure)** 임을 의미하며,
 유한가법성 만으로는 충분하지 않고 가산가법성이 필요한 이유를 보여준다.
-  - 유한가법성 (finite additivity)만으로는 이러한 연속성을 보장할 수 없다.
-    - **유한가법성 (Finite Additivity)**  
-      유한 개의 서로소 사건 $A_1, A_2, \ldots, A_n$에 대해서만
+   - **유한가법성 (Finite Additivity)**: 유한 개의 서로소 사건 $A_1, A_2, \ldots, A_n$에 대해서만 $P(A_1 \cup A_2 \cup \cdots \cup A_n) = P(A_1) + P(A_2) + \cdots + P(A_n)$ 이 성립한다는 조건으로, 무한이 있고 없고 차이.  
+   - 유한가법성만으로는 무한 개의 사건에 대한 극한 연산을 다룰 수 없으므로,
+   Kolmogorov는 **가산가법성(countable additivity)** 을 확률의 공리로 채택하였다.
 
-      $$P(A_1 \cup A_2 \cup \cdots \cup A_n) = P(A_1) + P(A_2) + \cdots + P(A_n)$$
+실해석학의 측도론에서 이를 **측도의 연속성(continuity from below/above)**  이라 하며, 확률론의 근간이 되는 중요한 성질이다.
 
-      이 성립한다는 조건으로, 무한이 있고 없고 차이.  
-      유한가법성만으로는 무한 개의 사건에 대한 극한 연산을 다룰 수 없으므로,
-      Kolmogorov는 **가산가법성(countable additivity)** 을 확률의 공리로 채택하였다.
-
-실해석학의 측도론에서 이를 **측도의 연속성(continuity from below/above)**  이라 하며,
-확률론의 근간이 되는 중요한 성질이다. ∎
-
-#### 예 1.1.3 (Example)
-표본공간 $S=[0,1]$이고
-
-$$P((a,b))=b-a$$
-
-일 때 ($a<b$), 한 점의 확률은
+#### 예제 1.1.3 
+표본공간 $S=[0,1]$이고 $P((a,b))=b-a$ 일 때 ($a<b$), 한 점의 확률은
 
 $$P(\{b\})
 =P\Big(\bigcap_{n=1}^\infty (b-\tfrac1n,b]\Big)
@@ -403,19 +235,68 @@ $$P(\{b\})
 =\lim_{n\to\infty}\frac1n
 =0$$
 
-## 2. 조건부확률과 독립성 (Conditional Probability and Independence)
+#### (추가) 예제 1.1.4 증가열과 감소열의 극한집합
+**(a) 증가열: $A_n = (1/n, 1]$**: 명백히 $A_1 \subseteq A_2 \subseteq A_3 \subseteq \cdots$ 이므로 증가열이다.  
+**극한집합 계산**: $\lim_{n\to\infty} A_n = \bigcup_{n=1}^{\infty} A_n = (0, 1]$
+- $x \in (0,1]$이면, 아르키메데스 성질에 의해 $1/n < x$인 $n$이 존재한다.
+   따라서 충분히 큰 $n$부터는 $x \in (1/n, 1]$이므로 $x \in \bigcup_{n=1}^{\infty} A_n$.
 
-### 2.1 조건부확률 (Conditional Probability)
+- 역으로 $x \in \bigcup_{n=1}^{\infty} A_n$이면 어떤 $n$에 대해 $x \in (1/n, 1]$이다.
+   따라서 $x > 1/n \ge 0$이고 $x \le 1$이므로 $x \in (0, 1]$.
+
+따라서 $\lim_{n\to\infty} A_n = (0, 1]$. ∎
+
+**(b) 증가열: $A_n = [1/n, 1]$**: 명백히 $A_1 \subseteq A_2 \subseteq A_3 \subseteq \cdots$ 이므로 증가열이다.  
+**극한집합 계산**: $\lim_{n\to\infty} A_n = \bigcup_{n=1}^{\infty} A_n = (0, 1]$
+
+- $x \in (0,1]$이면, 아르키메데스 성질에 의해 $1/n < x \le x$인 $n$이 존재한다.
+   따라서 충분히 큰 $n$부터는 $x \in [1/n, 1]$이므로 $x \in \bigcup_{n=1}^{\infty} A_n$.
+
+- 역으로 $x \in \bigcup_{n=1}^{\infty} A_n$이면 어떤 $n$에 대해 $x \in [1/n, 1]$이다.
+   따라서 $x \ge 1/n > 0$이고 $x \le 1$이므로 $x \in (0, 1]$.
+
+따라서 $\lim_{n\to\infty} A_n = (0, 1]$. ∎
+
+**비교**: $(0, 1/n, 1]$과 $[1/n, 1]$ 모두 극한집합이 $(0, 1]$로 동일하다.
+이는 변계점의 포함/제외가 극한집합에 영향을 주지 않음을 보여준다.
+
+**(c) 감소열: $B_n = [-1/n, 1]$**: 명백히 $B_1 \supseteq B_2 \supseteq B_3 \supseteq \cdots$ 이므로 감소열이다.  
+**극한집합 계산**: $\lim_{n\to\infty} B_n = \bigcap_{n=1}^{\infty} B_n = [0, 1]$
+- $x \in [0, 1]$이면, 모든 $n$에 대해 $-1/n < 0 \le x$이고 $x \le 1$이다.
+   따라서 $x \in [-1/n, 1]$ for all $n$, 즉 $x \in \bigcap_{n=1}^{\infty} B_n$.
+
+- 역으로 $x \in \bigcap_{n=1}^{\infty} B_n$이면, 모든 $n$에 대해 $-1/n \le x \le 1$이다.
+   특히 $n \to \infty$일 때 $-1/n \to 0^-$이므로 $x \ge 0$.
+   또한 모든 $n$에 대해 $x \le 1$이므로 $x \in [0, 1]$.
+
+따라서 $\lim_{n\to\infty} B_n = [0, 1]$. ∎
+
+**(d) 감소열: $B_n = (-1/n, 1]$**: 명백히 $B_1 \supseteq B_2 \supseteq B_3 \supseteq \cdots$ 이므로 감소열이다.  
+**극한집합 계산**: $\lim_{n\to\infty} B_n = \bigcap_{n=1}^{\infty} B_n = [0, 1]$
+- $x \in [0, 1]$이면, 모든 $n$에 대해 $-1/n < 0 \le x$이고 $x \le 1$이다.
+   따라서 $x \in (-1/n, 1]$ for all $n$, 즉 $x \in \bigcap_{n=1}^{\infty} B_n$.
+
+- 역으로 $x \in \bigcap_{n=1}^{\infty} B_n$이면, 모든 $n$에 대해 $-1/n < x \le 1$이다.
+   특히 $n \to \infty$일 때 $-1/n \to 0^-$이므로 $x \ge 0$.
+   또한 모든 $n$에 대해 $x \le 1$이므로 $x \in [0, 1]$.
+
+따라서 $\lim_{n\to\infty} B_n = [0, 1]$. ∎
+
+**비교**  
+(c)의 $[-1/n, 1]$과 (d)의 $(-1/n, 1]$ 모두 극한집합이 $[0, 1]$로 동일하다.
+이는 경계점 $-1/n \to 0$에서의 포함/제외가 극한집합에 영향을 주지 않음을 보여준다.
+
+
+## 1.2 조건부확률과 독립성 (Conditional Probability and Independence)
+
+### 1.2.1 조건부확률 (Conditional Probability)
 한 사건이 일어날 가능성은 그 사건에 관한 정보에 따라 다르다.  
 사건 $A$가 일어났다는 조건하에서
 사건 $B$가 일어날 확률을 **조건부확률**이라 하며
 
-$$P(B\mid A)
-=\frac{P(A\cap B)}{P(A)},
-\qquad P(A)>0$$
+$$P(B\mid A) =\frac{P(A\cap B)}{P(A)} \quad P(A)>0$$
 
-으로 정의한다.  
-이는 사건 $A$를 새로운 표본공간으로 간주하는 것이다.
+으로 정의한다. 이는 사건 $A$를 새로운 표본공간으로 간주하는 것이다.
 
 ### 정리 1.2.1 조건부확률의 성질 (Properties of Conditional Probability)
 (a) **곱셈공식 (Multiplication Rule)**
@@ -458,11 +339,11 @@ $$P(B) = \sum_{i=1}^n P(B \mid A_i)P(A_i)$$
 이 공식은 사건 $B$의 확률을 계산할 때, 전체 표본공간을 여러 경우로 나누어
 각 경우의 확률을 조건부확률로 계산한 후 합하는 방법을 제공한다. ∎
 
-#### 예 1.2.1 (Laplace's Rule of Succession)
+#### 예제 1.2.1 (Laplace's Rule of Succession)
 상자 $N+1$개가 있고
 $k (\in[0, N])$번째 상자에는 빨간 공 $k$개, 흰 공 $N-k$개가 들어 있다.
 
-상자를 임의로 하나고르자. 이 상자에서 복원추출하는 작업을 $n$번 했을 때 $n$번 연속 빨간 공이 나왔다. 같은 상자에서 다음 번도 빨간 공일 확률은?
+상자를 임의로 하나고르자. 이 상자에서 복원추출하는 작업을 $n$번 했을 때 $n$번 연속 빨간 공이 나왔다. 같은 상자에서(다른 상자 고르지 않음) 다음 번도 빨간 공일 확률은?
 
 **풀이 (Solution)**  
 사건을 다음과 같이 정의하자:
@@ -470,22 +351,19 @@ $k (\in[0, N])$번째 상자에는 빨간 공 $k$개, 흰 공 $N-k$개가 들어
 - $B$: $n$번 연속 빨간 공이 나오는 사건
 - $C$: 다음 번($(n+1)$번째)에도 빨간 공이 나오는 사건
 
-구하는 확률은 $P(C\mid B)$이다.
+구하는 확률은 $P(C\mid B)$이다.  
+B가 일어나면 빨간 공이 많은 상자가 뽑혔을 가능성이 커지므로, 그 정보가 C의 확률을 바꾼다!! (fork 구조 (common cause structure))
 
 **전확률공식 적용**  
 상자들이 표본공간을 분할하므로
 
 $$P(B) = \sum_{k=0}^N P(B\mid A_k)P(A_k)$$
 
-각 상자가 선택될 확률은 동일하므로 $P(A_k) = \frac{1}{N+1}$
-
+각 상자가 선택될 확률은 동일하므로 $P(A_k) = \frac{1}{N+1}$이고,  
 $k$번째 상자에서 빨간 공이 나올 확률은 $\frac{k}{N}$이고, 복원추출이므로
 
-$$P(B\mid A_k) = \left(\frac{k}{N}\right)^n$$
-
-따라서
-
-$$P(B) = \sum_{k=0}^N \left(\frac{k}{N}\right)^n \cdot \frac{1}{N+1} = \frac{1}{N+1}\sum_{k=0}^N \left(\frac{k}{N}\right)^n$$
+$$P(B\mid A_k) = \left(\frac{k}{N}\right)^n \\
+\therefore P(B) = \sum_{k=0}^N \left(\frac{k}{N}\right)^n \cdot \frac{1}{N+1} = \frac{1}{N+1}\sum_{k=0}^N \left(\frac{k}{N}\right)^n$$
 
 마찬가지로
 
@@ -494,9 +372,7 @@ P(C\mid B) = \frac{P(C\cap B)}{P(B)} = \frac{\frac{1}{N+1}\sum_{k=0}^N \left(\fr
 = \frac{\sum_{k=0}^N (k/N)^{n+1}}
 {\sum_{k=0}^N (k/N)^n}$$
 
-$N$이 큰 경우
-
-$$P(C\mid B)\approx \frac{n+1}{n+2}$$
+$N$이 큰 경우: $P(C\mid B)\approx \frac{n+1}{n+2}$
 
 **근삿값 유도**  
 $N$이 충분히 클 때, 합을 적분으로 근사할 수 있다.  
@@ -563,48 +439,24 @@ $P(A_1),P(A_2),\ldots$ 는 여러 모형의 가능성을 뜻하고,
 $P(A_1\mid B),P(A_2\mid B),\ldots$ 는 실험 결과 $B$의 관측 후 각 모형의 가능성을 뜻한다.
 이러한 이유에서 $P(A_j)$, $P(A_j\mid B)$를 각각 사전(prior), 사후(posterior) 확률이라 부른다.
 
-#### 예 1.2.2
+#### 예제 1.2.2
 한 공장에서 전체 생산량의 20%, 30%, 50%를 세 기계 $M_1,M_2,M_3$로 생산하고 있고
 각 기계에서의 불량품 제조 비율은 각각 3%, 2%, 1%로 알려져 있다.
 어느 날 이 공장에서 생산된 제품 중 임의로 1개를 택하여 검사하였더니 불량품이었다.
 이 제품이 각 기계에서 생산되었을 확률을 구하여라.
 
 **풀이**  
-검사 전 한 제품이 기계 $M_1,M_2,M_3$에서 생산되었을 확률은 각각
+검사 전 한 제품이 기계 $M_1,M_2,M_3$에서 생산되었을 확률은 각각 $P(M_1)=0.2,\quad P(M_2)=0.3,\quad P(M_3)=0.5$
 
-$$
-P(M_1)=0.2,\quad P(M_2)=0.3,\quad P(M_3)=0.5
-$$
+불량품 사건을 $B$라 하면 $P(B\mid M_1)=0.03,\quad P(B\mid M_2)=0.02,\quad P(B\mid M_3)=0.01$
 
-불량품 사건을 $B$라 하면
+베이즈 정리로부터 $P(M_1\mid B)\propto 0.2\times0.03,\quad P(M_2\mid B)\propto 0.3\times0.02,\quad P(M_3\mid B)\propto 0.5\times0.01$
 
-$$
-P(B\mid M_1)=0.03,\quad P(B\mid M_2)=0.02,\quad P(B\mid M_3)=0.01
-$$
+따라서 $P(M_1\mid B):P(M_2\mid B):P(M_3\mid B)=6:6:5$
 
-베이즈 정리로부터
+즉 $P(M_1\mid B)=\frac{6}{17},\quad P(M_2\mid B)=\frac{6}{17},\quad P(M_3\mid B)=\frac{5}{17}$
 
-$$
-P(M_1\mid B)\propto 0.2\times0.03,\quad
-P(M_2\mid B)\propto 0.3\times0.02,\quad
-P(M_3\mid B)\propto 0.5\times0.01
-$$
-
-따라서
-
-$$
-P(M_1\mid B):P(M_2\mid B):P(M_3\mid B)=6:6:5
-$$
-
-즉
-
-$$
-P(M_1\mid B)=\frac{6}{17},\quad
-P(M_2\mid B)=\frac{6}{17},\quad
-P(M_3\mid B)=\frac{5}{17}
-$$
-
-### 2.4 사건의 독립성 (Independence of Events)
+### 1.2.4 사건의 독립성 (Independence of Events)
 사건 $A$의 관측 여부가 사건 $B$가 일어날 가능성에 아무런 영향을 주지 않는 것을
 
 $$
@@ -640,7 +492,7 @@ $$P(A_1 \cap A_2 \cap \cdots \cap A_n) = P(A_1)P(A_2)\cdots P(A_n)$$
 - 총 $2^n - n - 1$개의 조건을 확인해야 한다
 - 아래 예에서는 A,B각각은 사건 C와 서로 독립이지만, A와B를 동시에 관측하면 C와 종속이 된다
 
-#### 예 1.2.3
+#### 예제 1.2.3
 두 개의 주사위를 던지는 경우 다음 사건들을 독립 여부를 판단하자.
 * $A$: 첫 번째 주사위의 눈이 짝수
 * $B$: 두 번째 주사위의 눈이 홀수
@@ -650,42 +502,26 @@ $$P(A_1 \cap A_2 \cap \cdots \cap A_n) = P(A_1)P(A_2)\cdots P(A_n)$$
 각각의 경우의 수를 구하여 전체 경우의 수로 나누면
 
 $$
-P(A)=18/36,\quad P(B)=18/36,\quad P(C)=18/36
-$$
-
-$$
-P(A\cap B)=9/36,\quad P(B\cap C)=9/36,\quad P(C\cap A)=9/36
+P(A)=18/36,\quad P(B)=18/36,\quad P(C)=18/36 \\ P(A\cap B)=9/36,\quad P(B\cap C)=9/36,\quad P(C\cap A)=9/36
 $$
 
 따라서
 
 $$
-P(A)=P(B)=P(C)=1/2
-$$
-
-$$
-P(A\cap B)=P(B\cap C)=P(C\cap A)=1/4
+P(A)=P(B)=P(C)=1/2 \\ P(A\cap B)=P(B\cap C)=P(C\cap A)=1/4
 $$
 
 즉 $A,B,C$는 서로 독립이다.
 
-#### 예 1.2.4
+#### 예제 1.2.4
 서로 독립인 두 사건 $A$와 $B$에 대하여, $A$와 $B^c$도 서로 독립임을 보이자.
 
 **풀이**  
-$A$와 $B$가 서로 독립이므로
+$A$와 $B$가 서로 독립이므로 $P(A \cap B) = P(A)P(B)$
 
-$$P(A \cap B) = P(A)P(B)$$
+사건 $A$는 다음과 같이 분할할 수 있다: $A = (A \cap B) \cup (A \cap B^c)$
 
-사건 $A$는 다음과 같이 분할할 수 있다:
-
-$$A = (A \cap B) \cup (A \cap B^c)$$
-
-이 두 사건은 서로소이므로 가산가법성에 의해
-
-$$P(A) = P(A \cap B) + P(A \cap B^c)$$
-
-따라서
+이 두 사건은 서로소이므로 가산가법성에 의해 $P(A) = P(A \cap B) + P(A \cap B^c)$ 따라서
 
 $$P(A \cap B^c) = P(A) - P(A \cap B)$$
 
@@ -704,9 +540,9 @@ $$P(A \cap B^c) = P(A)P(B^c)$$
 - $A$와 $B$가 독립이면 $A^c$와 $B$도 독립
 - $A$와 $B$가 독립이면 $A^c$와 $B^c$도 독립
 
-## 3. 확률변수와 확률분포 (Random Variables and Distributions)
+## 1.3 확률변수와 확률분포 (Random Variables and Distributions)
 
-### 3.1 확률변수 (Random Variable)
+### 1.3.1 확률변수 (Random Variable)
 야구선수의 타격 결과, 새로 개발된 전구의 수명처럼 여러 가지의 결과가 가능할 때, 각 결과의 가능성을 확률로 나타낼 수 있다.  
 여기서 가능한 결과들에 대응시킨 수 값에 관심이 있고, 하나의 값을 갖는게 아니라 여러 가지의 값을 적절한 확률에 따라 갖게되는 변수라 생각할 수 있다.  
 
@@ -720,7 +556,7 @@ $$
 
 를 확률변수라 한다.
 
-#### 예 1.3.1 동전을 두 번 던지는 실험에서 앞면이 나오는 횟수
+#### 예제 1.3.1 동전을 두 번 던지는 실험에서 앞면이 나오는 횟수
 표본공간은
 
 $$
@@ -736,73 +572,43 @@ $$
 확률변수의 값에 관한 사건은
 $\{X=1\}$, $\{X\le1\}$, $\{1<Y\le3\}$ 등으로 나타내며 이는 표본공간의 부분집합으로서 확률을 갖는다.
 
-### 3.2 확률분포 (Probability Distribution)
-확률변수 $X$가 유도하는 측도
+### 1.3.2 확률분포 (Probability Distribution)
+확률변수 $X$가 유도하는 측도 $P_X(B)=P(X\in B)$ 를 $X$의 확률분포라 한다.
 
-$$
-P_X(B)=P(X\in B)
-$$
-
-를 $X$의 확률분포라 한다.
-
-#### 예 1.3.2
-앞면이 나오는 횟수 $X$의 확률분포표
-
-$$
-P(X=0)=1/4,\quad
-P(X=1)=1/2,\quad
-P(X=2)=1/4
-$$
+#### 예제 1.3.2
+앞면이 나오는 횟수 $X$의 확률분포표 $P(X=0)=1/4,\quad P(X=1)=1/2,\quad P(X=2)=1/4$
 
 | $X$의 값 | 0     | 1     | 2     |
 | ------ | ----- | ----- | ----- |
 | 확률     | $1/4$ | $1/2$ | $1/4$ |
 
-### 3.3 이산형 확률질량함수 (Probability Mass Function, PMF)
+### 1.3.3 이산형 확률질량함수 (Probability Mass Function, PMF)
 확률변수가 가질 수 있는 값들의 집합을 $\{x_1, x_2, \dots \}$로 나타낼 수 있을 때 그 확류변수를 이산형(discrete type)이라 하고, 각각의 값에 그 값을 가질 확률을 대응시키는 함수, 즉 $f(x_k) = P(X=x_k)$를 X의 확률질량함수(probability mass function, pmf)이라 한다. (밀도함수 즉 pdf로 표현하는 책도 있네)  
 
 #### 확률질량함수의 성질 (Properties of PMF)
 확률질량함수 $p_X(x) = P(X=x)$는 다음을 만족한다:
 
-(a) **비음성 (Non-negativity)**
+(a) **비음성 (Non-negativity)**: $p_X(x) \ge 0 \quad \text{for all } x$
 
-$$p_X(x) \ge 0 \quad \text{for all } x$$
-
-(b) **합이 1 (Normalization)**
-
-$$\sum_{x} p_X(x) = 1$$
-
+(b) **합이 1 (Normalization)**: $\sum_{x} p_X(x) = 1$  
 여기서 합은 $X$가 가질 수 있는 모든 값에 대해 취한다.
 
-(c) **사건의 확률 계산**
-임의의 집합 $B$에 대하여
-
-$$P(X \in B) = \sum_{x \in B} p_X(x)$$
-
+(c) **사건의 확률 계산**: 임의의 집합 $B$에 대하여 $P(X \in B) = \sum_{x \in B} p_X(x)$
 - 사건의 확률을 PMF로 계산
   - 임의의 집합 $B \subseteq \mathbb{R}$에 대하여
     $$P(a < X \le b) = \sum_{x: a < x \le b} p_X(x)$$
 
-#### 예 1.3.3
-앞면이 나올 때까지 동전을 던지는 실험
-
-$$
-S=\{H,TH,TTH,TTTH,\ldots\}
-$$
-
-확률변수 $X$가 가질 수 있는 값은 자연수이고
-
-$$
-P(X=x)=(1/2)^x,\quad x=1,2,\ldots
-$$
+#### 예제 1.3.3
+앞면이 나올 때까지 동전을 던지는 실험 $S=\{H,TH,TTH,TTTH,\ldots\}$  
+확률변수 $X$가 가질 수 있는 값은 자연수이고 $P(X=x)=(1/2)^x,\quad x=1,2,\ldots$
 
 이를 이산형 확률변수라 한다.
 
-### 3.4 연속형 확률질량함수 (Probability density function, PDF)
+### 1. 3.4 연속형 확률질량함수 (Probability density function, PDF)
 확률변수가 실수 구간의 값을 갖고 그 확률이 적분으로 주어질 때 이 확률변수를 연속형(continuous type)이라 한다.
 
 $$
-P(a\le X\le b)=\int_a^b f(x),dx
+P(a\le X\le b)=\int_a^b f(x)\ dx
 $$
 
 이 확률을 정해주는 함수 $f$를 $X$의 확률밀도함수라 한다.
@@ -810,17 +616,17 @@ $$
 #### 성질
 * $f(x)\ge0$
 * $\int_{-\infty}^{\infty}f(x) dx=1$
-* $P(a < X \le b) = \int_a^b f(x)\,dx$
+* $P(a < X \le b) = \int_a^b f(x)\ dx$
 
 - 참고
-   - 한 점에서의 적분값이 0이다. $P(X=a)=\int_a^a f(x),dx=0$
+   - 한 점에서의 적분값이 0이다. $P(X=a)=\int_a^a f(x)\ dx=0$
    - $f(a) \neq P(X=a)$
    - $\Delta x \to 0$일 때, $P(a < X \le a + \Delta x) \approx f(a)\Delta x$
 
 이산형이던 연속형이던 확률밀도함수는 확률변수에 관한 확률 $P(a \le X \le b)$를 결정지어준다. 즉 확률변수 X에 관한 확률이 실직선 위에 어떻게 분포되는가를 나타낸다.  
-그래서 P를 X의 확률분포(probability function)또는 간단히 '분포'라 부르며, $$X \sim f(pdf)$$ 와 같이 X의 분포가 pdf f에 의해 정해지는 것으로 표기한다.
+그래서 P를 X의 확률분포(probability function)또는 간단히 '분포'라 부르며, $X \sim f(pdf)$ 와 같이 X의 분포가 pdf f에 의해 정해지는 것으로 표기한다.
 
-#### 예 1.3.4
+#### 예제 1.3.4
 다음 함수가 확률밀도함수가 되기 위한 상수 $c$를 구하고
 $P(1/2\le X\le 3/4)$를 구하여라.
 
@@ -835,14 +641,8 @@ $$
 **풀이**  
 
 $$
-\int_0^1 cx(1-x)dx=1
-\Rightarrow c=6
-$$
-
-$$
-P(1/2\le X\le 3/4)
-=\int_{1/2}^{3/4}6x(1-x),dx
-=\frac{11}{32}
+\int_0^1 cx(1-x)\ dx=1 \Rightarrow c=6 \\
+P(1/2\le X\le 3/4) =\int_{1/2}^{3/4}6x(1-x)\ dx =\frac{11}{32}
 $$
 
 - 참고  
@@ -896,7 +696,7 @@ $$
 \mu=
 \begin{cases}
 \displaystyle\sum_x x f(x), & X\text{가 이산형일 때} \\
-\displaystyle\int_{-\infty}^{\infty} x f(x),dx, & X\text{가 연속형일 때}
+\displaystyle\int_{-\infty}^{\infty} x f(x)\ dx, & X\text{가 연속형일 때}
 \end{cases}
 $$
 
@@ -910,7 +710,7 @@ $$
 E[g(X)]=
 \begin{cases}
 \displaystyle\sum_x g(x)f(x), & X\text{가 이산형일 때} \\
-\displaystyle\int_{-\infty}^{\infty} g(x)f(x),dx, & X\text{가 연속형일 때}
+\displaystyle\int_{-\infty}^{\infty} g(x)f(x)\ dx, & X\text{가 연속형일 때}
 \end{cases}
 $$
 
@@ -922,15 +722,9 @@ $$
 - 수리통계학에서는 평균을 "$E[X]$로 정의되는 모수"로, 기댓값을 "더 일반적인 적분/합 연산자"로 구분한다  
 
 **개념적 차이**  
-1. **평균 (Mean, $\mu$)**
-   - 확률분포 자체의 특성치
-   - 모집단의 고정된 모수(parameter)
-   - 분포의 중심 위치를 나타내는 상수
+1. **평균 (Mean, $\mu$)**: 확률분포 자체의 특성치, 모집단의 고정된 모수(parameter), 분포의 중심 위치를 나타내는 상수
 
-2. **기댓값 (Expected Value, $E[\cdot]$)**
-   - 확률변수의 함수에 대한 연산자(operator)
-   - $E[g(X)]$는 함수 $g(X)$의 가중평균
-   - 더 일반적인 개념
+2. **기댓값 (Expected Value, $E[\cdot]$)**: 확률변수의 함수에 대한 연산자(operator), $E[g(X)]$는 함수 $g(X)$의 가중평균, 더 일반적인 개념
 
 3. **기댓값의 일반성**
   - $E[X^2]$: 2차 적률
@@ -977,20 +771,15 @@ $$E[X] = \int_0^{\infty} P(X > t)\,dt$$
 
 **의미**  
 이 공식은 비음 확률변수의 기댓값을 계산하는 또 다른 방법을 제공한다:
-- 확률밀도함수를 이용: $E[X] = \int_0^{\infty} x f(x)\,dx$
+- 확률밀도함수를 이용: $E[X] = \int_0^{\infty} x f(x)\ dx$
 - 생존함수를 이용: $E[X] = \int_0^{\infty} P(X > t)\,dt$
 
 특히 생존함수 $P(X > t)$가 간단한 형태일 때 유용하다.
 
-#### 예 1.4.2
+#### 예제 1.4.2
 동전을 두 번 던져 앞면이 나오는 횟수를 $X$라 하고, 상금을 $X^2$(만원)만큼 받는다고 할 때 기대할 수 있는 상금은 얼마인가?  
 **풀이**  
-앞에서 구한 확률분포는
-
-$$
-P(X=0)=\frac14,\quad P(X=1)=\frac12,\quad P(X=2)=\frac14
-$$
-
+앞에서 구한 확률분포는 $P(X=0)=\frac14,\quad P(X=1)=\frac12,\quad P(X=2)=\frac14$  
 따라서
 
 $$
@@ -1011,7 +800,7 @@ $$
 \mathrm{Var}(X)=E[(X-\mu)^2]=
 \begin{cases}
 \displaystyle\sum_x (x-\mu)^2 f(x), & X\text{가 이산형일 때} \\
-\displaystyle\int_{-\infty}^{\infty} (x-\mu)^2 f(x)\,dx, & X\text{가 연속형일 때}
+\displaystyle\int_{-\infty}^{\infty} (x-\mu)^2 f(x)\ dx, & X\text{가 연속형일 때}
 \end{cases}
 $$
 
@@ -1019,7 +808,7 @@ $$
 \mathrm{Sd}(X)=\sqrt{\mathrm{Var}(X)}
 $$
 
-#### 예 1.4.3
+#### 예제 1.4.3
 다음 두 확률분포의 분산을 구하여라.  
 (a) $X\sim f_1$ (균등분포)
 
@@ -1037,20 +826,14 @@ $$
 두 분포의 평균은 각각
 
 $$
-\mu_1=\int_0^1 x\,dx=\frac12
-$$
-
-$$
-\mu_2=\int_0^{1/2}x(4x)\,dx+\int_{1/2}^1x(4-4x)\,dx=\frac12
+\mu_1=\int_0^1 x\ dx=\frac12 \\
+\mu_2=\int_0^{1/2}x(4x)\ dx+\int_{1/2}^1x(4-4x)\ dx=\frac12
 $$
 
 분산은
 
 $$
-\mathrm{Var}(X_1)=\int_0^1(x-\tfrac12)^2dx=\frac1{12}
-$$
-
-$$
+\mathrm{Var}(X_1)=\int_0^1(x-\tfrac12)^2dx=\frac1{12} \\
 \mathrm{Var}(X_2)=\int_0^1(x-\tfrac12)^2(2-4|x-\tfrac12|)dx=\frac1{24}
 $$
 
@@ -1086,7 +869,7 @@ $$\mathrm{Var}(aX+b)=a^2\mathrm{Var}(X)$$
 
 $$\mathrm{Var}(X)=E(X^2)-{E(X)}^2$$
 
-#### 예 1.4.5 확률변수의 표준화
+#### 예제 1.4.5 확률변수의 표준화
 평균이 $\mu$, 표준편차가 $\sigma>0$일 때
 
 $$Z=\frac{X-E(X)}{\sqrt{\mathrm{Var}(X)}}=\frac{X-\mu}{\sigma}$$
@@ -1097,7 +880,6 @@ $$E(Z)=0,\quad \mathrm{Var}(Z)=1$$
 
 이때 $Z$를 $X$를 **표준화한 확률변수**라 한다.  
 
-TODO:
 한편 다음과 같은 확률분포를 갖는 확률변수에 대해서는 평균이나 분산이 실수로 정의되지 않을 수 있다.
 
 $$f(k)=P(X=k)=\frac1{k(k+1)},\quad k=1,2,\ldots$$
@@ -1111,12 +893,12 @@ $$f(k)=P(X=k)=\frac1{k(k+1)},\quad k=1,2,\ldots$$
 2. 조건부수렴만으로는 극한값이 재배열에 따라 달라질 수 있음
 3. 측도론적으로 Lebesgue 적분이 잘 정의되려면 절대수렴 필요
 
-## 5. 누적분포함수와 생성함수 (Distribution and Generating Functions)
+## 1.5 누적분포함수와 생성함수 (Distribution and Generating Functions)
 확률밀도함수 외에도 확률분포를 나타내는 방법은 여러 가지가 있다.  
 수열에서 일반항, 유한항까지의 합이 서로를 정해줄 수 있듯이,  
 이상형 확률변수의 경우에 누적 확률과 확률밀도함수는 서로를 정해줄 수 있다.  
 
-### 5.1 누적분포함수 (Cumulative Distribution Function, CDF)
+### 1.5.1 누적분포함수 (Cumulative Distribution Function, CDF)
 확률변수 $X$의 누적분포함수(cumulative distribution function, CDF)는 다음과 같이 정의된다.
 
 $$F(x)=P(X\le x)$$
@@ -1129,7 +911,7 @@ $$F(x)=\sum_{k:x_k\le x}p(x_k)=\sum_{k:x_k\le x}P(X=x_k)$$
 여기서 합은 $x_k\le x$를 만족하는 모든 가능한 값에 대해 취한다.  
 이산형의 경우 CDF는 계단함수(step function) 형태를 가지며, 각 가능한 값에서 불연속점을 갖는다.
 
-#### 예 1.5.1
+#### 예제 1.5.1
 앞면이 나올 때까지 동전을 던질 때 시행 횟수 $X$에 대하여
 
 $$P(X=k)=(1/2)^k,\quad k=1,2,\dots$$
@@ -1137,8 +919,6 @@ $$P(X=k)=(1/2)^k,\quad k=1,2,\dots$$
 누적분포함수는
 
 $$F(n)=1-(1/2)^n$$
-
-이다.
 
 #### 연속형 확률변수의 경우
 확률변수 $X$가 연속형이고 확률밀도함수가 $f(x)$일 때, 누적분포함수는
@@ -1153,7 +933,7 @@ $$F'(x)=f(x)$$
 
 또한 연속형 확률변수의 경우
 
-$$P(a<X\le b)=F(b)-F(a)=\int_a^b f(x)\,dx$$
+$$P(a<X\le b)=F(b)-F(a)=\int_a^b f(x)\ dx$$
 
 이고, 한 점에서의 확률은
 
@@ -1182,7 +962,7 @@ $$f(x) = F'(x) \quad \text{(거의 모든 } x\text{에서)}$$
 - 불연속점에서의 점프 크기 = 그 점에서의 확률질량: $P(X=b) = F(b) - F(b-)$
 - CDF가 불연속이어도 구간 확률 계산에는 문제가 없다. 구간의 열림/닫힘 여부에 따라 $a, b$에서 좌극한 또는 우극한을 적절히 선택하면 된다 (연습문제 1.6, 1.7)  
 
-1. **연속형**: $P(a < X \le b) = F(b) - F(a) = \int_a^b f(x)\,dx$
+1. **연속형**: $P(a < X \le b) = F(b) - F(a) = \int_a^b f(x)\ dx$
    - CDF가 연속이고 미분가능
    - 확률밀도함수 $f$가 존재
 
@@ -1194,7 +974,7 @@ $$f(x) = F'(x) \quad \text{(거의 모든 } x\text{에서)}$$
    - CDF가 일부 점에서 불연속
    - $F(b) - F(a)$는 항상 잘 정의됨
 
-#### 예 1.5.2 표준지수분포(standard exponential distribution)
+#### 예제 1.5.2 표준지수분포(standard exponential distribution)
 확률변수 $X$가 확률밀도함수
 
 $$f(x)= \begin{cases}
@@ -1225,24 +1005,15 @@ $$
 $$F(x)=(1-e^{-x})\mathbf{1}_{[0,\infty)}(x)$$
 
 #### 누적분포함수의 성질 (정리 1.5.1)
-* 단조증가:
+* 단조증가: $x_1<x_2 \Rightarrow F(x_1)\le F(x_2)$
 
-$$x_1<x_2 \Rightarrow F(x_1)\le F(x_2)$$
+* 전체 변동: $\lim_{x\to-\infty}F(x)=0,\quad \lim_{x\to\infty}F(x)=1$
 
-* 전체 변동:
+* 오른쪽 연속성: $\lim_{h\downarrow 0}F(x+h)=F(x)$
 
-$$\lim_{x\to-\infty}F(x)=0,\quad \lim_{x\to\infty}F(x)=1$$
+또한, $F(a)-F(a^-)=P(X=a)$ 가 성립한다.
 
-* 오른쪽 연속성:
-
-$$\lim_{h\downarrow 0}F(x+h)=F(x)$$
-
-또한,
-
-$$F(a)-F(a^-)=P(X=a)$$
-
-가 성립한다.
-
+TODO:
 **증명**  
 **(1) 단조증가 (Monotonicity)**  
 $x_1 < x_2$일 때, $\{X \le x_1\} \subseteq \{X \le x_2\}$이므로
@@ -1279,9 +1050,11 @@ $$\bigcup_{n=1}^{\infty} A_n = \{X < a\}$$
 
 $$F(a-) = \lim_{n \to \infty} F(a - \tfrac{1}{n}) = P(X < a)$$
 
-따라서 $$ P(X = a) = P(X \le a) - P(X < a) = F(a) - F(a-)$$ ∎
+따라서 
 
-### 5.2 확률생성함수 (Probability Generating Function, PGF)
+$$ P(X = a) = P(X \le a) - P(X < a) = F(a) - F(a-)$$
+
+### 1.5.2 확률생성함수 (Probability Generating Function, PGF)
 음이 아닌 정수 값을 갖는 이산형 확률변수 $X$에 대해 확률생성함수는
 
 $$G(s)=E[s^X]=\sum_{k=0}^{\infty}s^kP(X=k)$$
@@ -1312,7 +1085,7 @@ $G_X(s)=G_Y(s)$이면 $X$와 $Y$의 분포는 동일하다.
    - 수렴하는 멱급수 $\sum_{k=0}^{\infty} a_k s^k = \sum_{k=0}^{\infty} b_k s^k$이 $|s| < r$ (for some $r > 0$)에서 성립하면, 모든 $k$에 대해 $a_k = b_k$이다.
    - 확률생성함수는 $|s| \le 1$에서 수렴하므로 이 원리를 적용할 수 있다.
 
-#### 예 1.5.3
+#### 예제 1.5.3
 $P(X=k)=(1/2)^k$, $k=1,2,\ldots$ 일 때
 
 $$G(s)=\sum_{k=1}^{\infty}s^k(1/2)^k=\frac{s/2}{1-s/2}, \quad |s|<2$$
@@ -1323,12 +1096,12 @@ $$G(s)=\sum_{k=1}^{\infty}s^k(1/2)^k=\frac{s/2}{1-s/2}, \quad |s|<2$$
    - MGF가 존재하고
    - 적률과 분포결정 이론을 강하게 적용할 수 있음을 의미
 
-#### 예 1.5.4
+#### 예제 1.5.4
 베르누이 확률변수 $X\sim\mathrm{Bernoulli}(p)$에 대해
 
 $$G(s)=(1-p)+ps=1-p(1-s)$$
 
-### 5.3 적률생성함수 (Moment Generating Function, MGF)
+### 1.5.3 적률생성함수 (Moment Generating Function, MGF)
 
 >**Moment(적률)의 정의**  
 >확률론과 통계학에서 **moment(적률)** 는 확률분포의 특성을 나타내는 수치로, 확률변수의 거듭제곱에 대한 기댓값입니다. 확률변수 $X$의 **$k$차 적률(k-th moment)** 은 다음과 같이 정의됩니다:
@@ -1347,14 +1120,14 @@ $$E(e^{tX})<\infty \quad \forall t\in(-h,h)\ (\exists h>0)$$
 
 일 때 $M(t) = E(e^{tX})$를 확률변수 $X$의 적률생성함수 (moment generating function, mgf)라 한다.
 
-#### 예 1.5.5
+#### 예제 1.5.5
 앞면이 나올 때까지 동전을 던질 때
 
 $$
 M(t)=\frac{e^t/2}{1-e^t/2},\quad t<\log 2
 $$
 
-### 5.4 적률 (Moment)
+### 1.5.4 적률 (Moment)
 지수함수의 멱급수 전개식으로부터
 
 $$e^{tX} = \sum_{k=0}^{\infty} \frac{(tX)^k}{k!} = \sum_{k=0}^{\infty} \frac{t^k X^k}{k!}$$
@@ -1369,7 +1142,7 @@ $$
 m_k = E(X^k) = 
 \begin{cases}
 \displaystyle\sum_x x^k f(x), & X\text{가 이산형일 때} \\
-\displaystyle\int_{-\infty}^{\infty} x^k f(x)\,dx, & X\text{가 연속형일 때}
+\displaystyle\int_{-\infty}^{\infty} x^k f(x)\ dx, & X\text{가 연속형일 때}
 \end{cases}
 $$
 
@@ -1421,7 +1194,7 @@ $$
 >
 >$$m'(0) = E(Xe^{0}) = E(X)$$
 >
->**예시**
+>**예시**  
 >확률변수 $Y = \frac{X - \mu}{\sigma}$로 표준화한 확률변수의 적률생성함수 $m(s) = E(e^{sY})$에 대해 $m'(s)$를 구하면
 >
 >$m'(s) = E(Ye^{sY})$이므로, $s=0$에서 $m'(0) = E(Y) = 0$이 된다.  
@@ -1448,7 +1221,6 @@ $$
 >$$E(Y^k) = m^{(k)}(0) = \left.\frac{d^k}{ds^k}m(s)\right|_{s=0}$$
 >
 >이것이 적률생성함수가 "$k$차 적률을 생성한다"는 의미의 근거이다.
-
 
 **증명**  
 적률생성함수의 멱급수를 $k$번 미분하면
@@ -1480,7 +1252,6 @@ $$
 \frac{|tx|^k}{k!}\le e^{|tx|}\le e^{tx}+e^{-tx}
 $$
 
-가 성립한다.  
 확률밀도함수(또는 확률질량함수)를 곱해 적분(또는 합)을 취하면
 
 $$
@@ -1532,7 +1303,7 @@ M(t)-\sum_{k=0}^{n-1}\frac{E(X^k)}{k!}t^k
 $$
 
 **5. 극한**  
-$|t|<h/3$에서 우변은 유한하고
+$|t|<h/3$ 에서 우변은 유한하고
 
 $$
 \frac{1}{n}{M(3t)+M(-3t)}\xrightarrow[n\to\infty]{}0
@@ -1546,18 +1317,11 @@ M(t)=\sum_{k=0}^{\infty}\frac{E(X^k)}{k!}t^k,
 $$
 
 **결론**  
-멱급수 표현으로부터
-
-$$
-M^{(k)}(0)=E(X^k),\qquad k=0,1,2,\dots
-$$
-
-가 성립한다. ∎
+멱급수 표현으로부터 $M^{(k)}(0)=E(X^k),\quad k=0,1,2,\dots$
 
 **(b) 분포 결정성 (Uniqueness Theorem)**  
 두 확률변수 $X$와 $Y$의 적률생성함수가 0을 포함하는 열린구간에서 일치하면,
-즉 $M_X(t) = M_Y(t)$ for all $t \in (-h, h)$ (for some $h > 0$)이면,
-$X$와 $Y$는 같은 확률분포를 갖는다. (확률밀도함수, 누적분포함수가 일치)
+즉 $M_X(t) = M_Y(t)\quad \forall t \in (-h, h), \quad h > 0$이면, $X$와 $Y$는 같은 확률분포를 갖는다. (확률밀도함수, 누적분포함수가 일치)
 
 증명은 생략,  
 (적률생성함수를 일반화한 특성함수(characteristic function)을 이용한 증명은 Probability and Measure 3rd ed. 346~347p참고)  
@@ -1598,13 +1362,13 @@ $$M_Z(t) = E(e^{t(X+Y)}) = E(e^{tX} \cdot e^{tY}) = E(e^{tX}) \cdot E(e^{tY}) = 
 
 이 성질은 독립 확률변수들의 합의 분포를 구할 때 매우 유용하다.
 
-#### 예 1.5.6
+#### 예제 1.5.6
 표준지수분포의 적률생성함수를 구하고 평균과 분산을 계산하자.
 
 **풀이**  
 확률밀도함수가 $f(x) = e^{-x} \mathbf{1}_{[0,\infty)}(x)$일 때
 
-$$M(t) = E(e^{tX}) = \int_0^{\infty} e^{tx} e^{-x}\,dx = \int_0^{\infty} e^{(t-1)x}\,dx$$
+$$M(t) = E(e^{tX}) = \int_0^{\infty} e^{tx} e^{-x}\ dx = \int_0^{\infty} e^{(t-1)x}\ dx$$
 
 $t < 1$일 때 이 적분이 수렴하며
 
@@ -1628,7 +1392,7 @@ $$\frac{E(X^k)}{k!} = 1 \quad \Rightarrow \quad E(X^k) = k!$$
 **부분적분을 이용한 직접 계산**  
 정의에 따라 적률을 직접 귀납적으로 계산하면
 
-$$E(X^k) = \int_0^{\infty} x^k e^{-x}\,dx = k \int_0^{\infty} x^{k-1} e^{-x}\,dx = k \cdot E(X^{k-1})$$
+$$E(X^k) = \int_0^{\infty} x^k e^{-x}\ dx = k \int_0^{\infty} x^{k-1} e^{-x}\ dx = k \cdot E(X^{k-1})$$
 
 따라서
 
@@ -1636,7 +1400,7 @@ $$E(X^k) = k!$$
 
 이는 적률생성함수의 멱급수 전개로부터 얻은 결과와 일치한다.
 
-#### 예 1.5.7
+#### 예제 1.5.7
 베르누이 확률변수 $X \sim \mathrm{Bernoulli}(p)$의 적률생성함수를 구하자.
 
 **풀이**  
@@ -1656,7 +1420,7 @@ $$E(X^2) = M''(0) = pe^t\big|_{t=0} = p$$
 
 $$\mathrm{Var}(X) = p - p^2 = p(1-p)$$
 
-### 5.5 누율생성함수 (Cumulant Generating Function)
+### 1.5.5 누율생성함수 (Cumulant Generating Function)
 적률생성함수가 존재할 때
 
 $$
@@ -1704,7 +1468,7 @@ $$c_2 = m_2 - m_1^2 = \mathrm{Var}(X)$$
 
 > 누율, 적률 관계추가 정보: Statistics_01_추가_표준화 확률변수의 왜도_첨도.md 참고!
 
-#### 예 1.5.8 
+#### 예제 1.5.8 
 적률생성함수가 $M(t) = \frac{1}{1-2t}$일 때, 누율생성함수와 누율  
 누율생성함수는  
 
@@ -1732,7 +1496,7 @@ $$c_r = \frac{r! \cdot 2^r}{r} = (r-1)! \cdot 2^r$$
 산술평균, 기하평균의 대소관계같이 항상 성립하는 부등식은 증명에 유용하다. 이런 부등식들을 추가로 정리했다.  
 
 ### 정리 1.6.1 Jensen(젠센) 부등식 (Jensen's Inequality)
-볼정리 1.6.1(ction와 확률변수의 기댓값 사이의 관계를 나타내는 중요한 부등식이다.
+확률변수의 기댓값 사이의 관계를 나타내는 중요한 부등식이다.
 
 함수 $\varphi: \mathbb{R} \to \mathbb{R}$가 볼록함수이고, $E[|X|] < \infty$, $E[|\varphi(X)|] < \infty$이면
 
@@ -1751,6 +1515,7 @@ $$\varphi(\lambda x_1 + (1-\lambda)x_2) \le \lambda \varphi(x_1) + (1-\lambda)\v
 기하학적으로, 두 점을 연결한 선분이 함수 그래프보다 위에 있다는 의미이다.  
 미분가능한 경우, $\varphi''(x) \ge 0$이면 볼록함수이다.
 
+TODO:
 #### 증명 (Proof - 이산형의 경우)
 $X$가 유한개의 값 $x_1, x_2, \ldots, x_n$을 확률 $p_1, p_2, \ldots, p_n$으로 갖는다고 하자.
 ($\sum_{i=1}^n p_i = 1$)
@@ -1844,10 +1609,10 @@ $$[E(|X|^r)]^{s/r} \le E[(|X|^r)^{s/r}] = E[|X|^s]$$
 
 $$[E(|X|^r)]^{1/r} \le [E(|X|^s)]^{1/s}$$
 
-#### 예 1.6.2
+#### 예제 1.6.2
 $X$가 $[0,1]$ 구간의 균등분포를 따를 때, Lyapunov 부등식을 확인해보자.
 
-$$E[|X|^r] = \int_0^1 x^r\,dx = \frac{1}{r+1}$$
+$$E[|X|^r] = \int_0^1 x^r\ dx = \frac{1}{r+1}$$
 
 따라서
 
@@ -1893,10 +1658,10 @@ $$P(|Z| \ge k) = E[\mathbf{1}_{\{|Z| \ge k\}}] \le E\left[\frac{|Z|^r}{k^r}\righ
 >
 >**증명 2 (직접 계산 - 연속형)**  
 >확률밀도함수를 $f(x)$라 하면
->$$P(|X-\mu| \ge k) = \int_{|x-\mu| \ge k} f(x)\,dx$$
+>$$P(|X-\mu| \ge k) = \int_{|x-\mu| \ge k} f(x)\ dx$$
 >
 >$|x-\mu| \ge k$인 영역에서 $\frac{(x-\mu)^2}{k^2} \ge 1$이므로
->$$P(|X-\mu| \ge k) \le \int_{|x-\mu| \ge k} \frac{(x-\mu)^2}{k^2} f(x)\,dx \le \frac{1}{k^2}\int_{-\infty}^{\infty} (x-\mu)^2 f(x)\,dx = \frac{\sigma^2}{k^2}$$
+>$$P(|X-\mu| \ge k) \le \int_{|x-\mu| \ge k} \frac{(x-\mu)^2}{k^2} f(x)\ dx \le \frac{1}{k^2}\int_{-\infty}^{\infty} (x-\mu)^2 f(x)\ dx = \frac{\sigma^2}{k^2}$$
 >
 >#### 다른 표현
 >**(a) 표준편차의 배수로 표현**  
@@ -1912,7 +1677,7 @@ $$P(|Z| \ge k) = E[\mathbf{1}_{\{|Z| \ge k\}}] \le E\left[\frac{|Z|^r}{k^r}\righ
 >
 >즉, 평균 근처에 있을 확률의 하한을 제공한다.
 
-#### 예 1.6.3 (6시그마 법칙)
+#### 예제 1.6.3 (6시그마 법칙)
 확률변수 $X$의 평균과 표준편차를 각각 $\mu$, $\sigma$라 하자.
 
 Chebyshev 부등식에서 $k = 6\sigma$로 놓으면
@@ -1928,7 +1693,7 @@ $$P(|X-\mu| \ge 6\sigma) \le \frac{\sigma^2}{(6\sigma)^2} = \frac{1}{36} \approx
    - 공정의 변동을 $\pm 6\sigma$ 범위 내로 유지
    - 실제로는 정규분포를 가정하여 더 엄격한 기준 적용
 
-#### 예 1.6.4
+#### 예제 1.6.4
 어떤 시험의 평균 점수가 70점, 표준편차가 10점일 때, 50점 이하 또는 90점 이상을 받을 학생의 비율은?
 
 **풀이**  
@@ -1967,171 +1732,6 @@ $$
    $$
    |E[XY]| \le \sqrt{E[X^2]}\sqrt{E[Y^2]}
    $$
-
-
-### 주요 부등식 정리 (Summary of Key Inequalities)
-
-이 페이지에 이미 등장한 부등식은 생략하고, 증명이나 계산에 자주 쓰이는 대표적 부등식들을 정리한다.
-
-#### 삼각부등식 (Triangle Inequality)
-임의의 실수 $a, b$에 대해
-
-$$
-|a + b| \leq |a| + |b|
-$$
-
-확률변수 $X, Y$에 대해서도
-
-$$
-|X + Y| \leq |X| + |Y| \implies E[|X + Y|] \leq E[|X|] + E[|Y|]
-$$
-
-#### 절댓값 차이 부등식
-임의의 실수 $a, b$에 대해
-
-$$
-||a| - |b|| \leq |a - b|
-$$
-
-**증명**  
-삼각부등식 $|a| \leq |a-b| + |b|$에서 $|a| - |b| \leq |a-b|$이고, $|b| - |a| \leq |b-a| = |a-b|$이므로, 두 경우를 합치면 $||a| - |b|| \leq |a-b|$.
-
-확률변수 $X, Y$에 대해서도
-
-$$
-||X| - |Y|| \leq |X - Y|
-$$
-
-#### 절댓값의 곱과 합 부등식
-임의의 실수 $a, b$에 대해
-
-$$
-|ab| \leq \frac{a^2 + b^2}{2}
-$$
-
-이는 $2ab \leq a^2 + b^2$에서 유도된다.
-
-#### 최대/최소와 절댓값 부등식
-임의의 실수 $a, b$에 대해
-
-$$
-\max(a, b) \leq |a| + |b|,\qquad \min(a, b) \geq -(|a| + |b|)
-$$
-
-#### Bernoulli 부등식 (Bernoulli's Inequality)
-$x > -1$, $r \geq 1$일 때
-
-$$
-(1 + x)^r \geq 1 + r x
-$$
-
-#### Grönwall 부등식 (Grönwall's Inequality, 적분부등식)
-$u(t) \leq a + b \int_0^t u(s)\,ds$이면
-
-$$
-u(t) \leq a e^{b t}
-$$
-
-#### Markov의 역부등식 (Reverse Markov Inequality)
-$X \geq 0$, $a < E[X]$이면
-
-$$
-P(X > a) \geq \frac{E[X] - a}{\sup X - a}
-$$
-
-(단, $X$의 상한 $\sup X < \infty$일 때)
-
-#### Pinsker 부등식 (정보이론)
-두 분포 $P, Q$에 대해 변분거리 $d_{TV}$와 Kullback-Leibler 발산 $D_{KL}$ 사이
-
-$$
-d_{TV}(P, Q) \leq \sqrt{\frac{1}{2} D_{KL}(P \| Q)}
-$$
-
-#### Chernoff 부등식 (Chernoff Bound)
-$X$ 임의의 확률변수, $t > 0$에 대해
-
-$$
-P(X \geq a) \leq \frac{E[e^{tX}]}{e^{ta}}
-$$
-
-#### Kolmogorov 부등식 (부분합 최대치)
-$S_n = X_1 + \cdots + X_n$이 독립이고 $E[X_i] = 0$이면
-
-$$
-P\left(\max_{1 \leq k \leq n} |S_k| \geq \lambda\right) \leq \frac{E[S_n^2]}{\lambda^2}
-$$
-
-#### Paley–Zygmund 부등식
-$X \geq 0$, $E[X^2] < \infty$, $0 < \theta < 1$일 때
-
-$$
-P(X \geq \theta E[X]) \geq (1-\theta)^2 \frac{(E[X])^2}{E[X^2]}
-$$
-
-#### Jensen–Shannon 부등식 (정보이론)
-두 분포 $P, Q$에 대해
-
-$$
-\frac{1}{2} D_{KL}(P \| M) + \frac{1}{2} D_{KL}(Q \| M) \leq \log 2
-$$
-
-($M = \frac{1}{2}(P+Q)$)
-
-#### Log-Sum 부등식
-$a_i, b_i > 0$에 대해
-
-$$
-\sum_i a_i \log \frac{a_i}{b_i} \geq \left(\sum_i a_i\right) \log \frac{\sum_i a_i}{\sum_i b_i}
-$$
-
-#### Gibbs 부등식 (상대엔트로피 비음성)
-확률분포 $p, q$에 대해
-
-$$
-D_{KL}(p \| q) \geq 0
-$$
-
-등호는 $p = q$일 때만 성립.
-
-#### Bonferroni 부등식 (확률의 하한)
-사건 $A_1, \ldots, A_n$에 대해
-
-$$
-P\left(\bigcup_{i=1}^n A_i\right) \geq \sum_{i=1}^n P(A_i) - \sum_{i<j} P(A_i \cap A_j)
-$$
-
-#### Union Bound (Boole's Inequality)
-임의의 사건 $A_1, \ldots, A_n$에 대해
-
-$$
-P\left(\bigcup_{i=1}^n A_i\right) \leq \sum_{i=1}^n P(A_i)
-$$
-
-#### FKG 부등식 (양의 상관관계)
-$X, Y$가 증가함수일 때
-
-$$
-E[XY] \geq E[X] E[Y]
-$$
-
-#### 코시-슈바르츠 부등식 (Cauchy-Schwarz Inequality)
-확률변수 $X, Y$에 대해 $E[X^2], E[Y^2] < \infty$이면
-
-$$
-|E[XY]| \leq \sqrt{E[X^2]} \sqrt{E[Y^2]}
-$$
-
-Variance, Covariance 관련 부등식으로 표현하면, 
-
-$$Var(X) \geq 0, \quad |Cov(X,Y)| \leq \sqrt{Var(X)} \sqrt{Var(Y)}$$
-
-#### 영(Young)의 부등식 (Young's Inequality)
-$a, b \geq 0$, $p, q > 1$, $1/p + 1/q = 1$일 때
-
-$$
-ab \leq \frac{a^p}{p} + \frac{b^q}{q}
-$$
 
 ### 정리 1.6.5 분산 0이면 상수 (Variance Zero Implies Constant)
 확률변수 $X$의 평균이 $\mu = E(X)$이고 $\mathrm{Var}(X) = 0$이면
@@ -2203,7 +1803,7 @@ $$P(X = \mu) = 1$$
 #### 예시: 균등분포 $X \sim \text{Uniform}[0,1]$
 표본공간은 $S = [0,1]$이고, 임의의 한 점 $a \in [0,1]$에 대해
 
-$$P(X = a) = \int_a^a f(x)\,dx = 0$$
+$$P(X = a) = \int_a^a f(x)\ dx = 0$$
 
 **역설적 상황**
 - $X$는 반드시 $[0,1]$ 안의 어떤 값을 가져야 함

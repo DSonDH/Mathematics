@@ -1,4 +1,4 @@
-### 6.5 표준화 확률변수의 적률과 누율 (Moments and Cumulants of Standardized Variables)
+### 표준화 확률변수의 적률과 누율 (Moments and Cumulants of Standardized Variables)
 
 #### 표준화 확률변수의 정의
 확률변수 $X$의 평균을 $\mu = E[X]$, 표준편차를 $\sigma = \sqrt{\mathrm{Var}(X)} > 0$이라 할 때,
@@ -8,7 +8,7 @@ $$Z = \frac{X - \mu}{\sigma}$$
 
 로 정의되며, $E[Z] = 0$, $\mathrm{Var}(Z) = 1$을 만족한다.
 
-#### 정리 1.6.6 (표준화 확률변수의 누율과 적률)
+#### 표준화 확률변수의 누율과 적률
 표준화 확률변수 $Z = \frac{X-\mu}{\sigma}$에 대해 다음이 성립한다:
 
 **(a) 저차 누율**
@@ -163,7 +163,7 @@ $$\gamma_2 = \beta_2 - 3 = c_4(Z)$$
 - 균등분포: $\gamma_2 = -1.2$, $\beta_2 = 1.8$ (평평함)
 - 라플라스분포: $\gamma_2 = 3$, $\beta_2 = 6$ (뾰족하고 두터운 꼬리)
 
-#### 정리 1.6.7 (왜도와 첨도의 성질)
+#### 왜도와 첨도의 성질
 
 **(a) 선형변환 불변성**  
 $Y = aX + b$ ($a \neq 0$)일 때
@@ -193,7 +193,7 @@ $$c_r(Z) = c_r(X) + c_r(Y), \quad r = 1, 2, 3, 4$$
 
 $$c_3(Z) = \frac{c_3(X) + c_3(Y)}{(\sigma_X^2 + \sigma_Y^2)^{3/2}}$$
 
-#### 예 1.6.4 균등분포의 왜도와 첨도
+#### 균등분포의 왜도와 첨도
 $X \sim \text{Uniform}[0,1]$일 때, $\mu = 1/2$, $\sigma^2 = 1/12$
 
 **3차 적률**

@@ -406,7 +406,7 @@ $$
 
 # rank 
 ## rank(계수)의 정의
-행렬 $A\in\mathbb{R}^{m\times n}$의 **rank**는 다음과 같은 “서로 같은 값”으로 정의/해석된다.
+행렬 $A\in\mathbb{R}^{m\times n}$의 **rank**는 다음과 같은 "서로 같은 값"으로 정의/해석된다.
 
 - $\mathrm{rank}(A)=\dim(\mathrm{Col}(A))$ (열공간의 차원)
 - $\mathrm{rank}(A)=\dim(\mathrm{Row}(A))$ (행공간의 차원)
@@ -447,7 +447,7 @@ $$
 >\mathrm{rank}(I-P)=n-(p+1)=n-p-1
 >$$
 >
->> 실무 통계(회귀)에서는 $P$가 “hat matrix”처럼 $X$의 열공간으로의 직교사영인 경우가 많고, 이때 $\mathrm{rank}(P)=\mathrm{rank}(X)$이며 (절편 포함 시) 보통 $p+1$이 된다.
+>> 실무 통계(회귀)에서는 $P$가 "hat matrix"처럼 $X$의 열공간으로의 직교사영인 경우가 많고, 이때 $\mathrm{rank}(P)=\mathrm{rank}(X)$이며 (절편 포함 시) 보통 $p+1$이 된다.
 
 ## rank의 중요한 성질 총정리
 ### (1) 기본 성질

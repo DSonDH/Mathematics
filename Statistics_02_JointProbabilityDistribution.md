@@ -769,7 +769,7 @@ $$
 확률벡터 $(X,Y)$의 결합적률생성함수를
 
 $$
-M(t_1,t_2)=E\!\left(e^{t_1X+t_2Y}\right)
+M(t_1,t_2)=E\left(e^{t_1X+t_2Y}\right)
 $$
 
 라 하자.
@@ -2929,13 +2929,13 @@ $\mathrm{Var}(Y)=\mathrm{Cov}(Y,Y)$
 
 $$
 \mathrm{Var}(X_1+\cdots+X_n)
-=\mathrm{Cov}\!\left(\sum_{i=1}^n X_i,\,\sum_{j=1}^n X_j\right)
+=\mathrm{Cov}\left(\sum_{i=1}^n X_i,\,\sum_{j=1}^n X_j\right)
 $$
 
 공분산의 이중 선형성(bilinearity)에 의해
 
 $$
-\mathrm{Cov}\!\left(\sum_{i=1}^n X_i,\,\sum_{j=1}^n X_j\right)
+\mathrm{Cov}\left(\sum_{i=1}^n X_i,\,\sum_{j=1}^n X_j\right)
 =\sum_{i=1}^n\sum_{j=1}^n \mathrm{Cov}(X_i,X_j)
 $$
 
@@ -2953,8 +2953,8 @@ $$
 
 $$
 M_{X_1+\cdots+X_n}(t)
-=E\!\left[e^{t(X_1+\cdots+X_n)}\right]
-=E\!\left[\prod_{i=1}^n e^{tX_i}\right]
+=E\left[e^{t(X_1+\cdots+X_n)}\right]
+=E\left[\prod_{i=1}^n e^{tX_i}\right]
 $$
 
 확률변수 $X_1,\dots,X_n$이 서로 독립이므로
@@ -2962,7 +2962,7 @@ $$
 따라서
 
 $$
-E\!\left[\prod_{i=1}^n e^{tX_i}\right]
+E\left[\prod_{i=1}^n e^{tX_i}\right]
 =\prod_{i=1}^n E[e^{tX_i}]
 =\prod_{i=1}^n M_{X_i}(t)
 $$

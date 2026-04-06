@@ -1258,6 +1258,7 @@ $$
 
 를 만족한다. 대칭성에 의해 $t_{1-\alpha}(r) = -t_\alpha(r)$이다.
 
+TODO: 암기!!!!!!!!!!
 ### 정리 4.2.2 정규모집단 경우의 표본분포에 관한 기본 정리
 정규분포 $N(\mu,\sigma^2)$에서의 랜덤표본을 $X_1,\dots,X_n$이라 할 때, 다음이 성립한다.
 
@@ -2805,6 +2806,7 @@ $$
 \Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}=\sigma_2^2-\rho\sigma_1\sigma_2\cdot\frac{1}{\sigma_1^2}\cdot\rho\sigma_1\sigma_2=\sigma_2^2(1-\rho^2)
 $$
 
+(TODO: 암기!!!!!!!!)
 ### 정리 4.4.5 이차형식의 분포 *(Distribution of Quadratic Forms)*
 
 **(a) 이차형식의 카이제곱분포**
