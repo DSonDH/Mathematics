@@ -1846,6 +1846,56 @@ $$H_f(x) = \frac{\partial^2 f}{\partial x \partial x^T} = \begin{pmatrix}
 * $f$가 극소점을 가지면 헤시안은 양반정치이다
 * $f$가 강한 극소점을 가지면 헤시안은 양정치이다
 
+#### 헤시안의 양정치성 판정 조건
+$H$가 $n \times n$ 대칭행렬일 때, 다음 세 조건은 **동치(equivalent)** 이다:
+
+**조건 1**: 모든 0이 아닌 벡터 $a \in \mathbb{R}^n$에 대해 $a^T H a > 0$  
+**조건 2**: $H$의 모든 고유값이 양수이다: $\lambda_i > 0, \quad i = 1, 2, \ldots, n$  
+**조건 3**: $H$의 모든 주소행렬식(principal minors)이 양수이다. 특히, **선행 주소행렬식(leading principal minors)** 이 모두 양수이다: $\det(H_1) > 0, \quad \det(H_2) > 0, \quad \ldots, \quad \det(H_n) > 0$
+
+여기서 $H_k$는 $H$의 왼쪽 위에서 시작하는 $k \times k$ 부분행렬이다.
+
+#### 반대로: $\det(H) > 0$ ⟺ $a^THa > 0$ (모든 $a \neq 0$)인가?
+**답: 아니다. 필요조건 but 충분조건 아님 (단, $n=2$일 때는 예외)**
+
+**경우 1**: $n=2$ (2차원)  
+2×2 대칭행렬 $H = \begin{pmatrix} h_{11} & h_{12} \\ h_{12} & h_{22} \end{pmatrix}$에 대해:
+
+$$\det(H) > 0 \text{ and } h_{11} > 0 \quad \Leftrightarrow \quad a^THa > 0 \text{ (모든 } a \neq 0\text{)}$$
+
+즉, 2차원에서는 $\det(H) > 0$에 추가로 대각원소(또는 대각합) 조건이 필요하다.
+
+**경우 2: $n \geq 3$ (3차원 이상)**  
+
+$$H = \begin{pmatrix} 1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1 \end{pmatrix}$$
+
+이 행렬은 $\det(H) = 1 \cdot (-1) \cdot (-1) = 1 > 0$이지만, $a^THa$는 $a_1^2 - a_2^2 - a_3^2$이므로 $a = (0, 1, 0)^T$에 대해 $a^THa = -1 < 0$이다. 따라서 양정치가 아니다.
+
+**올바른 양정치 판정 조건: 실비비안 판정법 (Sylvester Criterion)**  
+대칭행렬 $H$가 양정치이기 위한 필요충분조건은 모든 **선행 주소행렬식**이 양수인 것이다:
+
+$$\det(H_1) > 0, \quad \det(H_2) > 0, \quad \ldots, \quad \det(H_n) > 0$$
+
+여기서:
+
+$$H_1 = (h_{11}), \quad H_2 = \begin{pmatrix} h_{11} & h_{12} \\ h_{12} & h_{22} \end{pmatrix}, \quad \ldots, \quad H_n = H$$
+
+**예제**: $H = \begin{pmatrix} 2 & 1 \\ 1 & 3 \end{pmatrix}$의 양정치 판정  
+
+$\det(H_1) = 2 > 0 \quad (✓) \\\det(H_2) = \det(H) = 2 \cdot 3 - 1^2 = 5 > 0 \quad (✓)$
+
+따라서 $H$는 양정치이고, 모든 $a \neq 0$에 대해 $a^THa > 0$이다.
+
+#### 응용: 최적화에서의 의미
+
+1차 필요조건: $\nabla f(x^*) = 0$ (극값점)  
+2차 충분조건 (극소점):  
+
+$$H_f(x^*) \succ 0 \text{ (양정치)}$$
+
+이는 실비비안 판정법으로 검증하면 확실하다.
+
+
 ## (4) 비선형방정식의 반복해법
 
 ### 뉴턴-랩슨 방법 (Newton-Raphson Method)

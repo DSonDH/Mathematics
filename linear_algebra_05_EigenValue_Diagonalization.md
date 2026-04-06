@@ -571,7 +571,7 @@ $$Q\Lambda Q^T \cdot Q\Lambda Q^T = Q\Lambda Q^T \\ Q\Lambda^2 Q^T = Q\Lambda Q^
 
 양변에 왼쪽에서 $Q^T$를, 오른쪽에서 $Q$를 곱하면 $\Lambda^2 = \Lambda$  
 따라서 각 대각원소에 대해 $\lambda_i^2 = \lambda_i$, 즉 $\lambda_i(\lambda_i - 1) = 0$.  
-그러므로 모든 $\lambda_i \in \{0, 1\}$. $\square$
+그러므로 모든 $\lambda_i \in \{0, 1\}$.
 
 **응용: rank와 nullity의 관계**  
 대칭행렬 $A$가 $A^2 = A$를 만족할 때,
@@ -739,33 +739,23 @@ $$
 
 ## 양정치행렬 (Positive Definite Matrix)
 정의: 대칭행렬 $A$에 대해 모든 $x \neq 0$에 대해 $x^TAx > 0$ 이면,
-* 즉 x가 0일때만 0이 되면,
-* 이런 이차형식을 양정치(positive definite)이라 한다
-* 이때의 A를 양정치행렬(positive definite matrix)라 한다
+* 즉 x가 0일때만 0이 되면, 이런 이차형식을 양정치(positive definite)이라 하고, 이때의 A를 양정치행렬(positive definite matrix)라 한다
 * $>$가 아니라 $\geq$면 positive semidefinite(양반정치)이라 한다. positive definite이 아니라
 * 양정치던 양반정치던, nonnegative definite (n.n.d, 정부호)라 한다.
 
-**참고) 이차형식과 대칭행렬의 관계**
-
-임의의 이차형식은 항상 대칭행렬로 나타낼 수 있다.
-
+**참고) 이차형식과 대칭행렬의 관계**  
+임의의 이차형식은 항상 대칭행렬로 나타낼 수 있다.  
 일반적인 행렬 $B$에 대해 $x^TBx$가 주어졌을 때, 이를 대칭행렬로 변환할 수 있다:
 
 $$x^TBx = x^T\left(\frac{B + B^T}{2}\right)x$$
 
 **증명**:  
-$x^TBx$는 스칼라이므로 전치해도 같다:
-
-$$x^TBx = (x^TBx)^T = x^TB^Tx$$
-
+$x^TBx$는 스칼라이므로 전치해도 같다: $x^TBx = (x^TBx)^T = x^TB^Tx$  
 따라서:
 
 $$x^TBx = \frac{1}{2}(x^TBx + x^TB^Tx) = \frac{1}{2}x^T(B + B^T)x = x^T\left(\frac{B + B^T}{2}\right)x$$
 
-여기서 $A = \frac{B + B^T}{2}$는 대칭행렬이다:
-
-$$A^T = \left(\frac{B + B^T}{2}\right)^T = \frac{B^T + B}{2} = A$$
-
+여기서 $A = \frac{B + B^T}{2}$는 대칭행렬이다: $A^T = \left(\frac{B + B^T}{2}\right)^T = \frac{B^T + B}{2} = A$  
 따라서 모든 이차형식은 대칭행렬을 이용해 표현할 수 있으며, 이차형식을 다룰 때는 항상 대칭행렬을 사용하는 것이 표준이다.
 > 💡 **결론**: 이차형식을 표현할 때는 항상 대칭행렬을 사용하는 것이 표준이며, 비대칭 행렬로 주어진 경우에도 대칭화하여 다룬다.
 
@@ -774,6 +764,8 @@ $$A^T = \left(\frac{B + B^T}{2}\right)^T = \frac{B^T + B}{2} = A$$
 * **음정치 (negative definite)**: 모든 $x \neq 0$에 대해 $x^TAx < 0$
 * **음반정치 (negative semi-definite)**: 모든 $x$에 대해 $x^TAx \leq 0$
 * **부정치 (indefinite)**: 위의 어느 것에도 해당하지 않음
+
+* TODO: determinant와의 관계?: linear_algebra_01_Matrix_Determinant.md에 정리한거 있음
 
 ### 양정치행렬의 판정
 대칭행렬 $A$가 양정치가 되기 위한 필요충분조건:

@@ -787,3 +787,155 @@ $$\int_0^1 \log x\cdot \theta x^{\theta-1}dx=-\frac1\theta$$
 - Beta/Gamma 계열 로그우도 미분(Score) 계산
 - Fisher Information 계산
 - $(0,1)$ 구간 로그모멘트 계산의 기본 블록
+
+
+## 27. 미분 관련 기호 및 개념 총정리
+
+### 1. 그래디언트 (Gradient) ∇
+
+**정의**: 스칼라함수 $f: \mathbb{R}^n \to \mathbb{R}$의 편미분을 모은 열**벡터**
+
+$$\nabla f(\mathbf{x}) = \begin{pmatrix} \frac{\partial f}{\partial x_1} \\ \frac{\partial f}{\partial x_2} \\ \vdots \\ \frac{\partial f}{\partial x_n} \end{pmatrix}$$
+
+**성질**
+- $\nabla f$는 함수값이 가장 빠르게 증가하는 방향
+- $\nabla f = \mathbf{0}$인 점이 극값(critical point)
+
+**활용**: 최적화, MLE 계산
+
+### 2. 헤시안 행렬 (Hessian Matrix) H, $H_f$
+
+**정의**: 스칼라함수 $f: \mathbb{R}^n \to \mathbb{R}$의 2차 편미분을 모은 정사각행렬
+
+$$H_f(\mathbf{x}) = \begin{pmatrix} 
+\frac{\partial^2 f}{\partial x_1^2} & \frac{\partial^2 f}{\partial x_1 \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+\frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2^2} & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial^2 f}{\partial x_n \partial x_1} & \frac{\partial^2 f}{\partial x_n \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_n^2}
+\end{pmatrix}$$
+
+**성질**
+- Schwarz 정리: 연속 2차 미분 조건 하에서 $H_f$ 대칭 ($H_f = H_f^T$)
+- $H_f$의 고유값이 모두 양수 → $f$ 볼록(convex)
+- $H_f$의 고유값이 모두 음수 → $f$ 오목(concave)
+
+**활용**: Newton-Raphson 방법, 극값의 성질 판정, Fisher Information과 연결
+
+### 3. 야코비안 행렬 (Jacobian Matrix) J, $J_f$
+
+**정의**: 벡터함수 $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^m$의 모든 편미분을 모은 $m \times n$ 행렬
+
+$$J_{\mathbf{f}}(\mathbf{x}) = \begin{pmatrix} 
+\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \cdots & \frac{\partial f_1}{\partial x_n} \\
+\frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \cdots & \frac{\partial f_2}{\partial x_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \cdots & \frac{\partial f_m}{\partial x_n}
+\end{pmatrix}$$
+
+**특수 경우**
+- $m=1$ (스칼라 함수): $J_f = (\nabla f)^T$ (행벡터)
+- $n=1$ (곡선): $J_{\mathbf{f}} = (\mathbf{f}'(t))^T$
+
+**활용**: 변수변환(change of variables), 야코비안 행렬식 → 확률변수 변환의 밀도함수
+
+### 4. 야코비안 행렬식 (Jacobian Determinant) $|J|$, $\det(J)$
+
+**정의**: $n = m$일 때, 야코비안의 행렬식
+
+$$|J_{\mathbf{f}}(\mathbf{x})| = \det(J_{\mathbf{f}}(\mathbf{x}))$$
+
+**활용**: 다변량 확률변수 변환
+
+$$f_{\mathbf{Y}}(\mathbf{y}) = f_{\mathbf{X}}(g^{-1}(\mathbf{y})) \cdot |J_{g^{-1}}(\mathbf{y})|$$
+
+(단, $\mathbf{Y} = g(\mathbf{X})$, $\mathbf{X} = g^{-1}(\mathbf{Y})$)
+
+### 5. 라플라시안 (Laplacian) $\nabla^2$, $\Delta$
+
+**정의**: 스칼라함수 $f: \mathbb{R}^n \to \mathbb{R}$의 2차 편미분의 합
+
+$$\nabla^2 f = \Delta f = \sum_{i=1}^{n} \frac{\partial^2 f}{\partial x_i^2} = \operatorname{trace}(H_f)$$
+
+**성질**
+- 헤시안의 대각합(trace)
+- PDE(편미분방정식)의 기본 연산자
+
+### 6. 발산 (Divergence) $\nabla \cdot \mathbf{F}$, $\operatorname{div}(\mathbf{F})$
+
+**정의**: 벡터장 $\mathbf{F}: \mathbb{R}^n \to \mathbb{R}^n$, $\mathbf{F} = (F_1, \ldots, F_n)^T$에 대해
+
+$$\nabla \cdot \mathbf{F} = \sum_{i=1}^{n} \frac{\partial F_i}{\partial x_i}$$
+
+**성질**
+- 스칼라값 반환
+- 벡터장의 "발산" 정도 측정
+
+**활용**: 확률밀도함수 표준화 조건 (divergence theorem)
+
+### 7. 회전 (Curl) $\nabla \times \mathbf{F}$, $\operatorname{curl}(\mathbf{F})$
+
+**정의** ($\mathbb{R}^3$): 벡터장 $\mathbf{F} = (F_1, F_2, F_3)^T$에 대해
+
+$$\nabla \times \mathbf{F} = \begin{pmatrix} 
+\frac{\partial F_3}{\partial x_2} - \frac{\partial F_2}{\partial x_3} \\
+\frac{\partial F_1}{\partial x_3} - \frac{\partial F_3}{\partial x_1} \\
+\frac{\partial F_2}{\partial x_1} - \frac{\partial F_1}{\partial x_2}
+\end{pmatrix}$$
+
+**활용**: 벡터 미분(덜 자주 사용)
+
+### 8. 연쇄법칙 (Chain Rule) 형태별 정리
+
+**스칼라 → 스칼라**
+
+$$\frac{df}{dt} = \frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial y}\frac{dy}{dt}$$
+
+**벡터 → 스칼라** (합성: $f \circ \mathbf{g}$)
+
+$$\frac{df}{dt} = \nabla f(\mathbf{g}(t))^T \cdot \mathbf{g}'(t) = (\nabla f)^T \mathbf{g}'$$
+
+**벡터 → 벡터** (합성: $\mathbf{f} \circ \mathbf{g}$)
+
+$$J_{\mathbf{f} \circ \mathbf{g}}(\mathbf{x}) = J_{\mathbf{f}}(\mathbf{g}(\mathbf{x})) \cdot J_{\mathbf{g}}(\mathbf{x})$$
+
+### 9. 2차 미분과 헤시안의 관계
+
+**이계 방향미분 (directional second derivative)**
+
+$$\mathbf{d}^T H_f(\mathbf{x}) \mathbf{d} = \lim_{h \to 0} \frac{f(\mathbf{x} + h\mathbf{d}) - 2f(\mathbf{x}) + f(\mathbf{x} - h\mathbf{d})}{h^2}$$
+
+**Taylor 전개** (1차)
+
+$$f(\mathbf{x} + \Delta \mathbf{x}) \approx f(\mathbf{x}) + (\nabla f)^T \Delta \mathbf{x}$$
+
+**Taylor 전개** (2차)
+
+$$f(\mathbf{x} + \Delta \mathbf{x}) \approx f(\mathbf{x}) + (\nabla f)^T \Delta \mathbf{x} + \frac{1}{2}(\Delta \mathbf{x})^T H_f (\Delta \mathbf{x})$$
+
+### 10. 통계학에서의 미분 기호
+
+| 기호 | 의미 | 용도 |
+|------|------|------|
+| $\frac{\partial \ell}{\partial \theta}$ | Score function | MLE 계산 |
+| $H_{\ell} = -\frac{\partial^2 \ell}{\partial \theta^2}$ | Hessian of log-likelihood | Fisher Information |
+| $\mathcal{I}(\theta) = E[H_\ell]$ | Fisher Information Matrix | 점근분포, 효율성 |
+| $J(\hat{\theta}) = -H_\ell\|_{\hat{\theta}}$ | Observed Information | 수치 표준오차 계산 |
+
+### 11. 행렬 미분 (Matrix Calculus) 기호
+
+**벡터 w.r.t 벡터**
+
+$$\frac{\partial \mathbf{f}}{\partial \mathbf{x}} = J_{\mathbf{f}}^T = \begin{pmatrix} \frac{\partial \mathbf{f}^T}{\partial x_1} \\ \vdots \\ \frac{\partial \mathbf{f}^T}{\partial x_n} \end{pmatrix}$$
+
+**스칼라 w.r.t 행렬**
+
+$$\frac{\partial f}{\partial \mathbf{X}} = \begin{pmatrix} 
+\frac{\partial f}{\partial X_{11}} & \cdots & \frac{\partial f}{\partial X_{1n}} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial f}{\partial X_{m1}} & \cdots & \frac{\partial f}{\partial X_{mn}}
+\end{pmatrix}$$
+
+**유용한 공식**
+- $\frac{\partial}{\partial \mathbf{x}}(\mathbf{a}^T \mathbf{x}) = \mathbf{a}$
+- $\frac{\partial}{\partial \mathbf{x}}(\mathbf{x}^T \mathbf{A} \mathbf{x}) = (\mathbf{A} + \mathbf{A}^T)\mathbf{x}$
+- $\frac{\partial}{\partial \mathbf{X}}\operatorname{trace}(\mathbf{AXB}) = \mathbf{A}^T \mathbf{B}^T$
