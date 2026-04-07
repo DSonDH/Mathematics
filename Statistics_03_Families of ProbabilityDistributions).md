@@ -35,8 +35,7 @@ $$
 이 모집단의 분포는 값 $1$에 확률 $p$, 값 $0$에 확률 $1-p$를 대응시키는 분포다.
 
 ### 초기하분포의 정의
-위와 같은 모집단에서 $n$개를 단순랜덤추출할 때, 표본에 포함된 $1$의 개수를 확률변수 $X$라 하자.  
-그러면 $X$의 확률질량함수는 다음과 같다.
+위와 같은 모집단에서 $n$개를 단순랜덤추출할 때, 표본에 포함된 $1$의 개수를 확률변수 $X$라 하자. 그러면 $X$의 확률질량함수는 다음과 같다.
 
 $$
 P(X=x) = \frac{\binom{D}{x}\binom{N-D}{n-x}}{\binom{N}{n}},
@@ -179,11 +178,11 @@ $$
 
 **(b) 재생성 (Reproductive Property)**  
 
+$X_1 \sim B(n_1, p)$, $X_2 \sim B(n_2, p)$이고 $X_1$, $X_2$가 독립이면
+
 $$
 X_1 + X_2 \sim B(n_1 + n_2, p)
 $$
-
-$X_1 \sim B(n_1, p)$, $X_2 \sim B(n_2, p)$이고 $X_1$, $X_2$가 독립이면
 
 #### 증명
 
@@ -273,7 +272,7 @@ $$m! \sim m^{m+1/2} e^{-m}\sqrt{2\pi},\quad m \to \infin$$
 #### 증명
 $$m! = \Gamma(m+1) = \int_0^\infty x^m e^{-x} dx = \int_0^\infty e^{m \log x - x} dx \\
 = \int_0^\infty e^{m \log my - my} m\ dy = m^{m+1} \int_0^\infty e^{m(\log y - y)} dy \\
-m^{m+1}e^{-m} \int_0^\infty e^{m(\log y - y + 1)} dy \\
+= m^{m+1}e^{-m} \int_0^\infty e^{m(\log y - y + 1)} dy \\
 = m^{m+1}e^{-m} \int_0^\infty exp\left [m\left(-\frac{(y-1)^2}{2} + \frac{(y-1)^3}{3} - \cdots\right) \right ] dy \\
 = m^{m+1}e^{-m} \int_0^\infty e^{-\frac{m(y-1)^2}{2}} exp\left [m\left(\frac{(y-1)^3}{3} - \cdots\right) \right ] dy $$
 
@@ -327,18 +326,9 @@ $$
 $X\sim \mathrm{Multi}(n;p_1,\dots,p_k)$이면
 
 $$
-E(X_i)=np_i
-$$
-
-$$
-\mathrm{Var}(X_i)=np_i(1-p_i)
-$$
-
-$$
-\mathrm{Cov}(X_i,X_j)=-np_ip_j\quad(i\ne j)
-$$
-
-$$
+E(X_i)=np_i \\
+\mathrm{Var}(X_i)=np_i(1-p_i) \\
+\mathrm{Cov}(X_i,X_j)=-np_ip_j\quad(i\ne j) \\
 M_X(t) = \left(\sum_{i=1}^k p_i e^{t_i}\right)^n
 $$
 
@@ -402,9 +392,7 @@ $$
 $$
 \mathrm{mgf}_{W_1}(t)=E(e^{tW_1})
 =\sum_{x=1}^\infty e^{tx}(1-p)^{x-1}p \\
-= p e^t \sum_{x=1}^\infty \big((1-p)e^t\big)^{x-1} \\
-=\frac{p e^t}{1-(1-p)e^t},
-\quad t<-\log(1-p)
+= p e^t \sum_{x=1}^\infty \big((1-p)e^t\big)^{x-1} =\frac{p e^t}{1-(1-p)e^t},\quad t<-\log(1-p)
 $$
 
 **(b) 평균과 분산**
@@ -434,8 +422,7 @@ $$
 
 $$
 E(W_1)=\mathrm{cgf}'_{W_1}(0)=\frac{1}{p},
-\qquad
-\mathrm{Var}(W_1)=\mathrm{cgf}''_{W_1}(0)=\frac{1-p}{p^2}
+\quad \mathrm{Var}(W_1)=\mathrm{cgf}''_{W_1}(0)=\frac{1-p}{p^2}
 $$
 
 ### 기하분포의 무기억증 (Memoryless Property)
@@ -479,8 +466,7 @@ $$
 
 ### 참고: 음이항분포의 명칭 유래
 
-음이항분포라는 명칭은 **음의 지수를 갖는 이항전개식**으로부터 유래하였다.
-
+음이항분포라는 명칭은 **음의 지수를 갖는 이항전개식**으로부터 유래하였다.  
 이항정리의 일반화로부터
 
 $$
@@ -690,6 +676,7 @@ $$
 \therefore X_1 + X_2 \sim \mathrm{Poisson}(\lambda_1+\lambda_2)
 $$
 
+TODO:
 ### 포아송과정
 
 **포아송과정 (Poisson process)** 은 시간 또는 공간에서 사건이 발생하는 현상(갯수)을 모델링하는 확률과정이다.
@@ -755,12 +742,7 @@ P_n(t+h) = P(N_{t+h} = n) \\
 = P_n(t) \cdot (1-\lambda h + o(h)) + P_{n-1}(t) \cdot (\lambda h + o(h)) + o(h)
 $$
 
-정리하면
-
-$$
-P_n(t+h) - P_n(t) = -\lambda h P_n(t) + \lambda h P_{n-1}(t) + o(h)
-$$
-
+정리하면 $P_n(t+h) - P_n(t) = -\lambda h P_n(t) + \lambda h P_{n-1}(t) + o(h)$  
 양변을 $h$로 나누고 $h \to 0$으로 극한을 취하면
 
 $$
@@ -776,33 +758,22 @@ $n=0$일 때: $P_0'(t) = -\lambda P_0(t)$이므로 $P_0(t) = e^{-\lambda t}$
 단위 길이당 평균 결점 수가 0.05로 알려진 전선을 생산하는 공정에서 나타나는 결점 수 모형으로서 포아송과정이 타당하다고 할 때, 100단위 길이에 해당하는 전선에서 10개 이상의 결점이 나타날 확률을 구하자.
 
 **풀이**  
-포아송과정의 강도 $\lambda = 0.05$이고, 구간의 길이 $t = 100$이므로 정리 3.4.2에 의해 100단위 길이에서 나타나는 결점 수 $X$는
+포아송과정의 강도 $\lambda = 0.05$이고, 구간의 길이 $t = 100$이므로 정리 3.4.2에 의해 100단위 길이에서 나타나는 결점 수 $X$는  
+$X \sim \mathrm{Poisson}(\lambda t) = \mathrm{Poisson}(0.05 \times 100) = \mathrm{Poisson}(5)$
 
-$$X \sim \mathrm{Poisson}(\lambda t) = \mathrm{Poisson}(0.05 \times 100) = \mathrm{Poisson}(5)$$
-
-따라서 구하고자 하는 확률은
-
-$$P(X \geq 10) = 1 - P(X \leq 9) = 1 - \sum_{x=0}^{9} e^{-5}\frac{5^x}{x!}$$
-
-포아송 누적확률표나 계산을 통해
-
-$$P(X \leq 9) \approx 0.9682$$
-
-$$\therefore P(X \geq 10) \approx 1 - 0.9682 = 0.0318$$
-
+따라서 구하고자 하는 확률은 $P(X \geq 10) = 1 - P(X \leq 9) = 1 - \sum_{x=0}^{9} e^{-5}\frac{5^x}{x!}$  
+포아송 누적확률표나 계산을 통해  
+$P(X \leq 9) \approx 0.9682\\
+\therefore P(X \geq 10) \approx 1 - 0.9682 = 0.0318$
 
 
 ## 지수분포와 감마분포 (Exponential and Gamma Distributions)
 
+TODO:
 ### 포아송과정 (Poisson process)에서의 도입
 
-발생률(occurrence rate)이 $\lambda$인 포아송과정 $\{N_t:t\ge 0\}$에서 "첫 번째 사건이 시각 $t$ 이후에 발생"한다는 것은 "시각 $t$까지 사건이 0번 발생"과 동치이므로
-
-$$
-(W_1>t)\iff (N_t=0)
-$$
-
-이다. 따라서
+발생률(occurrence rate)이 $\lambda$인 포아송과정 $\{N_t:t\ge 0\}$에서 "첫 번째 사건이 시각 $t$ 이후에 발생"한다는 것은 "시각 $t$까지 사건이 0번 발생"과 동치이므로  
+$(W_1>t)\iff (N_t=0)$ 이다. 따라서
 
 $$
 P(W_1>t)=P(N_t=0)=e^{-\lambda t},\quad t\ge 0
@@ -818,13 +789,7 @@ P(W_1\le t)=
 \end{cases}
 $$
 
-이다. 이를 미분하면 확률밀도함수(pdf)는
-
-$$
-f_{W_1}(t)=\lambda e^{-\lambda t}\mathbf{1}(t\ge 0)
-$$
-
-가 된다. 즉 $W_1$은 지수분포(exponential distribution)를 따르며, 기호로는
+이다. 이를 미분하면 확률밀도함수(pdf)는 $f_{W_1}(t)=\lambda e^{-\lambda t}\mathbf{1}(t\ge 0)$ 가 된다. 즉 $W_1$은 지수분포(exponential distribution)를 따르며, 기호로는
 
 $$
 W_1\sim \mathrm{Exp}(1/\lambda)\quad (\lambda>0)
@@ -894,16 +859,11 @@ $$
 
 #### 감마분포의 도입: $r$번째 사건까지의 대기시간
 
-포아송과정에서 $r$번째 사건이 시각 $t$ 이후에 발생한다는 것은, 시각 $t$까지 사건이 $r-1$번 이하로 발생했다는 것과 동치이므로
+포아송과정에서 $r$번째 사건이 시각 $t$ 이후에 발생한다는 것은, 시각 $t$까지 사건이 $r-1$번 이하로 발생했다는 것과 동치이므로  
+$(W_r>t)\iff (N_t\le r-1)$ 이다. 따라서
 
 $$
-(W_r>t)\iff (N_t\le r-1)
-$$
-
-이다. 따라서
-
-$$
-P(W_r\le t)=1-P(W_r>t)=1-P(N_t\le r-1)
+P(W_r\le t)=1-P(W_r>t)=1-P(N_t\le r-1) \\
 =1-\sum_{k=0}^{r-1} e^{-\lambda t}\frac{(\lambda t)^k}{k!},\quad t\ge 0
 $$
 
@@ -1048,34 +1008,23 @@ $$
 
 >### 참고: 정규분포의 근본적 의의
 >
->#### (1) 최대 엔트로피 원리
->
+>**(1) 최대 엔트로피 원리**  
 >주어진 평균 $E[X]=\mu$와 분산 $\mathrm{Var}(X)=\sigma^2$ 제약 조건 하에서 엔트로피
 >
 >$$H(f) = -\int_{-\infty}^{\infty} f(x) \log f(x) \, dx$$
 >
->를 최대화하는 분포는 무엇인가?
->
->라그랑주 승수법을 적용하면, 최적해는
->
->$$\log f(x) = \lambda_0 + \lambda_1 x + \lambda_2 x^2$$
->
->형태이며, 이를 정리하면
->
->$$f(x) \propto \exp\left(-a x^2 + bx\right)$$
->
+>를 최대화하는 분포는 무엇인가?  
+>라그랑주 승수법을 적용하면, 최적해는 $\log f(x) = \lambda_0 + \lambda_1 x + \lambda_2 x^2$ 형태이며, 이를 정리하면 $f(x) \propto \exp\left(-a x^2 + bx\right)$  
 >이는 정규분포의 확률밀도함수와 정확히 일치한다. **즉, 평균과 분산만 고정하고 추가 정보가 없으면, 정규분포가 가장 "비정보적"이고 "덜 가정된" 분포이다.**
 >
->#### (2) 중심극한정리 (Central Limit Theorem)
->
+>**(2) 중심극한정리 (Central Limit Theorem)**  
 >서로 독립이고 동일한 분포를 따르는 확률변수 $X_1, X_2, \ldots$의 표준화합
 >
 >$$Z_n = \frac{\sum_{i=1}^n X_i - n\mu}{\sqrt{n\sigma^2}}$$
 >
->은 $n \to \infty$일 때 표준정규분포 $N(0,1)$으로 분포수렴한다.
+>은 $n \to \infty$일 때 표준정규분포 $N(0,1)$으로 분포수렴한다. 
 >
->**이 현상이 나타나는 이유:**
->
+>**이 현상이 나타나는 이유:**  
 >각 $X_i$의 누율생성함수(cumulant generating function)는
 >
 >$$\kappa(t) = \log M_{X_i}(t) = \mu t + \frac{1}{2}\sigma^2 t^2 + \frac{\kappa_3}{6}t^3 + \cdots$$
@@ -1111,15 +1060,9 @@ $$
 
 는 적분값이 1이 되는 함수로서 표준정규분포(standard normal distribution) $N(0,1)$의 pdf로 정의된다.
 
-**De Moivre–Laplace 정리 증명**
-
-$X_n \sim B(n,p)$이고 $\mu=np$, $\sigma^2=np(1-p)$라 하자. 표준화된 확률변수
-
-$$
-Z_n = \frac{X_n - np}{\sqrt{np(1-p)}}
-$$
-
-의 적률생성함수를 고려하면
+TODO:  
+**De Moivre–Laplace 정리 증명**  
+$X_n \sim B(n,p)$이고 $\mu=np$, $\sigma^2=np(1-p)$라 하자. 표준화된 확률변수 $Z_n = \frac{X_n - np}{\sqrt{np(1-p)}}$ 의 적률생성함수를 고려하면
 
 $$
 M_{Z_n}(t) = E(e^{tZ_n}) = e^{-\mu t/\sigma} M_{X_n}(t/\sigma)
@@ -1139,13 +1082,15 @@ pe^{t/\sigma} + 1-p = 1 + p\left(\frac{t}{\sigma} + \frac{t^2}{2\sigma^2} + O(t^
 \therefore \log M_{Z_n}(t) = -\frac{\mu t}{\sigma} + n\log\left(1 + \frac{pt}{\sigma} + \frac{pt^2}{2\sigma^2} + O(t^3/\sigma^3)\right)
 $$
 
-$\log(1+A) = A - A^2/2 + O(A^3)$를 적용하고 $n\to\infty$일 때 주도항만 남기면
+$\log(1+A) = A - A^2/2 + O(A^3)$를 적용하고 $\mu = np$, $\sigma^2 = np(1-p)$ 사용하여 $n\to\infty$일 때 주도항만 남기면
 
 $$
-\log M_{Z_n}(t) \to \frac{t^2}{2}
+= -\frac{\mu t}{\sigma} + n\left(\frac{pt}{\sigma} + \frac{pt^2}{2\sigma^2} + O(t^3/\sigma^3)\right) = -\frac{\mu t}{\sigma} + \frac{npt}{\sigma} + \frac{n(p-p^2)t^2}{2\sigma^2} + O(n t^3/\sigma^3) \\
+= \frac{t^2}{2} + O(n^{-1/2}) \\
+\therefore \log M_{Z_n}(t) \to \frac{t^2}{2}
 $$
 
-따라서 $M_{Z_n}(t) \to e^{t^2/2}$이며, 이는 표준정규분포 $N(0,1)$의 mgf이다. 적률생성함수의 연속성 정리에 의해 $Z_n$은 분포수렴하여 $N(0,1)$로 근사된다. □
+이는 표준정규분포 $N(0,1)$의 mgf이다. 적률생성함수의 연속성 정리에 의해 $Z_n$은 분포수렴하여 $N(0,1)$로 근사된다. □
 
 **$\phi$의 적분값이 1 증명**
 
@@ -1338,44 +1283,28 @@ $$
 
 $X\sim N(3,4)$에서 $Z=(X-3)/\sqrt{4}=(X-3)/2\sim N(0,1)$로 표준화하여 계산.
 
-**(a)** $P(5<X\le 7)$
+**(a)** $P(5<X\le 7)$  
+$P(5<X\le 7)=\Phi\left(\frac{7-3}{2}\right)-\Phi\left(\frac{5-3}{2}\right)=\Phi(2.0)-\Phi(1.0) \\
+=0.9772-0.8413=0.1359$
 
-$$
-P(5<X\le 7)=\Phi\left(\frac{7-3}{2}\right)-\Phi\left(\frac{5-3}{2}\right)=\Phi(2.0)-\Phi(1.0)
-$$
-
-$$
-=0.9772-0.8413=0.1359
-$$
-
-**(b)** $P(1<X\le 4)$
-
-$$
-P(1<X\le 4)=\Phi\left(\frac{4-3}{2}\right)-\Phi\left(\frac{1-3}{2}\right)=\Phi(0.5)-\Phi(-1.0)
-$$
-
-$$
+**(b)** $P(1<X\le 4)$  
+$P(1<X\le 4)=\Phi\left(\frac{4-3}{2}\right)-\Phi\left(\frac{1-3}{2}\right)=\Phi(0.5)-\Phi(-1.0) \\
 =\Phi(0.5)-\{1-\Phi(1.0)\}=0.6915-(1-0.8413)=0.5328
-$$
+$
 
-**(c)** $P(X>0)$
-
-$$
-P(X>0)=1-P(X\le 0)=1-\Phi\left(\frac{0-3}{2}\right)=1-\Phi(-1.5)=\Phi(1.5)\approx 0.9332
-$$
+**(c)** $P(X>0)$  
+$P(X>0)=1-P(X\le 0)=1-\Phi\left(\frac{0-3}{2}\right)=1-\Phi(-1.5)=\Phi(1.5)\approx 0.9332$
 
 ### 상방 $\alpha$ 분위수(upper $\alpha$ quantile)
 
-**one tailed**
-
+**one tailed**  
 표준정규 $Z\sim N(0,1)$에서
 
 $$
 P(Z>z_\alpha)=\alpha\quad (0<\alpha<1)
 $$
 
-를 만족하는 $z_\alpha$를 상방 $\alpha$ 분위수라고 한다. 예로 $z_{0.025}=1.96$, $z_{0.05}=1.645$가 제시된다.
-
+를 만족하는 $z_\alpha$를 상방 $\alpha$ 분위수라고 한다. 예로 $z_{0.025}=1.96$, $z_{0.05}=1.645$가 제시된다.  
 정리 3.6.2로부터 $X\sim N(\mu,\sigma^2)$이면
 
 $$
@@ -1388,43 +1317,17 @@ $$
 
 $X\sim N(3,4)$에서 $\mu=3,\sigma=2$이다.
 
-**(a)** $q_{0.95}$ (95 분위수): $P(X\le q_{0.95})=0.95$는 $P(X>q_{0.95})=0.05$와 같으므로
+**(a)** $q_{0.95}$ (95 분위수): $P(X\le q_{0.95})=0.95$는 $P(X>q_{0.95})=0.05$와 같으므로  
+$q_{0.95}=3+2z_{0.05}=3+2(1.645)=6.290$
 
-$$
-q_{0.95}=3+2z_{0.05}=3+2(1.645)=6.290
-$$
+**(b)** $q_{0.025}$ (2.5 분위수): $P(X\le q_{0.025})=0.025$는 $P(X>q_{0.025})=0.975$와 같고,  
+$q_{0.025}=3+2z_{0.975}=3-2z_{0.025}=3-2(1.96)=-0.92$
 
-**(b)** $q_{0.025}$ (2.5 분위수): $P(X\le q_{0.025})=0.025$는 $P(X>q_{0.025})=0.975$와 같고,
-
-$$
-q_{0.025}=3+2z_{0.975}=3-2z_{0.025}=3-2(1.96)=-0.92
-$$
-
-### 정규분포의 주요 성질 요약
-
-$X \sim N(\mu, \sigma^2)$일 때 다음이 성립한다.
-
-**(1) 표준화 및 스케일-위치 변환**
-
-$$
-X \overset{d}{\equiv} \sigma Z + \mu, \quad Z \sim N(0,1)
-$$
-
-**(2) 선형변환의 닫힘성**
-
-상수 $a, b$에 대해
-
-$$
-aX + b \sim N(a\mu + b, a^2\sigma^2)
-$$
-
-**(3) 독립합의 닫힘성**
-
-$X_1 \sim N(\mu_1, \sigma_1^2)$, $X_2 \sim N(\mu_2, \sigma_2^2)$가 서로 독립이면
-
-$$
-X_1 \oplus X_2 \sim N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)
-$$
+>**정규분포의 주요 성질 요약**: $X \sim N(\mu, \sigma^2)$일 때 다음이 성립한다.  
+>**(1) 표준화 및 스케일-위치 변환**: $X \overset{d}{\equiv} \sigma Z + \mu, \quad Z \sim N(0,1)$  
+>**(2) 선형변환의 닫힘성**: 상수 $a, b$에 대해 $aX + b \sim N(a\mu + b, a^2\sigma^2)$  
+>**(3) 독립합의 닫힘성**: $X_1 \sim N(\mu_1, \sigma_1^2)$, $X_2 \sim N(\mu_2, \sigma_2^2)$가 서로 독립이면  
+>$X_1 \oplus X_2 \sim N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$
 
 
 ## 주요 확률분포 요약
