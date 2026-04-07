@@ -1,18 +1,17 @@
-### 정리 2.5.5 (분산행렬의 스펙트럼 분해와 기하학적 해석)
-#### 대각화 정리 (Spectral Decomposition Theorem)
+# 분산행렬의 스펙트럼 분해와 기하학적 해석
+## 대각화 정리 (Spectral Decomposition Theorem)
 확률벡터 $\mathbf{X}\in\mathbb{R}^k$의 분산행렬 $\Sigma=\mathrm{Var}(\mathbf{X})$는 대칭이며 음이 아닌 정부호(non-negative definite)이므로, 다음과 같은 스펙트럼 분해(spectral decomposition)가 가능하다.
 
 $$
 \Sigma = P\Lambda P^T
 $$
 
-여기서
 * $P=(p_1,\dots,p_k)$는 **직교행렬(orthogonal matrix)**, 즉 $P^TP=PP^T=I$를 만족한다.
-* $\Lambda=\mathrm{diag}(\lambda_1,\dots,\lambda_k)$는 대각행렬이며, 대각성분 $\lambda_i$는 $\Sigma$의 **고유값(eigenvalue)**이다.
-* $p_i$는 고유값 $\lambda_i$에 대응하는 **단위 고유벡터(unit eigenvector)**이다.
+* $\Lambda=\mathrm{diag}(\lambda_1,\dots,\lambda_k)$는 대각행렬이며, 대각성분 $\lambda_i$는 $\Sigma$의 **고유값(eigenvalue)** 이다.
+* $p_i$는 고유값 $\lambda_i$에 대응하는 **단위 고유벡터(unit eigenvector)** 이다.
 
-#### 음이 아닌 정부호 행렬의 조건
-정리 2.5.4에 의해 $\Sigma$는 음이 아닌 정부호이므로, 모든 고유값이 음이 아니다.
+## 음이 아닌 정부호 행렬의 조건
+$\Sigma$는 음이 아닌 정부호이므로, 모든 고유값이 음이 아니다.
 
 $$
 \lambda_i\ge 0,\quad i=1,\dots,k
@@ -27,7 +26,7 @@ $$
   ⇔ 적어도 하나의 고유값이 0: $\exists i,\ \lambda_i=0$  
   ⇔ 확률변수들 사이에 선형종속 관계가 존재(확률 1로)
 
-#### 분산행렬의 기하학적 해석
+## 분산행렬의 기하학적 해석
 고유벡터와 고유값은 확률분포의 기하학적 구조를 나타낸다.
 
 **(1) 주성분 방향(Principal Directions)**  
@@ -65,18 +64,10 @@ $$
 * $\det(\Sigma)=0$이면 분포가 더 낮은 차원의 부분공간에 집중되어 있음을 의미한다.
 * $\det(\Sigma)$가 클수록 분포가 더 퍼져 있음을 의미한다.
 
-#### 예시 2.5.9 (분산행렬의 고유분석)
-예시 2.5.7에서 얻은 분산행렬
-
-$$
-\Sigma=
-\begin{pmatrix}
-1/4 & 1/4\\
-1/4 & 5/4
-\end{pmatrix}
-$$
-
-의 고유값과 고유벡터를 구하자.
+## 예시: 분산행렬의 고유분석
+분산행렬 $\Sigma= \begin{pmatrix}
+1/4 & 1/4\\ 1/4 & 5/4
+\end{pmatrix}$ 의 고유값과 고유벡터를 구하자.  
 
 특성방정식(characteristic equation)은
 
@@ -89,25 +80,8 @@ $$
 =(1/4-\lambda)(5/4-\lambda)-1/16=0
 $$
 
-전개하면
-
-$$
-\lambda^2-\frac{3}{2}\lambda+\frac{1}{4}=0
-$$
-
-근의 공식으로
-
-$$
-\lambda=\frac{3/2\pm\sqrt{9/4-1}}{2}=\frac{3\pm\sqrt{5}}{4}
-$$
-
-따라서 고유값은
-
-$$
-\lambda_1=\frac{3+\sqrt{5}}{4}\approx 1.309,\quad
-\lambda_2=\frac{3-\sqrt{5}}{4}\approx 0.191
-$$
-
+전개하면 $\lambda^2-\frac{3}{2}\lambda+\frac{1}{4}=0$, 근의 공식으로 $\lambda=\frac{3/2\pm\sqrt{9/4-1}}{2}=\frac{3\pm\sqrt{5}}{4}$  
+따라서 고유값은 $\lambda_1=\frac{3+\sqrt{5}}{4}\approx 1.309,\quad \lambda_2=\frac{3-\sqrt{5}}{4}\approx 0.191$  
 각 고유값에 대응하는 정규화된 고유벡터는
 
 $$
@@ -129,7 +103,6 @@ p_2=\frac{1}{\sqrt{2-2\sqrt{5}}}
 \end{pmatrix}
 $$
 
-**해석**
 * $p_1$ 방향(대략 $(0.447, 1.000)$ 방향)이 가장 큰 분산($\lambda_1\approx 1.309$)을 갖는 주성분 방향이다.
 * $p_2$ 방향은 $p_1$에 직교하며, 가장 작은 분산($\lambda_2\approx 0.191$)을 갖는다.
 * 총분산: $\lambda_1+\lambda_2=3/2=\mathrm{Var}(X_1)+\mathrm{Var}(X_2)=1/4+5/4$
@@ -156,7 +129,8 @@ $$
 > 특징 추출(feature extraction)의 기초가 되며,  
 > 통계학, 기계학습, 데이터 과학에서 광범위하게 활용된다.
 
-### 정리4.4.2 참고: 음이닌 정부호 행렬과 제곱근 행렬
+
+# 정리4.4.2 참고: 음이닌 정부호 행렬과 제곱근 행렬
 실수가 원소인 $m\times m$ 대칭행렬 $\Sigma$에 대하여, 다음 조건들은 서로 동치이다:
 
 1. $a^T\Sigma a \geq 0$ for all $a \in \mathbb{R}^m$ ($\Sigma$가 **음이닌 정부호 행렬(nonnegative definite matrix)**)
@@ -177,7 +151,7 @@ $$
 조건 (1)에 의해 $v^T\Sigma v \geq 0$이고, $\|v\|^2 > 0$이므로 $\lambda \geq 0$이다.
 
 **(2) ⇒ (3):**  
-$\Sigma$는 실수 대칭행렬이므로 **스펙트럴 분해(spectral decomposition)**가 가능하다:
+$\Sigma$는 실수 대칭행렬이므로 **스펙트럴 분해(spectral decomposition)** 가 가능하다:
 
 $$
 \Sigma = Q\Lambda Q^T
@@ -204,4 +178,4 @@ $$
 a^T\Sigma a = a^T(\Sigma^{1/2}\Sigma^{1/2})a = a^T\Sigma^{1/2}(\Sigma^{1/2})^Ta = (\Sigma^{1/2}a)^T(\Sigma^{1/2}a) = \|\Sigma^{1/2}a\|^2 \geq 0
 $$
 
-따라서 $\Sigma$는 음이닌 정부호 행렬이다.
+따라서 $\Sigma$는 음아닌 정부호 행렬이다.

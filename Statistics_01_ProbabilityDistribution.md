@@ -16,9 +16,8 @@ $$S \quad (\text{또는 } \Omega)$$
 러시아의 수학자 **Kolmogorov (1903–1987)** 는 이를 공리적으로 정식화하였다.
 
 ### 1.1.2 사건의 정의 (Definition of Events, σ-field)
-표본공간 $S$의 부분집합들 중 다음 조건을 만족하는 집합들의 모임을
-**사건의 집합체** (sigma field of events) 또는
-$\sigma$-대수라 하며 $\mathcal E$로 나타낸다.
+표본공간 $S$의 부분집합들로서 다음 조건을 만족하는 부분집합들을 사건이라 한다.  
+이들의 모임을 **사건의 집합체 (sigma field of events)** 또는 $\sigma$-대수라 하며 $\mathcal E$로 나타낸다.
 
 1. **전체사건 (Sure Event)**: $S\in\mathcal E$
 - 표본공간 $S$는 사건이다
@@ -1179,7 +1178,7 @@ $$
 모든 차수의 적률이 존재하며
 
 $$
-E(X^k) = M^{(k)}(0) = \left.\frac{d^k M(t)}{dt^k}\right|_{t=0}
+E(X^k) = M^{(k)}(0) = \left \frac{d^k M(t)}{dt^k}\right|_{t=0}
 $$
 
 여기서 $M^{(k)}(0)$는 $t=0$에서의 $k$차 도함수이다.
@@ -1218,7 +1217,7 @@ $$
 >
 >$$m^{(k)}(0) = E(Y^k)$$
 >
->$$E(Y^k) = m^{(k)}(0) = \left.\frac{d^k}{ds^k}m(s)\right|_{s=0}$$
+>$$E(Y^k) = m^{(k)}(0) = \left \frac{d^k}{ds^k}m(s)\right|_{s=0}$$
 >
 >이것이 적률생성함수가 "$k$차 적률을 생성한다"는 의미의 근거이다.
 

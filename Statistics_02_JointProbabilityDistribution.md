@@ -48,11 +48,7 @@ $$
 
 를 만족하면 $f$를 $(X,Y)$의 결합확률밀도함수라 한다. 성질은 다음과 같다.
 
-- 비음성
-
-$$
-f(x,y)\ge 0\ \forall x,y
-$$
+- 비음성: $f(x,y)\ge 0\ \forall x,y$
 
 - 전체 적분은 1
 
@@ -150,8 +146,6 @@ $$
 f(x,y)=\dfrac{\binom{2}{x}\binom{3}{y}\binom{4}{3-x-y}}{\binom{9}{3}}
 $$
 
-이다.
-
 **1) $X$의 주변확률질량함수**  
 
 $$
@@ -163,8 +157,6 @@ $$
 $$
 \sum_{y=0}^{3-x}\binom{3}{y}\binom{4}{3-x-y}=\binom{7}{3-x}
 $$
-
-이다.
 
 따라서 
 
@@ -192,8 +184,6 @@ $$
 \sum_{x=0}^{3-y}\binom{2}{x}\binom{4}{3-y-x}=\binom{6}{3-y}
 $$
 
-이다.
-
 따라서 
 
 $$
@@ -207,25 +197,17 @@ $$
 f(x,y)=2e^{-x-y}\mathbf{1}_{\{0\le x\le y\}}
 $$
 
-이다.  
-
 **1) $X$의 주변확률밀도함수**  
 
 $$
-f_1(x)=\int_{-\infty}^{+\infty}2e^{-x-y}\mathbf{1}_{\{0\le x\le y\}}\,dy = \int_{y=x}^{+\infty}2e^{-x-y}\,dy\,\mathbf{1}_{\{x\ge 0\}}
-$$
-
-$$
+f_1(x)=\int_{-\infty}^{+\infty}2e^{-x-y}\mathbf{1}_{\{0\le x\le y\}}\,dy = \int_{y=x}^{+\infty}2e^{-x-y}\,dy\,\mathbf{1}_{\{x\ge 0\}} \\
 =2e^{-2x}\mathbf{1}_{\{x\ge 0\}}
 $$
 
 **2) $Y$의 주변확률밀도함수**  
 
 $$
-f_2(y)=\int_{-\infty}^{+\infty}2e^{-x-y}\mathbf{1}_{\{0\le x\le y\}}\,dx = \int_0^{y}2e^{-x-y}\,dx\,\mathbf{1}_{\{y\ge 0\}}
-$$
-
-$$
+f_2(y)=\int_{-\infty}^{+\infty}2e^{-x-y}\mathbf{1}_{\{0\le x\le y\}}\,dx = \int_0^{y}2e^{-x-y}\,dx\,\mathbf{1}_{\{y\ge 0\}} \\
 =2e^{-y}(1-e^{-y})\mathbf{1}_{\{y\ge 0\}}
 $$
 
@@ -248,15 +230,17 @@ $$
 또한  
 
 $$
-f(x_j,y_k)=P(X=x_j, Y=y_k) = \{F(x_j,y_k)-F(x_{j-1},y_k)\}-\{F(x_j,y_{k-1})-F(x_{j-1},y_{k-1})\}
+f(x_j,y_k) = P(X=x_j, Y=y_k) \\= \{F(x_j,y_k)-F(x_{j-1},y_k)\}-\{F(x_j,y_{k-1})-F(x_{j-1},y_{k-1})\}
 $$
 
 > **설명:**  
 > 이산형 확률변수의 경우, 점확률 $P(X=x_j, Y=y_k)$는 누적분포함수의 차분으로 표현된다.  
 > 직사각형 영역 $\{x_{j-1}<X\le x_j,\ y_{k-1}<Y\le y_k\}$의 확률이 바로 $P(X=x_j, Y=y_k)$이므로,  
 > 포함-배제 원리(inclusion-exclusion principle)를 적용하면  
-> $$P(x_{j-1}<X\le x_j,\ y_{k-1}<Y\le y_k) = F(x_j,y_k)-F(x_{j-1},y_k)-F(x_j,y_{k-1})+F(x_{j-1},y_{k-1})$$
-> 이 성립한다. 이는 큰 직사각형 $\{X\le x_j, Y\le y_k\}$에서 왼쪽 영역 $\{X\le x_{j-1}, Y\le y_k\}$와  
+>
+> $$P(x_{j-1}<X\le x_j,\ y_{k-1}<Y\le y_k) \\= F(x_j,y_k)-F(x_{j-1},y_k)-F(x_j,y_{k-1})+F(x_{j-1},y_{k-1})$$
+>
+> 이 성립한다. 이는 큰 직사각형 $\{X\le x_j, Y\le y_k\}$에서 왼쪽 영역 $\{X\le x_{j-1}, Y\le y_k\}$와
 > 아래쪽 영역 $\{X\le x_j, Y\le y_{k-1}\}$을 빼고, 중복으로 뺀 왼쪽 아래 영역 $\{X\le x_{j-1}, Y\le y_{k-1}\}$을 더하는 것이다.
 
 #### (b) 연속형인 경우
@@ -271,8 +255,6 @@ $$
 f(x,y)=\dfrac{\partial^2}{\partial x\,\partial y}F(x,y)
 $$
 
-이다.
-
 #### 예시 2.1.5 (예시 2.1.2의 결합누적분포함수)
 $f(t,u)=2e^{-t-u}\mathbf{1}_{\{0\le t\le u\}}$일 때  
 
@@ -283,23 +265,10 @@ $$
 먼저 $u$에 대해 적분하면 ($y\ge t\ge 0$에서만 기여)  
 
 $$
-\int_{-\infty}^{y}2e^{-t-u}\mathbf{1}_{\{0\le t\le u\}}\,du = 2e^{-t}\int_t^{y}e^{-u}\,du\,\mathbf{1}_{\{y\ge t\ge 0\}}
-$$
-
-$$
-=2e^{-t}(e^{-t}-e^{-y})\mathbf{1}_{\{y\ge t\ge 0\}}
-$$
-
-따라서  
-
-$$
-F(x,y)=\int_{0}^{x\wedge y}2\left(e^{-2t}-e^{-t-y}\right)dt\,\mathbf{1}_{\{x\wedge y\ge 0\}}
-$$
-
-계산하면  
-
-$$
-F(x,y)=\left\{1-e^{-2(x\wedge y)}+2e^{-y}\left(e^{-(x\wedge y)}-1\right)\right\}\mathbf{1}_{\{x\ge 0,\ y\ge 0\}}
+\int_{-\infty}^{y}2e^{-t-u}\mathbf{1}_{\{0\le t\le u\}}\,du = 2e^{-t}\int_t^{y}e^{-u}\,du\,\mathbf{1}_{\{y\ge t\ge 0\}} \\
+=2e^{-t}(e^{-t}-e^{-y})\mathbf{1}_{\{y\ge t\ge 0\}} \\
+\therefore F(x,y)=\int_{0}^{x\wedge y}2\left(e^{-2t}-e^{-t-y}\right)dt\,\mathbf{1}_{\{x\wedge y\ge 0\}} \\
+=\left\{1-e^{-2(x\wedge y)}+2e^{-y}\left(e^{-(x\wedge y)}-1\right)\right\}\mathbf{1}_{\{x\ge 0,\ y\ge 0\}}
 $$
 
 ### 주변누적분포함수(Marginal CDF)
@@ -310,8 +279,6 @@ Y의 주변누적분포함수: $F_2(y)=P(Y\le y)$로 정의된다.
 $$
 F_1(x)=\lim_{y\to +\infty}F(x,y), \quad F_2(y)=\lim_{x\to +\infty}F(x,y)
 $$
-
-이다.
 
 #### 예시 2.1.6 (예시 2.1.5로부터 주변누적분포함수 구하기)
 $F(x,y)=\left\{1-e^{-2(x\wedge y)}+2e^{-y}\left(e^{-(x\wedge y)}-1\right)\right\}\mathbf{1}_{\{x\ge 0,\ y\ge 0\}}$로부터
@@ -332,11 +299,10 @@ $$
 
 로서 예시 2.1.4와 일치한다.
 
-### 정리 2.1.1 결합누적분포함수의 성질
+### 정리 2.1.1 결합누적분포함수의 성질 (Properties of Joint CDF)
 $F(x,y)=P(X\le x, Y\le y)$는 다음을 만족한다.  
 
 **(a) 증가성**  
-
 (i) 모든 $h>0,k>0$에 대해  
 
 $$
@@ -349,8 +315,9 @@ $$
 F(x_2,y_2)-F(x_1,y_2)-F(x_2,y_1)+F(x_1,y_1)\ge 0
 $$
 
-**(b) 전체변동(극한값)**  
+>증명: $P(x_1 \lt X \leq x_2, y_1 \lt Y \leq y_2) = F(x_2,y_2)-F(x_1,y_2)-F(x_2,y_1)+F(x_1,y_1) \geq 0$ □
 
+**(b) 전체변동(극한값)**  
 모든 $a,b$에 대해  
 
 $$
@@ -360,7 +327,6 @@ $$
 $$
 
 **(c) 오른쪽 연속성**  
-
 모든 $x,y$에 대해  
 
 $$
@@ -388,7 +354,6 @@ $$
 P(X=x, Y\le y)=F(x,y)-F(x-,y)
 $$
 
-로 주어진다.
 
 ## 2.2 결합확률분포의 특성치 *(Characteristics of Joint Distributions)*
 
@@ -546,8 +511,7 @@ $$
 $$
 
 **(7) 증명**  
-공분산의 성질 **(5)** 를 반복 적용하여 증명한다.
-
+공분산의 성질 **(5)** 를 반복 적용하여 증명한다.  
 먼저 첫 번째 합에 대해 성질 **(5)** 를 적용하면
 
 $$
@@ -555,12 +519,11 @@ $$
 = \sum_i a_i \mathrm{Cov}\left(X_i, \sum_j b_j Y_j\right)
 $$
 
-다음으로 두 번째 합에 대해서도 성질 **(5)**를 적용한다. 
+다음으로 두 번째 합에 대해서도 성질 **(5)** 를 적용한다. 
 고정된 $i$에 대하여
 
 $$
-\mathrm{Cov}\left(X_i, \sum_j b_j Y_j\right) 
-= \sum_j b_j \mathrm{Cov}(X_i, Y_j)
+\mathrm{Cov}\left(X_i, \sum_j b_j Y_j\right) = \sum_j b_j \mathrm{Cov}(X_i, Y_j)
 $$
 
 따라서 이 두 결과를 결합하면
@@ -848,17 +811,14 @@ $$
 
 $$
 E[X^2]=\frac{\partial^2}{\partial t_1^2}M(t_1,t_2)\Big|_{(0,0)}=\frac12,\quad
-E[Y^2]=\frac{\partial^2}{\partial t_2^2}M(t_1,t_2)\Big|_{(0,0)}=\frac72,\quad
+E[Y^2]=\frac{\partial^2}{\partial t_2^2}M(t_1,t_2)\Big|_{(0,0)}=\frac72,\\
 E[XY]=\frac{\partial^2}{\partial t_1\partial t_2}M(t_1,t_2)\Big|_{(0,0)}=1
 $$
 
 따라서
 
 $$
-\mathrm{Var}(X)=E[X^2]-E[X]^2=\frac12-\frac14=\frac14
-$$
-
-$$
+\mathrm{Var}(X)=E[X^2]-E[X]^2=\frac12-\frac14=\frac14 \\
 \mathrm{Var}(Y)=E[Y^2]-E[Y]^2=\frac72-\left(\frac32\right)^2=\frac72-\frac94=\frac54
 $$
 
@@ -876,7 +836,7 @@ $$
 
 $$
 \frac{\partial^2}{\partial t_1^2}C(t_1,t_2)\Big|_{(0,0)}=\mathrm{Var}(X)=\frac14,\quad
-\frac{\partial^2}{\partial t_2^2}C(t_1,t_2)\Big|_{(0,0)}=\mathrm{Var}(Y)=\frac54,\quad
+\frac{\partial^2}{\partial t_2^2}C(t_1,t_2)\Big|_{(0,0)}=\mathrm{Var}(Y)=\frac54,\\
 \frac{\partial^2}{\partial t_1\partial t_2}C(t_1,t_2)\Big|_{(0,0)}=\mathrm{Cov}(X,Y)=\frac14
 $$
 
@@ -999,11 +959,11 @@ $$
 $X=x$가 고정되었을 때, $y\mapsto f_{2|1}(y\mid x)$는 $Y$의 확률질량함수와 같은 성질을 만족한다.
 1. 비음성 *(Nonnegativity)*
 
-   $$   f_{2|1}(y\mid x)\ge 0,\ \forall y   $$
+   $$f_{2|1}(y\mid x)\ge 0,\ \forall y$$
 
 2. 전체합 1 *(Normalization)*
 
-   $$   \sum_y f_{2|1}(y\mid x)=1   $$
+   $$\sum_y f_{2|1}(y\mid x)=1$$
 
 (이 성질은 단순히 확률의 기본성질과 정의에서 즉시 따른다.)
 
@@ -1013,17 +973,17 @@ $X=x$가 고정되었을 때, $y\mapsto f_{2|1}(y\mid x)$는 $Y$의 확률질량
 
 구체적으로, 양수 $h$에 대하여
 
-$$P(c\le Y\le d\mid x\le X\le x+h) =\frac{P(c\le Y\le d,\ x\le X\le x+h)}{P(x\le X\le x+h)} $$
+$$P(c\le Y\le d\mid x\le X\le x+h) =\frac{P(c\le Y\le d,\ x\le X\le x+h)}{P(x\le X\le x+h)}$$
 
 이때 결합밀도 $f_{1,2}$, 주변밀도 $f_1$가 연속이면
 
 * 분자에서
   
-  $$  P(c\le Y\le d,\ x\le X\le x+h)  =\int_x^{x+h}\int_c^d f_{1,2}(s,y) dy ds  $$
+  $$P(c\le Y\le d,\ x\le X\le x+h)  =\int_x^{x+h}\int_c^d f_{1,2}(s,y) dy ds$$
 
 * 분모에서
   
-  $$  P(x\le X\le x+h)=\int_x^{x+h} f_1(s) ds  $$
+  $$P(x\le X\le x+h)=\int_x^{x+h} f_1(s) ds$$
 
 가 되고, $h\downarrow 0$ 극한에서 비율이 잘 정의되도록 만들 수 있다.
 
@@ -1037,15 +997,15 @@ $$f_{2|1}(y\mid x)=\frac{f_{1,2}(x,y)}{f_1(x)}$$
 $f_1(x)>0$인 고정된 $x$에 대해 다음이 성립한다.
 1. 비음성
    
-   $$   f_{2|1}(y\mid x)\ge 0,\ \forall y   $$
+   $$f_{2|1}(y\mid x)\ge 0,\ \forall y$$
 
 2. 적분이 1
    
-   $$   \int_{-\infty}^{\infty} f_{2|1}(y\mid x)dy=1   $$
+   $$\int_{-\infty}^{\infty} f_{2|1}(y\mid x)dy=1$$
 
 3. 구간확률
    
-   $$   P(c\le Y\le d\mid X=x)=\int_c^d f_{2|1}(y\mid x)dy   $$
+   $$P(c\le Y\le d\mid X=x)=\int_c^d f_{2|1}(y\mid x)dy$$
 
 #### 예 2.3.2 
 (예 2.1.2, 2.1.4에서)
@@ -1075,11 +1035,11 @@ $$
 임의의 구간 $[a,b]$, $[c,d]$에 대해
 * 이산형의 경우
   
-  $$  P(a\le X\le b,\ c\le Y\le d) = \sum_{a\le x\le b} P(c\le Y\le d\mid X=x)f_1(x)  $$
+  $$P(a\le X\le b,\ c\le Y\le d) = \sum_{a\le x\le b} P(c\le Y\le d\mid X=x)f_1(x)  $$
 
 * 연속형의 경우
   
-  $$  P(a\le X\le b,\ c\le Y\le d)
+  $$P(a\le X\le b,\ c\le Y\le d)
   =  \int_a^b P(c\le Y\le d\mid X=x)f_1(x)dx  $$
 
 #### 증명 (연속형)
@@ -1123,22 +1083,22 @@ $$\mu_{2|1}(x)=E(Y\mid X=x)$$
 로 표기한다.
 * 이산형:
 
-  $$  E(Y\mid X=x)=\sum_y yf_{2|1}(y\mid x)  $$
+  $$E(Y\mid X=x)=\sum_y yf_{2|1}(y\mid x)$$
 
 * 연속형:
 
-  $$  E(Y\mid X=x)=\int_{-\infty}^{\infty} yf_{2|1}(y\mid x)dy  $$
+  $$E(Y\mid X=x)=\int_{-\infty}^{\infty} yf_{2|1}(y\mid x)dy$$
 
 ### 조건부기대값 *(Conditional Expectation)*
 조건부평균은 $Y$ 자체의 함수 $g(Y)=Y$에 대한 조건부기대값의 특수한 경우다.  
 $X=x$인 조건에서 $Y$의 조건부밀도/질량함수가 $f_{2|1}(y\mid x)$일 때, 임의의 실값 함수 $g$에 대해
 * 이산형:
   
-  $$  E(g(Y)\mid X=x)=\sum_y g(y)f_{2|1}(y\mid x)  $$
+  $$E(g(Y)\mid X=x)=\sum_y g(y)f_{2|1}(y\mid x)$$
 
 * 연속형:
   
-  $$  E(g(Y)\mid X=x)=\int_{-\infty}^{\infty} g(y)f_{2|1}(y\mid x)dy  $$
+  $$E(g(Y)\mid X=x)=\int_{-\infty}^{\infty} g(y)f_{2|1}(y\mid x)dy$$
 
 로 정의한다.
 
@@ -1267,11 +1227,7 @@ $$
 $$
 
 ### 확률변수로서의 조건부기대값 *(Conditional Expectation as a Random Variable)*
-함수
-
-$$h(x)=E(g(Y)\mid X=x)$$
-
-를 정의하면, $X$는 확률변수이므로 $h(X)$도 확률변수가 된다. 이를
+함수 $h(x)=E(g(Y)\mid X=x)$ 를 정의하면, $X$는 확률변수이므로 $h(X)$도 확률변수가 된다. 이를
 
 $$E(g(Y)\mid X)=h(X)$$
 
@@ -1281,17 +1237,17 @@ $$E(g(Y)\mid X)=h(X)$$
 (가정: 적절한 적분가능성 조건이 필요.)  
 1. 전체기대값의 법칙 *(Law of Total Expectation)*
    
-   $$   E[E(Y\mid X)]=E(Y)   $$
+$$E[E(Y\mid X)]=E(Y)$$
 
 2. 타워 성질 *(Tower Property)*
     
-    $$    E[E(Y\mid X)\mid X]=E(Y\mid X)    $$
+$$E[E(Y\mid X)\mid X]=E(Y\mid X)$$
 
 3. 직교성/비상관 성질 *(Orthogonality / Uncorrelatedness)*  
    
-   $$   \forall v(X),\ \mathrm{Cov}(Y-E(Y\mid X),\ v(X))=0   $$
+$$\forall v(X),\ \mathrm{Cov}(Y-E(Y\mid X),\ v(X))=0$$
 
-   - 이는 $Y$에서 $X$로 설명 가능한 부분을 제거한 잔차(residual)가 $X$의 함수들과 비상관임을 의미한다.
+- 이는 $Y$에서 $X$로 설명 가능한 부분을 제거한 잔차(residual)가 $X$의 함수들과 비상관임을 의미한다.
 
 #### 증명 
 (1) (연속형)
@@ -1303,17 +1259,12 @@ E[E(Y\mid X)]
 =E(Y)
 $$
 
-(2)  
-$E(Y\mid X)$는 $X$의 함수이므로, $X=x$가 주어진 조건에서 $E(Y\mid X)$는 상수 $E(Y\mid x)$가 되므로, 
+(2) $E(Y\mid X)$는 $X$의 함수이므로, $X=x$가 주어진 조건에서 $E(Y\mid X)$는 상수 $E(Y\mid x)$가 되므로, 
 
 $$E[E(Y\mid X)\mid X=x]=E(Y\mid x)\cdot 1=E(Y\mid x)$$
 
-(3)  
-$Z=Y-E(Y\mid X)$라 두면, 조건부기대값의 정의상
-
-$$E(Z\mid X)=E(Y\mid X)-E(E(Y\mid X)\mid X)=E(Y\mid X)-E(Y\mid X)=0$$
-
-이므로 $E(Z)=E(E(Z\mid X))=0$  
+(3) $Z=Y-E(Y\mid X)$라 두면, 조건부기대값의 정의상  
+$E(Z\mid X)=E(Y\mid X)-E(E(Y\mid X)\mid X)=E(Y\mid X)-E(Y\mid X)=0$ 이므로 $E(Z)=E(E(Z\mid X))=0$  
 따라서
 
 $$
@@ -1342,10 +1293,13 @@ $$
 
 > 앞으로 확률변수의 합을 $X \oplus Y$로 표기할 때에는,  
 > 확률변수 $X$와 $Y$가 서로 **비상관(uncorrelated)** 임을 전제로 한다. 즉,
+>
 > $$\mathrm{Corr}(X,Y) = 0 \quad (\text{동치로 } \mathrm{Cov}(X,Y) = 0)$$
 > 
 > $\oplus$는 단순한 대수적 덧셈 $X+Y$가 아니라, **분산이 교차항 없이 분해되는 합**임을 나타내는 기호다.
+>
 > $$ X \oplus Y \implies \mathrm{Var}(X+Y) = \mathrm{Var}(X) + \mathrm{Var}(Y)$$
+>
 > 이는 일반적인 분산 공식
 >
 > $$ \mathrm{Var}(X+Y) = \mathrm{Var}(X) + \mathrm{Var}(Y) + 2\mathrm{Cov}(X,Y)$$
@@ -1364,15 +1318,14 @@ $$Y-u(X)=(Y-E(Y\mid X))\oplus(E(Y\mid X)-u(X))$$
 >이 분해가 $\oplus$로 가능함을 확인하자.  
 >$E(Y\mid X)-u(X)$는 $X$의 함수이므로, 정리 2.3.4(직교성 성질)에 의해
 >
->\mathrm{Cov}(Y-E(Y\mid X),\ E(Y\mid X)-u(X))=0$$
+>$$\mathrm{Cov}(Y-E(Y\mid X),\ E(Y\mid X)-u(X))=0$$
 >
 >가 성립한다. 따라서 두 항은 서로 비상관이며, $\oplus$ 표기가 정당하다.
 
 이제 양변의 제곱의 기댓값을 취하면, $\oplus$의 정의에 의해 분산이 가법적으로 분해되어
 
 $$
-E[(Y-u(X))^2]=E[(Y-E(Y\mid X))^2]+E[(E(Y\mid X)-u(X))^2] \\
-+ 2E[(Y-E(Y\mid X))(E(Y\mid X)-u(X))] \quad (\text{이 마지막 항은 0임})
+E[(Y-u(X))^2]=E[(Y-E(Y\mid X))^2]+E[(E(Y\mid X)-u(X))^2] \\ + 2E[(Y-E(Y\mid X))(E(Y\mid X)-u(X))] \quad (\text{이 마지막 항은 0임})
 $$
 
 두 번째 항은 항상 비음이므로
@@ -1406,17 +1359,10 @@ $Y-\mu$를 다음과 같이 분해한다:
 
 $$Y-\mu=(Y-E(Y\mid X))+(E(Y\mid X)-\mu)$$
 
-양변을 제곱하고 기댓값을 취하면
+양변을 제곱하고 기댓값을 취하면 $\mathrm{Var}(Y)=E[(Y-E(Y\mid X))^2]+E[(E(Y\mid X)-\mu)^2]+2E[(Y-E(Y\mid X))(E(Y\mid X)-\mu)]$
 
-$$
-\mathrm{Var}(Y)=E[(Y-E(Y\mid X))^2]+E[(E(Y\mid X)-\mu)^2]+2E[(Y-E(Y\mid X))(E(Y\mid X)-\mu)]
-$$
-
-정리 2.3.4(3)의 직교성 성질에 의해 교차항은
-
-$$
-E[(Y-E(Y\mid X))(E(Y\mid X)-\mu)]=\mathrm{Cov}(Y-E(Y\mid X),\ E(Y\mid X)-\mu)=0
-$$
+정리 2.3.4(3)의 직교성 성질에 의해 교차항은  
+$E[(Y-E(Y\mid X))(E(Y\mid X)-\mu)]=\mathrm{Cov}(Y-E(Y\mid X),\ E(Y\mid X)-\mu)=0$
 
 또한 정리 2.3.4(1)에 의해 $E(E(Y\mid X))=E(Y)=\mu$이므로
 
@@ -1428,9 +1374,7 @@ $$
 
 #### 예 2.3.8 *(Verification for the Beta-like example)*
 예 2.3.6에서 $E(Y\mid X)=\frac{1-X}{2},\quad \mathrm{Var}(Y\mid X)=\frac{(1-X)^2}{20}$이고,  
-앞 절들에서$E(X)=\frac{1}{3},\quad E(X^2)=\frac{1}{7},\quad \mathrm{Var}(X)=\frac{2}{63}$를 알고 있다.
-
-따라서
+앞 절들에서$E(X)=\frac{1}{3},\quad E(X^2)=\frac{1}{7},\quad \mathrm{Var}(X)=\frac{2}{63}$를 알고 있다. 따라서,
 
 $$
 \mathrm{Var}(E(Y\mid X))=\mathrm{Var}\left(\frac{1-X}{2}\right)=\frac{1}{4}\mathrm{Var}(X)=\frac{1}{4}\cdot\frac{2}{63}=\frac{1}{126} \\
@@ -1496,20 +1440,9 @@ $$
 \mathrm{Cov}(Y,Z)=\mathrm{Cov}(Y,X-E(X\mid Y))=0
 $$
 
-이므로 $Y$와 $Z$는 비상관이다.
+이므로 $Y$와 $Z$는 비상관이다. 따라서 정리 2.4.5에 의해 $\mathrm{Var}(Y+Z)=\mathrm{Var}(Y)+\mathrm{Var}(Z)$
 
-따라서 정리 2.4.5에 의해
-
-$$
-\mathrm{Var}(Y+Z)=\mathrm{Var}(Y)+\mathrm{Var}(Z)
-$$
-
-여기서 정리 2.3.7에 의해
-
-$$
-\mathrm{Var}(Z)=\mathrm{Var}(X-E(X\mid Y))=E[\mathrm{Var}(X\mid Y)]
-$$
-
+여기서 정리 2.3.7에 의해 $\mathrm{Var}(Z)=\mathrm{Var}(X-E(X\mid Y))=E[\mathrm{Var}(X\mid Y)]$  
 따라서
 
 $$
@@ -1555,6 +1488,8 @@ $$
 M_{X,Y}(t_1,t_2)=M_X(t_1)M_Y(t_2), \quad (t_1,t_2)\text{ in a neighborhood of }(0,0)
 $$
 
+$\forall t_i: -h_i < t_i < h_i \quad(\exists h_i>0)(i=1,2)$
+
 **(d) 확률측도 표현**
 
 $$
@@ -1567,38 +1502,28 @@ $$
 >**(b') 인수분해 기준 (Factorization Criterion)**  
 >결합확률밀도함수(또는 결합확률질량함수)가 $x$만의 함수와 $y$만의 함수의 곱으로 인수분해되면, 즉
 >
->$$
->f_{X,Y}(x,y) = g_1(x) \cdot g_2(y), \quad \forall x,y
->$$
+>$$f_{X,Y}(x,y) = g_1(x) \cdot g_2(y), \quad \forall x,y$$
 >
 >를 만족하는 비음함수 $g_1(x)$와 $g_2(y)$가 존재하면, $X$와 $Y$는 독립이다.
 >
 >**증명 (연속형의 경우)**  
 >항등식 양변을 모든 $x, y$에 대해 적분하면
 >
->$$
->\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} f_{X,Y}(x,y)\,dy\,dx 
->= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g_1(x)g_2(y)\,dy\,dx = 1
->$$
+>$$\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} f_{X,Y}(x,y)\,dy\,dx 
+>= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g_1(x)g_2(y)\,dy\,dx = 1$$
 >
 >이므로
 >
->$$
->\left(\int_{-\infty}^{\infty} g_1(x)\,dx\right)\left(\int_{-\infty}^{\infty} g_2(y)\,dy\right) = 1.
->$$
+>$$\left(\int_{-\infty}^{\infty} g_1(x)\,dx\right)\left(\int_{-\infty}^{\infty} g_2(y)\,dy\right) = 1$$
 >
 >따라서
 >
->$$
->f_{X,Y}(x,y) = g_1(x)g_2(y) 
->= \left\{\frac{g_1(x)}{\int g_1(x)\,dx}\right\}\left\{\frac{g_2(y)}{\int g_2(y)\,dy}\right\}
->$$
+>$$f_{X,Y}(x,y) = g_1(x)g_2(y) 
+>= \left\{\frac{g_1(x)}{\int g_1(x)\,dx}\right\}\left\{\frac{g_2(y)}{\int g_2(y)\,dy}\right\}$$
 >
 >로 쓸 수 있고, 각 중괄호 안의 함수는 적분이 1인 확률밀도함수이므로
 >
->$$
->f_{X,Y}(x,y) = f_X(x)f_Y(y)
->$$
+>$$f_{X,Y}(x,y) = f_X(x)f_Y(y)$$
 >
 >가 성립하여 (b)가 성립한다. □
 >
@@ -1656,6 +1581,7 @@ $$
 
 이므로 $X$와 $Y$는 독립이 아니다. □
 
+TODO:
 ### 정리 2.4.2 (독립 확률변수의 함수)
 
 $X$와 $Y$가 독립이면, 임의의 함수 $g_1, g_2$에 대하여
@@ -2294,17 +2220,15 @@ $$
 >
 >확률벡터 $\mathbf{A}, \mathbf{B}$와 상수행렬 $C$에 대해 다음이 성립한다.
 >
->$$
->\mathrm{Var}(\mathbf{A}+C\mathbf{B})
->=\mathrm{Var}(\mathbf{A})+C\mathrm{Var}(\mathbf{B})C^T
->+\mathrm{Cov}(\mathbf{A},\mathbf{B})C^T+C\mathrm{Cov}(\mathbf{B},\mathbf{A})
->$$
 >
->$$
->\mathrm{Var}(\mathbf{A}-C\mathbf{B})
+>$$\mathrm{Var}(\mathbf{A}+C\mathbf{B})
 >=\mathrm{Var}(\mathbf{A})+C\mathrm{Var}(\mathbf{B})C^T
->-\mathrm{Cov}(\mathbf{A},\mathbf{B})C^T-C\mathrm{Cov}(\mathbf{B},\mathbf{A})
->$$
+>+\mathrm{Cov}(\mathbf{A},\mathbf{B})C^T+C\mathrm{Cov}(\mathbf{B},\mathbf{A})$$
+>
+>$$\mathrm{Var}(\mathbf{A}-C\mathbf{B})
+>=\mathrm{Var}(\mathbf{A})+C\mathrm{Var}(\mathbf{B})C^T
+>-\mathrm{Cov}(\mathbf{A},\mathbf{B})C^T-C\mathrm{Cov}(\mathbf{B},\mathbf{A})$$
+>
 
 #### 증명
 
@@ -2432,17 +2356,7 @@ $$
 
 에서 $\mathrm{Cov}(X_i,X_j)=\mathrm{Cov}(X_j,X_i)$이므로 즉시 따른다.
 
-이제 임의의 $a\in\mathbb{R}^k$에 대해 $a^T\mathbf{X}$는 실수값 확률변수이므로
-
-$$
-\mathrm{Var}(a^T\mathbf{X})\ge0
-$$
-
-한편, 분산은 항상 비음이므로 정리 2.5.3(b)에 의해 
-
-$$
-\mathrm{Var(a^T\mathbf{X})} = a^T\mathrm{Var}(\mathbf{X})a \ge0
-$$
+이제 임의의 $a\in\mathbb{R}^k$에 대해 $a^T\mathbf{X}$는 실수값 확률변수이므로 $\mathrm{Var}(a^T\mathbf{X})\ge0$  한편, 분산은 항상 비음이므로 정리 2.5.3(b)에 의해 $\mathrm{Var(a^T\mathbf{X})} = a^T\mathrm{Var}(\mathbf{X})a \ge0$
 
 **참고: Statistics_02_분산행렬의 스펙트럼 분해와 기하학적 해석.md**
 
@@ -2463,8 +2377,7 @@ $$
 $\mathbf{0}$을 포함하는 어떤 열린집합에서
 
 $$
-M(t_1,\dots,t_k)
-=E\left(e^{t_1X_1+\cdots+t_kX_k}\right)
+M(t_1,\dots,t_k) =E\left(e^{t_1X_1+\cdots+t_kX_k}\right)
 $$
 
 가 유한하면 이를 $\mathbf{X}$의 **결합적률생성함수(joint moment generating function)** 라 한다.  
@@ -2536,16 +2449,13 @@ $$
 결합누율생성함수 $C(\mathbf{t})$에 대하여 다음이 성립한다.
 
 $$
-\left.
-\frac{\partial C(\mathbf{t})}{\partial t_i}
+\left| \frac{\partial C(\mathbf{t})}{\partial t_i}
 \right|_{t_1=\cdots=t_k=0}
-=E(X_i),
-
+=E(X_i)
 $$
 
 $$
-\left.
-\frac{\partial^2 C(\mathbf{t})}{\partial t_i\partial t_j}
+\left| \frac{\partial^2 C(\mathbf{t})}{\partial t_i\partial t_j}
 \right|_{t_1=\cdots=t_k=0}
 =\mathrm{Cov}(X_i,X_j)
 $$
@@ -2613,16 +2523,14 @@ $$
 로그함수의 멱급수 전개
 
 $$
--\log(1-A)=A+\frac{A^2}{2}+\frac{A^3}{3}+\cdots
-\quad(-1<A<1)
+-\log(1-A)=A+\frac{A^2}{2}+\frac{A^3}{3}+\cdots \quad(-1<A<1)
 $$
 
 를 이용하여 $C(\mathbf{t})$를 전개하면,
 일차항과 이차항의 계수로부터
 
 $$
-E(\mathbf{X})
-= 
+E(\mathbf{X}) = 
 \begin{pmatrix}
 1/3\\
 5/6\\
@@ -2711,19 +2619,12 @@ $$
 $$
 
 >이 분해가 $\oplus$로 가능함을 확인하자.  
->$E(\mathbf{Y}\mid \mathbf{X})-\mu$는 $\mathbf{X}$의 함수이므로, 정리 2.5.6(b)의 직교성 성질에 의해
->$$
->\mathrm{Cov}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}),\ E(\mathbf{Y}\mid \mathbf{X})-\mu)=\mathbf{0}
->$$
->가 성립한다. 따라서 두 항은 서로 비상관이며, $\oplus$ 표기가 정당하다.
+>$E(\mathbf{Y}\mid \mathbf{X})-\mu$는 $\mathbf{X}$의 함수이므로, 정리 2.5.6(b)의 직교성 성질에 의해 $\mathrm{Cov}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}),\ E(\mathbf{Y}\mid \mathbf{X})-\mu)=\mathbf{0}$ 가 성립한다. 따라서 두 항은 서로 비상관이며, $\oplus$ 표기가 정당하다.
 
 이제 양변에서 분산을 구하면, $\oplus$의 정의에 의해 분산이 가법적으로 분해되어
 
 $$
-\mathrm{Var}(\mathbf{Y})=\mathrm{Var}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus\mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X})-\mu)
-$$
-
-$$
+\mathrm{Var}(\mathbf{Y})=\mathrm{Var}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus\mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X})-\mu) \\
 =\mathrm{Var}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))+\mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X}))
 $$
 
@@ -2737,9 +2638,8 @@ $$
 조건부기댓값의 타워 성질과 정리 2.5.6(a)를 이용하면
 
 $$
-E[(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T]
-=E[E((\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T\mid \mathbf{X})] \\
-=E[\mathrm{Var}(\mathbf{Y}\mid \mathbf{X})]
+E[(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T] \\
+=E[E((\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T\mid \mathbf{X})] =E[\mathrm{Var}(\mathbf{Y}\mid \mathbf{X})]
 $$
 
 따라서
@@ -2796,22 +2696,15 @@ $$
 
 즉 $u(\mathbf{X})=E(\mathbf{Y}\mid \mathbf{X})$일 때, 그리고 그때에만 성립한다. □
 
-
+TODO:
 ### 추가: 최적 선형 예측 *(Optimal Linear Prediction)*
-
 $\mathbf{Y}$를 $\mathbf{X}$의 선형함수로 예측할 때, 평균제곱오차를 최소화하는 최적 선형 예측량은
 
 $$
 \widehat{\mathbf{Y}} = E(\mathbf{Y}) + \mathrm{Cov}(\mathbf{Y},\mathbf{X})[\mathrm{Var}(\mathbf{X})]^{-1}(\mathbf{X}-E(\mathbf{X}))
 $$
 
-여기서 **회귀행렬(regression matrix)** 는
-
-$$
-\mathbf{B} = \mathrm{Cov}(\mathbf{Y},\mathbf{X})[\mathrm{Var}(\mathbf{X})]^{-1}
-$$
-
-로 정의되며, 이는 다차원 다중회귀의 기본 형태이다.
+여기서 **회귀행렬(regression matrix)** 는 $\mathbf{B} = \mathrm{Cov}(\mathbf{Y},\mathbf{X})[\mathrm{Var}(\mathbf{X})]^{-1}$ 로 정의되며, 이는 다차원 다중회귀의 기본 형태이다.
 
 #### 증명
 
@@ -2821,7 +2714,9 @@ $$
 L(\mathbf{a},\mathbf{B}) = E\|\mathbf{Y}-\mathbf{a}-\mathbf{B}\mathbf{X}\|^2
 $$
 
-를 최소화한다. $\mathbf{a}$와 $\mathbf{B}$의 각 성분에 대해 미분하면  
+를 최소화한다.  
+a,B에 대해 이차식(quadratic function), Var(X)가 positive definite이면 이차식이 strictly convex하므로, $\mathbf{a}$와 $\mathbf{B}$에 대한 편미분을 구하여 최적해를 찾는다.
+
 첫째, $\mathbf{a}$에 대한 미분:
 
 $$
@@ -2836,17 +2731,38 @@ $$
 \frac{\partial L}{\partial \mathrm{vec}(\mathbf{B})} = -2E[(\mathbf{Y}-\mathbf{a}-\mathbf{B}\mathbf{X})\mathbf{X}^T] = \mathbf{0}
 $$
 
-이로부터
+앞서 구한 $\mathbf{a}$를 대입하면, 
 
 $$
-E[(\mathbf{Y}-E(\mathbf{Y})+\mathbf{B}E(\mathbf{X})-\mathbf{B}\mathbf{X})\mathbf{X}^T] = \mathbf{0} \\
-\mathrm{Cov}(\mathbf{Y},\mathbf{X})-\mathbf{B}\mathrm{Var}(\mathbf{X}) = \mathbf{0}
+E[(\mathbf{Y}-E(\mathbf{Y})+\mathbf{B}E(\mathbf{X})-\mathbf{B}\mathbf{X})\mathbf{X}^T] = \mathbf{0}\\
+E[(\mathbf{Y}-E(\mathbf{Y}))\mathbf{X}^T] - E[\mathbf{B}(\mathbf{X}-E(\mathbf{X}))\mathbf{X}^T] = \mathbf{0} \\
+E[(\mathbf{Y}-E(\mathbf{Y}))\mathbf{X}^T] - \mathbf{B}E[(\mathbf{X}-E(\mathbf{X}))\mathbf{X}^T] = \mathbf{0}
 $$
+
+**첫 번째 항**  
+$E[(\mathbf{Y}-E(\mathbf{Y}))\mathbf{X}^T]$에서 $\mathbf{X}=(\mathbf{X}-E(\mathbf{X}))+E(\mathbf{X})$를 대입하면
+
+$$
+E[(\mathbf{Y}-E(\mathbf{Y}))(\mathbf{X}-E(\mathbf{X}))^T] + E[\mathbf{Y}-E(\mathbf{Y})]E[\mathbf{X}]^T
+$$
+
+$E[\mathbf{Y}-E(\mathbf{Y})]=\mathbf{0}$이므로 두 번째 항은 0이므로 $\mathrm{Cov}(\mathbf{Y},\mathbf{X})$
+
+**두 번째 항**
+
+$E[(\mathbf{X}-E(\mathbf{X}))\mathbf{X}^T]$에서 $\mathbf{X}=(\mathbf{X}-E(\mathbf{X}))+E(\mathbf{X})$를 대입하면
+
+$$
+E[(\mathbf{X}-E(\mathbf{X}))(\mathbf{X}-E(\mathbf{X}))^T] + E[(\mathbf{X}-E(\mathbf{X}))]E[\mathbf{X}]^T
+$$
+
+두 번째 항은 0이므로 $\mathrm{Var}(\mathbf{X})$
 
 따라서
 
 $$
-\mathbf{B} = \mathrm{Cov}(\mathbf{Y},\mathbf{X})[\mathrm{Var}(\mathbf{X})]^{-1}
+\mathrm{Cov}(\mathbf{Y},\mathbf{X}) - \mathbf{B}\mathrm{Var}(\mathbf{X}) = \mathbf{0} \\
+\therefore \mathbf{B} = \mathrm{Cov}(\mathbf{Y},\mathbf{X})[\mathrm{Var}(\mathbf{X})]^{-1}
 $$
 
 결과적으로
@@ -2888,17 +2804,17 @@ $$
 >독립성을 판정할 때 반드시 주변확률밀도함수나 주변적률생성함수를 명시적으로 구할 필요는 없다.
 >
 >결합확률밀도함수가 각 확률벡터에만 의존하는 함수들의 곱으로 인수분해되면, 즉
->$$
->f_{1,\dots,n}(\mathbf{x}_1,\dots,\mathbf{x}_n) = g_1(\mathbf{x}_1) \cdot g_2(\mathbf{x}_2) \cdots g_n(\mathbf{x}_n)
->$$
+>
+>$$f_{1,\dots,n}(\mathbf{x}_1,\dots,\mathbf{x}_n) = g_1(\mathbf{x}_1) \cdot g_2(\mathbf{x}_2) \cdots g_n(\mathbf{x}_n)$$
+>
 >를 만족하는 비음함수 $g_1,\dots,g_n$이 존재하면, $\mathbf{X}_1,\dots,\mathbf{X}_n$은 서로 독립이다.
 >
 >이는 2차원의 경우(정리 2.4.1의 인수분해 기준)와 동일한 원리이며, 각 $g_i$를 적절히 정규화하면 주변확률밀도함수를 얻을 수 있다.
 >
 >마찬가지로 결합적률생성함수가
->$$
->M_{1,\dots,n}(\mathbf{t}_1,\dots,\mathbf{t}_n) = h_1(\mathbf{t}_1) \cdot h_2(\mathbf{t}_2) \cdots h_n(\mathbf{t}_n)
->$$
+>
+>$$M_{1,\dots,n}(\mathbf{t}_1,\dots,\mathbf{t}_n) = h_1(\mathbf{t}_1) \cdot h_2(\mathbf{t}_2) \cdots h_n(\mathbf{t}_n)$$
+>
 >형태로 인수분해되면, 각 $h_i$가 주변적률생성함수가 되므로 독립성이 성립한다.
 
 ### 정리 2.5.10 독립인 다차원 확률변수들의 성질 *(Properties of Independent Random Variables)*
@@ -2912,17 +2828,13 @@ $$
 독립인 확률변수 $X_1,\dots,X_n$에 대하여
 
 $$
-\mathrm{Var}(X_1+\cdots+X_n) =\mathrm{Var}(X_1)+\cdots+\mathrm{Var}(X_n)
-$$
-
-$$
+\mathrm{Var}(X_1+\cdots+X_n) =\mathrm{Var}(X_1)+\cdots+\mathrm{Var}(X_n) \\
 M_{X_1+\cdots+X_n}(t) = M_{X_1}(t)\cdots M_{X_n}(t)
 $$
 
 #### 증명
 
-**분산의 경우**
-
+**분산의 경우**  
 분산은 공분산의 특수한 경우이므로
 $\mathrm{Var}(Y)=\mathrm{Cov}(Y,Y)$
 를 이용한다. 따라서
@@ -2947,8 +2859,7 @@ $$
 =\sum_{i=1}^n \mathrm{Var}(X_i)
 $$
 
-**적률생성함수의 경우**
-
+**적률생성함수의 경우**  
 적률생성함수의 정의에 의해
 
 $$
