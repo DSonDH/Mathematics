@@ -245,6 +245,67 @@ C_{1n} & C_{2n} & \cdots & C_{nn}
 $$\det\begin{pmatrix} a_1 + b_1 \\ a_2 \\ \vdots \end{pmatrix} = \det\begin{pmatrix} a_1 \\ a_2 \\ \vdots \end{pmatrix} + \det\begin{pmatrix} b_1 \\ a_2 \\ \vdots \end
 {pmatrix}$$
 
+#### 행렬식의 곱 (Product of Determinants)
+
+정사각행렬 $A$, $B$에 대해 다음이 성립한다:
+
+$$\det(AB) = \det(A)\det(B)$$
+
+**증명** (기본 행 연산을 이용한 증명):
+
+행렬 $A$를 행 소거를 통해 상삼각행렬 $U$로 변환할 수 있다:
+
+$$A = L_1 L_2 \cdots L_k U$$
+
+여기서 $L_i$는 기본연산행렬이다. 각 기본연산행렬의 행렬식은:
+- 한 행에 상수배: $\det(L_i) = c$ (상수)
+- 행 교환: $\det(L_i) = -1$
+- 한 행을 다른 행에 더함: $\det(L_i) = 1$
+
+따라서:
+
+$$\det(A) = \det(L_1) \cdots \det(L_k) \det(U)$$
+
+마찬가지로 $B = M_1 M_2 \cdots M_m V$로 표현하면:
+
+$$AB = L_1 \cdots L_k U M_1 \cdots M_m V$$
+
+그러므로:
+
+$$\det(AB) = \det(L_1) \cdots \det(L_k) \det(U) \det(M_1) \cdots \det(M_m) \det(V) = \det(A)\det(B)$$
+
+**따름정리 1**: $\det(A^n) = [\det(A)]^n$
+
+**따름정리 2**: $\det(cA) = c^n \det(A)$ ($A$가 $n \times n$ 행렬)
+
+**따름정리 3**: $A, B$가 정칙행렬이면
+
+$$\det(A^{-1}) = \frac{1}{\det(A)}, \quad \det(AB) = \det(A)\det(B)$$
+
+**응용: 직교행렬의 행렬식**
+
+$A$가 직교행렬이면 $A^TA = I$이므로:
+
+$$\det(A^TA) = \det(I) = 1 \\
+\det(A^T)\det(A) = 1 \\
+[\det(A)]^2 = 1$$
+
+따라서 **직교행렬의 행렬식은 $\pm 1$이다**.
+
+**응용: 특이값 분해(SVD)의 행렬식**
+
+$A = U\Sigma V^T$로 분해되면 ($U, V$는 직교행렬):
+
+$$\det(A) = \det(U)\det(\Sigma)\det(V^T) = (\pm 1) \cdot \prod_{i=1}^{r} \sigma_i \cdot (\pm 1) = \pm \prod_{i=1}^{r} \sigma_i$$
+
+여기서 $\sigma_i$는 특이값이다.
+
+**주의: 일반적으로 $\det(A+B) \neq \det(A) + \det(B)$**
+
+$\det$는 곱셈에서만 분배법칙이 성립한다.
+
+
+
 ### 반데르몬드 행렬식 (Vandermonde Determinant)
 **정의**  
 서로 다른 수 $x_1, x_2, \ldots, x_n$에 대한 반데르몬드 행렬(Vandermonde matrix) 에서,  
@@ -501,15 +562,23 @@ $$E[\text{RSS}] = E[\mathbf{e}^\top (I - \Pi_X) \mathbf{e}] = \operatorname{trac
 
 $$\hat{\sigma}^2 = \frac{\text{RSS}}{n-p}$$
 
-### 전치와 덧셈
+### 전치
 
 $$(A + B)^T = A^T + B^T$$
-
-### 전치와 곱셈
 
 $$(ABC)^T = C^T B^T A^T$$
 
 일반적으로 $(A_1 A_2 \cdots A_n)^T = A_n^T \cdots A_2^T A_1^T$
+
+#### 랭크-1 행렬 $ab^T$의 제곱
+
+$a,b \in \mathbb{R}^{m}$ (열벡터)라 두면 $ab^T$는 $m\times m$ 행렬이고,
+
+$$
+(ab^T)(ab^T)=a(b^Ta)b^T=(b^Ta)\,ab^T
+$$
+
+여기서 $b^Ta$는 $1\times1$ 스칼라이므로 행렬곱에서 자유롭게 앞으로 뺄 수 있다. 
 
 ### 분할행렬의 곱셈
 $A = \begin{pmatrix} A_{11} & A_{12} \\ A_{21} & A_{22} \end{pmatrix}$, $B = \begin{pmatrix} B_{11} \\ B_{21} \end{pmatrix}$일 때
