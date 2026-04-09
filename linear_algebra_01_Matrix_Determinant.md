@@ -562,6 +562,75 @@ $$E[\text{RSS}] = E[\mathbf{e}^\top (I - \Pi_X) \mathbf{e}] = \operatorname{trac
 
 $$\hat{\sigma}^2 = \frac{\text{RSS}}{n-p}$$
 
+#### 대각합(Trace)과 계수(Rank)의 관계
+
+**멱등행렬에서의 대각합-계수 정리**  
+정사각행렬 $P$가 **멱등행렬** ($P^2 = P$)이면:
+
+$$\text{rank}(P) = \text{tr}(P)$$
+
+**증명**:
+
+멱등행렬 $P$는 고유값이 0 또는 1만 가진다. (∵ $P^2 = P$로부터 $\lambda^2 = \lambda$, 즉 $\lambda(\lambda - 1) = 0$)
+
+$P$를 대각화하면:
+
+$$P = QDQ^{-1}$$
+
+여기서 대각행렬 $D = \text{diag}(\underbrace{1, 1, \ldots, 1}_{r \text{개}}, \underbrace{0, 0, \ldots, 0}_{n-r \text{개}})$이고 $r = \text{rank}(P)$
+
+따라서:
+
+$$\text{tr}(P) = \text{tr}(QDQ^{-1}) = \text{tr}(DQ^{-1}Q) = \text{tr}(D) = r = \text{rank}(P)$$
+
+**예시**:  
+중심화행렬 $C_n = I - \frac{1}{n}\mathbf{1}\mathbf{1}^T$에서:
+- $C_n^2 = C_n$ (멱등성)
+- $\text{tr}(C_n) = \text{tr}(I) - \frac{1}{n}\text{tr}(\mathbf{1}\mathbf{1}^T) = n - \frac{1}{n} \cdot n = n - 1$
+- $\text{rank}(C_n) = n - 1$ (고유값: $n-1$개의 1, 1개의 0)
+
+**일반 정사각행렬에서의 대각합-계수 관계**  
+일반적인 정사각행렬 $A$에 대해서는 다음이 성립한다:
+
+$$\text{rank}(A) = \sum_{i=1}^{n} \mathbf{1}_{e_i(A) \neq 0}$$
+
+(고유값이 0이 아닌 개수)
+
+$$\text{tr}(A) = \sum_{i=1}^{n} e_i(A)$$
+
+(모든 고유값의 합)
+
+따라서:
+- **$\text{rank}(A) \neq \text{tr}(A)$ 일반적으로**
+- **$\text{rank}(A) = \text{tr}(A) \Leftrightarrow$ 멱등행렬**
+
+**정사영행렬에서의 응용**  
+정사영행렬 $\Pi = X(X^TX)^{-1}X^T$ ($X$는 $n \times p$ 열 최대계수 행렬)에서:
+
+$$\text{rank}(\Pi) = \text{tr}(\Pi) = p$$
+
+**기하학적 의미**:
+- $\Pi$는 멱등행렬이므로 대각합 = 계수
+- $p$: 사영되는 부분공간의 차원
+- $\text{tr}(\Pi) = p$는 고유값이 $p$개의 1과 $(n-p)$개의 0을 가짐을 의미
+
+**잔차사영행렬에서의 응용**  
+$M = I - \Pi = I - X(X^TX)^{-1}X^T$ (여사영)에서:  
+$\text{rank}(M) = \text{tr}(M) = n - p$
+
+이는 회귀분석의 자유도(degrees of freedom)와 일치한다:  
+$\text{RSS의 자유도} = n - p = \text{tr}(M)$
+
+**양정치 부분의 계수**  
+대칭행렬 $A$의 양정치 고유값 개수: rank(A)  
+(∵ 대칭행렬의 0이 아닌 고유값은 모두 양정치 또는 음정치의 부호를 가짐)
+
+**정규화 추적(Normalized Trace)**  
+$n \times n$ 행렬 $A$에서: $\frac{\text{tr}(A)}{n} = \text{평균 고유값}$ 
+특히 정사영행렬 $\Pi$에서: $\frac{\text{tr}(\Pi)}{n} = \frac{p}{n}$ 
+이는 데이터의 $p/n$ 비율이 설명되는 정도를 나타낸다.
+
+
 ### 전치
 
 $$(A + B)^T = A^T + B^T$$
@@ -951,6 +1020,50 @@ $$S_{WW} = \sum_{i=1}^n (W_i-\bar W)^2 = W^TW-\frac{(\mathbf{1}^TW)^2}{\mathbf{1
 $$S_{WW} = W^T \left(I-\mathbf{1}(\mathbf{1}^T\mathbf{1})^{-1}\mathbf{1}^T\right)W = W^T\left(I-\frac{1}{n} \mathbf{1}\mathbf{1}^T\right)W = W^T C_n W$$
 
 즉, 편차제곱합은 중심화행렬 $C_n$에 의한 이차형식으로 정리된다.
+
+### 중심화행렬을 이용한 편차제곱합과 공분산의 표현
+
+벡터 $Z = (Z_1, \ldots, Z_n)^T$, $W = (W_1, \ldots, W_n)^T$라 하고,
+
+$$M_1 = I - \frac{1}{n}\mathbf{1}\mathbf{1}^T$$
+
+를 중심화행렬(centering matrix)이라 하면, 다음과 같이 표현할 수 있다:
+
+**편차제곱합**:
+
+$$S_{ZZ} = \sum_{i=1}^{n}(Z_i - \bar{Z})^2 = Z^T M_1 Z$$
+
+$$S_{WW} = \sum_{i=1}^{n}(W_i - \bar{W})^2 = W^T M_1 W$$
+
+**공분산(편차곱의 합)**:
+
+$$S_{ZW} = \sum_{i=1}^{n}(Z_i - \bar{Z})(W_i - \bar{W}) = Z^T M_1 W$$
+
+**해석**:
+* 중심화행렬 $M_1$은 벡터의 각 성분에서 평균을 제거하는 역할을 한다
+* $M_1 Z$는 $Z$를 중심화한 벡터 $(Z_1 - \bar{Z}, \ldots, Z_n - \bar{Z})^T$를 생성한다
+* 편차제곱합과 공분산은 중심화행렬을 이용한 이차형식으로 간결하게 표현된다
+
+**응용: 표본상관계수**
+
+표본상관계수(sample correlation coefficient)는 다음과 같이 표현된다:
+
+$$r_{ZW} = \frac{S_{ZW}}{\sqrt{S_{ZZ} \cdot S_{WW}}} = \frac{Z^T M_1 W}{\sqrt{Z^T M_1 Z \cdot W^T M_1 W}}$$
+
+**응용: 정규화 편차제곱합과 F-통계량**
+
+회귀분석에서 총편차제곱합(TSS), 회귀제곱합(RSS), 잔차제곱합(ESS)을 분해할 때:
+
+$$Y^T M_1 Y = \hat{Y}^T M_1 \hat{Y} + e^T e$$
+
+여기서 $\hat{Y} = \Pi_X Y$는 예측값, $e = (I - \Pi_X)Y$는 잔차, $\Pi_X$는 정사영행렬이다.
+
+**성질**:
+* $M_1 \mathbf{1} = \mathbf{0}$ (중심화행렬은 상수벡터를 영벡터로 변환)
+* $M_1^2 = M_1$ (멱등성)
+* $M_1^T = M_1$ (대칭성)
+* $\text{rank}(M_1) = n-1$ (자유도)
+* $\text{tr}(M_1) = n - 1$ (대각합 = 계수 = 자유도)
 
 
 ## (3) 멱등행렬 (Idempotent Matrix)

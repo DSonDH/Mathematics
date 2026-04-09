@@ -241,6 +241,51 @@ $$x_i=(x_i-\bar{x})+\bar{x}$$
 $$\sum (x_i-\bar{x})(y_i-\bar{y}) 
 = \sum (x_i y_i - x_i \bar{y} - \bar{x} y_i + \bar{x}\bar{y}) = \sum x_i y_i - n\bar{x}\bar{y}$$
 
+### 중심화행렬을 이용한 편차제곱합과 공분산의 표현
+
+벡터 $Z = (Z_1, \ldots, Z_n)^T$, $W = (W_1, \ldots, W_n)^T$라 하고,
+
+$$M_1 = I - \frac{1}{n}\mathbf{1}\mathbf{1}^T$$
+
+를 중심화행렬(centering matrix)이라 하면, 다음과 같이 표현할 수 있다:
+
+**편차제곱합**:
+
+$$S_{ZZ} = \sum_{i=1}^{n}(Z_i - \bar{Z})^2 = Z^T M_1 Z$$
+
+$$S_{WW} = \sum_{i=1}^{n}(W_i - \bar{W})^2 = W^T M_1 W$$
+
+**공분산(편차곱의 합)**:
+
+$$S_{ZW} = \sum_{i=1}^{n}(Z_i - \bar{Z})(W_i - \bar{W}) = Z^T M_1 W$$
+
+**해석**:
+* 중심화행렬 $M_1$은 벡터의 각 성분에서 평균을 제거하는 역할을 한다
+* $M_1 Z$는 $Z$를 중심화한 벡터 $(Z_1 - \bar{Z}, \ldots, Z_n - \bar{Z})^T$를 생성한다
+* 편차제곱합과 공분산은 중심화행렬을 이용한 이차형식으로 간결하게 표현된다
+
+**응용: 표본상관계수**
+
+표본상관계수(sample correlation coefficient)는 다음과 같이 표현된다:
+
+$$r_{ZW} = \frac{S_{ZW}}{\sqrt{S_{ZZ} \cdot S_{WW}}} = \frac{Z^T M_1 W}{\sqrt{Z^T M_1 Z \cdot W^T M_1 W}}$$
+
+**응용: 정규화 편차제곱합과 F-통계량**
+
+회귀분석에서 총편차제곱합(TSS), 회귀제곱합(RSS), 잔차제곱합(ESS)을 분해할 때:
+
+$$Y^T M_1 Y = \hat{Y}^T M_1 \hat{Y} + e^T e$$
+
+여기서 $\hat{Y} = \Pi_X Y$는 예측값, $e = (I - \Pi_X)Y$는 잔차, $\Pi_X$는 정사영행렬이다.
+
+**성질**:
+* $M_1 \mathbf{1} = \mathbf{0}$ (중심화행렬은 상수벡터를 영벡터로 변환)
+* $M_1^2 = M_1$ (멱등성)
+* $M_1^T = M_1$ (대칭성)
+* $\text{rank}(M_1) = n-1$ (자유도)
+* $\text{tr}(M_1) = n - 1$ (대각합 = 계수 = 자유도)
+
+
 ## 5. 합을 평균으로 바꾸기 (Sum-Mean Conversion)
 
 수리통계에서 거의 항상 등장한다.
@@ -604,12 +649,43 @@ $$\text{Var}(X)
 
 ## 22. 대칭성 이용 (Symmetry)
 
-$$\int_{-\infty}^{\infty} x \phi(x)dx = 0 \quad (\phi: \text{대칭 pdf})$$
+### 기본 형태
+
+확률밀도함수 $\phi(x)$가 0을 중심으로 대칭일 때:
+
+$$\int_{-\infty}^{\infty} x \phi(x)dx = 0 \quad (\text{홀함수와 짝함수의 곱})$$
+
+**증명**: $\phi(-x) = \phi(x)$ (짝함수)이고, $x$는 홀함수이므로 $x\phi(x)$는 홀함수. 따라서 대칭 구간에서의 적분은 0.
+
+### 확장: 차수별 정리
+
+$Z \sim N(0,1)$, $\phi(z) = \frac{1}{\sqrt{2\pi}}e^{-z^2/2}$ (표준정규분포)
+
+| 차수 | 적분 | 성질 |
+|------|------|------|
+| 1차 | $\int z \phi(z)dz = 0$ | 홀함수 |
+| 2차 | $\int z^2 \phi(z)dz = 1$ | 짝함수 ✓ |
+| 3차 | $\int z^3 \phi(z)dz = 0$ | 홀함수 |
+| 4차 | $\int z^4 \phi(z)dz = 3$ | 짝함수 ✓ |
+
+**일반 규칙**
+- 홀수 차: $E[Z^{2k+1}] = 0$ (대칭성)
+- 짝수 차: $E[Z^{2k}] = (2k-1)!! = (2k-1) \times (2k-3) \times \cdots \times 3 \times 1$
+
+### 혼합 항의 소거
+
+$X, Y$가 모두 0 중심 대칭 분포를 따를 때:
+
+$$E[XY] \text{ 계산 시 홀함수 항은 소거}$$
+
+예: $E[X(X^2-1)] = E[X^3] - E[X] = 0 - 0 = 0$
 
 ### 활용
 
-* 기댓값 계산 단순화
-* 모멘트 계산
+* 기댓값 계산 단순화 (홀함수 항 제거)
+* 모멘트 계산 (짝수 차만 남음)
+* 다변량 정규분포의 고차 모멘트
+* 정규성 검정: skewness = 0, kurtosis = 3
 
 
 ## 23. 기댓값의 미분적분 (Differentiation Under Integration)
@@ -909,6 +985,39 @@ $$\frac{\partial f}{\partial \mathbf{X}} = \begin{pmatrix}
 
 # 주요 부등식 정리 (Summary of Key Inequalities)
 
+## 로그 부등식 (Logarithmic Inequality)
+
+모든 $t \geq 0$에 대해 $\log t \leq t - 1$  
+등호는 $t = 1$일 때만 성립.
+
+**증명**
+
+$f(t) = t - 1 - \log t$로 정의하면
+
+$$f'(t) = 1 - \frac{1}{t} = \frac{t-1}{t}$$
+
+- $0 < t < 1$일 때 $f'(t) < 0$ (감소)
+- $t > 1$일 때 $f'(t) > 0$ (증가)
+
+따라서 $t = 1$에서 최솟값 $f(1) = 0$을 가지므로 $f(t) \geq 0$, 즉
+
+$$\log t \leq t - 1$$
+
+**활용**
+
+- KL divergence 비음성 증명
+- 정보이론 부등식 기초
+- MLE 수렴성 증명
+- Gibbs 부등식의 선행 정리
+
+**확장형**
+
+$t > 0$에 대해
+
+$$\log t \leq \frac{t}{\alpha} - 1 - \log \alpha \quad (\alpha > 0)$$
+
+치환 $t \to t/\alpha$를 사용하면 일반화 가능.
+
 ## 삼각부등식 (Triangle Inequality)
 임의의 실수 $a, b$에 대해
 
@@ -921,6 +1030,12 @@ $$
 $$
 |X + Y| \leq |X| + |Y| \implies E[|X + Y|] \leq E[|X|] + E[|Y|]
 $$
+
+## 산술 기하 조화 부등식 (AM-GM-HM Inequality)
+양의 실수 $a, b$에 대해 
+
+$$\sqrt{ab} \leq \frac{a+b}{2} \leq \frac{2}{\frac{1}{a} + \frac{1}{b}}$$
+
 
 ## 절댓값 차이 부등식
 임의의 실수 $a, b$에 대해
