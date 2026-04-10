@@ -13,15 +13,9 @@ $$
 \quad n \to \infty
 $$
 
-이는 앞선 장(제3장 제6절)에서 이미 소개된 바 있다.
-
-### 베르누이 표본과 표본비율의 정규근사
-확률변수 $X_1, X_2, \dots, X_n$이 서로 독립이고 동일한 베르누이분포 Bernoulli$(p)$를 따른다고 하자.
-이때 불량품의 총 개수는
-
-$$X_1 + \cdots + X_n \sim \text{Binomial}(n,p)$$
-
-를 따른다.
+이는 앞선 장(제3장 제6절)에서 이미 소개된 바 있다.  
+한편, 확률변수 $X_1, X_2, \dots, X_n$이 서로 독립이고 동일한 베르누이분포 $Bernoulli(p)$를 따른다고 하자.
+이때 불량품의 총 개수는 $X_1 + \cdots + X_n \sim \text{Binomial}(n,p)$ 를 따른다.
 
 표준정규분포 $N(0,1)$를 따르는 확률변수 $Z$에 대하여 다음이 성립한다.
 
@@ -79,11 +73,7 @@ $$\frac{\sqrt{n}(\bar X_n-\mu)}{\sigma} = \frac{(X_1+\cdots+X_n)/n - \mu}{\sigma
 
 이라 하자.
 
-누적분포함수 대신 적률생성함수를 이용하여, 위 확률변수의 적률생성함수가 표준정규분포의 적률생성함수
-
-$$\mathrm{mgf}_Z(t)=\exp(t^2/2)$$
-
-로 수렴함을 보이면 충분하다. 즉,
+누적분포함수 대신 적률생성함수를 이용하여, 위 확률변수의 적률생성함수가 표준정규분포의 적률생성함수 $\mathrm{mgf}_Z(t)=\exp(t^2/2)$ 로 수렴함을 보이면 충분하다. 즉,
 
 $$\lim_{n\to\infty} \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t) = \mathrm{mgf}_Z(t) = \exp(t^2/2)$$
 
@@ -91,14 +81,10 @@ $$\lim_{n\to\infty} \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t) = \mathrm{mg
 
 $$
 \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t)
-= E\left[
-\exp\left(
+= E\left[\exp\left(
 \frac{t}{\sqrt{n}}\sum_{i=1}^n \frac{X_i-\mu}{\sigma}
-\right)
-\right]
-= \left[
-\mathrm{mgf}_{(X_1-\mu)/\sigma}\left(\frac{t}{\sqrt{n}}\right)
-\right]^n
+\right)\right]
+= \left[\mathrm{mgf}_{(X_1-\mu)/\sigma}\left(\frac{t}{\sqrt{n}}\right)\right]^n
 $$
 
 $m(s)=\mathrm{mgf}_{(X_1-\mu)/\sigma}(s)$라 두면 $Y=\frac{X_1-\mu}{\sigma}$라 하면 $m_Y^{(k)}(s) = E(Y^k e^{sY})$이므로, 테일러 전개로
@@ -117,26 +103,14 @@ $$= 1+\frac{1}{2}\frac{t^2}{n}+R_{n,t},\quad \lim_{n\to\infty} nR_{n,t}=0$$
 $$
 \log \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t)
 = n\log\left(1+\frac{1}{2n}t^2+R_{n,t}\right)
-= \frac{1}{2}t^2 + nr_{n,t},
-\quad \lim_{n\to\infty}nr_{n,t}=0
+= \frac{1}{2}t^2 + nr_{n,t}, \quad \lim_{n\to\infty}nr_{n,t}=0 \\
+\therefore \lim_{n\to\infty} \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t) = \exp(t^2/2)
 $$
-
-이므로
-
-$$
-\lim_{n\to\infty}
-\mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t)
-= \exp(t^2/2)
-$$
-
-가 성립한다.
 
 >각주  
 >일반적으로 확률변수열 $Z_n$의 적률생성함수가 어떤 열린 구간에서 $Z$의 적률생성함수로 수렴하고, $Z$의 누적분포함수가 연속이면
 >
->$$
->\lim_{n\to\infty} P(Z_n\le x)=P(Z\le x)
->$$
+>$$\lim_{n\to\infty} P(Z_n\le x)=P(Z\le x)$$
 >
 >가 성립하는 것이 알려져 있다.
 
@@ -144,20 +118,11 @@ $$
 
 **(a) 포아송분포의 정규근사**
 
-서로 독립이고 $Poisson(\lambda)$를 따르는 $X_1,\dots,X_n$에 대해
-
-$$
-E(X_1)=\mathrm{Var}(X_1)=\lambda
-$$
-
+서로 독립이고 $Poisson(\lambda)$를 따르는 $X_1,\dots,X_n$에 대해 $E(X_1)=\mathrm{Var}(X_1)=\lambda$  
 중심극한정리에 의해
 
 $$
-\lim_{n\to\infty}
-P\left(
-\frac{(X_1+\cdots+X_n)/n-\lambda}{\sqrt{\lambda/n}} \le x
-\right)
-= P(Z\le x)
+\lim_{n\to\infty} P\left(\frac{(X_1+\cdots+X_n)/n-\lambda}{\sqrt{\lambda/n}} \le x\right) = P(Z\le x)
 $$
 
 또한 $X_1+\cdots+X_n\sim\text{Poisson}(n\lambda)$이므로
@@ -172,22 +137,14 @@ $$
 따라서 $Y_n\sim\text{Poisson}(n)$에 대해
 
 $$
-P(a<Y_n\le b)
-\approx
-\Phi\left(\frac{b-n}{\sqrt{n}}\right)
-- \Phi\left(\frac{a-n}{\sqrt{n}}\right)
+P(a<Y_n\le b) \approx \Phi\left(\frac{b-n}{\sqrt{n}}\right) - \Phi\left(\frac{a-n}{\sqrt{n}}\right)
 $$
 
 (각주: 이런 근사계산은 중심극한정리에서 정규분포로의 수렴이 균등수렴이므로 가능한 것이다.)
 
 **(b) 감마분포 및 카이제곱분포의 정규근사**
 
-$X_1,\dots,X_n\sim\text{Gamma}(\alpha,\beta)$라 하면
-
-$$
-E(X_1)=\alpha\beta,\quad \mathrm{Var}(X_1)=\alpha\beta^2
-$$
-
+$X_1,\dots,X_n\sim\text{Gamma}(\alpha,\beta)$라 하면 $E(X_1)=\alpha\beta,\quad \mathrm{Var}(X_1)=\alpha\beta^2$  
 중심극한정리에 의해
 
 $$
@@ -207,8 +164,6 @@ P\left(
 \right)
 = P(Z\le x)
 $$
-
-가 성립한다.
 
 ### 다차원 중심극한정리
 
@@ -255,12 +210,7 @@ $$
 
 #### 예 5.1.2. 다항분포의 다변량 정규근사
 
-$X_n\sim\text{Multinomial}(n,p_1,\dots,p_k)$, $D$를 대각행렬이라 하면
-
-$$
-E(X_1)=p,\quad \mathrm{Var}(X_1)=D(p_j)-pp^\top
-$$
-
+$X_n\sim\text{Multinomial}(n,p_1,\dots,p_k)$, $D$를 대각행렬이라 하면 $E(X_1)=p,\quad \mathrm{Var}(X_1)=D(p_j)-pp^\top$  
 중심극한정리에 의해
 
 $$
@@ -319,16 +269,14 @@ F(x)=
 \end{cases}
 $$
 
-를 정의한다.
-
+를 정의한다.  
 이 함수 $F(x)$는 누적분포함수이며, 예 5.2.1의 확률변수열 $X_n$에 대해
 
 $$
 \lim_{n\to\infty}\mathrm{cdf}_{X_n}(x)=F(x)\quad \forall x\neq 1
 $$
 
-이 성립한다.
-
+이 성립한다.  
 이 경우, 앞면이 나오면 $0$부터 $1$ 사이의 수를 균등하게 선택하고, 뒷면이 나오면 $1$을 보여주는 확률변수를 $X$라 하면, $F(x)$는 $X$의 누적분포함수이다. 따라서 $X_n$의 분포는 $X$의 분포로 근사된다고 말할 수 있다.
 
 이 예시처럼 극한으로 주어지는 분포의 누적분포함수가 연속이 아닌 경우까지 다루기 위해 극한분포를 아래와 같이 정의한다.
@@ -376,22 +324,15 @@ P(X_n=k)
 = P(X=k)
 $$
 
-가 성립한다. (3장 4절)
-
-또한 이들 확률변수는 $0$ 또는 자연수 값만 가지므로 모든 $x$에 대해
+가 성립한다(3장 4절). 또한 이들 확률변수는 $0$ 또는 자연수 값만 가지므로 모든 $x$에 대해
 
 $$
 \mathrm{cdf}_{X_n}(x)
 =\sum_{k:0\le k\le x}P(X_n=k)
 \;\xrightarrow[n\to\infty]{}\;
 \sum_{k:0\le k\le x}P(X=k)
-=\mathrm{cdf}_X(x)
-$$
-
-따라서
-
-$$
-B(n,\lambda/n)\;\approx\;\mathrm{Poisson}(\lambda),\quad n\to\infty
+=\mathrm{cdf}_X(x) \\
+\therefore B(n,\lambda/n)\;\approx\;\mathrm{Poisson}(\lambda),\quad n\to\infty
 $$
 
 #### 예 5.2.3. 최대 순서통계량의 극한분포
@@ -471,7 +412,8 @@ $$
 
 #### 증명
 ($\Rightarrow$)  
-$P(X=c)=1$이면, $\mathrm{cdf}_X(x)$는 $x=c$를 제외한 모든 점에서 연속이다. 극한분포의 정의에 따라
+$P(X=c)=1$이면, $\mathrm{cdf}_X(x)$는 $x=c$를 제외한 모든 점에서 연속이다.  
+극한분포의 정의에 따라
 
 $$\lim_{n\to\infty}\mathrm{cdf}_{X_n}(x)=\mathrm{cdf}_X(x)\quad(x\neq c)$$
 
@@ -483,23 +425,15 @@ $$P(|X_n-c|\ge\varepsilon)
 
 $n\to\infty$로 보낼 때, 극한분포의 정의에 의해
 
-$$\mathrm{cdf}_{X_n}(c-\varepsilon) \to \mathrm{cdf}_X(c-\varepsilon),\quad
-\mathrm{cdf}_{X_n}(c+\varepsilon) \to \mathrm{cdf}_X(c+\varepsilon)$$
+$$\mathrm{cdf}_{X_n}(c-\varepsilon) \to \mathrm{cdf}_X(c-\varepsilon),\quad \mathrm{cdf}_{X_n}(c+\varepsilon) \to \mathrm{cdf}_X(c+\varepsilon)$$
 
-이고, $X$가 상수 $c$이므로
-
-$$\mathrm{cdf}_X(c-\varepsilon) = 0,\quad \mathrm{cdf}_X(c+\varepsilon) = 1$$
-
+이고, $X$가 상수 $c$이므로 $\mathrm{cdf}_X(c-\varepsilon) = 0,\quad \mathrm{cdf}_X(c+\varepsilon) = 1$이다.  
 따라서
 
 $$\lim_{n\to\infty}P(|X_n-c|\ge\varepsilon) = 0 + 1 - 1 = 0$$
 
 ($\Leftarrow$)  
-주어진 조건
-
-$$\lim_{n\to\infty}P(|X_n-c|\ge\varepsilon)=0$$
-
-에서, $x < c$인 경우
+주어진 조건 $\lim_{n\to\infty}P(|X_n-c|\ge\varepsilon)=0$ 에서, $x < c$인 경우
 
 $$\mathrm{cdf}_{X_n}(x) = P(X_n \le x) \le P(X_n \le c-\varepsilon) \le P(|X_n-c|\ge\varepsilon)$$
 
@@ -564,8 +498,7 @@ $$P(|\bar X_n-E(X_1)|\ge\varepsilon)
 
 $$\frac{1}{n}\sum_{i=1}^n I_A(X_i)$$
 
-로 나타낼 수 있다.  
-이 상대도수에 큰수의 법칙을 적용하면
+로 나타낼 수 있다. 이 상대도수에 큰수의 법칙을 적용하면
 
 $$\mathrm{plim}_{n\to\infty}\frac{1}{n}\sum_{i=1}^n I_A(X_i) = E(I_A(X_1)) = P(X_1 \in A)$$
 
@@ -602,15 +535,8 @@ $$\mathrm{plim}_{n\to\infty}X_n=c
 벡터 노름의 성질을 이용하여 각 조건의 동치성을 보인다.
 
 **(a) ⇒ (b):**  
-(a)에서 확률수렴의 정의에 따라, 임의의 $\varepsilon>0$에 대해
-
-$$\lim_{n\to\infty}P(|X_n-c|\ge\varepsilon)=0$$
-
-이다. 벡터 노름의 성질에 의해
-
-$$\max_{1\le i\le k}|X_{ni}-c_i| \le |X_n-c|$$
-
-이므로
+(a)에서 확률수렴의 정의에 따라, 임의의 $\varepsilon>0$에 대해 $\lim_{n\to\infty}P(|X_n-c|\ge\varepsilon)=0$ 이다.  
+벡터 노름의 성질에 의해 $\max_{1\le i\le k}|X_{ni}-c_i| \le |X_n-c|$ 이므로
 
 $$P\left(\max_{1\le i\le k}|X_{ni}-c_i|\ge\varepsilon\right)
 \le P(|X_n-c|\ge\varepsilon)$$
@@ -667,7 +593,7 @@ $$
 
 즉, $r$차 표본적률이 모집단의 $r$차 모적률(population $r$ th moment)로 확률수렴한다.
 
-이는 $X_1^r,\dots,X_n^r$ 역시 서로 독립이고 동일한 분포를 따르며, $E(|X_1^r|)<\infty$이므로 정리 1.6.2로부터 큰수의 법칙을 그대로 적용할 수 있다. 따라서 표본평균 $\frac{1}{n}\sum_{i=1}^n X_i^r$는 모집단의 적률벡터 $E(X_1^r)$에 확률적으로 가까워진다.
+이는 $X_1^r,\dots,X_n^r$ 역시 서로 독립이고 동일한 분포를 따르며, $E(|X_1^r|)<\infty$이므로 정리 1.6.2 (리아푸노프 부등식) 로부터 큰수의 법칙을 그대로 적용할 수 있다. 따라서 표본평균 $\frac{1}{n}\sum_{i=1}^n X_i^r$는 모집단의 적률벡터 $E(X_1^r)$에 확률적으로 가까워진다.
 
 이 결과는 표본평균뿐만 아니라 표본분산, 표본적률 등 다양한 통계량의 일치성(consistency)을 보장하는 근거가 된다.
 
@@ -778,8 +704,7 @@ $$ P(|X_n-a|\ge\varepsilon) \le \frac{E[(X_n-a)^2]}{\varepsilon^2} $$
 $$ E[(X_n-a)^2] = \mathrm{Var}(X_n)+\{E(X_n)-a\}^2 $$
 
 이고, 가정에 의해 $\lim_{n\to\infty}E[(X_n-a)^2]=0$
-이다.
-
+이다.  
 따라서
 
 $$ 0\le \lim_{n\to\infty}P(|X_n-a|\ge\varepsilon) \le 0 $$
@@ -792,13 +717,10 @@ $$ 0\le \lim_{n\to\infty}P(|X_n-a|\ge\varepsilon) \le 0 $$
 
 $U_{(n)}$의 확률밀도함수는 $\mathrm{pdf}_{U_{(n)}}(x)=n x^{n-1} I_{(0,1)}(x)$ 이므로
 
-$$ E(U_{(n)})=\int_0^1 x\cdot nx^{n-1}dx=\frac{n}{n+1} $$
-
-$$ E(U_{(n)}^2)=\int_0^1 x^2\cdot nx^{n-1}dx=\frac{n}{n+2} $$
-
-$$ \mathrm{Var}(U_{(n)})=\frac{n}{n+2}-\left(\frac{n}{n+1}\right)^2 $$
-
-$$ \therefore \lim_{n\to\infty}\mathrm{Var}(U_{(n)})=0, \quad
+$$ E(U_{(n)})=\int_0^1 x\cdot nx^{n-1}dx=\frac{n}{n+1}, \quad
+E(U_{(n)}^2)=\int_0^1 x^2\cdot nx^{n-1}dx=\frac{n}{n+2} \\
+\mathrm{Var}(U_{(n)})=\frac{n}{n+2}-\left(\frac{n}{n+1}\right)^2 \\
+\therefore \lim_{n\to\infty}\mathrm{Var}(U_{(n)})=0, \quad
 \lim_{n\to\infty}E(U_{(n)})=1 $$
 
 정리 5.2.7로부터 $\mathrm{plim}_{n\to\infty}U_{(n)}=1$
@@ -841,10 +763,7 @@ $$ E(Y_n)\sim \int_0^\alpha \frac{1}{1-x}\,dx=-\log(1-\alpha) \\
 
 $$ \mathrm{plim}_{n\to\infty}Y_n=-\log(1-\alpha) $$
 
-함수 $h$가 연속이므로 정리 5.2.5에 의해
-
-$$ \mathrm{plim}_{n\to\infty} h(Y_n) = h(-\log(1-\alpha)) =F^{-1}(\alpha) $$
-
+함수 $h$가 연속이므로 정리 5.2.5에 의해 $\mathrm{plim}_{n\to\infty} h(Y_n) = h(-\log(1-\alpha)) =F^{-1}(\alpha)$  
 즉,
 
 $$ \mathrm{plim}_{n\to\infty}X_{(r_n)}=F^{-1}(\alpha) $$
@@ -914,6 +833,7 @@ $X_n \xrightarrow{d} Z$이므로 $\limsup_{n \to \infty} P(|X_n| > k) \le P(|Z| 
 
 $Y_n \xrightarrow{P} c$이고 $c \neq 0$이므로 $1 / Y_n \xrightarrow{P} 1 / c$. (c)를 $X_n$과 $1 / Y_n$에 적용하면 $X_n / Y_n \xrightarrow{d} Z / c$가 성립한다.
 
+TODO:
 #### 예 5.3.1. 스튜던트화된 표본평균의 극한분포
 
 모집단 평균 $\mu$, 분산 $\sigma^2$인 랜덤표본 $X_1,\dots,X_n$에 대해 표본평균이 $\bar X_n$, 표본표준편차가 $S_n$라 하면, **스튜던트화된 표본평균**은 다음과 같다:
@@ -930,7 +850,7 @@ $$T_n = \frac{\bar X_n - \mu}{S_n / \sqrt{n}}$$
 
 따라서 슬럿츠키의 정리에 의해
 
-$$\frac{\bar X_n - \mu}{S_n / \sqrt{n}} = \frac{\bar X_n - \mu}{\sigma / \sqrt{n}}/\frac{S_n}{\sigma} \xrightarrow{d} Z/1 = Z, Z\sim N(0,1)$$
+$$\frac{\bar X_n - \mu}{S_n / \sqrt{n}} = \frac{\bar X_n - \mu}{\sigma / \sqrt{n}}/\frac{S_n}{\sigma} \xrightarrow{d} Z/1 = Z,\quad Z\sim N(0,1)$$
 
 즉, 정규모집단이 아니더라도 표본크기가 커지면 $t$분포가 표준정규분포로 근사된다.
 
@@ -970,23 +890,14 @@ $$\operatorname{Var}(Y_1) = E[(X_1 - \mu)^4] - \sigma^4$$
 
 이므로 중심극한정리에 의해
 
-$$\sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n Y_i - \sigma^2 \right) = \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 - \sigma^2 \right) \xrightarrow{d} W,\quad W \sim N\left(0,\, E[(X_1 - \mu)^4] - \sigma^4\right)$$
+$$\sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n Y_i - \sigma^2 \right) = \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 - \sigma^2 \right) \xrightarrow{d} W,\\ 
+W \sim N\left(0,\, E[(X_1 - \mu)^4] - \sigma^4\right)$$
 
-한편, 중심극한정리로부터
-
-$$\sqrt{n}(\bar X_n - \mu) \xrightarrow{d} Z,\quad Z \sim N(0, \sigma^2)$$
-
-이고, 큰수의 법칙에 의해
-
-$$\bar X_n - \mu \xrightarrow{P} 0$$
-
-이므로 슬럿츠키의 정리에 의해
-
-$$\sqrt{n} (\bar X_n - \mu)^2 \xrightarrow{P} 0$$
-
+한편, 중심극한정리로부터 $\sqrt{n}(\bar X_n - \mu) \xrightarrow{d} Z,\quad Z \sim N(0, \sigma^2)$ 이고,  
+큰수의 법칙에 의해 $\bar X_n - \mu \xrightarrow{P} 0$ 이므로 슬럿츠키의 정리에 의해 $\sqrt{n} (\bar X_n - \mu)^2 \xrightarrow{P} 0$  
 따라서
 
-$$\sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n (X_i - \bar X_n)^2 - \sigma^2 \right) = \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 - \sigma^2 \right) - \sqrt{n} (\bar X_n - \mu)^2 \xrightarrow{d} W$$
+$$\sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n (X_i - \bar X_n)^2 - \sigma^2 \right) = \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 - \sigma^2 \right) - \sqrt{n} (\bar X_n - \mu)^2 \\ \xrightarrow{d} W$$
 
 $S_n^2$와 $\frac{1}{n} \sum_{i=1}^n (X_i - \bar X_n)^2$의 차이는 계수 $\frac{n}{n-1}$에서만 발생한다. 실제로
 
@@ -1052,7 +963,6 @@ $$
 
 이 결과는 이항검정, 적합도검정 등에서 카이제곱 근사에 이론적 근거를 제공한다.
 
-TODO:  
 #### 예 5.3.4 다항분포와 카이제곱근사
 
 확률벡터 $(X_{n1},\dots,X_{nk})^t$ 가 모수 $(p_1,\dots,p_k)$ $(p_j>0,\ \sum_{j=1}^k p_j=1)$를 갖는 다항분포 $\mathrm{Multinomial}(n,p_1,\dots,p_k)$를 따른다고 하자. 즉,
@@ -1067,11 +977,7 @@ $$P(X_{n1}=x_1,\dots,X_{nk}=x_k)
 다음과 같은 벡터를 고려하자.
 
 $$
-Z_n
-= \left(
-\frac{X_{n1}-np_1}{\sqrt n},\dots,
-\frac{X_{nk}-np_k}{\sqrt n}
-\right)^\top
+Z_n = \left(\frac{X_{n1}-np_1}{\sqrt n},\dots, \frac{X_{nk}-np_k}{\sqrt n}\right)^\top
 $$
 
 다차원 중심극한정리에 의해 $Z_n\xrightarrow{d}Z$
@@ -1087,37 +993,23 @@ p_1(1-p_1) & -p_1p_2 & \cdots & -p_1p_k \\
 \end{pmatrix}
 $$
 
-인 $k$차원 정규분포를 따른다.
-
-또한 $\sum_{j=1}^k X_{nj}=n$이 항상 성립하므로
-
-$$\sum_{j=1}^k Z_{nj}=0$$
-
-이고, 따라서 $\Sigma$는 계수(rank)가 $k-1$인 특이행렬이다.
+인 $k$차원 정규분포를 따른다. 또한 $\sum_{j=1}^k X_{nj}=n$이 항상 성립하므로 $\sum_{j=1}^k Z_{nj}=0$ 이고, 따라서 $\Sigma$는 계수(rank)가 $k-1$인 특이행렬이다.
 
 이제 다음 통계량을 고려하자.
 
 $$Q_n = \sum_{j=1}^k \frac{(X_{nj}-np_j)^2}{np_j}$$
 
-이를 $Z_n$을 이용하여 쓰면
-
-$$ Q_n = Z_n^t D^{-1} Z_n, \quad D=\mathrm{diag}(p_1,\dots,p_k)$$
-
+이를 $Z_n$을 이용하여 쓰면 $Q_n = Z_n^t D^{-1} Z_n, \quad D=\mathrm{diag}(p_1,\dots,p_k)$  
 위에서 본 바와 같이 $Z_n\xrightarrow{d}Z$이고, $Z$는 평균이 0이며 공분산행렬이 $\Sigma$인 정규분포를 따른다. 또한 $D^{-1}$는 상수 행렬이므로 연속함수 정리에 의해
 
 $$ Q_n \xrightarrow{d} Q=Z^t D^{-1} Z $$
 
-이때 $Z$는 선형 제약조건 $\sum_{j=1}^k Z_j=0$을 만족하므로, $Q$는 자유도 $k-1$인 카이제곱분포를 따른다. 즉,
-
-$$ Q\sim \chi^2(k-1) $$
-
-따라서
+이때 $Z$는 선형 제약조건 $\sum_{j=1}^k Z_j=0$을 만족하므로, $Q$는 자유도 $k-1$인 카이제곱분포를 따른다. 즉, $Q\sim \chi^2(k-1)$ 따라서
 
 $$ \sum_{j=1}^k \frac{(X_{nj}-np_j)^2}{np_j} \xrightarrow{d} \chi^2(k-1) $$
 
 이 결과는 다항분포에 기초한 적합도 검정에서 사용되는 카이제곱 근사의 이론적 근거를 제공한다.
 
-TODO: 극한분포, CLT, Slutsky, Continuous Mapping Theorem, Delta Method 들의 관계 정리
 ### 정리 5.3.3 일차근사를 이용한 극한분포 계산: 델타 방법 (Delta Method)
 
 다차원 확률변수 $X_n$에 대해
@@ -1137,14 +1029,8 @@ $$
 **설명:**  
 델타 방법(Delta Method)은 중심극한정리로부터 얻은 표본평균 등 통계량의 극한분포를, 미분가능한 함수 $g$에 적용한 새로운 통계량의 극한분포로 확장하는 데 사용된다.  
 함수 $g$가 $\theta$에서 미분가능하면, $X_n$이 $\theta$ 근처에서 $g(X_n)$을 1차 테일러 전개로 근사할 수 있다.  
-즉,
-
-$$ g(X_n) \approx g(\theta) + g'(\theta)(X_n - \theta)$$
-
-따라서
-
-$$ \sqrt{n}(g(X_n) - g(\theta)) \approx g'(\theta) \sqrt{n}(X_n - theta)$$
-
+즉, $ g(X_n) \approx g(\theta) + g'(\theta)(X_n - \theta)$  
+따라서 $\sqrt{n}(g(X_n) - g(\theta)) \approx g'(\theta) \sqrt{n}(X_n - theta)$  
 $X_n$의 중심화된 극한분포가 $Z$라면, $g(X_n)$의 극한분포는 $g'(\theta)Z$가 된다.
 
 **증명:**  
@@ -1168,16 +1054,18 @@ $X_n \xrightarrow{P} \theta$이므로 $|X_n - \theta| \xrightarrow{P} 0$, $r_n =
 >통계량의 극한분포를 구하는 과정은 다음과 같이 단계적으로 진행된다:
 >
 >1. **중심극한정리의 역할**: 표본평균과 같은 기본 통계량이 asymptotic normal을 따름을 보장한다. 즉, 표본으로부터 만든 추정량 $T_n$에 대해 
+>
 >$$\sqrt{n}(T_n - \theta) \xrightarrow{d} N(0, \sigma^2)$$
+>
 >의 선형구조를 제시한다.
 >
 >2. **델타 방법의 역할**: $T_n$이 asymptotic normal일 때, 이를 미분가능한 smooth 함수 $g$에 적용한 $g(T_n)$의 극한분포까지 확장한다. 1차 테일러 전개를 통해
+>
 >$$\sqrt{n}(g(T_n) - g(\theta)) \xrightarrow{d} g'(\theta) Z, \quad Z \sim N(0, \sigma^2)$$
+>
 >의 비선형구조를 다룬다.
 >
 >**한 줄 요약**: CLT는 선형 구조까지 극한분포를 설명하고, 델타 방법은 그 위의 smooth한 비선형 변환까지 확장하는 도구이다.
->
->**적용 제약**: 델타 방법이 유효하려면 (1) 함수 $g$가 $\theta$에서 미분가능, (2) 수렴 속도가 $\sqrt{n}$, (3) 극한분포가 normal이어야 한다는 조건을 만족해야 한다.
 
 #### 5.3.5 예시: 표본표준편차의 극한분포
 
@@ -1185,8 +1073,7 @@ $X_n \xrightarrow{P} \theta$이므로 $|X_n - \theta| \xrightarrow{P} 0$, $r_n =
 
 $$ \sqrt{n}(S_n^2 - \sigma^2) \xrightarrow{d} N\left(0,\, (\rho_4 + 2)\sigma^4\right) $$
 
-임을 보였다. 여기서 $\rho_4$는 모집단의 첨도(kurtosis)이다.
-
+임을 보였다. 여기서 $\rho_4$는 모집단의 첨도(kurtosis)이다.  
 이제 $g(x) = \sqrt{x}$를 $x = \sigma^2$에서 미분하면 $g'(\sigma^2) = \frac{1}{2\sqrt{\sigma^2}} = \frac{1}{2\sigma}$이다. 델타 방법에 따라
 
 $$ \sqrt{n}(S_n - \sigma) \approx g'(\sigma^2)\sqrt{n}(S_n^2 - \sigma^2) $$
@@ -1200,29 +1087,22 @@ $$ \sqrt{n}(S_n - \sigma) \xrightarrow{d} N\left(0,\, \frac{(\rho_4 + 2)\sigma^4
 
 $$ \sqrt{n}(S_n - \sigma) \xrightarrow{d} Z,\quad Z \sim N\left(0,\, \frac{(\rho_4 + 2)\sigma^2}{4}\right) $$
 
-**설명:**  
-- 표본분산 $S_n^2$의 극한분포를 델타 방법으로 변환하여 표본표준편차 $S_n$의 극한분포를 구한다.
-- 분산의 첨도 $\rho_4$가 0인 정규분포의 경우, 분산은 $\sigma^2/2$가 된다.
-- 이 결과는 표본표준편차의 신뢰구간 계산 등에서 근사적으로 활용된다.
-
 #### 예 5.3.6 표본상관계수의 극한분포
 
 모평균이 각각 $\mu_1, \mu_2$, 모분산이 각각 $\sigma_1^2, \sigma_2^2$ ($0<\sigma_1<+\infty,\ 0<\sigma_2<+\infty$), 모상관계수가 $\rho$ ($-1<\rho<1$)인 이변량 모집단에서 랜덤표본 $((X_1,Y_1)^T, \dots, (X_n,Y_n)^T)$ ($n>2$)을 추출할 때, 표본상관계수는 다음과 같이 정의된다.
 
 $$ \hat\rho_n = \frac{\sum_{i=1}^n (X_i-\bar X)(Y_i-\bar Y)}{\sqrt{\sum_{i=1}^n (X_i-\bar X)^2}\ \sqrt{\sum_{i=1}^n (Y_i-\bar Y)^2}} $$
 
-$(X_i, Y_i)$ 대신 각각 $(\frac{X_i-\mu_1}{\sigma_1}, \frac{Y_i-\mu_2}{\sigma_2})$로 치환해도 표본상관계수 값은 변하지 않으므로, $\mu_1=0, \mu_2=0, \sigma_1=1, \sigma_2=1$로 가정해도 무방하다.
-
+$(X_i, Y_i)$ 대신 각각 $(\frac{X_i-\mu_1}{\sigma_1}, \frac{Y_i-\mu_2}{\sigma_2})$로 치환해도 표본상관계수 값은 변하지 않으므로, $\mu_1=0, \mu_2=0, \sigma_1=1, \sigma_2=1$로 가정해도 무방하다.  
 또한, 다음과 같이 표기한다.
 
 $$ \bar X_n = \frac{1}{n}\sum_{i=1}^n X_i,\quad
 \bar Y_n = \frac{1}{n}\sum_{i=1}^n Y_i,\quad
-\overline{(XY)}_n = \frac{1}{n}\sum_{i=1}^n X_i Y_i $$
-
-$$ \overline{(X^2)}_n = \frac{1}{n}\sum_{i=1}^n X_i^2,\quad
+\overline{(XY)}_n = \frac{1}{n}\sum_{i=1}^n X_i Y_i \\
+\overline{(X^2)}_n = \frac{1}{n}\sum_{i=1}^n X_i^2,\quad
 \overline{(Y^2)}_n = \frac{1}{n}\sum_{i=1}^n Y_i^2 $$
 
-함수 $g$를
+함수 $g$를 
 
 $$ g(t_1, t_2, t_3, t_4, t_5) = \frac{t_3 - t_1 t_2}{\sqrt{t_4 - t_1^2}\ \sqrt{t_5 - t_2^2}} $$
 
@@ -1230,22 +1110,19 @@ $$ g(t_1, t_2, t_3, t_4, t_5) = \frac{t_3 - t_1 t_2}{\sqrt{t_4 - t_1^2}\ \sqrt{t
 
 $$ \hat\rho_n = g(\bar X_n, \bar Y_n, \overline{(XY)}_n, \overline{(X^2)}_n, \overline{(Y^2)}_n) $$
 
-즉, 표본상관계수는 $(X_i, Y_i, X_iY_i, X_i^2, Y_i^2)^T$의 표본평균의 함수로 나타낼 수 있다.
-
+즉, 표본상관계수는 $(X_i, Y_i, X_iY_i, X_i^2, Y_i^2)^T$의 표본평균의 함수로 나타낼 수 있다.  
 $Z_i = (X_i, Y_i, X_iY_i, X_i^2, Y_i^2)^T$ ($i=1,\dots,n$)라 하면, $Z_i$는 서로 독립이고 동일한 분포를 따르는 5차원 확률변수이므로 분산행렬이 존재할 때
 
 $$ \sqrt{n}\left(\frac{1}{n}\sum_{i=1}^n Z_i - E(Z_1)\right) \xrightarrow{d} V,\quad V \sim N_5(0, \operatorname{Var}(Z_1)) $$
 
-또한 $E(Z_1) = (0, 0, \rho, 1, 1)^T$, $\rho = g(0,0,\rho,1,1) = g(E(Z_1))$이다.
-
+또한 $E(Z_1) = (0, 0, \rho, 1, 1)^T$, $\rho = g(0,0,\rho,1,1) = g(E(Z_1))$이다.  
 함수 $g$의 일차편도함수들이 연속이므로, 정리 5.3.3에 의해
 
 $$ \sqrt{n}(\hat\rho_n - \rho)
 = \sqrt{n}\left(g\left(\frac{1}{n}\sum_{i=1}^n Z_i\right) - g(\theta)\right)
 \xrightarrow{d} (\dot g(\theta))^T V $$
 
-여기서 $\theta = E(Z_1) = (0,0,\rho,1,1)^T$이고, $\dot g(\theta) = (0, 0, 1, -\rho/2, -\rho/2)^T$이다.
-
+여기서 $\theta = E(Z_1) = (0,0,\rho,1,1)^T$이고, $\dot g(\theta) = (0, 0, 1, -\rho/2, -\rho/2)^T$이다.  
 따라서
 
 $$ (\dot g(\theta))^T V \sim N\left(0, (\dot g(\theta))^T \operatorname{Var}(Z_1) \dot g(\theta)\right) $$
@@ -1261,7 +1138,7 @@ W \sim N\left(0, \operatorname{Var}\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{
 
 #### 예 5.3.7 표본상관계수와 분산안정변환 (variance stabilizing transformation)
 
-이변량 정규분포 $N(\mu_1, \mu_2; \sigma_1^2, \sigma_2^2, \rho)$ ($\sigma_1>0, \sigma_2>0, -1<\rho<1$)에서 표본상관계수의 극한분포를 살펴보자.
+이전 예제에서 더 나아가, 이변량 정규분포 $N(\mu_1, \mu_2; \sigma_1^2, \sigma_2^2, \rho)$ ($\sigma_1>0, \sigma_2>0, -1<\rho<1$)에서 표본상관계수의 극한분포를 살펴보자.
 
 이 경우 $(Y_1 - \rho X_1 \mid X_1 = x_1) \sim N(0, 1-\rho^2)$로, $Y_1 - \rho X_1$과 $X_1$은 조건부분포가 x1에 의존하지 않으므로 서로 독립이다. $\mu_1 = \mu_2 = 0$, $\sigma_1 = \sigma_2 = 1$로 두면
 
@@ -1269,42 +1146,15 @@ $$ T = \frac{Y_1 - \rho X_1}{\sqrt{1-\rho^2}} $$
 
 에서 $X_1$과 $T$는 서로 독립이고 각각 $N(0,1)$을 따른다.
 
-$Y_1 = \rho X_1 + \sqrt{1-\rho^2} T$를 표본상관계수의 극한분포식에 대입하면
+$Y_1 = \rho X_1 + \sqrt{1-\rho^2} T$를 표본상관계수의 극한분포식 $X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2$에 대입하면 $\frac{\rho}{2}(1-\rho^2) X_1^2 + (1-\rho^2)^{3/2} X_1 T - \frac{\rho}{2}(1-\rho^2) T^2$
 
-$$ X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2
-= \frac{\rho}{2}(1-\rho^2) X_1^2 + (1-\rho^2)^{3/2} X_1 T - \frac{\rho}{2}(1-\rho^2) T^2 $$
+이를 활용하여 표준정규분포의 적률과 공분산 성질을 이용하여 계산하면, 
 
-이므로, 계산 과정은 다음과 같다.
-
-먼저 $X_1, Y_1$이 $N(0,1)$이고 $\operatorname{Cov}(X_1, Y_1) = \rho$임을 이용한다.  
-$T = X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2$라 하면,
-
-$$ \begin{align*}
-E(T) &= E\left[X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right] \\
-&= E[X_1 Y_1] - \frac{\rho}{2} E[X_1^2] - \frac{\rho}{2} E[Y_1^2] \\
-&= \rho - \frac{\rho}{2} \cdot 1 - \frac{\rho}{2} \cdot 1 \\
-&= 0
-\end{align*} $$
-
-분산은
-
-$$ \operatorname{Var}(T) = E[T^2] - (E[T])^2 = E[T^2] $$
-
-$E[T^2]$를 전개하면,
-
-$$ \begin{align*}
-E[T^2] &= E\left[ \left( X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2 \right)^2 \right] \\
-&= E[X_1^2 Y_1^2] - \rho E[X_1^2 Y_1^2] - \rho E[X_1 Y_1^2 X_1] \\
-&\quad + \frac{\rho^2}{4} E[X_1^4] + \rho^2 E[X_1^2 Y_1^2] + \frac{\rho^2}{4} E[Y_1^4]
-\end{align*} $$
-
-표준정규분포의 적률과 공분산 성질을 이용하여 계산하면, 최종적으로
-
-$$ \operatorname{Var}\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right) = (1-\rho^2)^2 $$
-
-따라서
-
-$$ \sqrt{n}(\hat\rho_n - \rho) \xrightarrow{d} W,\quad W \sim N(0, (1-\rho^2)^2) $$
+$$ \operatorname{Var}\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right) = E\left[\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right)^2\right] \\
+= \frac{\rho^2}{4}(1-\rho^2)^2 E(X_1^4) + (1-\rho^2)^3 E(X_1^2) E(T^2) + \frac{\rho^2}{4}(1-\rho^2)^2 E(T^4) \\
+= \frac{\rho^2}{4}(1-\rho^2)^2 \cdot 3 + (1-\rho^2)^3 \cdot 1 \cdot 1 + \frac{\rho^2}{4}(1-\rho^2)^2 \cdot 3 \\
+= (1-\rho^2)^2 \\
+\therefore \sqrt{n}(\hat\rho_n - \rho) \xrightarrow{d} W,\quad W \sim N(0, (1-\rho^2)^2) $$
 
 이제 $\hat\rho_n$의 함수 $g(\hat\rho_n)$의 극한분포를 구하면, 정리 5.3.3에 의해
 
@@ -1323,11 +1173,7 @@ $$ \sqrt{n}\big(g(\hat\rho_n) - g(\rho)\big) \xrightarrow{d} Z,\quad Z \sim N(0,
 
 예 5.2.7에서 표본분위수 $X_{(r_n)}$ ($r_n \sim \alpha n,\ 0<\alpha<1$)의 확률수렴을 다루었다. 여기서는 표본분위수의 극한분포를 살펴본다.
 
-모집단 누적분포함수의 역함수를 $F^{-1}$라 하고,
-
-$$ h(y) = F^{-1}(1 - e^{-y}),\quad y > 0 $$
-
-라 하면, 정리 4.3.4에 의해
+모집단 누적분포함수의 역함수를 $F^{-1}$라 하고, $h(y) = F^{-1}(1 - e^{-y}),\quad y > 0$ 라 하면, 정리 4.3.4에 의해
 
 $$ X_{(r_n)} \overset{d}{\equiv}
  h\left(\frac{1}{n} Z_1 + \cdots + \frac{1}{n - r_n + 1} Z_{r_n}\right),\quad Z_i \overset{iid}{\sim} \operatorname{Exp}(1) $$
@@ -1341,11 +1187,7 @@ $$ E(Y_n) \sim -\log(1-\alpha),\qquad
 
 $$ W_n = \sqrt{n}\ \frac{Y_n + \log(1-\alpha)}{\sqrt{\alpha/(1-\alpha)}} $$
 
-에 대해 적률생성함수를 근사해보면
-
-$$ W_n \xrightarrow{d} N(0,1) $$
-
-즉,
+에 대해 적률생성함수를 근사해보면 $W_n \xrightarrow{d} N(0,1)$ 즉,
 
 $$ \sqrt{n}\big(Y_n + \log(1-\alpha)\big) \xrightarrow{d} \sqrt{\frac{\alpha}{1-\alpha}}\, W,\quad W \sim N(0,1) $$
 
@@ -1441,18 +1283,10 @@ $$ x_i = (b-a)u_i + a, \qquad y_i = (b-a)g(x_i) $$
 
 $$ \int_a^b g(x)\, dx \approx \frac{1}{n} \sum_{i=1}^n y_i $$
 
-가 된다.
-
 이는 $Y_i$의 관측값을 이용하여 $E(Y_1)$을 추정하는 것이므로, 이에 대한 점근신뢰구간을 통해 근사의 정확도를 평가할 수 있다.
 
 #### 예 5.4.2 정적분의 몬테칼로 근사
-$$ \int_1^3 x^2\,dx = \frac{26}{3} $$
-
-임은 잘 알려져 있다. 독립적으로 생성된 $U(0,1)$ 난수 $u_1,\dots,u_n$에 대해
-
-$$ x_i = 2u_i + 1, \qquad y_i = 2x_i^2 $$
-
-로 두면
+$\int_1^3 x^2\,dx = \frac{26}{3}$ 이다. 독립적으로 생성된 $U(0,1)$ 난수 $u_1,\dots,u_n$에 대해 $x_i = 2u_i + 1, \quad y_i = 2x_i^2$ 로 두면
 
 $$ \int_1^3 x^2\,dx \approx \frac{1}{n}\sum_{i=1}^n y_i $$
 
@@ -1463,55 +1297,34 @@ $$ \int_1^3 x^2\,dx \approx \frac{1}{n}\sum_{i=1}^n y_i $$
 
 $$ \operatorname{Var}(X) = \int_{-\infty}^{\infty} x^2\, f(x)\, dx = \int_{-\infty}^{\infty} \frac{x^2 e^x}{(1 + e^x)^2}\, dx = \frac{\pi^2}{3} $$
 
-정리 5.4.1을 이용하면, 균등분포 $U(0,1)$ 난수 $u_1, \dots, u_n$에 대해
-
-$$ x_i = \log\frac{u_i}{1-u_i}, \qquad y_i = x_i^2 $$
-
-로 두고,
+정리 5.4.1을 이용하면, 균등분포 $U(0,1)$ 난수 $u_1, \dots, u_n$에 대해 $x_i = \log\frac{u_i}{1-u_i}, \quad y_i = x_i^2$ 로 두고,
 
 $$ \frac{1}{n} \sum_{i=1}^n y_i \approx E(X^2) = \frac{\pi^2}{3} $$
 
 로 근사할 수 있다. 이 방법을 통해 로지스틱분포의 분산 근삿값과 점근적 신뢰구간을 계산할 수 있다.
 
 #### 예 5.4.4 표본비율의 극한분포
-모비율이 $p$ $(0 < p < 1)$인 베르누이 시행을 독립적으로 $n$번 관측한 결과를 $X_1, \dots, X_n$이라 하면, 표본비율
-
-$$ \hat{p}_n = \frac{1}{n} \sum_{i=1}^n X_i $$
-
-에 대해 큰수의 법칙과 중심극한정리에 의해
+모비율이 $p$ $(0 < p < 1)$인 베르누이 시행을 독립적으로 $n$번 관측한 결과를 $X_1, \dots, X_n$이라 하면, 표본비율 $\hat{p}_n = \frac{1}{n} \sum_{i=1}^n X_i$ 에 대해 큰수의 법칙과 중심극한정리에 의해
 
 $$ \mathrm{plim}_{n \to \infty} \hat{p}_n = p, \qquad
 \frac{\hat{p}_n - p}{\sqrt{p(1-p)/n}} \xrightarrow{d} N(0, 1) $$
 
-이 성립한다.  
 슬럿츠키의 정리와 연속함수 정리(정리 5.3.2)를 이용하면
 
 $$ \frac{\hat{p}_n - p}{\sqrt{\hat{p}_n (1 - \hat{p}_n) / n}} \xrightarrow{d} N(0, 1) $$
 
-이 되며, 이를 통해 모비율 $p$에 대한 $100(1-\alpha)\%$ 점근 신뢰구간
+이 되며, 이를 통해 모비율 $p$에 대한 $100(1-\alpha)\%$ 점근 신뢰구간은:
 
 $$ p \in \left[
 \hat{p}_n - z_{\alpha/2} \sqrt{\frac{\hat{p}_n (1 - \hat{p}_n)}{n}},
-\hat{p}_n + z_{\alpha/2} \sqrt{\frac{\hat{p}_n (1 - \hat{p}_n)}{n}}
-\right] $$
-
-을 얻는다.
+\hat{p}_n + z_{\alpha/2} \sqrt{\frac{\hat{p}_n (1 - \hat{p}_n)}{n}} \right] $$
 
 #### 예 5.4.5 표본비율의 극한분포를 이용한 원주율 $\pi$의 근사
 서로 독립이고 균등분포 $U(0,1)$를 따르는 $U_1, U_2$에 대해 점 $(U_1, U_2)$는 단위정사각형 내부에 무작위로 떨어진 점으로 생각할 수 있다.
 
-이 점이 사분원 내부에 떨어질 확률은
+이 점이 사분원 내부에 떨어질 확률은 $P(U_1^2 + U_2^2 \le 1) = \frac{\pi}{4}$
 
-$$ P(U_1^2 + U_2^2 \le 1) = \frac{\pi}{4} $$
-
-이를 독립적으로 반복하여 $n$개의 점을 생성하고
-
-$$ X_i = I(U_{i1}^2 + U_{i2}^2 \le 1) $$
-
-이라 두면, 표본비율
-
-$$ \hat{p}_n = \frac{1}{n} \sum_{i=1}^n X_i $$
-
-은 $\pi/4$의 근삿값이 되며, $4\hat{p}_n$은 $\pi$의 근삿값으로 사용될 수 있다.
+이를 독립적으로 반복하여 $n$개의 점을 생성하고  
+$X_i = I(U_{i1}^2 + U_{i2}^2 \le 1)$ 이라 두면, 표본비율 $\hat{p}_n = \frac{1}{n} \sum_{i=1}^n X_i$ 은 $\pi/4$의 근삿값이 되며, $4\hat{p}_n$은 $\pi$의 근삿값으로 사용될 수 있다.
 
 또한 예 5.4.4에서 얻은 점근 신뢰구간을 이용하여 $\pi$에 대한 근사의 정확도를 평가할 수 있다.
