@@ -108,6 +108,9 @@ $$
 $$
 
 >각주  
+>샘플 개수 n에 의해 정의되는 확률변수 X의 분포함수들을 함수열(function sequence)로 본 것.  
+>적률생성함수의 수렴이 확률변수열의 분포함수의 수렴을 보장하는 이유는, 적률생성함수의 수렴이 확률변수열의 분포함수의 균등수렴(uniform convergence)을 보장하기 때문이다.
+
 >일반적으로 확률변수열 $Z_n$의 적률생성함수가 어떤 열린 구간에서 $Z$의 적률생성함수로 수렴하고, $Z$의 누적분포함수가 연속이면
 >
 >$$\lim_{n\to\infty} P(Z_n\le x)=P(Z\le x)$$
@@ -281,7 +284,6 @@ $$
 
 이 예시처럼 극한으로 주어지는 분포의 누적분포함수가 연속이 아닌 경우까지 다루기 위해 극한분포를 아래와 같이 정의한다.
 
-TODO: 개념 이해, 연결이 안되고 있음  
 ### 정의: 극한분포(limiting distribution)
 
 확률변수열 $X_n,(n=1,2,\dots)$과 확률변수 $Z$에 대하여
@@ -796,15 +798,16 @@ $X_n$이 분포수렴하고 $Y_n$이 상수로 확률수렴하면, 이들의 합
 
 이 정리는 일반적인 경우에 성립하지만, Z의 누적분포함수가 연속함수인 경우만 증명하기로 한다. 증명은 분포함수의 연속성과 확률수렴의 정의를 이용한다.
 
-**(a) $X_n + Y_n \xrightarrow{d} Z + c$**
+**(a) $X_n + Y_n \xrightarrow{d} Z + c$**  
+$F_Z$가 연속인 점 $z$에 대해 $P(X_n + Y_n \le z)$의 극한을 구한다. 임의의 $\varepsilon > 0$에 대해
 
-$X_n \xrightarrow{d} Z$, $Y_n \xrightarrow{P} c$라 하자. $F_Z$가 연속인 점 $z$에 대해 $P(X_n + Y_n \le z)$의 극한을 구한다.
+$$P(X_n +Y_n \le z) = P(X_n +Y_n \le z, |Y_n - c| < \varepsilon) + P(X_n + Y_n \le z, |Y_n - c| \ge \varepsilon)$$
 
-임의의 $\varepsilon > 0$에 대해
+이때 $P(X_n +Y_n \le z, |Y_n - c| < \varepsilon) \le P(X_n \le z - c + \varepsilon)$ 이고, $P(X_n + Y_n \le z, |Y_n - c| \ge \varepsilon) \le P(|Y_n - c| \ge \varepsilon)$ 이므로
 
-$$P(X_n \le z - c - \varepsilon) \le P(X_n + Y_n \le z) \le P(X_n \le z - c + \varepsilon) + P(|Y_n - c| \ge \varepsilon)$$
+$$\le P(X_n \le z - c + \varepsilon) + P(|Y_n - c| \ge \varepsilon)$$
 
-$Y_n \xrightarrow{P} c$이므로 $P(|Y_n - c| \ge \varepsilon) \to 0$, $X_n \xrightarrow{d} Z$이므로 $P(X_n \le x) \to P(Z \le x)$이다. 따라서
+$Y_n \xrightarrow{P} c$이므로 $P(|Y_n - c| \ge \varepsilon) \to 0$, $X_n \xrightarrow{d} Z$이므로 $P(X_n \le x) \to P(Z \le x)$이다. 같은방법으로 하계도 구하면,
 
 $$\limsup_{n \to \infty} P(X_n + Y_n \le z) \le P(Z \le z - c + \varepsilon) \\
 \liminf_{n \to \infty} P(X_n + Y_n \le z) \ge P(Z \le z - c - \varepsilon)$$
