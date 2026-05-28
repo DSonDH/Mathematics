@@ -270,6 +270,7 @@ $$
 $$m! \sim m^{m+1/2} e^{-m}\sqrt{2\pi},\quad m \to \infin$$
 
 #### 증명
+
 $$m! = \Gamma(m+1) = \int_0^\infty x^m e^{-x} dx = \int_0^\infty e^{m \log x - x} dx \\
 = \int_0^\infty e^{m \log my - my} m\ dy = m^{m+1} \int_0^\infty e^{m(\log y - y)} dy \\
 = m^{m+1}e^{-m} \int_0^\infty e^{m(\log y - y + 1)} dy \\
@@ -1229,7 +1230,8 @@ $$
 $X\sim N(\mu,\sigma^2)$이면 상수 $a,b$에 대해
 
 $$
-aX+b\sim N(a\mu+b,\ a^2\sigma^2)
+
+AX+b\sim N(a\mu+b,\ a^2\sigma^2)
 $$
 
 **(b) 표준화**

@@ -2013,6 +2013,7 @@ $$
 과 $n\times n$ 상수 행렬, $n$차원 벡터
 
 $$
+
 A=(a_{ij})_{1\le i,j\le n},\quad \mu=(\mu_1,\mu_2,\dots,\mu_n)^T
 $$
 
@@ -2182,6 +2183,7 @@ $P\left(\frac{X_2-\mu_2}{\sigma_2}=-\frac{X_1-\mu_1}{\sigma_1}\right)=1$
 $X\sim N_n(\mu,\Sigma)$이고 $A$가 $m\times n$ 상수행렬, $b$가 $m$차원 상수벡터이면
 
 $$
+
 AX+b\sim N_m(A\mu+b,A\Sigma A^T)
 $$
 
@@ -2257,6 +2259,7 @@ $$
 **(a)** 정리 4.4.3 (a)를 이용한다. $A=(I_{k_1},0)$로 선택하면
 
 $$
+
 AX=X_1\sim N(A\mu,A\Sigma A^T)=N(\mu_1,\Sigma_{11})
 $$
 

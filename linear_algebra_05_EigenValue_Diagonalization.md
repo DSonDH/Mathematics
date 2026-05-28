@@ -907,6 +907,7 @@ $$\operatorname{adj}(A)A = \det(A)I$$ 또는 $$A\operatorname{adj}(A)=\det(A)I$$
 따라서 만약 $\det(A) \neq 0$이면,
 
 $$
+
 A^{-1} = \frac{1}{\det(A)} \operatorname{adj}(A)
 $$
 

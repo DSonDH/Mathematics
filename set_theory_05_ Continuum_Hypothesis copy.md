@@ -72,7 +72,7 @@ $$
 
 ### (2) 그 외의 집합론
 
-* **NBG 집합론 (Neumann–Bernays–Gödel)**
+* **NBG 집합론 (von Neumann–Bernays–Gödel)**
   : ZFC를 보존적으로 확장한 형식.
   고유모임(proper class (집합이 아닌것들))을 포함할 수 있다.
 

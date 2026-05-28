@@ -381,6 +381,8 @@ $$\overline{A} = \mathrm{int}(A) \cup b(A)$$
 또한 $X = \mathrm{int}(A) \cup b(A) \cup \mathrm{ext}(A)$ (분할)
 
 #### 증명
+...
+
 
 ## 1.4 수렴열 (Convergent Sequence)
 

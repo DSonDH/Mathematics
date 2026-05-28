@@ -1,4 +1,43 @@
-# 수리통계학 식 전개 패턴 총정리
+## 조건부 확률 
+### 곱셈법칙 (Multiplication Rule)
+
+$$P(A \cap B) = P(A) P(B|A) = P(B) P(A|B)$$
+
+**증명**: 조건부 확률의 정의에서
+$$P(B|A) = \frac{P(A \cap B)}{P(A)} \implies P(A \cap B) = P(A) P(B|A)$$
+
+### 확장: 연쇄법칙 (Chain Rule)
+
+$n$개의 사건 $A_1, A_2, \ldots, A_n$에 대해
+
+$$P(A_1 \cap A_2 \cap \cdots \cap A_n) = P(A_1) P(A_2|A_1) P(A_3|A_1 \cap A_2) \cdots P(A_n|A_1 \cap \cdots \cap A_{n-1})$$
+
+**증명**: 귀납법으로 곱셈법칙을 반복 적용
+
+**변수 표기 예시**: 조건부 변수 분리
+
+$$P(Y, X_E \mid X_C) = P(Y \mid X_C) P(X_E \mid Y, X_C)$$
+
+(단, $X_C$는 조건부 변수, $X_E$는 추가 변수, $Y$는 반응변수)
+
+### 베이즈 정리 (Bayes' Theorem)
+
+$$P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{\sum_i P(B|A_i)P(A_i)}$$
+
+(단, $\{A_i\}$는 표본공간의 분할)
+
+**증명**: $P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B|A)P(A)}{P(B)}$에서 전확률 공식 적용
+
+**일반형**: 다중 조건부 변수
+
+$$P(Y \mid X_C) = \frac{P(X_C \mid Y) P(Y)}{P(X_C)} = \frac{P(X_C \mid Y) P(Y)}{\sum_y P(X_C \mid Y=y) P(Y=y)}$$
+
+### 활용
+
+* 베이지안 추론: 사전확률 → 사후확률
+* 의료진단: 검사양성일 때 실제 질병 보유 확률
+* 혼합분포: 성분별 기여도 계산
+* 그래프 모형: 조건부 독립성 구조 표현
 
 ## 랜덤표본 분포 변환
 
@@ -1181,5 +1220,6 @@ $$Var(X) \geq 0, \quad |Cov(X,Y)| \leq \sqrt{Var(X)} \sqrt{Var(Y)}$$
 $a, b \geq 0$, $p, q > 1$, $1/p + 1/q = 1$일 때
 
 $$
-ab \leq \frac{a^p}{p} + \frac{b^q}{q}
+
+Ab \leq \frac{a^p}{p} + \frac{b^q}{q}
 $$

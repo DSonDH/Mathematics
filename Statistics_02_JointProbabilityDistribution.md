@@ -681,6 +681,7 @@ $$
 로그함수의 멱급수 전개식 $\log(1+A) = A - \frac{A^2}{2} + \frac{A^3}{3} - \cdots$를 이용하면,
 
 $$
+
 A = \sum_{\substack{r+s\ge 1}} \frac{m_{r,s}}{r!s!}t_1^r t_2^s = \frac{m_{1,0}}{1!}t_1 + \frac{m_{0,1}}{1!}t_2 + \frac{m_{2,0}}{2!}t_1^2 + \frac{m_{1,1}}{1!1!}t_1t_2 + \frac{m_{0,2}}{2!}t_2^2 + \cdots
 $$
 

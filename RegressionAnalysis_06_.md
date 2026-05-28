@@ -569,7 +569,8 @@ $$
 로 쓸 수 있으며,
 
 $$
-a_j = \beta_j \sqrt{\frac{S_{jj}}{S_{yy}}}
+
+A_j = \beta_j \sqrt{\frac{S_{jj}}{S_{yy}}}
 $$
 
 변수 $Z_j$는 $x_j$의 표준화된 버전이며, $y^*$는 $y$의 표준화된 버전이다. $a_j$는 표준화 회귀계수(standardized regression coefficient)라고 불린다.
@@ -851,6 +852,7 @@ $$
 #### (1) Bonferroni 방법
 
 $$
+
 A_j = \left\{\beta_j: \hat{\mathbf{\beta}}_j - t_{\alpha/(2(p+1))}(n-p-1) \sqrt{\operatorname{\widehat{Var}}(\hat{\mathbf{\beta}}_j)} \le \beta_j \le \hat{\mathbf{\beta}}_j + t_{\alpha/(2(p+1))}(n-p-1) \sqrt{\operatorname{\widehat{Var}}(\hat{\mathbf{\beta}}_j)} \right\} \\
 = \left[ \hat{\mathbf{\beta}}_j - t_{\alpha/(2(p+1))}(n-p-1) \sqrt{\operatorname{\widehat{Var}}(\hat{\mathbf{\beta}}_j)},\ \hat{\mathbf{\beta}}_j + t_{\alpha/(2(p+1))}(n-p-1) \sqrt{\operatorname{\widehat{Var}}(\hat{\mathbf{\beta}}_j)} \right]
 $$

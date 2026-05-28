@@ -40,6 +40,7 @@ Homogeneity는 스칼라배에 대한 성질이므로 다른 개념임)
   - '구조적으로 동일하다'는 뜻이지,
 원소의 내용물 이 반드시 같아야 한다는 뜻은 아니다
     - domain, codomain 내용물이 같은것은 endomorphism임
+  - 참고: 전단사: bijective
 
 * **자기동형사상(automorphism)**:
   자기사상인 동형사상
@@ -154,7 +155,8 @@ $$
 $W$의 기저 $\{w_i\}$ 가 선형독립이므로
 
 $$
-a_i = b_i \quad (1\le i\le n)
+
+A_i = b_i \quad (1\le i\le n)
 $$
 
 따라서

@@ -84,6 +84,7 @@ $
 #### Step 1
 
 $$
+
 AX=B
 \quad\text{with}\quad
 A=
@@ -104,6 +105,7 @@ $$
 정규방정식 $A^TAX=A^TB$를 구성한다.
 
 $$
+
 A^TA=
 \begin{pmatrix}
 4 & 6\\
@@ -153,6 +155,7 @@ $y = a_0 + a_1x + \cdots + a_n x^n$
 $AX=B$
 
 $$
+
 A=
 \begin{pmatrix}
 1 & x_1 & x_1^2 & \cdots & x_1^n\\
@@ -255,6 +258,7 @@ $
 행렬
 
 $$
+
 A=\begin{pmatrix}
 5 & 2\\
 2 & 5

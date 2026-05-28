@@ -19,41 +19,22 @@
 
 #### ③ 극대원소(Maximal element)와 극소원소(Minimal element)
 
-부분순서집합 $A$에서 $a$ in A는 **극대원소**: 
-
-$$
-\forall x \in A,\ a \le x \Rightarrow x = a
-$$
-
-$a$ in A는 **극소원소**:
-
-$$
-\forall x \in A,\ x \le a \Rightarrow x = a
-$$
-극대, 극소 원소는 유일하지는 않다.  
-
-예: 멱집합 $\mathcal{P}(X)$에서 $\emptyset, X$
+- 부분순서집합 $A$에서 $a$ in A는 **극대원소**:  $\forall x \in A,\ a \le x \Rightarrow x = a$
+- $a$ in A는 **극소원소**: $\forall x \in A,\ x \le a \Rightarrow x = a$
+- 극대, 극소 원소는 유일하지는 않다.  
+- 예: 멱집합 $\mathcal{P}(X)$에서 $\emptyset, X$
 
 #### ④ 최대원소(Greatest element)와 최소원소(Least element)
-
 부분순서집합 $A$,  
- a in A에서 **최대원소** :
 
-$$
-\forall x \in A,\ x \le a
-$$
-
-a in A에서 **최소원소** :
-
-$$
-\forall x \in A,\ a \le x
-$$
+- a in A에서 **최대원소** :$\forall x \in A,\ x \le a$
+- a in A에서 **최소원소** : $\forall x \in A,\ a \le x$
 
 - 극대/극소 원소는 존재가능하지만, 최대/최소 원소는 없을 수 있다: 모든 원소끼리 비교가능하지 않으면 그럼.  
 - 개구간 (0, 1)에서 극대, 극소를 알 수 없음.  
-- 이런 무한 집합에서 극대, 극소 개념이 필요해서 상한, 하한이 도입됨.
+- 이런 무한 집합에서 극대, 극소 개념이 필요해서 **상한, 하한**이 도입됨.
 
-### (3) 상한과 하한
+### (3) 상한과 하한 (Supremum and Infimum)
 극대, 극소, 최대원소, 최소원소와 달리, 상한은 $A$ 안에 부분집합 $B$ 에 대해 정의됨  
 
 #### ① 상계(upper bound)와 하계(lower bound)
@@ -85,6 +66,7 @@ $$\sup B, \quad \inf B$$
 
 ### (4) 절편과 절단
 #### ① 절편 (section 또는 segment)
+
 $$
 S_a = \{x \in A \mid x < a\}
 $$
@@ -94,6 +76,7 @@ $$
 * $\mathbb{N}$의 절편 $S_3 = \{1,2\}$
 
 #### ② 절단 (cut)
+
 $$
 B \cap C = \emptyset,\ B \cup C = A,\\
 x \in B,\ y \leq x \Rightarrow y \in B \\
@@ -109,6 +92,7 @@ $$
 ### (5) 순서동형 (Order Isomorphism)
 #### ① 순서보존함수 (Order-preserving map)
 부분순서집합 A, B에 대해 함수 f  
+
 $$
 f: A \to B,\quad \forall x, y \in A, \quad x \le y \Rightarrow f(x) \le f(y)
 $$
@@ -116,6 +100,7 @@ $$
 이면 **순서보존함수**라 한다.  
 입력값 순서가 출력값 순서에도 동일하게 유지되는 것  
 #### ② 순서동형사상 (Order isomorphism)
+
 $$
 f: A \to B \text{ 전단사이며 } x \le y \Rightarrow f(x) \le f(y)
 $$
@@ -132,6 +117,7 @@ $$ A \cong B $$
 ## 2. 전순서집합 (Totally Ordered Set)
 ### (1) 정의
 #### ① 비교가능성
+
 $$
 \forall x, y \in A,\ (x \le y) \lor (y \le x)
 $$
@@ -153,6 +139,7 @@ $A$에서의 **쇄(chain)** 라 한다.
 $$
 A \neq \emptyset \Rightarrow \exists a \in A,\ a \text{는 최소원소}
 $$
+
 모든 비공집합이 최소원소를 가지면 $A$는 **정렬집합(well-ordered set)** 이라 한다.  
 정렬의 기준이 되는 최소원소가 있어야 한다는 말.  
 정렬집합이면 전순서집합. 전순서집합이라고 정렬집합은 아님.  
@@ -164,12 +151,11 @@ $$
 * 모든 정렬집합 $A$에 대해 서수 $\alpha$가 존재.
 * 모든 순서수 $\alpha$에 대해 $o(A) = \alpha$인 정렬집합 A가 존재한다. 
   - o 또는 ord는 서수를 나타내는 기호
-  $$ A \cong \alpha $$
+
+$$ A \cong \alpha $$
 
 1) $A \cong B \iff o(A) = o(B)$
-
 2) $A = \emptyset \iff o(A) = 0$
-
 3) $A \cong \{1, 2, \dots, k\} \iff o(A) = k$
 * $\mathbb{N}$의 정렬형은 $\omega$ (최초의 초한서수).
 
@@ -198,12 +184,14 @@ $A={1}, B={3,4,5}$ → $o(A)=1, o(B)=3$, $\alpha\prec\beta$
 ### (4) 서수의 연산
 #### ① 서수 합
 서로소인 두 집합 A, B의 서수가 alpha, beta. 
+
 $$
 \alpha + \beta = o(A \cup B)
 $$
 
 #### ② 서수 곱
 집합 A, B의 서수가 alpha, beta
+
 $$
 \alpha \times \beta = o(B \times A)
 $$ 
@@ -215,23 +203,19 @@ AxB가 아님!! BxA로 정의 한것임.
 임의의 서수 $\alpha, \beta, \gamma$에 대하여
 
 1. 결합법칙
+
    $$
-   (\alpha + \beta) + \gamma = \alpha + (\beta + \gamma)
-   $$
-   $$
-   (\alpha \times \beta) \times \gamma = \alpha \times (\beta \times \gamma)
+   (\alpha + \beta) + \gamma = \alpha + (\beta + \gamma) \\ (\alpha \times \beta) \times \gamma = \alpha \times (\beta \times \gamma)
    $$
 
 2. 분배법칙
+
    $$
-   \alpha(\beta + \gamma) = \alpha\beta + \alpha\gamma
-   $$
-   
-   $$
-   (\beta + \gamma)\alpha \neq \alpha\gamma + \beta\gamma
+   \alpha(\beta + \gamma) = \alpha\beta + \alpha\gamma \\ (\beta + \gamma)\alpha \neq \alpha\gamma + \beta\gamma
    $$
 
 단, **서수의 덧셈과 곱셈은 교환법칙이 성립하지 않는다.**  
+
 덧셈의 경우:  
 $1+ \omega$는 1과 무한자연수의 순서구조.  
 $\omega + 1$은 무한자연수가 이어지다가 한 상수로 막힌 구조.  
@@ -267,15 +251,10 @@ $\omega\times 2 \cong \omega + \omega$.
    * $\alpha \gamma = \beta \gamma \Rightarrow \alpha = \beta$ 성립 여부.
 
 4. 네 명제 중 거짓인 것 찾고 이유 제시:
-   $$
-   \alpha < \beta \Rightarrow \gamma + \alpha < \gamma + \beta
-   $$
-   $$
-   \alpha < \beta \Rightarrow \alpha + \gamma < \beta + \gamma
-   $$
-   $$
-   \alpha < \beta \Rightarrow \gamma\alpha < \gamma\beta
-   $$
-   $$
-   \alpha < \beta \Rightarrow \alpha\gamma < \beta\gamma
-   $$
+
+$$
+\alpha < \beta \Rightarrow \gamma + \alpha < \gamma + \beta \\
+\alpha < \beta \Rightarrow \alpha + \gamma < \beta + \gamma \\
+\alpha < \beta \Rightarrow \gamma\alpha < \gamma\beta \\
+\alpha < \beta \Rightarrow \alpha\gamma < \beta\gamma
+$$

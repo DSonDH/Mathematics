@@ -370,6 +370,7 @@ $$
 으로 위아래 식이 같으므로
 
 $$
+
 A^2=A,\qquad A^\top=A,\qquad SSB=(X_{ij})^\top A(X_{ij})
 $$
 
@@ -1035,6 +1036,7 @@ $X\sim N(\mu,I_n)$이고 $A$가 멱등행렬(idempotent)라 하자.
 대칭 멱등행렬 $A$는 고유값이 $0$ 또는 $1$만 가지며, 어떤 직교행렬 $P$가 존재하여
 
 $$
+
 A=P
 \begin{pmatrix}
 I_r & 0\\

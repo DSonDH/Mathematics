@@ -4,24 +4,16 @@
 
 ### ① 동등(equivalence)
 
-두 집합 $X, Y$에 대하여 전단사함수
-
-$$
-f: X \to Y
-$$
-
-가 존재하면 $X$와 $Y$는 **동등(equinumerous)** 하다고 한다.
-즉,
-
-$$
-X \approx Y \quad \text{또는} \quad f: X \leftrightarrow Y
-$$
+두 집합 $X, Y$에 대하여 전단사함수 $f: X \to Y$ 가 존재하면 $X$와 $Y$는 **동등(equinumerous)** 하다고 한다.  
+즉, $X \approx Y$ 또는 $f: X \leftrightarrow Y$
 
 ### ② 유한집합, 무한집합
 (진부분집합이란 부분집합 중, 자기 자신을 제외한 부분집합)  
 * 집합 $X$의 적당한 **진부분집합 $Y$** 가
   $X$와 동등하면 $X$는 **무한집합**이라 한다.
 * 그렇지 않으면 $X$는 **유한집합**이라 한다.
+* 즉, 유한 무한을 구분하는 기준은 자기 자신과 동등한 진부분집합이 존재하는가이다.
+  - 더 쉽게, 함수로 표현하면, $X$에서 $X$로의 전단사함수 $f: X \to X$가 존재하는가이다.
 
 예시:
 
@@ -47,9 +39,9 @@ $$
 $X$를 **가부번집합(Denumerable set)** 이라 한다.
 
 ### ② 가산집합(Countable set)
-가부번 집합 확장개념:  
-유한집합이나 가부번집합을 **가산집합**이라 한다.
-무한집합만 대상으로 함.  
+가부번집합의 확장 개념:  
+**가산집합**은 유한집합이거나 가부번집합인 경우를 말한다.  
+즉, 유한집합 또는 $\mathbb{N}$과 동등한 집합을 포함한다.  
 
 ### ③ 여러 가지 정리
 1. 가산집합의 부분집합은 가산집합이다.
@@ -57,18 +49,15 @@ $X$를 **가부번집합(Denumerable set)** 이라 한다.
 3. $\mathbb{N} \times \mathbb{N}$은 가부번집합이다.
 4. $\mathbb{Q}$는 가부번집합이다.
 5. $\mathbb{R}$의 부분집합 $(0,1)$은 비가부번집합이다.
-  - 귀류법으로 증명
-  $$ \text{가정: } \exists f:\mathbb{N}\to(0,1),; f \text{ 전단사.} \\
-  f(n)=0.a_{n1}a_{n2}a_{n3}\dots, \quad ; a_{nm}\in{0,1,\dots,9}.
-  $$
-  $$
-  \text{Let z} \in (0, 1), z=0.z_1z_2z_3\dots,\quad z_k\neq a_{kk};(\forall k\in\mathbb{N})
-  $$
-  $$
-  \Rightarrow z\neq f(k);(\forall k\in\mathbb{N})
-  \Rightarrow z\notin f(\mathbb{N})
-  $$
-  $$
+  - 귀류법으로 증명 (칸토어의 대각법)
+    - 가정: $\exists f:\mathbb{N}\to(0,1)$, $f$는 전단사함수.
+
+  $$ 
+  f(n)=0.a_{n1}a_{n2}a_{n3}\dots, \quad ; a_{nm}\in{0,1,\dots,9}\\
+  \text{Let z} \in (0, 1), z=0.z_1z_2z_3\dots,\quad z_k\neq a_{kk};(\forall k\in\mathbb{N})\\
+
+  \Rightarrow z\neq f(k);(\forall k\in\mathbb{N}) \Rightarrow z\notin f(\mathbb{N})\\
+
   \therefore f \text{ 전단사 아님 } \Rightarrow (0,1)\text{ 비가산.}
   $$
 
@@ -83,14 +72,10 @@ $X$를 **가부번집합(Denumerable set)** 이라 한다.
 # 2. 기수(Cardinal Number)
 ## (1) 기수의 개념
 ### ① 정의
-집합의 크기를 나타내는 수로,
-
-$$
-\text{card } A \text{ 또는 } \#A
-$$
+집합의 크기를 나타내는 수로, $\text{card } A \text{ 또는 } \#A$ 로 표기한다.
 
 * 각 집합에 대해 $\#A$는 유일하다
-* #A에 해당하는 집합 A는 항상 존재한다
+* $\#A$에 해당하는 집합 A는 항상 존재한다
 * 유한집합의 경우 $\#A = k, (k \in \mathbb{N})$
 * $A \approx B \iff \#A = \#B$
 
@@ -117,7 +102,7 @@ $$
 서로소인 두 집합 $A, B$의 기수를 각각 $a, b$라 할 때,
 
 $$
-a + b = \#(A \cup B)
+A + b = \#(A \cup B)
 $$
 
 ### ② 기수 곱
@@ -125,7 +110,7 @@ $$
 집합 $A, B$의 기수를 각각 $a, b$라 할 때,
 
 $$
-a \times b = \#(A \times B)
+A \times b = \#(A \times B)
 $$
 
 ### ③ 연산 법칙
@@ -150,18 +135,17 @@ $$
 
 ### ① 정의
 
-집합 $A, B$에 대하여
+집합 $A, B$에 대하여 $\#A = m, \#B = n$ 일 때 
 
-$$
-\#A = m, \#B = n \text{일 때 } \#(B^A) = n^m
-$$
+$$\#(B^A) = n^m$$
+
 단, $B^A = \{ f \mid f : A \to B \}$
 
 예시:
 $B = {0,1}$일 때,
 
 $$
-B^A = {0,1}^A = 2^{A}
+B^A = \{0,1\}^A = 2^{A}
 $$
 
 ### ② 여러 가지 정리
@@ -170,14 +154,17 @@ $$
    $$
    \#\mathcal{P}(X) = 2^x
    $$
+
 2. 기수 $x, y, z$에 대하여
    $$
    (x^y)(x^z) = x^{y+z}, \quad (x^{y})^z = x^{yz}, \quad (xy)^z = x^z y^z
    $$
+   
 3. 중요: $\mathfrak{c} = {\aleph_0}^{\aleph_0} = \mathfrak{c}^{\aleph_0}$
 4. 중요: $2^{\mathfrak{c}} = {\aleph_0}^{\mathfrak{c}} = \mathfrak{c}^{\mathfrak{c}}$
 
 * 기수를 지수로 올리면 더 큰 집합이, 더 큰 기수가 된다.
+  - $\#\mathcal{P}(X) = 2^{\#X}$이므로, $\#X < \#\mathcal{P}(X)$
 * 연속체 가설과 연결됨! 다음에 나옴
 
 # 연습문제

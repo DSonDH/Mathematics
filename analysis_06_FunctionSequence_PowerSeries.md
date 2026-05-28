@@ -213,7 +213,8 @@ $$
 따라서 $n \ge N$일 때
 
 $$
-a_n < (M + \varepsilon)^n
+
+A_n < (M + \varepsilon)^n
 $$
 
 $\sum_{n=1}^\infty (M + \varepsilon)^n$은 $M + \varepsilon < 1$이므로 수렴하는 등비급수이다.  
@@ -271,7 +272,8 @@ $\alpha=\infty$이면 $R=0$으로 간주한다.
 **풀이:**
 
 $$
-a_n = \frac{1}{n},\quad \sqrt[n]{|a_n|} = \frac{1}{n^{1/n}}
+
+A_n = \frac{1}{n},\quad \sqrt[n]{|a_n|} = \frac{1}{n^{1/n}}
 $$
 
 $\lim_{n\to\infty} n^{1/n} = 1$이므로

@@ -8,6 +8,7 @@
 예) 연결 그래프가 있을 때 인접행렬 $A$는 다음과 같다.
 
 $$
+
 A=
 \begin{pmatrix}
 0 & 1 & 1\\
@@ -91,6 +92,7 @@ $$
 10개의 인터넷 페이지 $p_1$~$p_{10}$ 간의 인접행렬 $A$가 다음과 같다고 한다.
 
 $$
+
 A=
 \begin{pmatrix}
 0&1&0&0&1&0&0&1&0&0\\
@@ -159,6 +161,7 @@ $$
 ### 3) 특잇값 분해 (Singular Value Decomposition)
 정방행렬이 아닐 때에도
 $$
+
 A = U \Sigma V^T
 $$
 
@@ -168,6 +171,7 @@ $\Sigma$는 특잇값이 대각에 놓이고 나머지 성분은 0인 $m \times 
 
 예) A를 특잇값 분해 해보자
 $$
+
 A=
 \begin{pmatrix}
 1 & 1\\
@@ -211,6 +215,7 @@ V의 행들은 고유벡터에서 파생된 것.
 특잇값 분해에서 0인 특잇값의 행 또는 열 제외한 형태를 축소된 특잇값 분해라 한다.
 
 $$
+
 A = U_r \Sigma_r V_r^T \\
 = (u_1\ u_2\ \ldots\ u_r)
 \begin{pmatrix}
@@ -232,6 +237,7 @@ $r$은 랭크(rank)이다.
 축소된 특잇값 분해를 사용하면
 
 $$
+
 A = \sigma_1 u_1 v_1^T + \sigma_2 u_2 v_2^T + \cdots + \sigma_r u_r v_r^T
 $$
 
@@ -243,6 +249,7 @@ $m\times n$을 $k\times n$으로 줄일 수 있다.
 축소된 특잇값 분해를 사용하여
 
 $$
+
 A \approx \sigma_1 u_1 v_1^T + \cdots + \sigma_k u_k v_k^T
 $$
 
