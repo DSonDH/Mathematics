@@ -21,6 +21,17 @@ $$
 (0,1) \approx \mathbb{R} \Rightarrow \mathbb{R} \text{은 무한집합이다.}
 $$
 
+#### 증명 
+1. $f: (0,1) \to \mathbb{R}$, $f(x) = \tan(\pi x - \frac{\pi}{2})$는 $(0,1)$에서 $\mathbb{R}$로의 전단사함수이다.
+2. $g: \mathbb{R} \to (0,1)$,
+   $$
+   g(x) = \begin{cases}
+   \frac{1}{2} + \frac{1}{\pi}\arctan x, & x \geq 0\\
+   \frac{1}{2} + \frac{1}{\pi}\arctan x, & x < 0
+   \end{cases}
+   $$
+   는 $\mathbb{R}$에서 $(0,1)$로의 전단사함수이다.
+
 ### ③ 여러 가지 정리
 1. 공집합은 유한집합이다.
 2. 무한집합을 포함하는 집합은 무한이다.
@@ -49,25 +60,40 @@ $X$를 **가부번집합(Denumerable set)** 이라 한다.
 3. $\mathbb{N} \times \mathbb{N}$은 가부번집합이다.
 4. $\mathbb{Q}$는 가부번집합이다.
 5. $\mathbb{R}$의 부분집합 $(0,1)$은 비가부번집합이다.
-  - 귀류법으로 증명 (칸토어의 대각법)
-    - 가정: $\exists f:\mathbb{N}\to(0,1)$, $f$는 전단사함수.
 
-  $$ 
-  f(n)=0.a_{n1}a_{n2}a_{n3}\dots, \quad ; a_{nm}\in{0,1,\dots,9}\\
-  \text{Let z} \in (0, 1), z=0.z_1z_2z_3\dots,\quad z_k\neq a_{kk};(\forall k\in\mathbb{N})\\
-
-  \Rightarrow z\neq f(k);(\forall k\in\mathbb{N}) \Rightarrow z\notin f(\mathbb{N})\\
-
-  \therefore f \text{ 전단사 아님 } \Rightarrow (0,1)\text{ 비가산.}
-  $$
-
-  - 이렇게 하나씩 원소가 어긋남을 비교하는 방법을 칸토어의 대각법이라고 함
+>- 귀류법으로 증명 (칸토어의 대각법)
+>    - 가정: $\exists f:\mathbb{N}\to(0,1)$, $f$는 전단사함수라고 하자. 즉, $(0,1)$의 모든 원소를 자연수에 대응시키는 열거가 존재한다고 가정한다.
+>
+>증명 절차(대각법):
+>1. 임의의 $n\in\mathbb{N}$에 대해 $f(n)$의 소수표현을
+>     
+>$$f(n)=0.a_{n1}a_{n2}a_{n3}\dots$$
+>
+>(단, 소수표현이 유일하지 않은 경우를 피하기 위해 끝이 모두 9로 채워진 표현은 사용하지 않는다고 가정한다. 즉 0.9999... 대신 1.0000...으로 표현한다.)
+>
+>2. 새로운 수 $z\in(0,1)$를 다음과 같이 정의한다:
+>     
+>$$z=0.z_1z_2z_3\dots$$
+>
+>여기서 각 자리의 숫자 $z_k$는 $a_{kk}$와 다르게 선택한다. 예를 들어,
+>     
+>$$z_k=\begin{cases}1,& a_{kk}\neq1\\2,& a_{kk}=1\end{cases}$$
+>     
+>이렇게 하면 모든 $k$에 대해 $z_k\neq a_{kk}$가 성립한다.
+>
+>3. 그러면 어떤 자연수 $n$에 대해서도 $z$와 $f(n)$의 소수표현은 적어도 한 자리에서 다르므로 $z\neq f(n)$이다. 즉 $z$는 열거된 어떤 원소와도 같지 않다.
+>
+>4. 따라서 $z\notin f(\mathbb{N})$이고, 이는 $f$가 전단사(또는 전사)라는 가정에 모순된다.
+>
+>결론: 처음의 가정이 잘못되었으므로 $(0,1)$은 자연수와 동등하지 않다. 즉, $(0,1)$은 비가부번집합(비가산집합)이다.
+>
+>- 이 방법은 열거된 원소들의 대각선 자리(즉 $a_{11},a_{22},a_{33},\dots$)를 따라 각 자리마다 다른 숫자를 취해 새로운 원소를 만드는 방식이므로 '대각법'이라 불린다. 이 아이디어는 실수의 무한 소수열뿐 아니라 무한 이진열, 집합의 부분집합들 등 다양한 경우에 적용된다.
+>- 유리수의 경우는 대각법에 의한 모순이 발생하지 않는다.
 
 6. 모든 무리수의 집합 $\mathbb{I}$는 비가부번집합이다.
 7. 복소수 집합 $\mathbb{C}$는 비가부번집합이다.
 8. 임의의 무한집합은 가산무한집합을 부분집합으로 갖는다.
 9. 가산집합의 가산합집합은 가산집합이다.
-
 
 # 2. 기수(Cardinal Number)
 ## (1) 기수의 개념
@@ -78,6 +104,7 @@ $X$를 **가부번집합(Denumerable set)** 이라 한다.
 * $\#A$에 해당하는 집합 A는 항상 존재한다
 * 유한집합의 경우 $\#A = k, (k \in \mathbb{N})$
 * $A \approx B \iff \#A = \#B$
+  * 또는 $A \sim B$
 
 ### ② 유한기수와 초한기수
 * **유한기수**: 유한집합의 기수
@@ -94,7 +121,19 @@ $$
 
 1. $\#A \leq \#B \leftrightarrow $ $A$에서 $B$로의 단사함수가 존재
 2. 칸토어 번슈타인 정리: A가 B의 부분집합과 동등이고, B도 A의 부분집합과 동등이면 $A \approx B$ ($\#A = \#B$)
-3. $\#A \leq \#B, \#B \leq \#C \Rightarrow \#A \leq \#C$
+3. 슈뢰더 번슈타인 정리: A에서 B로의 단사함수와 B에서 A로의 단사함수가 모두 존재하면 $A \approx B$ ($\#A = \#B$)
+4. $\#A \leq \#B, \#B \leq \#C \Rightarrow \#A \leq \#C$
+
+## Power set
+Power set: 집합 $A$의 모든 부분집합들의 집합을 $P(A)$로 표기한다.
+
+참고) 반사슬 (antichain): 집합 $A$의 부분집합들 중에서 서로 포함관계가 없는 부분집합들의 집합을 말한다. 즉, $A$의 부분집합들 중에서 어떤 두 부분집합도 서로 포함관계에 있지 않은 경우를 의미한다.  
+
+예: $A = \{1,2\}$일 때, $P(A) = \{\emptyset, \{1\}, \{2\}, \{1,2\}\}$이고, $\{\{1\}, \{2\}\}$는 $P(A)$의 반사슬이다.
+
+### $P(\mathbb{N})$의 기수는 $\mathfrak{c}$이다.
+$\#P(\mathbb{N}) = 2^{\#\mathbb{N}} = 2^{\aleph_0} = \mathfrak{c}$
+
 
 ## (2) 기수의 연산
 
@@ -128,6 +167,11 @@ $$
 2. $\mathfrak{c} + \mathfrak{c} = \mathfrak{c}$
 3. $\aleph_0 + \mathfrak{c} = \mathfrak{c}$
 4. $\aleph_0 \aleph_0 = \aleph_0$
+  - $\aleph_0 ^ 2 = \aleph_0$
+  - $\aleph_0 ^ 3 = \aleph_0$
+  - $\aleph_0 ^ k = \aleph_0$ ($k \in \mathbb{N}$)
+  - $\aleph_0 ^ {\aleph_0} = \mathfrak{c}$
+  - $2 ^ {\aleph_0} = \mathfrak{c}$
 5. $\mathfrak{c}\mathfrak{c} = \mathfrak{c}$
 6. $\aleph_0{\mathfrak{c}} = \mathfrak{c}$
 

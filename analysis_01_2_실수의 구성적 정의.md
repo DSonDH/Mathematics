@@ -139,6 +139,7 @@ $C, D \in \mathbb{R}$에 대해 $CD$ 혹은 $C \times D$를 다음과 같이 정
    로 정의한다.
 
 * $C \in \mathbb{R}$에 대해
+
    $$
    \frac{1}{C}
    = \{ d \in \mathbb{Q} \mid \forall c \in C,\ \exists d \text{ s.t. } d < d' \ \text{with}\ cd' < 1 \}
