@@ -163,14 +163,24 @@ $f^{-1}(A)$와 $f^{-1}(B)$를 계산하자.
 
 이는 $x$의 소수부분이 $(1/2, 1)$에 속하는 모든 실수 $x$를 의미한다. 즉, $f^{-1}(B) = \bigcup_{n \in \mathbb{Z}} (n + 1/2, n + 1)$이다. 이 집합도 $\mathscr{T}$의 열린집합이므로 $B \in \mathscr{T}_1$이다. **✓**  
 
-## 1.2 닫힌집합, 집적점, 폐포 (Closed Set, Limit Point, Closure)
+## 1.2 열린집합, 닫힌집합, 집적점, 폐포 (Open Set, Closed Set, Limit Point, Closure)
 
-### 정의 1.5: 닫힌집합 (closed set)
+### 정의: 열린집합 (open set)
+모든 점 $a \in O$에 대해, $O$에 포함되는 $\epsilon$-근방 $V_\epsilon(a)$가 존재하는 집합 $O \subseteq \mathbb{R}$를 열린집합(open set)이라 한다.
+
+### 정리: 열린집합의 기본 성질 (basic properties of open sets)
+1. $\emptyset, X$는 열린집합이다.
+2. 임의의 열린집합족의 합집합은 열린집합이다: $\{O_\alpha\}_{\alpha \in I}$이 모두 열린집합이면 $\bigcup_{\alpha \in I} O_\alpha$도 열린집합.
+3. 유한개의 열린집합의 유한 교집합은 열린집합이다.
+
+### 정의: 닫힌집합 (closed set)
 집합 $F \subset X$가 닫힌집합(closed set)이라는 것은 $X \setminus F$가 열린집합인 것을 의미한다.
 
-### 정리 1.6: 닫힌집합의 기본 성질 (basic properties of closed sets)
+- 자기 자신의 극한점을 모두 포함하는 집합.
+
+### 정리: 닫힌집합의 기본 성질 (basic properties of closed sets)
 1. $\emptyset, X$는 닫힌집합이다.
-2. 임의의 닫힌집합족의 교집합은 닫힌집합이다: $\{F_\alpha\}_{\alpha \in I}$이 모두 닫힌집합이면 $\bigcap_{\alpha \in I} F_\alpha$도 닫힌집합.
+2. 닫힌집합족의 임의의 교집합은 닫힌집합이다: $\{F_\alpha\}_{\alpha \in I}$이 모두 닫힌집합이면 $\bigcap_{\alpha \in I} F_\alpha$도 닫힌집합.
 3. 유한개의 닫힌집합의 합집합은 닫힌집합이다.
 
 #### 예제
@@ -179,13 +189,33 @@ $f^{-1}(A)$와 $f^{-1}(B)$를 계산하자.
 #### 예제
 닫힌집합의 임의의 합집합은 닫힌집합이 아니다. 예시?
 
-### 정의 1.6: 집적점과 유도집합 (limit point and derived set)
-점 $p \in X$가 집합 $A \subset X$의 집적점(limit point)이라는 것은, $p$를 포함하는 모든 열린집합 $G$에 대해 $(G \setminus \{p\}) \cap A \neq \emptyset$인 것을 의미한다.
+### 정리: 닫힌집합과 코시 수열 (closed set and Cauchy sequence)
+집합 $F \subset \mathbb{R}$이 닫힌집합일 필요충분조건은 $F$에 포함되는 모든 코시수열이 $F$안에서 극한값을 갖는 것이다.
+
+### 여집합 (complement)
+집합 $A \subset X$의 여집합 $X \setminus A$는 $A$의 여집합이라 한다.
+
+$$A^c = \{ x \in X : x \notin A\}$$
+
+### 정리: 집합의 여집합과 열린집합, 닫힌집합 (complement and open/closed sets)
+집합 $A \subset X$에 대해, $A$가 열린집합 $\Leftrightarrow A^c$가 닫힌집합
+
+집합 $A \subset X$에 대해, $A$가 닫힌집합 $\Leftrightarrow A^c$가 열린집합
+
+### 정의: 집적점과 유도집합 (limit point and derived set)
+점 $p \in X$가 집합 $A \subset X$의 집적점(limit point 또는 cluster point, 또는 **극한점**)이라는 것은, $p$를 포함하는 모든 열린집합 $G$에 대해 $(G \setminus \{p\}) \cap A \neq \emptyset$인 것을 의미한다.
+
+- 점 $x$의 모든 $\epsilon$-근방 $V_\epsilon(x)$에 대해 $V_\epsilon(x)$의 집합 $A$의 교집합이 $x$이외의 다른 원소를 가질 때 점 $x$를 집합 $A$의 극한점(limit point)라 한다.
 
 집합 $A$의 모든 집적점들의 집합을 $A'$로 표기하고 유도집합(derived set)이라 한다.
 
-### 정의 1.7: 고립점 (isolated point)
+### 정리: 집적점의 기본 성질 (basic properties of limit points)
+점 $x$가 집합 $A$의 극한점일 필요충분조건은 $\forall n \in \mathbb{N}$에 대하여 $a_n \neq x$이면서 $A$에 포함되는 어떤 수열 ($a_n$)이 존재하여 $x = lim a_n$인 것이다.
+
+### 정의7: 고립점 (isolated point)
 점 $x \in A$가 $A$의 고립점이라는 것은 $\{x\}$가 열린집합이고, $x$를 포함하는 어떤 열린집합 $G$에 대해 $(G \setminus \{x\}) \cap A = \emptyset$인 것을 의미한다.
+
+- 극한점이 아닌 점 $a \in A$
 
 #### 예제
 위상공간 $(X, \mathscr{T})$에서 $x$가 고립점이면 모든 $A \subset X$에 대해 $x \notin A'$임을 보이시오.
@@ -206,24 +236,39 @@ $f^{-1}(A)$와 $f^{-1}(B)$를 계산하자.
 
 그러므로 $\mathbb{Q}' = \mathbb{R}$이다. **✓**
 
-### 정리 1.7: 닫힌집합의 집적점 판정법 (closed set criterion via derived set)
+### 정리: 닫힌집합의 집적점 판정법 (closed set criterion via derived set)
 $F$가 닫힌집합 $\Leftrightarrow$ $F' \subset F$
 
 #### 증명
+...
 
+### 정의: 폐포 (closure)
+집합 $A \subset \mathbb{R}$가 주어질 때 $A$의 극한점 전체의 집합을 $L$이라 하자. $A$의 폐포(closure)는 $\overline{A} = A \cup L$로 정의된다.
 
-### 정의 1.8: 폐포 (closure)
 집합 $A \subset X$의 폐포(closure) $\overline{A}$는 $A$를 포함하는 모든 닫힌집합의 교집합으로 정의된다:
 
 $$\overline{A} = \bigcap \{F : A \subset F, F \text{는 닫힌집합}\}$$
 
-### 정리 1.8: 폐포의 성질 (properties of closure)
+#### 예제
+$A = \{1/n : n \in \mathbb{N}\}$에 대해 $\overline{A}$를 구하시오
+
+**풀이**:
+
+$A$의 집적점은 $0$이다. 따라서 $\overline{A} = A \cup \{0\} = \{1/n : n \in \mathbb{N}\} \cup \{0\}$이다.
+
+### 정리: 폐포의 성질 (properties of closure)
 1. $\overline{A}$는 닫힌집합이다.
 2. $\overline{A}$는 $A$를 포함하는 최소 닫힌집합이다: $A \subset \overline{A}$이고, $A \subset F$인 모든 닫힌집합에 대해 $\overline{A} \subset F$.
+  - 증명
+    - $L$이 $A$의 극한점을 모은 집합이므로 $\overline{A}$는 명백히 $A$의 극한점을 포함한다
+    - $L$, $A$의 합집합을 취하는 중에 $\overline{A}$의 새로운 극한점이 생겼을 수 있다. 하지만 이런 일이 불가능함을 증명할 수 있다.
+    - 한편 $A$를 포함하는 닫힌집합은 항상 $L$또한 포함해야 한다.
+    - 증명 끝.
+
 3. $A = \overline{A}$ $\Leftrightarrow$ $A$가 닫힌집합.
 4. $\overline{A} = A \cup A'$
 
-#### 예제 1.8
+#### 예제
 집합 $X$에 여유한 또는 여가산 위상이 주어질 경우, $X$의 부분집합 $A$에 대하여 $\overline{A}$의 폐포를 구하시오.
 
 **풀이**:
@@ -256,7 +301,7 @@ $$\overline{A} = \begin{cases} A & \text{if } A \text{는 유한} \\ X & \text{i
 
 $$\overline{A} = \begin{cases} A & \text{if } A \text{는 가산} \\ X & \text{if } A \text{는 비가산} \end{cases}$$
 
-### 정리 1.9: 폐포의 특성화 (characterization of closure)
+### 정리: 폐포의 특성화 (characterization of closure)
 $X$를 위상공간, $A \subset X$를 부분집합이라 하자. $x \in \overline{A}$이기 위한 필요충분조건은 $x$를 포함하는 임의의 열린집합 $G$에 대하여 $G \cap A \neq \emptyset$이 되는 것이다.
 
 #### 증명
@@ -280,7 +325,7 @@ $([p, c) \setminus \{p\}) \cap \mathbb{Q} = (p, c) \cap \mathbb{Q}$
 
 따라서 $\mathbb{Q}' = \mathbb{R}$. **✓**
 
-### 정의 1.9: 조밀부분집합 (dense subset)
+### 정의: 조밀부분집합 (dense subset)
 위상공간 $(X, \mathscr{T})$의 부분집합 $D$가 조밀부분집합이라는 것은 $\overline{D} = X$인 것을 의미한다.
 
 **동치 조건**: $D$가 $X$의 조밀부분집합 $\Leftrightarrow$ $X$의 모든 공집합이 아닌 열린집합이 $D$와 교집합을 가진다. 즉, 모든 $U \in \mathscr{T}$, $U \neq \emptyset$에 대해 $U \cap D \neq \emptyset$이다.
@@ -289,7 +334,7 @@ $([p, c) \setminus \{p\}) \cap \mathbb{Q} = (p, c) \cap \mathbb{Q}$
 - $\mathbb{Q}$는 $\mathbb{R}$의 보통위상에서 조밀부분집합이다.
 - $\mathbb{R} \setminus \mathbb{Q}$ (무리수 집합)도 $\mathbb{R}$의 보통위상에서 조밀부분집합이다.
 
-### 정리 1.10: 폐포의 유도집합 표현 (closure via derived set)
+### 정리: 폐포의 유도집합 표현 (closure via derived set)
 위상공간 $(X, \mathscr{T})$와 $A \subset X$에 대하여 다음이 성립한다:
 
 $$\overline{A} = A \cup A'$$
@@ -304,7 +349,9 @@ $(\subset)$ $\overline{A}$는 $A$를 포함하는 닫힌집합이므로, $\overl
 ### 정의 1.9: 내부 (interior), 경계와 외부 (boundary and exterior)
 집합 $A \subset X$의 내부(interior) $\mathrm{int}(A)$ 또는 $A^\circ$는 $A$에 포함되는 모든 열린부분집합의 합집합으로 정의된다:
 
-$$\mathrm{int}(A) = \bigcup \{U : U \subset A, U \in \mathscr{T}\}$$
+$$\mathrm{int}(A) = \bigcup \{U : U \subset A, U \in \mathscr{T}\} \\
+\{x \in A: V_\epsilon(x) \subseteq A \text{인 x의 근방} V_\epsilon(x) \text{가 존재} \}
+$$
 
 집합 $A$의 경계(boundary) $\partial(A)$는:
 

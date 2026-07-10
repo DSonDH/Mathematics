@@ -189,6 +189,18 @@ $$
 
 가 0으로 수렴하지 않으므로 $[0,1)$에서 균등수렴하지 않는다.
 
+## 참고
+
+### 비 판정법(Ratio Test)
+$a_n \neq 0$인 인 무한급수 $\sum_{n=1}^\infty a_n$이 주어질 때, $\lim_{n\to\infty} \left|\frac{a_{n+1}}{a_n}\right| = r \lt 1$이면 $\sum_{n=1}^\infty a_n$은 수렴한다.
+
+### 아벨 판정법(Abel's Test)
+무한급수 $\sum_{n=1}^\infty a_n b_n$이 주어질 때, $\{a_n\}$이 단조수열이고 유계이며, $\sum_{n=1}^\infty b_n$이 수렴하면 $\sum_{n=1}^\infty a_n b_n$도 수렴한다.
+
+### 디리클레 판정법(Dirichlet's Test)
+무한급수 $\sum_{n=1}^\infty a_n b_n$이 주어질 때, $\{a_n\}$이 단조수열이고 $\lim_{n\to\infty} a_n = 0$이며, $\sum_{n=1}^\infty b_n$의 부분합이 유계이면 $\sum_{n=1}^\infty a_n b_n$도 수렴한다.
+
+
 # 3. 멱급수 *(Power Series)*
 ## (1) 멱급수의 수렴
 ### Thm. 1. [근판정법] *(Root Test)*
@@ -242,6 +254,10 @@ $$
 >2. $\displaystyle\sum_{n=1}^\infty a_n$이 발산하면
 >   $\displaystyle\sum_{n=1}^\infty b_n$도 발산한다.
 >
+>**절대수렴 판정법** *(Absolute Convergence Test)* 은 **급수의 수렴·발산을 이미 알고 있는 급수와의 항별 비교로 판단하는 방법**이다.
+>
+> 무한급수 $\sum_{n=1}^\infty a_n$이 절대수렴하면, $\sum_{n=1}^\infty a_n$도 수렴한다.
+
 ### Cor. 중요: [멱급수의 수렴반경] *(Radius of Convergence)*
 멱급수
 

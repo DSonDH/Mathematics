@@ -11,18 +11,31 @@ $$\{a_{n_k}\}$$
 
 를 $\{a_n\}$의 **부분수열**이라 한다.
  - ex: $n_k = \{1, 3, 5, ...\}$, $\{a_{n_k}\} = \{a_1, a_3, a_5, ... \}$
-### 추가: [증가(감소)수열] *(Monotone Sequence)*
-1. $\forall n\in\mathbb N,\ a_n\le a_{n+1}$이면 $\{a_n\}$을 **단조증가수열** *(monotone increasing sequence)* 이라 한다.  
+
+#### Thm. 1. [부분수열의 수렴성] *(Convergence of Subsequences)*
+증명: $\forall \, \, \varepsilon>0$, 수열 $\{a_n\}$이 $\lim_{n\to\infty}a_n=L$이므로
+$$\exists N\in\mathbb N\quad\text{s.t.}\quad |a_n-L|<\varepsilon\quad(\forall n\ge N).$$
+
+부분수열 $\{a_{n_k}\}$에 대하여 $n_k\ge k$이므로,
+$k\ge N$이면 $n_k\ge N$이다. 따라서
+$$|a_{n_k}-L|<\varepsilon\quad(\forall k\ge N).$$
+
+이는 $\lim_{k\to\infty}a_{n_k}=L$임을 의미한다.
+
+### 추가: [증가(감소)수열] *(Increasing (Decreasing) Sequence)*
+1. $\forall n\in\mathbb N,\ a_n\le a_{n+1}$이면 $\{a_n\}$을 **증가수열** *(increasing sequence)* 이라 한다.  
 - ($a_n<a_{n+1}$이면 **순증가수열**)
 
-2. $\forall n\in\mathbb N,\ a_n\ge a_{n+1}$이면 $\{a_n\}$을 **단조감소수열**
-   *(monotone decreasing sequence)* 이라 한다.
+2. $\forall n\in\mathbb N,\ a_n\ge a_{n+1}$이면 $\{a_n\}$을 **감소수열**
+   *(decreasing sequence)* 이라 한다.
+
+3. $\{a_n\}$이 증가수열 또는 감소수열이면 $\{a_n\}$을 **단조수열** *(monotone sequence)* 이라 한다.
 
 ### Def. 4. [유계인 수열] *(Bounded Sequence)*
 $\exists M>0$ s.t. $\forall n\in\mathbb N,\ |a_n|\le M$이면
 $\{a_n\}$을 **유계 수열**이라 한다.
 
-### Thm. ⭐유계인 단조 실수열은 항상 수렴한다. **[Monotone Convergence Theorem]**
+### ⭐ Thm. 단조수렴정리: 유계인 단조 실수열은 항상 수렴한다. **[Monotone Convergence Theorem]**
 #### 증명
 $\{a_n\}$이 단조증가하고 유계인 경우만 증명한다. (감소의 경우도 유사)  
 
@@ -57,6 +70,12 @@ $$\forall n\ge N,\ |a_n-a|<\varepsilon$$
 $$\lim_{n\to\infty}a_n=a$$
 
 로 쓴다.
+
+- $\varepsilon$ 근방(Neighborhood): $a$를 중심으로 하는 반지름 $\varepsilon$인 열린구간 $(a-\varepsilon, a+\varepsilon)$
+  - 중심이 $a$이고 반지름이 $\varepsilon$인 열린구간을 $a$의 $\varepsilon$-근방이라 한다.
+  - $V_\varepsilon(a) := (a-\varepsilon, a+\varepsilon)$ 로 표기
+- 즉, N 이후의 모든 항이 $a$의 $\varepsilon$-근방에 들어가는 것이 수열의 수렴의 정의이다.
+- $N$는 $\varepsilon$에 따라 달라질 수 있다. 즉, $\varepsilon$이 작아질수록 $N$이 커질 수 있다.
 
 ### Def. 2. [수열의 발산] *(Divergence of a Sequence)*
 수열 ${a_n}$이 어떤 실수 $a$로도 수렴하지 않으면
@@ -106,6 +125,50 @@ $\lim a_n=a$, $\lim b_n=b$이면 다음이 성립한다.
 2. $\lim(a_nb_n)=ab$
 3. $\lim\dfrac{a_n}{b_n}=\dfrac ab$
    (단, $b\ne0$, $\forall n,\ b_n\ne0$)
+
+### Thm. 4. [극한과 부등식] *(Limits and Inequalities)*
+$\{a_n\}$과 $\{b_n\}$이 수열이고 $\lim a_n = a$, $\lim b_n = b$일때,
+
+1. $\forall n\in\mathbb N,\ a_n \ge c$이면 $a \ge c$
+2. $\forall n\in\mathbb N,\ a_n \le c$이면 $a \le c$
+3. $\forall n\in\mathbb N,\ a_n \le b_n$이면 $a \le b$
+4. $\forall n\in\mathbb N,\ a_n \le b_n \le c_n$이고 $\lim a_n = \lim c_n = L$이면 $\lim b_n = L$
+
+#### 증명
+1. 귀류법으로 증명한다. 
+$\exists n_0\in\mathbb N$ s.t. $a_{n_0} < c$라고 하면, $\varepsilon = \frac{c - a_{n_0}}{2} > 0$에 대하여
+
+$$\exists N \in \mathbb{N} \text{ s.t. } \forall n \ge N, |a_n - a| < \varepsilon$$
+
+$n \ge \max\{N, n_0\}$일 때
+
+$$a < a_{n_0} + \varepsilon = \frac{a_{n_0} + c}{2} < c$$
+
+이는 모순이다. 따라서 $a \ge c$이다.
+
+2. 역시 귀류법으로 증명한다. $\exists n_0\in\mathbb N$ s.t. $a_{n_0} > c$라고 하면, $\varepsilon = \frac{a_{n_0} - c}{2} > 0$에 대하여
+
+$$\exists N \in \mathbb{N} \text{ s.t. } \forall n \ge N, |a_n - a| < \varepsilon$$
+
+$n \ge \max\{N, n_0\}$일 때
+
+$$a > a_{n_0} - \varepsilon = \frac{a_{n_0} + c}{2} > c$$
+
+이는 모순이다. 따라서 $a \le c$이다.
+
+3. 1번을 활용하여 증명할 수 있다. 
+$\forall n\in\mathbb N,\ a_n \le b_n$이므로 $a_n - b_n \le 0$이다. 따라서 $\lim (a_n - b_n) = a - b \le 0$이다. 즉, $a \le b$이다.
+
+4. $\varepsilon > 0$이 주어졌을 때, $\exists N_1 \in \mathbb{N}$ s.t. $\forall n \ge N_1, |a_n - L| < \varepsilon$이고 $\exists N_2 \in \mathbb{N}$ s.t. $\forall n \ge N_2, |c_n - L| < \varepsilon$이다.
+따라서 모든 $n \ge \max\{N_1, N_2\}$에 대하여
+
+$$L - \varepsilon < a_n \le b_n \le c_n < L + \varepsilon$$
+
+즉, $|b_n - L| < \varepsilon$이다. 따라서 $\lim b_n = L$이다.
+
+### 참고: 궁극적(eventually)과 무한히 자주(infinitely often)
+- 궁극적(eventually): 어떤 성질이 처음 유한개를 제외한 모든 $n$에 대해 성립하는 경우. 즉, $\exists N$ s.t. $\forall n \ge N$에 대해 성립한다.
+- 무한히 자주(infinitely often): 어떤 성질이 무한히 많은 $n$에 대해 성립하는 경우. 즉, $\forall N$, $\exists n \ge N$에 대해 성립한다.
 
 >### 추가: 실수 수열의 상한과 하한 *(Supremum and Infimum)*
 >실수 수열 $\{a_n\}_{n\in\mathbb{N}}\subset\mathbb{R}$의 값집합을
@@ -216,7 +279,7 @@ $\lim a_n=a$, $\lim b_n=b$이면 다음이 성립한다.
 >- $\lim_{k\to\infty} 2k\left(\frac{1}{2}\right)^{2k} = \lim_{k\to\infty} \frac{2k}{4^k} = 0$  
 >따라서 $\lim_{n\to\infty} a_n = 0$
 
-### Thm. 4. [상극한의 특성화] *(Characterization of Limit Superior)*
+### Thm. 5. [상극한의 특성화] *(Characterization of Limit Superior)*
 유계실수열 $\{x_n\}$의 상극한이 $\alpha \in \mathbb{R}$이면 다음 두 성질이 성립한다.
 
 1. 임의의 $\varepsilon > 0$에 대하여, $\exists N \in \mathbb{N}$ s.t. $\forall n \ge N$, $x_n < \alpha + \varepsilon$
@@ -263,7 +326,7 @@ $(\Leftarrow$ 방향) 주어진 두 성질을 만족한다고 하자.
 
 따라서 $M = \alpha$이고, $\limsup_{n\to\infty} x_n = \alpha$이다.
 
-### Thm. 5. [하극한의 특성화] *(Characterization of Limit Inferior)*
+### Thm. 6. [하극한의 특성화] *(Characterization of Limit Inferior)*
 유계실수열 $\{x_n\}$의 하극한이 $\beta \in \mathbb{R}$이면 다음 두 성질이 성립한다.
 
 1. 임의의 $\varepsilon > 0$에 대하여, $\exists N \in \mathbb{N}$ s.t. $\forall n \ge N$, $x_n > \beta - \varepsilon$
@@ -409,34 +472,41 @@ $$M = \max\{|a_1|, |a_2|, \ldots, |a_{N-1}|, |a_N| + 1\}$$
 $\mathbb R$의 공집합이 아닌 부분집합이 위로 유계이면
 그 부분집합은 **상한** *(supremum)* 을 갖는다.
 
-
-# 2. 주요 정리 *(Main Theorems)*
-## (1) 단조수렴정리 *(Monotone Convergence Theorem)*
-### Thm. 1.
-$\{a_n\}$이 단조증가(또는 감소)하고 위(아래)로 유계이면
-$\{a_n\}$은 수렴한다.
+### 코시 응집판별법 (Cauchy Condensation Test)
+$(b_n)$이 감소수열이고 모든 $n\in \mathbb N$에 대해 $b_n\ge0$이면, $\sum_{n=1}^\infty b_n$은 수렴한다 $\iff$ $\sum_{n=0}^\infty 2^n b_{2^n}$이 수렴한다.
 
 #### 증명
-단조증가하고 위로 유계인 경우만 증명한다. (감소의 경우도 유사)
+(충분조건 증명)  
 
-$\{a_n\}$이 단조증가하고 위로 유계라고 하자.
+$\sum_{n=1}^\infty 2^n b_n$이 수렴한다고 하자. 수렴하는 수열은 모두 유계이므로 $\exists M>0$ s.t. $\forall N\in\mathbb N,\ \sum_{n=1}^N 2^n b_n\le M$이다.  
 
-$A = \{a_n : n \in \mathbb{N}\}$라 하면, $A$는 공집합이 아니고 위로 유계이므로
-실수의 완비성에 의해 상한 $\alpha = \sup A$가 존재한다.
+이제 다음 부분합이 유계임을 보이면 충분하다: $s_m = b_1 + b_2 + \cdots + b_m$
 
-이제 $\lim_{n\to\infty} a_n = \alpha$임을 보이자.
+$m$을 고정하고 $k$를 충분히 크게하여 $m \leq 2^{k+1}-1$라고 하자. 그러면 $s_m \leq s_{2^{k+1}-1}$이고, 
 
-$\varepsilon > 0$이 주어졌을 때, $\alpha - \varepsilon$은 $A$의 상한이 아니므로
+$$s_{2^{k+1}-1} = b_1 + (b_2+b_3) + (b_4+b_5+b_6+b_7) + \cdots + (b_{2^k}+\cdots+b_{2^{k+1}-1}) \\
+\leq b_1 + 2b_2 + 4b_4 + \cdots + 2^k b_{2^k} \leq M$$
 
-$$\exists N \in \mathbb{N} \text{ s.t. } a_N > \alpha - \varepsilon$$
+따라서 $s_m \leq M$이므로 $\sum_{n=1}^\infty b_n$은 단조수렴정리에 의해 수렴한다.
 
-$\{a_n\}$이 단조증가하므로 $n \ge N$일 때
+(필요조건 증명)
 
-$$\alpha - \varepsilon < a_N \le a_n \le \alpha < \alpha + \varepsilon$$
+급수 $\sum_{n=0}^\infty b_{2^n}$이 수렴한다고 하자. 
+$\sum_{n=0}^\infty 2^n b_{2^n}$이 수렴함을 보이면 충분하다.
+$k$를 고정하고 $m$을 충분히 크게하여 $2^k \leq m < 2^{k+1}$라고 하자. 그러면  
 
-따라서 $n \ge N$이면 $|a_n - \alpha| < \varepsilon$이므로
+$$\sum_{n=0}^m 2^n b_{2^n} = b_1 + 2b_2 + 4b_4 + \cdots + 2^k b_{2^k} \\ \leq b_1 + (b_2+b_3) + (b_4+b_5+b_6+b_7) + \cdots + (b_{2^k}+\cdots+b_{2^{k+1}-1}) \leq \sum_{n=1}^{2^{k+1}-1} b_n$$
 
-$$\lim_{n\to\infty} a_n = \alpha$$
+가정에서 $\sum_{n=1}^{2^{k+1}-1} b_n$이 유계이므로 $\sum_{n=0}^m 2^n b_{2^n}$도 유계이다. 따라서 $\sum_{n=0}^\infty 2^n b_{2^n}$은 단조수렴정리에 의해 수렴한다.
+
+따라서 $$\sum_{n=1}^\infty b_n \text{은 수렴} \iff \sum_{n=0}^\infty 2^n b_{2^n} \text{은 수렴}$$
+
+
+# 2. 주요 정리 *(Main Theorems)*
+
+### Thm. 1. 단조수렴정리 *(Monotone Convergence Theorem)* (위에 먼저 소개함)
+$\{a_n\}$이 단조증가(또는 감소)하고 위(아래)로 유계이면
+$\{a_n\}$은 수렴한다.
 
 ### Thm. 2. [축소구간정리] *(Nested Interval Theorem)*
 실수의 완비성을 보이는 다른 버전.  
@@ -491,10 +561,10 @@ $\{a_n\}$이 유계라고 하자. 즉, $\exists M > 0$ s.t. $\forall n \in \math
 
 구간 $I_1 = [-M, M]$을 이등분하여 $[-M, 0]$, $[0, M]$ 두 구간을 만들면,
 비둘기집 원리에 의해 적어도 하나의 구간에는 무한히 많은 $a_n$이 존재한다.
-이 구간을 $I_2$라 하고, $a_{n_1} \in I_2$를 선택한다.
+이 구간을 $I_2$라 하고, $a_{n_1} \in I_2$를 임의로 선택한다.
 
 $I_2$를 다시 이등분하여 무한히 많은 $a_n$을 포함하는 구간을 $I_3$라 하고,
-$n_2 > n_1$인 $a_{n_2} \in I_3$를 선택한다.
+$n_2 > n_1$인 $a_{n_2} \in I_3$를 임의로 선택한다.
 
 이 과정을 반복하면 닫힌 구간의 수열 $\{I_k\}$와 부분수열 $\{a_{n_k}\}$를 얻는다.
 - $I_{k+1} \subset I_k$
@@ -558,6 +628,10 @@ $$f(b_0) = \lim_{k\to\infty} f(x_{n_k})$$
 
 따라서 $\exists b_0 \in [a,b]$ s.t. $f(b_0) = M = \sup\{f(x) : x \in [a,b]\}$.
 
+### 참고
+- 볼차노-바이어슈트라스 정리(Bolzano–Weierstrass Theorem), 완비성 공리, 단조수렴 정리는 모두 동치이다.
+
+
 # 3. 급수와 극한 *(Series and Limits)*
 ## (1) 급수의 정의 *(Definition of a Series)*
 ### Def. 1. [급수] *(Series)*
@@ -565,13 +639,18 @@ $$f(b_0) = \lim_{k\to\infty} f(x_{n_k})$$
 
 $$a_1+a_2+a_3+\cdots=\sum_{n=1}^\infty a_n$$
 
-을 **(무한)급수**라 한다.
+을 **(무한)급수 (Infinite Series)** 라 한다.
 
-$n$번째 부분합을
+$n$번째 부분합(partial sum)을
 
 $$S_n=\sum_{k=1}^n a_k$$
 
 라 한다.
+
+- 수열의 항: $a_1, a_2, a_3, \ldots$
+- 무한급수의 수렴성은 수열 $(S_n)$의 수렴성에 의해 정의된다.
+  - 즉, $\sum_{n=1}^\infty a_n$이 수렴한다(converges) 
+  - $\sum_{n=1}^\infty a_n = A \Leftrightarrow \lim_{n\to\infty} S_n = A$
 
 ## [등차수열과 등비수열] *(Arithmetic and Geometric Sequences)*
 
@@ -626,12 +705,19 @@ $$\sum_{n=1}^\infty a_{f(n)}$$
   - 더해지는 순서가 중요하므로, 의미있는 급수다.
 
 ## (2) 급수의 극한 *(Convergence of Series)*
+
+### 무한급수에 대한 코시 수렴 판정법 (Cauchy Criterion for Series)
+무한급수 $\sum_{n=1}^\infty a_n$이 수렴한다 $\iff$ 임의의 $\varepsilon > 0$에 대하여, $\exists N \in \mathbb{N}$ s.t. $\forall m > n \ge N$,
+
+$$\left|\sum_{k=n+1}^m a_k\right| < \varepsilon$$
+
+
 ### Def. 1. [급수의 수렴과 발산]
 부분합 수열 $\{S_n\}$이 $S$로 수렴하면
 
 $$\sum_{n=1}^\infty a_n=S$$
 
-S로 수렴한다 하고, 그렇지 않으면 발산한다고 한다.
+S로 수렴한다(converges to $S$) 하고, 그렇지 않으면 발산한다(diverges) 한다.
 - 급수의 수렴, 발산 확인은 수열의 수렴, 발산보다 어렵다
 - 케바케로 다양한 제안이 서술되어있다.
 
@@ -663,8 +749,8 @@ S로 수렴한다 하고, 그렇지 않으면 발산한다고 한다.
     이 급수는 **조건수렴**한다.
     
     - **수렴성**: 교대급수 판정법(Alternating Series Test)에 의해 수렴한다.
-        * $\frac{1}{n}$은 단조감소하고
-        * $\lim_{n\to\infty}\frac{1}{n} = 0$이므로
+        * 수열 ($\frac{1}{n}$) 은 단조감소하고
+        * 수열의 극한값 ($\lim_{n\to\infty}\frac{1}{n} = 0$) 이 0 이므로
         * 급수는 수렴한다. (실제로 $\ln 2$로 수렴)
     
     * $\ln 2$로 수렴하는 이유
@@ -720,45 +806,43 @@ $$\lim_{n\to\infty}a_n=0$$
 ### Thm. 3.
 $\sum a_n$이 절대수렴하면 임의의 재배열 급수도 수렴하며 그 합은 같다. (조건수렴은 그렇지 않다)
 
-#### 증명
-$\sum a_n$이 절대수렴한다고 하자. 즉, $\sum |a_n| = L < \infty$이다.
-
-$f:\mathbb{N} \to \mathbb{N}$을 전단사 함수라 하고, 재배열급수 $\sum a_{f(n)}$을 고려하자.
-
-**Step 1.** 재배열급수가 수렴함을 보이자.
-
-재배열급수의 부분합을 $T_m = \sum_{k=1}^m a_{f(k)}$라 하자.
-
-임의의 $\varepsilon > 0$에 대해, $\sum |a_n|$이 수렴하므로
-
-$$\exists N \in \mathbb{N} \text{ s.t. } \sum_{n=N+1}^\infty |a_n| < \frac{\varepsilon}{2}$$
-
-$M$을 충분히 크게 선택하여 $\{1, 2, \ldots, N\} \subset \{f(1), f(2), \ldots, f(M)\}$이 되도록 하자.
-
-$m, m' \ge M$일 때, $T_m - T_{m'}$에 포함되는 항들은 모두 $n > N$인 $a_n$들이므로
-
-$$|T_m - T_{m'}| \le \sum_{n=N+1}^\infty |a_n| < \frac{\varepsilon}{2} < \varepsilon$$
-
-따라서 $\{T_m\}$은 코시수열이고, 코시수열은 수렴하므로 재배열급수는 수렴한다.
-
-**Step 2.** 재배열급수의 합이 원래 급수의 합과 같음을 보이자.
-
-원래 급수의 합을 $S = \sum_{n=1}^\infty a_n$, 재배열급수의 합을 $T = \sum_{n=1}^\infty a_{f(n)}$이라 하자.
-
-임의의 $\varepsilon > 0$에 대해, $\exists N$ s.t. $\sum_{n=N+1}^\infty |a_n| < \varepsilon$이고
-
-$$\left|S - \sum_{k=1}^N a_k\right| < \varepsilon$$
-
-
-$M$을 충분히 크게 선택하여 $\{1, 2, \ldots, N\} \subset \{f(1), f(2), \ldots, f(M)\}$이 되도록 하면
-
-$$\left|T - \sum_{k=1}^N a_k\right| = \left|\sum_{n=1}^\infty a_{f(n)} - \sum_{k=1}^N a_k\right| < \varepsilon$$
-
-따라서
-
-$$|S - T| \le \left|S - \sum_{k=1}^N a_k\right| + \left|T - \sum_{k=1}^N a_k\right| < 2\varepsilon$$
-
-$\varepsilon$은 임의이므로 $S = T$이다.
+>**증명**  
+>$\sum a_n$이 절대수렴한다고 하자. 즉, $\sum |a_n| = L < \infty$이다.
+>
+>**Step 1.** 재배열급수가 수렴함을 보이자.
+>
+>재배열급수의 부분합을 $T_m = \sum_{k=1}^m a_{f(k)}$라 하자.
+>
+>임의의 $\varepsilon > 0$에 대해, $\sum |a_n|$이 수렴하므로
+>
+>$$\exists N \in \mathbb{N} \text{ s.t. } \sum_{n=N+1}^\infty |a_n| < \frac{\varepsilon}{2}$$
+>
+>$M$을 충분히 크게 선택하여 $\{1, 2, \ldots, N\} \subset \{f(1), f(2), \ldots, f(M)\}$이 되도록 하자.
+>
+>$m, m' \ge M$일 때, $T_m - T_{m'}$에 포함되는 항들은 모두 $n > N$인 $a_n$들이므로
+>
+>$$|T_m - T_{m'}| \le \sum_{n=N+1}^\infty |a_n| < \frac{\varepsilon}{2} < \varepsilon$$
+>
+>따라서 $\{T_m\}$은 코시수열이고, 코시수열은 수렴하므로 재배열급수는 수렴한다.
+>
+>**Step 2.** 재배열급수의 합이 원래 급수의 합과 같음을 보이자.
+>
+>원래 급수의 합을 $S = \sum_{n=1}^\infty a_n$, 재배열급수의 합을 $T = \sum_{n=1}^\infty a_{f(n)}$이라 하자.
+>
+>임의의 $\varepsilon > 0$에 대해, $\exists N$ s.t. $\sum_{n=N+1}^\infty |a_n| < \varepsilon$이고
+>
+>$$\left|S - \sum_{k=1}^N a_k\right| < \varepsilon$$
+>
+>
+>$M$을 충분히 크게 선택하여 $\{1, 2, \ldots, N\} \subset \{f(1), f(2), \ldots, f(M)\}$이 되도록 하면
+>
+>$$\left|T - \sum_{k=1}^N a_k\right| = \left|\sum_{n=1}^\infty a_{f(n)} - \sum_{k=1}^N a_k\right| < \varepsilon$$
+>
+>따라서
+>
+>$$|S - T| \le \left|S - \sum_{k=1}^N a_k\right| + \left|T - \sum_{k=1}^N a_k\right| < 2\varepsilon$$
+>
+>$\varepsilon$은 임의이므로 $S = T$이다.
 
 ### Thm. 4. [상극한의 특성화] *(Characterization of Limit Superior)*
 유계실수열 $\{x_n\}$의 상극한이 $\alpha \in \mathbb{R}$이면 다음 두 성질이 성립한다.
