@@ -45,13 +45,19 @@
 
 $$K_1 \supseteq K_2 \supseteq K_3 \supseteq \cdots \supseteq K_n \supseteq \cdots$$
 
-교집합 $\bigcap_{n=1}^{\infty} K_n$이 공집합이 아니다.
+교집합 $\bigcap_{n=1}^{\infty} K_n$이 공집합이 아니다. G_n$ 은 공집합이 아니다.
+증명
+
+
 
 > **증명**
 > 각 집합 $K_n$이 콤팩트란 성질을 이용하기 위해 모든 $K_n$에 결국 속하게 되는 수열을 만들 것이다.  
 > 각 $n \in \mathbb{N}$에 대해 $x_n \in K_n$을 잡자. 이때 $\{x_n\}$은 $K_1$에 속하는 수열이므로, 콤팩트성에 의해 $\{x_n\}$의 부분수열 $\{x_{n_k}\}$이 존재하여 $\{x_{n_k}\} \to x \in K_1$이다.
 > 
-> 실제로 $x$는 **모든** $K_n$에 속한다. 왜냐하면, $\{x_{n_k}\}$은 결국 모든 $K_n$에 속하는 꼬리부분수열이기 때문이다. 따라서 $x \in \bigcap_{n=1}^{\infty} K_n$이고, 교집합이 공집합이 아님을 알 수 있다. $\square$
+> 실제로 $x$는 **모든** $K_n$에 속한다. 왜냐하면, $\{x_{n_k}\}$은 결국 모든 $K_n$에 속하는 꼬리부분수열이기 때문이다. 따라서 $x \in \bigcap_{n=1}^{\infty} K_n$이고, 교집합이 공집합이 아님을 알 수  G_n$ 은 공집합이 아니다.있다. $\square$
+
+증명
+
 
 **정의 6.1** (열린피복, 열린덮개, open cover)
 
@@ -123,7 +129,13 @@ $(y_n)$을 $K$에 포함되는 코시수열로서 $lim y_n = y$라고 하자.
 
 구성법: $I_n$가 주어지면 $I_n$를 두 개의 닫힌 반구간 $J_1, J_2$로 나눈다. 만약 두 반구간 모두에 대해 $J_1\cap K$와 $J_2\cap K$가 유한부분피복을 갖는다면, 그 두 유한 부분덮개의 합집합으로 $I_n\cap K$의 유한부분피복을 얻을 수 있다. 이는 $I_n\cap K$가 유한부분피복을 갖지 않는다는 가정과 모순이 된다. 따라서 둘 중 적어도 하나는 유한부분피복을 갖지 않는다. 그 반구간을 $I_{n+1}$로 택한다. 이렇게 하면 각 단계에서 길이가 절반으로 줄어들므로 $|I_n|\to0$이다.
 
-각 $I_n$에 대해 $I_n\cap K$가 유한부분피복을 갖지 않으므로 특히 공집합이 아니다. 따라서 임의의 $n$에 대해 $x_n\in I_n\cap K$를 고를 수 있고, 닫힌구간들의 교집합 $\bigcap_{n=0}^\infty I_n$는 완비성으로 인해 한 점 $x$를 포함한다. 또한 $x\in \bigcap_{n=0}^{\infty} I_n$이므로 $x, x_n \in I_n$이다. 따라서
+각 $I_n$에 대해 $I_n\cap K$가 유한부분피복을 갖지 않으므로 특히 공집합이 아니다. 따라서 임의의 $n$에 대해 $x_n\in I_n\cap K$를 고를 수 있고, 닫힌구간들의 교집합 $\bigcap_{n=0}^\infty I_n$는  G_n$ 은 공집합이 아니다.완비성으로 인해 한 점 $x$를 포함한다. 또한 $x\in
+증명
+
+ \bigcap_{n=0}^ G_n$ 은 공집합이 아니다.{\infty} I_n$이므로 $x, x_n \in I_n$이다. 따라서
+증명
+
+
 
 $$ |x_n - x| \le |I_n| $$
 
@@ -139,15 +151,44 @@ $$ |x_n - x| \le |I_n| $$
 고립점을 가지지 않는 닫힌집합을 완전집합이라 한다. 즉, 완전집합은 모든 점이 극한점인 집합이다.
 
 ### 예제 6.2
-1. 닫힌 구간 $[0,1]$은 완전집합이다. 왜냐하면, 모든 점이 극한점이기 때문이다.
+1. 닫힌 구간 $[0,1]$은 완전집합이다. 모든 점이 극한점이기 때문이다.
 
-2. 칸토어 집합(Cantor set)도 완전집합이다.  
-- 칸토어 집합은 닫힌집합이면서, 모든 점이 극한점이므로 완전집합이다.
-- $x \in C$이면, $x$는 고립점을 가지지 않음을 보여야 한다. 
-- 즉 $C$의 수열로서 $x$로 수렴하는 수열이 존재함을 보여야 한다.
-- $C$의 점 $x$를 포함하는 임의의 열린구간 $(x-\epsilon, x+\epsilon)$을 잡자.
-- $C$는 닫힌집합이므로, $C$의 점 $y$가 $(x-\epsilon, x+\epsilon)$에 존재한다.
-- 따라서 $C$의 점 $x$는 고립점이 아니므로, $C$는 완전집합이다.
+2. 칸토어 집합(Cantor set)도 완전집합이다.
+
+>칸토어 집합 C가 완전집합임을 보이자.
+>
+>**(1) C는 닫힌집합이다**
+>
+>칸토어 집합은 각 단계에서 제거되는 열린구간의 여집합들의 교집합으로 정의된다. 각 단계에서 남는 집합은 닫힌집합이며, 닫힌집합들의 임의의 교집합은 닫힌집합이므로 $C=\bigcap_{n=1}^ G_n$ 은 공집합이 아니다.{\infty}C_n$ 는 닫힌집합이다.
+
+증명
+
+>
+>**(2) C의 모든 점은 극한점이다**
+>
+>임의의 $x\in C$를 잡는다. 또한 임의의 $\varepsilon>0$를 잡는다. 칸토어 집합의 구성에 의해 충분히 큰 $n$을 택하면, $x$를 포함하는 $n$단계의 닫힌구간 $I_n$의 길이는
+>
+>$$\left(\frac{1}{3}\right)^n<\varepsilon$$
+>
+>이 되도록 할 수 있다.
+>
+>한편 각 $I_n$에는 $x$ 이외에도 칸토어 집합의 점이 존재한다. (예를 들어 $I_n$의 다른 끝점은 모두 칸토어 집합에 속한다.)
+>
+>따라서
+>
+>$$y\in C,\qquad y\neq x,\qquad |x-y|<\varepsilon$$
+>
+>인 점 $y$를 항상 찾을 수 있다.
+>
+>즉, 임의의 $\varepsilon>0$에 대하여
+>
+>$$(x-\varepsilon,x+\varepsilon)\cap(C\setminus\{x\})\neq\varnothing$$
+>
+>이므로 $x$는 $C$의 극한점이다.
+>
+>$x$가 임의로 선택되었으므로 $C$의 모든 점은 극한점이다.  
+>
+>따라서, C는 닫힌집합이고, 모든 점이 극한점이므로 $C$는 완전집합이다.
 
 **정리 6.4** (완전집합의 성질)
 공집합 아닌 완전집합은 셀 수 없는 집합이다.
@@ -161,7 +202,10 @@ $$ |x_n - x| \le |I_n| $$
 >$P$의 모든 원소는 이 목록에 나타나야 한다. 즉, $P$에 포함되면서 $x_1 \notin K_2, x_2 \notin K_3, x_3 \notin K_4, \ldots$을 만족하는 축소 콤팩트 집합열 $K_1 \supseteq K_2 \supseteq K_3 \supseteq \cdots$을 구성할 수 있다.  
 >각 $K_n$이 공집합이 안되도록만 주의를 기울이면, 축소 콤팩트 집합의 성질을 이용하여 다음과 같은 $x$를 찾을 수 있다. 
 >
->$$x \in \bigcap_{n=1}^{\infty} K_n \subseteq P$$
+>$$x \in \bigcap_{n=1}^{\infty} K_n \subseteq P$$ G_n$ 은 공집합이 아니다.
+증명
+
+
 >
 >그러면 $x \in P$이면서 $x \notin \{x_1, x_2, x_3, \ldots\}$이다.
 >
@@ -174,15 +218,21 @@ $$ |x_n - x| \le |I_n| $$
 >
 >구성 상 $K_n$은 공집합이 아니고 $K_{n+1} \subseteq K_n$이므로, 축소 콤팩트 집합열의 성질에 의해 
 >
->$$\bigcap_{n=1}^{\infty} K_n \neq \emptyset$$
+>$$\bigcap_{n=1}^{\infty} K_n \neq \emptyset$$ G_n$ 은 공집합이 아니다.
+증명
+
+
 >
->한편, 각 $K_n$은 $x_n \notin K_{n+1}$이므로, $\bigcap_{n=1}^{\infty} K_n$에 속하는 점은 $\{x_1, x_2, x_3, \ldots\}$에 속하지 않는다. 이는 모순이다. 따라서 $P$는 셀 수 없는 집합이다. $\square$
+>한편, 각 $K_n$은 $x_n \notin K_{n+1}$이므로, $\bigcap_{n=1}^ G_n$ 은 공집합이 아니다.{\infty} K_n$에 속하는 점은 $\{x_1, x_2, x_3, 
+증명
+
+\ldots\}$에 속하지 않는다. 이는 모순이다. 따라서 $P$는 셀 수 없는 집합이다. $\square$
 >
 
 ## 연결집합 (Connected set)
 **정의 6.4** (분리, separated)
 
-공집합이 아닌 두 집합 $A, B \subseteq \mathbb{R}$에 대해 $\bar{A} \cap B = A \cap \bar{B} = \emptyset$이면, $A$와 $B$를 서로 **분리(separated)** 한다고 한다.
+공집합이 아닌 두 집합 $A, B \subseteq \mathbb{R}$에 대해 $\overline{A} \cap B = A \cap \overline{B} = \emptyset$이면, $A$와 $B$를 서로 **분리(separated)** 한다고 한다.
 
 **정의 6.5** (비연결집합, disconnected set)
 공집합이 아닌 서로 분리된 집합 $A, B \subseteq \mathbb{R}$이 존재하여 $E = A \cup B$이면, 집합 $E$를 **비연결집합(disconnected set)** 이라 한다.
@@ -197,37 +247,171 @@ $$ |x_n - x| \le |I_n| $$
 
 - 이 연결성은 평면이나 고차원 공간의 부분집합을 다룰 때 더 유용하다.
 
+>증명
+>
+>($\Rightarrow$):  
+>$E$가 연결집합이라고 하자. 공집합이 아닌 서로소인 두 집합 $A, B \subseteq \mathbb{R}$에 대해 $E = A \cup B$라 하자. $E$가 연결집합이므로 $A$와 $B$는 분리된 집합이 될 수 없다. 분리된다는 것은
+>
+>$$\overline{A} \cap B = \emptyset, \qquad A \cap \overline{B} = \emptyset$$
+>
+>가 동시에 성립하는 것이다. 따라서 적어도 하나는 성립하지 않는다.
+>
+>- 경우 1: $\overline{A} \cap B \neq \emptyset$.
+>
+>어떤 $x \in \overline{A} \cap B$가 존재한다. 이때 $x \in \overline{A}$이므로 폐포의 정의에 따라 $x_n \in A$이고 $x_n \to x$인 수열 $(x_n)$가 존재한다. 이 수열은 $A$의 점들로만 이루어져 있고, 그 극한 $x$는 $B$에 속한다.
+>
+>- 경우 2: $A \cap \overline{B} \neq \emptyset$.
+>
+>어떤 $x \in A \cap \overline{B}$가 존재한다. 이때 $x \in \overline{B}$이므로 $x_n \in B$이고 $x_n \to x$인 수열 $(x_n)$가 존재한다. 이 수열은 $B$의 점들로만 이루어져 있고, 그 극한 $x$는 $A$에 속한다.
+>
+>따라서 어느 경우이든 한 집합의 점들로 이루어진 수열이 다른 집합의 점으로 수렴하는 수열이 항상 존재한다.
+>
+>($\Leftarrow$):  
+>이제 임의의 공집합이 아닌 서로소인 집합 $A, B \subseteq \mathbb{R}$에 대해 $E = A \cup B$이고, 한 집합의 점들로 이루어진 수열이 다른 집합의 점으로 수렴하는 조건을 만족한다고 가정하자. $E$가 비연결집합이라고 가정하여 모순을 보이자.
+>
+>$E$가 비연결집합이면 $A$와 $B$는 서로 분리되어 있고, 따라서
+>
+>$$A \cap B = \emptyset, \qquad \overline{A} \cap B = \emptyset, \qquad A \cap \overline{B} = \emptyset.$$
+>
+>가 성립한다.
+>
+>이제 가정에 따라 다음 두 경우 중 하나가 성립해야 한다.
+>
+>- 경우 1: $x_n \in A$이고 $x_n \to x \in B$.
+>
+>이 경우 $x \in \overline{A}$이므로 $x \in \overline{A} \cap B$가 된다. 이는 $\overline{A} \cap B = \emptyset$와 모순이다.
+>
+>- 경우 2: $x_n \in B$이고 $x_n \to x \in A$.
+>
+>이 경우 $x \in \overline{B}$이므로 $x \in A \cap \overline{B}$가 된다. 이는 $A \cap \overline{B} = \emptyset$와 모순이다.
+>
+>따라서 $E$를 분리된 공집합이 아닌 두 집합으로 나눌 수 없으므로 $E$는 연결집합이다. $\square$
+
 2. $E \subseteq \mathbb{R}$이 연결집합일 필요충분조건은 임의의 두 점 $a, b \in E$에 대해 $a < c < b$인 모든 $c \in \mathbb{R}$에 대해 $c \in E$인 것이다. 즉, 연결집합은 구간의 성질을 가진다.
 
-증명  
+>증명  
+>
+>($\Rightarrow$):  
+>$E$를 연결집합이라 하고, $a, b \in E$, $a < c < b$라 가정하자. $A = (-\infty, c), B = (c, \infty)$라 하자. $A$와 $B$는 서로 분리되어 있으므로, $E = A \cup B$라 하면, $E$는 비연결집합이다. 이는 $E$ 가정에 모순이므로, $A \cup B$가 아닌 다른 집합에 속하는 $c$가 존재해야만 한다. $c$외에는 조건을 만족하는 점이 없으므로, $c \in E$이다. 
+>
+>($\Leftarrow$):
+>$E$를 임의의 $a, b \in E$에 대해 $a < c < b$이면 $c \in E$가 되는 구간이라 가정하자.  
+>
+>연결집합의 특성을 사용하기 위해 공집합이 아니면서 서로소인 두 집합 $A, B$에 대해 $E = A \cup B$라고 하자. 두 집합 중 하나가 다른 집합의 극한점을 포함함을 보여야 한다. 
+>
+>$a_0 \in A, b_0 \in B$를 잡고 $a_0 < b_0$라 하자. $E$는 자기 자신이 구간이므로 구간 $I_0 = [a_0, b_0]$는 $E$에 포함된다.
+>
+>이제 $c_0 = (a_0 + b_0)/2$를 잡자. $c_0$는 $c_0 \in A$ 또는 $c_0 \in B$이다. $a_1 \in A, b_1 \in B$가 되도록 반쪽 $I_1 = [a_1, b_1]$을 택하자. 이 과정을 계속하면 $a_n \in A, b_n \in B$이면서 길이가 $(b_n - a_n) \to 0$ 인 축소구간 $I_n = [a_n, b_n]$으로 이루어진 수열을 얻는다.
+>
+>축소구간성질에 의해 다음과 같은 $x$가 존재한다: $x \in \bigcap  G_n$ 은 공집합이 아니다.{n=0}^{\infty} I_n$  
+>그리
+증명
 
-($\Rightarrow$):  
-$E$를 연결집합이라 하고, $a, b \in E$, $a < c < b$라 가정하자. $A = (-\infty, c), B = (c, \infty)$라 하자. $A$와 $B$는 서로 분리되어 있으므로, $E = A \cup B$라 하면, $E$는 비연결집합이다. 이는 $E$ 가정에 모순이므로, $A \cup B$가 아닌 다른 집합에 속하는 $c$가 존재해야만 한다. $c$외에는 조건을 만족하는 점이 없으므로, $c \in E$이다. 
-
-($\Leftarrow$):
-$E$를 임의의 $a, b \in E$에 대해 $a < c < b$이면 $c \in E$가 되는 구간이라 가정하자.  
-
-연결집합의 특성을 사용하기 위해 공집합이 아니면서 서로소인 두 집합 $A, B$에 대해 $E = A \cup B$라고 하자. 두 집합 중 하나가 다른 집합의 극한점을 포함함을 보여야 한다. 
-
-$a_0 \in A, b_0 \in B$를 잡고 $a_0 < b_0$라 하자. $E$는 자기 자신이 구간이므로 구간 $I_0 = [a_0, b_0]$는 $E$에 포함된다.
-
-이제 $c_0 = (a_0 + b_0)/2$를 잡자. $c_0$는 $c_0 \in A$ 또는 $c_0 \in B$이다. $a_1 \in A, b_1 \in B$가 되도록 반쪽 $I_1 = [a_1, b_1]$을 택하자. 이 과정을 계속하면 $a_n \in A, b_n \in B$이면서 길이가 $(b_n - a_n) \to 0$ 인 축소구간 $I_n = [a_n, b_n]$으로 이루어진 수열을 얻는다.
-
-축소구간성질에 의해 다음과 같은 $x$가 존재한다: $x \in \bigcap_{n=0}^{\infty} I_n$  
-그리고 끝점의 수열인 $(a_n), (b_n)$이 각각 $lim a_n = x, lim b_n = x$를 만족함을 보일 수 있다. 
-
-그러나 $x \in E$는 $A$ 또는 $B$에 속한다. 만약 $x \in A$라면 $lim b_n = x$이므로 $x$는 $B$의 극한점이다. 반대의 경우도 마찬가지. 증명 끝.
-
-
+고 끝점의 수열인 $(a_n), (b_n)$이 각각 $lim a_n = x, lim b_n = x$를 만족함을 보일 수 있다. 
+>
+>그러나 $x \in E$는 $A$ 또는 $B$에 속한다. 만약 $x \in A$라면 $lim b_n = x$이므로 $x$는 $B$의 극한점이다. 반대의 경우도 마찬가지. 증명 끝.
+>
 
 **예제 6.3**
 1. 닫힌구간 $[0,1]$은 연결집합이다. 왜냐하면, 임의의 두 점 $x, y \in [0,1]$에 대해 $[x,y] \subseteq [0,1]$이므로, $[0,1]$은 비연결집합이 될 수 없다.
 
 2. $A = (1,2), B = (2, 5)$라 하자. $A$와 $B$는 서로 분리되어 있으므로, $E = A \cup B$는 비연결집합이다.
 
-3. $A = (1,2], B = (2, 5)$라 하자. $A$와 $\bar{B}$는 서로 분리되지 않는다. 따라서 $E = A \cup B$는 연결집합이다.
+3. $A = (1,2], B = (2, 5)$라 하자. $A$와 $\overline{B}$는 서로 분리되지 않는다. 따라서 $E = A \cup B$는 연결집합이다.
 
 4. $A = \mathbb{Q} \cap (-\infty, \sqrt 2), B = \mathbb{Q} \cap (\sqrt 2, \infty)$라 하자. $A$와 $B$는 서로 분리되어 있으므로, $E = A \cup B$는 비연결집합이다.
+
+
+## 조밀 집합 (dense set)
+
+**정의** ($F_{\sigma}$집합, $G_{\delta}$집합)  
+
+집합 $A \subseteq \mathbb{R}$을 닫힌 집합의 셀 수 있는 합집합으로 나타낼 수 있을 때 $A$를 **$F_{\sigma}$ 집합 ($F_{\sigma}$ set)** 이라고 한다. 
+
+집합 $B \subseteq \mathbb{R}$를 열린 집합의 셀 수 있는 교집합으로 나타낼 수 있을 때 $B$를 **$G_{\delta}$ 집합 ($G_{\delta}$ set)** 이라고 한다.
+
+- 집합 $A$ 가 $G_{\delta}$ 집합의 필요충분조건은 여집합이 $F_{\sigma}$ 집합이다.
+
+**정리**
+$\{G_1, G_2, ... \}$ 이 조밀한 열린 집합으로 이루어진 셀 수 있는 모임일 때 교집합 $\bigcap_{n=1}^{\infty} G_n$ 은 공집합이 아니다.
+
+>증명
+>
+>1. $I_1$의 구성
+>
+>$G_1$은 조밀하므로 임의의 열린구간과 교집합을 갖는다. 예를 들어 $G_1\cap(0,1)\neq\varnothing$ 이므로 어떤 $x_1\in G_1\cap(0,1)$ 을 선택할 수 있다. $G_1\cap(0,1)$은 열린집합이므로 $x_1$를 중심으로 하는 충분히 작은 $r_1>0$가 존재하여 $[x_1-r_1,x_1+r_1]\subseteq G_1\cap(0,1)$ 이 되게 할 수 있다. 이때
+>
+>$I_1=[x_1-r_1,x_1+r_1]$
+>
+>이라 두면 $I_1$은 닫힌구간이고 $I_1\subseteq G_1$이다.
+>
+>2. 귀납적 구성
+>
+>$I_n=[a_n,b_n]\subseteq G_n$을 이미 구성했다고 하자. $G_{n+1}$도 조밀하므로 열린구간 $(a_n,b_n)$과 교집합을 갖는다: $G_{n+1}\cap(a_n,b_n)\neq\varnothing$.
+>
+>따라서 $x_{n+1}\in G_{n+1}\cap(a_n,b_n)$ 을 선택하고, 충분히 작은 $r_{n+1}>0$를 택하여 $[x_{n+1}-r_{n+1},x_{n+1}+r_{n+1}]\subseteq G_{n+1}\cap(a_n,b_n)$ 이 되게 한다. 이 구간을
+>
+>$I_{n+1}=[x_{n+1}-r_{n+1},x_{n+1}+r_{n+1}]$
+>
+>이라 두면 $I_{n+1}\subseteq G_{n+1}$ 이고 동시에 $I_{n+1}\subseteq(a_n,b_n)\subseteq I_n$.
+>
+>따라서 귀납적으로 $I_1\supseteq I_2\supseteq I_3\supseteq\cdots$ 이고 각 $I_n\subseteq G_n$인 닫힌구간들의 축소열을 구성할 수 있다.
+>
+>3. 축소구간정리 적용
+>
+>각 $I_n$은 공집합이 아닌 닫힌 유계구간이고, $I_1\supseteq I_2\supseteq I_3\supseteq\cdots$ 이므로 축소구간정리에 의해 $\bigcap_{n=1}^{\infty} I_n\neq\varnothing$ 이 된다. 따라서 어떤 점 $x$가 존재하여 $x\in\bigcap_{n=1}^{\infty} I_n$.
+>
+>각 $n$에 대해 $I_n\subseteq G_n$이므로 $x\in G_n$,
+>
+>따라서 $x\in\bigcap_{n=1}^{\infty} G_n$.
+>
+>결론적으로 $\bigcap_{n=1}^{\infty} G_n\neq\varnothing$.
+
+**정의**
+
+**조밀(dense)**: 임의의 두 실수 $a < b$가 주어질 때 $a < x < b$인 점 $x \in G$를 찾을 수 있으면 $G \subseteq \mathbb R$가 $\mathbb R$에서 **조밀(dense)** 하다.
+
+집합 $E$에 대해 $\overline E$가 공집합이 아닌 열린 구간을 포함하지 않으면 $E$를 **조밀한 곳이 없는 집합(nowhere-dense set)** 이라고 한다.
+
+**정리**  
+
+$E$가 $\mathbb{R}$에서 조밀한 곳이 없을 필요충분조건은 $\overline E$의 여집합이 $\mathbb R$에서 조밀한 것이다.
+
+**정리 (베르 정리, Baire's theorem)**
+
+실수집합 $\mathbb R$은 조밀한 곳이 없는 집합의 셀 수 있는 합집합으로 나타낼 수 없다.
+
+- 베르정리는 실수의 크기에 대한 또 다른 설명이다. 이미 무한집합의 크기를 설명하는 여러 방법이 있었다. 
+- 베르정리는 길기, 측도 개념도 새로운 관점을 제시한다. (조밀한 곳이 없는 집합은 '얇은' 집합으로 간주된다)
+  - 이런 작은 집합의 셀 수 있는 합집합 (그리고 크지 않은 합집합)을 '빈약한(meager)' 집합 또는 '제1 범주(first category)'집합 이라 한다
+  - 제1 범주 집합이 아닌 집합을 '제2 범주(second category)'집합 이라 한다.
+    - 직관적으로 제2범주 집합은 '두툼한' 부분집합이고, 흔히 베르 범주정리라 불리는 정리는 실수가 제2범주집합임을 설명한다.
+- 완비거리공간(complete metric space)와 관련하여, 모든(any) 완비거리공간은 너무 커서 조밀한 곳이 없는 부분집합의 셀 수 있는 합집합으로 표현되지 않는다.
+
+>증명
+>
+>다음과 같이 가정하고 모순을 유도하자.  
+>$\mathbb R=\bigcup_{n=1}^{\infty}E_n$ 이고, 각 $E_n$은 $\mathbb R$에서 조밀한 곳이 없는 집합이라고 하자.  
+>
+>$E_n$이 조밀한 곳이 없다는 것은 $G_n:=\mathbb R\setminus\overline{E_n}$ 이 조밀하다는 것과 동치이다.  
+>또한 $\overline{E_n}$은 닫힌집합이므로 그 여집합 $G_n$은 열린집합이다. 따라서 각 $G_n$은 조밀한 열린집합이다. 조밀집합 정리에 의해 $\bigcap_{n=1}^{\infty}G_n\neq\varnothing.$
+>
+>한편 드모르간 법칙으로
+>
+>$$
+>\bigcap_{n=1}^{\infty}G_n
+>=\bigcap_{n=1}^{\infty}\left(\mathbb R\setminus\overline{E_n}\right) =\mathbb R\setminus\bigcup_{n=1}^{\infty}\overline{E_n}.
+>$$
+>
+>모든 $n$에 대해 $E_n\subseteq\overline{E_n}$이므로
+>
+>$$\mathbb R=\bigcup_{n=1}^{\infty}E_n\subseteq\bigcup_{n=1}^{\infty}\overline{E_n}\subseteq\mathbb R.$$
+>
+>따라서 $\bigcup_{n=1}^{\infty}\overline{E_n}=\mathbb R$ 이고, 그러므로
+>
+>$$\bigcap_{n=1}^{\infty}G_n=\mathbb R\setminus\mathbb R=\varnothing,$$
+>
+>이는 정리 3.5.2의 결론과 모순이다. 따라서 처음 가정이 틀렸고, $\mathbb R$은 조밀한 곳이 없는 집합들의 셀 수 있는 합집합으로 나타낼 수 없다.
 
 ## 6.3 티호노프 정리 (Tychonoff theorem)
 
