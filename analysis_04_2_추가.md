@@ -1,5 +1,16 @@
 # Analysis 추가 개념
 
+## 립시츠 함수 (Lipschitz function)
+
+$\forall x \neq y \in A$에 대해 다음 부등식을 만족하는 $M >0$이 존재하면 함수 $f: A \to \mathbb R$을 립시츠 함수라 한다
+
+$$\left|\frac{f(x)-f(y)}{x-y}\right| \leq M$$
+
+- 기하학적으로 함수 f의 그래프 위 임의의 두 점을 지나는 직선의 기울기를 모은 집합이 유계일 때, f는 립시츠 함수다.
+
+- $f: A \to \mathbb R$이 립시츠면 $A$에서 고른연속이다.
+- 역은 성립하지 않는다.
+
 ## Lipschitz 연속 (Lipschitz Continuity)
 함수 $f: X \to Y$가 **Lipschitz 연속**이라는 것은 다음을 만족하는 상수 $K \geq 0$가 존재하는 것이다:  
 ($d_X$와 $d_Y$는 각각 공간 $X$와 $Y$의 거리 함수 (metric))  

@@ -9,7 +9,7 @@ $체 F$-벡터공간 $V,\ W$에 대하여
 $V$의 성질을 보존하는 다음 두 조건을 만족하는 사상을
 $L(Linear):V \to W$라 한다.
 
-1. Additivity(가산성): $L(u+v)=L(u)+L(v)$  $(u,v\in V)$
+1. Additivity(가산성/가법성): $L(u+v)=L(u)+L(v)$  $(u,v\in V)$
 2. Homogeneity(동차성): $L(kv)=kL(v)$  $(k\in F,\ v\in V)$  
 (Additivity는 벡터끼리의 덧셈에 대한 성질이고
 Homogeneity는 스칼라배에 대한 성질이므로 다른 개념임)  

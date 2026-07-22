@@ -11,17 +11,40 @@
     
 ## (2) 극한의 정의 *(Definition of Limits)*
 해석적 관점만 다룸. 기하적 특성은 위상수학에서 다룸.  
+- 기하적 특성은 극한점(limit point)의 정의를 활용함
+  - 함수 $f: A \to \mathbb R$에서 $A$의 극한점 $c$에 대해 임의의 $\epsilon$-근방 $V_{\epsilon}(c)$와 $A$의 교집합은 $c$가 아닌 다른 원소를 반드시 가져야한다. 
+  - $A$가 닫힌 집합이 아니라면 $A$의 극한점은 집합 $A$의 원소가 아닐 수도 있다.
 
 ### Def 1. *(수렴과 극한, Limit of a function at a point)*
 $f : D \to \mathbb{R},\ a \in D,\ L \in \mathbb{R}$ 라 하자
-$$ \forall \epsilon>0,\ \exists \delta>0\ \text{s.t.}\ \forall x\in D,\\
-0 < |x-a| < \delta \Rightarrow |f(x)-L|<\epsilon $$
+
+$$ \forall \epsilon>0,\ \exists \delta>0\ \text{s.t. $x\in D$}, 0 < |x-a| < \delta \Rightarrow |f(x)-L|<\epsilon $$
 
 이 성립하면 $f$는 $x=a$에서 극한값 $L$로 수렴한다고 하고, 
 $\lim_{x\to a} f(x)=L$ 로 표기한다.
 
 - 함숫값 f(x) = a는 고려안함. 따라서 죄부등식에 등호가 없음
 - 수렴안하는 경우엔 발산한다고 함
+
+> 위상으로 표현한 함수의 극한
+>
+> 점 $c$가 $f: A \to \mathbb R$의 정의역의 극한점이라 하자. $L$의 모든 $\epsilon$-근방 $V_{\epsilon}(L)$에 대해 ($x \in A$이면서) $c$와 다른 $x \in V_{\delta}(c)$이면 항상 $f(x) \in V_{\epsilon}(L)$이 되게 하는 $c$의 $\delta$-근방 $V_{\delta}(c)$가 존재할 때, $\lim_{x\to c} f(x)=L$라 한다.
+
+### 함수의 극한에 대한 수열 판정법
+함수 $f: A \to \mathbb R$와 $A$의 극한점 $c$가 주어졌을 때 다음 두 명제는 동치다
+
+1. $\lim_{x\to c} f(x)=L$
+2. $x_n \neq c$ 이면서 $(x_n)\to c$인 수열 $(x_n) \subseteq A$에 대해 $f(x_n)\to L$이다.
+
+
+### 따름정리 [함수의 극한에 대한 발산 판정법]
+
+$A$에서 정의된 함수 $f$와 $A$의 극한점 $c$를 생각하자. $A$에 포함되는 두 수열 $(x_n)$과 $(y_n)$이 있어 $x_n \neq c, y_n \neq c$이고 다음을 만족한다고 하자.
+
+$$\lim x_n = \lim y_n = c \text{이지만} \lim f(x_n) \neq \lim f(y_n)$$
+
+그러면 극한값 $\lim_{x\to c} f(x)$ 는 존재하지 않는다.
+
 
 #### 예제1
 함수
@@ -78,25 +101,24 @@ $$
 
 따라서 어떤 $L$에 대해서도 $\lim_{x\to 0} f(x)=L$가 될 수 없으므로 $\lim_{x\to 0} f(x)$는 존재하지 않는다. $\blacksquare$
 
-### Def 2. *(우극한/좌극한, Right/Left Limits)*
+### Def 2. *(좌극한/우극한, Left/Right Limits)*
 $f:D\to\mathbb{R},\ a\in D',\ L\in\mathbb{R}$ 라 하자.
 
 (좌극한)
-$\forall\varepsilon>0,\ \exists\delta>0,$
-$0< a-x <\delta \Rightarrow |f(x)-L|<\varepsilon$
-→ $\displaystyle \lim_{x\to a^-} f(x)=L=f(a^+)$
+$\forall\varepsilon>0,\text{s.t. } \exists\delta>0,$
+$0< a-x <\delta \Rightarrow |f(x)-L|<\varepsilon \\ \Leftrightarrow\lim_{x\to a^-} f(x)=L=f(a^+)$
 
 (우극한)
-$\forall\varepsilon>0,\ \exists\delta>0,$
-$0< x-a <\delta \Rightarrow |f(x)-L|<\varepsilon$
-→ $\displaystyle \lim_{x\to a^+} f(x)=L=f(a^-)$
+$\forall\varepsilon>0,\text{s.t. } \exists\delta>0,$
+$0< x-a <\delta \Rightarrow |f(x)-L|<\varepsilon \\ \Leftrightarrow\lim_{x\to a^+} f(x)=L=f(a^-)$
 
 ### Def 3. *(무한대로의 극한, Limits at infinity)*
-극한값이 fix되는 정의. 0보다 크다는 표현이 없으므로, 언저리값이 아님.  
+극한값이 fix되는 정의. 0보다 크다는 표현이 없으므로, 언저리값이 아님. 한쪽 방향으로 그것도 N 이후 쭈욱... 살펴보는 정의.  
 
 $a, L \in \mathbb{R}$ 이라 하자.
 
-1.
+1. (x는 무한대로, 함수는 수렴)
+
 $\forall \varepsilon > 0,\ \exists N\in\mathbb{R}\ \text{s.t.}\ x\geq N \Rightarrow |f(x)-L| < \varepsilon$ 일때 $\displaystyle \lim_{x\to\infty} f(x)=L$
   - ex: $\displaystyle \lim_{x\to\infty} 1/x=0$
   - 증명: 
@@ -107,7 +129,8 @@ $\forall \varepsilon > 0,\ \exists N\in\mathbb{R}\ \text{s.t.}\ x\geq N \Rightar
   즉, $x\ge N \Rightarrow \left|\frac{1}{x}-0\right|<\varepsilon$  
   그러므로 $\displaystyle \lim_{x\to\infty}\frac{1}{x}=0$ 이다.
 
-2.
+2. (x는 수렴, 함수는 발산)
+
 $\forall M > 0,\ \exists \delta > 0$ s.t. $0 < |x -a| < \delta \Rightarrow |f(x)|>M$
 일때  
 $\displaystyle \lim_{x\to a} f(x)=\infty$
@@ -120,10 +143,10 @@ $\displaystyle \lim_{x\to a} f(x)=\infty$
   즉, $0<|x|<\delta \Rightarrow \left|\frac{1}{x^2}\right|>M$.  
   그러므로 $\displaystyle \lim_{x\to 0}\frac{1}{x^2}=\infty$ 이다.
 
-3.
+3.(x도, 함수도 발산)
+
 $\forall M > 0,\ \exists N \in \mathbb{R}$ s.t. $x \geq N \Rightarrow f(x)>M$ 일때  
 $\displaystyle \lim_{x\to\infty} f(x)=\infty$
-
 
 ## (3) 극한의 연산 *(Limit Laws)*
 $A, B \in \mathbb{R}$ 이고 $f,g : D\to \mathbb{R},\ a\in D$라 하자. $\lim_{x \to a} f(x)=A,\ \lim_{x \to a} g(x)=B$ 이면:
@@ -148,8 +171,7 @@ $$
 
 $$ |f(x)g(x)-AB|=|f(x)g(x)-Ag(x)+Ag(x)-AB| \\ \leq |fg-Ag| + |Ag-AB|= |g||f-A| + |A||g-B| $$
 
-$\lim_{x\to a} g(x)=B$ 이므로  
-$\exists\delta_0>0$ s.t. $|x-a|<\delta_0 \Rightarrow |g(x)-B|<1$  
+$\lim_{x\to a} g(x)=B$ 이므로 $\exists\delta_0>0$ s.t. $|x-a|<\delta_0 \Rightarrow |g(x)-B|<1$  
 따라서 $|g(x)|\le |B|+1.$  
 
 이제 임의의 $\varepsilon>0$에 대해  
@@ -217,12 +239,7 @@ $|x-a|<\delta_2 \Rightarrow |f(x)-M|<\varepsilon/2$.
 
 $\delta=\min\{\delta_1,\delta_2\}$로 두면 $|x-a|<\delta$에서
 
-$$
-|L-M|
-= |L-f(x)+f(x)-M|
-\le |f(x)-L|+|f(x)-M|
-< \varepsilon
-$$
+$$|L-M| = |L-f(x)+f(x)-M| \le |f(x)-L|+|f(x)-M| < \varepsilon$$
 
 임의의 $\varepsilon>0$에 대해 $|L-M|<\varepsilon$이므로 $L=M$이다.
 
@@ -230,35 +247,30 @@ $$
 $\forall x\in D,\ f(x)\le g(x)\le h(x)$이고 $L\in\mathbb{R}$에 대하여
 $\lim_{x\to a} f(x)=\lim_{x\to a} h(x)=L$이면 $\lim_{x\to a} g(x)=L$이다.
 
-**증명**  
-임의의 $\varepsilon>0$를 잡는다.
-
-$\lim_{x\to a} f(x)=L$이므로 $\exists\delta_1>0$ s.t.
-$|x-a|<\delta_1 \Rightarrow |f(x)-L|<\varepsilon$, 즉
-$L-\varepsilon<f(x)<L+\varepsilon$.
-
-$\lim_{x\to a} h(x)=L$이므로 $\exists\delta_2>0$ s.t.
-$|x-a|<\delta_2 \Rightarrow |h(x)-L|<\varepsilon$, 즉
-$L-\varepsilon<h(x)<L+\varepsilon$.
-
-$\delta=\min\{\delta_1,\delta_2\}$로 두면 $|x-a|<\delta$에서
-
-$$
-L-\varepsilon<f(x)\le g(x)\le h(x)<L+\varepsilon
-$$
-
-따라서 $|g(x)-L|<\varepsilon$가 되어 $\lim_{x\to a} g(x)=L$이다.
+>**증명**  
+>임의의 $\varepsilon>0$를 잡는다.
+>
+>$\lim_{x\to a} f(x)=L$이므로 $\exists\delta_1>0$ s.t.
+>$|x-a|<\delta_1 \Rightarrow |f(x)-L|<\varepsilon$, 즉
+>$L-\varepsilon<f(x)<L+\varepsilon$.
+>
+>$\lim_{x\to a} h(x)=L$이므로 $\exists\delta_2>0$ s.t.
+>$|x-a|<\delta_2 \Rightarrow |h(x)-L|<\varepsilon$, 즉
+>$L-\varepsilon<h(x)<L+\varepsilon$.
+>
+>$\delta=\min\{\delta_1,\delta_2\}$로 두면 $|x-a|<\delta$에서
+>
+>$$
+>L-\varepsilon<f(x)\le g(x)\le h(x)<L+\varepsilon
+>$$
+>
+>따라서 $|g(x)-L|<\varepsilon$가 되어 $\lim_{x\to a} g(x)=L$이다.
 
 **샌드위치 정리 예시**  
 $\displaystyle \lim_{x\to 0}\frac{\sin x}{x}=1$ 증명  
 
-$x\neq 0$라 하자. 삼각함수의 기본 부등식에 의해  
-$\sin x < x < \tan x \quad (0<x<\tfrac{\pi}{2})$
-가 성립한다.
-
-양변을 $x$로 나누면
-$\frac{\sin x}{x} < 1 < \frac{\tan x}{x}.$
-
+$x\neq 0$라 하자. 삼각함수의 기본 부등식에 의해 $\sin x < x < \tan x \quad (0<x<\tfrac{\pi}{2})$
+가 성립한다. 양변을 $x$로 나누면 $\frac{\sin x}{x} < 1 < \frac{\tan x}{x}.$  
 여기서 $\tan x=\frac{\sin x}{\cos x}$ 이므로
 $1 < \frac{1}{\cos x}$
 
@@ -276,58 +288,57 @@ $\lim_{x\to 0}\cos x = 1, \quad \lim_{x\to 0} 1 = 1$
 이므로 샌드위치 정리에 의해
 $\lim_{x\to 0}\frac{\sin x}{x}=1$
 
+
 # 2. 함수의 연속 *(Continuity of Functions)*
+실변수 함수에 대한 엄밀한 이론을 확립하는 여정에 매우 중요한 개념이다. '구멍', '끊어지지 않는' 같은 직관적인 표현에서 벗어나 엄밀한 연속을 정의해보자.
+
 ## (1) 연속의 정의 *(Definition of Continuity)*
 ### Def 1. *(점 연속, Continuity at a point)*
 
 $f:D\to\mathbb{R},\ a\in D$라 하자.
 
-$\forall \varepsilon>0,\ \exists\delta>0$ s.t.
-$\forall x\in D, |x-a|<\delta \Rightarrow |f(x)-f(a)|<\varepsilon$  
+$$\forall \varepsilon>0,\ \exists\delta>0 \text{ s.t. $(x\in D$)},\ |x-a|<\delta \Rightarrow |f(x)-f(a)|<\varepsilon$$
+
 이 성립하면 $f$는 $x=a$에서 연속이라 한다.  
-- $a\in D$: $f(a)$가 정의됨
-- $0 < |x-a|$ 조건 없음
-- $|f(x)-f(a)|$ 조건이 극한 정의와 달리, 함숫값을 가리킴
+- 극한의 정의와 비슷함. 차이점?
+  - 극한값 L 대신 f(a). $|f(x)-f(a)|$ 조건이 극한 정의와 달리, 함숫값을 가리킴
+  - $a\in D$: $f(a)$가 정의됨
+  - $0 < |x-a|$ 조건 없음
 - 즉, $f$는 $a$에서 연속 $\iff \lim_{x\to a} f(x)=f(a)$
 * 위 정의를 만족하는 모든 대상이 연속이라는 개념을 만족한다.
   - 이산적인 연속도 정의 가능. 아래 예시 참고
 
-예시: D = {0, 1, 2, 3}일때 f(x) = -x + 3이면 f는 x=2에서 연속 증명  
-**증명**  
-$f(2)=-2+3=1$ 이다. 임의의 $\varepsilon>0$를 잡고, 
-$\delta=\frac{1}{2}$로 둔다.  
-그러면 $x\in D$에 대해
-$|x-2|<\delta$ 를 만족하는 경우는 오직 $x=2$ 뿐이다.
-(왜냐하면 $D$의 다른 원소들에 대해 $|x-2|\ge 1$ 이기 때문이다.)
+#### 예시: 이산집합은 연속
+ D = {0, 1, 2, 3}일때 f(x) = -x + 3이면 f는 x=2에서 연속 증명  
 
-따라서 $|x-2|<\delta$ 이면 반드시 $x=2$이고,
-$|f(x)-f(2)| = |1-1| = 0 < \varepsilon$  
-즉,
-
-$$
-\forall \varepsilon>0,\ \exists\delta>0\ \text{s.t.}\
-|x-2|<\delta \Rightarrow |f(x)-f(2)|<\varepsilon
-$$
-
-그러므로 $f$는 $x=2$에서 연속이다.
-
-**개념적으로 중요한 점**  
-* 정의역 $D$가 **이산집합**이면
-  모든 함수는 정의역의 모든 점에서 연속이다.
-* 위 증명은 이를 $\varepsilon$–$\delta$ 정의로 직접 확인한 것이다.
-* 이 예시는 연속성은 함수의 식보다 **정의역의 구조**에 크게 의존한다는 점을 보여주는 전형적인 예시다.
+>**증명**  
+>$f(2)=-2+3=1$ 이다. 임의의 $\varepsilon>0$를 잡고, 
+>$\delta=\frac{1}{2}$로 둔다.  
+>그러면 $x\in D$에 대해
+>$|x-2|<\delta$ 를 만족하는 경우는 오직 $x=2$ 뿐이다.  
+>따라서 $|x-2|<\delta$ 이면 반드시 $x=2$이고,
+>$|f(x)-f(2)| = |1-1| = 0 < \varepsilon$  
+>즉,
+>
+>$$
+>\forall \varepsilon>0,\ \exists\delta>0\ \text{s.t.}\
+>|x-2|<\delta \Rightarrow |f(x)-f(2)|<\varepsilon
+>$$
+>
+>그러므로 $f$는 $x=2$에서 연속이다.
 
 ### Def 2. *(우연속, 좌연속 — Right/Left continuity)*
 $f: D\to \mathbb{R}, a\in D$라 하자.  
 
 (우연속)  
-$\forall\epsilon>0, \exists\delta>0$ s.t. $\forall x\in D$  
-$0\leq x-a<\delta \Rightarrow |f(x)-f(a)|<\varepsilon$  
+$$\forall\epsilon>0, \exists\delta>0 \text{ s.t. $(x\in D$)},\   0\leq x-a<\delta \Rightarrow |f(x)-f(a)|<\varepsilon$$
+
 이 성립하면 $f$는 $x=a$에서 우연속이라 한다.
 
 (좌연속)  
-$\forall\epsilon>0, \exists\delta>0$ s.t. $\forall x\in D$  
-$0\leq a-x<\delta \Rightarrow |f(x)-f(a)|<\varepsilon$  
+$$\forall\epsilon>0, \exists\delta>0 \text{ s.t. $(x\in D$)},\   
+0\leq a-x<\delta \Rightarrow |f(x)-f(a)|<\varepsilon$$
+
 이 성립하면 $f$는 $x=a$에서 좌연속이라 한다.
 
 ### Def 3. *(연속함수, Continuous function)*
@@ -342,37 +353,57 @@ $f: D\to \mathbb{R}, X \subseteq D$라 하자.
   - a가 원하는 집합의 임의의 점이라고 서술
 
 - 예시: $f(x)=x^2$이 $x>0$에서 연속 증명
+>
+>임의의 $a\in X$를 잡는다. 즉, $a>0$이다.
+>임의의 $\varepsilon>0$를 잡는다.
+>Then $\forall x\in(0, \infty)$, with $|x-a|<\delta$
+>
+>$$
+>|f(x)-f(a)| =|x^2-a^2| =|x-a||x+a|
+>$$
+>
+>(만약 delta = 1이었으면, 즉 $|x-a|<1$이라고 추가로 가정하면)  
+>$|x-a|<1$ 이면 $a-1 < x < a+1$ 이므로 $|x+a| < 2a+1$
+>
+>따라서 
+>
+>$$ |f(x)-f(a)| < (2a+1)|x-a|$$
+>
+>이제 $\delta = \min\{1, \frac{\varepsilon}{2a+1}\}$
+>로 두면, $|x-a|<\delta\leq \frac{\varepsilon}{2a+1}$
+>
+>$$\therefore |f(x)-f(a)|<\varepsilon$$
+>
+>즉,
+>
+>$$
+>\forall \varepsilon>0,\ \exists\delta>0\ \text{s.t.}\ |x-a|<\delta \Rightarrow |f(x)-f(a)|<\varepsilon
+>$$
+>
+>따라서 $f$는 임의의 $a>0$에서 연속이다.  
+>$a$가 $X$의 임의의 원소였으므로, $f$는 $x>0$에서 연속이다.
 
-임의의 $a\in X$를 잡는다. 즉, $a>0$이다.
-임의의 $\varepsilon>0$를 잡는다.
-Then $\forall x\in(0, \infty)$, with $|x-a|<\delta$
 
-$$
-|f(x)-f(a)| =|x^2-a^2| =|x-a||x+a|
-$$
+- (참고) $f$가 정의역 $D$의 모든 점에서 연속이면 $f$는 **집합 $A$에서 연속** 이라 한다.
 
-(만약 delta = 1이었으면, 즉 $|x-a|<1$이라고 추가로 가정하면)  
-$|x-a|<1$ 이면 $a-1 < x < a+1$ 이므로 $|x+a| < 2a+1$
+### (추가) 연속을 정의하는 동치 표현들
+함수 $f:A \to \mathbb{R}$와 점 $a \in A$에 대해 다음 조건 1~3중 하나를 만족하는 것과 함수 $f$가 $c$에서 연속인 것은 동치다.
 
-따라서 
+1. 임의의 $\epsilon>0$에 대해 ($x \in A$이고) $|x - c| < \delta$면 $|f(x)-f(c)| < \epsilon$이 되게 하는 $\delta > 0$이 존재한다.
 
-$$ |f(x)-f(a)| < (2a+1)|x-a|$$
+2. 임의의 $V_{\epsilon}(f(c))$에 대해 ($x \in A$이고) $x \in V_{\delta}(c)$면 $f(x) \in V_{\epsilon}(f(c))$가 되게 하는 $V_{\delta}(c)$가 존재한다.
 
-이제 $\delta = \min\{1, \frac{\varepsilon}{2a+1}\}$
-로 두면, $|x-a|<\delta\leq \frac{\varepsilon}{2a+1}$
+3. $x \in A$이면서 $(x_n) \to c$인 임의의 $(x_n)$에 대해 $f(x_n) \ \to f(c)$ 이다.
 
-$$
-\therefore |f(x)-f(a)|<\varepsilon
-$$
+$c$가 $A$의 극한점이면 조건 1,2,3은 4와 동치다:
 
-즉,
+4. $\lim_{x\to c}f(x) = f(c)$
 
-$$
-\forall \varepsilon>0,\ \exists\delta>0\ \text{s.t.}\ |x-a|<\delta \Rightarrow |f(x)-f(a)|<\varepsilon
-$$
+- 1,2,4 명제는 거의 같은 표현이고, 명제3은 질적으로 다르다. 3번은 함수가 어떤 점에서 연속이 아님을 보이는 데 유용하다.
 
-따라서 $f$는 임의의 $a>0$에서 연속이다.  
-$a$가 $X$의 임의의 원소였으므로, $f$는 $x>0$에서 연속이다.
+### (추가) [따름정리: 불연속성 판정법]
+함수 $f: A\to \mathbb{R}$와 $A$의 극한점 $c \in A$에 대하여 $(x_n) \to c$ 이지만 $f(x_n)$은 $f(c)$로 수렴하지 않는 수열 $(x_n) \subseteq A$이 존재하면 $f$는 $c$에서 연속이 아니다.
+
 
 ### Def 4. *(불연속의 종류, Types of discontinuities)*
 연속이 아니면 불연속.  
@@ -383,59 +414,138 @@ $f: D\to \mathbb{R}, a \in D$라 하자. (즉 함숫값이 존재할 때)
 (제 1종 불연속점)  
   - 제거가능(removable discontinuity) 불연속점 
   
-  $$x=a \quad \text{s.t. }\lim_{x\to a^+}f(x)=\lim_{x\to a^-}f(x)\neq f(a)$$
-  
-    - 이 값만 대체하면 연속이 되므로
+$$x=a \quad \text{s.t. }\lim_{x\to a^+}f(x)=\lim_{x\to a^-}f(x)\neq f(a)$$
+
+이 값만 대체하면 연속이 되므로
 
   - 비약 불연속점 (jump discontinuity) 
-  
-  $$x=a \quad \text{s.t. }\lim_{x\to a^+}f(x)\neq\lim_{x\to a^-}f(x)$$
-  
-    - 좌극한, 우극한 이지러진 경우
+
+$$x=a \quad \text{s.t. }\lim_{x\to a^+}f(x)\neq\lim_{x\to a^-}f(x)$$
+
+좌극한, 우극한 이지러진 경우
 
 (제 2종 불연속점)  
   - $\displaystyle \lim_{x\to a^+}f(x)$와$\displaystyle \lim_{x\to a^-}f(x)$중에 적어도 하나가 존재하지 않는다.
     - 진동하는 경우 보통은 극한이 없다
 
-## (2) 균등연속 *(Uniform Continuity)*
-### Def.
-$f: D\to \mathbb{R}$이라 하자.  
-$\forall \varepsilon>0,\ \exists \delta>0,\ \forall x,y\in D,$
+#### 예제: 최대정수함수의 연속성
 
-$|x-y|<\delta \Rightarrow |f(x)-f(y)|<\varepsilon$
+최대정수함수 $h(x)=\lfloor x\rfloor$는 각 $x\in\mathbb{R}$에 대하여 $n\le x$를 만족하는 최대의 정수 $n\in\mathbb{Z}$를 함수값으로 갖는다.  
+이 함수는 계단 모양의 그래프를 가지며, 정수점에서 불연속일 것으로 예상된다. 이를 수열판정법과 $\varepsilon$-$\delta$ 정의를 이용하여 엄밀하게 증명하라.
+
+>**1. 정수에서의 불연속성**
+>
+>임의의 정수 $m\in\mathbb{Z}$를 잡는다.  
+>수열 $x_n=m-\frac{1}{n}$을 정의하면 $x_n\to m$이다.  
+>한편 $m-1<x_n<m$이므로 최대정수함수의 정의에 의해 $h(x_n)=m-1$이다.  
+>따라서 $h(x_n)\to m-1$.
+>
+>그런데 $h(m)=m$이므로 $h(x_n)\to m-1\neq m=h(m)$
+>
+>따름정리 4.3.3(수열판정법)에 의해 $h$는 모든 $m\in\mathbb{Z}$에서 불연속이다. ✓
+>
+>**2. 정수가 아닌 점에서의 연속성**
+>
+>이제 $c\notin\mathbb{Z}$에서 연속임을 보인다.
+>
+>연속의 정의에 따라 임의의 $\varepsilon>0$에 대하여 $x\in V_\delta(c)$이면 $h(x)\in V_\varepsilon(h(c))$가 되도록 하는 $\delta$-근방 $V_\delta(c)$를 찾아야 한다.
+>
+>**$\delta$의 선택:**
+>
+>$c\notin\mathbb{Z}$이므로 어떤 정수 $n\in\mathbb{Z}$에 대하여 $n<c<n+1$이 성립한다.  
+>이때 $\delta=\min\{\,c-n,\,(n+1)-c\,\}$로 잡는다. $\delta$를 이렇게 선택하면 $x\in V_\delta(c)$인 모든 $x$는 여전히 $n<x<n+1$을 만족한다.  
+>따라서 최대정수함수의 정의에 의해 $h(x)=n=h(c)$.  
+>즉, $x\in V_\delta(c)$이면 $h(x)=h(c)$가 성립한다.  
+>
+>따라서 $h(x)\in V_\varepsilon(h(c))$도 자동으로 성립한다.  
+>결국 $h$는 $c\notin\mathbb{Z}$에서 연속이다. ✓
+>
+>**3. 설명**
+>
+>이 증명의 특징은 $\delta$의 선택이 $\varepsilon$에 전혀 의존하지 않는다는 점이다.  
+>일반적인 연속성 증명에서는 $\varepsilon$을 더 작게 선택하면 그에 맞추어 $\delta$도 더 작게 선택해야 하는 경우가 많다.
+>
+>그러나 최대정수함수는 정수가 아닌 점 근처에서는 함수값이 일정하므로 $h(x)=h(c)$가 되어 $|h(x)-h(c)|=0$이 항상 성립한다.
+>
+>따라서 어떤 $\varepsilon>0$에 대해서도 동일한 $\delta$를 사용할 수 있다.
+>
+
+## (2) 균등연속 *(Uniform Continuity, 고른연속)*
+- 연속의 정의상, 연속점 c에 따라 $\delta$가 달라지는 경우가 있다.
+- c에 무관하게 $\delta$를 정할 수 있는 더 강한 연속 조건을 균등연속이라 한다.
+
+### 정의
+$f: D\to \mathbb{R}$이라 하자.  
+
+$$\forall \varepsilon>0,\ \exists \delta>0,\ (x,y\in D), |x-y|<\delta \Rightarrow |f(x)-f(y)|<\varepsilon$$
 
 이 성립하면 $f$는 $D$에서 균등연속이다.
 
 - f가 균등연속이면 연속.
 
-- 예: $f(x) = x^2$이 $[-2, 2)$에서 균등연속 증명  
+- 예: $f(x) = x^2$이 $[-2, 2)$에서 균등연속 
+>증명:  
+>정의역을 $D=[-2,2)$라 하자.  
+>임의의 $\varepsilon>0$를 잡는다.  
+>임의의 $x,y\in D$에 대해
+>$|f(x)-f(y)| =|x^2-y^2| =|x-y||x+y|$
+>
+>$x,y\in[-2,2)$ 이므로
+>$|x|\le 2, |y|\le 2$
+>이고, 따라서 $|x+y|\le |x|+|y|\le 4$
+>
+>그러므로 $|f(x)-f(y)|\le 4|x-y|$
+>
+>이제 $\delta=\frac{\varepsilon}{4}$
+>로 두면, $|x-y|<\delta$일 때
+>$|f(x)-f(y)|<4\cdot\frac{\varepsilon}{4}=\varepsilon$
+>
+>즉,
+>$\forall \varepsilon>0,\ \exists\delta>0\ \text{s.t.}\
+>|x-y|<\delta \Rightarrow |f(x)-f(y)|<\varepsilon
+>$
+>가 모든 $x,y\in[-2,2)$에 대해 성립한다.
+>
+>따라서 $f(x)=x^2$는 $[-2,2)$에서 균등연속이다.
 
-정의역을 $D=[-2,2)$라 하자.  
-임의의 $\varepsilon>0$를 잡는다.  
-임의의 $x,y\in D$에 대해
-$|f(x)-f(y)| =|x^2-y^2| =|x-y||x+y|$
+### (추가) 고른연속에 대한 수열 판정법
+함수 $f: A \to \mathbb R$가 고른연속이 아니기 위한 필요충분조건은 다음을 만족하는 어떤 $\epsilon_0 >0$와 $A$의 두 수열 $(x_n)$과 $(y_n)$이 존재하는 것이다
 
-$x,y\in[-2,2)$ 이므로
-$|x|\le 2, |y|\le 2$
-이고, 따라서 $|x+y|\le |x|+|y|\le 4$
+$$
+|x_n - y_n| \to 0 \text{이지만, } |f(x_n) - f(y_n)| > \epsilon_0
+$$
 
-그러므로 $|f(x)-f(y)|\le 4|x-y|$
+- 연속성은 한 점에서 정의되지만, 고른연속성은 항상 특정 정의역에서 정의된다
 
-이제 $\delta=\frac{\varepsilon}{4}$
-로 두면, $|x-y|<\delta$일 때
-$|f(x)-f(y)|<4\cdot\frac{\varepsilon}{4}=\varepsilon$
+> 증명  
+> 균등연속의 정의를 부정하면 다음과 같다: 함수 f가 A에서 고른연속이 아니라는 것과 어떤 $\epsilon_0 >0$이 존재하여 모든 $\delta > 0$에 대해 $|x_1-y_1| < \delta$지만 $|f(x)-f(y)|>\epsilon_0$인 두 점 x와 y를 찾을 수 있다는 것은 동치다.  
+>
+> 따라서 $\delta_1=1$로 두면 $|x_1-y_1|<1$ 이지만 $|f(x_1)-f(y_1)| \geq \epsilon_0$가 되는 두 점 $x_1$과 $y_1$이 존재한다.  
+>
+> 비슷하게 $n \in \mathbb N$일때 $\delta_n = 1/n$로 두면 $|x_n - y_n| < 1/n$이지만 $|f(x_n)-f(y_n)| \geq \epsilon_0$가 되는 두 점 $x_n$, $y_n$이 존재한다.  
+>이렇게 만들어진 수열 $(x_n)$, $(y_n)$이 정리에서 말하는 수열이다.
+>
+> 역으로 $\epsilon_0$와 두 수열 $(x_n)$, $(y_n)$이 제시된 바와 같이 존재하면 $\epsilon_0$에 대한 적절한 $\delta > 0$이 존재하지 않음을 바로 보일 수 있다.
 
-즉,
-$\forall \varepsilon>0,\ \exists\delta>0\ \text{s.t.}\
-|x-y|<\delta \Rightarrow |f(x)-f(y)|<\varepsilon
-$
-가 모든 $x,y\in[-2,2)$에 대해 성립한다.
+### 정리: 콤팩트 집합에서 고른연속
+콤팩트 집합 $K$에서 연속인 함수는 $K$에서 고른 연속이다.
 
-따라서 $f(x)=x^2$는 $[-2,2)$에서 균등연속이다.
+> 증명
+> 귀류법 사용: $f$가 $K$에서 고른연속이 아니라면, 어떤 $\epsilon_0 >0$에 대해 다음을 만족하는 두 수열 $(x_n), (y_n)$이 $K$에 존재한다.
+>
+> $\text{lim} |x_n-y_n| = 0$ 이지만 $|f(x_n)-f(y_n)| \geq \epsilon_0$
+>
+> $K$는 콤팩트집합이므로 수열 xn은 수렴하는 부분수열 xnk를 가지며 이때 x = lim xnk도 K에 있다. K는 콤팩트집합이므로 (yn)의 수렴하는 부분수열을 만들 수 있지만, (y_n)의 항 중에서 수렴하는 부분수열 (x_nk)의 항에 대응하는 항으로 이루어진 부분수열 (y_nk)를 생각해보자.  
+> 극한과 사칙연산 성질에 의해 $lim (y_{nk}) = lim ((y_{nk}-x_{nk})+x_{nk}) = 0 + x$
+>
+> 따라서 $(x_{nk})$와 $(y_{nk})$ 모두 $x \in K$로 수렴한다. f는 x에서 연속이라 가정했으므로  $lim f(x_{nk}) = f(x), lim f(y_{nk}) = f(x)$이고 따라서 $lim (f(x_{nk})-f(y_{nk})) = 0$ 이다.  
+> 그런데 (x_n), (y_n)은 모든 $n \in \mathbb N$에 대해 다음 부등식을 만족하도록 택했으므로 가정에 모순이다: $|f(x_n)-f(y_n)| \geq \epsilon_0$
+>
+> 따라서 f는 K에서 고른연속이다.
 
 ## (3) 연속함수의 연산 *(Operations of continuous functions)*
 $a\in D, f,g: D \to \mathbb{R}$가 $x=a$ 에서 연속일때, 다음이 성립한다:
-1. $f+g$는 $x=a$ 에서 연속
+1. 임의의 $k \in \mathbb R$에 대해 $kf$는 $x=a$ 에서 연속
 2. $f-g$는 $x=a$ 에서  연속
 3. $fg$는 $x=a$ 에서  연속
 4. $g(a)\ne 0$ 이면 $\frac{f}{g}$는 $x=a$ 에서  연속
@@ -448,6 +558,42 @@ $f$가 $[a,b]$에서 연속이면 최대·최소 존재 $\exists a_0, b_0 \in [a
 $f$가 $[a,b]$에서 연속이고 $f(a)<f(b)$ 이면
 $\exists c\in(a,b)$ s.t. $f(c)=p$, $f(a)<p<f(b)$.  
 $f(b)<f(a)$이면 $f(b)<p<f(a)$.
+
+- (TMI) 오일러, 가우스를 포함한 18세기 수학자들은 이 정리를 증명없이 자유롭게 사용했다. 1817년 볼차노가 최초로 현대적 연속성 정의를 포함하여 논문을 쓰기 전까지 아무도 이 정리를 해석학적으로 증명하지 않았다. 볼차노와 동시대 수학자들이 수학의 기초를 확고히 하는것은, 단순히 누락된 증명을 채우는 단순한 문제가 아니었다. 관련 개념에 대한 철저히 합의된 이해가 있어야 수학의 최전방에서 격렬한 전투를 벌일 수 있다. 즉, 본질에 대한 이해가 '증명가능할 만큼' 충분히 성숙해져야 하는 것이다.
+
+#### 정리: 연결집합의 보존
+
+함수 $f:G \to \mathbb R$이 연속이라 하자. 집합 $E \subseteq G$가 연결집합이면 $f(E)$도 연결집합이다.
+
+-중간값 정리를 연속함수가 연결집합(connected set)을 연결집합으로 옮긴다는 사실의 따름정리로 볼 수 있다.
+
+> 증명  
+> $f(E)$가 연결집합이 아니라고 가정하자. 그러면 $f(E)$의 분리 $A,B$가 존재하여
+> $f(E)=A\cup B, \quad A\cap B=\varnothing, \quad A,B\neq\varnothing$ 이고 $\overline A^{\,f(E)}\cap B=\varnothing, \quad A\cap\overline B^{\,f(E)}=\varnothing$ 이다.  
+> ($\bar A$는 A의 폐포(closure))
+>
+> 다음과 같이 둔다: $C=\{x\in E:f(x)\in A\}, \quad D=\{x\in E:f(x)\in B\}$.
+> 그러면 $C,D\neq\varnothing$이고
+> $C\cap D=\varnothing, \quad E=C\cup D$이다.
+>
+> $E$가 연결집합이므로 $C,D$가 $E$의 분리가 될 수 없다. 따라서 둘 중 한쪽의 점들로 이루어진 수열이 다른 쪽의 점으로 수렴한다. 일반성을 잃지 않고 $x_n\in C, \quad x_n\to x\in D$ 라고 하자.
+>
+> $f$가 연속이므로 $f(x_n)\to f(x)$.
+> 그런데 $f(x_n)\in A$이고 $f(x)\in B$이므로
+> $f(x)\in\overline A^{\,f(E)}\cap B$이다. 이는 $A,B$가 분리라는 사실에 모순이다.  
+>따라서 $f(E)$는 연결집합이다.
+>
+> ### 더 간단한 표준 증명
+> 수열을 사용하지 않으면 훨씬 간결하다.  
+> $f(E)$가 연결되지 않았다고 가정하고, $A,B$를 $f(E)$의 분리라고 하자. 제한함수 $f|_E:E\to f(E)$ 도 연속이다. 따라서 상대적으로 열린 집합 $A,B\subseteq f(E)$의 원상 $C=(f|_E)^{-1}(A), \quad D=(f|_E)^{-1}(B)$ 는 $E$에서 상대적으로 열린 집합이다. 또한 $C,D\neq\varnothing, \quad C\cap D=\varnothing, \quad E=C\cup D$.  
+> 그러므로 $C,D$는 $E$의 분리가 된다. 이는 $E$가 연결집합이라는 가정에 모순이다. 따라서 $f(E)$는 연결집합이다.
+>
+
+### Thm 3. 연속함수의 합성
+$f: A \to \mathbb{R}$와 $g: B \to \mathbb{R}$에 대하여 치역 $f(A) = \{f(x): x \in A\}$가 정의역 $B$에 포함되어 합성함수 $g \circ f(x) = g(f(x))$가 $A$에서 잘 정의된다 가정하자.
+
+$f$가 $c \in A$에서 연속이고 $g$가 $f(c) \in B$에서 연속이면 $g\circ f$ 가 $c$에서 연속이다.
+
 
 # 연습문제
 1. 다음을 증명하시오.  
