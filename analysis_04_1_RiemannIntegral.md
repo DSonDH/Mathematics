@@ -210,7 +210,7 @@ $$
 * 불연속인데 리만적분 가능한 경우도 있긴 함! 
 
 #### 증명 
-$f$가 $[a,b]$에서 연속이므로, 유계 폐구간에서 연속인 함수는 **균등연속** *(uniformly continuous)* 이다. (by 하이네–칸토어 정리(Heine–Cantor theorem))
+$f$가 $[a,b]$에서 연속이므로, 유계 폐구간에서 연속인 함수는 **균등연속** *(uniformly continuous)* 이다. (by 하이네-칸토어 정리(Heine–Cantor theorem))
 
 즉, 임의의 $\varepsilon > 0$에 대하여 $\delta > 0$이 존재하여
 

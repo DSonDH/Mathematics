@@ -28,6 +28,7 @@ $$
 이때 $f$는 $x=c$에서 **미분가능(differentiable)** 하다고 한다.
 - 평균변화율의 극한
 - 미분가능 <=> 미분계수 존재 (우미분계수 == 좌미분계수)
+- 모든 점 $c \in (a,b)$에서 미분가능: $f$는 이 구간 / 집합에서 미분가능하다고 한다.
 
 ### Def 3. 우미분계수와 좌미분계수 *(Right-hand and Left-hand Differential Coefficient)*
 함수 $f:[a,b)\to \mathbb{R}$에 대해  
@@ -69,11 +70,22 @@ $f$가 $x=a$에서 미분가능하면 $x=a$에서 연속이다.
 $x=a$에서 불연속이면 $x=a$에서 미분불가능하다!  
 - 연속이라고 미분가능은 아님
 
+> 증명  
+> 다음 극한값이 존재한다 가정하자: 
+>
+>$$g'(x)=\lim_{x\to a}\dfrac{g(x)-g(a)}{x-a}$$
+>
+>함수의 극한과 사칙연산 사이의 관계를 생각해보면,  
+>$\lim_{x\to a}(g(x) - g(a)) = \lim_{x\to a}\dfrac{g(x)-g(a)}{x-a}(x-a) = g'(a) \cdot 0 =0$
+>
+>따라서 $\lim_{x\to a}g(x) = g(a)$ 이다.
+
 ### Thm 2. 극값과 미분계수 *(interior extremum theorem, Fermat’s Theorem)*
 $f:D\to\mathbb{R}$가 $D$의 내부점 $x=a$에서 극값을 갖고, $x=a$에서 미분가능하면 $f'(a)=0$ 이다.
 
 ### Thm 3. 연쇄법칙 *(Chain Rule)*
-$f:D\to \mathbb{R}$가 $x=a$에서 미분가능하고 $g$가 $x=f(a)$에서 미분가능하면
+$f:D\to \mathbb{R}$, $g:B\to \mathbb{R}$에 대하여 $f(D) \subseteq B$이고, 합성함수 $g \circ f$가 잘 정의된다 가정하자.  
+$f$가 $x=a \in D$에서 미분가능하고 $g$가 $x=f(a) \in B$에서 합성함수도 $x$에서 미분가능하며, 아래가 성립한다:
 
 $$
 (g\circ f)'(a)=g'(f(a))f'(a)
@@ -184,7 +196,21 @@ $$ f'(x)=\frac{df}{dx}
 * $\left(\frac{f(x)}{g(x)}\right)'= \frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}$
 
 # 3. 평균값 정리 *(Mean Value Theorem)*
-## (0) 롤의 정리
+
+## 페르마 정리 (interior extremum theorem, 내부 극값 정리)
+열린구간 $(a,b)$에서 미분가능한 함수 $f$를 생각하자. $f$가 어떤 점 $c \in (a,b)$에서 최댓값을 가지면 (즉, 모든 $x \in (a,b)$에 대해 $f(c) \geq f(x)$이면) $f'(c) = 0$이다. $f(c)$에서 최솟값을 가지는 경우에도 마찬가지다.
+
+> 증명  
+> $c$가 열리구간 $(a,b)$에 속한 점이므로 $\forall n \in N$에 대해 $x_n < c < y_n$이면서 $c$로 수렴하는 두 수열 $(x_n)$과 $(y_n)$을 만들 수 있다.  
+>$f(c)$가 최댓값이므로 모든 $n$에 대해 $f(y_n) - f(c) \leq 0$이고 따라서 극한과 부등식 정리(order limit theorem)에 의해 $f'(c) = \lim_{n\to \infty}\frac{f(y_n)-f(c)}{y_n-c} \leq 0$  
+> 비슷한 방법으로 각 $x_n$에 대해 $\frac{f(x_n)-f(c)}{x_n-c} \geq 0$ 이는 분자, 분모 모두 음수이기 때문이다. 따라서
+> $f'(c) = \lim_{n\to \infty}\frac{f(x_n)-f(c)}{x_n-c} \geq 0$  
+> 따라서 $f'(c) = 0$이다.
+
+## 다르부 정리(Darboux's theorem)
+함수 $f$가 구간 $[a,b]$에서 미분가능하고 $\alpha$에 대해 $f'(a) < \alpha < f'(b)$ (또는 $f'(a) > \alpha > f'(b)$) 이면 $f'(c) = \alpha$인 점 $c \in (a,b)$가 존재한다.
+
+## 롤의 정리
 $f:[a,b]\to\mathbb{R}$가 $[a,b]$에서 연속이고 $(a,b)$에서 미분가능하면
 
 $$
@@ -218,7 +244,7 @@ $q$는 내부점에서의 최댓값 → Thm 2에 의해 $f'(q)=0$
   - 따라서 최소값을 주는 점 $p$는 $a,b$가 될 수 없고 $p\in(a,b)$
   - → Thm 2에 의해 $f'(p)=0$
 
-## (1) 평균값 정리 *(Mean Value Theorem, MVT)*
+## 평균값 정리 *(Mean Value Theorem, MVT)*
 $f:[a,b]\to\mathbb{R}$가 $[a,b]$에서 연속이고 $(a,b)$에서 미분가능하면
 
 $$
@@ -226,54 +252,57 @@ $$
 f'(c)=\frac{f(b)-f(a)}{b-a}
 $$
 
-- 증명  
+>- 증명  
+>
+>보조함수 $g(x)$를 다음과 같이 정의하자:
+>
+>$$
+>g(x) = f(x) - \left[\frac{f(b)-f(a)}{b-a}(x-a) + f(a)\right]
+>$$
+>
+>$g(x)$는 $f(x)$에서 두 점 $(a,f(a))$, $(b,f(b))$를 잇는 직선을 뺀 함수이다.
+>
+>**$g$가 롤의 정리 조건을 만족함을 보이자:**
+>1. $g$는 $[a,b]$에서 연속: $f$가 연속이고 일차함수도 연속이므로 $g$도 연속
+>2. $g$는 $(a,b)$에서 미분가능: $f$가 미분가능하고 일차함수도 미분가능하므로 $g$도 미분가능
+>3. $g(a)=g(b)$인지 확인:
+>   
+>   $$
+>   g(a) = f(a) - \frac{f(b)-f(a)}{b-a}(a-a) - f(a) = 0 \\
+>   g(b) = f(b) - \frac{f(b)-f(a)}{b-a}(b-a) -f(a)= 0
+>   $$
+>   
+>   따라서 $g(a)=g(b)$
+>
+>**롤의 정리 적용:**  
+>$g$가 롤의 정리의 조건을 모두 만족하므로 $\exists c\in(a,b)\ \text{s.t.}\ g'(c)=0$
+>
+>**$g'(c)=0$로부터 결론 도출:**
+>
+>$g'(x) = f'(x) - \frac{f(b)-f(a)}{b-a}$ 이므로
+>
+>$$
+>g'(c) = f'(c) - \frac{f(b)-f(a)}{b-a} = 0 \\
+>\therefore f'(c) = \frac{f(b)-f(a)}{b-a}
+>$$
 
-보조함수 $g(x)$를 다음과 같이 정의하자:
+- 평균값 정리는 미분과 과련한 거의 모든 주요 정리의 증명과정에서 초석으로 사용된다.
 
-$$
-g(x) = f(x) - \frac{f(b)-f(a)}{b-a}(x-a)
-$$
+- 따름정리 1:
 
-$g(x)$는 $f(x)$에서 두 점 $(a,f(a))$, $(b,f(b))$를 잇는 직선을 뺀 함수이다.
+  함수 $g$가 구간 $I$에서 미분 가능하고 모든 $x\in I$에 대하여 $g'(x)=0$ 이면 $g$는 $I$에서 상수함수이다. 즉, 어떤 상수 $k\in\mathbb{R}$가 존재하여 $g(x)=k \quad (x\in I)$ 이다.
 
-**$g$가 롤의 정리 조건을 만족함을 보이자:**
-1. $g$는 $[a,b]$에서 연속: $f$가 연속이고 일차함수도 연속이므로 $g$도 연속
-2. $g$는 $(a,b)$에서 미분가능: $f$가 미분가능하고 일차함수도 미분가능하므로 $g$도 미분가능
-3. $g(a)=g(b)$인지 확인:
-   
-   $$
-   g(a) = f(a) - \frac{f(b)-f(a)}{b-a}(a-a) = f(a) \\
-   g(b) = f(b) - \frac{f(b)-f(a)}{b-a}(b-a) = f(b) - (f(b)-f(a)) = f(a)
-   $$
-   
-   따라서 $g(a)=g(b)$
+  >**증명.**  
+  >임의의 $a,b\in I$에서 $a<b$라 하자. 평균값 정리에 따라 어떤 $c\in(a,b)$가 존재하여 $\frac{g(b)-g(a)}{b-a}=g'(c)=0$ 이다. 따라서 $g(b)=g(a)$이다. 이는 구간 $I$의 임의의 두 점에서 함수값이 같다는 뜻이므로 $g$는 상수함수이다. $\square$
 
-**롤의 정리 적용:**  
-$g$가 롤의 정리의 조건을 모두 만족하므로
+- 따름정리 2:
 
-$$
-\exists c\in(a,b)\ \text{s.t.}\ g'(c)=0
-$$
+  함수 $f,g$가 구간 $I$에서 미분 가능하고 모든 $x\in I$에 대하여 $f'(x)=g'(x)$ 이면 어떤 상수 $k\in\mathbb{R}$가 존재하여 $f(x)=g(x)+k \quad (x\in I)$ 이다.
 
-**$g'(c)=0$로부터 결론 도출:**
+  >**증명.**  
+  >함수 $h$를 $h(x)=f(x)-g(x)$ 로 정의하면 $h'(x)=f'(x)-g'(x)=0$ 이다. 따름정리 1에 따라 $h$는 상수함수이므로 어떤 $k\in\mathbb{R}$에 대하여 $h(x)=f(x)-g(x)=k$ 이다. 따라서 $f(x)=g(x)+k$ 이다. $\square$
 
-$$
-g'(x) = f'(x) - \frac{f(b)-f(a)}{b-a}
-$$
-
-이므로
-
-$$
-g'(c) = f'(c) - \frac{f(b)-f(a)}{b-a} = 0
-$$
-
-따라서
-
-$$
-f'(c) = \frac{f(b)-f(a)}{b-a}
-$$
-
-## (2) 코시 평균값 정리 *(Cauchy Mean Value Theorem)*
+## 코시 평균값 정리 *(Cauchy Mean Value Theorem)*
 $f,g:[a,b]\to\mathbb{R}$가 $[a,b]$에서 연속이고 $(a,b)$에서 미분가능하면
 
 $$
@@ -293,7 +322,7 @@ $$
     - 일반화: 평균값 정리를 두 함수의 비율 관계로 확장한 것
     - 응용: **로피탈 정리의 증명**에 핵심적으로 사용됨
 
-## (3) 로피탈의 정리 *(L’Hôpital’s Rule)*
+## 로피탈의 정리 *(L’Hôpital’s Rule)*
 $f,g$가 $a$를 제외한 어떤 근방에서 미분가능하고, $a$에서(또는 $a$로 갈 때) 다음이 성립한다고 하자.
 
 * (H1) $\exists\delta>0$ s.t. $f,g$는 $I:=(a-\delta,a)\cup(a,a+\delta)$에서 미분가능이다.
@@ -316,13 +345,14 @@ $$
   - lim f'/g' -> lim f/g이지 역은 아니다
 
 ### 증명
-#### 공통 준비: $g(x)\neq 0$를 근방에서 보장
+**공통 준비: $g(x)\neq 0$를 근방에서 보장**  
+
 (H2)로부터 $g'$는 $I$에서 0이 아니므로, $g$는 각 구간 $(a-\delta,a)$, $(a,a+\delta)$에서 단조이다(미분가능 + 도함수 부호 불변).  
 따라서 각 구간에서 $x\neq a$이면 $g(x)\neq g(a)$가 성립한다. 특히 $0/0$ 경우에 $g(a)=0$로 정의하면, 충분히 $a$에 가까운 $x\neq a$에 대해 $g(x)\neq 0$이 되어 $\frac{f(x)}{g(x)}$가 정의된다.
 
 (단조성은 평균값정리로도 보일 수 있다: $x_1<x_2$이면 어떤 $\xi$가 존재하여 $g(x_2)-g(x_1)=g'(\xi)(x_2-x_1)\neq 0$이므로 $g(x_2)\neq g(x_1)$, 따라서 단조.)
 
-#### Case 1: $0/0$ 꼴
+**Case 1: $0/0$ 꼴**  
 가정: $\displaystyle \lim_{x\to a}f(x)=\lim_{x\to a}g(x)=0$.
 
 $ f(a):=0,\ g(a):=0$으로 재정의하면 $f,g$는 $a$에서 연속이 된다. 위의 공통 준비에 의해 $x\neq a$가 $a$에 충분히 가까우면 $g(x)\neq 0$이다.
@@ -363,7 +393,7 @@ $$
 \lim_{x\to a}\frac{f(x)}{g(x)}=L
 $$
 
-#### Case 2: $\infty/\infty$ 꼴
+**Case 2: $\infty/\infty$ 꼴**  
 가정: $\displaystyle |f(x)|\to\infty,\ |g(x)|\to\infty$ $(x\to a)$.
 
 (H4)의 정의에 의해 임의의 $\epsilon>0$에 대해 어떤 $\delta_1>0$가 존재하여
@@ -398,9 +428,7 @@ $$
 절댓값을 취하고 삼각부등식을 쓰면
 
 $$
-\left|\frac{f(x)}{g(x)}-L\right|
-\le
-\left|\frac{f(y)}{g(x)}\right|
+\left|\frac{f(x)}{g(x)}-L\right| \le \left|\frac{f(y)}{g(x)}\right|
 + \left|\frac{f'(c)}{g'(c)}-L\right|\left|\frac{g(x)-g(y)}{g(x)}\right|
 + |L|\left|\frac{g(y)}{g(x)}\right|
 $$
@@ -420,10 +448,7 @@ $$
 가 성립한다. 마지막으로
 
 $$
-\left|\frac{g(x)-g(y)}{g(x)}\right|
-=\left|1-\frac{g(y)}{g(x)}\right|
-\le 1+\left|\frac{g(y)}{g(x)}\right|
-\to 1
+\left|\frac{g(x)-g(y)}{g(x)}\right| =\left|1-\frac{g(y)}{g(x)}\right| \le 1+\left|\frac{g(y)}{g(x)}\right| \to 1
 $$
 
 이므로, $x$를 충분히 $a$에 가깝게 하면 어떤 상수(예: $2$)로 유계시킬 수 있다. 즉 충분히 $a$에 가까운 $x$에 대해
@@ -437,9 +462,7 @@ $$
 따라서 $x$를 $a$에 충분히 가깝게 잡으면
 
 $$
-\left|\frac{f(x)}{g(x)}-L\right|
-\le 0 + \epsilon\cdot 2 + 0
-=2\epsilon
+\left|\frac{f(x)}{g(x)}-L\right| \le 0 + \epsilon\cdot 2 + 0 =2\epsilon
 $$
 
 가 된다. $\epsilon>0$가 임의이므로

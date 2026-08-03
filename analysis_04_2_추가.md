@@ -11,25 +11,28 @@ $$\left|\frac{f(x)-f(y)}{x-y}\right| \leq M$$
 - $f: A \to \mathbb R$이 립시츠면 $A$에서 고른연속이다.
 - 역은 성립하지 않는다.
 
-## Lipschitz 연속 (Lipschitz Continuity)
+### Lipschitz 연속 (Lipschitz Continuity)
 함수 $f: X \to Y$가 **Lipschitz 연속**이라는 것은 다음을 만족하는 상수 $K \geq 0$가 존재하는 것이다:  
 ($d_X$와 $d_Y$는 각각 공간 $X$와 $Y$의 거리 함수 (metric))  
 
 $$d_Y(f(x_1), f(x_2)) \leq K \cdot d_X(x_1, x_2), \quad \forall x_1, x_2 \in X$$
 
-### 주요 성질
+#### 주요 성질
 - $K$를 **Lipschitz 상수**라고 한다
 - Lipschitz 연속은 함수의 변화율이 상수 $K$로 제한됨을 의미한다
 - **함의 관계**: Lipschitz 연속 $\Rightarrow$ 균등연속 $\Rightarrow$ 연속
   - Lipschitz 연속이면 $\delta = \epsilon/K$로 선택하여 균등연속성 증명 가능
   - 균등연속은 각 점에서의 연속성을 함의
 
-### 예시
+- $f$가 닫힌구간 $[a,b]$에서 미분가능하고 $f'$이 $[a,b]$에서 연속이면 $f$가 $[a,b]$에서 립시츠 함수다.
+
+#### 예시
 1. $f(x) = |x|$는 $K=1$인 Lipschitz 연속
    - $||x_1| - |x_2|| \leq |x_1 - x_2|$ (삼각부등식)
 2. $f(x) = x^2$는 유계 구간에서만 Lipschitz 연속
    - $|x_1^2 - x_2^2| = |x_1 + x_2| \cdot |x_1 - x_2| \leq 2M|x_1 - x_2|$ (when $|x_i| \leq M$)
 3. $f(x) = \sqrt{x}$는 Lipschitz 연속이 아님 ($x=0$ 근처에서 미분 불가능)
+
 
 
 ## 르벡 적분 (Lebesgue Integration)

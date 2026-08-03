@@ -628,7 +628,7 @@ $$f(b_0) = \lim_{k\to\infty} f(x_{n_k})$$
 
 따라서 $\exists b_0 \in [a,b]$ s.t. $f(b_0) = M = \sup\{f(x) : x \in [a,b]\}$.
 
-### 참고
+**참고**
 - 볼차노-바이어슈트라스 정리(Bolzano–Weierstrass Theorem), 완비성 공리, 단조수렴 정리는 모두 동치이다.
 
 

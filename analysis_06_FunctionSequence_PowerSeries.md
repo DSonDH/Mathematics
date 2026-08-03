@@ -59,20 +59,28 @@ $$
 ### Def. [점별수렴과 균등수렴] *(Pointwise Convergence and Uniform Convergence)*
 $\{f_n\}$과 $f$가 $D$에서 정의된 함수열과 함수라 하자.
 
-① 임의의 $x\in D$와 $\varepsilon>0$에 대하여
+① 점별수렴: 임의의 $x\in D$와 $\varepsilon>0$에 대하여
 
 $$\exists N\in\mathbb N\ \text{s.t.}\ n\ge N \Rightarrow |f_n(x)-f(x)|<\varepsilon
 $$
 
 이면 $\{f_n\}$은 $D$에서 $f$로 **점별수렴** *(pointwise convergence)* 한다.
-
-② 임의의 $\varepsilon>0$에 대하여
+- 즉, 실수열 $f_n(x)$가 $f(x)$로 수렴할 때.
+- $f_n\to f$ 혹은 $\lim f_n = f$ 혹은 $\lim_{n\to \infty} f_n(x) = f(x)$로 표기한다.
+- 점별수렴의 문제점이 있어 더 강한 조건인 균등수렴이 제안된다.
+  - 점별수렴에서는 $N$이 $x$에 의존할 수 있다.
+  - 그러나 연속성을 증명하려면 하나의 $\delta>0$에 대해 $|x-c|<\delta$인 **모든** $x$에서 부등식이 동시에 성립해야 한다.
+  - 점별수렴에서는 서로 다른 $x$에 대해 서로 다른 $N(x)$가 필요할 수 있으므로, 하나의 $N$으로 $\delta$-근방 전체를 동시에 제어하기 어렵다.
+  - 이러한 문제를 해결하기 위해 $N$을 $x$와 무관하게 선택하는 균등수렴이 도입된다.
+  
+② 균등수렴: 임의의 $\varepsilon>0$에 대하여
 
 $$\exists N\in\mathbb N\ \text{s.t.}\ \forall x\in D,\ n\ge N \Rightarrow |f_n(x)-f(x)|<\varepsilon$$
 
 이면 $\{f_n\}$은 $D$에서 $f$로 **균등수렴** *(uniform convergence)* 한다.
-   - ①은 각 $x$마다 서로 다른 $N$을 선택 가능
-   - ②는 ①과 달리 $N$이 $x$에 무관하게 존재
+- ①은 각 $x$마다 서로 다른 $N$을 선택 가능
+- ②는 ①과 달리 $N$이 $x$에 무관하게 존재
+- 고르게 수렴한다 고도 함 (Uniformly converge)
 
 **점별수렴 예시:**
    - $f_n(x) = x^n$을 $[0,1]$에서 생각하면
@@ -90,23 +98,46 @@ $$\exists N\in\mathbb N\ \text{s.t.}\ \forall x\in D,\ n\ge N \Rightarrow |f_n(x
 ### Thm.
 $\{f_n\}$이 $D$에서 균등수렴하면 점별수렴한다.
 
-- 증명
+>**증명**
+>
+>균등수렴하면 정의상 $N$이 $x$에 무관하게 존재한다.
+>
+>임의의 $\varepsilon>0$에 대하여, 균등수렴의 정의에 의해
+>
+>$$
+>\exists N\in\mathbb N\ \text{s.t.}\ \forall x\in D,\ n\ge N \Rightarrow |f_n(x)-f(x)|<\varepsilon
+>$$
+>
+>따라서 임의의 $x\in D$를 고정하면, 같은 $N$에 대해
+>
+>$$
+>n\ge N \Rightarrow |f_n(x)-f(x)|<\varepsilon
+>$$
+>
+>이므로 점별수렴의 정의를 만족한다. □
 
-균등수렴하면 정의상 $N$이 $x$에 무관하게 존재한다.
+### Thm. [코시판정법] *(Cauchy Criterion for Sequence of Functions)*
 
-임의의 $\varepsilon>0$에 대하여, 균등수렴의 정의에 의해
-
+$f_n:D\to\mathbb R$라 할 때, 집합 $D\in \mathbb R$에서 정의된 함수 $(f_n)$이 $D$에서 균등수렴할 필요충분조건은
+  
 $$
-\exists N\in\mathbb N\ \text{s.t.}\ \forall x\in D,\ n\ge N \Rightarrow |f_n(x)-f(x)|<\varepsilon
+\forall\varepsilon>0,\ \exists N\in\mathbb N\ \text{s.t.}\
+\forall m>n\ge N,\ \forall x\in D,\\
+\left|f_n (x) - f_m(x)\right|<\varepsilon
 $$
 
-따라서 임의의 $x\in D$를 고정하면, 같은 $N$에 대해
+### 연속함수와 고른 수렴
+$A \in \mathbb R$에서 정의된 함수 $(f_n)$으로 이루어진 함수열이 $A$에서 $f$로 고르게 수렴한다 가정하자. 각 $f_n$이 $c \in A$에서 연속이면 $f$도 $c$에서 연속이다.
 
-$$
-n\ge N \Rightarrow |f_n(x)-f(x)|<\varepsilon
-$$
-
-이므로 점별수렴의 정의를 만족한다. □
+>**증명** 
+>$c \in A$를 고정하고 $\epsilon >0$이라 하자. 모든 $x\in A$에 대해 $|f_N(x)-f(x)| <\epsilon /3$을 만족하도록 $N$을 선택할 수 있다.  
+>$f_N$이 연속이므로 어떤 $\delta >0$이 존재하여 $|x-c| < \delta$면 $|f_N(x)-f_N(c)| <\epsilon /3$을 만족한다.
+>
+>이때 
+>
+>$$|f(x)-f(c)| =  |f(x)-f_N(x)+f_N(x)-f_N(c)+f_N(c)-f(c)| \\ \leq |f(x)-f_N(x)| + |f_N(x)-f_N(c)| + |f_N(c)-f(c)| <\epsilon /3+\epsilon /3+\epsilon /3 = \epsilon$$
+>
+>따라서 $f$는 $c\in A$에서 연속이다.
 
 ## (2) 함수급수의 수렴
 ### Thm. 1. [코시판정법] *(Cauchy Criterion for Series of Functions)*

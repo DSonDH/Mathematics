@@ -413,16 +413,17 @@ $c$가 $A$의 극한점이면 조건 1,2,3은 4와 동치다:
 $f: D\to \mathbb{R}, a \in D$라 하자. (즉 함숫값이 존재할 때)  
 (제 1종 불연속점)  
   - 제거가능(removable discontinuity) 불연속점 
+    - 이 값만 대체하면 연속이 되므로
   
 $$x=a \quad \text{s.t. }\lim_{x\to a^+}f(x)=\lim_{x\to a^-}f(x)\neq f(a)$$
 
-이 값만 대체하면 연속이 되므로
 
   - 비약 불연속점 (jump discontinuity) 
+    - 좌극한, 우극한 이지러진 경우
 
 $$x=a \quad \text{s.t. }\lim_{x\to a^+}f(x)\neq\lim_{x\to a^-}f(x)$$
 
-좌극한, 우극한 이지러진 경우
+* 참고: 위 2개 경우가 아닌 다른 이유로 극한값이 존재하지 않으면 $a$를 본질적(essential) 불연속점 이라 한다
 
 (제 2종 불연속점)  
   - $\displaystyle \lim_{x\to a^+}f(x)$와$\displaystyle \lim_{x\to a^-}f(x)$중에 적어도 하나가 존재하지 않는다.
@@ -527,21 +528,21 @@ $$
 >
 > 역으로 $\epsilon_0$와 두 수열 $(x_n)$, $(y_n)$이 제시된 바와 같이 존재하면 $\epsilon_0$에 대한 적절한 $\delta > 0$이 존재하지 않음을 바로 보일 수 있다.
 
-### 정리: 콤팩트 집합에서 고른연속
+### 정리: 콤팩트 집합에서 고른연속 (하이네-칸토어 정리, Heine-Cantor theorem)
 콤팩트 집합 $K$에서 연속인 함수는 $K$에서 고른 연속이다.
 
-> 증명
-> 귀류법 사용: $f$가 $K$에서 고른연속이 아니라면, 어떤 $\epsilon_0 >0$에 대해 다음을 만족하는 두 수열 $(x_n), (y_n)$이 $K$에 존재한다.
+> 증명  
+> 귀류법 사용: $f$가 $K$에서 고른연속이 아니라면, 어떤 $\epsilon_0 >0$에 대해 다음을 만족하는 두 수열 $(x_n), (y_n)$이 $K$에 존재한다:
 >
 > $\text{lim} |x_n-y_n| = 0$ 이지만 $|f(x_n)-f(y_n)| \geq \epsilon_0$
 >
-> $K$는 콤팩트집합이므로 수열 xn은 수렴하는 부분수열 xnk를 가지며 이때 x = lim xnk도 K에 있다. K는 콤팩트집합이므로 (yn)의 수렴하는 부분수열을 만들 수 있지만, (y_n)의 항 중에서 수렴하는 부분수열 (x_nk)의 항에 대응하는 항으로 이루어진 부분수열 (y_nk)를 생각해보자.  
-> 극한과 사칙연산 성질에 의해 $lim (y_{nk}) = lim ((y_{nk}-x_{nk})+x_{nk}) = 0 + x$
+> $K$는 콤팩트집합이므로 수열 $x_n$은 수렴하는 부분수열 $x_{nk}$를 가지며 이때 $x = \lim x_{nk}$도 K에 있다. $K$는 콤팩트집합이므로 $(y_n)$의 수렴하는 부분수열을 만들 수 있지만, $(y_n)$의 항 중에서 수렴하는 부분수열 $(x_{nk})$의 항에 대응하는 항으로 이루어진 부분수열 $(y_{nk})$를 생각해보자.  
+> 극한과 사칙연산 성질에 의해 $\lim (y_{nk}) = \lim ((y_{nk}-x_{nk})+x_{nk}) = 0 + x$
 >
-> 따라서 $(x_{nk})$와 $(y_{nk})$ 모두 $x \in K$로 수렴한다. f는 x에서 연속이라 가정했으므로  $lim f(x_{nk}) = f(x), lim f(y_{nk}) = f(x)$이고 따라서 $lim (f(x_{nk})-f(y_{nk})) = 0$ 이다.  
-> 그런데 (x_n), (y_n)은 모든 $n \in \mathbb N$에 대해 다음 부등식을 만족하도록 택했으므로 가정에 모순이다: $|f(x_n)-f(y_n)| \geq \epsilon_0$
+> 따라서 $(x_{nk})$와 $(y_{nk})$ 모두 $x \in K$로 수렴한다. $f$는 $x$에서 연속이라 가정했으므로  $\lim f(x_{nk}) = f(x), \lim f(y_{nk}) = f(x)$이고 따라서 $\lim (f(x_{nk})-f(y_{nk})) = 0$ 이다.  
+> 그런데 $(x_n), (y_n)$은 모든 $n \in \mathbb N$에 대해 다음 부등식을 만족하도록 택했으므로 가정에 모순이다: $|f(x_n)-f(y_n)| \geq \epsilon_0$
 >
-> 따라서 f는 K에서 고른연속이다.
+> 따라서 $f$는 $K$에서 고른연속이다.
 
 ## (3) 연속함수의 연산 *(Operations of continuous functions)*
 $a\in D, f,g: D \to \mathbb{R}$가 $x=a$ 에서 연속일때, 다음이 성립한다:
@@ -869,6 +870,27 @@ $f$가 연속이므로 $f(x_{n_{k_j}})\to f(x^*)$.
 실수에서 수열에 의한 연속성과 $\varepsilon$-$\delta$ 연속성은 동치이므로 $g=f^{-1}$는 $y$에서 연속이다. $y\in B$가 임의적이므로
 
 $f^{-1}:f([a,b])\to[a,b]$는 연속이다.
+
+## $\alpha$연속
+함수 $f$가 $\mathbb R$에서 정의되고, $\alpha>0$이라 하자. $y, z \in (x-\delta, x+\delta)$이면 항상 $|f(y)-f(z)| < \alpha$가 되게 하는 $\delta >0$가 존재할 때 함수 $f$가 $x\in \mathbb R$에서 $\alpha$연속이라 한다.
+
+- 여기선 $\alpha$앞에 모든(forall)이 없다. 
+  - 이게 있으면 연속성 정의와 동치다.
+  - 이 $\alpha$연속성은 특정 지점 근방에서 함수의 변동을 측정한 것으로 볼 수 있다
+  - c를 중심으로 하는 어떤 구간에서 함수변동이 $\alpha$를 넘지 않으면 이 함수는 점 c에서 $\alpha$연속.
+
+### $\alpha$연속 관련 정리
+
+$\mathbb R$위에 함수 $f$가 주어질 때 $D_f^{\alpha}$를 함수$f$가 $\alpha$연속이 아닌 점의 집합으로 정의하자. 즉,
+
+$$D_f^{\alpha}=\{x \in \mathbb R: \text{$f$는 $x$에서 $\alpha$ 연속이 아니다.}\}$$
+
+- 고정된 $\alpha > 0$에 대해 집합 $D_f^{\alpha}$는 닫힌 집합이다.
+- $f: \mathbb R \to \mathbb R$가 임의의 함수라 하자. 이때 $D_f$는 $F_\sigma$집합이다.
+  - $D_f=\{x \in \mathbb R: \text{f는 x에서 연속이 아니다.}\}$
+  - $F_\sigma$집합: 닫힌집합의 셀 수 있는 합집합으로 나타낼 수 있는 집합
+  - $\alpha < \alpha'$이면 $D_f^{\alpha}\subseteq D_f^{\alpha'}$
+  - $\alpha > 0$이 주어졌을 때,  함수$f$가 $x$에서 연속이면 $x$에서 $\alpha$연속이다. 이로부터 $D_f^{\alpha}\subseteq D_f$를 설명할 수 있다.
 
 
 # 연습문제

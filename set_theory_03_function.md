@@ -42,6 +42,14 @@ $$
 - 항등함수(identity function): $\forall x\in X,\ f(x)=x$인 함수. $I_X$로 표기하기도 함
 - 상수함수(constant function): $\exists y_0\in Y$ s.t. $\forall x\in X,\ f(x)=y_0$
 - 역함수(inverse function): 전단사 $f:X\to Y$에 대해 $f^{-1}:Y\to X$가 존재하며 $f^{-1}(y)=x\iff f(x)=y$
+
+- 단조함수(monotone function): 정의역과 공역이 순서집합일 때, 정의역의 순서를 보존하거나 반전하는 함수.
+  - 증가함수(increasing function, non-decreasing): $x_1\le x_2\Rightarrow f(x_1)\le f(x_2)$.
+    - 엄격히 증가(strictly increasing): $x_1<x_2\Rightarrow f(x_1)<f(x_2)$.
+  - 감소함수(decreasing function, non-increasing): $x_1\le x_2\Rightarrow f(x_1)\ge f(x_2)$.
+    - 엄격히 감소(strictly decreasing): $x_1<x_2\Rightarrow f(x_1)>f(x_2)$.
+  - 증가함수 또는 감소함수를 모두 단조함수라고 부르며, 엄격히 증가(감소)하면 반드시 단사이다.
+
 - 합성함수(composite): $f:X\to Y,\ g:Y\to Z$에 대해 $(g\circ f)(x)=g(f(x))$
     - 합성함수의 성질들
         - $g\circ f \neq f\circ g$
@@ -70,7 +78,7 @@ $$
         - 치환·취소 관점
             - 왼쪽 취소성: 어떤 $h$가 있어 $h\circ f=I$이면 $f$는 단사(왼쪽 역함수 존재).
             - 오른쪽 취소성: 어떤 $k$가 있어 $f\circ k=I$이면 $f$는 전사(오른쪽 역함수 존재).
-
+- 
 
 (2) 고등학교 교육과정 외 함수들
 
