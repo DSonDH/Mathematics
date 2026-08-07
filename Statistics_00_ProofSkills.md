@@ -1,3 +1,38 @@
+## 삼각함수 공식 정리
+
+### 기본 관계식
+
+- $\sin^2 x + \cos^2 x = 1$
+- $1 + \tan^2 x = \sec^2 x$
+- $1 + \cot^2 x = \csc^2 x$
+- $\sin x = \cos\left(\frac{\pi}{2}-x\right)$, $\cos x = \sin\left(\frac{\pi}{2}-x\right)$
+
+### 덧셈정리
+
+- $\sin(a\pm b)=\sin a \cos b \pm \cos a \sin b$
+- $\cos(a\pm b)=\cos a \cos b \mp \sin a \sin b$
+- $\tan(a\pm b)=\frac{\tan a \pm \tan b}{1 \mp \tan a \tan b}$
+
+### 배각 공식
+
+- $\sin 2x = 2\sin x \cos x$
+- $\cos 2x = \cos^2 x - \sin^2 x = 1 - 2\sin^2 x = 2\cos^2 x - 1$
+- $\tan 2x = \frac{2\tan x}{1 - \tan^2 x}$
+
+### 반각 공식
+
+- $\sin^2 \frac{x}{2} = \frac{1 - \cos x}{2}$
+- $\cos^2 \frac{x}{2} = \frac{1 + \cos x}{2}$
+- $\tan \frac{x}{2} = \frac{1 - \cos x}{\sin x} = \frac{\sin x}{1 + \cos x}$
+
+### 증명에 쓰일 요소
+
+- 기본 관계식: 단위원과 피타고라스 정리를 이용해 유도.
+- 덧셈정리: 복소수 지수함수 또는 직각삼각형에서의 사인, 코사인 변환으로 증명.
+- 배각 공식: 덧셈정리에서 $a=b=x$로 두어 유도.
+- 반각 공식: 배각 공식에 $x\to 2x$ 치환 후 정리.
+
+
 ## 조건부 확률 
 ### 곱셈법칙 (Multiplication Rule)
 

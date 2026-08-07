@@ -1,5 +1,5 @@
-함수열·멱급수
-# 1. 정의
+
+# 1. 함수열·멱급수 정의
 
 ## Def. 1. [함수열과 함수급수] *(Sequence of Functions and Series of Functions)*
 $\varphi:\phi \neq D\subset\mathbb R$이고 모든 $n\in\mathbb N$에 대하여
@@ -19,7 +19,7 @@ $$
 을 **함수급수** *(series of functions)* 라 한다.
 
 - 이게 수렴하는지 확인하는게 핵심
-- fn이 다항함수면 멱급수
+- $f_n$이 다항함수면 멱급수
 
 ## Def. 2. [멱급수] *(Power Series)*
 실수 $c$와 수열 ${a_n}$에 대하여 함수열 $\{f_n\}$이
@@ -55,6 +55,8 @@ $$
    - 각 함수는 연속인데 극한함수는 불연속
    - 각 함수는 미분가능인데 극한함수는 미분불가능
 - 이를 분석하여 어떤 조건에서 성질이 보존되는지 바이어슈트라스가 밝혀냈고, 여기서 점별수렴과 균등수렴이 핵심 개념임
+
+
 
 ### Def. [점별수렴과 균등수렴] *(Pointwise Convergence and Uniform Convergence)*
 $\{f_n\}$과 $f$가 $D$에서 정의된 함수열과 함수라 하자.
@@ -116,6 +118,36 @@ $\{f_n\}$이 $D$에서 균등수렴하면 점별수렴한다.
 >
 >이므로 점별수렴의 정의를 만족한다. □
 
+## 비율판정법 *(Ratio Test)*
+
+1) (급수에 대한 비율판정법)
+임의의 양수열 $\{u_n\}$에 대해
+
+$$L=\lim_{n\to\infty}\left|\frac{u_{n+1}}{u_n}\right|$$
+
+이 존재한다고 하자. 그러면
+- $L<1$ 이면 $\sum u_n$은 절대수렴한다.
+- $L>1$ 이면 $\sum u_n$은 발산한다.
+- $L=1$ 이면 판정할 수 없다.
+
+간단한 증명: $L<1$이면 어떤 $r$ (예: $L<r<1$)에 대하여 충분히 큰 $n$에 대해 $|u_{n+1}|\le r|u_n|$ 이므로 기하급수와 비교하여 수렴한다. $L>1$이면 항이 0으로 수렴하지 않아 발산한다.
+
+2) (멱급수의 수렴반경)
+멱급수 $\sum a_n(x-c)^n$에 대해
+
+$$R=\frac{1}{\limsup_{n\to\infty}\sqrt[n]{|a_n|}}$$
+
+로 정의되는 수렴반경이 존재한다. 만약
+
+$$L=\lim_{n\to\infty}\left|\frac{a_{n+1}}{a_n}\right|$$
+가 존재하면 $R=1/L$ (단, $L=0$이면 $R=\infty$, $L=\infty$이면 $R=0$).
+
+증명 아이디어: 멱급수의 항 절대값에 대해 비율판정법을 적용하면
+
+$$\left|\frac{a_{n+1}(x-c)^{n+1}}{a_n(x-c)^n}\right|=\left|\frac{a_{n+1}}{a_n}\right|\,|x-c|$$
+
+의 극한이 $L|x-c|$이므로 $L|x-c|<1$ 일 때 절대수렴, $L|x-c|>1$ 일 때 발산한다. □
+
 ### Thm. [코시판정법] *(Cauchy Criterion for Sequence of Functions)*
 
 $f_n:D\to\mathbb R$라 할 때, 집합 $D\in \mathbb R$에서 정의된 함수 $(f_n)$이 $D$에서 균등수렴할 필요충분조건은
@@ -139,11 +171,124 @@ $A \in \mathbb R$에서 정의된 함수 $(f_n)$으로 이루어진 함수열이
 >
 >따라서 $f$는 $c\in A$에서 연속이다.
 
-## (2) 함수급수의 수렴
-### Thm. 1. [코시판정법] *(Cauchy Criterion for Series of Functions)*
+### Thm. 미분가능한 함수와 고른수렴 *(Differentiable Functions and Uniform Convergence)*
 
-$f_n:D\to\mathbb R$라 할 때, 다음을 만족하면
-$\sum_{n=1}^\infty f_n$은 $D$에서 균등수렴한다.
+닫힌구간 $[a,b]$에서 $(f_n)$이$f$로 점별수렴하고, 각 $f_n$이 미분가능하다고 가정하자. $(f_n')$이 $[a,b]$에서 $g$로 고르게 수렴하면, 극한 함수 $f$는 미분가능하며, $f' = g$이다.
+
+**증명**  
+$c\in[a,b]$를 고정하자. 임의의 $x\neq c$에 대하여 $\frac{f_n(x)-f_n(c)}{x-c}$ 를 생각하자. 평균값정리에 의해 어떤 $\xi$가 $x$와 $c$ 사이에 존재하여
+
+$$\frac{f_m(x)-f_m(c)}{x-c} - \frac{f_n(x)-f_n(c)}{x-c} = f_m'(\xi)-f_n'(\xi)$$
+
+이 된다.
+
+이제 $(f_n')$의 고른수렴성으로 인하여 코시판정법을 적용할 수 있다. 따라서
+
+$$\forall\varepsilon>0, \exists N_2\in\mathbb N\ \text{s.t.}\ \forall m,n\ge N_2,\ \forall x\in[a,b],\ |f_m'(x)-f_n'(x)| < \varepsilon/3$$
+
+또한 점 $c$에서 $f_n(c)\to f(c)$이므로 적당한 $N_1$이 존재하여
+
+$$\forall n\ge N_1, |f_n(c)-f(c)| < \varepsilon/3$$
+
+이다. $N = \max(N_1,N_2)$로 두자.
+
+그러면 모든 $m,n\ge N$와 $x\neq c$에 대하여
+
+$$\left|\frac{f_m(x)-f_m(c)}{x-c} - \frac{f_n(x)-f_n(c)}{x-c}\right| < \varepsilon/3$$
+
+이고, 따라서 함수열
+
+$$S_n(x) = \frac{f_n(x)-f_n(c)}{x-c},\quad x\neq c$$
+
+은 $[a,b]\setminus\{c\}$에서 고른 코시열이므로 어떤 함수 $H(x)$로 고르게 수렴한다.
+
+한편, $x\neq c$를 고정하면 $f_n(x)\to f(x)$이고 $f_n(c)\to f(c)$이므로
+
+$$H(x)=\lim_{n\to\infty}S_n(x) = \frac{f(x)-f(c)}{x-c}$$
+
+이제 $f$가 $c$에서 미분가능하고 $f'(c)=g(c)$임을 보이자. $N$을 위에서 정의한 대로 취하고, 또 $N$이 충분히 크므로
+
+$$|f_N'(c)-g(c)| < \varepsilon/3$$
+
+를 만족하게 할 수 있다. $f_N$은 $c$에서 미분가능하므로, 적당한 $\delta>0$에 대하여
+
+$$0<|x-c|<\delta\ \Rightarrow\ \left|S_N(x)-f_N'(c)\right| = \left|\frac{f_N(x)-f_N(c)}{x-c} - f_N'(c)\right| < \varepsilon/3$$
+
+을 만족한다.
+
+이때 $0<|x-c|<\delta$이면
+
+$$\left|\frac{f(x)-f(c)}{x-c} - g(c)\right|
+\le \left|\frac{f(x)-f(c)}{x-c} - S_N(x)\right| + |S_N(x)-f_N'(c)| + |f_N'(c)-g(c)|$$
+
+이고, 첫 번째 항은 $S_n$의 고른수렴으로부터
+
+$$\left|\frac{f(x)-f(c)}{x-c} - S_N(x)\right| = |H(x)-S_N(x)| < \varepsilon/3$$
+
+이다. 따라서
+
+$$\left|\frac{f(x)-f(c)}{x-c} - g(c)\right| < \varepsilon/3 + \varepsilon/3 + \varepsilon/3 = \varepsilon$$
+
+$c$를 임의로 취하였으므로 $f$는 $[a,b]$에서 미분가능하고 $f'=g$이다.
+
+- 위 정리는 불필요하게 강한 가정을 한다. 실제로 정의역의 각 점에서 $f_n(x) \to f(x)$임을 가정할 필요는 없는데, 도함수열 $(f'_n)$이 고르게 수렴한다는 가정이 $(f_n)$이 고르게 수렴한다는것을 증명할 수 있을 만큼 충분히 강력하기 때문이다. 다만, 도함수가 같은 두 함수는 상수만큼 차이가 날 수 있으므로 $f_n(x_0) \to f(x_0)$인 점 $x_0$가 적어도 하나 존재함은 가정해야 한다.
+
+  - 닫힌구간 $[a, b]$에서 $(f_n)$이 $f$로 점별수렴하고, 각 $f_n$이 미분가능하며, $(f_n')$이 $[a,b]$에서 $g$로 고르게 수렴한다 가정하자. 점 $x_0 \in [a,b]$에서 $f_n(x_0) \to f(x_0)$이 성립하면, $(f_n)$이 $[a,b]$에서 고르게 수렴한다.
+  - 앞의 두 결과를 종합하면 더 강한 다음 정리를 얻을 수 있다:
+  - 닫힌구간 $[a,b]$에서 정의된 미분가능한 함수 $(f_n)$으로 이루어진 함수열에 대하여 $(f'_n)$이 $[a,b]$에서 함수 $g$로 고르게 수렴한다고 가정하자. 점 $x_0 \in [a,b]$에서 $f_n(x_0) \to f(x_0)$이 성립하면, $(f_n)$은 $[a,b]$에서 고르게 수렴하고, 극한함수 $f = \lim f_n$는 $[a,b]$에서 미분가능하며, $f' = g$이다.
+
+## (2) 함수급수의 수렴
+각 $n \in \mathbb N$에 대해 $f$와 $f_n:D\to\mathbb R$라 하자. 유한 부분합의 수열을 $s_k(x) = f_1(x) + f_2(x) + \cdots + f_k(x)$ 로 정의하자.
+
+- $s_k(x)$가 $f(x)$로 점별수렴하면 $\sum_{n=1}^\infty f_n$은 $D$에서 $f(x)$로 점별수렴한다고 한다.
+
+- $s_k(x)$가 $f(x)$로 균등수렴하면 $\sum_{n=1}^\infty f_n$은 $D$에서 $f(x)$로 균등수렴한다고 한다.
+
+- 점별수렴하는 경우나 고르게수렴하는 경우 모두 $f = \sum_{n=1}^\infty f_n$ 또는 $f(x) = \sum_{n=1}^\infty f_n(x)$으로 표기한다.
+  - 혼동이 없으려면 어떤 유형의 수렴인지 분명히 밝혀야한다.
+
+### 정리. 연속과 함수급수 *(Continuity of Series of Functions)*
+$f_n$이 집합 $A \subseteq \mathbb R$에서 정의된 연속함수고, $\sum_{n=1}^\infty f_n$이 $A$에서 $f$로 균등수렴하면, 극한함수 $f = \sum_{n=1}^\infty f_n$도 $A$에서 연속이다.
+
+>**증명**  
+>
+>각 $k\in\mathbb N$에 대해 부분합 $ s_k(x)=\sum_{n=1}^k f_n(x)$ 은 연속함수들의 유한합이므로 $A$에서 연속이다.
+>$\bigl(s_k \bigr)$는 $A$에서 $f$로 균등수렴한다고 가정했으므로, 연속함수의 고른수렴 정리에 의해 극한함수 $f$도 $A$에서 연속이다.
+>
+>직접 증명하려면 다음과 같이 적을 수 있다. 임의의 $x_0\in A$와 $\varepsilon>0$를 취하면, 균등수렴이므로 적당한 $N$이 있어
+>
+>$$
+> |s_N(x)-f(x)|<\frac{\varepsilon}{3}\qquad(\forall x\in A)
+>$$
+>
+>이다. 이때 $s_N$는 연속이므로 어떤 $\delta>0$가 존재하여
+>
+>$$
+> |x-x_0|<\delta\ \Rightarrow\ |s_N(x)-s_N(x_0)|<\frac{\varepsilon}{3}
+>$$
+>
+>이다. 따라서 $|x-x_0|<\delta$이면
+>
+>$$
+> |f(x)-f(x_0)|\le|f(x)-s_N(x)|+|s_N(x)-s_N(x_0)|+|s_N(x_0)-f(x_0)|<\varepsilon.
+>$$
+>
+>이로써 $f$는 $A$에서 연속이다.
+
+### 정리. 미분가능성과 함수급수 *(Differentiation of Series of Functions)*
+
+$f_n$이 집합 $A$에서 정의된 미분가능한 함수라하고, $\sum_{n=1}^\infty f'_n(x)$가 $A$에서 함수$g(x)$로 고르게 수렴한다 가정하자.
+어떤 점 $x_0 \in [a,b]$에서 $\sum_{n=1}^\infty f_n(x_0)$가 수렴하면 함수급수 $\sum_{n=1}^\infty f_n(x)$는 미분가능한 함수 $f(x)$로 고르게 수렴하며 $A$에서 $f'(x) = g(x)$이다. 즉,
+
+$$f(x) = \sum_{n=1}^\infty f_n(x),\quad f'(x) = \sum_{n=1}^\infty f'_n(x)$$
+
+>**증명**
+>
+>미분가능한 함수와 고른수렴 정리를 부분합 $s_k$에 적용한다. 미분가능한 함수의 사칙연산 정리에 의해 $s'_k = f'_1 + f'_2 + \cdots + f'_k$이므로, $(s'_k)$은 $A$에서 $g$로 고르게 수렴한다.
+
+### Thm. 1. [함수급수의 코시판정법] *(Cauchy Criterion for Series of Functions)*
+
+$f_n:D\to\mathbb R$라 할 때, $\sum_{n=1}^\infty f_n$이 $D$에서 균등수렴할 필요충분조건은:
   
 $$
 \forall\varepsilon>0,\ \exists N\in\mathbb N\ \text{s.t.}\
@@ -151,7 +296,7 @@ $$
 \left|\sum_{k=n+1}^m f_k(x)\right|<\varepsilon
 $$
 
-### Thm. 2. [바이어슈트라스 판정법] *(Weierstrass M-test)*
+### 따름정리: Thm. 2. [바이어슈트라스 M-판정법] *(Weierstrass M-test)*
 각 $n\in\mathbb N$에 대해 $f_n:D\to\mathbb R$라 하자.
 적당한 양의 상수 $M_n>0$가 존재하여
 
@@ -159,39 +304,29 @@ $$
 |f_n(x)|\le M_n\quad(\forall x\in D)
 $$
 
-이고
-
-$$
-\sum_{n=1}^\infty M_n<\infty
-$$
-
-이면
-
-$$
-\sum_{n=1}^\infty f_n
-$$
-
+이고 $\sum_{n=1}^\infty M_n<\infty$ 이면 $\sum_{n=1}^\infty f_n$
 은 $D$에서 균등수렴한다.
 
-#### 증명
-임의의 $\varepsilon>0$에 대하여, $\sum_{n=1}^\infty M_n$이 수렴하므로 코시판정법에 의해
+>**증명**  
+>
+>임의의 $\varepsilon>0$에 대하여, $\sum_{n=1}^\infty M_n$이 수렴하므로 코시판정법에 의해
+>
+>$$
+>\exists N\in\mathbb N\ \text{s.t.}\ \forall m>n\ge N,\quad \sum_{k=n+1}^m M_k<\varepsilon
+>$$
+>
+>이때 모든 $x\in D$에 대해 (삼각부등식 활용)
+>
+>$$
+>\left|\sum_{k=n+1}^m f_k(x)\right|
+>\le\sum_{k=n+1}^m |f_k(x)|
+>\le\sum_{k=n+1}^m M_k
+><\varepsilon
+>$$
+>
+>따라서 Thm. 1 (코시판정법)에 의해 $\sum_{n=1}^\infty f_n$은 $D$에서 균등수렴한다. □
 
-$$
-\exists N\in\mathbb N\ \text{s.t.}\ \forall m>n\ge N,\quad \sum_{k=n+1}^m M_k<\varepsilon
-$$
-
-이때 모든 $x\in D$에 대해 (삼각부등식 활용)
-
-$$
-\left|\sum_{k=n+1}^m f_k(x)\right|
-\le\sum_{k=n+1}^m |f_k(x)|
-\le\sum_{k=n+1}^m M_k
-<\varepsilon
-$$
-
-따라서 Thm. 1 (코시판정법)에 의해 $\sum_{n=1}^\infty f_n$은 $D$에서 균등수렴한다. □
-
-### 예시: 균등수렴 판정
+#### 예시: 균등수렴 판정
 함수급수 $\sum_{n=1}^\infty \frac{\sin nx}{n^2}$가 $\mathbb{R}$에서 균등수렴하는지 확인하자.
 
 **풀이:**
@@ -234,6 +369,15 @@ $a_n \neq 0$인 인 무한급수 $\sum_{n=1}^\infty a_n$이 주어질 때, $\lim
 
 # 3. 멱급수 *(Power Series)*
 ## (1) 멱급수의 수렴
+
+멱급수 $\sum_{n=0}^\infty a_n x^n$ 이 어떤 점 $x_0 \in \mathbb R$에서 수렴하면 $|x| < |x_0|$인 모든 점에서 수렴한다.
+
+>**증명**  
+>
+>$\sum_{n=0}^\infty a_n x^n$이 수렴하면 일반항의 수열 $(a_n x_0^n)$은 유계다. (사실 0으로 수렴.) 모든 $n \in \mathbb N$에 대해 $|a_n x^n| \leq M$이 되도록 $M > 0$을 잡자. $x \in \mathbb R$에 대해 $|x| < |x_0|$이면 $|a_n x^n| = |a_n x_0^n| \cdot \left|\frac{x}{x_0}\right|^n \leq M \left|\frac{x}{x_0}\right|^n$이다. $\sum_{n=0}^\infty M \left|\frac{x}{x_0}\right|^n$은 $|x/x_0| < 1$이므로 수렴하는 등비급수이다. 
+>
+>따라서 비교판정법에 의해 $\sum_{n=0}^\infty a_n x^n$도 수렴한다.
+
 ### Thm. 1. [근판정법] *(Root Test)*
 모든 $n\in\mathbb N$에 대해 $a_n\ge0$이고
 
@@ -246,7 +390,7 @@ $$
 ① $M<1$이면 $\sum_{n=1}^\infty a_n$은 수렴한다.  
 ② $M>1$이면 $\sum_{n=1}^\infty a_n$은 발산한다.  
 
-#### 증명
+**증명**  
 ① $M < 1$일 때: $\varepsilon > 0$을 $M + \varepsilon < 1$이 되도록 선택하면, 정의에 의해
 
 $$
@@ -313,7 +457,6 @@ $$
 $\alpha=0$이면 $R=\infty$,
 $\alpha=\infty$이면 $R=0$으로 간주한다.
 
-#### 예시: 멱급수의 수렴반경 계산
 **예제 1.** 멱급수 $\displaystyle\sum_{n=1}^\infty \frac{x^n}{n}$의 수렴반경을 구하자.
 
 **풀이:**
@@ -329,11 +472,7 @@ $$
 \alpha = \limsup_{n\to\infty} \sqrt[n]{|a_n|} = \lim_{n\to\infty} \frac{1}{n^{1/n}} = 1
 $$
 
-따라서 수렴반경은
-
-$$
-R = \frac{1}{\alpha} = 1
-$$
+따라서 수렴반경은 $R = \frac{1}{\alpha} = 1$
 
 **수렴구간 판정:**
 - $|x| < 1$: 절대수렴
@@ -355,37 +494,26 @@ $$
 
 은 $[c-r,c+r]$에서 균등수렴한다.
 
-#### 증명
-$r < R$이므로 어떤 $r' \in (r, R)$를 선택하자.
-
-$|x - c| \le r < r' < R$인 모든 $x$에 대해
-
-$$
-|a_n(x-c)^n| \le |a_n|r'^n
-$$
-
-$r' < R = \frac{1}{\alpha}$이므로 $\alpha r' < 1$이다.
-
-따라서 $\limsup_{n\to\infty}\sqrt[n]{|a_n|r'^n} = r'\alpha < 1$이므로
-
-근판정법(Thm. 1)에 의해 $\sum_{n=0}^\infty |a_n|r'^n$은 수렴한다.
-
-$M_n = |a_n|r'^n$으로 두면 $\sum_{n=0}^\infty M_n < \infty$이고
-
-모든 $x \in [c-r, c+r]$에 대해 $|a_n(x-c)^n| \le M_n$이므로
-
-바이어슈트라스 판정법(Thm. 2)에 의해
-
-$\sum_{n=0}^\infty a_n(x-c)^n$은 $[c-r, c+r]$에서 균등수렴한다. □
+>**증명**  
+>$r < R$이므로 어떤 $r' \in (r, R)$를 선택하자. $|x - c| \le r < r' < R$인 모든 $x$에 대해
+>
+>$$
+>|a_n(x-c)^n| \le |a_n|r'^n
+>$$
+>
+>$r' < R = \frac{1}{\alpha}$이므로 $\alpha r' < 1$이다.
+>
+>따라서 $\limsup_{n\to\infty}\sqrt[n]{|a_n|r'^n} = r'\alpha < 1$이므로, 근판정법(Thm. 1)에 의해 $\sum_{n=0}^\infty |a_n|r'^n$은 수렴한다.
+>
+>$M_n = |a_n|r'^n$으로 두면 $\sum_{n=0}^\infty M_n < \infty$이고, 
+모든 $x \in [c-r, c+r]$에 대해 $|a_n(x-c)^n| \le M_n$이므로 바이어슈트라스 판정법에 의해 $\sum_{n=0}^\infty a_n(x-c)^n$은 $[c-r, c+r]$에서 균등수렴한다. □
 
 ## (2) 멱급수의 연속
 ### Thm. 1. [함수열의 연속] *(Continuity under Uniform Convergence)*
 구간 $I$에서 연속인 함수열 $\{f_n\}$이 $I$에서 $f$로 균등수렴하면, $f$는 $I$에서 연속이다.
 
-#### 증명
-임의의 $x_0 \in I$를 고정하자. 주어진 $\varepsilon > 0$에 대하여
-
-균등수렴의 정의에 의해
+**증명**  
+임의의 $x_0 \in I$를 고정하자. 주어진 $\varepsilon > 0$에 대하여 균등수렴의 정의에 의해
 
 $$
 \exists N \in \mathbb{N} \text{ s.t. } n \ge N \Rightarrow \sup_{x \in I}|f_n(x) - f(x)| < \frac{\varepsilon}{3}
@@ -416,39 +544,57 @@ $$
 $$
 
 이 $I$에서 $f$로 균등수렴하면 $f$도 $I$에서 연속이다.
-#### 증명
-부분합 $S_n(x) = \sum_{k=1}^n f_k(x)$라 하면, $S_n$은 연속함수들의 유한합이므로 $I$에서 연속이다.
 
-$\sum_{n=1}^\infty f_n$이 $I$에서 $f$로 균등수렴하므로, 함수열 $\{S_n\}$은 $I$에서 $f$로 균등수렴한다.
+>**증명**  
+>부분합 $S_n(x) = \sum_{k=1}^n f_k(x)$라 하면, $S_n$은 연속함수들의 유한합이므로 $I$에서 연속이다.
+>
+>$\sum_{n=1}^\infty f_n$이 $I$에서 $f$로 균등수렴하므로, 함수열 $\{S_n\}$은 $I$에서 $f$로 균등수렴한다.
+>
+>따라서 Thm. 1에 의해 $f$는 $I$에서 연속이다. □
 
-따라서 Thm. 1에 의해 $f$는 $I$에서 연속이다. □
+### 아벨의 보조정리 *(Abel's Lemma)*
+$b_1 \geq b_2 \geq \cdots \geq b_n \geq 0$이고, $\sum_{k=1}^n a_k$의 부분합이 유계이면($|a_1 + a_2 + \cdots + a_n| \leq M$ for all $n$), $|\sum_{k=1}^n a_k b_k|$도 유계이다 (즉, $\left|\sum_{k=1}^n a_k b_k\right| \leq M b_1$).
 
-### Lemma. [아벨의 공식] *(Abel's Summation Formula)*
-수열 $\{a_k\},\{b_k\}$와 자연수 $n,m$ $(n>m)$에 대하여
+**증명**  
+
+> 보조정리: 부분합 공식 (summation by parts)
+>
+> 수열 $(x_n)$과 $(y_n)$에 대하여 $s_n = x1 + x_2 + \cdots + x_n$ 이라 하고 $s_0 = 0$으로 두자. $x_j = s_j - s_{j-1}$이므로, 다음이 성립한다.
+>
+> $$ \sum_{j=m}^n x_j y_j = s_n y_{n+1} - s_{m-1} y_m + \sum_{j=m}^{n} s_j (y_j - y_{j+1})$$
+>
+> **보조정리 증명**  
+> 
+>다음과 같이 변형한다. $x_j = s_j - s_{j-1}$이므로
+>
+>$$ \sum_{j=m}^n x_j y_j = \sum_{j=m}^n (s_j - s_{j-1})y_j = \sum_{j=m}^n s_j y_j - \sum_{j=m}^n s_{j-1}y_j $$
+>
+>두 번째 합의 지표를 $k=j-1$로 바꾸면
+>
+>$$ \sum_{j=m}^n s_{j-1}y_j = \sum_{k=m-1}^{n-1} s_k y_{k+1} = s_{m-1}y_m + \sum_{j=m}^{n-1} s_j y_{j+1} $$
+>
+>따라서
+>
+>$$ \sum_{j=m}^n x_j y_j = \sum_{j=m}^n s_j y_j - s_{m-1}y_m - \sum_{j=m}^{n-1} s_j y_{j+1} \\= s_n y_n - s_{m-1}y_m + \sum_{j=m}^{n-1} s_j (y_j - y_{j+1}) $$
+>
+>이제 $ s_n y_n = s_n y_{n+1} + s_n (y_n - y_{n+1})$ 이므로
+>
+>$$ \sum_{j=m}^n x_j y_j = s_n y_{n+1} - s_{m-1}y_m + \sum_{j=m}^{n-1} s_j (y_j - y_{j+1}) + s_n (y_n - y_{n+1}) \\= s_n y_{n+1} - s_{m-1}y_m + \sum_{j=m}^n s_j (y_j - y_{j+1})$$
+>
+>따라서 원하는 공식이 성립한다. □
+
+
+
+$s_n = a_1 + a_2 + \cdots + a_n$로 두자. 그러면 $a_k = s_k - s_{k-1}$이고, $s_0 = 0$이다. 따라서 
 
 $$
-\sum_{k=m+1}^n a_k b_k 
-= a_n\sum_{k=m+1}^n b_k
-- \sum_{j=m+1}^{n-1}(a_{j+1}-a_j)\sum_{k=m+1}^j b_k
+|\sum_{k=1}^n a_k b_k| = |\sum_{k=1}^n (s_k - s_{k-1}) b_k| = |\sum_{k=1}^{n-1} s_k (b_k - b_{k+1}) + s_n b_n| \\
+\leq M \sum_{k=1}^{n-1} (b_k - b_{k+1}) + M b_n = M b_1
 $$
 
-#### 증명
-$A_j = \sum_{k=m+1}^j b_k$로 정의하자. 그러면 $b_k = A_k - A_{k-1}$ (단, $A_m = 0$)이다.
+- 아벨의 보조정리의 핵심은 각 항의 절댓값 $|a_k|$를 따로 더하지 않고, $a_k$들 사이의 상쇄 효과가 반영된 부분합 $s_k$를 이용한다는 데 있다. 직접 삼각부등식을 적용하면 $\sum |a_k|$의 유계성이 필요하지만, 부분합 공식을 이용하면 더 약한 조건인 $|s_k| \leq M$만으로 가중합을 제어할 수 있다. 단조감소하는 비음수 가중치 $b_k$가 이러한 상쇄 효과를 깨뜨리지 않기 때문이다.
 
-$$
-\begin{align*}
-\sum_{k=m+1}^n a_k b_k 
-&= \sum_{k=m+1}^n a_k(A_k - A_{k-1})\\
-&= \sum_{k=m+1}^n a_k A_k - \sum_{k=m+1}^n a_k A_{k-1}\\
-&= \sum_{k=m+1}^n a_k A_k - \sum_{j=m}^{n-1} a_{j+1} A_j\\
-&= a_n A_n + \sum_{k=m+1}^{n-1} a_k A_k - \sum_{j=m+1}^{n-1} a_{j+1} A_j \quad \text{(Am=0이므로)}\\
-&= a_n A_n + \sum_{j=m+1}^{n-1}(a_j - a_{j+1})A_j\\
-&= a_n\sum_{k=m+1}^n b_k - \sum_{j=m+1}^{n-1}(a_{j+1}-a_j)\sum_{k=m+1}^j b_k
-\end{align*}
-$$
-
-따라서 아벨의 공식이 성립한다. □
-
+- 이 보조정리는 $\sum |a_k|$의 유계성을 요구하지 않는다. 심지어 $\sum a_k$의 수렴도 요구하지 않고, 부분합이 유계이기만 하면 된다. 부분합에 축적된 상쇄 효과와 $b_k$의 단조성을 이용하여 가중합을 제어한다.
 
 ### Thm. 2. [아벨정리] *(Abel’s Theorem)*
 멱급수
@@ -463,7 +609,10 @@ $$
   - Thm.1이 균등수렴을 만들어 주는 정리라면
   - 아벨정리는 끝점에서의 점별수렴이라는 추가 정보가 주어지더라도, 수렴반지름 내부의 닫힌 부분구간에서의 균등수렴 결론이 여전히 성립함을 보장하는 정리이다.
 
-#### 증명
+- 정리: 멱급수가 집합 $A \subseteq \mathbb{R}$에서 점별수렴하면 임의의 콤팩트 집합 $K \subseteq A$에서 고르게 수렴한다.
+  - 이로부터 멱급수가 수렴하는 모든 지점에서 연속이다.
+
+**증명**  
 임의의 $\varepsilon > 0$을 택하자.
 
 $\sum_{n=0}^\infty a_n R^n$이 수렴하므로, 코시 판정법에 의해
@@ -499,6 +648,41 @@ $$
 
 마찬가지 방법으로 $[c-R, c-r]$에서도 균등수렴함을 보일 수 있다. □
 
+### 예제: 코시 곱
+
+> 코시 곱 (Cauchy product) 은 두 급수 $\sum_{n=0}^\infty a_n$과 $\sum_{n=0}^\infty b_n$의 곱을 정의하는 방법이다.
+> $\sum_{n=0}^\infty c_n$으로 정의하며, 각 항은 다음과 같이 주어진다.
+> $$
+> c_n = \sum_{k=0}^n a_k b_{n-k}
+> $$
+>
+> $\sum a_n$과 $\sum b_n$ 이 각각 $A$, $B$로 조건수렴하면 코시 곱은 발산할 수 있다.
+> 반면, $\sum a_n$과 $\sum b_n$이 각각 절대수렴하면 코시 곱도 절대수렴하며, 그 합은 $AB$이다.
+
+함수 $f(x) = \sum a_n x^n$과 $g(x) = \sum b_n x^n$, $h(x) = \sum c_n x^n$ 이라 하자. $\sum c_n$이 수렴하면 반드시 $AB$로 수렴함을 증명하라.
+
+>**증명**  
+>
+>$\sum a_n$과 $\sum b_n$이 각각 수렴하므로 항들이 유계이다. 따라서 $|a_n| \le M$, $|b_n| \le M$인 $M > 0$이 존재하고, $|x| < 1$일 때 
+>$$\sum_{n=0}^\infty |a_n x^n| \le M \sum_{n=0}^\infty |x|^n < \infty$$
+>이므로 $f(x)$, $g(x)$, $h(x)$는 모두 $|x| < 1$에서 절대수렴한다.
+>
+>$|x| < 1$에서 $f(x)$와 $g(x)$가 절대수렴하므로 코시 곱의 성질에 의해
+>$$f(x)g(x) = \left(\sum_{n=0}^\infty a_n x^n\right)\left(\sum_{n=0}^\infty b_n x^n\right) = \sum_{n=0}^\infty \left(\sum_{k=0}^n a_k b_{n-k}\right) x^n = \sum_{n=0}^\infty c_n x^n = h(x)$$
+>
+>따라서 $|x| < 1$에서 $h(x) = f(x)g(x)$이다.
+>
+>아벨 정리에 의해, $\sum a_n = A$, $\sum b_n = B$이면
+>$$\lim_{x \to 1^-} f(x) = A, \quad \lim_{x \to 1^-} g(x) = B$$
+>
+>$\sum c_n$이 수렴한다고 가정했으므로 $\sum c_n = C$라 하면, 아벨 정리에 의해
+>$$\lim_{x \to 1^-} h(x) = C$$
+>
+>$|x| < 1$에서 $h(x) = f(x)g(x)$이므로
+>$$C = \lim_{x \to 1^-} h(x) = \lim_{x \to 1^-} (f(x)g(x)) = \left(\lim_{x \to 1^-} f(x)\right)\left(\lim_{x \to 1^-} g(x)\right) = AB$$
+>
+>따라서 $\sum c_n = AB$이다. □
+
 ### 중요! Thm. 3. [멱급수의 연속] *(Continuity of Power Series)*
 멱급수
 
@@ -508,92 +692,24 @@ $$
 
 는 수렴구간에서 연속이다.
 
-#### 증명
-임의의 $x_0 \in (c-R, c+R)$를 택하자.
-
-$|x_0 - c| < r < R$인 $r$을 선택하면, Thm. 1에 의해
-
-$\sum_{n=0}^\infty a_n(x-c)^n$은 $[c-r, c+r]$에서 균등수렴한다.
-
-각 항 $f_n(x) = a_n(x-c)^n$은 연속함수이므로,
-
-Cor. [함수급수의 연속]에 의해
-
-$f(x) = \sum_{n=0}^\infty a_n(x-c)^n$은 $[c-r, c+r]$에서 연속이다.
-
-특히 $x_0 \in [c-r, c+r]$이므로 $f$는 $x_0$에서 연속이다.
-
-$x_0$는 $(c-R, c+R)$의 임의의 점이므로 $f$는 수렴구간에서 연속이다. □
+>**증명**  
+>임의의 $x_0 \in (c-R, c+R)$를 택하자. $|x_0 - c| < r < R$인 $r$을 선택하면, Thm. 1에 의해 $\sum_{n=0}^\infty a_n(x-c)^n$은 $[c-r, c+r]$에서 균등수렴한다.
+>
+>각 항 $f_n(x) = a_n(x-c)^n$은 연속함수이므로, Cor. [함수급수의 연속]에 의해 $f(x) = \sum_{n=0}^\infty a_n(x-c)^n$은 $[c-r, c+r]$에서 연속이다. 특히 $x_0 \in [c-r, c+r]$이므로 $f$는 $x_0$에서 연속이다.  
+>
+>$x_0$는 $(c-R, c+R)$의 임의의 점이므로 $f$는 수렴구간에서 연속이다. □
 
 ## (3) 멱급수의 미분 *(Differentiation of Power Series)*
-### Thm. 1. [함수열의 미분] *(Differentiation under Uniform Convergence)*
-유계구간 $I$에서 함수열 $\{f_n\}$이 다음을 만족하면
 
-* 어떤 $x_0\in I$에서 $\{f_n(x_0)\}$가 수렴
-  - 즉, 이 구간에서 점별수렴
-* $\{f_n\}$이 $I$에서 미분가능
-* $\{f_n'\}$이 $I$에서 균등수렴
-  - 점별수렴 정도로는 f도 미분가능하다는 보장이 안됨
+### 정리.
+모든 $x \in (-R, R)$에 대해 멱급수 $\sum_{n=0}^\infty a_n x^n$이 수렴하면, 그 항별미분으로 얻어지는 멱급수 $\sum_{n=1}^\infty n a_n x^{n-1}$도 각 $x \in (-R, R)$에서 수렴한다. 결과적으로 $(-R, R)$에 포함되는 콤팩트 집합에서 고르게 수렴한다.
 
-$f_n\to f$라 할 때 $f$는 $I$에서 미분가능하며
-
-$$
-f'(x)=\lim_{n\to\infty}f_n'(x)
-$$
-
-#### 증명
-임의의 $x_0 \in I$를 고정하고, $h \ne 0$이며 $x_0 + h \in I$라 하자.
-
-$\{f_n(x_0)\}$가 수렴하고 $\{f_n'\}$이 $I$에서 균등수렴하므로,
-
-평균값 정리에 의해 각 $n$에 대해 $x_0$와 $x_0+h$ 사이의 어떤 $\xi_n$이 존재하여
-
-$$
-f_n(x_0+h) - f_n(x_0) = f_n'(\xi_n)h
-$$
-
-따라서
-
-$$
-\frac{f_n(x_0+h) - f_n(x_0)}{h} = f_n'(\xi_n)
-$$
-
-$\{f_n'\}$이 $I$에서 어떤 함수 $g$로 균등수렴하므로, 임의의 $\varepsilon > 0$에 대하여
-
-$$
-\exists N \in \mathbb{N} \text{ s.t. } \forall n \ge N, \forall x \in I, \quad |f_n'(x) - g(x)| < \varepsilon
-$$
-
-$n, m \ge N$일 때
-
-$$
-\left|\frac{f_n(x_0+h) - f_n(x_0)}{h} - \frac{f_m(x_0+h) - f_m(x_0)}{h}\right| = |f_n'(\xi_n) - f_m'(\xi_m)|
-$$
-
-$$
-\le |f_n'(\xi_n) - g(\xi_n)| + |g(\xi_n) - g(\xi_m)| + |g(\xi_m) - f_m'(\xi_m)|
-$$
-
-균등수렴에 의해 첫 번째와 세 번째 항은 각각 $\varepsilon$보다 작고, $g$는 Thm. 1 [함수열의 연속]에 의해 연속이므로 $|g(\xi_n) - g(\xi_m)| \to 0$이다.
-
-따라서 $\left\{\frac{f_n(x_0+h) - f_n(x_0)}{h}\right\}$는 코시 수열이므로 수렴한다.
-
-$f(x) = \lim_{n\to\infty} f_n(x)$로 정의하면
-
-$$
-\frac{f(x_0+h) - f(x_0)}{h} = \lim_{n\to\infty}\frac{f_n(x_0+h) - f_n(x_0)}{h} = \lim_{n\to\infty}f_n'(\xi_n) = g(x_0)
-$$
-
-$h \to 0$일 때 극한을 취하면 $f'(x_0) = g(x_0) = \lim_{n\to\infty}f_n'(x_0)$이다. □
+>**증명**  
+>
+>임의의 $x \in (-R, R)$를 택하자. $|x| < r < R$인 $r$을 선택하면, $\sum_{n=1}^\infty n a_n x^{n-1}$은 Lemma에 의해 수렴반지름이 $R$이므로, Thm. 1 [수렴반지름과 균등수렴]에 의해 $[−r, r]$에서 균등수렴한다. □
 
 ### Cor. [함수열급수의 미분] *(Term-by-term Differentiation)*
-다음이 성립하면
-
-$$
-\sum_{n=1}^\infty f_n
-$$
-
-은 유계구간 $I$에서 미분가능하다.
+다음이 성립하면 $\sum_{n=1}^\infty f_n$ 은 유계구간 $I$에서 미분가능하다.
 
 ① $\sum f_n(x_0)$가 수렴  
 ② $\sum f_n'$이 $I$에서 균등수렴  
@@ -605,15 +721,8 @@ $$
 =\sum_{n=1}^\infty f_n'
 $$
 
-### Lemma. *(Power series and its derivative have the same radius of convergence)*
-
-멱급수
-
-$$
-\sum_{n=0}^{\infty} a_n (x-c)^n
-$$
-
-의 수렴반지름이 $R$이면, 그 **항별미분으로 얻어지는 멱급수**
+### Lemma. [멱급수의 항별미분] *(Term-by-term Differentiation of Power Series)*
+멱급수 $\sum_{n=0}^{\infty} a_n (x-c)^n$ 의 수렴반지름이 $R$이면, 그 **항별미분으로 얻어지는 멱급수**
 
 $$
 \sum_{n=1}^{\infty} n a_n (x-c)^{,n-1}
@@ -621,59 +730,52 @@ $$
 
 의 수렴반지름도 역시 $R$이다.
 
-#### 증명
-원래 멱급수의 수렴반지름을 $R$이라 하면
-
-$$
-\alpha = \limsup_{n\to\infty}\sqrt[n]{|a_n|} = \frac{1}{R}
-$$
-
-미분한 멱급수 $\sum_{n=1}^{\infty} n a_n (x-c)^{n-1}$의 수렴반지름을 $R'$이라 하면
-
-$$
-\frac{1}{R'} = \limsup_{n\to\infty}\sqrt[n]{|n a_n|} 
-= \limsup_{n\to\infty}\sqrt[n]{n}\cdot\sqrt[n]{|a_n|}
-$$
-
-$\lim_{n\to\infty}\sqrt[n]{n} = 1$이므로
-
-$$
-\frac{1}{R'} = 1 \cdot \limsup_{n\to\infty}\sqrt[n]{|a_n|} = \alpha = \frac{1}{R}
-$$
-
-따라서 $R' = R$이다. □
+>**증명**  
+>원래 멱급수의 수렴반지름을 $R$이라 하면
+>
+>$$
+>\alpha = \limsup_{n\to\infty}\sqrt[n]{|a_n|} = \frac{1}{R}
+>$$
+>
+>미분한 멱급수 $\sum_{n=1}^{\infty} n a_n (x-c)^{n-1}$의 수렴반지름을 $R'$이라 하면
+>
+>$$
+>\frac{1}{R'} = \limsup_{n\to\infty}\sqrt[n]{|n a_n|}  = \limsup_{n\to\infty}\sqrt[n]{n}\cdot\sqrt[n]{|a_n|}
+>$$
+>
+>$\lim_{n\to\infty}\sqrt[n]{n} = 1$이므로
+>
+>$$
+>\frac{1}{R'} = 1 \cdot \limsup_{n\to\infty}\sqrt[n]{|a_n|} = \alpha = \frac{1}{R}
+>$$
+>
+>따라서 $R' = R$이다. □
 
 ### 중요! Thm. 3. [멱급수의 미분] *(Differentiation of Power Series)*
-멱급수
-
-$$
-f(x)=\sum_{n=0}^\infty a_n(x-c)^n
-$$
-
-의 수렴반지름이 $R$이면 $(c-R,c+R)$에서 미분가능하며
+멱급수 $f(x)=\sum_{n=0}^\infty a_n(x-c)^n$ 의 수렴반지름이 $R$이면 $(c-R,c+R)$에서 미분가능하며
 
 $$
 f'(x)=\sum_{n=1}^\infty n a_n(x-c)^{n-1}
 $$
 
-#### 증명
-임의의 $x \in (c-R, c+R)$를 택하자.
+>**증명**  
+>임의의 $x \in (c-R, c+R)$를 택하자. $|x-c| < r < R$인 $r$을 선택하면, 미분한 멱급수 $\sum_{n=1}^{\infty} n a_n (x-c)^{n-1}$은 Lemma에 의해 수렴반지름이 $R$이므로, Thm. 1 [수렴반지름과 균등수렴]에 의해 $[c-r, c+r]$에서 균등수렴한다.
+>
+>또한 원래 멱급수는 $x$에서 수렴하므로 Cor. [함수열급수의 미분]의 조건을 만족한다. 따라서 $f$는 $x$에서 미분가능하며
+>
+>$$
+>f'(x) = \sum_{n=1}^{\infty} n a_n (x-c)^{n-1}
+>$$
+>
+>$x$는 $(c-R, c+R)$의 임의의 점이므로 결론이 성립한다. □
 
-$|x-c| < r < R$인 $r$을 선택하면, 
+### 정리. [멱급수의 고차미분] *(Higher-order Differentiation of Power Series)*
 
-미분한 멱급수 $\sum_{n=1}^{\infty} n a_n (x-c)^{n-1}$은 Lemma에 의해 수렴반지름이 $R$이므로
+다음 멱급수 $f$가 구간 $A\subseteq \mathbb{R}$에서 수렴한다고 하자. $f(x) = \sum_{n=0}^\infty a_n x^n$
 
-Thm. 1 [수렴반지름과 균등수렴]에 의해 $[c-r, c+r]$에서 균등수렴한다.
+함수 $f$는 $A$에서 연속이고 임의의 열린구간 $(-R, R) \subseteq A$에서 미분가능하다. 도함수는 다음과 같다: $f'(x) = \sum_{n=1}^\infty n a_n x^{n-1}$
 
-또한 원래 멱급수는 $x$에서 수렴하므로 Cor. [함수열급수의 미분]의 조건을 만족한다.
-
-따라서 $f$는 $x$에서 미분가능하며
-
-$$
-f'(x) = \sum_{n=1}^{\infty} n a_n (x-c)^{n-1}
-$$
-
-$x$는 $(c-R, c+R)$의 임의의 점이므로 결론이 성립한다. □
+또한 $f$는 $(-R, R)$에서 무한번 미분가능하며, $k$차 도함수는 다음과 같다: $f^{(k)}(x) = \sum_{n=k}^\infty \frac{n!}{(n-k)!} a_n x^{n-k}$
 
 ## (4) 멱급수의 적분 *(Integration of Power Series)*
 ### Thm. 1. [균등수렴과 적분] *(Integration under Uniform Convergence)*
@@ -685,7 +787,7 @@ $$
 $$
 
 
-#### 증명
+**증명**  
 임의의 $\varepsilon > 0$을 택하자.
 
 $\{f_n\}$이 $[a,b]$에서 $f$로 균등수렴하므로
@@ -756,7 +858,7 @@ $$
 
 이다.
 
-#### 증명
+**증명**  
 각 $f_n \in \mathcal{R}[a,b]$이고 $S_N = \sum_{n=1}^N f_n$이 $[a,b]$에서 $f$로 균등수렴하므로,
 
 Thm. 1 [균등수렴과 적분]에 의해 $f \in \mathcal{R}[a,b]$이고
@@ -791,7 +893,7 @@ $$
 =\sum_{n=0}^\infty a_n\int_a^b (x-c)^n\,dx
 $$
 
-#### 증명
+**증명**  
 멱급수의 수렴반지름을 $R$이라 하자.
 
 $[a,b]$가 수렴구간 $(c-R, c+R)$에 포함되므로, 적당한 $r$에 대해 $[a,b] \subset [c-r, c+r] \subset (c-R, c+R)$이다.
@@ -820,7 +922,7 @@ $$
 = \sum_{n=0}^\infty a_n\int_a^b (x-c)^n\,dx
 $$
 
-#### 증명
+**증명**  
 임의의 $\varepsilon > 0$을 택하자.
 
 $\sum_{n=0}^\infty \frac{a_n}{n+1}(b-c)^{n+1}$이 수렴하므로, 충분히 큰 $N$에 대해

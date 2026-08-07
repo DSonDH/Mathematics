@@ -717,7 +717,7 @@ $$\left|\sum_{k=n+1}^m a_k\right| < \varepsilon$$
 
 $$\sum_{n=1}^\infty a_n=S$$
 
-S로 수렴한다(converges to $S$) 하고, 그렇지 않으면 발산한다(diverges) 한다.
+S로 수렴한다 (converges to $S$) 하고, 그렇지 않으면 발산한다 (diverges) 한다.
 - 급수의 수렴, 발산 확인은 수열의 수렴, 발산보다 어렵다
 - 케바케로 다양한 제안이 서술되어있다.
 
@@ -749,9 +749,9 @@ S로 수렴한다(converges to $S$) 하고, 그렇지 않으면 발산한다(div
     이 급수는 **조건수렴**한다.
     
     - **수렴성**: 교대급수 판정법(Alternating Series Test)에 의해 수렴한다.
-        * 수열 ($\frac{1}{n}$) 은 단조감소하고
-        * 수열의 극한값 ($\lim_{n\to\infty}\frac{1}{n} = 0$) 이 0 이므로
-        * 급수는 수렴한다. (실제로 $\ln 2$로 수렴)
+        * 조건1: 수열 ($a_n$) 은 단조감소
+        * 조건2: $\lim_{n\to\infty}a_n = 0$
+        * 두 조건을 만족하면, 급수 $\sum_{n=1}^\infty (-1)^{n+1}a_n$ 는 수렴한다. (실제로 $\ln 2$로 수렴)
     
     * $\ln 2$로 수렴하는 이유
     
