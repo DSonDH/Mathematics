@@ -555,7 +555,7 @@ $a\in D, f,g: D \to \mathbb{R}$가 $x=a$ 에서 연속일때, 다음이 성립�
 ### Thm 1. 최대 최소 정리 *(Extreme Value Theorem)*
 $f$가 $[a,b]$에서 연속이면 최대·최소 존재 $\exists a_0, b_0 \in [a, b]$ s.t. $\forall x\in [a, b], f(a_0)\leq f(x) \leq f(b_0)$
 
-### Thm 2. 사잇값(중간값) 정리 *(Intermediate Value Theorem)*
+### Thm 2. 사잇값 (중간값) 정리 *(Intermediate Value Theorem)*
 $f$가 $[a,b]$에서 연속이고 $f(a)<f(b)$ 이면
 $\exists c\in(a,b)$ s.t. $f(c)=p$, $f(a)<p<f(b)$.  
 $f(b)<f(a)$이면 $f(b)<p<f(a)$.

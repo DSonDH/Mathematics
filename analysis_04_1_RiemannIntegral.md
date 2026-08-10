@@ -13,6 +13,8 @@
 * 두 분할 $\varphi,\varphi^*$에 대해
   $\varphi\subset\varphi^*$이면 $\varphi^*$를 $\varphi$의 **세분** *(refinement)* 이라 한다.
   - 세분: 더 쪼개기
+  - 공통 세분 (common refinement): $\varphi_1\cup\varphi_2$는 $\varphi_1,\varphi_2$의 공통 세분
+    - $L(\varphi_1,f)\le L(\varphi_1\cup\varphi_2,f)\le U(\varphi_1\cup\varphi_2,f)\le U(\varphi_2,f)$
 
 ### 상합과 하합 *(Upper Sum, Lower Sum)*
 $f:[a,b]\to\mathbb R$가 유계일 때, 분할 $\varphi=\{x_i\}$에 대해
@@ -134,7 +136,7 @@ $$
 또한, $[a, b]$에서 유계인 리만적분가능한 함수 f들의 집합은 $\mathcal{R}[a, b]$로 나타낸다 ($f \in \mathcal{R}[a, b]$)
 
 ## (2) 주요 정리 *(Main Theorems on the Riemann Integral)*
-### Thm.1 판별법 *(Riemann Integrability Criterion)*
+### Thm.1 리만 적분 판별법 *(Riemann Integrability Criterion)*
 $f$가 $[a,b]$에서 유계이면
 
 $$
@@ -182,14 +184,14 @@ $$
 상적분과 하적분의 정의에 의해:
 
 $$
-\underline{\int_a^b} f = \sup L(\varphi, f) \le L(\varphi, f)\\
-\overline{\int_a^b} f = \inf U(\varphi, f) \le U(\varphi, f)
+\overline{\int_a^b} f = \inf U(\varphi, f) \le U(\varphi, f) \\
+\underline{\int_a^b} f = \sup L(\varphi, f) \ge L(\varphi, f)
 $$
 
 따라서
 
 $$
-0 \le \overline{\int_a^b} f - \underline{\int_a^b} f \le U(\varphi, f) - L(\varphi, f) < \varepsilon
+\overline{\int_a^b} f - \underline{\int_a^b} f \le U(\varphi, f) - L(\varphi, f) < \varepsilon
 $$
 
 $\varepsilon$는 임의의 양수이므로
@@ -207,40 +209,37 @@ $$
 f\in\mathcal R[a,b]
 $$
 
-* 불연속인데 리만적분 가능한 경우도 있긴 함! 
+* 역은 성립 안함: 불연속인데 리만적분 가능한 경우도 있긴 함! 
 
-#### 증명 
-$f$가 $[a,b]$에서 연속이므로, 유계 폐구간에서 연속인 함수는 **균등연속** *(uniformly continuous)* 이다. (by 하이네-칸토어 정리(Heine–Cantor theorem))
-
-즉, 임의의 $\varepsilon > 0$에 대하여 $\delta > 0$이 존재하여
-
-$$
-|x - y| < \delta \implies |f(x) - f(y)| < \frac{\varepsilon}{b-a}
-$$
-
-이제 $[a,b]$의 분할 $\varphi = \{x_0, x_1, \dots, x_n\}$을 $\|\varphi\| = \max_i \Delta x_i < \delta$가 되도록 선택하자.
-- $\max_i \Delta x_i$는 분할에서 가장 긴 소구간의 길이
-- $\|\varphi\|$: 분할의 크기 또는 메시(mesh) 라고 부른다.
-
-각 소구간 $[x_{i-1}, x_i]$에서 $f$는 연속이므로 **최대·최소 정리**에 의해 최댓값과 최솟값을 갖는다. 즉,
-
-$$
-M_i = \max_{x \in [x_{i-1}, x_i]} f(x), \quad m_i = \min_{x \in [x_{i-1}, x_i]} f(x)
-$$
-
-$\Delta x_i < \delta$이므로 균등연속성에 의해
-
-$$
-M_i - m_i < \frac{\varepsilon}{b-a}
-$$
-
-따라서
-
-$$
-U(\varphi, f) - L(\varphi, f) = \sum_{i=1}^n (M_i - m_i)\Delta x_i < \frac{\varepsilon}{b-a} \sum_{i=1}^n \Delta x_i = \frac{\varepsilon}{b-a} \cdot (b-a) = \varepsilon
-$$
-
-**Thm.1 판별법**에 의해 $f \in \mathcal{R}[a,b]$이다.
+>**증명**  
+>
+>$f$가 $[a,b]$에서 연속이므로, 유계 폐구간에서 연속인 함수는 **균등연속** *(uniformly continuous, 고른연속)* 이다. (by 하이네-칸토어 정리(Heine–Cantor theorem))
+>
+>즉, 임의의 $\varepsilon > 0$에 대하여 $\delta > 0$이 존재하여
+>
+>$$
+>|x - y| < \delta \implies |f(x) - f(y)| < \frac{\varepsilon}{b-a}
+>$$
+>
+>이제 $[a,b]$의 분할 $\varphi = \{x_0, x_1, \dots, x_n\}$을 $\|\varphi\| = \max_i \Delta x_i < \delta$가 되도록 선택하자.
+>- $\max_i \Delta x_i$는 분할에서 가장 긴 소구간의 길이
+>- $\|\varphi\|$: 분할의 크기 또는 메시(mesh) 라고 부른다.
+>
+>각 소구간 $[x_{i-1}, x_i]$에서 $f$는 연속이므로 **최대·최소 정리**에 의해 최댓값과 최솟값을 갖는다. 즉,
+>
+>$$
+>M_i = \max_{x \in [x_{i-1}, x_i]} f(x), \quad m_i = \min_{x \in [x_{i-1}, x_i]} f(x)
+>$$
+>
+>$\Delta x_i < \delta$이므로 균등연속성에 의해 $M_i - m_i < \frac{\varepsilon}{b-a}$ 
+>
+>따라서
+>
+>$$
+>U(\varphi, f) - L(\varphi, f) = \sum_{i=1}^n (M_i - m_i)\Delta x_i < \frac{\varepsilon}{b-a} \sum_{i=1}^n \Delta x_i = \frac{\varepsilon}{b-a} \cdot (b-a) = \varepsilon
+>$$
+>
+>**Thm.1 판별법**에 의해 $f \in \mathcal{R}[a,b]$이다.
 
 ### Thm.3 적분의 평균값 정리 *(Mean Value Theorem for Integrals)*
 $f$가 $[a,b]$에서 연속이면
@@ -292,6 +291,66 @@ $$
 $$
 
 $f$가 상수함수가 아니면 $m < M$이므로 $c \in (a,b)$이다.
+
+### 참고: 단조증가(감소) 함수와 적분가능성
+
+함수 $f:[a,b]\to\mathbb{R}$가 증가함수, 즉 $x < y\implies f(x)\le f(y)$라고 하자. 그러면 $f$는 $[a,b]$에서 리만 적분 가능하다.
+
+>**증명**
+>
+>모든 $x\in[a,b]$에 대해 $f(a)\le f(x)\le f(b)$ 이므로 $f$는 유계이다.
+>
+>구간 $[a,b]$를 같은 길이의 $n$개의 부분구간으로 나누는 분할 $P_n=\{x_0,x_1,\dots,x_n\}$ 을 생각하자. 여기서
+>
+>$$
+>x_k=a+\frac{k}{n}(b-a), \qquad \Delta x_k=x_k-x_{k-1}=\frac{b-a}{n}
+>$$
+>
+>이다. $f$가 증가함수이므로 각 부분구간 $[x_{k-1},x_k]$에서 최솟값과 최댓값은
+>
+>$$
+>m_k=f(x_{k-1}), \qquad M_k=f(x_k)
+>$$
+>
+>이다. 따라서 하합과 상합은
+>
+>$$
+>L(f,P_n)=\sum_{k=1}^n f(x_{k-1})\frac{b-a}{n}, \qquad U(f,P_n)=\sum_{k=1}^n f(x_k)\frac{b-a}{n}
+>$$
+>
+>이다. 두 합의 차이는
+>
+>$$
+>U(f,P_n)-L(f,P_n)=\frac{b-a}{n}\sum_{k=1}^n (f(x_k)-f(x_{k-1}))
+>$$
+>
+>이고, 우변의 중간 항들이 모두 소거되어
+>
+>$$
+>U(f,P_n)-L(f,P_n)=\frac{b-a}{n}(f(x_n)-f(x_0))=\frac{b-a}{n}(f(b)-f(a)).
+>$$
+>
+>따라서
+>
+>$$
+>\lim_{n\to\infty}[U(f,P_n)-L(f,P_n)] = \lim_{n\to\infty} \frac{b-a}{n}(f(b)-f(a)) = 0.
+>$$
+>
+>적분 가능성에 대한 수열 판정법에 의해 $f$는 $[a,b]$에서 리만 적분 가능하다.
+>
+>$\varepsilon$-형식으로 쓰면, $f(b)>f(a)$일 때
+>
+>$$
+>n>\frac{(b-a)(f(b)-f(a))}{\varepsilon}
+>$$
+>
+>로 $n$을 선택하면
+>
+>$$
+>U(f,P_n)-L(f,P_n)<\varepsilon.
+>$$
+>
+>$f(b)=f(a)$이면 증가성에 의해 $f$는 상수함수이므로 바로 적분 가능하다. 연속성을 가정하지 않아도, 증가함수가 불연속점을 가질 수 있어도 위의 상합과 하합의 차이가 0으로 수렴하기 때문에 적분 가능하다.
 
 ## (3) 리만적분의 연산 *(Properties of the Riemann Integral)*
 $f,g\in\mathcal R[a,b]$이면 다음이 성립한다.
@@ -422,6 +481,39 @@ $\varepsilon \to 0$으로 보내면
 $$
 \int_a^b f = \int_a^c f + \int_c^b f
 $$
+
+## 불연속점이 있는 함수의 적분
+불연속점에서 발생하는 함수의 좋지 못한 성질을 분할의 매우 작은 부분구간에 격리 시켜 적분을 계산할 수 있다.
+
+### Thm. 불연속점이 유한개인 함수의 적분가능성 *(Integrability of Functions with Finitely Many Discontinuities)
+$f: [a,b] \to \mathbb{R}$가 유계이고, 모든 $c \in (a,b)$에 대해 $f$가 $[c, b]$에서 적분가능하면 $f$는 $[a, b]$에서 적분가능하다.
+
+마찬가지로 모든 $c \in (a,b)$에 대해 $f$가 $[a, c]$에서 적분가능하면 $f$는 $[a, b]$에서 적분가능하다.
+
+- 끝점에서 불연속점을 가지는 유계함수는 닫힌 구간에서 여전히 적분가능하다.
+- $[a,b]$와 $[b,d]$에서 적분가능성은 $[a,d]$에서의 적분가능성과 동치다
+  - 귀납적으로 유한개 불연속점을 가지는 함수도 모두 적분 가능하다!
+- 토메함수는 무한개 불연속점으 가지지만, $[0,1]$ 전체에서 불연속점은 아니고, 리만적분 가능하다!
+
+>**증명**
+>
+>$\epsilon >0$이라 하자. $U(f,P), L(f,P) < \epsilon$이 되게하는 분할 $P$를 찾으면 증명이 완료된다.
+>
+>임의의 분할에 대해 다음이 항상 성립한다:
+>
+>$$U(f,P) - L(f,P) = \sum_{k=1}^n (M_k - m_k) \Delta x_k \\= (M_1 -m_1)(x_1-a) + \sum_{k=2}^n (M_k - m_k) \Delta x_k$$
+>
+>여기서 $(M_1 - m_1)(x_1 - a) < \epsilon/2$이 되도록 $x_1$을 선택할 수 있다. 이는 $f$가 유계이므로 어떤 $M > 0$이 있어 모든 $x \in [a,b]$에 대해 $|f(x)| \leq M$ 이다. 상한값이 $M$ 보다 같거나 작고, 하한값이 $-M$ 보다 크거나 같으므로 $(M_1 - m_1) \leq 2M$ 이다. 
+>
+>여기서 $x_1$을 $(x_1 - a) < \epsilon/(4M)$이 되도록 선택한다.
+>
+>가정에 의해  $f$는 $[x_1, b]$에서 적분가능하므로, 적분 판정법에 의해 $[x_1, b]$의 분할 $P_1$이 존재하여 $U(f, P_1) - L(f, P_1) \leq \epsilon/2$ 다.
+>
+>마지막으로 $P = {a} \cup P_1$을 $[a,b]$의 분할로 선택하면,
+>
+>$$ U(f,P) - L(f,P) = (M_1 - m_1)(x_1-a) + \sum_{k=2}^n (M_k - m_k) \Delta x_k \\
+>= 2M(x_1-a) + U(f,P_1)-L(f,P_1) < \epsilon/2 + \epsilon/2 = \epsilon$$
+>
 
 # 2. 미적분학의 기본정리 *(Fundamental Theorem of Calculus)*
 ## (1) 제1 기본정리 *(First Fundamental Theorem of Calculus)*
