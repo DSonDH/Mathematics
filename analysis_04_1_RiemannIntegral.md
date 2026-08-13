@@ -249,48 +249,49 @@ $$
 \int_a^b f(x),dx=f(c)(b-a)
 $$
 
-#### 증명
-$f$가 $[a,b]$에서 연속이므로, **Thm.2**에 의해 $f \in \mathcal{R}[a,b]$이다.
-
-연속함수의 **최대·최소 정리**에 의해
-
-$$
-m = \min_{x \in [a,b]} f(x), \quad M = \max_{x \in [a,b]} f(x)
-$$
-
-가 존재한다.
-
-따라서 모든 $x \in [a,b]$에 대해
-
-$$
-m \le f(x) \le M
-$$
-
-적분의 단조성에 의해
-
-$$
-m(b-a) \le \int_a^b f(x)\,dx \le M(b-a)
-$$
-
-양변을 $(b-a)$로 나누면
-
-$$
-m \le \frac{1}{b-a}\int_a^b f(x)\,dx \le M
-$$
-
-$f$는 $[a,b]$에서 연속이므로 **중간값 정리**에 의해, 어떤 $c \in [a,b]$가 존재하여
-
-$$
-f(c) = \frac{1}{b-a}\int_a^b f(x)\,dx
-$$
-
-따라서
-
-$$
-\int_a^b f(x)\,dx = f(c)(b-a)
-$$
-
-$f$가 상수함수가 아니면 $m < M$이므로 $c \in (a,b)$이다.
+>**증명**
+>
+>$f$가 $[a,b]$에서 연속이므로, **Thm.2**에 의해 $f \in \mathcal{R}[a,b]$이다.
+>
+>연속함수의 **최대·최소 정리**에 의해
+>
+>$$
+>m = \min_{x \in [a,b]} f(x), \quad M = \max_{x \in [a,b]} f(x)
+>$$
+>
+>가 존재한다.
+>
+>따라서 모든 $x \in [a,b]$에 대해
+>
+>$$
+>m \le f(x) \le M
+>$$
+>
+>적분의 단조성에 의해
+>
+>$$
+>m(b-a) \le \int_a^b f(x)\,dx \le M(b-a)
+>$$
+>
+>양변을 $(b-a)$로 나누면
+>
+>$$
+>m \le \frac{1}{b-a}\int_a^b f(x)\,dx \le M
+>$$
+>
+>$f$는 $[a,b]$에서 연속이므로 **중간값 정리**에 의해, 어떤 $c \in [a,b]$가 존재하여
+>
+>$$
+>f(c) = \frac{1}{b-a}\int_a^b f(x)\,dx
+>$$
+>
+>따라서
+>
+>$$
+>\int_a^b f(x)\,dx = f(c)(b-a)
+>$$
+>
+>$f$가 상수함수가 아니면 $m < M$이므로 $c \in (a,b)$이다.
 
 ### 참고: 단조증가(감소) 함수와 적분가능성
 
@@ -361,63 +362,249 @@ $$
 \int_a^b (f\pm g)=\int_a^b f\pm\int_a^b g
 $$
 
-- 증명  
 
-**($\alpha f + \beta g$의 적분가능성)**  
-임의의 $\varepsilon > 0$에 대하여, $f, g \in \mathcal{R}[a,b]$이므로 **Thm.1 판별법**에 의해 분할 $\varphi_1, \varphi_2$가 존재하여
+
+>**증명**  
+>
+>**($\alpha f + \beta g$의 적분가능성)**  
+>임의의 $\varepsilon > 0$에 대하여, $f, g \in \mathcal{R}[a,b]$이므로 **Thm.1 판별법**에 의해 분할 $\varphi_1, \varphi_2$가 존재하여
+>
+>$$
+>U(\varphi_1, f) - L(\varphi_1, f) < \frac{\varepsilon}{2|\alpha|}, \quad U(\varphi_2, g) - L(\varphi_2, g) < \frac{\varepsilon}{2|\beta|}
+>$$
+>
+>($\alpha, \beta \neq 0$인 경우. 0이면 자명)
+>
+>$\varphi = \varphi_1 \cup \varphi_2$라 하면, 각 소구간에서:
+>- $\alpha > 0$이면 $M_i(\alpha f) = \alpha M_i(f)$, $m_i(\alpha f) = \alpha m_i(f)$
+>- $\alpha < 0$이면 $M_i(\alpha f) = \alpha m_i(f)$, $m_i(\alpha f) = \alpha M_i(f)$
+>
+>따라서
+>
+>$$
+>U(\varphi, \alpha f + \beta g) - L(\varphi, \alpha f + \beta g) \\ \le |\alpha|(U(\varphi, f) - L(\varphi, f)) + |\beta|(U(\varphi, g) - L(\varphi, g)) \\
+>< \varepsilon
+>$$
+>
+>고로 $\alpha f + \beta g \in \mathcal{R}[a,b]$.
+>
+>**($\int(f+g) = \int f + \int g$)**  
+>분할 $\varphi$에 대해 각 소구간에서
+>
+>$$
+>m_i(f) + m_i(g) \le f(x) + g(x) \le M_i(f) + M_i(g)
+>$$
+>
+>따라서
+>
+>$$
+>m_i(f) + m_i(g) \le m_i(f+g) \le M_i(f+g) \le M_i(f) + M_i(g)
+>$$
+>
+>이를 합하면
+>
+>$$
+>L(\varphi, f) + L(\varphi, g) \le L(\varphi, f+g) \le U(\varphi, f+g) \le U(\varphi, f) + U(\varphi, g)
+>$$
+>
+>극한을 취하면
+>
+>$$
+>\int_a^b f + \int_a^b g = \int_a^b (f+g)
+>$$
+
+### 연산2. 상수배 *(Scalar multiples)*
 
 $$
-U(\varphi_1, f) - L(\varphi_1, f) < \frac{\varepsilon}{2|\alpha|}, \quad U(\varphi_2, g) - L(\varphi_2, g) < \frac{\varepsilon}{2|\beta|}
+f\in\mathcal R[a,b],\quad k\in\mathbb R \implies kf\in\mathcal R[a,b],\quad \int_a^b kf = k\int_a^b f.
 $$
 
-($\alpha, \beta \neq 0$인 경우. 0이면 자명)
-
-$\varphi = \varphi_1 \cup \varphi_2$라 하면, 각 소구간에서:
-- $\alpha > 0$이면 $M_i(\alpha f) = \alpha M_i(f)$, $m_i(\alpha f) = \alpha m_i(f)$
-- $\alpha < 0$이면 $M_i(\alpha f) = \alpha m_i(f)$, $m_i(\alpha f) = \alpha M_i(f)$
-
-따라서
-
-$$
-U(\varphi, \alpha f + \beta g) - L(\varphi, \alpha f + \beta g) \\ \le |\alpha|(U(\varphi, f) - L(\varphi, f)) + |\beta|(U(\varphi, g) - L(\varphi, g)) \\
-< \varepsilon
-$$
-
-고로 $\alpha f + \beta g \in \mathcal{R}[a,b]$.
-
-**($\int(f+g) = \int f + \int g$)**  
-분할 $\varphi$에 대해 각 소구간에서
+>**증명**  
+>선형성에서 $g=0$으로 취하면 바로 얻어진다. 또한 $k\neq 0$일 때 각 소구간에서
+>
+>$$
+>M_i(kf)=kM_i(f),\quad m_i(kf)=km_i(f)
+>$$
+>
+>또는 $k<0$일 때는 $M_i(kf)=km_i(f)$, $m_i(kf)=kM_i(f)$가 되므로 상합과 하합의 차이는 $|k|$배로 늘어난다. 따라서 적분 가능성이 유지되고, 적분값도 $k$배가 된다.
+>
+### 연산3. 상한·하한에 의한 부등식 *(Bounds from minimum and maximum)*
 
 $$
-m_i(f) + m_i(g) \le f(x) + g(x) \le M_i(f) + M_i(g)
+m\le f(x)\le M\quad (\forall x\in[a,b]) \implies m(b-a)\le \int_a^b f\le M(b-a).
 $$
 
-따라서
+>**증명**  
+>분할 $
+ho$에 대해 각 소구간 $[x_{i-1},x_i]$에서
+>
+>$$
+>m\le m_i(f)\le M_i(f)\le M
+>$$
+>
+>이므로
+>
+>$$
+>m\Delta x_i\le L_i(f,\rho)\le U_i(f,\rho)\le M\Delta x_i.
+>$$
+>
+>모든 소구간을 합하면
+>
+>$$
+>m(b-a)\le L(f,\rho)\le U(f,\rho)\le M(b-a).
+>$$
+>
+>따라서 적분값도 이 사이에 들어간다.
+>
+### 연산4. 단조성 *(Monotonicity)*
 
 $$
-m_i(f) + m_i(g) \le m_i(f+g) \le M_i(f+g) \le M_i(f) + M_i(g)
+f(x)\le g(x)\quad (\forall x\in[a,b]) \implies \int_a^b f\le \int_a^b g.
 $$
 
-이를 합하면
+>**증명**  
+>$h=g-f\ge0$이라 하면 $h\in\mathcal R[a,b]$이고, 연산3에 의해
+>
+>$$
+>0\le \int_a^b h = \int_a^b(g-f) = \int_a^b g - \int_a^b f.
+>$$
+>
+>따라서
+>
+>$$
+>\int_a^b f \le \int_a^b g.
+>$$
+>
+### 연산5. 절대값의 적분 가능성과 절대값 부등식 *(Absolute value and inequality)*
 
 $$
-L(\varphi, f) + L(\varphi, g) \le L(\varphi, f+g) \le U(\varphi, f+g) \le U(\varphi, f) + U(\varphi, g)
+f\in\mathcal R[a,b] \implies |f|\in\mathcal R[a,b],\qquad \left|\int_a^b f\right|\le \int_a^b |f|.
 $$
 
-극한을 취하면
+>**증명**  
+>분할 $
+ho$에 대해 각 소구간에서
+>
+>$$
+>M_i(|f|)-m_i(|f|)\le M_i(f)-m_i(f)
+>$$
+>
+>이 성립하므로, $f$의 상합과 하합의 차이가 작아질 때 $|f|$의 상합과 하합의 차이도 작아진다. 따라서 $|f|\in\mathcal R[a,b]$이다.
+>
+>또한
+>
+>$$
+>-|f|\le f\le |f|
+>$$
+>
+>이므로 연산4를 적용하면
+>
+>$$
+>-\int_a^b |f|\le \int_a^b f\le \int_a^b |f|.
+>$$
+>
+>따라서
+>
+>$$
+>\left|\int_a^b f\right|\le \int_a^b |f|.
+>$$
+>
+
+### 연산6. 함수 곱의 적분도 적분가능 *()*
+
 
 $$
-\int_a^b f + \int_a^b g = \int_a^b (f+g)
+f^2 \in \mathcal R
 $$
 
-### 연산2. 구간의 가법성 *(Additivity over intervals)*
+$$
+fg \in \mathcal R
+$$
+
+>**증명**
+>
+>$f$가 $[a,b]$에서 리만 적분 가능하므로 유계이다 (리만 적분 전제조건임). 따라서 어떤 $M>0$가 존재하여 $|f(x)|\le M \quad (x\in[a,b])$ 이다.  
+>임의의 분할 $P=\{x_0,x_1,\dots,x_n\}$ 을 잡고 부분구간을 $I_k=[x_{k-1},x_k]$ 이라 하자. 각 부분구간에서 함수의 진동 폭을
+>
+>$$
+>\omega_k(f)=\sup_{x,y\in I_k}|f(x)-f(y)|
+>$$
+>
+>라고 하면
+>
+>$$
+>\omega_k(f)=\sup_{I_k}f-\inf_{I_k}f
+>$$
+>
+>마찬가지로
+>
+>$$
+>\omega_k(f^2)=\sup_{x,y\in I_k}|f(x)^2-f(y)^2|
+>$$
+>
+>이다. 위의 유계성에 의해 모든 $x,y\in I_k$에 대해 다음과 같이 전개할 수 있다.
+>
+>$$
+>|f(x)^2-f(y)^2|=|f(x)-f(y)|\,|f(x)+f(y)| \\
+>\le |f(x)-f(y)|\bigl(|f(x)|+|f(y)|\bigr) \\
+>\le |f(x)-f(y)|\cdot( M+M )
+>=2M|f(x)-f(y)|.
+>$$
+>
+>이므로 $\omega_k(f^2)\le 2M\,\omega_k(f)$  
+>따라서 상합과 하합의 차이에 대해
+>
+>$$
+>U(f^2,P)-L(f^2,P)=\sum_{k=1}^n\omega_k(f^2)(x_k-x_{k-1}) \\
+>\le 2M\sum_{k=1}^n\omega_k(f)(x_k-x_{k-1})
+>=2M\bigl(U(f,P)-L(f,P)\bigr).
+>$$
+>
+>이제 $\varepsilon>0$를 임의로 잡는다. $f$가 적분 가능하므로 어떤 분할 $P$가 존재하여 $U(f,P)-L(f,P)<\frac{\varepsilon}{2M}$ 이 되게 할 수 있다. 그러면
+>
+>$$
+>U(f^2,P)-L(f^2,P)\le 2M\bigl(U(f,P)-L(f,P)\bigr)
+><2M\cdot\frac{\varepsilon}{2M}=\varepsilon.
+>$$
+>
+>그러므로 리만 적분 가능성의 판정법에 의해 $f^2$은 $[a,b]$에서 적분 가능하다.
+>
+> ---
+>f와 g가 적분 가능하므로 합에 관한 정리에 의해 $f+g$ 도 적분 가능하다. $f,g,f+g$ 각각 위 공식에 의해 $f^2,g^2,(f+g)^2$ 이 모두 적분 가능하다.  
+>한편 $(f+g)^2=f^2+2fg+g^2$ 이므로
+>
+>$$
+>fg=	\frac12\bigl((f+g)^2-f^2-g^2\bigr).
+>$$
+>
+>적분 가능한 함수들의 합, 차 및 상수배는 적분 가능하므로 우변이 적분 가능하다. 따라서
+>
+>$fg$도 $[a,b]$에서 리만 적분 가능하다.
+
+### 정의. 적분의 방향 반전과 0 길이 구간
+
+$f\in\mathcal R[a,b]$일 때, 다음이 성립한다.
+
+$$
+\int_a^b f(x)\,dx = -\int_b^a f(x)\,dx,
+\qquad
+\int_c^c f(x)\,dx = 0 \quad (c\in[a,b]).
+$$
+
+- 첫째 식은 적분의 방향을 반대로 바꾸면 부호가 반대로 바뀐다는 뜻
+- 둘째 식은 구간 $[c,c]$의 길이가 0이므로, 임의의 분할에 대한 하합과 상합이 모두 0이 되어 적분값도 0으로 정한 것
+- 적분 계산을 간단히 만들기 위한 관습이다.
+
+### 정리. 구간의 가법성 *(Additivity over intervals)*
 
 $$
 f \in \mathcal{R}[a,b] \Leftrightarrow
 \forall c\in(a,b),\int_a^b f=\int_a^c f+\int_c^b f
 $$
 
-- 증명  
+- 무한히 많은 구간으로 분해하려면 별도의 극한 논증이 필요
+
+**증명**
 
 **Step1: ($f \in \mathcal{R}[a,b] \Rightarrow f \in \mathcal{R}[a,c], f \in \mathcal{R}[c,b]$)**  
 $f \in \mathcal{R}[a,b]$이므로, 임의의 $\varepsilon > 0$에 대하여 **Thm.1 판별법**에 의해 분할 $\varphi$가 존재하여
@@ -485,6 +672,8 @@ $$
 ## 불연속점이 있는 함수의 적분
 불연속점에서 발생하는 함수의 좋지 못한 성질을 분할의 매우 작은 부분구간에 격리 시켜 적분을 계산할 수 있다.
 
+- 유계함수의 함수값을 유한개의 점에서만 변경하면 불연속점이 새로 생길 수 있지만, 리만 적분 가능성과 적분값은 변하지 않는다.
+
 ### Thm. 불연속점이 유한개인 함수의 적분가능성 *(Integrability of Functions with Finitely Many Discontinuities)
 $f: [a,b] \to \mathbb{R}$가 유계이고, 모든 $c \in (a,b)$에 대해 $f$가 $[c, b]$에서 적분가능하면 $f$는 $[a, b]$에서 적분가능하다.
 
@@ -493,7 +682,7 @@ $f: [a,b] \to \mathbb{R}$가 유계이고, 모든 $c \in (a,b)$에 대해 $f$가
 - 끝점에서 불연속점을 가지는 유계함수는 닫힌 구간에서 여전히 적분가능하다.
 - $[a,b]$와 $[b,d]$에서 적분가능성은 $[a,d]$에서의 적분가능성과 동치다
   - 귀납적으로 유한개 불연속점을 가지는 함수도 모두 적분 가능하다!
-- 토메함수는 무한개 불연속점으 가지지만, $[0,1]$ 전체에서 불연속점은 아니고, 리만적분 가능하다!
+- 토메함수는 무한개 불연속점을 가지지만, $[0,1]$ 전체에서 불연속점은 아니고, 리만적분 가능하다!
 
 >**증명**
 >
@@ -515,7 +704,162 @@ $f: [a,b] \to \mathbb{R}$가 유계이고, 모든 $c \in (a,b)$에 대해 $f$가
 >= 2M(x_1-a) + U(f,P_1)-L(f,P_1) < \epsilon/2 + \epsilon/2 = \epsilon$$
 >
 
+### 정리. 유한개 불연속점을 가지는 균등수렴 함수열의 적분가능성
+
+$f_n$이 $f$로 균등수렴하고, 각 $f_n$은 유한개의 불연속점을 가지면 $f$는 적분가능하다.
+
+>**증명**
+>
+>임의의 $\epsilon>0$를 잡자. 균등수렴이므로 어떤 $N$에 대하여
+>$$\|f-f_N\|_\infty=\sup_{x\in[0,1]}|f(x)-f_N(x)|<\epsilon/4.$$
+>
+>$f_N$은 적분가능하므로 어떤 분할 $P$가 존재하여
+>
+>$$U(f_N,P)-L(f_N,P)<\epsilon/2$$
+>
+>각 부분구간 $I_k$에 대하여
+>
+>$$\sup_{I_k}f\le\sup_{I_k}f_N+\epsilon/4,\qquad \inf_{I_k}f\ge\inf_{I_k}f_N-\epsilon/4,$$
+>
+>따라서
+>
+>$$\sup_{I_k}f-\inf_{I_k}f\le(\sup_{I_k}f_N-\inf_{I_k}f_N)+\epsilon/2.$$
+>
+>그러므로 전체 길이가 1임을 이용하면
+>
+>$$U(f,P)-L(f,P)\le U(f_N,P)-L(f_N,P)+(\epsilon/2)\sum_k\Delta x_k<\epsilon/2+\epsilon/2 = \epsilon.$$
+>
+>따라서 적분판별법에 의해 $f$는 적분가능하다.
+
+
+### 정리. 적분가능성과 절댓값
+
+$f\in\mathcal R[a,b]$이면 $|f|\in\mathcal R[a,b]$이고
+
+$$
+\left|\int_a^b f(x)\,dx\right|\le \int_a^b |f(x)|\,dx.
+$$
+
+> **증명**
+>
+> 먼저 $|f|$가 적분가능함을 보이자.
+>
+> 임의의 분할 $P=\{x_0,\dots,x_n\}$을 잡고, 각 소구간 $I_i=[x_{i-1},x_i]$에 대해
+>
+> $$
+> M_i=\sup_{x\in I_i}f(x),\qquad m_i=\inf_{x\in I_i}f(x) \\ 
+M_i^*=\sup_{x\in I_i}|f(x)|,\qquad m_i^*=\inf_{x\in I_i}|f(x)|
+> $$
+>
+> 를 정의하자.
+>
+> 임의의 $x,y\in I_i$에 대하여 역삼각부등식에 의해
+>
+> $$
+> \bigl||f(x)|-|f(y)|\bigr|\le |f(x)-f(y)|
+> $$
+>
+> 그런데 $x,y\in I_i$이므로 $f(x),f(y)\in[m_i,M_i]$이고, 따라서 $|f(x)-f(y)|\le M_i-m_i$ 이므로
+>
+> $$
+> \bigl||f(x)|-|f(y)|\bigr|\le M_i-m_i
+> $$
+>
+> 양변의 supremum을 취하면
+>
+> $$
+> M_i^*-m_i^*\le M_i-m_i.
+> $$
+>
+> 이제 각 소구간에 대해 이를 곱하고 합하면
+>
+> $$
+> U(P,|f|)-L(P,|f|)\le U(P,f)-L(P,f).
+> $$
+>
+> $f\in\mathcal R[a,b]$이므로, 적분판별법에 의해 임의의 $\varepsilon>0$에 대하여 어떤 분할 $P$가 존재하여
+>
+> $$
+> U(P,f)-L(P,f)<\varepsilon.
+> $$
+>
+> 따라서
+>
+> $$
+> U(P,|f|)-L(P,|f|)<\varepsilon.
+> $$
+>
+> 다시 적분판별법에 의해 $|f|\in\mathcal R[a,b]$이다.
+>
+> 다음으로 절대값 부등식을 보이자.
+>
+> $$
+> -|f(x)|\le f(x)\le |f(x)|
+> $$
+>
+> 이므로, 적분의 단조성을 적용하면
+>
+> $$
+> -\int_a^b |f(x)|\,dx\le \int_a^b f(x)\,dx\le \int_a^b |f(x)|\,dx.
+> $$
+>
+> 따라서
+>
+> $$
+> \left|\int_a^b f(x)\,dx\right|\le \int_a^b |f(x)|\,dx.
+> $$
+>
+> 특히, $g=f_n-f$라 두면 $g\in\mathcal R[a,b]$이고, 위 결과를 $g$에 적용하면
+>
+> $$
+> \left|\int_a^b (f_n-f)\right|
+> \le \int_a^b |f_n-f|.
+> $$
+>
+> 이 부등식은 균등수렴 함수열의 적분값 수렴 증명에서 바로 쓰인다.
+
+### 정리. 균등수렴 함수열과 적분가능성
+
+$[a,b]$에서 $f_n$이 $f$로 균등수렴하고, 각 $f_n$이 적분가능하다고 가정하자. 이때 $f$는 적분가능하며 다음이 성립한다:
+
+$$ \lim_{n\to \infty}\int_a^b f_n = \int_a^b f$$
+
+일반적으로
+
+$$ \lim_{n\to\infty}\int_a^b f_n(x)\,dx \neq \int_a^b \lim_{n\to\infty} f_n(x)\ dx$$
+
+이지만, 위 정리에서 보인 바와 같이 $f_n$이 $[a,b]$에서 $f$로 균등수렴하면 극한과 적분을 교환할 수 있다.
+
+>**증명**
+>
+> $f$의 적분가능성은 위 정리에서 보였다. 이제 적분값의 수렴을 보이자. 한 $N$을 택하면, $n\ge N$에 대해
+>
+> $$
+> \|f_n-f\|_\infty < \frac{\varepsilon}{b-a}.
+> $$
+>
+> 그리고
+>
+> $$
+> \left|\int_a^b f_n-\int_a^b f\right|
+> =\left|\int_a^b (f_n-f)\right|
+> \le \int_a^b |f_n-f|
+> \le (b-a)\|f_n-f\|_\infty
+> <\varepsilon.
+> $$
+>
+> 따라서
+>
+> $$
+> \lim_{n\to\infty}\int_a^b f_n=\int_a^b f.
+> $$
+>
+
+
 # 2. 미적분학의 기본정리 *(Fundamental Theorem of Calculus)*
+
+미분, 적분은 독립적으로 정의되었고, 각각 수학적으로 엄밀한 용어로 기술되었다. 미분은 접선기울기를 찾는 문제였고, 함수 평균변화율의 극한으로 표현된다. 적분은 함수 그래프 아래 넓이를 계산하려는 시도에서 유한합의 상한, 하한을 이용하여 정의했다. 미적분학의 기본정리는 이 둘 사이에 역연산 관계가 있음을 설명한다!
+
 ## (1) 제1 기본정리 *(First Fundamental Theorem of Calculus)*
 **Def.**  
 $f\in\mathcal R[a,b]$일 때 $x\in [a,b]$에 대해  
@@ -529,70 +873,70 @@ $$
 **Thm.**  
 $f\in\mathcal R[a,b]$이면,
 1. $F$는 $[a,b]$에서 균등연속이다.
-2. $f$가$[a,b]$에서 연속이면 $F$는 $(a,b)$에서 미분가능하고, $\forall x\in [a,b], \ F'(x)=f(x).$
+2. $f$가 $c \in [a,b]$에서 연속이면 $F$는 $c$에서 미분가능하고, $F'(c)=f(c)$
   - 미분과 적분은 서로 역연산 관계
 
-### 증명
-**1. $F$는 $[a,b]$에서 균등연속이다.**
+>### 증명
+>**1. $F$는 $[a,b]$에서 균등연속이다.**
+>
+>$f \in \mathcal{R}[a,b]$이므로 $f$는 유계이다. 즉, $|f(x)| \le M$ for some $M > 0$ and all $x \in [a,b]$.  
+>임의의 $x, y \in [a,b]$에 대하여 ($x < y$라 가정)
+>
+>$$
+>|F(y) - F(x)| = \left|\int_a^y f(t)\,dt - \int_a^x f(t)\,dt\right| = \left|\int_x^y f(t)\,dt\right|
+>$$
+>
+>적분의 단조성에 의해
+>
+>$$
+>\left|\int_x^y f(t)\,dt\right| \le \int_x^y |f(t)|\,dt \le M(y-x)
+>$$
+>
+>따라서 임의의 $\varepsilon > 0$에 대하여 $\delta = \frac{\varepsilon}{M}$로 선택하면
+>
+>$$
+>|y - x| < \delta \implies |F(y) - F(x)| \le M|y-x| < M \cdot \frac{\varepsilon}{M} = \varepsilon
+>$$
+>
+>이는 $x, y$의 위치에 무관하므로 $F$는 $[a,b]$에서 균등연속이다. (참고: 립쉬츠 함수면 고른연속, $F$가 립쉬츠 함수임)
+>
+>**2. $f$가 $[a,b]$에서 연속이면 $F'(x) = f(x)$**
+>
+>$x \in [a,b]$를 고정하자. $f$가 $x$에서 연속이므로, 임의의 $\varepsilon > 0$에 대하여 $\delta > 0$이 존재하여
+>
+>$$
+>|t - x| < \delta \implies |f(t) - f(x)| < \varepsilon
+>$$
+>
+>$0 < |h| < \delta$이고 $x + h \in [a,b]$인 $h$에 대하여
+>
+>$$
+>\frac{F(x+h) - F(x)}{h} = \frac{1}{h}\int_x^{x+h} f(t)\,dt
+>$$
+>
+>($h < 0$인 경우 $\int_x^{x+h} = -\int_{x+h}^x$로 처리)
+>
+>$h > 0$인 경우를 고려하면
+>
+>$$
+>\left|\frac{F(x+h) - F(x)}{h} - f(x)\right| = \left|\frac{1}{h}\int_x^{x+h} f(t)\,dt - f(x)\right|\\
+>= \left|\frac{1}{h}\int_x^{x+h} (f(t) - f(x))\,dt\right| \le \frac{1}{h}\int_x^{x+h} |f(t) - f(x)|\,dt
+>$$
+>
+>$|t - x| \le h < \delta$이므로 $|f(t) - f(x)| < \varepsilon$. 따라서
+>
+>$$
+>\left|\frac{F(x+h) - F(x)}{h} - f(x)\right| < \frac{1}{h} \cdot \varepsilon h = \varepsilon
+>$$
+>
+>$h < 0$인 경우도 유사하게 증명된다.
+>
+>$$\therefore \lim_{h \to 0} \frac{F(x+h) - F(x)}{h} = f(x) = F'(x)$$
 
-$f \in \mathcal{R}[a,b]$이므로 $f$는 유계이다. 즉, $|f(x)| \le M$ for some $M > 0$ and all $x \in [a,b]$.
-
-임의의 $x, y \in [a,b]$에 대하여 ($x < y$라 가정)
-
-$$
-|F(y) - F(x)| = \left|\int_a^y f(t)\,dt - \int_a^x f(t)\,dt\right| = \left|\int_x^y f(t)\,dt\right|
-$$
-
-적분의 단조성에 의해
-
-$$
-\left|\int_x^y f(t)\,dt\right| \le \int_x^y |f(t)|\,dt \le M(y-x)
-$$
-
-따라서 임의의 $\varepsilon > 0$에 대하여 $\delta = \frac{\varepsilon}{M}$로 선택하면
-
-$$
-|y - x| < \delta \implies |F(y) - F(x)| \le M|y-x| < M \cdot \frac{\varepsilon}{M} = \varepsilon
-$$
-
-이는 $x, y$의 위치에 무관하므로 $F$는 $[a,b]$에서 균등연속이다.
-
-**2. $f$가 $[a,b]$에서 연속이면 $F'(x) = f(x)$**
-
-$x \in [a,b]$를 고정하자. $f$가 $x$에서 연속이므로, 임의의 $\varepsilon > 0$에 대하여 $\delta > 0$이 존재하여
-
-$$
-|t - x| < \delta \implies |f(t) - f(x)| < \varepsilon
-$$
-
-$0 < |h| < \delta$이고 $x + h \in [a,b]$인 $h$에 대하여
-
-$$
-\frac{F(x+h) - F(x)}{h} = \frac{1}{h}\int_x^{x+h} f(t)\,dt
-$$
-
-($h < 0$인 경우 $\int_x^{x+h} = -\int_{x+h}^x$로 처리)
-
-$h > 0$인 경우를 고려하면
-
-$$
-\left|\frac{F(x+h) - F(x)}{h} - f(x)\right| = \left|\frac{1}{h}\int_x^{x+h} f(t)\,dt - f(x)\right|\\
-= \left|\frac{1}{h}\int_x^{x+h} (f(t) - f(x))\,dt\right| \le \frac{1}{h}\int_x^{x+h} |f(t) - f(x)|\,dt
-$$
-
-$|t - x| \le h < \delta$이므로 $|f(t) - f(x)| < \varepsilon$. 따라서
-
-$$
-\left|\frac{F(x+h) - F(x)}{h} - f(x)\right| < \frac{1}{h} \cdot \varepsilon h = \varepsilon
-$$
-
-$h < 0$인 경우도 유사하게 증명된다.
-
-따라서 $\lim_{h \to 0} \frac{F(x+h) - F(x)}{h} = f(x)$, 즉 $F'(x) = f(x)$.
 
 ## (2) 제2 기본정리 *(Second Fundamental Theorem of Calculus)*
-**Def.**  
-역도함수 (Antiderivative)**  
+**Def. 역도함수 (Antiderivative)**  
+
 함수 $f$가 구간 $D$에서 정의될 때, $F'(x) = f(x)$ for all $x \in D$를 만족하는 함수 $F$를 $f$의 **역도함수** 또는 **원시함수** *(antiderivative)* 라 한다.
 
 **Thm.**  
@@ -603,92 +947,86 @@ $$
 \int_a^b f(x)dx=F(b)-F(a)
 $$
 
-### 증명
-**$f$의 원시함수가 존재한다고 가정**  
-$F$를 $f$의 원시함수, 즉 $F' = f$라 하자.
-
-**Step 1: 분할을 이용한 근사**  
-$[a,b]$의 분할 $\varphi = \{x_0, x_1, \dots, x_n\}$ (단, $a = x_0 < x_1 < \cdots < x_n = b$)을 택하자.
-
-평균값 정리에 의해 각 소구간 $[x_{i-1}, x_i]$에서 어떤 $c_i \in (x_{i-1}, x_i)$가 존재하여
-
-$$
-F(x_i) - F(x_{i-1}) = F'(c_i)(x_i - x_{i-1}) = f(c_i)\Delta x_i
-$$
-
-**Step 2: 텔레스코핑 합**  
-(텔레스코핑 합 (telescoping sum): 합을 전개하면 중간항들이 서로 소거되어 처음 항과 마지막 항만 남는 합)
-
-양변을 $i = 1$부터 $n$까지 더하면
-
-$$
-\sum_{i=1}^n (F(x_i) - F(x_{i-1})) = \sum_{i=1}^n f(c_i)\Delta x_i
-$$
-
-좌변은 텔레스코핑 합이므로
-
-$$
-F(x_n) - F(x_0) = F(b) - F(a)
-$$
-
-**Step 3: 리만합으로의 수렴**  
-각 소구간에서 $m_i \le f(c_i) \le M_i$이므로
-
-$$
-L(\varphi, f) \le \sum_{i=1}^n f(c_i)\Delta x_i \le U(\varphi, f)
-$$
-
-$f \in \mathcal{R}[a,b]$이므로 $\|\varphi\| \to 0$일 때
-
-$$
-L(\varphi, f) \to \int_a^b f(x)\,dx, \quad U(\varphi, f) \to \int_a^b f(x)\,dx
-$$
-
-샌드위치 정리에 의해
-
-$$
-\sum_{i=1}^n f(c_i)\Delta x_i \to \int_a^b f(x)\,dx
-$$
-
-**Step 4: 결론**  
-Step 2와 Step 3을 결합하면
-
-$$
-\int_a^b f(x)\,dx = F(b) - F(a)
-$$
+>### 증명
+>**$f$의 원시함수가 존재한다고 가정**  
+>$F$를 $f$의 원시함수, 즉 $F' = f$라 하자.
+>
+>**Step 1: 분할을 이용한 근사**  
+>$[a,b]$의 분할 $\varphi = \{x_0, x_1, \dots, x_n\}$ (단, $a = x_0 < x_1 < \cdots < x_n = b$)을 택하자.  
+>평균값 정리에 의해 각 소구간 $[x_{i-1}, x_i]$에서 어떤 $c_i \in (x_{i-1}, x_i)$가 존재하여
+>
+>$$
+>F(x_i) - F(x_{i-1}) = F'(c_i)(x_i - x_{i-1}) = f(c_i)\Delta x_i
+>$$
+>
+>**Step 2: 텔레스코핑 합 (망원급수)**  
+>(텔레스코핑 합 (telescoping sum): 합을 전개하면 중간항들이 서로 소거되어 처음 항과 마지막 항만 남는 합)  
+>양변을 $i = 1$부터 $n$까지 더하면
+>
+>$$
+>\sum_{i=1}^n (F(x_i) - F(x_{i-1})) = \sum_{i=1}^n f(c_i)\Delta x_i
+>$$
+>
+>좌변은 텔레스코핑 합이므로
+>
+>$$
+>F(x_n) - F(x_0) = F(b) - F(a)
+>$$
+>
+>**Step 3: 리만합으로의 수렴**  
+>각 소구간에서 $m_i \le f(c_i) \le M_i$이므로
+>
+>$$
+>L(\varphi, f) \le \sum_{i=1}^n f(c_i)\Delta x_i \le U(\varphi, f)
+>$$
+>
+>$f \in \mathcal{R}[a,b]$이므로 $\|\varphi\| \to 0$일 때
+>
+>$$
+>L(\varphi, f) \to \int_a^b f(x)\,dx, \quad U(\varphi, f) \to \int_a^b f(x)\,dx
+>$$
+>
+>샌드위치 정리에 의해
+>
+>$$
+>\sum_{i=1}^n f(c_i)\Delta x_i \to \int_a^b f(x)\,dx
+>$$
+>
+>**Step 4: 결론** : Step 2와 Step 3을 결합하면
+>
+>$$
+>\int_a^b f(x)\,dx = F(b) - F(a)
+>$$
 
 ## (3) 따름정리 *(Corollaries)*
 ### 치환적분 *(Change of Variables / Substitution Rule)*
-$g$는 $[a,b]$에서 연속이고,
-$(a,b)$에서 미분가능하며,
-$g'\in\mathcal R[a,b]$,
-$f$는 $g([a,b])$에서 연속이면
+$g$는 $[a,b]$에서 연속이고, $(a,b)$에서 미분가능하며, $g'\in\mathcal R[a,b]$, $f$는 $g([a,b])$에서 연속이면
 
 $$
 \int_a^b f(g(t))g'(t),dt=\int_{g(a)}^{g(b)} f(x),dx
 $$
 
-- 증명  
-
-$F(x) = \int_{g(a)}^{g(x)} f(t)\,dt$라 하자. 
-
-제1 기본정리에 의해 $F$는 미분가능하고 $F'(x) = f(g(x))  
-(*Lemma $f, g \in \mathcal{R}[a,b] \Rightarrow fg\in \mathcal{R}[a,b]$ 5장 참고자료 pdf)
-
-연쇄법칙(chain rule)을 적용하면, $G(t) = F(g(t))$에 대해
-
-$$
-G'(t) = F'(g(t)) \cdot g'(t) = f(g(t)) \cdot g'(t)
-$$
-
-따라서 $G$는 $f(g(t))g'(t)$의 원시함수이다.
-
-제2 기본정리에 의해
-
-$$
-\int_a^b f(g(t))g'(t)\,dt = G(b) - G(a) = F(g(b)) - F(g(a))\\
-= \int_{g(a)}^{g(b)} f(x)\,dx - \int_{g(a)}^{g(a)} f(x)\,dx = \int_{g(a)}^{g(b)} f(x)\,dx
-$$
+>**증명**
+>
+>$$F(x) = \int_{g(a)}^{g(x)} f(t)\,dt$$
+>
+>라 하자. 제1 기본정리에 의해 $F$는 미분가능하고 $F'(x) = f(g(x))$  
+>(*Lemma $f, g \in \mathcal{R}[a,b] \Rightarrow fg\in \mathcal{R}[a,b]$ 5장 참고자료 pdf)
+>
+>연쇄법칙(chain rule)을 적용하면, $G(t) = F(g(t))$에 대해
+>
+>$$
+>G'(t) = F'(g(t)) \cdot g'(t) = f(g(t)) \cdot g'(t)
+>$$
+>
+>따라서 $G$는 $f(g(t))g'(t)$의 원시함수이다.
+>
+>제2 기본정리에 의해
+>
+>$$
+>\int_a^b f(g(t))g'(t)\,dt = G(b) - G(a) = F(g(b)) - F(g(a))\\
+>= \int_{g(a)}^{g(b)} f(x)\,dx - \int_{g(a)}^{g(a)} f(x)\,dx = \int_{g(a)}^{g(b)} f(x)\,dx
+>$$
 
 **다변수 치환적분 *(Change of Variables in Multiple Integrals)***  
 $Y$를 $\mathbb{R}^n$의 열린집합이고, $w: Y \to X$가 일대일 대응이며 미분가능하고 1차 편도함수가 연속이며, 야코비안 행렬식
@@ -889,7 +1227,234 @@ $$\int \ln x\,dx = x\ln x - x + C = x(\ln x - 1) + C$$
 
 위의 부정적분 결과를 이용하면 $\int_1^e \ln x\,dx = [x\ln x - x]_1^e = (e\ln e - e) - (1\ln 1 - 1) \\ = (e \cdot 1 - e) - (0 - 1) = 0 + 1 = 1$
 
+### 예제 ?. 자연로그와 오일러 상수
 
+$x>0$에 대하여
+
+$$L(x)=\int_1^x\frac{1}{t}\,dt$$
+
+로 정의한다.
+
+**(a)** $L(1)$을 구하고, $L$의 미분 가능성 및 $L'(x)$를 구하시오.
+
+**(b)** $L(xy)=L(x)+L(y)$ ($y>0$)임을 보이시오.  
+힌트: $y$를 상수 취급하고 $g(x) = L(xy)$를 미분한다.
+
+**(c)** $L(x/y)=L(x)-L(y)$ ($x,y>0$)임을 보이시오.
+
+**(d)** 수열 $\gamma_n=\left(1+\frac{1}{2}+\cdots+\frac{1}{n}\right)-L(n)$이 수렴함을 보이시오.
+- 상수 $\gamma = \lim \gamma_n$을 오일러 상수(Euler's constant)라 한다.
+
+**(e)** $L(2)=1-\frac12+\frac13-\frac14+\dots$ 를 수열 $\gamma_{2n}-\gamma_n$을 이용하여 유도하라.
+
+>**풀이**
+>
+>(a) $L(1)$, 미분 가능성 및 $L'(x)$
+>
+>정적분의 성질에 의해
+>
+>$$\boxed{L(1)=\int_1^1\frac{1}{t}\,dt=0}$$
+>
+>이다.
+>
+>함수 $t\mapsto 1/t$는 $(0,\infty)$에서 연속이다. 따라서 미적분학의 기본정리에 의해 $L$은 $(0,\infty)$에서 미분 가능하며
+>
+>$$\boxed{L'(x)=\frac{1}{x}}$$
+>
+>이다.
+>
+>---
+>
+>(b) $L(xy)=L(x)+L(y)$
+>
+>$y>0$를 고정하고
+>
+>$$g(x)=L(xy)$$
+>
+>라고 하자. 연쇄법칙에 의해
+>
+>$$g'(x)=L'(xy)\cdot y=\frac{1}{xy}\cdot y=\frac{1}{x}$$
+>
+>한편
+>
+>$$L'(x)=\frac{1}{x}$$
+>
+>이므로
+>
+>$$g'(x)=L'(x)$$
+>
+>따라서 $g(x)-L(x)$의 도함수는 $0$이므로 어떤 상수 $C$에 대하여
+>
+>$$g(x)-L(x)=C$$
+>
+>이다. $x=1$을 대입하면
+>
+>$$C=g(1)-L(1)=L(y)-0=L(y)$$
+>
+>그러므로
+>
+>$$\boxed{L(xy)=L(x)+L(y)}$$
+>
+>이다.
+>
+>---
+>
+>(c) $L(x/y)=L(x)-L(y)$
+>
+>$x,y>0$일 때
+>
+>$$x=\frac{x}{y}\cdot y$$
+>
+>이다. (b)를 적용하면
+>
+>$$L(x)=L\left(\frac{x}{y}\right)+L(y)$$
+>
+>따라서
+>
+>$$\boxed{L\left(\frac{x}{y}\right)=L(x)-L(y)}$$
+>
+>이다.
+>
+>특히 $x=1$이면
+>
+>$$L\left(\frac{1}{y}\right)=-L(y)$$
+>
+>이다.
+>
+>---
+>
+>(d) $(\gamma_n)$의 수렴성
+>
+>수열을
+>
+>$$\gamma_n=\left(1+\frac{1}{2}+\cdots+\frac{1}{n}\right)-L(n)$$
+>
+>으로 정의한다.
+>
+>**1. $(\gamma_n)$이 감소함을 보인다**
+>
+>$$\begin{aligned}
+>\gamma_{n+1}-\gamma_n
+>&=\frac{1}{n+1}-\bigl(L(n+1)-L(n)\bigr)\\
+>&=\frac{1}{n+1}-L\left(\frac{n+1}{n}\right)\\
+>&=\frac{1}{n+1}-\int_n^{n+1}\frac{1}{t}\,dt
+>\end{aligned}$$
+>
+>$n<t<n+1$이면
+>
+>$$\frac{1}{t}>\frac{1}{n+1}$$
+>
+>이므로
+>
+>$$\int_n^{n+1}\frac{1}{t}\,dt>\int_n^{n+1}\frac{1}{n+1}\,dt=\frac{1}{n+1}$$
+>
+>따라서
+>
+>$$\gamma_{n+1}-\gamma_n<0$$
+>
+>즉,
+>
+>$$\boxed{(\gamma_n)\text{은 감소수열이다}}$$
+>
+>**2. $(\gamma_n)$이 아래로 유계임을 보인다**
+>
+>각 $k=1,\ldots,n$에 대하여 $k\le t\le k+1$이면
+>
+>$$\frac{1}{t}\le\frac{1}{k}$$
+>
+>이므로
+>
+>$$\int_k^{k+1}\frac{1}{t}\,dt\le\frac{1}{k}$$
+>
+>이를 모두 더하면
+>
+>$$\int_1^{n+1}\frac{1}{t}\,dt\le\sum_{k=1}^n\frac{1}{k}$$
+>
+>즉,
+>
+>$$L(n+1)\le 1+\frac{1}{2}+\cdots+\frac{1}{n}$$
+>
+>따라서
+>
+>$$\begin{aligned}
+>\gamma_n
+>&=\sum_{k=1}^n\frac{1}{k}-L(n)\\
+>&\ge L(n+1)-L(n)\\
+>&=L\left(\frac{n+1}{n}\right)>0
+>\end{aligned}$$
+>
+>그러므로 $(\gamma_n)$은 $0$을 하한으로 갖는다.
+>
+>감소하면서 아래로 유계인 수열은 수렴하므로
+>
+>$$\boxed{(\gamma_n)\text{은 수렴한다}}$$
+>
+>그 극한
+>
+>$$\boxed{\gamma=\lim_{n\to\infty}\left(\sum_{k=1}^n\frac{1}{k}-L(n)\right)}$$
+>
+>을 **오일러 상수**(Euler-Mascheroni constant)라고 한다.
+>
+>---
+>
+>(e) 교대급수로 $L(2)$ 나타내기
+>
+>$\gamma_n\to\gamma$이므로 부분수열도 같은 극한으로 수렴한다.
+>
+>$$\gamma_{2n}\to\gamma,\qquad \gamma_n\to\gamma$$
+>
+>따라서
+>
+>$$\gamma_{2n}-\gamma_n\to 0 \tag{1}$$
+>
+>한편
+>
+>$$\begin{aligned}
+>\gamma_{2n}-\gamma_n
+>&=\left(\sum_{k=1}^{2n}\frac{1}{k}-L(2n)\right)-\left(\sum_{k=1}^n\frac{1}{k}-L(n)\right)\\
+>&=\sum_{k=n+1}^{2n}\frac{1}{k}-\bigl(L(2n)-L(n)\bigr)
+>\end{aligned}$$
+>
+>(c)에 의해
+>
+>$$L(2n)-L(n)=L\left(\frac{2n}{n}\right)=L(2)$$
+>
+>이므로
+>
+>$$\gamma_{2n}-\gamma_n=\sum_{k=n+1}^{2n}\frac{1}{k}-L(2) \tag{2}$$
+>
+>이제 첫째 항을 살펴보면
+>
+>$$\begin{aligned}
+>\sum_{k=n+1}^{2n}\frac{1}{k}
+>&=\sum_{k=1}^{2n}\frac{1}{k}-\sum_{k=1}^n\frac{1}{k}\\
+>&=\sum_{k=1}^{2n}\frac{1}{k}-2\sum_{k=1}^n\frac{1}{2k}
+>\end{aligned}$$
+>
+>따라서 짝수 번째 항들을 두 번 빼는 형태가 되어
+>
+>$$\begin{aligned}
+>\sum_{k=n+1}^{2n}\frac{1}{k}
+>&=1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\cdots+\frac{1}{2n-1}-\frac{1}{2n}
+>\end{aligned}$$
+>
+>그러므로 식 (2)는
+>
+>$$\gamma_{2n}-\gamma_n=\left(1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\cdots-\frac{1}{2n}\right)-L(2)$$
+>
+>가 된다. 식 (1)에 의해 $n\to\infty$로 보내면
+>
+>$$0=\lim_{n\to\infty}\left(1-\frac{1}{2}+\frac{1}{3}-\cdots-\frac{1}{2n}\right)-L(2)$$
+>
+>따라서
+>
+>$$\boxed{L(2)=1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\frac{1}{5}-\frac{1}{6}+\cdots}$$
+>
+>이다. 이는 자연로그를 사용하는 표기에서는
+>
+>$$\boxed{\ln 2=\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k}}$$
+>
+>라는 결과이다.
 
 # 3. 리만적분의 확장 *(Extensions of the Riemann Integral)*
 ## (1) 특이적분 *(Improper Integral)*

@@ -61,7 +61,7 @@ $$
 ### Def. [점별수렴과 균등수렴] *(Pointwise Convergence and Uniform Convergence)*
 $\{f_n\}$과 $f$가 $D$에서 정의된 함수열과 함수라 하자.
 
-① 점별수렴: 임의의 $x\in D$와 $\varepsilon>0$에 대하여
+**① 점별수렴**: 임의의 $x\in D$와 $\varepsilon>0$에 대하여
 
 $$\exists N\in\mathbb N\ \text{s.t.}\ n\ge N \Rightarrow |f_n(x)-f(x)|<\varepsilon
 $$
@@ -75,7 +75,7 @@ $$
   - 점별수렴에서는 서로 다른 $x$에 대해 서로 다른 $N(x)$가 필요할 수 있으므로, 하나의 $N$으로 $\delta$-근방 전체를 동시에 제어하기 어렵다.
   - 이러한 문제를 해결하기 위해 $N$을 $x$와 무관하게 선택하는 균등수렴이 도입된다.
   
-② 균등수렴: 임의의 $\varepsilon>0$에 대하여
+**② 균등수렴**: 임의의 $\varepsilon>0$에 대하여
 
 $$\exists N\in\mathbb N\ \text{s.t.}\ \forall x\in D,\ n\ge N \Rightarrow |f_n(x)-f(x)|<\varepsilon$$
 
