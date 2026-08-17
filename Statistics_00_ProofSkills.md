@@ -1272,6 +1272,13 @@ E[XY] \geq E[X] E[Y]
 $$
 
 ## 코시-슈바르츠 부등식 (Cauchy-Schwarz Inequality)
+
+$a, b, c, d \in \mathbb{R}$에 대해
+
+$$
+ac + bd \leq \sqrt{a^2 + b^2} \sqrt{c^2 + d^2}
+$$
+
 확률변수 $X, Y$에 대해 $E[X^2], E[Y^2] < \infty$이면
 
 $$

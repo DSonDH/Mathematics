@@ -14,6 +14,19 @@
 ### 유도 거리 *(Induced Metric)*
 노름 공간에서 $d(x, y) := \|x - y\|$로 정의하면 거리 공간이 된다.
 
+### norm 종류
+
+벡터 $x = (x_1, x_2, \ldots, x_n) \in \mathbb{R}^n$에 대해:
+
+| 노름 | 정의 | 기호 |
+|------|------|------|
+| $L^1$ 노름 | $\|x\|_1 = \sum_{i=1}^n \|x_i\|$ | 맨해튼 거리 |
+| $L^2$ 노름 | $\|x\|_2 = \sqrt{\sum_{i=1}^n x_i^2}$ | 유클리드 거리 |
+| $L^p$ 노름 | $\|x\|_p = \left(\sum_{i=1}^n \|x_i\|^p\right)^{1/p}$ | ($1 \leq p < \infty$) |
+| $L^\infty$ 노름 | $\|x\|_\infty = \max_{1 \leq i \leq n} \|x_i\|$ | Chebyshev 거리 |
+
+**성질:** $\|x\|_\infty \leq \|x\|_2 \leq \|x\|_1$ (단, $n$차원)
+- $L^P$에서 $0< P < 1$이면 norm 조건을 만족하지 않아 노름이라 하지 않는다.
 ---
 
 # 2. 바나흐 공간 *(Banach Space)*

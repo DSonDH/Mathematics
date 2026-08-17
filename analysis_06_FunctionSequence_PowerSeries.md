@@ -148,7 +148,7 @@ $$\left|\frac{a_{n+1}(x-c)^{n+1}}{a_n(x-c)^n}\right|=\left|\frac{a_{n+1}}{a_n}\r
 
 의 극한이 $L|x-c|$이므로 $L|x-c|<1$ 일 때 절대수렴, $L|x-c|>1$ 일 때 발산한다. □
 
-### Thm. [코시판정법] *(Cauchy Criterion for Sequence of Functions)*
+### Thm. [코시판정법] *(Cauchy Criterion for Sequence of Functions, 코시 판정법)*
 
 $f_n:D\to\mathbb R$라 할 때, 집합 $D\in \mathbb R$에서 정의된 함수 $(f_n)$이 $D$에서 균등수렴할 필요충분조건은
   
@@ -366,6 +366,11 @@ $a_n \neq 0$인 인 무한급수 $\sum_{n=1}^\infty a_n$이 주어질 때, $\lim
 ### 디리클레 판정법(Dirichlet's Test)
 무한급수 $\sum_{n=1}^\infty a_n b_n$이 주어질 때, $\{a_n\}$이 단조수열이고 $\lim_{n\to\infty} a_n = 0$이며, $\sum_{n=1}^\infty b_n$의 부분합이 유계이면 $\sum_{n=1}^\infty a_n b_n$도 수렴한다.
 
+### 동등연속 (Equicontinuous)
+집합 $E \subseteq \mathbb R$에서 정의된 함수열 $(f_n)$이 모든 $\epsilon >0$에 대해 어떤 $\delta >0$이 존재하여 모든 $n\in \mathbb N$과 $|x-y|<\delta$를 만족하는 $x, y \in E$에 대하여 $|f_n(x)-f_n(y)|<\epsilon$이 될때 **동등연속** 하다고 한다.
+
+### 아르젤라-아스콜리 정리 (Arzela-Ascoli theorem)
+각 $n\in \mathbb N$에 대해 $f_n$이 $[0,1]$에서 정의된 함수라 하자. $(f_n)$이 $[0,1]$에서 유계이고 함수열 $(f_n)$이 동등연속할 때, $(f_n)$이 고르게 수렴하는 부분수열을 포함한다.
 
 # 3. 멱급수 *(Power Series)*
 ## (1) 멱급수의 수렴
@@ -462,7 +467,6 @@ $\alpha=\infty$이면 $R=0$으로 간주한다.
 **풀이:**
 
 $$
-
 A_n = \frac{1}{n},\quad \sqrt[n]{|a_n|} = \frac{1}{n^{1/n}}
 $$
 
