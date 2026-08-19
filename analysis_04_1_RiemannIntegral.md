@@ -523,7 +523,7 @@ $$
 
 >**증명**
 >
->$f$가 $[a,b]$에서 리만 적분 가능하므로 유계이다 (리만 적분 전제조건임). 따라서 어떤 $M>0$가 존재하여 $|f(x)|\le M \quad (x\in[a,b])$ 이다.  
+>$f$가 $[a,b]$에서 리만 적분 가능하므로 유계이다 (리만 적분 전제조건임). 따라서 어떤 $M>0$가 존재하여 $|f(x)|\le M \quad $x\in[a,b]$$ 이다.  
 >임의의 분할 $P=\{x_0,x_1,\dots,x_n\}$ 을 잡고 부분구간을 $I_k=[x_{k-1},x_k]$ 이라 하자. 각 부분구간에서 함수의 진동 폭을
 >
 >$$
@@ -1085,8 +1085,7 @@ $$I = \int_{-\infty}^{\infty} e^{-x^2/2}\,dx = \sqrt{2\pi}$$
 
 
 ### 부분적분 *(Integration by Parts)*
-$f,g$가 $[a,b]$에서 연속, $(a, b)$에서 미분가능하며  
-$f', g'\in \mathcal{R}[a,b]$이면
+$f,g$가 $[a,b]$에서 연속, $(a, b)$에서 미분가능하며 $f', g'\in \mathcal{R}[a,b]$이면
 
 $$
 \int_a^b f'g
@@ -1457,8 +1456,9 @@ $$L(x)=\int_1^x\frac{1}{t}\,dt$$
 >라는 결과이다.
 
 # 3. 리만적분의 확장 *(Extensions of the Riemann Integral)*
-## (1) 특이적분 *(Improper Integral)*
+## (1) 특이적분 *(Improper Integral, 이상적분)*
 적분 구간에 개구간이 포함되면 어떻게 정의하는지 살펴보자.  
+정상(proper) 적분의 극한값으로 정의한다:
 
 ### Def. 1. $(a,b]$ 또는 $[a,b)$의 경우
 
@@ -1479,8 +1479,7 @@ $$
 
 ② ①에서 우변의 극한이 존재하면 각 구간에 대해 $f$는 **특이적분가능**하다고 한다.
 
-③ $f:[a,b]\setminus{c}\to\mathbb R$가 $[a,c)$와 $(c,b]$에서 각각 특이적분가능하면
-$f$는 $[a,b]$에서 **특이적분가능**하다고 하고
+③ $f:[a,b]\setminus{c}\to\mathbb R$가 $[a,c)$와 $(c,b]$에서 각각 특이적분가능하면 $f$는 $[a,b]$에서 **특이적분가능**하다고 하고
 
 $$
 \int_a^b f
@@ -1536,7 +1535,7 @@ $$
   \int_{-\infty}^b f := \lim_{c\to-\infty}\int_c^b f
   $$
 
-② ①에서 우변의 극한이 존재하면 각 구간에 대해 $f$는 **특이적분가능**하다고 한다.
+② ①에서 우변의 극한이 존재하면 각 구간에 대해 $f$는 **특이적분가능**하다고 하고, 이상적분 $\int^{\infty}_b f$는 수렴한다(converge)고 한다.
 
 ③ $f$가 적당한 $p\in\mathbb R$에 대하여
 $(-\infty,p]$와 $[p,\infty)$에서 특이적분가능하면
@@ -1590,6 +1589,125 @@ $$
 $$
 \int_1^\infty \frac{1}{x^2}\,dx = \lim_{c\to\infty}\left(1 - \frac{1}{c}\right) = 1
 $$
+
+### 이상적분 수렴 판정법
+**코시 판정법(Cauchy criterion)**  
+이상적분 $\int_a^\infty f$가 수렴하는 필요충분 조건은 임의의 $\epsilon >0$에 대해 다음을 만족하는 $M > a$가 존재하는 것이다.
+
+$$d > c \geq M \Rightarrow \left|\int_c^d f \right| < \epsilon$$
+
+**비교판정법(comparison test)**  
+$0 \leq f \leq g$이고 $\int_a^\infty g$가 수렴하면 $\int_a^\infty f$ 도 수렴한다
+
+>**증명**
+>
+>[코시 판정법]
+>
+>필요성 $(\Rightarrow)$
+>
+>$\int_a^\infty f=L$ 이라고 하자. 즉, $\lim_{b\to\infty}F(b)=L,\ F(b)=\int_a^b f$ 이다. 임의의 $\epsilon>0$을 택한다. 극한의 정의에 의해 어떤 $M>a$가 존재하여 $b\ge M$이면
+>
+>$$
+>|F(b)-L|<\frac{\epsilon}{2}
+>$$
+>
+>이다. 이제 $d>c\ge M$이면
+>
+>$$
+>\int_c^d f=F(d)-F(c)
+>$$
+>
+>이므로 삼각부등식에 의해
+>
+>$$
+>\left|\int_c^d f\right|=|F(d)-F(c)|
+>\le |F(d)-L|+|F(c)-L|
+><\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.
+>$$
+>
+>따라서 코시 조건이 성립한다.
+>
+>충분성 $(\Leftarrow)$
+>
+>이제 임의의 $\epsilon>0$에 대해 어떤 $M>a$가 존재하여
+>
+>$$
+>d>c\ge M\ \Rightarrow\ \left|\int_c^d f\right|<\epsilon
+>$$
+>
+>이라고 가정한다. 힌트에 따라 수열
+>
+>$$
+>a_n=\int_a^{a+n}f
+>$$
+>
+>을 생각하자. 충분히 큰 $m>n$에 대하여 $a+n\ge M$이면
+>
+>$$
+>|a_m-a_n|=
+>\left|\int_a^{a+m}f-\int_a^{a+n}f\right|
+>=\left|\int_{a+n}^{a+m}f\right|<\epsilon.
+>$$
+>
+>따라서 $(a_n)$은 코시수열이다. $\mathbb{R}$의 완비성에 의해 어떤 $L\in\mathbb{R}$이 존재하여 $a_n\to L$ 이다.
+>
+>이제 $F(b)\to L$임을 보이자. 임의의 $\epsilon>0$이 주어졌다고 하자. 충분히 큰 $N$을 택하여
+>
+>$$
+>a+N\ge M,\qquad |a_N-L|<\frac{\epsilon}{2}
+>$$
+>
+>가 되게 한다. 코시 조건을 $\epsilon/2$에 적용하면, $b>a+N$일 때
+>
+>$$
+>\begin{aligned}
+>|F(b)-L|
+>&\le |F(b)-a_N|+|a_N-L|\\
+>&=\left|\int_{a+N}^b f\right|+|a_N-L|\\
+>&<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.
+>\end{aligned}
+>$$
+>
+>따라서 $\lim_{b\to\infty}F(b)=L$ 이므로 $\int_a^\infty f$ 가 수렴한다.
+>
+>---
+>[비교판정법]
+>
+>코시 판정법에 따라 임의의 $\epsilon>0$에 대해 어떤 $M>a$가 존재하여 $d>c\ge M$이면 $\int_c^d g(t)\,dt<\epsilon$ 이다. $g\ge0$이므로 이는
+>
+>$$
+>0\le\int_c^d g(t)\,dt<\epsilon
+>$$
+>
+>이라는 뜻이다. 또한 $0\le f\le g$이므로 적분의 단조성에 의해
+>
+>$$
+>0\le\int_c^d f(t)\,dt\le\int_c^d g(t)\,dt<\epsilon.
+>$$
+>
+>따라서 $\displaystyle\int_c^d f(t)\,dt<\epsilon$이다. 코시 판정법에 의해
+>
+>$$
+>0\le f\le g,\quad \int_a^\infty g(t)\,dt\text{ 수렴}
+>\Longrightarrow \int_a^\infty f(t)\,dt\text{ 수렴}
+>$$
+>
+>---
+>[절대수렴 판정법]
+>
+>$\displaystyle\int_a^\infty |f(t)|\,dt$가 수렴한다고 하자. 코시 판정법에 의해 임의의 $\epsilon>0$에 대해 어떤 $M>a$가 존재하여 $d>c\ge M$이면
+>
+>$$
+>\int_c^d |f(t)|\,dt<\epsilon
+>$$
+>
+>이다. 적분의 삼각부등식에 의해
+>
+>$$
+>\left|\int_c^d f(t)\,dt\right| \le\int_c^d |f(t)|\,dt<\epsilon.
+>$$
+>
+>따라서 $\displaystyle\int_a^\infty f(t)\,dt$도 코시 조건을 만족하므로 수렴한다.
 
 
 ## (2) 스틸체스적분 *(Riemann–Stieltjes Integral)*
@@ -1797,6 +1915,548 @@ $$
 **적용 조건:**
 - 절대수렴할 때만 적분순서 교환 가능
 - 음수항이 있으면 반드시 절대수렴 확인 필요
+
+## 적분 기호 속 미분
+$f(x,t)$가 모든 $a \leq x \leq b, c\leq t \leq d$에 대해 정의되는 이변수 함수라 하자. $f$의 정의역은 $\mathbb R^2$의 직사각형 $D$다.
+
+$f$가 $D$의 점$(x_0, t_0)$에서 연속이라는 것의 판단은 거리(distance)를 유클리드 거리로 바꿔 확인한다.
+
+### 정의. 이변수 함수의 연속
+모든 $\epsilon >0$에 대해 다음을 만족하는 $\delta >0$이 존재하면, 함수 $f: D \to \mathbb R$는 점 $(x_0, t_0)$에서 연속이라 한다.
+
+$$\|(x,t)-(x_0,t) \| < \delta \Rightarrow |f(x,t)-f(x_0,t_0)| < \epsilon $$
+
+### 예제.
+함수 $f:D\to\mathbb R,\quad D=[a,b]\times[c,d]$ 가 직사각형 $D$에서 연속이라고 하자. 모든 $x\in[a,b]$에 대해
+
+$$
+F(x)=\int_c^d f(x,t)\,dt
+$$
+
+가 잘 정의되는 이유는? 
+
+임의의 $x\in[a,b]$를 하나 고정한다. 그러면 $g_x(t)=f(x,t),\ t\in[c,d]$ 라는 일변수 함수를 얻는다. $f$가 $D$에서 연속이므로, $x$를 고정했을 때 $g_x(t)=f(x,t)$는 닫힌 유계구간 $[c,d]$에서 $t$에 대한 연속함수다. 
+
+닫힌 유계구간에서 연속인 함수는 리만 적분 가능하므로 $\int_c^d f(x,t)\,dt$ 가 존재한다. 이 결론은 모든 $x\in[a,b]$에 대해 성립한다.
+
+따라서
+
+$$
+F(x)=\int_c^d f(x,t),dt
+$$
+
+는 모든 $x\in[a,b]$에서 잘 정의된다.
+
+### 정리 8.4.5
+
+$f(x,t)$ 가 콤팩트한 직사각형 $D=[a,b]\times[c,d]$ 에서 연속이면 $F(x)=\int_c^d f(x,t),dt$ 는 $[a,b]$에서 고른 연속이다.
+
+**증명**
+
+1. $f$의 고른 연속성
+
+집합 $D$는 $\mathbb R^2$의 닫힌 유계집합이므로 콤팩트하다. 콤팩트 집합에서 연속인 함수는 고른 연속이므로, $f$는 $D$에서 고른 연속이다.
+
+임의의 $\varepsilon>0$이 주어졌다고 하자. $d>c$라고 하면 $f$의 고른 연속성에 의해 어떤 $\delta>0$가 존재하여 $|(x,t)-(y,s)|<\delta$ 이면 $|f(x,t)-f(y,s)| < \frac{\varepsilon}{d-c}$ 이다.
+
+특히 $s=t$로 놓으면 $|(x,t)-(y,t)| =\sqrt{(x-y)^2+(t-t)^2} =|x-y|$ 따라서 $|x-y|<\delta$이면 모든 $t\in[c,d]$에 대해
+
+$$
+|f(x,t)-f(y,t)| < \frac{\varepsilon}{d-c}
+$$
+
+이다. 여기서 중요한 점은 하나의 $\delta$가 모든 $x,y,t$에 공통으로 적용된다는 것이다.
+
+2. $F(x)-F(y)$ 평가
+
+$$
+\begin{aligned}
+|F(x)-F(y)|
+&=
+\left|
+\int_c^d f(x,t),dt - \int_c^d f(y,t),dt
+\right|
+&=
+\left|
+\int_c^d
+\bigl(f(x,t)-f(y,t)\bigr),dt
+\right|\\
+&\le
+\int_c^d
+|f(x,t)-f(y,t)|,dt.
+\end{aligned}
+$$
+
+$|x-y|<\delta$이면
+
+$$
+\begin{aligned}
+|F(x)-F(y)|
+&<
+\int_c^d\frac{\varepsilon}{d-c},dt\
+&=
+\frac{\varepsilon}{d-c}(d-c)\
+&=\varepsilon.
+\end{aligned}
+$$
+
+따라서
+
+$$
+|x-y|<\delta
+\quad\Longrightarrow\quad
+|F(x)-F(y)|<\varepsilon
+$$
+
+이며, $\delta$는 $x,y$의 위치와 무관하다. 그러므로 $f$는 $[a,b]$에서 고른 연속이다.
+
+$$
+f\in C(D)
+\quad\Longrightarrow\quad
+F(x)=\int_c^d f(x,t),dt
+\text{는 }[a,b]\text{에서 고른 연속이다}
+$$
+
+### 정리 8.4.6. 적분기호 속의 미분
+
+함수 $f(x,t)$ 가 $x$에 대해 미분가능하고, 편도함수 $f_x(x,t)=\frac{\partial f}{\partial x}(x,t)$ 가 $D=[a,b]\times[c,d]$ 에서 연속이라고 가정한다. 다음 함수를 정의한다.
+
+$$
+F(x)=\int_c^d f(x,t),dt.
+$$
+
+이 함수는 미분가능하며, 그 도함수는 
+
+$$
+F'(x)=\int_c^d f_x(x,t),dt
+$$
+
+이다.
+
+- 이 정리를 활용하여 적분 기호 속을 미분할 수 있게 된다.
+
+**증명**
+
+1. 차분몫 정리
+
+$x\in(a,b)$를 고정하고 $z\neq x$라고 하자. 그러면
+
+$$
+\begin{aligned}
+\frac{F(z)-F(x)}{z-x}
+&=
+\frac1{z-x}
+\left(
+\int_c^d f(z,t),dt-\int_c^d f(x,t),dt
+\right)\
+&=
+\int_c^d
+\frac{f(z,t)-f(x,t)}{z-x},dt.
+\end{aligned}
+$$
+
+따라서
+
+$$
+\begin{aligned}
+&\frac{F(z)-F(x)}{z-x}
+-\int_c^d f_x(x,t),dt\
+&\qquad=
+\int_c^d
+\left[
+\frac{f(z,t)-f(x,t)}{z-x}
+-f_x(x,t)
+\right]dt.
+\end{aligned}
+$$
+
+그러므로 적분의 삼각부등식에 의해
+
+$$
+\begin{aligned}
+\left|
+\frac{F(z)-F(x)}{z-x}
+-\int_c^d f_x(x,t),dt
+\right|
+\le
+\int_c^d
+\left|
+\frac{f(z,t)-f(x,t)}{z-x}
+-f_x(x,t)
+\right|dt.
+\end{aligned}
+$$
+
+이 우변을 0에 가깝게 만들면 된다.
+
+2. 평균값정리 적용
+
+각각의 고정된 $t\in[c,d]$에 대해 일변수 함수 $u\longmapsto f(u,t)$ 를 생각한다. 평균값정리에 의해 $x$와 $z$ 사이에 어떤 점 $\xi_t$가 존재하여
+
+$$
+\frac{f(z,t)-f(x,t)}{z-x}
+=f_x(\xi_t,t)
+$$
+
+이다. $\xi_t$는 $t$에 따라 달라질 수 있다.
+
+따라서
+
+$$
+\left|
+\frac{f(z,t)-f(x,t)}{z-x} -f_x(x,t)
+\right| = |f_x(\xi_t,t)-f_x(x,t)|.
+$$
+
+3. $f_x$의 고른 연속성 이용
+
+$f_x$는 콤팩트 집합 $D$에서 연속이므로 $D$에서 고른 연속이다. 임의의 $\varepsilon>0$이 주어졌다고 하자. $f_x$의 고른 연속성에 의해 어떤 $\delta>0$가 존재하여 $|(u,t)-(x,t)|<\delta$ 이면 $|f_x(u,t)-f_x(x,t)| < \frac{\varepsilon}{d-c}$ 이다.
+
+이제 $0<|z-x|<\delta$ 라고 하자. $\xi_t$는 $x$와 $z$ 사이에 있으므로 $|\xi_t-x|\le |z-x|<\delta.$ 따라서 $|(\xi_t,t)-(x,t)| =|\xi_t-x| <\delta$ 이고, 모든 $t\in[c,d]$에 대해
+
+$$
+|f_x(\xi_t,t)-f_x(x,t)| < \frac{\varepsilon}{d-c}
+$$
+
+이다.
+
+4. 차분몫의 극한
+
+앞의 부등식을 사용하면
+
+$$
+\begin{aligned}
+&\left|
+\frac{F(z)-F(x)}{z-x}
+-\int_c^d f_x(x,t),dt
+\right|\
+&\le
+\int_c^d
+|f_x(\xi_t,t)-f_x(x,t)|,dt\
+&<
+\int_c^d\frac{\varepsilon}{d-c},dt\
+&=\varepsilon.
+\end{aligned}
+$$
+
+따라서 $z\to x$ 일 때
+
+$$
+\frac{F(z)-F(x)}{z-x}
+\longrightarrow
+\int_c^d f_x(x,t),dt.
+$$
+
+그러므로 $f$는 $x$에서 미분 가능하고
+
+$$
+F'(x)=\int_c^d f_x(x,t),dt.
+$$
+
+$x\in(a,b)$가 임의의 점이었으므로
+
+$$
+F'(x)=\frac{d}{dx}\int_c^d f(x,t),dt
+=\int_c^d\frac{\partial f}{\partial x}(x,t),dt
+$$
+이다. 끝점 $a,b$에서는 각각 오른쪽 미분과 왼쪽 미분으로 같은 결론을 얻는다.
+
+핵심은 $f_x$의 연속성 자체보다, 콤팩트한 직사각형 $D$ 위에서 얻어지는 $f_x$의 고른 연속성이다. 이것이 모든 $t\in[c,d]$에 대해 차분몫의 오차를 하나의 $\delta$로 동시에 제어하게 한다.
+
+---
+
+어떤 집합 $A \subseteq \mathbb R$에서 $x$를 고정하자. $x$에 대해 다음 식의 극한이 존재하면 함수 $F(x)$를 정의할 수 있다:
+
+$$F(x) = \int_c^\infty f(x,t)\ dt = \lim_{d\to \infty}\int_c^d f(x,t)\ dt$$
+
+위 등식은 점별로(pointwise) 서술되어있다. $x \in A$와 $\epsilon >0$이 주어지면 $d \ge M$일때 다음을 만족하는 $M$을 착을 수 있다.
+
+$$ \left|F(x)-\int_c^d f(x,t)\ dt \right| < \epsilon$$
+
+이를 무한으로 확장시켜 이상적분에 대해 정의하면 다음과 같다:
+### 정의. 이상적분의 고른 수렴
+$D = \{(x,t): x\in A,  c \leq t\}$에서 정의된 $f(x,t)$가 주어질 때 모든 $x\in A$에 대해 $F(x)=\int_c^\infty f(x,t)\ dt$가 존재한다 가정하자. 모든 $\epsilon>0$에 대해 $M>c$이 존재하여 모든 $d\ge M$와 $x \in A$에 대해 다음이 성립할 때, 이상적분이 $A$에서 $F(x)$로 고르게 수렴한다 (converges uniformly)고 한다.
+
+$$ \left|F(x)-\int_c^d f(x,t)\ dt \right| < \epsilon$$
+
+핵심은 $M$을 $x$와 무관하게 선택할 수 있어야 한다는 것이다.
+
+#### 예제. 문제 15
+다음 이상적분을 생각한다.
+
+$$
+F(x)=\int_0^\infty e^{-xt},dt=\frac1x,\qquad x>0.
+$$
+
+1. 이상적분이 집합 $[1/2,\infty)$에서 $1/x$로 고르게 수렴함을 보여라.
+2. 집합 $(0,\infty)$에서도 고르게 수렴하는지 판정하라.
+
+1. $[1/2,\infty)$에서의 고른 수렴 증명
+
+$F(x)=\int_0^\infty e^{-xt},dt=\frac1x$ 이다. 유한한 $d>0$에 대해서는
+
+$$
+\begin{aligned}
+\int_0^d e^{-xt},dt
+&=\left[-\frac1x e^{-xt}\right]_0^d\
+&=\frac{1-e^{-xd}}x.
+\end{aligned}
+$$
+
+따라서 절단 적분과 이상적분 사이의 오차는
+
+$$
+\begin{aligned}
+\left| \frac1x-\int_0^d e^{-xt},dt \right|
+&= 
+\left| \frac1x-\frac{1-e^{-xd}}x \right|\
+&=\frac{e^{-xd}}x.
+\end{aligned}
+$$
+
+이제 $x\ge1/2$이면 $\frac1x\le2$ 이고 $e^{-xd}\le e^{-d/2}$ 이므로 $\frac{e^{-xd}}x\le2e^{-d/2}$.  
+임의의 $\varepsilon>0$이 주어졌다고 하자. $M$을 충분히 크게 택하여 $2e^{-M/2}<\varepsilon$ 이 되게 한다. 예를 들어 $0<\varepsilon<2$이면 $M>2\log\frac2\varepsilon$ 로 택할 수 있다.
+
+그러면 모든 $d\ge M$와 $x\ge1/2$에 대해
+
+$$
+\begin{aligned}
+\left|
+\frac1x-\int_0^d e^{-xt},dt
+\right|
+&\le2e^{-d/2}\
+&\le2e^{-M/2}\
+&<\varepsilon.
+\end{aligned}
+$$
+
+여기서 $M$은 $x$와 무관하다. 따라서
+
+$$
+\boxed{
+\int_0^\infty e^{-xt},dt
+\text{는 }[1/2,\infty)\text{에서 }\frac1x\text{로 고르게 수렴한다.}
+}
+$$
+
+2. $(0,\infty)$에서의 고른 수렴 여부 판단.
+
+오차는 $R_d(x)=\frac{e^{-xd}}x$ 이다.
+
+고정된 $d>0$에 대하여 $x\to0^+$이면 $e^{-xd}\to1,\quad \frac1x\to\infty$ 이므로 $R_d(x)=\frac{e^{-xd}}x\to\infty.$
+
+따라서 모든 유한한 $d>0$에 대해
+
+$$
+\sup_{x>0} \left| \frac1x-\int_0^d e^{-xt},dt \right| =\infty.
+$$
+
+특히 이 상한은 $d\to\infty$일 때 $0$으로 수렴하지 않는다. 따라서
+
+$$
+\boxed{
+\int_0^\infty e^{-xt},dt
+\text{는 }(0,\infty)\text{에서 고르게 수렴하지 않는다.}
+}
+$$
+
+각각의 고정된 $x>0$에서는 수렴하지만, $x$가 $0$에 가까워질수록 $e^{-xt}$의 감소가 느려진다.
+
+### 정리. 이상적분에 대한 바이어슈트라스 $M$-판정법
+모든 $x\in A$와 $t\ge a$에 대해 $|f(x,t)|\le g(t)$ 이고 $\int_a^\infty g(t),dt$ 가 수렴하면
+
+$$
+\int_a^\infty f(x,t),dt
+$$
+
+가 $A$에서 고르게 수렴함을 보여라.
+
+>**증명**  
+>
+>먼저 각각의 고정된 $x\in A$에 대해 $|f(x,t)|\le g(t)$ 이다. $\int_a^\infty g(t),dt$가 수렴하므로 비교판정법에 의해 $\int_a^\infty |f(x,t)|,dt$ 가 수렴한다. 따라서 각각의 $x\in A$에 대해 $\int_a^\infty f(x,t),dt$ 가 절대수렴한다. 다음과 같이 정의한다. $F(x)=\int_a^\infty f(x,t),dt.$
+>
+>임의의 $d>a$에 대해 $F(x)-\int_a^d f(x,t),dt = \int_d^\infty f(x,t),dt$ 이므로
+>
+>$$
+>\left| F(x)-\int_a^d f(x,t),dt \right| = \left| \int_d^\infty f(x,t),dt \right|\ \le \int_d^\infty |f(x,t)|,dt\ \le \int_d^\infty g(t),dt.
+>$$
+>
+>$\int_a^\infty g(t),dt$가 수렴하므로 임의의 $\varepsilon>0$에 대해 어떤 $M>a$가 존재하여 $d\ge M \Rightarrow \int_d^\infty g(t),dt<\varepsilon$ 이다. 따라서 모든 $d\ge M$와 모든 $x\in A$에 대해
+>
+>$$
+>\left|
+>F(x)-\int_a^d f(x,t),dt
+>\right|
+>\le
+>\int_d^\infty g(t),dt
+><\varepsilon.
+>$$
+>
+>여기서 $M$은 $x$와 무관하다. 그러므로
+>
+>$$
+>\boxed{
+>\int_a^\infty f(x,t),dt
+>\text{는 }A\text{에서 고르게 수렴한다.}
+>}
+>$$
+
+### 정리 8.4.8
+함수 $f(x,t)$가 $D=\{(x,t):a\le x\le b,\ c\le t\}$ 에서 연속이라고 하자.   이상적분
+
+$$
+F(x)=\int_c^\infty f(x,t),dt
+$$
+
+가 $[a,b]$에서 고르게 수렴하면 $F$는 $[a,b]$에서 고른 연속이다.
+
+>**증명**  
+>
+>자연수 $n$에 대해 절단 적분함수 $F_n(x)=\int_c^{c+n}f(x,t),dt$ 를 정의한다.
+>
+>1. 각각의 $F_n$은 연속이다
+>
+>고정된 $n$에 대해 $f$는 콤팩트 직사각형 $[a,b]\times[c,c+n]$ 에서 연속이다. 정리 8.4.5에 의해 $F_n(x)=\int_c^{c+n}f(x,t),dt$ 는 $[a,b]$에서 연속이다. 실제로 정리 8.4.5는 $F_n$이 고른 연속임도 보장한다.
+>
+>2. $F_n$은 $F$로 고르게 수렴한다
+>
+>가정에 의해 이상적분 $F(x)=\int_c^\infty f(x,t),dt$ 가 $[a,b]$에서 고르게 수렴한다. 따라서 모든 $\varepsilon>0$에 대해 어떤 $M>c$가 존재하여, 모든 $d\ge M$와 모든 $x\in[a,b]$에 대해
+>
+>$$
+>\left| F(x)-\int_c^d f(x,t),dt \right|<\varepsilon
+>$$
+>
+>이다. 충분히 큰 $n$에 대해 $c+n\ge M$이므로 $|F(x)-F_n(x)|<\varepsilon$ 가 모든 $x\in[a,b]$에 대해 성립한다. 따라서 $F_n\to F$ 는 $[a,b]$에서 고른 수렴이다.
+>
+>3. 고른 극한의 연속성
+>
+>각 $F_n$은 연속이고 $F_n\to F$가 고르게 수렴하므로, 연속함수의 고른 극한에 관한 정리에 의해 $F$는 $[a,b]$에서 연속이다.
+>
+>또한 $[a,b]$는 콤팩트 집합이다. 콤팩트 집합에서 연속인 함수는 고른 연속이므로 $F$는 $[a,b]$에서 고른 연속이다.
+>
+>따라서
+>
+>$$
+>\boxed{
+>f\text{가 }D\text{에서 연속이고 }
+>\int_c^\infty f(x,t),dt
+>\text{가 고르게 수렴하면, }F\text{는 }[a,b]\text{에서 고른 연속이다.}
+>}
+>$$
+>
+>단순한 점별수렴만으로는 연속성이 극한함수에 전달되지 않는다. 고른 수렴이 연속성을 보존하는 핵심 조건이다.
+
+### 정리 8.4.9: 이상적분의 적분기호 속 미분
+
+함수 $f(x,t)$가 $D=\{(x,t):a\le x\le b,\ c\le t\}$ 에서 연속이고, 각 $x\in[a,b]$에 대해 $F(x)=\int_c^\infty f(x,t),dt$ 가 존재한다고 하자. 편도함수 $f_x(x,t)=\frac{\partial f}{\partial x}(x,t)$ 가 존재하고 $D$에서 연속이라고 하자. 또한 이상적분 $\int_c^\infty f_x(x,t),dt$ 가 $[a,b]$에서 고르게 수렴한다고 하자.
+
+그러면 $F$는 미분 가능하고
+
+$$
+\boxed{
+F'(x)=\int_c^\infty f_x(x,t),dt
+}
+$$
+
+가 성립한다.
+
+**증명**
+
+다음 함수를 정의한다.
+
+$$
+G(x)=\int_c^\infty f_x(x,t),dt.
+$$
+
+가정에 의해 이 이상적분은 $[a,b]$에서 고르게 수렴한다.
+
+1. 절단 적분함수의 미분
+
+유한한 $d>c$에 대해
+
+$$
+F_d(x)=\int_c^d f(x,t),dt
+$$
+
+라고 정의한다. $f$와 $f_x$가 콤팩트 직사각형 $[a,b]\times[c,d]$ 에서 연속이므로 정리 8.4.6에 의해 적분기호 안에서 미분할 수 있다.
+
+$$
+F_d'(x)=\int_c^d f_x(x,t),dt.
+$$
+
+다음과 같이 놓는다.
+
+$$
+G_d(x)=\int_c^d f_x(x,t),dt.
+$$
+
+그러면 $F_d'(x)=G_d(x)$이다.
+
+2. $G$의 연속성
+
+각각의 $G_d$는 정리 8.4.5에 의해 $x$에 대한 연속함수다. 또한 가정에 의해 $G_d(x)=\int_c^d f_x(x,t),dt$ 는 $G(x)=\int_c^\infty f_x(x,t),dt$ 로 $[a,b]$에서 고르게 수렴한다. 따라서 연속함수의 고른 극한에 관한 정리에 의해 $G$는 $[a,b]$에서 연속이다. 이는 정리 8.4.8을 $f_x$에 적용한 결과이기도 하다.
+
+3. $F(y)-F(x)$ 계산
+
+임의의 $x,y\in[a,b]$를 고정한다. 각각의 유한한 $d>c$에 대해 미적분학의 기본정리를 적용하면
+
+$$
+F_d(y)-F_d(x) = \int_x^y F_d'(s),ds = \int_x^yG_d(s),ds.
+$$
+
+이를 원래의 적분으로 쓰면
+
+$$
+\int_c^d f(y,t),dt - \int_c^d f(x,t),dt = \int_x^y
+\left( \int_c^d f_x(s,t),dt \right)ds.
+$$
+
+이제 $d\to\infty$로 보낸다. 각 $x,y$에서 이상적분이 존재하므로 $F_d(y)\to F(y), \quad F_d(x)\to F(x).$ 따라서 왼쪽은 $F(y)-F(x)$ 로 수렴한다.
+
+한편 $G_d\to G$가 $[a,b]$에서 고르게 수렴하므로 극한과 유한구간 적분의 순서를 교환할 수 있다.
+
+$$
+\lim_{d\to\infty}\int_x^yG_d(s),ds = \int_x^yG(s),ds.
+$$
+
+따라서
+
+$$
+F(y)-F(x)=\int_x^yG(s),ds.
+$$
+
+즉,
+
+$$
+F(y)=F(x)+\int_x^yG(s),ds.
+$$
+
+4. 미분
+
+함수 $G$는 연속이므로 미적분학의 기본정리에 의해
+
+$$
+\frac{d}{dy}\int_x^yG(s),ds=G(y).
+$$
+
+따라서
+
+$$
+F'(y)=G(y) = \int_c^\infty f_x(y,t),dt.
+$$
+
+변수 이름을 다시 $x$로 바꾸면
+
+$$
+\boxed{
+\frac{d}{dx}\int_c^\infty f(x,t),dt = \int_c^\infty
+\frac{\partial f}{\partial x}(x,t),dt
+}
+$$
+
+를 얻는다.
+
+이 결론은 $x\in(a,b)$에서 보통의 양쪽 미분으로 성립한다. 끝점 $a,b$에서는 각각 오른쪽 미분과 왼쪽 미분으로 해석한다.
 
 
 

@@ -912,7 +912,7 @@ $$
 \int_a^b f(x)\,dx = \int_a^b \sum_{n=0}^\infty a_n(x-c)^n\,dx = \sum_{n=0}^\infty \int_a^b a_n(x-c)^n\,dx = \sum_{n=0}^\infty a_n\int_a^b (x-c)^n\,dx
 $$
 
-### Thm. 4. [멱급수의 특이적분] *(Improper Integration of Power Series)*
+### Thm. 4. [멱급수의 특이적분 (멱급수의 이상적분)] *(Improper Integration of Power Series)*
 $f(x)=\sum_{n=0}^\infty a_n(x-c)^n$이 $[a,b)$에서 수렴하고
 
 $$

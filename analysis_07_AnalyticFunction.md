@@ -406,6 +406,7 @@ $$
 
 실제값 $\sin(0.1)\approx 0.0998334$과 거의 일치한다.
 
+
 # 3. 해석함수와 연산 *(Operations on Analytic Functions)*
 ## Thm. 1. [해석함수의 사칙연산] *(Algebra of Analytic Functions)*
 함수 $f,g$가 각각 열린구간 $I,J$에서 해석적이면 다음이 성립한다.
