@@ -1,36 +1,214 @@
 ## 삼각함수 공식 정리
 
-### 기본 관계식
+### 홀함수와 짝함수
 
-- $\sin^2 x + \cos^2 x = 1$
-- $1 + \tan^2 x = \sec^2 x$
-- $1 + \cot^2 x = \csc^2 x$
-- $\sin x = \cos\left(\frac{\pi}{2}-x\right)$, $\cos x = \sin\left(\frac{\pi}{2}-x\right)$
+**짝함수**
+
+함수 $f$가 $f(-x)=f(x)$ 를 만족하면 짝함수라고 한다. 그래프가 $y$축에 대하여 대칭이다. 코사인은 $\cos(-x)=\cos x$ 를 만족하므로 짝함수다.
+
+짝함수는 대칭구간에서 다음을 만족한다.
+
+$$
+\boxed{
+\int_{-a}^{a}f(x),dx = 2\int_0^a f(x),dx
+}
+$$
+
+**홀함수**
+
+함수 $f$가 $f(-x)=-f(x)$ 를 만족하면 홀함수라고 한다. 그래프가 원점에 대하여 대칭이다. 사인은 $\sin(-x)=-\sin x$ 를 만족하므로 홀함수다.
+
+홀함수는 대칭구간에서 다음을 만족한다.
+
+$$
+\boxed{
+\int_{-a}^{a}f(x),dx=0
+}
+$$
+
+### 홀짝함수의 곱
+
+| 첫 번째 함수 | 두 번째 함수 | 곱   |
+| ------- | ------- | --- |
+| 짝함수     | 짝함수     | 짝함수 |
+| 홀함수     | 홀함수     | 짝함수 |
+| 짝함수     | 홀함수     | 홀함수 |
+
+따라서 $\cos(mx)\sin(nx)$는 짝함수와 홀함수의 곱이므로 홀함수다.
+
+### 기본 삼각함수 관계식
+
+$$
+\boxed{\sin^2\theta+\cos^2\theta=1}
+$$
+
+이를 변형하면 $\sin^2\theta=1-\cos^2\theta$ 및 $\cos^2\theta=1-\sin^2\theta$ 를 얻는다.
+
+또한 다음이 성립한다.
+
+$$
+\tan\theta=\frac{\sin\theta}{\cos\theta}
+\qquad(\cos\theta\neq0) \\
+1+\tan^2\theta=\sec^2\theta\\
+1+\cot^2\theta=\csc^2\theta
+$$
 
 ### 덧셈정리
 
-- $\sin(a\pm b)=\sin a \cos b \pm \cos a \sin b$
-- $\cos(a\pm b)=\cos a \cos b \mp \sin a \sin b$
-- $\tan(a\pm b)=\frac{\tan a \pm \tan b}{1 \mp \tan a \tan b}$
+대부분의 삼각공식은 덧셈정리로부터 유도된다.
 
-### 배각 공식
+$$
+  \sin(A+B)=\sin A\cos B+\cos A\sin B \\
+\sin(A-B)=\sin A\cos B-\cos A\sin B \\
+\cos(A+B)=\cos A\cos B-\sin A\sin B \\
+\cos(A-B)=\cos A\cos B+\sin A\sin B \\
+$$
 
-- $\sin 2x = 2\sin x \cos x$
-- $\cos 2x = \cos^2 x - \sin^2 x = 1 - 2\sin^2 x = 2\cos^2 x - 1$
-- $\tan 2x = \frac{2\tan x}{1 - \tan^2 x}$
+### 배각공식
 
-### 반각 공식
+덧셈정리에서 $A=B=\theta$로 놓으면 다음을 얻는다.
 
-- $\sin^2 \frac{x}{2} = \frac{1 - \cos x}{2}$
-- $\cos^2 \frac{x}{2} = \frac{1 + \cos x}{2}$
-- $\tan \frac{x}{2} = \frac{1 - \cos x}{\sin x} = \frac{\sin x}{1 + \cos x}$
+$$
+\boxed{\sin(2\theta)=2\sin\theta\cos\theta}, \quad\boxed{\cos(2\theta)=\cos^2\theta-\sin^2\theta}
+$$
 
-### 증명에 쓰일 요소
+기본 관계식 $\sin^2\theta+\cos^2\theta=1$을 이용하면 다음과 같이 바꿀 수 있다.
 
-- 기본 관계식: 단위원과 피타고라스 정리를 이용해 유도.
-- 덧셈정리: 복소수 지수함수 또는 직각삼각형에서의 사인, 코사인 변환으로 증명.
-- 배각 공식: 덧셈정리에서 $a=b=x$로 두어 유도.
-- 반각 공식: 배각 공식에 $x\to 2x$ 치환 후 정리.
+$$
+\boxed{\cos(2\theta)=2\cos^2\theta-1}, \quad \boxed{\cos(2\theta)=1-2\sin^2\theta}
+$$
+
+배각공식을 변형하면 다음을 얻는다.
+
+$$
+\cos^2\theta=\frac{1+\cos(2\theta)}{2}, \quad \sin^2\theta=\frac{1-\cos(2\theta)}{2}
+$$
+
+이는 $\sin^2\theta$와 $\cos^2\theta$를 적분할 때 중요하다.
+
+예를 들어
+
+$$
+\begin{aligned}
+\int\cos^2x,dx
+&=\int\frac{1+\cos(2x)}{2},dx\
+&=\frac{x}{2}+\frac{\sin(2x)}{4}+C\\
+\int\sin^2x,dx
+&=\int\frac{1-\cos(2x)}{2},dx\
+&=\frac{x}{2}-\frac{\sin(2x)}{4}+C
+\end{aligned}
+$$
+
+### 곱을 합으로 바꾸는 공식
+
+푸리에 급수에서 매우 중요한 공식이다.
+
+$$
+\sin A\cos B = \frac12{\sin(A+B)+\sin(A-B)} \\
+\cos A\cos B = \frac12{\cos(A-B)+\cos(A+B)} \\
+\sin A\sin B = \frac12{\cos(A-B)-\cos(A+B)}
+$$
+
+특히 $A=mx$, $B=nx$로 놓으면 다음을 얻는다.
+
+$$
+\sin(mx)\cos(nx) = \frac12 \left[\sin((m+n)x)+\sin((m-n)x)\right] \\
+\cos(mx)\cos(nx) = \frac12 \left[\cos((m-n)x)+\cos((m+n)x)\right] \\
+\sin(mx)\sin(nx) = \frac12 \left[\cos((m-n)x)-\cos((m+n)x)\right]
+$$
+
+### 합을 곱으로 바꾸는 공식
+
+곱을 합으로 바꾸는 공식과 반대 방향의 공식이다.
+
+$$
+\sin A+\sin B = 2\sin\left(\frac{A+B}{2}\right) \cos\left(\frac{A-B}{2}\right) \\
+\sin A-\sin B = 2\cos\left(\frac{A+B}{2}\right) \sin\left(\frac{A-B}{2}\right) \\
+\cos A+\cos B = 2\cos\left(\frac{A+B}{2}\right) \cos\left(\frac{A-B}{2}\right) \\
+\cos A-\cos B = -2\sin\left(\frac{A+B}{2}\right) \sin\left(\frac{A-B}{2}\right)
+$$
+
+### 삼각함수의 미분과 적분
+
+$n$이 상수일 때 다음이 성립한다.
+
+$$
+\frac{d}{dx}\sin(nx)=n\cos(nx), \quad \frac{d}{dx}\cos(nx)=-n\sin(nx) \\
+\int\sin(nx),dx = -\frac{1}{n}\cos(nx)+C, \quad \int\cos(nx),dx = \frac{1}{n}\sin(nx)+C
+$$
+
+두 번 미분하면 다음과 같다.
+
+$$
+\frac{d^2}{dx^2}\sin(nx) = -n^2\sin(nx) \\ \frac{d^2}{dx^2}\cos(nx) = -n^2\cos(nx)
+$$
+
+이 성질 때문에 사인과 코사인이 파동방정식의 해에 자연스럽게 등장한다.
+
+### 주기
+
+$\sin x$와 $\cos x$의 기본주기는 $2\pi$다.
+
+$$
+\sin(x+2\pi)=\sin x, \quad \cos(x+2\pi)=\cos x
+$$
+
+$\sin(nx)$와 $\cos(nx)$의 주기는 $\frac{2\pi}{|n|}$ 이다.  
+$n$이 커질수록 주기는 짧아지고, 같은 구간에서 더 빠르게 진동한다.
+
+### 직교성의 의미
+
+함수의 내적을 다음과 같이 정의한다.
+
+$$
+\langle f,g\rangle = \int_{-\pi}^{\pi}f(x)g(x),dx
+$$
+
+두 함수의 내적이 $0$이면 두 함수가 서로 직교한다고 한다.
+
+$$
+\langle f,g\rangle=0
+\quad\Longrightarrow\quad
+f\perp g
+$$
+
+이는 유클리드 공간에서 두 벡터의 내적이 $0$이면 서로 수직인 것과 같은 개념이다.
+
+### 직교와 정규직교의 차이
+
+함수의 길이 또는 노름을 다음과 같이 정의한다.
+
+$$
+|f| = \sqrt{\langle f,f\rangle} = \sqrt{\int_{-\pi}^{\pi}|f(x)|^2,dx}
+$$
+
+상수함수 $1$의 길이는
+
+$$|1| = \sqrt{\int_{-\pi}^{\pi}1,dx} = \sqrt{2\pi}$$
+
+이다.
+
+사인과 코사인의 길이는
+
+$$|\cos(nx)|=\sqrt{\pi}, \quad |\sin(nx)|=\sqrt{\pi}$$
+
+이다.
+
+따라서 다음 함수계는 서로 직교하고 각각의 길이가 $1$인 정규직교 함수계다.
+
+$$
+\boxed{
+{
+\frac1{\sqrt{2\pi}},
+\frac{\cos x}{\sqrt\pi},
+\frac{\sin x}{\sqrt\pi},
+\frac{\cos2x}{\sqrt\pi},
+\frac{\sin2x}{\sqrt\pi},
+\ldots}
+}
+$$
+
+이러한 직교성 때문에 푸리에 급수에서 각 주파수의 계수를 다른 항의 간섭 없이 개별적으로 구할 수 있다.
 
 
 ## 조건부 확률 

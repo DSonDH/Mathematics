@@ -669,6 +669,56 @@ $$
 \int_a^b f = \int_a^c f + \int_c^b f
 $$
 
+### 유한합과 적분의 교환
+리만 적분이 가능한 함수들의 유한합은 적분 가능하고, 적분과 유한합의 순서를 바꿀 수 있다.
+
+함수 $f_1, f_2, \dots, f_n$이 모두 $[a,b]$에서 리만 적분 가능하고 $c_1, c_2, \dots, c_n \in \mathbb{R}$이면
+
+$$
+\sum_{k=1}^n c_k f_k \in \mathcal{R}[a,b]
+$$
+
+이며
+
+$$
+\int_a^b \left(\sum_{k=1}^n c_k f_k(x)\right) dx
+= \sum_{k=1}^n c_k \int_a^b f_k(x)\,dx.
+$$
+
+특히 두 함수에 대해서는
+
+$$
+\int_a^b (f+g)\,dx = \int_a^b f\,dx+\int_a^b g\,dx,
+\qquad
+\int_a^b cf\,dx = c\int_a^b f\,dx.
+$$
+
+여기서 중요한 점은 **유한합**이라는 것이다. 유한합은 항의 개수가 고정되어 있으므로 각 항의 적분가능성과 선형성을 유한 번 적용하면 된다. 따라서 합과 적분의 교환을 위해 급수처럼 별도의 수렴 조건을 확인할 필요가 없다.
+
+예를 들어 구간을 $[a,b]$의 분할점 $a=x_0<x_1<\dots<x_m=b$로 나누면
+
+$$
+\int_a^b \sum_{k=1}^n f_k(x)\,dx
+= \sum_{j=1}^m \int_{x_{j-1}}^{x_j}\sum_{k=1}^n f_k(x)\,dx
+= \sum_{j=1}^m\sum_{k=1}^n\int_{x_{j-1}}^{x_j}f_k(x)\,dx.
+$$
+
+이중합도 유한합이므로 합의 순서를 바꿀 수 있어
+
+$$
+=\sum_{k=1}^n\sum_{j=1}^m\int_{x_{j-1}}^{x_j}f_k(x)\,dx
+=\sum_{k=1}^n\int_a^b f_k(x)\,dx.
+$$
+
+따라서 적분의 선형성은 다음과 같이 정리된다.
+
+$$
+\boxed{\displaystyle
+\int_a^b\left(\sum_{k=1}^n c_k f_k\right)
+=\sum_{k=1}^n c_k\int_a^b f_k}
+$$
+
+
 ## 불연속점이 있는 함수의 적분
 불연속점에서 발생하는 함수의 좋지 못한 성질을 분할의 매우 작은 부분구간에 격리 시켜 적분을 계산할 수 있다.
 

@@ -518,7 +518,7 @@ $$
 
 # 근사이론 (Approximation Theory)
 
-## Thm. [바이어슈트라스 근사정리] *(Weierstrass Approximation Theorem)*
+## Thm. [바이어슈트라스 근사정리] *(Weierstrass Approximation Theorem, WAT)*
 
 $f: [a,b] \to \mathbb{R}$가 연속함수이면, 임의의 $\epsilon>0$에 대하여 다항식 $P(x)$가 존재하여 다음 부등식이 $\forall x \in [a,b]$에 대해 성립한다.
 
