@@ -2129,17 +2129,6 @@ $$\nabla f = \frac{\partial f}{\partial x} = \begin{pmatrix}
 
 * $$\frac{\partial (Ax)}{\partial x} = A$$
 
-**예제 1**: $y = x^TAx$일 때, $\frac{\partial y}{\partial x}$를 구하라.
-
-$A$가 대칭행렬이면:
-
-$$\frac{\partial y}{\partial x} = \frac{\partial (x^TAx)}
-{\partial x} = 2Ax$$
-
-**예제 2**: $y = b^TAx$일 때, $\frac{\partial y}{\partial x}$를 구하라.
-
-$$\frac{\partial y}{\partial x} = A^Tb$$
-
 **예제 3**: 최소제곱법에서 $f(x) = \|Ax - b\|_2^2$를 최소화하는 $x$를 구하라.
 
 $$f(x) = (Ax - b)^T(Ax - b) = x^TA^TAx - 2b^TAx + b^Tb$$

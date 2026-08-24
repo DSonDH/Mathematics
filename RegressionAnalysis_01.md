@@ -32,7 +32,7 @@ $\rho$는 상관계수(correlation coefficient)이다. $|\rho|<1$이면 평균�
 * 곡선형 패턴 → 곡선회귀(curvilinear regression) 또는 다항회귀(polynomial regression) 필요
 
 ### 1.2.2 기본 가정 (Basic Assumptions)
-설명변수 $X$와 반응변수 $Y$ 사이의 직선회귀모형(straight line regression model)을 적용하기 위해 다음 가정을 둔다.
+설명변수 $X$와 반응변수 $Y$ 사이의 직선회귀모형(straight line regression model)을 적용하기 위해 세가지 가정을 둔다.
  
 #### (1) 선형성 (Linearity)
 
@@ -61,7 +61,7 @@ $$\text{Cov}(\varepsilon_i,\varepsilon_j|X)=0 \quad (i\ne j)$$
 
 ### 회귀모형 표현
 위 가정 하에서 단순회귀모형은
-> 단순회귀모형: 이 모형이 회귀계수로 볼때도 선형, 설명변수로 볼 때도 선형이며, 설명변수가 단 하나뿐인 것
+> 단순회귀모형: 이 모형이 회귀계수로 볼때도 선형, 설명변수로 볼 때도 선형이며, 설명변수가 단 하나뿐인 것.  
 > 이런 모형을 설명변수가 하나인 '일차 모형(first-order model)'이라고도 한다
 
 $$Y = \beta_0 + \beta_1 X + \varepsilon$$
@@ -82,22 +82,18 @@ $$Y = E(Y|X=x) + \varepsilon, \quad \text{Var}(Y|X)=\sigma^2$$
 ### 1.2.3 회귀의 비대칭성 (Asymmetry of Regression)
 회귀분석은 설명변수와 반응변수의 역할이 명확히 구분되는 비대칭적 분석이다.
 
-#### Y on X vs X on Y
-$Y$를 $X$로 회귀하는 경우와 $X$를 $Y$로 회귀하는 경우는 서로 다른 결과를 산출한다.
-
-$$E(Y|X) \ne E(X|Y)$$
-
-이는 회귀분석이 조건부 기대값을 추정하는데, 조건부 기대값은 변수의 순서에 따라 달라지기 때문이다.
-
-**Y on X:**
-
-$$E(Y|X=x) = \beta_0 + \beta_1 x$$
-
-**X on Y:**
-
-$$E(X|Y=y) = \gamma_0 + \gamma_1 y$$
-
-일반적으로 $\beta_1 \ne 1/\gamma_1$이므로, 두 회귀선의 기울기는 다르다.
+>Y on X vs X on Y
+>
+>$Y$를 $X$로 회귀하는 경우와 $X$를 $Y$로 회귀하는 경우는 서로 다른 결과를 산출한다.
+>
+>$$E(Y|X) \ne E(X|Y)$$
+>
+>이는 회귀분석이 조건부 기대값을 추정하는데, 조건부 기대값은 변수의 순서에 따라 달라지기 때문이다.
+>
+>**Y on X:**: $E(Y|X=x) = \beta_0 + \beta_1 x$  
+>**X on Y:**: $E(X|Y=y) = \gamma_0 + \gamma_1 y$
+>
+>일반적으로 $\beta_1 \ne 1/\gamma_1$이므로, 두 회귀선의 기울기는 다르다.
 
 ### 1.2.4 대체모형 (Alternative Form)
 회귀모형은 다음과 같이 등가적으로 표현할 수 있다.
@@ -141,7 +137,7 @@ $$S(\beta_0,\beta_1)=\sum_{i=1}^{n}(y_i-\beta_0-\beta_1 x_i)^2$$
 
 을 최소로 만드는 $\beta_0,\beta_1$를 추정값 $\hat{\beta}_0,\hat{\beta}_1$로 정의하는 방법이다.
 
-#### 1) 정규방정식 (Normal Equations)
+**1) 정규방정식 (Normal Equations)**  
 위 목적함수를 각각 $\beta_0,\beta_1$에 대해 편미분(partial derivative)하여 0으로 놓으면
 
 $$\frac{\partial S}{\partial \beta_0}=-2\sum (y_i-\beta_0-\beta_1 x_i)=0 \\
@@ -154,13 +150,18 @@ $$\hat{\beta}_0 n+\hat{\beta}_1\sum x_i=\sum y_i \\
 
 을 얻는다.
 
-#### 2) 해의 존재와 최소조건
+**2) 해의 존재와 최소조건**  
 앞서 S를 편미분결과를 0으로 두고 해를 구했는데, 실제로 이 해가 S를 최소화 하는 보장이 없어 필요조건에 불과하다. 충분조건은 이차편미분 행렬이 양정치 (positive definite)이어야 한다는 것이다.
   
 $$
-J = \begin{bmatrix}
+J 
+= \begin{bmatrix}
 \frac{\partial^2 S}{\partial \beta_0^2} & \frac{\partial^2 S}{\partial \beta_0 \partial \beta_1} \\
 \frac{\partial^2 S}{\partial \beta_1 \partial \beta_0} & \frac{\partial^2 S}{\partial \beta_1^2}
+\end{bmatrix}
+= \begin{bmatrix}
+2n & 2\sum x_i \\
+2\sum x_i & 2\sum x_i^2
 \end{bmatrix}
 $$
 
@@ -170,26 +171,41 @@ $$\frac{\partial^2 S}{\partial \beta_0^2}=2n>0$$
 
 행렬식(determinant)
 
-$$|J|=4n\sum (x_i-\bar{x})^2>0$$
+$$|H| = (2n)(2\sum x_i^2) - (2\sum x_i)^2 
+=4\left(n\sum x_i^2 - \left(\sum x_i\right)^2\right)$$
 
-이므로 최소해가 보장된다.
+여기서 $\left(\sum x_i\right)^2 = n^2\bar{x}^2 = n\cdot n\bar{x}^2$ 이므로
 
-#### 3) 최소제곱추정량 (Least Squares Estimators)
-정규방정식을 풀면
+$$n\sum x_i^2 - \left(\sum x_i\right)^2
+= n\sum x_i^2 - 2\bar{x}n\sum x_i + n^2\bar{x}^2
+= n\sum (x_i^2 - 2\bar{x}x_i + \bar{x}^2)
+= n\sum (x_i-\bar{x})^2$$
+
+이므로
+
+$$|H| = 4n\sum (x_i-\bar{x})^2 \ge 0$$
+
+이고, 자료가 적어도 하나 이상 변동하여 $x_i \ne \bar{x}$인 경우가 존재하면 $\sum (x_i-\bar{x})^2 > 0$이므로
+
+$$|H| > 0$$
+
+이 된다. 즉, Hessian 행렬 $J$는 양정치(positive definite)이며, 이 경우 목적함수 $S$는 이 점에서 최소값을 갖는다. 따라서 앞서 구한 해는 실제로 최소제곱문제의 최소해가 됨이 보장된다.
 
 $$\hat{\beta}_1=\frac{\sum x_i y_i-\frac{(\sum x_i)(\sum y_i)}{n}}{\sum x_i^2-\frac{(\sum x_i)^2}{n}} =\frac{\sum x_i y_i - n(\sum x_i/n)(\sum y_i/n)}{\sum x_i^2 - n(\sum x_i/n)^2} = \frac{\sum x_i y_i - n \bar{x} \bar{y}}{\sum x_i^2 - n \bar{x}^2}$$
 
 $$= \frac{\sum x_i y_i - n \bar{x} \bar{y} - n \bar{x} \bar{y} + n \bar{x} \bar{y}}{\sum x_i^2 - n \bar{x}^2 - n \bar{x}^2 + n \bar{x}^2} = \frac{\sum x_i y_i - \sum{x_i} \bar{y} - \bar{x} \sum{y_i} + n \bar{x} \bar{y}}{\sum x_i^2 - \sum{x_i} \bar{x} - \bar{x} \sum{x_i} + n \bar{x}^2}$$
 
-$$=\frac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sum (x_i-\bar{x})^2}$$
+$$=\frac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sum (x_i-\bar{x})^2} 
+= \frac{\sum (x_i-\bar{x})y_i}{\sum (x_i-\bar{x})^2}
+= \frac{\sum x_i(y_i-\bar{y})}{\sum (x_i-\bar{x})^2}$$
+
+이고,
 
 $$\hat{\beta}_0 =\bar{y}-\hat{\beta}_1\bar{x}$$
 
 다음 기호를 정의하면
 
-$$S_{xx}=\sum (x_i-\bar{x})^2\\
-S_{yy}=\sum (y_i-\bar{y})^2\\
-S_{xy}=\sum (x_i-\bar{x})(y_i-\bar{y})$$
+$$S_{xx}=\sum (x_i-\bar{x})^2,\quad S_{yy}=\sum (y_i-\bar{y})^2,\quad S_{xy}=\sum (x_i-\bar{x})(y_i-\bar{y})$$
 
 기울기는
 
@@ -197,7 +213,7 @@ $$\hat{\beta}_1=\frac{S_{xy}}{S_{xx}}$$
 
 으로 간단히 표현된다.
 
-#### 4) 대체모형 (Centered Form)
+**4) 대체모형 (Centered Form)**  
 회귀식은 다음과 같이 표현할 수도 있다.
 
 $$\hat{y}=\bar{y}+\hat{\beta}_1(x-\bar{x})$$
@@ -208,7 +224,6 @@ $$\hat{y}-\bar{y}=\hat{\beta}_1(x-\bar{x})$$
 
 이 식은 추정된 회귀선이 항상 평균점 $(\bar{x},\bar{y})$을 지난다는 것을 의미한다.
 
-TODO: 
 ### 1.3.2 최대가능도추정법 (Method of Maximum Likelihood Estimation)
 회귀선 추정의 두 번째 방법이다. 최소제곱추정량에 정규성 가정을 추가하여 최대가능도추정량(MLE)을 구하는 방법이다. 즉,
 
@@ -232,7 +247,9 @@ $$e_i=y_i-\hat{y}_i$$
 
 #### (1) 잔차의 합은 0
 
-$$\sum e_i=0\quad \therefore \sum y_i=\sum \hat{y}_i$$
+$$\sum e_i
+= \sum (y_i - \hat y) = \sum(y_i -\hat\beta_0 - \hat\beta_1x_1) = \sum y_i - n\hat\beta_0 -\hat\beta_1\sum x_i = 0\\
+\therefore \sum y_i=\sum \hat{y}_i$$
 
 #### (2) 잔차제곱합은 최소
 
@@ -242,11 +259,11 @@ $$\sum e_i^2$$
 
 #### (3) 잔차와 $x_i$의 가중합은 0
 
-$$\sum x_i e_i=0$$
+$$\sum x_i e_i= \sum x_i(y_i-\hat y_i) = \sum x_i(y_i-\hat \beta_0-\hat\beta_1 x_i)=0$$
 
 #### (4) 잔차와 적합값의 가중합은 0
 
-$$\sum \hat{y}_i e_i=0$$
+$$\sum \hat{y}_i e_i =\sum(\hat\beta_0 +\hat\beta_1 x_i)e_i = \hat\beta_0\sum e_i + \hat\beta_1\sum x_ie_i =0$$
 
 즉, 적합값과 잔차의 표본상관계수(sample correlation coefficient)는 0이다.
 
@@ -281,16 +298,15 @@ $$s_{y \cdot x}=\sqrt{\frac{\sum (y_i - \hat{y}_i)^2}{n-2}}$$
 * 단위는 종속변수 $Y$의 단위와 동일
 
 ### 1.4.2 결정계수 (Coefficient of Determination)
-총편차 (total variation) $SST$는
+총편차 (total variation), 혹은 **총제곱합 (total sum of squares) $SST$** 는
 
-$$SST = \sum (y_i - \bar{y})^2 \\
-= \sum (y_i - \hat{y}_i + \hat{y}_i - \bar{y})^2 \\
+$$SST = \sum (y_i - \bar{y})^2 = \sum (y_i - \hat{y}_i + \hat{y}_i - \bar{y})^2 \\
 = \sum (y_i - \hat{y}_i)^2 + \sum (\hat{y}_i - \bar{y})^2 + 2\sum (y_i - \hat{y}_i)(\hat{y}_i - \bar{y}) \\
 = SSE + SSR$$
 
-* 마지막 항은 0이 된다 (잔차와 적합값의 가중합이 0이므로)
-* $SSE = \sum (y_i - \hat{y}_i)^2$ (설명되지 않는 변동, residual sum of squares, error sum of squares)
-* $SSR = \sum (\hat{y}_i - \bar{y})^2$ (회귀에 의해 설명되는 변동, regression sum of squares)
+* 마지막 항은 0이 된다 (잔차벡터와 중심화된 적합값 벡터의 내적 또는 교차곱이 0이므로)
+* $SSE = \sum (y_i - \hat{y}_i)^2$ (잔차제곱합, 설명되지 않는 변동, residual sum of squares, error sum of squares, sum of squares due to residual errors)
+* $SSR = \sum (\hat{y}_i - \bar{y})^2$ (회귀제곱합, 회귀에 의해 설명되는 변동, regression sum of squares, explained sum of squares)
 
 결정계수는
 
@@ -304,21 +320,6 @@ $$R^2=\frac{SSR}{SST}=1 - \frac{SSE}{SST}$$
 
 (참고: 회귀선 정도는 상관계수나 분산분석의 F-검정으로도 측정이 가능하다. 나중에 나옴)
 
-### 1.4.3 단순회귀에서의 추가 성질
-단순선형회귀에서는 $R^2 = r_{xy}^2$ 즉, 결정계수는 표본상관계수의 제곱과 동일하다.
-
-또한,
-
-$$SSR = \hat{\beta}_1^2 S_{xx} \\
-\hat{\beta}_1 = \frac{S_{xy}}{S_{xx}}$$
-
-이므로,
-
-$$R^2=\frac{S_{xy}^2}{S_{xx} S_{yy}}=r_{xy}^2$$
-
-가 성립한다.
-
-
 ## 1.5 상관분석 (Correlation Analysis)
 결정계수는 선형관계의 "설명력"을 나타내지만, 관계의 방향(양/음)을 나타내지는 못한다. 이를 보완하는 척도가 상관계수이다.
 
@@ -330,30 +331,40 @@ $$\rho_{XY}=\frac{\mathrm{Cov}(X,Y)}{\sqrt{\mathrm{Var}(X)\mathrm{Var}(Y)}} \\
 $$
 
 ### 1.5.2 표본상관계수 (Sample Correlation)
-표본자료 $(x_i,y_i)$에 대해
-
-$$S_{xx}=\sum (x_i-\bar{x})^2 \\
-S_{yy}=\sum (y_i-\bar{y})^2 \\
-S_{xy}=\sum (x_i-\bar{x})(y_i-\bar{y})$$
-
-라 하면,
+표본자료 $(x_i,y_i)$에 대해 $S_{xx}=\sum (x_i-\bar{x})^2 ,\ S_{yy}=\sum (y_i-\bar{y})^2 ,\ S_{xy}=\sum (x_i-\bar{x})(y_i-\bar{y})$ 라 하면,
 
 $$r_{xy}=\frac{S_{xy}}{\sqrt{S_{xx}S_{yy}}}$$
 
-#### 성질
+- 성질: $-1 \le r_{xy} \le 1$
+  * $r=1$: 완전한 양의 선형관계
+  * $r=-1$: 완전한 음의 선형관계
+  * $r=0$: 선형관계 없음 (비선형관계는 존재 가능)
+  * 선형관계가 어느정도 인가를 재는 측도이지, 함수관계를 알아보는 측도가 아님
 
-$$-1 \le r_{xy} \le 1$$
+### 1.5.3 결정계수와 상관계수의 관계
 
-* $r=1$: 완전한 양의 선형관계
-* $r=-1$: 완전한 음의 선형관계
-* $r=0$: 선형관계 없음 (비선형관계는 존재 가능)
-* 선형관계가 어느정도 인가를 재는 측도이지, 함수관계를 알아보는 측도가 아님
+**단순선형회귀** 에서는 $R^2 = r_{xy}^2$ 즉, 결정계수는 표본상관계수의 제곱과 동일하다. 또한, $SSR = \hat{\beta}_1^2 S_{xx}$ 이다. 
 
-### 1.5.3 회귀계수와 상관계수의 관계
+증명: 절편이 포함된 단순선형회귀에서 $\hat{y}_i=\hat{\beta}_0+\hat{\beta}_1x_i, \quad \bar{\hat{y}}=\bar{y}=\hat{\beta}_0+\hat{\beta}_1\bar{x}$ 이므로 $\hat{y}_i-\bar{y}=\hat{\beta}_1(x_i-\bar{x})$ 이다. 따라서
+
+$$SSR=\sum(\hat{y}_i-\bar{y})^2
+=\hat{\beta}_1^2\sum(x_i-\bar{x})^2
+=\hat{\beta}_1^2S_{xx}.$$
+
+한편 최소제곱법의 기울기는 $\hat{\beta}_1=\frac{S_{xy}}{S_{xx}}$ 이므로,
+
+$$SSR=\left(\frac{S_{xy}}{S_{xx}}\right)^2S_{xx}
+=\frac{S_{xy}^2}{S_{xx}}.$$
+
+이를 활용하면
+
+$$R^2=SSR/SST = \frac{S_{xy}^2}{S_{xx} S_{yy}}=r_{xy}^2$$
+
+### 1.5.4 회귀계수와 상관계수의 관계
 
 $$r_{xy}=\frac{S_{xy}}{\sqrt{S_{xx}S_{yy}}} = \frac{S_{xy}}{S_{xx}} \cdot \frac{S_{xx}}{\sqrt{S_{xx}S_{yy}}} = \frac{S_{xy}}{S_{xx}} \cdot \frac{\sqrt{S_{xx}}}{\sqrt{S_{yy}}} = \frac{S_{xy}}{S_{xx}} \cdot \frac{s_x}{s_y} = \hat{\beta}_1 \frac{s_x}{s_y}$$
 
-이때 s_x, s_y는 각각 x와 y의 표본표준편차로,
+이때 $s_x, s_y$는 각각 $x$와 $y$의 표본표준편차(sample standard deviation)로,
 
 $$s_x^2 = S_{xx}/(n-1), \quad s_y^2 = S_{yy}/(n-1)$$
 
@@ -362,35 +373,146 @@ $$s_x^2 = S_{xx}/(n-1), \quad s_y^2 = S_{yy}/(n-1)$$
 * 회귀계수는 상관계수에 표준편차의 비율을 곱한 것
 * 단위 변환에 따라 회귀계수는 변하지만 상관계수는 변하지 않음
 
-### 1.5.4 표준화 변수와의 관계
-표준화 변수 (standardized variable) $x^*, y^*$를 다음과 같이 정의하자.
+### 1.5.5 오차분산과 상관계수의 관계
+
+잔차제곱합은 $SSE = \sum_{i=1}^n(y_i-\hat y_i)^2$ 이고, 회귀로부터의 평균제곱편차 정의는 $s_{y\cdot x}^2 = \frac{SSE}{n-2}$ 이다. 
+
+또한 총제곱합과 회귀제곱합의 분해에 의해 $SSE=SST-SSR$ 이다. 
+
+여기서 절편을 포함한 단순회귀에서 회귀제곱합은 $SSR =\sum_{i=1}^n(\hat y_i-\bar y)^2 =\hat\beta_1^2\sum_{i=1}^n(x_i-\bar x)^2.$ 한편 최소제곱 추정량은 $\hat\beta_1= \frac{\sum_{i=1}^n(x_i-\bar x)(y_i-\bar y)} {\sum_{i=1}^n(x_i-\bar x)^2}$ 이므로 이를 대입하면
+
+$$
+SSR=\frac{\left[\sum_{i=1}^n(x_i-\bar x)(y_i-\bar y)\right]^2}
+{\sum_{i=1}^n(x_i-\bar x)^2}.
+$$
+
+따라서
+
+$$
+SSE =(n-2)s_{y\cdot x}^2 =
+\sum_{i=1}^n(y_i-\bar y)^2 -
+\frac{ \left[\sum_{i=1}^n(x_i-\bar x)(y_i-\bar y)\right]^2
+}{\sum_{i=1}^n(x_i-\bar x)^2}\
+=
+\left[ \sum_{i=1}^n(y_i-\bar y)^2\right](1 - r_{xy}^2).
+$$
+
+즉,
+
+$$
+\boxed{
+SSE=SST(1-r_{xy}^2) =SST(1-R^2)
+}
+$$
+
+### 1.5.6 상관계수 범위의 유도
+
+위 $SSE$식으로 상관계수 범위를 추론할 수 있다. 잔차제곱합은 제곱들의 합이므로 $SSE\geq 0$ 이다. 그리고 $SST>0$인 경우 $SSE=SST(1-r_{xy}^2)\geq 0$ 이므로 $1-r_{xy}^2\geq 0$ 이다. 따라서
+
+$$
+r_{xy}^2\leq 1
+$$
+
+이고,
+
+$$
+\boxed{-1\leq r_{xy}\leq 1}
+$$
+
+을 얻는다.
+
+잔차제곱합이 0이면 $SSE=0$ 이므로 $r_{xy}^2=1$ 이며, $r_{xy}=1$ 또는 $r_{xy}=-1$ 이다. 이는 모든 관측점이 양의 기울기 또는 음의 기울기를 가진 하나의 직선 위에 정확히 놓여 있다는 뜻이다.
+
+### 1.5.7 오차분산과 $y$의 표본분산 비교
+
+$y$의 표본분산은 $s_y^2 = \frac{\sum_{i=1}^n(y_i-\bar y)^2}{n-1} = \frac{SST}{n-1}$ 이다. 한편 오차분산 추정량은 $s_{y\cdot x}^2 = \frac{SSE}{n-2} = \frac{SST(1-r_{xy}^2)}{n-2}$ 이다. 따라서 두 분산의 비율은
+
+$$
+\frac{s_{y\cdot x}^2}{s_y^2}
+=
+\frac{SST(1-r_{xy}^2)/(n-2)}
+{SST/(n-1)}\
+=
+\frac{n-1}{n-2}(1-r_{xy}^2).
+$$
+
+즉,
+
+$$
+\boxed{
+\frac{s_{y\cdot x}^2}{s_y^2} = \frac{n-1}{n-2}(1-r_{xy}^2)
+}
+$$
+
+이다. 표본크기 $n$이 충분히 크면 $\frac{n-1}{n-2}\approx 1$ 이므로
+
+$$
+\boxed{
+\frac{s_{y\cdot x}^2}{s_y^2}
+\approx
+1-r_{xy}^2
+}
+$$
+
+이는 다음과 같이 해석할 수 있다.
+
+* $r_{xy}^2$는 $y$의 총변동 중 회귀로 설명된 비율이다.
+* $1-r_{xy}^2$는 $y$의 총변동 중 회귀로 설명되지 않은 비율이다.
+* 다만 정확한 분산 추정량의 비율에는 자유도 보정항 $(n-1)/(n-2)$가 붙는다.
+
+### 1.5.8 표준화 변수와의 관계
+$x$와 $y$의 측정단위나 크기가 크게 다르면 표준화 변수 (standardized variable) $x^*, y^*$를 다음과 같이 정의하여 사용한다.
 
 $$x^*=\frac{x-\bar{x}}{s_x}, \quad y^*=\frac{y-\bar{y}}{s_y}$$
 
-이를 사용하면 회귀식은
 
-$$\hat{y}^* = r_{xy} x^*$$
+원래 단순회귀식은 평균을 중심으로 쓰면 $\hat y-\bar y = \hat\beta_1(x-\bar x)$ 이다. 양변을 $s_y$로 나누면
+
+$$
+\frac{\hat y-\bar y}{s_y} = \hat\beta_1 \frac{x-\bar x}{s_y}
+$$
+
+이고, $x-\bar x=s_xx^*$ 이므로
+
+$$
+\hat y^* = \hat\beta_1\frac{s_x}{s_y}x^*
+$$
+
+가 된다. 앞에서 구한
+
+$$
+\hat\beta_1 = r_{xy}\frac{s_y}{s_x}
+$$
+
+를 대입하면
+
+$$
+\hat y^* = r_{xy}x^*
+$$
+
 
 즉, 표준화 단위에서의 회귀계수는 상관계수와 동일하다.
 
-- 용어 정리
-  - 결정계수 $R^2$
-    - 회귀선의 설명력 (회귀선이 총변동에서 설명하는 비율)
-    - 종속변수의 분산 중 설명변수에 의해 선형적으로 설명되는 비율
-    
-  - 상관계수 $r_{xy}$
-    - 선형관계의 방향과 강도 (양/음의 선형관계가 어느 정도인가)
-    - 결정계수와의 관계 (단순선형회귀에서, 결정계수는 상관계수의 제곱과 동일)
-    - 회귀계수 $\hat{\beta}_1$과의 관계 (회귀계수는 상관계수에 표준편차의 비율을 곱한 것)
-    - x,y 대칭적임
+>[복습: 용어 정리]
+>  - 결정계수 $R^2$
+>    - 회귀선의 설명력 (회귀선이 총변동에서 설명하는 비율)
+>    - 종속변수의 분산 중 설명변수에 의해 선형적으로 설명되는 비율
+>    
+>  - 상관계수 $r_{xy}$
+>    - 선형관계의 방향과 강도 (양/음의 선형관계가 어느 정도인가)
+>    - 결정계수와의 관계 (단순선형회귀에서, 결정계수는 상관계수의 제곱과 동일)
+>    - 회귀계수 $\hat{\beta}_1$과의 관계 (회귀계수는 상관계수에 표준편차의 비율을 곱한 것)
+>    - x,y 대칭적임
+>
+>  - 회귀직선 기울기 (회귀 계수) $\hat{\beta}_1$
+>    - $x$가 한 단위 증가할 때 $y$가 평균적으로 얼마나 증가하는가
+>    - 최소제곱법이나 최대가능도추정법으로 추정
+>    - 상관계수와 표준편차의 비율에 의해 결정됨
+>    - x,y 비대칭적임
+>
+>  - (참고: 다중회귀에서는 partial correlation을 고려해야함)
 
-  - 회귀직선 기울기 (회귀 계수) $\hat{\beta}_1$
-    - $x$가 한 단위 증가할 때 $y$가 평균적으로 얼마나 증가하는가
-    - 최소제곱법이나 최대가능도추정법으로 추정
-    - 상관계수와 표준편차의 비율에 의해 결정됨
-    - x,y 비대칭적임
 
-  - (참고: 다중회귀에서는 partial correlation을 고려해야함)
 
 
 ## 1.6 분산분석 (Analysis of Variance, ANOVA)
@@ -407,19 +529,16 @@ $$\hat{y}^* = r_{xy} x^*$$
 | 잔차 | SSE | n−2 | MSE = SSE/(n−2) |                         |
 | 합계 | SST | n−1 |                 |                         |
 
-임계값: $F_0 > F_{\alpha}(1, n-2)$일 때 회귀선은 유의하다.  
-해석적으로,
+임계값: $F_0 > F_{\alpha}(1, n-2)$일 때 회귀선은 유의하다. 해석적으로,
 * SSR이 SSE보다 상대적으로 크면
 * 즉 설명변동이 오차변동보다 충분히 크면
 * 회귀식은 통계적으로 유의하다.
 
 검정통계량은
 
-$$F_0 = \frac{MSR}{MSE}\\ 
-F_0 \sim F(1, n-2)$$
+$$F_0 = \frac{MSR}{MSE},\ F_0 \sim F(1, n-2)$$
 
-를 따른다 (귀무가설 하).  
-단순회귀에서는 $F_0 = t^2$관계가 성립한다.
+를 따른다 (귀무가설 하). 단순회귀에서는 $F_0 = t^2$관계가 성립한다.
 
 
 ## 1.7 원점을 지나는 회귀 (Regression Through the Origin)
@@ -444,14 +563,14 @@ $$SSR = \sum \hat{y}_i^2 = \hat{\beta}_1^2 \sum x_i^2 \\
 SSE = \sum (y_i - \hat{y}_i)^2$$
 
 자유도:
-* 회귀: 1
-* 잔차: $n-1$
+* SSR: 1
+* SSE: $n-1$
 
 검정통계량:
 
 $$F_0 = \frac{SSR/1}{SSE/(n-1)}$$
 
-* 원점 통과 회귀에서는 잔차합이 0이 아니다.
+* 원점 통과 회귀에서는 잔차합이 반드시 0은 아니다.
 * $R^2$의 정의도 일반회귀와 동일하게 해석하면 오류가 발생할 수 있다.
 * 절편을 제거하는 것은 강한 구조적 가정이므로 신중해야 한다.
 
@@ -469,14 +588,14 @@ $$Q(\beta_0,\beta_1)=\sum w_i (y_i - \beta_0 - \beta_1 x_i)^2$$
 를 최소화한다.
 
 ### 1.8.2 가중평균
-$Q$를 $\beta_0,\beta_1$에 대해 편미분하여 0으로 놓으면 다음과 같은 정규방정식이 나온다.
+설명변수 관측값들, 반응변수 관측값들의 가중평균을 각각 아래로 정의한다.
 
-$$\bar{x}_w=\frac{\sum w_i x_i}{\sum w_i} \\
+$$\bar{x}_w=\frac{\sum w_i x_i}{\sum w_i},\
 \bar{y}_w=\frac{\sum w_i y_i}{\sum w_i}$$
 
 ### 1.8.3 추정량
 
-$$\hat{\beta}_1=\frac{\sum w_i (x_i-\bar{x}_w)(y_i-\bar{y}_w)}{\sum w_i (x_i-\bar{x}_w)^2} \\
+$$\hat{\beta}_1=\frac{\sum w_i (x_i-\bar{x}_w)(y_i-\bar{y}_w)}{\sum w_i (x_i-\bar{x}_w)^2}, \
 \hat{\beta}_0=\bar{y}_w - \hat{\beta}_1 \bar{x}_w$$
 
 ### 1.8.4 변동의 정의
