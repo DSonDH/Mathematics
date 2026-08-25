@@ -43,7 +43,7 @@ $$E(Y|X=x) = \beta_0 + \beta_1 x$$
 #### (2) 정규성 및 등분산성 (Normality and Homoscedasticity)
 주어진 $x$에서 반응변수 $Y$는 정규분포를 따른다고 가정한다.
 
-$$Y|X=x \sim N(\beta_0 + \beta_1 x, \sigma^2)$$
+$$Y|_{X=x} \sim N(\beta_0 + \beta_1 x, \sigma^2)$$
 
 * 평균은 $x$에 따라 변함
 * 분산은 $x$에 관계없이 일정
@@ -54,10 +54,25 @@ $$\text{Var}(Y|X=x) = \sigma^2$$
 분산이 $x$에 따라 달라지면 이분산성(heteroscedasticity)이라 한다.
 
 #### (3) 독립성 (Independence)
-설명변수 $X$는 고정값(fixed value)으로 간주하며,
-오차항(error term) $\varepsilon_i$들은 서로 독립이다.
+설명변수 $X$는 고정값(fixed value)으로 간주하며, $Y$ 반응변수는 측정오차를 수반하는 확률변수로 본다. $Y$의 오차항(error term) $\varepsilon_i$들은 서로 독립이다.
 
 $$\text{Cov}(\varepsilon_i,\varepsilon_j|X)=0 \quad (i\ne j)$$
+
+>참고: 조건부 공분산의 정의는 다음과 같다.
+>
+>$$\operatorname{Cov}(\varepsilon_1,\varepsilon_2\mid X)
+>=E\left[(\varepsilon_1-E(\varepsilon_1\mid X))(\varepsilon_2-E(\varepsilon_2\mid X))\mid X\right]$$
+>
+>따라서 조건부 평균 0을 함께 가정하면 $E(\varepsilon_1\mid X)=E(\varepsilon_2\mid X)=0$ 이므로 $\operatorname{Cov}(\varepsilon_1,\varepsilon_2\mid X)=E(\varepsilon_1\varepsilon_2\mid X).$
+
+>**참고: 유사한 독립성 가정들**
+>| 조건                                                        | 의미                           | 다른 조건과의 관계        | OLS에서 주된 역할          |
+>| --------------------------------------------------------- | ---------------------------- | ----------------- | -------------------- |
+>| $E(\varepsilon_i\mid X)=0$                                | $X$가 주어졌을 때 오차의 평균이 0        | 독립성과 별개의 조건       | OLS의 조건부 불편성         |
+>| $\operatorname{Cov}(\varepsilon_i,\varepsilon_j\mid X)=0$ | 두 오차가 조건부로 선형적 관계가 없음        | 조건부 독립보다 약함       | 오차 간 상관이 없는 단순 분산 공식 |
+>| $\varepsilon_i\perp\!\!\!\perp\varepsilon_j\mid X$           | $X$가 주어졌을 때 두 오차의 전체 분포가 분리됨 | 조건부 공분산 0을 함의     | 분포론·우도·점근론 단순화       |
+>| $\operatorname{Var}(\varepsilon_i\mid X)=\sigma^2$        | 모든 관측치의 조건부 오차분산이 같음         | 독립성·평균 0과 별개      | OLS 효율성 및 고전적 표준오차   |
+>| $\varepsilon\mid X\sim N(0,\sigma^2I)$                    | 조건부 정규성·평균 0·등분산·독립성         | 가장 강한 고전적 가정 중 하나 | 유한표본 (t,F) 검정        |
 
 ### 회귀모형 표현
 위 가정 하에서 단순회귀모형은
@@ -73,6 +88,7 @@ $$y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$$
 * $y_i$: i번째 관측 반응값
 * $x_i$: i번째 설명변수 값
 * $\varepsilon_i$: 오차항(error term)
+  - 주의: 오차항은 잔차랑 다름. 잔차는 $e$, 오차항은 $\varepsilon$
 * $\varepsilon_i \sim N(0,\sigma^2)$ (독립적)
 
 또한
@@ -100,8 +116,7 @@ $$Y = E(Y|X=x) + \varepsilon, \quad \text{Var}(Y|X)=\sigma^2$$
 
 표준 형태:
 
-$$Y = \beta_0 + \beta_1 X + \varepsilon\\
-= \beta_0 + \beta_1 \bar{x} + \beta_1(X - \bar{x}) + \varepsilon\\
+$$Y = \beta_0 + \beta_1 X + \varepsilon = \beta_0 + \beta_1 \bar{x} + \beta_1(X - \bar{x}) + \varepsilon\\
 = \beta_0' + \beta_1(X - \bar{x}) + \varepsilon$$
 
 여기서 $\beta_0' = \beta_0 + \beta_1 \bar{x}$는 중심화된 절편이다.
@@ -119,9 +134,9 @@ $$E(Y|X=x)=\beta_0+\beta_1 x$$
 
 $$\hat{y}=\hat{\beta}_0+\hat{\beta}_1 x$$
 
-* $\hat{\beta}_0$: 절편(intercept)
-* $\hat{\beta}_1$: 기울기(slope)
-이다.
+* $\hat{\beta}_0$: 절편(intercept), $\beta_0$의 추정값.
+* $\hat{\beta}_1$: 기울기(slope), $\beta_1$의 추정값.
+* $\hat y$: $E(Y|X=x)$의 추정값.
 * 회귀모형의 적합도(goodness of fit)를 평가하기 위한 주요 기준(criteria)은 다음과 같다.
  1. 회귀계수의 통계적 유의성
  2. 결정계수($R^2$) 크기
@@ -214,15 +229,14 @@ $$\hat{\beta}_1=\frac{S_{xy}}{S_{xx}}$$
 으로 간단히 표현된다.
 
 **4) 대체모형 (Centered Form)**  
-회귀식은 다음과 같이 표현할 수도 있다.
-
-$$\hat{y}=\bar{y}+\hat{\beta}_1(x-\bar{x})$$
-
-또는
-
-$$\hat{y}-\bar{y}=\hat{\beta}_1(x-\bar{x})$$
-
+회귀식은 다음과 같이 표현할 수도 있다: $\hat{y}=\bar{y}+\hat{\beta}_1(x-\bar{x})$ 또는 $\hat{y}-\bar{y}=\hat{\beta}_1(x-\bar{x})$.  
 이 식은 추정된 회귀선이 항상 평균점 $(\bar{x},\bar{y})$을 지난다는 것을 의미한다.
+
+대체모형에 대한 오차제곱합 $S(\beta_0, \beta_1) = \sum \epsilon^2 = \sum[y_i-\beta_0'-\beta_1(x_i-\bar x)]^2$ 을 만들어 위와 똑같은 방법으로 $\beta_0'$와 $\beta_1$을 추정하여 $\hat\beta_0'$와 $\hat\beta_1$를 구하면, 
+
+$$ \hat y = \hat\beta_0' + \hat\beta_1'(x-\bar x), \quad \hat\beta_0' = \bar y, \hat\beta_1 = S_{(xy)}/S_{(xx)}$$
+
+- $\beta_0' = \beta_0 + \beta_1 \bar{x}$는 중심화된 절편
 
 ### 1.3.2 최대가능도추정법 (Method of Maximum Likelihood Estimation)
 회귀선 추정의 두 번째 방법이다. 최소제곱추정량에 정규성 가정을 추가하여 최대가능도추정량(MLE)을 구하는 방법이다. 즉,
@@ -308,7 +322,7 @@ $$SST = \sum (y_i - \bar{y})^2 = \sum (y_i - \hat{y}_i + \hat{y}_i - \bar{y})^2 
 * $SSE = \sum (y_i - \hat{y}_i)^2$ (잔차제곱합, 설명되지 않는 변동, residual sum of squares, error sum of squares, sum of squares due to residual errors)
 * $SSR = \sum (\hat{y}_i - \bar{y})^2$ (회귀제곱합, 회귀에 의해 설명되는 변동, regression sum of squares, explained sum of squares)
 
-결정계수는
+결정계수 정의는
 
 $$R^2=\frac{SSR}{SST}=1 - \frac{SSE}{SST}$$
 
@@ -317,6 +331,8 @@ $$R^2=\frac{SSR}{SST}=1 - \frac{SSE}{SST}$$
 * $R^2 = 0$: 선형설명력 없음
 * $R^2$는 종속변수 총변동 중 회귀식이 설명하는 비율을 의미한다.
 * 총변동을 설명하는데 있어 회귀선에 의해 설명되는 변동이 기여하는 비율을 의미하므로 회귀선의 '기여율'이라 부르기도 한다
+
+(참고: $R^2$말고 $r^2$라고 해서 표본결정계수라 하기도 함. 같은 의미, 같은 식)
 
 (참고: 회귀선 정도는 상관계수나 분산분석의 F-검정으로도 측정이 가능하다. 나중에 나옴)
 

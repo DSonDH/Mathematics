@@ -4,11 +4,12 @@
 $$\mu_{y\cdot x} = \beta_0 + \beta_1 x$$
 
 가 성립한다고 하였다. 이는 모집단에서 $x$와 $y$ 사이에 선형관계가 존재함을 의미한다. $\beta_0, \beta_1$는 모집단의 모수(parameter)이다.  
-모집단의 모든 관측값을 일일히 확일할 수 없으므로, 표본을 이용하여 $\beta_0, \beta_1$ 및 $\mu_{y\cdot x}$에 대한 추정과 구간추정을 수행한다. 표본 $(x_i, y_i), i=1,\dots,n$을 이용하면 회귀모형은
+모집단의 모든 관측값을 일일히 확인할 수 없으므로, 표본을 이용하여 $\beta_0, \beta_1$ 및 $\mu_{y\cdot x}$에 대한 추정과 구간추정을 수행한다.  
+표본 $(x_i, y_i),\ i=1,\dots,n$을 이용하면 회귀모형은
 
 $$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x$$
 
-으로 추정된다. 물론 이추정량들은 통계량이므로 분포를 가지며, 이를 이용하여 모수에 대한 구간추정과 가설검정을 수행할 수 있다. 이제 1장에서의 단순회귀모형 가정이 모두 성립한다고 전제하여 $\beta_0, \beta_1$ 및 $\mu_{y\cdot x}$에 대한 구간추정을 살펴보자.
+으로 추정된다. 물론 이 추정량들은 통계량이므로 분포를 가지며, 이를 이용하여 모수에 대한 구간추정과 가설검정을 수행할 수 있다. 이제 1장에서의 단순회귀모형 가정(선형성, 정규성, 등분산성, 독립성) 이 모두 성립한다고 전제하여 $\beta_0, \beta_1$ 및 $\mu_{y\cdot x}$에 대한 구간추정을 살펴보자.
 - prediction band: 특정 $x$에서의 평균반응 $\mu_{y\cdot x}$에 대한 구간추정은 confidence band라고도 불리는 반면, 개별 관측값 $y$에 대한 구간추정은 prediction band라고도 불린다. 이는 개별 관측값이 평균반응보다 더 큰 변동성을 가지기 때문이다.
 
 
@@ -19,24 +20,21 @@ $$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x$$
 
 $$\hat{\beta}_1 = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}$$
 
-였는데, 이를 다음과 같이 쓸 수 있다.
+였는데, 분자는 $\sum(x_i-\bar x)y_i -\bar y\sum(x_i - 
+\bar x) = \sum(x_i-\bar x)y_i$ 이므로, 다음과 같이 쓸 수 있다.
 
 $$\hat{\beta}_1 = \sum a_i y_i, \quad a_i = \frac{x_i - \bar{x}}{\sum (x_i - \bar{x})^2}$$
 
 따라서 $\hat{\beta}_1$은 서로 독립인 $y_i$들의 선형결합이고, $y_i$는 정규분포를 따르므로 $\hat{\beta}_1$도 정규분포를 따른다.
 
-**기대값** 
- 
-$$E(\hat{\beta}_1) = \sum a_i E(y_i) = \sum a_i (\beta_0 + \beta_1 x_i) = \beta_1$$
-
+**기대값**: $E(\hat{\beta}_1) = \sum a_i E(y_i) = \sum a_i (\beta_0' + \beta_1(x_i-\bar x)) = \beta_0'\frac{\sum(x_i-\bar x)}{\sum(x_i-\bar x)^2}+ \beta_1\frac{\sum(x_i-\bar x)^2}{\sum(x_i-\bar x)^2} = \beta_1$.  
 즉, $\hat{\beta}_1$은 불편추정량이다.
 
-**분산** 
- 
-$$\mathrm{Var}(\hat{\beta}_1) = \sigma^2 \sum a_i^2 = \frac{\sigma^2}{S_{xx}} \\
-S_{xx} = \sum (x_i - \bar{x})^2$$
+**분산**: 공분산이 모두 0이므로, $\mathrm{Var}(\hat{\beta}_1) = \sum a_i^2 \mathrm{Var}(y_i)
+=\sum(\frac{(x_i-\bar x)^2}{(\sum(x_i-\bar x)^2)^2})\sigma^2 = \frac{\sigma^2}{\sum(x_i-\bar x)^2}$ 
+이므로 $\hat\beta_1$의 분포는 $\hat\beta_1 \sim N(\beta_1, \sigma^2/S_{(xx)})$이 된다.
 
-$\sigma^2$의 추정량은 $MSE = \frac{SSE}{n-2}$ 이므로,
+$\sigma^2$의 추정량은 $s^2_{y\cdot x}$또는 $MSE = \frac{SSE}{n-2}$ 이므로,
 
 $$\widehat{\mathrm{Var}}(\hat{\beta}_1) = \frac{MSE}{S_{xx}}$$
 
@@ -77,6 +75,44 @@ $$\widehat{\mathrm{Var}}(\hat{\beta}_0) = MSE \left( \frac{1}{n} + \frac{\bar{x}
 $$\hat{\sigma}_{\hat{\beta}_0} = \sqrt{ MSE \left( \frac{1}{n} + \frac{\bar{x}^2}{S_{xx}} \right) }$$
 
 **신뢰구간**  
+모집단에서 회귀모형 절편 $\beta_0$는 표본으로 구한 식으로부터 $\hat\beta_0 = \bar y - \hat\beta_1\bar x$로 추정한다. $\hat\beta_1$와 마찬가지로 이 추정량도 $y_i$들의 선형결합임을 알 수 있고, 표본분포는 정규분포를 따른다. $\hat\beta_0$의 기댓값은 
+
+$$E(\hat\beta_0) = E(\bar y)-\bar x \cdot E(\hat\beta_1) = (\beta_0 +\beta_1 \bar x) -\bar x \beta_1 = \beta_0$$
+
+이고, 분산은
+
+$$ \mathrm{Var}(\hat\beta_0) = \mathrm{Var}(\bar y-\hat\beta_1\bar x) = \mathrm{Var}(\bar y) +(\bar x)^2\mathrm{Var}(\hat\beta_1) -2\mathrm{Cov}(\bar y,\hat\beta_1 \bar x) \\= \sigma^2(\frac1n +\frac{(\bar x)^2}{S_{(xx)}})\sigma^2 - 2\bar x \mathrm{Cov}(\bar y, \hat\beta_1)
+$$
+
+이때 공분산을 계산하기 위해 다음과 같이 놓자.
+
+$$\bar{Y}=\frac{1}{n}\sum_{i=1}^nY_i, \qquad \hat{\beta}_1=\sum_{j=1}^n a_jY_j, \qquad a_j=\frac{x_j-\bar{x}}{S_{xx}}.$$
+
+그러면 공분산의 선형성에 따라
+
+$$
+\mathrm{Cov}(\bar{Y},\hat{\beta}_1)
+=\mathrm{Cov}\left(\frac{1}{n}\sum_{i=1}^nY_i,\sum_{j=1}^n a_jY_j\right) =\frac{1}{n}\sum_{i=1}^n\sum_{j=1}^n a_j\mathrm{Cov}(Y_i,Y_j).
+$$
+
+여기에는 원래 $i,j$에 대한 이중합이 들어간다. 회귀모형의 오차들이 서로 독립이므로
+
+$$
+\mathrm{Cov}(Y_i,Y_j)=
+\begin{cases}
+\sigma^2, & i=j,\\
+0, & i\ne j.
+\end{cases}
+$$
+
+따라서 $i=j$인 항만 남아
+
+$$
+\mathrm{Cov}(\bar{y},\hat{\beta}_1) =\frac{1}{n}\sum_{i=1}^n a_i\sigma^2 =\frac{\sigma^2}{nS_{xx}}\sum_{i=1}^n(x_i-\bar{x}) =0.
+$$
+
+따라서 $ \mathrm{Var}(\hat\beta_0) =\sigma^2(\frac1n +\frac{(\bar x)^2}{S_{(xx)}})\sigma^2$
+
 - $\sigma^2$를 아는 경우:
 
 $$\hat{\beta}_0 \pm z_{\alpha/2} \sqrt{ \sigma^2 \left( \frac{1}{n} + \frac{\bar{x}^2}{S_{xx}} \right) }$$
@@ -86,17 +122,18 @@ $$\hat{\beta}_0 \pm z_{\alpha/2} \sqrt{ \sigma^2 \left( \frac{1}{n} + \frac{\bar
 $$\hat{\beta}_0 \pm t_{\alpha/2}(n-2) \sqrt{ MSE \left( \frac{1}{n} + \frac{\bar{x}^2}{S_{xx}} \right) }$$
 
 ### 2.1.3 $\mu_{y\cdot x} = E(Y|X=x)$의 신뢰구간
-어떤 특정한 $x$에서의 평균반응은 $\mu_{y\cdot x} = \beta_0 + \beta_1 x$ 이며, 추정값은 $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x$
+어떤 특정한 $x$에서의 평균반응은 $\mu_{y\cdot x} = \beta_0 + \beta_1 x$ 이며, 추정값은 $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x=\hat\beta_0'+\hat\beta_1(x-\bar x)$
 
 **기대값** 
  
-$$E(\hat{y}) = \mu_{y\cdot x}$$
+$$E(\hat{y}) = E(\hat{\beta}_0 + \hat{\beta}_1 x)= \beta_0 + \beta_1 x= \mu_{y\cdot x}$$
 
 즉, 불편추정량이다.
 
 **분산** 
  
-$$\mathrm{Var}(\hat{y}) = \sigma^2 \left( \frac{1}{n} + \frac{(x - \bar{x})^2}{S_{xx}} \right)$$
+$$\mathrm{Var}(\hat{y}) = \mathrm{Var}(\bar y+\hat\beta_1(x-\bar x)) = \mathrm{Var}(\bar y) +(x-\bar x)^2\mathrm{Var}(\hat\beta_1)+ 2(x-\bar x)\mathrm{Cov}(\bar y,\hat\beta_1) \\= \sigma^2(\frac1n +\frac{(x-\bar x)^2}{S_{(xx)}})\sigma^2 - 2(x-\bar x) \mathrm{Cov}(\bar y, \hat\beta_1) \\
+= \sigma^2 \left( \frac{1}{n} + \frac{(x - \bar{x})^2}{S_{xx}} \right)$$
 
 - 분산은 $x$의 함수로서, $\bar{x}$에서 멀어질수록 증가하고, $\bar{x}$에서 최소가 된다.
 - 표본크기 $n$이 커질수록 분산이 감소한다.
@@ -117,11 +154,13 @@ $$\hat{y} \pm t_{\alpha/2}(n-2) \sqrt{ MSE \left( \frac{1}{n} + \frac{(x - \bar{
 ### 2.1.4 개별 관측값 $y$의 신뢰구간 (예측구간)
 $y$의 기댓값이 아닌, 개별적인 관측값 $y_0$에 대한 구간추정은 예측구간(prediction interval)이라고 한다.
 
+$\mu_{y\cdot x} = \beta_0 + \beta_1 x$이고 회귀모형은 $y = \mu_{y\cdot x} + \epsilon$ 이므로, 하나의 예측값 $y_x$는 평균반응 $\mu_{y\cdot x}$의 예측값 $\hat y$이 갖는 분산에 $\sigma^2$를 더한 크기의 분산을 갖는다.
+
 하나의 새로운 관측값 $y_0$에 대한 예측분산은
 
-$$\mathrm{Var}(y_0) = \mathrm{Var}(\hat{y}) + \mathrm{Var}(\epsilon_0) = \sigma^2 \left( 1 + \frac{1}{n} + \frac{(x - \bar{x})^2}{S_{xx}} \right)$$
+$$\mathrm{Var}(y_s) = \mathrm{Var}(\hat{y}) + \mathrm{Var}(\epsilon) = \sigma^2 \left( 1 + \frac{1}{n} + \frac{(x - \bar{x})^2}{S_{xx}} \right)$$
 
-이고, $$\widehat{\mathrm{Var}}(\hat{y}_0) = MSE \left( 1 + \frac{1}{n} + \frac{(x - \bar{x})^2}{S_{xx}} \right)$$
+이고, $$\widehat{\mathrm{Var}}(\hat{y}_s) = MSE \left( 1 + \frac{1}{n} + \frac{(x - \bar{x})^2}{S_{xx}} \right)$$
 
 따라서 예측구간은
 
@@ -137,12 +176,9 @@ $$\hat{y} \pm t_{\alpha/2}(n-2) \sqrt{ MSE \left( 1 + \frac{1}{n} + \frac{(x - \
 
 
 ## 2.2 가설검정 (Hypothesis Testing)
-모집단의 회귀직선
+모집단의 회귀직선 $\mu_{y\cdot x} = \beta_0 + \beta_1 x$ 정확히 알려면 모집단 전체를 관측해야 한다. 이는 불가능하거나 바람직하지 않을 경우가 많으므로, 모수가 특정 값을 취하는지 아닌지 여부를 검정하는 편이 좋다.
 
-$$\mu_{y\cdot x} = \beta_0 + \beta_1 x$$
-
-의 모수에 대해 특정 값을 취하는지 아닌지 여부를 검정하는 절차를 다룬다.  
-일반적으로 모수 $\theta$의 불편추정량 $\hat{\theta}$가 정규분포를 따르고 분산이 알려진 경우, 검정통계량은
+일반적으로 모수 $\theta$의 추정량 $\hat{\theta}$가 불편추정량이고, 정규분포를 따르는경우, 검정통계량을 아래와 같이 만들어 검정할 수 있다:
 
 $$Z_0 = \frac{\hat{\theta} - \theta_0}{\sqrt{\mathrm{Var}(\hat{\theta})}}$$
 
@@ -167,13 +203,15 @@ $$t_0 = \frac{\hat{\beta}_1 - \beta_{10}}{\sqrt{MSE/S_{xx}}}$$
 
 이며 자유도 $n-2$의 t-분포를 따른다.
 
-양측검정에서
+양측검정이므로
 
 $$|t_0| > t_{\alpha/2}(n-2)$$
 
 이면 귀무가설을 기각한다.
 
 ### 2.2.2 $\beta_0$의 검정
+앞선 $\beta_1$검정과 같은 방법을 따르면 된다. 여기선 단측검정인 경우를 보자.
+
 가설:
 
 $$H_0 : \beta_0 = \beta_{00}, \qquad H_1 : \beta_0 < \beta_{00} \quad \text{(단측 예시)}\\
@@ -225,21 +263,20 @@ $$|t_0| > t_{\alpha/2}(n-2)$$
 
 
 ## 2.3 상관계수의 검정 (Test of Correlation Coefficient)
-이 절에서는 모집단 상관계수 $\rho$에 대한 추론을 다룬다.
-표본상관계수 $r$의 분포는 정규분포가 아니며, $\rho$에 의존한다. 이를 해결하기 위해 Fisher의 z-변환을 사용한다.
+이 절에서는 모집단 상관계수(population coefficient of correlation) $\rho$에 대한 추정을 다룬다. 이 계수는 설명변수 x가 확률변수면 x와 y의 선형성의 측도가 된다.
+
+표본상관계수 $r$의 분포는 정규분포가 아니며, $\rho$에 의존한다. 이 분포는 Fisher에 의해 처음 연구되었다: Fisher의 z-변환
 
 > 참고: Fisher's z-transformation
 > r을 g(r)로 변환하여 정규분포에 근사시키는 방법. r의 분포가 비대칭적이므로, z-변환을 통해 정규분포에 근사시킬 수 있다.
 >
 > $$g(r) = \frac{1}{2}\ln\left(\frac{1+r}{1-r}\right)$$
 
-**Fisher 변환** 
- 
-$$Z' = \frac{1}{2}\ln\left(\frac{1+r}{1-r}\right)$$
+**Fisher 변환** 통계량: $Z' = \frac{1}{2}\ln\left(\frac{1+r}{1-r}\right)$
 
-표본이 충분히 클 때 (대략 $n \ge 25$)
+표본이 충분히 클 때 (대략 $n \ge 25$) 근사적으로 정규분포를 한다.
 
-$$E(Z') = \frac{1}{2} \ln\left(\frac{1+\rho}{1-\rho}\right) \\
+$$E(Z') = \frac{1}{2} \ln\left(\frac{1+\rho}{1-\rho}\right), \quad
 \mathrm{Var}(Z') = \frac{1}{n-3}$$
 
 표준화된 통계량 
@@ -263,19 +300,73 @@ $$|Z| > z_{\alpha/2}$$
 이면 기각한다.
 
 **회귀계수와의 관계**  
-설명변수 $x$가 확률변수가 아닌 경우,
-
-$$H_0 : \beta_1 = 0$$
-
-은
-
-$$H_0 : \rho = 0$$
-
-과 동등하다. 이때 검정통계량은
+설명변수 $x$가 확률변수가 아닌 경우, $H_0 : \beta_1 = 0$ 은 $H_0 : \rho = 0$ 과 동등하다. 이때 검정통계량은
 
 $$t_0 = \frac{r\sqrt{n-2}}{\sqrt{1-r^2}}$$
 
 이며 자유도 $n-2$의 t-분포를 따른다.
+
+>**증명**
+>
+>다음과 같이 정의한다.
+>
+>$S_{xx}=\sum_{i=1}^n(x_i-\bar{x})^2,\quad S_{yy}=\sum_{i=1}^n(y_i-\bar{y})^2, \ S_{xy}=\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y}),\quad
+>r=\frac{S_{xy}}{\sqrt{S_{xx}S_{yy}}}$
+>
+>단순선형회귀에서 기울기의 최소제곱추정량은
+>
+>$$
+>\hat{\beta}_1
+>=\frac{S_{xy}}{S_{xx}}
+>=r\sqrt{\frac{S_{yy}}{S_{xx}}}
+>=r\frac{s_y}{s_x}
+>$$
+>
+>이다. 또한 단순선형회귀에서는 $R^2=r^2$이므로 $SSE=(1-r^2)S_{yy}$ 이고,
+>
+>$$
+>MSE=\frac{SSE}{n-2}
+>=\frac{(1-r^2)S_{yy}}{n-2}
+>$$
+>
+>이다. 따라서 $\hat{\beta}_1$의 표준오차는
+>
+>$$
+>\sqrt{\frac{MSE}{S_{xx}}} = \sqrt{\frac{(1-r^2)S_{yy}}{(n-2)S_{xx}}} =
+>\frac{s_y}{s_x}\sqrt{\frac{1-r^2}{n-2}}
+>$$
+>
+>이다. 이를 검정통계량에 대입하면
+>
+>$$
+>t_0 = \frac{
+>r\frac{s_y}{s_x}-\beta_{10}
+>}{
+>\frac{s_y}{s_x}\sqrt{\frac{1-r^2}{n-2}}
+>}
+>$$
+>
+>이고, 이를 정리하면 다음과 같다.
+>
+>$$
+>\boxed{
+>t_0 = \left(
+>r-\beta_{10}\frac{s_x}{s_y}
+>\right)
+>\sqrt{\frac{n-2}{1-r^2}}
+>}
+>$$
+>
+>특히 귀무가설이 $H_0:\beta_1=0$인 경우에는 $\beta_{10}=0$이므로
+>
+>$$
+>\boxed{
+>t_0 = \frac{r\sqrt{n-2}}{\sqrt{1-r^2}}
+>}
+>$$
+>
+>가 된다. 이는 단순선형회귀에서 $H_0:\beta_1=0$에 대한 검정통계량과 $H_0:\rho=0$에 대한 상관계수 검정통계량이 동일함을 의미한다.
+
 
 > 회귀분석 모형에서 설명변수 $x$가 확률변수가 아니므로 모상관계수 $\rho$는 정의되지 않지만, 표본상관계수 $r$은 통계량 값으로, 정의는 문제가 없어서 여전히 계산할 수 있다.  
 > 이 경우 $r$이 0에 가까울수록 회귀계수 $\hat{\beta}_1$이 0에 가까워지고, $r$이 1 또는 -1에 가까울수록 $\hat{\beta}_1$의 절대값이 커진다. 따라서 $r$이 0에서 멀어질수록 회귀계수 $\hat{\beta}_1$이 유의미하게 다르다고 판단할 가능성이 높아진다.
@@ -312,11 +403,11 @@ $$SSE = \sum_{i=1}^{k}\sum_{j=1}^{n_i} (y_{ij} - \hat{y}_i)^2$$
 
 $$SSE = \sum_{i=1}^{k}\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_i)^2 + \sum_{i=1}^{k} n_i (\bar{y}_i - \hat{y}_i)^2$$
 
-첫 항: **순오차제곱합, pure error sum of squares**
+- 첫 항: **순오차제곱합, pure error sum of squares**
 
 $$SSPE = \sum_{i=1}^{k}\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_i)^2$$
 
-두 번째 항: **적합결여제곱합, lack-of-fit sum of squares**
+- 두 번째 항: **적합결여제곱합, lack-of-fit sum of squares**
 
 $$SSLF = \sum_{i=1}^{k} n_i (\bar{y}_i - \hat{y}_i)^2$$
 
@@ -342,6 +433,12 @@ $$MSPE = \frac{SSPE}{n-k}, \quad MSLF = \frac{SSLF}{k-2}$$
  
 $$F_0 = \frac{MSLF}{MSPE}$$
 
+회귀직선이 옳든 아니든간에 
+
+$$E(MSPE) = \sigma^2, \quad E(MSLF) = \sigma^2+\frac{\sum_{i=1}^k n_i[E(y_i)-E(\hat y_i)]^2}{k-2}$$
+
+이 성립한다. $E(\hat y_i) = E(y_i) = \beta_0 + \beta_1x_i$이면 $E(MSLF) = \sigma^2$와 같다. 따라서 $F_0$값이 1에 가까우면 회귀직선모형이 옳고, $F_0$값이 커지면 옳지 않은 가정이라는 의미가 된다.
+
 가설:
 
 $$H_0 : E(Y|X=x) = \beta_0 + \beta_1 x \quad H_1 : E(Y|X=x) \neq \beta_0 + \beta_1 x \\
@@ -349,10 +446,15 @@ F_0 > F_\alpha(k-2, n-k)$$
 
 이면 선형모형이 부적절하다고 판단한다.
 
+**증명** TODO:
+$$E(MSPE) = \sigma^2, \quad E(MSLF) = \sigma^2+\frac{\sum_{i=1}^k n_i[E(y_i)-E(\hat y_i)]^2}{k-2}$$
+
+
+
 ### 2.4.2 잔차의 검토 (Residual Analysis)
 잔차는 $e_i = y_i - \hat{y}_i$이고, OLS의 성질로부터
 
-$$\sum e_i = 0, \qquad \sum x_i e_i = 0, \qquad \sum \hat{y}_i e_i = 0$$
+$$\sum e_i = 0, \quad \sum x_i e_i = 0, \quad \sum \hat{y}_i e_i = 0$$
 
 **잔차 산점도 해석**
 - 랜덤한 패턴 → 선형성 가정 적절
@@ -361,7 +463,9 @@ $$\sum e_i = 0, \qquad \sum x_i e_i = 0, \qquad \sum \hat{y}_i e_i = 0$$
 - 구조적 패턴 → 모형 오적합
 
 ### 2.4.3 잔차의 성질
-잔차: 
+> 주의: 오차항은 잔차랑 다름. 잔차는 $e$, 오차항은 $\varepsilon$
+
+잔차: 잔차를 구성하는 성분 모두 정규분포를 따르고 선형결합이므로 잔차도 정규분포를 따른다.
 
 $$e_i = y_i - \hat{y}_i = (y_i - \mu_{y\cdot x_i}) + (\mu_{y\cdot x_i} - \hat{y}_i) = \varepsilon_i - (\hat{\beta}_0 - \beta_0) - (\hat{\beta}_1 - \beta_1)x_i$$
 
@@ -385,14 +489,10 @@ $$\mathrm{Cov}(e_i,e_j) = \left[ \frac{1}{n} + \frac{(x_i-\bar{x})(x_j-\bar{x})}
 
 
 ## 2.5 오차의 자기상관 (Autocorrelation of Errors)
-설명변수 (x)가 시간(time)을 나타내는 경우, 오차항 사이의 독립성 가정이 특히 중요해진다.
+설명변수 $x$가 시간(time)을 나타내는 경우, 오차항 사이의 독립성 가정이 특히 중요해진다.
 잔차가 시간의 흐름에 따라 일정한 주기(cycle)나 패턴을 보인다면 오차들 사이에 상관관계가 존재할 가능성이 있다.
 
-단순선형회귀모형
-
-$$y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$$
-
-에서 오차가 다음과 같이 주어진다고 하자.
+단순선형회귀모형 $y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$ 에서 오차가 다음과 같이 주어진다고 하자.
 
 $$\varepsilon_i = \rho \varepsilon_{i-1} + \delta_i$$
 
@@ -409,15 +509,15 @@ $$\varepsilon_i = \rho \varepsilon_{i-1} + \delta_i$$
 $$\varepsilon_i = \rho \varepsilon_{i-1} + \delta_i = \rho (\rho \varepsilon_{i-2} + \delta_{i-1}) + \delta_i = \rho^2 \varepsilon_{i-2} + \rho \delta_{i-1} + \delta_i \\
 = \rho^3 \varepsilon_{i-3} + \rho^2 \delta_{i-2} + \rho \delta_{i-1} + \delta_i = \cdots \\ = \sum_{j=0}^{\infty} \rho^j \delta_{i-j}$$
 
-$E(\delta_i)=0$이고 $Cov(\delta_i,\delta_j)=0$이므로,
+$E(\delta_i)=0$이고 $\mathrm{Cov}(\delta_i,\delta_j)=0$이므로,
 
 $$
 E(\varepsilon_i)=0, \quad \forall i \\
 \mathrm{Var}(\varepsilon_i) = \sigma_\delta^2 \sum_{j=0}^{\infty} \rho^{2j} = \frac{\sigma_\delta^2}{1-\rho^2} $$
 
 $$
-\mathrm{Cov}(\varepsilon_i,\varepsilon_{i-1}) = E(\varepsilon_i \varepsilon_{i-1}) = E\left( \sum_{j=0}^{\infty} \rho^j \delta_{i-j} \cdot \sum_{k=0}^{\infty} \rho^k \delta_{i-1-k} \right) =
-\rho \frac{\sigma_\delta^2}{1-\rho^2}
+\mathrm{Cov}(\varepsilon_i,\varepsilon_{i-1}) = E(\varepsilon_i \varepsilon_{i-1}) = E\left( \sum_{j=0}^{\infty} \rho^j \delta_{i-j} \cdot \sum_{k=0}^{\infty} \rho^k \delta_{i-1-k} \right)
+= \rho \mathrm{Var}(\epsilon_{i-1}) = \rho \frac{\sigma_\delta^2}{1-\rho^2}
 $$
 
 일반적으로
@@ -427,6 +527,20 @@ $$\mathrm{Cov}(\varepsilon_i,\varepsilon_{i-j}) = \rho^j \frac{\sigma_\delta^2}{
 따라서 일차자기상관이 있는 단순선형회귀모형에서 오차벡터 $\varepsilon=(\varepsilon_1,\dots,\varepsilon_n)'$의 분산-공분산행렬은
 
 $$\mathrm{Var}(\varepsilon) = E(\varepsilon \varepsilon') = \frac{\sigma_\delta^2}{1-\rho^2} \begin{pmatrix} 1 & \rho & \rho^2 & \cdots \\ \rho & 1 & \rho & \cdots \\ \rho^2 & \rho & 1 & \cdots \\ \vdots & \vdots & \vdots & \ddots \end{pmatrix}$$
+
+역행렬은
+
+$$
+\{\mathrm{Var}(\varepsilon)\}^{-1}
+= \frac{1}{\sigma_\delta^2}
+\begin{pmatrix}
+1 & -\rho & 0 & \cdots & 0 \\
+-\rho & 1+\rho^2 & -\rho & \ddots & \vdots \\
+0 & -\rho & 1+\rho^2 & \ddots & 0 \\
+\vdots & \ddots & \ddots & \ddots & -\rho \\
+0 & \cdots & 0 & -\rho & 1
+\end{pmatrix}
+$$
 
 ### Durbin–Watson 검정
 일차자기상관계수(first-order autocorrelation coefficient) $\rho$가 0인지 여부를 검정하는 절차를 다룬다.  

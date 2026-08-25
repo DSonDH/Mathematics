@@ -1143,7 +1143,7 @@ W \sim N\left(0, \operatorname{Var}\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{
 
 이전 예제에서 더 나아가, 이변량 정규분포 $N(\mu_1, \mu_2; \sigma_1^2, \sigma_2^2, \rho)$ ($\sigma_1>0, \sigma_2>0, -1<\rho<1$)에서 표본상관계수의 극한분포를 살펴보자.
 
-이 경우 $(Y_1 - \rho X_1 \mid X_1 = x_1) \sim N(0, 1-\rho^2)$로, $Y_1 - \rho X_1$과 $X_1$은 조건부분포가 x1에 의존하지 않으므로 서로 독립이다. $\mu_1 = \mu_2 = 0$, $\sigma_1 = \sigma_2 = 1$로 두면
+이 경우 $(Y_1 - \rho X_1 \mid X_1 = x_1) \sim N(0, 1-\rho^2)$로, 조건부분포가 $x_1$에 의존하지 않으므로 서로 독립이다. 따라서 $\mu_1 = \mu_2 = 0$, $\sigma_1 = \sigma_2 = 1$인 경우에
 
 $$ T = \frac{Y_1 - \rho X_1}{\sqrt{1-\rho^2}} $$
 
