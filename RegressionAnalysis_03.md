@@ -103,7 +103,7 @@ $$y = \beta_0 + \beta_1 x' + \varepsilon$$
 3. $y' = 1/y,\; x' = 1/x$
 
 적용 상황:
-* $x$ 증가에 따라 $y$가 일정 값으로 수렴(convergence)하는 곡선(curvilinear relationship)을 보일 때 적절하다.
+* $x$ 증가에 따라 $y$가 일정 값으로 **수렴(convergence)** 하는 곡선(curvilinear relationship)을 보일 때 적절하다.
 
 ### 3.1.3 Box–Cox 변환 (Box–Cox Transformation)
 로그변환, 역변환, 멱변환(power transformation)을 포괄하는 일반적 변환체계이다. 정규성(normality), 등분산성(homoscedasticity), 선형성(linearity)을 동시에 만족시키기 위한 방법이다.
@@ -190,8 +190,7 @@ $$y_i = \beta_0 + \beta_1 x_i^* + (\varepsilon_i - \beta_1 \delta_i)$$
 ### 3.2.2 공분산 구조
 설명변수와 오차항의 공분산:
 
-$$\mathrm{Cov}(x_i^*, \varepsilon_i - \beta_1 \delta_i) \\
-= E[(x_i^* - E(x_i^*))( \varepsilon_i - \beta_1 \delta_i - E(\varepsilon_i - \beta_1 \delta_i))]$$
+$$\mathrm{Cov}(x_i^*, \varepsilon_i - \beta_1 \delta_i) = E[(x_i^* - E(x_i^*))( \varepsilon_i - \beta_1 \delta_i - E(\varepsilon_i - \beta_1 \delta_i))]$$
 
 $$= E[(x_i + \delta_i - x_i)(\varepsilon_i - \beta_1 \delta_i)]$$
 
@@ -218,13 +217,13 @@ $$\hat{\beta}_1 = \frac{\sum (x_i^* - \bar{x}^*)(y_i - \bar{y})}{\sum (x_i^* - \
 이를 감쇠편의(attenuation bias)라고 한다.
 
 
-## 3.3 x의 수준 선택 (Choice of Levels of X)
+## 3.3 x의 수준 선택 (Choice of Levels of x)
 실험계획법(design of experiments)의 관점에서 설명변수 $x$의 관측수준(level)을 어떻게 선택할 것인지가 중요한 문제이다.
 
 - 정해진 $x$값에서 몇 번 $y$를 관측할 것인가?
 - $x$값을 어떻게 분포시킬 것인가? 등등
 
-### 3.3.1 실험 목적
+**실험 목적**
 1. 기울기 $\beta_1$을 정확히 추정
 2. 절편 $\beta_0$을 정확히 추정
 3. 평균반응 $E(Y|X=x)$ 예측
@@ -237,7 +236,7 @@ $$\mathrm{Var}(\hat{\beta}_1) = \sigma^2 \left[ \frac{1}{\sum (x_i - \bar{x})^2}
 \mathrm{Var}(\hat{y}) = \sigma^2 \left[ \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum (x_i - \bar{x})^2} \right]\\
 \mathrm{Var}(\hat{y}_0) = \sigma^2 \left[ 1 + \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum (x_i - \bar{x})^2} \right]$$
 
-### 3.3.2 기울기 추정 정밀화
+**기울기 추정 정밀화**  
 기울기 분산 최소화를 위해서는
 
 $$S_{xx} = \sum (x_i - \bar{x})^2$$
@@ -251,15 +250,15 @@ $$S_{xx} = \sum (x_i - \bar{x})^2$$
 * 하지만, 이런 극단적 배치는 비선형성(nonlinearity) 가능성을 간과할 수 있다.
 * 비선형 가능성이 있는 경우에는 최소 세 수준을 사용하는 것이 바람직하다.
 
-### 3.3.3 절편 추정 정밀화
+**절편 추정 정밀화**  
 절편의 분산을 줄이려면 $\bar{x} = 0$이 되도록 설계하는 것이 이상적이다.
 
-### 3.3.4 예측 정확도 향상
+**예측 정확도 향상**  
 관심 있는 $x$ 값이 $\bar{x}$에 가까울수록 예측분산이 작다.
 
 
 ## 3.4 두 회귀선의 비교 (Comparison of Two Regression Lines)
-두 모집단(population)에 대해 회귀직선이 동일한지 검정하는 문제이다.
+두 모집단(population)을 비교할때, 회귀직선이 동일한지 검정하는 문제이다.
 
 * 소득 당 소비전력량의 관계를 보고싶은데, 서울 모델이랑 부산 모델이랑 같을까?
 * 지역 간 소득–소비 관계 비교
@@ -348,10 +347,8 @@ $$|t_0| > t_{\alpha/2}(df) \Rightarrow H_0 \text{ 기각}$$
 
 $$ 
 \sum (y_i - \bar{y})^2 
-= \sum y_i^2 - 2\bar{y} \sum y_i + n \bar{y}^2 \\
-= \sum y_i^2 - n \bar{y}^2 \\
-= y^T y - \frac{1}{n} (1^T y)^2 \\
-= y^T \left(I_n - \frac{1}{n} 1 1^T\right) y \\
+= \sum y_i^2 - 2\bar{y} \sum y_i + n \bar{y}^2 = \sum y_i^2 - n \bar{y}^2 \\
+= y^T y - \frac{1}{n} (1^T y)^2 = y^T \left(I_n - \frac{1}{n} 1 1^T\right) y \\
 = y^T A y
 $$
 
@@ -389,6 +386,7 @@ $$\mathbf{y}^T \mathbf{y} \sim \chi^2(n,\lambda), \quad \lambda=\frac{1}{2} \mat
 $$\frac{Q_1/n_1}{Q_2/n_2} \sim F(n_1,n_2,\lambda)$$
 
 ### 3.5.3 일반 이차형식의 분포
+TODO: FIXME: 다시 증명 검토해보기
 
 #### 정리 3.1: 
 $\mathbf{y \sim N(\mathbf{\mu},\mathbf{V})}$ 이면
@@ -396,68 +394,1639 @@ $\mathbf{y \sim N(\mathbf{\mu},\mathbf{V})}$ 이면
 $$E(\mathbf{y}^T \mathbf{A} \mathbf{y})=\mathrm{tr}(\mathbf{A}\mathbf{V})+\mathbf{\mu}^T \mathbf{A}\mathbf{\mu}\\
 \mathrm{Cov}(\mathbf{y},\mathbf{y}^T \mathbf{A} \mathbf{y})=2\mathbf{V}\mathbf{A}\mathbf{\mu}$$
 
-증명:  
-
-$$E(\mathbf{y}^T \mathbf{A} \mathbf{y}) = E[\mathrm{tr}(\mathbf{y}^T \mathbf{A} \mathbf{y})] = E[\mathrm{tr}(\mathbf{A} \mathbf{y} \mathbf{y}^T)] = \mathrm{tr}(\mathbf{A} E[\mathbf{y}\mathbf{y}^T]) \\
-= \mathrm{tr}(\mathbf{A} (\mathbf{V} + \mathbf{\mu}\mathbf{\mu}^T)) = \mathrm{tr}(\mathbf{A}\mathbf{V}) + \mathrm{tr}(\mathbf{A}\mathbf{\mu}\mathbf{\mu}^T) = \mathrm{tr}(\mathbf{A}\mathbf{V}) + \mathbf{\mu}^T \mathbf{A}\mathbf{\mu}$$
-
-$$\mathrm{Cov}(\mathbf{y},\mathbf{y}^T \mathbf{A} \mathbf{y}) = E(\mathbf{y} - \mathbf{\mu})(\mathbf{y}^T \mathbf{A} \mathbf{y} - E(\mathbf{y}^T \mathbf{A} \mathbf{y})) \\
-= E(\mathbf{y} - \mathbf{\mu})(\mathbf{y}^T \mathbf{A} \mathbf{y} - \mathrm{tr}(\mathbf{A}\mathbf{V}) - \mathbf{\mu}^T \mathbf{A}\mathbf{\mu}) \\
-= E(\mathbf{y} - \mathbf{\mu})(\mathbf{(y- \mu)}^T \mathbf{A} \mathbf{(y- \mu)} - \mathrm{tr}(\mathbf{A}\mathbf{V}) + 2\mathbf{(y- \mu)}^T \mathbf{A}\mathbf{\mu}) \\
-= E(\mathbf{y} - \mathbf{\mu})(\mathbf{(y- \mu)}^T \mathbf{A} \mathbf{(y- \mu)} - \mathrm{tr}(\mathbf{A}\mathbf{V})) + 2E(\mathbf{y} - \mathbf{\mu})\mathbf{(y- \mu)}^T \mathbf{A}\mathbf{\mu} \\
-= 2\mathbf{V}\mathbf{A}\mathbf{\mu}
-$$
+>**증명**
+>
+>$$
+>E(\mathbf{y}\mathbf{y}^T) 
+>= E[(\mathbf{y}-\mathbf{\mu})(\mathbf{y}-\mathbf{\mu})^T+\mathbf{y}\mathbf{\mu}^T+\mathbf{\mu}\mathbf{y}^T-\mathbf{\mu}\mathbf{\mu}^T] 
+>= V+\mathbf{\mu}\mathbf{\mu}^T
+>$$
+>
+>를 활용한다.
+>
+>$$E(\mathbf{y}^T \mathbf{A} \mathbf{y}) = E[\mathrm{tr}(\mathbf{y}^T \mathbf{A} \mathbf{y})] = E[\mathrm{tr}(\mathbf{A} \mathbf{y} \mathbf{y}^T)] = \mathrm{tr}(\mathbf{A} E[\mathbf{y}\mathbf{y}^T]) \\
+>= \mathrm{tr}(\mathbf{A} (\mathbf{V} + \mathbf{\mu}\mathbf{\mu}^T)) = \mathrm{tr}(\mathbf{A}\mathbf{V}) + \mathrm{tr}(\mathbf{A}\mathbf{\mu}\mathbf{\mu}^T) = \mathrm{tr}(\mathbf{A}\mathbf{V}) + \mathbf{\mu}^T \mathbf{A}\mathbf{\mu}$$
+>
+>$$\mathrm{Cov}(\mathbf{y},\mathbf{y}^T \mathbf{A} \mathbf{y}) = E[(\mathbf{y} - \mathbf{\mu})(\mathbf{y}^T \mathbf{A} \mathbf{y} - E(\mathbf{y}^T \mathbf{A} \mathbf{y}))] 
+>= E[(\mathbf{y} - \mathbf{\mu})\left(\mathbf{y}^T \mathbf{A} \mathbf{y} - \mathrm{tr}(\mathbf{A}\mathbf{V}) - \mathbf{\mu}^T \mathbf{A}\mathbf{\mu}\right)] \\
+>= E[(\mathbf{y} - \mathbf{\mu})\left((\mathbf{y}-\mathbf{\mu}+\mathbf{\mu})^T \mathbf{A}(\mathbf{y}-\mathbf{\mu}+\mathbf{\mu}) - \mathrm{tr}(\mathbf{A}\mathbf{V}) - \mathbf{\mu}^T \mathbf{A}\mathbf{\mu}\right)] \\
+>= E[(\mathbf{y} - \mathbf{\mu})\Big( (\mathbf{y}-\mathbf{\mu})^T \mathbf{A}(\mathbf{y}-\mathbf{\mu}) + (\mathbf{y}-\mathbf{\mu})^T \mathbf{A}\mathbf{\mu} + \mathbf{\mu}^T \mathbf{A}(\mathbf{y}-\mathbf{\mu}) + \mathbf{\mu}^T \mathbf{A}\mathbf{\mu} -\mathrm{tr}(\mathbf{A}\mathbf{V}) - \mathbf{\mu}^T \mathbf{A}\mathbf{\mu} \Big)]
+>$$
+>
+>이때 $\mathbf{A}=\mathbf{A}^T$이므로, 
+>$\mu^T\mathbf{A}(\mathbf{y}-\mu) =\left[\mu^T\mathbf{A}(\mathbf{y}-\mu)\right]^T =(\mathbf{y}-\mu)^T\mathbf{A}^T\mu =(\mathbf{y}-\mu)^T\mathbf{A}\mu$ 이므로 두 교차항은 같고, 
+>$(\mathbf{y}-\mu)^T\mathbf{A}\mu+\mu^T\mathbf{A}(\mathbf{y}-\mu)
+>=2(\mathbf{y}-\mu)^T\mathbf{A}\mu.$  
+>따라서 
+>
+>$$
+>= E[(\mathbf{y} - \mathbf{\mu})\Big( (\mathbf{y}-\mathbf{\mu})^T \mathbf{A}(\mathbf{y}-\mathbf{\mu}) - \mathrm{tr}(\mathbf{A}\mathbf{V}) + 2(\mathbf{y}-\mathbf{\mu})^T \mathbf{A}\mathbf{\mu} \Big)] \\
+>= E[(\mathbf{y} - \mathbf{\mu})\left((\mathbf{y}-\mathbf{\mu})^T \mathbf{A}(\mathbf{y}-\mathbf{\mu}) - \mathrm{tr}(\mathbf{A}\mathbf{V})\right) + 2E(\mathbf{y} - \mathbf{\mu})(\mathbf{y}-\mathbf{\mu})^T \mathbf{A}\mathbf{\mu}]
+>\\ = E[(\mathbf{y} - \mathbf{\mu})(\mathbf{y}-\mathbf{\mu})^T \mathbf{A}(\mathbf{y}-\mathbf{\mu})] - E[(\mathbf{y} - \mathbf{\mu})\mathrm{tr}(\mathbf{A}\mathbf{V})] + 2E(\mathbf{y} - \mathbf{\mu})(\mathbf{y}-\mathbf{\mu})^T \mathbf{A}\mathbf{\mu}]$$
+>
+>마지막 식의 첫 항이 0인 이유는 중심 정규분포의 3차 모멘트(변수 세개를 곱합것의 기댓값)가 원점대칭 홀함수라서 0이기 때문이다. $\mathbf{x}=\mathbf{y}-\mathbf{\mu}$ 라 두면 $\mathbf{x}\sim N(\mathbf{0},\mathbf{V})$ 이고, 성분으로 풀었을 때 $i$번째 성분은
+>
+>$$E[x_i(\mathbf{x}^T\mathbf{A}\mathbf{x})]
+>=E\left[x_i\sum_{j,k}A_{jk}x_jx_k\right]
+>=\sum_{j,k}A_{jk}E[x_ix_jx_k].$$
+>
+>중심 다변량 정규분포에서는 모든 홀수 차 모멘트가 0이므로 $E[x_ix_jx_k]=0$ 이다. 따라서 $E[\mathbf{x}(\mathbf{x}^T\mathbf{A}\mathbf{x})]=\mathbf{0}.$  
+>두번째 항은 자명하게 0이고 세번째 항은 분산 정의에 의한다. 따라서
+>
+>$$
+>= \mathbf{0} + \mathbf{0} + 2\mathbf{V}\mathbf{A}\mathbf{\mu}
+>$$
 
 #### 정리 3.2
 
-$$\mathrm{Var}(\mathbf{y}^T \mathbf{A} \mathbf{y}) = 2\mathrm{tr}(\mathbf{A}\mathbf{V})^2+4\mathbf{\mu}^T \mathbf{A} \mathbf{V} \mathbf{A}\mathbf{\mu}$$
+$$\mathrm{Var}(\mathbf{y}^T \mathbf{A} \mathbf{y}) = 2\mathrm{tr}[(\mathbf{A}\mathbf{V})^2]+4\mathbf{\mu}^T \mathbf{A} \mathbf{V} \mathbf{A}\mathbf{\mu}$$
+
+>**증명**
+>
+>$x=y-\mu$ 라 두면 $x\sim N(0,V)$
+>
+>그러면 $y^TAy =(x+\mu)^TA(x+\mu) =x^TAx+2x^TA\mu+\mu^TA\mu.$
+>
+>$\mu^TA\mu$ 는 상수이므로 $\operatorname{Var}(y^TAy) = \operatorname{Var}(x^TAx+2x^TA\mu).$  
+>일반적으로 두 확률변수 $U,V$에 대해
+>$\operatorname{Var}(U+V) =\operatorname{Var}(U)+\operatorname{Var}(V)+\operatorname{Cov}(U,V)+\operatorname{Cov}(V,U)$ 이므로
+>
+>
+>$$\operatorname{Var}(y^TAy) = \operatorname{Var}(x^TAx)+4\operatorname{Var}(x^TA\mu) +4\operatorname{Cov}(x^TAx,x^TA\mu).$$
+>
+>이제 각 항을 계산하면 된다. 먼저 $\operatorname{Cov}(x^TAx,x^TA\mu)=0$ 이다. 실제로 $E[x^TA\mu]=0$ 이므로
+>
+>$$
+>\begin{aligned}
+>\operatorname{Cov}(x^TAx,x^TA\mu)
+>&=
+>E[(x^TAx)(x^TA\mu)]\\
+>&=
+>E\left[
+>\left(\sum_{i,j}a_{ij}x_ix_j\right)
+>\left(\sum_k (A\mu)_k x_k\right)
+>\right]\\
+>&=
+>\sum_{i,j,k}a_{ij}(A\mu)_kE[x_ix_jx_k]\\
+>&=0.
+>\end{aligned}
+>$$
+>
+>마지막 등식은 평균이 $0$ 인 정규분포에서 세 변수의 곱의 기댓값이 $0$ 이기 때문이다.
+>
+>다음으로 $x^TA\mu$ 는 스칼라이므로
+>
+>$$
+>\operatorname{Var}(x^TA\mu) =E[(x^TA\mu)^2] =E[x^TA\mu\mu^TAx]\\
+>=E[\mu^TAxx^TA\mu] =\mu^TAE[xx^T]A\mu =\mu^TAVA\mu. \\
+>\therefore 4\operatorname{Var}(x^TA\mu)  = \boxed{4\mu^TAVA\mu}.
+>$$
+>
+>이제 $\operatorname{Var}(x^TAx)$ 를 보자.  
+>$E[x^TAx]=\operatorname{tr}(AV)$ 이므로, $\operatorname{Var}(x^TAx) = E[(x^TAx)^2] - [\operatorname{tr}(AV)]^2.$
+>
+>이제 $x^TAx=\sum_{i,j}a_{ij}x_ix_j$ 이므로
+>
+>$$
+>\begin{aligned}
+>E[(x^TAx)^2]
+>&=
+>E\left[
+>\sum_{i,j}a_{ij}x_ix_j
+>\sum_{k,l}a_{kl}x_kx_l
+>\right]\\
+>&=
+>\sum_{i,j,k,l}
+>a_{ij}a_{kl}
+>E[x_ix_jx_kx_l].
+>\end{aligned}
+>$$
+>
+>평균이 $0$ 인 다변량 정규분포에서는
+>
+>$$
+>\boxed{
+>E[x_ix_jx_kx_l]
+>=
+>V_{ij}V_{kl}
+>+
+>V_{ik}V_{jl}
+>+
+>V_{il}V_{jk}
+>}
+>$$
+>
+>가 성립한다 (정규분포의 **4차 모멘트 공식(Isserlis/Wick 공식)**). 이를 대입하면
+>
+>$$
+>\begin{aligned}
+>E[(x^TAx)^2]
+>&=
+>\sum_{i,j,k,l}
+>a_{ij}a_{kl}V_{ij}V_{kl}\\
+>&\quad+
+>\sum_{i,j,k,l}
+>a_{ij}a_{kl}V_{ik}V_{jl}\\
+>&\quad+
+>\sum_{i,j,k,l}
+>a_{ij}a_{kl}V_{il}V_{jk}.
+>\end{aligned}
+>$$
+>
+>첫 번째 항은 $\left(\sum_{i,j}a_{ij}V_{ij}\right)^2 = [\operatorname{tr}(AV)]^2.$  
+>나머지 두 항은 $A,V$ 가 대칭이므로 각각 $\operatorname{tr}(AVAV) = \operatorname{tr}((AV)^2)$ 가 된다. 따라서
+>
+>$$
+>E[(x^TAx)^2]
+>= [\operatorname{tr}(AV)]^2 + 2\operatorname{tr}((AV)^2).
+>$$
+>
+>그러므로
+>
+>$$
+>\begin{aligned}
+>\operatorname{Var}(x^TAx)
+>&=
+>E[(x^TAx)^2]
+>-
+>[E(x^TAx)]^2\\
+>&=
+>[\operatorname{tr}(AV)]^2
+>+
+>2\operatorname{tr}((AV)^2)
+>-
+>[\operatorname{tr}(AV)]^2\\
+>&=
+>\boxed{2\operatorname{tr}((AV)^2)}.
+>\end{aligned}
+>$$
+>
+>이들을 합치면
+>
+>$$
+>\begin{aligned}
+>\operatorname{Var}(y^TAy)
+>&=
+>\operatorname{Var}(x^TAx)
+>+4\operatorname{Var}(x^TA\mu)
+>+4\operatorname{Cov}(x^TAx,x^TA\mu)\\
+>&=
+>2\operatorname{tr}((AV)^2)
+>+
+>4\mu^TAVA\mu
+>+0.
+>\end{aligned}
+>$$
+>
+>따라서
+>
+>$$
+>\boxed{
+>\operatorname{Var}(y^TAy)
+>=
+>2\operatorname{tr}((AV)^2)
+>+
+>4\mu^TAVA\mu
+>}
+>$$
 
 #### 정리 3.3
 
-$$\mathbf{y}^T \mathbf{A} \mathbf{y} \sim \chi^2(r(\mathbf{A}),\tfrac{1}{2} \mathbf{\mu}^T \mathbf{A}\mathbf{\mu})$$
+$\mathbf y\sim N(\mu,V)$이고 $A$가 대칭행렬, $V$가 양의 정부호 행렬이라고 하자. 그러면
+
+$$
+\mathbf y^T A\mathbf y \sim \chi^2\left(r(A),\frac12\mu^T A\mu\right)
+$$
 
 가 되기 위한 필요충분조건은
 
-$$\mathbf{A}\mathbf{V}\mathbf{A}\mathbf{V}=\mathbf{A}\mathbf{V}$$
+$AVAV=AV$ 즉, $(AV)^2=AV$ 이어서 $AV$가 멱등행렬인 것이다.
 
-즉 $\mathbf{A}\mathbf{V}$가 멱등행렬(idempotent matrix)인 것이다.
+>**증명**
+>
+>먼저 $V$가 양의 정부호이므로 $V^{1/2}$와 $V^{-1/2}$가 존재하여  표준정규벡터를 정의할 수 있다: $z=V^{-1/2}(y-\mu).$ 그러면 $z\sim N(0,I)$ 이고 $y=\mu+V^{1/2}z.$ 또 $\delta=V^{-1/2}\mu$ 라고 두면 $y=V^{1/2}(z+\delta).$
+>
+>따라서 이차형식은 $y^TAy =(z+\delta)^TV^{1/2}AV^{1/2}(z+\delta).$ 여기서 $B=V^{1/2}AV^{1/2}$ 라고 두자. $A$와 $V^{1/2}$가 대칭이므로 $B$도 대칭행렬이다. 따라서 $\boxed{y^TAy=(z+\delta)^TB(z+\delta)}$
+>
+>이제 **조건 $AVAV=AV$ 과 $B$의 멱등성이 동치** 임을 보이자.  
+>$B^2 = V^{1/2}AV^{1/2}V^{1/2}AV^{1/2} = V^{1/2}AVAV^{1/2}.$ 따라서 $AVAV=AV$이면 $B^2 = V^{1/2}AV^{1/2}= B.$ 즉 $B$는 멱등행렬이다.  
+>반대로 $B^2=B$이면 $V^{1/2}AVAV^{1/2} = V^{1/2}AV^{1/2}.$ 양변의 왼쪽에 $V^{-1/2}$, 오른쪽에 $V^{-1/2}$를 곱하면 $AVAV=AV.$  
+>따라서 $\boxed{AVAV=AV\iff B^2=B}$, 
+>
+>이제 $B$는 대칭이며 멱등행렬이다. 대칭행렬이므로 직교행렬 $P$를 이용하여 $B=PDP^T$ 로 대각화할 수 있다.또한 $B^2=B$이므로 $B$의 고유값 $\lambda_i$는 $\lambda_i^2=\lambda_i$ 를 만족한다. 따라서 $\lambda_i\in\{0,1\}.$ 즉 $B$의 rank를 $r$이라 하면 적절히 순서를 정하여 $D=\operatorname{diag} (\underbrace{1,\ldots,1}_{r}, \underbrace{0,\ldots,0}_{n-r})$ 
+>로 쓸 수 있다.  
+>이제 $w=P^Tz,\quad \gamma=P^T\delta$ 라 두자. $P$는 직교행렬이고 $z\sim N(0,I)$이므로 $w\sim N(0,I).$ 따라서 $w_1,\ldots,w_n$은 서로 독립인 $N(0,1)$ 확률변수이다. 그러면
+>
+>$$
+>\begin{aligned}
+>y^TAy
+>&=(z+\delta)^TB(z+\delta)\\
+>&=(z+\delta)^TPDP^T(z+\delta)\\
+>&=(w+\gamma)^TD(w+\gamma)\\
+>&=
+>\sum_{i=1}^r(w_i+\gamma_i)^2.
+>\end{aligned}
+>$$
+>
+>각각 $w_i+\gamma_i\sim N(\gamma_i,1)$ 이므로 정의에 의해 $\sum_{i=1}^r(w_i+\gamma_i)^2$ 는 자유도 $r$, 비중심성 모수 $\sum_{i=1}^r\gamma_i^2$ 인 비중심 카이제곱분포를 따른다. 이 비중심성 모수를 원래 행렬로 표현해보자:  
+>$\sum_{i=1}^r\gamma_i^2 =\gamma^TD\gamma =\delta^TPDP^T\delta =\delta^TB\delta.$
+>
+>그런데 $\delta=V^{-1/2}\mu, \quad B=V^{1/2}AV^{1/2}$ 이므로 $\delta^TB\delta = \mu^TV^{-1/2} V^{1/2}AV^{1/2} V^{-1/2}\mu =\mu^TA\mu.$
+>
+>따라서  $\boxed{ y^TAy \sim \chi^2 \left(r,\frac12\mu^TA\mu\right)}$
+>
+>또한 $V^{1/2}$는 가역행렬이므로 $r(B)=r(V^{1/2}AV^{1/2})=r(A).$  
+>따라서$r=r(A).$
+>
+>**왜 이것이 필요조건이기도 한가?**
+>
+>$B$는 대칭이므로 일반적으로 $B=P\operatorname{diag}(\lambda_1,\ldots,\lambda_n)P^T$ 라고 쓸 수 있다. 그러면 $y^TAy = \sum_{i=1}^n \lambda_i(w_i+\gamma_i)^2.$  
+>즉 일반적인 정규벡터의 이차형식은 $\sum_i\lambda_i\chi_1^2(\gamma_i^2)$ 형태의 **가중된 카이제곱합**이다.
+>
+>이것이 하나의 일반적인 카이제곱분포가 되려면 살아 있는 항들의 계수가 모두 $1$이어야 한다. 즉 $\lambda_i$ 는 0 또는 1 이어야 한다. 따라서 $\lambda_i^2=\lambda_i$ 이고, $B^2=B.$ 
+>
+>앞에서 보였듯 이것은 $AVAV=AV$ 와 동치이다. 따라서 필요충분조건이 증명된다.
 
-#### 정리 3.4 (특수형)
-1. $\mathbf{y \sim N(0,I_n)}$이면 $\mathbf{y}^T \mathbf{A} \mathbf{y} \sim \chi^2(p)$ ⇔ $\mathbf{A}$가 계수 $p$인 멱등행렬.
-2. $\mathbf{y \sim N(\mathbf{\mu},I_n)}$이면 $\mathbf{y}^T\mathbf{A} \mathbf{y} \sim \chi^2(p,\tfrac{1}{2} \mathbf{\mu}^T\mathbf{A}\mathbf{\mu}) \Leftrightarrow \mathbf{A}$가 계수 $p$인 멱등행렬.
+**단순회귀 예시**
+
+단순선형회귀모형 $y_i=\beta_0+\beta_1x_i+\epsilon_i, \quad \epsilon_i\overset{iid}{\sim}N(0,\sigma^2)$ 를 생각하자. 벡터로 나타내면
+
+$$
+y= \begin{pmatrix}
+y_1\\
+\vdots\\
+y_n
+\end{pmatrix}
+\sim N(\mu,\sigma^2I_n), \quad
+\mu=
+\begin{pmatrix}
+\beta_0+\beta_1x_1\\
+\vdots\\
+\beta_0+\beta_1x_n
+\end{pmatrix}
+$$
+
+즉 $V=\sigma^2I_n.$ 총제곱합은 $SST=\sum_{i=1}^n(y_i-\bar y)^2.$ 이를 행렬로 표현해보자. $\mathbf1=(1,\ldots,1)^T$이고 $J_n=\mathbf1\mathbf1^T$ 라 하면 $\bar y\mathbf1 = \frac1nJ_ny.$ 따라서 $y-\bar y\mathbf1 = \left(I_n-\frac1nJ_n\right)y.$ 여기서 $M=I_n-\frac1nJ_n$ 라고 두면
+
+$$
+SST = (y-\bar y\mathbf1)^T(y-\bar y\mathbf1).
+$$
+
+$M$은 대칭이고 멱등이므로 $M^T=M, M^2=M$ 이다. 따라서 $SST = (My)^T(My) = y^TMy$  
+따라서 $\frac{SST}{\sigma^2} = y^TAy$ 에서
+
+$$
+\boxed{
+A=\frac1{\sigma^2} \left(I_n-\frac1nJ_n\right) = \frac1{\sigma^2}M
+}
+$$
+
+**1. $AV$가 멱등임을 확인**  
+$V=\sigma^2I_n$이므로 $AV = \frac1{\sigma^2}M (\sigma^2I_n) =M.$ 따라서 $(AV)^2=M^2=M=AV.$ 즉 정리 3.3의 조건을 만족한다.
+
+**2. $r(A)=n-1$ 증명**  
+$A=\frac1{\sigma^2}M$ 이므로 $M$의 랭크와 같다. 멱등행렬 $M$의 랭크는 trace값과 같다. $\operatorname{tr}(M)= \operatorname{tr}(I_n)-\frac1n \operatorname{tr}(J_n) = n - \frac1n n= n-1$ 따라서 $r(A)=r(M)=n-1.$
+
+**3. $\mu^TA\mu$ 계산**  
+평균벡터는  $\mu = \beta_0\mathbf1+\beta_1x$ 이다. 여기서 $x=(x_1,\ldots,x_n)^T.$ 따라서 $\mu^TA\mu = \frac1{\sigma^2} \mu^TM\mu = \frac1{\sigma^2} (\beta_0\mathbf1+\beta_1x)^T M (\beta_0\mathbf1+\beta_1x).$
+
+그런데 $M\mathbf1=0$ 이므로 절편 $\beta_0$가 포함된 항은 모두 사라진다. 따라서 $\mu^TA\mu = \frac{\beta_1^2}{\sigma^2}x^TMx.$
+
+이제 $Mx = x-\bar x\mathbf1$ 이므로 $x^TMx = x^T\left(x-\bar x\mathbf1\right) = \sum_{i=1}^nx_i(x_i-\bar x)=\sum_{i=1}^n(x_i-\bar x)^2 =S_{xx}.$  
+또는 $M^2=M$을 이용하면 더 직관적으로 $x^TMx = x^TM^TMx = (Mx)^T(Mx) = \sum_{i=1}^n(x_i-\bar x)^2 =S_{xx}$
+
+$$
+\boxed{\therefore \mu^TA\mu=\frac{\beta_1^2S_{xx}}{\sigma^2}}.
+$$
+
+- 여기서 중요한 해석은 **절편 $\beta_0$는 총제곱합의 비중심성 모수에 전혀 영향을 주지 않고, 기울기 $\beta_1$만 영향을 준다**는 것이다. $M=I-J/n$이 모든 관측치에 공통으로 더해지는 $\beta_0$ 성분을 제거하기 때문이다. 
+- 총제곱합은 전체적인 평균 수준 $\beta_0$에는 영향을 받지 않는다. 총제곱합의 비중심성 모수는 $x$에 따른 평균함수의 체계적인 변화량을 나타내며, 실제 총제곱합에는 이 체계적 변화와 오차에 의한 무작위 변동이 함께 포함된다..
+
+
+#### 정리 3.4 (위 예시의 특수형)
+
+$\mathbf A$를 $n\times n$ 실대칭행렬이라고 하자.
+
+1. $\mathbf y\sim N(\mathbf0,I_n)$이면
+
+$$
+\mathbf y^T\mathbf A\mathbf y\sim\chi^2(p)
+$$
+
+일 필요충분조건은 $\mathbf A$가 계수, 즉 랭크가 $p$인 멱등행렬인 것이다.
+
+2. $\mathbf y\sim N(\boldsymbol\mu,\sigma^2I_n)$이면
+
+$$
+\frac{\mathbf y^T\mathbf y}{\sigma^2}
+\sim
+\chi^2\left(
+n,\frac{\boldsymbol\mu^T\boldsymbol\mu}{2\sigma^2}
+\right).
+$$
+
+3. $\mathbf y\sim N(\boldsymbol\mu,I_n)$이면
+
+$$
+\mathbf y^T\mathbf A\mathbf y
+\sim
+\chi^2\left(
+p,\frac12\boldsymbol\mu^T\mathbf A\boldsymbol\mu
+\right)
+$$
+
+일 필요충분조건은 $\mathbf A$가 계수 $p$인 멱등행렬인 것이다.
+
+>**1번 증명**
+>
+>$\mathbf y\sim N(\mathbf0,I_n)$ 이므로 정리 3.3에서 $\boldsymbol\mu=\mathbf0, \mathbf V=I_n$ 으로 놓는다. 이때 정리 3.3의 멱등 조건은 $\mathbf A\mathbf V = \mathbf A I_n = \mathbf A$ 가 멱등행렬이라는 조건이 된다. 따라서
+>
+>$$
+>(\mathbf A\mathbf V)^2=\mathbf A\mathbf V
+>\iff
+>\mathbf A^2=\mathbf A.
+>$$
+>
+>또한 $r(\mathbf A)=p$라고 하면 정리 3.3에 의해
+>
+>$$
+>\mathbf y^T\mathbf A\mathbf y \sim
+>\chi^2\left(p,\frac12\mathbf0^T\mathbf A\mathbf0\right).
+>$$
+>
+>그런데 $\frac12\mathbf0^T\mathbf A\mathbf0=0$ 이므로 $\chi^2\left(p,0\right)=\chi^2(p).$  
+>따라서
+>
+>$$
+>\mathbf y^T\mathbf A\mathbf y\sim\chi^2(p) \iff 
+>\mathbf A^2=\mathbf A,\quad r(\mathbf A)=p
+>$$
+>
+>즉 $\mathbf A$가 계수 $p$인 멱등행렬일 필요충분조건을 얻는다.
+>
+>**2번 증명**
+>
+>$\mathbf y\sim N(\boldsymbol\mu,\sigma^2I_n)$ 이고, 관심 있는 이차형식은 $\frac{\mathbf y^T\mathbf y}{\sigma^2}$ 이다. 이를 정리 3.3의 형태로 나타내면
+>
+>$$
+>\frac{\mathbf y^T\mathbf y}{\sigma^2}
+>=
+>\mathbf y^T \left(\frac1{\sigma^2}I_n\right) \mathbf y.
+>$$
+>
+>따라서 $\mathbf A=\frac1{\sigma^2}I_n, \mathbf V=\sigma^2I_n$ 으로 놓는다.
+>
+>그러면 $\mathbf A\mathbf V = \left(\frac1{\sigma^2}I_n\right) \left( \sigma^2I_n \right) = I_n$  
+>$I_n$은 $I_n^2=I_n$ 을 만족하므로 멱등행렬이다. 또한 $\sigma^2>0$이므로 $r(\mathbf A) = r\left(\frac1{\sigma^2}I_n\right) =n$
+>
+>비중심성 모수는
+>
+>$$
+>\frac12\boldsymbol\mu^T\mathbf A\boldsymbol\mu =
+>\frac12 \boldsymbol\mu^T \left(\frac1{\sigma^2}I_n\right) \boldsymbol\mu = \frac{\boldsymbol\mu^T\boldsymbol\mu}{2\sigma^2}.
+>$$
+>
+>따라서 정리 3.3에 의해
+>
+>$$
+>\boxed{
+>\frac{\mathbf y^T\mathbf y}{\sigma^2}
+>\sim
+>\chi^2\left(
+>n,
+>\frac{\boldsymbol\mu^T\boldsymbol\mu}{2\sigma^2}
+>\right)
+>}.
+>$$
+>
+>여기서 주의할 점은 $\mathbf A=\frac1{\sigma^2}I_n$ 자체는 일반적으로 멱등행렬이 아니라는 것이다. 정리 3.3에서 확인해야 하는 것은 $\mathbf A$가 아니라 $\mathbf A\mathbf V=I_n$ 의 멱등성이다.
+>
+>**3번 증명**
+>
+>$\mathbf y\sim N(\boldsymbol\mu,I_n)$ 이므로 정리 3.3에서 $\mathbf V=I_n$ 으로 놓는다.
+>
+>그러면 $\mathbf A\mathbf V = \mathbf A I_n = \mathbf A.$
+>
+>따라서 정리 3.3의 조건인 $\mathbf A\mathbf V$의 멱등성은 곧 $\mathbf A$의 멱등성과 같다.
+>
+>이제 $r(\mathbf A)=p$라고 하면 정리 3.3에 의해
+>
+>$$
+>\boxed{
+>\mathbf y^T\mathbf A\mathbf y
+>\sim
+>\chi^2\left(
+>p,
+>\frac12\boldsymbol\mu^T\mathbf A\boldsymbol\mu
+>\right)
+>\iff
+>\mathbf A^2=\mathbf A,\quad r(\mathbf A)=p
+>}.
+>$$
 
 #### 정리 3.5
-$\mathbf{y}^T \mathbf{A} \mathbf{y}$와 $\mathbf{B}\mathbf{y}$가 독립 ⇔
+$\mathbf y\sim N(\mu,V)$일때, $\mathbf{y}^T \mathbf{A} \mathbf{y}$와 $\mathbf{B}\mathbf{y}$가 독립 ⇔
 $\mathbf{B}\mathbf{V}\mathbf{A}=0$
-- 증명: A, B가 대칭멱등행렬임을 가정
+
+**증명**
+#### 정리 3.5
+
+$\mathbf y\sim N(\boldsymbol\mu,\mathbf V)$이고, $\mathbf A$와 $\mathbf B$가 모두 $n\times n$ 대칭 멱등행렬이라고 하자. 그러면
+
+$$
+\mathbf y^T\mathbf A\mathbf y
+\quad\text{와}\quad
+\mathbf B\mathbf y
+$$
+
+가 독립일 필요충분조건은
+
+$$
+\boxed{\mathbf B\mathbf V\mathbf A=0}
+$$
+
+인 것이다.
+
+**충분성 증명**
+
+$\mathbf B\mathbf V\mathbf A=0$ 이라고 하자.  
+$\mathbf A\mathbf y$와 $\mathbf B\mathbf y$는 정규벡터 $\mathbf y$의 선형변환이므로 결합정규분포를 따른다. 두 벡터 사이의 공분산행렬은
+
+$$
+\operatorname{Cov}(\mathbf A\mathbf y,\mathbf B\mathbf y)
+= \mathbf A\operatorname{Cov}(\mathbf y)\mathbf B^T = \mathbf A\mathbf V\mathbf B^T.
+$$
+
+$\mathbf A$, $\mathbf B$, $\mathbf V$가 모두 대칭이므로 $(\mathbf B\mathbf V\mathbf A)^T = \mathbf A\mathbf V\mathbf B.$
+
+가정에 의해 $\mathbf B\mathbf V\mathbf A=0$이므로 $\mathbf A\mathbf V\mathbf B = (\mathbf B\mathbf V\mathbf A)^T =0.$ 또한 $\mathbf B^T=\mathbf B$이므로 $\operatorname{Cov}(\mathbf A\mathbf y,\mathbf B\mathbf y) = \mathbf A\mathbf V\mathbf B =0.$
+
+공동정규벡터는 공분산이 $0$이면 독립이므로 $\mathbf A\mathbf y \perp\!\!\!\perp \mathbf B\mathbf y.$
+
+한편 $\mathbf y^T\mathbf A\mathbf y = (\mathbf A\mathbf y)^T(\mathbf A\mathbf y)$ 는 $\mathbf A\mathbf y$의 함수이므로 $\mathbf y^T\mathbf A\mathbf y \perp\!\!\!\perp \mathbf B\mathbf y$
+
+**필요성 증명**
+
+반대로 $\mathbf y^T\mathbf A\mathbf y \perp\!\!\!\perp \mathbf B\mathbf y$ 라고 하자. 다음과 같이 중심화한다. $\boldsymbol\varepsilon = \mathbf y-\boldsymbol\mu \sim N(\mathbf0,\mathbf V).$
+
+$\mathbf B\boldsymbol\mu$는 상수벡터이므로 $\mathbf B\mathbf y = \mathbf B \boldsymbol\mu + \mathbf B\boldsymbol\varepsilon$. 따라서 $\mathbf y^T\mathbf A\mathbf y$와 $\mathbf B\boldsymbol\varepsilon$도 독립이다.
+
+임의의 $\mathbf c\in\mathbb R^n$에 대하여 $L=\mathbf c^T\mathbf B\boldsymbol\varepsilon$ 라고 하자. $L^2$은 $\mathbf B\boldsymbol\varepsilon$ 의 함수이므로 독립성에 의해
+
+$$
+\operatorname{Cov}\left(\mathbf y^T\mathbf A\mathbf y,L^2\right)=0.
+$$
+
+이제
+
+$$
+\begin{aligned}
+\mathbf y^T\mathbf A\mathbf y
+&=
+(\boldsymbol\mu+\boldsymbol\varepsilon)^T
+\mathbf A
+(\boldsymbol\mu+\boldsymbol\varepsilon)\\
+&=
+\boldsymbol\mu^T\mathbf A\boldsymbol\mu
++
+2\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon
++
+\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon
+\end{aligned}
+$$
+
+이다.
+
+상수항은 공분산에 영향을 주지 않는다. 또한 중심정규분포의 홀수 차수 적률은 $0$이므로
+
+$$
+\operatorname{Cov}
+\left(
+2\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon,
+L^2
+\right)
+=0.
+$$
+
+따라서
+
+$$
+0
+=
+\operatorname{Cov}
+\left(
+\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon,
+L^2
+\right).
+$$
+
+$\mathbf d=\mathbf B\mathbf c$라고 놓으면 $\mathbf B^T=\mathbf B$이므로
+
+$$
+L
+=
+\mathbf c^T\mathbf B\boldsymbol\varepsilon
+=
+\mathbf d^T\boldsymbol\varepsilon.
+$$
+
+중심정규벡터의 이차형식에 대한 공식에 의해
+
+$$
+\operatorname{Cov}
+\left(
+\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon,
+(\mathbf d^T\boldsymbol\varepsilon)^2
+\right)
+=
+2\mathbf d^T\mathbf V\mathbf A\mathbf V\mathbf d.
+$$
+
+따라서
+
+$$
+0
+=
+2\mathbf c^T
+\mathbf B\mathbf V\mathbf A\mathbf V\mathbf B
+\mathbf c.
+$$
+
+그런데 $\mathbf A$가 대칭이고 멱등이므로
+
+$$
+\begin{aligned}
+\mathbf c^T
+\mathbf B\mathbf V\mathbf A\mathbf V\mathbf B
+\mathbf c
+&=
+\mathbf c^T
+\mathbf B\mathbf V\mathbf A^T\mathbf A\mathbf V\mathbf B
+\mathbf c\\
+&=
+(\mathbf A\mathbf V\mathbf B\mathbf c)^T
+(\mathbf A\mathbf V\mathbf B\mathbf c)\\
+&=
+\left\|
+\mathbf A\mathbf V\mathbf B\mathbf c
+\right\|^2.
+\end{aligned}
+$$
+
+그러므로 모든 $\mathbf c\in\mathbb R^n$에 대하여
+
+$$
+\left\|
+\mathbf A\mathbf V\mathbf B\mathbf c
+\right\|^2=0.
+$$
+
+따라서
+
+$$
+\mathbf A\mathbf V\mathbf B=0.
+$$
+
+양변을 전치하면
+
+$$
+(\mathbf A\mathbf V\mathbf B)^T
+=
+\mathbf B\mathbf V\mathbf A
+=0.
+$$
+
+그러므로
+
+$$
+\boxed{
+\mathbf y^T\mathbf A\mathbf y
+\perp\!\!\!\perp
+\mathbf B\mathbf y
+\iff
+\mathbf B\mathbf V\mathbf A=0
+}.
+$$
+
+참고로 이 증명에서 $\mathbf B$의 멱등성은 실제로 사용되지 않는다. 일반적인 정리에서는 $\mathbf A$만 대칭행렬로 두고 $\mathbf B$는 임의의 적절한 차원의 행렬로 둘 수 있다. 다만 위 증명은 요청한 가정에 맞추어 $\mathbf A$와 $\mathbf B$를 모두 대칭 멱등행렬로 두었다.
+
 
 #### 정리 3.6
-두 이차형식 $\mathbf{y}^T \mathbf{A} \mathbf{y}$, $\mathbf{y}^T \mathbf{B} \mathbf{y}$ 독립 ⇔
+$\mathbf y\sim N(\mu,V)$ 일때, 두 이차형식 $\mathbf{y}^T \mathbf{A} \mathbf{y}$, $\mathbf{y}^T \mathbf{B} \mathbf{y}$ 독립 $\iff \mathbf{A}\mathbf{V}\mathbf{B}=0$
 
-$$\mathbf{A}\mathbf{V}\mathbf{B}=0$$
+**증명**
 
-- 증명: A, B가 대칭멱등행렬임을 가정
+$\mathbf V$가 양의 정부호이므로 대칭인 제곱근 $\mathbf V^{1/2}$과 역행렬 $\mathbf V^{-1/2}$이 존재한다.
+
+다음과 같이 정의한다.
+
+$$
+\mathbf x=\mathbf V^{-1/2}\mathbf y,
+\qquad
+\boldsymbol\eta=\mathbf V^{-1/2}\boldsymbol\mu.
+$$
+
+그러면
+
+$$
+\mathbf x\sim N(\boldsymbol\eta,I_n)
+$$
+
+이고
+
+$$
+\mathbf y=\mathbf V^{1/2}\mathbf x
+$$
+
+이다.
+
+또한
+
+$$
+\begin{aligned}
+\mathbf y^T\mathbf A\mathbf y
+&=
+\mathbf x^T\mathbf V^{1/2}\mathbf A\mathbf V^{1/2}\mathbf x,\\
+\mathbf y^T\mathbf B\mathbf y
+&=
+\mathbf x^T\mathbf V^{1/2}\mathbf B\mathbf V^{1/2}\mathbf x.
+\end{aligned}
+$$
+
+여기서
+
+$$
+\mathbf C=\mathbf V^{1/2}\mathbf A\mathbf V^{1/2},
+\qquad
+\mathbf D=\mathbf V^{1/2}\mathbf B\mathbf V^{1/2}
+$$
+
+라고 놓으면 $\mathbf C$와 $\mathbf D$는 모두 대칭행렬이며
+
+$$
+\mathbf y^T\mathbf A\mathbf y=\mathbf x^T\mathbf C\mathbf x,
+\qquad
+\mathbf y^T\mathbf B\mathbf y=\mathbf x^T\mathbf D\mathbf x
+$$
+
+가 된다.
+
+따라서 표준 공분산행렬을 가지는 정규벡터에 대한 다음 Craig의 보조정리를 적용할 수 있다.
+
+$$
+\mathbf x\sim N(\boldsymbol\eta,I_n)
+\quad\Longrightarrow\quad
+\mathbf x^T\mathbf C\mathbf x
+\perp\!\!\!\perp
+\mathbf x^T\mathbf D\mathbf x
+\iff
+\mathbf C\mathbf D=0.
+$$
+
+그러므로
+
+$$
+\begin{aligned}
+\mathbf y^T\mathbf A\mathbf y
+\perp\!\!\!\perp
+\mathbf y^T\mathbf B\mathbf y
+&\iff
+\mathbf C\mathbf D=0\\
+&\iff
+\left(\mathbf V^{1/2}\mathbf A\mathbf V^{1/2}\right)
+\left(\mathbf V^{1/2}\mathbf B\mathbf V^{1/2}\right)=0\\
+&\iff
+\mathbf V^{1/2}\mathbf A\mathbf V\mathbf B\mathbf V^{1/2}=0.
+\end{aligned}
+$$
+
+양변의 왼쪽에 $\mathbf V^{-1/2}$을 곱하고 오른쪽에 $\mathbf V^{-1/2}$을 곱하면
+
+$$
+\mathbf A\mathbf V\mathbf B=0
+$$
+
+을 얻는다. 따라서
+
+$$
+\boxed{
+\mathbf y^T\mathbf A\mathbf y
+\perp\!\!\!\perp
+\mathbf y^T\mathbf B\mathbf y
+\iff
+\mathbf A\mathbf V\mathbf B=0
+}.
+$$
+
+
+**Craig의 보조정리에 대한 설명**
+
+$\mathbf x\sim N(\boldsymbol\eta,I_n)$이고 $\mathbf C,\mathbf D$가 대칭행렬일 때
+
+$$
+\mathbf x^T\mathbf C\mathbf x
+\perp\!\!\!\perp
+\mathbf x^T\mathbf D\mathbf x
+\iff
+\mathbf C\mathbf D=0
+$$
+
+이라는 결과를 Craig의 정리라고 한다.
+
+충분성은 직접 확인할 수 있다. $\mathbf C\mathbf D=0$이면 대칭성에 의해
+
+$$
+\mathbf D\mathbf C
+=
+(\mathbf C\mathbf D)^T
+=0.
+$$
+
+따라서 $\mathcal R(\mathbf C)$와 $\mathcal R(\mathbf D)$는 서로 직교한다. 실제로 $\mathbf u=\mathbf C\mathbf a$와 $\mathbf v=\mathbf D\mathbf b$라고 하면
+
+$$
+\mathbf u^T\mathbf v
+=
+\mathbf a^T\mathbf C\mathbf D\mathbf b
+=0.
+$$
+
+그러므로 어떤 직교행렬 $\mathbf P$를 이용하여
+
+$$
+\mathbf P^T\mathbf C\mathbf P
+=
+\begin{pmatrix}
+\mathbf C_1&0&0\\
+0&0&0\\
+0&0&0
+\end{pmatrix},
+\qquad
+\mathbf P^T\mathbf D\mathbf P
+=
+\begin{pmatrix}
+0&0&0\\
+0&\mathbf D_1&0\\
+0&0&0
+\end{pmatrix}
+$$
+
+로 나타낼 수 있다.
+
+$\mathbf z=\mathbf P^T\mathbf x$라고 놓으면
+
+$$
+\mathbf z\sim N(\mathbf P^T\boldsymbol\eta,I_n)
+$$
+
+이고 서로 다른 좌표 묶음은 독립이다. 이때 $\mathbf x^T\mathbf C\mathbf x$는 첫 번째 좌표 묶음에만 의존하고, $\mathbf x^T\mathbf D\mathbf x$는 두 번째 좌표 묶음에만 의존한다. 따라서 두 이차형식은 독립이다.
+
+필요성은 두 이차형식의 결합적률생성함수를 이용한다. 원점 근방에서
+
+$$
+\begin{aligned}
+M(s,t)
+&=
+E\left[
+\exp\left\{
+s\mathbf x^T\mathbf C\mathbf x
++t\mathbf x^T\mathbf D\mathbf x
+\right\}
+\right]\\
+&=
+\det\left(
+I_n-2s\mathbf C-2t\mathbf D
+\right)^{-1/2}\\
+&\quad\times
+\exp\left[
+\boldsymbol\eta^T
+(s\mathbf C+t\mathbf D)
+\left(
+I_n-2s\mathbf C-2t\mathbf D
+\right)^{-1}
+\boldsymbol\eta
+\right].
+\end{aligned}
+$$
+
+두 이차형식이 독립이면 결합적률생성함수가 주변 적률생성함수의 곱으로 분해되어야 한다.
+
+$$
+M(s,t)=M(s,0)M(0,t).
+$$
+
+이 등식의 양변을 $s,t$에 관한 해석함수로 전개하여 모든 혼합항의 계수를 비교하면
+
+$$
+\mathbf C\mathbf D=0
+$$
+
+을 얻는다. 이것이 Craig 정리의 필요성 부분이다.
+
+마지막으로
+
+$$
+\mathbf C\mathbf D
+=
+\mathbf V^{1/2}
+\mathbf A\mathbf V\mathbf B
+\mathbf V^{1/2}
+$$
+
+이므로, $\mathbf V^{1/2}$이 가역이라는 사실에 의해
+
+$$
+\mathbf C\mathbf D=0
+\iff
+\mathbf A\mathbf V\mathbf B=0
+$$
+
+이다.
+
+참고로 전치하면
+
+$$
+(\mathbf A\mathbf V\mathbf B)^T
+=
+\mathbf B\mathbf V\mathbf A
+$$
+
+이므로 대칭행렬을 가정한 경우
+
+$$
+\mathbf A\mathbf V\mathbf B=0
+\iff
+\mathbf B\mathbf V\mathbf A=0
+$$
+
+도 성립한다.
 
 #### 정리 3.7
-$\mathbf{A}=\sum_{j=1}^p \mathbf{A}_j$ 이고 각 $\mathbf{A}_j$가 대칭이며 $r(\mathbf{A}_j)=k_j$, $r(\mathbf{A})=k$이면
+$\mathbf y\sim N(\mu,V)$이고 $\mathbf{A}=\sum_{j=1}^p \mathbf{A}_j$ 이고 각 $\mathbf{A}_j$가 대칭이며 $r(\mathbf{A}_j)=k_j$, $r(\mathbf{A})=k$이면
 
 $$\mathbf{y}^T \mathbf{A}_j \mathbf{y} \sim \chi^2(k_j,\tfrac{1}{2} \mathbf{\mu}^T \mathbf{A}_j\mathbf{\mu})$$
 
 $\mathbf{y}^T \mathbf{A} \mathbf{y}$는 서로 독립이고
 $\mathbf{y}^T \mathbf{A} \mathbf{y} \sim \chi^2(k,\tfrac{1}{2} \mathbf{\mu}^T \mathbf{A}\mathbf{\mu})$ 이 성립하기 위한 필요충분조건은 다음의 1 또는 2이다.
-1. $\mathbf{A}_j \mathbf{V} \mathbf{A}_j = \mathbf{A}_j$ (즉, $\mathbf{A}_j \mathbf{V}$가 멱등행렬)이고 $\mathbf{A}_j \mathbf{V} \mathbf{A}_l = 0$ ($j \neq l$)
-2. $\mathbf{A}_j \mathbf{V}$가 멱등행렬이고 $\sum_{j=1}^p k_j = k$
+1.  다음 3개 중 어느 두 개가 성립한다.
+    - $\mathbf{A}_j \mathbf{V}$는 모든 $j$에 대해 멱등행렬
+    - 모든 $i < j$에 대해 $\mathbf{A}_i \mathbf{V}\mathbf{A}_k = \mathbf{O}_n$
+    - $\mathbf{A}\mathbf{V}$가 멱등행렬
+2. $\mathbf{A} \mathbf{V}$가 멱등행렬이고 $\sum_{j=1}^p k_j = k$
 
-#### 정리 3.8 (Cochran 정리)
-정리 3.7에서 $\mathbf{\mu}=0$이고 $V=I_n=A$이면
+**증명**
+먼저 문장에서 두 군데를 수정해야 한다.
 
-$$\mathbf{y \sim N(0,I_n)},\quad \sum_{j=1}^p \mathbf{A}_j=I_n$$
+* “$\mathbf y^T\mathbf A\mathbf y$는 서로 독립”이 아니라 “$\mathbf y^T\mathbf A_j\mathbf y$들이 서로 독립”이다.
+* 두 번째 조건의 $\mathbf A_i\mathbf V\mathbf A_k=0$은 $\mathbf A_i\mathbf V\mathbf A_j=0$이다.
 
-$A_j$는 대칭행렬이면
+또한 $\mathbf V$는 양의 정부호라고 가정한다.
+
+#### 정리 3.7
+
+$\mathbf y\sim N(\boldsymbol\mu,\mathbf V)$이고
+
+$$
+\mathbf A=\sum_{j=1}^p\mathbf A_j
+$$
+
+라 하자. 각 $\mathbf A_j$는 대칭행렬이고
+
+$$
+r(\mathbf A_j)=k_j,
+\qquad
+r(\mathbf A)=k
+$$
+
+라고 하자.
+
+다음이 성립한다고 하자.
+
+$$
+\mathbf y^T\mathbf A_j\mathbf y
+\sim
+\chi^2\left(
+k_j,\frac12\boldsymbol\mu^T\mathbf A_j\boldsymbol\mu
+\right),
+\qquad j=1,\ldots,p,
+$$
+
+이 이차형식들이 서로 독립이고,
+
+$$
+\mathbf y^T\mathbf A\mathbf y
+\sim
+\chi^2\left(
+k,\frac12\boldsymbol\mu^T\mathbf A\boldsymbol\mu
+\right)
+$$
+
+이다.
+
+이를 위한 필요충분조건은 다음 두 조건 중 하나이다.
+
+1. 다음 세 조건 중 임의의 두 조건이 성립한다.
+
+   * 모든 $j$에 대하여 $\mathbf A_j\mathbf V$가 멱등행렬이다.
+   * 모든 $i<j$에 대하여 $\mathbf A_i\mathbf V\mathbf A_j=0$이다.
+   * $\mathbf A\mathbf V$가 멱등행렬이다.
+
+2. $\mathbf A\mathbf V$가 멱등행렬이고
+
+$$
+\sum_{j=1}^p k_j=k
+$$
+
+이다.
+
+---
+
+## 증명
+
+다음 세 조건을 각각 $(C_1)$, $(C_2)$, $(C_3)$라고 하자.
+
+$$
+(C_1):
+\quad
+\mathbf A_j\mathbf V\text{가 모든 }j\text{에 대하여 멱등이다},
+$$
+
+$$
+(C_2):
+\quad
+\mathbf A_i\mathbf V\mathbf A_j=0
+\quad\text{for all }i<j,
+$$
+
+$$
+(C_3):
+\quad
+\mathbf A\mathbf V\text{가 멱등이다}.
+$$
+
+### 1. 각 조건의 통계적 의미
+
+정리 3.3에 의해
+
+$$
+\mathbf y^T\mathbf A_j\mathbf y
+\sim
+\chi^2\left(
+k_j,\frac12\boldsymbol\mu^T\mathbf A_j\boldsymbol\mu
+\right)
+$$
+
+일 필요충분조건은
+
+$$
+\mathbf A_j\mathbf V
+$$
+
+가 멱등행렬인 것이다. 따라서 $(C_1)$은 각각의 이차형식이 주어진 카이제곱분포를 따른다는 조건이다.
+
+정리 3.6에 의해 서로 다른 $i,j$에 대하여
+
+$$
+\mathbf y^T\mathbf A_i\mathbf y
+\perp\!\!\!\perp
+\mathbf y^T\mathbf A_j\mathbf y
+$$
+
+일 필요충분조건은
+
+$$
+\mathbf A_i\mathbf V\mathbf A_j=0
+$$
+
+인 것이다. 모든 $i<j$에 대해 이 조건이 성립하면 이차형식들은 서로 독립이다. 따라서 $(C_2)$는 이차형식들의 독립성 조건이다.
+
+마지막으로 정리 3.3에 의해
+
+$$
+\mathbf y^T\mathbf A\mathbf y
+\sim
+\chi^2\left(
+k,\frac12\boldsymbol\mu^T\mathbf A\boldsymbol\mu
+\right)
+$$
+
+일 필요충분조건은 $\mathbf A\mathbf V$가 멱등행렬인 것이다. 따라서 $(C_3)$은 전체 이차형식의 카이제곱분포 조건이다.
+
+결국 정리에서 요구하는 분포와 독립성이 모두 성립할 필요충분조건은 $(C_1)$, $(C_2)$, $(C_3)$이 모두 성립하는 것이다.
+
+---
+
+## 2. 세 조건 중 두 조건이면 나머지 조건도 성립함을 증명
+
+증명을 간단히 하기 위해
+
+$$
+\mathbf C_j
+=
+\mathbf V^{1/2}\mathbf A_j\mathbf V^{1/2},
+\qquad
+\mathbf C
+=
+\mathbf V^{1/2}\mathbf A\mathbf V^{1/2}
+=
+\sum_{j=1}^p\mathbf C_j
+$$
+
+라고 놓는다.
+
+각 $\mathbf A_j$가 대칭이므로 $\mathbf C_j$도 대칭행렬이다. 또한 $\mathbf V^{1/2}$이 가역이므로
+
+$$
+r(\mathbf C_j)=r(\mathbf A_j)=k_j,
+\qquad
+r(\mathbf C)=r(\mathbf A)=k.
+$$
+
+그리고 다음 동치관계가 성립한다.
+
+$$
+\mathbf A_j\mathbf V\text{가 멱등}
+\iff
+\mathbf C_j^2=\mathbf C_j,
+$$
+
+$$
+\mathbf A_i\mathbf V\mathbf A_j=0
+\iff
+\mathbf C_i\mathbf C_j=0,
+$$
+
+$$
+\mathbf A\mathbf V\text{가 멱등}
+\iff
+\mathbf C^2=\mathbf C.
+$$
+
+따라서 $(C_1)$, $(C_2)$, $(C_3)$을 각각 $\mathbf C_j$의 멱등성, 상호 직교성, $\mathbf C$의 멱등성으로 바꾸어 증명할 수 있다.
+
+### $(C_1)$과 $(C_2)$가 성립하는 경우
+
+각 $\mathbf C_j$가 멱등이고 서로 다른 $i,j$에 대하여
+
+$$
+\mathbf C_i\mathbf C_j=0
+$$
+
+이라고 하자.
+
+그러면
+
+$$
+\begin{aligned}
+\mathbf C^2
+&=
+\left(\sum_{j=1}^p\mathbf C_j\right)^2\\
+&=
+\sum_{j=1}^p\mathbf C_j^2
++
+\sum_{i\ne j}\mathbf C_i\mathbf C_j\\
+&=
+\sum_{j=1}^p\mathbf C_j\\
+&=
+\mathbf C.
+\end{aligned}
+$$
+
+따라서 $\mathbf C$가 멱등이고, 이는 $(C_3)$을 의미한다.
+
+---
+
+### $(C_1)$과 $(C_3)$이 성립하는 경우
+
+각 $\mathbf C_j$와 $\mathbf C$가 멱등이라고 하자.
+
+대칭 멱등행렬에서는 랭크와 대각합이 같으므로
+
+$$
+\operatorname{tr}(\mathbf C_j^2)
+=
+\operatorname{tr}(\mathbf C_j)
+$$
+
+이고
+
+$$
+\operatorname{tr}(\mathbf C^2)
+=
+\operatorname{tr}(\mathbf C)
+$$
+
+이다.
+
+한편
+
+$$
+\begin{aligned}
+\operatorname{tr}(\mathbf C^2)
+&=
+\operatorname{tr}
+\left[
+\left(\sum_{j=1}^p\mathbf C_j\right)^2
+\right]\\
+&=
+\sum_{j=1}^p\operatorname{tr}(\mathbf C_j^2)
++
+2\sum_{i<j}\operatorname{tr}(\mathbf C_i\mathbf C_j).
+\end{aligned}
+$$
+
+또한
+
+$$
+\operatorname{tr}(\mathbf C)
+=
+\sum_{j=1}^p\operatorname{tr}(\mathbf C_j).
+$$
+
+따라서
+
+$$
+\sum_{i<j}\operatorname{tr}(\mathbf C_i\mathbf C_j)=0.
+$$
+
+대칭 멱등행렬 $\mathbf C_i,\mathbf C_j$에 대하여
+
+$$
+\begin{aligned}
+\operatorname{tr}(\mathbf C_i\mathbf C_j)
+&=
+\operatorname{tr}(\mathbf C_i^2\mathbf C_j^2)\\
+&=
+\operatorname{tr}
+\left[
+(\mathbf C_i\mathbf C_j)
+(\mathbf C_i\mathbf C_j)^T
+\right]\\
+&=
+\|\mathbf C_i\mathbf C_j\|_F^2
+\geq0.
+\end{aligned}
+$$
+
+각 항이 음이 아니면서 그 합이 $0$이므로
+
+$$
+\|\mathbf C_i\mathbf C_j\|_F^2=0
+$$
+
+이다. 따라서 모든 $i<j$에 대하여
+
+$$
+\mathbf C_i\mathbf C_j=0.
+$$
+
+이는 $(C_2)$을 의미한다.
+
+---
+
+### $(C_2)$와 $(C_3)$이 성립하는 경우
+
+서로 다른 $i,j$에 대하여
+
+$$
+\mathbf C_i\mathbf C_j=0
+$$
+
+이고 $\mathbf C$가 멱등이라고 하자.
+
+$\mathbf C_\ell$의 고유값 $\lambda\ne0$에 대응하는 고유벡터를 $\mathbf u$라고 하면
+
+$$
+\mathbf C_\ell\mathbf u=\lambda\mathbf u.
+$$
+
+$j\ne\ell$에 대하여
+
+$$
+\mathbf C_j\mathbf C_\ell=0
+$$
+
+이므로
+
+$$
+0
+=
+\mathbf C_j\mathbf C_\ell\mathbf u
+=
+\lambda\mathbf C_j\mathbf u.
+$$
+
+$\lambda\ne0$이므로
+
+$$
+\mathbf C_j\mathbf u=0
+\qquad
+(j\ne\ell)
+$$
+
+이다. 따라서
+
+$$
+\mathbf C\mathbf u
+=
+\sum_{j=1}^p\mathbf C_j\mathbf u
+=
+\mathbf C_\ell\mathbf u
+=
+\lambda\mathbf u.
+$$
+
+즉 $\lambda$는 $\mathbf C$의 고유값이기도 하다. 그런데 $\mathbf C$가 멱등이므로 고유값은 $0$ 또는 $1$이다. $\lambda\ne0$이므로
+
+$$
+\lambda=1.
+$$
+
+따라서 각 $\mathbf C_\ell$의 모든 고유값은 $0$ 또는 $1$이고,
+
+$$
+\mathbf C_\ell^2=\mathbf C_\ell.
+$$
+
+그러므로 $(C_1)$이 성립한다.
+
+결국 $(C_1)$, $(C_2)$, $(C_3)$ 중 어느 두 조건이 성립하면 나머지 조건도 자동으로 성립한다.
+
+---
+
+## 3. 두 번째 조건과의 동치
+
+먼저 $(C_1)$과 $(C_2)$이 성립한다고 하자. 각 $\mathbf C_j$는 대칭 멱등행렬이고 서로 직교하므로
+
+$$
+\mathcal R(\mathbf C_i)
+\perp
+\mathcal R(\mathbf C_j),
+\qquad i\ne j.
+$$
+
+따라서
+
+$$
+r(\mathbf C)
+=
+\sum_{j=1}^p r(\mathbf C_j).
+$$
+
+즉
+
+$$
+k=\sum_{j=1}^p k_j.
+$$
+
+또한 앞에서 증명한 것처럼 $(C_3)$도 성립하므로 $\mathbf A\mathbf V$가 멱등이다. 따라서 조건 1은 조건 2를 함의한다.
+
+반대로
+
+$$
+\mathbf A\mathbf V\text{가 멱등이고}
+\qquad
+\sum_{j=1}^p k_j=k
+$$
+
+라고 하자. 이는
+
+$$
+\mathbf C^2=\mathbf C,
+\qquad
+\sum_{j=1}^p r(\mathbf C_j)=r(\mathbf C)
+$$
+
+를 의미한다.
+
+항상
+
+$$
+\mathcal R(\mathbf C)
+\subseteq
+\mathcal R(\mathbf C_1)+\cdots+\mathcal R(\mathbf C_p)
+$$
+
+이고, 랭크 조건에 의해
+
+$$
+\begin{aligned}
+\dim\mathcal R(\mathbf C)
+&=
+r(\mathbf C)\\
+&=
+\sum_{j=1}^p r(\mathbf C_j).
+\end{aligned}
+$$
+
+따라서
+
+$$
+\mathcal R(\mathbf C)
+=
+\mathcal R(\mathbf C_1)
+\oplus\cdots\oplus
+\mathcal R(\mathbf C_p)
+$$
+
+이다.
+
+임의의 $\mathbf x\in\mathcal R(\mathbf C_i)$를 생각하자. 그러면 $\mathbf x\in\mathcal R(\mathbf C)$이고 $\mathbf C$가 멱등이므로
+
+$$
+\mathbf C\mathbf x=\mathbf x.
+$$
+
+그런데
+
+$$
+\mathbf C\mathbf x
+=
+\sum_{j=1}^p\mathbf C_j\mathbf x
+$$
+
+이며 $\mathbf C_j\mathbf x\in\mathcal R(\mathbf C_j)$이다. 위의 합이 직합이므로 표현의 유일성에 의해
+
+$$
+\mathbf C_i\mathbf x=\mathbf x,
+\qquad
+\mathbf C_j\mathbf x=0
+\quad
+(j\ne i)
+$$
+
+이다.
+
+따라서 모든 $\mathbf u$에 대하여 $\mathbf C_i\mathbf u\in\mathcal R(\mathbf C_i)$이므로
+
+$$
+\mathbf C_i^2\mathbf u
+=
+\mathbf C_i\mathbf u.
+$$
+
+즉
+
+$$
+\mathbf C_i^2=\mathbf C_i.
+$$
+
+또한 $i\ne j$이면 $\mathbf C_j\mathbf u\in\mathcal R(\mathbf C_j)$이므로
+
+$$
+\mathbf C_i\mathbf C_j\mathbf u=0.
+$$
+
+따라서
+
+$$
+\mathbf C_i\mathbf C_j=0.
+$$
+
+그러므로 $(C_1)$과 $(C_2)$이 모두 성립한다. 따라서 조건 2는 조건 1을 함의한다.
+
+---
+
+마지막으로
+
+$$
+\mathbf y^T\mathbf A\mathbf y
+=
+\sum_{j=1}^p\mathbf y^T\mathbf A_j\mathbf y
+$$
+
+이고 비중심성 모수도
+
+$$
+\sum_{j=1}^p
+\frac12\boldsymbol\mu^T\mathbf A_j\boldsymbol\mu
+=
+\frac12\boldsymbol\mu^T
+\left(\sum_{j=1}^p\mathbf A_j\right)
+\boldsymbol\mu
+=
+\frac12\boldsymbol\mu^T\mathbf A\boldsymbol\mu
+$$
+
+로 합해진다.
+
+따라서 조건 1 또는 이와 동치인 조건 2가 성립하면
+
+$$
+\boxed{
+\mathbf y^T\mathbf A_j\mathbf y
+\sim
+\chi^2\left(
+k_j,\frac12\boldsymbol\mu^T\mathbf A_j\boldsymbol\mu
+\right)
+}
+$$
+
+이고 이 이차형식들은 서로 독립이며,
+
+$$
+\boxed{
+\mathbf y^T\mathbf A\mathbf y
+\sim
+\chi^2\left(
+k,\frac12\boldsymbol\mu^T\mathbf A\boldsymbol\mu
+\right)
+}
+$$
+
+가 성립한다.
+
+#### 정리 3.8 (Cochran, 코크란 정리)
+$\mathbf{y \sim N(0,I_n)},\quad \sum_{j=1}^p \mathbf{A}_j=I_n$ 이고, $A_j$는 대칭행렬이면
 
 $$\mathbf{y}^T \mathbf{A}_j \mathbf{y} \sim \chi^2(k_j)$$
 
-서로 독립분포 ⇔ $\sum_{j=1}^p k_j=n$
+그리고, 서로 독립분포 ⇔ $\sum_{j=1}^p k_j=n$
+
+#### 정리 3.8 (Cochran의 정리)
+
+$\mathbf y\sim N(\mathbf0,I_n)$이고, $\mathbf A_1,\ldots,\mathbf A_p$가 $n\times n$ 대칭행렬이라고 하자. 또한
+
+$$
+\sum_{j=1}^p\mathbf A_j=I_n,
+\qquad
+r(\mathbf A_j)=k_j
+$$
+
+라고 하자.
+
+그러면
+
+$$
+\mathbf y^T\mathbf A_j\mathbf y\sim\chi^2(k_j),
+\qquad j=1,\ldots,p
+$$
+
+이고 이 이차형식들이 서로 독립일 필요충분조건은
+
+$$
+\boxed{\sum_{j=1}^p k_j=n}
+$$
+
+인 것이다.
+
+### 증명
+
+정리 3.7에서
+
+$$
+\boldsymbol\mu=\mathbf0,
+\qquad
+\mathbf V=I_n,
+\qquad
+\mathbf A=\sum_{j=1}^p\mathbf A_j
+$$
+
+로 놓는다.
+
+가정에 의해
+
+$$
+\mathbf A
+=
+\sum_{j=1}^p\mathbf A_j
+=
+I_n.
+$$
+
+따라서
+
+$$
+\mathbf A\mathbf V
+=
+I_nI_n
+=
+I_n
+$$
+
+이다. $I_n$은
+
+$$
+I_n^2=I_n
+$$
+
+을 만족하므로 멱등행렬이고,
+
+$$
+r(\mathbf A)=r(I_n)=n.
+$$
+
+정리 3.7의 두 번째 필요충분조건은
+
+$$
+\mathbf A\mathbf V\text{가 멱등행렬이고 }
+\sum_{j=1}^p k_j=r(\mathbf A)
+$$
+
+인 것이다.
+
+현재 $\mathbf A\mathbf V=I_n$의 멱등성은 자동으로 성립하고 $r(\mathbf A)=n$이므로, 정리 3.7의 조건은
+
+$$
+\sum_{j=1}^p k_j=n
+$$
+
+으로 축약된다.
+
+따라서 정리 3.7에 의해
+
+$$
+\sum_{j=1}^p k_j=n
+$$
+
+일 필요충분조건은
+
+$$
+\mathbf y^T\mathbf A_j\mathbf y
+\sim
+\chi^2\left(
+k_j,
+\frac12\mathbf0^T\mathbf A_j\mathbf0
+\right)
+$$
+
+이고 이 이차형식들이 서로 독립인 것이다.
+
+그런데
+
+$$
+\frac12\mathbf0^T\mathbf A_j\mathbf0=0
+$$
+
+이므로 비중심 카이제곱분포는 중심 카이제곱분포가 된다. 즉
+
+$$
+\chi^2(k_j,0)=\chi^2(k_j).
+$$
+
+따라서
+
+$$
+\boxed{
+\sum_{j=1}^p k_j=n
+\iff
+\begin{cases}
+\mathbf y^T\mathbf A_j\mathbf y\sim\chi^2(k_j),
+&j=1,\ldots,p,\\[2mm]
+\mathbf y^T\mathbf A_1\mathbf y,\ldots,
+\mathbf y^T\mathbf A_p\mathbf y
+\text{가 서로 독립이다}.
+\end{cases}
+}
+$$
+
+이다.
+
+필요성은 분포의 합을 이용해서도 확인할 수 있다. 이차형식들이 서로 독립이고 각각 $\chi^2(k_j)$를 따른다면
+
+$$
+\sum_{j=1}^p\mathbf y^T\mathbf A_j\mathbf y
+\sim
+\chi^2\left(\sum_{j=1}^p k_j\right).
+$$
+
+한편
+
+$$
+\begin{aligned}
+\sum_{j=1}^p\mathbf y^T\mathbf A_j\mathbf y
+&=
+\mathbf y^T
+\left(\sum_{j=1}^p\mathbf A_j\right)
+\mathbf y\\
+&=
+\mathbf y^TI_n\mathbf y\\
+&=
+\mathbf y^T\mathbf y.
+\end{aligned}
+$$
+
+그리고 $\mathbf y\sim N(\mathbf0,I_n)$이므로
+
+$$
+\mathbf y^T\mathbf y\sim\chi^2(n).
+$$
+
+따라서
+
+$$
+\chi^2\left(\sum_{j=1}^p k_j\right)
+=
+\chi^2(n)
+$$
+
+이어야 하므로 자유도가 같아야 한다.
+
+$$
+\boxed{\sum_{j=1}^p k_j=n}.
+$$
+
+즉 Cochran의 정리는 정리 3.7에서 $\boldsymbol\mu=\mathbf0$, $\mathbf V=I_n$, $\mathbf A=I_n$으로 둔 특수한 경우다.
 
 
 ## 3.6 평균제곱의 기대값 (Expected Mean Squares)
@@ -478,13 +2047,21 @@ $Var(\bar y) = Var(\bar\varepsilon) = \sigma^2 / n$
 ### 제곱합 기대값
 
 $$
-E(SST) = E\left(\sum (y_i - \bar{y})^2\right) \\
-= E\left(\sum (y_i - E(y_i) + E(y_i) - \bar{y})^2\right) \\
-E\left(\sum (y_i - E(y_i))^2\right) + E\left(\sum (E(y_i) - \bar{y})^2\right) + 2E\left(\sum (y_i - E(y_i))(E(y_i) - \bar{y})\right) \\
-= E\left(\sum \varepsilon_i^2\right) + E\left(\sum (\beta_1 (x_i - \bar{x}))^2\right) + 2E\left[\sum \varepsilon_i (\beta_1 (x_i - \bar{x}))\right] \\
-= E\left(\sum \varepsilon_i^2\right) + E\left(\sum (\beta_1 (x_i - \bar{x}))^2\right) + 2\beta_1 E\left[\sum \varepsilon_i (x_i - \bar{x})\right] \\
-= E\left(\sum \varepsilon_i^2\right) + E\left(\sum (\beta_1 (x_i - \bar{x}))^2\right) + 0 \\
-= (n-1)\sigma^2 + \beta_1^2 S_{xx}
+\begin{aligned}
+E(SST) 
+&= E\left(\sum (y_i - \bar{y})^2\right) \\
+&= 
+E\left(\sum (y_i - E(y_i) + E(y_i) - \bar{y})^2\right) \\
+&=E\left(\sum (y_i - E(y_i))^2\right) + E\left(\sum (E(y_i) - \bar{y})^2\right) + 2E\left(\sum (y_i - E(y_i))(E(y_i) - \bar{y})\right) \\
+&= 
+E\left(\sum \varepsilon_i^2\right) + E\left(\sum (\beta_1 (x_i - \bar{x}))^2\right) + 2E\left[\sum \varepsilon_i (\beta_1 (x_i - \bar{x}))\right] \\
+&= 
+E\left(\sum \varepsilon_i^2\right) + E\left(\sum (\beta_1 (x_i - \bar{x}))^2\right) + 2\beta_1 E\left[\sum \varepsilon_i (x_i - \bar{x})\right] \\
+&= 
+E\left(\sum \varepsilon_i^2\right) + E\left(\sum (\beta_1 (x_i - \bar{x}))^2\right) + 0 \\
+&= 
+(n-1)\sigma^2 + \beta_1^2 S_{xx}
+\end{aligned}
 $$
 
 > $E[\varepsilon_i]=0$이고 $\varepsilon_i$는 $x_i$와 독립이므로 $E[\sum \varepsilon_i (x_i - \bar{x})] = \sum (x_i - \bar{x})E[\varepsilon_i] = 0$

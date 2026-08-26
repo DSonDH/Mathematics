@@ -297,7 +297,7 @@ $(\bar{x},\bar{y})$는 적합된 회귀직선 위에 있다.
 * $\mathrm{Var}(\varepsilon)=\sigma^2$  
 를 만족한다고 가정한다.
 
-회귀식을 적합한 뒤 잔차(residual) $e_i = y_i - \hat{y}_i$를 정의하면, 오차분산 $\sigma^2$의 불편추정량(unbiased estimator)은 (mean squre deviation from the regression line이라고도 함)
+회귀식을 적합한 뒤 잔차(residual) $e_i = y_i - \hat{y}_i$를 정의하면, (잔차는 오차항이랑 다름. 기호도 다름.) 오차분산 $\sigma^2$의 불편추정량(unbiased estimator)은 (mean squre deviation from the regression line이라고도 함)
 
 $$s_{y \cdot x}^2=\frac{\sum (y_i - \hat{y}_i)^2}{n-2}$$
 

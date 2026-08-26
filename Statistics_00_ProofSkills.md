@@ -783,11 +783,89 @@ $$E[L(\mathbf{X})] = L(E[\mathbf{X}])$$
 - $\operatorname{trace}(\mathbf{X})$: 선형 ✓
 - $\|\mathbf{X}\|_F^2 = \operatorname{trace}(\mathbf{X}^\top\mathbf{X})$: 이차형식이므로 선형 아님 ✗
 
-### 적용 예시
+**예시2**
 
 회귀잔차 분산 계산:
 
 $$E[\operatorname{trace}[(I - \Pi) \mathbf{e} \mathbf{e}^\top]] = \operatorname{trace}[E[(I - \Pi) \mathbf{e} \mathbf{e}^\top]]$$
+
+**예시3**
+유한한 합에 대해서는
+
+$$
+\boxed{
+E\left[\sum_r c_rX_r\right]
+=
+\sum_r c_rE[X_r]
+}
+$$
+
+가 항상 성립한다. 여기서 $c_r$은 확률변수가 아닌 상수다. **확률변수들이 독립일 필요도 없다.**
+
+
+먼저 $x^TAx=\sum_{i=1}^n\sum_{j=1}^n a_{ij}x_ix_j$ 이고 $x^TA\mu = \sum_{k=1}^n x_k(A\mu)_k.$
+
+따라서 두 식을 곱하면
+
+$$
+\begin{aligned}
+(x^TAx)(x^TA\mu)
+&=
+\left(\sum_{i,j}a_{ij}x_ix_j\right)
+\left(\sum_k(A\mu)_kx_k\right).
+\end{aligned}
+$$
+
+여기서 일반적인 합의 분배법칙
+
+$$
+\left(\sum_{i,j}u_{ij}\right)
+\left(\sum_kv_k\right)
+=
+\sum_{i,j,k}u_{ij}v_k
+$$
+
+를 적용하면
+
+$$
+\begin{aligned}
+(x^TAx)(x^TA\mu)
+&=
+\sum_{i,j,k}
+(a_{ij}x_ix_j)((A\mu)_kx_k)\\
+&=
+\sum_{i,j,k}
+a_{ij}(A\mu)_kx_ix_jx_k.
+\end{aligned}
+$$
+
+따라서 기댓값을 취하면
+
+$$
+E[(x^TAx)(x^TA\mu)]
+=
+E\left[
+\sum_{i,j,k}
+a_{ij}(A\mu)_kx_ix_jx_k
+\right].
+$$
+
+이제 **기댓값과 유한합은 순서를 바꿀 수 있다.**
+
+$$
+=\sum_{i,j,k} E\left[ a_{ij}(A\mu)_kx_ix_jx_k \right].
+=\sum_{i,j,k} a_{ij}(A\mu)_k E[x_ix_jx_k].
+$$
+
+여기서 마지막으로 $x\sim N(0,V)$이므로 $E[x_ix_jx_k]=0$ 이고, 따라서
+
+$$
+\sum_{i,j,k}a_{ij}(A\mu)_k
+\underbrace{E[x_ix_jx_k]}_{0}
+=0.
+$$
+
+주의할 점은 **곱은 이렇게 분리할 수 없다는 것**이다. $X,Y$가 독립인 경우 등에만 $E[XY]=E[X]E[Y]$가 성립한다.
 
 ### 관련 개념
 
