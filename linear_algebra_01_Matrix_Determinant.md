@@ -668,15 +668,375 @@ $$A \circ B = (a_{ij} \cdot b_{ij})$$
 
 $$A \oplus B = \begin{pmatrix} A & 0 \\ 0 & B \end{pmatrix}$$
 
-#### 직합의 일반화
+#### 행렬 직합의 일반화
 
 $$A \oplus B \oplus C = \begin{pmatrix} A & 0 & 0 \\ 0 & B & 0 \\ 0 & 0 & C \end{pmatrix} \\
 \bigoplus_{l=1}^{k} A_l = \text{diag}\{A_1, A_2, \ldots, 
 A_k\}$$
 
-#### 직합의 성질
+#### 행렬 직합의 성질
 * $(A \oplus B) + (C \oplus D) = (A+C) \oplus (B+D)$
 * $(A \oplus B)(C \oplus D) = (AC) \oplus (BD)$
+
+맞다. 블록 대각행렬을 만드는 것도 direct sum의 한 종류지만, 직합의 본질은 "벡터가 여러 부분공간의 성분으로 유일하게 분해된다"는 것이다.
+
+### 직합의 일반적 정의
+
+우선, 부분공간의 합을 정의해야 한다.
+
+>**정의. 부분공간의 합**: 벡터공간 $V$의 부분공간 $V_1,\ldots,V_p$에 대해 합을
+>
+>$$
+>V_1+\cdots+V_p
+>=
+>\left\{
+>\mathbf v_1+\cdots+\mathbf v_p:
+>\mathbf v_j\in V_j
+>\right\}
+>$$
+>
+>로 정의한다.
+>
+>즉, 각 부분공간에서 벡터를 하나씩 꺼내 더해서 만들 수 있는 모든 벡터의 집합이다.
+>
+>예를 들어 $\mathbb R^2$에서
+>
+>$$
+>V_1=\operatorname{span}
+>\left\{
+>\begin{pmatrix}1\\0\end{pmatrix}
+>\right\},
+>\qquad
+>V_2=\operatorname{span}
+>\left\{
+>\begin{pmatrix}0\\1\end{pmatrix}
+>\right\}
+>$$
+>
+>이면 $V_1+V_2=\mathbb R^2$
+
+부분공간의 합 $V_1+\cdots+V_p$ 에서 모든 벡터의 분해가 유일하면 이를 직합이라고 하고
+
+$$
+\boxed{
+V_1\oplus\cdots\oplus V_p
+}
+$$
+
+로 쓴다. 즉, $\mathbf v = \mathbf v_1+\cdots+\mathbf v_p, \quad \mathbf v_j\in V_j$ 라는 표현이 오직 하나만 존재한다는 뜻이다.
+
+**직합의 핵심: 각 부분공간 성분으로의 분해가 유일하다**
+
+#### 직합 판정조건
+
+다음 세 조건들은 서로 동치다.
+
+1. 영벡터의 표현이 유일하다
+
+$$
+\mathbf v_1+\cdots+\mathbf v_p=0,
+\qquad
+\mathbf v_j\in V_j
+$$
+
+이면
+
+$$
+\mathbf v_1=\cdots=\mathbf v_p=0
+$$
+
+이다.
+
+2. 모든 벡터의 분해가 유일하다
+
+$$
+\mathbf v
+=
+\mathbf v_1+\cdots+\mathbf v_p
+$$
+
+라는 표현이 유일하다.
+
+3. 차원이 더해진다
+
+유한차원 벡터공간에서는
+
+$$
+\boxed{\dim(V_1+\cdots+V_p) = \sum_{j=1}^p\dim V_j}
+$$
+
+따라서
+
+$$
+V_1+\cdots+V_p = V_1\oplus\cdots\oplus V_p
+$$
+
+일 필요충분조건은 차원 손실이 발생하지 않는 것이다.
+
+#### 두 부분공간의 직합
+
+부분공간이 두 개일 때는 특히 간단하다.
+
+$$
+\boxed{ V_1+V_2=V_1\oplus V_2 \iff V_1\cap V_2=\{0\}}
+$$
+
+이다.
+
+**증명**
+
+먼저 $V_1\cap V_2=\{0\}$이라고 하자. 만약 $\mathbf v_1+\mathbf v_2 = \mathbf w_1+\mathbf w_2$ 라면 $\mathbf v_1-\mathbf w_1 = -(\mathbf v_2-\mathbf w_2).$
+
+왼쪽은 $V_1$에 속하고 오른쪽은 $V_2$에 속하므로 이 벡터는 $V_1\cap V_2$에 속한다. 교집합이 $\{0\}$이므로
+
+$$
+\mathbf v_1=\mathbf w_1,
+\qquad
+\mathbf v_2=\mathbf w_2
+$$
+
+이다. 따라서 분해가 유일하다.
+
+반대로 합이 직합인데 $\mathbf x\in V_1\cap V_2$라고 하자. 그러면 $\mathbf0=\mathbf0+\mathbf0$ 뿐 아니라 $\mathbf0=\mathbf x+(-\mathbf x)$ 로도 표현된다. 직합에서 표현은 유일하므로 $\mathbf x=0$ 이다. 따라서
+
+$$
+V_1\cap V_2=\{0\}.
+$$
+
+#### 직합이지만 직교하지 않는 예
+
+$$
+V_1
+=
+\operatorname{span}
+\left\{
+\begin{pmatrix}1\\0\end{pmatrix}
+\right\},
+\qquad
+V_2
+=
+\operatorname{span}
+\left\{
+\begin{pmatrix}1\\1\end{pmatrix}
+\right\}
+$$
+
+라고 하자. 두 직선은 서로 다르므로 $V_1\cap V_2=\{0\}.$ 또한 두 생성벡터가 선형독립이므로 $\mathbb R^2=V_1\oplus V_2.$
+
+실제로 임의의 벡터는 $\begin{pmatrix}a\\b\end{pmatrix} = (a-b)\begin{pmatrix}1\\0\end{pmatrix} + b\begin{pmatrix}1\\1\end{pmatrix}$ 로 유일하게 표현된다.
+
+하지만 $\begin{pmatrix}1\\0\end{pmatrix}^T \begin{pmatrix}1\\1\end{pmatrix} =1\neq0$ 이므로 두 부분공간은 직교하지 않는다.
+
+따라서, **직합이라고 해서 반드시 직교하는 것은 아니다**
+
+#### 직교직합
+
+부분공간들이 서로 직교하면서 직합을 이루는 경우를 직교직합이라고 한다.
+
+$$
+V=V_1\mathbin{\overset{\perp}{\oplus}}\cdots
+\mathbin{\overset{\perp}{\oplus}}V_p
+$$
+
+또는 문맥상 단순히
+
+$$
+V=V_1\oplus\cdots\oplus V_p
+$$
+
+라고 쓴다.
+
+직교직합에서는 $\mathbf v_i^T\mathbf v_j=0\quad (i\neq j)$ 가 성립한다. 즉, 직교직합이면 자동으로 직합이다.  
+실제로 $\mathbf v_1+\cdots+\mathbf v_p=0$ 이면
+
+$$
+0 =\left\|\sum_{j=1}^p\mathbf v_j \right\|^2 = \sum_{j=1}^p\|\mathbf v_j\|^2
+$$
+
+이므로 모든 $\mathbf v_j=0$이다.
+
+반대는 일반적으로 성립하지 않는다.
+
+
+#### 부분공간이 세 개 이상일 때의 주의점
+
+부분공간이 세 개 이상이면 모든 두 부분공간의 교집합이 $\{0\}$이라는 것만으로는 직합과 동치가 되기에는 부족하다.
+
+예를 들어 $\mathbb R^2$에서 $V_1=\operatorname{span}\{\mathbf e_1\}, \quad V_2=\operatorname{span} \{\mathbf e_2\},\quad V_3=\operatorname{span}\{\mathbf e_1+\mathbf e_2\}$ 라고 하자.  
+서로 다른 두 부분공간의 교집합은 모두 $V_i\cap V_j=\{0\}$ 이다. 하지만 $\mathbf e_1+\mathbf e_2+ \bigl(-(\mathbf e_1+\mathbf e_2)\bigr)=0$ 이라는 자명하지 않은(모든 성분이 0이 아닌) 표현이 존재한다. 따라서 $V_1+V_2+V_3$ 는 직합이 아니다.
+
+세 개 이상에서는 다음 조건을 사용해야 한다.
+
+$$
+\boxed{
+V_i\cap \left( \sum_{j\neq i}V_j \right)
+= \{0\} \quad\text{for every }i
+}
+$$
+
+또는 차원 조건
+
+$$
+\boxed{
+\dim(V_1+\cdots+V_p) = \sum_{j=1}^p\dim V_j
+}
+$$
+
+을 사용해야 한다.
+
+이 둘을 사용하여 위 예시를 검사하면, $V_2+V_3=\mathbb R^2$이므로
+
+$$
+V_1\cap(V_2+V_3)=V_1\neq\{0\}
+$$
+
+이다. 따라서 첫 번째 조건을 만족하지 않는다. 또한
+
+$$
+\dim(V_1+V_2+V_3)=2\neq 3
+=\dim V_1+\dim V_2+\dim V_3
+$$
+
+이므로 차원 조건도 만족하지 않는다. 두 조건 모두 이 합이 직합이 아님을 확인해 준다.
+
+#### 내부 직합과 외부 직합
+
+직합이라는 용어에는 내부 직합과 외부 직합이 있다.
+
+**내부 직합**: 하나의 큰 벡터공간 $V$ 안에 이미 부분공간 $V_1,\ldots,V_p$가 주어져 있고
+
+$$
+V=V_1\oplus\cdots\oplus V_p
+$$
+
+가 성립하는 경우다.
+
+**외부 직합**: 서로 다른 벡터공간 $V_1,\ldots,V_p$를 모아 새로운 공간을 만드는 것이다.
+
+$$
+V_1\oplus\cdots\oplus V_p
+=
+\left\{
+(\mathbf v_1,\ldots,\mathbf v_p):
+\mathbf v_j\in V_j
+\right\}.
+$$
+
+벡터의 덧셈과 상수배는 성분별로 정의한다.
+
+$$
+(\mathbf v_1,\ldots,\mathbf v_p)
++
+(\mathbf w_1,\ldots,\mathbf w_p)
+=
+(\mathbf v_1+\mathbf w_1,\ldots,\mathbf v_p+\mathbf w_p).
+$$
+
+외부 직합에서는 벡터 자체가 성분들의 순서쌍 또는 순서튜플이므로 분해의 유일성이 자동으로 성립한다.
+
+유한 개의 벡터공간에 대해서는 외부 직합과 Cartesian product(곱집합)가 집합으로는 동일하다.
+
+#### 행렬의 직합
+
+행렬
+
+$$
+\mathbf A\in\mathbb R^{m\times m},
+\qquad
+\mathbf B\in\mathbb R^{n\times n}
+$$
+
+의 직합은 블록 대각행렬로 정의한다.
+
+$$
+\boxed{
+\mathbf A\oplus\mathbf B
+=
+\begin{pmatrix}
+\mathbf A&0\\
+0&\mathbf B
+\end{pmatrix}
+}
+$$
+
+세 행렬이면
+
+$$
+\mathbf A_1\oplus\mathbf A_2\oplus\mathbf A_3
+=
+\begin{pmatrix}
+\mathbf A_1&0&0\\
+0&\mathbf A_2&0\\
+0&0&\mathbf A_3
+\end{pmatrix}.
+$$
+
+하지만 이것은 직합 개념 전체가 아니라, 벡터공간의 외부 직합 위에서 각각의 선형변환을 동시에 표현한 행렬이다.
+
+$$
+\begin{pmatrix}
+\mathbf A&0\\
+0&\mathbf B
+\end{pmatrix}
+\begin{pmatrix}
+\mathbf x\\
+\mathbf y
+\end{pmatrix}
+=
+\begin{pmatrix}
+\mathbf A\mathbf x\\
+\mathbf B\mathbf y
+\end{pmatrix}.
+$$
+
+즉, $\mathbf A$는 첫 번째 공간에만 작용하고 $\mathbf B$는 두 번째 공간에만 작용한다.
+
+#### 부분공간의 직합과 블록 대각행렬의 관계
+
+벡터공간이
+
+$$
+V=V_1\oplus\cdots\oplus V_p
+$$
+
+로 분해되고, 선형변환 $T:V\to V$가 각 부분공간을 보존한다고 하자.
+
+$$
+T(V_j)\subseteq V_j
+\qquad
+\text{for every }j.
+$$
+
+각 $V_j$의 기저를 선택하여 이어 붙이면 $V$의 기저를 얻는다. 이 기저에서 $T$의 행렬은
+
+$$
+[T]
+=
+\begin{pmatrix}
+[T|_{V_1}]&0&\cdots&0\\
+0&[T|_{V_2}]&\cdots&0\\
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&[T|_{V_p}]
+\end{pmatrix}
+$$
+
+와 같은 블록 대각행렬이 된다.
+
+따라서 관계는 다음과 같다.
+
+벡터공간이 직합으로 분해되고 선형변환이 각 성분을 보존되면, 적절한 기저에서 블록 대각행렬이 표현될수 있는 구조이다.
+
+#### 개념 비교
+
+| 개념                                  | 핵심 의미                   |
+| ----------------------------------- | ----------------------- |
+| 부분공간의 합 $V_1+\cdots+V_p$          | 각 부분공간의 벡터들을 더해 만든 공간이다 |
+| 내부 직합 $V_1\oplus\cdots\oplus V_p$ | 같은 큰 공간 안에서 분해가 유일하다    |
+| 외부 직합 $V_1\oplus\cdots\oplus V_p$ | 서로 다른 공간을 성분별 튜플로 결합한다  |
+| 직교직합                                | 직합이며 서로 다른 부분공간이 직교한다   |
+| 행렬의 직합 $\mathbf A\oplus\mathbf B$ | 블록 대각행렬을 만든다            |
+| 블록 대각화                              | 직합분해를 적절한 기저에서 행렬로 표현한다 |
+
 
 ### (6) 행렬의 직적 (Direct Product)
 크로네커 곱(Kronecker Product) 또는 쪼이푸스 곱(Zehfuss Product)이라고도 함

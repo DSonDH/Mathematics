@@ -24,6 +24,7 @@
 | $L^2$ 노름 | $\|x\|_2 = \sqrt{\sum_{i=1}^n x_i^2}$ | 유클리드 거리 |
 | $L^p$ 노름 | $\|x\|_p = \left(\sum_{i=1}^n \|x_i\|^p\right)^{1/p}$ | ($1 \leq p < \infty$) |
 | $L^\infty$ 노름 | $\|x\|_\infty = \max_{1 \leq i \leq n} \|x_i\|$ | Chebyshev 거리 |
+| Frobenius 노름 | $\|A\|_F = \sqrt{\sum_{i=1}^m\sum_{j=1}^n \|a_{ij}\|^2}$ | 행렬 원소를 벡터로 본 $L^2$ 노름 |
 
 **성질:** $\|x\|_\infty \leq \|x\|_2 \leq \|x\|_1$ (단, $n$차원)
 - $L^P$에서 $0< P < 1$이면 norm 조건을 만족하지 않아 노름이라 하지 않는다.
