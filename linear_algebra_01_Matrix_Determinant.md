@@ -558,7 +558,7 @@ $$E[\mathbf{e}^\top (I - \Pi) \mathbf{e}] = \sigma^2 \operatorname{trace}(I - \P
 $$E[\text{RSS}] = E[\mathbf{e}^\top (I - \Pi_X) \mathbf{e}] = \operatorname{trace}[(I - \Pi_X) \sigma^2 I] = 
 \sigma^2(n - p)$$
 
-여기서 $\Pi_X = X(X^TX)^{-1}X^T$는 $X$의 열공간으로의 정사영행렬이고, $p = \operatorname{rank}(X)$는 매개변수 개수이다.
+여기서 $\Pi_X = X(X^TX)^{-1}X^T$는 $X$의 열공간으로의 정사영행렬이고, $p = \operatorname{rank}(X)$는 매개변수 개수이다. 왜 이 식인지는 '열벡터공간으로의 정사영행렬' 참고
 
 따라서 불편추정량:
 

@@ -227,8 +227,11 @@ $$
 \dim(V)=\dim(\ker L)+\dim(\operatorname{im}L)
 $$
 
+- 정의역의 차원 = Rank(이미지의 차원) + Nullity(커널의 차원)
+- 변환을 통해 살아남는 공간의 크기와 0으로 무너지는 공간의 크기를 더하면 원래 공간의 크기가 된다는 정리
+
 ### 증명
-증명>  $B_V = \{v_1, \dots, v_n\}$
+$B_V = \{v_1, \dots, v_n\}$
 
 $\ker L = \{v_1, \dots, v_k\}$
 
@@ -367,7 +370,7 @@ $$
 \operatorname{col\text{-}rank}M = \operatorname{row\text{-}rank}M
 $$
 
-이 차원을 행렬 **$M$의 계수 rankM**이라 한다.
+이 차원을 행렬 **$M$의 계수 rank M**이라 한다.
 
 ## ③ Rank–Nullity 정리
 행렬 $M\in M_{m\times n}(F)$에 대하여:

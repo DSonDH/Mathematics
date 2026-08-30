@@ -373,7 +373,7 @@ $$f(\mathbf{y})=(2\pi)^{-n/2}|\mathbf{V}|^{-1/2} \exp\left[-\frac{1}{2} (\mathbf
 
      $$\frac{y}{\sqrt{Q/n}} \sim t(n)$$
 
-### 3.3.2 비중심 χ² 및 F 분포 (Noncentral χ² and F Distributions)
+### 3.5.2 비중심 χ² 및 F 분포 (Noncentral χ² and F Distributions)
 만약 $\mathbf{y \sim N(\mu, I_n)}$ 이면
 
 $$\mathbf{y}^T \mathbf{y} \sim \chi^2(n,\lambda), \quad \lambda=\frac{1}{2} \mathbf{\mu}^T\mathbf{\mu}$$

@@ -103,6 +103,118 @@ $$\det(\lambda I - A) = (\lambda - \lambda_1)(\lambda - \lambda_2) \cdots (\lamb
 
 따라서 계수를 비교하면 위의 결과를 얻는다.
 
+### 고윳값 관련 성질들
+
+$A\in\mathbb F^{n\times n}$, $\lambda\in\mathbb F$에 대하여 다음 명제들은 모두 동치다.
+
+$$
+\boxed{
+\begin{aligned}
+&(1)\ \lambda\text{는 }A\text{의 고윳값이다}\\
+\Longleftrightarrow\;&(2)\ \ker(A-\lambda I)\neq\{\mathbf0\}\\
+\Longleftrightarrow\;&(3)\ A-\lambda I\text{는 가역행렬이 아니다}\\
+\Longleftrightarrow\;&(4)\ \det(A-\lambda I)=0.
+\end{aligned}}
+$$
+
+따라서 그 대우로
+
+$$
+\boxed{
+\lambda\text{가 }A\text{의 고윳값이 아니다}
+\iff A-\lambda I\text{는 가역행렬이다}
+}
+$$
+
+가 성립한다.
+
+---
+
+1. 고윳값과 영공간의 관계
+
+고윳값의 정의에 따르면 $\lambda$가 $A$의 고윳값이라는 것은 영이 아닌 벡터 $\mathbf v$가 존재하여 $A\mathbf v=\lambda\mathbf v$ 를 만족한다는 뜻이다.  
+이 식을 이항하면 $A\mathbf v-\lambda\mathbf v=0.$ 그리고 $\lambda\mathbf v=\lambda I\mathbf v$이므로 $(A-\lambda I)\mathbf v=0.$
+
+따라서 $\lambda$ 가 고윳값 이라는 것은 정확히 $\mathbf v\neq0,\quad \mathbf v\in\ker(A-\lambda I)$ 인 벡터가 존재한다는 뜻이다. 즉,
+
+$$
+\boxed{
+\lambda\text{가 }A\text{의 고윳값} \iff \ker(A-\lambda I)\neq\{\mathbf0\}
+}
+$$
+
+---
+
+2. 영공간이 자명하지 않으면 왜 비가역인가
+
+일반적인 정사각행렬 $B\in\mathbb F^{n\times n}$를 생각하자. 먼저 $B$가 가역행렬이라고 가정하자. 만약 $B\mathbf v=0$ 이면 $B^{-1}B\mathbf v=B^{-1}0$ 이므로 $\mathbf v=0$ 이다. 즉, 가역행렬의 영공간은 반드시 $\ker(B)=\{\mathbf0\}$ 이다. 그러므로 그 대우에 의해 $\ker(B)\neq\{\mathbf0\} \Longrightarrow B\text{는 가역이 아니다}$
+
+반대 방향도 증명할 수 있다. $\ker(B)=\{\mathbf0\}$라고 하자. 이는 선형사상
+
+$$
+T_B:\mathbb F^n\to\mathbb F^n,\quad T_B(\mathbf v)=B\mathbf v
+$$
+
+가 단사라는 뜻이다.
+
+rank-nullity 정리에 의해 $\dim\ker(B)+\operatorname{rank}(B)=n$ 이다. $\dim\ker(B)=0$이므로 $\operatorname{rank}(B)=n.$ 따라서 $B$의 상공간은 $n$차원이고, $\operatorname{Im}(B)=\mathbb F^n$ 이다. 즉, $T_B$는 전사다. 결국 $T_B$는 일대일 대응이므로 역선형사상이 존재한다. 따라서 $B$는 가역이다.
+
+그러므로 $\ker(B)=\{\mathbf0\} \iff B\text{는 가역이다}$ 이며, 동치의 부정을 취하면
+
+$$
+\boxed{
+\ker(B)\neq\{\mathbf0\} \iff B\text{는 가역이 아니다}
+}
+$$
+
+이다. 여기서 $B=A-\lambda I$를 대입하면
+
+$$
+\boxed{
+\ker(A-\lambda I)\neq\{\mathbf0\} \iff A-\lambda I\text{는 가역이 아니다}
+}
+$$
+
+를 얻는다.
+
+---
+
+3. 행렬식과 가역성의 관계
+
+정사각행렬 $B$에 관한 가역행렬 정리에 의해 $B$ 가 가역 $\iff \det(B)\neq0$ 이다. 따라서 $B$ 가 비가역 $\iff \det(B)=0$
+
+$B=A-\lambda I$를 대입하면
+
+$$
+\boxed{
+A-\lambda I\text{가 비가역} \iff \det(A-\lambda I)=0
+}
+$$
+
+따라서 특성방정식 $\det(A-\lambda I)=0$ 의 해가 바로 $A$의 고윳값이 된다.
+
+---
+
+4.  $\lambda$ 가 고윳값이 아니면 $A-\lambda I$ 는 가역이다 
+
+$\lambda$가 $A$의 고윳값이 아니라고 가정한다. 그러면 고윳값의 정의에 의해 $A\mathbf v=\lambda\mathbf v$ 를 만족하는 영이 아닌 벡터 $\mathbf v$가 존재하지 않는다. 그런데
+
+$A\mathbf v=\lambda\mathbf v \iff (A-\lambda I)\mathbf v=0$ 이므로 $(A-\lambda I)\mathbf v=0$ 의 해는 $\mathbf v=0$뿐이다. 따라서
+
+$$
+\ker(A-\lambda I)=\{\mathbf0\}.
+$$
+
+rank-nullity 정리에 의해 $\operatorname{rank}(A-\lambda I) =n-\dim\ker(A-\lambda I) =n.$  
+즉, $A-\lambda I$는 완전계수 정사각행렬이므로 가역이다. 따라서
+
+$$
+\boxed{
+\lambda\text{가 고윳값이 아니면 } A-\lambda I\text{는 가역이다}
+}
+$$
+
+
 # 2. 대각화(Diagonalization)
 
 ## (1) Definition
@@ -820,6 +932,246 @@ $A = X^TX$ 형태의 행렬을 그람 행렬이라 하며:
 * $X$가 열 최대계수 행렬이면 양정치이다
 * $XX^T$도 그람 행렬이며, $X^TX$와 같은 양정치성질을 갖는다
 
+앞에서 사용한 "최소다항식 정리"에는 서로 다른 두 명제가 포함되어 있다. 정확히 구분하면 다음과 같다.
+
+## 최소다항식 (Minimal Polynomial)
+
+행렬 $A\in\mathbb F^{n\times n}$, 다항식 $p$ 에 대하여
+
+$$p(A)=0$$
+
+을 만족하는 다항식을 소거다항식(annihilating polynomial) 이라 하고, 최고차항 계수가 $1$인 다항식 중 차수가 가장 낮은 것을 $A$의 최소다항식이라 하고 $m_A(t)$로 나타낸다.
+
+최소다항식은 각 행렬에 대해 유일하다.
+
+### 정리. 최소다항식 정리
+
+임의의 다항식 $p(t)\in\mathbb F[t]$에 대하여
+
+$$
+\boxed{p(A)=0\iff m_A(t)\mid p(t)}
+$$
+
+즉, 행렬 $A$를 영행렬로 만드는 모든 다항식은 최소다항식의 배수다.
+
+>**다항식의 나눗셈 표기**
+>
+>세로선 $\mid$는 '나눈다' 또는 '약수다'라는 뜻이다. 두 다항식 $f(t),g(t)\in\mathbb F[t]$에 대하여
+>
+>$$
+>\boxed{f(t)\mid g(t) \iff g(t)=q(t)f(t)\text{인 다항식 }q(t)\in\mathbb F[t]\text{가 존재한다}}
+>$$
+>
+>라고 정의한다. 즉, $m_A(t)\mid p(t)$ 는 최소다항식 $m_A(t)$가 다항식 $p(t)$를 나눈다는 뜻이며, $p(t)$가 $m_A(t)$의 다항식 배수라는 뜻이다.
+
+**증명**
+
+**1. $p(A)=0$이면 $m_A(t)\mid p(t)$**
+
+$p(A)=0$이라고 가정하자.
+
+다항식 나눗셈 정리에 의해 $p(t)$를 $m_A(t)$로 나누면 몫 $q(t)$와 나머지 $r(t)$가 유일하게 존재하여 $p(t)=q(t)m_A(t)+r(t)$ 로 나타낼 수 있다. 이때 나머지는 $r(t)=0$ 이거나 $\deg r<\deg m_A$ 를 만족한다.
+
+위 등식에 행렬 $A$를 대입하면 $p(A)=q(A)m_A(A)+r(A)$ 이다.
+
+가정에 의해 $p(A)=0$이고, 최소다항식의 정의에 의해 $m_A(A)=0$이다. 따라서 $0=q(A)\cdot 0+r(A)=r(A)$  이므로 $r(A)=0$이다.
+
+이제 $r(t)\neq0$이라고 가정해 보자. 그러면 $r(A)=0$이므로 $r(t)$도 $A$의 소거다항식이다. 그런데 나눗셈 정리에 의해 $\deg r<\deg m_A$ 이다.
+
+이는 $m_A(t)$가 모든 $0$이 아닌 소거다항식 중 차수가 가장 작은 다항식이라는 사실에 모순이다. 따라서 $r(t)=0$이다.
+
+그러므로 $p(t)=q(t)m_A(t)$ 이고, 이는 $m_A(t)\mid p(t)$ 를 뜻한다.
+
+**2. $m_A(t)\mid p(t)$이면 $p(A)=0$임을 증명**
+
+이번에는 $m_A(t)\mid p(t)$ 라고 가정하자.
+
+나눗셈의 정의에 따라 어떤 다항식 $q(t)$가 존재하여 $p(t)=q(t)m_A(t)$  로 쓸 수 있다.
+
+행렬 $A$를 대입하면 $p(A)=q(A)m_A(A)$ 이다. 최소다항식의 정의에 의해 $m_A(A)=0$ 이므로 $p(A)=q(A)\cdot0=0$ 이다.
+
+$$
+\therefore \boxed{p(A)=0 \iff m_A(t)\mid p(t)}
+$$
+
+**예시: 멱등행렬에 적용**
+
+$A^2=A$이면 $A^2-A=0$ 이므로 $p(t)=t(t-1)$에 대하여 $p(A)=0$이다. 따라서 위 정리에 의해
+
+$$
+\boxed{m_A(t)\mid t(t-1)}
+$$
+
+### 최소다항식과 특성다항식의 관계
+
+$A$의 특성다항식을 $\chi_A(t)=\det(tI-A)$ 라 하자.
+
+케일리–해밀턴 정리에 의해 $\chi_A(A)=0$ 이다. 즉, 특성다항식은 $A$의 소거다항식이다. 따라서 앞의 정리에 의해
+
+$$
+\boxed{m_A(t)\mid\chi_A(t)}
+$$
+
+이다.
+
+따라서 다음 관계가 성립한다.
+
+$$
+\boxed{m_A(A)=0,\quad m_A(t)\mid\chi_A(t)}
+$$
+
+다만 최소다항식과 특성다항식이 항상 같지는 않다. 예를 들어 $A=I_n$이면 $m_A(t)=t-1$ 이지만 $\chi_A(t)=(t-1)^n$ 이다.
+
+### 정리. 최소다항식과 고윳값에 관한 정리
+
+$$
+\boxed{\lambda\text{가 }A\text{의 고윳값}
+\iff m_A(\lambda)=0}
+$$
+
+즉, 최소다항식의 근들은 정확히 $A$의 서로 다른 고윳값들이다.
+
+**증명**
+
+1. $\lambda$가 고윳값이면 $m_A(\lambda)=0$
+
+$\lambda$가 고윳값이면 영이 아닌 벡터 $\mathbf v$가 존재하여 $A\mathbf v=\lambda\mathbf v$ 이다. 임의의 다항식 $p(t)$에 대하여 $p(A)\mathbf v=p(\lambda)\mathbf v$ 가 성립한다.
+
+특히 $m_A(A)=0$이므로 $0=m_A(A)\mathbf v=m_A(\lambda)\mathbf v.$
+
+$\mathbf v\neq0$이므로 $m_A(\lambda)=0$ 이다.
+
+2. $m_A(\lambda)=0$이면 $\lambda$가 고윳값임
+
+만약 $\lambda$가 고윳값이 아니라면 $A-\lambda I$는 가역행렬이다.
+
+그런데 $m_A(\lambda)=0$이므로 인수정리에 의해 $m_A(t)=(t-\lambda)q(t)$ 로 쓸 수 있다. 따라서 $0=m_A(A)=(A-\lambda I)q(A).$
+
+$A-\lambda I$가 가역행렬이므로 양변에 그 역행렬을 곱하면 $q(A)=0$ 이다. 그런데 $\deg q<\deg m_A$ 이므로 최소다항식의 최소성에 모순이다. 따라서 $\lambda$는 $A$의 고윳값이다.
+
+### 정리. 대각화에 관한 최소다항식 정리
+
+앞에서 멱등행렬이 대각화 가능하다고 결론 내릴 때 직접 사용한 정리는 다음이다:
+
+행렬 $A\in\mathbb F^{n\times n}$가 $\mathbb F$ 위에서 대각화 가능할 필요충분조건은 최소다항식이 $\mathbb F$ 위에서 서로 다른 일차인수들의 곱으로 분해되는 것이다.
+
+즉,
+
+$$
+\boxed{
+A\text{가 대각화 가능} \iff m_A(t)=\prod_{j=1}^{k}(t-\lambda_j)
+}
+$$
+
+이며 여기서 $\lambda_1,\dots,\lambda_k$는 서로 다르다.
+
+이를 흔히 "최소다항식을 이용한 대각화 판정 정리"라고 한다.
+
+**필요조건 증명**
+
+$A$가 대각화 가능하다고 하자. 그러면 어떤 가역행렬 $P$에 대하여 $A=PDP^{-1}$ 이고, $D=\operatorname{diag}(\lambda_1,\dots,\lambda_n)$ 이다.
+
+$A$의 서로 다른 고윳값을 $\mu_1,\dots,\mu_k$ 라 하고 $p(t)=\prod_{j=1}^k(t-\mu_j)$ 라 놓자. 그러면 모든 대각성분에 대하여 $p(\lambda_i)=0$이므로 $p(D)=0.$
+
+따라서
+
+$$
+p(A)=Pp(D)P^{-1}=0.
+$$
+
+그러므로 최소다항식은 $p(t)$를 나눈다. $m_A(t)\mid p(t).$
+
+한편 모든 고윳값 $\mu_j$는 최소다항식의 근이어야 하므로 $t-\mu_j$가 모두 $m_A(t)$의 인수다. 결국
+
+$$
+m_A(t)=\prod_{j=1}^k(t-\mu_j).
+$$
+
+따라서 최소다항식에는 중복된 인수가 없다.
+
+**충분조건 증명**
+
+최소다항식이 $m_A(t)=\prod_{j=1}^k(t-\lambda_j), \quad \lambda_i\neq\lambda_j\;(i\neq j)$ 라고 하자.
+
+각 $j$에 대하여 라그랑주 다항식
+
+$$
+p_j(t)
+=\prod_{\ell\neq j}
+\frac{t-\lambda_\ell}{\lambda_j-\lambda_\ell}
+$$
+
+를 정의하면
+
+$$
+p_j(\lambda_i)=
+\begin{cases}
+1,&i=j,\\
+0,&i\neq j
+\end{cases}
+$$
+
+이다. 또한 다항식 항등식으로 $\sum_{j=1}^kp_j(t)=1 \pmod{m_A(t)}$ 이므로 $A$를 대입하면 $I=\sum_{j=1}^kp_j(A).$
+
+따라서 임의의 $\mathbf v\in\mathbb F^n$는
+
+$$
+\mathbf v = \sum_{j=1}^kp_j(A)\mathbf v
+$$
+
+로 분해된다.
+
+그리고 $(A-\lambda_jI)p_j(A)=0$ 이므로 $p_j(A)\mathbf v\in\ker(A-\lambda_jI).$
+
+즉, 모든 벡터가 $A$의 고유벡터 공간들의 합으로 표현된다.
+
+$$
+\mathbb F^n
+=
+\ker(A-\lambda_1I)+\cdots+
+\ker(A-\lambda_kI).
+$$
+
+서로 다른 고윳값에 대응하는 고유공간들의 합은 직합이므로
+
+$$
+\mathbb F^n
+=
+\bigoplus_{j=1}^k\ker(A-\lambda_jI).
+$$
+
+따라서 각 고유공간의 기저를 합치면 $\mathbb F^n$의 고유벡터 기저가 만들어진다. 그러므로 $A$는 대각화 가능하다.
+
+### 중복인수가 대각화를 방해하는 이유
+
+최소다항식이
+
+$$
+m_A(t)=\prod_{j=1}^k(t-\lambda_j)^{s_j}
+$$
+
+라고 하자. $s_j>1$인 인수가 존재한다는 것은 해당 고윳값에 대해 크기가 $2$ 이상인 조르당 블록이 존재한다는 뜻이다. 즉, 일반 고유벡터가 필요하므로 고유벡터만으로 전체 공간의 기저를 만들 수 없다.
+
+따라서
+
+$$
+\boxed{
+A\text{가 대각화 가능}
+\iff
+m_A(t)\text{의 모든 근의 중복도가 }1
+}
+$$
+
+이다.
+
+특성다항식은 중근을 가져도 대각화가 가능할 수 있다는 점에 주의해야 한다. 예를 들어 $I_n$은 대각화 가능하지만
+
+$$
+\chi_{I_n}(t)=(t-1)^n
+$$
+
+은 중근을 갖는다. 중요한 것은 특성다항식이 아니라 최소다항식에 중복인수가 있는지 여부다.
+
 
 
 # 3. 중복도(Multiplicity)
@@ -840,8 +1192,8 @@ $A = X^TX$ 형태의 행렬을 그람 행렬이라 하며:
    기하적 중복도 = 대수적 중복도.
 
 
-# 4. 닮음(Similarity) 불변량 (Invariants under Similarity)
-## (1) 정의
+# 4. 닮음(Similarity), 불변량 (Invariants under Similarity)
+## (1) 정의: 닮음(Similarity)
 두 정사각행렬 $A, B$에 대하여
 가역행렬 $P$가 존재해
 
@@ -911,14 +1263,11 @@ $$
 A^{-1} = \frac{1}{\det(A)} \operatorname{adj}(A)
 $$
 
-## 증명
+**증명**
+
 $B = \operatorname{adj}(\lambda I - A)$라 하면, $B$는 $\lambda$에 대한 다항식 행렬이다.
 
-수반행렬의 성질에 의해
-
-$$
-B(\lambda I - A) = \det(\lambda I - A) I = f(\lambda) I
-$$
+수반행렬의 성질에 의해 $B(\lambda I - A) = \det(\lambda I - A) I = f(\lambda) I$
 
 $B$는 $\lambda$에 대한 차수가 최대 $n-1$인 다항식 행렬이므로
 
@@ -940,25 +1289,9 @@ $$
 B_0(\lambda I - A) + B_1 \lambda(\lambda I - A) + \cdots + B_{n-1} \lambda^{n-1}(\lambda I - A) = f(\lambda) I
 $$
 
-양변의 $\lambda$의 각 차수 계수를 비교하면, 특히 $\lambda = A$를 대입하면
+양변의 $\lambda$의 각 차수 계수를 비교하면, 특히 $\lambda = A$를 대입하면 $B(A)(AI - A) = f(A)I$ 즉, $B(A) \cdot 0 = f(A)I$ 
 
-$$
-B(A)(AI - A) = f(A)I
-$$
-
-즉,
-
-$$
-B(A) \cdot 0 = f(A)I
-$$
-
-따라서
-
-$$
-f(A) = 0
-$$
-
-$\square$
+따라서 $f(A) = 0$ $\square$
 
 
 # [연습 문제]
