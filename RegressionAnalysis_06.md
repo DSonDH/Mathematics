@@ -124,9 +124,9 @@ $(H - H_1)$은 멱등행렬(idempotent matrix)이며, 그 계수(rank)는 $p - q
 >   
 >   $$(H - H_1)^2 = H^2 - H H_1 - H_1 H + H_1^2 = H - H_1$$
 >   
->2. 계수: $\operatorname{rank}(H - H_1) = p - q$  
+>2. 계수: $\text{rank}(H - H_1) = p - q$  
 >   $H$는 전체모형의 예측공간(prediction space)을 나타내며, $H_1$은 부분모형의 예측공간을 나타낸다. $H - H_1$은 부분모형의 예측공간에 직교하는 공간을 나타내며, 이 공간의 차원은 $p - q$이다.
->   따라서 $\operatorname{rank}(H - H_1) = p - q$이다.
+>   따라서 $\text{rank}(H - H_1) = p - q$이다.
 
 ### 정리 6.2 분포적 성질 (Distributional Properties)
 정규성 가정 하에서
@@ -677,7 +677,7 @@ $$
 
 분산
 $$
-\operatorname{Var}
+\text{Var}
 \begin{pmatrix}
 \hat{a}_1 \\
 \hat{a}_2
@@ -692,8 +692,8 @@ $$
 이므로
 
 $$
-\operatorname{Var}(\hat{a}_1)
-=\operatorname{Var}(\hat{a}_2)
+\text{Var}(\hat{a}_1)
+=\text{Var}(\hat{a}_2)
 =\frac{\sigma^2}{1 - r_{12}^2}
 $$
 
@@ -801,7 +801,7 @@ n(\mathbf{\beta}_0-\hat{\mathbf{\beta}}_0)^2
 \le 2\,\text{MSE}\,F_{\alpha}(2, n-2)
 $$
 
-로 표현되는 타원이다. 재밌는점은, 공분산행렬은 $\operatorname{Var}(\hat{\mathbf{\beta}}) = \sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}$이고, 단순회귀의 경우
+로 표현되는 타원이다. 재밌는점은, 공분산행렬은 $\text{Var}(\hat{\mathbf{\beta}}) = \sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}$이고, 단순회귀의 경우
 
 $$
 (\mathbf{X}^T \mathbf{X})^{-1}
@@ -816,16 +816,16 @@ $$
 따라서 공동신뢰영역 식은 아래처럼 변형된다
 
 $$
-Var(\hat{\mathbf{\beta}}_1)(\beta_0-\hat\beta_0)^2 + Var(\hat{\mathbf{\beta}}_0)(\beta_1-\hat\beta_1)^2 - 2 \operatorname{Cov}(\hat{\mathbf{\beta}}_0,\hat{\mathbf{\beta}}_1)(\beta_0-\hat\beta_0)(\beta_1-\hat\beta_1) \\
+Var(\hat{\mathbf{\beta}}_1)(\beta_0-\hat\beta_0)^2 + Var(\hat{\mathbf{\beta}}_0)(\beta_1-\hat\beta_1)^2 - 2 \text{Cov}(\hat{\mathbf{\beta}}_0,\hat{\mathbf{\beta}}_1)(\beta_0-\hat\beta_0)(\beta_1-\hat\beta_1) \\
 \le 2\cdot \text{MSE}\cdot F_{\alpha}(2, n-2) / D \cdot \sigma^2
 $$
 
 이때
  
 $$
-\operatorname{Var}(\hat{\mathbf{\beta}}_0) = \sigma^2 \frac{\sum x_i^2}{D} \\
-\operatorname{Var}(\hat{\mathbf{\beta}}_1) = \sigma^2 \frac{n}{D} \\
-\operatorname{Cov}(\hat{\mathbf{\beta}}_0,\hat{\mathbf{\beta}}_1) = -\sigma^2 \frac{\sum x_i}{D}
+\text{Var}(\hat{\mathbf{\beta}}_0) = \sigma^2 \frac{\sum x_i^2}{D} \\
+\text{Var}(\hat{\mathbf{\beta}}_1) = \sigma^2 \frac{n}{D} \\
+\text{Cov}(\hat{\mathbf{\beta}}_0,\hat{\mathbf{\beta}}_1) = -\sigma^2 \frac{\sum x_i}{D}
 $$
 
 * 분산이 클수록 타원은 해당 축 방향으로 길어진다.
@@ -840,7 +840,7 @@ $$
 이는 각 $\beta_j$에 대한 구간
 
 $$
-\hat{\mathbf{\beta}}_j \pm c \sqrt{\operatorname{Var}(\hat{\mathbf{\beta}}_j)}
+\hat{\mathbf{\beta}}_j \pm c \sqrt{\text{Var}(\hat{\mathbf{\beta}}_j)}
 $$
 
 을 구성하되, 모든 구간이 동시에 참모수를 포함할 확률이 $1-\alpha$가 되도록 상수 $c$를 조정하는 방법이다.
@@ -853,8 +853,8 @@ $$
 
 $$
 
-A_j = \left\{\beta_j: \hat{\mathbf{\beta}}_j - t_{\alpha/(2(p+1))}(n-p-1) \sqrt{\operatorname{\widehat{Var}}(\hat{\mathbf{\beta}}_j)} \le \beta_j \le \hat{\mathbf{\beta}}_j + t_{\alpha/(2(p+1))}(n-p-1) \sqrt{\operatorname{\widehat{Var}}(\hat{\mathbf{\beta}}_j)} \right\} \\
-= \left[ \hat{\mathbf{\beta}}_j - t_{\alpha/(2(p+1))}(n-p-1) \sqrt{\operatorname{\widehat{Var}}(\hat{\mathbf{\beta}}_j)},\ \hat{\mathbf{\beta}}_j + t_{\alpha/(2(p+1))}(n-p-1) \sqrt{\operatorname{\widehat{Var}}(\hat{\mathbf{\beta}}_j)} \right]
+A_j = \left\{\beta_j: \hat{\mathbf{\beta}}_j - t_{\alpha/(2(p+1))}(n-p-1) \sqrt{\text{\widehat{Var}}(\hat{\mathbf{\beta}}_j)} \le \beta_j \le \hat{\mathbf{\beta}}_j + t_{\alpha/(2(p+1))}(n-p-1) \sqrt{\text{\widehat{Var}}(\hat{\mathbf{\beta}}_j)} \right\} \\
+= \left[ \hat{\mathbf{\beta}}_j - t_{\alpha/(2(p+1))}(n-p-1) \sqrt{\text{\widehat{Var}}(\hat{\mathbf{\beta}}_j)},\ \hat{\mathbf{\beta}}_j + t_{\alpha/(2(p+1))}(n-p-1) \sqrt{\text{\widehat{Var}}(\hat{\mathbf{\beta}}_j)} \right]
 $$
 
 이렇게 계산된 입방체의 확률은
@@ -879,7 +879,7 @@ $$
 
 $$
 \mathbf{a}^\top \hat{\mathbf{\beta}} \pm \sqrt{(p+1)F_{\alpha}(p+1,n-p-1)}
-\sqrt{\mathbf{a}^T \operatorname{Var}(\hat{\mathbf{\beta}}) \mathbf{a}}
+\sqrt{\mathbf{a}^T \text{Var}(\hat{\mathbf{\beta}}) \mathbf{a}}
 $$
 
 여기서 각 모수의 신뢰수준은 $\mathbf{a}$의 선택과 무관하게 항상 일정하다. 이는 동시신뢰구간의 경우 '대전제'임을 기억할 필요가 있다. 다만 p가 커짐에 따라 두 방법등의 동시신뢰구간 추정방법 등은 신뢰구간이 크게 넓어진다.

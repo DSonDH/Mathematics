@@ -86,7 +86,7 @@ E(Z_i\mid X)\neq 0
 그리고
 
 [
-\boxed{\operatorname{Cov}(X,Z)\neq0}
+\boxed{\text{Cov}(X,Z)\neq0}
 ]
 
 즉, 누락된 변수 (Z)가 포함된 설명변수 (X)와 관련되어야 한다.
@@ -100,13 +100,13 @@ Y_i=\beta_0+\beta_1X_i+\gamma Z_i+u_i
 라면 (Z)를 누락한 OLS 기울기의 확률극한은
 
 [
-\operatorname{plim}\hat\beta_1
+\text{plim}\hat\beta_1
 ==============================
 
 \beta_1+
 \gamma
-\frac{\operatorname{Cov}(X,Z)}
-{\operatorname{Var}(X)}.
+\frac{\text{Cov}(X,Z)}
+{\text{Var}(X)}.
 ]
 
 따라서 누락변수 편향은
@@ -117,8 +117,8 @@ Y_i=\beta_0+\beta_1X_i+\gamma Z_i+u_i
 ===========
 
 \gamma
-\frac{\operatorname{Cov}(X,Z)}
-{\operatorname{Var}(X)}
+\frac{\text{Cov}(X,Z)}
+{\text{Var}(X)}
 }
 ]
 
@@ -126,7 +126,7 @@ Y_i=\beta_0+\beta_1X_i+\gamma Z_i+u_i
 
 ### 편향 방향
 
-| (Z)가 (Y)에 미치는 영향 (\gamma) | (\operatorname{Cov}(X,Z)) | 편향 방향 |
+| (Z)가 (Y)에 미치는 영향 (\gamma) | (\text{Cov}(X,Z)) | 편향 방향 |
 | ------------------------: | ------------------------: | ----- |
 |                       (+) |                       (+) | 상향 편향 |
 |                       (+) |                       (-) | 하향 편향 |
@@ -225,12 +225,12 @@ E(\varepsilon_i\mid X)=0
 다만 오차분산은 증가한다.
 
 [
-\operatorname{Var}(\varepsilon_i\mid X)
+\text{Var}(\varepsilon_i\mid X)
 =======================================
 
-\gamma^2\operatorname{Var}(Z_i\mid X)
-+\operatorname{Var}(u_i\mid X)
-+2\gamma\operatorname{Cov}(Z_i,u_i\mid X).
+\gamma^2\text{Var}(Z_i\mid X)
++\text{Var}(u_i\mid X)
++2\gamma\text{Cov}(Z_i,u_i\mid X).
 ]
 
 즉, 계수는 불편일 수 있지만 추정의 정밀도가 낮아질 수 있다.
@@ -248,28 +248,28 @@ E(\varepsilon_i\mid X)=0
 이므로
 
 [
-\operatorname{Var}(\varepsilon_i\mid X)
+\text{Var}(\varepsilon_i\mid X)
 =======================================
 
-\operatorname{Var}(Z_i^\top\gamma+u_i\mid X).
+\text{Var}(Z_i^\top\gamma+u_i\mid X).
 ]
 
 만약 누락변수의 조건부분산이 (X)에 따라 달라지면
 
 [
-\operatorname{Var}(Z_i\mid X)=h(X_i)
+\text{Var}(Z_i\mid X)=h(X_i)
 ]
 
 이고,
 
 [
-\operatorname{Var}(\varepsilon_i\mid X)
+\text{Var}(\varepsilon_i\mid X)
 ]
 
 도 (X_i)에 따라 달라질 수 있다. 따라서 등분산성
 
 [
-\operatorname{Var}(\varepsilon_i\mid X)=\sigma^2
+\text{Var}(\varepsilon_i\mid X)=\sigma^2
 ]
 
 이 깨진다.
@@ -303,11 +303,11 @@ X_{ig}^\top\beta+A_g+u_{ig}.
 
 [
 \begin{aligned}
-\operatorname{Cov}
+\text{Cov}
 (\varepsilon_{ig},\varepsilon_{jg}\mid X)
 &=
-\operatorname{Cov}(A_g+u_{ig},A_g+u_{jg}\mid X)\
-&\approx\operatorname{Var}(A_g\mid X)>0.
+\text{Cov}(A_g+u_{ig},A_g+u_{jg}\mid X)\
+&\approx\text{Var}(A_g\mid X)>0.
 \end{aligned}
 ]
 
@@ -412,7 +412,7 @@ E(\varepsilon_i\mid X_i)=\beta_2X_i^2\neq0.
 ### (X)의 완전계수 조건
 
 [
-\operatorname{rank}(X)=k
+\text{rank}(X)=k
 ]
 
 는 포함된 (X)열 사이의 선형관계에 관한 조건이다. 변수가 누락되었다고 이 조건이 자동으로 깨지지는 않는다.

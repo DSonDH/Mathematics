@@ -1477,15 +1477,15 @@ $$R(|X_i-\theta_0|) = 1 + \sum_{j=1}^n I(|X_j-\theta_0| < |X_i-\theta_0|)$$
 
 이다. 다음 통계량을 **부호순위(signed rank) 검정통계량**이라 한다.
 
-$$W_n = \sum_{i=1}^n \operatorname{sgn}(X_i-\theta_0) R(|X_i-\theta_0|)$$
+$$W_n = \sum_{i=1}^n \text{sgn}(X_i-\theta_0) R(|X_i-\theta_0|)$$
 
-여기서 $\operatorname{sgn}(x)$는 $x$의 부호 함수이다.
+여기서 $\text{sgn}(x)$는 $x$의 부호 함수이다.
 
 #### 예: 부호순위(signed rank) 통계량 계산 예시
 
 $X=(2.1,\ -0.4,\ 1.3,\ -2.0,\ 0.7)$
 
-| $i$ | $X_i$ | $\operatorname{sgn}(X_i)$ | $\lvert X_i\rvert$ | 순위 $R(\lvert X_i\rvert)$ | $\operatorname{sgn}(X_i)\,R(\lvert X_i\rvert)$ |
+| $i$ | $X_i$ | $\text{sgn}(X_i)$ | $\lvert X_i\rvert$ | 순위 $R(\lvert X_i\rvert)$ | $\text{sgn}(X_i)\,R(\lvert X_i\rvert)$ |
 |---:|---:|:---:|---:|---:|---:|
 | 1 | 2.1  | $+1$ | 2.1 | 5 | 5  |
 | 2 | -0.4 | $-1$ | 0.4 | 1 | -1 |
@@ -1600,9 +1600,9 @@ $$
 $$
 
 ### 정리 9.3.3 부호순위 검정통계량의 표현
-$R(|X_i-\theta_0|)$를 $|X_1-\theta_0|,\dots,|X_n-\theta_0|$의 순위라 하고, $\operatorname{sgn}(x)$를 부호 함수라 하고, 부호순위 검정통계량을 아래로 정의하자.
+$R(|X_i-\theta_0|)$를 $|X_1-\theta_0|,\dots,|X_n-\theta_0|$의 순위라 하고, $\text{sgn}(x)$를 부호 함수라 하고, 부호순위 검정통계량을 아래로 정의하자.
 
-$$W_n = \sum_{i=1}^n \operatorname{sgn}(X_i-\theta_0) R(|X_i-\theta_0|),\quad W_n^+ = \sum_{i=1}^n \mathbf{1}(X_i-\theta_0 > 0) R(|X_i-\theta_0|)$$
+$$W_n = \sum_{i=1}^n \text{sgn}(X_i-\theta_0) R(|X_i-\theta_0|),\quad W_n^+ = \sum_{i=1}^n \mathbf{1}(X_i-\theta_0 > 0) R(|X_i-\theta_0|)$$
 
 그러면 아래 두 가지가 성립한다.  
 (a) $W_n$과 $W_n^+$의 관계
@@ -1620,7 +1620,7 @@ $$
 **(a)** 각 관측치에 대해
 
 $$
-\operatorname{sgn}(X_i-\theta_0)=
+\text{sgn}(X_i-\theta_0)=
 \begin{cases}
 +1,& X_i-\theta_0>0\\
 -1,& X_i-\theta_0<0
@@ -1791,7 +1791,7 @@ $$
 \frac{1}{\sigma} f\left(\frac{x-\mu}{\sigma}\right),\quad -\infty<\mu<\infty,\ \sigma>0
 $$
 
-가설: $H_0(\mu_0):\mu=\mu_0\quad \text{vs}\quad H_1:\mu>\mu_0$ 을 통계량 $W_n := \sum_{i=1}^n \operatorname{sgn}(X_i-\theta_0)\,R(|X_i-\theta_0|)$을 이용하는 부호순위 검정을 (정리9.3.4)와 같이 적용할 수 있다.  
+가설: $H_0(\mu_0):\mu=\mu_0\quad \text{vs}\quad H_1:\mu>\mu_0$ 을 통계량 $W_n := \sum_{i=1}^n \text{sgn}(X_i-\theta_0)\,R(|X_i-\theta_0|)$을 이용하는 부호순위 검정을 (정리9.3.4)와 같이 적용할 수 있다.  
 이 경우에도 로컬 대립 $\mu_{1n} \simeq \mu_0 + K/\sqrt{n}$에서 부호검정에 의함 검정력이 $\gamma$이기 위해 필요한 표본의 크기는 정리 9.3.6에서와 같이 주어진다:
 
 $$

@@ -122,6 +122,9 @@ $$
 ### (1) 행렬식이란?
 정사각행렬 $A$를 하나의 스칼라 값으로 대응시키는 함수. $\det A = |A|$
 
+- 행렬식은 행렬이 나타내는 선형변환이 부피를 얼마나 확대·축소하는지를 나타낸다
+- 행렬의 크기가 아니다. 행렬의 크기는 프로베니우스 norm 등으로 나타낸다.
+
 #### 기본 성질
 * $0 \times 0$: $\det() = 0$
 * $1 \times 1$: $\det(a) = a$
@@ -478,7 +481,7 @@ $$\text{tr}(A) = \sum_{i=1}^{n} a_{ii}$$
 
 임의의 벡터 $x \in \mathbb{R}^n$과 행렬 $A \in \mathbb{R}^{n \times n}$에 대해 다음이 성립한다:
 
-$$x^TAx = \operatorname{tr}(Axx^T)$$
+$$x^TAx = \text{tr}(Axx^T)$$
 
 **설명**: $x^TAx$는 스칼라이고, 스칼라는 $1 \times 1$ 행렬이므로 자기 자신의 대각합과 같다. 여기에 대각합의 순환 성질을 적용하면 우변으로 변환할 수 있다.
 
@@ -515,50 +518,50 @@ $$x^TAx = \text{tr}(Axx^T)$$
 #### 기댓값과 정사영행렬의 상호작용
 정사영행렬 $\Pi$와 확률벡터 $\mathbf{e}$에 대해:
 
-$$E[\mathbf{e}^\top (I - \Pi) \mathbf{e}] = \operatorname{trace}[(I - \Pi) E[\mathbf{e} \mathbf{e}^\top]]$$
+$$E[\mathbf{e}^\top (I - \Pi) \mathbf{e}] = \text{trace}[(I - \Pi) E[\mathbf{e} \mathbf{e}^\top]]$$
 
 **증명**:
 
-$$E[\mathbf{e}^\top (I - \Pi) \mathbf{e}] = E[\operatorname
+$$E[\mathbf{e}^\top (I - \Pi) \mathbf{e}] = E[\text
 {trace}[\mathbf{e}^\top (I - \Pi) \mathbf{e}]]$$
 
 대각합의 순환 성질을 이용하면:
 
-$$= E[\operatorname{trace}[(I - \Pi) \mathbf{e} \mathbf{e}
+$$= E[\text{trace}[(I - \Pi) \mathbf{e} \mathbf{e}
 ^\top]]$$
 
 기댓값과 대각합 연산의 순서를 바꾸면:
 
-$$= \operatorname{trace}[E[(I - \Pi) \mathbf{e} \mathbf{e}
+$$= \text{trace}[E[(I - \Pi) \mathbf{e} \mathbf{e}
 ^\top]]$$
 
 $(I - \Pi)$는 상수행렬이므로:
 
-$$= \operatorname{trace}[(I - \Pi) E[\mathbf{e} \mathbf{e}
+$$= \text{trace}[(I - \Pi) E[\mathbf{e} \mathbf{e}
 ^\top]]$$
 
 **경우 1**: $E[\mathbf{e}] = 0$이면 (중심화된 오차)
 
-$$\operatorname{Cov}(\mathbf{e}) = E[\mathbf{e} \mathbf{e}
+$$\text{Cov}(\mathbf{e}) = E[\mathbf{e} \mathbf{e}
 ^\top]$$
 
 따라서:
 
-$$E[\mathbf{e}^\top (I - \Pi) \mathbf{e}] = \operatorname
-{trace}[(I - \Pi) \operatorname{Cov}(\mathbf{e})]$$
+$$E[\mathbf{e}^\top (I - \Pi) \mathbf{e}] = \text
+{trace}[(I - \Pi) \text{Cov}(\mathbf{e})]$$
 
-**경우 2**: $\operatorname{Cov}(\mathbf{e}) = \sigma^2 I$ (등분산 오차)이면:
+**경우 2**: $\text{Cov}(\mathbf{e}) = \sigma^2 I$ (등분산 오차)이면:
 
-$$E[\mathbf{e}^\top (I - \Pi) \mathbf{e}] = \sigma^2 \operatorname{trace}(I - \Pi) = \sigma^2 [n - \operatorname
+$$E[\mathbf{e}^\top (I - \Pi) \mathbf{e}] = \sigma^2 \text{trace}(I - \Pi) = \sigma^2 [n - \text
 {rank}(\Pi)]$$
 
 **응용 (회귀분석에서)**:
 최소제곱추정에서 잔차제곱합의 기댓값:
 
-$$E[\text{RSS}] = E[\mathbf{e}^\top (I - \Pi_X) \mathbf{e}] = \operatorname{trace}[(I - \Pi_X) \sigma^2 I] = 
+$$E[\text{RSS}] = E[\mathbf{e}^\top (I - \Pi_X) \mathbf{e}] = \text{trace}[(I - \Pi_X) \sigma^2 I] = 
 \sigma^2(n - p)$$
 
-여기서 $\Pi_X = X(X^TX)^{-1}X^T$는 $X$의 열공간으로의 정사영행렬이고, $p = \operatorname{rank}(X)$는 매개변수 개수이다. 왜 이 식인지는 '열벡터공간으로의 정사영행렬' 참고
+여기서 $\Pi_X = X(X^TX)^{-1}X^T$는 $X$의 열공간으로의 정사영행렬이고, $p = \text{rank}(X)$는 매개변수 개수이다. 왜 이 식인지는 '열벡터공간으로의 정사영행렬' 참고
 
 따라서 불편추정량:
 
@@ -702,12 +705,12 @@ A_k\}$$
 >예를 들어 $\mathbb R^2$에서
 >
 >$$
->V_1=\operatorname{span}
+>V_1=\text{span}
 >\left\{
 >\begin{pmatrix}1\\0\end{pmatrix}
 >\right\},
 >\qquad
->V_2=\operatorname{span}
+>V_2=\text{span}
 >\left\{
 >\begin{pmatrix}0\\1\end{pmatrix}
 >\right\}
@@ -808,14 +811,14 @@ $$
 $$
 V_1
 =
-\operatorname{span}
+\text{span}
 \left\{
 \begin{pmatrix}1\\0\end{pmatrix}
 \right\},
 \qquad
 V_2
 =
-\operatorname{span}
+\text{span}
 \left\{
 \begin{pmatrix}1\\1\end{pmatrix}
 \right\}
@@ -862,7 +865,7 @@ $$
 
 부분공간이 세 개 이상이면 모든 두 부분공간의 교집합이 $\{0\}$이라는 것만으로는 직합과 동치가 되기에는 부족하다.
 
-예를 들어 $\mathbb R^2$에서 $V_1=\operatorname{span}\{\mathbf e_1\}, \quad V_2=\operatorname{span} \{\mathbf e_2\},\quad V_3=\operatorname{span}\{\mathbf e_1+\mathbf e_2\}$ 라고 하자.  
+예를 들어 $\mathbb R^2$에서 $V_1=\text{span}\{\mathbf e_1\}, \quad V_2=\text{span} \{\mathbf e_2\},\quad V_3=\text{span}\{\mathbf e_1+\mathbf e_2\}$ 라고 하자.  
 서로 다른 두 부분공간의 교집합은 모두 $V_i\cap V_j=\{0\}$ 이다. 하지만 $\mathbf e_1+\mathbf e_2+ \bigl(-(\mathbf e_1+\mathbf e_2)\bigr)=0$ 이라는 자명하지 않은(모든 성분이 0이 아닌) 표현이 존재한다. 따라서 $V_1+V_2+V_3$ 는 직합이 아니다.
 
 세 개 이상에서는 다음 조건을 사용해야 한다.
@@ -2415,7 +2418,7 @@ $$H = \begin{pmatrix} 1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1 \end{pmatrix}$$
 
 이 행렬은 $\det(H) = 1 \cdot (-1) \cdot (-1) = 1 > 0$이지만, $a^THa$는 $a_1^2 - a_2^2 - a_3^2$이므로 $a = (0, 1, 0)^T$에 대해 $a^THa = -1 < 0$이다. 따라서 양정치가 아니다.
 
-**올바른 양정치 판정 조건: 실비비안 판정법 (Sylvester Criterion)**  
+**올바른 양정치 판정 조건: 실베스터 판정법 (Sylvester Criterion)**  
 대칭행렬 $H$가 양정치이기 위한 필요충분조건은 모든 **선행 주소행렬식**이 양수인 것이다:
 
 $$\det(H_1) > 0, \quad \det(H_2) > 0, \quad \ldots, \quad \det(H_n) > 0$$
@@ -2437,7 +2440,7 @@ $\det(H_1) = 2 > 0 \quad (✓) \\\det(H_2) = \det(H) = 2 \cdot 3 - 1^2 = 5 > 0 \
 
 $$H_f(x^*) \succ 0 \text{ (양정치)}$$
 
-이는 실비비안 판정법으로 검증하면 확실하다.
+이는 실베스터 판정법으로 검증하면 확실하다.
 
 
 ## (4) 비선형방정식의 반복해법

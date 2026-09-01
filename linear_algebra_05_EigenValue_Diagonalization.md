@@ -157,7 +157,7 @@ $$
 
 가 단사라는 뜻이다.
 
-rank-nullity 정리에 의해 $\dim\ker(B)+\operatorname{rank}(B)=n$ 이다. $\dim\ker(B)=0$이므로 $\operatorname{rank}(B)=n.$ 따라서 $B$의 상공간은 $n$차원이고, $\operatorname{Im}(B)=\mathbb F^n$ 이다. 즉, $T_B$는 전사다. 결국 $T_B$는 일대일 대응이므로 역선형사상이 존재한다. 따라서 $B$는 가역이다.
+rank-nullity 정리에 의해 $\dim\ker(B)+\text{rank}(B)=n$ 이다. $\dim\ker(B)=0$이므로 $\text{rank}(B)=n.$ 따라서 $B$의 상공간은 $n$차원이고, $\text{Im}(B)=\mathbb F^n$ 이다. 즉, $T_B$는 전사다. 결국 $T_B$는 일대일 대응이므로 역선형사상이 존재한다. 따라서 $B$는 가역이다.
 
 그러므로 $\ker(B)=\{\mathbf0\} \iff B\text{는 가역이다}$ 이며, 동치의 부정을 취하면
 
@@ -205,7 +205,7 @@ $$
 \ker(A-\lambda I)=\{\mathbf0\}.
 $$
 
-rank-nullity 정리에 의해 $\operatorname{rank}(A-\lambda I) =n-\dim\ker(A-\lambda I) =n.$  
+rank-nullity 정리에 의해 $\text{rank}(A-\lambda I) =n-\dim\ker(A-\lambda I) =n.$  
 즉, $A-\lambda I$는 완전계수 정사각행렬이므로 가역이다. 따라서
 
 $$
@@ -593,6 +593,20 @@ $$\text{rank}(A) = \text{rank}(\Lambda) = \text{(0이 아닌 대각원소의 개
 $$AA^* = A^*A$$
 
 여기서 $A^*$는 $A$의 켤레전치행렬(conjugate transpose)이다.
+
+**켤레전치행렬의 예시:**
+
+$$
+A = \begin{bmatrix}
+1+2i & 3-i \\
+4 & -2+5i
+\end{bmatrix} ,\quad
+A^* = \overline{A}^{T}
+= \begin{bmatrix}
+1-2i & 4 \\
+3+i & -2-5i
+\end{bmatrix}
+$$
 
 **정규행렬의 예:**
 1. 에르미트 행렬(Hermitian matrix): $A = A^*$
@@ -1069,7 +1083,7 @@ $$
 
 **필요조건 증명**
 
-$A$가 대각화 가능하다고 하자. 그러면 어떤 가역행렬 $P$에 대하여 $A=PDP^{-1}$ 이고, $D=\operatorname{diag}(\lambda_1,\dots,\lambda_n)$ 이다.
+$A$가 대각화 가능하다고 하자. 그러면 어떤 가역행렬 $P$에 대하여 $A=PDP^{-1}$ 이고, $D=\text{diag}(\lambda_1,\dots,\lambda_n)$ 이다.
 
 $A$의 서로 다른 고윳값을 $\mu_1,\dots,\mu_k$ 라 하고 $p(t)=\prod_{j=1}^k(t-\mu_j)$ 라 놓자. 그러면 모든 대각성분에 대하여 $p(\lambda_i)=0$이므로 $p(D)=0.$
 
@@ -1242,7 +1256,7 @@ $$
 * 전치된(cofactor matrix의 transpose) 행렬이 곧 수반행렬이다.
 
 $$
-\operatorname{adj}(A) = (C_{ij})^{T}
+\text{adj}(A) = (C_{ij})^{T}
 $$
 
 여기서 $C_{ij} = (-1)^{i+j} M_{ij}$,  
@@ -1253,19 +1267,19 @@ $M_{ij}$는 $(i,j)$ 소행렬식(minor)이다.
 **수반행렬의 핵심 성질**  
 수반행렬(adj A)이 중요한 이유는 다음의 기본 성질을 만족하기 때문이다:
 
-$$\operatorname{adj}(A)A = \det(A)I$$ 또는 $$A\operatorname{adj}(A)=\det(A)I$$  
+$$\text{adj}(A)A = \det(A)I$$ 또는 $$A\text{adj}(A)=\det(A)I$$  
 이 식은 **항상 성립**한다.
 
 따라서 만약 $\det(A) \neq 0$이면,
 
 $$
 
-A^{-1} = \frac{1}{\det(A)} \operatorname{adj}(A)
+A^{-1} = \frac{1}{\det(A)} \text{adj}(A)
 $$
 
 **증명**
 
-$B = \operatorname{adj}(\lambda I - A)$라 하면, $B$는 $\lambda$에 대한 다항식 행렬이다.
+$B = \text{adj}(\lambda I - A)$라 하면, $B$는 $\lambda$에 대한 다항식 행렬이다.
 
 수반행렬의 성질에 의해 $B(\lambda I - A) = \det(\lambda I - A) I = f(\lambda) I$
 

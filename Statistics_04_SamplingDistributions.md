@@ -2416,23 +2416,23 @@ $\bar X = \sum_{i=1}^k n_i\bar X_i / n, \quad \bar\mu = \sum_{i=1}^k n_i\mu_i / 
 
 $E(Y_i) = E(\bar{X}_i - \mu_i) - E(\bar{X} - \bar{\mu}) = \mu_i - \mu_i - (\bar{\mu} - \bar{\mu}) = 0$  
 한편, $\Sigma$를 Var, Cov로 아래와 같이 구할 수 있다:  
->$\operatorname{Var}(Y_i) = \operatorname{Var}(\bar{X}_i - \mu_i) + \operatorname{Var}(\bar{X} - \bar{\mu}) - 2\operatorname{Cov}(\bar{X}_i - \mu_i, \bar{X} - \bar{\mu})$  
+>$\text{Var}(Y_i) = \text{Var}(\bar{X}_i - \mu_i) + \text{Var}(\bar{X} - \bar{\mu}) - 2\text{Cov}(\bar{X}_i - \mu_i, \bar{X} - \bar{\mu})$  
 >각 항을 계산하면:
 >
->$$\operatorname{Var}(\bar{X}_i - \mu_i) = \operatorname{Var}(\bar{X}_i) = \frac{\sigma^2}{n_i} \\
->\operatorname{Var}(\bar{X} - \bar{\mu}) = \frac{1}{n^2}\sum_{j=1}^k n_j^2 \cdot \frac{\sigma^2}{n_j} = \frac{\sigma^2}{n} \\
->\operatorname{Cov}(\bar{X}_i - \mu_i, \bar{X} - \bar{\mu}) = \frac{1}{n}n_i \operatorname{Var}(\bar{X}_i - \mu_i) = \frac{1}{n}n_i \cdot \frac{\sigma^2}{n_i} = \frac{\sigma^2}{n}$$
+>$$\text{Var}(\bar{X}_i - \mu_i) = \text{Var}(\bar{X}_i) = \frac{\sigma^2}{n_i} \\
+>\text{Var}(\bar{X} - \bar{\mu}) = \frac{1}{n^2}\sum_{j=1}^k n_j^2 \cdot \frac{\sigma^2}{n_j} = \frac{\sigma^2}{n} \\
+>\text{Cov}(\bar{X}_i - \mu_i, \bar{X} - \bar{\mu}) = \frac{1}{n}n_i \text{Var}(\bar{X}_i - \mu_i) = \frac{1}{n}n_i \cdot \frac{\sigma^2}{n_i} = \frac{\sigma^2}{n}$$
 >
->$$\therefore \operatorname{Var}(Y_i) = \frac{\sigma^2}{n_i} + \frac{\sigma^2}{n} - 2 \cdot \frac{\sigma^2}{n} = \left(\frac{1}{n_i} - \frac{1}{n}\right)\sigma^2$$
+>$$\therefore \text{Var}(Y_i) = \frac{\sigma^2}{n_i} + \frac{\sigma^2}{n} - 2 \cdot \frac{\sigma^2}{n} = \left(\frac{1}{n_i} - \frac{1}{n}\right)\sigma^2$$
 >
 >한편, 공분산은
 >
->$$\operatorname{Cov}(Y_i, Y_j) = \operatorname{Cov}(\bar{X}_i - \mu_i, \bar{X}_j - \mu_j) - \operatorname{Cov}(\bar{X}_i - \mu_i, \bar{X} - \bar{\mu}) \\ 
->- \operatorname{Cov}(\bar{X}_j - \mu_j, \bar{X} - \bar{\mu}) + \operatorname{Var}(\bar{X} - \bar{\mu})$$
+>$$\text{Cov}(Y_i, Y_j) = \text{Cov}(\bar{X}_i - \mu_i, \bar{X}_j - \mu_j) - \text{Cov}(\bar{X}_i - \mu_i, \bar{X} - \bar{\mu}) \\ 
+>- \text{Cov}(\bar{X}_j - \mu_j, \bar{X} - \bar{\mu}) + \text{Var}(\bar{X} - \bar{\mu})$$
 >
->$i \neq j$일 때, 독립성에 의해 $\operatorname{Cov}(\bar{X}_i - \mu_i, \bar{X}_j - \mu_j) = 0$이고, 위의 계산으로부터:
+>$i \neq j$일 때, 독립성에 의해 $\text{Cov}(\bar{X}_i - \mu_i, \bar{X}_j - \mu_j) = 0$이고, 위의 계산으로부터:
 >
->$$\operatorname{Cov}(Y_i, Y_j) = 0 - \frac{\sigma^2}{n} - \frac{\sigma^2}{n} + \frac{\sigma^2}{n} = -\frac{\sigma^2}{n}$$
+>$$\text{Cov}(Y_i, Y_j) = 0 - \frac{\sigma^2}{n} - \frac{\sigma^2}{n} + \frac{\sigma^2}{n} = -\frac{\sigma^2}{n}$$
 >
 
 따라서 $\mathbf{1} = (1, \dots, 1)^T$, $D(\cdot)$를 대각행렬(diagonal matrix)로 나타내는 연산자라고 하면, 

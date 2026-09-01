@@ -43,7 +43,7 @@ $$
 식 (16.1)은 $(\beta_0,\beta_1)$에 대해 비선형함수처럼 보이지만, 확률 $\pi(x)$에 로짓 변환을 적용하면 선형형태로 바뀐다. 로짓(logit)은 다음과 같이 정의된다.
 
 $$
-\operatorname{logit}(\pi(x))
+\text{logit}(\pi(x))
 =\ln\left(\frac{\pi(x)}{1-\pi(x)}\right)
 =\beta_0+\beta_1x
 \tag{16.3}

@@ -128,7 +128,7 @@ $$\hat{\boldsymbol{\beta}}^{lse}=(X^TX)^{-1}X^T\mathbf{y}=\frac{1}{n}X^T\mathbf{
 
 이제 $\lambda>0$일 때 라쏘추정량은 각 좌표별로 다음과 같이 주어진다.
 
-$$\hat{\boldsymbol{\beta}}^{lasso}_j = \operatorname{sgn}(\hat{\boldsymbol{\beta}}^{lse}_j)\max\left(|\hat{\boldsymbol{\beta}}^{lse}_j|-\lambda,0\right)$$
+$$\hat{\boldsymbol{\beta}}^{lasso}_j = \text{sgn}(\hat{\boldsymbol{\beta}}^{lse}_j)\max\left(|\hat{\boldsymbol{\beta}}^{lse}_j|-\lambda,0\right)$$
 
 이 식은 라쏘가 최소제곱추정량을 일정 문턱값 (thresholding value) $\lambda$만큼 0 방향으로 줄이고, 그 절댓값이 $\lambda$ 이하이면 정확히 0으로 만든다는 것을 보여준다. 이를 소프트 임계화 (soft-thresholding)라고 한다.
 
@@ -144,7 +144,7 @@ $$A=\{j:\hat{\boldsymbol{\beta}}^{lasso}_j\neq 0\}$$
 
 라고 하자. 그러면 $j\in A$에 대해서는 목적함수가 미분 가능하므로 KKT 조건은
 
-$$-\frac{1}{n}x_j^T(y-X\hat{\boldsymbol{\beta}}^{lasso})+\lambda \operatorname{sgn}(\hat{\boldsymbol{\beta}}^{lasso}_j)=0$$
+$$-\frac{1}{n}x_j^T(y-X\hat{\boldsymbol{\beta}}^{lasso})+\lambda \text{sgn}(\hat{\boldsymbol{\beta}}^{lasso}_j)=0$$
 
 이 된다.  
 반면 $j\notin A$에서는 $\beta_j=0$에서의 부분도함수 (subgradient)를 고려해야 하므로
@@ -154,7 +154,7 @@ $$\left| -x_j^T(y-X\hat{\boldsymbol{\beta}}^{lasso}) \right| \le n\lambda$$
 가 성립한다.  
 이제 직교설계 ($X^TX=nI_p$)를 사용하면, $j\in A$에 대해
 
-$$-\hat{\boldsymbol{\beta}}^{lse}_j+\hat{\boldsymbol{\beta}}^{lasso}_j+\lambda \operatorname{sgn}(\hat{\boldsymbol{\beta}}^{lasso}_j)=0$$
+$$-\hat{\boldsymbol{\beta}}^{lse}_j+\hat{\boldsymbol{\beta}}^{lasso}_j+\lambda \text{sgn}(\hat{\boldsymbol{\beta}}^{lasso}_j)=0$$
 
 를 얻는다. 또한 $j\notin A$에 대해서는
 
@@ -163,7 +163,7 @@ $$|\hat{\boldsymbol{\beta}}^{lse}_j|\le \lambda$$
 가 된다.  
 라쏘해와 최소제곱해는 부호가 같으므로,
 
-$$\hat{\boldsymbol{\beta}}^{lasso}_j = \operatorname{sgn}(\hat{\boldsymbol{\beta}}^{lse}_j)\max\left(|\hat{\boldsymbol{\beta}}^{lse}_j|-\lambda,0\right)$$
+$$\hat{\boldsymbol{\beta}}^{lasso}_j = \text{sgn}(\hat{\boldsymbol{\beta}}^{lse}_j)\max\left(|\hat{\boldsymbol{\beta}}^{lse}_j|-\lambda,0\right)$$
 
 가 도출된다. 이것이 라쏘의 소프트 임계화 공식이다.
 
@@ -190,7 +190,7 @@ $$\hat{\boldsymbol{\beta}}^{lasso}_j = \operatorname{sgn}(\hat{\boldsymbol{\beta
 
 직교설계에서는 각 회귀계수가 서로 독립적으로 처리된다. 이 경우 라쏘는 각 최소제곱추정량에 대해 개별적으로 소프트 임계화를 적용한다.
 
-$$\hat{\boldsymbol{\beta}}^{lasso}_j = \operatorname{sgn}(\hat{\boldsymbol{\beta}}^{lse}_j)\max\left(|\hat{\boldsymbol{\beta}}^{lse}_j|-\lambda,0\right)$$
+$$\hat{\boldsymbol{\beta}}^{lasso}_j = \text{sgn}(\hat{\boldsymbol{\beta}}^{lse}_j)\max\left(|\hat{\boldsymbol{\beta}}^{lse}_j|-\lambda,0\right)$$
 
 이 식은 다음 의미를 가진다.
 
@@ -333,11 +333,11 @@ $$A\leftarrow A\cup\{j_1\}$$
 
 선택된 변수 $j_1$의 계수를 상관계수의 부호 방향으로 조금씩 증가시킨다. 즉, 사전에 정한 작은 상수 $\alpha$에 대하여
 
-$$\hat{\boldsymbol{\beta}}_{j_1}\leftarrow \hat{\boldsymbol{\beta}}_{j_1}+\alpha\operatorname{sign}(\hat{c}_{j_1})$$
+$$\hat{\boldsymbol{\beta}}_{j_1}\leftarrow \hat{\boldsymbol{\beta}}_{j_1}+\alpha\text{sign}(\hat{c}_{j_1})$$
 
 의 방향으로 움직인다. 이 과정을 계속하여, 아직 선택되지 않은 변수들 가운데 어떤 변수 하나가 현재 활성 변수들과 동일한 수준의 상관관계를 갖게 될 때까지 진행한다. 즉,
 
-$$\max_{k\in A^c} |\operatorname{corr}(x_k,\mathbf{r}(\alpha))| \ge \max_{j\in A} |\operatorname{corr}(x_j,\mathbf{r}(\alpha))| \tag{16.17}$$
+$$\max_{k\in A^c} |\text{corr}(x_k,\mathbf{r}(\alpha))| \ge \max_{j\in A} |\text{corr}(x_j,\mathbf{r}(\alpha))| \tag{16.17}$$
 
 가 처음 성립하는 시점까지 이동한다. 이때 위 조건을 만족시키는 새로운 변수를 $j_2$라 하면,
 

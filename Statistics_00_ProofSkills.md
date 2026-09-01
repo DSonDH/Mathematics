@@ -757,19 +757,19 @@ $$R(1|0) = \mathbf{Y}^T\Pi_{1|0}\mathbf{Y} \perp SSE = \mathbf{Y}^T(I-\Pi_{0,1})
 
 ## 26. 기댓값과 대각합(trace) 연산 순서 교환 (Expectation-Trace Interchange)
 
-선형연산자 $\operatorname{trace}$와 기댓값 $E[\cdot]$는 교환 가능하다.
+선형연산자 $\text{trace}$와 기댓값 $E[\cdot]$는 교환 가능하다.
 
-$$E[\operatorname{trace}(\mathbf{A})] = \operatorname{trace}(E[\mathbf{A}])$$
+$$E[\text{trace}(\mathbf{A})] = \text{trace}(E[\mathbf{A}])$$
 
 ### 증명
 
 $\mathbf{X} = (X_{ij})$를 $p \times p$ 확률행렬이라 하면
 
-$$\operatorname{trace}(\mathbf{X}) = \sum_{i=1}^{p} X_{ii}$$
+$$\text{trace}(\mathbf{X}) = \sum_{i=1}^{p} X_{ii}$$
 
 따라서
 
-$$E[\operatorname{trace}(\mathbf{X})] = E\left[\sum_{i=1}^{p} X_{ii}\right] = \sum_{i=1}^{p} E[X_{ii}] = \operatorname{trace}(E[\mathbf{X}])$$
+$$E[\text{trace}(\mathbf{X})] = E\left[\sum_{i=1}^{p} X_{ii}\right] = \sum_{i=1}^{p} E[X_{ii}] = \text{trace}(E[\mathbf{X}])$$
 
 **핵심**: 대각합은 선형연산자(linear operator)이므로, 선형성(linearity of expectation)에 의해 기댓값과 교환 가능.
 
@@ -780,14 +780,14 @@ $$E[\operatorname{trace}(\mathbf{X})] = E\left[\sum_{i=1}^{p} X_{ii}\right] = \s
 $$E[L(\mathbf{X})] = L(E[\mathbf{X}])$$
 
 **예시**
-- $\operatorname{trace}(\mathbf{X})$: 선형 ✓
-- $\|\mathbf{X}\|_F^2 = \operatorname{trace}(\mathbf{X}^\top\mathbf{X})$: 이차형식이므로 선형 아님 ✗
+- $\text{trace}(\mathbf{X})$: 선형 ✓
+- $\|\mathbf{X}\|_F^2 = \text{trace}(\mathbf{X}^\top\mathbf{X})$: 이차형식이므로 선형 아님 ✗
 
 **예시2**
 
 회귀잔차 분산 계산:
 
-$$E[\operatorname{trace}[(I - \Pi) \mathbf{e} \mathbf{e}^\top]] = \operatorname{trace}[E[(I - \Pi) \mathbf{e} \mathbf{e}^\top]]$$
+$$E[\text{trace}[(I - \Pi) \mathbf{e} \mathbf{e}^\top]] = \text{trace}[E[(I - \Pi) \mathbf{e} \mathbf{e}^\top]]$$
 
 **예시3**
 유한한 합에 대해서는
@@ -870,8 +870,8 @@ $$
 ### 관련 개념
 
 - **선형성**: $E[a\mathbf{X} + b\mathbf{Y}] = aE[\mathbf{X}] + bE[\mathbf{Y}]$
-- **Cyclic property of trace**: $\operatorname{trace}(\mathbf{ABC}) = \operatorname{trace}(\mathbf{BCA})$
-- **Trace-Inner product**: $\operatorname{trace}(\mathbf{A}^\top\mathbf{B}) = \langle \mathbf{A}, \mathbf{B} \rangle_F$
+- **Cyclic property of trace**: $\text{trace}(\mathbf{ABC}) = \text{trace}(\mathbf{BCA})$
+- **Trace-Inner product**: $\text{trace}(\mathbf{A}^\top\mathbf{B}) = \langle \mathbf{A}, \mathbf{B} \rangle_F$
 
 
 ## 11. Orthogonal Basis Decomposition
@@ -1226,13 +1226,13 @@ $$f_{\mathbf{Y}}(\mathbf{y}) = f_{\mathbf{X}}(g^{-1}(\mathbf{y})) \cdot |J_{g^{-
 
 **정의**: 스칼라함수 $f: \mathbb{R}^n \to \mathbb{R}$의 2차 편미분의 합
 
-$$\nabla^2 f = \Delta f = \sum_{i=1}^{n} \frac{\partial^2 f}{\partial x_i^2} = \operatorname{trace}(H_f)$$
+$$\nabla^2 f = \Delta f = \sum_{i=1}^{n} \frac{\partial^2 f}{\partial x_i^2} = \text{trace}(H_f)$$
 
 **성질**
 - 헤시안의 대각합(trace)
 - PDE(편미분방정식)의 기본 연산자
 
-### 6. 발산 (Divergence) $\nabla \cdot \mathbf{F}$, $\operatorname{div}(\mathbf{F})$
+### 6. 발산 (Divergence) $\nabla \cdot \mathbf{F}$, $\text{div}(\mathbf{F})$
 
 **정의**: 벡터장 $\mathbf{F}: \mathbb{R}^n \to \mathbb{R}^n$, $\mathbf{F} = (F_1, \ldots, F_n)^T$에 대해
 
@@ -1244,7 +1244,7 @@ $$\nabla \cdot \mathbf{F} = \sum_{i=1}^{n} \frac{\partial F_i}{\partial x_i}$$
 
 **활용**: 확률밀도함수 표준화 조건 (divergence theorem)
 
-### 7. 회전 (Curl) $\nabla \times \mathbf{F}$, $\operatorname{curl}(\mathbf{F})$
+### 7. 회전 (Curl) $\nabla \times \mathbf{F}$, $\text{curl}(\mathbf{F})$
 
 **정의** ($\mathbb{R}^3$): 벡터장 $\mathbf{F} = (F_1, F_2, F_3)^T$에 대해
 
@@ -1310,7 +1310,7 @@ $$\frac{\partial f}{\partial \mathbf{X}} = \begin{pmatrix}
 **유용한 공식**
 - $\frac{\partial}{\partial \mathbf{x}}(\mathbf{a}^T \mathbf{x}) = \mathbf{a}$
 - $\frac{\partial}{\partial \mathbf{x}}(\mathbf{x}^T \mathbf{A} \mathbf{x}) = (\mathbf{A} + \mathbf{A}^T)\mathbf{x}$
-- $\frac{\partial}{\partial \mathbf{X}}\operatorname{trace}(\mathbf{AXB}) = \mathbf{A}^T \mathbf{B}^T$
+- $\frac{\partial}{\partial \mathbf{X}}\text{trace}(\mathbf{AXB}) = \mathbf{A}^T \mathbf{B}^T$
 
 
 # 주요 부등식 정리 (Summary of Key Inequalities)

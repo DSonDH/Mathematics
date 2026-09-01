@@ -355,8 +355,8 @@ $(X, d)$를 거리공간이라 하자.
 >
 >- 동치인 정의: $\exist M>0$, s.t. $\forall x,y\in E$에 대하여 $d(x,y)\le M$ 이면 $E$는 유계다.
 >
->- 집합의 지름을 $\operatorname{diam}(E)=\sup{d(x,y):x,y\in E}$ 
->라고 하면 $E$ 가 유계 $\iff$ $\operatorname{diam}(E)<\infty$ 
+>- 집합의 지름을 $\text{diam}(E)=\sup{d(x,y):x,y\in E}$ 
+>라고 하면 $E$ 가 유계 $\iff$ $\text{diam}(E)<\infty$ 
 
 (b) $K$가 거리공간 $(X,d)$의 콤팩트 부분집합이면 $K$는 닫힌 유계집합임을 보여라.
 
@@ -394,7 +394,7 @@ $(X, d)$를 거리공간이라 하자.
 >2단계: $Y$는 유계집합이다
 >
 >모든 $f\in Y$에 대하여 $d(f,0)=\|f\|_\infty\le1$ 이다. 따라서 $Y\subseteq C_1(0)$ 이므로 $Y$는 유계다.  
->또는 $f,g\in Y$에 대하여 $d(f,g) =\|f-g\|_\infty\ \le \|f\|_\infty+\|g\|_\infty\ \le 2$ 이므로 $\operatorname{diam}(Y)\le2$ 이다.
+>또는 $f,g\in Y$에 대하여 $d(f,g) =\|f-g\|_\infty\ \le \|f\|_\infty+\|g\|_\infty\ \le 2$ 이므로 $\text{diam}(Y)\le2$ 이다.
 >
 >3단계: $Y$는 콤팩트집합이 아니다
 >

@@ -889,7 +889,7 @@ $$E(Y_1) = E[(X_1 - \mu)^2] = \sigma^2$$
 
 이다. $E[(X_1 - \mu)^4] < +\infty$라 가정하면
 
-$$\operatorname{Var}(Y_1) = E[(X_1 - \mu)^4] - \sigma^4$$
+$$\text{Var}(Y_1) = E[(X_1 - \mu)^4] - \sigma^4$$
 
 이므로 중심극한정리에 의해
 
@@ -1116,7 +1116,7 @@ $$ \hat\rho_n = g(\bar X_n, \bar Y_n, \overline{(XY)}_n, \overline{(X^2)}_n, \ov
 즉, 표본상관계수는 $(X_i, Y_i, X_iY_i, X_i^2, Y_i^2)^T$의 표본평균의 함수로 나타낼 수 있다.  
 $Z_i = (X_i, Y_i, X_iY_i, X_i^2, Y_i^2)^T$ ($i=1,\dots,n$)라 하면, $Z_i$는 서로 독립이고 동일한 분포를 따르는 5차원 확률변수이므로 분산행렬이 존재할 때
 
-$$ \sqrt{n}\left(\frac{1}{n}\sum_{i=1}^n Z_i - E(Z_1)\right) \xrightarrow{d} V,\quad V \sim N_5(0, \operatorname{Var}(Z_1)) $$
+$$ \sqrt{n}\left(\frac{1}{n}\sum_{i=1}^n Z_i - E(Z_1)\right) \xrightarrow{d} V,\quad V \sim N_5(0, \text{Var}(Z_1)) $$
 
 또한 $E(Z_1) = (0, 0, \rho, 1, 1)^T$, $\rho = g(0,0,\rho,1,1) = g(E(Z_1))$이다.  
 함수 $g$의 일차편도함수들이 연속이므로, 정리 5.3.3에 의해
@@ -1128,7 +1128,7 @@ $$ \sqrt{n}(\hat\rho_n - \rho)
 여기서 $\theta = E(Z_1) = (0,0,\rho,1,1)^T$이고, $\dot g(\theta) = (0, 0, 1, -\rho/2, -\rho/2)^T$이다.  
 따라서
 
-$$ (\dot g(\theta))^T V \sim N\left(0, (\dot g(\theta))^T \operatorname{Var}(Z_1) \dot g(\theta)\right) $$
+$$ (\dot g(\theta))^T V \sim N\left(0, (\dot g(\theta))^T \text{Var}(Z_1) \dot g(\theta)\right) $$
 
 또는
 
@@ -1137,7 +1137,7 @@ $$ (\dot g(\theta))^T Z_1 = X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^
 이므로 $E(X_1^4)<+\infty$, $E(Y_1^4)<+\infty$일 때
 
 $$ \sqrt{n}(\hat\rho_n - \rho) \xrightarrow{d} W,\quad
-W \sim N\left(0, \operatorname{Var}\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right)\right) $$
+W \sim N\left(0, \text{Var}\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right)\right) $$
 
 #### 예 5.3.7 표본상관계수와 분산안정변환 (variance stabilizing transformation)
 
@@ -1153,7 +1153,7 @@ $Y_1 = \rho X_1 + \sqrt{1-\rho^2} T$를 표본상관계수의 극한분포식 $X
 
 이를 활용하여 표준정규분포의 적률과 공분산 성질을 이용하여 계산하면, 
 
-$$ \operatorname{Var}\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right) = E\left[\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right)^2\right] \\
+$$ \text{Var}\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right) = E\left[\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right)^2\right] \\
 = \frac{\rho^2}{4}(1-\rho^2)^2 E(X_1^4) + (1-\rho^2)^3 E(X_1^2) E(T^2) + \frac{\rho^2}{4}(1-\rho^2)^2 E(T^4) \\
 = \frac{\rho^2}{4}(1-\rho^2)^2 \cdot 3 + (1-\rho^2)^3 \cdot 1 \cdot 1 + \frac{\rho^2}{4}(1-\rho^2)^2 \cdot 3 \\
 = (1-\rho^2)^2 \\
@@ -1179,12 +1179,12 @@ $$ \sqrt{n}\big(g(\hat\rho_n) - g(\rho)\big) \xrightarrow{d} Z,\quad Z \sim N(0,
 모집단 누적분포함수의 역함수를 $F^{-1}$라 하고, $h(y) = F^{-1}(1 - e^{-y}),\quad y > 0$ 라 하면, 정리 4.3.4에 의해
 
 $$ X_{(r_n)} \overset{d}{\equiv}
- h\left(\frac{1}{n} Z_1 + \cdots + \frac{1}{n - r_n + 1} Z_{r_n}\right),\quad Z_i \overset{iid}{\sim} \operatorname{Exp}(1) $$
+ h\left(\frac{1}{n} Z_1 + \cdots + \frac{1}{n - r_n + 1} Z_{r_n}\right),\quad Z_i \overset{iid}{\sim} \text{Exp}(1) $$
 
 한편, $Y_n = \frac{1}{n} Z_1 + \cdots + \frac{1}{n - r_n + 1} Z_{r_n}$의 평균과 분산은
 
 $$ E(Y_n) \sim -\log(1-\alpha),\qquad
-\operatorname{Var}(Y_n) \sim \frac{1}{n} \frac{\alpha}{1-\alpha} $$
+\text{Var}(Y_n) \sim \frac{1}{n} \frac{\alpha}{1-\alpha} $$
 
 따라서
 
@@ -1298,7 +1298,7 @@ $$ \int_1^3 x^2\,dx \approx \frac{1}{n}\sum_{i=1}^n y_i $$
 #### 예 5.4.3 로지스틱분포 (L(0,1))의 분산
 로지스틱분포 $L(0,1)$은 $x=0$에 대해 대칭인 분포이며, 분산은 다음과 같이 주어진다.
 
-$$ \operatorname{Var}(X) = \int_{-\infty}^{\infty} x^2\, f(x)\, dx = \int_{-\infty}^{\infty} \frac{x^2 e^x}{(1 + e^x)^2}\, dx = \frac{\pi^2}{3} $$
+$$ \text{Var}(X) = \int_{-\infty}^{\infty} x^2\, f(x)\, dx = \int_{-\infty}^{\infty} \frac{x^2 e^x}{(1 + e^x)^2}\, dx = \frac{\pi^2}{3} $$
 
 정리 5.4.1을 이용하면, 균등분포 $U(0,1)$ 난수 $u_1, \dots, u_n$에 대해 $x_i = \log\frac{u_i}{1-u_i}, \quad y_i = x_i^2$ 로 두고,
 

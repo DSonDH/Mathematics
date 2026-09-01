@@ -163,7 +163,7 @@ $$
 
 #### 증명
 
-$i=1,\dots,n$에 대해 $Y_i=(X_i,\dots,X_i^k)^\top\in\mathbb{R}^k$ 로 두면 $E(Y_i)=m$이고 $\operatorname{Cov}(Y_i)=\Sigma, \Sigma_{rs}=\operatorname{Cov}(X_i^r,X_i^s)=E(X_i^{r+s})-E(X_i^r)E(X_i^s)=m_{r+s}-m_rm_s$ 가 된다. 가정 $E(X_1^{2k})<\infty$로 각 성분의 2차 모멘트가 유한하므로 다변량 중심극한정리에 의해
+$i=1,\dots,n$에 대해 $Y_i=(X_i,\dots,X_i^k)^\top\in\mathbb{R}^k$ 로 두면 $E(Y_i)=m$이고 $\text{Cov}(Y_i)=\Sigma, \Sigma_{rs}=\text{Cov}(X_i^r,X_i^s)=E(X_i^{r+s})-E(X_i^r)E(X_i^s)=m_{r+s}-m_rm_s$ 가 된다. 가정 $E(X_1^{2k})<\infty$로 각 성분의 2차 모멘트가 유한하므로 다변량 중심극한정리에 의해
 
 $$ \sqrt n(\hat m-m) =\sqrt n\left(\frac1n\sum_{i=1}^n Y_i-E(Y_1)\right) \xrightarrow{d}N_k(0,\Sigma)$$
 
@@ -749,11 +749,11 @@ $$L_\eta(\eta; x) = L_\theta(h(\eta); x) \\
 
 (1) 정규분포에서 $|\mu|$의 최대가능도 추정
 
-정규분포 $N(\mu, \sigma^2)$에서 모수 $\theta = (\mu, \sigma^2)^\top$를 생각하자. 이때 $\eta = (|\mu|, \operatorname{sgn}(\mu), \sigma^2)^\top$ 는 $\theta$의 일대일 변환.  
+정규분포 $N(\mu, \sigma^2)$에서 모수 $\theta = (\mu, \sigma^2)^\top$를 생각하자. 이때 $\eta = (|\mu|, \text{sgn}(\mu), \sigma^2)^\top$ 는 $\theta$의 일대일 변환.  
 앞의 예시 6.3.2로부터 $\hat\mu^{\mathrm{MLE}} = \bar X, \ \hat\sigma^{2, \mathrm{MLE}} = \frac{1}{n} \sum_{i=1}^n (X_i - \bar X)^2$이므로, 정리 6.3.1에 의해
 
 $$
-\widehat{\eta}^{\mathrm{MLE}} = |\hat\mu^{\mathrm{MLE}}| = |\bar X|, \quad \widehat{\operatorname{sgn}(\mu)}^{\mathrm{MLE}} = \operatorname{sgn}(\bar X), \quad \widehat{\sigma^2}^{\mathrm{MLE}} = \frac{1}{n}\sum_{i=1}^n (X_i - \bar X)^2
+\widehat{\eta}^{\mathrm{MLE}} = |\hat\mu^{\mathrm{MLE}}| = |\bar X|, \quad \widehat{\text{sgn}(\mu)}^{\mathrm{MLE}} = \text{sgn}(\bar X), \quad \widehat{\sigma^2}^{\mathrm{MLE}} = \frac{1}{n}\sum_{i=1}^n (X_i - \bar X)^2
 $$
 
 (2) 베르누이 분포에서 분산의 최대가능도 추정
@@ -1563,7 +1563,7 @@ $$\sqrt{n}\big(\hat\theta_n^{(1)}-\theta\big)\xrightarrow{d}N\left(0,[I(\theta)]
 
 $$Y_i = x_{i0}\beta_0 + x_{i1}\beta_1 + \cdots + x_{ip}\beta_p + e_i$$
 
-- $E(e_i) = 0$, $\operatorname{Var}(e_i) = \sigma^2$, $\operatorname{Cov}(e_i, e_j) = 0$ for $i \neq j$
+- $E(e_i) = 0$, $\text{Var}(e_i) = \sigma^2$, $\text{Cov}(e_i, e_j) = 0$ for $i \neq j$
 - $-\infty < \beta_j < \infty$ $(j=0,\dots,p)$, $0 < \sigma^2 < \infty$
 
 **평균반응 $E(Y_i \mid x_{i0},\dots,x_{ip})$:** 이 설명변수의 선형함수라는 가정하에서 평균반응을 추정하는게 목적이다. 관측값들과의 거리의 제곱을 최소로 하는것을 찾아 추측에 사용하자는 것이 최소제곱 추정법.
@@ -1586,9 +1586,9 @@ $$\mathbf{X} = \begin{pmatrix} x_{10} & x_{11} & \cdots & x_{1p} \\ \vdots & \vd
 - 오차벡터 $\mathbf{e} = (e_1, \dots, e_n)^\top$
 
 $$\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{e}\\ 
-E(\mathbf{e}) = 0, \quad \operatorname{Var}(\mathbf{e}) = \sigma^2 I_n, \quad \operatorname{rank}(\mathbf{X}) = p+1$$
+E(\mathbf{e}) = 0, \quad \text{Var}(\mathbf{e}) = \sigma^2 I_n, \quad \text{rank}(\mathbf{X}) = p+1$$
 
-$\operatorname{rank}(\mathbf{X}) = p+1$은 $\mathbf{X}^\top \mathbf{X}$가 가역(invertible)임을 보장한다.
+$\text{rank}(\mathbf{X}) = p+1$은 $\mathbf{X}^\top \mathbf{X}$가 가역(invertible)임을 보장한다.
 
 **(2) 최소제곱 추정량(LSE) 정의**
 
@@ -1624,7 +1624,7 @@ $$|\mathbf{Y} - \mathbf{X}\boldsymbol{\beta}|^2 = |\Pi(\mathbf{Y} - \mathbf{X}\b
 
 $$\mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = \Pi \mathbf{Y}$$
 
-를 만족해야 하고, $\operatorname{rank}(\mathbf{X}) = p+1$이면 해가 유일하여
+를 만족해야 하고, $\text{rank}(\mathbf{X}) = p+1$이면 해가 유일하여
 
 $$\boxed{\hat{\boldsymbol{\beta}}^{LSE} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{Y}}$$
 
@@ -1653,12 +1653,12 @@ $\Pi^\top(I-\Pi) = 0$이므로 $(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})^\top
 
 $|\Pi(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})|^2 = |\Pi\mathbf{Y} - \Pi \mathbf{X}\boldsymbol{\beta}|^2 = |\Pi \mathbf{Y} - \mathbf{X}\boldsymbol{\beta}|^2 = |\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{Y} - \mathbf{X}\boldsymbol{\beta}|^2$ 이므로  
 $\boldsymbol{\beta}$에 대한 최소값은 $\mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = \Pi \mathbf{Y}$를 만족하는 $\hat{\boldsymbol{\beta}}^{LSE}$에서 달성된다.  
-$\operatorname{rank}(\mathbf{X}) = p+1$이므로 $\hat{\boldsymbol{\beta}}^{LSE}$는 유일하게 존재하며, $\hat{\boldsymbol{\beta}}^{LSE} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{Y}$가 된다.
+$\text{rank}(\mathbf{X}) = p+1$이므로 $\hat{\boldsymbol{\beta}}^{LSE}$는 유일하게 존재하며, $\hat{\boldsymbol{\beta}}^{LSE} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{Y}$가 된다.
 
 ### 정리 6.5.2: 최소제곱 추정량의 성질(불편성, 분산, 정규성)
 
 선형회귀모형 $\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{e}$,  
-$E(\mathbf{e}) = 0$, $\operatorname{Var}(\mathbf{e}) = \sigma^2 I_n$, $\operatorname{rank}(\mathbf{X}) = p+1$에서  
+$E(\mathbf{e}) = 0$, $\text{Var}(\mathbf{e}) = \sigma^2 I_n$, $\text{rank}(\mathbf{X}) = p+1$에서  
 
 오차항 분산의 추정량으로 아래식의 평균오차제곱(MSE)을 사용한다. 분모 $n - p - 1$은 자유도(표본크기 $n$에서 추정한 모수 개수 $p+1$을 뺀 값)이다.
 
@@ -1667,7 +1667,7 @@ $$\hat\sigma^2 = \frac{|\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE}|^2
 이와 관련하여 최소제곱 추정량의 성질은 다음과 같다:
 
 **(a) 불편성(Unbiasedness):**  
-$E(\hat{\boldsymbol{\beta}}^{LSE}) = \boldsymbol{\beta}, \quad \operatorname{Var}(\hat{\boldsymbol{\beta}}^{LSE}) = \sigma^2 (\mathbf{X}^\top \mathbf{X})^{-1}$ 
+$E(\hat{\boldsymbol{\beta}}^{LSE}) = \boldsymbol{\beta}, \quad \text{Var}(\hat{\boldsymbol{\beta}}^{LSE}) = \sigma^2 (\mathbf{X}^\top \mathbf{X})^{-1}$ 
 - 즉, 최소제곱 추정량은 **불편추정량**이다.
 - $\mathbf{X}^\top \mathbf{X}$는 "설명변수 정보량"을 모으는 행렬
 - $(\mathbf{X}^\top \mathbf{X})^{-1}$가 커질수록(설명변수들이 서로 비슷하거나, 표본이 부족하거나) 분산이 커진다.
@@ -1696,9 +1696,9 @@ $$E(\hat\beta^{LSE}) = (X^\top X)^{-1} X^\top E(Y) = (X^\top X)^{-1} X^\top X \b
 
 즉, 불편추정량이다. 분산의 경우:
 
-$$\operatorname{Var}(\hat{\boldsymbol{\beta}}^{LSE}) = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \operatorname{Var}(\mathbf{Y}) \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top (\sigma^2 I) \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} = \sigma^2 (\mathbf{X}^\top \mathbf{X})^{-1}$$
+$$\text{Var}(\hat{\boldsymbol{\beta}}^{LSE}) = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \text{Var}(\mathbf{Y}) \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top (\sigma^2 I) \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} = \sigma^2 (\mathbf{X}^\top \mathbf{X})^{-1}$$
 
-> $\operatorname{Var}(Y) = \operatorname{Var}(X\beta + e) = \operatorname{Var}(e) = \sigma^2 I$
+> $\text{Var}(Y) = \text{Var}(X\beta + e) = \text{Var}(e) = \sigma^2 I$
 
 **(b)**
 
@@ -1709,15 +1709,15 @@ $$\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = \mathbf{Y} - \Pi \math
 
 $$\hat{\sigma}^2 = \frac{|\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE}|^2}{n - p - 1} = \frac{\mathbf{e}^\top (I - \Pi) \mathbf{e}}{n - p - 1}$$
 
-$\mathbf{e}^\top (I - \Pi) \mathbf{e} = \operatorname{trace}\big((I - \Pi) \mathbf{e} \mathbf{e}^\top\big), \quad E[\mathbf{e} \mathbf{e}^\top] = \sigma^2 I_n$ 이므로  
-$(n - p - 1) E(\hat\sigma^2) = E\big[\mathbf{e}^\top (I - \Pi) \mathbf{e}\big] = E\big[\operatorname{trace}((I - \Pi) \mathbf{e} \mathbf{e}^\top)\big] \\ 
-= \operatorname{trace}\big((I - \Pi) E[\mathbf{e} \mathbf{e}^\top]\big) = \operatorname{trace}\big((I - \Pi) \sigma^2 I_n\big) = \sigma^2 \operatorname{trace}(I - \Pi)$
+$\mathbf{e}^\top (I - \Pi) \mathbf{e} = \text{trace}\big((I - \Pi) \mathbf{e} \mathbf{e}^\top\big), \quad E[\mathbf{e} \mathbf{e}^\top] = \sigma^2 I_n$ 이므로  
+$(n - p - 1) E(\hat\sigma^2) = E\big[\mathbf{e}^\top (I - \Pi) \mathbf{e}\big] = E\big[\text{trace}((I - \Pi) \mathbf{e} \mathbf{e}^\top)\big] \\ 
+= \text{trace}\big((I - \Pi) E[\mathbf{e} \mathbf{e}^\top]\big) = \text{trace}\big((I - \Pi) \sigma^2 I_n\big) = \sigma^2 \text{trace}(I - \Pi)$
 
-한편 $\operatorname{trace}(A + B) = \operatorname{trace}(A) + \operatorname{trace}(B)$, $\operatorname{trace}(AB) = \operatorname{trace}(BA)$ 이므로  
-$\operatorname{trace}(I_n - \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top) = n - \operatorname{trace}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top)$ 이고,  
-$\operatorname{trace}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top) = \operatorname{trace}((\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{X}) = \operatorname{trace}(I_{p+1}) = p+1$
+한편 $\text{trace}(A + B) = \text{trace}(A) + \text{trace}(B)$, $\text{trace}(AB) = \text{trace}(BA)$ 이므로  
+$\text{trace}(I_n - \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top) = n - \text{trace}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top)$ 이고,  
+$\text{trace}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top) = \text{trace}((\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{X}) = \text{trace}(I_{p+1}) = p+1$
 
-따라서 $\operatorname{trace}(I_n - \Pi) = n - (p+1) = n - p - 1$  
+따라서 $\text{trace}(I_n - \Pi) = n - (p+1) = n - p - 1$  
 결국 $(n - p - 1) E(\hat\sigma^2) = \sigma^2 (n - p - 1) \implies E(\hat\sigma^2) = \sigma^2$
 
 **(c)**
@@ -1731,8 +1731,8 @@ $$\frac{|Y - X\hat\beta^{LSE}|^2}{\sigma^2} = \frac{e^\top (I - \Pi) e}{\sigma^2
 $\hat\beta^{LSE}$와 $\hat\sigma^2$는 서로 독립이다. 왜냐하면 $\hat\beta^{LSE}$는 $\Pi Y$에 의해 결정되고, $\hat\sigma^2$는 $(I - \Pi)Y$에 의해 결정되는데, $\Pi$와 $(I - \Pi)$가 서로 직교이므로 이 둘은 서로 독립이 된다.  
 수식으로 표현하면, 
 
-$$ \operatorname{Cov}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top Y, (I - \Pi)Y) \\
-= \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \operatorname{Var}(Y) (I - \Pi)^\top
+$$ \text{Cov}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top Y, (I - \Pi)Y) \\
+= \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \text{Var}(Y) (I - \Pi)^\top
 = 0
 $$
 
@@ -1776,7 +1776,7 @@ $$\Pi_0\Pi_{1|0} = X_0(X_0^\top X_0)^{-1}(X_0^\top X_{1|0})(X_{1|0}^\top X_{1|0}
 P^2 = (\Pi_0+\Pi_{1|0})^2 = \Pi_0^2+\Pi_{1|0}^2+\Pi_0\Pi_{1|0}+\Pi_{1|0}\Pi_0 = \Pi_0+\Pi_{1|0} = P $  
 이므로 $P$는 대칭 멱등행렬, 즉 직교투영행렬이다.
 
-이제 $P$의 상을 보면, $\operatorname{Im}(P) = C(X_0)+C(X_{1|0})$ 이다.  
+이제 $P$의 상을 보면, $\text{Im}(P) = C(X_0)+C(X_{1|0})$ 이다.  
 한편 $X_{1|0}=(I-\Pi_0)X_1=X_1-\Pi_0X_1$ 이므로  
 $C(X_{1|0}) \subset C[(X_0,X_1])=C(X)$이고, 또한 $X_1=\Pi_0X_1+X_{1|0}$ 이므로 $C(X_1)\subset C(X_0)+C(X_{1|0})$이다. 따라서
 
@@ -1807,12 +1807,12 @@ $$X_0\hat\gamma_0^{LSE} = \Pi_0 Y, \quad X_{1|0}\hat\beta_1^{LSE} = \Pi_{1|0} Y,
 **(b) 공분산 0 및 평균/분산**  
 직교화의 가장 큰 이점은, 두 블록의 추정이 분리되고 상관이 사라진다는 점이다.
 
-$$\operatorname{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = 0$$
+$$\text{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = 0$$
 
 또한
 
-$$E(\hat\gamma_0^{LSE}) = \gamma_0,\quad \operatorname{Var}(\hat\gamma_0^{LSE}) = \sigma^2 (X_0^\top X_0)^{-1} \\
-E(\hat\beta_1^{LSE}) = \beta_1,\quad \operatorname{Var}(\hat\beta_1^{LSE}) = \sigma^2 (X_{1|0}^\top X_{1|0})^{-1}$$
+$$E(\hat\gamma_0^{LSE}) = \gamma_0,\quad \text{Var}(\hat\gamma_0^{LSE}) = \sigma^2 (X_0^\top X_0)^{-1} \\
+E(\hat\beta_1^{LSE}) = \beta_1,\quad \text{Var}(\hat\beta_1^{LSE}) = \sigma^2 (X_{1|0}^\top X_{1|0})^{-1}$$
 
 즉 $X_1$을 "$X_0$의 영향 제거 후"에 회귀하는 형태로 분산이 정리된다.
 
@@ -1837,11 +1837,11 @@ X\hat\beta^{LSE}
 $$
 
 **(b)**  
-$\operatorname{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = \operatorname{Cov}((X_0^\top X_0)^{-1} X_0^\top Y, (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top Y)$이므로 $Y$의 공분산이 $\sigma^2 I$이며, $X_0X_{1|0}^\top = 0$이므로 
+$\text{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = \text{Cov}((X_0^\top X_0)^{-1} X_0^\top Y, (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top Y)$이므로 $Y$의 공분산이 $\sigma^2 I$이며, $X_0X_{1|0}^\top = 0$이므로 
 
 > 왜냐하면, $X_{1|0} = (I - \Pi_0) X_1$이므로 $X_0^\top X_{1|0} = X_0^\top (I - \Pi_0) X_1 = X_0^\top X_1 - X_0^\top \Pi_0 X_1$ 이다. $\Pi_0$는 $X_0$의 열공간으로의 투영이므로 $X_0^\top \Pi_0 = X_0^\top$ 이고, 따라서 $X_0^\top \Pi_0 X_1 = X_0^\top X_1$
 
-$$\operatorname{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top \sigma^2 I X_{1|0} (X_{1|0}^\top X_{1|0})^{-1} \\ 
+$$\text{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top \sigma^2 I X_{1|0} (X_{1|0}^\top X_{1|0})^{-1} \\ 
 = \sigma^2 (X_0^\top X_0)^{-1} X_0^\top X_{1|0} (X_{1|0}^\top X_{1|0})^{-1}
 = 0
 $$
@@ -1849,8 +1849,8 @@ $$
 $E(\hat\gamma_0^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top E(Y) = (X_0^\top X_0)^{-1} X_0^\top X\beta = (X_0^\top X_0)^{-1} X_0^\top(X_0\gamma_0 + X_{1|0}\beta_1) = \gamma_0$,  
 $E(\hat\beta_1^{LSE}) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top E(Y) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top X\beta = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top(X_0\gamma_0 + X_{1|0}\beta_1) = \beta_1$
 
-$\operatorname{Var}(\hat\gamma_0^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top \sigma^2 I X_0 (X_0^\top X_0)^{-1} = \sigma^2 (X_0^\top X_0)^{-1}$,  
-$\operatorname{Var}(\hat\beta_1^{LSE}) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top \sigma^2 I X_{1|0} (X_{1|0}^\top X_{1|0})^{-1} = \sigma^2 (X_{1|0}^\top X_{1|0})^{-1}$
+$\text{Var}(\hat\gamma_0^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top \sigma^2 I X_0 (X_0^\top X_0)^{-1} = \sigma^2 (X_0^\top X_0)^{-1}$,  
+$\text{Var}(\hat\beta_1^{LSE}) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top \sigma^2 I X_{1|0} (X_{1|0}^\top X_{1|0})^{-1} = \sigma^2 (X_{1|0}^\top X_{1|0})^{-1}$
 
 #### 예 6.5.1: 절편이 포함된 선형회귀모형(중심화로 직교화)
 

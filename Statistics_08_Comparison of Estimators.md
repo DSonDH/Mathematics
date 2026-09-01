@@ -203,11 +203,11 @@ $$E_\theta[\hat\eta(X_1, \dots, X_n)]=\eta(\theta),\quad \forall\theta\in\Omega$
 
 $$\mathrm{MSE}(\hat\eta, \theta) = E_\theta\left[(\hat\eta - \eta(\theta))^2\right]
 = E_\theta\left[(\hat\eta - E_\theta[\hat\eta] + E_\theta[\hat\eta] - \eta(\theta))^2\right] \\
-= \operatorname{Var}_\theta(\hat\eta) + \left(E_\theta[\hat\eta] - \eta(\theta)\right)^2$$
+= \text{Var}_\theta(\hat\eta) + \left(E_\theta[\hat\eta] - \eta(\theta)\right)^2$$
 
 인데, (bias, variance decomposition!!) 불편추정량이면 $E_\theta[\hat\eta] = \eta(\theta)$이므로  
 
-$$\mathrm{MSE}(\hat\eta, \theta) = \operatorname{Var}_\theta(\hat\eta)$$
+$$\mathrm{MSE}(\hat\eta, \theta) = \text{Var}_\theta(\hat\eta)$$
 
 즉, 분산을 최소화하는 것이 곧 MSE를 최소화하는 것, 최적의 추정량이다.
 
@@ -510,12 +510,12 @@ E_\theta\left[(\hat\eta - \eta(\theta))^2\right]
 가운데 항, $E[(\hat\eta - E_\theta[\hat\eta \mid Y])(E_\theta[\hat\eta \mid Y] - \eta(\theta)) \mid Y] = 0$ 이므로,
 
 $$
-= E_\theta\left[ \operatorname{Var}_\theta(\hat\eta \mid Y) + (E_\theta[\hat\eta \mid Y] - \eta(\theta))^2 \right] \\
-= E_\theta\left[\operatorname{Var}_\theta(\hat\eta \mid Y)\right] + E_\theta\left[(\hat\eta^{RB} - \eta(\theta))^2\right] \\
-\therefore \mathrm{MSE}(\hat\eta, \theta) = E_\theta\left[\operatorname{Var}_\theta(\hat\eta \mid Y)\right] + \mathrm{MSE}(\hat\eta^{RB}, \theta)
+= E_\theta\left[ \text{Var}_\theta(\hat\eta \mid Y) + (E_\theta[\hat\eta \mid Y] - \eta(\theta))^2 \right] \\
+= E_\theta\left[\text{Var}_\theta(\hat\eta \mid Y)\right] + E_\theta\left[(\hat\eta^{RB} - \eta(\theta))^2\right] \\
+\therefore \mathrm{MSE}(\hat\eta, \theta) = E_\theta\left[\text{Var}_\theta(\hat\eta \mid Y)\right] + \mathrm{MSE}(\hat\eta^{RB}, \theta)
 $$
 
-이고, $E_\theta[\operatorname{Var}_\theta(\hat\eta \mid Y)] \ge 0$이기 때문에
+이고, $E_\theta[\text{Var}_\theta(\hat\eta \mid Y)] \ge 0$이기 때문에
 
 $$\mathrm{MSE}(\hat\eta^{RB}, \theta) \le \mathrm{MSE}(\hat\eta, \theta)$$
 
@@ -1123,13 +1123,13 @@ $$
     E_\theta[\dot l_n(\theta)]=E_{\theta}\left[\sum_{i=1}^n \frac{\partial}{\partial\theta} \log f(X_i;\theta)\right] = nE_\theta\left[\frac{\partial}{\partial\theta} \log f(X_1;\theta)\right] = 0$$
 
 >(다변수의 경우 $\theta=(\theta_1,\dots,\theta_k)^t$는 $k$차원 벡터, $\dot l_n(\theta)$도 $k$차원 벡터)  
->$\Sigma_{11} = \operatorname{Var}_\theta(\hat\eta_n)$, $\Sigma_{22} = \operatorname{Var}_\theta(\dot l_n(\theta))$, $\Sigma_{12} = \operatorname{Cov}_\theta(\hat\eta_n, \dot l_n(\theta)), \Sigma_{21} = \Sigma_{12}^t$라고 하자.
+>$\Sigma_{11} = \text{Var}_\theta(\hat\eta_n)$, $\Sigma_{22} = \text{Var}_\theta(\dot l_n(\theta))$, $\Sigma_{12} = \text{Cov}_\theta(\hat\eta_n, \dot l_n(\theta)), \Sigma_{21} = \Sigma_{12}^t$라고 하자.
 
 이제 증명을 정리하면 다음과 같다:
 1. **코시–슈바르츠 부등식 적용**: 임의의 추정량 $\hat\eta_n$에 대해,
     
     $$
-    \operatorname{Var}_\theta(\hat\eta_n)\,\operatorname{Var}_\theta(\dot l_n(\theta)) \ge \operatorname{Cov}_\theta(\hat\eta_n,\,\dot l_n(\theta))^2
+    \text{Var}_\theta(\hat\eta_n)\,\text{Var}_\theta(\dot l_n(\theta)) \ge \text{Cov}_\theta(\hat\eta_n,\,\dot l_n(\theta))^2
     $$
     
 >    (다변수의 경우, 임의의 벡터 $a$, $b$에 대해)  
@@ -1141,7 +1141,7 @@ $$
 2. **공분산 계산**: 조건(R4) 활용 
     
     $$
-    \operatorname{Cov}_\theta(\hat\eta_n,\,\dot l_n(\theta))
+    \text{Cov}_\theta(\hat\eta_n,\,\dot l_n(\theta))
     = E_\theta(\hat\eta_n\,\dot l_n(\theta)) - E_\theta[\hat\eta_n]E_\theta[\dot l_n(\theta)]
     = E_\theta(\hat\eta_n\,\dot l_n(\theta)) \\
     = E_\theta \left[\hat\eta_n \frac{\partial}{\partial\theta}  \log \prod_{i=1}^n f(X_i;\theta)\right]
@@ -1149,14 +1149,14 @@ $$
     = \frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]
     $$
     
- >   (다변수의 경우, $\Sigma_{12} = \mathrm{Cov}_\theta(\hat\eta_n, \dot l_n(\theta)) = \frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]^\top$는 $m\times k$ 행렬, $\Sigma_{21} = \Sigma_{12}^t$, $\Sigma_{22} = \operatorname{Var}_\theta(\dot l_n(\theta)) =nI(\theta)$)
+ >   (다변수의 경우, $\Sigma_{12} = \mathrm{Cov}_\theta(\hat\eta_n, \dot l_n(\theta)) = \frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]^\top$는 $m\times k$ 행렬, $\Sigma_{21} = \Sigma_{12}^t$, $\Sigma_{22} = \text{Var}_\theta(\dot l_n(\theta)) =nI(\theta)$)
 >
 
 3. **분산 계산**: 
 
-    $$\operatorname{Var}_\theta(\dot l_n(\theta)) 
-    = \operatorname{Var}_\theta\left(\sum_{i=1}^n \frac{\partial}{\partial\theta} \log f(X_i;\theta)\right) 
-    = n\operatorname{Var}_\theta\left(\frac{\partial}{\partial\theta} \log f(X_1;\theta)\right)
+    $$\text{Var}_\theta(\dot l_n(\theta)) 
+    = \text{Var}_\theta\left(\sum_{i=1}^n \frac{\partial}{\partial\theta} \log f(X_i;\theta)\right) 
+    = n\text{Var}_\theta\left(\frac{\partial}{\partial\theta} \log f(X_1;\theta)\right)
     = nI(\theta)$$
     
     ($I(\theta)$는 $k\times k$ 양정정부호 행렬)
@@ -1164,7 +1164,7 @@ $$
 4. **최종 부등식**: 위 분산, 공분산을 코시–슈바르츠 부등식에 대입하면,
     
     $$
-    \operatorname{Var}_\theta(\hat\eta_n) \ge
+    \text{Var}_\theta(\hat\eta_n) \ge
     \frac{\left(\frac{\partial}{\partial\theta} E_\theta[\hat\eta_n]\right)^2}{nI(\theta)}, \quad \forall \theta \in \Omega
     $$
     
@@ -1243,7 +1243,7 @@ $$
 정리 8.4.2에 따르면, 일차원 모수의 경우
 
 $$
-\operatorname{Var}_\theta\left(\sqrt{n}(\hat\theta_n^{\mathrm{UE}} - \theta)\right) \geq \frac{1}{I(\theta)}
+\text{Var}_\theta\left(\sqrt{n}(\hat\theta_n^{\mathrm{UE}} - \theta)\right) \geq \frac{1}{I(\theta)}
 $$
 
 임을 알 수 있다. 이로부터, 점근정규성을 갖는 임의의 추정량 $\hat\theta_n$의 극한분포 분산 $\sigma^2(\theta)$에 대해

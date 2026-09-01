@@ -21,7 +21,7 @@ Homogeneity는 스칼라배에 대한 성질이므로 다른 개념임)
   $\ker L=\{v\in V\mid L(v)=0\}$
 
 * **상(im, image)**:
-  $\operatorname{im}L = L(V)=\{L(v)\mid v\in V\}$
+  $\text{im}L = L(V)=\{L(v)\mid v\in V\}$
 
 * **자기사상 (endomorphism)**:
   $V=W$일 때 $L:V\to V$
@@ -224,7 +224,7 @@ $$
 유한차원 벡터공간 $V$와 선형사상 $L:V\to W$에 대해:
 
 $$
-\dim(V)=\dim(\ker L)+\dim(\operatorname{im}L)
+\dim(V)=\dim(\ker L)+\dim(\text{im}L)
 $$
 
 - 정의역의 차원 = Rank(이미지의 차원) + Nullity(커널의 차원)
@@ -236,17 +236,17 @@ $B_V = \{v_1, \dots, v_n\}$
 $\ker L = \{v_1, \dots, v_k\}$
 
 목표:  
-$B_{\operatorname{im}L}
+$B_{\text{im}L}
  = \{\,L(v_{k+1}),\, L(v_{k+2}),\, \dots,\, L(v_n)\,\}$
 - $\ker L$ 의 기저는 $v_1, \dots, v_k$ 이다.
-- 따라서 $\dim(\operatorname{im}L) = n - k$ 이다.
+- 따라서 $\dim(\text{im}L) = n - k$ 이다.
 - 이미지 기저는 반드시 **0이 아닌 벡터 $n-k$개**여야 한다.
 - $L(v_i) = 0$ 인 벡터는 $i \le k$ 뿐이다.
 - 즉, **0이 아닌 $L(v_i)$는 모두 $i > k$에서 나온다.**
 - 따라서 이미지의 기저 후보는  
   $\{\,L(v_{k+1}), \dots, L(v_n)\,\}$ 이다.
 - 이 집합이 span + 선형독립임을 보이면  
-  곧 $B_{\operatorname{im}L}$ 이 된다.
+  곧 $B_{\text{im}L}$ 이 된다.
 
 (1) 생성(span)
 모든 $v \in V$에 대하여  
@@ -259,11 +259,11 @@ $L(v)
 핵의 원소들에서 $L(v_1)=\cdots=L(v_k)=\mathbf{0}$ 이므로,  
 $L(v)
  = c_{k+1} L(v_{k+1}) + \cdots + c_n L(v_n)
- \in \operatorname{im}L$
+ \in \text{im}L$
 
 따라서  
-$\operatorname{span}\{L(v_{k+1}), \dots, L(v_n)\}
- = \operatorname{im}L$
+$\text{span}\{L(v_{k+1}), \dots, L(v_n)\}
+ = \text{im}L$
 
 (2) 선형독립  
 $c_{k+1} L(v_{k+1}) + \cdots + c_n L(v_n) = \mathbf{0}$ 이라 하자.
@@ -299,9 +299,9 @@ $L$은 전사 $\Leftrightarrow$ 단사 $\Leftrightarrow$ 전단사
 (1) L이 전사면 L이 단사  
 가정:  
 $\dim(V) = \dim(W) = n$  
-만약 $L$이 전사라면, $\dim(\operatorname{im}L) = \dim(W) = n$  
+만약 $L$이 전사라면, $\dim(\text{im}L) = \dim(W) = n$  
 Rank–Nullity 정리에 의해,  
-$\dim(V) = \dim(\ker L) + \dim(\operatorname{im}L)$  
+$\dim(V) = \dim(\ker L) + \dim(\text{im}L)$  
 $\Rightarrow n = \dim(\ker L) + n$  
 $\Rightarrow \dim(\ker L) = 0$  
 $\Rightarrow \ker L = \{\mathbf{0}\}$  
@@ -323,20 +323,20 @@ $\dim(\ker L) = 0$.
 Rank–Nullity 정리에 의해,
 
 $$
-n = 0 + \dim(\operatorname{im}L)
+n = 0 + \dim(\text{im}L)
 $$
 
 따라서,
 
 $$
-\dim(\operatorname{im}L) = n
+\dim(\text{im}L) = n
 $$
 
-그런데 $\operatorname{im}L \subseteq W$ 이고,
+그런데 $\text{im}L \subseteq W$ 이고,
 $\dim(W)=n$ 이므로,
 
 $$
-\operatorname{im}L = W
+\text{im}L = W
 $$
 
 즉, $L$은 전사이다.
@@ -354,20 +354,20 @@ $f$가 전사 ⇔ $f$가 단사 ⇔ $f$가 전단사
 
 * **열공간 (Column Space)**:  
   $M$의 열벡터들이 생성하는 부분공간  
-  열계수: $\operatorname{col\text{-}rank}(M)$
+  열계수: $\text{col\text{-}rank}(M)$
 
 * **행공간 (Row Space)**:  
   $M$의 행벡터들이 생성하는 부분공간  
-  행계수: $\operatorname{row\text{-}rank}(M)$
+  행계수: $\text{row\text{-}rank}(M)$
 
 * **영공간 (Null Space)**:  
   연립방정식 $Mx = 0$ 의 해공간  
-  널리티: $\operatorname{nullity}(M)$
+  널리티: $\text{nullity}(M)$
 
 
 ## (2) 계수정리
 $$
-\operatorname{col\text{-}rank}M = \operatorname{row\text{-}rank}M
+\text{col\text{-}rank}M = \text{row\text{-}rank}M
 $$
 
 이 차원을 행렬 **$M$의 계수 rank M**이라 한다.
@@ -376,7 +376,7 @@ $$
 행렬 $M\in M_{m\times n}(F)$에 대하여:
 
 $$
-n = \operatorname{rank}M + \operatorname{nullity}M
+n = \text{rank}M + \text{nullity}M
 $$
 
 (차원정리와 대꾸됨!)

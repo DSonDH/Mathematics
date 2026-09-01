@@ -46,7 +46,7 @@ $$
 $$y_i=\beta_0+\beta_1 x_{i1}+\beta_2 x_{i2}+\varepsilon_i$$
 
 * $\varepsilon_i \sim N(0,\sigma^2)$
-* $\operatorname{Cov}(\varepsilon_i,\varepsilon_j)=0 \quad (i\ne j)$
+* $\text{Cov}(\varepsilon_i,\varepsilon_j)=0 \quad (i\ne j)$
 
 이 모형에서의 **반응함수(response function)** 는 다음과 같다.
 
@@ -155,11 +155,11 @@ $$
 교호작용 효과가 존재하는지 검정하는 가설: $H_0:\beta_3=0$  
 검정통계량은 
 
-$$t_0=\frac{\hat{\beta}_3}{\sqrt{\operatorname{Var}(\hat{\beta}_3)}}$$
+$$t_0=\frac{\hat{\beta}_3}{\sqrt{\text{Var}(\hat{\beta}_3)}}$$
 
-여기서 $\operatorname{Var}(\hat{\beta}_3)=c_{33}\sigma^2$ 이고 그 추정값은
+여기서 $\text{Var}(\hat{\beta}_3)=c_{33}\sigma^2$ 이고 그 추정값은
  
-$$\widehat{\operatorname{Var}(\hat{\beta}_3)} = c_{33}MSE = (0.00003049)(11.02) = 0.000336$$
+$$\widehat{\text{Var}(\hat{\beta}_3)} = c_{33}MSE = (0.00003049)(11.02) = 0.000336$$
 
 따라서
 
@@ -452,7 +452,7 @@ $$\hat{\beta}^*=(X^T V^{-1} X)^{-1}X^T V^{-1}y$$
 
 2. $\hat{p}_i=\hat{\beta}_0+\hat{\beta}_1 x_i$ 를 계산한다.
 
-3. $\hat{V}=\operatorname{diag}(\hat{p}_1(1-\hat{p}_1),\dots,\hat{p}_n(1-\hat{p}_n))$ 을 계산한다.
+3. $\hat{V}=\text{diag}(\hat{p}_1(1-\hat{p}_1),\dots,\hat{p}_n(1-\hat{p}_n))$ 을 계산한다.
 
 4. $\hat{\beta}^*=(X^T \hat{V}^{-1}X)^{-1}X^T \hat{V}^{-1}y$ 를 계산한다.
 

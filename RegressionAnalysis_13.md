@@ -186,8 +186,8 @@ $$
 MSE(\hat{\boldsymbol{\beta}})
 &=E(L^2)
 =E\left[(\hat{\boldsymbol{\beta}}-\beta)^T(\hat{\boldsymbol{\beta}}-\beta)\right] \\
-&=\operatorname{tr}\left(E\left[(\hat{\boldsymbol{\beta}}-\beta)(\hat{\boldsymbol{\beta}}-\beta)^T\right]\right) \\
-&=E\left[\operatorname{tr}((\hat{\boldsymbol{\beta}}-\beta)(\hat{\boldsymbol{\beta}}-\beta)^T)\right] \\
+&=\text{tr}\left(E\left[(\hat{\boldsymbol{\beta}}-\beta)(\hat{\boldsymbol{\beta}}-\beta)^T\right]\right) \\
+&=E\left[\text{tr}((\hat{\boldsymbol{\beta}}-\beta)(\hat{\boldsymbol{\beta}}-\beta)^T)\right] \\
 &=\sum_{j=1}^{p} Var(\hat{\boldsymbol{\beta}}_j) \\
 &=\sigma^2\sum_{j=1}^{p}\lambda_j^{-1}
 \end{aligned}
@@ -242,7 +242,7 @@ $$
 MSE[\hat{\boldsymbol{\beta}}(k)]
 &=E[L^2(k)]
 =E\left[(\hat{\boldsymbol{\beta}}(k)-\boldsymbol{\beta})^T(\hat{\boldsymbol{\beta}}(k)-\boldsymbol{\beta})\right] \\
-&=\sigma^2\operatorname{tr}\left[(X^TX+kI_p)^{-1}X^TX(X^TX+kI_p)^{-1}\right]
+&=\sigma^2\text{tr}\left[(X^TX+kI_p)^{-1}X^TX(X^TX+kI_p)^{-1}\right]
 +k^2\boldsymbol{\beta}^T(X^TX+kI_p)^{-2}\boldsymbol{\beta} \\
 &=\sigma^2\sum_{j=1}^{p}\lambda_j(\lambda_j+k)^{-2}
 +\sum_{j=1}^{p}\frac{k^2\alpha_j^2}{(\lambda_j+k)^2}
@@ -368,8 +368,8 @@ $$
 MSE(\hat{\alpha}(k))
 &=E[L^2(k)]
 =E\left[(\hat{\alpha}(k)-\alpha)^T(\hat{\alpha}(k)-\alpha)\right] \\
-&=\operatorname{tr}(Var[\hat{\alpha}(k)])+[\hat{\alpha}(k)\text{의 편의}]^2 \\
-&=\sigma^2\operatorname{tr}[\Lambda(\Lambda+kI)^{-2}]
+&=\text{tr}(Var[\hat{\alpha}(k)])+[\hat{\alpha}(k)\text{의 편의}]^2 \\
+&=\sigma^2\text{tr}[\Lambda(\Lambda+kI)^{-2}]
 +\alpha^T[(\Lambda+kI)^{-1}\Lambda-I_p]^T[(\Lambda+kI)^{-1}\Lambda-I_p]\alpha \\
 &=\sigma^2\sum_{j=1}^{p}\frac{\lambda_j}{(\lambda_j+k)^2}
 +\sum_{j=1}^{p}\frac{k^2\alpha_j^2}{(\lambda_j+k)^2}

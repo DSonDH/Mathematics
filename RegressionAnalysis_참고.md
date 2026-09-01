@@ -203,7 +203,7 @@ $$
 과
 
 $$
-\operatorname{Var}(\varepsilon_i\mid X)=\sigma^2
+\text{Var}(\varepsilon_i\mid X)=\sigma^2
 $$
 
 이다. 오차항들이 서로 비상관이라는 가정까지 만족하면
@@ -394,7 +394,7 @@ $$
 이고
 
 $$
-\operatorname{Var}(\hat\beta_1\mid X)
+\text{Var}(\hat\beta_1\mid X)
 =
 \frac{\sigma^2}{S_{xx}}
 $$
@@ -402,7 +402,7 @@ $$
 이다. 확률변수 $Z$에 대해
 
 $$
-E(Z^2)=\operatorname{Var}(Z)+\{E(Z)\}^2
+E(Z^2)=\text{Var}(Z)+\{E(Z)\}^2
 $$
 
 이므로
@@ -411,7 +411,7 @@ $$
 \begin{aligned}
 E(\hat\beta_1^2\mid X)
 &=
-\operatorname{Var}(\hat\beta_1\mid X)
+\text{Var}(\hat\beta_1\mid X)
 +\{E(\hat\beta_1\mid X)\}^2\\
 &=
 \frac{\sigma^2}{S_{xx}}+\beta_1^2

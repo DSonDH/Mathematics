@@ -60,18 +60,18 @@ $$\text{Cov}(\varepsilon_i,\varepsilon_j|X)=0 \quad (i\ne j)$$
 
 >참고: 조건부 공분산의 정의는 다음과 같다.
 >
->$$\operatorname{Cov}(\varepsilon_1,\varepsilon_2\mid X)
+>$$\text{Cov}(\varepsilon_1,\varepsilon_2\mid X)
 >=E\left[(\varepsilon_1-E(\varepsilon_1\mid X))(\varepsilon_2-E(\varepsilon_2\mid X))\mid X\right]$$
 >
->따라서 조건부 평균 0을 함께 가정하면 $E(\varepsilon_1\mid X)=E(\varepsilon_2\mid X)=0$ 이므로 $\operatorname{Cov}(\varepsilon_1,\varepsilon_2\mid X)=E(\varepsilon_1\varepsilon_2\mid X).$
+>따라서 조건부 평균 0을 함께 가정하면 $E(\varepsilon_1\mid X)=E(\varepsilon_2\mid X)=0$ 이므로 $\text{Cov}(\varepsilon_1,\varepsilon_2\mid X)=E(\varepsilon_1\varepsilon_2\mid X).$
 
 >**참고: 유사한 독립성 가정들**
 >| 조건                                                        | 의미                           | 다른 조건과의 관계        | OLS에서 주된 역할          |
 >| --------------------------------------------------------- | ---------------------------- | ----------------- | -------------------- |
 >| $E(\varepsilon_i\mid X)=0$                                | $X$가 주어졌을 때 오차의 평균이 0        | 독립성과 별개의 조건       | OLS의 조건부 불편성         |
->| $\operatorname{Cov}(\varepsilon_i,\varepsilon_j\mid X)=0$ | 두 오차가 조건부로 선형적 관계가 없음        | 조건부 독립보다 약함       | 오차 간 상관이 없는 단순 분산 공식 |
+>| $\text{Cov}(\varepsilon_i,\varepsilon_j\mid X)=0$ | 두 오차가 조건부로 선형적 관계가 없음        | 조건부 독립보다 약함       | 오차 간 상관이 없는 단순 분산 공식 |
 >| $\varepsilon_i\perp\!\!\!\perp\varepsilon_j\mid X$           | $X$가 주어졌을 때 두 오차의 전체 분포가 분리됨 | 조건부 공분산 0을 함의     | 분포론·우도·점근론 단순화       |
->| $\operatorname{Var}(\varepsilon_i\mid X)=\sigma^2$        | 모든 관측치의 조건부 오차분산이 같음         | 독립성·평균 0과 별개      | OLS 효율성 및 고전적 표준오차   |
+>| $\text{Var}(\varepsilon_i\mid X)=\sigma^2$        | 모든 관측치의 조건부 오차분산이 같음         | 독립성·평균 0과 별개      | OLS 효율성 및 고전적 표준오차   |
 >| $\varepsilon\mid X\sim N(0,\sigma^2I)$                    | 조건부 정규성·평균 0·등분산·독립성         | 가장 강한 고전적 가정 중 하나 | 유한표본 (t,F) 검정        |
 
 ### 회귀모형 표현
@@ -166,7 +166,7 @@ $$\hat{\beta}_0 n+\hat{\beta}_1\sum x_i=\sum y_i \\
 을 얻는다.
 
 **2) 해의 존재와 최소조건**  
-앞서 S를 편미분결과를 0으로 두고 해를 구했는데, 실제로 이 해가 S를 최소화 하는 보장이 없어 필요조건에 불과하다. 충분조건은 이차편미분 행렬이 양정치 (positive definite)이어야 한다는 것이다.
+앞서 S를 편미분결과를 0으로 두고 해를 구했는데, 실제로 이 해가 S를 최소화 하는 보장이 없어 필요조건에 불과하다. 충분조건은 이차편미분 행렬이 양정치 (positive definite)이어야 한다는 것이다. 실베스터 판정법을 활용해야 한다.
   
 $$
 J 
@@ -180,13 +180,11 @@ J
 \end{bmatrix}
 $$
 
-이차편미분(second order partial derivative) 행렬이 양정치(positive definite)이면 극값은 최소값이다.
+우선, $J_{11}$성분이 양수여야 한다. $\frac{\partial^2 S}{\partial \beta_0^2}=2n>0$
 
-$$\frac{\partial^2 S}{\partial \beta_0^2}=2n>0$$
+$2\times2$행렬이므로, 행렬식(determinant)을 추가로 검사하면 된다.
 
-행렬식(determinant)
-
-$$|H| = (2n)(2\sum x_i^2) - (2\sum x_i)^2 
+$$\text{det}(J) = (2n)(2\sum x_i^2) - (2\sum x_i)^2 
 =4\left(n\sum x_i^2 - \left(\sum x_i\right)^2\right)$$
 
 여기서 $\left(\sum x_i\right)^2 = n^2\bar{x}^2 = n\cdot n\bar{x}^2$ 이므로
@@ -198,11 +196,11 @@ $$n\sum x_i^2 - \left(\sum x_i\right)^2
 
 이므로
 
-$$|H| = 4n\sum (x_i-\bar{x})^2 \ge 0$$
+$$\text{det}(J) = 4n\sum (x_i-\bar{x})^2 \ge 0$$
 
 이고, 자료가 적어도 하나 이상 변동하여 $x_i \ne \bar{x}$인 경우가 존재하면 $\sum (x_i-\bar{x})^2 > 0$이므로
 
-$$|H| > 0$$
+$$\text{det}(J) > 0$$
 
 이 된다. 즉, Hessian 행렬 $J$는 양정치(positive definite)이며, 이 경우 목적함수 $S$는 이 점에서 최소값을 갖는다. 따라서 앞서 구한 해는 실제로 최소제곱문제의 최소해가 됨이 보장된다.
 
@@ -243,7 +241,7 @@ $$\hat{\beta}_1=\frac{S_{xy}}{S_{xx}}$$
 
 대체모형에 대한 오차제곱합 $S(\beta_0, \beta_1) = \sum \epsilon^2 = \sum[y_i-\beta_0'-\beta_1(x_i-\bar x)]^2$ 을 만들어 위와 똑같은 방법으로 $\beta_0'$와 $\beta_1$을 추정하여 $\hat\beta_0'$와 $\hat\beta_1$를 구하면, 
 
-$$ \hat y = \hat\beta_0' + \hat\beta_1'(x-\bar x), \quad \hat\beta_0' = \bar y, \hat\beta_1 = S_{(xy)}/S_{(xx)}$$
+$$ \hat y = \hat\beta_0' + \hat\beta_1'(x-\bar x), \quad \hat\beta_0' = \bar y,\quad \hat\beta_1 = S_{(xy)}/S_{(xx)}$$
 
 - $\beta_0' = \beta_0 + \beta_1 \bar{x}$는 중심화된 절편
 

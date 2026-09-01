@@ -93,7 +93,7 @@ $x_i^T = (1, x_{i1}, x_{i2}, \dots, x_{ip})$는 $i$번째 관측값에 대응하
 해트 행렬은
 $HH = H$를 만족하므로 멱등행렬(idempotent matrix)이다.  
 또한 그 계수(rank)는 $\gamma(H) = \gamma(X) = p+1$  
-더불어 대각합(trace)은 $\operatorname{tr}(H) = \sum_{i=1}^n h_{ii} = p+1$  
+더불어 대각합(trace)은 $\text{tr}(H) = \sum_{i=1}^n h_{ii} = p+1$  
 즉, 해트 행렬의 대각원소들의 합은 설명변수 개수 $p$와 절편(intercept)을 포함한 총 모수 개수와 같다.
 
 #### 8.2.1.3 멱등성으로부터 나오는 관계 (Relation Derived from Idempotence)
@@ -150,7 +150,7 @@ $$h_{ij} = x_i^T (X^T X)^{-1} x_j = \frac1n + \frac{(x_i-\bar{x})(x_j-\bar{x})}{
 h_{ii} = \frac1n + \frac{(x_i-\bar{x})^2}{S_{xx}} \\
 \therefore \sum_{i=1}^n h_{ii} = 1 + \frac{\sum_i (x_i-\bar{x})^2}{S_{xx}} = 2$$
 
-이는 단순회귀에서 $p=1$이므로 $\operatorname{tr}(H)=p+1=2$와 일치한다.  
+이는 단순회귀에서 $p=1$이므로 $\text{tr}(H)=p+1=2$와 일치한다.  
 또한 $h_{ii}$의 최소값은 $x_i=\bar{x}$일 때 $1/n$이고, 최대값은 $x_i$가 평균 $\bar{x}$에서 가장 멀리 떨어져 있을 때 발생한다.
 
 #### 8.2.1.7 중회귀에서의 해트 값 (Hat Values in Multiple Regression)
@@ -188,7 +188,7 @@ $$\frac{\partial \hat{y}_i}{\partial y_i} = h_{ii}$$
 
 를 만족한다. 따라서 $h_{ii}$가 1에 가까울수록, $i$번째 관측값 $y_i$가 자기 자신의 적합값 $\hat{y}_i$에 큰 영향을 준다는 뜻이다.
 
-한편 해트 행렬의 트레이스(trace)는 $\operatorname{tr}(H)=\sum_{i=1}^n h_{ii}=p+1$이므로, 대각원소의 평균(mean)은
+한편 해트 행렬의 트레이스(trace)는 $\text{tr}(H)=\sum_{i=1}^n h_{ii}=p+1$이므로, 대각원소의 평균(mean)은
 
 $$\bar{h}=\frac{p+1}{n}$$
 
@@ -433,13 +433,13 @@ DFFITS는 Belsley 등이 제안한 영향점 탐색 척도이다. 핵심 아이�
 여기서 $\hat{\boldsymbol{\beta}}(i)$는 $y_i$를 제외하고 $n-1$개 자료에서 구한 $\boldsymbol{\beta}$의 최소제곱추정벡터(least squares estimate vector)이다.  
 $i$번째 관측값의 DFFITS는
 
-$$\mathrm{DFFITS}(i) = \operatorname{sgn}(e_i)\cdot
+$$\mathrm{DFFITS}(i) = \text{sgn}(e_i)\cdot
 \sup_{\lambda}
 \frac{\left|\lambda^T(\hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}(i))\right|}
 {s(i){\lambda^T(X^TX)^{-1}\lambda}^{1/2}}
 \tag{8.27}$$
 
-로 정의된다. 여기서 $\operatorname{sgn}(e_i)$는 부호함수(sign function)로,
+로 정의된다. 여기서 $\text{sgn}(e_i)$는 부호함수(sign function)로,
 * $e_i>0$이면 $(+)$
 * $e_i=0$이면 $(0)$
 * $e_i<0$이면 $(-)$
@@ -447,7 +447,7 @@ $$\mathrm{DFFITS}(i) = \operatorname{sgn}(e_i)\cdot
 식 (8.27)은 다음과 같이 쓸 수도 있다.
 
 $$\mathrm{DFFITS}(i)
-= \operatorname{sgn}(e_i)
+= \text{sgn}(e_i)
 \frac{\left[(\hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}(i))^TX^TX(\hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}(i))\right]^{1/2}}
 {s(i)} \tag{8.28}$$
 

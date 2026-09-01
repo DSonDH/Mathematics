@@ -476,7 +476,156 @@ $$\mathrm{Var}(e_i) = \left[ 1 - \frac{1}{n} - \frac{(x_i-\bar{x})^2}{S_{xx}} \r
 
 공분산:
 
-$$\mathrm{Cov}(e_i,e_j) = \left[ \frac{1}{n} + \frac{(x_i-\bar{x})(x_j-\bar{x})}{S_{xx}} \right]\sigma^2 \quad (i\neq j)$$
+$$\mathrm{Cov}(e_i,e_j) = -\left[ \frac{1}{n} + \frac{(x_i-\bar{x})(x_j-\bar{x})}{S_{xx}} \right]\sigma^2 \quad (i\neq j)$$
+
+>**증명**
+>
+>편의를 위해 $d_i=x_i-\bar x$ 라고 쓰면 $e_i=(y_i-\bar y)-d_i\hat\beta_1$ 이다.
+>
+>[잔차의 분산]
+>
+>$$
+>\text{Var}(e_i)
+>=\text{Var}\left[(y_i-\bar y)-d_i\hat\beta_1\right]\\
+>=\text{Var}(y_i-\bar y)
+>+d_i^2\text{Var}(\hat\beta_1)
+>-2d_i\text{Cov}(y_i-\bar y,\hat\beta_1)
+>$$
+>
+>이므로 세 항을 각각 구해야 한다.
+>
+>1. $\text{Var}(y_i-\bar y)$
+>
+>$Cov(y_i, y_j), (i \neq j)$는 0이므로, $\text{Var}(y_i)=\sigma^2, \quad \text{Var}(\bar y)=\frac{\sigma^2}{n}$ 이고,
+>
+>$$
+>\text{Cov}(y_i,\bar y)=\text{Cov}\left(y_i,\frac1n\sum_{k=1}^ny_k\right) =\frac1n\sum_{k=1}^n\text{Cov}(y_i,y_k) =\frac{\sigma^2}{n}.
+>$$
+>
+>따라서
+>
+>$$
+>\text{Var}(y_i-\bar y)
+>=\text{Var}(y_i)+\text{Var}(\bar y) -2\text{Cov}(y_i,\bar y) =\sigma^2+\frac{\sigma^2}{n}
+>-2\frac{\sigma^2}{n} =\boxed{\left(1-\frac1n\right)\sigma^2}.
+>$$
+>
+>2. $\text{Var}(\hat\beta_1)$
+>
+>최소제곱 추정량은 $\hat\beta_1= \frac{S_{xy}}{S_{xx}} =\frac{\sum_k(x_k-\bar x)(y_k-\bar y)}{S_{xx}} \sum_{k=1}^n \frac{x_k-\bar x}{S_{xx}}y_k$
+>
+>따라서 $y_k$들이 서로 독립이므로
+>
+>$$
+>\text{Var}(\hat\beta_1)
+>=\sum_{k=1}^n\left(\frac{x_k-\bar x}{S_{xx}}\right)^2\text{Var}(y_k)
+>=\frac{\sigma^2}{S_{xx}^2}\sum_{k=1}^n(x_k-\bar x)^2 = \boxed{\frac{\sigma^2}{S_{xx}}}.
+>$$
+>
+>3. $\text{Cov}(y_i-\bar y,\hat\beta_1)$  
+>  
+>$$\text{Cov}(y_i,\hat\beta_1) = \text{Cov}\left(y_i,\sum_{k=1}^n\frac{x_k-\bar x}{S_{xx}}y_k\right) = \sum_{k=1}^n \frac{x_k-\bar x}{S_{xx}} \text{Cov}(y_i,y_k)$$
+>
+>$i\neq k$이면 $y_i,y_k$가 서로 독립이므로 $k=i$인 항만 남는다. 따라서
+>
+>$$
+>\boxed{
+>\text{Cov}(y_i,\hat\beta_1)
+>=
+>\frac{x_i-\bar x}{S_{xx}}\sigma^2
+>}
+>$$
+>
+>한편,
+>
+>$$
+>\text{Cov}(\bar y,\hat\beta_1)
+>= \text{Cov}\left(\frac1n\sum_{j=1}^ny_j, \hat\beta_1 \right) 
+>= \frac1n\sum_{j=1}^n \text{Cov}(y_j,\hat\beta_1)
+>=\frac{\sigma^2}{nS_{xx}}\sum_{j=1}^n(x_j-\bar x) =0.
+>$$
+>
+>따라서
+>
+>$$
+>\text{Cov}(y_i-\bar y,\hat\beta_1)
+>=
+>\text{Cov}(y_i,\hat\beta_1)
+>-\text{Cov}(\bar y,\hat\beta_1)\\
+>=
+>\boxed{
+>\frac{x_i-\bar x}{S_{xx}}\sigma^2
+>}.
+>$$
+>
+>4. 잔차의 분산
+>
+>앞의 세 결과를 대입한다.
+>
+>$$
+>\text{Var}(e_i)
+>= \left(1-\frac1n\right)\sigma^2 + \frac{(x_i-\bar x)^2}{S_{xx}}\sigma^2 - 2\frac{(x_i-\bar x)^2}{S_{xx}}\sigma^2. \\
+>= \left[ 1-\frac1n -\frac{(x_i-\bar x)^2}{S_{xx}} \right]\sigma^2
+>$$
+>
+>---
+>
+>[서로 다른 두 잔차의 공분산]
+>
+>$i\neq j$라고 하자. 잔차를 $e_i=(y_i-\bar y)-d_i\hat\beta_1, \ e_j=(y_j-\bar y)-d_j\hat\beta_1$ 로 표현하면
+>
+>$$
+>\text{Cov}(e_i,e_j)
+>=
+>\text{Cov}(y_i-\bar y,y_j-\bar y) -d_j\text{Cov}(y_i-\bar y,\hat\beta_1)\\
+>-d_i\text{Cov}(\hat\beta_1,y_j-\bar y)+d_id_j\text{Var}(\hat\beta_1).
+>$$
+>
+>첫 번째 공분산: $i\neq j$이므로 $\text{Cov}(y_i,y_j)=0$ 이다. 따라서
+>
+>$$
+>\text{Cov}(y_i-\bar y,y_j-\bar y)
+>=\text{Cov}(y_i,y_j) -\text{Cov}(y_i,\bar y) -\text{Cov}(\bar y,y_j) +\text{Var}(\bar y)\\
+>=
+>0-\frac{\sigma^2}{n} -\frac{\sigma^2}{n} +\frac{\sigma^2}{n} =-\frac{\sigma^2}{n}.
+>$$
+>
+>앞에서 구한 결과에 따라
+>
+>$$
+>\text{Cov}(y_i-\bar y,\hat\beta_1) = \frac{d_i}{S_{xx}}\sigma^2, \quad
+>\text{Cov}(\hat\beta_1,y_j-\bar y)=\frac{d_j}{S_{xx}}\sigma^2, 
+>\quad
+>\text{Var}(\hat\beta_1)=\frac{\sigma^2}{S_{xx}}
+>$$
+>
+>이다. 따라서
+>
+>$$
+>\text{Cov}(e_i,e_j)
+>=
+>-\frac{\sigma^2}{n}
+>-d_j\frac{d_i}{S_{xx}}\sigma^2
+>-d_i\frac{d_j}{S_{xx}}\sigma^2
+>+d_id_j\frac{\sigma^2}{S_{xx}}\\
+>=
+>-\frac{\sigma^2}{n}
+>-\frac{d_id_j}{S_{xx}}\sigma^2.
+>$$
+>
+>$d_i=x_i-\bar x$, $d_j=x_j-\bar x$를 다시 대입하면
+>
+>$$
+>\boxed{
+>\text{Cov}(e_i,e_j)
+>=
+>-\left[
+>\frac1n+
+>\frac{(x_i-\bar x)(x_j-\bar x)}{S_{xx}}
+>\right]\sigma^2,
+>\qquad i\neq j
+>}
+>$$
 
 즉, 잔차는 서로 독립이 아니다.
 - 오차항은 서로 독립이지만, 잔차는 서로 독립이 아니다. 이는 잔차가 오차항과 회귀계수 추정량의 선형결합으로 표현되기 때문이다. 회귀계수 추정량은 모든 관측값에 의존하므로, 잔차도 모든 관측값에 의존하게 된다. 따라서 잔차는 서로 독립이 아니다.

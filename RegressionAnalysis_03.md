@@ -2,7 +2,7 @@
 본 장은 단순선형회귀(simple linear regression)와 관련하여 기존 장에서 다루지 않은 주요 주제들을 정리한 것이다. 특히 비선형관계를 선형모형으로 변환하는 방법, 역변환, Box–Cox 변환 등 실무적 자료분석에서 자주 활용되는 기법들을 체계적으로 다룬다.
 
 ## 3.1 모형의 변환 (Model Transformation)
-실제 자료에서는 설명변수 (x)와 반응변수 (y)의 관계가 선형모형(linear model)
+실제 자료에서는 설명변수 $x$와 반응변수 $y$의 관계가 선형모형(linear model)
 
 $$y = \beta_0 + \beta_1 x + \varepsilon$$
 
@@ -356,7 +356,6 @@ $$
 
 ### 3.5.1 다변량정규분포 (Multivariate Normal Distribution)
 확률벡터 $\mathbf{y} = (y_1,\dots,y_n)^T$가 $\mathbf{y} \sim N(\mu, V)$이면 밀도함수는
-밀도함수는
 
 $$f(\mathbf{y})=(2\pi)^{-n/2}|\mathbf{V}|^{-1/2} \exp\left[-\frac{1}{2} (\mathbf{y-\mu})^T \mathbf{V}^{-1} (\mathbf{y-\mu})\right]$$
 
@@ -447,18 +446,18 @@ $$\mathrm{Var}(\mathbf{y}^T \mathbf{A} \mathbf{y}) = 2\mathrm{tr}[(\mathbf{A}\ma
 >
 >그러면 $y^TAy =(x+\mu)^TA(x+\mu) =x^TAx+2x^TA\mu+\mu^TA\mu.$
 >
->$\mu^TA\mu$ 는 상수이므로 $\operatorname{Var}(y^TAy) = \operatorname{Var}(x^TAx+2x^TA\mu).$  
+>$\mu^TA\mu$ 는 상수이므로 $\text{Var}(y^TAy) = \text{Var}(x^TAx+2x^TA\mu).$  
 >일반적으로 두 확률변수 $U,V$에 대해
->$\operatorname{Var}(U+V) =\operatorname{Var}(U)+\operatorname{Var}(V)+\operatorname{Cov}(U,V)+\operatorname{Cov}(V,U)$ 이므로
+>$\text{Var}(U+V) =\text{Var}(U)+\text{Var}(V)+\text{Cov}(U,V)+\text{Cov}(V,U)$ 이므로
 >
 >
->$$\operatorname{Var}(y^TAy) = \operatorname{Var}(x^TAx)+4\operatorname{Var}(x^TA\mu) +4\operatorname{Cov}(x^TAx,x^TA\mu).$$
+>$$\text{Var}(y^TAy) = \text{Var}(x^TAx)+4\text{Var}(x^TA\mu) +4\text{Cov}(x^TAx,x^TA\mu).$$
 >
->이제 각 항을 계산하면 된다. 먼저 $\operatorname{Cov}(x^TAx,x^TA\mu)=0$ 이다. 실제로 $E[x^TA\mu]=0$ 이므로
+>이제 각 항을 계산하면 된다. 먼저 $\text{Cov}(x^TAx,x^TA\mu)=0$ 이다. 실제로 $E[x^TA\mu]=0$ 이므로
 >
 >$$
 >\begin{aligned}
->\operatorname{Cov}(x^TAx,x^TA\mu)
+>\text{Cov}(x^TAx,x^TA\mu)
 >&=
 >E[(x^TAx)(x^TA\mu)]\\
 >&=
@@ -477,13 +476,13 @@ $$\mathrm{Var}(\mathbf{y}^T \mathbf{A} \mathbf{y}) = 2\mathrm{tr}[(\mathbf{A}\ma
 >다음으로 $x^TA\mu$ 는 스칼라이므로
 >
 >$$
->\operatorname{Var}(x^TA\mu) =E[(x^TA\mu)^2] =E[x^TA\mu\mu^TAx]\\
+>\text{Var}(x^TA\mu) =E[(x^TA\mu)^2] =E[x^TA\mu\mu^TAx]\\
 >=E[\mu^TAxx^TA\mu] =\mu^TAE[xx^T]A\mu =\mu^TAVA\mu. \\
->\therefore 4\operatorname{Var}(x^TA\mu)  = \boxed{4\mu^TAVA\mu}.
+>\therefore 4\text{Var}(x^TA\mu)  = \boxed{4\mu^TAVA\mu}.
 >$$
 >
->이제 $\operatorname{Var}(x^TAx)$ 를 보자.  
->$E[x^TAx]=\operatorname{tr}(AV)$ 이므로, $\operatorname{Var}(x^TAx) = E[(x^TAx)^2] - [\operatorname{tr}(AV)]^2.$
+>이제 $\text{Var}(x^TAx)$ 를 보자.  
+>$E[x^TAx]=\text{tr}(AV)$ 이므로, $\text{Var}(x^TAx) = E[(x^TAx)^2] - [\text{tr}(AV)]^2.$
 >
 >이제 $x^TAx=\sum_{i,j}a_{ij}x_ix_j$ 이므로
 >
@@ -533,31 +532,31 @@ $$\mathrm{Var}(\mathbf{y}^T \mathbf{A} \mathbf{y}) = 2\mathrm{tr}[(\mathbf{A}\ma
 >\end{aligned}
 >$$
 >
->첫 번째 항은 $\left(\sum_{i,j}a_{ij}V_{ij}\right)^2 = [\operatorname{tr}(AV)]^2.$  
->나머지 두 항은 $A,V$ 가 대칭이므로 각각 $\operatorname{tr}(AVAV) = \operatorname{tr}((AV)^2)$ 가 된다. 따라서
+>첫 번째 항은 $\left(\sum_{i,j}a_{ij}V_{ij}\right)^2 = [\text{tr}(AV)]^2.$  
+>나머지 두 항은 $A,V$ 가 대칭이므로 각각 $\text{tr}(AVAV) = \text{tr}((AV)^2)$ 가 된다. 따라서
 >
 >$$
 >E[(x^TAx)^2]
->= [\operatorname{tr}(AV)]^2 + 2\operatorname{tr}((AV)^2).
+>= [\text{tr}(AV)]^2 + 2\text{tr}((AV)^2).
 >$$
 >
 >그러므로
 >
 >$$
 >\begin{aligned}
->\operatorname{Var}(x^TAx)
+>\text{Var}(x^TAx)
 >&=
 >E[(x^TAx)^2]
 >-
 >[E(x^TAx)]^2\\
 >&=
->[\operatorname{tr}(AV)]^2
+>[\text{tr}(AV)]^2
 >+
->2\operatorname{tr}((AV)^2)
+>2\text{tr}((AV)^2)
 >-
->[\operatorname{tr}(AV)]^2\\
+>[\text{tr}(AV)]^2\\
 >&=
->\boxed{2\operatorname{tr}((AV)^2)}.
+>\boxed{2\text{tr}((AV)^2)}.
 >\end{aligned}
 >$$
 >
@@ -565,13 +564,13 @@ $$\mathrm{Var}(\mathbf{y}^T \mathbf{A} \mathbf{y}) = 2\mathrm{tr}[(\mathbf{A}\ma
 >
 >$$
 >\begin{aligned}
->\operatorname{Var}(y^TAy)
+>\text{Var}(y^TAy)
 >&=
->\operatorname{Var}(x^TAx)
->+4\operatorname{Var}(x^TA\mu)
->+4\operatorname{Cov}(x^TAx,x^TA\mu)\\
+>\text{Var}(x^TAx)
+>+4\text{Var}(x^TA\mu)
+>+4\text{Cov}(x^TAx,x^TA\mu)\\
 >&=
->2\operatorname{tr}((AV)^2)
+>2\text{tr}((AV)^2)
 >+
 >4\mu^TAVA\mu
 >+0.
@@ -582,9 +581,9 @@ $$\mathrm{Var}(\mathbf{y}^T \mathbf{A} \mathbf{y}) = 2\mathrm{tr}[(\mathbf{A}\ma
 >
 >$$
 >\boxed{
->\operatorname{Var}(y^TAy)
+>\text{Var}(y^TAy)
 >=
->2\operatorname{tr}((AV)^2)
+>2\text{tr}((AV)^2)
 >+
 >4\mu^TAVA\mu
 >}
@@ -613,7 +612,7 @@ $AVAV=AV$ 즉, $(AV)^2=AV$ 이어서 $AV$가 멱등행렬인 것이다.
 >반대로 $B^2=B$이면 $V^{1/2}AVAV^{1/2} = V^{1/2}AV^{1/2}.$ 양변의 왼쪽에 $V^{-1/2}$, 오른쪽에 $V^{-1/2}$를 곱하면 $AVAV=AV.$  
 >따라서 $\boxed{AVAV=AV\iff B^2=B}$, 
 >
->이제 $B$는 대칭이며 멱등행렬이다. 대칭행렬이므로 직교행렬 $P$를 이용하여 $B=PDP^T$ 로 대각화할 수 있다.또한 $B^2=B$이므로 $B$의 고유값 $\lambda_i$는 $\lambda_i^2=\lambda_i$ 를 만족한다. 따라서 $\lambda_i\in\{0,1\}.$ 즉 $B$의 rank를 $r$이라 하면 적절히 순서를 정하여 $D=\operatorname{diag} (\underbrace{1,\ldots,1}_{r}, \underbrace{0,\ldots,0}_{n-r})$ 
+>이제 $B$는 대칭이며 멱등행렬이다. 대칭행렬이므로 직교행렬 $P$를 이용하여 $B=PDP^T$ 로 대각화할 수 있다.또한 $B^2=B$이므로 $B$의 고유값 $\lambda_i$는 $\lambda_i^2=\lambda_i$ 를 만족한다. 따라서 $\lambda_i\in\{0,1\}.$ 즉 $B$의 rank를 $r$이라 하면 적절히 순서를 정하여 $D=\text{diag} (\underbrace{1,\ldots,1}_{r}, \underbrace{0,\ldots,0}_{n-r})$ 
 >로 쓸 수 있다.  
 >이제 $w=P^Tz,\quad \gamma=P^T\delta$ 라 두자. $P$는 직교행렬이고 $z\sim N(0,I)$이므로 $w\sim N(0,I).$ 따라서 $w_1,\ldots,w_n$은 서로 독립인 $N(0,1)$ 확률변수이다. 그러면
 >
@@ -640,7 +639,7 @@ $AVAV=AV$ 즉, $(AV)^2=AV$ 이어서 $AV$가 멱등행렬인 것이다.
 >
 >**왜 이것이 필요조건이기도 한가?**
 >
->$B$는 대칭이므로 일반적으로 $B=P\operatorname{diag}(\lambda_1,\ldots,\lambda_n)P^T$ 라고 쓸 수 있다. 그러면 $y^TAy = \sum_{i=1}^n \lambda_i(w_i+\gamma_i)^2.$  
+>$B$는 대칭이므로 일반적으로 $B=P\text{diag}(\lambda_1,\ldots,\lambda_n)P^T$ 라고 쓸 수 있다. 그러면 $y^TAy = \sum_{i=1}^n \lambda_i(w_i+\gamma_i)^2.$  
 >즉 일반적인 정규벡터의 이차형식은 $\sum_i\lambda_i\chi_1^2(\gamma_i^2)$ 형태의 **가중된 카이제곱합**이다.
 >
 >이것이 하나의 일반적인 카이제곱분포가 되려면 살아 있는 항들의 계수가 모두 $1$이어야 한다. 즉 $\lambda_i$ 는 0 또는 1 이어야 한다. 따라서 $\lambda_i^2=\lambda_i$ 이고, $B^2=B.$ 
@@ -685,7 +684,7 @@ $$
 $V=\sigma^2I_n$이므로 $AV = \frac1{\sigma^2}M (\sigma^2I_n) =M.$ 따라서 $(AV)^2=M^2=M=AV.$ 즉 정리 3.3의 조건을 만족한다.
 
 **2. $r(A)=n-1$ 증명**  
-$A=\frac1{\sigma^2}M$ 이므로 $M$의 랭크와 같다. 멱등행렬 $M$의 랭크는 trace값과 같다. $\operatorname{tr}(M)= \operatorname{tr}(I_n)-\frac1n \operatorname{tr}(J_n) = n - \frac1n n= n-1$ 따라서 $r(A)=r(M)=n-1.$
+$A=\frac1{\sigma^2}M$ 이므로 $M$의 랭크와 같다. 멱등행렬 $M$의 랭크는 trace값과 같다. $\text{tr}(M)= \text{tr}(I_n)-\frac1n \text{tr}(J_n) = n - \frac1n n= n-1$ 따라서 $r(A)=r(M)=n-1.$
 
 **3. $\mu^TA\mu$ 계산**  
 평균벡터는  $\mu = \beta_0\mathbf1+\beta_1x$ 이다. 여기서 $x=(x_1,\ldots,x_n)^T.$ 따라서 $\mu^TA\mu = \frac1{\sigma^2} \mu^TM\mu = \frac1{\sigma^2} (\beta_0\mathbf1+\beta_1x)^T M (\beta_0\mathbf1+\beta_1x).$
@@ -848,8 +847,8 @@ $\mathbf B\mathbf V\mathbf A=0$ 이라고 하자.
 $\mathbf A\mathbf y$와 $\mathbf B\mathbf y$는 정규벡터 $\mathbf y$의 선형변환이므로 결합정규분포를 따른다. 두 벡터 사이의 공분산행렬은
 
 $$
-\operatorname{Cov}(\mathbf A\mathbf y,\mathbf B\mathbf y)
-= \mathbf A\operatorname{Cov}(\mathbf y)\mathbf B^T = \mathbf A\mathbf V\mathbf B^T.
+\text{Cov}(\mathbf A\mathbf y,\mathbf B\mathbf y)
+= \mathbf A\text{Cov}(\mathbf y)\mathbf B^T = \mathbf A\mathbf V\mathbf B^T.
 $$
 
 $\mathbf A$, $\mathbf B$, $\mathbf V$가 모두 대칭이므로 $(\mathbf B\mathbf V\mathbf A)^T = \mathbf A\mathbf V\mathbf B = \mathbf A\mathbf V\mathbf B^T=0$.  
@@ -862,7 +861,7 @@ $\mathbf A$, $\mathbf B$, $\mathbf V$가 모두 대칭이므로 $(\mathbf B\math
 
 $\mathbf B\boldsymbol\mu$는 상수벡터이고 $\mathbf B\boldsymbol\varepsilon = \mathbf B\mathbf y-\mathbf B\boldsymbol\mu$ 이므로 $\mathbf y^T\mathbf A\mathbf y \perp\!\!\!\perp \mathbf B\boldsymbol\varepsilon.$ 따라서 임의의 $\mathbf c\in\mathbb R^n$에 대해 $\mathbf y^T\mathbf A\mathbf y \perp\!\!\!\perp (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2.$
 
-그러므로 $\operatorname{Cov} \left(
+그러므로 $\text{Cov} \left(
 \mathbf y^T\mathbf A\mathbf y, (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2 \right)=0.$
 
 한편 $\mathbf y=\boldsymbol\mu+\boldsymbol\varepsilon$ 이므로 $\mathbf y^T\mathbf A\mathbf y = \boldsymbol\mu^T\mathbf A\boldsymbol\mu + 2\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon + \boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon.$
@@ -870,15 +869,15 @@ $\mathbf B\boldsymbol\mu$는 상수벡터이고 $\mathbf B\boldsymbol\varepsilon
 따라서 공분산의 선형성에 의해
 
 $$
-0 = \operatorname{Cov}
+0 = \text{Cov}
 \left(
 \boldsymbol\mu^T\mathbf A\boldsymbol\mu, (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2
 \right) +
-\operatorname{Cov}
+\text{Cov}
 \left(
 2\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon, (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2
 \right) +
-\operatorname{Cov}
+\text{Cov}
 \left(
 \boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon, (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2
 \right).
@@ -887,20 +886,20 @@ $$
 첫 번째 항은 $\boldsymbol\mu^T\mathbf A\boldsymbol\mu$가 상수이므로 $0$이다.
 
 두 번째 항에서 $E[\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon]=0$ 이고, $(\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon) (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2$ 은 $\boldsymbol\varepsilon$에 관한 총 3차 다항식이다. 중심정규벡터의 홀수 총차수 적률은 $0$이므로 두 번째 항도 $0$이다.  
-따라서 $\operatorname{Cov} \left(\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon,(\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2\right)=\operatorname{Cov} \left(\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon,\boldsymbol\varepsilon^T \mathbf B\mathbf c\mathbf c^T\mathbf B \boldsymbol\varepsilon\right)=0$ 이다.
+따라서 $\text{Cov} \left(\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon,(\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2\right)=\text{Cov} \left(\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon,\boldsymbol\varepsilon^T \mathbf B\mathbf c\mathbf c^T\mathbf B \boldsymbol\varepsilon\right)=0$ 이다.
 
 중심정규벡터의 두 이차형식에 대해서는 
-$\operatorname{Cov} \left(\boldsymbol\varepsilon^T\mathbf M\boldsymbol\varepsilon, \boldsymbol\varepsilon^T\mathbf N\boldsymbol\varepsilon\right) =2\operatorname{tr}(\mathbf M\mathbf V\mathbf N\mathbf V)$ 가 성립한다. 
+$\text{Cov} \left(\boldsymbol\varepsilon^T\mathbf M\boldsymbol\varepsilon, \boldsymbol\varepsilon^T\mathbf N\boldsymbol\varepsilon\right) =2\text{tr}(\mathbf M\mathbf V\mathbf N\mathbf V)$ 가 성립한다. 
 
 >왜냐하면, $Q=\boldsymbol\varepsilon^T\mathbf M\boldsymbol\varepsilon, \quad R=\boldsymbol\varepsilon^T\mathbf N\boldsymbol\varepsilon
->$ 라고 하자. 그러면 $\operatorname{Var}(Q+R) = \operatorname{Var}(Q)+\operatorname{Var}(R) +2\operatorname{Cov}(Q,R)$ 중심정규벡터에 대한 정리 3.2에 의해 $\operatorname{Var} \left(\boldsymbol\varepsilon^T\mathbf M\boldsymbol\varepsilon\right) = 2\operatorname{tr}\bigl[(\mathbf M\mathbf V)^2\bigr].$
+>$ 라고 하자. 그러면 $\text{Var}(Q+R) = \text{Var}(Q)+\text{Var}(R) +2\text{Cov}(Q,R)$ 중심정규벡터에 대한 정리 3.2에 의해 $\text{Var} \left(\boldsymbol\varepsilon^T\mathbf M\boldsymbol\varepsilon\right) = 2\text{tr}\bigl[(\mathbf M\mathbf V)^2\bigr].$
 >
->따라서 $2\operatorname{Cov}(Q,R) = 2\operatorname{tr} \left[\{(\mathbf M+\mathbf N)\mathbf V\}^2\right] - 2\operatorname{tr}\bigl[(\mathbf M\mathbf V)^2\bigr] - 2\operatorname{tr}\bigl[(\mathbf N\mathbf V)^2\bigr]\\ = 2\operatorname{tr}(\mathbf M\mathbf V\mathbf N\mathbf V) + 2\operatorname{tr}(\mathbf N\mathbf V\mathbf M\mathbf V).$
+>따라서 $2\text{Cov}(Q,R) = 2\text{tr} \left[\{(\mathbf M+\mathbf N)\mathbf V\}^2\right] - 2\text{tr}\bigl[(\mathbf M\mathbf V)^2\bigr] - 2\text{tr}\bigl[(\mathbf N\mathbf V)^2\bigr]\\ = 2\text{tr}(\mathbf M\mathbf V\mathbf N\mathbf V) + 2\text{tr}(\mathbf N\mathbf V\mathbf M\mathbf V).$
 >
->Trace의 순환성에 의해 $\operatorname{tr}(\mathbf N\mathbf V\mathbf M\mathbf V) = \operatorname{tr}(\mathbf M\mathbf V\mathbf N\mathbf V)$ 이므로 $2\operatorname{Cov}(Q,R) = 4\operatorname{tr}(\mathbf M\mathbf V\mathbf N\mathbf V).$
+>Trace의 순환성에 의해 $\text{tr}(\mathbf N\mathbf V\mathbf M\mathbf V) = \text{tr}(\mathbf M\mathbf V\mathbf N\mathbf V)$ 이므로 $2\text{Cov}(Q,R) = 4\text{tr}(\mathbf M\mathbf V\mathbf N\mathbf V).$
 
 
-따라서 $0 = 2\operatorname{tr} \left( \mathbf A\mathbf V \mathbf B\mathbf c\mathbf c^T\mathbf B \mathbf V \right) = 2\mathbf c^T \mathbf B\mathbf V\mathbf A\mathbf V\mathbf B \mathbf c.$  
+따라서 $0 = 2\text{tr} \left( \mathbf A\mathbf V \mathbf B\mathbf c\mathbf c^T\mathbf B \mathbf V \right) = 2\mathbf c^T \mathbf B\mathbf V\mathbf A\mathbf V\mathbf B \mathbf c.$  
 $\mathbf A$가 대칭 멱등행렬이므로 $\mathbf A=\mathbf A^T\mathbf A.$ 따라서
 
 $$
@@ -1070,34 +1069,34 @@ $$
 >
 >2. $(C_1)+(C_3)\Rightarrow(C_2)$ 증명
 >
->각 $\mathbf C_j$와 $\mathbf C$가 멱등이라고 하자. $\mathbf C^2=\mathbf C$ 에 trace를 취하면 $\operatorname{tr}(\mathbf C^2) = \operatorname{tr}(\mathbf C).$
+>각 $\mathbf C_j$와 $\mathbf C$가 멱등이라고 하자. $\mathbf C^2=\mathbf C$ 에 trace를 취하면 $\text{tr}(\mathbf C^2) = \text{tr}(\mathbf C).$
 >
 >한편
 >
 >$$
 >\begin{aligned}
->\operatorname{tr}(\mathbf C^2)
+>\text{tr}(\mathbf C^2)
 >&=
->\sum_{j=1}^p\operatorname{tr}(\mathbf C_j^2)
+>\sum_{j=1}^p\text{tr}(\mathbf C_j^2)
 >+
->2\sum_{i<j}\operatorname{tr}(\mathbf C_i\mathbf C_j)\\
+>2\sum_{i<j}\text{tr}(\mathbf C_i\mathbf C_j)\\
 >&=
->\sum_{j=1}^p\operatorname{tr}(\mathbf C_j)
+>\sum_{j=1}^p\text{tr}(\mathbf C_j)
 >+
->2\sum_{i<j}\operatorname{tr}(\mathbf C_i\mathbf C_j),
+>2\sum_{i<j}\text{tr}(\mathbf C_i\mathbf C_j),
 >\end{aligned}
 >$$
 >
->이고 $\operatorname{tr}(\mathbf C^2) = \operatorname{tr}(\mathbf C) = \sum_{j=1}^p\operatorname{tr}(\mathbf C_j).$ 따라서 $\sum_{i<j}\operatorname{tr}(\mathbf C_i\mathbf C_j)=0.$
+>이고 $\text{tr}(\mathbf C^2) = \text{tr}(\mathbf C) = \sum_{j=1}^p\text{tr}(\mathbf C_j).$ 따라서 $\sum_{i<j}\text{tr}(\mathbf C_i\mathbf C_j)=0.$
 >
 >대칭 멱등행렬에 대해서는
 >
 >$$
 >\begin{aligned}
->\operatorname{tr}(\mathbf C_i\mathbf C_j)
->&= \operatorname{tr} \left[ (\mathbf C_i\mathbf C_j)^T (\mathbf C_i\mathbf C_j) \right]\\
->&= \operatorname{tr} \left[ \mathbf C_j^T\mathbf C_i\mathbf C_j \right]\\
->&= \operatorname{tr} \left[ \mathbf C_i\mathbf C_j^T\mathbf C_j \right] &\because\text{trace 순환성}\\
+>\text{tr}(\mathbf C_i\mathbf C_j)
+>&= \text{tr} \left[ (\mathbf C_i\mathbf C_j)^T (\mathbf C_i\mathbf C_j) \right]\\
+>&= \text{tr} \left[ \mathbf C_j^T\mathbf C_i\mathbf C_j \right]\\
+>&= \text{tr} \left[ \mathbf C_i\mathbf C_j^T\mathbf C_j \right] &\because\text{trace 순환성}\\
 >&=
 >\|\mathbf C_i\mathbf C_j\|_F^2
 >\geq0.
@@ -1299,7 +1298,7 @@ $$\sigma^2 = E\left[\frac{1}{n-1} \sum(\varepsilon_i - \bar\varepsilon)^2\right]
 - $\bar y = \beta_0'+\bar{\varepsilon}$  
 - $Var(\bar y) = Var(\bar\varepsilon) = \sigma^2 / n$
 - $\hat\beta_0' = \bar y$
-- $\operatorname{Var}(\hat\beta_1') = E(\hat\beta^2_1)-\beta^2_1$
+- $\text{Var}(\hat\beta_1') = E(\hat\beta^2_1)-\beta^2_1$
 
 ### 제곱합 기대값
 

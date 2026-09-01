@@ -1624,7 +1624,7 @@ $$
 \begin{cases}
 X\beta = X(C_0\ C_1)(C_0\ C_1)^t \beta = D_0 \gamma_0 + D_1 \gamma_1 \\
 D_0 = X C_0,\quad D_1 = X C_1,\quad \gamma_0 = C_0^t \beta,\quad \gamma_1 = C_1^t \beta \\
-\operatorname{rank}(D_0) = p+1-r,\quad \operatorname{rank}(D_1) = r,\quad \operatorname{rank}(D_0, D_1) = p+1
+\text{rank}(D_0) = p+1-r,\quad \text{rank}(D_1) = r,\quad \text{rank}(D_0, D_1) = p+1
 \end{cases}
 $$
 
@@ -1638,13 +1638,13 @@ $$
 이므로, <정리 10.4.3>의 (a)로부터 행렬 $(D_0, D_1)$의 열벡터공간
 
 $$
-\operatorname{col}((D_0, D_1)) = {D_0 \gamma_0 + D_1 \gamma_1 : \gamma_0 \in \mathbb{R}^{p+1-r},\ \gamma_1 \in \mathbb{R}^r}
+\text{col}((D_0, D_1)) = {D_0 \gamma_0 + D_1 \gamma_1 : \gamma_0 \in \mathbb{R}^{p+1-r},\ \gamma_1 \in \mathbb{R}^r}
 $$
 
 에서 행렬 $D_0$의 열벡터공간의 직교여공간(orthogonal complement)
 
 $$
-\operatorname{col}(D_{1|0}) = {a \in \operatorname{col}((D_0, D_1)) : a^t D_0 = 0}
+\text{col}(D_{1|0}) = {a \in \text{col}((D_0, D_1)) : a^t D_0 = 0}
 $$
 
 으로의 정사영행렬을 $\Pi_{1|0}$라고 하면 다음이 성립하는 것을 알고 있다.
@@ -1656,11 +1656,11 @@ $$
 한편 $(D_0, D_1) = X(C_0\ C_1)$이므로
 
 $$
-\operatorname{col}((D_0, D_1)) = {X(C_0 \gamma_0 + C_1 \gamma_1) : \gamma_0 \in \mathbb{R}^{p+1-r},\ \gamma_1 \in \mathbb{R}^r} \\
-= {X\beta : \beta \in \mathbb{R}^{p+1}} = \operatorname{col}(X)
+\text{col}((D_0, D_1)) = {X(C_0 \gamma_0 + C_1 \gamma_1) : \gamma_0 \in \mathbb{R}^{p+1-r},\ \gamma_1 \in \mathbb{R}^r} \\
+= {X\beta : \beta \in \mathbb{R}^{p+1}} = \text{col}(X)
 $$
 
-임을 알 수 있고, 행렬 $D_0$의 열벡터공간의 직교여공간 $\operatorname{col}(D_{1|0})$이 행렬
+임을 알 수 있고, 행렬 $D_0$의 열벡터공간의 직교여공간 $\text{col}(D_{1|0})$이 행렬
 
 $$
 S = X(X^t X)^{-1} C
@@ -1669,15 +1669,15 @@ $$
 의 열벡터공간임을 다음으로부터 알 수 있다.
 
 $$
-\operatorname{col}(D_{1|0}) = \{a \in \operatorname{col}((D_0, D_1)) : a^t D_0 = 0\} \\
-= \{a \in \operatorname{col}(X) : a^t X C_0 = 0\} \\
+\text{col}(D_{1|0}) = \{a \in \text{col}((D_0, D_1)) : a^t D_0 = 0\} \\
+= \{a \in \text{col}(X) : a^t X C_0 = 0\} \\
 = \{X\beta : \beta^t X^t X C_0 = 0\} \\
-= \{X\beta : X^t X \beta \in \operatorname{col}(C)\} \\
+= \{X\beta : X^t X \beta \in \text{col}(C)\} \\
 = \{X(X^t X)^{-1} C \xi : \xi \in \mathbb{R}^r\} \\
-= \operatorname{col}(X(X^t X)^{-1} C)
+= \text{col}(X(X^t X)^{-1} C)
 $$
 
-따라서 행렬 $D_0$의 열벡터공간의 직교여공간 $\operatorname{col}(D_{1|0})$으로의 정사영행렬이
+따라서 행렬 $D_0$의 열벡터공간의 직교여공간 $\text{col}(D_{1|0})$으로의 정사영행렬이
 
 $$
 \Pi_{1|0} = S(S^t S)^{-1} S^t = X(X^t X)^{-1} C (C^t (X^t X)^{-1} C)^{-1} C^t (X^t X)^{-1} X^t

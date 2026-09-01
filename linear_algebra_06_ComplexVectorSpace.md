@@ -19,15 +19,15 @@ $$
 실수부, 허수부는 다음과 같다.
 
 $$
-\operatorname{Re}(v) = (a_1, \ldots, a_n), \quad
-\operatorname{Im}(v) = (b_1, \ldots, b_n)
+\text{Re}(v) = (a_1, \ldots, a_n), \quad
+\text{Im}(v) = (b_1, \ldots, b_n)
 $$
 
 벡터의 복소켤레는
 
 $$
 \overline{v} = (\overline{v_1}, \ldots, \overline{v_n})
-= \operatorname{Re}(v) - i \operatorname{Im}(v)
+= \text{Re}(v) - i \text{Im}(v)
 $$
 
 ## (3) 대수적 성질 (Algebraic Properties)
@@ -205,8 +205,8 @@ $v_1 = (1 - i,\ 4 + 2i,\ 3)$,
     에 대하여 $\overline{\langle u, w \rangle + \langle \|u\| v, u \rangle}$
     을 계산하시오.
 
-2. 모든 $2 \times 2$ 실행렬 $A$의 대각성분의 총합을 $\operatorname{tr}(A)$라 할 때,
-   $\operatorname{tr}(A)^2 -4det(A) \lt 0$이면 A는 두개의 복소켤레 고윳값을 가짐을 증명하라.
+2. 모든 $2 \times 2$ 실행렬 $A$의 대각성분의 총합을 $\text{tr}(A)$라 할 때,
+   $\text{tr}(A)^2 -4det(A) \lt 0$이면 A는 두개의 복소켤레 고윳값을 가짐을 증명하라.
 
 3. 에르미트행렬
    $$

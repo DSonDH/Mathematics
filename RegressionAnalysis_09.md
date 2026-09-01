@@ -996,13 +996,13 @@ $$\sum_{i=1}^n x_{ik}^T(X_k^TX_k)^{-1}x_{ik}$$
 
 를 trace를 이용해 전개하면
 
-$$\sum_{i=1}^n x_{ik}^T(X_k^TX_k)^{-1}x_{ik}=\sum_{i=1}^n \operatorname{tr}\left[x_{ik}^T(X_k^TX_k)^{-1}x_{ik}\right] \\
-=\sum_{i=1}^n \operatorname{tr}\left[(X_k^TX_k)^{-1}x_{ik}x_{ik}^T\right]
-=\operatorname{tr}\left[(X_k^TX_k)^{-1}\sum_{i=1}^n x_{ik}x_{ik}^T\right]$$
+$$\sum_{i=1}^n x_{ik}^T(X_k^TX_k)^{-1}x_{ik}=\sum_{i=1}^n \text{tr}\left[x_{ik}^T(X_k^TX_k)^{-1}x_{ik}\right] \\
+=\sum_{i=1}^n \text{tr}\left[(X_k^TX_k)^{-1}x_{ik}x_{ik}^T\right]
+=\text{tr}\left[(X_k^TX_k)^{-1}\sum_{i=1}^n x_{ik}x_{ik}^T\right]$$
 
 그런데 $\sum_{i=1}^n x_{ik}x_{ik}^T = X_k^TX_k$ 이므로
 
-$$\operatorname{tr}\left[(X_k^TX_k)^{-1}(X_k^TX_k)\right]=\operatorname{tr}(I)=k+1 \tag{11.27}$$
+$$\text{tr}\left[(X_k^TX_k)^{-1}(X_k^TX_k)\right]=\text{tr}(I)=k+1 \tag{11.27}$$
 
 이 된다. 여기서 $k+1$이 되는 이유는 절편까지 포함한 모수의 수가 $k+1$이기 때문이다.
 

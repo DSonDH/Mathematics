@@ -54,7 +54,7 @@ $V$의 원소를 **벡터**, $F$의 원소를 **스칼라**라 한다. +는 벡�
   이들의 모든 선형결합으로 이루어지는 집합을 **선형생성집합(span)** 이라 하며,
   이를
 $$
-\operatorname{span}(S) =
+\text{span}(S) =
 \left\{ \sum_{i=1}^{n} k_i v_i \ \middle|\ k_i \in F,\ v_i \in S \right\}
 $$
 
@@ -64,7 +64,7 @@ $$
 > $S = \{(1,0), (0,1)\}$
 > $F = \mathbb{R}$
 > $$
-> \operatorname{span}(S)
+> \text{span}(S)
 > = \{k(1,0) + m(0,1) \mid k, m \in F \}
 > $$
 
