@@ -900,11 +900,13 @@ $$
 
 여기서 행렬 $B = X(X^TX)^{-1}X^T - \frac{J_n}{n}$는 대칭이고 멱등이며 rank = $p$이다. 또한
 
-$$
+```math
 (X\beta)^T\left[X(X^TX)^{-1}X^T - \frac{J_n}{n}\right](X\beta) = \beta^T X^T \left[X(X^TX)^{-1}X^T - \frac{J_n}{n}\right] X\beta
-$$
+```
 
-이므로 비중심모수는 $$\lambda = \frac{\beta^T X^T (I-\frac{J}{n}) X\beta}{2\sigma^2}$$
+이므로 비중심모수는 
+
+$$\lambda = \frac{\beta^T X^T (I-\frac{J}{n}) X\beta}{2\sigma^2}$$
  
 따라서
 
