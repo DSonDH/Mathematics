@@ -399,14 +399,11 @@ E(SSR)
 &=
 E(\mathbf y^TA\mathbf y)\\
 &=
-\text{tr}\left[A\text{Var}(\mathbf y)\right]
-+ E(\mathbf y)^TAE(\mathbf y)\\
+\text{tr}\left[A\text{Var}(\mathbf y)\right] + E(\mathbf y)^TAE(\mathbf y)\\
 &=
-\text{tr}(A\sigma^2I_n)
-+ (X\boldsymbol\beta)^TA(X\boldsymbol\beta)\\
+\text{tr}(A\sigma^2I_n) + (X\boldsymbol\beta)^TA(X\boldsymbol\beta)\\
 &=
-\sigma^2\text{tr}(A)
-+ \boldsymbol\beta^TX^TAX\boldsymbol\beta.
+\sigma^2\text{tr}(A) + \boldsymbol\beta^TX^TAX\boldsymbol\beta.
 \end{aligned}
 $$
 
