@@ -304,9 +304,7 @@ $$
 \frac{\pi}{2}
 -\frac4\pi
 \sum_{k=0}^{\infty}
-\frac{\cos((2k+1)x)}{(2k+1)^2}
-=
-\frac{\pi}{2}
+\frac{\cos((2k+1)x)}{(2k+1)^2} = \frac{\pi}{2}
 -\frac4\pi
 \left(
 \cos x
@@ -602,9 +600,7 @@ $$
 그런데 $\sin\left(n\left(y+\frac{\pi}{n}\right)\right)= \sin(ny+\pi) = -\sin(ny)$ 이다. 따라서
 
 $$
-\int_{a+\pi/n}^{a+2\pi/n}h(x)\sin(nx)\ dx\
-=
--\int_a^{a+\pi/n}
+\int_{a+\pi/n}^{a+2\pi/n}h(x)\sin(nx)\ dx\ = -\int_a^{a+\pi/n}
 h\left(y+\frac{\pi}{n}\right)\sin(ny)\ dy
 $$
 

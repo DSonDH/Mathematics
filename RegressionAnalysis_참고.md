@@ -69,9 +69,7 @@ $$
 
 $$
 \boxed{
-\sum_{i=1}^n(y_i-\bar y)^2
-=
-\sum_{i=1}^n(\hat y_i-\bar y)^2
+\sum_{i=1}^n(y_i-\bar y)^2 = \sum_{i=1}^n(\hat y_i-\bar y)^2
 +
 \sum_{i=1}^n(y_i-\hat y_i)^2
 }
@@ -188,9 +186,7 @@ $$
 모집단 회귀모형을
 
 $$
-y_i
-=
-\beta_0+\beta_1x_{i1}+\cdots+\beta_px_{ip}
+y_i = \beta_0+\beta_1x_{i1}+\cdots+\beta_px_{ip}
 +\varepsilon_i
 $$
 
@@ -238,11 +234,7 @@ $$
 머신러닝에서는 흔히
 
 $$
-MSE_{\mathrm{ML}}
-=
-\frac{1}{n}\sum_{i=1}^n(y_i-\hat y_i)^2
-=
-\frac{SSE}{n}
+MSE_{\mathrm{ML}} = \frac{1}{n}\sum_{i=1}^n(y_i-\hat y_i)^2 = \frac{SSE}{n}
 $$
 
 을 MSE라고 부른다.
@@ -279,9 +271,7 @@ $$
 
 $$
 \boxed{
-F=\frac{MSR}{MSE}
-=
-\frac{SSR/p}{SSE/(n-p-1)}
+F=\frac{MSR}{MSE} = \frac{SSR/p}{SSE/(n-p-1)}
 }
 $$
 
@@ -394,9 +384,7 @@ $$
 이고
 
 $$
-\text{Var}(\hat\beta_1\mid X)
-=
-\frac{\sigma^2}{S_{xx}}
+\text{Var}(\hat\beta_1\mid X) = \frac{\sigma^2}{S_{xx}}
 $$
 
 이다. 확률변수 $Z$에 대해
@@ -441,9 +429,7 @@ $$
 
 $$
 \boxed{
-E(SSR\mid X)
-=
-\sigma^2+\beta_1^2S_{xx}
+E(SSR\mid X) = \sigma^2+\beta_1^2S_{xx}
 }
 $$
 
@@ -459,9 +445,7 @@ $$
 
 $$
 \boxed{
-E(MSR\mid X)
-=
-\sigma^2+\beta_1^2S_{xx}
+E(MSR\mid X) = \sigma^2+\beta_1^2S_{xx}
 }
 $$
 
@@ -485,11 +469,7 @@ $$
 
 $$
 \boxed{
-R^2
-=
-\frac{SSR}{SST}
-=
-1-\frac{SSE}{SST}
+R^2 = \frac{SSR}{SST} = 1-\frac{SSE}{SST}
 }
 $$
 
@@ -508,9 +488,7 @@ $$
 
 $$
 \boxed{
-R_{\mathrm{adj}}^2
-=
-1-
+R_{\mathrm{adj}}^2 = 1-
 \frac{SSE/(n-p-1)}
 {SST/(n-1)}
 }
@@ -520,9 +498,7 @@ $$
 
 $$
 \boxed{
-R_{\mathrm{adj}}^2
-=
-1-\frac{MSE}{SST/(n-1)}
+R_{\mathrm{adj}}^2 = 1-\frac{MSE}{SST/(n-1)}
 }
 $$
 
@@ -543,9 +519,7 @@ $$
 
 $$
 \boxed{
-y_{ij}-\bar y
-=
-(\bar y_j-\bar y)
+y_{ij}-\bar y = (\bar y_j-\bar y)
 +
 (y_{ij}-\bar y_j)
 }
@@ -570,9 +544,7 @@ $$
 
 $$
 \boxed{
-SST
-=
-\sum_{j=1}^k\sum_{i=1}^{n_j}
+SST = \sum_{j=1}^k\sum_{i=1}^{n_j}
 (y_{ij}-\bar y)^2
 }
 $$
@@ -583,9 +555,7 @@ $$
 
 $$
 \boxed{
-SSB
-=
-\sum_{j=1}^k
+SSB = \sum_{j=1}^k
 n_j(\bar y_j-\bar y)^2
 }
 $$
@@ -596,9 +566,7 @@ $$
 
 $$
 \boxed{
-SSW
-=
-\sum_{j=1}^k\sum_{i=1}^{n_j}
+SSW = \sum_{j=1}^k\sum_{i=1}^{n_j}
 (y_{ij}-\bar y_j)^2
 }
 $$
@@ -612,9 +580,7 @@ $$
 $SSB$는 각 집단평균이 전체 평균으로부터 얼마나 떨어져 있는지를 측정한다.
 
 $$
-SSB
-=
-\sum_{j=1}^k
+SSB = \sum_{j=1}^k
 n_j(\bar y_j-\bar y)^2
 $$
 
@@ -623,9 +589,7 @@ $$
 $SSW$는 같은 집단 안의 관측값들이 해당 집단평균으로부터 얼마나 흩어져 있는지를 측정한다.
 
 $$
-SSW
-=
-\sum_{j=1}^k\sum_{i=1}^{n_j}
+SSW = \sum_{j=1}^k\sum_{i=1}^{n_j}
 (y_{ij}-\bar y_j)^2
 $$
 
@@ -633,9 +597,7 @@ $$
 
 $$
 \boxed{
-\text{전체 변동}
-=
-\text{집단 간 변동}
+\text{전체 변동} = \text{집단 간 변동}
 +
 \text{집단 내 변동}
 }
@@ -679,9 +641,7 @@ $$
 
 $$
 \boxed{
-F=\frac{MSB}{MSW}
-=
-\frac{SSB/(k-1)}{SSW/(n-k)}
+F=\frac{MSB}{MSW} = \frac{SSB/(k-1)}{SSW/(n-k)}
 }
 $$
 
@@ -752,9 +712,7 @@ $$
 
 $$
 \boxed{
-\frac{MSR}{MSE}
-=
-\frac{MSB}{MSW}
+\frac{MSR}{MSE} = \frac{MSB}{MSW}
 }
 $$
 
@@ -767,9 +725,7 @@ SSR은 교재에 따라 두 가지 의미로 사용된다.
 ### 관습 1: Regression Sum of Squares
 
 $$
-SSR
-=
-\sum_{i=1}^n(\hat y_i-\bar y)^2
+SSR = \sum_{i=1}^n(\hat y_i-\bar y)^2
 $$
 
 즉, 모형이 설명한 변동을 뜻한다. 이 관습에서는
@@ -785,11 +741,7 @@ $$
 일부 교재에서는 SSR을 잔차제곱합이라는 의미로 사용한다.
 
 $$
-SSR
-=
-\sum_{i=1}^n(y_i-\hat y_i)^2
-=
-\sum_{i=1}^ne_i^2
+SSR = \sum_{i=1}^n(y_i-\hat y_i)^2 = \sum_{i=1}^ne_i^2
 $$
 
 이 경우 첫 번째 관습의 $SSE$와 같은 양이다.
@@ -799,15 +751,11 @@ $$
 혼동을 피하려면 다음과 같이 표기하는 것이 안전하다.
 
 $$
-SS_{\mathrm{Reg}}
-=
-\sum_{i=1}^n(\hat y_i-\bar y)^2
+SS_{\mathrm{Reg}} = \sum_{i=1}^n(\hat y_i-\bar y)^2
 $$
 
 $$
-SS_{\mathrm{Err}}
-=
-\sum_{i=1}^n(y_i-\hat y_i)^2
+SS_{\mathrm{Err}} = \sum_{i=1}^n(y_i-\hat y_i)^2
 $$
 
 ---
@@ -840,11 +788,7 @@ $$
 
 $$
 \boxed{
-R^2
-=
-\frac{SSR}{SST}
-=
-1-\frac{SSE}{SST}
+R^2 = \frac{SSR}{SST} = 1-\frac{SSE}{SST}
 }
 $$
 
@@ -901,9 +845,7 @@ $$
 핵심적으로 회귀분석은 전체 변동을
 
 $$
-\text{전체 변동}
-=
-\text{모형이 설명한 변동}
+\text{전체 변동} = \text{모형이 설명한 변동}
 +
 \text{잔차 변동}
 $$
@@ -911,9 +853,7 @@ $$
 으로 분해한다. 일원분산분석은 같은 원리를
 
 $$
-\text{전체 변동}
-=
-\text{집단 간 변동}
+\text{전체 변동} = \text{집단 간 변동}
 +
 \text{집단 내 변동}
 $$

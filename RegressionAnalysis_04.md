@@ -447,9 +447,7 @@ $$
 
 $$
 \boxed{
-E(SSR)
-=
-p\sigma^2
+E(SSR) = p\sigma^2
 +
 \boldsymbol\beta^TX^T
 \left(I_n-\frac{J_n}{n}\right)
@@ -568,11 +566,7 @@ $$y_i=\beta_1x_{i1}+\cdots+\beta_px_{ip}+\varepsilon_i =X\beta+\varepsilon$$
 
 $$
 \boxed{
-SST_U
-=
-\sum_{i=1}^n y_i^2
-=
-\mathbf y^T\mathbf y
+SST_U = \sum_{i=1}^n y_i^2 = \mathbf y^T\mathbf y
 }
 $$
 
@@ -597,9 +591,7 @@ $$
 
 $$
 \boxed{
-\mathbf y^T\mathbf y
-=
-\hat{\mathbf y}^T\hat{\mathbf y}
+\mathbf y^T\mathbf y = \hat{\mathbf y}^T\hat{\mathbf y}
 +
 \mathbf e^T\mathbf e
 }
@@ -621,9 +613,7 @@ $$
 
 $$
 \boxed{
-SSR_U
-=
-\hat{\boldsymbol\beta}^TX^T\mathbf y
+SSR_U = \hat{\boldsymbol\beta}^TX^T\mathbf y
 }
 $$
 
@@ -647,13 +637,7 @@ $$
 
 $$
 \boxed{
-SSR_U
-=
-\hat{\mathbf y}^T\hat{\mathbf y}
-=
-\hat{\boldsymbol\beta}^TX^T\mathbf y
-=
-\mathbf y^TH\mathbf y
+SSR_U = \hat{\mathbf y}^T\hat{\mathbf y} = \hat{\boldsymbol\beta}^TX^T\mathbf y = \mathbf y^TH\mathbf y
 }
 $$
 
@@ -681,9 +665,7 @@ $H$는 대칭이고 멱등이므로 $(I_n-H)^T(I_n-H) = (I_n-H)^2 = I_n-H$ 이�
 
 $$
 \boxed{
-SSE
-=
-\mathbf y^T(I_n-H)\mathbf y
+SSE = \mathbf y^T(I_n-H)\mathbf y
 }
 $$
 
@@ -776,11 +758,7 @@ $$
 
 $$
 \boxed{
-F_0
-=
-\frac{MSR}{MSE}
-=
-\frac{SSR_U/p}{SSE/(n-p)}
+F_0 = \frac{MSR}{MSE} = \frac{SSR_U/p}{SSE/(n-p)}
 \sim F(p,n-p)
 }
 $$
@@ -875,9 +853,7 @@ $$
 
 $$
 \boxed{
-\text{Var}(Y_0-\hat y_0)
-=
-\sigma^2
+\text{Var}(Y_0-\hat y_0) = \sigma^2
 \left[
 1+\mathbf x_0^T(X^TX)^{-1}\mathbf x_0
 \right]
@@ -1044,13 +1020,9 @@ $i$번째 관측값에 대해서는
 
 $$
 y_i = \mathbf x_{1i}^T\boldsymbol\beta_1 + \mathbf x_{2i}^T\boldsymbol\beta_2 + \varepsilon_i \\
-\mathbf x_{1i}^T
-=
-(1,x_{i1},\ldots,x_{iq}),
+\mathbf x_{1i}^T = (1,x_{i1},\ldots,x_{iq}),
 \qquad
-\mathbf x_{2i}^T
-=
-(x_{i,q+1},\ldots,x_{ip})
+\mathbf x_{2i}^T = (x_{i,q+1},\ldots,x_{ip})
 $$
 
 이때, $X_1^TX_1$ 및 $X_2^T(I_n-H_1)X_2$ 가 가역행렬이라고 가정한다. 이는 $X_1$ 자체에 완전한 다중공선성이 없고, $X_1$의 영향을 제거한 후에도 $X_2$에 독립적인 정보가 남아 있음을 의미한다.
@@ -1111,9 +1083,7 @@ $$
 전체 중회귀모형의 잔차제곱합은
 
 $$
-SSE(\boldsymbol\beta_1,\boldsymbol\beta_2)
-=
-\left(\mathbf y-X_1\boldsymbol\beta_1-X_2\boldsymbol\beta_2\right)^T
+SSE(\boldsymbol\beta_1,\boldsymbol\beta_2) = \left(\mathbf y-X_1\boldsymbol\beta_1-X_2\boldsymbol\beta_2\right)^T
 \left(\mathbf y-X_1\boldsymbol\beta_1-X_2\boldsymbol\beta_2\right)
 $$
 
@@ -1225,9 +1195,7 @@ $$
 성분별로 쓰면
 
 $$
-\hat\beta_2
-=
-\frac{\sum_{i=1}^n x_{2\cdot1,i}y_{\cdot1,i}}
+\hat\beta_2 = \frac{\sum_{i=1}^n x_{2\cdot1,i}y_{\cdot1,i}}
 {\sum_{i=1}^n x_{2\cdot1,i}^2}
 $$
 
@@ -1242,9 +1210,7 @@ $$
 따라서 부분상관계수를
 
 $$
-r_{y2\cdot1}
-=
-\frac{
+r_{y2\cdot1} = \frac{
 \sum_{i=1}^n
 y_{\cdot1,i}x_{2\cdot1,i}
 }{
@@ -1283,9 +1249,7 @@ $$
 하나의 추가 설명변수 $\mathbf x_2$만 있는 경우에는
 
 $$
-\text{Var}(\hat\beta_2)
-=
-\frac{\sigma^2}
+\text{Var}(\hat\beta_2) = \frac{\sigma^2}
 {\mathbf x_{2\cdot1}^T\mathbf x_{2\cdot1}}
 $$
 
@@ -1294,9 +1258,7 @@ $$
 $\mathbf x_2$를 $X_1$에 회귀했을 때의 결정계수를 $R_2^2$라고 하면
 
 $$
-\mathbf x_{2\cdot1}^T\mathbf x_{2\cdot1}
-=
-(1-R_2^2)
+\mathbf x_{2\cdot1}^T\mathbf x_{2\cdot1} = (1-R_2^2)
 \sum_{i=1}^n(x_{i2}-\bar x_2)^2
 $$
 
@@ -1304,9 +1266,7 @@ $$
 
 $$
 \boxed{
-\text{Var}(\hat\beta_2)
-=
-\frac{\sigma^2}
+\text{Var}(\hat\beta_2) = \frac{\sigma^2}
 {
 (1-R_2^2)
 \sum_{i=1}^n(x_{i2}-\bar x_2)^2
@@ -1322,9 +1282,7 @@ Frisch–Waugh–Lovell 정리에 따라
 
 $$
 \boxed{
-\hat{\boldsymbol\beta}_2
-=
-\left[
+\hat{\boldsymbol\beta}_2 = \left[
 X_2^T(I_n-H_1)X_2
 \right]^{-1}
 X_2^T(I_n-H_1)\mathbf y
@@ -1348,18 +1306,14 @@ $$
 3. 남은 두 부분을 서로 회귀한다.
 
 $$
-\mathbf y_{\cdot1}
-=
-X_{2\cdot1}\boldsymbol\beta_2+\text{잔차}
+\mathbf y_{\cdot1} = X_{2\cdot1}\boldsymbol\beta_2+\text{잔차}
 $$
 
 그 결과 얻는 회귀계수는 원래 전체 중회귀모형의 $X_2$ 계수와 정확히 같다.
 
 $$
 \boxed{
-\hat{\boldsymbol\alpha}_2
-=
-\hat{\boldsymbol\beta}_2
+\hat{\boldsymbol\alpha}_2 = \hat{\boldsymbol\beta}_2
 }
 $$
 

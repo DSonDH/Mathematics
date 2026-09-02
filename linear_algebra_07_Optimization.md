@@ -133,9 +133,7 @@ $$
 X=
 \begin{pmatrix}
 a_0 \\ a_1
-\end{pmatrix}
-=
-
+\end{pmatrix} = 
 \begin{pmatrix}
 \frac{3}{2}\\
 1

@@ -794,9 +794,7 @@ $$E[\text{trace}[(I - \Pi) \mathbf{e} \mathbf{e}^\top]] = \text{trace}[E[(I - \P
 
 $$
 \boxed{
-E\left[\sum_r c_rX_r\right]
-=
-\sum_r c_rE[X_r]
+E\left[\sum_r c_rX_r\right] = \sum_r c_rE[X_r]
 }
 $$
 
@@ -820,9 +818,7 @@ $$
 
 $$
 \left(\sum_{i,j}u_{ij}\right)
-\left(\sum_kv_k\right)
-=
-\sum_{i,j,k}u_{ij}v_k
+\left(\sum_kv_k\right) = \sum_{i,j,k}u_{ij}v_k
 $$
 
 를 적용하면
@@ -842,9 +838,7 @@ $$
 따라서 기댓값을 취하면
 
 $$
-E[(x^TAx)(x^TA\mu)]
-=
-E\left[
+E[(x^TAx)(x^TA\mu)] = E\left[
 \sum_{i,j,k}
 a_{ij}(A\mu)_kx_ix_jx_k
 \right].

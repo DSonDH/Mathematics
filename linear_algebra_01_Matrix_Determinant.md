@@ -753,9 +753,7 @@ $$
 2. 모든 벡터의 분해가 유일하다
 
 $$
-\mathbf v
-=
-\mathbf v_1+\cdots+\mathbf v_p
+\mathbf v = \mathbf v_1+\cdots+\mathbf v_p
 $$
 
 라는 표현이 유일하다.
@@ -809,16 +807,12 @@ $$
 #### 직합이지만 직교하지 않는 예
 
 $$
-V_1
-=
-\text{span}
+V_1 = \text{span}
 \left\{
 \begin{pmatrix}1\\0\end{pmatrix}
 \right\},
 \qquad
-V_2
-=
-\text{span}
+V_2 = \text{span}
 \left\{
 \begin{pmatrix}1\\1\end{pmatrix}
 \right\}
@@ -917,9 +911,7 @@ $$
 **외부 직합**: 서로 다른 벡터공간 $V_1,\ldots,V_p$를 모아 새로운 공간을 만드는 것이다.
 
 $$
-V_1\oplus\cdots\oplus V_p
-=
-\left\{
+V_1\oplus\cdots\oplus V_p = \left\{
 (\mathbf v_1,\ldots,\mathbf v_p):
 \mathbf v_j\in V_j
 \right\}.
@@ -930,9 +922,7 @@ $$
 $$
 (\mathbf v_1,\ldots,\mathbf v_p)
 +
-(\mathbf w_1,\ldots,\mathbf w_p)
-=
-(\mathbf v_1+\mathbf w_1,\ldots,\mathbf v_p+\mathbf w_p).
+(\mathbf w_1,\ldots,\mathbf w_p) = (\mathbf v_1+\mathbf w_1,\ldots,\mathbf v_p+\mathbf w_p).
 $$
 
 외부 직합에서는 벡터 자체가 성분들의 순서쌍 또는 순서튜플이므로 분해의 유일성이 자동으로 성립한다.
@@ -953,9 +943,7 @@ $$
 
 $$
 \boxed{
-\mathbf A\oplus\mathbf B
-=
-\begin{pmatrix}
+\mathbf A\oplus\mathbf B = \begin{pmatrix}
 \mathbf A&0\\
 0&\mathbf B
 \end{pmatrix}
@@ -965,9 +953,7 @@ $$
 세 행렬이면
 
 $$
-\mathbf A_1\oplus\mathbf A_2\oplus\mathbf A_3
-=
-\begin{pmatrix}
+\mathbf A_1\oplus\mathbf A_2\oplus\mathbf A_3 = \begin{pmatrix}
 \mathbf A_1&0&0\\
 0&\mathbf A_2&0\\
 0&0&\mathbf A_3
@@ -984,9 +970,7 @@ $$
 \begin{pmatrix}
 \mathbf x\\
 \mathbf y
-\end{pmatrix}
-=
-\begin{pmatrix}
+\end{pmatrix} = \begin{pmatrix}
 \mathbf A\mathbf x\\
 \mathbf B\mathbf y
 \end{pmatrix}.
@@ -1013,9 +997,7 @@ $$
 각 $V_j$의 기저를 선택하여 이어 붙이면 $V$의 기저를 얻는다. 이 기저에서 $T$의 행렬은
 
 $$
-[T]
-=
-\begin{pmatrix}
+[T] = \begin{pmatrix}
 [T|_{V_1}]&0&\cdots&0\\
 0&[T|_{V_2}]&\cdots&0\\
 \vdots&\vdots&\ddots&\vdots\\

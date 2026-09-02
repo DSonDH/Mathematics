@@ -1140,18 +1140,14 @@ $$
 즉, 모든 벡터가 $A$의 고유벡터 공간들의 합으로 표현된다.
 
 $$
-\mathbb F^n
-=
-\ker(A-\lambda_1I)+\cdots+
+\mathbb F^n = \ker(A-\lambda_1I)+\cdots+
 \ker(A-\lambda_kI).
 $$
 
 서로 다른 고윳값에 대응하는 고유공간들의 합은 직합이므로
 
 $$
-\mathbb F^n
-=
-\bigoplus_{j=1}^k\ker(A-\lambda_jI).
+\mathbb F^n = \bigoplus_{j=1}^k\ker(A-\lambda_jI).
 $$
 
 따라서 각 고유공간의 기저를 합치면 $\mathbb F^n$의 고유벡터 기저가 만들어진다. 그러므로 $A$는 대각화 가능하다.

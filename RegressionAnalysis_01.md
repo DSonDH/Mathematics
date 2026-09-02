@@ -415,9 +415,7 @@ $$
 SSE =(n-2)s_{y\cdot x}^2 =
 \sum_{i=1}^n(y_i-\bar y)^2 -
 \frac{ \left[\sum_{i=1}^n(x_i-\bar x)(y_i-\bar y)\right]^2
-}{\sum_{i=1}^n(x_i-\bar x)^2}\
-=
-\left[ \sum_{i=1}^n(y_i-\bar y)^2\right](1 - r_{xy}^2).
+}{\sum_{i=1}^n(x_i-\bar x)^2}\ = \left[ \sum_{i=1}^n(y_i-\bar y)^2\right](1 - r_{xy}^2).
 $$
 
 즉,
@@ -451,12 +449,8 @@ $$
 $y$의 표본분산은 $s_y^2 = \frac{\sum_{i=1}^n(y_i-\bar y)^2}{n-1} = \frac{SST}{n-1}$ 이다. 한편 오차분산 추정량은 $s_{y\cdot x}^2 = \frac{SSE}{n-2} = \frac{SST(1-r_{xy}^2)}{n-2}$ 이다. 따라서 두 분산의 비율은
 
 $$
-\frac{s_{y\cdot x}^2}{s_y^2}
-=
-\frac{SST(1-r_{xy}^2)/(n-2)}
-{SST/(n-1)}\
-=
-\frac{n-1}{n-2}(1-r_{xy}^2).
+\frac{s_{y\cdot x}^2}{s_y^2} = \frac{SST(1-r_{xy}^2)/(n-2)}
+{SST/(n-1)}\ = \frac{n-1}{n-2}(1-r_{xy}^2).
 $$
 
 즉,
