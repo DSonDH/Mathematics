@@ -420,12 +420,10 @@ $$
 \text{tr}(A)
 &=
 \text{tr}\left[X(X^TX)^{-1}X^T\right]
--
-\text{tr}\left(\frac{J_n}{n}\right)\\
+- \text{tr}\left(\frac{J_n}{n}\right)\\
 &=
 \text{tr}\left[(X^TX)^{-1}X^TX\right]
--
-\frac{1}{n}\text{tr}(J_n)\\
+- \frac{1}{n}\text{tr}(J_n)\\
 &=
 \text{tr}(I_{p+1})-\frac{n}{n}\\
 &=
@@ -445,9 +443,7 @@ X^T
 X(X^TX)^{-1}X^T-\frac{J_n}{n}
 \right]X\\
 &=
-X^TX(X^TX)^{-1}X^TX
--
-X^T\frac{J_n}{n}X\\
+X^TX(X^TX)^{-1}X^TX - X^T\frac{J_n}{n}X\\
 &=
 X^TX-X^T\frac{J_n}{n}X\\
 &=
