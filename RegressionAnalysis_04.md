@@ -918,7 +918,7 @@ $$SSE = y^T\left[I_n - X(X^TX)^{-1}X^T\right]y$$
 
 여기서 행렬 $C = I_n - X(X^TX)^{-1}X^T$는 대칭이고 멱등이며 rank = $n-p-1$이다. 또한
 
-$$(X\beta)^T\left[I_n - X(X^TX)^{-1}X^T\right](X\beta) = 0$$
+$$(X\beta)^T\left[I_n - X(X^TX)^{-1}X^T\right](X \beta) = 0$$
 
 이므로 비중심모수는 0이다. 따라서
 
