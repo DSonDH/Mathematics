@@ -1,23 +1,12 @@
 # Chapter 5 추정과 가설검정 I (Estimation and Hypothesis Testing I)
-우리가 다루는 중회귀모형은
-
-$$y_i = \beta_0 + \sum_{j=1}^p \beta_j x_{ij} + \varepsilon_i$$
-
-행렬형:
-
-$$\mathbf{y} = \mathbf{X}\beta + \mathbf{\varepsilon}$$
+우리가 다루는 중회귀모형은 $y_i = \beta_0 + \sum_{j=1}^p \beta_j x_{ij} + \varepsilon_i$ 또는 $\mathbf{y} = \mathbf{X}\beta + \mathbf{\varepsilon}$ 형태이다.
 
 * $\mathbf{y}$: $n \times 1$ 반응벡터
 * $\mathbf{X}$: $n \times (p+1)$ 설계행렬(design matrix)
-  - rank($\mathbf{X}$) = $p+1$ (full rank)
+  - rank($\mathbf{X}$) = $p+1$ (full rank)M
   - $\mathbf{X}^T\mathbf{X}$는 가역행렬(invertible matrix, 정칙행렬, non-singular matrix)
 * $\beta$: $(p+1) \times 1$ 모수벡터
 * $\mathbf{\varepsilon}$: 오차벡터
-
-가정:
-1. $E(\mathbf{\varepsilon})=0$
-2. $Var(\mathbf{\varepsilon})=\sigma^2 I_n$
-3. (정규성 가정) $\mathbf{\varepsilon} \sim N(0,\sigma^2 I_n)$
 
 위와 같은 성질을 가진 모형을 완전계수의 중선형회귀모형(multiple linear regression model of full rank)이라고 하며, 간단히 중회귀모형하면 이 모형을 의미한다.
 
