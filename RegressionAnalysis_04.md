@@ -400,16 +400,13 @@ E(SSR)
 E(\mathbf y^TA\mathbf y)\\
 &=
 \text{tr}\left[A\text{Var}(\mathbf y)\right]
-+
-E(\mathbf y)^TAE(\mathbf y)\\
++ E(\mathbf y)^TAE(\mathbf y)\\
 &=
 \text{tr}(A\sigma^2I_n)
-+
-(X\boldsymbol\beta)^TA(X\boldsymbol\beta)\\
++ (X\boldsymbol\beta)^TA(X\boldsymbol\beta)\\
 &=
 \sigma^2\text{tr}(A)
-+
-\boldsymbol\beta^TX^TAX\boldsymbol\beta.
++ \boldsymbol\beta^TX^TAX\boldsymbol\beta.
 \end{aligned}
 $$
 
@@ -419,11 +416,9 @@ $$
 \begin{aligned}
 \text{tr}(A)
 &=
-\text{tr}\left[X(X^TX)^{-1}X^T\right]
-- \text{tr}\left(\frac{J_n}{n}\right)\\
+\text{tr}\left[X(X^TX)^{-1}X^T\right] - \text{tr}\left(\frac{J_n}{n}\right)\\
 &=
-\text{tr}\left[(X^TX)^{-1}X^TX\right]
-- \frac{1}{n}\text{tr}(J_n)\\
+\text{tr}\left[(X^TX)^{-1}X^TX\right] - \frac{1}{n}\text{tr}(J_n)\\
 &=
 \text{tr}(I_{p+1})-\frac{n}{n}\\
 &=
