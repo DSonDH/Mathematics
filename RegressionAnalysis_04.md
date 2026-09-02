@@ -73,7 +73,12 @@ $$\mathbf y = X\beta + \varepsilon$$
 
 두 설명변수의 경우
 
-$$X=\begin{pmatrix}1 & x_{11} & x_{12} \\1 & x_{21} & x_{22} \\\vdots & \vdots & \vdots \\1 & x_{n1} & x_{n2}\end{pmatrix}$$
+$$X=\begin{pmatrix}
+1 & x_{11} & x_{12} \\
+1 & x_{21} & x_{22} \\
+\vdots & \vdots & \vdots \\
+1 & x_{n1} & x_{n2}
+\end{pmatrix}$$
 
 여기서
 
@@ -113,8 +118,7 @@ $$\begin{pmatrix}
 \hat\beta_1 \\
 \hat\beta_2
 \end{pmatrix}
-=
-\begin{pmatrix}
+= \begin{pmatrix}
 \sum y_i \\
 \sum x_{i1}y_i \\
 \sum x_{i2}y_i
