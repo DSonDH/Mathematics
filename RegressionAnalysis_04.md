@@ -371,19 +371,13 @@ $$
 \begin{aligned}
 E(SSR)
 &=
-E\left[
-\mathbf y^T X(X^TX)^{-1}X^T\mathbf y- n\bar y^2
-\right]\\
+E\left[\mathbf y^T X(X^TX)^{-1}X^T\mathbf y- n\bar y^2\right]\\
 &=
-E\left[
-\mathbf y^T X(X^TX)^{-1}X^T\mathbf y -\mathbf y^T\left(\frac{J_n}{n}\right)\mathbf y
-\right]\\
+E\left[\mathbf y^T X(X^TX)^{-1}X^T\mathbf y -\mathbf y^T\left(\frac{J_n}{n}\right)\mathbf y\right]\\
 &=
-E\left[
-\mathbf y^T
+E\left[\mathbf y^T
 \left\{ X(X^TX)^{-1}X^T-\frac{J_n}{n} \right\}
-\mathbf y
-\right].
+\mathbf y\right].
 \end{aligned}
 $$
 
