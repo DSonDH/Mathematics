@@ -8,7 +8,8 @@ $$ SS(X_2 \mid X_1) = SS(X_1, X_2) - SS(X_1) $$
 
   - $SS(X_1)$: $X_1$만 포함한 모형의 회귀제곱합
   - $SS(X_1, X_2)$: $X_1$과 $X_2$ 모두 포함한 모형의 회귀제곱합
-  - $SS(X_2 \mid X_1)$: $X_1$이 이미 포함된 상태에서 $X_2$를 추가함으로써 증가하는 제곱합
+  - **(중요!!!!!)** $SS(X_2 \mid X_1)$: $X_1$이 이미 포함된 상태에서 $X_2$를 추가함으로써 증가하는 제곱합
+    - $X_1$ 조건부도 아니고, $X_1$을 제외한것도 아님.
 
 ### 6.1.1 기본 모형 설정
 다음과 같은 중회귀모형을 고려한다.
@@ -20,7 +21,7 @@ $$
 
 최소제곱법(least squares method)에 의해 $\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_p$를 추정하고, 오차분산 $\sigma^2$는 평균제곱오차(mean square error, MSE)로 추정한다.
 
-기존 회귀제곱합(regression sum of squares)은
+기존 회귀제곱합(regression sum of squares)을 아래와 같이 표현하자.
 
 $$SSR = SS(\hat{\beta}_1, \dots, \hat{\beta}_p \mid \hat{\beta}_0) = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2 = \hat{\beta}^T X^T \mathbf{y} - n\bar{y}^2$$
 
@@ -28,37 +29,74 @@ $$SSR = SS(\hat{\beta}_1, \dots, \hat{\beta}_p \mid \hat{\beta}_0) = \sum_{i=1}^
   - SSR: $\sum (\hat{y}_i - \bar{y})^2$: 회귀제곱합(regression sum of squares), 회귀로 설명되는 편차
   - SSE: $\sum (y_i - \hat{y}_i)^2$: 잔차제곱합(error sum of squares), 설명되지 않는 편차
 
-절편(intercept)만 포함하는 모형 $y_i = \beta_0 + \varepsilon_i$의 회귀제곱합 $SS(\hat{\beta}_0)$는 절편항의 기여도를 나타내며, 이는 다음과 같이 유도된다.
->설계행렬은 $X = \mathbf{1} \in \mathbb{R}^{n \times 1}$ (모든 원소가 1인 열벡터)이다. 정규방정식 $X^T(y - X\hat{\beta}_0) = 0$에서
+
+>전체모형의 최소제곱 잔차 $\mathbf{e}_F$는 전체모형의 모든 적합한 벡터와 직교한다. 여기서 $\mathbf{d}$ 역시 전체모형의 공간에 속하므로 $\mathbf{e}_F^T \mathbf{d} = 0$이다. 따라서
 >
->$$\mathbf{1}^T(y - \mathbf{1}\hat{\beta}_0) = 0
->\quad \Rightarrow \quad
->\sum_{i=1}^n y_i - n\hat{\beta}_0 = 0 \\
+>$$
+>SSE(M_R) - SSE(M_F) = \|\hat{\mathbf{y}}_F - \hat{\mathbf{y}}_R\|^2
+>$$
+>
+>가 성립한다.
+>
+>다만 이 등식은 임의의 두 모형에서 자동으로 성립하는 것이 아니다. 다음 조건이 필요하다.
+>
+>- 두 모형이 중첩되어 있어야 한다.
+>- 각 모형을 최소제곱법으로 적합해야 한다.
+>
+>결국 두 식은 서로 다른 정의가 우연히 같은 값을 내는 것이 아니다. 최소제곱법의 직교성 때문에
+>
+>"직교함이 증가한 제곱거리"가 정확히 "잔차제곱합이 감소한 양"과 같아지는 것이다.
+
+
+>절편(intercept)만 포함하는 모형 $y_i = \beta_0 + \varepsilon_i$의 회귀제곱합 $SS(\hat{\beta}_0)$는 절편항의 기여도를 나타내며, 다음과 같이 유도된다:
+>
+>설계행렬은 $X = \mathbf{1} \in \mathbb{R}^{n \times 1}$, 정규방정식 $X^T(y - X\hat{\beta}_0) = 0$에서
+>
+>$$\mathbf{1}^T(y - \mathbf{1}\hat{\beta}_0) = 0 \quad \Rightarrow \quad \sum_{i=1}^n y_i - n\hat{\beta}_0 = 0 \\
 >\therefore \hat{\beta}_0 = \bar{y}$$
 >
->**회귀제곱합의 유도**  
->정의에 의해
+>평균에서 설명되는 제곱합은
 >
->$$SS(\hat{\beta}_0) = \hat{\beta}_0^T X^T y = \hat{\beta}_0 \cdot \mathbf{1}^T y$$
+>$$
+SS(\hat{\beta}_0) = \sum (\hat{y}_i - \bar{y})^2 =  n\bar{y}^2
+>$$
 >
->$\hat{\beta}_0 = \bar{y}$이고 스칼라이므로
+>여기서 첫 번째 등식은 절편의 비보정 제곱합(평균을 0으로 둔 행렬식 표현)이며, $\hat\beta_0$가 스칼라이므로 $\hat\beta_0^T=\hat\beta_0$이다. 따라서 일반적인 행렬식 $\hat\beta^T X^T y$에 절편모형의 $X=\mathbf1$과 $\hat\beta_0=\bar y$를 대입하면
 >
->$$SS(\hat{\beta}_0) = \bar{y} \sum_{i=1}^n y_i = \bar{y} \cdot n\bar{y} = n\bar{y}^2$$
+>$$
+>\hat\beta_0^T X^T y=\hat\beta_0\,\mathbf1^T y=n\bar y^2
+>$$
 >
->한편, 예측값은 $\hat{y}_i = \hat{\beta}_0 = \bar{y}$ (모든 $i$에 대해 상수)이므로
+>다만 평균을 기준으로 한 절편의 회귀제곱합은 $\sum_i(\hat y_i-\bar y)^2=0$이고, 여기의 $n\bar y^2$는 비보정 제곱합임을 구분해야 한다.
 >
->$$SS(\hat{\beta}_0) = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2 = \sum_{i=1}^n (\bar{y} - \bar{y})^2 = 0$$
->
->이는 명백한 모순처럼 보이나, 실제로는 표기의 차이에서 비롯된다. 회귀제곱합 $SS(\hat{\beta}_0)$는 상수항의 기여도를 나타내며, 정규방정식의 형태로 정의될 때는 $n\bar{y}^2$이다. 이는 절편항이 표본평균을 중심으로 회귀를 수행할 때의 제곱합을 의미한다.
->
-자유도는 1이다.
+>자유도는 1이다.
 
-따라서 전체 회귀제곱합은
+
+
+
+
+
+
+
+위에 의해서, $n\bar{y}^2$는 절편항만 포함한 모형의 회귀제곱합(SSR)이다.  
+한편, $\hat{\beta}^T X^T y$는 절편항을 포함한 전체모형의 비보정 회귀제곱합.
+
+> $\hat\beta^T X^T y = \hat{\beta}_0 \sum_{i=1}^n y_i + \hat{\beta}_1 \sum_{i=1}^n x_{1i}y_i + \cdots + \hat{\beta}_p \sum_{i=1}^n x_{pi}y_i \\ 
+= n\bar{y}^2 + \hat{\beta}_1 \sum_{i=1}^n x_{1i}y_i + \cdots + \hat{\beta}_p \sum_{i=1}^n x_{pi}y_i \\
+= SST$
+
+따라서 
 
 $$
 SS(\hat{\beta}_1, \dots, \hat{\beta}_p \mid \hat{\beta}_0)
 = SS(\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_p) - SS(\hat{\beta}_0) \\
-(df=k) = (df=k+1) - (df=1)
+(df=k) = (df=k+1) - (df=1) 
+$$
+
+또는, 전체 제곱합을 절편, 회귀, 잔차로 분해하면
+
+$$
+\mathbf{y}^T\mathbf{y} = \underbrace{n\bar{y}^2}_{\text{절편의 비보정 제곱합}} + \underbrace{SSR}_{\text{설명변수의 추가제곱합}} + \underbrace{SSE}_{\text{잔차 제곱합}}
 $$
 
 ### 6.1.2 부분모형과 추가제곱합 (Reduced Model and Extra SS)
