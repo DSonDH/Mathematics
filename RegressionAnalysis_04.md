@@ -293,19 +293,23 @@ $$SST = \mathbf{y}^T \mathbf{y} - n(\bar y)^2 = \mathbf{y}^T\left(I_n - \frac{J_
 잔차는 $\mathbf{e} = \mathbf{y} - \hat{\mathbf{y}}$  
 잔차제곱합은
 
-$$SSE = (\mathbf{y}-\hat{\mathbf{y}})^T (\mathbf{y}-\hat{\mathbf{y}})\\ 
+$$
+SSE = (\mathbf{y}-\hat{\mathbf{y}})^T (\mathbf{y}-\hat{\mathbf{y}})\\ 
 = \mathbf{y}^T\mathbf{y} - 2\hat\beta^T X^T \mathbf{y} + \hat\beta^T X^T X \hat\beta \\
 = \mathbf{y}^T\left[I_n - X(X^T X)^{-1}X^T\right]\mathbf{y} \\
-= \mathbf{y}^T \mathbf{y} - \hat\beta^T X^T \mathbf{y}$$
+= \mathbf{y}^T \mathbf{y} - \hat\beta^T X^T \mathbf{y}
+$$
+
+$= \mathbf{y}^TA\mathbf{y}= \mathbf{y}^T \mathbf{y} - \mathbf{y}^TH\mathbf{y}$ 로 표기하기도 함.
 
 자유도는 $\mathbf{y}^T \mathbf{y}$에서 $\hat\beta^T X^T \mathbf{y}$를 빼는 과정에서 $p+1$개의 선형 제약이 추가되므로 $n - p - 1$  
 
 **(3) 회귀제곱합 (Sum of Squares due to Regression, SSR)**  
 회귀에 의해 설명되는 변동은 $SSR = SST - SSE$ 또는 정의로부터
 
-$$SSR = \sum_{i=1}^n (\hat y_i - \bar y)^2 \\
-= \hat\beta^T X^T \mathbf{y} - n(\bar y)^2 \\
-= \mathbf{y}^T X (X^T X)^{-1} X^T \mathbf{y} - n(\bar y)^2$$
+$$
+SSR = \sum_{i=1}^n (\hat y_i - \bar y)^2 = \sum_{i=1}^n \hat y_i^2 - n(\bar{y})^2 = \hat{\mathbf{y}}^T \hat{\mathbf{y}} - n(\bar{y})^2
+$$
 
 자유도는 $p$이다. 이는 회귀식이 $p$개의 설명변수를 포함하기 때문이다.
 
