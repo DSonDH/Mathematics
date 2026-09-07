@@ -9,10 +9,7 @@ $$(x_{i1}, x_{i2}, \dots, x_{pi}, y_i), \quad i=1,2,\dots,n $$
 
 $$y = X\beta + \varepsilon,\qquad \varepsilon \sim N(0_n,\sigma^2 I_n)$$
 
-여기서 $X$는 $n \times (p+1)$ 행렬이며, 계수(rank)는 $p+1$이라고 가정한다. 최소제곱법(method of least squares)에 의한 회귀계수 추정량(estimator)은 다음과 같다.
-
-$$\hat{\beta} = (X^T X)^{-1}X^T y$$
-
+여기서 $X$는 $n \times (p+1)$ 행렬이며, 계수(rank)는 $p+1$이라고 가정한다. 최소제곱법(method of least squares)에 의한 회귀계수 추정량(estimator)은 다음과 같다. $\hat{\beta} = (X^T X)^{-1}X^T y$  
 이러한 회귀분석(regression analysis)을 수행할 때, 자료로부터 모형의 타당성을 확인하는 절차를 회귀진단(regression diagnostics)이라 한다. 회귀진단은 다음과 같은 사항을 점검하기 위해 사용된다.
 1. 회귀식의 선형성(linearity)
 2. 오차항(error term)의 정규성(normality)
@@ -32,7 +29,7 @@ $$\hat{\beta} = (X^T X)^{-1}X^T y$$
 * 등분산성(equal variance)
 
 이 가정이 성립해야 최소제곱추정량 $\hat{\beta}$가 최량선형불편추정량(best linear unbiased estimator; BLUE)이 되며, 분산분석표(analysis of variance table)에서의 $F$-검정도 유효하게 성립한다.  
-일반적으로는 잔차분석(residual analysis)을 통하여 오차항 가정을 검토한다.   잔차분석 방법은 앞 장에서 이미 소개되었으므로 여기서는 생략.
+일반적으로는 잔차분석(residual analysis)을 통하여 오차항 가정을 검토한다.   잔차분석 방법은 5장에서 이미 소개되었으므로 여기서는 생략.
 
 ### 8.1.2 적절한 모형의 선택 (Selection of an Appropriate Model)
 $y = X\beta + \varepsilon$의 모형은 1차 선형모형(first-order linear model)으로 볼 수 있다. 그러나 실제로는 반응변수 $y$와 $p$개의 설명변수 사이에서 이 모형이 가장 적절한지 검토할 필요가 있다.  
@@ -55,11 +52,7 @@ $y = X\beta + \varepsilon$의 모형은 1차 선형모형(first-order linear mod
 지렛대(leverage)란 $i$번째 관측값의 설명변수 값이 나머지 데이터의 설명변수 값들로부터 얼마나 멀리 떨어져 있는지를 나타내는 개념이다.  
 큰 지렛대를 가지는 관측값은 설명변수 값이 다른 관측값들과 멀리 떨어져 있으며, 설명변수 공간(explanatory-variable space)에서 주변에 이웃 관측값이 거의 없는 점이다.  
 단순선형회귀(simple linear regression)에서는 설명변수 값이 다른 관측값들과 크게 다른 점을 찾으면 되므로 큰 지렛대점을 식별하는 것이 상대적으로 쉽다. 그러나 중회귀모형(multiple regression model, $p>2$)에서는 각 개별 설명변수만 보면 극단적이지 않아도, 전체 $p$차원 설명변수 벡터로 보면 큰 지렛대점이 될 수 있어 식별이 쉽지 않다.  
-회귀분석에서는 이러한 큰 지렛대점을 찾기 위해 해트 행렬(hat matrix)
-
-$$H = X(X^T X)^{-1}X^T = (h_{ij}), \qquad i,j=1,2,\dots,n$$
-
-의 대각원소(diagonal element) $h_{ii}$를 사용한다. $h_{ii}$가 큰 관측값은 큰 지렛대점을 가진다고 판단한다.
+회귀분석에서는 이러한 큰 지렛대점을 찾기 위해 해트 행렬(hat matrix) $H = X(X^T X)^{-1}X^T = (h_{ij}), \quad i,j=1,2,\dots,n$ 의 대각원소(diagonal element) $h_{ii}$를 사용한다. $h_{ii}$가 큰 관측값은 큰 지렛대점을 가진다고 판단한다.
 
 ### 8.1.5 이상점 탐색 (Search for Outliers)
 $n$개의 반응변수 $y_1,y_2,\dots,y_n$을 관측할 때, 측정 또는 실험상의 오류 등 다양한 원인으로 이상치가 포함될 수 있다. 일반적으로 이러한 이상점(outlier)은 관측값이 모형의 예측값과 크게 달라 큰 잔차(residual)를 남기므로 식별이 비교적 쉽다.  
@@ -76,11 +69,16 @@ $n$개의 반응변수 $y_1,y_2,\dots,y_n$을 관측할 때, 측정 또는 실�
 * 큰 지렛대점을 갖는 관측값(high leverage case)
 * 이상점(outlier)
 * 영향점(influential observation)
+
+
 ## 8.2 지렛대점의 검출 (Detection of Leverage Points)
+
 ### 8.2.1 해트 행렬 $H = X(X^T X)^{-1}X^T$의 성질 (Properties of the Hat Matrix)
+
 회귀모형에서 $E(y)$의 추정벡터(estimator vector)는 적합값(fitted value) 벡터 $\hat{y}$이며, $\hat{y} = X\hat{\beta}$이다. 최소제곱추정량을 대입하면
 $\hat{y} = X(X^T X)^{-1}X^T y = Hy$가 된다. 여기서 $n \times n$ 행렬 $H$를 **해트 행렬(hat matrix)** 이라 부른다. 그 이유는 관측벡터 $y$에 "hat"을 씌워 적합값 $\hat{y}$를 만들기 때문이다.  
 해트 행렬의 원소는 다음과 같이 표현된다.
+
 #### 8.2.1.1 해트 행렬 원소의 표현 (Representation of the Elements)
 
 $$h_{ij} = x_i^T (X^T X)^{-1}x_j = x_j^T (X^T X)^{-1}x_i = h_{ji}\\
@@ -105,23 +103,14 @@ $$h_{ii} = \sum_{j=1}^n h_{ij}^2 = h_{ii}^2 + \sum_{j\ne i} h_{ij}^2$$
 
 #### 8.2.1.4 값의 범위 (Range of the Elements)
 해트 행렬 $H$는 양반정치행렬(positive semidefinite matrix)이므로
-$h_{ii} \ge 0$이다. 또한 앞의 관계로부터 $h_{ii}^2 \le h_{ii}$이므로
+$h_{ii} \ge 0$이다. 또한 앞의 관계로부터 $h_{ii}^2 \le h_{ii}$이므로 $0 \le h_{ii} \le 1$
 
-$$0 \le h_{ii} \le 1$$
-
-같은 방식으로 $i \ne j$인 경우에 대해
-
-$$h_{ij}^2 \le h_{ii} - h_{ii}^2 \le \frac14$$
-
-이므로
-
-$$-\frac12 \le h_{ij} \le \frac12$$
+같은 방식으로 $i \ne j$인 경우에 대해 $h_{ij}^2 \le h_{ii} - h_{ii}^2 \le \frac14$ 이므로 $-\frac12 \le h_{ij} \le \frac12$
 
 > 식의 구조로부터 $h_{ii}$의 실제 하한(lower bound)은 $1/n$이다.
 
 #### 8.2.1.5 해트 행렬과 설계행렬의 관계 (Relation Between the Hat Matrix and Design Matrix)
-해트 행렬은 $HX = X(X^T X)^{-1}X^T X = X$를 만족한다.  
-따라서 행렬 $X$의 $j$번째 열벡터(column vector) ($j=1,2,\dots,p+1$)에 대하여
+해트 행렬은 $HX = X(X^T X)^{-1}X^T X = X$를 만족하므로, 행렬 $X$의 $j$번째 열벡터(column vector) ($j=1,2,\dots,p+1$)에 대하여
 
 $$H
 \begin{pmatrix}
@@ -151,7 +140,7 @@ h_{ii} = \frac1n + \frac{(x_i-\bar{x})^2}{S_{xx}} \\
 \therefore \sum_{i=1}^n h_{ii} = 1 + \frac{\sum_i (x_i-\bar{x})^2}{S_{xx}} = 2$$
 
 이는 단순회귀에서 $p=1$이므로 $\text{tr}(H)=p+1=2$와 일치한다.  
-또한 $h_{ii}$의 최소값은 $x_i=\bar{x}$일 때 $1/n$이고, 최대값은 $x_i$가 평균 $\bar{x}$에서 가장 멀리 떨어져 있을 때 발생한다.
+또한 $h_{ii}$의 최솟값은 $x_i=\bar{x}$일 때 $1/n$이고, 최대값은 $x_i$가 평균 $\bar{x}$에서 가장 멀리 떨어져 있을 때 발생한다.
 
 #### 8.2.1.7 중회귀에서의 해트 값 (Hat Values in Multiple Regression)
 중회귀모형(multiple regression model)에서는
@@ -186,9 +175,9 @@ $$\hat{y}_i
 
 $$\frac{\partial \hat{y}_i}{\partial y_i} = h_{ii}$$
 
-를 만족한다. 따라서 $h_{ii}$가 1에 가까울수록, $i$번째 관측값 $y_i$가 자기 자신의 적합값 $\hat{y}_i$에 큰 영향을 준다는 뜻이다.
+를 만족한다. 따라서 $h_{ii}$가 1에 가까울수록, $i$번째 관측값 $y_i$가 자기 자신의 적합값 $\hat{y}_i$에 큰 영향을 준다는 뜻이다.  
 
-한편 해트 행렬의 트레이스(trace)는 $\text{tr}(H)=\sum_{i=1}^n h_{ii}=p+1$이므로, 대각원소의 평균(mean)은
+한편 $\text{tr}(H)=p+1$이므로, 대각원소의 평균(mean)은
 
 $$\bar{h}=\frac{p+1}{n}$$
 
@@ -218,28 +207,14 @@ $$M(i) = (n-1)\left(h_{ii}-\frac1n\right)$$
 회귀진단(regression diagnostics)에서 이상점 탐색은 단순히 잔차의 절대값만 보는 것이 아니라, 지렛대(leverage), 분산(variance), 표준화(standardization), 그리고 관측값 제거 시의 변동까지 고려하여 수행한다.
 
 ### 8.3.1 잔차의 성질 (Properties of Residuals)
-보통 잔차벡터(residual vector)는 다음과 같이 정의된다. $\mathbf{e} = \mathbf{y} - \hat{\mathbf{y}} = \mathbf{y} - X\hat{\boldsymbol{\beta}}$, 최소제곱추정량(least squares estimator) $\hat{\boldsymbol{\beta}} = (X^TX)^{-1}X^T\mathbf{y}$를 대입하면, 
-
-$$\mathbf{e} = \mathbf{y} - X(X^TX)^{-1}X^T\mathbf{y}$$
-
-이고, 해트 행렬(hat matrix) $H = X(X^TX)^{-1}X^T$를 이용하면
-
-$$\mathbf{e} = (I_n - H)\mathbf{y}$$
+보통 잔차벡터(residual vector)는 다음과 같이 정의된다. $\mathbf{e} = \mathbf{y} - \hat{\mathbf{y}} = \mathbf{y} - X\hat{\boldsymbol{\beta}} = \mathbf{y} - X(X^TX)^{-1}X^T\mathbf{y}$ 이고, 해트 행렬(hat matrix) $H = X(X^TX)^{-1}X^T$를 이용하면 $\mathbf{e} = (I_n - H)\mathbf{y}$
 
 이로부터 잔차벡터의 기댓값 벡터(expected value vector)와 분산-공분산 행렬(variance-covariance matrix)은
 
-$$E(\mathbf{e})=0_n,\qquad \mathrm{Var}(\mathbf{e})=\sigma^2(I_n-H)$$
+$$E(\mathbf{e})=0_n,\quad \mathrm{Var}(\mathbf{e})=\sigma^2(I_n-H)$$
 
-따라서 $i$번째 잔차 $e_i$에 대해서는
-
-$$E(e_i)=0,\qquad \mathrm{Var}(e_i)=\sigma^2(1-h_{ii})$$
-
-를 얻는다. 즉, 각 잔차의 분산은 모두 동일하지 않고, 해트 행렬의 대각원소(diagonal element) $h_{ii}$에 따라 달라진다. 특히 $h_{ii}$가 큰 관측값은 잔차의 분산이 작아지는 경향이 있다.  
-또한 $e_i$와 $e_j$의 공분산(covariance)은
-
-$$\mathrm{Cov}(e_i,e_j)=-h_{ij}\sigma^2$$
-
-이고, 따라서 상관계수(correlation coefficient)는
+따라서 $i$번째 잔차 $e_i$에 대해서는 $E(e_i)=0,\quad \mathrm{Var}(e_i)=\sigma^2(1-h_{ii})$ 를 얻는다. 즉, 각 잔차의 분산은 모두 동일하지 않고, 해트 행렬의 대각원소(diagonal element) $h_{ii}$에 따라 달라진다. 특히 $h_{ii}$가 큰 관측값은 잔차의 분산이 작아지는 경향이 있다.  
+또한 $e_i$와 $e_j$의 공분산(covariance)은 $\mathrm{Cov}(e_i,e_j)=-h_{ij}\sigma^2$ 이고, 따라서 상관계수(correlation coefficient)는
 
 $$\rho_{ij} =\frac{-h_{ij}\sigma^2}{\sqrt{\sigma^4(1-h_{ii})(1-h_{jj})}}
 = \frac{-h_{ij}}{\sqrt{(1-h_{ii})(1-h_{jj})}}$$
@@ -252,16 +227,13 @@ $$\rho_{ij} =\frac{-h_{ij}\sigma^2}{\sqrt{\sigma^4(1-h_{ii})(1-h_{jj})}}
 1. 표준화 잔차(standardized residual)
 2. 스튜던트화 잔차(studentized residual)
 
-#### 표준화 잔차 (Standardized Residual)
+#### (1) 표준화 잔차 (Standardized Residual)
 관측벡터 $\mathbf{y}$가 정규분포(normal distribution)
-$\mathbf{y} \sim N(X\boldsymbol{\beta},\sigma^2 I_n)$를 따르면, 식 (8.16)으로부터 잔차벡터는
-$\mathbf{e} \sim N(0_n,\sigma^2(I_n-H))$를 따른다.  
-따라서 $i$번째 잔차는
+$\mathbf{y} \sim N(X\boldsymbol{\beta},\sigma^2 I_n)$를 따르면, $E(\mathbf{e}), \mathrm{Var}(\mathbf{e})$식으로부터 잔차벡터는 $\mathbf{e} \sim N(0_n,\sigma^2(I_n-H))$를 따른다. 따라서 $i$번째 잔차는
 
 $$e_i \sim N(0,\sigma^2(1-h_{ii}))$$
 
-이 식은 중요한 의미를 가진다. 잔차의 분산이 $(1-h_{ii})$에 비례하므로, **큰 지렛대점(high leverage point)은 본질적으로 작은 잔차를 가질 가능성이 있다.** 따라서 단순히 잔차 크기만 비교하면 큰 지렛대점을 가진 이상점을 놓칠 수 있다.  
-이를 보정하기 위해
+이 식은 중요한 의미를 가진다. 잔차의 분산이 $(1-h_{ii})$에 비례하므로, **큰 지렛대점(high leverage point)은 본질적으로 작은 잔차를 가질 가능성이 있다.** 따라서 단순히 잔차 크기만 비교하면 큰 지렛대점을 가진 이상점을 놓칠 수 있다. 이를 보정하기 위해
 
 $$\frac{e_i}{\sigma\sqrt{1-h_{ii}}} \sim N(0,1)$$
 
@@ -276,15 +248,14 @@ $$r_i=\frac{e_i}{s\sqrt{1-h_{ii}}} \tag{8.20}$$
 를 얻는다. 다만 이 $r_i$의 표본분포(sampling distribution)는 단순한 $t$-분포로 근사할 수 없다. 이유는 분자 $e_i$와 분모 $s$가 서로 독립이 아니기 때문이다. 특히 $|e_i|$가 크면 $s$ 역시 커지는 경향이 있다.  
 식 (8.20)의 $r_i$를 **내적 스튜던트화 잔차(internally studentized residual)** 라고도 부른다.
 
-#### 스튜던트화 잔차 (Studentized Residual)
+#### (2) 스튜던트화 잔차 (Studentized Residual)
 표준화 잔차의 한계를 보완하기 위해, $i$번째 관측값 $y_i$를 제외한 나머지 $n-1$개 자료로부터 오차표준편차(error standard deviation)를 추정한다. 즉, 식 (8.20)의 $s$ 대신, $i$번째 관측값을 제외하고 계산한 $s(i)$를 사용한다. 그러면 스튜던트화 잔차(studentized residual)
 
 $$r_i^*=\frac{e_i}{s(i)\sqrt{1-h_{ii}}} \tag{8.21}$$
 
 를 얻는다. 이를 $r_i$와 구별하여 **외적 스튜던트화 잔차(externally studentized residual)** 라고 부른다. 직관적으로는 $i$번째 관측값이 이상점이면 그 점 자체가 전체 오차분산 추정에 영향을 미치므로, 그 점을 뺀 뒤 분산을 다시 추정하는 것이 더 공정한 판단 기준이 된다.
 
-#### $s(i)^2$와 $\hat{\beta}(i)$의 관계 (Relations for $s(i)^2$ and $\hat{\beta}(i)$)
-처음에는 $r_i^*$를 계산하려면 $i=1,\dots,n$ 각각에 대해 별도의 회귀모형을 $n$번 적합해야 할 것처럼 보인다. 그러나 그럴 필요는 없다: 다음 관계식이 성립한다.
+$r_i^*$를 계산하려면 $i=1,\dots,n$ 각각에 대해 별도의 회귀모형을 $n$번 적합해야 할 것처럼 보인다. 그러나 그럴 필요는 없다: 다음 관계식이 성립한다.
 
 $$s^2(i) = \frac{(n-p-1)s^2-\dfrac{e_i^2}{1-h_{ii}}}{n-p-2} \tag{8.22}$$
 
@@ -295,7 +266,7 @@ $$\hat{\boldsymbol{\beta}}(i) = \hat{\boldsymbol{\beta}} - \frac{(X^TX)^{-1}\mat
 
 가 성립한다. 즉, 한 관측값을 제거했을 때 회귀계수가 얼마나 변하는지도 전체 적합 결과와 잔차, 지렛대 값만으로 계산 가능하다.
 
-#### 이상점 검정을 위한 이론적 절차 (Theoretical Procedure for Outlier Testing)
+#### [이상점 검정을 위한 이론적 절차 (Theoretical Procedure for Outlier Testing)]
 $y_i$가 이상점인지 판정하기 위한 이론적 절차는 다음과 같다.
 
 **Step1** 전체 $n$개 데이터에서 $y_i$를 제거한다.
@@ -327,6 +298,7 @@ $$t_i= \frac{y_i-\tilde{y}_i}{s(i)\sqrt{1+\mathbf{x}_i^T[X(i)^TX(i)]^{-1}\mathbf
 
 $$t_i = r_i \left( \frac{n-p-2}{n-p-1-r_i^2} \right)^{1/2} \tag{8.25}$$
 
+즉, 전체 데이터를 한번만 적합하면 모든 $t_i$를 구할 수 있다.  
 그리고 식 (8.20), (8.21), (8.22), (8.25)의 관계를 이용하면
 
 $$r_i^* = \frac{e_i}{s(i)\sqrt{1-h_{ii}}} = r_i \left( \frac{n-p-2}{n-p-1-r_i^2} \right)^{1/2}
@@ -340,10 +312,10 @@ $$|r_i^*| \ge t_{\alpha/2}(n-p-2)$$
 
 또한 자료 수 $n$이 크면 식 (8.26)의 제곱근 항이 1에 가까워지므로, **스튜던트화 잔차(studentized residual)** 와 **표준화 잔차(standardized residual)** 의 차이는 거의 없어지고, 두 값은 단조함수(monotone function) 관계에 있으므로 잔차 크기의 순서(order)도 동일해진다.
 
-#### 예제 8.1
-두 변수 $x, y$에 대하여 다음의 21개 데이터가 주어졌다고 하자. 이 데이터는 Andrews와 Pregibon, John과 Draper, Michy 등의 논문에서 사용된 것으로, 회귀진단에서 자주 사용되는 자료라고 설명한다. 문제는 **단순회귀모형(simple linear regression model)** 을 적합하고, **지렛대점(leverage point)** 과 **이상점(outlier)** 의 유무를 판정하는 것이다.
+**예제 8.1**
 
-주어진 데이터는 다음과 같다.
+두 변수 $x, y$에 대하여 다음의 21개 데이터가 주어졌다고 하자. 이 데이터는 Andrews와 Pregibon, John과 Draper, Michy 등의 논문에서 사용된 것으로, 회귀진단에서 자주 사용되는 자료다. 단순회귀모형을 적합하고, 지렛대점과 이상유무를 판정하자.
+
 | 실험번호 | $x$ | $y$ |
 | ---- | --: | --: |
 | 1    |  15 |  95 |
@@ -370,15 +342,15 @@ $$|r_i^*| \ge t_{\alpha/2}(n-p-2)$$
 
 전체 21개 데이터를 이용하여 회귀직선(regression line)을 구하면
 $\hat{y}_i = 109.874 - 1.127x_i$를 얻는다.  
-이 단순선형회귀모형(simple linear regression model)의 분산분석표(analysis of variance table)는 다음과 같다.
+
 | 요인              | 제곱합 (sum of squares) | 자유도 (df) | 평균제곱 (mean square) | $F_0$ |
 | --------------- | -------------------: | -------: | -----------------: | ----: |
 | 회귀 (regression) |              1604.08 |        1 |            1604.08 | 13.20 |
 | 잔차 (residual)   |              2308.59 |       19 |            121.505 |       |
 | 계 (total)       |                 3912 |       20 |                    |       |
 
-여기서 $F_0 = 13.20 > F_{0.05}(1,19)=4.38$이므로 회귀직선은 유의하다(significant).  
-또한 잔차의 평균제곱(mean square error, MSE)이 121.505이므로 $\sigma$의 추정값은 $s=\sqrt{MSE}=\sqrt{121.505}=11.0229$
+여기서 $F_0 = 13.20 > F_{0.05}(1,19)=4.38$이므로 회귀직선은 유의하다.    
+또한 잔차의 평균제곱(MSE)이 121.505이므로 $\sigma$의 추정값은 $s=\sqrt{MSE}=\sqrt{121.505}=11.0229$
 
 
 이제 해트 행렬의 대각원소 $h_{ii}$, 잔차 $e_i$, 표준화 잔차 $r_i$, 스튜던트화 잔차 $r_i^*$를 구하면 표와 같은 결과를 얻는다.
@@ -418,7 +390,7 @@ $\bar{h}=\frac{p+1}{n}=\frac{2}{21}$이므로 $2\bar{h}=\frac{4}{21}=0.1905,\qua
 이때 $t_{0.025}(n-p-2)=t_{0.025}(18)=2.101$ 이므로, $|r_i^*| > 2.101$인 경우 이상점으로 판정할 수 있다.
 
 표에서 이를 만족하는 것은 **19번째 관측값**뿐이다.
-실제로 19번째 관측값은 $r_{19}=2.8234,\quad r_{19}^*=3.6070$으로 나타나며, 잔차도 $e_{19}=30.2850$으로 가장 크다. 따라서 **19번째 관측값은 이상점(outlier)**이다.
+실제로 19번째 관측값은 $r_{19}=2.8234,\quad r_{19}^*=3.6070$으로 나타나며, 잔차도 $e_{19}=30.2850$으로 가장 크다. 따라서 **19번째 관측값은 이상점(outlier)** 이다.
 
 정리하면 예제의 결론은 다음과 같다.
 * **18번째 관측값**: 매우 큰 지렛대점(high leverage point)
@@ -439,10 +411,7 @@ $$\mathrm{DFFITS}(i) = \text{sgn}(e_i)\cdot
 {s(i){\lambda^T(X^TX)^{-1}\lambda}^{1/2}}
 \tag{8.27}$$
 
-로 정의된다. 여기서 $\text{sgn}(e_i)$는 부호함수(sign function)로,
-* $e_i>0$이면 $(+)$
-* $e_i=0$이면 $(0)$
-* $e_i<0$이면 $(-)$
+로 정의된다. 여기서 $\text{sgn}(e_i)$는 부호함수(sign function)로, $e_i>0$이면 $(+)$, $e_i=0$이면 $(0)$, $e_i<0$이면 $(-)$
 
 식 (8.27)은 다음과 같이 쓸 수도 있다.
 
@@ -456,7 +425,7 @@ $$\mathrm{DFFITS}(i)
 $$\mathrm{DFFITS}(i) = \frac{\hat{y}_i-\tilde{y}_i(i)}
 {\sqrt{\mathrm{Var}(\hat{y}_i)\text{의 추정값}}} \tag{8.29}$$
 
-여기서 $\tilde{y}_i(i)=x_i^T\hat{\boldsymbol{\beta}}(i)$는 $i$번째 데이터를 제외한 $n-1$개 자료에서 얻은 적합값(fitted value)이다.  
+여기서 $\tilde{y}_i(i)$는 $x_i^T\hat{\boldsymbol{\beta}}(i)$로 계산하며,  $i$번째 데이터를 제외한 $n-1$개 자료에서 얻은 적합값(fitted value)이다.  
 이 값은 계산 편의상 다음처럼 더 간단히 표현된다.
 
 $$\mathrm{DFFITS}(i)
@@ -466,6 +435,7 @@ $$\mathrm{DFFITS}(i)
 \tag{8.30}$$
 
 즉, DFFITS는 **해트 행렬의 대각원소 $h_{ii}$** 와 **외적 스튜던트화 잔차(externally studentized residual) $r_i^*$** 의 결합으로 표현된다.  
+
 대략적으로 $|r_i^*|\ge 2$이고 $h_{ii}\ge (p+1)/n$일 때 $i$번째 관측값을 영향점으로 판정한다면,
 
 $$|\mathrm{DFFITS}(i)|
@@ -581,57 +551,13 @@ Belsley 등은 다음 기준을 제안하였다.
 
 
 ## 8.5 이상한 관측값 탐지: 지렛대점, 이상점과 영향점 (Detection of Leverage, Outliers, and Influential Points)
-이 절은 앞에서 따로따로 살펴본 **지렛대점(leverage point)**, **이상점(outlier)**, **영향점(influential point)** 의 척도들을 한 번에 정리하고, 이들 사이의 관계 및 실제 데이터 해석 방법을 설명한다.
+앞에서 살펴본 **지렛대점(leverage point)**, **이상점(outlier)**, **영향점(influential point)** 의 척도들을 정리해보자..
 
 ### 8.5.1 측도의 종합검토 (Comprehensive Review of Measures)
 앞 절들에서 다음을 다루었다.
 * 지렛대점을 찾는 해트 행렬의 대각원소(diagonal element of hat matrix)와 마할라노비스 거리(Mahalanobis distance)
 * 이상점을 탐지하는 두 종류의 잔차(residual)
 * 영향점을 검출하는 다섯 가지 방법
-
-#### 이상한 관측값 탐지에 사용되는 척도 정리 (Summary of Measures)
-**지렛대점 (Leverage Point)**
-1. 해트 행렬 $(H)$의 대각원소(diagonal element)
-
-    $$h_{ii}$$
-2. 
-마할라노비스 거리(Mahalanobis distance)
-
-    $$M(i)=(n-1)\left(h_{ii}-\frac{1}{n}\right)$$
-
-
-**이상점 (Outlier)**
-1. 표준화 잔차(standardized residual)
-
-    $$r_i=\frac{e_i}{s\sqrt{1-h_{ii}}}$$
-2. 
-스튜던트화 잔차(studentized residual)
-
-    $$r_i^*=\frac{e_i}{s(i)\sqrt{1-h_{ii}}}
-    = r_i \left( \frac{n-p-2}{n-p-1-r_i^2} \right)^{1/2}$$
-
-
-**영향점 (Influential Point)**
-1. DFFITS
-
-    $$\mathrm{DFFITS}(i)= \left(\frac{h_{ii}}{1-h_{ii}}\right)^{1/2}r_i^* $$
-
-2. Cook의 통계량(Cook's statistic)
-
-    $$D(i)=\frac{h_{ii}}{(p+1)(1-h_{ii})}r_i^2 $$
-
-3. Andrews-Pregibon의 통계량(Andrews-Pregibon statistic)
-
-    $$AP(i)=1-h_{ii}-\frac{e_i^2}{(n-p-1)s^2} $$
-
-4. COVRATIO
-    
-    $$\mathrm{COVRATIO}(i) = \frac{1} {\left[1+\dfrac{(r_i^*)^2-1}{n-p-1}\right]^{p+1}(1-h_{ii})} $$
-
-5. FVARATIO
-    
-    $$\mathrm{FVARATIO}(i) = \frac{e_i^2}{(r_i^*)^2(1-h_{ii})^2s^2} $$
-
 
 #### 지렛대점, 이상점, 영향점의 관계 (Relations Among Leverage, Outliers, and Influential Points)
 실제 자료에서 하나의 측정값이 이상점이면 동시에 영향점이 되고, 영향점이면 또한 이상점이 되기도 한다. 그러나 이것이 항상 참인 것은 아니고, 어떤 경우에는 이상점을 제거해도 회귀분석 결과(회귀계수, 결정계수 등)에 큰 변화가 없어 영향점이 아닌 경우가 있다. 반대로 어떤 경우에는 잔차가 작은 측정값이, 잔차가 큰 측정값보다 오히려 회귀결과에 더 큰 영향을 줄 수도 있다.
@@ -705,32 +631,32 @@ Belsley 등은 다음 기준을 제안하였다.
 | 20   |     -0.2638 | 0.0345 |  0.1810 |  0.8863 |        1.0426 |        1.0513 |
 | 21   |      0.0330 | 0.0006 |  0.3039 |  0.9363 |        1.1867 |        1.1253 |
 
-(1) 예제 8.1의 결과에 의해 **19번째 관측값은 이상점(outlier)**이다.
+(1) 예제 8.1의 결과에 의해 19번째 관측값은 이상점이다.
 
 (2) $h_{ii}$의 값을 보면  $h_{ii}\ge 2(p+1)/n = 2(1+1)/21 = 0.1905$
 
-인 관측값은 **18번째 관측값뿐**이다. 또한 18번째 관측값은 가장 큰 $M(i)$ 값을 가진다. 실제로 18번째 관측값은 $x=42$로 다른 $x$들로부터 멀리 떨어져 있으므로 **지렛대점(leverage point)**이라 판단할 수 있다.
+인 관측값은 18번째 관측값뿐이다. 또한 18번째 관측값은 가장 큰 $M(i)$ 값을 가진다. 실제로 18번째 관측값은 $x=42$로 다른 $x$들로부터 멀리 떨어져 있으므로 지렛대점이라 판단할 수 있다.
 
 (3) DFFITS를 보면 $|\mathrm{DFFITS}(i)|\ge 2\sqrt{(p+1)/n} = 2\sqrt{(1+1)/21} \approx 0.6172$
 
-인 경우는 **18번째와 19번째 관측값**이고, 그중 18번째가 조금 더 크다.
+인 경우는 18번째와 19번째 관측값이고, 그중 18번째가 조금 더 크다.
 
 (4) $D(i)$를 보면 $F_{0.50}(2,19)=0.719$ 이므로, 18번째 관측값은 Cook의 통계량 기준에서 영향점에 가장 가까운 값으로 볼 수 있다. 즉 영향을 주는 측정값에 가장 근사하다
 
-(5) $AP(i)$는 값이 작을수록 영향을 크게 주는 관측값인데, **18번째 관측값**이 가장 작은 $AP(i)$를 가진다.
+(5) $AP(i)$는 값이 작을수록 영향을 크게 주는 관측값인데, 18번째 관측값이 가장 작은 $AP(i)$를 가진다.
 
 (6) COVRATIO는 $\mathrm{COVRATIO}(i)\ge 1+\frac{3(p+1)}{n} = 1+\frac{3(1+1)}{21} \approx 1.2857$
 
 이거나 $\mathrm{COVRATIO}(i)\le 1-\frac{3(p+1)}{n} \approx 0.7143$
 
 
-이면 영향을 크게 주는 관측값으로 볼 수 있다. 표에서는 **18번째와 19번째 관측값**이 모두 해당한다.
+이면 영향을 크게 주는 관측값으로 볼 수 있다. 표에서는 18번째와 19번째 관측값이 모두 해당한다.
 
 (7) 마지막으로 FVARATIO는 $1-\frac{3}{n}=1-\frac{3}{21}=0.8571$
 
-보다 작거나, $1+\frac{2p+3}{n} = 1+\frac{2+3}{21} \approx 1.2381$ 보다 크면 영향을 크게 주는 관측값으로 판정할 수 있다. 여기에서도 **18번째와 19번째 관측값**이 모두 해당한다.
+보다 작거나, $1+\frac{2p+3}{n} = 1+\frac{2+3}{21} \approx 1.2381$ 보다 크면 영향을 크게 주는 관측값으로 판정할 수 있다. 여기에서도 18번째와 19번째 관측값이 모두 해당한다.
 
 위 결과를 종합하면 다음 결론을 얻는다.
 
-* **18번째 관측값**: 지렛대점(leverage point)이면서 영향점(influential point)
-* **19번째 관측값**: 이상점(outlier)이면서 영향점(influential point)
+* 18번째 관측값: 지렛대점이면서 영향점
+* 19번째 관측값: 이상점이면서 영향점
