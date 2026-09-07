@@ -326,6 +326,7 @@ $$SST = \sum (y_i - \bar{y})^2 = \sum (y_i - \hat{y}_i + \hat{y}_i - \bar{y})^2 
 = SSE + SSR$$
 
 * 마지막 항은 0이 된다 (잔차벡터와 중심화된 적합값 벡터의 내적 또는 교차곱이 0이므로)
+  - 혹은, $\sum\hat y e=0$ 이고 $\sum e=0$ 이므로.
 * $SSE = \sum (y_i - \hat{y}_i)^2$ (잔차제곱합, 설명되지 않는 변동, residual sum of squares, error sum of squares, sum of squares due to residual errors)
 * $SSR = \sum (\hat{y}_i - \bar{y})^2$ (회귀제곱합, 회귀에 의해 설명되는 변동, regression sum of squares, explained sum of squares)
 
