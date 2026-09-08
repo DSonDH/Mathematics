@@ -266,6 +266,176 @@ $$\hat{\boldsymbol{\beta}}(i) = \hat{\boldsymbol{\beta}} - \frac{(X^TX)^{-1}\mat
 
 가 성립한다. 즉, 한 관측값을 제거했을 때 회귀계수가 얼마나 변하는지도 전체 적합 결과와 잔차, 지렛대 값만으로 계산 가능하다.
 
+>**증명**  
+>
+>$i$번째 관측값을 제외한 행렬과 벡터를 각각 $X(i)$와 $\mathbf y(i)$라고 하고, 전체 설계행렬 $X$는 완전열계수이고, $X(i)$ 역시 완전열계수라고 가정한다.
+>
+>1. 삭제 후 회귀계수추정량
+>
+>$i$번째 관측값을 제외하면 $X(i)^TX(i) = X^TX-\mathbf x_i\mathbf x_i^T$ 이고, $X(i)^T\mathbf y(i) = X^T\mathbf y-\mathbf x_i y_i$ 이다. 따라서 $\hat{\boldsymbol\beta}(i) = \left( X^TX-\mathbf x_i\mathbf x_i^T\right)^{-1}\left(X^T\mathbf y-\mathbf x_i y_i\right)$ 이다.
+>
+>Sherman–Morrison 공식 적용:
+>
+>$$
+>(A+\mathbf u\mathbf v^T)^{-1}
+>= A^{-1} -\frac{A^{-1}\mathbf u\mathbf v^TA^{-1}}{1+\mathbf v^TA^{-1}\mathbf u}
+>$$
+>
+>여기서 $A=X^TX,\quad \mathbf u=-\mathbf x_i,\quad \mathbf v=\mathbf x_i$ 로 놓는다. 그러면 $A+\mathbf u\mathbf v^T = X^TX-\mathbf x_i\mathbf x_i^T$ 이다. 따라서
+>
+>$$
+>\left( X^TX-\mathbf x_i\mathbf x_i^T\right)^{-1}
+>= (X^TX)^{-1} \quad + \frac{(X^TX)^{-1}\mathbf x_i\mathbf x_i^T(X^TX)^{-1}}{1-\mathbf x_i^T(X^TX)^{-1}\mathbf x_i}
+>$$
+>
+>해트 행렬의 대각원소가 $h_{ii} = \mathbf x_i^T(X^TX)^{-1}\mathbf x_i$ 이므로
+>
+>$$
+>\boxed{
+>\left(X(i)^TX(i)\right)^{-1} = (X^TX)^{-1} +
+>\frac{(X^TX)^{-1}\mathbf x_i\mathbf x_i^T(X^TX)^{-1}}{1-h_{ii}}
+>}
+>$$
+>
+>$C=(X^TX)^{-1}$ 라고 쓰면 $\left(X(i)^TX(i)\right)^{-1} = C+\frac{C\mathbf x_i\mathbf x_i^TC}{1-h_{ii}}$ 이다.
+>
+>따라서
+>
+>$$
+>\begin{aligned}
+>\hat{\boldsymbol\beta}(i)
+>&= \left(C+\frac{C\mathbf x_i\mathbf x_i^TC}{1-h_{ii}}\right)
+>\left(X^T\mathbf y-\mathbf x_i y_i\right)\\
+>&= CX^T\mathbf y -C\mathbf x_i y_i +\frac{C\mathbf x_i\mathbf x_i^TCX^T\mathbf y}{1-h_{ii}} - \frac{C\mathbf x_i\mathbf x_i^TC\mathbf x_i y_i}{1-h_{ii}}.
+>\end{aligned}
+>$$
+>
+>다음 관계들을 사용한다:  $CX^T\mathbf y=\hat{\boldsymbol\beta}, \quad \mathbf x_i^TCX^T\mathbf y = \mathbf x_i^T\hat{\boldsymbol\beta} = \hat y_i, \quad \mathbf x_i^TC\mathbf x_i=h_{ii}$  
+>그러면
+>
+>$$
+>\hat{\boldsymbol\beta}(i)
+>= \hat{\boldsymbol\beta} -C\mathbf x_i y_i + \frac{C\mathbf x_i\hat y_i}{1-h_{ii}} - \frac{C\mathbf x_i h_{ii}y_i}{1-h_{ii}} \\
+>= \hat{\boldsymbol\beta} + C\mathbf x_i \left[ -y_i+ \frac{\hat y_i-h_{ii}y_i}{1-h_{ii}} \right] \\
+>= \hat{\boldsymbol\beta} + C\mathbf x_i \left[\frac{\hat y_i-y_i}{1-h_{ii}} \right] \\
+>= \hat{\boldsymbol\beta} - \frac{C\mathbf x_i e_i}{1-h_{ii}}
+>= \hat{\boldsymbol\beta} -\frac{(X^TX)^{-1}\mathbf x_i e_i}{1-h_{ii}}
+>$$
+>
+>2. 삭제잔차의 계산
+>
+>$i$번째 관측값을 제외하고 추정한 회귀계수로 다시 $i$번째 관측값을 예측했을 때의 잔차를 $e_i(i) = y_i-\mathbf x_i^T\hat{\boldsymbol\beta}(i)$ 라고 하자.
+>
+>앞에서 구한 식에 왼쪽에서 $\mathbf x_i^T$를 곱하면
+>
+>$$
+>\mathbf x_i^T\hat{\boldsymbol\beta}(i) = \mathbf x_i^T\hat{\boldsymbol\beta} - \frac{\mathbf x_i^T(X^TX)^{-1}\mathbf x_i e_i}{1-h_{ii}} = \hat y_i-\frac{h_{ii}e_i}{1-h_{ii}}
+>$$
+>
+>그러므로
+>
+>$$
+>\begin{aligned}
+>e_i(i)
+>&= y_i-\mathbf x_i^T\hat{\boldsymbol\beta}(i)\\
+>&= y_i-\hat y_i +\frac{h_{ii}e_i}{1-h_{ii}}\\
+>&= e_i+\frac{h_{ii}e_i}{1-h_{ii}}\\
+>&= \frac{e_i}{1-h_{ii}}.
+>\end{aligned}
+>$$
+>
+>3. 삭제 후 잔차제곱합
+>
+>전체 자료의 잔차벡터를 $\mathbf e = \mathbf y-X\hat{\boldsymbol\beta}$ 라고 하고, 전체 잔차제곱합을 $SSE=\mathbf e^T\mathbf e$ 라고 하자.  
+>회귀계수의 변화량을 $\boldsymbol\delta_i = \hat{\boldsymbol\beta}(i) -\hat{\boldsymbol\beta}$ 라고 하면 앞의 결과에서 $\boldsymbol\delta_i = -\frac{(X^TX)^{-1}\mathbf x_i e_i}{1-h_{ii}}$ 이다.
+>
+>삭제 후 회귀계수를 원래 $n$개 자료 전체에 적용한 잔차벡터는 $\mathbf y-X\hat{\boldsymbol\beta}(i) = \mathbf y-X \left(\hat{\boldsymbol\beta}+\boldsymbol\delta_i\right) = \mathbf e-X\boldsymbol\delta_i$. 따라서 그 잔차제곱합은
+>
+>$$
+>\left\| \mathbf y-X\hat{\boldsymbol\beta}(i) \right\|^2
+>= (\mathbf e-X\boldsymbol\delta_i)^T (\mathbf e-X\boldsymbol\delta_i) =
+>\mathbf e^T\mathbf e -2\boldsymbol\delta_i^TX^T\mathbf e +\boldsymbol\delta_i^TX^TX\boldsymbol\delta_i.
+>$$
+>
+>최소제곱법의 정규방정식에 의해 $X^T\mathbf e=\mathbf0$ 이므로 교차항은 0이다. 따라서
+>
+>$$
+>\left\| \mathbf y-X\hat{\boldsymbol\beta}(i) \right\|^2 = SSE+\boldsymbol\delta_i^TX^TX\boldsymbol\delta_i
+>$$
+>
+>여기서
+>
+>$$
+>\begin{aligned}
+>\boldsymbol\delta_i^TX^TX\boldsymbol\delta_i
+>&=
+>\frac{e_i^2}{(1-h_{ii})^2}
+>\mathbf x_i^T
+>(X^TX)^{-1}
+>X^TX
+>(X^TX)^{-1}
+>\mathbf x_i\\
+>&=
+>\frac{e_i^2}{(1-h_{ii})^2}
+>\mathbf x_i^T(X^TX)^{-1}\mathbf x_i\\
+>&=
+>\frac{h_{ii}e_i^2}{(1-h_{ii})^2}.
+>\end{aligned}
+>$$
+>
+>그러므로 삭제 후 추정량을 원래 자료 전체에 적용한 잔차제곱합은
+>
+>$$
+>SSE+ \frac{h_{ii}e_i^2}{(1-h_{ii})^2}
+>$$
+>
+>하지만 여기에는 실제로 삭제해야 하는 $i$번째 관측값의 잔차제곱도 포함되어 있다. 앞에서 구한 삭제잔차는
+>
+>$$
+>e_i(i)=\frac{e_i}{1-h_{ii}}
+>$$
+>
+>이므로
+>
+>$$
+>e_i(i)^2
+>=
+>\frac{e_i^2}{(1-h_{ii})^2}
+>$$
+>
+>이다.
+>
+>따라서 실제 삭제 후 잔차제곱합은
+>
+>$$
+>\begin{aligned}
+>SSE(i)
+>&= SSE+ \frac{h_{ii}e_i^2}{(1-h_{ii})^2} - \frac{e_i^2}{(1-h_{ii})^2}\\
+>&= SSE- \frac{(1-h_{ii})e_i^2}{(1-h_{ii})^2}\\
+>&= SSE-\frac{e_i^2}{1-h_{ii}}.
+>\end{aligned}
+>$$
+>
+>4. 삭제 후 분산추정량
+>
+>전체 자료에서는 모수가 절편을 포함하여 $p+1$개이므로 잔차 자유도는 $n-(p+1)=n-p-1$ 이다. 따라서 $s^2=\frac{SSE}{n-p-1}$ 이고, $SSE=(n-p-1)s^2$ 이다.
+>
+>$i$번째 관측값을 삭제하면 관측값은 $n-1$개가 되므로 잔차 자유도는 $(n-1)-(p+1)=n-p-2$ 이다. 따라서 $s^2(i)=\frac{SSE(i)}{n-p-2}$ 이다.
+>
+>앞에서 얻은 잔차제곱합 관계를 대입하면
+>
+>$$
+>s^2(i) = \frac{SSE-\dfrac{e_i^2}{1-h_{ii}}}{n-p-2}
+>$$
+>
+>이고, 다시 $SSE=(n-p-1)s^2$을 대입하면
+>
+>$$
+>\boxed{
+>s^2(i) = \frac{(n-p-1)s^2-\dfrac{e_i^2}{1-h_{ii}}}{n-p-2}
+>}
+>$$
+
 #### [이상점 검정을 위한 이론적 절차 (Theoretical Procedure for Outlier Testing)]
 $y_i$가 이상점인지 판정하기 위한 이론적 절차는 다음과 같다.
 

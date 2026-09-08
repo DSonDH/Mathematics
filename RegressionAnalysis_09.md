@@ -1,11 +1,9 @@
 # Chapter 9 변수의 선택 (Variable Selection)
 
-이 장에서는 반응변수 $y$와 이 변수에 영향을 미칠 수 있는 가능한 모든 설명변수 $x_1, x_2, \dots, x_p$가 주어졌다고 가정한다. 일반적으로 반응변수 $y$의 변화를 설명하기 위한 모형을 찾을 때, 모든 설명변수를 전부 포함한 모형보다는 **가능한 적은 수의 변수를 사용한 간단한 모형**을 선택하는 것이 바람직한 경우가 많다. 이러한 모형을 간단모형 (parsimonious model)이라고 한다.
+반응변수 $y$와 설명변수 $x_1, x_2, \dots, x_p$가 주어졌을 때, 반응변수 $y$의 변화를 설명하기 위한 모형을 찾을 때, 모든 설명변수를 전부 포함한 모형보다는 **가능한 적은 수의 변수를 사용한 간단한 모형**을 선택하는 것이 바람직한 경우가 많다. 이러한 모형을 간단모형 (parsimonious model)이라고 한다.  
+그리하여 이 장의 핵심 문제는 다음과 같다: 회귀모형 (regression model)에서 설명변수들을 어떻게 선택할 것인가?
 
-이 장의 핵심 문제는 다음과 같다.
-회귀모형 (regression model)에서 설명변수들을 어떻게 선택할 것인가?
-
-첫째, $y$에 영향을 미칠 수 있는 모든 설명변수 $x$를 사용하여 $y$의 값을 예측해야 한다. 그렇지 않으면 $y$의 편의가 증가할 수 있다. 여기서 편의는 편향 (bias)을 뜻한다.
+첫째, $y$에 영향을 미칠 수 있는 모든 설명변수 $x$를 사용하여 $y$의 값을 예측해야 한다. 그렇지 않으면 $y$의 편의(bias)가 증가할 수 있다.
 
 둘째, 설명변수가 많을수록 데이터를 수집하고 분석하며 변수들의 변화를 탐지하거나 관리하는 데 큰 노력이 요구될 뿐 아니라, $\hat{y}$의 분산이 증가할 수 있으므로 가능한 범위 내에서 적은 수의 설명변수를 포함해야 한다.
 
@@ -14,23 +12,17 @@
 * 중요한 설명변수를 빠뜨리지 말아야 한다.
 * 그러나 설명변수를 너무 많이 넣어 분산을 키우거나 모형을 복잡하게 만들어서도 안 된다.
 
-이 두 원칙이 **서로 이율배반적**이므로, 적절한 판정기준 (criterion)을 토대로 설명변수를 선택함으로써 '최적' 회귀모형 (best regression model)을 선택해야 한다고 설명한다. 여기서 '최적'이라는 표현은 절대적 의미가 아니라 **판정기준에 따라 달라지는 상대적 개념**이다. 즉, 판정기준이 달라지면 최적회귀모형도 달라질 수 있다.
+이 두 원칙이 **서로 이율배반적**이므로, 적절한 판정기준 (criterion)을 토대로 설명변수를 선택함으로써 '최적' 회귀모형 (best regression model)을 선택해야 한다. 여기서 '최적'이라는 표현은 절대적 의미가 아니라 **판정기준에 따라 달라지는 상대적 개념**이다. 즉, 판정기준이 달라지면 최적회귀모형도 달라질 수 있다.
 
 그리고 본격적으로 변수 선택 방법을 논하기 전에, **모든 설명변수를 포함시키지 않고 일부만 선택함으로써 발생하는 회귀분석의 이론적 결과**를 먼저 살펴보자.
 
 ## 9.1 변수제거의 결과 (Consequences of Variable Deletion)
 
-1. 변수를 제거하면 추정량에 **편향 (bias)** 이 생길 수 있다.
-2. 그러나 동시에 추정량 또는 예측량의 **분산 (variance)** 이 줄어들 수 있다.
-3. 따라서 전체 성능은 평균제곱오차 (mean squared error, MSE)의 관점에서 판단해야 한다.
-
-### 완전모형 (Full Model)의 설정
-
-설명변수가 총 $p$개 있고, 자료는 $n$개 있으며, $n > p$라고 하자. 중회귀모형 (multiple regression model)을 다음과 같이 둔다. 이 중회귀모형을 **완전모형 (full model)** 이라고 부른다. 즉, 완전모형은 가능한 모든 설명변수를 포함한 모형.
+설명변수가 총 $p$개 있고, 자료는 $n$개 있으며, $n > p$라고 하자. 중회귀모형 (multiple regression model)을 다음과 같이 둔다. 
 
 $$y_i = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip} + \epsilon_i, \qquad \epsilon_i \sim N(0,\sigma^2), \quad i=1,2,\dots,n \tag{11.1}$$
 
-이를 행렬 형태로 쓰면
+이 중회귀모형을 **완전모형 (full model)** 이라고 부른다. 즉, 완전모형은 가능한 모든 설명변수를 포함한 모형이다. 이를 행렬 형태로 쓰면
 
 $$\mathbf{y} = X\beta + \epsilon, \qquad \epsilon \sim N(0,\sigma^2 I_n) \tag{11.2}$$
 
@@ -38,12 +30,9 @@ $$\mathbf{y} = X\beta + \epsilon, \qquad \epsilon \sim N(0,\sigma^2 I_n) \tag{11
 * $\beta$는 $(p+1)\times 1$ 벡터
 * $\mathbf{y}$와 $\epsilon$은 $n \times 1$ 벡터
 
-### 설명변수의 분할
-
 이제 전체 설명변수 집합을 두 부분으로 나눈다. 행렬 $X$를 나누면,
 
-$$X = (X_k, X_r) \\
-\mathbf{y} = X_k \beta_k + X_r \beta_r + \epsilon \tag{11.3}$$
+$$X = (X_k, X_r) ,\quad \mathbf{y} = X_k \beta_k + X_r \beta_r + \epsilon \tag{11.3}$$
 
 * $X_k$는 절편 (intercept)과 $k$개의 설명변수를 포함한다.
 * $X_r$는 나머지 $p-k$개의 설명변수를 포함한다.
@@ -99,86 +88,131 @@ $$\tilde{\sigma}^2 = \mathbf{y}^T \left[ I_n - X_k(X_k^TX_k)^{-1}X_k^T \right]
 
 ### 축소모형 추정량의 기대값: 편향의 발생
 
-이제 $\tilde{\boldsymbol{\beta}}_k$의 기대값을 계산한다.
+이제 $\tilde{\boldsymbol{\beta}}_k$의 기대값을 계산한다. 
 
-$$E(\tilde{\boldsymbol{\beta}}_k)=E\left[(X_k^TX_k)^{-1}X_k^T\mathbf{y}\right] =(X_k^TX_k)^{-1}X_k^T E(\mathbf{y})$$
-
-완전모형에서 $E(\mathbf{y}) = X\boldsymbol{\beta}$이므로,
-
-$$=(X_k^TX_k)^{-1}X_k^T X\boldsymbol{\beta}$$
-
-그리고 $X=(X_k,X_r)$, $\boldsymbol{\beta} = \begin{bmatrix}\boldsymbol{\beta}_k \\ \boldsymbol{\beta}_r\end{bmatrix}$ 이므로
-
-$$=(X_k^TX_k)^{-1}X_k^T [X_k\boldsymbol{\beta}_k + X_r\boldsymbol{\beta}_r]\\ =\boldsymbol{\beta}_k + (X_k^TX_k)^{-1}X_k^T X_r \boldsymbol{\beta}_r$$
+$$
+\begin{aligned}
+E(\tilde{\boldsymbol{\beta}}_k) &=E\left[(X_k^TX_k)^{-1}X_k^T\mathbf{y}\right] \\ 
+&=(X_k^TX_k)^{-1}X_k^T E(\mathbf{y}) \\
+&=(X_k^TX_k)^{-1}X_k^T X\boldsymbol{\beta} \\
+&=(X_k^TX_k)^{-1}X_k^T [X_k\boldsymbol{\beta}_k + X_r\boldsymbol{\beta}_r]\\ 
+&=\boldsymbol{\beta}_k + (X_k^TX_k)^{-1}X_k^T X_r \boldsymbol{\beta}_r
+\end{aligned}
+$$
 
 여기서 $A = (X_k^TX_k)^{-1}X_k^T X_r$로 놓으면
 
 $$E(\tilde{\boldsymbol{\beta}}_k) = \boldsymbol{\beta}_k + A\boldsymbol{\beta}_r \tag{11.8}$$
 
-이 식의 의미는 매우 중요하다. $\tilde{\boldsymbol{\beta}}_k$의 기대값이 $\boldsymbol{\beta}_k$와 정확히 일치하지 않고, 추가항 $A\boldsymbol{\beta}_r$가 붙는다. 즉, 일반적으로 축소모형의 추정량 $\tilde{\boldsymbol{\beta}}_k$는 **불편추정량 (unbiased estimator)** 이 아니다. 설명변수 제거로 인해 **편향 (bias)** 이 생긴다.
-
-이 편향은 구체적으로
-
-$$\text{Bias}(\tilde{\boldsymbol{\beta}}_k)=E(\tilde{\boldsymbol{\beta}}_k)-\boldsymbol{\beta}_k=A\boldsymbol{\beta}_r$$
-
-즉, 제거한 변수들의 계수 $\boldsymbol{\beta}_r$이 0이 아니고, 또한 제거된 변수 $X_r$이 남겨진 변수 $X_k$와 상관되어 있으면 $A\boldsymbol{\beta}_r\neq 0$가 되어 편향이 발생한다.
-
-이는 회귀분석에서 잘 알려진 **누락변수편향 (omitted variable bias)** 의 행렬형 표현이라고 볼 수 있다.
+>$\tilde{\boldsymbol{\beta}}_k$의 기대값이 $\boldsymbol{\beta}_k$와 정확히 일치하지 않고, 추가항 $A\boldsymbol{\beta}_r$가 붙는다. 즉, 일반적으로 축소모형의 추정량 $\tilde{\boldsymbol{\beta}}_k$는 불편추정량 이 아니다. 설명변수 제거로 인해 **편향 (bias)** 이 생긴다: $\text{Bias}(\tilde{\boldsymbol{\beta}}_k)=E(\tilde{\boldsymbol{\beta}}_k)-\boldsymbol{\beta}_k=A\boldsymbol{\beta}_r$
+>
+>이는 회귀분석에서 잘 알려진 **누락변수편향 (omitted variable bias)** 의 행렬형 표현이라고 볼 수 있다.
 식 (11.8)은 사실상 누락변수편향의 핵심 수식을 제시한 것이다.
 
 ### 축소모형 추정량의 분산
 
 다음으로 $\tilde{\boldsymbol{\beta}}_k$의 분산은
 
-$$\text{Var}(\tilde{\boldsymbol{\beta}}_k)=\text{Var}[(X_k^TX_k)^{-1}X_k^T\mathbf{y}] \\ =(X_k^TX_k)^{-1}X_k^T \, \text{Var}(\mathbf{y}) \, X_k (X_k^TX_k)^{-1}$$
+$$
+\begin{aligned}
+\text{Var}(\tilde{\boldsymbol{\beta}}_k)
+&=\text{Var}[(X_k^TX_k)^{-1}X_k^T\mathbf{y}] \\
+&=(X_k^TX_k)^{-1}X_k^T \, \text{Var}(\mathbf{y}) \, X_k (X_k^TX_k)^{-1} \\
+&=\sigma^2 (X_k^TX_k)^{-1}X_k^T I_n X_k (X_k^TX_k)^{-1} \\ 
+&=\sigma^2 (X_k^TX_k)^{-1} \tag{11.9}
+\end{aligned}
+$$
 
-완전모형에서 $\text{Var}(\mathbf{y}) = \sigma^2 I_n$ 이므로
-
-$$=\sigma^2 (X_k^TX_k)^{-1}X_k^T I_n X_k (X_k^TX_k)^{-1} \\ =\sigma^2 (X_k^TX_k)^{-1} \tag{11.9}$$
-
-이 결과는 형식상 일반적인 최소제곱추정량의 분산 공식을 따른다. 다만 중요한 것은 이것이 **편향이 있는 추정량의 분산**이라는 점이다. 즉, 분산만 보고 좋다고 판단하면 안 되고, 편향까지 함께 봐야 한다.
+>이 결과는 일반적인 최소제곱추정량의 분산 공식과 같다. 하지만 **편향이 있는 추정량의 분산**이라는 점이다. 즉, 분산만 보고 좋다고 판단하면 안 되고, 편향까지 함께 봐야 한다.
 
 ### 평균제곱오차 (Mean Squared Error, MSE)
 
 다음으로 $(\tilde{\boldsymbol{\beta}}_k-\boldsymbol{\beta}_k)(\tilde{\boldsymbol{\beta}}_k-\boldsymbol{\beta}_k)^T$의 기대값을 $\tilde{\boldsymbol{\beta}}_k$의 평균제곱오차 (mean squared error, MSE)라고 정의한다. 즉,
 
-$$\text{MSE}(\tilde{\boldsymbol{\beta}}_k)=E[(\tilde{\boldsymbol{\beta}}_k-\boldsymbol{\beta}_k)(\tilde{\boldsymbol{\beta}}_k-\boldsymbol{\beta}_k)^T]\\
-= E[(\tilde{\boldsymbol{\beta}}_k - E(\tilde{\boldsymbol{\beta}}_k) + E(\tilde{\boldsymbol{\beta}}_k) - \boldsymbol{\beta}_k)(\tilde{\boldsymbol{\beta}}_k - E(\tilde{\boldsymbol{\beta}}_k) + E(\tilde{\boldsymbol{\beta}}_k) - \boldsymbol{\beta}_k)^T] \\
-= E[(\tilde{\boldsymbol{\beta}}_k - E(\tilde{\boldsymbol{\beta}}_k))(\tilde{\boldsymbol{\beta}}_k - E(\tilde{\boldsymbol{\beta}}_k))^T] + [E(\tilde{\boldsymbol{\beta}}_k) - \boldsymbol{\beta}_k][E(\tilde{\boldsymbol{\beta}}_k) - \boldsymbol{\beta}_k]^T \\
-= \text{Var}(\tilde{\boldsymbol{\beta}}_k)+[E(\tilde{\boldsymbol{\beta}}_k)-\boldsymbol{\beta}_k][E(\tilde{\boldsymbol{\beta}}_k)-\boldsymbol{\beta}_k]^T$$
+> $(p+1) \times 1$ 벡터 $\boldsymbol{\beta}$의 추정량 $\hat{\boldsymbol{\beta}}$에 대해 $\text{MSE}(\tilde{\boldsymbol{\beta}}_k)=E[(\tilde{\boldsymbol{\beta}}_k-\boldsymbol{\beta}_k)(\tilde{\boldsymbol{\beta}}_k-\boldsymbol{\beta}_k)^T]$ 라 정의한다.  
+> 이는 $\text{MSE}^*(\tilde{\boldsymbol{\beta}}_k)$ 의 trace에 해당한다.: $\text{MSE}(\tilde{\boldsymbol{\beta}}_k) = tr(\text{MSE}^*(\tilde{\boldsymbol{\beta}}_k))$
+
+$$
+\begin{aligned}
+\text{MSE}(\tilde{\boldsymbol{\beta}}_k) &=E[(\tilde{\boldsymbol{\beta}}_k-\boldsymbol{\beta}_k)(\tilde{\boldsymbol{\beta}}_k-\boldsymbol{\beta}_k)^T]\\
+&= E\left[\left(\tilde{\boldsymbol{\beta}}_k - E(\tilde{\boldsymbol{\beta}}_k) + E(\tilde{\boldsymbol{\beta}}_k) - \boldsymbol{\beta}_k \right)
+\left(\tilde{\boldsymbol{\beta}}_k - E(\tilde{\boldsymbol{\beta}}_k) + E(\tilde{\boldsymbol{\beta}}_k) - \boldsymbol{\beta}_k \right)^T \right] \\
+&= E\left[(\tilde{\boldsymbol{\beta}}_k - E(\tilde{\boldsymbol{\beta}}_k))(\tilde{\boldsymbol{\beta}}_k - E(\tilde{\boldsymbol{\beta}}_k))^T \right] + \left[E(\tilde{\boldsymbol{\beta}}_k) - \boldsymbol{\beta}_k\right]\left[E(\tilde{\boldsymbol{\beta}}_k) - \boldsymbol{\beta}_k\right]^T \\
+&= \text{Var}(\tilde{\boldsymbol{\beta}}_k)+[E(\tilde{\boldsymbol{\beta}}_k)-\boldsymbol{\beta}_k][E(\tilde{\boldsymbol{\beta}}_k)-\boldsymbol{\beta}_k]^T
+\end{aligned}
+$$
 
 이고, 식 (11.8), (11.9)를 이용하면
 
 $$\text{MSE}(\tilde{\boldsymbol{\beta}}_k)=\sigma^2(X_k^T X_k)^{-1} + A\boldsymbol{\beta}_r\boldsymbol{\beta}_r^T A^T \tag{11.10}$$
 
-이 식은 변수 제거 문제의 핵심을 정확히 보여 준다.
-
-* 첫 번째 항 $\sigma^2(X_k^TX_k)^{-1}$: 분산 (variance) 부분
-* 두 번째 항 $A\boldsymbol{\beta}_r\boldsymbol{\beta}_r^T A^T$: 편향 제곱 (squared bias) 부분
-
-즉, 변수를 제거하면 분산은 줄어들 수 있지만, 그 대가로 편향이 생긴다. 평균제곱오차는 두 효과를 함께 평가한다.
+>* 첫 번째 항 $\sigma^2(X_k^TX_k)^{-1}$: 분산 (variance) 부분
+>* 두 번째 항 $A\boldsymbol{\beta}_r\boldsymbol{\beta}_r^T A^T$: 편향 제곱 (squared bias) 부분
+>
+>즉, 변수를 제거하면 분산은 줄어들 수 있지만, 그 대가로 편향이 생긴다. 평균제곱오차는 두 효과를 함께 평가한다.
 
 ### 축소모형 오차분산 추정량의 기대값
 
-이어서 $\tilde{\sigma}^2$의 기대값은 정리 3.1에 의해
+$$
+E(\tilde{\sigma}^2)=\sigma^2+\frac{\boldsymbol{\beta}_r^T X_r^T\left[I - X_k(X_k^TX_k)^{-1}X_k^T\right]X_r \boldsymbol{\beta}_r}{n-k-1} \tag{11.11}
+$$
 
-$$E(\tilde{\sigma}^2)=\sigma^2+\frac{\boldsymbol{\beta}_r^T X_r^T\left[I - X_k(X_k^TX_k)^{-1}X_k^T\right]X_r \boldsymbol{\beta}_r}{n-k-1} \tag{11.11}$$
+>**증명**  
+>
+>축소모형의 hat matrix와 residual-maker matrix를 각각 $H_k=X_k(X_k^TX_k)^{-1}X_k^T$ 및 $M_k=I-H_k = I-X_k(X_k^TX_k)^{-1}X_k^T$ 라고 하자. 축소모형의 잔차는 $\tilde{\mathbf e} = \mathbf y-X_k\tilde{\boldsymbol\beta}_k = M_k\mathbf y$ 이므로 축소모형의 오차분산 추정량은
+>
+>$$
+>\tilde{\sigma}^2 = \frac{\tilde{\mathbf e}^T\tilde{\mathbf e}}{n-k-1} = \frac{\mathbf y^TM_k^TM_k\mathbf y}{n-k-1} = \frac{\mathbf y^TM_k\mathbf y}{n-k-1}
+>$$
+>
+>주어진 정리 3.1에 의하면 $E(\mathbf y^TA\mathbf y) = \text{tr}(A\mathbf V) + \boldsymbol\mu^TA\boldsymbol\mu$ 이고, $A=M_k$와 $\mathbf V=\sigma^2I$를 대입하면
+>
+>$$
+>E(\mathbf y^TM_k\mathbf y) = \text{tr}(M_k\sigma^2I) + \boldsymbol\mu^TM_k\boldsymbol\mu = \sigma^2\text{tr}(M_k) + \boldsymbol\mu^TM_k\boldsymbol\mu
+>$$
+>
+>$X_k$가 절편을 포함하여 $k+1$개의 선형독립인 열을 가진다고 하면 $\text{rank}(X_k)=k+1$ 이다. $H_k$는 $\mathcal C(X_k)$로의 직교투영행렬이므로 $\text{tr}(H_k) = \text{rank}(H_k) = k+1$ 이다. 따라서 $\text{tr}(M_k) = \text{tr}(I-H_k) = n-(k+1) = n-k-1$ 이다.
+>
+>이제 평균에 관한 항을 계산한다. $M_k$의 정의에 의해 $M_kX_k = \left[I-X_k(X_k^TX_k)^{-1}X_k^T\right]X_k = 0$ 이다. 또한 $M_k$는 대칭이므로 $X_k^TM_k=0$ 도 성립한다.  
+>따라서 $\boldsymbol\mu^TM_k\boldsymbol\mu = (X_k\boldsymbol\beta_k+X_r\boldsymbol\beta_r)^T M_k (X_k\boldsymbol\beta_k+X_r\boldsymbol\beta_r) = \boldsymbol\beta_r^TX_r^TM_kX_r\boldsymbol\beta_r$
+>
+>그러므로
+>
+>$$
+>E(\mathbf y^TM_k\mathbf y) = \sigma^2(n-k-1) + \boldsymbol\beta_r^TX_r^TM_kX_r\boldsymbol\beta_r
+>$$
+>
+>이고, 양변을 $n-k-1$로 나누면
+>
+>$$
+>E(\tilde{\sigma}^2) = \sigma^2 + \frac{\boldsymbol\beta_r^TX_r^TM_kX_r\boldsymbol\beta_r}
+>{n-k-1}
+>$$
+>
+>이다. 마지막으로 $M_k$를 다시 대입하면
+>
+>$$
+>\boxed{
+>E(\tilde{\sigma}^2) = \sigma^2+
+>\frac{\boldsymbol\beta_r^TX_r^T \left[I-X_k(X_k^TX_k)^{-1}X_k^T\right] X_r\boldsymbol\beta_r }{n-k-1}
+>}
+>$$
+>
+추가항은
 
-즉, 축소모형에서의 잔차평균제곱은 일반적으로 $\sigma^2$의 불편추정량이 아니다. 제거된 변수들이 실제로 유의한 역할을 하고 있다면, 그 효과가 잔차로 밀려 들어가므로 $\tilde{\sigma}^2$는 실제 오차분산보다 커질 수 있다.
+$$
+\boldsymbol\beta_r^TX_r^TM_kX_r\boldsymbol\beta_r
+= (X_r\boldsymbol\beta_r)^TM_k(X_r\boldsymbol\beta_r)
+= \left\|M_kX_r\boldsymbol\beta_r\right\|^2 \geq 0
+$$
+
+이므로 일반적으로 $E(\tilde{\sigma}^2)\geq\sigma^2$ 이다. 즉, 제외된 변수의 효과 중 $X_k$의 열공간으로 설명되지 않는 부분이 존재하면(제거된 변수들이 실제로 유의한 역할을 하고 있다면) 축소모형의 오차분산 추정량은 상향 편향된다. 반대로 $M_kX_r\boldsymbol\beta_r=0$ 이면 추가항이 사라져 $E(\tilde{\sigma}^2)=\sigma^2$ 가 된다.
 
 여기서 MSE는 평균제곱오차 (mean squared error)를 뜻하는 것이며, 분산분석표 (ANOVA table) 등에서 사용되는 잔차평균제곱 (MSE)와는 다른 맥락이다. 따라서 평균제곱오차를 쓸 때는 $\text{MSE}(\cdot)$처럼 괄호를 붙여 써야한다.
 
 ### 예측 문제로의 전개
 
-이제 설명변수 $(x_1,\dots,x_p)$가 주어졌을 때 $E(y)$를 예측하는 문제를 생각한다. 완전모형에서
-
-$$E(y) = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p = \mathbf{x}^T\boldsymbol{\beta}$$
-
-여기서 $\mathbf{x}$를 $\mathbf{x}_k$와 $\mathbf{x}_r$로 나누면
-
-$$E(y) = \mathbf{x}_k^T \boldsymbol{\beta}_k + \mathbf{x}_r^T \boldsymbol{\beta}_r$$
-
-그리고 $E(y)$의 추정량은 완전모형과 축소모형에서 각각 다음과 같다.
+이제 설명변수 $(x_1,\dots,x_p)$가 주어졌을 때 $E(y)$를 예측하는 문제를 생각한다. 완전모형에서 $E(y) = \mathbf{x}_k^T \boldsymbol{\beta}_k + \mathbf{x}_r^T \boldsymbol{\beta}_r$ 그리고 $E(y)$의 추정량은 완전모형과 축소모형에서 각각 다음과 같다.
 
 완전모형에서는
 
@@ -188,23 +222,16 @@ $$\hat{y} = \mathbf{x}^T\hat{\boldsymbol{\beta}} = \mathbf{x}_k^T \hat{\boldsymb
 
 $$\tilde{y}_k = \mathbf{x}_k^T \tilde{\boldsymbol{\beta}}_k$$
 
-### 완전모형 예측량과 축소모형 예측량의 기대값, 분산
-
-완전모형 예측량에 대해서
+이들의 기댓값, 분산은 다음과 같다:
 
 $$E(\hat{y}) = \mathbf{x}^T\boldsymbol{\beta},\quad \text{Var}(\hat{y}) = \sigma^2 \mathbf{x}^T (X^TX)^{-1} \mathbf{x} \tag{11.13}$$
 
-즉, 완전모형 예측량 $\hat{y}$는 불편하다. 반면 축소모형 예측량은
+즉, 완전모형 예측량 $\hat{y}$는 불편하다. 반면 축소모형 예측량은  
+($A = (X_k^TX_k)^{-1}X_k^T X_r$)
 
 $$E(\tilde{y}_k) = \mathbf{x}_k^T\boldsymbol{\beta}_k + \mathbf{x}_k^T A\boldsymbol{\beta}_r, \quad \text{Var}(\tilde{y}_k) = \sigma^2 \mathbf{x}_k^T (X_k^TX_k)^{-1} \mathbf{x}_k$$
 
-여기서 $E(y)=\mathbf{x}_k^T\boldsymbol{\beta}_k + \mathbf{x}_r^T\boldsymbol{\beta}_r$이므로, 일반적으로
-
-$$ E(\tilde{y}_k) \neq E(y) $$
-
-즉, 축소모형 예측량 역시 편향을 가진다.
-
-### 축소모형 예측의 평균제곱오차
+여기서 $E(y)=\mathbf{x}_k^T\boldsymbol{\beta}_k + \mathbf{x}_r^T\boldsymbol{\beta}_r$이므로, 일반적으로 $E(\tilde{y}_k) \neq E(y)$ 즉, 축소모형 예측량 역시 편향을 가진다.
 
 축소모형에서 $E(y)$의 예측값 $\tilde{y}_k$에 대한 평균제곱오차는
 
@@ -212,62 +239,154 @@ $$\text{MSE}(\tilde{y}_k)=E(\tilde{y}_k - \mathbf{x}^T\boldsymbol{\beta})^2 \tag
 
 로 정의된다. 이를 분해하면
 
-$$\text{MSE}(\tilde{y}_k)=E(\tilde{y}_k - E(\tilde{y}_k))^2+[E(\tilde{y}_k)-\mathbf{x}^T\boldsymbol{\beta}]^2 \\
-=\text{Var}(\tilde{y}_k)+[(\mathbf{x}_k^T\boldsymbol{\beta}_k + \mathbf{x}_k^T A\boldsymbol{\beta}_r) - (\mathbf{x}_k^T\boldsymbol{\beta}_k + \mathbf{x}_r^T\boldsymbol{\beta}_r)]^2$$
-
-따라서
-
-$$\text{MSE}(\tilde{y}_k)=\sigma^2 \mathbf{x}_k^T (X_k^TX_k)^{-1} \mathbf{x}_k+(\mathbf{x}_k^T A\boldsymbol{\beta}_r - \mathbf{x}_r^T\boldsymbol{\beta}_r)^2$$
+$$=E(\tilde{y}_k - E(\tilde{y}_k))^2+[E(\tilde{y}_k)-\mathbf{x}^T\boldsymbol{\beta}]^2 \\
+=\text{Var}(\tilde{y}_k)+[(\mathbf{x}_k^T\boldsymbol{\beta}_k + \mathbf{x}_k^T A\boldsymbol{\beta}_r) - (\mathbf{x}_k^T\boldsymbol{\beta}_k + \mathbf{x}_r^T\boldsymbol{\beta}_r)]^2 \\
+=\sigma^2 \mathbf{x}_k^T (X_k^TX_k)^{-1} \mathbf{x}_k+(\mathbf{x}_k^T A\boldsymbol{\beta}_r - \mathbf{x}_r^T\boldsymbol{\beta}_r)^2$$
 
 이 역시 분산항 + 편향제곱항의 구조이다. 즉, 예측에서도 본질은 동일하다. 변수를 제거하면 예측 분산은 줄어들 수 있지만, 대신 예측 편향이 생길 수 있다.
 
 ### 정리 9.1
 
-행렬
+행렬 $\text{Var}(\hat{\boldsymbol{\beta}}_k) - \text{Var}(\tilde{\boldsymbol{\beta}}_k)$ 은 양반정치행렬 (positive semi-definite matrix)이다.
 
-$$\text{Var}(\hat{\boldsymbol{\beta}}_k) - \text{Var}(\tilde{\boldsymbol{\beta}}_k)$$
+즉 **완전모형에서 추정된 회귀계수의 분산이 축소모형보다 더 크다.**  
+완전모형에서의 계수 추정은 불편하지만, 더 많은 변수를 함께 추정해야 하므로 분산이 커질 수 있다. 반대로 축소모형에서는 일부 변수를 제거하므로 $\tilde{\boldsymbol{\beta}}_k$의 분산은 더 작아질 수 있다.
 
-은 양반정치행렬 (positive semi-definite matrix)이다.
-
-
-* 즉 **완전모형에서 추정된 회귀계수의 분산이 축소모형보다 더 크다.**
-* 완전모형에서의 계수 추정은 불편하지만
-* 더 많은 변수를 함께 추정해야 하므로 분산이 커질 수 있다.
-* 반대로 축소모형에서는 일부 변수를 제거하므로 $\tilde{\boldsymbol{\beta}}_k$의 분산은 더 작아질 수 있다.
+>**증명**
+>
+>$\text{Var}(\tilde{\boldsymbol\beta}_k) = \sigma^2(X_k^TX_k)^{-1}
+>$ 이다. $M_r = I-X_r(X_r^TX_r)^{-1}X_r^T$ 라 하면, Frisch–Waugh–Lovell 정리에 따라 $\hat{\boldsymbol\beta}_k = (X_k^TM_rX_k)^{-1}X_k^TM_r\mathbf y$ 이므로 $\text{Var}(\hat{\boldsymbol\beta}_k) = \sigma^2(X_k^TM_rX_k)^{-1}
+>$ 이다.
+>
+>$M_r$는 $X_r$의 열공간에 수직인 공간으로의 직교투영행렬이다. 따라서 $0\leq M_r\leq I$ 이다. 그러므로 $X_k^TM_rX_k \leq X_k^TX_k$ 가 성립한다.  
+>양정치행렬에 대해서는 행렬의 순서가 역행렬을 취하면 반대로 바뀌므로
+>
+>$$
+>(X_k^TM_rX_k)^{-1} \geq (X_k^TX_k)^{-1}
+>$$
+>
+>양변에 $\sigma^2$을 곱하면
+>
+>$$
+>\sigma^2(X_k^TM_rX_k)^{-1} - \sigma^2(X_k^TX_k)^{-1} \geq 0
+>$$
+>
+>따라서
+>
+>$$
+>\boxed{
+>\text{Var}(\hat{\boldsymbol\beta}_k) - \text{Var}(\tilde{\boldsymbol\beta}_k) \geq 0
+>}
+>$$
 
 ### 정리 9.2
+$\text{Var}(\hat{y}) \ge \text{Var}(\tilde{y}_k)$
 
-$$\text{Var}(\hat{y}) \ge \text{Var}(\tilde{y}_k)$$
+완전모형은 예측에서 불편하지만 분산이 크다. 축소모형은 편향이 있으나 분산이 작다. 그런데 어떤 조건 아래에서는 축소모형의 평균제곱오차가 완전모형의 분산보다 더 작아질 수 있다. 즉, **약간의 편향을 감수하더라도 분산 감소 효과가 더 크다면 축소모형이 오히려 더 좋은 선택**이 된다.  
+이것이 변수 제거를 정당화하는 이론적 배경이다.
+
+**증명**
+
+
+$\text{Var}(\hat{\mathbf y}) = H\text{Var}(\mathbf y)H^T = \sigma^2H^2 = \sigma^2H$  
+마찬가지로 축소모형의 적합값은 $\tilde{\mathbf y}_k=H_k\mathbf y$ 이므로 $\text{Var}(\tilde{\mathbf y}_k) = \sigma^2H_k$ 이다.
+
+따라서 $\text{Var}(\hat{\mathbf y}) - \text{Var}(\tilde{\mathbf y}_k) = \sigma^2(H-H_k)$ 이다.
+
+축소모형은 완전모형에 포함되어 있으므로 $\mathcal C(X_k)\subseteq\mathcal C(X)$ 이다. $H_k$는 $\mathcal C(X_k)$로의 직교투영행렬이고, $H$는 $\mathcal C(X)$로의 직교투영행렬이다.
+
+따라서 임의의 벡터 $\mathbf a$에 대하여 $\mathbf a^T(H-H_k)\mathbf a = \left\|(H-H_k)\mathbf a\right\|^2
+\geq 0$ 이다.  
+즉, $H-H_k$ 는 양반정치행렬이다.
+
+따라서
+
+$$
+\boxed{
+\text{Var}(\hat{\mathbf y}) - \text{Var}(\tilde{\mathbf y}_k) = \sigma^2(H-H_k) \geq0
+}
+$$
+
 
 ### 정리 9.3
 
-만약 행렬
-
-$$\text{Var}(\hat{\boldsymbol{\beta}}_r) - \boldsymbol{\beta}_r\boldsymbol{\beta}_r^T$$
-
-이 양반정치행렬이면,
-
-$$\text{Var}(\hat{y}) - \text{MSE}(\tilde{y}_k)$$
-
-도 양반정치행렬이며, 따라서
+만약 행렬 $\text{Var}(\hat{\boldsymbol{\beta}}_r) - \boldsymbol{\beta}_r\boldsymbol{\beta}_r^T$ 이 양반정치행렬이면, $\text{Var}(\hat{y}) - \text{MSE}(\tilde{y}_k)$ 도 양반정치행렬이며, 따라서
 
 $$\text{Var}(\hat{y}) \ge \text{MSE}(\tilde{y}_k)$$
 
-이 정리는 변수제거의 이론적 근거를 제시하는 중요한 정리다.
+즉, 이 정리의 조건이 만족되면, 축소모형이 완전모형보다 더 바람직하다는 뜻이다.
 
-완전모형은 예측에서 불편하지만 분산이 크다.
-축소모형은 편향이 있으나 분산이 작다.
-그런데 어떤 조건 아래에서는 축소모형의 평균제곱오차가 완전모형의 분산보다 더 작아질 수 있다. 즉, **약간의 편향을 감수하더라도 분산 감소 효과가 더 크다면 축소모형이 오히려 더 좋은 선택**이 된다.
+**증명**
 
-이것이 변수 제거를 정당화하는 이론적 배경이다.
+
+참된 평균벡터를 $\boldsymbol\mu = E(\mathbf y) = X_k\boldsymbol\beta_k+X_r\boldsymbol\beta_r$ 라고 하자.
+
+벡터 추정량 $\mathbf t$의 평균제곱오차행렬은 $\text{MSE}(\mathbf t) = \text{Var}(\mathbf t) + \text{Bias}(\mathbf t) \text{Bias}(\mathbf t)^T$ 로 분해된다.
+
+축소모형 적합값의 기댓값은 $E(\tilde{\mathbf y}_k) = E(H_k\mathbf y) = H_k(X_k\boldsymbol\beta_k+X_r\boldsymbol\beta_r) = X_k\boldsymbol\beta_k+H_kX_r\boldsymbol\beta_r$ 이다. 따라서 축소모형 적합값의 편향은
+
+$$
+\begin{aligned}
+\text{Bias}(\tilde{\mathbf y}_k)
+&= E(\tilde{\mathbf y}_k)-\boldsymbol\mu\\
+&= H_kX_r\boldsymbol\beta_r-X_r\boldsymbol\beta_r\\
+&= -(I-H_k)X_r\boldsymbol\beta_r\\
+&= -M_kX_r\boldsymbol\beta_r
+\end{aligned}
+$$
+
+그러므로 편향의 외적은 $\text{Bias}(\tilde{\mathbf y}_k) \text{Bias}(\tilde{\mathbf y}_k)^T = M_kX_r \boldsymbol\beta_r\boldsymbol\beta_r^T X_r^TM_k$ 이다.
+
+정리 9.2에서 $\text{Var}(\tilde{\mathbf y}_k) = \sigma^2H_k$ 이므로 $\text{MSE}(\tilde{\mathbf y}_k) = \sigma^2H_k + M_kX_r \boldsymbol\beta_r\boldsymbol\beta_r^T X_r^TM_k$ 이다.
+
+한편 완전모형에서 $\boldsymbol\beta_r$의 추정량은 $\hat{\boldsymbol\beta}_r = (X_r^TM_kX_r)^{-1}X_r^TM_k\mathbf y$ 이고, 그 분산은 $\text{Var}(\hat{\boldsymbol\beta}_r) = \sigma^2(X_r^TM_kX_r)^{-1}$ 이다.
+
+또한 완전모형과 축소모형의 hat matrix 차이는 $H-H_k = M_kX_r(X_r^TM_kX_r)^{-1}X_r^TM_k$ 이다. 따라서
+
+$$
+\begin{aligned}
+\text{Var}(\hat{\mathbf y}) - \text{Var}(\tilde{\mathbf y}_k)
+&= \sigma^2(H-H_k)\\
+&= M_kX_r \left[ \sigma^2(X_r^TM_kX_r)^{-1} \right] X_r^TM_k\\
+&= M_kX_r \text{Var}(\hat{\boldsymbol\beta}_r) X_r^TM_k.
+\end{aligned}
+$$
+
+이제 완전모형 적합값의 분산과 축소모형 적합값의 MSE 차이를 계산하면
+
+$$
+\begin{aligned}
+&\text{Var}(\hat{\mathbf y}) - \text{MSE}(\tilde{\mathbf y}_k) \\
+&= \text{Var}(\hat{\mathbf y}) - \text{Var}(\tilde{\mathbf y}_k) - \text{Bias}(\tilde{\mathbf y}_k) \text{Bias}(\tilde{\mathbf y}_k)^T \\
+&= M_kX_r \text{Var}(\hat{\boldsymbol\beta}_r) X_r^TM_k - M_kX_r \boldsymbol\beta_r\boldsymbol\beta_r^T X_r^TM_k\\
+&= M_kX_r \left[\text{Var}(\hat{\boldsymbol\beta}_r) - \boldsymbol\beta_r\boldsymbol\beta_r^T \right] X_r^TM_k.
+\end{aligned}
+$$
+
+가정에 따라 $A= \text{Var}(\hat{\boldsymbol\beta}_r) - \boldsymbol\beta_r\boldsymbol\beta_r^T$ 는 양반정치행렬이다. 임의의 벡터 $\mathbf a$에 대하여
+
+$$
+\mathbf a^T
+\left[ M_kX_rAX_r^TM_k\right] \mathbf a = (X_r^TM_k\mathbf a)^T A (X_r^TM_k\mathbf a) \geq0
+$$
+
+이므로 $M_kX_rAX_r^TM_k$ 도 양반정치행렬이다.
+
+따라서
+
+$$
+\boxed{
+\text{Var}(\hat{\mathbf y}) - \text{MSE}(\tilde{\mathbf y}_k) = M_kX_r \left[ \text{Var}(\hat{\boldsymbol\beta}_r) - \boldsymbol\beta_r\boldsymbol\beta_r^T \right] X_r^TM_k \geq0
+}
+$$
 
 ### 평균제곱오차의 해석: 분산과 편향의 제곱의 합
 
-예를 들어 축소모형 예측량 $\tilde{y}_k$의 평균제곱오차는
+식 11.14에서 보듯이, 축소모형 예측량 $\tilde{y}_k$의 평균제곱오차는
 
 $$\text{MSE}(\tilde{y}_k)=\text{Var}(\tilde{y}_k)+[\text{Bias}(\tilde{y}_k)]^2$$
 
-여기서 편향은
+이다. 여기서 편향은
 
 $$\text{Bias}(\tilde{y}_k) = E(\tilde{y}_k)-E(y) = E(\tilde{y}_k)-\mathbf{x}^T\boldsymbol{\beta} \tag{11.15}$$
 
@@ -289,12 +408,6 @@ $$E(\hat{\boldsymbol{\beta}}) = \begin{bmatrix} \hat{\boldsymbol{\beta}}_k \\ \h
 이므로 $\hat{\boldsymbol{\beta}}_k$는 $\boldsymbol{\beta}_k$의 불편추정량이다. 그리고 축소모형에서의 최소제곱추정량 $\tilde{\boldsymbol{\beta}}_k$ 역시 $\boldsymbol{\beta}_k$의 불편추정량이다.
 
 즉, 이 경우에는 완전모형과 축소모형이 모두 편향이 없다. 하지만 정리 9.1에 의해 축소모형의 분산이 더 작으므로, 평균제곱오차 관점에서도 축소모형이 더 유리하다.
-
-* 참모형에 불필요한 변수를 추가하면 편향은 생기지 않지만 분산이 커진다.
-* 따라서 불필요한 변수는 제거한 축소모형이 더 좋은 선택이 될 수 있다.
-
-즉, 변수 선택은 단지 "필요한 변수를 빼면 안 된다"는 문제만이 아니라,
-반대로 "불필요한 변수를 넣어도 손해를 볼 수 있다"는 점까지 포함하는 문제이다.
 
 
 ## 9.2 변수선택의 방법 (Methods of Variable Selection)
@@ -330,7 +443,7 @@ $$\sum_{k=0}^{p} \binom{p}{k} = 2^p \tag{11.17}$$
 
 ### 9.2.1 전역탐색법 (Exhaustive Search Method)
 
-전역탐색법은 **가능한 모든 설명변수 조합에 대해 회귀모형을 적합한 뒤, 그중 가장 좋은 조합을 선택하는 방법**이다. 이를 **최적의 부분집합선택 (best subset selection)** 절차라 한다.
+전역탐색법은 **모든 설명변수 조합에 대해 회귀모형을 적합한 뒤, 그중 가장 좋은 조합을 선택하는 방법**이다. 이를 **최적의 부분집합선택 (best subset selection)** 절차라 한다.
 
 예를 들어 설명변수 수가 $p=10$이라면 가능한 모든 회귀모형의 수는 $2^{10}=1024$
 이므로, 1024개의 회귀모형을 전부 적합해 보고 비교하는 방식이다. 일반적인 절차는 다음과 같다.
@@ -340,23 +453,13 @@ $$\sum_{k=0}^{p} \binom{p}{k} = 2^p \tag{11.17}$$
 * 이들 각각을 모두 적합한다.
 * 그중에서 결정계수 $R^2$, 잔차평균제곱 $MSE$, 또는 11.3절에서 소개될 다른 판정기준을 사용하여 최적모형을 고른다.
 
-앞으로 $k$개의 설명변수로 이루어진 모형의 결정계수와 잔차평균제곱을 각각
-
-$$R_k^2,\qquad MSE_k$$
-
-로 표기한다. 또한 $p$개 가운데 $k$개를 선택하는 경우의 수는 $\binom{p}{k}=\frac{p!}{(p-k)!k!}$ 개
+> 앞으로 $k$개의 설명변수로 이루어진 모형의 결정계수와 잔차평균제곱을 각각 $R_k^2,\quad MSE_k$ 로 표기한다. 
 
 $k$가 **고정**되어 있다면, $R_k^2$를 최대화하는 모형과 $MSE_k$를 최소화하는 모형은 **같은 모형**을 선택한다. 그 이유는 다음 식 때문이다.
 
 $$R_k^2 = 1-\frac{SSE_k}{SST} = 1-\left(\frac{n-k-1}{SST}\right)MSE_k \tag{11.18}$$
 
-* $SSE_k$: $k$개 설명변수를 사용한 모형의 오차제곱합 (sum of squared errors)
-* $SST$: 총제곱합 (total sum of squares)
-
-이 식에서 $n, k, SST$가 고정되어 있으면 $R_k^2$는 $MSE_k$의 단조함수이다. 따라서
-
-* $MSE_k$가 작을수록 $R_k^2$는 크고, $R_k^2$가 클수록 $MSE_k$는 작다.
-
+이 식에서 $n, k, SST$가 고정되어 있으면 $R_k^2$는 $MSE_k$의 단조함수이다. 따라서 $MSE_k$가 작을수록 $R_k^2$는 크고, $R_k^2$가 클수록 $MSE_k$는 작다.  
 즉, 같은 $k$ 안에서는 두 기준이 같은 모형을 선택한다.
 
 그러나 $k$를 1에서 $p$까지 바꾸어 가면서 각 $k$에 대해 최적모형을 먼저 고른 뒤, 다시 이들 중 최종모형을 선택할 때는 상황이 달라진다. 그 이유는 다음과 같다.
@@ -365,76 +468,11 @@ $$R_k^2 = 1-\frac{SSE_k}{SST} = 1-\left(\frac{n-k-1}{SST}\right)MSE_k \tag{11.18
 * 따라서 단순 $R^2$만 쓰면 변수 수가 많은 모형을 무조건 더 좋다고 판단하는 경향이 있다.
 * 그래서 서로 다른 $k$를 비교할 때는 단순 $R^2$보다 **수정결정계수 (adjusted coefficient of determination)** 를 사용하는 것이 더 적절하다.
 
-수정결정계수를 다음과 같이 준다.
+수정결정계수:
 
 $$R_{ak}^2 = 1-\frac{n-1}{n-k-1}(1-R_k^2)$$
 
 수정결정계수는 $R^2$와 달리 단순히 변수 수 $k$가 증가한다고 해서 자동으로 커지지 않는다. 따라서 **모형 복잡도에 대한 패널티 (penalty)** 를 어느 정도 반영하는 판정기준이라고 볼 수 있다. 바로 이 이유 때문에 수정결정계수가 더 좋은 판정기준이다.
-
-#### 예제 9.2.1
-
-참고문헌의 Held 데이터 (Hald data)를 이용하여 **가능한 모든 회귀를 검토하고 최적회귀모형을 선택하라**
-
-표 11.1의 데이터는 총 13개의 관측값을 가지며, 설명변수는 4개이다.
-
-* $x_1, x_2, x_3, x_4$
-* 반응변수 $y$
-
-| 데이터 번호 | $x_1$ | $x_2$ | $x_3$ | $x_4$ |   $y$ |
-| ------ | ----: | ----: | ----: | ----: | ----: |
-| 1      |     7 |    26 |     6 |    60 |  78.5 |
-| 2      |     1 |    29 |    15 |    52 |  74.3 |
-| 3      |    11 |    56 |     8 |    20 | 104.3 |
-| 4      |    11 |    31 |     8 |    47 |  87.6 |
-| 5      |     7 |    52 |     6 |    33 |  95.9 |
-| 6      |    11 |    55 |     9 |    22 | 109.2 |
-| 7      |     3 |    71 |    17 |     6 | 102.7 |
-| 8      |     1 |    31 |    22 |    44 |  72.5 |
-| 9      |     2 |    54 |    18 |    22 |  93.1 |
-| 10     |    21 |    47 |     4 |    26 | 115.9 |
-| 11     |     1 |    40 |    23 |    34 |  83.8 |
-| 12     |    11 |    66 |     9 |    12 | 113.3 |
-| 13     |    10 |    68 |     8 |    12 | 109.4 |
-
-설명변수가 4개이므로 가능한 회귀모형의 수는 $2^4=16$개이다.
-
-표 11.2는 16개 모든 모형에 대해 $R_{ak}^2$, $R_k^2$, $MSE_k$를 계산한 결과이다.
-
-| $k$ | 회귀모형                         | $R_{ak}^2$ | $R_k^2$ | $MSE_k$ |
-| --- | ---------------------------- | ---------: | ------: | ------: |
-| 0   | $\hat{y}=f(1)$               |          0 |       0 |  226.31 |
-| 1   | $\hat{y}=f(x_1)$             |     0.4915 |  0.5339 |  115.06 |
-| 1   | $\hat{y}=f(x_2)$             |     0.6360 |  0.6663 |   82.39 |
-| 1   | $\hat{y}=f(x_3)$             |     0.2210 |  0.2859 |  176.31 |
-| 1   | $\hat{y}=f(x_4)$             |     0.6449 |  0.6745 |   80.35 |
-| 2   | $\hat{y}=f(x_1,x_2)$         |     0.9744 |  0.9787 |    5.79 |
-| 2   | $\hat{y}=f(x_1,x_3)$         |     0.4578 |  0.5482 |  122.71 |
-| 2   | $\hat{y}=f(x_1,x_4)$         |     0.9670 |  0.9725 |    7.48 |
-| 2   | $\hat{y}=f(x_2,x_3)$         |     0.8164 |  0.8470 |   41.54 |
-| 2   | $\hat{y}=f(x_2,x_4)$         |     0.6161 |  0.6801 |   86.89 |
-| 2   | $\hat{y}=f(x_3,x_4)$         |     0.9224 |  0.9353 |   17.57 |
-| 3   | $\hat{y}=f(x_1,x_2,x_3)$     |     0.9764 |  0.9823 |    5.35 |
-| 3   | $\hat{y}=f(x_1,x_2,x_4)$     |     0.9764 |  0.9823 |    5.33 |
-| 3   | $\hat{y}=f(x_1,x_3,x_4)$     |     0.9751 |  0.9813 |    5.65 |
-| 3   | $\hat{y}=f(x_2,x_3,x_4)$     |     0.9637 |  0.9728 |    8.20 |
-| 4   | $\hat{y}=f(x_1,x_2,x_3,x_4)$ |     0.9736 |  0.9824 |    5.98 |
-
-이 표를 바탕으로 각 $k$별 최적모형을 뽑으면:
-
-| $k$ | 회귀모형                         | $R_{ak}^2$ | $R_k^2$ | $MSE_k$ |
-| --- | ---------------------------- | ---------: | ------: | ------: |
-| 0   | $\hat{y}=f(1)$               |          0 |       0 |  226.31 |
-| 1   | $\hat{y}=f(x_4)$             |     0.6449 |  0.6745 |   80.35 |
-| 2   | $\hat{y}=f(x_1,x_2)$         |     0.9744 |  0.9787 |    5.79 |
-| 3   | $\hat{y}=f(x_1,x_2,x_4)$     |     0.9764 |  0.9823 |    5.33 |
-| 4   | $\hat{y}=f(x_1,x_2,x_3,x_4)$ |     0.9736 |  0.9824 |    5.98 |
-
-* $R_k^2$ 값은 $k$가 커질수록 계속 증가한다.
-* 따라서 단순 $R^2$ 기준만 쓰면 결국 설명변수가 가장 많은 모형이 유리해진다.
-* 그러나 수정결정계수 $R_{ak}^2$ 기준으로 보면, $k=3$에서의 모형 $$\hat{y}=\hat{\beta}_0+\hat{\beta}_1x_1+\hat{\beta}_2x_2+\hat{\beta}_4x_4$$ 이 최적회귀모형으로 선택된다.
-* 잔차평균제곱 $MSE_k$ 기준 역시 같은 모형을 선택한다.
-
-즉, 이 예제에서는 **$(x_1, x_2, x_4)$를 포함하고 $x_3$는 제외한 3변수 모형이 최적회귀모형**으로 판단된다.
 
 ### 9.2.2 후진제거법 (Backward Elimination Method)
 
@@ -446,7 +484,8 @@ $$R_{ak}^2 = 1-\frac{n-1}{n-k-1}(1-R_k^2)$$
 
 1. **모든 변수를 포함한 회귀모형**을 적합한다.
 2. 현재 모형에 포함된 모든 변수에 대해 **부분 $F$-검정 (partial $F$-test)** 을 실시한다.
-3. 가장 작은 '부분 $F$-검정 통계량'을 $F_L$이라 하고, 유의수준 $\alpha_{drop}$에서의 임계값 $F_C$와 비교한다.
+  - $j$번째 변수 외 모든 변수가 있는 모델에서 $j$ 변수를 추가하면 발생하는 추가제곱항을 검정
+3. 가장 작은 '부분 $F$-검정 통계량'을 $F_L$이라 하고, 유의수준 $\alpha_{drop}$에서의 기각치 $F_C$와 비교한다.
 4. 만약 $F_L < F_C$이면, 가장 작은 $F$값을 준 설명변수를 제거하고, 남은 변수들만으로 새 회귀모형을 적합한다. 그 뒤 다시 2단계로 돌아간다.
 5. 만약 $F_L \ge F_C$이면, 더 이상 제거할 변수가 없다고 보고 현재 모형에 있는 변수들을 최종 선택한다.
 
@@ -462,16 +501,9 @@ $$R_{ak}^2 = 1-\frac{n-1}{n-k-1}(1-R_k^2)$$
 
 이는 가능한 모든 회귀모형의 수 $2^p$에 비하면 훨씬 적다. 또한 중간에 $F_L\ge F_C$가 성립하면 제거 작업을 중단하므로 실제 비교 횟수는 이보다 더 적어질 수 있다.
 
-$\alpha_{drop}$는 단순히 각 설명변수가 반응변수와 관련이 있는지를 보는 유의수준이 아니다. 현재 다른 변수들의 조합이 주어진 상태에서, 특정 변수가 추가적인 설명력을 가지는지를 검정하는 기준이다. 즉, **설명변수의 조합에 따라 같은 변수의 유의성 평가가 달라질 수 있다**는 뜻이다.
+$\alpha_{drop}$는 단순히 각 설명변수가 반응변수와 관련이 있는지를 보는 유의수준이 아니다. 현재 다른 변수들의 조합이 주어진 상태에서, 특정 변수가 추가적인 설명력을 가지는지를 검정하는 기준이다. 즉, **설명변수의 조합에 따라 같은 변수의 유의성 평가가 달라질 수 있다**는 뜻이다. 이 때문에 여기선 **5%보다 15–20% 수준의 유의수준을 잡는 것이 더 적절하다고 알려져 있다.**
 
-이 때문에 후진제거법에서는 보통 매우 작은 유의수준보다 다소 큰 유의수준을 택하기도 한다. 최적의 변수조합을 찾는 목적이라면 **5%보다 15–20% 수준의 유의수준을 잡는 것이 더 적절하다고 알려져 있다.**
-
-즉 
-* 후진제거법은 계산량이 적다는 장점이 있다.
-* 그러나 전역탐색법에서 사용하는 변수선택 기준을 반드시 최적화한다는 보장은 없다.
-* 따라서 "최적모형"보다는 "좋은 모형"을 찾는 절차로 이해하는 것이 적절하다.
-
->부분 $F$-검정 기반 후진제거법은 전역탐색법의 변수선택 기준(예: $R_{ak}^2$ 등)을 직접 최적화하는 이론적 보장이 없다. 만약 특정 선택기준을 최적화하려면, 각 단계에서 **부분 $F$-검정치가 최소인 변수**를 제거할 것이 아니라, **해당 기준을 가장 좋게 만드는 변수 제거**를 해야 한다.
+>부분 $F$-검정 기반 후진제거법은 전역탐색법의 변수선택 기준(예: $R_{ak}^2$ 등)을 직접 최적화하는 이론적 보장이 없다. 
 
 #### 부분 $F$-검정과 $t$-검정의 관계
 
@@ -479,87 +511,99 @@ $\alpha_{drop}$는 단순히 각 설명변수가 반응변수와 관련이 있�
 
 $$t=\frac{\hat{\beta}_j}{\sqrt{\widehat{Var}(\hat{\beta}_j)}}$$
 
-이며, 임계값은
+이며, 기각치는
 
 $$t_C=t_{\alpha_{drop}/2}(\phi_E)$$
 
-여기서 $\phi_E$는 잔차항의 자유도이다. 이때
+여기서 $\phi_E$는 잔차항의 자유도이다. 이게 성립하는 이유는,
 
 $$F_{\alpha}(1,\phi_E)=\left[t_{\alpha/2}(\phi_E)\right]^2$$
 
-가 성립하므로, 자유도 1인 부분 $F$-검정은 사실상 $t$-검정의 제곱과 같은 정보를 준다. 따라서 변수 하나를 제거할지 판단할 때 두 검정은 본질적으로 동등하다.
+가 성립하기 때문이다. 자유도 1인 부분 $F$-검정은 사실상 $t$-검정의 제곱과 같은 정보를 준다. 따라서 변수 하나를 제거할지 판단할 때 두 검정은 본질적으로 동등하다.
 
 #### 부분 $F$-검정 통계량의 계산식
 
-부분 $F$-검정 통계량을 다음과 같이 설명한다.
-
+부분 $F$-검정 통계량을 다음과 같이 구할 수 있다:  
 현재 남아 있는 모든 변수를 포함한 회귀모형을 **완전모형 (full model)** 로 간주하고, 그 회귀제곱합과 잔차제곱합을 각각 $SSR(F), SSE(F)$ 라고 하자. 그리고 변수 $x_j$를 제거하여 만든 모형을 **축소모형 (reduced model)** 이라고 하고, 그 회귀제곱합과 잔차제곱합을 각각 $SSR(R), SSE(R)$ 라고 하자. 또한 잔차제곱합의 자유도를 각각 $df(F)$, $df(R)$이라고 하자. 그러면 부분 $F$-검정 통계량은
 
-$$F_0 = \frac{(\text{SSE}(R)-\text{SSE}(F))/(\text{df}(R)-\text{df}(F))}{\text{SSE}(F)/\text{df}(F)}$$
+$$
+F_0 = \frac{SSE(R)-SSE(F)}{MSE(F)} = \frac{SSR(F)-SSR(R)}{MSE(F)} = \frac{\hat\beta_j^2} {\widehat{\operatorname{Var}}(\hat\beta_j)}
+$$
 
-이는 통상적인 부분 $F$-검정의 형태를 설명하는 것이며, 이어지는 전개에서는 실질적으로 **한 변수 추가의 유의성 검정**, 즉 귀무가설 $H_0:\beta_j=0$ 을 검정하는 통계량으로 해석한다.
+이는 5장 4절에서 설명한 $F$-검정의 형태다. 귀무가설은 $H_0:\beta_j=0$
 
-#### 예제 9.2.2
-
-앞선 Hald 데이터에 대해 **후진제거법을 사용하여 적절한 회귀방정식을 구하라**
-
-**1단계: 모든 변수 포함 모형 적합**  
-
-먼저 4개의 설명변수 $x_1,x_2,x_3,x_4$를 모두 사용한 회귀방정식은
-
-$$\hat{y}=f(x_1,x_2,x_3,x_4) =\hat{\beta}_0+\hat{\beta}_1x_1+\hat{\beta}_2x_2+\hat{\beta}_3x_3+\hat{\beta}_4x_4 \\=62.4052+1.5511x_1+0.5102x_2+0.1019x_3-0.1441x_4$$
-
-이때 $R^2=0.9824, \text{MSE}=5.9829$  
-또 $(X^TX)^{-1}$로부터 각 회귀계수의 분산을 구하면
-
-$$\widehat{\text{Var}}(\hat{\beta}_1)=0.5547,\quad
-\widehat{\text{Var}}(\hat{\beta}_2)=0.5239, \quad \widehat{\text{Var}}(\hat{\beta}_3)=0.5696, \quad \widehat{\text{Var}}(\hat{\beta}_4)=0.5027$$
-
-따라서 부분 $F$-검정치는 다음과 같다.
-
-$$x_1:\quad F_0=\frac{\hat{\beta}_1^2}{\widehat{\text{Var}}(\hat{\beta}_1)}=4.3376\\ 
-x_2:\quad F_0=\frac{\hat{\beta}_2^2}{\widehat{\text{Var}}(\hat{\beta}_2)}=0.4968 \\
-x_3:\quad F_0=\frac{\hat{\beta}_3^2}{\widehat{\text{Var}}(\hat{\beta}_3)}=0.0182 \\
-x_4:\quad F_0=\frac{\hat{\beta}_4^2}{\widehat{\text{Var}}(\hat{\beta}_4)}=0.0413$$
-
-여기서 가장 작은 값은 $x_3$에 대한 부분 $F$-검정치 $F_L=0.0182$  
-유의수준 $\alpha_{drop}=0.05$에서 기각치는 $F_C=F_{0.05}(1,8)=5.32$ 인데, $F_L < F_C$ 이므로 설명변수 $x_3$를 제거한다.
-
-**2단계: $x_3$ 제거 후 모형 적합**  
-
-이제 남은 설명변수 $x_1,x_2,x_4$에 대해 회귀하면
-
-$$\hat{y}=f(x_1,x_2,x_4) =\hat{\beta}_0+\hat{\beta}_1x_1+\hat{\beta}_2x_2+\hat{\beta}_4x_4 \\ =71.6482+1.4519x_1+0.4161x_2-0.2365x_4$$
-
-이때 $\text{MSE}=5.3303$ 이 모형에서 부분 $F$-검정치를 구하면
-
-$$x_1:\quad F_0=154.0080, x_2:\quad F_0=5.0259, x_4:\quad F_0=1.8633$$
-
-가장 작은 값은 $x_4$에 대한 $F_L=1.8633$ 이고, 이때 기각치는 $F_C=F_{0.05}(1,9)=5.12$ 따라서 $F_L<F_C$ 이므로 $x_4$도 제거한다.
-
-**3단계: $x_1,x_2$만 남긴 모형**  
-
-이제 남은 두 변수 $x_1,x_2$에 대한 회귀방정식은
-
-$$\hat{y}=f(x_1,x_2) =52.5773+1.4683x_1+0.6623x_2 \tag{11.20}$$
-
-이때 $R^2=0.9787,\qquad \text{MSE}=5.7904$
-
-또 $x_1,x_2$에 대한 부분 $F$-검정치는
-
-$$x_1:\quad F_0=146.5229, x_2:\quad F_0=208.5823$$
-
-이 값들이 모두 기각치 $F_C=F_{0.05}(1,10)=4.96$ 보다 크므로 더는 제거할 변수가 없다고 결론짓는다. 따라서 후진제거법에 의해 **설명변수 $x_1$과 $x_2$가 선택되며**, 최종회귀모형으로는 식 (11.20)이 사용된다.
-
-**예제의 해석**  
-
-이 결과는 전역탐색법의 최적모형과는 다르다.
-
-* 전역탐색법에서는 $(x_1,x_2,x_4)$ 모형이 최적
-* 후진제거법에서는 $(x_1,x_2)$ 모형이 선택
-
-즉, 후진제거법은 계산량을 줄이는 대신 **탐색 경로(path dependence)** 에 따라 전역 최적해와 다른 모형을 줄 수 있다. "최적모형을 보장하지 않는다"의 이유가 바로 여기에 있다.
-
+>**증명**
+>
+>완전모형을 $\mathbf y=X_R\boldsymbol\beta_R+\mathbf x_j\beta_j+\boldsymbol\varepsilon$ 라고 하자. 여기서 $X_R$은 변수 $x_j$를 제외한 나머지 설명변수로 이루어진 행렬이다.
+>
+>검정하려는 가설은 $H_0:\beta_j=0$ 이다. $H_0$가 참이면 변수 $x_j$를 제거할 수 있으므로 축소모형은 $\mathbf y=X_R\boldsymbol\beta_R+\boldsymbol\varepsilon$ 이다.
+>
+>완전모형의 잔차 자유도를 $df(F)$, 축소모형의 잔차 자유도를 $df(R)$라고 하면 변수 하나를 제거했으므로 $df(R)-df(F)=1$ 이다.
+>
+>따라서 일반적인 부분 $F$-통계량은
+>
+>$$
+>F_0 = \frac{ \left\{SSE(R)-SSE(F)\right\}/1}{ SSE(F)/df(F)} = \frac{SSE(R)-SSE(F)}{MSE(F)}
+>$$
+>
+>- 잔차제곱합 차이와 회귀제곱합 차이
+>
+>절편이 포함된 회귀모형에서는 $SST=SSR+SSE$ 이다. 완전모형과 축소모형은 동일한 반응변수 $\mathbf y$를 사용하므로 두 모형의 $SST$는 같다. 따라서 $SSR(F)+SSE(F) = SSR(R)+SSE(R)$ 이므로 $SSE(R)-SSE(F) = SSR(F)-SSR(R)$ 이고, $F_0 =\frac{SSR(F)-SSR(R)}{MSE(F)}$이다.
+>
+>- 추가제곱합을 $\hat\beta_j$로 표현
+>
+>축소모형의 hat matrix와 residual-maker matrix를 각각 $H_R=X_R(X_R^TX_R)^{-1}X_R^T$ 및 $M_R=I-H_R$ 라고 정의한다.
+>
+>변수 $\mathbf x_j$에서 다른 설명변수 $X_R$로 설명되는 부분을 제거한 벡터를 $\mathbf z=M_R\mathbf x_j$ 라고 하자. 이는 $\mathbf x_j$를 $X_R$에 회귀시켰을 때 얻어지는 잔차벡터이다.
+>
+>Frisch–Waugh–Lovell 정리에 따라 완전모형에서 $\beta_j$의 최소제곱추정량은 $\hat\beta_j = \frac{\mathbf z^T\mathbf y}{\mathbf z^T\mathbf z}$ 이다.  
+>축소모형에 변수 $\mathbf x_j$를 추가함으로써 감소하는 잔차제곱합은 $SSE(R)-SSE(F) = \frac{(\mathbf z^T\mathbf y)^2}{\mathbf z^T\mathbf z}$ 이다.
+>
+>그런데 $\mathbf z^T\mathbf y = \hat\beta_j\mathbf z^T\mathbf z$ 이므로
+>
+>$$
+>SSE(R)-SSE(F) = \frac{\left(\hat\beta_j\mathbf z^T\mathbf z\right)^2}{\mathbf z^T\mathbf z} = \hat\beta_j^2\mathbf z^T\mathbf z
+>$$
+>
+>따라서
+>
+>$$
+>\boxed{SSE(R)-SSE(F) = \hat\beta_j^2\mathbf z^T\mathbf z}
+>$$
+>
+>- $\hat\beta_j$의 분산
+>
+>$$
+>\operatorname{Var}(\hat\beta_j) = \operatorname{Var} \left(\frac{\mathbf z^T\mathbf y}{\mathbf z^T\mathbf z}\right) = \frac{\mathbf z^T\operatorname{Var}(\mathbf y)\mathbf z}{(\mathbf z^T\mathbf z)^2} = \frac{\sigma^2}{\mathbf z^T\mathbf z}
+>$$
+>
+>알 수 없는 $\sigma^2$을 완전모형의 $MSE(F)$로 추정하면 $\widehat{\operatorname{Var}}(\hat\beta_j) = \frac{MSE(F)}{\mathbf z^T\mathbf z}$ 이다.
+>
+>따라서 $\mathbf z^T\mathbf z = \frac{MSE(F)}{\widehat{\operatorname{Var}}(\hat\beta_j)}$ 이고, 이를 앞서 구한 추가제곱합에 대입하면
+>
+>$$
+>SSE(R)-SSE(F) = \hat\beta_j^2\mathbf z^T\mathbf z = \hat\beta_j^2 \frac{MSE(F)}{\widehat{\operatorname{Var}}(\hat\beta_j)}.
+>$$
+>
+>양변을 $MSE(F)$로 나누면
+>
+>$$
+>\boxed{
+>\frac{SSE(R)-SSE(F)}{MSE(F)} = \frac{\hat\beta_j^2}{\widehat{\operatorname{Var}}(\hat\beta_j)}
+>}
+>$$
+>
+>결국
+>
+>$$
+>\boxed{
+>F_0 = \frac{\left\{SSE(R)-SSE(F)\right\} \left\{df(R)-df(F)\right\}}{SSE(F)/df(F)}
+>= \frac{SSR(F)-SSR(R)}{MSE(F)}
+>= \frac{\hat\beta_j^2}{\widehat{\operatorname{Var}}(\hat\beta_j)}
+>}
+>$$
+>
+>가 성립한다. 단, 가운데와 마지막 등식은 변수 하나만 제거하여 $df(R)-df(F)=1$인 경우의 결과이다. 또한 $\beta_j=0$에 대한 $t$-통계량은 $t_0 = \frac{\hat\beta_j} {\sqrt{\widehat{\operatorname{Var}}(\hat\beta_j)}}$ 이므로 $F_0=t_0^2$ 이다. 즉, 변수 하나의 유의성을 검정할 때 부분 $F$-검정과 양측 $t$-검정은 동일한 결론을 준다.
 
 ### 9.2.3 전진선택법 (Forward Selection Method)
 
@@ -577,7 +621,7 @@ $$x_1:\quad F_0=146.5229, x_2:\quad F_0=208.5823$$
 
 즉, 전진선택법은 **모형을 점차 확장하는 방식**의 변수선택 절차이다.
 
-#### 절차 1: 첫 번째 변수 선택
+**절차 1: 첫 번째 변수 선택**
 
 모든 설명변수 중에서 반응변수 $y$와 가장 상관관계가 높은 변수를 선택한다. 이 변수를 $x_k$라고 하자.
 
@@ -592,142 +636,40 @@ $$x_1:\quad F_0=146.5229, x_2:\quad F_0=208.5823$$
 
 여기서 $\alpha_{add}$는 **변수를 추가하기 위한 유의수준**이다.
 
-#### 절차 2: 두 번째 변수 선택
+**절차 2: 두 번째 변수 선택**
 
-이제 아직 선택되지 않은 설명변수 $x_j$, $j\neq k$에 대해 각각 2변수 회귀모형 $\hat{y}=f(x_k,x_j)$ 를 적합한다.
-
-각 모형의 결정계수 $R^2$를 구하여, 그중 $R^2$ 값을 가장 크게 하는 설명변수를 선택한다. 이 변수를 $x_q$라고 하자.
-
-즉, 이미 선택된 첫 번째 변수 $x_k$에 더하여 넣었을 때 설명력을 가장 많이 증가시키는 설명변수 $x_q$를 찾는 것이다.
-
+이제 아직 선택되지 않은 설명변수 $x_j$, $j\neq k$에 대해 각각 2변수 회귀모형 $\hat{y}=f(x_k,x_j)$ 를 적합한다.  
+각 모형의 결정계수 $R^2$를 구하여, 그중 $R^2$ 값을 가장 크게 하는 설명변수를 선택한다. 이 변수를 $x_q$라고 하자.  
+즉, 이미 선택된 첫 번째 변수 $x_k$에 더하여 넣었을 때 설명력을 가장 많이 증가시키는 설명변수 $x_q$를 찾는 것이다.  
 그 다음 $x_q$에 대해 유의수준 $\alpha_{add}$에서 **부분 $F$-검정 (partial $F$-test)** 을 실시한다.
 
 * 유의하면 다음 변수 선택을 위해 다음 단계로 넘어간다.
-* 유의하지 않으면 $x_q$를 추가하지 않고, 이미 선택된 $x_k$만을 포함한 모형
+* 유의하지 않으면 $x_q$를 추가하지 않고, 이미 선택된 $x_k$만을 포함한 모형 $\hat{y}=f(x_k)$ 을 최종모형으로 선택한다.  
+즉, 설명력 증가가 가장 큰 변수라고 해도, **기존 변수들이 이미 들어간 상태에서 추가 효과가 유의하지 않으면 채택하지 않는다**는 뜻이다.
 
-$$\hat{y}=f(x_k)$$
-
-을 최종모형으로 선택한다.
-
-즉, "설명력 증가가 가장 큰 변수"라고 해도, **기존 변수들이 이미 들어간 상태에서 추가 효과가 유의하지 않으면 채택하지 않는다**는 뜻이다.
-
-#### 절차 3: 세 번째 이후 변수 선택
+**절차 3: 세 번째 이후 변수 선택**
 
 이제 아직 선택되지 않은 변수들 중에서 하나를 추가하는 문제로 일반화된다.
 
-예를 들어 이미 $x_k$, $x_q$가 선택되어 있을 때, 남아 있는 설명변수 $x_j$, $j\neq k,q$에 대해 각각
-
-$$\hat{y}=f(x_k,x_q,x_j)$$
-
-를 적합한다.
-
-각 모형의 $R^2$를 계산하여 가장 큰 값을 주는 설명변수 $x_j$를 선택하고, 이를 $x_r$라고 하자.
-
+예를 들어 이미 $x_k$, $x_q$가 선택되어 있을 때, 남아 있는 설명변수 $x_j$, $j\neq k,q$에 대해 각각 $\hat{y}=f(x_k,x_q,x_j)$ 를 적합한다.  
+각 모형의 $R^2$를 계산하여 가장 큰 값을 주는 설명변수 $x_j$를 선택하고, 이를 $x_r$라고 하자.  
 그 다음 $x_r$에 대해 유의수준 $\alpha_{add}$에서 부분 $F$-검정을 실시한다.
 
 * 유의하면 같은 방식으로 또 하나의 변수를 추가한다.
 * 유의하지 않으면 선택 절차를 중단하고, 현재까지 선택된 변수들만 포함한 모형을 최종모형으로 선택한다.
 
-즉, 전진선택법은 "설명력 증가가 가장 큰 변수"를 **순차적으로** 넣되, 매 단계마다 **그 증가가 통계적으로 유의한지 확인**하는 절차이다.
+즉, 전진선택법은 설명력 증가가 가장 큰 변수를 순차적으로 넣되, 매 단계마다 그 증가가 통계적으로 유의한지 확인하는 절차이다.
 
-#### $\alpha_{add}$의 의미와 계산량
+$\alpha_{add}$는 **변수를 추가하기 위한 유의수준**에 해당한다. 이 값 역시 후진제거법의 $\alpha_{drop}$와 마찬가지로 보통 5%보다 훨씬 큰 유의수준을 쓰는 것이 일반적이다.
 
-$\alpha_{add}$가 **변수를 추가하기 위한 유의수준**에 해당한다고 설명한다. 이 값 역시 후진제거법의 $\alpha_{drop}$와 마찬가지로 보통 5%보다 훨씬 큰 유의수준을 쓰는 것이 일반적이라고 한다.
+또한 전진선택법의 계산량도 후진제거법과 비슷한 수준이다. 최대로 적합해야 할 회귀모형 수는 $p+(p-1)+\cdots+2+1=\frac{p(p+1)}{2}$ 개 정도이며, 이는 가능한 모든 회귀모형 $2^p$개를 다 적합하는 전역탐색법 (exhaustive search method)에 비해 훨씬 적다. 따라서 $p$가 큰 경우에도 실용적으로 사용할 수 있다.
 
-또한 전진선택법의 계산량도 후진제거법과 비슷한 수준이라고 설명한다. 최대로 적합해야 할 회귀모형 수는
+후진제거법과 마찬가지로 전진선택법도 **이 방법에 의해 선택된 회귀모형이 '최적'이라는 보장은 없다**  
+어떤 회귀모형 $\hat{y}=f(x_p,x_q,x_r)$ 이 전진선택법에 의해 선택되었다고 하더라도, 3개의 설명변수를 갖는 가능한 모든 모형 $\binom{p}{3}$개를 모두 비교해 보면, 이것보다 $R^2$를 더 크게 하는 다른 조합이 존재할 수 있다.
 
-$$p+(p-1)+\cdots+2+1=\frac{p(p+1)}{2}$$
+이는 전진선택법이 **처음에 선택된 변수를 이후 단계에서도 계속 고정**시키기 때문이다. 즉, 처음 단계에서 선택된 설명변수 $x_k$는 다음에 어떤 변수가 들어오든 모형에 계속 남아 있게 된다. 따라서 전역적으로는 더 좋은 조합이 있어도, 초기에 선택된 변수가 잘못되면 최적조합을 놓칠 수 있다.
 
-개 정도이며, 이는 가능한 모든 회귀모형 $2^p$개를 다 적합하는 전역탐색법 (exhaustive search method)에 비해 훨씬 적다. 따라서 $p$가 큰 경우에도 실용적으로 사용할 수 있다.
-
-#### 전진선택법의 한계
-
-후진제거법과 마찬가지로 전진선택법도 **이 방법에 의해 선택된 회귀모형이 '최적'이라는 보장은 없다**고 명시한다.
-
-그 이유를 예를 들어 설명한다. 어떤 회귀모형 $\hat{y}=f(x_p,x_q,x_r)$ 이 전진선택법에 의해 선택되었다고 하더라도, 3개의 설명변수를 갖는 가능한 모든 모형 $\binom{p}{3}$개를 모두 비교해 보면, 이것보다 $R^2$를 더 크게 하는 다른 조합이 존재할 수 있다.
-
-이런 일이 생기는 이유는 전진선택법이 **처음에 선택된 변수를 이후 단계에서도 계속 고정**시키기 때문이다. 즉, 처음 단계에서 선택된 설명변수 $x_k$는 다음에 어떤 변수가 들어오든 모형에 계속 남아 있게 된다. 따라서 전역적으로는 더 좋은 조합이 있어도, 초기에 선택된 변수가 잘못되면 최적조합을 놓칠 수 있다.
-
-이러한 점을 보완하기 위해 다음 절에서 소개할 방법이 **단계적 전진선택법 (stepwise forward selection method)** 이라고 설명한다.
-
->전진선택법 역시 후진제거법과 마찬가지로 $R_{ak}^2$ 등 11.3절의 변수선택 기준을 직접 최적화하는 이론적 보장이 없다. 만약 특정 선택기준을 직접 최적화하고자 한다면, 각 단계에서 단순히 $R^2$를 가장 크게 하는 변수를 넣는 것이 아니라, 그 판정기준을 가장 좋게 만드는 변수를 선택해야 한다는 뜻이다.
-
-#### 예제 9.2.3
-
-예제 11.3은 Hald 데이터에 대해 전진선택법으로 설명변수를 선택하는 과정이다.
-
-**1단계: 첫 번째 변수 선택**  
-
-표 11.2에서 단일 변수 모형들의 결정계수를 보면
-
-* $\hat{y}=f(x_1)$: $R^2=0.5339$
-* $\hat{y}=f(x_2)$: $R^2=0.6663$
-* $\hat{y}=f(x_3)$: $R^2=0.2859$
-* $\hat{y}=f(x_4)$: $R^2=0.6745$
-
-이므로, 가장 큰 $R^2$를 주는 단순회귀모형은 $\hat{y}=f(x_4)$. 따라서 $x_4$가 첫 번째 선택변수이다.
-
-이 단순회귀모형에 대한 분산분석표 (analysis of variance table)는 다음과 같이 주어진다.
-
-* 회귀 제곱합: 1831.8968
-* 회귀 자유도: 1
-* 회귀 평균제곱: 1831.8698
-* 잔차 제곱합: 883.8668
-* 잔차 자유도: 11
-* 잔차 평균제곱: 80.3515
-* $F_0=22.7985$
-* 기각치 $F_{0.05}(1,11)=4.84$
-
-따라서 유의수준 $\alpha_{add}=5\%$에서 $F_0=22.7985 > F_{0.05}(1,11)=4.84$
-이므로 회귀모형 $\hat{y}=f(x_4)$는 유의하며, $x_4$가 첫 번째로 선택된다.
-
-이 단계에서 $R^2$를 일일이 비교하지 않고, 표 11.4의 상관계수 표를 보고 $y$와의 상관이 가장 큰 변수 $x_4$를 택해도 같은 결과를 얻는다고 설명한다.
-
-**2단계: 두 번째 변수 선택**  
-
-이제 $x_4$와 함께 넣을 수 있는 변수는 $x_1, x_2, x_3$이다. 각 2변수 모형의 $R^2$는 다음과 같다.
-
-$$\hat{y}=f(x_1,x_4):\quad R^2=0.9725 \\
-\hat{y}=f(x_2,x_4):\quad R^2=0.6801 \\
-\hat{y}=f(x_3,x_4):\quad R^2=0.9353$$
-
-이 중 가장 큰 $R^2$를 주는 모형은 $\hat{y}=f(x_1,x_4)$ 이므로, 두 번째 선택변수는 $x_1$이다.
-
-이 회귀모형은 $\hat{y}=f(x_1,x_4)=103.09738+1.43996x_1-0.61395x_4$
-
-이제 변수 $x_1$의 추가가 유의한지 부분 $F$-검정을 실시한다. 다음 계산을 준다. 
-$F_0=\frac{\hat{\beta}_1^2}{\widehat{\text{Var}}(\hat{\beta}_1)}=\frac{(1.43996)^2}{0.019159}=108.225$ 
-
-기각치는 $F_{0.05}(1,10)=4.96$ 이므로, $108.225 > 4.96$ 따라서 $x_1$의 추가는 유의하며, $x_1$이 선택된다.
-
-**3단계: 세 번째 변수 선택 시도**  
-
-이제 이미 선택된 변수는 $x_4, x_1$이고, 아직 추가 가능한 변수는 $x_2, x_3$이다.
-
-각 3변수 모형의 결정계수를 보면
-
-$$\hat{y}=f(x_4,x_1,x_2):\quad R^2=0.9823 \\
-\hat{y}=f(x_4,x_1,x_3):\quad R^2=0.9813$$
-
-이므로, $x_2$를 추가하는 것이 더 바람직하다.
-
-따라서 회귀모형은 $\hat{y}=71.6482+1.4519x_1+0.4161x_2-0.2365x_4$ 이 되고, 이에 대해 변수 $x_2$의 부분 $F$-검정을 하면 $F_0=\frac{\hat{\beta}_2^2}{\widehat{\text{Var}}(\hat{\beta}_2)}=\frac{(0.4161)^2}{0.03445}=5.0258$
-
-기각치는 $F_{0.05}(1,9)=5.12$ 이므로, $5.0258 < 5.12$ 따라서 유의수준 $\alpha_{add}=0.05$에서는 $x_2$의 추가가 **유의하지 않다**.
-
-따라서 전진선택 절차는 여기서 종료되며, 최종적으로 선택된 변수는 $x_1$과 $x_4$이다. 최종회귀모형은
-
-$$\hat{y}=103.09738+1.43996x_1-0.61395x_4$$
-
-**예제 결과의 해석**  
-
-이 예제를 통해 후진제거법과 전진선택법이 서로 다른 결과를 줄 수 있음을 보여 준다.
-
-* 후진제거법에서는 $(x_1,x_2)$가 선택되었다.
-* 전진선택법에서는 $(x_1,x_4)$가 선택되었다.
-
-즉, 같은 데이터라도 변수선택 절차에 따라 최종모형이 달라질 수 있으므로, 선택 결과를 해석할 때 주의가 필요하다.
-
+이러한 점을 보완하기 위해 다음 절에서 소개할 방법이 **단계적 전진선택법 (stepwise forward selection method)** 이다.
 
 ### 9.2.4 단계적 전진선택법 (Stepwise Forward Selection Method)
 
@@ -743,20 +685,13 @@ $$\hat{y}=103.09738+1.43996x_1-0.61395x_4$$
 
 즉, **추가(add)** 와 **제거(drop)** 를 모두 허용하는 방식이다. 그래서 이 방법은 전진선택법과 후진제거법의 절충형으로 볼 수 있다.
 
-#### 절차 1
+**절차 1**
 
-전진선택법의 순서 (1)과 동일하다.
+전진선택법의 순서 (1)과 동일하다. 즉, 모든 설명변수 중에서 반응변수 $y$와 가장 상관이 높거나, 단순회귀의 $R^2$를 가장 크게 하는 변수를 첫 번째로 선택한다. 그 모형이 유의수준 $\alpha_{add}$에서 유의하면 다음 단계로 간다.
 
-즉, 모든 설명변수 중에서 반응변수 $y$와 가장 상관이 높거나, 단순회귀의 $R^2$를 가장 크게 하는 변수를 첫 번째로 선택한다. 그 모형이 유의수준 $\alpha_{add}$에서 유의하면 다음 단계로 간다.
+**절차 2**
 
-#### 절차 2
-
-설명변수 $x_j$, $j\neq k$에 대해 각각
-
-$$\hat{y}=f(x_k,x_j)$$
-
-를 적합하고, $R^2$를 가장 크게 하여 주는 설명변수 $x_j$를 선택한다. 이를 $x_q$라 하자.
-
+설명변수 $x_j$, $j\neq k$에 대해 각각 $\hat{y}=f(x_k,x_j)$ 를 적합하고, $R^2$를 가장 크게 하여 주는 설명변수 $x_j$를 선택한다. 이를 $x_q$라 하자.  
 그 다음 유의수준 $\alpha_{add}$에서 부분 $F$-검정으로 $x_q$의 추가가 유의한지 검정한다.
 
 * 유의하지 않으면 $\hat{y}=f(x_k)$를 최종모형으로 하여 $x_k$만 선택한다.
@@ -769,133 +704,59 @@ $$\hat{y}=f(x_k,x_j)$$
 
 즉, 두 번째 변수가 추가된 뒤에는 **이전 변수의 생존 여부를 다시 평가**한다.
 
-#### 절차 3
+**절차 3**
 
-$x_k$와 $x_q$가 모두 유의하여 남아 있는 경우, 다음으로 들어올 설명변수를 선택하기 위해
-
-$$\hat{y}=f(x_k,x_q,x_j), \qquad j\neq k,q$$
-
-를 각각 적합하고, $R^2$를 가장 크게 하는 설명변수 $x_j$를 찾는다. 이를 $x_r$이라 하자.
+$x_k$와 $x_q$가 모두 유의하여 남아 있는 경우, 다음으로 들어올 설명변수를 선택하기 위해 $\hat{y}=f(x_k,x_q,x_j), \quad j\neq k,q$ 를 각각 적합하고, $R^2$를 가장 크게 하는 설명변수 $x_j$를 찾는다. 이를 $x_r$이라 하자.
 
 그 다음 $x_r$에 대해 유의수준 $\alpha_{add}$에서 부분 $F$-검정을 한다.
 
 * 유의하지 않으면 변수선택절차를 중단하고 $x_k,x_q$만 선택한다.
+  - 단계가 늘어날수록 검사할 항목은 $0, 1, ..., p-1$까지 늘어난다.
 * 유의하면 $x_r$을 모형에 추가한다.
 
 그리고 $x_r$이 추가된 뒤에는, 기존에 들어 있던 $x_k, x_q$에 대해 유의수준 $\alpha_{drop}$에서 부분 $F$-검정을 각각 실시하여, 유의하지 않은 변수가 있으면 제거한다.
 
-또한 앞의 단계 (2)에서 $x_k$가 유의하지 않아 제거되고 $x_q$만 남게 되는 경우에는 다음에 어떤 변수가 들어갈지를 다시 정하기 위해
-
-$$\hat{y}=f(x_q,x_j),\qquad j\neq q$$
-
-들을 각각 적합하고, $R^2$를 가장 크게 하는 변수를 선택하는 방식으로 계속 진행한다.
-
+또한 앞의 단계 (2)에서 $x_k$가 유의하지 않아 제거되고 $x_q$만 남게 되는 경우에는 다음에 어떤 변수가 들어갈지를 다시 정하기 위해 $\hat{y}=f(x_q,x_j),\qquad j\neq q$ 들을 각각 적합하고, $R^2$를 가장 크게 하는 변수를 선택하는 방식으로 계속 진행한다.  
 즉, 단계적 전진선택법은 경로상에서 모형 구조가 바뀌면 그에 맞추어 다시 다음 후보를 고르는 **동적 절차**이다.
 
-#### $\alpha_{add}$와 $\alpha_{drop}$
-
-단계적 변수선택절차에서 $\alpha_{add}$, $\alpha_{drop}$ 모두 약 15% 정도의 유의수준을 사용하는 것이 보통이라고 설명한다.
+> 단계적 변수선택절차에서 $\alpha_{add}$, $\alpha_{drop}$ 모두 약 15% 정도의 유의수준을 사용하는 것이 보통이다.
 
 이 절차는 다음이 성립하지 않을 때까지 반복된다.
 
 * 새로 선택되는 변수가 유의하게 추가됨
 * 이미 모형에 있는 변수들이 유의하게 남아 있음
 
-즉, 새로 들어올 변수도 충분히 중요해야 하고, 기존 변수들도 새 상황에서 계속 중요해야 한다.
+또한 이 절차가 끝난 후 최종모형에 남아 있는 설명변수들에 대해 중회귀모형에서 각 변수의 유의확률은 $\alpha_{drop}$보다 작고, 모형에 포함되지 않은 설명변수들에 대한 유의확률은 $\alpha_{add}$보다 크다고 볼 수 있다.
 
-이 방법의 특징을 다음처럼 요약한다.
-
-* 새로 들어온 변수가 유의하면,
-* 그 변수 때문에 기존 변수들의 유의성이 변할 수 있으므로,
-* 앞서 들어온 변수들이 계속 남아 있을 자격이 있는지 다시 평가한다.
-
-또한 이 절차가 끝난 후 최종모형에 남아 있는 설명변수들에 대해 중회귀모형에서 각 변수의 유의확률은 $\alpha_{drop}$보다 작고, 모형에 포함되지 않은 설명변수들에 대한 유의확률은 $\alpha_{add}$보다 크다고 볼 수 있다고 설명한다.
-
-마지막으로 이 방법이 전진선택법 (forward selection method)을 보완한 방법이며, 적합해야 할 회귀모형의 수 또한 가능한 모든 회귀 (all possible regressions)에 비해 훨씬 적으므로 $k$가 큰 경우에도 활용될 수 있다고 말한다.
-
-#### 예제 9.2.4
-
-예제 11.4는 Hald 데이터에 대해 단계적 선택법을 적용하는 과정이다.
-
-**$\alpha_{add}=0.05$인 경우**  
-
-앞의 예제 11.3에서 이미 보았듯이, 처음에는 $x_4$가 선택되고, 다음으로 $x_1$의 선택이 유의하다. 따라서 현재 모형은 $\hat{y}=f(x_1,x_4)=103.09738+1.43996x_1-0.61395x_4$ 
-
-이때 잔차평균제곱은 $\text{MSE}=7.47621$
-
-이제 새로 들어온 $x_1$ 때문에 기존 변수 $x_4$가 여전히 유의한지를 부분 $F$-검정한다. 계산은
-
-$$F_0=\frac{\hat{\beta}_4^2}{\widehat{\text{Var}}(\hat{\beta}_4)}=\frac{(-0.61395)^2}{0.002366}=159.31$$
-
-기각치는 $F_{0.05}(1,10)=4.96$ 이므로, $159.31 > 4.96$ 따라서 $x_4$도 유의하게 남아 있다.
-
-다음으로 $(x_4,x_1)$이 들어간 상태에서 추가할 수 있는 변수 $x_j$, $j\neq 1,4$ 중 $R^2$를 더 크게 하는 변수를 고르면 표 11.2로부터 $x_2$가 선택된다. 회귀모형은
-
-$\hat{y}=f(x_4,x_1,x_2)=71.6482+1.4519x_1+0.4161x_2-0.2365x_4$ 이고,$\text{MSE}=5.330297$
-
-이제 변수 $x_2$에 대한 부분 $F$-검정을 해 보면, 앞의 예제와 같이 $\alpha_{add}=0.05$에서 유의하지 않다. 따라서 $\alpha_{add}=0.05$에서는 $x_2$를 추가하지 않게 된다.
-
-그 결과 단계적 선택법에서도 최종적으로 선택된 변수는 $x_1$과 $x_4$가 되며, 회귀모형은 $\hat{y}=103.09738+1.43996x_1-0.61395x_4$
-
-**$\alpha_{add}=0.10$인 경우**  
-
-유의수준을 $\alpha_{add}=0.10$으로 바꾸면 결과가 달라진다고 설명한다.
-
-앞서 계산한 $x_2$의 부분 $F$-검정치는
-
-$$F_0=\frac{\hat{\beta}_2^2}{\widehat{\text{Var}}(\hat{\beta}_2)}=5.0258$$
-
-이때 기각치는 $F_{0.10}(1,9)=3.36$ 이므로, $5.0258 > 3.36$ 따라서 이번에는 $x_2$의 추가선택이 유의하다.
-
-이제 이미 들어가 있는 $x_4$와 $x_1$에 대해 부분 $F$-검정을 다시 한다.
-
-먼저 $x_4$에 대한 부분 $F$-검정결과는
-
-$$F_0=\frac{\hat{\beta}_4^2}{\widehat{\text{Var}}(\hat{\beta}_4)}=\frac{(-0.2365)^2}{0.03003}=1.86$$
-
-으로 유의하지 않다. 따라서 $x_4$는 제거된다.
-
-반면 $x_1$에 대한 부분 $F$-검정은
-
-$$F_0=\frac{\hat{\beta}_1^2}{\widehat{\text{Var}}(\hat{\beta}_1)}=\frac{(1.4519)^2}{0.01369}=153.98$$
-
-으로 매우 큰 값이므로 유의하다. 따라서 현재 남아 있는 변수는 $x_1$과 $x_2$가 된다.
-
-이제 다음으로 추가될 변수를 다시 찾아보면 $x_4$가 후보가 되지만, 이 변수의 추가는 유의하지 않으므로 선택절차는 여기서 중단된다.
-
-결국 최종적으로 선택된 변수는 $x_1$과 $x_2$이며, 최종회귀모형은
-
-$$\hat{y}=f(x_1,x_2)=52.5773+1.4683x_1+0.6623x_2$$
-
-**단계적 선택법 예제의 의미**  
-
-이 예제는 단계적 선택법의 중요한 특징을 매우 잘 보여 준다.
-
-* 전진선택법에서는 한번 들어온 변수는 이후 제거되지 않는다.
-* 단계적 전진선택법에서는 새 변수가 들어온 뒤 기존 변수의 유의성을 다시 검사한다.
-* 따라서 이미 선택된 변수라도 나중에 제거될 수 있다.
-
-실제로 이 예제에서는 처음에는 $x_4$가 선택되었지만, $x_1$, $x_2$가 차례로 들어오고 난 뒤에는 $x_4$가 더 이상 유의하지 않아 제거된다. 이 점이 전진선택법과 단계적 전진선택법의 핵심 차이이다.
+마지막으로 이 방법이 전진선택법 (forward selection method)을 보완한 방법이며, 적합해야 할 회귀모형의 수 또한 가능한 모든 회귀 (all possible regressions)에 비해 훨씬 적으므로 $k$가 큰 경우에도 활용될 수 있다.
 
 > **단계적 후진제거법 (stepwise backward elimination method)** 이는 단계적 전진선택법과 비슷한 절차로, 후진제거법의 순서 (1)에서 출발하여 제거절차를 거친 뒤 다시 남은 변수 중 선택할 변수가 있는지 검정함으로써, 후진제거법과 전진선택법을 번갈아 사용하는 방식이다.
 
 
 ## 9.3 변수선택의 판단기준 (Criteria for Variable Selection)
 
-앞 절에서는 변수선택법 (variable selection methods)으로 네 가지 절차를 검토하였다. 그때는 주로 계산절차를 중심으로 설명하였고, 결정계수 $(R^2)$를 판단기준 (criterion)으로 사용하여 변수를 선택하였다. 그러나 실제 변수선택에서는 $(R^2)$ 이외에도 여러 판단기준이 사용될 수 있다.
+앞 절에서는 변수선택법 (variable selection methods)으로 네 가지 절차를 검토하였다. 그때는 주로 계산절차를 중심으로 설명하였고, 결정계수 $R^2$를 판단기준 (criterion)으로 사용하여 변수를 선택하였다. 그러나 실제 변수선택에서는 $R^2$ 이외에도 여러 판단기준이 사용될 수 있다.
 
-다음 네 가지 판단기준을 제시한다.
+다음 네 가지 판단기준을 소개한다.
 
-1. 잔차평균제곱 (residual mean square)
-2. 결정계수 (coefficient of determination)
-3. 수정결정계수 (adjusted coefficient of determination)
-4. 말로우 (Mallows)의 $C_k$ 통계량
+**(1) 잔차평균제곱 (Residual Mean Square)**
 
-각각의 정의는 다음과 같다.
+$$\text{MSE}_k=\frac{\text{SSE}_k}{n-k-1} \tag{11.21}$$
 
-### 기본 정의
+**(2) 결정계수 (Coefficient of Determination)**
 
-설명변수 $p$개 중 $k(\le p)$개를 선택하여 회귀모형을 적합한 경우를 생각하자. 이때 다음 기호를 사용한다.
+$$R_k^2 = 1-\frac{\text{SSE}_k}{\text{SST}} \tag{11.22}$$
+
+여기서 $\text{SST}$는 총제곱합 (total sum of squares)이다.
+
+**(3) 수정결정계수 (Adjusted Coefficient of Determination)**
+
+$$R_{ak}^2 = 1-\left(\frac{n-1}{n-k-1}\right)(1-R_k^2) \tag{11.23}$$
+
+**(4) 말로우 (Mallows)의 $C_k$ 통계량**
+
+$$C_k=\frac{\text{SSE}_k}{\hat{\sigma}^2}+2(k+1)-n \tag{11.24}$$
+
 
 * $\text{SSE}_k$: $k$개의 설명변수를 사용한 모형의 오차제곱합 (sum of squared errors)
 * $\text{MSE}_k$: 그 모형의 잔차평균제곱 (residual mean square)
@@ -903,37 +764,15 @@ $$\hat{y}=f(x_1,x_2)=52.5773+1.4683x_1+0.6623x_2$$
 * $R_{ak}^2$: 그 모형의 수정결정계수
 * $\hat{\sigma}^2$: $p$개의 설명변수를 모두 사용하여 적합한 완전모형 (full model)에서 구한 $\text{MSE}$
 
-그러면 네 판단기준은 다음과 같이 정의된다.
+### 9.3.1 $\text{MSE}_k$, $R_k^2$ 와 $R_{ak}^2$
 
-#### (1) 잔차평균제곱 (Residual Mean Square)
-
-$$\text{MSE}_k=\frac{\text{SSE}_k}{n-k-1} \tag{11.21}$$
-
-#### (2) 결정계수 (Coefficient of Determination)
-
-$$R_k^2 = 1-\frac{\text{SSE}_k}{\text{SST}} \tag{11.22}$$
-
-여기서 $\text{SST}$는 총제곱합 (total sum of squares)이다.
-
-#### (3) 수정결정계수 (Adjusted Coefficient of Determination)
-
-$$R_{ak}^2 = 1-\left(\frac{n-1}{n-k-1}\right)(1-R_k^2) \tag{11.23}$$
-
-#### (4) 말로우 (Mallows)의 $C_k$ 통계량
-
-$$C_k=\frac{\text{SSE}_k}{\hat{\sigma}^2}+2(k+1)-n \tag{11.24}$$
-
-이제 이들 판단기준의 의미를 차례로 설명한다.
-
-### 9.3.1 $\text{MSE}_k$, $R_k^2$, $R_{ak}^2$
-
-반응변수 $y$의 변화를 설명하기 위하여 $p$개의 설명변수 중 $k$개를 선택한다고 하자. 이때 결정계수 $R_k^2$를 크게 하여 주는 $k$개의 설명변수를 선택하는 것은 가장 먼저 떠올릴 수 있는 자연스러운 방법이다. 왜냐하면 결정계수는 총변동 ($\text{SST}$) 중에서 회귀식에 의해 설명되는 변동의 비율을 의미하기 때문이다. 따라서 $R_k^2$가 크다는 것은 회귀모형에 의해 설명되지 않는 변동, 즉 $\text{SSE}_k$가 작다는 뜻이다.
+반응변수 $y$의 변화를 설명하기 위하여 $p$개의 설명변수 중 $k$개를 선택한다고 하자. 이때 결정계수 $R_k^2$를 크게 하여 주는 $k$개의 설명변수를 선택하는 것이 자연스럽다. 왜냐하면 결정계수는 총변동 ($\text{SST}$) 중에서 회귀식에 의해 설명되는 변동의 비율을 의미하기 때문이다. 따라서 $R_k^2$가 크다는 것은 회귀모형에 의해 설명되지 않는 변동, 즉 $\text{SSE}_k$가 작다는 뜻이다.
 
 이 관계를 바탕으로 $R_k^2$와 $\text{MSE}_k$를 비교한다.
 
 잔차평균제곱은 $\text{MSE}_k=\frac{\text{SSE}_k}{n-k-1}$ 이므로, $\text{SSE}_k$를 작게 하면 일반적으로 $\text{MSE}_k$도 작아진다. 그러나 여기서 중요한 차이점이 있다.
 
-* $R_k^2$는 설명변수 수 $k$가 증가할수록 감소하지 않는 함수이다.
+* $R_k^2$는 설명변수 수 $k$의 증가함수이다.
 * 반면 $\text{MSE}_k$는 $k$에 대한 단순 증가함수도 아니고 단순 감소함수도 아니다.
 
 그 이유는 다음과 같다.
@@ -943,27 +782,18 @@ $$C_k=\frac{\text{SSE}_k}{\hat{\sigma}^2}+2(k+1)-n \tag{11.24}$$
 
 따라서 $\text{MSE}_k$는 무조건 줄어들지도 않고 무조건 늘어나지도 않는다. 즉, $\text{MSE}_k$를 최소로 하는 어떤 $k$의 값 ($1\le k\le p$)이 존재할 수 있다. 이 점에서 $\text{MSE}_k$는 서로 다른 변수 수를 갖는 모형들을 비교하는 판단기준으로 사용할 수 있다.
 
-반면 $R_k^2$는 변수 수가 증가하면 대체로 증가하므로, 모형 간 비교의 판단기준으로는 적절하지 않다. 설명변수를 더 많이 넣을수록 늘 유리하게 보이기 때문이다.
+반면 $R_k^2$는 모형 간 비교의 판단기준으로는 적절하지 않다. 설명변수를 더 많이 넣을수록 늘 유리하게 보이기 때문이다.
 
-이 문제를 보완하기 위해 수정결정계수 $(R_{ak}^2)$가 사용된다. 식 (11.23)을 다음과 같이 다시 정리한다.
+이 문제를 보완하기 위해 수정결정계수 $R_{ak}^2$가 사용된다:
 
-$$R_{ak}^2 = 1-\left(\frac{n-1}{n-k-1}\right)(1-R_k^2)$$
+$$R_{ak}^2 = 1-\left(\frac{n-1}{n-k-1}\right)(1-R_k^2)\\= 1-\left(\frac{n-1}{n-k-1}\right)\frac{\text{SSE}_k}{\text{SST}}\\ = 1-\frac{\text{MSE}_k}{\text{SST}/(n-1)} \tag{11.25}$$
 
-또한 $1-R_k^2=\dfrac{\text{SSE}_k}{\text{SST}}$ 이므로
-
-$$R_{ak}^2 = 1-\left(\frac{n-1}{n-k-1}\right)\frac{\text{SSE}_k}{\text{SST}}$$
-
-그리고 $\text{MSE}_k=\dfrac{\text{SSE}_k}{n-k-1}$ 이므로
-
-$$R_{ak}^2 = 1-\frac{\text{MSE}_k}{\text{SST}/(n-1)} \tag{11.25}$$
-
-이 식의 의미는 매우 중요하다. $\text{SST}/(n-1)$은 주어진 데이터에서 상수이므로, $R_{ak}^2$를 최대화하는 것은 곧 $\text{MSE}_k$를 최소화하는 것과 같다. 따라서 다음과 같은 결론을 준다.
+이 식의 의미는 매우 중요하다. $\text{SST}/(n-1)$은 주어진 데이터에서 상수이므로, $R_{ak}^2$를 최대화하는 것은 곧 $\text{MSE}_k$를 최소화하는 것과 같다. 따라서 
 
 * $\text{MSE}_k$를 최소로 하는 $k$의 값은 $R_{ak}^2$도 최대화한다.
 * 따라서 수정결정계수 $R_{ak}^2$는 $R_k^2$를 대신하여 모형 비교의 판단기준으로 사용될 수 있다.
 
 즉, 서로 다른 변수 수를 가진 모형을 비교할 때는 단순 $R^2$보다는 $\text{MSE}_k$ 또는 $R_{ak}^2$ 를 사용하는 것이 더 적절하다.
-
 
 ### 9.3.2 말로우 (Mallows)의 $C_k$
 
@@ -1004,8 +834,6 @@ $$\sum_{i=1}^n x_{ik}^T(X_k^TX_k)^{-1}x_{ik}=\sum_{i=1}^n \text{tr}\left[x_{ik}^
 
 $$\text{tr}\left[(X_k^TX_k)^{-1}(X_k^TX_k)\right]=\text{tr}(I)=k+1 \tag{11.27}$$
 
-이 된다. 여기서 $k+1$이 되는 이유는 절편까지 포함한 모수의 수가 $k+1$이기 때문이다.
-
 다음으로 두 번째 항은
 
 $$\sum_{i=1}^n (x_{ik}^T A\beta_r - x_{ir}^T\beta_r)^2= \sum_{i=1}^n\left(\beta_r^T A x_{ik}x_{ik}^T A\beta_r-2\beta_r^T x_{ir}x_{ik}^T A\beta_r+\beta_r^T x_{ir}x_{ir}^T \beta_r\right) \tag{11.28}$$
@@ -1036,7 +864,7 @@ $$C_k=\frac{\text{SSE}_k}{\hat{\sigma}^2}+2(k+1)-n \tag{11.31}$$
 
 이 된다. 이것이 바로 Mallows의 $C_k$ 통계량이다.
 
-#### $C_k$의 해석
+**$C_k$의 해석**
 
 * $X_k^T X_r = O$, 즉 선택된 변수와 버려진 변수들이 직교 (orthogonal)하거나
 * $\beta_r=0$, 즉 버려진 변수들의 실제 효과가 0
@@ -1047,11 +875,7 @@ $$E(C_k\mid X_k^TX_r=O \text{ 또는 } \beta_r=0)\approx\frac{(n-k-1)\sigma^2}{\
 
 즉, $p$개의 변수 중 $k$개를 선택하고 $r$개를 버릴 때, 버린 변수들을 적절히 잘 선택하여 $\beta_r=0$에 가까운 상황이면 $C_k$의 값은 $k+1$에 가까워진다.
 
-그래서 일반적으로 
-
-$$C_k \le k+1$$
-
-이면 좋은 모형으로 판단한다. 그리고 이 조건을 만족하는 여러 모형이 있다면, **변수의 수가 적은 모형**을 선택하는 것이 바람직하다고 한다.
+그래서 일반적으로 $C_k \le k+1$ 이면 좋은 모형으로 판단한다. 그리고 이 조건을 만족하는 여러 모형이 있다면, **변수의 수가 적은 모형**을 선택하는 것이 바람직하다고 한다.
 
 또한 이 모형선택 기준은 앞 절에서 다룬 네 가지 변수선택 절차
 
@@ -1065,7 +889,7 @@ $$C_k \le k+1$$
 
 ## 9.4 혼합모형에서의 변수 선택 (Variable Selection in Mixture Models)
 
-여기서 "혼합모형"은 일반적인 현대 통계에서 말하는 **랜덤효과 혼합모형 (mixed effects model)** 이 아니라, **혼합비율이 1이 되도록 제약된 조성자료의 선형혼합모형 (mixture model)** 을 뜻한다.
+여기서 "혼합모형"은 일반적인 현대 통계에서 말하는 랜덤효과 혼합모형 (mixed effects model) 이 아니라, **혼합비율이 1이 되도록 제약된 조성자료의 선형혼합모형 (mixture model)** 을 뜻한다.
 
 혼합모형 (mixture model)을 다음 제약조건 (constraints)을 가진 회귀모형으로 정의한다.
 
@@ -1093,7 +917,7 @@ $$E_j = \hat{\beta}_j - \frac{\sum_{k\ne j} \hat{\beta}_k}{p-1}$$
 
 이 $E_j$를 변수 $x_j$의 선형효과 (linear effect)라고 부르기도 한다. 만약 $E_j=0$이면, 심플렉스 (simplex)에서 $x_j=0$이 되는 선에 수직을 이루는 직선상의 모든 점에서 $\hat{y}$의 값은 변함이 없다. 즉, 그 변수 $x_j$는 반응값에 실질적인 변화를 주지 못하므로 제거할 수 있다는 뜻이다.
 
-#### 기하학적 설명 예시
+**기하학적 설명 예시**
 
 그림 11.1과 그림 11.2를 통해 이를 설명한다. 예를 들어 추정된 회귀모형이 $\hat{y}=80x_1+90x_2+100x_3$ 라고 하자. 그러면 $x_2$의 선형효과는
 
@@ -1111,7 +935,7 @@ $$x_1=x_3=\frac{1-x_2}{2}$$
 
 만약 두 개 이상의 회귀계수 추정값 $\hat{\beta}_j$들이 서로 같다면, 그에 해당하는 변수들은 동등한 효과 (equal effects)를 가진다고 말한다. 이 경우 그 변수들을 한데 묶어 하나의 새로운 변수로 만들어 변수의 수를 줄인다.
 
-#### 기하학적 설명 예시
+**기하학적 설명 예시**
 
 예를 들어 추정된 회귀모형이 $\hat{y}=90x_1+80x_2+80x_3$이라고 하자. 그러면 $\hat{\beta}_2=\hat{\beta}_3=80$이므로 $x_2$와 $x_3$는 동등한 효과를 가진다.
 
@@ -1121,24 +945,21 @@ $$x_1=x_3=\frac{1-x_2}{2}$$
 
 즉, 혼합모형에서는 어떤 성분들이 서로 구분되지 않는 동일 효과를 보이면 그들을 통합하여 차원을 줄일 수 있다.
 
-### 실제 분석에서는 가설검정을 사용
+**실제 분석에서는 가설검정을 사용**  
+실제 문제에서 $\hat{\beta}_j$들이 위 두 기준을 정확하게 만족하는 경우를 찾기는 어렵다. 따라서 실제로는 다음과 같은 가설검정 (hypothesis testing)을 통해 변수제거 또는 변수통합을 수행할 수 있다.
 
-실제 문제에서 $\hat{\beta}_j$들이 위 두 기준을 **정확하게** 만족하는 경우를 찾기는 어렵다고 설명한다. 따라서 실제로는 다음과 같은 가설검정 (hypothesis testing)을 통해 변수제거 또는 변수통합을 수행할 수 있다.
+- (1) 선형효과가 0인지에 대한 검정
 
-#### (1) 선형효과가 0인지에 대한 검정
-
-$H_0: \beta_j - \frac{\sum_{k\ne j}^{p}\beta_k}{p-1} = 0$ 을 검정한다.
-
+$H_0: \beta_j - \frac{\sum_{k\ne j}^{p}\beta_k}{p-1} = 0$ 을 검정한다.  
 이것이 5장에서 다룬 다른 가설검정의 $C\beta=0$ 형태이므로 어렵지 않게 검정을 실시할 수 있다. 만약 이 귀무가설이 채택되면 $x_j$를 제거할 수 있다.
 
-#### (2) 두 성분의 효과가 같은지 검정
+- (2) 두 성분의 효과가 같은지 검정
 
-$H_0:\beta_j-\beta_k=0,\qquad j\ne k$에 대한 검정을 한다. 이 귀무가설이 채택되면 $x_j$와 $x_k$를 묶어 하나의 변수로 취급할 수 있다.
+$H_0:\beta_j-\beta_k=0, \quad j\ne k$ 에 대한 검정을 한다. 이 귀무가설이 채택되면 $x_j$와 $x_k$를 묶어 하나의 변수로 취급할 수 있다.
 
-#### (3) 세 성분 이상의 효과가 같은지 검정
+- (3) 세 성분 이상의 효과가 같은지 검정
 
-또는 $H_0:\beta_j=\beta_k=\beta_l,\qquad j\ne k\ne l$ 에 대한 검정도 같은 방법으로 실시할 수 있다.
-
+또는 $H_0:\beta_j=\beta_k=\beta_l,\qquad j\ne k\ne l$ 에 대한 검정도 같은 방법으로 실시할 수 있다.  
 이 귀무가설이 채택되면 $x_j, x_k, x_l$를 합하여 하나의 변수로 취급할 수 있다.
 
 > 혼합모형 자세한 내용은 Cornell 참고
