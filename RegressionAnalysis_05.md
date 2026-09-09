@@ -75,55 +75,42 @@ $$\hat{\beta}=(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$$
 즉, 모든 선형(linear)이고 불편(unbiased)인 추정량 중에서 분산이 최소이다 (minimum variance linear unbiased estimator, MVLUE).
   - 최량(bets)라는 표현을 써서, 최량 선형 불편추정량이라고도 함.
 
-**증명**
-
-먼저 $ C=(\mathbf X^T\mathbf X)^{-1}\mathbf X^T $ 라고 두면 $\hat\beta=C\mathbf y$이다.
-
-임의의 선형 불편추정량을 $ \tilde\beta=A\mathbf y $ 라고 하자. 불편성은 모든 $\beta$에 대해 성립해야 하므로 $ E(\tilde\beta) =A\mathbf X\beta =\beta $ 에서
-
-$$ A\mathbf X=I_k $$
-
-를 얻는다.
-
-이제 $B=A-C$ 라고 하면 $B\mathbf X =A\mathbf X-C\mathbf X =I_k-I_k =0 $ 이므로 $B\mathbf X=0$이다.
-
-따라서
-
-$$ \begin{aligned} \text{Var}(\tilde\beta) &=\text{Var}(A\mathbf y)\\ 
-&=A\text{Var}(\mathbf y)A^T\\ 
-&=\sigma^2AA^T\\ 
-&=\sigma^2(C+B)(C+B)^T\\ 
-&=\sigma^2 \left(CC^T+CB^T+BC^T+BB^T\right). \end{aligned} $$
-
-그런데 $CB^T =(\mathbf X^T\mathbf X)^{-1}\mathbf X^TB^T =(\mathbf X^T\mathbf X)^{-1}(B\mathbf X)^T =0$ 이고 $BC^T=(CB^T)^T=0$이다.  
-또한 $CC^T =(\mathbf X^T\mathbf X)^{-1} \mathbf X^T\mathbf X (\mathbf X^T\mathbf X)^{-1} =(\mathbf X^T\mathbf X)^{-1}$ 이므로
-
-$$ \text{Var}(\tilde\beta) = \sigma^2(\mathbf X^T\mathbf X)^{-1} +\sigma^2BB^T. $$
-
-한편
-
-$$ \text{Var}(\hat\beta) = \sigma^2(\mathbf X^T\mathbf X)^{-1} $$
-
-이므로
-
-$$ \boxed{ \text{Var}(\tilde\beta) -\text{Var}(\hat\beta) =\sigma^2BB^T\succeq0 } $$
-
-이다. 따라서 $\hat\beta$는 BLUE이다.
-
-더 자세히는, 등호 $\text{Var}(\tilde\beta)=\text{Var}(\hat\beta)$ 가 성립한다고 하자. $\sigma^2>0$이므로 $\sigma^2BB^T=0 \Rightarrow BB^T=0$  
-$B$의 $i$번째 행을 $b_i^T$라고 하면 $BB^T$의 $i$번째 대각성분은 $(BB^T)_{ii}=b_i^Tb_i=\|b_i\|^2$ 이다. 따라서 $BB^T=0$이면 모든 $i$에 대해 $\|b_i\|^2=0$ 즉 $b_i=0$이다. 그러므로
-
-$$ B=0. $$
-
-따라서
-
-$$ A=C $$
-
-이고, 모든 $\mathbf y$에 대하여
-
-$$ \tilde\beta=A\mathbf y =C\mathbf y =\hat\beta $$
-
-이다. 그러므로 $\hat\beta$는 유일한 BLUE이다.
+>**증명**
+>
+>먼저 $ C=(\mathbf X^T\mathbf X)^{-1}\mathbf X^T $ 라고 두면 $\hat\beta=C\mathbf y$이다.
+>
+>임의의 선형 불편추정량을 $ \tilde\beta=A\mathbf y $ 라고 하자. 불편성은 모든 $\beta$에 대해 성립해야 하므로 $ E(\tilde\beta) =A\mathbf X\beta =\beta $ 에서 $ A\mathbf X=I_k $ 를 얻는다.
+>
+>이제 $B=A-C$ 라고 하면 $B\mathbf X =A\mathbf X-C\mathbf X =I_k-I_k =0 $ 이므로 $B\mathbf X=0$이다.  
+>따라서
+>
+>$$ \begin{aligned} \text{Var}(\tilde\beta) &=\text{Var}(A\mathbf y)\\ 
+>&=A\text{Var}(\mathbf y)A^T\\ 
+>&=\sigma^2AA^T\\ 
+>&=\sigma^2(C+B)(C+B)^T\\ 
+>&=\sigma^2 \left(CC^T+CB^T+BC^T+BB^T\right). \end{aligned} $$
+>
+>그런데 $CB^T =(\mathbf X^T\mathbf X)^{-1}\mathbf X^TB^T =(\mathbf X^T\mathbf X)^{-1}(B\mathbf X)^T =0$ 이고 $BC^T=(CB^T)^T=0$이다.  
+>또한 $CC^T =(\mathbf X^T\mathbf X)^{-1} \mathbf X^T\mathbf X (\mathbf X^T\mathbf X)^{-1} =(\mathbf X^T\mathbf X)^{-1}$ 이므로
+>
+>$$ \text{Var}(\tilde\beta) = \sigma^2(\mathbf X^T\mathbf X)^{-1} +\sigma^2BB^T. $$
+>
+>한편 $ \text{Var}(\hat\beta) = \sigma^2(\mathbf X^T\mathbf X)^{-1} $ 이므로
+>
+>$$ \boxed{ \text{Var}(\tilde\beta) -\text{Var}(\hat\beta) =\sigma^2BB^T\succeq0 } $$
+>
+>이다. 따라서 $\hat\beta$는 BLUE이다.
+>
+>더 자세히는, 등호 $\text{Var}(\tilde\beta)=\text{Var}(\hat\beta)$ 가 성립한다고 하자. $\sigma^2>0$이므로 $\sigma^2BB^T=0 \Rightarrow BB^T=0$  
+>$B$의 $i$번째 행을 $b_i^T$라고 하면 $BB^T$의 $i$번째 대각성분은 $(BB^T)_{ii}=b_i^Tb_i=\|b_i\|^2$ 이다. 따라서 $BB^T=0$이면 모든 $i$에 대해 $\|b_i\|^2=0$ 즉 $b_i=0$이다. 그러므로
+>
+>$$ B=0. $$
+>
+>따라서 $ A=C $ 이고, 모든 $\mathbf y$에 대하여
+>
+>$$ \tilde\beta=A\mathbf y =C\mathbf y =\hat\beta $$
+>
+>이다. 그러므로 $\hat\beta$는 유일한 BLUE이다.
 
 
 ## 5.2 구간추정 (Interval Estimation)

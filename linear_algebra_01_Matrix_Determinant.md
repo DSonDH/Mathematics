@@ -1057,9 +1057,8 @@ $$\det(A \otimes B) = \det(A)^m \cdot \det(B)^p$$
 
 ### 정칙행렬의 조건
 정사각행렬 $A$가 정칙행렬이 되기 위한 필요충분조건:
-* $\det(A) \neq 0$
-* $A^{-1}$이 존재한다
-* $AX = 0$의 유일한 해가 $X = 0$이다 (자명해만 존재)
+
+$$ \begin{aligned} &A\text{가 가역이다}\\ \Longleftrightarrow\;&A^{-1}\text{가 존재한다}\\ \Longleftrightarrow\;&A\text{가 nonsingular이다}\\ \Longleftrightarrow\;&\det(A)\neq 0\\ \Longleftrightarrow\;&\operatorname{rank}(A)=n\\ \Longleftrightarrow\;&\ker(A)=\{\mathbf 0\}\\ \Longleftrightarrow\;&A\mathbf x=\mathbf 0\text{의 해가 }\mathbf x=\mathbf 0\text{뿐이다}\\ \Longleftrightarrow\;&A\text{의 열벡터들이 선형독립이다}\\ \Longleftrightarrow\;&A\text{의 행벡터들이 선형독립이다}\\ \Longleftrightarrow\;&0\text{이 }A\text{의 고유값이 아니다}\\ \Longleftrightarrow\;&A\mathbf x=\mathbf b\text{가 모든 }\mathbf b\text{에 대해 유일해를 가진다}\\ \Longleftrightarrow\;&\mathbf x\mapsto A\mathbf x\text{가 일대일대응이다}. \end{aligned} $$
 
 ### 정칙행렬의 성질
 * $A$가 정칙행렬이면 $A^{-1}$도 정칙행렬이다
@@ -1070,7 +1069,14 @@ $$\det(A \otimes B) = \det(A)^m \cdot \det(B)^p$$
 ### 특이행렬 (Singular Matrix)
 역행렬이 존재하지 않는 정사각행렬 (즉, $\det(A) = 0$인 행렬)
 
+영어의 singular에는 단순히 문법의 '단수'뿐 아니라 "보통의 규칙에서 벗어난 특별한 상태, 예외적인 상태, 정상적으로 작동하지 않는 지점" 의 뜻이 있다.  
+수학에서 singularity는 함수나 기하학적 대상이 정상적인 성질을 잃는 지점을 가리킨다. 예를 들어 $1/x$는 $x=0$에서 정의되지 않으므로 $x=0$이 특이점이다. 곡선의 접선이 정상적으로 정의되지 않는 점도 singular point라고 한다. 
+
+행렬에서도 같은 관점이 적용된다. 일반적인 선형변환은 공간의 차원을 보존하지만, singular matrix가 나타내는 선형변환은 어떤 방향을 완전히 눌러서 차원을 낮춘다.
+
 ## 역행렬
+$A\in\mathbb F^{n\times n}$이고 $\mathbb F$가 실수나 복소수 같은 체라면 다음은 모두 동치다.
+
 
 ### 역행렬의 성질
 * $(AB)^{-1} = B^{-1}A^{-1}$
@@ -1122,6 +1128,10 @@ $(AB)^T = B^TA^T$
 **응용**:
 
 $$PXX^T = QXX^T \Rightarrow PX = QX$$
+
+증명: $X$를 열벡터라고 하자. $A := P-Q$라 하면 $AXX^T = 0$이다. 이때 $X\neq 0$이면 $X^T X = \|X\|^2 > 0$이므로, 양변에 $X$를 오른쪽에서 곱하면 $AXX^T X = A X (X^T X) = A X \|X\|^2 = 0$ 따라서 $AX = 0$  
+
+한편 $X=0$이면 당연히 $PX = QX = 0$이므로, 모든 경우에 성립한다.
 
 ## 기초벡터 (Standard Basis Vector)
 $i$번째 성분만 1이고 나머지는 0인 벡터

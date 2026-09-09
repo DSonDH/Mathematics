@@ -387,7 +387,7 @@ $$\frac{Q_1/n_1}{Q_2/n_2} \sim F(n_1,n_2,\lambda)$$
 ### 3.5.3 일반 이차형식의 분포
 TODO: FIXME: 다시 증명 검토해보기
 
-#### 정리 3.1: 
+#### 정리 3.1: (TODO:외우기)
 $\mathbf{y \sim N(\mathbf{\mu},\mathbf{V})}$ 이면
 
 $$E(\mathbf{y}^T \mathbf{A} \mathbf{y})=\mathrm{tr}(\mathbf{A}\mathbf{V})+\mathbf{\mu}^T \mathbf{A}\mathbf{\mu}\\
