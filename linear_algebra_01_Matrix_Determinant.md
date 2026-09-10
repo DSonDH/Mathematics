@@ -1058,7 +1058,7 @@ $$\det(A \otimes B) = \det(A)^m \cdot \det(B)^p$$
 ### 정칙행렬의 조건
 정사각행렬 $A$가 정칙행렬이 되기 위한 필요충분조건:
 
-$$ \begin{aligned} &A\text{가 가역이다}\\ \Longleftrightarrow\;&A^{-1}\text{가 존재한다}\\ \Longleftrightarrow\;&A\text{가 nonsingular이다}\\ \Longleftrightarrow\;&\det(A)\neq 0\\ \Longleftrightarrow\;&\operatorname{rank}(A)=n\\ \Longleftrightarrow\;&\ker(A)=\{\mathbf 0\}\\ \Longleftrightarrow\;&A\mathbf x=\mathbf 0\text{의 해가 }\mathbf x=\mathbf 0\text{뿐이다}\\ \Longleftrightarrow\;&A\text{의 열벡터들이 선형독립이다}\\ \Longleftrightarrow\;&A\text{의 행벡터들이 선형독립이다}\\ \Longleftrightarrow\;&0\text{이 }A\text{의 고유값이 아니다}\\ \Longleftrightarrow\;&A\mathbf x=\mathbf b\text{가 모든 }\mathbf b\text{에 대해 유일해를 가진다}\\ \Longleftrightarrow\;&\mathbf x\mapsto A\mathbf x\text{가 일대일대응이다}. \end{aligned} $$
+$$ \begin{aligned} &A\text{가 가역이다}\\ \Longleftrightarrow\;&A^{-1}\text{가 존재한다}\\ \Longleftrightarrow\;&A\text{가 nonsingular이다}\\ \Longleftrightarrow\;&\det(A)\neq 0\\ \Longleftrightarrow\;&\text{rank}(A)=n\\ \Longleftrightarrow\;&\ker(A)=\{\mathbf 0\}\\ \Longleftrightarrow\;&A\mathbf x=\mathbf 0\text{의 해가 }\mathbf x=\mathbf 0\text{뿐이다}\\ \Longleftrightarrow\;&A\text{의 열벡터들이 선형독립이다}\\ \Longleftrightarrow\;&A\text{의 행벡터들이 선형독립이다}\\ \Longleftrightarrow\;&0\text{이 }A\text{의 고유값이 아니다}\\ \Longleftrightarrow\;&A\mathbf x=\mathbf b\text{가 모든 }\mathbf b\text{에 대해 유일해를 가진다}\\ \Longleftrightarrow\;&\mathbf x\mapsto A\mathbf x\text{가 일대일대응이다}. \end{aligned} $$
 
 ### 정칙행렬의 성질
 * $A$가 정칙행렬이면 $A^{-1}$도 정칙행렬이다

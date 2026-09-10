@@ -527,7 +527,7 @@ $$F_{\alpha}(1,\phi_E)=\left[t_{\alpha/2}(\phi_E)\right]^2$$
 현재 남아 있는 모든 변수를 포함한 회귀모형을 **완전모형 (full model)** 로 간주하고, 그 회귀제곱합과 잔차제곱합을 각각 $SSR(F), SSE(F)$ 라고 하자. 그리고 변수 $x_j$를 제거하여 만든 모형을 **축소모형 (reduced model)** 이라고 하고, 그 회귀제곱합과 잔차제곱합을 각각 $SSR(R), SSE(R)$ 라고 하자. 또한 잔차제곱합의 자유도를 각각 $df(F)$, $df(R)$이라고 하자. 그러면 부분 $F$-검정 통계량은
 
 $$
-F_0 = \frac{SSE(R)-SSE(F)}{MSE(F)} = \frac{SSR(F)-SSR(R)}{MSE(F)} = \frac{\hat\beta_j^2} {\widehat{\operatorname{Var}}(\hat\beta_j)}
+F_0 = \frac{SSE(R)-SSE(F)}{MSE(F)} = \frac{SSR(F)-SSR(R)}{MSE(F)} = \frac{\hat\beta_j^2} {\widehat{\text{Var}}(\hat\beta_j)}
 $$
 
 이는 5장 4절에서 설명한 $F$-검정의 형태다. 귀무가설은 $H_0:\beta_j=0$
@@ -574,22 +574,22 @@ $$
 >- $\hat\beta_j$의 분산
 >
 >$$
->\operatorname{Var}(\hat\beta_j) = \operatorname{Var} \left(\frac{\mathbf z^T\mathbf y}{\mathbf z^T\mathbf z}\right) = \frac{\mathbf z^T\operatorname{Var}(\mathbf y)\mathbf z}{(\mathbf z^T\mathbf z)^2} = \frac{\sigma^2}{\mathbf z^T\mathbf z}
+>\text{Var}(\hat\beta_j) = \text{Var} \left(\frac{\mathbf z^T\mathbf y}{\mathbf z^T\mathbf z}\right) = \frac{\mathbf z^T\text{Var}(\mathbf y)\mathbf z}{(\mathbf z^T\mathbf z)^2} = \frac{\sigma^2}{\mathbf z^T\mathbf z}
 >$$
 >
->알 수 없는 $\sigma^2$을 완전모형의 $MSE(F)$로 추정하면 $\widehat{\operatorname{Var}}(\hat\beta_j) = \frac{MSE(F)}{\mathbf z^T\mathbf z}$ 이다.
+>알 수 없는 $\sigma^2$을 완전모형의 $MSE(F)$로 추정하면 $\widehat{\text{Var}}(\hat\beta_j) = \frac{MSE(F)}{\mathbf z^T\mathbf z}$ 이다.
 >
->따라서 $\mathbf z^T\mathbf z = \frac{MSE(F)}{\widehat{\operatorname{Var}}(\hat\beta_j)}$ 이고, 이를 앞서 구한 추가제곱합에 대입하면
+>따라서 $\mathbf z^T\mathbf z = \frac{MSE(F)}{\widehat{\text{Var}}(\hat\beta_j)}$ 이고, 이를 앞서 구한 추가제곱합에 대입하면
 >
 >$$
->SSE(R)-SSE(F) = \hat\beta_j^2\mathbf z^T\mathbf z = \hat\beta_j^2 \frac{MSE(F)}{\widehat{\operatorname{Var}}(\hat\beta_j)}.
+>SSE(R)-SSE(F) = \hat\beta_j^2\mathbf z^T\mathbf z = \hat\beta_j^2 \frac{MSE(F)}{\widehat{\text{Var}}(\hat\beta_j)}.
 >$$
 >
 >양변을 $MSE(F)$로 나누면
 >
 >$$
 >\boxed{
->\frac{SSE(R)-SSE(F)}{MSE(F)} = \frac{\hat\beta_j^2}{\widehat{\operatorname{Var}}(\hat\beta_j)}
+>\frac{SSE(R)-SSE(F)}{MSE(F)} = \frac{\hat\beta_j^2}{\widehat{\text{Var}}(\hat\beta_j)}
 >}
 >$$
 >
@@ -599,11 +599,11 @@ $$
 >\boxed{
 >F_0 = \frac{\left\{SSE(R)-SSE(F)\right\} \left\{df(R)-df(F)\right\}}{SSE(F)/df(F)}
 >= \frac{SSR(F)-SSR(R)}{MSE(F)}
->= \frac{\hat\beta_j^2}{\widehat{\operatorname{Var}}(\hat\beta_j)}
+>= \frac{\hat\beta_j^2}{\widehat{\text{Var}}(\hat\beta_j)}
 >}
 >$$
 >
->가 성립한다. 단, 가운데와 마지막 등식은 변수 하나만 제거하여 $df(R)-df(F)=1$인 경우의 결과이다. 또한 $\beta_j=0$에 대한 $t$-통계량은 $t_0 = \frac{\hat\beta_j} {\sqrt{\widehat{\operatorname{Var}}(\hat\beta_j)}}$ 이므로 $F_0=t_0^2$ 이다. 즉, 변수 하나의 유의성을 검정할 때 부분 $F$-검정과 양측 $t$-검정은 동일한 결론을 준다.
+>가 성립한다. 단, 가운데와 마지막 등식은 변수 하나만 제거하여 $df(R)-df(F)=1$인 경우의 결과이다. 또한 $\beta_j=0$에 대한 $t$-통계량은 $t_0 = \frac{\hat\beta_j} {\sqrt{\widehat{\text{Var}}(\hat\beta_j)}}$ 이므로 $F_0=t_0^2$ 이다. 즉, 변수 하나의 유의성을 검정할 때 부분 $F$-검정과 양측 $t$-검정은 동일한 결론을 준다.
 
 ### 9.2.3 전진선택법 (Forward Selection Method)
 

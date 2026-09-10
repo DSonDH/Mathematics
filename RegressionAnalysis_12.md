@@ -5,11 +5,17 @@
 일반적인 회귀분석에서는 설명변수(explanatory variable)로 양적 변수와 질적 변수 모두를 포함할 수 있다. 그러나 분산분석 모형에서는 설명변수가 주로 질적 변수(categorical variable)로 구성된다. 따라서 회귀모형이 관측 연구(observational study)에서 수집된 데이터 분석에 많이 활용되는 것과 달리, 분산분석 모형은 실험 연구(experimental study)에서 수집된 데이터의 분석에 자주 활용된다.  
 분산분석 모형과 회귀모형은 서로 다른 모형으로 생각될 수 있지만, 분산분석에서 사용되는 분산분석표(analysis of variance table)는 회귀분석 모형의 결과로도 작성될 수 있다. 넓은 의미에서 분산분석은 회귀분석의 특수한 경우로 해석될 수 있다.
 
+- ANOVA 모형은 관측값이 어떤 구조로 생성되었다고 보는 확률적 생성모형
+- ANOVA와 선형회귀가 모두 일반선형모형이라는 동일한 체계에 속하며 ANOVA가 선형회귀모형의 특수한 형태
+  - ANOVA 관점: 여러 집단의 평균이 같은지를 비교하고 변동을 요인별로 분해한다.
+  - 회귀 관점: 설명변수와 평균반응 사이의 관계를 회귀계수로 표현한다.
+
 ## 12.1 일원배치법 (One-Way ANOVA)
 
-분산분석 모형에서는 질적인 설명변수를 인자(factor)라고 한다. 하나의 인자 $A$가 있고, 이 인자가 $l$개의 수준(level) $A_1, A_2, \dots, A_l$을 가지고 있다고 하자.
-
+분산분석 모형에서는 질적인 설명변수를 인자(factor)라고 한다. 하나의 인자 $A$가 있고, 이 인자가 $l$개의 수준(level) $A_1, A_2, \dots, A_l$을 가지고 있다고 하자. 인자가 하나이므로 '일원'이다.  
 이 인자의 각 수준이 주는 효과(effect) $a_i$는 **고정효과(fixed effect)** 라고 가정한다. 각 수준에서 $m$개의 관측값이 있다고 하면 데이터의 배열은 다음과 같다.
+
+
 
 |   | $A_1$    | $A_2$    | ... | $A_l$    |
 | - | -------- | -------- | --- | -------- |
@@ -47,9 +53,9 @@ $$y_{ij} = \mu_i + \epsilon_{ij} \quad \text{또는} \quad y_{ij} = \mu + \alpha
 **일원배치법의 분산분석표 (ANOVA Table)**  
 | 요인    | 제곱합   | 자유도      | 평균제곱             | F             |
 | ----- | ----- | -------- | ---------------- | ------------- |
-| A(요인) | $S_A$ | $l-1$    | $V_A=S_A/(l-1)$  | $F_0=V_A/V_E$ |
-| 오차    | $S_E$ | $l(m-1)$ | $V_E=S_E/l(m-1)$ |               |
-| 전체    | $S_T$ | $lm-1$   |                  |               |
+| A(요인) | $S_A=m\sum_{i=1}^l(y_{i.}-\bar y)^2$ | $l-1$    | $V_A=S_A/(l-1)$  | $F_0=V_A/V_E$ |
+| 오차    | $S_E=S_T-S_A$ | $l(m-1)$ | $V_E=S_E/l(m-1)$ |               |
+| 전체    | $S_T=\sum_{i=1}^l\sum_{j=1}^m(y_{ij}-\bar y)^2$ | $lm-1$   |                  |               |
 
 **선형회귀모형 표현 (Linear Regression Representation)**  
 분산분석 모형은 선형회귀모형(linear regression model)으로 다음과 같이 표현할 수 있다.
@@ -66,9 +72,7 @@ x_k =
 \end{cases}
 $$
 
-행렬 형태로 표현하면 
-
-$$\mathbf{y} = \mathbf{X}\beta + \boldsymbol{\varepsilon}$$
+행렬 형태로 표현하면 $\mathbf{y} = \mathbf{X}\beta + \boldsymbol{\varepsilon}$
 
 정규방정식(normal equations)은 
 
@@ -101,13 +105,17 @@ $$\hat{\mu} = \bar{y} \\ \hat{\alpha}_i = \bar{y}_i - \bar{y}$$
 
 총변동(total variation)은 앞의 일원배치법의 분산분석표의 총제곱합 $S_T$와 같다.  
 
-$$SST = \sum_{i=1}^{l}\sum_{j=1}^{m}(y_{ij}-\bar{y})^2$$
+$$SST = \mathbf{y}^T\mathbf{y}-n(\bar y)^2= \sum_{i=1}^{l}\sum_{j=1}^{m}(y_{ij}-\bar{y})^2$$
 
 회귀변동 (regression variation)은 분산분석표의 $A$의 변동 $S_A$와 동일하다
 
-$$SSR = \hat{\boldsymbol{\beta}}^T X^T \mathbf{y} - n(\bar{y})^2 \\
-= lm(\bar{y})^2 + m\sum_{i=1}^{l} \hat{\alpha}_i \bar{y}_i - lm(\bar{y})^2 \\
-= m\sum_{i=1}^{l}(\bar{y}_i-\bar{y})^2$$
+$$
+\begin{aligned}
+SSR &= \hat{\boldsymbol{\beta}}^T X^T \mathbf{y} - n(\bar{y})^2 \\
+&= lm(\bar{y})^2 + m\sum_{i=1}^{l} \hat{\alpha}_i \bar{y}_i - lm(\bar{y})^2 \\
+&= m\sum_{i=1}^{l}(\bar{y}_i-\bar{y})^2
+\end{aligned}
+$$
 
 마찬가지로 $SSE = S_E$도 확인할 수 있다. 잔차변동(error variation)은 $SSE = SST - SSA$
 
@@ -123,7 +131,10 @@ H_0 : \alpha_1 = \alpha_2 = \cdots = \alpha_l = 0 \\
 H_1 : \text{적어도 하나의 } \alpha_i \neq 0
 $$
 
-검정통계량은 $F = \frac{V_A}{V_E} = \frac{SSR}{SSE} \cdot \frac{df_E}{df_A} = \frac{SSR/(l-1)}{SSE/(l(m-1))} = \frac{MSR}{MSE}$  
+검정통계량은 
+
+$$F = \frac{V_A}{V_E} = \frac{SSR}{SSE} \cdot \frac{df_E}{df_A} = \frac{SSR/(l-1)}{SSE/(l(m-1))} = \frac{MSR}{MSE}$$
+
 임계값 $F_\alpha(l-1,\ l(m-1))$ 보다 크면 귀무가설을 기각한다.
 
 **각 수준에서 반복수가 다른 경우 (Unequal Replication)**  
@@ -142,6 +153,8 @@ $$\mu = \frac{\sum_{i=1}^{l} m_i \mu_i}{\sum_{i=1}^{l} m_i}$$
 | A(요인) | $S_A = \sum_{i=1}^{l} m_i (\bar{y}_i-\bar{y})^2$ | $l-1$    | $V_A=S_A/(l-1)$  | $F_0=V_A/V_E$ |
 | 오차    | $S_E = S_T - S_A$ | $\sum_{i=1}^{l} (m_i-1)$ | $V_E=S_E/\sum_{i=1}^{l} (m_i-1)$ |               |
 | 전체    | $S_T = \sum_{i=1}^{l} \sum_{j=1}^{m_i} (y_{ij}-\bar{y})^2$ | $\sum_{i=1}^{l} m_i - 1$   |                  |               |
+
+회귀분석에 의한 제곱합과 비교해보자.
 
 $$
 X^T X = \begin{pmatrix} \sum_{i=1}^{l} m_i & m_1 & m_2 & \cdots & m_l \\ m_1 & m_1 & 0 & \cdots & 0 \\ m_2 & 0 & m_2 & \cdots & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ m_l & 0 & 0 & \cdots & m_l\end{pmatrix},\qquad
@@ -175,121 +188,11 @@ $$
 
 잔차변동은 $SSE = SST - SSA$
 
-#### 예제 12.1 (Example)
-
-네 가지 다이어트 방법 $A_1, A_2, A_3, A_4$을 비교하는 실험을 수행하였다. 총 10명을 대상으로 실험을 수행하였다.
-
-|   | A1 | A2 | A3 | A4 |
-| - | -- | -- | -- | -- |
-|   | 12 | 14 | 19 | 24 |
-|   | 18 | 12 | 17 | 30 |
-|   |    | 13 | 21 |    |
-
-평균은 다음과 같다.
-
-$$
-\bar{y}_1=15,\quad
-\bar{y}_2=13,\quad
-\bar{y}_3=19,\quad
-\bar{y}_4=27
-$$
-
-전체 평균은 $\bar{y}=18$  
-총제곱합은 $SST = 304$  
-요인제곱합은 $SSA = 258$  
-잔차제곱합은 $SSE = 46$  
-
-분산분석표는 다음과 같다.
-
-| 요인 | 제곱합 | 자유도 | 평균제곱 | F     |
-| -- | --- | --- | ---- | ----- |
-| A  | 258 | 3   | 86   | 11.21 |
-| 오차 | 46  | 6   | 7.67 |       |
-| 전체 | 304 | 9   |      |       |
-
-유의수준 $0.05$에서 $F_{0.05}(3,6)=4.76$ 이므로 $F_0=11.21>4.76$  
-따라서 귀무가설을 기각한다. 즉, 다이어트 방법에 따라 체중 감소량에 유의한 차이가 있다고 결론 내린다.
-
-TODO: FIXME: 관련 개념 찾아서 없으면 추가하기. 시험에 나왔음
-``` 
-**수준조합(level combination)**은 이원배치(two-way layout)에서 매우 기본적인 개념이다. 정의를 명확히 정리하면 다음과 같다.
-
-## 1. 수준(level)의 의미
-모형:
-
-$$
-y_{ij} = \mu + \alpha_i + \beta_j + \epsilon_{ij}
-$$
-
-- $\alpha_i$: 첫 번째 요인(factor A)의 **$i$번째 수준(level)** 효과  
-- $\beta_j$: 두 번째 요인(factor B)의 **$j$번째 수준(level)** 효과
-
-즉,
-
-- factor A: $(A_1, A_2, \dots, A_\ell)$  
-- factor B: $(B_1, B_2, \dots, B_m)$
-
-## 2. 수준조합(level combination)
-
-**수준조합이란:**
-
-> 두 요인의 특정 수준을 하나씩 선택하여 만든 조합
-
-즉,
-
-$$
-(A_i, B_j)
-$$
-
-이 하나의 수준조합이다.
-
-## 3. 예: $(A_1, B_1)$ 의미
-
-$$
-\mu(A_1, B_1) = \mu + \alpha_1 + \beta_1
-$$
-
-이는
-
-> factor A의 1번째 수준 + factor B의 1번째 수준이 동시에 적용된 경우의 평균
-
-을 의미한다.
-
-## 4. 직관적 예시
-
-예를 들어:
-
-- A: 비료 종류  
-    $\rightarrow$ $A_1$: 비료1, $A_2$: 비료2
-- B: 물의 양  
-    $\rightarrow$ $B_1$: 적게, $B_2$: 많이
-
-그러면 수준조합은 다음과 같다.
-
-| 수준조합      | 의미         |
-| ------------- | ------------ |
-| $(A_1, B_1)$ | 비료1 + 물 적게 |
-| $(A_1, B_2)$ | 비료1 + 물 많이 |
-| $(A_2, B_1)$ | 비료2 + 물 적게 |
-| $(A_2, B_2)$ | 비료2 + 물 많이 |
-
-## 5. 수학적 의미 (중요)
-
-각 수준조합은 하나의 평균을 가진다.
-
-$$
-E[y_{ij}] = \mu + \alpha_i + \beta_j
-$$
-
-> **수준조합은 이원배치에서 하나의 셀(cell)이며, 해당 셀의 평균이 $\mu + \alpha_i + \beta_j$이다.**
-
-```
-
 ## 12.2 반복이 없는 이원배치법 (Two-Way ANOVA without Replication)
 
-앞 절에서는 인자가 하나인 경우에 대하여 회귀분석 방법에 의한 분산분석표를 작성하는 방법을 살펴보았다. 이제 두 개의 인자 $A$, $B$가 있는 **이원배치법(two-factor design of experiment)**에 대하여 생각해 보자.
+이제 두 개의 인자 $A$, $B$가 있는 **이원배치법(two-factor design of experiment)** 에 대하여 생각해 보자.
 
-인자 $A$의 $i$수준 $(A_i)$이 주는 효과를 $\alpha_i$, 인자 $B$의 $j$수준 $(B_j)$이 주는 효과를 $\beta_j$라 하자. 여기서 $\alpha_i$와 $\beta_j$는 **고정효과(fixed effect)** 라고 가정한다. 또한 $A_i$와 $B_j$의 조건에서 측정값에 반복이 없다고 하자.
+인자 $A$의 $i$수준 $A_i$이 주는 효과를 $\alpha_i$, 인자 $B$의 $j$수준 $B_j$이 주는 효과를 $\beta_j$라 하자. 여기서 $\alpha_i$와 $\beta_j$는 **고정효과(fixed effect)** 라고 가정한다. 또한 $A_i$와 $B_j$의 조건에서 측정값에 반복이 없다고 하자.
 
 이때 분산분석 모형(ANOVA model)은 다음과 같이 표현된다.
 
@@ -302,9 +205,14 @@ i = 1,2,\dots,l, \qquad j = 1,2,\dots,m$$
 
 $$\sum_{i=1}^{l} \alpha_i = 0,\qquad \sum_{j=1}^{m} \beta_j = 0$$
 
+> 앞에 일원배치에서는 수준별 평균 $\mu_i$를 (라고 하면)으로부터 $\mu$와 $\alpha_i$를 정의했기 때문에 합이 0이라는 식이 결과로 나타난다. 이원배치에서는 $\mu,\alpha_i,\beta_j$로 평균구조를 먼저 표현했기 때문에, 이들을 유일하게 정하기 위한 제약조건으로 같은 식을 제시한다.
+>
+>다만 본질적인 차이는 아니다. 일원배치도 처음부터 $ \mu_i=\mu+\alpha_i $ 라는 효과모형으로 출발하면 $\sum_i\alpha_i=0$을 식별 제약으로 부과해야 한다. 반대로 이원배치도 주변평균을 먼저 정의하면 합이 0이라는 식을 정의의 결과로 유도할 수 있다.  
+>즉, 수식상으로는 같은 내용이고, 설명의 출발점이 다른 것.
+
 ### 선형회귀모형 표현 (Linear Regression Representation)
 
-모형을 **선형회귀모형(linear regression model)** 으로 표현하면 다음과 같다.
+이원배치법 모형을 선형회귀모형으로 표현하면 다음과 같다.
 
 $$y_{ij} = \mu + \sum_{i=1}^{l} \alpha_i x_i + \sum_{j=1}^{m} \beta_j x_{l+j} + \epsilon_{ij}$$
 
@@ -335,6 +243,8 @@ x_{l+v} =
 | 평균    | $\bar{y}_{1.}$ | $\bar{y}_{2.}$ | … | $\bar{y}_{l.}$ |       | $\bar{y}$      |
 
 $$T = \sum_{i=1}^{l}\sum_{j=1}^{m} y_{ij}, \quad \bar{y} = \frac{1}{lm}\sum_{i=1}^{l}\sum_{j=1}^{m} y_{ij}$$
+
+> 참고: 수준조합이란, 두 요인의 특정 수준을 하나씩 선택하여 만든 조합. 즉, $(A_i, B_j)$ 이 하나의 수준조합이다. 위 이원배치표의 한 셀을 의미한다.
 
 ### 분산분석표 (ANOVA Table)
 
@@ -373,7 +283,7 @@ $$\hat{\mu} = \bar{y}\\
 \hat{\alpha}_i = \bar{y}_{i.}-\bar{y}\\
 \hat{\beta}_j = \bar{y}_{.j}-\bar{y}$$
 
-또한 위 제약조건(가정)하에서는 언제나 성립한다. 즉,
+또한 위 제약조건(가정)하에서는 언제나 다음이 성립한다:
 
 $$\sum_{i=1}^{l}\hat{\alpha}_i=0,\qquad \sum_{j=1}^{m}\hat{\beta}_j=0$$
 
@@ -381,15 +291,25 @@ $$\sum_{i=1}^{l}\hat{\alpha}_i=0,\qquad \sum_{j=1}^{m}\hat{\beta}_j=0$$
 
 회귀변동(regression variation)은 다음과 같이 계산된다.
 
-$$SSR = \hat{\boldsymbol{\beta}}^T X^T \mathbf{y} - n(\bar{y})^2\\
-= lm(\bar{y})^2 + m\sum_{i=1}^{l} \hat{\alpha}_i \bar{y}_{i.} + l\sum_{j=1}^{m} \hat{\beta}_j \bar{y}_{.j} - lm(\bar{y})^2\\
-= m\sum_{i=1}^{l}(\bar{y}_{i.}-\bar{y})^2 + l\sum_{j=1}^{m}(\bar{y}_{.j}-\bar{y})^2 = S_A + S_B$$
+$$
+\begin{aligned}
+SSR &= \hat{\boldsymbol{\beta}}^T X^T \mathbf{y} - n(\bar{y})^2\\
+&=(\hat\mu, \hat\alpha_1, \cdots, \hat\beta, \hat\alpha_1, \cdots, \hat\beta_m)(T, T_{1.}, \cdots, T_{l.}, T_{.1}, \cdots, T_{.m})^T-lm(\bar y)^2 \\
+&= \hat\mu T + \sum_{i=1}^{l}\hat\alpha_i T_{i.} + \sum_{j=1}^{m}\hat\beta_j T_{.j}-lm(\hat y)^2\\
+&= \sum_{i=1}^{l}(\bar{y}_{i.}-\bar{y})T_{i.} + \sum_{j=1}^{m}(\bar{y}_{.j}-\bar{y})T_{.j} \\
+&= m\sum_{i=1}^{l}(\bar{y}_{i.}-\bar{y})^2 + l\sum_{j=1}^{m}(\bar{y}_{.j}-\bar{y})^2 \\
+&= S_A + S_B
+\end{aligned}
+$$
 
 따라서 $SSR = S_A + S_B$ 임을 알 수 있다.
+- 즉, 즉, ANOVA가 회귀분석과 별개의 계산체계가 아니라 범주형 설명변수를 사용한 선형모형이라는 것이다.
 
 ### 축소모형 (Reduced Model)
 
-인자 $A$의 변동 $S_A$를 구하기 위해서는 $B$의 효과가 없다고 가정한 **축소모형(reduced model)**
+인자별 변동을 개별적으로 구하는 또다른 회귀분석방법이다.
+
+인자 $A$의 변동 $S_A$를 개별적으로 구하기 위해서는 $B$의 효과가 없다고 가정한 **축소모형(reduced model)** 을 사용한다.
 
 $$y_{ij}=\mu+\sum_{i=1}^{l}\alpha_i x_i+\epsilon_{ij}$$
 
@@ -412,8 +332,8 @@ $$SST = \mathbf{y}^T \mathbf{y} - n(\bar{y})^2 = \sum_{i=1}^{l}\sum_{j=1}^{m}y_{
 인자가 둘인 **이원배치법(two-factor design of experiment)** 에서는 인자 $A$와 $B$의 수준 조합에서 여러 번 반복하여 측정값을 얻는 경우가 흔히 있다. 이 반복수를 $r$이라 하자. 반복이 있는 이원배치법에서는 두 인자 $A$, $B$ 간의 **교호작용(interaction)** 의 효과를 측정할 수 있으므로, 분산분석의 모형은 일반적으로 다음과 같이 표현된다.
 
 $$y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk}\\
-\epsilon_{ijk} \sim N(0, \sigma^2),\qquad
-i=1,2,\cdots,l,\quad j=1,2,\cdots,m,\quad k=1,2,\cdots,r$$
+\epsilon_{ijk} \sim N(0, \sigma^2),\quad
+(i=1,2,\cdots,l,\quad j=1,2,\cdots,m,\quad k=1,2,\cdots,r)$$
 
 여기서 $(\alpha\beta)_{ij}$는 $A_i$ 수준과 $B_j$ 수준에서 발생되는 두 인자 $A$, $B$ 간의 교호작용의 효과이다.
 
@@ -435,7 +355,7 @@ $$\bar y = \frac{1}{lmr} \sum_{i=1}^{l}\sum_{j=1}^{m}\sum_{k=1}^{r} y_{ijk}$$
 $$\sum_{i=1}^{l} \alpha_i = 0,\qquad
 \sum_{j=1}^{m} \beta_j = 0\\
 \sum_{i=1}^{l} (\alpha\beta)_{ij} = 0,\qquad j=1,2,\cdots,m\\
-\sum_{j=1}^{m} (\alpha\beta)_{ij} = 0,\qquad i=1,2,\cdots,l$$
+\sum_{j=1}^{m} (\alpha\beta)_{ij} = 0,\qquad i=1,2,\cdots,l \tag{12.20}$$
 
 이 제약조건은 모형의 모수를 유일하게 식별하기 위하여 필요한 조건이다. 즉, 전체 평균 $\mu$, 주효과(main effect) $\alpha_i,\beta_j$, 교호작용 효과 $(\alpha\beta)_{ij}$를 서로 중복되지 않게 분리하기 위한 조건이다.
 
@@ -447,7 +367,7 @@ $$y_{ijk} = \mu
 + \sum_{i=1}^{l} \alpha_i x_i
 + \sum_{j=1}^{m} \beta_j x_{l+j}
 + \sum_{i=1}^{l} \sum_{j=1}^{m} (\alpha\beta)_{ij} x_i x_{l+j}
-+ \epsilon_{ijk}$$
++ \epsilon_{ijk} \tag{12.21}$$
 
 여기서 가변수는
 
@@ -488,17 +408,11 @@ x_{l+u} =
 * $S_E$: 위 세 가지로 설명되지 않는 나머지 변동
 * $S_T$: 전체 관측치의 총변동(total variation)
 
-특히 교호작용의 제곱합 $S_{A\times B}$에 들어 있는
-
-$$\bar y_{ij.} - \bar y_{i..} - \bar y_{.j.} + \bar y$$
-
-는 셀 평균(cell mean)이 단순한 주효과의 합으로 설명되지 않고 따로 남는 부분이다. 즉, 교호작용의 크기를 직접 나타내는 항이다.
+특히 교호작용의 제곱합 $S_{A\times B}$에 들어 있는 $\bar y_{ij.} - \bar y_{i..} - \bar y_{.j.} + \bar y$ 는 셀 평균(cell mean)이 단순한 주효과의 합으로 설명되지 않고 따로 남는 부분이다. 즉, 교호작용의 크기를 직접 나타내는 항이다.
 
 ### 회귀분석에 의한 제곱합 계산
 
-회귀분석에 의하여 위 분산분석표의 제곱합들을 구할 수 있다. 예를 들어 $l=2$, $m=2$, $r=2$이면 회귀모형은 다음과 같이 표현된다.
-
-$$\mathbf{y} = X\boldsymbol{\beta} + \boldsymbol{\epsilon}$$
+회귀분석에 의하여 위 분산분석표의 제곱합들을 구할 수 있다. 예를 들어 $l=2$, $m=2$, $r=2$이면 회귀모형은 다음과 같이 표현된다: $\mathbf{y} = X\boldsymbol{\beta} + \boldsymbol{\epsilon}$  
 
 여기서
 
@@ -534,6 +448,8 @@ $$SSR = \boldsymbol{\hat \beta}^T X^T \mathbf{y} - n(\bar y)^2 \\
 
 즉, 전체 회귀변동은 인자 $A$, 인자 $B$, 그리고 교호작용이 설명하는 변동의 합으로 분해된다.  
 
+---
+
 또한 $S_A, S_B, S_{A\times B}$를 하나하나 개별적으로 회귀분석에 의하여 구할 수 있는 또 하나의 방법은 축소모형(reduced model)을 사용하는 것이다.  
 먼저 $\beta_j=0$, $(\alpha\beta)_{ij}=0$으로 놓고 축소모형
 
@@ -546,13 +462,86 @@ $$y_{ijk} = \mu + \sum_{j=1}^{m} \beta_j x_{l+j} + \epsilon_{ijk}$$
 의 축소모형에 대한 회귀변동을 구하여 $S_B$를 얻는다. 같은 방법으로 $\alpha_i=0$, $\beta_j=0$으로 놓고 축소모형
 
 $$y_{ijk} =
-\mu + \sum_{i=1}^{l}\sum_{j=1}^{m} (\alpha\beta)_{ij} x_i x_{l+j} + \epsilon_{ijk}$$
+\mu + \sum_{i=1}^{l}\sum_{j=1}^{m} (\alpha\beta)_{ij} x_i x_{l+j} + \epsilon_{ijk} \tag{12.25}$$
 
 를 만들어 회귀변동을 구하면
 
 $$r\sum_{i=1}^{l}\sum_{j=1}^{m}(\bar y_{ij.}-\bar y)^2$$
 
-이 되는데, 여기에서 $S_A$와 $S_B$를 빼면 $S_{A\times B}$를 얻을 수 있다. 총변동(total sum of squares)은 회귀분석에서 구한 공식으로부터
+이 되는데, 
+
+>**증명**  
+>
+>식 (12.25)의 핵심은 곱 $x_i x_{l+j}$가 셀 $(i,j)$을 나타내는 가변수라는 점이다. 이를 이용하면 식 (12.25)는 사실상 각 셀에 서로 다른 평균을 적합하는 **셀 평균 모형(cell-means model)** 이 된다.
+>
+>편의를 위해 $\gamma_{ij}=(\alpha\beta)_{ij}$ 라고 쓰겠다.
+>
+>1. 곱 가변수의 의미
+>
+>관측값 $y_{abk}$가 셀 $(A_a,B_b)$에 속한다고 하자. 이 관측값에 대해서는 $x_a=1,\quad x_{l+b}=1$ 이고, 나머지 수준의 가변수는 모두 $0$이다. 따라서
+>
+>$$
+>x_i x_{l+j}
+>= \begin{cases}
+>1,&(i,j)=(a,b),\\
+>0,&(i,j)\neq(a,b)
+>\end{cases}
+>$$
+>
+>가 된다. 그러므로 셀 $(i,j)$에 속한 관측값에 대한 모형은 단순히 $y_{ijk}=\mu+\gamma_{ij}+\epsilon_{ijk}$ 가 된다.
+>
+>셀 $(i,j)$의 모형 평균을 $\theta_{ij}=\mu+\gamma_{ij}$ 라고 놓으면 모형은
+>
+>$$
+>y_{ijk}=\theta_{ij}+\epsilon_{ijk}
+>$$
+>
+>로 쓸 수 있다. 즉, 각 셀마다 독립적인 평균 $\theta_{ij}$를 적합하는 모형이다.
+>
+>2. 최소제곱추정값
+>
+>잔차제곱합은 $SSE = \sum_{i=1}^{l}\sum_{j=1}^{m}\sum_{k=1}^{r} (y_{ijk}-\theta_{ij})^2$ 이다.  
+>$\theta_{ij}$에 관하여 미분하면
+>
+>$$
+>\frac{\partial SSE}{\partial\theta_{ij}}
+>= -2\sum_{k=1}^{r}(y_{ijk}-\theta_{ij})
+>$$
+>
+>이다. 이를 $0$으로 놓으면 $r\hat\theta_{ij} = \sum_{k=1}^{r}y_{ijk}$ 이다. 따라서
+>
+>$$
+>\hat\theta_{ij} = \frac{1}{r}\sum_{k=1}^{r}y_{ijk} = \bar y_{ij.}
+>$$
+>
+>그러므로 셀 $(i,j)$에 속한 모든 관측값의 적합값은 $\hat y_{ijk}=\bar y_{ij.}$ 이다.
+>
+>3. 회귀변동 계산
+>
+>절편이 포함된 회귀모형에서 보정된 회귀제곱합은
+>
+>$$
+>SSR = \sum_{i=1}^{l}\sum_{j=1}^{m}\sum_{k=1}^{r}
+>(\hat y_{ijk}-\bar y)^2
+>$$
+>
+>앞에서 구한 $\hat y_{ijk}=\bar y_{ij.}$ 를 대입하면
+>
+>$$
+>SSR = \sum_{i=1}^{l}\sum_{j=1}^{m}\sum_{k=1}^{r}
+>(\bar y_{ij.}-\bar y)^2
+>$$
+>
+>가 된다.  
+>한 셀에는 반복 관측값이 $r$개 있으므로 $(\bar y_{ij.}-\bar y)^2$이 $r$번 더해진다. 따라서
+>
+>$$
+>\boxed{
+>SSR = r\sum_{i=1}^{l}\sum_{j=1}^{m} (\bar y_{ij.}-\bar y)^2
+>}
+>$$
+
+여기에서 $S_A$와 $S_B$를 빼면 $S_{A\times B}$를 얻을 수 있다. 총변동(total sum of squares)은 회귀분석에서 구한 공식으로부터
 
 $$SST = \sum_{i=1}^{l}\sum_{j=1}^{m}\sum_{k=1}^{r} y_{ijk}^2 - lmr(\bar y)^2 \\
 = \sum_{i=1}^{l}\sum_{j=1}^{m}\sum_{k=1}^{r}(y_{ijk}-\bar y)^2 = S_T$$
@@ -695,48 +684,39 @@ $$\hat\mu + \hat\alpha_i + \widehat{(\alpha\beta)}_{ij}\\
 
 ## 12.4 모수의 재조정법 (Reparameterization)
 
-앞에서 기본적인 몇 가지의 실험계획법에 의하여 얻어진 데이터를 분석하는 방법으로 회귀분석의 적용을 검토하였다. 이때 공통적인 점은 $X^TX$가 **비정칙행렬(singular matrix)** 이 되어 $X^TX$ 행렬의 역행렬(inverse matrix)을 구할 수 없으므로, 최소제곱추정량(least squares estimator)
+앞에서 기본적인 몇 가지의 실험계획법에 의하여 얻어진 데이터를 분석하는 방법으로 회귀분석의 적용을 검토하였다. 이때 공통적인 점은 $X^TX$가 **비정칙행렬(singular matrix)** 이 되어 $X^TX$ 행렬의 역행렬(inverse matrix)을 구할 수 없으므로, 최소제곱추정량 $\hat{\beta}=(X^TX)^{-1}X^Ty$ 를 그대로 사용할 수 없었다는 점이다. 이러한 문제를 극복하기 위하여 모수들 사이에 가정을 도입하여 정규방정식(normal equations)을 풀어서 해를 얻었다. 여기서 모수(parameters)란 회귀계수가 되는 $(\mu,\alpha_i,\beta_j)$ 등을 말한다.  
 
-$$\hat{\beta}=(X^TX)^{-1}X^Ty$$
-
-를 그대로 사용할 수 없었다는 점이다. 이러한 문제를 극복하기 위하여 모수들 사이에 가정을 도입하여 정규방정식(normal equations)을 풀어서 해를 얻었다. 여기서 모수(parameters)란 회귀계수가 되는 $(\mu,\alpha_i,\beta_j)$ 등을 말한다.  
-
-이 모수들을 추정하는 데에 위의 방법을 사용하지 않고, 모수들 간의 가정을 직접 회귀모형에 도입시켜서 **모수의 재조정(reparameterization of parameters)** 을 통하여 $X^TX$ 행렬을 **정칙행렬(non-singular matrix)** 로 만들어 모수들을 추정하는 방법이 있다. 이 재조정법은 앞장에서 가정 $C\beta=m$의 검정에서 간단히 논의된 바 있다. 이제 이 방법을 상세히 살펴본다.
+이 모수들을 추정하는 데에 위의 방법을 사용하지 않고, 모수들 간의 가정을 직접 회귀모형에 도입시켜서 **모수의 재조정(reparameterization of parameters)** 을 통하여 $X^TX$ 행렬을 **정칙행렬(non-singular matrix)** 로 만들어 모수들을 추정하는 방법이 있다. 이 재조정법은 앞장에서 가정 $C\beta=m$의 검정에서 간단히 논의된 바 있다. 
 
 ### 12.4.1 일원배치법 (방법 I)
 
-먼저 반복수가 다른 일원배치법(one-way layout with unequal replications)에 대한 회귀모형을 살펴보자. 앞 절의 가정
+먼저 반복수가 다른 일원배치법(one-way layout with unequal replications)에 대한 회귀모형을 살펴보자. 각 수준에서 반복수가 다른 경우에 세웠던 가정 $m_1\alpha_1+m_2\alpha_2+\cdots+m_l\alpha_l=0$ 을 모형에 직접 대입하면 ($m_l$은 $l$수준에서의 측정값 갯수)
 
-$$m_1\alpha_1+m_2\alpha_2+\cdots+m_l\alpha_l=0$$
-
-을 모형에 직접 대입하면
-
-$$\alpha_l=-\frac{1}{m_l}(m_1\alpha_1+m_2\alpha_2+\cdots+m_{l-1}\alpha_{l-1})
-\tag{12.27}$$
+$$\alpha_l=-\frac{1}{m_l}(m_1\alpha_1+m_2\alpha_2+\cdots+m_{l-1}\alpha_{l-1}) \tag{12.27}$$
 
 이므로
 
-$$y_{ij}=\mu+\alpha_1x_1+\alpha_2x_2+\cdots+\alpha_lx_l+\epsilon_{ij} \\
-=\mu+\alpha_1x_1+\alpha_2x_2+\cdots+\frac{1}{m_l}(-m_1\alpha_1-\cdots-m_{l-1}\alpha_{l-1})x_l+\epsilon_{ij}\\
-=\mu+\alpha_1\left(x_1-\frac{m_1}{m_l}x_l\right)+\cdots+\alpha_{l-1}\left(x_{l-1}-\frac{m_{l-1}}{m_l}x_l\right)+\epsilon_{ij}\\
-=\mu+\alpha_1w_1+\cdots+\alpha_{l-1}w_{l-1}+\epsilon_{ij}
-\tag{12.28}$$
+$$
+\begin{aligned}
+y_{ij} &=\mu+\alpha_1x_1+\alpha_2x_2+\cdots+\alpha_lx_l+\epsilon_{ij} \\
+&=\mu+\alpha_1x_1+\alpha_2x_2+\cdots+\frac{1}{m_l}(-m_1\alpha_1-\cdots-m_{l-1}\alpha_{l-1})x_l+\epsilon_{ij}\\
+&=\mu+\alpha_1\left(x_1-\frac{m_1}{m_l}x_l\right)+\cdots+\alpha_{l-1}\left(x_{l-1}-\frac{m_{l-1}}{m_l}x_l\right)+\epsilon_{ij}\\
+&=\mu+\alpha_1w_1+\cdots+\alpha_{l-1}w_{l-1}+\epsilon_{ij} \tag{12.28}
+\end{aligned}
+$$
 
 가 되어, 설명변수(explanatory variable)의 수가 하나 줄어들게 된다. 여기서
 
-$$w_i=x_i-\frac{m_i}{m_l}x_l,\qquad i=1,2,\cdots,l-1
-\tag{12.29}$$
+$$w_i=x_i-\frac{m_i}{m_l}x_l,\qquad i=1,2,\cdots,l-1 \tag{12.29}$$
 
 이 $w_i$의 값은 수준에 따라 다음과 같이 해석된다.
 
-* $A_i$ 수준의 데이터에 대해서는 $x_i=1$, $x_l=0$이므로 $w_i=1$이다.
-* $A_l$ 수준의 데이터에 대해서는 $x_i=0$, $x_l=1$이므로 $w_i=-\frac{m_i}{m_l}$
+* $A_i$ 수준의 데이터에 대해서는 가변수 $x_i=1$, $x_l=0$이므로 $w_i=1$이다.
+* $A_l$ 수준의 데이터에 대해서는 가변수 $x_i=0$, $x_l=1$이므로 $w_i=-\frac{m_i}{m_l}$
 * 그 이외의 수준에 대해서는 $w_i=0$이다.
+* 지금 식에서는 안보이지만, $l$수준, 그 이외 수준은 아래 예제의 $X$행렬 원소들을 말하는 것!
 
-만약 $A$의 각 수준에서 같은 반복수를 갖는다면
-
-$$m_1=m_2=\cdots=m_l=m
-$$이므로 $w_i$는 $-1$, $0$, 또는 $1$의 값을 갖게 된다.
+만약 $A$의 각 수준에서 같은 반복수를 갖는다면 $m_1=m_2=\cdots=m_l=m$ 이므로 $w_i$는 $-1$, $0$, 또는 $1$의 값을 갖게 된다.
 
 #### 예제
 
@@ -823,47 +803,23 @@ $$\hat{\alpha}_4 =-\frac{1}{2}(2\hat{\alpha}_1+3\hat{\alpha}_2+3\hat{\alpha}_3) 
 
 앞의 방법 I에서는 가정 $\alpha_l=-\frac{1}{m_l}\sum_{i=1}^{l-1}m_i\alpha_i$ 를 회귀모형에 대입시켜서 변수를 하나 줄이는 방법을 선택하였다. 이 방법 외에 다음과 같은 모수의 재조정법을 사용할 수도 있다. 회귀모형 (12.3)에서 마지막 설명변수 $x_l$을 제거하고, 새로운 모수로 표현하면
 
-$$y_{ij}=\gamma_0+\gamma_1x_1+\gamma_2x_2+\cdots+\gamma_{l-1}x_{l-1}+\epsilon_{ij}
-\tag{12.30}$$
+$$y_{ij}=\gamma_0+\gamma_1x_1+\gamma_2x_2+\cdots+\gamma_{l-1}x_{l-1} \epsilon_{ij} \tag{12.30}$$
 
 가 된다. 
->각주: 마지막 설명변수 $x_l$이 아니라 임의의 수준에 대한 설명변수 하나를 제거하여도 된다. $x_l$을 제거하는 것은 $\alpha_l=0$을 가정한 것과 동일하며, 실제로 이 방법은 범주형 변수(categorical variable)에 대하여 $(\text{수준 수}-1)$개의 가변수만 생성하는 방법과 같다.
+>각주: 마지막 설명변수 $x_l$이 아니라 임의의 수준에 대한 설명변수 하나를 제거해도 된다. $x_l$을 제거하는 것은 $\alpha_l=0$을 가정한 것과 동일하며, 실제로 이 방법은 11장의 범주형 변수(categorical variable)에 대하여 $(\text{수준 수}-1)$개의 가변수만 생성하는 방법과 같다.
 
 이제 새로운 모수 $\gamma_i$와 $\alpha_i$들 간의 관계를 살펴보자. 
-$A_l$ 수준의 데이터에 대해서는 원래의 모형 (12.3)이
+$A_l$ 수준의 데이터에 대해서는 원래의 모형 (12.3)이 $y_{lj}=\mu+\alpha_l+\epsilon_{lj}$ 이나, 새로운 모형 (12.30)은 $y_{lj}=\gamma_0+\epsilon_{lj}$ 이므로
 
-$$y_{lj}=\mu+\alpha_l+\epsilon_{lj}$$
+$$\gamma_0=\mu+\alpha_l \tag{12.31}$$
 
-이나, 새로운 모형 (12.30)은
+의 관계가 성립한다. 다음으로 $A_1$ 수준의 데이터에 대해서는 모형 (12.3)이 $y_{1j}=\mu+\alpha_1+\epsilon_{1j}$ 이고, 모형 (12.30)은 $y_{1j}=\gamma_0+\gamma_1+\epsilon_{1j} =\mu+\alpha_l+\gamma_1+\epsilon_{1j}$ 이므로, 이 두 모형의 비교로부터 $\gamma_1=\alpha_1-\alpha_l$ 를 얻는다. 일반적으로
 
-$$y_{lj}=\gamma_0+\epsilon_{lj}$$
-
-이므로
-
-$$\gamma_0=\mu+\alpha_l
-\tag{12.31}$$
-
-의 관계가 성립한다. 다음으로 $A_1$ 수준의 데이터에 대해서는 모형 (12.3)이
-
-$$y_{1j}=\mu+\alpha_1+\epsilon_{1j}$$
-
-이고, 모형 (12.30)은
-
-$$y_{1j}=\gamma_0+\gamma_1+\epsilon_{1j}
-=\mu+\alpha_l+\gamma_1+\epsilon_{1j}$$
-
-이므로, 이 두 모형의 비교로부터
-
-$$\gamma_1=\alpha_1-\alpha_l$$
-
-를 얻는다. 일반적으로
-
-$$\gamma_i=\alpha_i-\alpha_l,\qquad i=1,2,\cdots,l-1
-\tag{12.32}$$
+$$\gamma_i=\alpha_i-\alpha_l,\qquad i=1,2,\cdots,l-1 \tag{12.32}$$
 
 가 된다. 이는 $i$ 수준과 마지막 수준 $l$과의 처리효과(treatment effect)의 차를 의미한다. 
 
->각주: R에서는 보통 $\gamma_i=\alpha a_i-\alpha_1,\quad i=2,\cdots,l$ 를 디폴트(default)로 생성하며, 기준이 되는 수준(reference level)은 다시 설정할 수 있다. 다만, 각 수준별 평균의 추정값이나 분산분석표는 이러한 선형제약조건(linear constraints)에 영향을 받지 않는다.
+>각주: R에서는 보통 $\gamma_i=\alpha_i-\alpha_1,\quad i=2,\cdots,l$ 를 디폴트(default)로 생성하며, 기준이 되는 수준(reference level)은 다시 설정할 수 있다. 다만, 각 수준별 평균의 추정값이나 분산분석표는 이러한 선형제약조건(linear constraints)에 영향을 받지 않는다.
 
 따라서 일반적으로 마지막 수준을 **기본범주(reference category)** 로 하여 가변수를 생략하는 경우, 회귀계수의 의미는 기본범주에 대한 $i$ 수준에서의 처리효과를 나타낸다.
 
@@ -941,11 +897,7 @@ $$\hat{\gamma}_0=\hat{\mu}+\hat{\alpha}_4=\bar{y}+(\bar{y}_4-\bar{y})=\bar{y}_4\
 =(\bar{y}_i-\bar{y})-(\bar{y}_4-\bar{y})
 =\bar{y}_i-\bar{y}_4,\qquad i=1,2,3$$
 
-모형이 재조정되어 회귀계수들이 다른 의미를 갖더라도 얻어지는 회귀변동은 변함이 없다. 즉, 적합된 모형
-
-$$\hat{y}=\hat{\gamma}_0+\sum_{i=1}^{3}\hat{\gamma}_ix_i$$
-
-에 대한 회귀변동은
+모형이 재조정되어 회귀계수들이 다른 의미를 갖더라도 얻어지는 회귀변동은 변함이 없다. 즉, 적합된 모형 $\hat{y}=\hat{\gamma}_0+\sum_{i=1}^{3}\hat{\gamma}_ix_i$ 에 대한 회귀변동은
 
 $$SSR=\hat{\beta}^TX^Ty-n(\bar{y})^2\\
 =(\hat{\gamma}_0,\hat{\gamma}_1,\hat{\gamma}_2,\hat{\gamma}_3)
@@ -963,20 +915,18 @@ $$SSR=\hat{\beta}^TX^Ty-n(\bar{y})^2\\
 앞에서 검토된 두 가지의 재조정법을 이원배치법(two-way layout)에서도 그대로 적용할 수 있다. 먼저 반복이 없는 이원배치법에 대하여 재조정법 I을 알아보자. 가정이
 
 $$\alpha_l=-(\alpha_1+\alpha_2+\cdots+\alpha_{l-1})\\
-\beta_m=-(\beta_1+\beta_2+\cdots+\beta_{m-1})
-\tag{12.33}$$
+\beta_m=-(\beta_1+\beta_2+\cdots+\beta_{m-1}) \tag{12.33}$$
 
-이므로, 이를 모형 (12.17)에 대입시키면
+이므로, 이를 모형에 대입시키면
 
 $$y_{ij}
 = \mu+\alpha_1(x_1-x_l)+\alpha_2(x_2-x_l)+\cdots+\alpha_{l-1}(x_{l-1}-x_l)\\
 \qquad
 +\beta_1(x_{l+1}-x_{l+m})+\cdots+\beta_{m-1}(x_{l+m-1}-x_{l+m})
 +\epsilon_{ij}\\
-=\mu+\sum_{i=1}^{l-1}\alpha_iw_i+\sum_{j=1}^{m-1}\beta_jw_{l+j-1}+\epsilon_{ij}
-\tag{12.34}$$
+=\mu+\sum_{i=1}^{l-1}\alpha_iw_i+\sum_{j=1}^{m-1}\beta_jw_{l+j-1}+\epsilon_{ij} \tag{12.34}$$
 
-로 표현된다. 이때 새로운 변수 $w_k$ $(k=1,2,\cdots,l+m-2)$는 $-1,0,1$의 값을 갖는다. 예를 들어 $l=2$, $m=3$이라면
+이때 새로운 변수 $w_k$ $(k=1,2,\cdots,l+m-2)$는 $-1,0,1$의 값을 갖는다. 예를 들어 $l=2$, $m=3$이라면
 
 $$y_{ij} =
 \mu+\alpha_1(x_1-x_2)+\beta_1(x_3-x_5)+\beta_2(x_4-x_5)+\epsilon_{ij} \\
@@ -988,7 +938,7 @@ $$y=X\beta+\epsilon\\
 \begin{bmatrix}
 y_{11}\\ y_{12}\\ y_{13}\\ y_{21}\\ y_{22}\\ y_{23} \end{bmatrix}
 = \begin{bmatrix}
-1&1&0&0\\
+1&1&1&0\\
 1&1&0&1\\
 1&1&-1&-1\\
 1&-1&1&0\\
@@ -1016,6 +966,7 @@ $$\hat{\beta} =
 $$\hat{\alpha}_2=-\hat{\alpha}_1\\ \hat{\beta}_3=-(\hat{\beta}_1+\hat{\beta}_2)$$
 
 와 같이 추정된다.  
+
 방법 II에 의한 재조정법을 사용하게 되면 이원배치법의 선형모형
 
 $$y_{ij}=\mu+\sum_{i=1}^{l}\alpha_ix_i+\sum_{j=1}^{m}\beta_jx_{l+j}+\epsilon_{ij}$$
@@ -1033,6 +984,157 @@ $$\gamma_0=\mu+\alpha_l+\beta_m\\
 
 과 같아진다.
 
+
+#### 연습문제 10.10
+
+모형을  $Y_{ij}=\mu+\alpha_i+\beta_j+\epsilon_{ij}, \quad \epsilon_{ij}\overset{\mathrm{iid}}{\sim}N(0,\sigma^2)$, 오차평균을
+
+$$
+\bar\epsilon_{i.} = \frac1m\sum_{j=1}^{m}\epsilon_{ij}, \quad
+\bar\epsilon_{.j} = \frac1l\sum_{i=1}^{l}\epsilon_{ij}, \quad
+\bar\epsilon = \frac1{lm}\sum_{i=1}^{l}\sum_{j=1}^{m}\epsilon_{ij}
+$$
+
+라고 정의한다.
+
+(1) 다음 두 확률변수가 독립임을 보여라: 
+
+$Q_A = \sum_{i=1}^{l}\sum_{j=1}^{m} (\bar\epsilon_{i.}-\bar\epsilon)^2
+= m\sum_{i=1}^{l}(\bar\epsilon_{i.}-\bar\epsilon)^2$ 및 
+
+$Q_E = \sum_{i=1}^{l}\sum_{j=1}^{m} (\epsilon_{ij}-\bar\epsilon_{i.}-\bar\epsilon_{.j} +\bar\epsilon)^2.$
+
+**증명**
+
+다음을 정의하자. $U_i=\bar\epsilon_{i.}-\bar\epsilon$ 및 $V_{pq} = \epsilon_{pq}-\bar\epsilon_{p.} -\bar\epsilon_{.q}+\bar\epsilon$  
+그러면 $Q_A=m\sum_iU_i^2,\quad Q_E=\sum_p\sum_qV_{pq}^2$ 이다.
+
+모든 $U_i,V_{pq}$는 정규오차들의 선형결합이므로 이들은 결합정규분포를 따른다. 따라서 모든 $i,p,q$에 대하여 $\text{Cov}(U_i,V_{pq})=0$ 임을 보이면 두 벡터 $\mathbf U$와 $\mathbf V$가 독립이다.
+
+먼저 $\text{Cov}(\bar\epsilon_{i.},\epsilon_{pq}) = \frac{\sigma^2}{m}I(i=p)$ 이고, $\text{Cov}(\bar\epsilon_{i.},\bar\epsilon_{p.}) = \frac{\sigma^2}{m}I(i=p)$ 이다.  
+또한 한 행평균과 한 열평균에는 하나의 공통 오차가 있으므로 $\text{Cov}(\bar\epsilon_{i.},\bar\epsilon_{.q}) = \frac{\sigma^2}{lm}
+$ 이고,  $\text{Cov}(\bar\epsilon_{i.},\bar\epsilon) = \frac{\sigma^2}{lm}$ 이다.
+
+따라서
+
+$$
+\begin{aligned}
+\text{Cov}(\bar\epsilon_{i.},V_{pq})
+&=
+\text{Cov}
+\left(
+\bar\epsilon_{i.}, \epsilon_{pq}-\bar\epsilon_{p.}-\bar\epsilon_{.q} +\bar\epsilon
+\right)\\
+&=
+\frac{\sigma^2}{m}I(i=p) -\frac{\sigma^2}{m}I(i=p) -\frac{\sigma^2}{lm} +\frac{\sigma^2}{lm}\\
+&=0.
+\end{aligned}
+$$
+
+마찬가지로
+
+$$
+\begin{aligned}
+\text{Cov}(\bar\epsilon,V_{pq})
+&=
+\frac{\sigma^2}{lm} -\frac{\sigma^2}{lm} -\frac{\sigma^2}{lm} +\frac{\sigma^2}{lm}\\
+&=0.
+\end{aligned}
+$$
+
+그러므로
+
+$$
+\begin{aligned}
+\text{Cov}(U_i,V_{pq})
+&=
+\text{Cov}
+(\bar\epsilon_{i.}-\bar\epsilon,V_{pq})\\
+&=0.
+\end{aligned}
+$$
+
+$\mathbf U$와 $\mathbf V$는 결합정규분포를 따르면서 교차공분산이 모두 $0$이므로 서로 독립이다. 따라서 각각의 함수인 $Q_A$와 $Q_E$도 독립이다.
+
+실제로는 다음 분포도 성립한다: $\frac{Q_A}{\sigma^2}\sim\chi^2_{l-1}, \quad \frac{Q_E}{\sigma^2} \sim\chi^2_{(l-1)(m-1)}$  
+그리고 두 카이제곱 확률변수는 서로 독립이다.
+
+---
+
+(2) $l=4$이고 가설 $H_0:\alpha_1=2\alpha_2=3\alpha_3$ 을 검정하는 $F$-통계량을 구하라
+
+이는 다음 두 개의 독립적인 선형제약과 같다. $\alpha_1-2\alpha_2=0, \quad \alpha_1-3\alpha_3=0.$ 따라서 제약의 수는 $q=2$다.  
+효과 추정량은 $\hat\alpha_i=\bar Y_{i.}-\bar Y$ 이다. 다음을 정의하자. $d_1=\hat\alpha_1-2\hat\alpha_2, \quad d_2=\hat\alpha_1-3\hat\alpha_3.$
+
+표본평균으로 쓰면 $d_1 = \bar Y_{1.}-2\bar Y_{2.}+\bar Y$ 이고, $d_2 = \bar Y_{1.}-3\bar Y_{3.}+2\bar Y$ 이다. $\hat\alpha_i=\bar Y_{i.}-\bar Y$이므로 전체평균 항이 완전히 소거되지 않는다는 점에 주의해야 한다.
+
+효과 추정량 벡터를 $\hat{\boldsymbol\alpha} = (\hat\alpha_1,\hat\alpha_2,\hat\alpha_3,\hat\alpha_4)^T$ 라고 하면 $\text{Cov}(\hat{\boldsymbol\alpha}) = \frac{\sigma^2}{m} \left( I_4-\frac14J_4\right)$ 이다.
+
+가설행렬은
+
+$$
+R=
+\begin{pmatrix}
+1&-2&0&0\\
+1&0&-3&0
+\end{pmatrix}
+$$
+
+이고, $R\hat{\boldsymbol\alpha}=\begin{pmatrix}d_1\\d_2\end{pmatrix}.$
+
+계산하면
+
+$$
+R\left(I_4-\frac14J_4\right)R^T
+=
+\begin{pmatrix}
+19/4&1/2\\
+1/2&9
+\end{pmatrix}
+=M
+$$
+
+이다. 역행렬은
+
+$$
+M^{-1}
+=
+\begin{pmatrix}
+18/85&-1/85\\
+-1/85&19/170
+\end{pmatrix}
+$$
+
+따라서 귀무가설에 의한 제곱합은
+
+$$
+SS_H = m
+\begin{pmatrix}d_1&d_2\end{pmatrix}
+M^{-1}
+\begin{pmatrix}d_1\\d_2\end{pmatrix}
+$$
+
+이다. 전개하면 $SS_H = m\left( \frac{18}{85}d_1^2 -\frac{2}{85}d_1d_2 +\frac{19}{170}d_2^2 \right).$
+
+반복 없는 이원배치의 오차평균제곱은
+
+$$
+V_E = \frac{S_E}{(l-1)(m-1)} = \frac{S_E}{3(m-1)}
+$$
+
+따라서 검정통계량은
+
+$$
+\boxed{
+F_0 = \frac{SS_H/2}{V_E} = 
+\frac{m\left( \frac{18}{85}d_1^2 -\frac{2}{85}d_1d_2 +\frac{19}{170}d_2^2 \right)}{2V_E}
+}
+$$
+
+귀무가설 아래에서 $F_0\sim F_{2,\;3(m-1)}$이다. 따라서 유의수준 $\alpha$에서 $F_0>F_{2,\;3(m-1)}(\alpha)$ 이면 $H_0$를 기각한다.
+
+
+
 ### 12.4.4 반복이 있는 이원배치법
 
 $A_i$ 수준과 $B_j$ 수준에서 데이터의 반복측정이 있고, 그 반복수가 일정한 이원배치법의 경우를 살펴보자. 먼저 12.4.1절의 방법 I을 보면 가정 (12.20)으로부터
@@ -1044,25 +1146,14 @@ $$\alpha_l=-\sum_{i=1}^{l-1}\alpha_i\\
 \qquad j=1,2,\cdots,m\\
 (\alpha\beta)_{im}
 =-\sum_{j=1}^{m-1}(\alpha\beta)_{ij},
-\qquad i=1,2,\cdots,l
-\tag{12.35}$$
+\qquad i=1,2,\cdots,l \tag{12.35}$$
 
 이므로, 이를 모형 (12.21)에 대입시키면
 
 $$y_{ijk} =
-\mu+\sum_{i=1}^{l-1}\alpha_i(x_i-x_l)
-+\sum_{j=1}^{m-1}\beta_j(x_{l+j}-x_{l+m})\\
-\qquad
-+\sum_{i=1}^{l-1}\sum_{j=1}^{m-1}
-(\alpha\beta)_{ij}(x_i-x_l)(x_{l+j}-x_{l+m})
-+\epsilon_{ijk}
-\tag{12.36}$$
-
-$$= \mu+\sum_{i=1}^{l-1}\alpha_iw_i
-+\sum_{j=1}^{m-1}\beta_jw_{l+j-1}
-+\sum_{i=1}^{l-1}\sum_{j=1}^{m-1}(\alpha\beta)_{ij}w_iw_{l+j-1}
-+\epsilon_{ijk}
-\tag{12.37}$$
+\mu+\sum_{i=1}^{l-1}\alpha_i(x_i-x_l) +\sum_{j=1}^{m-1}\beta_j(x_{l+j}-x_{l+m})\\
+\qquad +\sum_{i=1}^{l-1}\sum_{j=1}^{m-1} (\alpha\beta)_{ij}(x_i-x_l)(x_{l+j}-x_{l+m}) +\epsilon_{ijk} \\
+= \mu+\sum_{i=1}^{l-1}\alpha_iw_i +\sum_{j=1}^{m-1}\beta_jw_{l+j-1} +\sum_{i=1}^{l-1}\sum_{j=1}^{m-1}(\alpha\beta)_{ij}w_iw_{l+j-1} +\epsilon_{ijk} \tag{12.37}$$
 
 예제 12.2의 데이터에서는 $l=4$, $m=3$, $r=2$이므로 모형은
 
@@ -1084,14 +1175,117 @@ $$\beta= \begin{bmatrix}
 \end{bmatrix}$$
 
 해당 $X$행렬은 정칙행렬이므로 $(\mu,\alpha_i,\beta_j,(\alpha\beta)_{ij})$의 추정은 $(X^TX)^{-1}X^Ty$ 에 의하여 얻어지며, 모형 (12.37)에 나타나 있지 않은 $\alpha_l,\beta_m,(\alpha\beta)_{lj},(\alpha\beta)_{im}$ 등은 가정 (12.35)의 관계로부터 얻어진다.  
+
 또한 12.4.2절의 방법 II에 의한 방법으로는 모형 (12.21)에서 변수 $x_l$, $x_{l+m}$, $x_ix_{l+j}\ (j=1,2,\cdots,m)$, $x_ix_{l+m}\ (i=1,2,\cdots,l)$를 모두 제거하고, 축소모형
 
 $$y_{ijk} =
 \gamma_0+\sum_{i=1}^{l-1}\gamma_ix_i+\sum_{j=1}^{m-1}\tau_jw_{l+j-1}
 +\sum_{i=1}^{l-1}\sum_{j=1}^{m-1}(\gamma\tau)_{ij}x_iw_{l+j-1}
-+\epsilon_{ijk}
-\tag{12.38}$$
++\epsilon_{ijk} \tag{12.38}$$
 
-을 만들어 분석하면 된다. 상세한 내용은 생략하고 연습문제를 통하여 익히도록 한다.
+을 만들어 분석하면 된다. 
 
 > 이 절의 핵심은 "분산분석표 자체는 변하지 않지만, 회귀계수의 해석은 재조정 방식에 따라 달라진다"는 점이다. 따라서 각 방법의 **회귀계수의 의미**, **왜 $X^TX$가 정칙행렬이 되도록 만드는지**를 고찰해보면 된다.
+
+#### 연습문제 10.11
+
+반복이 있는 이원배치모형은 $Y_{ijk} = \mu+\alpha_i+\beta_j+(\alpha\beta)_{ij} +\epsilon_{ijk}$ 이며, $i=1,\dots,l,\quad j=1,\dots,m,\quad k=1,\dots,r$ 이다. 오차들은 서로 독립이고 $\epsilon_{ijk}\sim N(0,\sigma^2)$
+
+통상적인 제약조건은 $\sum_i\alpha_i=0,\quad \sum_j\beta_j=0$ 및 $\sum_i(\alpha\beta)_{ij}=0, \quad \sum_j(\alpha\beta)_{ij}=0$
+
+(1) $\alpha_i$, $\beta_i$ 최소제곱추정량이 서로 독립임을 증명하라.
+
+최소제곱추정량은
+
+$$
+\hat\alpha_i=\bar Y_{i..}-\bar Y_{...}, \quad \hat\beta_j=\bar Y_{.j.}-\bar Y_{...}
+$$
+
+확률적인 부분만 쓰면 $\hat\alpha_i-\alpha_i = \bar\epsilon_{i..}-\bar\epsilon_{...}$ 이고, $\hat\beta_j-\beta_j = \bar\epsilon_{.j.}-\bar\epsilon_{...}$ 이다.
+
+행 주변평균에는 $mr$개의 관측값이 있고, 열 주변평균에는 $lr$개의 관측값이 있다. 두 주변평균은 셀 $(i,j)$의 $r$개 관측값을 공유하므로
+
+$$
+\text{Cov}
+(\bar\epsilon_{i..},\bar\epsilon_{.j.})
+= \frac{r\sigma^2}{(mr)(lr)} = \frac{\sigma^2}{lmr}
+$$
+
+또한
+
+$$
+\text{Cov} (\bar\epsilon_{i..},\bar\epsilon_{...}) = \frac{\sigma^2}{lmr}, \quad  \text{Cov} (\bar\epsilon_{.j.},\bar\epsilon_{...}) = \frac{\sigma^2}{lmr}, \quad \text{Var}(\bar\epsilon_{...}) = \frac{\sigma^2}{lmr}
+$$
+
+따라서
+
+$$
+\begin{aligned}
+\text{Cov}(\hat\alpha_i,\hat\beta_j)
+&=
+\text{Cov}
+(\bar\epsilon_{i..}-\bar\epsilon_{...},
+ \bar\epsilon_{.j.}-\bar\epsilon_{...})\\
+&=
+\frac{\sigma^2}{lmr}
+-\frac{\sigma^2}{lmr}
+-\frac{\sigma^2}{lmr}
++\frac{\sigma^2}{lmr}\\
+&=0.
+\end{aligned}
+$$
+
+이는 모든 $i,j$에 대하여 성립한다.
+
+$\hat{\boldsymbol\alpha}$와 $\hat{\boldsymbol\beta}$는 정규오차의 선형결합이므로 결합정규분포를 따른다. 결합정규분포에서는 교차공분산이 $0$이면 독립이므로
+
+$$
+\boxed{
+\hat{\boldsymbol\alpha}
+\ \text{와}\
+\hat{\boldsymbol\beta}
+\text{는 서로 독립이다.}
+}
+$$
+
+특히 각각의 $\hat\alpha_i$와 $\hat\beta_j$도 서로 독립이다.
+
+(2) $m=3$이고 가설은 $H_0:\beta_1=\beta_2$ 이다. $F$-검정하는 통계량은?
+
+이는 하나의 선형제약 $H_0:\beta_1-\beta_2=0$ 이다. 추정량의 차이는 $\hat\beta_1-\hat\beta_2 = (\bar Y_{.1.}-\bar Y_{...}) -(\bar Y_{.2.}-\bar Y_{...}) = \bar Y_{.1.}-\bar Y_{.2.}$ 이다.
+
+각 열 평균은 $lr$개 관측값의 평균이고, 서로 다른 두 열은 공통 관측값이 없으므로 서로 독립이다. 따라서
+
+$$
+\text{Var}(\bar Y_{.1.}) = \frac{\sigma^2}{lr}, \quad \text{Var}(\bar Y_{.2.}) = \frac{\sigma^2}{lr}, \quad \text{Var} (\hat\beta_1-\hat\beta_2) = \frac{2\sigma^2}{lr}
+$$
+
+따라서 귀무가설 제곱합은 
+
+$$
+SS_H = \frac{(\hat\beta_1-\hat\beta_2)^2}{2/(lr)} = \frac{lr}{2} (\hat\beta_1-\hat\beta_2)^2$$ 
+
+즉, 
+
+$$SS_H = \frac{lr}{2} (\bar Y_{.1.}-\bar Y_{.2.})^2$$
+
+반복이 있는 이원배치모형의 순수오차제곱합은
+
+$$
+S_E
+=
+\sum_{i=1}^{l}\sum_{j=1}^{m}\sum_{k=1}^{r}
+(Y_{ijk}-\bar Y_{ij.})^2
+$$
+
+이고 자유도는 $lm(r-1)$ 이다. 여기서 $m=3$이므로 $V_E = \frac{S_E}{3l(r-1)}$ 이다.
+
+따라서 검정통계량은
+
+$$
+\boxed{
+F_0 = \frac{SS_H}{V_E} = \frac{\dfrac{lr}{2} (\bar Y_{.1.}-\bar Y_{.2.})^2}{V_E}
+}
+$$
+
+귀무가설 아래에서 $F_0\sim F_{1,\;3l(r-1)}$ 이다. 따라서 유의수준 $\alpha$에서 $F_0>F_{1,\;3l(r-1)}(\alpha)$ 이면 $H_0:\beta_1=\beta_2$를 기각한다.
