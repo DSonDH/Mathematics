@@ -1,18 +1,8 @@
 # Chapter 13 편의추정 (Biased Estimation)
 
-지금까지 사용해 온 선형회귀모형(linear regression model)은
+지금까지 사용해 온 선형회귀모형(linear regression model)은 $\mathbf{y} = X\boldsymbol{\beta} + \boldsymbol{\epsilon},\quad \boldsymbol{\epsilon} \sim N(\mathbf{0}_n,\sigma^2 I_n)$ 이다. 이 모형에서 회귀계수(regression coefficient) $\boldsymbol{\beta}$는 최소제곱법(least squares method)을 이용하여 $\hat{\boldsymbol{\beta}}=(X^TX)^{-1}X^T\mathbf{y}$ 로 추정한다.
 
-$$\mathbf{y} = X\boldsymbol{\beta} + \boldsymbol{\epsilon},\qquad \boldsymbol{\epsilon} \sim N(\mathbf{0}_n,\sigma^2 I_n)$$
-
-이다. 이 모형에서 회귀계수(regression coefficient) $\boldsymbol{\beta}$는 최소제곱법(least squares method)을 이용하여
-
-$$\hat{\boldsymbol{\beta}}=(X^TX)^{-1}X^T\mathbf{y}$$
-
-로 추정한다.
-
-최소제곱추정량(least squares estimator)은 **최량 선형 불편 추정량(BLUE; Best Linear Unbiased Estimator)** 이다. 즉 선형 불편 추정량(linear unbiased estimator)들 가운데 분산(variance)이 가장 작은 추정량이다. 또한 최소제곱추정량의 분산은
-
-$$Var(\hat{\boldsymbol{\beta}})=\sigma^2 (X^TX)^{-1}$$
+최소제곱추정량(least squares estimator)은 **최량 선형 불편 추정량(BLUE; Best Linear Unbiased Estimator)** 이다. 즉 선형 불편 추정량(linear unbiased estimator)들 가운데 분산(variance)이 가장 작은 추정량이다. 또한 최소제곱추정량의 분산은 $\text{Var}(\hat{\boldsymbol{\beta}})=\sigma^2 (X^TX)^{-1}$ 
 
 그러나 설명변수(explanatory variable)들 사이에 강한 상관관계(strong correlation)가 존재하면 $X^TX$의 정칙성(non-singularity)에 문제가 발생한다. 이 경우 $(X^TX)^{-1}$의 값이 매우 커지는 현상이 나타난다. 이러한 상황에서는 최소제곱추정량이 매우 불안정해진다.
 
@@ -22,33 +12,36 @@ $$Var(\hat{\boldsymbol{\beta}})=\sigma^2 (X^TX)^{-1}$$
 
 $$\sum_{j=1}^{p}\beta_j^2$$
 
-를 사용한다. 이 값은 설명변수의 단위(scale)에 영향을 받지 않고 모든 변수에 균등하게 작용해야 한다. 또한 주성분회귀(principal component regression)와 부분최소제곱회귀(partial least squares regression)에서도 분산(variance)을 기준으로 차원축소(dimension reduction)를 수행하므로 변수의 단위 차이를 제거하기 위해 표준화를 수행한다.
+를 사용한다. 이 값은 설명변수의 단위(scale)에 영향을 받지 않고 모든 변수에 균등하게 작용해야 한다. 또한 주성분회귀(principal component regression)와 부분최소제곱회귀(partial least squares regression)에서도 분산을 기준으로 차원축소(dimension reduction)를 수행하므로 변수의 단위 차이를 제거하기 위해 표준화를 수행한다.
 
-표준화된 변수(standardized variables)를 사용하면 회귀모형에서 절편항(intercept)이 사라진다. 편의추정에 의해 구한 회귀추정량을
+**표준화된 변수(standardized variables)를 사용하면 회귀모형에서 절편항(intercept)이 사라진다.**  
+최종 결과를 정리할 떄는 표준화 이전 변수에 대한 회귀추정량으로 환원해야함! 
 
-$$\tilde{\beta}=(\tilde{\beta}_1,\tilde{\beta}_2,\dots,\tilde{\beta}_p)^T$$
+편의추정에 의해 구한 회귀추정량을
 
-라 하면, 원래 변수 기준 회귀계수는 다음과 같이 환원된다.
+$$\hat{\beta}=(\hat{\beta}_1,\hat{\beta}_2,\dots,\hat{\beta}_p)^T$$
 
-$$\tilde{\beta}_0 = \bar{y}-\sum_{j=1}^{p}\tilde{\beta}_j\frac{s_y}{s_j}\bar{x}_j \\
-\tilde{\beta}_j=\frac{s_y}{s_j}\tilde{\beta}_j,
+라 하면, 원래(최종) 변수 기준 회귀계수는 다음과 같이 환원된다.
+
+$$\tilde{\beta}_0 = \bar{y}-\sum_{j=1}^{p}\hat{\beta}_j\frac{s_y}{s_j}\bar{x}_j \\
+\tilde{\beta}_j=\frac{s_y}{s_j}\hat{\beta}_j,
 \qquad j=1,2,\dots,p
 \tag{15.1}
 $$
 
-* $\bar{y}$ : 반응변수(response variable)의 표본평균(sample mean)
-* $s_y^2$ : 반응변수의 표본분산(sample variance)
+* $\bar{y}$ : 반응변수의 표본평균
+* $s_y^2$ : 반응변수의 표본분산
 * $\bar{x}_j$ : $j$번째 설명변수의 표본평균
 * $s_j^2$ : $j$번째 설명변수의 표본분산
 
 
 ## 13.1 다중공선성의 문제 (Multicollinearity)
 
-다중공선성(multicollinearity)은 중회귀모형(multiple regression model)에서 두 개 이상의 설명변수 사이에 선형관계(linear relationship)가 존재하는 현상이다. 행렬 $X$의 어떤 열(column)이 다른 열 또는 여러 열의 선형결합(linear combination)으로 표현될 때 이러한 현상이 나타난다.
+다중공선성은 중회귀모형(multiple regression model)에서 두 개 이상의 설명변수 사이에 선형관계(linear relationship)가 존재하는 현상이다. 행렬 $X$의 어떤 열(column)이 다른 열 또는 여러 열의 선형결합(linear combination)으로 표현될 때 이러한 현상이 나타난다.
 
-$X$가 $n\times p$ 행렬일 때 완전한 다중공선성(perfect multicollinearity)이 존재하면 $X$의 계수(rank)가 $p$보다 작아진다. 이 경우 $X^TX$의 역행렬(inverse matrix)이 존재하지 않는다. 따라서 $\hat{\boldsymbol{\beta}}=(X^TX)^{-1}X^T\mathbf{y}$를 사용할 수 없다.
+$X$가 $n\times p$ 행렬일 때 완전한 다중공선성(perfect multicollinearity)이 존재하면 $X$의 계수가 $p$보다 작아진다. 이 경우 $X^TX$의 역행렬이 존재하지 않는다. 따라서 $\hat{\boldsymbol{\beta}}=(X^TX)^{-1}X^T\mathbf{y}$를 사용할 수 없다.
 
-완전한 다중공선성이 아니더라도 설명변수 사이에 매우 높은 상관관계가 존재하면 **근사적 다중공선성(approximate multicollinearity)**이 발생한다. 이 경우 $(X^TX)^{-1}$는 존재하지만 계산이 매우 불안정해진다.
+완전한 다중공선성이 아니더라도 설명변수 사이에 매우 높은 상관관계가 존재하면 **근사적 다중공선성(approximate multicollinearity)** 이 발생한다. 이 경우 $(X^TX)^{-1}$는 존재하지만 계산이 매우 불안정해진다.
 
 이를 이해하기 위해 설명변수가 두 개인 경우를 고려한다.
 
@@ -61,13 +54,13 @@ $$
 
 $$\sum y_i=\sum x_{i1}=\sum x_{i2}=0 \\ \sum y_i^2=\sum x_{i1}^2=\sum x_{i2}^2=1$$
 
-이 경우 절편항 $\beta_0$는 필요하지 않다. 이때
+이 가정 아래에서는 두 설명변수의 내적이 곧 두 변수의 상관계수가 되므로, 이후 다중공선성 계산이 매우 간단해진다. 이 경우 절편항 $\beta_0$는 필요하지 않다. 이때
 
 $$
 X^TX= \begin{pmatrix}
 1 & r_{12}\\
 r_{12} & 1
-\end{pmatrix} \\
+\end{pmatrix}, \quad  
 X^Ty= \begin{pmatrix}
 r_{1y}\\
 r_{2y}
@@ -97,47 +90,30 @@ r_{2y}
 \end{pmatrix}
 $$
 
-분산-공분산 행렬(variance-covariance matrix)은
+분산-공분산 행렬(variance-covariance matrix)은 $\text{Var}(\hat{\boldsymbol{\beta}})=\sigma^2(X^TX)^{-1}$ 이므로
 
 $$
-Var(\hat{\boldsymbol{\beta}})=\sigma^2(X^TX)^{-1}
-$$
-
-이므로
-
-$$
-Var(\hat{\beta}_j)
-= \frac{\sigma^2}{1-r_{12}^2},
-\qquad j=1,2
+\text{Var}(\hat{\beta}_j) = \frac{\sigma^2}{1-r_{12}^2}, \quad j=1,2
 \tag{15.3}
 $$
 
-따라서 $x_1$과 $x_2$ 사이 상관관계가 커져
+따라서 $x_1$과 $x_2$ 사이 상관관계가 커져 $|r_{12}| \rightarrow 1$ 이면 분모 $1-r_{12}^2$가 0에 가까워진다. 이 경우 회귀계수 추정량의 분산이 매우 커진다. 즉 $\hat{\beta}_1$과 $\hat{\beta}_2$는 $\beta_1$과 $\beta_2$의 추정량으로 신뢰하기 어려워진다.  
 
-$$
-|r_{12}| \rightarrow 1
-$$
-
-이면 분모 $1-r_{12}^2$가 0에 가까워진다. 이 경우 회귀계수 추정량의 분산이 매우 커진다. 즉 $\hat{\beta}_1$과 $\hat{\beta}_2$는 $\beta_1$과 $\beta_2$의 추정량으로 신뢰하기 어려워진다.  
 또한 $\sigma^2$의 불편추정량(unbiased estimator)으로 MSE를 사용하면 $\beta_j$의 $100(1-\alpha)\%$ 신뢰구간(confidence interval)은
 
 $$
-\hat{\beta}_j
-\pm
-t_{\alpha/2}(n-3)
-\sqrt{\frac{MSE}{1-r_{12}^2}}
-\tag{15.4}
+\hat{\beta}_j \pm t_{\alpha/2}(n-3) \sqrt{\frac{MSE}{1-r_{12}^2}} \tag{15.4}
 $$
 
 $1-r_{12}^2$가 작아지면 신뢰구간의 폭이 매우 커지므로 구간추정(interval estimation)의 의미도 약해진다.
 
-일반적인 선형회귀모형 $y=X\beta+\epsilon, \quad \epsilon\sim N(0_n,\sigma^2 I_n)$ 에서도 동일한 문제가 발생한다. $Var(\hat{\boldsymbol{\beta}})=\sigma^2 (X^TX)^{-1}$ 이므로
+일반적인 선형회귀모형 $y=X\beta+\epsilon, \quad \epsilon\sim N(0_n,\sigma^2 I_n)$ 에서도 동일한 문제가 발생한다. $\text{Var}(\hat{\boldsymbol{\beta}})=\sigma^2 (X^TX)^{-1}$ 이므로
 
-$$ \sum_{j=1}^{p} Var(\hat{\beta}_j) = \sigma^2\,tr[(X^TX)^{-1}] \tag{15.5}$$
+$$ \sum_{j=1}^{p} \text{Var}(\hat{\beta}_j) = \sigma^2\,tr[(X^TX)^{-1}] \tag{15.5}$$
 
-여기서 $X^TX$의 고유값(eigenvalue)을 $\lambda_j$라 하면
+여기서 $X^TX$의 고유값(eigenvalue)을 $\lambda_j$라 하면, $\text{tr}(A^{-1}) = \sum \lambda_i^{-1}$, ($\lambda_i$는 $A$의 고윳값) 이므로
 
-$$\sum_{j=1}^{p} Var(\hat{\beta}_j) = \sigma^2 \sum_{j=1}^{p}\lambda_j^{-1} \tag{15.6} $$
+$$\sum_{j=1}^{p} \text{Var}(\hat{\beta}_j) = \sigma^2 \sum_{j=1}^{p}\lambda_j^{-1} \tag{15.6} $$
 
 설명변수 사이에 강한 선형관계가 존재하면 $X^TX$는 **거의 특이행렬(near singular matrix)** 이 된다. 이 경우 가장 작은 고유값이 0에 가까워지고, 그 역수는 매우 커진다. 결과적으로 회귀계수 추정량의 분산이 크게 증가한다.
 
@@ -147,20 +123,20 @@ $$\sum_{j=1}^{p} Var(\hat{\beta}_j) = \sigma^2 \sum_{j=1}^{p}\lambda_j^{-1} \tag
 * 주성분회귀추정량 (principal component regression estimator)
 * 부분최소제곱추정량 (partial least squares estimator)
 
-다중공선성을 탐지하는 방법을 살펴본다.  
-$X$가 $n\times p$ 행렬이고 표준화되어 있다고 가정한다: $\sum_{i=1}^{n}x_{ij}=0, \quad \sum_{i=1}^{n}x_{ij}^2=1$  
-이때 최소제곱추정량은 $\hat{\boldsymbol{\beta}}=(X^TX)^{-1}X^T\mathbf{y}$ 이고 $E(\hat{\beta}_j)=\beta_j, \quad Var(\hat{\beta}_j)=c_{jj}\sigma^2$  
+이들을 살펴보기 전에, 다중공선성을 탐지하는 방법을 먼저 살펴본다. 행렬 $X^TX$에서 0이거나 0에 가까운 고윳값이 존재하면 다중공선성이 있다고 할 수 있다.
+
+다른 방법으로는, $X$가 $n\times p$ 행렬이고 표준화되어 있다고 가정한다: $\sum_{i=1}^{n}x_{ij}=0, \quad \sum_{i=1}^{n}x_{ij}^2=1$ 일때, 최소제곱추정량은 $\hat{\boldsymbol{\beta}}=(X^TX)^{-1}X^T\mathbf{y}$ 이고 $E(\hat{\beta}_j)=\beta_j, \quad \text{Var}(\hat{\beta}_j)=c_{jj}\sigma^2$  
 여기서 $C=(X^TX)^{-1}$ 이고 $c_{jj}$는 그 $j$번째 대각원소(diagonal element)이다.  
-행렬을 $X=(x_j,X_j^*)$ 로 나누면
+행렬을 $X=(x_j,X_j^*)$ 로 두 원소로 나누면
 
 $$ c_{jj} = (x_j^Tx_j-x_j^TX_j^*(X_j^{*T}X_j^*)^{-1}X_j^{*T}x_j)^{-1}$$
 
 이때 $x_j$를 반응변수로 하고 나머지 $p-1$개의 설명변수로 회귀했을 때의 결정계수(coefficient of determination)를 $R_j^2$라 하면 $c_{jj}=(1-R_j^2)^{-1}$ 이 된다. 따라서
 
-$$Var(\hat{\beta}_j)=\frac{\sigma^2}{1-R_j^2}$$
+$$\text{Var}(\hat{\beta}_j)=\frac{\sigma^2}{1-R_j^2}$$
 
-* $R_j^2=0$이면 $x_j$는 다른 설명변수들과 직교(orthogonal)
-* $R_j^2\rightarrow 1$이면 $x_j$는 다른 설명변수의 선형결합에 가깝다
+* $R_j^2=0$: $x_j$는 다른 설명변수들과 직교(orthogonal)
+* $R_j^2\rightarrow 1$: $x_j$는 다른 설명변수의 선형결합에 가깝다
 
 즉 $R_j^2$가 1에 가까울수록 다중공선성이 강하다.
 
@@ -188,13 +164,28 @@ MSE(\hat{\boldsymbol{\beta}})
 =E\left[(\hat{\boldsymbol{\beta}}-\beta)^T(\hat{\boldsymbol{\beta}}-\beta)\right] \\
 &=\text{tr}\left(E\left[(\hat{\boldsymbol{\beta}}-\beta)(\hat{\boldsymbol{\beta}}-\beta)^T\right]\right) \\
 &=E\left[\text{tr}((\hat{\boldsymbol{\beta}}-\beta)(\hat{\boldsymbol{\beta}}-\beta)^T)\right] \\
-&=\sum_{j=1}^{p} Var(\hat{\boldsymbol{\beta}}_j) \\
+&=\sum_{j=1}^{p} \text{Var}(\hat{\boldsymbol{\beta}}_j) \\
 &=\sigma^2\sum_{j=1}^{p}\lambda_j^{-1}
 \end{aligned}
 \tag{15.8}
 $$
 
-가 된다. 여기서 $\lambda_j$는 행렬 $X^TX$의 고유값(eigenvalue)이다. 따라서 설명변수 사이에 완전에 가까운 다중공선성(multicollinearity)이 존재하면 $\lambda_j$들 가운데 0에 가까운 값이 생기고, $\hat{\boldsymbol{\beta}}$는 $\beta$로부터 멀어져 평균제곱오차 기준에서 좋은 추정량이 되기 어렵다.
+
+
+>$X^TX$는 대칭행렬이므로 고유분해할 수 있다. $X^TX=Q\Lambda Q^T,$ 여기서 $Q^TQ=QQ^T=I, \quad \Lambda= \operatorname{diag}(\lambda_1,\ldots,\lambda_p).$  
+>$X$가 완전열계수이면 모든 고윳값이 양수이므로 $(X^TX)^{-1} = Q\Lambda^{-1}Q^T$ 이고, $\Lambda^{-1} = \operatorname{diag} \left(\frac1{\lambda_1},\ldots,\frac1{\lambda_p}\right)$ 이다. 즉, 역행렬의 고윳값은 원래 행렬 고윳값의 역수다.
+>
+>따라서
+>
+>$$
+>MSE(\hat{\boldsymbol\beta}) = \sigma^2\operatorname{tr}\{(X^TX)^{-1}\}
+>= \sigma^2\operatorname{tr}(Q\Lambda^{-1}Q^T) \\
+>= \sigma^2\operatorname{tr}(\Lambda^{-1}Q^TQ)
+>= \sigma^2\operatorname{tr}(\Lambda^{-1}) = \boxed{\sigma^2\sum_{j=1}^p\frac1{\lambda_j}}.
+>$$
+
+
+가 된다. 여기서 $\lambda_j$는 행렬 $X^TX$의 고유값(eigenvalue)이다. 따라서 설명변수 사이에 완전에 가까운 다중공선성이 존재하면 $\lambda_j$들 가운데 0에 가까운 값이 생기고, $\hat{\boldsymbol{\beta}}$는 $\beta$로부터 멀어져 평균제곱오차 기준에서 좋은 추정량이 되기 어렵다.
 
 이 단점을 보완하기 위하여 다음과 같은 추정량을 사용한다.
 
@@ -322,9 +313,9 @@ $$
 
 $$
 \begin{aligned}
-Var(\hat{\alpha})
-&=Var(\Lambda^{-1}Z^Ty) \\
-&=\Lambda^{-1}Z^TVar(y)Z\Lambda^{-1} \\
+\text{Var}(\hat{\alpha})
+&=\text{Var}(\Lambda^{-1}Z^Ty) \\
+&=\Lambda^{-1}Z^T\text{Var}(y)Z\Lambda^{-1} \\
 &=\sigma^2\Lambda^{-1}
 \end{aligned}
 $$
@@ -350,7 +341,7 @@ $$
 \begin{aligned}
 Var[\hat{\alpha}(k)]
 &=Var[(\Lambda+kI)^{-1}Z^Ty] \\
-&=(\Lambda+kI)^{-1}Z^TVar(y)Z(\Lambda+kI)^{-1} \\
+&=(\Lambda+kI)^{-1}Z^T\text{Var}(y)Z(\Lambda+kI)^{-1} \\
 &=\sigma^2\Lambda(\Lambda+kI)^{-2}
 \end{aligned}
 \tag{15.16}
@@ -568,7 +559,7 @@ $$\Lambda=P^TX^TXP=(XP)^T(XP)$$
 $$\lambda_j=p_j^TX^TXp_j=(Xp_j)^T(Xp_j)$$
 
 로 쓸 수 있다. 따라서 $Xp_j\approx 0_n$이 되어 거의 영벡터(zero vector)에 가까워진다. 이 경우 $p_j$를 영벡터에 대응하는 방향으로 보고 $\lambda_j=0$으로 두어 회귀추정량을 계산하는 것이 주성분회귀분석의 기본 생각이다.  
-또한 $Xp_j\approx 0_n$이면 $X$의 열들 사이에는 완전에 가까운 다중공선성(multicollinearity)이 존재한다고 볼 수 있다. 즉 $X^TX$의 $p$개 고유값 중 $s$개가 거의 0에 가까우면, $\boldsymbol{\beta}$의 주성분회귀추정량은
+또한 $Xp_j\approx 0_n$이면 $X$의 열들 사이에는 완전에 가까운 다중공선성이 존재한다고 볼 수 있다. 즉 $X^TX$의 $p$개 고유값 중 $s$개가 거의 0에 가까우면, $\boldsymbol{\beta}$의 주성분회귀추정량은
 
 $$\hat{\boldsymbol{\beta}}_g=P_g\hat{\boldsymbol{\alpha}}_g=P_g\Lambda_g^{-1}P_g^TX^T\mathbf{y}
 \tag{15.30}$$
@@ -584,7 +575,7 @@ $$\hat{\boldsymbol{\beta}}_g=(I-P_sP_s^T)\hat{\boldsymbol{\beta}}
 $$E(\hat{\boldsymbol{\beta}}_g)=\boldsymbol{\beta}-\sum_{j=g+1}^{p}(p_j^T\boldsymbol{\beta})p_j
 \tag{15.32}$$
 
-$$Var(\hat{\boldsymbol{\beta}}_g)=\sigma^2\sum_{j=1}^{g}\lambda_j^{-1}p_jp_j^T
+$$\text{Var}(\hat{\boldsymbol{\beta}}_g)=\sigma^2\sum_{j=1}^{g}\lambda_j^{-1}p_jp_j^T
 \tag{15.33}$$
 
 따라서 평균제곱오차(mean squared error)는
@@ -622,7 +613,7 @@ $$\lambda_1\ge \lambda_2\ge \cdots \ge \lambda_p$$
 
 를 주성분 개수에 대해 그려 보고 고유값이 크게 떨어지는 지점에서 주성분 개수 $g$를 선택한다. 이것을 **산비탈 그림(scree plot)** 이라 한다. 고유값이 급격히 떨어지는 지점은 흔히 **팔꿈치(elbow)** 지점이라고 부른다.
 
-그러나 이러한 방법으로 선택한 $g$는 주관적일 수 있다. 또한 이렇게 선택된 주성분이 반드시 반응변수(response variable)를 잘 설명하는 설명변수(explanatory variable)가 된다는 보장이 없다는 문제가 있다. 주성분회귀는 설명변수의 전체 변동(total variation)을 잘 설명하는 방향을 우선시하지만, 그 방향이 반응변수와 가장 관련이 큰 방향이라고는 할 수 없기 때문이다.
+그러나 이러한 방법으로 선택한 $g$는 주관적일 수 있다. 또한 이렇게 선택된 주성분이 반드시 반응변수를 잘 설명하는 설명변수(explanatory variable)가 된다는 보장이 없다는 문제가 있다. 주성분회귀는 설명변수의 전체 변동(total variation)을 잘 설명하는 방향을 우선시하지만, 그 방향이 반응변수와 가장 관련이 큰 방향이라고는 할 수 없기 때문이다.
 
 > 주석: 고윳값 대신 전체 자료의 분산 중 각 주성분이 차지하는 분산의 비율을 그리기도 한다. 전체자료의 분산은 $\sum_{j=1}^{p}\widehat{\
 Var}(X_j) = \sum_{j=1}^{p}1/n\sum_{i=1}^{n}X^2_{ij}$ 이고, $g$번째 주성분에 의해 설명되는 분산은 $\sum_{j=1}^p 1/n\sum_{i=1}^{n}Z^2_{ij}$ 이다.
@@ -700,7 +691,7 @@ TODO:FIXME: 이게 왠지 엄청 중요한 인과추론 관련 내용일 것 같
 
 #### 부분최소제곱 알고리즘
 
-1. 설명변수 $X_j$와 반응변수 $Y$에 대하여 표본평균(sample mean)을 0으로 하는 새로운 변수를 만든다. ($j=1,\cdots,p$)
+1. 설명변수 $X_j$와 반응변수 $Y$에 대하여 표본평균을 0으로 하는 새로운 변수를 만든다. ($j=1,\cdots,p$)
 
     $$
     V_{1j}=X_j-\bar{X}_j,\quad U_1=Y-\bar{Y}
@@ -746,7 +737,7 @@ $$\mathbf{T}_{l+1}=\sum_{j=1}^{p}w_{(l+1)j}\hat{\phi}_{(l+1)j}\mathbf{V}_{(l+1)j
 
 $$w_{lj}\propto \mathbf{V}_{lj}^T\mathbf{V}_{lj}$$
 
-로 두는 것이다. 즉 $w_{lj}\propto Var(\mathbf{V}_{lj})$로 놓는다. 이 경우 $\hat{\phi}_{lj}$의 분산은 $\mathbf{V}_{lj}$의 분산에 반비례한다. 따라서
+로 두는 것이다. 즉 $w_{lj}\propto \text{Var}(\mathbf{V}_{lj})$로 놓는다. 이 경우 $\hat{\phi}_{lj}$의 분산은 $\mathbf{V}_{lj}$의 분산에 반비례한다. 따라서
 
 $$w_{1j}\left[\frac{\mathbf{v}_{1j}^T\mathbf{u}_1}{\mathbf{v}_{1j}^T\mathbf{v}_{1j}}\right]=\mathbf{v}_{1j}^T\mathbf{u}_1 \\
 \mathbf{T}_1=\sum_{j=1}^{p}(\mathbf{v}_{1j}^T\mathbf{u}_1)\mathbf{v}_{1j}\propto \sum_{j}\widehat{Cov}(\mathbf{v}_{1j},\mathbf{u}_1)\mathbf{v}_{1j}$$
@@ -765,7 +756,7 @@ $$w_{1j}\left[\frac{\mathbf{v}_{1j}^T\mathbf{u}_1}{\mathbf{v}_{1j}^T\mathbf{v}_{
 
 $$C\boldsymbol{\beta}=\mathbf{0}_k \tag{15.39}$$
 
-이 성립한다고 가정하자. 문제를 간단히 하기 위하여 $\mathbf{m}=\mathbf{0}_k$인 경우를 다룬다. 여기서 $X$는 $n\times (p+1)$ 행렬이고 계수(rank)는 $p+1$이며, $C$는 $k\times (p+1)$ 행렬이고 계수는 $k(\le p+1)$이다.  
+이 성립한다고 가정하자. 문제를 간단히 하기 위하여 $\mathbf{m}=\mathbf{0}_k$인 경우를 다룬다. 여기서 $X$는 $n\times (p+1)$ 행렬이고 계수는 $p+1$이며, $C$는 $k\times (p+1)$ 행렬이고 계수는 $k(\le p+1)$이다.  
 이 제한조건 아래에서 $\boldsymbol{\beta}$의 최소제곱추정량은
 
 $$
@@ -780,13 +771,13 @@ $$
 이와 같은 제한추정량(restricted estimator) $\tilde{\boldsymbol{\beta}}$의 분산은
 
 $$
-Var(\tilde{\boldsymbol{\beta}})
+\text{Var}(\tilde{\boldsymbol{\beta}})
 = \sigma^2(X^TX)^{-1}
 -\sigma^2(X^TX)^{-1}C^T[C(X^TX)^{-1}C^T]^{-1}C(X^TX)^{-1}
 \tag{15.40}
 $$
 
-여기서 $(X^TX)^{-1}C^T[C(X^TX)^{-1}C^T]^{-1}C(X^TX)^{-1}$ 은 양정치(positive definite) 행렬이므로 $Var(\tilde{\boldsymbol{\beta}}_j)<Var(\hat{\boldsymbol{\beta}}_j)$가 된다. 즉 제한을 가하면 분산은 줄어든다.  
+여기서 $(X^TX)^{-1}C^T[C(X^TX)^{-1}C^T]^{-1}C(X^TX)^{-1}$ 은 양정치(positive definite) 행렬이므로 $\text{Var}(\tilde{\boldsymbol{\beta}}_j)<\text{Var}(\hat{\boldsymbol{\beta}}_j)$가 된다. 즉 제한을 가하면 분산은 줄어든다.  
 그러나 $C\boldsymbol{\beta}=\mathbf{0}_k$가 사실이 아니면 $\tilde{\boldsymbol{\beta}}$는 편의추정량이 되며, 그 편의(bias)는
 
 $$E(\tilde{\boldsymbol{\beta}})-\boldsymbol{\beta}
@@ -808,7 +799,7 @@ $$
 \begin{aligned}
 MSE(\tilde{\boldsymbol{\beta}})
 &= E\left[(\tilde{\boldsymbol{\beta}}-\boldsymbol{\beta})^T(\tilde{\boldsymbol{\beta}}-\boldsymbol{\beta})\right] \\
-&= tr[Var(\tilde{\boldsymbol{\beta}})]+[E(\tilde{\boldsymbol{\beta}})-\boldsymbol{\beta}]^T[E(\tilde{\boldsymbol{\beta}})-\boldsymbol{\beta}] \\
+&= tr[\text{Var}(\tilde{\boldsymbol{\beta}})]+[E(\tilde{\boldsymbol{\beta}})-\boldsymbol{\beta}]^T[E(\tilde{\boldsymbol{\beta}})-\boldsymbol{\beta}] \\
 &= \sigma^2\,tr[(X^TX)^{-1}]
 -\sigma^2\,tr[(X^TX)^{-1}C^T\{C(X^TX)^{-1}C^T\}^{-1}C(X^TX)^{-1}] \\
 &\quad

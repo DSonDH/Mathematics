@@ -541,10 +541,132 @@ $$
 =\mathrm{rank}(A)+\mathrm{rank}(B)
 $$
 
-(자주 쓰는 요약 한 줄)
-- 가역행렬로 좌우 곱해도 rank 불변  
-- $A^TA$, $AA^T$는 rank 보존  
-- 멱등(=사영)에서는 $\mathrm{rank}=\mathrm{tr}$, 따라서 $\mathrm{rank}(I-P)=n-\mathrm{rank}(P)$
+### 연립선형방정식
+
+$A\mathbf x = \mathbf b$.
+
+$A$는 $k \times k$ 행렬. $A$가 정칙행렬이면 $r(A)=k$, 위 방정식에 $A$의 역행렬을 곱해서 $\mathbf x$에 관한 유일한 해(solution)을 구할 수 있다.
+
+만약 $A$가 비정칙행렬($r(A) < k$)이면 $A$의 오른쪽에 $\mathbf b$를 첨가시킨 첨가행렬(augmented matrix)를 $B = [A:\mathbf b]$로 만든다.
+
+1. $r(A) = r(B)$이면 위 방정식의 해는 무한히 많이 존재함
+2. $r(A) < r(B)$이면 $\mathbf x$의 해는 존재하지 않음. 
+3. $r(A) > r(B)$는 있을 수 없음. $A$의 열들은 $B$ 열들의 부분집합이므로.
+
+
+### Thm. 
+
+$X\in\mathbb R^{n\times p}$, $\mathbf y\in\mathbb R^n$라고 하자. 증명할 명제는 다음과 같다.
+
+$$
+r(X^TX)=r([X^TX:X^T\mathbf y])
+\iff
+X^T\mathbf y\in\operatorname{Col}(X^TX)
+\iff
+\exists\boldsymbol\beta\in\mathbb R^p:
+X^TX\boldsymbol\beta=X^T\mathbf y.
+$$
+
+>**증명**
+>
+>편의를 위해 다음과 같이 놓는다. $A=X^TX,\quad \mathbf b=X^T\mathbf y.$
+>
+>그러면 다음 일반 명제를 증명하면 된다.
+>
+>$$
+>r(A)=r([A:\mathbf b])
+>\iff
+>\mathbf b\in\operatorname{Col}(A)
+>\iff
+>\exists\boldsymbol\beta:A\boldsymbol\beta=\mathbf b.
+>$$
+>
+>1. 첫 번째 동치관계
+>
+>먼저 다음을 증명한다. $r(A)=r([A:\mathbf b]) \iff \mathbf b\in\operatorname{Col}(A).$
+>
+>$A$의 열벡터를 다음과 같이 나타내자. $A=[\mathbf a_1:\mathbf a_2:\cdots:\mathbf a_p].$  
+>그러면 $\operatorname{Col}(A) = \operatorname{span}\{\mathbf a_1,\ldots,\mathbf a_p\}$ 이다. 첨가행렬은 $[A:\mathbf b] = [\mathbf a_1:\cdots:\mathbf a_p:\mathbf b]$ 이므로
+>
+>$\operatorname{Col}([A:\mathbf b]) = \operatorname{span} \{\mathbf a_1,\ldots,\mathbf a_p,\mathbf b\}$ 이다.
+>
+>**정방향**
+>
+>다음을 가정하자. $r(A)=r([A:\mathbf b]).$
+>
+>$A$의 모든 열은 $[A:\mathbf b]$에도 포함되므로 항상 $\operatorname{Col}(A) \subseteq \operatorname{Col}([A:\mathbf b])$ 이다.
+>
+>한편 rank는 열공간의 차원이므로 가정에 의해 $\dim\operatorname{Col}(A) = \dim\operatorname{Col}([A:\mathbf b])$ 이다.
+>
+>유한차원 벡터공간 $V,W$에 대하여 $V\subseteq W,\quad \dim V=\dim W$ 이면 $V=W$다. 따라서 $\operatorname{Col}(A) = \operatorname{Col}([A:\mathbf b]).$
+>
+>$\mathbf b$는 첨가행렬 $[A:\mathbf b]$의 열이므로 $\mathbf b\in\operatorname{Col}([A:\mathbf b]).$ 따라서 $\mathbf b\in\operatorname{Col}(A)$
+>
+>**역방향**
+>
+>이번에는 $\mathbf b\in\operatorname{Col}(A)$ 라고 가정하자. 그러면 어떤 스칼라 $c_1,\ldots,c_p$가 존재하여 $\mathbf b = c_1\mathbf a_1+\cdots+c_p\mathbf a_p$ 이다. 따라서 $\mathbf b$를 $A$에 새로운 열로 추가해도 열공간이 커지지 않는다. $\operatorname{Col}([A:\mathbf b]) = \operatorname{Col}(A).$
+>
+>그러므로 두 열공간의 차원이 같고, $r([A:\mathbf b])=r(A)$ 이다.
+>
+>결론적으로
+>
+>$$
+>r(A)=r([A:\mathbf b]) \iff \mathbf b\in\operatorname{Col}(A)
+>$$
+>
+>---
+>2. 두 번째 동치관계
+>
+>다음 명제를 증명한다. $\mathbf b\in\operatorname{Col}(A) \iff \exists\boldsymbol\beta:A\boldsymbol\beta=\mathbf b.$
+>
+>열공간의 정의에 의해 $\mathbf b\in\operatorname{Col}(A)$ 라는 것은 $\mathbf b$가 $A$의 열벡터들의 선형결합이라는 뜻이다. 즉, 어떤 $\beta_1,\ldots,\beta_p$가 존재하여 $\mathbf b = \beta_1\mathbf a_1+\cdots+\beta_p\mathbf a_p$ 가 성립한다.
+>
+>다음과 같이 놓으면
+>
+>$$
+>\boldsymbol\beta =
+>\begin{pmatrix}
+>\beta_1\\
+>\vdots\\
+>\beta_p
+>\end{pmatrix},
+>$$
+>
+>행렬곱의 정의에 의해 $A\boldsymbol\beta = \beta_1\mathbf a_1+\cdots+\beta_p\mathbf a_p.$ 따라서 $\mathbf b\in\operatorname{Col}(A) \iff \exists\boldsymbol\beta:A\boldsymbol\beta=\mathbf b$ 이다.  
+>이는 열공간의 정의를 행렬방정식으로 표현한 것이다.
+>
+>---
+>3. 원래 행렬을 대입
+>
+>$A=X^TX$, $\mathbf b=X^T\mathbf y$를 대입하면 $r(X^TX)=r([X^TX:X^T\mathbf y]) \iff X^T\mathbf y\in\operatorname{Col}(X^TX)$ 이다.  
+>
+>또한 $X^T\mathbf y\in\operatorname{Col}(X^TX) \iff \exists\boldsymbol\beta:
+>X^TX\boldsymbol\beta=X^T\mathbf y$ 이다.
+>
+>따라서
+>
+>$$
+>\boxed{
+>r(X^TX)=r([X^TX:X^T\mathbf y])
+>\iff X^T\mathbf y\in\operatorname{Col}(X^TX)
+>\iff \exists\boldsymbol\beta: X^TX\boldsymbol\beta=X^T\mathbf y
+>}
+>$$
+
+### Thm. 정규방정식의 계수는 언제나 존재
+다음과 같은 $\beta$에 관한 연립선형방정식
+
+$X^TX\beta = X^Ty$는 언제나 이를 만족시키는 $\beta$해를 갖는다.
+
+>**증명**
+>
+>$\text{rank}(AB) \leq \text{rank}(A)$이고 $\mathrm{rank}(A^TA)=\mathrm>{rank}(A) = \mathrm{rank}(AA^T)=\mathrm{rank}(A^T)$로 보인다.
+>
+>$$r(X^T) = r(X^TX) \leq r(X^TX : X^Ty) = r[X^T(X:y)] \leq r(X^T)$$
+>
+>식의 좌우가 같으므로, $r(X^TX) = r(X^TX : X^Ty)$.  
+> 따라서 연립선형방정식의 해는 존재한다.
+
 
 
 # 연습문제

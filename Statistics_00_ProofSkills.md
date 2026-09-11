@@ -538,43 +538,6 @@ $$Y^T M_1 Y = \hat{Y}^T M_1 \hat{Y} + e^T e$$
 * $\text{tr}(M_1) = n - 1$ (대각합 = 계수 = 자유도)
 
 
-## 5. 합을 평균으로 바꾸기 (Sum-Mean Conversion)
-
-수리통계에서 거의 항상 등장한다.
-
-$$\sum x_i = n\bar{x}$$
-
-$$\sum (x_i-\bar{x}) = 0$$
-
-### 사용
-
-* 회귀식
-* 공분산
-* MLE
-* 분산 계산
-
-## 6. 공분산 전개 공식 (Covariance Expansion)
-
-$$\text{Cov}(X,Y) = E[XY]-E[X]E[Y]$$
-
-표본 버전
-
-$$\sum (x_i-\bar{x})(y_i-\bar{y}) = \sum x_i y_i - n\bar{x}\bar{y}$$
-
-### 예
-표본 상관계수 계산 시 필수
-
-## 7. 분산 전개 공식 (Variance Expansion)
-
-$$\text{Var}(X) = E[X^2]-E[X]^2$$
-
-표본 버전
-
-$$\sum (x_i-\bar{x})^2 = \sum x_i^2 - n\bar{x}^2$$
-
-### 예
-표본분산: $s^2 = \frac{1}{n}\sum x_i^2 - \bar{x}^2$
-
 ## 8. 이차형식 전개 (Quadratic Form Expansion)
 
 다변량 통계에서 자주 등장한다.
@@ -598,26 +561,6 @@ $$|\mathbf{x}|^2 = |P\mathbf{x}|^2 + |(I-P)\mathbf{x}|^2$$
 * 카이제곱 분포
 * 회귀분석
 * ANOVA
-
-## 10. Projection Matrix Trick
-
-회귀분석 핵심 공식
-
-$$H=X(X'X)^{-1}X'$$
-
-성질
-
-$$H^2=H$$
-
-$$(I-H)^2=I-H$$
-
-### 활용
-
-* residual 분산
-* 영향점 분석
-* F-test
-
-책 문맥(가중 제곱합 → 투영행렬 → χ² 분포)과 정확히 일치하도록 **노트 형태로 정리**한다. 불필요한 일반화 없이, 해당 풀이에서 실제로 쓰이는 구조만 남긴다.
 
 ## Quadratic Form Decomposition 
 아래 식이 성립한다.
@@ -761,16 +704,16 @@ $$R(1|0) = \mathbf{Y}^T\Pi_{1|0}\mathbf{Y} \perp SSE = \mathbf{Y}^T(I-\Pi_{0,1})
 
 $$E[\text{trace}(\mathbf{A})] = \text{trace}(E[\mathbf{A}])$$
 
-### 증명
-
-$\mathbf{X} = (X_{ij})$를 $p \times p$ 확률행렬이라 하면
-
-$$\text{trace}(\mathbf{X}) = \sum_{i=1}^{p} X_{ii}$$
-
-따라서
-
-$$E[\text{trace}(\mathbf{X})] = E\left[\sum_{i=1}^{p} X_{ii}\right] = \sum_{i=1}^{p} E[X_{ii}] = \text{trace}(E[\mathbf{X}])$$
-
+>**증명**
+>
+>$\mathbf{X} = (X_{ij})$를 $p \times p$ 확률행렬이라 하면
+>
+>$$\text{trace}(\mathbf{X}) = \sum_{i=1}^{p} X_{ii}$$
+>
+>따라서
+>
+>$$E[\text{trace}(\mathbf{X})] = E\left[\sum_{i=1}^{p} X_{ii}\right] = \sum_{i=1}^{p} E[X_{ii}] = \text{trace}(E[\mathbf{X}])$$
+>
 **핵심**: 대각합은 선형연산자(linear operator)이므로, 선형성(linearity of expectation)에 의해 기댓값과 교환 가능.
 
 ### 일반화: 선형연산자와 기댓값
@@ -868,19 +811,176 @@ $$
 - **Trace-Inner product**: $\text{trace}(\mathbf{A}^\top\mathbf{B}) = \langle \mathbf{A}, \mathbf{B} \rangle_F$
 
 
-## 11. Orthogonal Basis Decomposition
+## 27. trace와 Variance
 
-정규벡터에서 매우 중요하다.
+$\mathbf d^T\mathbf d=\text{tr}(\mathbf d\mathbf d^T)$인가
 
-$$Q'\mathbf{X}$$
+$$
+\mathbf d=
+\begin{pmatrix}
+d_1\\
+d_2\\
+\vdots\\
+d_p
+\end{pmatrix}
+$$
 
-여기서 $Q$는 orthogonal matrix이다.
+라고 하자. 그러면 $\mathbf d^T\mathbf d = d_1^2+d_2^2+\cdots+d_p^2$ 이다.
 
-### 활용
+한편 외적 $\mathbf d\mathbf d^T$은
 
-* χ² 분포 유도
-* Wishart 분포
-* 표본상관계수 분포
+$$
+\mathbf d\mathbf d^T
+=
+\begin{pmatrix}
+d_1^2&d_1d_2&\cdots&d_1d_p\\
+d_2d_1&d_2^2&\cdots&d_2d_p\\
+\vdots&\vdots&\ddots&\vdots\\
+d_pd_1&d_pd_2&\cdots&d_p^2
+\end{pmatrix}.
+$$
+
+이 행렬의 trace는 대각성분의 합이므로 $\text{tr}(\mathbf d\mathbf d^T) =d_1^2+d_2^2+\cdots+d_p^2=\mathbf d^T\mathbf d.$
+
+따라서
+
+$$
+\boxed{
+\|\mathbf d\|^2
+=\mathbf d^T\mathbf d
+=\text{tr}(\mathbf d\mathbf d^T)
+}
+$$
+
+**$E[\mathbf d\mathbf d^T]$와 공분산행렬의 관계**
+
+확률벡터 $\mathbf d$의 평균을 $\boldsymbol\mu_d=E(\mathbf d)$ 라고 하자. 공분산행렬을 전개하면
+
+$$
+\begin{aligned}
+\text{Cov}(\mathbf d)
+&=
+E\left[
+\mathbf d\mathbf d^T -\mathbf d\boldsymbol\mu_d^T -\boldsymbol\mu_d\mathbf d^T +\boldsymbol\mu_d\boldsymbol\mu_d^T
+\right]\\
+&=
+E[\mathbf d\mathbf d^T] -\boldsymbol\mu_d\boldsymbol\mu_d^T -\boldsymbol\mu_d\boldsymbol\mu_d^T +\boldsymbol\mu_d\boldsymbol\mu_d^T\\
+&=
+E[\mathbf d\mathbf d^T] -\boldsymbol\mu_d\boldsymbol\mu_d^T.
+\end{aligned}
+$$
+
+따라서
+
+$$
+\boxed{
+E[\mathbf d\mathbf d^T] = \text{Cov}(\mathbf d) + E(\mathbf d)E(\mathbf d)^T
+}
+$$
+
+이 식의 trace를 취하면
+
+$$
+E(\mathbf d^T\mathbf d) =\text{tr}\{\text{Cov}(\mathbf d)\} + \text{tr}\{E(\mathbf d)E(\mathbf d)^T\}.
+$$
+
+그런데 임의의 벡터 $\mathbf a$에 대해 $\text{tr}(\mathbf a\mathbf a^T) =\mathbf a^T\mathbf a =\|\mathbf a\|^2 $이므로
+
+$$
+\boxed{E\|\mathbf d\|^2 = \text{tr}\{\text{Cov}(\mathbf d)\} + \|E(\mathbf d)\|^2}
+$$
+
+### 추정량의 MSE 분해
+
+이제 $\mathbf d=\hat{\boldsymbol\beta}-\boldsymbol\beta$ 라고 놓으면 $E(\mathbf d) = E(\hat{\boldsymbol\beta})-\boldsymbol\beta = \text{Bias}(\hat{\boldsymbol\beta}).$ 또한 $\boldsymbol\beta$는 상수이므로 $\text{Cov}(\mathbf d) = \text{Cov}(\hat{\boldsymbol\beta}).$
+
+따라서 일반적인 벡터 추정량의 MSE는
+
+$$
+\boxed{
+E\|\hat{\boldsymbol\beta}-\boldsymbol\beta\|^2
+= \text{tr}\{\text{Cov}(\hat{\boldsymbol\beta})\} + \|\text{Bias}(\hat{\boldsymbol\beta})\|^2
+}
+$$
+
+이를 성분별로 쓰면
+
+$$
+\boxed{
+E\|\hat{\boldsymbol\beta}-\boldsymbol\beta\|^2
+= \sum_{j=1}^p\text{Var}(\hat\beta_j) + \sum_{j=1}^p
+\left(E[\hat\beta_j]-\beta_j\right)^2
+}
+$$
+
+### OLS의 경우
+
+OLS는 $E(\hat{\boldsymbol\beta})=\boldsymbol\beta$ 인 불편추정량이므로 
+$E(\mathbf d)=0.$  
+따라서 $E[\mathbf d\mathbf d^T] = \text{Cov}(\hat{\boldsymbol\beta})$ 이고,
+
+$$
+\boxed{
+MSE(\hat{\boldsymbol\beta})
+= \text{tr}\{\text{Cov}(\hat{\boldsymbol\beta})\}
+= \sum_{j=1}^p\text{Var}(\hat\beta_j)
+}
+$$
+
+### Ridge의 경우
+
+Ridge 추정량은 일반적으로 편향되어 있으므로 $E(\mathbf d)\neq0.$
+
+$$
+E[\mathbf d\mathbf d^T] \neq \text{Cov}(\hat{\boldsymbol\beta}_R)
+$$
+
+이며 반드시
+
+$$
+\boxed{
+MSE(\hat{\boldsymbol\beta}_R)
+= \text{tr}\{\text{Cov}(\hat{\boldsymbol\beta}_R)\} + \|\text{Bias}(\hat{\boldsymbol\beta}_R)\|^2
+}
+$$
+
+로 계산해야 한다.
+
+### 일반적인 이차형식에서의 기댓값
+
+더 일반적으로 확률벡터 $\mathbf z$와 상수행렬 $A$에 대해 $Q=\mathbf z^TA\mathbf z$ 라고 하자. 다음 trace 표현이 성립한다. $\mathbf z^TA\mathbf z =\text{tr}(\mathbf z^TA\mathbf z) =\text{tr}(A\mathbf z\mathbf z^T).$
+
+따라서 $E(\mathbf z^TA\mathbf z) = \text{tr}\left(AE[\mathbf z\mathbf z^T]\right)$.  이때, $E[\mathbf z\mathbf z^T] = \Sigma+\boldsymbol\mu\boldsymbol\mu^T$ 이므로
+
+$$
+\boxed{
+E(\mathbf z^TA\mathbf z) =
+\text{tr}(A\Sigma) + \boldsymbol\mu^TA\boldsymbol\mu
+}
+$$
+
+가 된다. 여기서 $\boldsymbol\mu=E(\mathbf z), \quad \Sigma=\text{Cov}(\mathbf z)$ 이다.
+
+### 기댓값과 trace의 주요 공식
+
+| 공식                                                                                   | 조건·의미          |
+| ------------------------------------------------------------------------------------ | -------------- |
+| $\text{tr}(A)=\sum_iA_{ii}$                                                | trace의 정의      |
+| $\text{tr}(A+B)=\text{tr}(A)+\text{tr}(B)$                 | 선형성            |
+| $\text{tr}(cA)=c\text{tr}(A)$                                      | $c$는 스칼라     |
+| $\text{tr}(AB)=\text{tr}(BA)$                                      | 곱의 차원이 맞아야 함   |
+| $\text{tr}(ABC)=\text{tr}(BCA)=\text{tr}(CAB)$             | 순환이동만 가능       |
+| $E[\text{tr}(M)]=\text{tr}(E[M])$                                  | 유한한 해당 기댓값 필요  |
+| $\mathbf x^TA\mathbf x=\text{tr}(A\mathbf x\mathbf x^T)$                   | 이차형식의 trace 표현 |
+| $E[\mathbf x\mathbf x^T]=\text{Cov}(\mathbf x)+E[\mathbf x]E[\mathbf x]^T$ | 이차적률과 공분산 관계   |
+| $E[\mathbf x^TA\mathbf x]=\text{tr}(A\Sigma)+\mu^TA\mu$                    | 이차형식의 기댓값      |
+| $\text{tr}(Q^TAQ)=\text{tr}(A)$                                    | $Q$가 직교행렬일 때 |
+| $\text{tr}(A)=\sum_i\lambda_i(A)$                                          | 중복도를 포함한 고윳값 합 |
+
+주의할 점은 $E[\text{tr}(M)] = \text{tr}(E[M])$ 은 항상 선형성으로 성립하지만, 일반적으로 $E[AB]\neq E[A]E[B]$ 이다. 특히 $E[\mathbf d\mathbf d^T] \neq E[\mathbf d]E[\mathbf d]^T$ 이며, 두 행렬의 차이가 바로 공분산행렬이다.
+
+### 고윳값과 trace
+
 
 ## 13. Gram-Schmidt Orthogonalization
 

@@ -3,13 +3,11 @@
 **비유: 선형사상을 나타내는 방향(또는 축, eigenvector), 크기(eigenvalue)를 나타냄.**  
 
 체 $F$ 위의 벡터공간 $V$의 선형사상
-$L : V \to V$ 에 대하여, 다음 조건을 만족하는 $\lambda \in F$, $v \in V \setminus {0}$ 를 각각
+$L : V \to V$ 에 대하여, $L(v) = \lambda v$을 만족하는 $\lambda \in F$, $v \in V \setminus \{0\}$ 를 각각
 * 고윳값(eigenvalue)
 * 고유벡터(eigenvector)  
 
 라고 한다.
-1. $v \ne 0$
-2. $L(v) = \lambda v$
 
 ## (2) 고유방정식 (Characteristic Equation)
 $n \times n$ 행렬 $M$에 대해 $\lambda$가 $M$의 고윳값이 되기 위한 필요충분조건은 다음 방정식을 만족하는 것이다.
@@ -87,11 +85,7 @@ $$\sum_{i=1}^n \lambda_i = \text{tr}(A)$$
 $$\prod_{i=1}^n \lambda_i = \det(A)$$
 
 **증명 스케치:**  
-고유다항식 $\det(\lambda I - A)$는 $n$차 다항식이며
-
-$$\det(\lambda I - A) = (\lambda - \lambda_1)(\lambda - \lambda_2) \cdots (\lambda - \lambda_n)$$
-
-로 인수분해된다.
+고유다항식 $\det(\lambda I - A)$는 $n$차 다항식이며 $\det(\lambda I - A) = (\lambda - \lambda_1)(\lambda - \lambda_2) \cdots (\lambda - \lambda_n)$ 로 인수분해된다.
 
 이를 전개하면
 - $\lambda^{n-1}$의 계수는 $-(\lambda_1 + \lambda_2 + \cdots + \lambda_n)$
@@ -102,6 +96,15 @@ $$\det(\lambda I - A) = (\lambda - \lambda_1)(\lambda - \lambda_2) \cdots (\lamb
 - 상수항은 $(-1)^n \det(A)$
 
 따라서 계수를 비교하면 위의 결과를 얻는다.
+
+--- 
+
+추가 성질:
+
+$$\text{tr}(A^TA) = \sum_{i=1}^n \lambda_i^2$$
+
+$$\text{tr}(A^{-1}) = \sum_{i=1}^n \lambda_i^{-1}$$
+
 
 ### 고윳값 관련 성질들
 
@@ -147,7 +150,7 @@ $$
 
 2. 영공간이 자명하지 않으면 왜 비가역인가
 
-일반적인 정사각행렬 $B\in\mathbb F^{n\times n}$를 생각하자. 먼저 $B$가 가역행렬이라고 가정하자. 만약 $B\mathbf v=0$ 이면 $B^{-1}B\mathbf v=B^{-1}0$ 이므로 $\mathbf v=0$ 이다. 즉, 가역행렬의 영공간은 반드시 $\ker(B)=\{\mathbf0\}$ 이다. 그러므로 그 대우에 의해 $\ker(B)\neq\{\mathbf0\} \Longrightarrow B\text{는 가역이 아니다}$
+일반적인 정사각행렬 $B\in\mathbb F^{n\times n}$를 생각하자. 먼저 $B$가 가역행렬이라고 가정하자. 만약 $B\mathbf v=0$ 이면 $B^{-1}B\mathbf v=B^{-1}0$ 이므로 $\mathbf v=0$ 이다. 즉, 가역행렬의 영공간은 반드시 $\ker(B)=\{\mathbf0\}$ 이다. 그러므로 그 대우에 의해 $\ker(B)\neq\{\mathbf0\} \Rightarrow B\text{는 가역이 아니다}$
 
 반대 방향도 증명할 수 있다. $\ker(B)=\{\mathbf0\}$라고 하자. 이는 선형사상
 
@@ -214,6 +217,14 @@ $$
 }
 $$
 
+---
+5. 일반 행렬에서 서로 다른 고윳값에 대응하는 고유벡터들은 선형독립이지만, 반드시 직교하지는 않는다. 그러나 대칭행렬이면 서로 다른 고윳값의 고유벡터들은 선형독립이다.
+
+---
+
+6. $A$가 $n\times n$ 정사각행렬이고 $C$가 가역행렬이면, $A$와 $CAC^{-1}$는 같은 특성다항식과 같은 고윳값을 갖는다. 특히 $C$가 직교행렬이면 $C^{-1}=C^T$이므로 $A$와 $CAC^T$는 같은 고윳값을 갖는다.  
+(밑에 닮음과 직교변환의 고유치 불변성 참고)
+
 
 # 2. 대각화(Diagonalization)
 
@@ -230,56 +241,65 @@ $A$는 대각화 가능(diagonalizable)이라고 하며,
 - $P$: 고유벡터들을 열벡터로 하는 행렬 (기저 변환 행렬)
 - $B$: 대각행렬 (대각성분은 고윳값)
 
-## (2) 정리 (Diagonalization Theorem)
+## (2) 대각성 정리 (Diagonalization Theorem)
 $n \times n$ 행렬 $A$에 대하여 다음 두 명제는 동치이다.
 1. $A$는 대각화 가능하다.
 2. $A$는 선형독립인 고유벡터를 $n$개 가진다.
 
-**증명:**  
-$(1 \Rightarrow 2)$  
-$A$가 대각화 가능하다고 하자. 즉, 가역행렬 $P$가 존재하여
+>**증명:**  
+>$(1 \Rightarrow 2)$  
+>$A$가 대각화 가능하다고 하자. 즉, 가역행렬 $P$가 존재하여
+>
+>$$P^{-1}AP = D = \begin{pmatrix} \lambda_1 & & \\ & \ddots & \\ & & \lambda_n \end{pmatrix}$$
+>
+>$P$의 열벡터를 $v_1, v_2, \dots, v_n$이라 하면
+>
+>$$AP = PD$$
+>
+>이므로
+>
+>$$A(v_1, v_2, \dots, v_n) = (v_1, v_2, \dots, v_n) \begin{pmatrix} \lambda_1 & & \\ & \ddots & \\ & & \lambda_n \end{pmatrix}$$
+>
+>따라서 $Av_i = \lambda_i v_i$이고, $P$가 가역이므로, n개의 열벡터들은 n차원 공간의 기저를 이루는 것이므로, $v_1, v_2, \dots, v_n$은 선형독립이다.
+>즉, $A$는 선형독립인 고유벡터를 $n$개 가진다. 
+>
+>$(2 \Rightarrow 1)$  
+>$A$가 선형독립인 고유벡터 $v_1, v_2, \dots, v_n$을 가진다고 하자.
+>각 고유벡터에 대응하는 고윳값을 $\lambda_1, \lambda_2, \dots, \lambda_n$이라 하면
+>
+>$$A v_i = \lambda_i v_i, \quad i = 1, 2, \dots, n$$
+>
+>행렬 $P = (v_1, v_2, \dots, v_n)$이라 하면, $v_i$들이 선형독립이므로 $P$는 가역이다.
+>
+>$$AP = A(v_1, v_2, \dots, v_n) = (\lambda_1 v_1, \lambda_2 v_2, \dots, \lambda_n v_n)$$
+>
+>$$= (v_1, v_2, \dots, v_n) \begin{pmatrix} \lambda_1 & & \\ & \ddots & \\ & & \lambda_n \end{pmatrix} = PD$$
+>
+>따라서 $P^{-1}AP = D$이고 $A$는 대각화 가능하다. $\square$
 
-$$P^{-1}AP = D = \begin{pmatrix} \lambda_1 & & \\ & \ddots & \\ & & \lambda_n \end{pmatrix}$$
+### 대각성 정리2, Diagonality Theorem
+정사각행렬 $A$가 서로 다른 $n$개의 고윳값을 가지면, $A$는 대각화 가능하다.
 
-$P$의 열벡터를 $v_1, v_2, \dots, v_n$이라 하면
+- 이젠 고유벡터가 아니라 서로 다른 고윳값에 관한 충분조건만 말하고 있음.
+- 고유벡터의 개수 $k$에 대한 수학적 귀납법으로 증명
 
-$$AP = PD$$
+**쓰임새:**
+- 대각화 가능성을 판단하는 **충분조건**을 제공한다.
+- 고유벡터의 선형독립성을 일일이 확인하지 않고도 대각화 가능 여부를 빠르게 판정할 수 있다.
+- 특히 서로 다른 고윳값의 개수만 세어도 되므로 계산이 간단하다.
+- 중복된 고윳값이 있는 경우는 중복도 정리로 판단해야 한다.
 
-이므로
-
-$$A(v_1, v_2, \dots, v_n) = (v_1, v_2, \dots, v_n) \begin{pmatrix} \lambda_1 & & \\ & \ddots & \\ & & \lambda_n \end{pmatrix}$$
-
-따라서 $Av_i = \lambda_i v_i$이고, $P$가 가역이므로, n개의 열벡터들은 n차원 공간의 기저를 이루는 것이므로, $v_1, v_2, \dots, v_n$은 선형독립이다.
-즉, $A$는 선형독립인 고유벡터를 $n$개 가진다. 
-
-$(2 \Rightarrow 1)$  
-$A$가 선형독립인 고유벡터 $v_1, v_2, \dots, v_n$을 가진다고 하자.
-각 고유벡터에 대응하는 고윳값을 $\lambda_1, \lambda_2, \dots, \lambda_n$이라 하면
-
-$$A v_i = \lambda_i v_i, \quad i = 1, 2, \dots, n$$
-
-행렬 $P = (v_1, v_2, \dots, v_n)$이라 하면, $v_i$들이 선형독립이므로 $P$는 가역이다.
-
-$$AP = A(v_1, v_2, \dots, v_n) = (\lambda_1 v_1, \lambda_2 v_2, \dots, \lambda_n v_n)$$
-
-$$= (v_1, v_2, \dots, v_n) \begin{pmatrix} \lambda_1 & & \\ & \ddots & \\ & & \lambda_n \end{pmatrix} = PD$$
-
-따라서 $P^{-1}AP = D$이고 $A$는 대각화 가능하다.  
-$\square$
+**설명:**
+- 서로 다른 고윳값에 대응하는 고유벡터들은 자동으로 선형독립이다.
+- 따라서 $n \times n$ 행렬이 서로 다른 $n$개의 고윳값을 가지면, $n$개의 선형독립인 고유벡터를 갖게 되어 대각화 가능하다.
+- 역은 성립하지 않는다: 중복된 고윳값을 가져도 대각화 가능할 수 있다.
+   - 예: $I_n$은 고윳값 1만 가지지만 대각화 가능하다.
 
 ## (3) 대각화 방법
 $n \times n$ 행렬 $A$에 대하여:  
-**Step 1.**
-$n$개의 선형독립 고유벡터를 찾아 대각화 가능 여부를 확인한다.  
-**Step 2.**
-고유벡터들을 열로 하는 행렬 $P = (v_1, v_2, \dots, v_n)$ 을 만든다.  
-**Step 3.**
-
-$$
-P^{-1} A P = D
-$$
-
-은 대각행렬이 된다.
+**Step 1.** $n$개의 선형독립 고유벡터를 찾아 대각화 가능 여부를 확인한다.  
+**Step 2.** 고유벡터들을 열로 하는 행렬 $P = (v_1, v_2, \dots, v_n)$ 을 만든다.  
+**Step 3.**  $P^{-1} A P = D$ 은 대각행렬이 된다.
 
 ## (4) 결손행렬 (Defective Matrix)
 **정의:**  
@@ -325,21 +345,6 @@ $$J_i = \begin{pmatrix}
    - "$A$를 조르단 표준형으로 **변환(transform)** 한다"
    - "$A$의 조르단 표준형을 **구한다**"
 
-### 대각성 정리, Diagonality Theorem
-정사각행렬 $A$가 서로 다른 $n$개의 고윳값을 가지면, $A$는 대각화 가능하다.
-
-**쓰임새:**
-- 대각화 가능성을 판단하는 **충분조건**을 제공한다.
-- 고유벡터의 선형독립성을 일일이 확인하지 않고도 대각화 가능 여부를 빠르게 판정할 수 있다.
-- 특히 서로 다른 고윳값의 개수만 세어도 되므로 계산이 간단하다.
-- 중복된 고윳값이 있는 경우는 중복도 정리로 판단해야 한다.
-
-**설명:**
-- 서로 다른 고윳값에 대응하는 고유벡터들은 자동으로 선형독립이다.
-- 따라서 $n \times n$ 행렬이 서로 다른 $n$개의 고윳값을 가지면, $n$개의 선형독립인 고유벡터를 갖게 되어 대각화 가능하다.
-- 역은 성립하지 않는다: 중복된 고윳값을 가져도 대각화 가능할 수 있다.
-   - 예: $I_n$은 고윳값 1만 가지지만 대각화 가능하다.
-
 ### 중복도 정리 (Multiplicity Theorem)
 $n \times n$ 행렬 $A$가 중복도가 $m_k$인 고윳값 $\lambda_k$를 가진다고 하자. ($k = 1, 2, \dots, s$)
 이때 $\sum_{k=1}^s m_k = n$이다.
@@ -361,10 +366,6 @@ $$\text{rank}(A - \lambda_k I) = n - m_k$$
 - 모든 고윳값이 정규 고유치일 때, 행렬 $A$를 **정규 행렬(regular matrix)** 이라 한다.
    (주의: 이는 normal matrix와 다른 개념이다)
 - 하나 또는 그 이상의 고윳값이 정규 고유치가 아니면 $P^{-1}$가 존재하지 않으므로 $P^{-1}AP$도 정의되지 않는다.
-
-**결손 행렬 (Deficient Matrix):**
-- $\text{rank}(A - \lambda_k I) = n - m_k$가 성립하지 않는 고윳값이 하나라도 존재하면, $A$를 **결손 행렬(deficient matrix)** 이라 한다.
-- 결손 행렬은 대각화 불가능하다.
 
 **단일근의 경우:**
 - 중복도 $m_k = 1$인 고윳값(단일근)의 경우, $\text{rank}(A - \lambda_k I) = n - 1$이 자동으로 성립한다.
@@ -419,30 +420,18 @@ $$A = A^T$$
 ### 대칭행렬의 고유치 성질
 **정리 1: 대칭행렬의 고유치는 모두 실수이다.**
 
-**증명:**  
-$A$를 실대칭행렬이라 하고, $\lambda$를 고유치, $\mathbf{v}$를 대응하는 고유벡터라 하자.
-
-$$A\mathbf{v} = \lambda\mathbf{v}$$
-
-양변에 켤레전치 $\overline{\mathbf{v}}^T$를 왼쪽에서 곱하면
-
-$$\overline{\mathbf{v}}^T A\mathbf{v} = \lambda \overline{\mathbf{v}}^T\mathbf{v}$$
-
-한편, 좌변의 켤레전치를 취하면
-
-$$\overline{\mathbf{v}}^T A^T\mathbf{v} = \overline{\lambda} \overline{\mathbf{v}}^T\mathbf{v}$$
-
-$A = A^T$이므로
-
-$$\overline{\mathbf{v}}^T A\mathbf{v} = \overline{\lambda} \overline{\mathbf{v}}^T\mathbf{v}$$
-
-따라서 $\lambda \overline{\mathbf{v}}^T\mathbf{v} = \overline{\lambda} \overline{\mathbf{v}}^T\mathbf{v}$
-
-$\overline{\mathbf{v}}^T\mathbf{v} = \|\mathbf{v}\|^2 > 0$ 이므로
-
-$$\lambda = \overline{\lambda}$$
-
-즉, $\lambda$는 실수이다. $\square$
+>**증명:**  
+>$A$를 실대칭행렬이라 하고, $\lambda$를 고유치, $\mathbf{v}$를 대응하는 고유벡터라 하자: $A\mathbf{v} = \lambda\mathbf{v}$
+>
+>양변에 켤레전치 $\overline{\mathbf{v}}^T$를 왼쪽에서 곱하면 $\overline{\mathbf{v}}^T A\mathbf{v} = \lambda \overline{\mathbf{v}}^T\mathbf{v}$
+>
+>한편, 좌변의 켤레전치를 취하면 $\overline{\mathbf{v}}^T A^T\mathbf{v} = \overline{\lambda} \overline{\mathbf{v}}^T\mathbf{v}$
+>
+>$A = A^T$이므로 $\overline{\mathbf{v}}^T A\mathbf{v} = \overline{\lambda} \overline{\mathbf{v}}^T\mathbf{v}$
+>
+>따라서 $\lambda \overline{\mathbf{v}}^T\mathbf{v} = \overline{\lambda} \overline{\mathbf{v}}^T\mathbf{v}$
+>
+>$\overline{\mathbf{v}}^T\mathbf{v} = \|\mathbf{v}\|^2 > 0$ 이므로 $\lambda = \overline{\lambda}$. 즉, $\lambda$는 실수이다. $\square$
 
 ### 대칭행렬의 대각화
 **정리 2: 대칭행렬은 항상 대각화 가능하다.**
@@ -453,73 +442,76 @@ $$\lambda = \overline{\lambda}$$
 ### 대칭행렬의 고유벡터 직교성
 **정리 3: 대칭행렬의 서로 다른 고유치에 대응하는 고유벡터들은 서로 직교한다.**
 
-**증명:**  
-$\lambda_1 \neq \lambda_2$를 $A$의 서로 다른 고유치, $\mathbf{v}_1, \mathbf{v}_2$를 각각 대응하는 고유벡터라 하자.
+(일반행렬이면 고유벡터 직교가 보장이 안됬었음!)
 
-$$A\mathbf{v}_1 = \lambda_1\mathbf{v}_1, \quad A\mathbf{v}_2 = \lambda_2\mathbf{v}_2$$
+>**증명:**  
+>$\lambda_1 \neq \lambda_2$를 $A$의 서로 다른 고유치, $\mathbf{v}_1, \mathbf{v}_2$를 각각 대응하는 고유벡터라 하자.
+>
+>$$A\mathbf{v}_1 = \lambda_1\mathbf{v}_1, \quad A\mathbf{v}_2 = \lambda_2\mathbf{v}_2$$
+>
+>첫 번째 식의 양변에 $\mathbf{v}_2^T$를 왼쪽에서 곱하면 $\mathbf{v}_2^T A\mathbf{v}_1 = \lambda_1 \mathbf{v}_2^T\mathbf{v}_1$
+>
+>두 번째 식의 양변을 전치하면 $\mathbf{v}_2^T A^T = \lambda_2 \mathbf{v}_2^T$
+>
+>$A = A^T$이므로 $\mathbf{v}_2^T A = \lambda_2 \mathbf{v}_2^T$
+>
+>양변에 $\mathbf{v}_1$을 오른쪽에서 곱하면 $\mathbf{v}_2^T A\mathbf{v}_1 = \lambda_2 \mathbf{v}_2^T\mathbf{v}_1$
+>
+>따라서 $\lambda_1 \mathbf{v}_2^T\mathbf{v}_1 = \lambda_2 \mathbf{v}_2^T\mathbf{v}_1$
+>
+>$$(\lambda_1 - \lambda_2)\mathbf{v}_2^T\mathbf{v}_1 = 0$$
+>
+>$\lambda_1 \neq \lambda_2$이므로 $\mathbf{v}_2^T\mathbf{v}_1 = 0$  
+>즉, $\mathbf{v}_1 \perp \mathbf{v}_2$. $\square$
 
-첫 번째 식의 양변에 $\mathbf{v}_2^T$를 왼쪽에서 곱하면
+**정리 : 대칭행렬의 계수는 0이 아닌 고유치의 개수와 같다.**
 
-$$\mathbf{v}_2^T A\mathbf{v}_1 = \lambda_1 \mathbf{v}_2^T\mathbf{v}_1$$
+>**증명:**  
+>$A = P\Lambda P^T$에서 $P$는 직교행렬이므로 계수가 $n$이다.
+>따라서
+>
+>$$\text{rank}(A) = \text{rank}(\Lambda) = \text{(0이 아닌 대각원소의 개수)} = \text{(0이 아닌 고유치의 개수)}$$
 
-두 번째 식의 양변을 전치하면
-
-$$\mathbf{v}_2^T A^T = \lambda_2 \mathbf{v}_2^T$$
-
-$A = A^T$이므로
-
-$$\mathbf{v}_2^T A = \lambda_2 \mathbf{v}_2^T$$
-
-양변에 $\mathbf{v}_1$을 오른쪽에서 곱하면
-
-$$\mathbf{v}_2^T A\mathbf{v}_1 = \lambda_2 \mathbf{v}_2^T\mathbf{v}_1$$
-
-따라서
-
-$$\lambda_1 \mathbf{v}_2^T\mathbf{v}_1 = \lambda_2 \mathbf{v}_2^T\mathbf{v}_1$$
-
-$$(\lambda_1 - \lambda_2)\mathbf{v}_2^T\mathbf{v}_1 = 0$$
-
-$\lambda_1 \neq \lambda_2$이므로
-
-$$\mathbf{v}_2^T\mathbf{v}_1 = 0$$
-
-즉, $\mathbf{v}_1 \perp \mathbf{v}_2$. $\square$
+**추가 성질:**
+- 양정치 행렬: 모든 고유치 > 0 ⇔ $\text{rank}(A) = n$ (full rank)
+- 비음정치 행렬: 모든 고유치 ≥ 0 ⇔ $\text{rank}(A) = $ (양의 고유치 개수)
+- 음정치 행렬: 모든 고유치 < 0
+- 부정치 행렬: 양수와 음수 고유치가 모두 존재
 
 **중복 고유치의 경우:**  
 중복된 고유치에 대응하는 고유공간 내에서도 그람-슈미트 과정(Gram-Schmidt process)을 이용하여 서로 직교하는 고유벡터들을 선택할 수 있다.
 
 **보조정리:**  
-$n \times n$ 행렬 $B$에 대하여, $B\mathbf{x} = \mathbf{0}$의 해공간에서 서로 직교하는 기저를 항상 찾을 수 있다.
+$n \times n$ 행렬 $B$에 대하여, $B\mathbf{x} = \mathbf 0$의 해공간에서 서로 직교하는 기저를 항상 찾을 수 있다.
 
 ### 닮음과 직교변환의 고유치 불변성
-**정리:**
+
 $A$를 $n \times n$ 행렬, $C$를 $n \times n$ 가역행렬이라 하자.
 
 **(1) 닮음 변환에서의 고유치 불변성:**
 행렬 $A$와 $CAC^{-1}$은 같은 고유치를 갖는다.
 
-**증명:**
-$\det(\lambda I - CAC^{-1}) = \det(C(\lambda I - A)C^{-1}) = \det(C)\det(\lambda I - A)\det(C^{-1}) = \det(\lambda I - A)$
-
-따라서 $A$와 $CAC^{-1}$의 고유다항식이 동일하므로, 고유치도 같다. $\square$
+>**증명:**
+>$\det(\lambda I - CAC^{-1}) = \det(C(\lambda I - A)C^{-1}) = \det(C)\det(\lambda I - A)\det(C^{-1}) = \det(\lambda I - A)$
+>
+>따라서 $A$와 $CAC^{-1}$의 고유다항식이 동일하므로, 고유치도 같다. $\square$
 
 **(2) 직교변환에서의 고유치 불변성:**
 $C$가 직교행렬(orthogonal matrix)이면, 즉 $CC^T = C^TC = I$를 만족하면, 행렬 $A$와 $CAC^T$는 같은 고유치를 갖는다.
 
-**증명:**
-직교행렬 $C$에 대해 $C^{-1} = C^T$이므로
-
-$$\det(\lambda I - CAC^T) = \det(\lambda I - CAC^{-1}) = \det(\lambda I - A)$$
-
-따라서 $A$와 $CAC^T$의 고유다항식이 동일하고, 고유치도 같다. $\square$
+>**증명:**
+>직교행렬 $C$에 대해 $C^{-1} = C^T$이므로
+>
+>$$\det(\lambda I - CAC^T) = \det(\lambda I - CAC^{-1}) = \det(\lambda I - A)$$
+>
+>따라서 $A$와 $CAC^T$의 고유다항식이 동일하고, 고유치도 같다. $\square$
 
 **참고:**
 이 성질은 대칭행렬의 직교 대각화 $A = P\Lambda P^T$에서 $P$가 직교행렬이므로, $A$와 대각행렬 $\Lambda$가 같은 고유치를 갖는다는 사실을 설명한다.
 
 ### 스펙트럼 분해 정리 (Spectral Decomposition Theorem)
 **정리 4 (스펙트럼 분해):**  
-$A$를 $n \times n$ 차 대칭행렬이라 하자. 그러면 다음 식을 만족하는 직교행렬 $P$가 존재한다:
+$A$를 $n \times n$ 차 **대칭행렬** 이라 하자. 그러면 다음 식을 만족하는 직교행렬 $P$가 존재한다:
 
 $$A = P\Lambda P^T$$
 
@@ -532,11 +524,156 @@ $$A = P\Lambda P^T$$
 
 $$A = \sum_{i=1}^n \lambda_i \mathbf{p}_i\mathbf{p}_i^T$$
 
-여기서 $\mathbf{p}_i\mathbf{p}_i^T$는 $i$번째 고유공간으로의 정사영 행렬이다.
-
-**의미:**
 - 대칭행렬은 고유벡터들이 이루는 정규직교 기저로 완전히 분해된다.
 - 각 항 $\lambda_i \mathbf{p}_i\mathbf{p}_i^T$는 $i$번째 고유방향으로의 스케일된 정사영을 나타낸다.
+
+### Thm.
+
+$A\in\mathbb R^{n\times n}$가 실수 대칭행렬이라고 하자. $A$의 고윳값을 대수적 중복도를 포함하여 $\lambda_1,\ldots,\lambda_n$이라고 하고 $\Lambda=\text{diag}(\lambda_1,\ldots,\lambda_n)$ 이라고 하자.
+
+그러면 $A$의 정규직교 고유벡터 $\mathbf p_1,\ldots,\mathbf p_n$을 열벡터로 갖는 직교행렬 $P=[\mathbf p_1:\mathbf p_2:\cdots:\mathbf p_n]$ 가 존재하여 $P^TAP=\Lambda$ 를 만족한다. 이때 $A\mathbf p_i=\lambda_i\mathbf p_i, \quad i=1,\ldots,n $ 이고 $P^TP=PP^T=I$ 이다.
+
+따라서 임의의 $\mathbf x\in\mathbb R^n$에 대해 $\mathbf w=P^T\mathbf x$ 라고 놓으면 $\mathbf x=P\mathbf w$ 이고, 이차형식은
+
+$$
+\boxed{
+q(\mathbf x) = \mathbf x^TA\mathbf x
+= \mathbf w^T\Lambda\mathbf w = \sum_{i=1}^n\lambda_iw_i^2
+}
+$$
+
+로 표현된다.
+
+$$
+\boxed{
+\exists P\text{ such that }\forall\mathbf x,\;
+\mathbf w=P^T\mathbf x
+\text{에 대해 }
+\mathbf x^TA\mathbf x =
+\mathbf w^T\Lambda\mathbf w
+}
+$$
+
+즉, $P$는 $A$에 의해 결정되며 모든 $\mathbf x$에 공통으로 사용할 수 있다.
+
+---
+임의의 $\mathbf x\in\mathbb R^n$을 선택하자. $P$가 직교행렬이므로 $\mathbf w=P^T\mathbf x$ 라고 정의할 수 있다. 양변 왼쪽에 $P$를 곱하면 $P\mathbf w = PP^T\mathbf x = \mathbf x.$
+
+이것을 이차형식에 대입하면
+
+$$
+\mathbf x^TA\mathbf x =(P\mathbf w)^TA(P\mathbf w) =\mathbf w^TP^TAP\mathbf w =\mathbf w^T\Lambda\mathbf w.
+$$
+
+$\Lambda$가 대각행렬이므로
+
+$$
+\begin{aligned}
+\mathbf w^T\Lambda\mathbf w
+&=
+\begin{pmatrix}
+w_1&\cdots&w_n
+\end{pmatrix}
+\begin{pmatrix}
+\lambda_1&&0\\
+&\ddots&\\
+0&&\lambda_n
+\end{pmatrix}
+\begin{pmatrix}
+w_1\\
+\vdots\\
+w_n
+\end{pmatrix}\\
+&= \lambda_1w_1^2+\cdots+\lambda_nw_n^2.
+\end{aligned}
+$$
+
+따라서
+
+$$
+\boxed{
+\mathbf x^TA\mathbf x
+= \lambda_1w_1^2+\cdots+\lambda_nw_n^2
+}
+$$
+
+2. $\mathbf w$의 의미
+
+$\mathbf x=P\mathbf w$를 열벡터 단위로 쓰면 $\mathbf x = w_1\mathbf p_1+\cdots+w_n\mathbf p_n$ 이다.
+
+즉, $w_i$는 $\mathbf x$를 고유벡터 기저로 표현했을 때의 좌표다. 양변에 $\mathbf p_i^T$를 곱하면 정규직교성에 의해 $w_i=\mathbf p_i^T\mathbf x$ 를 얻는다.
+
+따라서
+
+$$
+\boxed{
+\mathbf w=
+\begin{pmatrix}
+\mathbf p_1^T\mathbf x\\
+\vdots\\
+\mathbf p_n^T\mathbf x
+\end{pmatrix}
+= P^T\mathbf x
+}
+$$
+
+또한 직교변환은 길이를 보존하므로
+
+$$
+\begin{aligned}
+\|\mathbf x\|^2
+&=\mathbf x^T\mathbf x\\
+&=\mathbf w^TP^TP\mathbf w\\
+&=\mathbf w^T\mathbf w\\
+&=\|\mathbf w\|^2.
+\end{aligned}
+$$
+
+즉,
+
+$$
+\boxed{\sum_{i=1}^nx_i^2 = \sum_{i=1}^nw_i^2}
+$$
+
+결론: 
+
+$$
+\boxed{
+\begin{aligned}
+A=A^T
+&\Rightarrow
+\text{정규직교 고유기저 }
+\mathbf p_1,\ldots,\mathbf p_n\text{ 존재}\\
+&\Rightarrow
+P=[\mathbf p_1:\cdots:\mathbf p_n]\text{는 직교행렬}\\
+&\Rightarrow
+P^TAP=\Lambda\\
+&\Rightarrow
+\mathbf x=P\mathbf w,\quad \mathbf w=P^T\mathbf x\\
+&\Rightarrow
+\mathbf x^TA\mathbf x
+=
+\sum_{i=1}^n\lambda_iw_i^2.
+\end{aligned}
+}
+$$
+
+## 행렬의 분해
+행렬의 분해란 하나의 행렬을 두개 또는 세 개 이상의 단순한 구조를 지닌 행렬들의 곱으로 표현하는 절차를 말한다. 회귀분석에 자주 사용되는 LU분해, Cholesky 분해, QR분해, 특잇값 분해 (singular value decomposition, SVD)가 있다. 이런 행렬의 분해는 행렬의 역행렬을 계산하거나 연립선형방정식을 푸는 데 중요한 역할을 하고, 현대 데이터과학의 핵심인 행렬연산을 빠르게 하기 위해서는 필수적이다.
+
+### LU분해
+LU분해는 정방행렬을 하삼각행렬 (lower triangular matrix) 와 상삼각행렬 (upper triangular matrix)의 곱으로 분해하는 절차다. 즉 정방행렬 $A$가 어떤 하삼각행렬 $L$과 상삼각행렬 $U$이 존재하여 $A = LU$로 표현되면 이를 $A$의 LU분해라 정의한다. 
+
+관련 성질
+1. 모든 정방행렬 $A$는 LU분해가 가능하고, $A$가 대칭행렬이면 $U = L^T$다.
+2. LU분해 변형으로 LDU분해가 있다. 이는 정방행렬 $A$를 $A= LDU$로 분해하는 절차자. $D$는 대각행렬이고, $L, U$는 모든 대각원소가 1인 하삼각, 상삼각 행렬이다.
+3. 정방행렬 $A$가 정칙행렬이고 $A$의 LU분해로 $L$의 모든 대각원소가 1인 LU분해를 생각할 때, $A$의 LU분해는 유일하고 $\text{det}(A) = u_{11}u_{22}\cdots u_{nn} =\text{det}(D)$ 이다. 여기서 $u_{ii}$ 는 $U$행렬의 $i$번째 대각원소다.
+4. 정방행렬 $A$가 대칭이고 양정치행렬이면 $A = U^TU= LL^T$의 분해가 가능하고 이 분해를 Cholesky분해라 부른다.
+
+**응용**
+
+1. 중회귀분석에 응용
+2. 자기회귀모형에 응용
 
 ### 촐레스키 분해 (Cholesky Decomposition)
 **정리 5 (촐레스키 분해):**  
@@ -563,27 +700,47 @@ $$A = U^TU$$
 - 몬테카를로 시뮬레이션에서 상관된 난수 생성
 - 최적화 문제의 수치 안정성 향상
 
-### 대칭행렬의 계수 (Rank)
-**정리 6: 대칭행렬의 계수는 0이 아닌 고유치의 개수와 같다.**
+### QR분해
+행렬 계수가 $p$인 $n \times p$행렬 $A$가 어떤 $p\times p$ 상삼각행렬 $R$과 서로 직교인 열로 이루어진 $n \times p$ 행렬 $Q$에 대해 $A = QR$을 만족시킬 때 이를 $A$의 QR분해라 정의한다. $Q$의 열벡터의 직교성은 $Q^TQ =I_p$를 만족시킨다.
 
-**증명:**  
-$A = P\Lambda P^T$에서 $P$는 직교행렬이므로 계수가 $n$이다.
-따라서
+**응용:** 중회귀모형 회귀계수 추정
 
-$$\text{rank}(A) = \text{rank}(\Lambda) = \text{(0이 아닌 대각원소의 개수)} = \text{(0이 아닌 고유치의 개수)}$$
+### 특잇값 분해 (singular value decomposition, SVD)
 
-**추가 성질:**
-- 양정치 행렬: 모든 고유치 > 0 ⇔ $\text{rank}(A) = n$ (full rank)
-- 비음정치 행렬: 모든 고유치 ≥ 0 ⇔ $\text{rank}(A) = $ (양의 고유치 개수)
-- 음정치 행렬: 모든 고유치 < 0
-- 부정치 행렬: 양수와 음수 고유치가 모두 존재
+$A$를 계수(rank) $r$인 $m \times n$ 행렬이라 하자 ($m \leq n$). 그러면 $m \times m$ 직교행렬 $P$와 $n \times n$ 직교행렬 $Q$가 존재하여
 
+$$A = P\begin{pmatrix} D & 0 \end{pmatrix}Q^T$$
 
-### LU분해 (어디에 넣을지 고민...)
-응용: auto regressive model, 중회귀분석
+를 만족한다. 여기서
+- $D$는 $m \times m$ 대각행렬로, 비음의 대각원소 $d_i$ ($i = 1, 2, \ldots, m$)를 갖는다.
+- $0$은 $m \times (n-m)$ 영행렬이다.
+- $D$의 양의 대각원소들은 $A^TA$ (또는 $AA^T$)의 양의 고유치들의 양의 제곱근이며, 이들을 $A$의 **특이치(singular value)** 라 한다.
+- $m = n$인 경우, $P^TAQ = D$이다.
+- $A$가 대칭인 경우 $P = Q$이고, $D$의 대각원소들은 $A$의 고유치들의 절댓값과 같다.
 
-### QR분해 (어디에 넣을지 고민...)
-응용: 고유값 계산, 선형회귀분석, 최소제곱문제
+**관례:**
+- 특이치는 보통 크기 순서대로 배열한다: $d_1 \geq d_2 \geq \cdots \geq d_r > 0$
+- 계수가 $r$이면 $r$개의 양의 특이치와 $(m-r)$개의 0을 갖는다.
+
+$$A = U\Sigma V^T$$
+
+형태로도 표기하며, 여기서
+- $U$: $m \times m$ 직교행렬 (좌특이벡터들)
+- $\Sigma$: $m \times n$ 직사각 대각행렬 (특이치들)
+- $V$: $n \times n$ 직교행렬 (우특이벡터들)
+
+#### 따름정리 (SVD와 고유벡터의 관계)
+위 정리의 행렬 $Q$의 열벡터들은 $A^TA$의 서로 정규직교(orthonormal)인 고유벡터들이다.
+
+마찬가지로, 행렬 $P$의 열벡터들은 $AA^T$의 서로 정규직교인 고유벡터들이다.
+
+**SVD의 응용:**
+- 데이터 압축 및 차원 축소
+- 최소제곱 문제의 해법
+- 주성분 분석(PCA)
+- 이미지 처리 및 신호 처리
+- 추천 시스템
+- 행렬의 의사역행렬(pseudoinverse) 계산
 
 
 ## (7) 정규행렬 (Normal Matrix)
@@ -660,7 +817,7 @@ $B$가 계수(rank) $r$을 갖는 $n \times n$ 차 멱등행렬이라면:
 
 ### 대칭 비음정치행렬의 고유치
 **정의:**  
-- 양정치행렬(positive definite): 모든 $\mathbf{x} \neq \mathbf{0}$에 대해 $\mathbf{x}^TA\mathbf{x} > 0$
+- 양정치행렬(positive definite): 모든 $\mathbf{x} \neq \mathbf 0$에 대해 $\mathbf{x}^TA\mathbf{x} > 0$
 - 양반정치행렬(positive semidefinite): 모든 $\mathbf{x}$에 대해 $\mathbf{x}^TA\mathbf{x} \geq 0$
 - 비음정치행렬: 양반정치행렬과 동일한 의미
 
@@ -686,31 +843,230 @@ $A$가 계수 $r$을 갖는 $n \times n$ 차 양반정치행렬이라면, $A = M
 **설명:**  
 이러한 분해는 스펙트럼 분해를 이용하여 구성할 수 있다. $A = Q\Lambda Q^T$에서 $\Lambda = \text{diag}(\lambda_1, \dots, \lambda_r, 0, \dots, 0)$이고 모든 $\lambda_i > 0$이면, $\Lambda^{1/2} = \text{diag}(\sqrt{\lambda_1}, \dots, \sqrt{\lambda_r}, 0, \dots, 0)$로 정의하여 $L = Q\Lambda^{1/2}$로 구성할 수 있다.
 
-### 정리 (멱등대칭행렬의 특성, Characterization of Idempotent Symmetric Matrices)
-$A$가 대칭행렬이고 멱등행렬($A^2 = A$)이면, $A$의 고유치는 0 또는 1이다.
+### ???
 
-**증명:**  
-$A$는 대칭행렬이므로 $A = Q\Lambda Q^T$로 직교대각화된다. 여기서 $\Lambda = \text{diag}(\lambda_1, \lambda_2, \ldots, \lambda_n)$.  
-$A^2 = A$에서
+$A\in\mathbb R^{n\times n}$가 rank $k$인 대칭 멱등행렬이라고 하자. 그러면 어떤 직교행렬 $P$가 존재하여 $P^TAP=E_k$ 를 만족한다. 여기서
 
-$$Q\Lambda Q^T \cdot Q\Lambda Q^T = Q\Lambda Q^T \\ Q\Lambda^2 Q^T = Q\Lambda Q^T$$
+$$
+E_k=
+\begin{pmatrix}
+I_k&0\\
+0&0
+\end{pmatrix}
+=
+\text{diag} (\underbrace{1,\ldots,1}_{k}, \underbrace{0,\ldots,0}_{n-k})
+$$
 
-양변에 왼쪽에서 $Q^T$를, 오른쪽에서 $Q$를 곱하면 $\Lambda^2 = \Lambda$  
-따라서 각 대각원소에 대해 $\lambda_i^2 = \lambda_i$, 즉 $\lambda_i(\lambda_i - 1) = 0$.  
-그러므로 모든 $\lambda_i \in \{0, 1\}$.
+동치:
 
-**응용: rank와 nullity의 관계**  
-대칭행렬 $A$가 $A^2 = A$를 만족할 때,
+$$
+\boxed{A=PE_kP^T}
+$$
 
-$$\text{rank}(A) = \#\{\lambda_i \neq 0\}, \quad \text{rank}(I - A) = \#\{\lambda_i \neq 1\}$$
+**증명** 
 
-두 식을 더하면 $\text{rank}(A) + \text{rank}(I - A) = n$  
-이는 각 고유치가 반드시 0 또는 1이어야 함을 의미한다.
+1. 상공간에서 $A$는 항등변환이다
 
-**예시:**  
-행렬 $P = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$는 대칭이고 $P^2 = P$를 만족한다.  
-고유치: $\lambda_1 = 1, \lambda_2 = 0$  
-따라서 $\text{rank}(P) = 1$, $\text{rank}(I - P) = 1$이고, $1 + 1 = 2 = n$. ✓
+$\mathbf u\in\text{Col}(A)$라고 하자. 그러면 어떤 $\mathbf x$가 존재하여 $\mathbf u=A\mathbf x$ 이고, $A\mathbf u =A(A\mathbf x) =A^2\mathbf x =A\mathbf x =\mathbf u.$
+
+따라서 $\mathbf u\in\text{Col}(A) \Rightarrow A\mathbf u=\mathbf u$  
+즉, $\text{Col}(A)$의 모든 영이 아닌 벡터는 고윳값 $1$에 대응하는 고유벡터다.
+
+2. 영공간에서 $A$는 영변환이다
+
+$\mathbf v\in\text{Null}(A)$이면 영공간의 정의에 의해 $A\mathbf v=0.$.  
+따라서 $\text{Null}(A)$의 모든 영이 아닌 벡터는 고윳값 $0$에 대응하는 고유벡터다.
+
+3. 상공간과 영공간은 서로 직교한다
+
+$\mathbf u\in\text{Col}(A)$이고 $\mathbf v\in\text{Null}(A)$라고 하자. $\mathbf u\in\text{Col}(A)$이므로 어떤 $\mathbf x$가 존재하여 $\mathbf u=A\mathbf x$ 이다. 그러면
+
+$$
+\begin{aligned}
+\mathbf u^T\mathbf v
+&=(A\mathbf x)^T\mathbf v\\
+&=\mathbf x^TA^T\mathbf v\\
+&=\mathbf x^TA\mathbf v\\
+&=\mathbf x^T0\\
+&=0.
+\end{aligned}
+$$
+
+따라서 $\text{Col}(A)\perp \text{Null}(A)$ 이다. 또한 rank-nullity 정리에 의해 $\dim\text{Col}(A)=r(A)=k$ 이고 $\dim\text{Null}(A)=n-k$ 이다. 따라서
+
+$$
+\boxed{
+\mathbb R^n
+=\text{Col}(A) 
+\mathbin{\overset{\perp}{\oplus}}
+\text{Null}(A)
+}
+$$
+
+4. 정규직교기저를 선택한다
+
+$\text{Col}(A)$에서 정규직교기저 $\mathbf p_1,\ldots,\mathbf p_k$ 를 선택하고, $\text{Null}(A)$에서 정규직교기저 $\mathbf p_{k+1},\ldots,\mathbf p_n$ 을 선택한다.
+
+두 공간이 서로 직교하므로 전체 벡터들 $\mathbf p_1,\ldots,\mathbf p_n$ 은 $\mathbb R^n$의 정규직교기저를 이룬다. 이들을 열벡터로 갖는 행렬을 $P= [\mathbf p_1:\cdots:\mathbf p_k: \mathbf p_{k+1}:\cdots:\mathbf p_n]$ 이라고 하자.
+
+열벡터들이 정규직교하므로 $P^TP=PP^T=I.$ 따라서 $P$는 직교행렬이다.
+
+5. $AP=PE_k$임을 보인다
+
+$i=1,\ldots,k$에 대해 $\mathbf p_i\in\text{Col}(A)$이므로 $A\mathbf p_i=\mathbf p_i.$  
+$i=k+1,\ldots,n$에 대해서는 $\mathbf p_i\in\text{Null}(A)$이므로 $A\mathbf p_i=0.$
+
+따라서
+
+$$
+\begin{aligned}
+AP
+&=
+[A\mathbf p_1:\cdots:A\mathbf p_k:
+A\mathbf p_{k+1}:\cdots:A\mathbf p_n]\\
+&=
+[\mathbf p_1:\cdots:\mathbf p_k:
+0:\cdots:0].
+\end{aligned}
+$$
+
+한편 $PE_k = [\mathbf p_1:\cdots:\mathbf p_k: 0:\cdots:0]$ 이므로 $AP=PE_k.$
+
+양변 왼쪽에 $P^T$를 곱하면 $P^TAP=P^TPE_k=E_k.$
+
+따라서 $P^TAP=E_k$ 가 증명된다.
+
+---
+
+**스펙트럴 정리를 이용한 짧은 증명**
+
+$A$가 실수 대칭행렬이므로 스펙트럴 정리에 의해 어떤 직교행렬 $P$가 존재하여 $P^TAP = \text{diag}(\lambda_1,\ldots,\lambda_n)$ 이다.
+
+$\lambda$가 $A$의 고윳값이고 $\mathbf v\neq0$가 대응하는 고유벡터라면 $A\mathbf v=\lambda\mathbf v.$
+
+따라서
+
+$$
+A^2\mathbf v
+= A(\lambda\mathbf v)
+= \lambda A\mathbf v
+= \lambda^2\mathbf v.
+$$
+
+그런데 $A^2=A$이므로 $A^2\mathbf v=A\mathbf v=\lambda\mathbf v.$ 따라서 $\lambda^2\mathbf v=\lambda\mathbf v.$
+
+$\mathbf v\neq0$이므로 $\lambda^2=\lambda$ 이고, $\lambda(\lambda-1)=0.$ 따라서 모든 고윳값은 $\lambda\in\{0,1\}$ 이다.
+
+$A$는 대칭행렬이므로 0이 아닌 고윳값의 개수는 중복도를 포함하여 $r(A)$와 같다. $r(A)=k$이므로 고윳값 1이 정확히 $k$개이고, 고윳값 0이 $n-k$개다.
+
+고유벡터의 순서를 적절히 배열하면
+
+$$
+P^TAP
+=
+\text{diag}
+(\underbrace{1,\ldots,1}_{k},
+\underbrace{0,\ldots,0}_{n-k})
+=
+E_k.
+$$
+
+따라서 명제가 증명된다.
+
+### 일반 멱등행렬에 대해 성립하는 올바른 결과
+위 정리와 유사하지만, 조건이 다르다.
+
+$A$가 대칭이 아닐 수 있는 일반적인 멱등행렬이라면 직교행렬은 보장되지 않지만, 가역행렬을 이용한 대각화는 항상 가능하다.
+
+즉,
+
+$$
+A^2=A,\qquad r(A)=k
+\Rightarrow
+\exists P\text{ 가역}:
+P^{-1}AP=E_k
+$$
+
+**증명**
+
+멱등행렬에서는 $\mathbb R^n  = \text{Col}(A)\oplus\text{Null}(A)$ 가 성립한다.
+
+실제로 두 공간의 교집합에 속하는 벡터 $\mathbf z$를 생각하자. $\mathbf z\in\text{Col}(A) \cap \text{Null}(A).$  
+$\mathbf z\in\text{Col}(A)$이므로 $A\mathbf z=\mathbf z$ 이고, 동시에 $\mathbf z\in\text{Null}(A)$이므로 $A\mathbf z=0.$  
+따라서 $\mathbf z=0.$ 즉, $\text{Col}(A)\cap\text{Null}(A)=\{0\}.$
+
+또한 $\dim\text{Col}(A)+\dim\text{Null}(A)=k+(n-k)=n$ 이므로
+
+$$
+\mathbb R^n = \text{Col}(A)\oplus\text{Null}(A)
+$$
+
+$\text{Col}(A)$의 기저를 $\mathbf p_1,\ldots,\mathbf p_k$ 로 선택하고, $\text{Null}(A)$의 기저를 $\mathbf p_{k+1},\ldots,\mathbf p_n$ 으로 선택한다.  
+이들을 열벡터로 갖는 행렬 $P=[\mathbf p_1:\cdots:\mathbf p_n]$ 는 가역이다. 이전과 마찬가지로 $AP=PE_k$ 이므로
+
+$$
+\boxed{P^{-1}AP=E_k}
+$$
+
+다만 두 부분공간이 반드시 직교하지는 않으므로 $P$가 직교행렬이라고 보장할 수 없다.
+
+### 다른 정리와의 관계
+
+이 명제는 완전히 새로운 독립적인 정리라기보다 기존 정리들의 따름정리로 볼 수 있다.
+
+**스펙트럴 정리와의 관계**
+
+대칭 멱등행렬에 관한 명제는 다음 두 사실을 결합한 것이다.
+
+$$
+\begin{aligned}
+A^T=A
+&\Rightarrow
+A\text{는 직교대각화 가능},\\
+A^2=A
+&\Rightarrow
+A\text{의 고윳값은 }0\text{ 또는 }1.
+\end{aligned}
+$$
+
+여기에 $r(A)=k$ 를 적용하면 고윳값 1이 정확히 $k$개라는 결론이 나온다.
+
+따라서 대칭 멱등행렬 명제는 스펙트럴 정리의 특별한 경우다.
+
+**일반 대각화 정리와의 관계**
+
+멱등행렬의 최소다항식은 $m_A(t)\mid t(t-1)$ 을 만족한다.
+
+다항식 $t(t-1)$은 서로 다른 일차인수만 가지므로 멱등행렬은 항상 대각화 가능하다. 따라서 일반 멱등행렬에 대해 $P^{-1}AP=E_k$ 가 성립한다.
+
+즉, 일반 멱등행렬의 대각화 = 최소다항식에 의한 대각화 정리의 특별한 경우다.
+
+**직교사영행렬의 정의와 관계**
+
+실수행렬 $A$에 대해 다음 조건들은 서로 동치다.
+
+$$
+\boxed{
+\begin{aligned}
+&A\text{는 어떤 부분공간 위의 직교사영행렬}\\
+\iff\;&A^2=A\text{이고 }A^T=A\\
+\iff\;&\exists P\text{ 직교}:
+P^TAP=E_k.
+\end{aligned}
+}
+$$
+
+따라서 수정된 명제는 직교사영행렬의 표준형을 나타내는 정리이기도 하다.
+
+최종적으로 구분하면 다음과 같다.
+
+| 조건                      | 결론                             |
+| ----------------------- | ------------------------------ |
+| $A^2=A$                 | 어떤 가역행렬 $P$에 대해 $P^{-1}AP=E_k$ |
+| $A^2=A$, $A^T=A$        | 어떤 직교행렬 $P$에 대해 $P^TAP=E_k$    |
+| $A^2=A$, $A^T\neq A$ 가능 | 직교대각화는 일반적으로 불가능               |
+| $A^2=A$, $A^T=A$        | $A$는 직교사영행렬                    |
+
 
 ## 직적과 직합의 고유치
 ### 크로네커 곱의 고유치
@@ -767,7 +1123,7 @@ $$B(AB\mathbf{v}) = B(\lambda\mathbf{v})$$
 
 $$(BA)(B\mathbf{v}) = \lambda(B\mathbf{v})$$
 
-$\lambda \neq 0$이므로 $\mathbf{v} \neq \mathbf{0}$이고, 따라서 $B\mathbf{v} \neq \mathbf{0}$이다.
+$\lambda \neq 0$이므로 $\mathbf{v} \neq \mathbf 0$이고, 따라서 $B\mathbf{v} \neq \mathbf 0$이다.
 즉, $B\mathbf{v}$는 $BA$의 고유치 $\lambda$에 대응하는 고유벡터이다.
 
 역방향도 유사하게 증명되므로, $AB$와 $BA$는 같은 0이 아닌 고유치를 공유한다. $\square$
@@ -776,6 +1132,7 @@ $\lambda \neq 0$이므로 $\mathbf{v} \neq \mathbf{0}$이고, 따라서 $B\mathb
 - Trace 관계: $\text{tr}(AB) = \text{tr}(BA)$ (크기가 달라도 성립)
 - 순환 행렬의 고유치 분석
 - 특이값 분해에서 $A^TA$와 $AA^T$의 관계
+
 ## 대칭행렬의 동시 대각화 (Simultaneous Diagonalization)
 
 ### 정리 1 (동시 대각화의 필요충분조건)
@@ -806,62 +1163,6 @@ $$AB = BA$$
 **설명:**
 - 두 비음정치행렬이 동시에 대각화 가능하다.
 - 이는 주성분 분석(PCA)과 정준상관분석(CCA) 등에서 활용된다.
-
-## 특이값 분해 (Singular Value Decomposition, SVD)
-
-### 정리 (특이값 분해)
-$A$를 계수(rank) $r$인 $m \times n$ 행렬이라 하자 ($m \leq n$). 그러면 $m \times m$ 직교행렬 $P$와 $n \times n$ 직교행렬 $Q$가 존재하여
-
-$$A = P\begin{pmatrix} D & 0 \end{pmatrix}Q^T$$
-
-를 만족한다. 여기서
-- $D$는 $m \times m$ 대각행렬로, 비음의 대각원소 $d_i$ ($i = 1, 2, \ldots, m$)를 갖는다.
-- $0$은 $m \times (n-m)$ 영행렬이다.
-- $D$의 양의 대각원소들은 $A^TA$ (또는 $AA^T$)의 양의 고유치들의 양의 제곱근이며, 이들을 $A$의 **특이치(singular value)** 라 한다.
-- $m = n$인 경우, $P^TAQ = D$이다.
-- $A$가 대칭인 경우 $P = Q$이고, $D$의 대각원소들은 $A$의 고유치들의 절댓값과 같다.
-
-**관례:**
-- 특이치는 보통 크기 순서대로 배열한다: $d_1 \geq d_2 \geq \cdots \geq d_r > 0$
-- 계수가 $r$이면 $r$개의 양의 특이치와 $(m-r)$개의 0을 갖는다.
-
-### 따름정리 (SVD와 고유벡터의 관계)
-위 정리의 행렬 $Q$의 열벡터들은 $A^TA$의 서로 정규직교(orthonormal)인 고유벡터들이다.
-
-마찬가지로, 행렬 $P$의 열벡터들은 $AA^T$의 서로 정규직교인 고유벡터들이다.
-
-**SVD의 응용:**
-- 데이터 압축 및 차원 축소
-- 최소제곱 문제의 해법
-- 주성분 분석(PCA)
-- 이미지 처리 및 신호 처리
-- 추천 시스템
-- 행렬의 의사역행렬(pseudoinverse) 계산
-
-**SVD 표기법:**
-
-$$A = U\Sigma V^T$$
-
-형태로도 표기하며, 여기서
-- $U$: $m \times m$ 직교행렬 (좌특이벡터들)
-- $\Sigma$: $m \times n$ 직사각 대각행렬 (특이치들)
-- $V$: $n \times n$ 직교행렬 (우특이벡터들)
-
-## 이차형식 (Quadratic Form)
-벡터 $x$와 대칭행렬 $A$에 대한 스칼라 함수
-
-$$Q(x) = x^TAx = \sum_{i=1}^{n}\sum_{j=1}^{n} a_{ij}x_ix_j$$
-
-### 이차형식의 표현
-대칭행렬 $A = (a_{ij})$에 대해:
-
-$$x^TAx = \sum_{i=1}^{n} a_{ii}x_i^2 + 2\sum_{i<j} a_{ij}x_ix_j$$
-
-### 이차형식의 미분
-
-$$
-\frac{\partial (x^TAx)}{\partial x} = (A + A^T)x = 2Ax$$ 
-(단, $A$가 대칭행렬일 때)
 
 ## 양정치행렬 (Positive Definite Matrix)
 정의: 대칭행렬 $A$에 대해 모든 $x \neq 0$에 대해 $x^TAx > 0$ 이면,
@@ -939,6 +1240,22 @@ $$x^TBx = \frac{1}{2}(x^TBx + x^TB^Tx) = \frac{1}{2}x^T(B + B^T)x = x^T\left(\fr
   - $3 \times 3$ 음정치: $D_1 < 0$, $D_2 > 0$, $D_3 < 0$
 
   **주의:** 양반정치 또는 음반정치의 판정은 $\geq$ 또는 $\leq$로 판정하며, 하나 이상의 부등호가 등호로 바뀐다.
+
+* $n \times m$ 행렬 $A$의 계수가 $m, \quad (m < n)$ 일때 $A^TA$는 양정치행렬이고 $AA^T$는 양반정치행렬이다.
+
+> $A\in\mathbb{R}^{n\times m}$이고 $\text{rank}(A)=m<n$ 이면 $A$는 full column rank이므로 $A^TA$는 양정치행렬이다. 실제로 임의의 $x\in\mathbb{R}^m$ , $x \neq 0$ 에 대하여
+>
+>  $$x^TA^TAx=(Ax)^T(Ax)=\|Ax\|^2>0$$
+>
+>이다. 한편 $AA^T$는
+>
+>$$y^TAA^Ty=\|A^Ty\|^2\geq 0$$
+>
+>이므로 양반정치행렬이지만, $\text{rank}(AA^T)=\text{rank}(A)=m<n $ 이어서 특이행렬이다. 따라서 $AA^T$는 양정치행렬이 아니다.
+
+* $n \times m$ 행렬 $A$의 계수가 $k, \quad (k < n, k < m)$ 일때 $A^TA$, $AA^T$ 모두 양반정치행렬이다.
+
+* 양정치행렬은 정칙행렬이다. 그러나 정칙행렬이 반드시 양정치행렬은 아니다.
 
 ### 그람 행렬 (Gram Matrix)
 $A = X^TX$ 형태의 행렬을 그람 행렬이라 하며:
@@ -1081,76 +1398,70 @@ $$
 
 이를 흔히 "최소다항식을 이용한 대각화 판정 정리"라고 한다.
 
-**필요조건 증명**
-
-$A$가 대각화 가능하다고 하자. 그러면 어떤 가역행렬 $P$에 대하여 $A=PDP^{-1}$ 이고, $D=\text{diag}(\lambda_1,\dots,\lambda_n)$ 이다.
-
-$A$의 서로 다른 고윳값을 $\mu_1,\dots,\mu_k$ 라 하고 $p(t)=\prod_{j=1}^k(t-\mu_j)$ 라 놓자. 그러면 모든 대각성분에 대하여 $p(\lambda_i)=0$이므로 $p(D)=0.$
-
-따라서
-
-$$
-p(A)=Pp(D)P^{-1}=0.
-$$
-
-그러므로 최소다항식은 $p(t)$를 나눈다. $m_A(t)\mid p(t).$
-
-한편 모든 고윳값 $\mu_j$는 최소다항식의 근이어야 하므로 $t-\mu_j$가 모두 $m_A(t)$의 인수다. 결국
-
-$$
-m_A(t)=\prod_{j=1}^k(t-\mu_j).
-$$
-
-따라서 최소다항식에는 중복된 인수가 없다.
-
-**충분조건 증명**
-
-최소다항식이 $m_A(t)=\prod_{j=1}^k(t-\lambda_j), \quad \lambda_i\neq\lambda_j\;(i\neq j)$ 라고 하자.
-
-각 $j$에 대하여 라그랑주 다항식
-
-$$
-p_j(t)
-=\prod_{\ell\neq j}
-\frac{t-\lambda_\ell}{\lambda_j-\lambda_\ell}
-$$
-
-를 정의하면
-
-$$
-p_j(\lambda_i)=
-\begin{cases}
-1,&i=j,\\
-0,&i\neq j
-\end{cases}
-$$
-
-이다. 또한 다항식 항등식으로 $\sum_{j=1}^kp_j(t)=1 \pmod{m_A(t)}$ 이므로 $A$를 대입하면 $I=\sum_{j=1}^kp_j(A).$
-
-따라서 임의의 $\mathbf v\in\mathbb F^n$는
-
-$$
-\mathbf v = \sum_{j=1}^kp_j(A)\mathbf v
-$$
-
-로 분해된다.
-
-그리고 $(A-\lambda_jI)p_j(A)=0$ 이므로 $p_j(A)\mathbf v\in\ker(A-\lambda_jI).$
-
-즉, 모든 벡터가 $A$의 고유벡터 공간들의 합으로 표현된다.
-
-$$
-\mathbb F^n = \ker(A-\lambda_1I)+\cdots+
-\ker(A-\lambda_kI).
-$$
-
-서로 다른 고윳값에 대응하는 고유공간들의 합은 직합이므로
-
-$$
-\mathbb F^n = \bigoplus_{j=1}^k\ker(A-\lambda_jI).
-$$
-
-따라서 각 고유공간의 기저를 합치면 $\mathbb F^n$의 고유벡터 기저가 만들어진다. 그러므로 $A$는 대각화 가능하다.
+>**필요조건 증명**
+>
+>$A$가 대각화 가능하다고 하자. 그러면 어떤 가역행렬 $P$에 대하여 $A=PDP^{-1}$ 이고, $D=\text{diag}(\lambda_1,\dots,\lambda_n)$ 이다.
+>
+>$A$의 서로 다른 고윳값을 $\mu_1,\dots,\mu_k$ 라 하고 $p(t)=\prod_{j=1}^k(t-\mu_j)$ 라 놓자. 그러면 모든 대각성분에 대하여 $p(\lambda_i)=0$이므로 $p(D)=0.$
+>
+>따라서
+>
+>$$
+>p(A)=Pp(D)P^{-1}=0.
+>$$
+>
+>그러므로 최소다항식은 $p(t)$를 나눈다. $m_A(t)\mid p(t).$
+>
+>한편 모든 고윳값 $\mu_j$는 최소다항식의 근이어야 하므로 $t-\mu_j$가 모두 $m_A(t)$의 인수다. 결국
+>
+>$$
+>m_A(t)=\prod_{j=1}^k(t-\mu_j).
+>$$
+>
+>따라서 최소다항식에는 중복된 인수가 없다.
+>
+>**충분조건 증명**
+>
+>최소다항식이 $m_A(t)=\prod_{j=1}^k(t-\lambda_j), \quad \lambda_i\neq\lambda_j\;(i\neq j)$ 라고 하자.
+>
+>각 $j$에 대하여 라그랑주 다항식
+>
+>$$
+>p_j(t)
+>=\prod_{\ell\neq j}
+>\frac{t-\lambda_\ell}{\lambda_j-\lambda_\ell}
+>$$
+>
+>를 정의하면
+>
+>$$
+>p_j(\lambda_i)=
+>\begin{cases}
+>1,&i=j,\\
+>0,&i\neq j
+>\end{cases}
+>$$
+>
+>이다. 또한 다항식 항등식으로 $\sum_{j=1}^kp_j(t)=1 \pmod{m_A(t)}$ 이므로 $A$를 대입하면 $I=\sum_{j=1}^kp_j(A).$
+>
+>따라서 임의의 $\mathbf v\in\mathbb F^n$는 $\mathbf v = \sum_{j=1}^kp_j(A)\mathbf v$ 로 분해된다.
+>
+>그리고 $(A-\lambda_jI)p_j(A)=0$ 이므로 $p_j(A)\mathbf v\in\ker(A-\lambda_jI).$
+>
+>즉, 모든 벡터가 $A$의 고유벡터 공간들의 합으로 표현된다.
+>
+>$$
+>\mathbb F^n = \ker(A-\lambda_1I)+\cdots+
+>\ker(A-\lambda_kI).
+>$$
+>
+>서로 다른 고윳값에 대응하는 고유공간들의 합은 직합이므로
+>
+>$$
+>\mathbb F^n = \bigoplus_{j=1}^k\ker(A-\lambda_jI).
+>$$
+>
+>따라서 각 고유공간의 기저를 합치면 $\mathbb F^n$의 고유벡터 기저가 만들어진다. 그러므로 $A$는 대각화 가능하다.
 
 ### 중복인수가 대각화를 방해하는 이유
 
@@ -1186,6 +1497,7 @@ $$
 
 # 3. 중복도(Multiplicity)
 대각화 가능 판단하는 다른 방법!  
+
 ## (1) 정의 (Definitions)
 * $\lambda$가 $n \times n$ 행렬 $A$의 고윳값이면,
   고유공간의 차원을 기하적 중복도(geometric multiplicity) 라 한다.
@@ -1193,6 +1505,11 @@ $$
 * 고유다항식에서 $\lambda$가 인수로 나타나는 횟수를
   대수적 중복도(algebraic multiplicity) 라고 한다.
    - 특성방정식을 인수분해 했을 때, 해당 고윳값의 항이 몇 제곱인지 말함. $(\lambda - 2)(\lambda - 1)^2$에서 2의 대수적 중복도는 1, 1의 대수적 중복도는 2
+   - $m_a(\lambda)$라고 한다.
+
+* 기하적 중복도: 고윳값 $\lambda$의 고유공간 차원이다.
+  - $m_g(\lambda) = \dim\text{Null}(A-\lambda I).$
+  - 항상 $\boxed{ 1\leq m_g(\lambda)\leq m_a(\lambda) }$ 가 성립한다.
 
 ## (2) 정리 (Multiplicity Theorem)
 정사각행렬 $A$에 대하여 다음 두 명제는 동치이다:
@@ -1200,6 +1517,10 @@ $$
 1. $A$는 대각화 가능하다.
 2. 모든 고윳값에 대하여
    기하적 중복도 = 대수적 중복도.
+
+동치로
+
+$$ \boxed{ A\text{가 대각화 가능} \iff \sum_{\lambda} \dim\text{Null}(A-\lambda I)=n } $$
 
 
 # 4. 닮음(Similarity), 불변량 (Invariants under Similarity)
@@ -1279,13 +1600,7 @@ $B = \text{adj}(\lambda I - A)$라 하면, $B$는 $\lambda$에 대한 다항식 
 
 수반행렬의 성질에 의해 $B(\lambda I - A) = \det(\lambda I - A) I = f(\lambda) I$
 
-$B$는 $\lambda$에 대한 차수가 최대 $n-1$인 다항식 행렬이므로
-
-$$
-B = B_0 + B_1 \lambda + B_2 \lambda^2 + \cdots + B_{n-1} \lambda^{n-1}
-$$
-
-로 쓸 수 있다. (여기서 $B_i$는 상수행렬)
+$B$는 $\lambda$에 대한 차수가 최대 $n-1$인 다항식 행렬이므로 $B = B_0 + B_1 \lambda + B_2 \lambda^2 + \cdots + B_{n-1} \lambda^{n-1}$ 로 쓸 수 있다. (여기서 $B_i$는 상수행렬)
 
 따라서
 

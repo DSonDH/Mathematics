@@ -9,13 +9,12 @@
 * **열(column)**: 행렬의 세로줄
 * **$m \times n$ 행렬**: $m$개의 행과 $n$개의 열로 이루어진 행렬
 
-#### 주요 용어
-
 * **주대각선(main diagonal)**: 행렬의 왼쪽 위에서 오른쪽 아래로 가는 선
 * **대각성분(diagonal element)**: 주대각선에 걸치는 항
 * **영행렬(zero matrix)**: 모든 성분이 0인 행렬
 * **전치행렬(transpose matrix)**: $A = (a_{ij})$에 대하여 $A^T = (a_{ji})$
 * **대칭행렬(symmetric matrix)**: $A^T = A$인 행렬
+* **계수(rank)**: 행렬의 선형독립인 행(또는 열)의 최대 개수
 * **정사각행렬(square matrix)**: 행의 개수와 열의 개수가 같은 행렬
 * **단위행렬(identity matrix)**: 모든 대각성분이 1이고, 그 외의 성분은 0인 정사각행렬
 
@@ -1169,50 +1168,7 @@ $$A = Q\Lambda Q^T$$
 - $Q^TQ = QQ^T = I$ (직교성)
 
 #### (2) 대칭행렬의 고유값과 고유벡터
-**성질 1**: 대칭행렬의 고유값은 모두 실수이다.
-
-**증명**: $A = A^T$인 대칭행렬 $A$에 대해 $A\mathbf{v} = \lambda\mathbf{v}$ ($\lambda \in \mathbb{C}$, $\mathbf{v} \neq 0$)라 하자.
-
-양변에 $\mathbf{v}^*$를 좌측에서 곱하면:
-
-$$\mathbf{v}^*A\mathbf{v} = \lambda\mathbf{v}^*\mathbf{v}$$
-
-양변의 켤레 전치를 취하면:
-
-$$\mathbf{v}^TA^T\mathbf{v} = \bar{\lambda}\mathbf{v}^T\mathbf{v}$$
-
-$A = A^T$이므로:
-
-$$\mathbf{v}^TA\mathbf{v} = \bar{\lambda}\mathbf{v}^T\mathbf{v}$$
-
-따라서:
-
-$$\lambda\mathbf{v}^T\mathbf{v} = \bar{\lambda}\mathbf{v}^T\mathbf{v}$$
-
-$\mathbf{v} \neq 0$이므로 $\mathbf{v}^T\mathbf{v} > 0$, 그러므로 $\lambda = \bar{\lambda}$, 즉 $\lambda \in \mathbb{R}$
-
-**성질 2**: 서로 다른 고유값에 대응하는 고유벡터는 직교한다.
-
-**증명**: $\lambda_i \neq \lambda_j$에 대응하는 고유벡터를 각각 $\mathbf{v}_i$, $\mathbf{v}_j$라 하면:
-
-$$A\mathbf{v}_i = \lambda_i\mathbf{v}_i, \quad A\mathbf{v}
-_j = \lambda_j\mathbf{v}_j$$
-
-첫 번째 식에 $\mathbf{v}_j^T$를 좌측에서 곱하면:
-
-$$\mathbf{v}_j^TA\mathbf{v}_i = \lambda_i\mathbf{v}_j^T\mathbf{v}_i$$
-
-$A$가 대칭이므로:
-
-$$\mathbf{v}_j^TA\mathbf{v}_i = (A\mathbf{v}_j)^T\mathbf{v}_i = \lambda_j\mathbf{v}_j^T\mathbf{v}_i$$
-
-따라서:
-
-$$\lambda_i\mathbf{v}_j^T\mathbf{v}_i = \lambda_j\mathbf{v}_j^T\mathbf{v}_i \\
-
-(\lambda_i - \lambda_j)\mathbf{v}_j^T\mathbf{v}_i = 0$$
-
-$\lambda_i \neq \lambda_j$이므로 $\mathbf{v}_i \perp \mathbf{v}_j$
+성질, 증명은 linear_algebra_05 참고
 
 #### (3) 대각화 과정
 $n \times n$ 대칭행렬 $A$를 대각화하는 단계:
