@@ -254,28 +254,28 @@ $$\det\begin{pmatrix} a_1 + b_1 \\ a_2 \\ \vdots \end{pmatrix} = \det\begin{pmat
 
 $$\det(AB) = \det(A)\det(B)$$
 
-**증명** (기본 행 연산을 이용한 증명):
-
-행렬 $A$를 행 소거를 통해 상삼각행렬 $U$로 변환할 수 있다:
-
-$$A = L_1 L_2 \cdots L_k U$$
-
-여기서 $L_i$는 기본연산행렬이다. 각 기본연산행렬의 행렬식은:
-- 한 행에 상수배: $\det(L_i) = c$ (상수)
-- 행 교환: $\det(L_i) = -1$
-- 한 행을 다른 행에 더함: $\det(L_i) = 1$
-
-따라서:
-
-$$\det(A) = \det(L_1) \cdots \det(L_k) \det(U)$$
-
-마찬가지로 $B = M_1 M_2 \cdots M_m V$로 표현하면:
-
-$$AB = L_1 \cdots L_k U M_1 \cdots M_m V$$
-
-그러므로:
-
-$$\det(AB) = \det(L_1) \cdots \det(L_k) \det(U) \det(M_1) \cdots \det(M_m) \det(V) = \det(A)\det(B)$$
+>**증명** (기본 행 연산을 이용한 증명):
+>
+>행렬 $A$를 행 소거를 통해 상삼각행렬 $U$로 변환할 수 있다:
+>
+>$$A = L_1 L_2 \cdots L_k U$$
+>
+>여기서 $L_i$는 기본연산행렬이다. 각 기본연산행렬의 행렬식은:
+>- 한 행에 상수배: $\det(L_i) = c$ (상수)
+>- 행 교환: $\det(L_i) = -1$
+>- 한 행을 다른 행에 더함: $\det(L_i) = 1$
+>
+>따라서:
+>
+>$$\det(A) = \det(L_1) \cdots \det(L_k) \det(U)$$
+>
+>마찬가지로 $B = M_1 M_2 \cdots M_m V$로 표현하면:
+>
+>$$AB = L_1 \cdots L_k U M_1 \cdots M_m V$$
+>
+>그러므로:
+>
+>$$\det(AB) = \det(L_1) \cdots \det(L_k) \det(U) \det(M_1) \cdots \det(M_m) \det(V) = \det(A)\det(B)$$
 
 **따름정리 1**: $\det(A^n) = [\det(A)]^n$
 
@@ -484,35 +484,35 @@ $$x^TAx = \text{tr}(Axx^T)$$
 
 **설명**: $x^TAx$는 스칼라이고, 스칼라는 $1 \times 1$ 행렬이므로 자기 자신의 대각합과 같다. 여기에 대각합의 순환 성질을 적용하면 우변으로 변환할 수 있다.
 
-**증명**:
-
-**1단계: 좌변 전개**
-
-$$x^TAx = \sum_{i=1}^{n} \sum_{j=1}^{n} x_i a_{ij} x_j$$
-
-**2단계: 우변 전개 - 행렬 $Axx^T$의 $(i,i)$ 성분 계산**
-
-먼저 행렬 $Axx^T$의 $(i,i)$ 성분을 계산한다:
-
-$$(Axx^T)_{ii} = \sum_{j=1}^{n} a_{ij}(xx^T)_{ji}$$
-
-여기서 $(xx^T)_{ji} = x_j x_i$이므로:
-
-$$(Axx^T)_{ii} = \sum_{j=1}^{n} a_{ij} x_j x_i$$
-
-**3단계: 대각합(trace) 계산**
-
-$$\text{tr}(Axx^T) = \sum_{i=1}^{n} (Axx^T)_{ii} = \sum_{i=1}^{n} \sum_{j=1}^{n} a_{ij} x_j x_i$$
-
-**4단계: 좌변과 우변이 같음을 확인**
-
-$$\sum_{i=1}^{n} \sum_{j=1}^{n} a_{ij} x_j x_i = \sum_{i=1}^{n} \sum_{j=1}^{n} x_i a_{ij} x_j = x^TAx$$
-
-(곱셈의 교환법칙 적용: $x_i a_{ij} x_j = a_{ij} x_j x_i$)
-
-따라서:
-
-$$x^TAx = \text{tr}(Axx^T)$$
+>**증명**:
+>
+>**1단계: 좌변 전개**
+>
+>$$x^TAx = \sum_{i=1}^{n} \sum_{j=1}^{n} x_i a_{ij} x_j$$
+>
+>**2단계: 우변 전개 - 행렬 $Axx^T$의 $(i,i)$ 성분 계산**
+>
+>먼저 행렬 $Axx^T$의 $(i,i)$ 성분을 계산한다:
+>
+>$$(Axx^T)_{ii} = \sum_{j=1}^{n} a_{ij}(xx^T)_{ji}$$
+>
+>여기서 $(xx^T)_{ji} = x_j x_i$이므로:
+>
+>$$(Axx^T)_{ii} = \sum_{j=1}^{n} a_{ij} x_j x_i$$
+>
+>**3단계: 대각합(trace) 계산**
+>
+>$$\text{tr}(Axx^T) = \sum_{i=1}^{n} (Axx^T)_{ii} = \sum_{i=1}^{n} \sum_{j=1}^{n} a_{ij} x_j x_i$$
+>
+>**4단계: 좌변과 우변이 같음을 확인**
+>
+>$$\sum_{i=1}^{n} \sum_{j=1}^{n} a_{ij} x_j x_i = \sum_{i=1}^{n} \sum_{j=1}^{n} x_i a_{ij} x_j = x^TAx$$
+>
+>(곱셈의 교환법칙 적용: $x_i a_{ij} x_j = a_{ij} x_j x_i$)
+>
+>따라서:
+>
+>$$x^TAx = \text{tr}(Axx^T)$$
 
 #### 기댓값과 정사영행렬의 상호작용
 정사영행렬 $\Pi$와 확률벡터 $\mathbf{e}$에 대해:
@@ -1084,6 +1084,13 @@ $A\in\mathbb F^{n\times n}$이고 $\mathbb F$가 실수나 복소수 같은 체�
 * $(A^{-1})^{-1} = A$
 * $(A \otimes B)^{-1} = A^{-1} \otimes B^{-1}$
 * $(A \oplus B)^{-1} = A^{-1} \oplus B^{-1}$
+
+#### 예제
+$A, B, A+B$가 모두 정칙행렬이면
+
+$$ (A^{-1}+B^{-1})^{-1} = A(A+B)^{-1}B= B(A+B)^{-1}A$$
+
+이다.
 
 ### 분할행렬의 행렬식과 역행렬
 $A = \begin{pmatrix} A_{11} & A_{12} \\ A_{21} & A_{22} \end{pmatrix}$이고 $A_{ij}$의 차수가 $n_i \times n_j$라면
@@ -2439,6 +2446,35 @@ $$\nabla f = \frac{\partial f}{\partial x} = \begin{pmatrix}
 * $$\frac{\partial (x^TA)}{\partial x} = A^T$$
 
 * $$\frac{\partial (Ax)}{\partial x} = A$$
+
+**예제**
+
+$y\in\mathbb R^n$, $A\in\mathbb R^{n\times p}$, $\beta\in\mathbb R^p$라 두겠다. $L=(y-A\beta)^T(y-A\beta)$ 의 전개식과 $\beta$ 편미분을 구하라.
+
+>$L = y^Ty-y^TA\beta-\beta^TA^Ty+\beta^TA^TA\beta.$ 여기서 $y^TA\beta$는 스칼라이므로 전치해도 같다. 따라서 $\boxed{L=y^Ty-2\beta^TA^Ty+\beta^TA^TA\beta}$ 이다.
+>
+>이를 편미분하면, 첫 항은 $\beta$와 무관하므로 $\frac{\partial}{\partial\beta}(y^Ty)=0.$  
+>두 번째 항은 $\frac{\partial}{\partial\beta} \left(-2\beta^TA^Ty\right) =-2A^Ty.$
+>마지막 항은 $A^TA$는 대칭행렬이므로 $(A^TA)^T=A^TA.$ 따라서 $\frac{\partial}{\partial\beta} \left(\beta^TA^TA\beta\right) = 2A^TA\beta.$
+>
+>결국
+>
+>$$
+>\boxed{\frac{\partial L}{\partial\beta}=-2A^T(y-A\beta)}
+>$$
+>
+>참고로 Hessian은
+>
+>$$
+>\boxed{
+>\frac{\partial^2 L}{\partial\beta\,\partial\beta^T}
+>=
+>2A^TA
+>}
+>$$
+>
+>이다. 따라서 $A$가 full column rank이면 $A^TA$가 양정치이므로 이 해는 유일한 최소점이다.
+
 
 **예제 3**: 최소제곱법에서 $f(x) = \|Ax - b\|_2^2$를 최소화하는 $x$를 구하라.
 

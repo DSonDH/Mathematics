@@ -123,6 +123,7 @@ $$
 
 ### (3) 정규기저 (Normal Basis)
 노름공간 $V$의 기저 $B$의 모든 원소 b가
+
 $$
 |b| = 1
 $$
@@ -131,6 +132,7 @@ $$
 
 ### (4) 직교기저 (Orthogonal Basis)
 내적공간 $V$의 기저 $B$의 모든 원소 b가
+
 $$
 \langle b_i, b_j \rangle = 0 \quad (i \neq j)
 $$

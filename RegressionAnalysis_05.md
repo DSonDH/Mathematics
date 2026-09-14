@@ -242,7 +242,7 @@ $$
 
 $C\mathbf{\tilde\beta} = C[\mathbf{\hat\beta}- (X^TX)^{-1}C^T\theta] = \mathbf{m}$ 이고, $\theta = [C(X^TX)^{-1}C^T]^{-1}(C\hat\beta - \mathbf{m})$ 이므로, 이를 $\tilde\beta$에 대입하면 제한추정량은:
 
-$$\mathbf{\tilde\beta} = \mathbf{\hat\beta} - (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}(\mathbf{C}\mathbf{\hat\beta}-\mathbf{m})$$
+$$\mathbf{\tilde\beta} = \mathbf{\hat\beta} - (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}(\mathbf{C}\mathbf{\hat\beta}-\mathbf{m}) \tag{5.29}$$
 
 **SSE 증가량**  
 $\mathbf{\tilde\beta}$로 추정한 잔차제곱합 $SSE$와 $\mathbf{\hat\beta}$로 추정한 잔차제곱합 $SSE$의 차이를 구해보자.
