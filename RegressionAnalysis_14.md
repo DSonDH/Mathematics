@@ -537,5 +537,7 @@ $$ \beta_0+\beta_1x_1+\cdots+\beta_px_p > \ln\left(\frac{c}{1-c}\right) $$
 * 분할표의 표본비율은 로지스틱 회귀의 최대가능도추정량 (MLE)과 일치한다.
 * 로지스틱 회귀는 교란요인 (confounding factors)을 통제하기 위하여 여러 설명변수를 동시에 포함할 수 있으므로, 단순 분할표보다 훨씬 강력하다.
 * 로지스틱 회귀는 $P(y=1\mid \mathbf{x})$를 추정한 뒤 절단값 (cut-off)을 적용하여 분류하는 확률기반 분류기 (probability-based classifier)이다.
-* 절단값은 사전정보 (prior information), 손실함수 (loss function), 민감도 (sensitivity), 특이도 (specificity) 등을 고려하여 정한다.
+* 절단값은 사전정보 (prior information), 손실함수 (loss function), 민감도 (sensitivity), 특이도 (specificity) 등의 상충관계를 고려하여 정한다.
+  - sensitivity: recall, 실제 class 1 중 옳게 예측된 class 1 비율
+  - specificity: 실제 class 0 중 옳게 예측된 class 0 비율
 * 로지스틱 회귀의 분류경계는 선형식으로 표현되므로 선형분류자 (linear classifier)가 된다.

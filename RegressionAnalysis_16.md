@@ -2,6 +2,8 @@
 
 벌점화 회귀분석 (penalized regression analysis)은 고차원 회귀분석에서 중요한 도구다. 기본 아이디어는 잔차제곱합에 벌점항 (penalty term)을 추가하여 회귀계수의 크기와 복잡성을 동시에 제어하는 데 있다. 이를 통해 예측 안정성 (prediction stability)을 높이고, 경우에 따라 변수선택 (variable selection)까지 수행할 수 있다.
 
+### 16.1.1 벌점화 회귀분석의 기본 구조
+
 이 장에서는 설명변수를 먼저 표준화 (standardization)하여 다음 조건을 가정한다.
 
 $$\sum_{i=1}^n x_{ij}=0,\qquad \sum_{i=1}^n x_{ij}^2=n,\qquad j=1,2,\dots,p$$
@@ -12,47 +14,44 @@ $$\frac{1}{n}\sum_{i=1}^n\left(y_i-\sum_{j=1}^p \beta_j x_{ij}\right)^2+\sum_{j=
 
 여기서 $J_\lambda(\beta_j)$는 회귀계수 $\beta_j$에 대한 벌점함수 (penalty function)이고, $\lambda>0$는 벌점의 강도를 조절하는 조절모수 (tuning parameter)다. $\lambda$가 커질수록 회귀계수는 더 강하게 0 방향으로 축소 (shrinkage)된다.
 
+즉, 벌점화 회귀분석에서는 손실함수 (loss function)와 벌점함수 (penalty function)를 결합하여 추정량을 정의: **손실함수 + 벌점함수**
 
-## 16.1 라쏘회귀분석 (Lasso Regression)
-
-라쏘회귀분석 (lasso regression)은 벌점화 회귀분석 가운데 가장 대표적인 방법 중 하나다. 라쏘는 $\ell_1$-노름 ($\ell_1$-norm)에 기반한 벌점항을 사용하며, 회귀계수를 0으로 만드는 효과가 있어 변수선택과 축소추정을 동시에 수행한다.
-
-### 16.1.1 벌점화 회귀분석의 기본 구조
-
-벌점화 회귀분석에서는 손실함수 (loss function)와 벌점함수 (penalty function)를 결합하여 추정량을 정의한다. 기본 구조는 다음과 같다.
-
-$$\text{손실함수}+\text{벌점함수}$$
-
-회귀문제에서는 손실함수로 제곱합 손실 (squared loss)을 사용하는 경우가 기본적이며, 벌점함수는 회귀계수의 복잡도를 측정하는 역할을 한다. 벌점항을 도입하면 단순히 데이터 적합도만 최대화하는 것이 아니라, 복잡도가 낮은 모형을 선호하게 된다.
+회귀문제에서는 손실함수로 제곱합 손실을 사용하는 경우가 기본적이며, 벌점함수는 회귀계수의 복잡도를 측정하는 역할을 한다. 벌점항을 도입하면 단순히 데이터 적합도만 최대화하는 것이 아니라, 복잡도가 낮은 모형을 선호하게 된다.
 
 이때 벌점은 다음 두 기능을 가진다.
 
 1. 회귀계수의 크기를 줄이는 축소 (shrinkage)
 2. 불필요한 변수를 제거하는 변수선택 (variable selection)
 
-### 16.1.2 대표적 벌점함수
-
 대표적인 벌점함수는 다음 세 가지다.
 
-#### $\ell_0$-노름 ($\ell_0$-norm)
+1. $\ell_0$-노름 ($\ell_0$-norm)
 
 $$J_\lambda(z)=\lambda I(z\neq 0)$$
 
 이는 0이 아닌 회귀계수의 개수에 벌점을 부과한다. 따라서 추정된 $\beta$에서 0이 아닌 계수의 개수는 모형의 복잡성 (model complexity)에 대한 직접적인 척도가 된다. 가장 직관적인 변수선택 기준이지만, 계산량이 매우 커진다.
 
-#### $\ell_1$-노름 ($\ell_1$-norm)
+2. $\ell_1$-노름 ($\ell_1$-norm)
 
 $$J_\lambda(z)=\lambda |z|$$
 
 이는 Tibshirani가 회귀분석의 변수선택 방법으로 제안한 벌점이다. 이 벌점함수 또는 이를 이용한 회귀분석을 라쏘 (lasso)라고 부른다. $\ell_1$-벌점은 볼록성 (convexity)을 유지하면서도 회귀계수를 정확히 0으로 만들 수 있다는 점이 핵심이다.
 
-#### $\ell_2$-노름 ($\ell_2$-norm)
+3. $\ell_2$-노름 ($\ell_2$-norm)
 
 $$J_\lambda(z)=\lambda z^2$$
 
 이 경우의 추정량은 능형회귀추정량 (ridge estimator)에 해당한다. 이는 예측의 안정성과 정확성 측면에서 장점을 가지지만, 일반적으로 변수선택 기능은 없다.
 
-### 16.1.3 조절모수의 역할
+> 참고: 벡터 노름 정의  
+>$p$차원 벡터$\mathbf x$에 대해 벡터 노름은 다음 세가지 성질을 만족시키는 함수 $f: \mathcal R^p \to \mathcal R$ 로 정의된다.
+>
+>1. 상수 $a$에 대해 $f(aX) = |a|f(X)$
+>2. 임의의 두 벡터 $\mathbf x, \mathbf y$에 대해 $f(\mathbf x + \mathbf y) \leq f(\mathbf x) + f(\mathbf y)$
+>3. $f(\mathbf x) =0$ 이면 $\mathbf x = \mathbf 0$
+
+
+### 16.1.2 조절모수의 역할
 
 조절모수 $\lambda$의 선택은 벌점화 회귀분석의 핵심이다.
 
@@ -63,7 +62,7 @@ $$J_\lambda(z)=\lambda z^2$$
 
 즉, $\lambda=0$은 가장 복잡한 모형, $\lambda=\infty$는 가장 단순한 모형에 해당한다. 따라서 적절한 $\lambda$ 선택은 모형선택 (model selection)의 핵심 단계다.
 
-### 16.1.4 손실함수와 벌점의 확장
+### 16.1.3 손실함수와 벌점의 확장
 
 벌점화 회귀분석은 두 방향으로 확장될 수 있다.
 
@@ -83,9 +82,9 @@ $$J_\lambda(z)=\lambda z^2$$
 
 이들 방법은 변수들 사이의 구조를 반영하거나, 특정한 형태의 희소성 (sparsity)을 유도하기 위해 사용된다.
 
-### 16.1.5 분해가능성
+### 16.1.4 분해가능성 (decomposability)
 
-벌점함수의 중요한 구조적 성질 중 하나가 분해가능성 (decomposability)이다. 설명변수 전체가 $p$차원 벡터공간을 이루고, 실제로 유의한 회귀계수가 $s$개뿐이라고 하자. 즉,
+벌점함수의 중요한 구조적 성질 중 하나가 분해가능성 (decomposability)이다. 설명변수 전체가 $p$차원 벡터공간을 이루고, 실제로 유의한 회귀계수가 $s$개뿐이라고 하자. 즉, 0아닌 회귀계수로 정의되는 부분공간과 그 수직부분공간으로 나뉜다.
 
 $$\beta_j\neq 0\quad (j=1,\dots,s),\qquad \beta_j=0\quad (j=s+1,\dots,p)$$
 
@@ -101,7 +100,7 @@ $$|\boldsymbol{\beta}|_1=\sum_{j=1}^p |\beta_j| = \sum_{j=1}^s |\beta_j|+\sum_{j
 
 이 성질 때문에 $\ell_1$-벌점은 희소한 구조를 다루는 데 특히 적합하다. 즉, 유의한 계수와 그렇지 않은 계수를 분리하여 해석할 수 있게 해준다.
 
-#### 예제: $\ell_0$-벌점과 모든 가능한 회귀 (All Possible Regressions)
+**예제: $\ell_0$-벌점과 모든 가능한 회귀 (All Possible Regressions)**
 
 $\ell_0$-벌점을 사용하면 $|\boldsymbol{\beta}|_0=s$라는 제약 아래에서 잔차제곱합 (SSE)를 최소로 하는 문제를 풀게 된다. 이는 크기가 $s$인 설명변수 부분집합 중에서 가장 좋은 조합을 찾는 문제와 동일하다.
 
@@ -109,8 +108,11 @@ $\ell_0$-벌점을 사용하면 $|\boldsymbol{\beta}|_0=s$라는 제약 아래�
 
 이 계산문제를 완화하기 위해 $\ell_0$-벌점 대신 개념적으로 유사하면서도 목적함수를 볼록하게 만드는 $\ell_1$-벌점, 즉 라쏘가 도입된다.
 
+## 16.2 라쏘회귀분석 (Lasso Regression)
 
-## 16.2 라쏘추정량 정의 (Definition of Lasso Estimator)
+라쏘회귀분석 (lasso regression)은 벌점화 회귀분석 가운데 가장 대표적인 방법 중 하나다. 라쏘는 $\ell_1$-노름 ($\ell_1$-norm)에 기반한 벌점항을 사용하며, 회귀계수를 0으로 만드는 효과가 있어 변수선택과 축소추정을 동시에 수행한다.
+
+## 16.2.1 라쏘추정량 정의 (Definition of Lasso Estimator)
 
 라쏘는 $\ell_0$-벌점이 가지는 계산상의 어려움을 해결하기 위해 제안된 방법이다. $\ell_1$-벌점은 $\ell_0$-벌점에 개념적으로 가장 가까우면서도, 최적화 문제를 볼록하게 만든다.
 
@@ -120,7 +122,7 @@ $$\frac{1}{n}\sum_{i=1}^n\left(y_i-\sum_{j=1}^p {\beta}_j x_{ij}\right)^2+\lambd
 
 이를 최소화하는 $\hat{\boldsymbol{\beta}}^{lasso}$를 라쏘추정량이라 한다.
 
-### 16.2.1 직교설계 (Orthogonal Design)에서의 라쏘추정량
+### 16.2.2 직교설계 (Orthogonal Design)에서의 라쏘추정량
 
 라쏘의 구조를 이해하기 위해 설명변수 행렬이 직교 (orthogonal)한다고 가정하자. $X^TX=nI_p$ 이 경우 $\lambda=0$이면 라쏘추정량은 최소제곱추정량 (least squares estimator)과 동일하다.
 
@@ -132,44 +134,41 @@ $$\hat{\boldsymbol{\beta}}^{lasso}_j = \text{sgn}(\hat{\boldsymbol{\beta}}^{lse}
 
 이 식은 라쏘가 최소제곱추정량을 일정 문턱값 (thresholding value) $\lambda$만큼 0 방향으로 줄이고, 그 절댓값이 $\lambda$ 이하이면 정확히 0으로 만든다는 것을 보여준다. 이를 소프트 임계화 (soft-thresholding)라고 한다.
 
-#### 증명: KKT 조건 (Karush-Kuhn-Tucker Conditions)에 의한 유도
-
-라쏘의 목적함수를 계산 편의를 위해 다음과 같이 쓰자.
-
-$$Q_\lambda(\boldsymbol{\beta})=\frac{1}{2n}(y-X\boldsymbol{\beta})^T(y-X\boldsymbol{\beta})+\lambda |\boldsymbol{\beta}|_1$$
-
-라쏘추정량에서 0이 아닌 계수의 인덱스 집합을
-
-$$A=\{j:\hat{\boldsymbol{\beta}}^{lasso}_j\neq 0\}$$
-
-라고 하자. 그러면 $j\in A$에 대해서는 목적함수가 미분 가능하므로 KKT 조건은
-
-$$-\frac{1}{n}x_j^T(y-X\hat{\boldsymbol{\beta}}^{lasso})+\lambda \text{sgn}(\hat{\boldsymbol{\beta}}^{lasso}_j)=0$$
-
-이 된다.  
-반면 $j\notin A$에서는 $\beta_j=0$에서의 부분도함수 (subgradient)를 고려해야 하므로
-
-$$\left| -x_j^T(y-X\hat{\boldsymbol{\beta}}^{lasso}) \right| \le n\lambda$$
-
-가 성립한다.  
-이제 직교설계 ($X^TX=nI_p$)를 사용하면, $j\in A$에 대해
-
-$$-\hat{\boldsymbol{\beta}}^{lse}_j+\hat{\boldsymbol{\beta}}^{lasso}_j+\lambda \text{sgn}(\hat{\boldsymbol{\beta}}^{lasso}_j)=0$$
-
-를 얻는다. 또한 $j\notin A$에 대해서는
-
-$$|\hat{\boldsymbol{\beta}}^{lse}_j|\le \lambda$$
-
-가 된다.  
-라쏘해와 최소제곱해는 부호가 같으므로,
-
-$$\hat{\boldsymbol{\beta}}^{lasso}_j = \text{sgn}(\hat{\boldsymbol{\beta}}^{lse}_j)\max\left(|\hat{\boldsymbol{\beta}}^{lse}_j|-\lambda,0\right)$$
-
-가 도출된다. 이것이 라쏘의 소프트 임계화 공식이다.
-
-> KKT조건은 블록최적화 문제의 해에 대한 필요충분조건으로, 라쏘회귀 뿐만 아니라 제약조건이 있는 최대우도추정량의 계상 등 여러 통계문제들의 추정량을 계산할 떄 사용된다. 자세한 조건은 Boyd, Vandenberghe (참고문헌 16.1)이나 다른 Convex Optimization 교재 참고.
-
-### 16.2.2 라쏘의 핵심 작동원리
+>**증명: KKT 조건 (Karush-Kuhn-Tucker Conditions)에 의한 유도**
+>
+>라쏘의 목적함수를 계산 편의를 위해 다음과 같이 쓰자.
+>
+>$$Q_\lambda(\boldsymbol{\beta})=\frac{1}{2n}(y-X\boldsymbol{\beta})^T(y-X\boldsymbol{\beta})+\lambda |\boldsymbol{\beta}|_1$$
+>
+>라쏘추정량에서 0이 아닌 계수의 인덱스 집합을
+>
+>$$A=\{j:\hat{\boldsymbol{\beta}}^{lasso}_j\neq 0\}$$
+>
+>라고 하자. 그러면 $j\in A$에 대해서는 목적함수가 미분 가능하므로 KKT 조건은
+>
+>$$-\frac{1}{n}x_j^T(y-X\hat{\boldsymbol{\beta}}^{lasso})+\lambda \text{sgn}(\hat{\boldsymbol{\beta}}^{lasso}_j)=0$$
+>
+>반면 $j\notin A$에서는 $\beta_j=0$에서의 부분도함수 (subgradient)를 고려해야 하므로
+>
+>$$\left| -x_j^T(y-X\hat{\boldsymbol{\beta}}^{lasso}) \right| \le n\lambda$$
+>
+>가 성립한다.  
+>이제 직교설계 ($X^TX=nI_p$)를 사용하면, $j\in A$에 대해
+>
+>$$-\hat{\boldsymbol{\beta}}^{lse}_j+\hat{\boldsymbol{\beta}}^{lasso}_j+\lambda \text{sgn}(\hat{\boldsymbol{\beta}}^{lasso}_j)=0$$
+>
+>를 얻는다. 또한 $j\notin A$에 대해서는
+>
+>$$|\hat{\boldsymbol{\beta}}^{lse}_j|\le \lambda$$
+>
+>가 된다.  
+>라쏘해와 최소제곱해는 부호가 같으므로,
+>
+>$$\hat{\boldsymbol{\beta}}^{lasso}_j = \text{sgn}(\hat{\boldsymbol{\beta}}^{lse}_j)\max\left(|\hat{\boldsymbol{\beta}}^{lse}_j|-\lambda,0\right)$$
+>
+>가 도출된다. 이것이 라쏘의 소프트 임계화 공식이다.
+>
+>- KKT조건은 블록최적화 문제의 해에 대한 필요충분조건으로, 라쏘회귀 뿐만 아니라 제약조건이 있는 최대우도추정량의 계산 등 여러 통계문제들의 추정량을 계산할 때 사용된다. 자세한 조건은 Boyd, Vandenberghe (참고문헌 16.1)이나 다른 Convex Optimization 교재 참고.
 
 위 정의식에서 확인할 수 있는 라쏘의 핵심은 다음 두 가지다.
 
@@ -199,7 +198,7 @@ $$\hat{\boldsymbol{\beta}}^{lasso}_j = \text{sgn}(\hat{\boldsymbol{\beta}}^{lse}
 
 따라서 라쏘는 작은 계수는 제거하고 큰 계수는 축소한다. 이 때문에 라쏘추정량을 축소추정량 (shrinkage estimator)이라 부른다.
 
-#### 예제: $p=2$인 직교설계
+**예제: $p=2$인 직교설계**
 
 $p=2$일 때 $\lambda$가 증가하면 두 회귀계수의 절댓값은 점차 감소한다. 어느 계수의 최소제곱추정량 절댓값이 $\lambda$ 이하가 되는 순간, 그 계수는 즉시 0이 된다. 이후 해당 변수는 회귀모형에서 제외된다.
 
@@ -226,7 +225,7 @@ $$\min_{\boldsymbol{\beta}} \frac{1}{n}(\boldsymbol{\beta}-\hat{\boldsymbol{\bet
 
 이것이 라쏘가 희소성 (sparsity)을 유도하는 기하학적 이유다.
 
-#### 예제: $\ell_1$-제약집합의 기하학적 해석
+**예제: $\ell_1$-제약집합의 기하학적 해석**
 
 $$|\boldsymbol{\beta}_1|+|\boldsymbol{\beta}_2|\le t$$
 
@@ -241,20 +240,21 @@ $$|\boldsymbol{\beta}_1|+|\boldsymbol{\beta}_2|\le t$$
 
 1. 추정오차 (estimation error), 즉 $|\hat{\boldsymbol{\beta}}^{lasso}-\boldsymbol{\beta}|_2$의 상한에 대한 성질
 2. 변수선택 (variable selection)에 대한 일치성 (consistency)
+  - 변수선택 일치성: 0이 아닌 계수의 위치, 즉 선택된 변수집합이 참 변수집합과 정확히 같아지는 성질
 
 이 두 성질은 서로 관련되어 있으나, 요구하는 조건은 서로 다르다. 먼저 추정오차의 성질을 살피기 위해 두 가지 가정을 둔다.
 
 ### 16.4.1 추정오차에 대한 성질
 
-첫째, $\boldsymbol{\beta}$의 서포트 (support)를 $S=\{ j\mid \boldsymbol{\beta}_j\neq 0,; j=1,2,\dots,p \}$로 두고, 그 크기를 $|S|=s$라 하자. 즉, 실제로 0이 아닌 회귀계수의 개수는 $s$개라고 가정한다.
+첫째, $\boldsymbol{\beta}$의 서포트 (support)를 $S=\{ j\mid \boldsymbol{\beta}_j\neq 0, j=1,2,\dots,p \}$로 두고, 그 크기를 $|S|=s$라 하자.
 
 둘째, 설명변수 행렬 $X$가 $S$에 대하여 고윳값 제한 (restricted eigenvalue) 조건을 만족한다고 가정한다. 이를 위해 상수 $\alpha\ge 1$에 대하여 다음 원뿔집합 (cone set)을 정의한다.
 
-$$C_\alpha(S):={\Delta\in \mathbb{R}^p \mid |\Delta_{S^c}|_1 \le \alpha|\Delta_S|_1} \tag{16.12}$$
+$$C_\alpha(S):=\{\Delta\in \mathbb{R}^p : \|\Delta_{S^c} \|_1 \le \alpha\|\Delta_S\|_1\} \tag{16.12}$$
 
-여기서 $\Delta=(\delta_1,\dots,\delta_p)$라 하면, $\Delta_S$는 $j\in S$인 성분들로만 이루어진 $|S|$차원 벡터이고, $\Delta_{S^c}$는 나머지 성분들로 이루어진 벡터다. 이때 설명변수 행렬 $X$가 어떤 $(\kappa,\alpha)$에 대하여
+여기서 $\Delta=(\delta_1,\dots,\delta_p)$라 하면, $\Delta_S$는 $j\in S$인 성분들로만 이루어진 $|S|$차원 벡터이고, $\Delta_{S^c}$는 나머지 성분들로 이루어진 벡터다. 이때 설명변수 행렬 $X$가 어떤 모수 $(\kappa,\alpha)$에 대하여
 
-$$\frac{1}{n}|X\Delta|_2^2 \ge \kappa|\Delta|_2^2,\qquad \forall \Delta\in C_\alpha(S) \tag{16.13}$$
+$$\frac{1}{n}\|X\Delta\|_2^2 \ge \kappa\|\Delta\|_2^2,\qquad \forall \Delta\in C_\alpha(S) \tag{16.13}$$
 
 를 만족한다고 하자. 그러면 $X$는 $S$ 위에서 모수 $(\kappa,\alpha)$에 대한 고윳값 제한 조건을 만족한다고 말한다.
 
@@ -264,7 +264,7 @@ $$\frac{1}{n}|X\Delta|_2^2 \ge \kappa|\Delta|_2^2,\qquad \forall \Delta\in C_\al
 
 ### 16.4.2 변수선택의 일치성
 
-라쏘추정량이 단지 계수를 잘 근사하는 것에 그치지 않고, 실제로 0이 아닌 변수들을 정확히 골라내려면 더 강한 조건이 필요하다. 이를 위해 다음 두 조건을 추가로 둔다.
+라쏘추정량이 단지 계수를 잘 근사하는 것에 그치지 않고, 실제로 0이 아닌 변수들을 정확히 골라내려면 더 강한 조건이 필요하다. 이를 위해 다음 두 조건을 **추가로** 둔다.
 
 첫째, 서포트에 해당하는 설명변수들만 모은 행렬을 $X_S$라 하자. 그러면 이들의 표본공분산행렬이 아래로 유계여야 한다.   즉, $\frac{1}{n}X_S^TX_S$ 의 가장 작은 고윳값이
 
@@ -274,13 +274,13 @@ $$c_{\min}>0 \tag{16.14}$$
 
 둘째, 상호 일관성 (mutual incoherence) 조건을 둔다. 어떤 $\alpha\in[0,1)$에 대하여
 
-$$\max_{j\in S^c}\left|(X_S^TX_S)^{-1}X_S^TX_j\right|_1\le \alpha \tag{16.15}$$
+$$\max_{j\in S^c} \|(X_S^TX_S)^{-1}X_S^TX_j \|_1\le \alpha \tag{16.15}$$
 
 가 성립한다고 하자. 이 조건은 진짜 변수 집합 $S$에 속하지 않는 변수들이, 진짜 변수들과 지나치게 강한 상관관계를 가져서는 안 된다는 뜻이다. 다시 말해, 잡음 변수 (noise variable)가 진짜 변수의 선형결합처럼 행동하지 않아야 한다.
 
 이 두 조건이 만족되면, 라쏘추정량의 비영 서포트 (estimated support)
 
-$$\hat{S}=\{j\mid \hat{\boldsymbol{\beta}}^{lasso}_j\neq 0,; j=1,2,\dots,p\} \tag{16.16}$$
+$$\hat{S}=\{j\mid \hat{\boldsymbol{\beta}}^{lasso}_j\neq 0, j=1,2,\dots,p\} \tag{16.16}$$
 
 가 진짜 서포트 $S$와 같아지는 확률이 1로 수렴한다. 즉, 라쏘는 변수선택에 대해 일치적 (selection consistent)일 수 있다.
 
@@ -289,14 +289,14 @@ $$\hat{S}=\{j\mid \hat{\boldsymbol{\beta}}^{lasso}_j\neq 0,; j=1,2,\dots,p\} \ta
 * 최소 고윳값 조건과 상호 일관성 (mutual incoherence) 조건은 변수선택 일치성에 필요하다.
 * 따라서 계수를 잘 추정하는 것과 변수를 정확히 선택하는 것은 서로 다른 난이도와 조건을 가진 문제다.
 
-#### 예제: 추정 일치성과 선택 일치성의 차이
+**추정 일치성과 선택 일치성의 차이**
 
 라쏘가 $|\hat{\beta}^{lasso}-\beta|_2\to 0$를 만족한다고 해서 자동으로 $\hat{S}=S$가 되는 것은 아니다. 예를 들어 실제로는 0인 변수가 진짜 변수와 매우 강하게 상관되어 있으면, 추정오차는 작더라도 해당 변수가 잘못 선택될 수 있다. 따라서 추정의 정확성 (estimation accuracy)과 선택의 정확성 (selection accuracy)은 구분해서 보아야 한다.
 
 
 ## 16.5 라쏘추정량의 계산 (Computation of Lasso Estimator)
 
-라쏘추정량을 실제로 계산하는 알고리즘 가운데 가장 널리 알려진 방법은 LARS (least angle regression)를 이용하는 알고리즘이다. 이 알고리즘은 전진 선택법 (forward selection)을 개량한 방법으로 이해할 수 있으며, $p>n$인 경우에도 적용 가능하다. 또한 약간의 수정만 가하면 라쏘 추정량의 조절모수 $\lambda$ 변화에 따른 해의 자취 (solution path)를 계산해 준다.
+라쏘추정량을 실제로 계산하는 알고리즘 가운데 가장 널리 알려진 방법은 LARS (least angle regression)를 이용하는 알고리즘이다. 이 알고리즘은 변수선택방법의 전진 선택법 (forward selection)을 개량한 방법으로 이해할 수 있으며, $p>n$인 경우에도 적용 가능하다. 또한 약간의 수정만 하면 라쏘 추정량의 조절모수 $\lambda$ 변화에 따른 해의 자취 (solution path)를 계산해 준다.
 
 중요한 점은 라쏘 추정량의 해 자취가 $\lambda$의 변화에 따라 조각별 선형 (piecewise linear)의 형태를 가진다는 점이다. 이 성질 덕분에 전체 경로를 효율적으로 추적할 수 있다.
 
@@ -333,7 +333,7 @@ $$A\leftarrow A\cup\{j_1\}$$
 
 선택된 변수 $j_1$의 계수를 상관계수의 부호 방향으로 조금씩 증가시킨다. 즉, 사전에 정한 작은 상수 $\alpha$에 대하여
 
-$$\hat{\boldsymbol{\beta}}_{j_1}\leftarrow \hat{\boldsymbol{\beta}}_{j_1}+\alpha\text{sign}(\hat{c}_{j_1})$$
+$$\hat{\boldsymbol{\beta}}_{j_1}\leftarrow \hat{\boldsymbol{\beta}}_{j_1}+\alpha \ \text{sign}(\hat{c}_{j_1})$$
 
 의 방향으로 움직인다. 이 과정을 계속하여, 아직 선택되지 않은 변수들 가운데 어떤 변수 하나가 현재 활성 변수들과 동일한 수준의 상관관계를 갖게 될 때까지 진행한다. 즉,
 
@@ -344,6 +344,8 @@ $$\max_{k\in A^c} |\text{corr}(x_k,\mathbf{r}(\alpha))| \ge \max_{j\in A} |\text
 $$A\leftarrow A\cup\{j_2\}$$
 
 로 업데이트한다.
+
+- $\hat\beta_1$ 을 업데이트한다는 것은 예측값 $\hat\mu$를 $x_1$ 방향으로 이동시켜 현재 반응변수 $y$에 조금 더 가까이 가져간다는 의미
 
 **단계 4**
 
@@ -386,7 +388,7 @@ LARS 기반 알고리즘의 장점은 다음과 같다.
 
 또한 LARS 알고리즘은 라쏘뿐 아니라 forward-stage 회귀추정량 등 다른 변형에도 적용 가능하며, 실제 구현은 R의 `"lars"` 패키지 등에서 제공된다.
 
-#### 예제: 변수의 진입과 이탈
+**예제: 변수의 진입과 이탈**
 
 초기에는 가장 상관이 큰 변수 하나만 선택된다. 이후 다른 변수들이 잔차와의 상관이 비슷해지면 차례로 모형에 들어온다. 그러나 라쏘에서는 계수 경로를 따라 이동하는 중 이미 들어온 변수의 계수가 다시 0이 될 수 있으므로, 그 변수는 활성집합에서 제거된다. 따라서 라쏘의 해 경로는 단순한 단조 증가 구조가 아니라, 변수의 진입과 이탈이 모두 가능한 동적 구조를 가진다.
 
@@ -416,7 +418,7 @@ $$\sum_{j=1}^p w_j|\beta_j|$$
 
 적응라쏘는 라쏘의 볼록성 (convexity)을 유지하면서도, 동시에 변수선택의 일치성 (selection consistency)을 보장하는 것으로 알려져 있다.
 
-#### 예제: 적응적 벌점의 효과
+**예제: 적응적 벌점의 효과**
 
 어떤 두 변수의 초기추정량이 $|\hat{\beta}^{lse}_1| \gg |\hat{\beta}^{lse}_2|$라고 하자. 그러면
 
@@ -448,7 +450,7 @@ $$|\hat{\beta}_1(\alpha,\lambda)-\hat{\beta}_2(\alpha,\lambda)| < \frac{\sqrt{n}
 
 마지막으로 엘라스틱넷의 계산은 반응변수 벡터와 설명변수 행렬을 적절히 변형하여 라쏘 회귀추정 문제로 바꾸어 풀 수 있다.
 
-#### 예제: 상관된 변수에 대한 라쏘와 엘라스틱넷의 차이
+**예제: 상관된 변수에 대한 라쏘와 엘라스틱넷의 차이**
 
 $X_1$과 $X_2$가 거의 같은 정보를 담고 있을 때, 라쏘는 둘 중 하나만 남기고 다른 하나를 0으로 만드는 경향이 강하다. 반면 엘라스틱넷은 두 변수에 유사한 계수를 부여하면서 함께 선택하는 경향이 강하다. 따라서 강한 다중공선성 (multicollinearity)이 존재하는 경우 엘라스틱넷이 더 자연스러운 해를 줄 수 있다.
 
@@ -476,13 +478,13 @@ $$\min_{\boldsymbol{\beta}\in \mathbb{R}^p} \sum_{i=1}^n \left(y_i-\sum_{g=1}^G 
 
 즉, 그룹별로 $\ell_2$-노름을 계산하고, 그룹들 전체에 대해서는 $\ell_1$-형식의 합을 취하는 구조다. 이 때문에 그룹 내 변수들은 함께 살아남거나 함께 제거되는 경향을 가진다.
 
-#### 예제: 범주형 변수의 더미코딩
+**예제: 범주형 변수의 더미코딩**
 
 하나의 범주형 변수를 여러 개의 더미변수로 바꾸면, 이 변수들은 사실상 하나의 원래 변수에서 파생된 것이다. 이들을 각각 따로 선택하면 해석이 어색해질 수 있다. 그룹라쏘는 이 더미변수 집합 전체를 하나의 그룹으로 취급하여, 해당 범주형 변수 전체를 선택하거나 제거하도록 만든다.
 
-### 16.6.4 퓨즈드라쏘 회귀추정량 (Fused Lasso Regression Estimator)
+### 16.6.4 Fused 라쏘 회귀추정량 (Fused Lasso Regression Estimator)
 
-퓨즈드라쏘 (fused lasso)는 설명변수들 사이에 순서 (ordering)가 존재하고, 인접한 변수들 사이에 강한 상관관계가 있을 때 사용되는 방법이다. Tibshirani 등이 제안하였다.
+fused lasso는 설명변수들 사이에 순서 (ordering)가 존재하고, 인접한 변수들 사이에 강한 상관관계가 있을 때 사용되는 방법이다. Tibshirani 등이 제안하였다.
 
 대표적인 예로, 단백질의 $m/z$ 변수를 측정한 SELDI-TOF MS (surface-enhanced laser desorption/ionization time-of-flight mass spectrometry) 자료를 생각할 수 있다. 이 경우 순서화된 인접 $m/z$ 변수들 사이에 강한 양의 상관성이 존재하며, 인접한 변수들의 회귀계수도 비슷할 것으로 기대된다.
 
@@ -497,7 +499,7 @@ $$\lambda\left((1-\alpha)\sum_{j=1}^p |\beta_j| + \alpha\sum_{j=2}^p |\beta_j-\b
 
 따라서 fused 라쏘는 elastic-net과 달리 변수들 사이의 관계를 직접적으로 강제한다. 특히 순서가 있는 설명변수에서 이웃한 계수들이 서로 비슷해지도록 만드는 점이 핵심이다.
 
-#### 예제: 순서가 있는 신호자료
+**예제: 순서가 있는 신호자료**
 
 설명변수들이 시간축 또는 위치축을 따라 정렬되어 있다고 하자. 이때 인접 구간에서는 영향력이 비슷할 가능성이 크다. fused 라쏘를 적용하면 개별 계수를 독립적으로 추정하는 대신, 인접 계수들이 같은 값 또는 비슷한 값을 갖도록 유도하여 더 해석 가능한 구조를 얻을 수 있다.
 
@@ -509,7 +511,7 @@ $$\lambda\left((1-\alpha)\sum_{j=1}^p |\beta_j| + \alpha\sum_{j=2}^p |\beta_j-\b
 * 적응라쏘 (adaptive lasso): 계수별 가중 벌점을 통해 편의 (bias)를 줄이고 선택 일치성 (selection consistency)을 개선한다.
 * 엘라스틱넷 (elastic-net): 상관된 변수들을 함께 선택하는 성질을 강화한다.
 * 그룹라쏘 (group lasso): 변수의 그룹구조를 반영하여 그룹 단위 선택을 수행한다.
-* 퓨즈드라쏘 (fused lasso): 순서가 있는 변수들에 대해 인접 계수의 유사성을 강제한다.
+* Fused 라쏘 (fused lasso): 순서가 있는 변수들에 대해 인접 계수의 유사성을 강제한다.
 
 즉, 벌점화 회귀분석은 단일한 방법이 아니라, 자료의 구조와 분석 목적에 맞추어 벌점함수 (penalty function)를 설계하는 하나의 큰 틀로 이해해야 한다.
 
