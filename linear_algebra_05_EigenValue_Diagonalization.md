@@ -706,14 +706,14 @@ $$A = U^TU$$
 **응용:** 중회귀모형 회귀계수 추정
 
 ### 특잇값 분해 (singular value decomposition, SVD)
+FIXME: ??? 내용이 일반적이지 않은것같음. 다시 정리하기.
 
 $A$를 계수(rank) $r$인 $m \times n$ 행렬이라 하자 ($m \leq n$). 그러면 $m \times m$ 직교행렬 $P$와 $n \times n$ 직교행렬 $Q$가 존재하여
 
-$$A = P\begin{pmatrix} D & 0 \end{pmatrix}Q^T$$
+$$A = PDQ^T$$
 
 를 만족한다. 여기서
 - $D$는 $m \times m$ 대각행렬로, 비음의 대각원소 $d_i$ ($i = 1, 2, \ldots, m$)를 갖는다.
-- $0$은 $m \times (n-m)$ 영행렬이다.
 - $D$의 양의 대각원소들은 $A^TA$ (또는 $AA^T$)의 양의 고유치들의 양의 제곱근이며, 이들을 $A$의 **특이치(singular value)** 라 한다.
 - $m = n$인 경우, $P^TAQ = D$이다.
 - $A$가 대칭인 경우 $P = Q$이고, $D$의 대각원소들은 $A$의 고유치들의 절댓값과 같다.

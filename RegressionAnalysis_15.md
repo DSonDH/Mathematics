@@ -30,13 +30,15 @@ $X^TX$ 가 비정칙행렬 (singular matrix)이 되어 최소제곱추정량 $(X
 
 ### 15.1.1 특잇값 분해와 최소제곱추정량 (SVD and Least Squares Estimator)
 
-먼저 $n>p$인 경우를 생각한다. $n\times p$ 설명변수 행렬 $\mathbf{X}$의 특잇값 분해는
+먼저 $n>p$이고 $X$가 완전 열계수, 즉 $\operatorname{rank}(X)=p$라고 가정하자. $n\times p$ 설명변수 행렬 $\mathbf{X}$의 특잇값 분해는
 
 $$\mathbf{X}=UDP^T=\sum_{l=1}^p d_l\mathbf{u}_l\mathbf{p}_l^T \tag{17.2} $$
 
-* $U$는 $n\times n$ 직교행렬 (orthogonal matrix)이다.
-* $P$는 $p\times p$ 직교행렬이다.
-* $\mathbf{u}_l$과 $\mathbf{p}_l$은 각각 $U$와 $P$의 $l$번째 열벡터이다.
+* $U$는 $n\times n$ 직교행렬 (orthogonal matrix)
+* $P$는 $p\times p$ 직교행렬
+* $\mathbf{u}_l$과 $\mathbf{p}_l$은 각각 $U$와 $P$의 $l$번째 열벡터
+  - $\mathbf{u}_l$: $n \times 1$
+  - $\mathbf{p}_l$: $p \times 1$
 * $D$는 블록행렬 (block matrix)이며, $n>p$일 때
   $$ D =
   \begin{bmatrix}
@@ -75,22 +77,16 @@ $$
 
 이다. 여기서 $k>0$는 벌점모수 (penalty parameter)이다. 이를 특잇값 분해로 표현하면
 
-$$ \hat{\boldsymbol{\beta}}(k) = (PD^TDP^T+kI_p)^{-1}PD^TU^T\mathbf{y}$$
+$$ \hat{\boldsymbol{\beta}}(k) = (PD^TDP^T+kPP^T)^{-1}PD^TU^T\mathbf{y} \\
+= P(D^TD+kI_p)^{-1}D^TU^T\mathbf{y} \tag{17.6}$$
 
-이고, $PP^T=I_p$를 이용하면
+이 식은 능형회귀가 최소제곱추정량과 비교하여 각 방향별 계수를 축소시키는 구조를 명확히 보여 준다 (능형회귀의 축소 성질 (Shrinkage Property)):
 
-$$ \hat{\boldsymbol{\beta}}(k) = P(D^TD+kI_p)^{-1}D^TU^T\mathbf{y} \tag{17.6}$$
+식 (17.4)와 식 (17.6)의 $D$의 $j$번째 대각원소를 $d_j$라 하고 비교하면 최소제곱추정량은 각 방향에 대하여 $\frac{d_j}{d_j^2}$ 의 계수를 가지는 반면, 능형회귀추정량은 $\frac{d_j}{d_j^2+k}$ 의 계수를 가진다. $k>0$이면 
 
-이 식은 능형회귀가 최소제곱추정량과 비교하여 각 방향별 계수를 축소시키는 구조를 명확히 보여 준다.
+$$\frac{d_j}{d_j^2}>\frac{d_j}{d_j^2+k}$$
 
->**증명: 능형회귀의 축소 성질 (Shrinkage Property)**
->
->식 (17.4)와 식 (17.6)을 비교하면 최소제곱추정량은 각 방향에 대하여 $\frac{d_j}{d_j^2}$ 의 계수를 가지는 반면, 능형회귀추정량은 $\frac{d_j}{d_j^2+k}$
->의 계수를 가진다. $k>0$이면 
->
->$$\frac{d_j}{d_j^2}>\frac{d_j}{d_j^2+k}$$
->
->이므로 능형회귀추정량은 최소제곱추정량보다 더 작은 크기로 회귀계수를 줄인다. 따라서 능형회귀는 최소제곱추정량을 축소하는 추정량이다.
+이므로 능형회귀추정량은 최소제곱추정량보다 더 작은 크기로 회귀계수를 줄인다. 따라서 능형회귀는 최소제곱추정량을 축소하는 추정량이다.
 
 ### 15.1.3 고차원 자료 $(p>n)$에서의 능형회귀 (Ridge Regression for High-Dimensional Data)
 
@@ -125,15 +121,11 @@ d_j^{-1}, & d_j\neq 0 \\[4pt]
 \end{cases}
 $$
 
-가 성립한다. 따라서 $k\to 0$이면 $(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}$ 은 Moore-Penrose 역행렬 (Moore-Penrose inverse)에 대응하는 형태로 수렴하며,
+가 성립한다. 따라서 $k\to 0$이면 $(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}$ 은 Moore-Penrose 역행렬에 대응하는 형태로 수렴하며,
 
 $$\lim_{k\to 0}\hat{\boldsymbol{\beta}}(k)=(\mathbf{X}^T\mathbf{X})^{-}\mathbf{X}^T\mathbf{y}$$
 
-가 된다. 여기서 $(\mathbf{X}^T\mathbf{X})^{-}$는 일반역행렬 (generalized inverse)이다. 반대로
-
-$$\lim_{k\to\infty}\frac{d_j}{d_j^2+k}=0$$
-
-이므로
+가 된다. 여기서 $(\mathbf{X}^T\mathbf{X})^{-}$는 일반역행렬 (generalized inverse)이다. 반대로 $\lim_{k\to\infty}\frac{d_j}{d_j^2+k}=0$ 이므로
 
 $$\lim_{k\to\infty}\hat{\boldsymbol{\beta}}(k)=0_{p\times 1}$$
 
@@ -144,19 +136,16 @@ $$|\hat{\boldsymbol{\beta}}(k_1)|<|\hat{\boldsymbol{\beta}}(k_2)|$$
 
 가 성립하는 것은 아니다. 따라서 벌점모수의 선택은 단순히 "크면 더 많이 축소된다"는 직관만으로 다룰 수 없으며, 예측오차의 관점에서 결정되어야 한다.
 
-### 15.1.5 능형회귀의 편의 (Bias) (Bias of Ridge Estimator)
+### 15.1.5 능형회귀의 편의 (Bias of Ridge Estimator)
 
-능형회귀는 편의를 허용하는 대신 분산을 줄이는 방법이다. 기대값을 계산하면
+능형회귀는 편의를 허용하는 대신 분산을 줄이는 방법이다. 설명변수행렬에 대한 특잇값 분해도 적용하면
 
 $$
 E[\hat{\boldsymbol{\beta}}(k)]
 = (\mathbf{X}^T\mathbf{X}+kI_p)^{-1}(\mathbf{X}^T\mathbf{X})\boldsymbol{\beta} \\
-= \boldsymbol{\beta}-k(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\boldsymbol{\beta}
+= \boldsymbol{\beta}-k(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\boldsymbol{\beta} \\
+=\boldsymbol{\beta}-kP(D^TD+kI_p)^{-1}P^T\boldsymbol{\beta}
 $$
-
-또는 특잇값 분해를 이용하여
-
-$$E[\hat{\boldsymbol{\beta}}(k)] =\boldsymbol{\beta}-kP(D^TD+kI_p)^{-1}P^T\boldsymbol{\beta}$$
 
 로 쓸 수 있다. 편의의 제곱은
 
@@ -164,47 +153,27 @@ $$(E[\hat{\boldsymbol{\beta}}(k)]-\boldsymbol{\beta})^T(E[\hat{\boldsymbol{\beta
 =k^2\boldsymbol{\beta}^TP(D^TD+kI_p)^{-2}P^T\boldsymbol{\beta}
 $$
 
->**증명: 능형회귀의 기대값 계산 (Derivation of Expectation)**
->
->선형모형 $\mathbf{y}=\mathbf{X}\boldsymbol{\beta}+\boldsymbol{\varepsilon},\quad E(\boldsymbol{\varepsilon})=0$ 에서 식 (17.5)에 기대값을 취하면
->
->$$
->E[\hat{\boldsymbol{\beta}}(k)] =
->(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\mathbf{X}^TE(\mathbf{y})
->= (\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\mathbf{X}^T\mathbf{X}\boldsymbol{\beta}
->$$
->
->가 된다. 여기에 $\mathbf{X}^T\mathbf{X}=(\mathbf{X}^T\mathbf{X}+kI_p)-kI_p$ 를 대입하면
->
->$$
->E[\hat{\boldsymbol{\beta}}(k)]
->= (\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\{(\mathbf{X}^T\mathbf{X}+kI_p)-kI_p\}\boldsymbol{\beta}
->= \boldsymbol{\beta}-k(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\boldsymbol{\beta}
->$$
->
->를 얻는다. 따라서 능형회귀는 일반적으로 불편추정량 (unbiased estimator)이 아니며, $k>0$일 때 편의를 가진다.
-
 ### 15.1.6 능형회귀의 분산과 평균제곱오차 (Variance and Mean Squared Error)
 
-식 (17.6)으로부터 분산을 계산하면
+식 (17.6)으로부터 분산을 계산하고 특잇값 분해를 이용하면
 
-$$\mathrm{Var}[\hat{\boldsymbol{\beta}}(k)] = \sigma^2(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\mathbf{X}^T\mathbf{X}(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}
+$$\mathrm{Var}[\hat{\boldsymbol{\beta}}(k)] = \sigma^2(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\mathbf{X}^T\mathbf{X}(\mathbf{X}^T\mathbf{X}+kI_p)^{-1} \\
+= \sigma^2P(D^TD+kI_p)^{-1}D^TD(D^TD+kI_p)^{-1}P^T
 $$
 
-이고, 특잇값 분해를 이용하면
+$p>n$인 경우 $j=n+1,\dots,p$에 대하여 $(D^TD)_j=0$이므로, 
 
 $$
-\mathrm{Var}[\hat{\boldsymbol{\beta}}(k)] = \sigma^2P(D^TD+kI_p)^{-1}D^TD(D^TD+kI_p)^{-1}P^T
+[P(D^TD+kI_p)^{-1}D^TD(D^TD+kI_p)^{-1}]_j = 0
 $$
 
-$p>n$인 경우 $j=n+1,\dots,p$에 대하여 $(D^TD)_j=0$이므로, 해당 방향에서는 분산 기여가 0이 된다.  
-능형회귀추정량의 평균제곱오차 (mean squared error, MSE)는
+이 된다. 따라서 능형회귀추정량의 평균제곱오차 (mean squared error, MSE)는
 
 $$
 \mathrm{MSE}[\hat{\boldsymbol{\beta}}(k)]
 = E\big[(\hat{\boldsymbol{\beta}}(k)-\boldsymbol{\beta})^T(\hat{\boldsymbol{\beta}}(k)-\boldsymbol{\beta})\big] \\
 = \sigma^2\sum_{j=1}^{n}\frac{d_j^2}{(d_j^2+k)^2}
-+ k^2\sum_{j=1}^{n}\frac{(p_j^T\boldsymbol{\beta})^2}{(d_j^2+k)^2}
++ k^2\sum_{j=1}^{n}\frac{(\mathbf p_j^T\boldsymbol{\beta})^2}{(d_j^2+k)^2}
 $$
 
 이 식은 능형회귀의 본질을 잘 보여 준다.
@@ -228,10 +197,161 @@ $$
 
 이 표현을 사용하면 $p\times p$ 행렬이 아니라 $n\times n$ 행렬만 역행렬 계산에 필요하므로 계산량이 크게 줄어든다. 예를 들어 $n=100$이면 $100\times100$ 행렬의 계산만으로 충분하다. 따라서 고차원 자료에서는 SVD 기반 표현이 계산상 매우 중요하다.
 
-**예제: 마이크로어레이 자료의 계산 부담 완화 (Microarray Example)**
+#### 연습문제 17.2
 
-자료가 $n=100$, $p=4000$인 경우를 생각하자. 직접 능형회귀를 계산하면 $4000\times4000$ 행렬의 역행렬이 필요하므로 일반적인 계산 환경에서는 부담이 매우 크다. 그러나 특잇값 분해를 이용하여 $n\times n$ 차원으로 계산을 바꾸면, 실질적으로 $100\times100$ 행렬의 연산만 수행하면 된다. 따라서 계산 복잡도가 크게 감소하며, 고차원 자료에 대한 능형회귀의 실제 적용이 가능해진다.
+$X\in\mathbb R^{n\times p},\qquad p>n,\qquad \operatorname{rank}(X)=n$ 이고 축약 특잇값분해를 $X=UDP^T=RP^T$ 라고 하자. 여기서 $U,D,R\in\mathbb R^{n\times n},\quad P\in\mathbb R^{p\times n},\quad P^TP=I_n$ 이고 $D$와 $R=UD$는 비특이행렬이다.
 
+(1) 일반적인 능형회귀와 제약 최소제곱의 관계
+
+능형회귀추정량은 $\widehat\beta(k) =(X^TX+kI_p)^{-1}X^Ty$ 이다. 다음 제약 최소화문제를 생각하자.
+
+$$
+\min_\beta (y-X\beta)^T(y-X\beta) \quad\text{subject to}\quad \|\beta\|^2\leq c.
+$$
+
+라그랑주 함수를
+
+$$
+L(\beta,k) =(y-X\beta)^T(y-X\beta) +k(\beta^T\beta-c), \quad k\geq0
+$$
+
+로 정의한다.
+
+$\beta$에 관하여 미분하면 $\nabla_\beta L=-2X^T(y-X\beta)+2k\beta.$  
+이를 0으로 놓으면 $-2X^Ty+2X^TX\beta+2k\beta=0,$ 즉 $(X^TX+kI_p)\beta=X^Ty$ 가 된다. 따라서
+
+$$
+\boxed{  
+\beta=(X^TX+kI_p)^{-1}X^Ty =\widehat\beta(k)
+}
+$$
+
+이때 주어진 $k>0$에 대응하는 제약상수는
+
+$$
+\boxed{
+c=c(k)=\|\widehat\beta(k)\|^2
+}
+$$
+
+로 선택하면 된다. $k>0$이면 상보성 조건 $k\bigl(\|\widehat\beta(k)\|^2-c\bigr)=0$ 에 의해 제약은 경계에서 활성화된다.
+
+따라서 능형회귀는 다음 두 문제가 같은 해를 갖도록 하는 방법이다.
+
+$$
+\boxed{
+\min_\beta
+\left\{
+\|y-X\beta\|^2+k\|\beta\|^2
+\right\}
+}
+$$
+
+와
+
+$$
+\boxed{
+\min_\beta \|y-X\beta\|^2
+\quad\text{subject to}\quad
+\|\beta\|^2\leq c(k)
+}
+$$
+
+직접적인 최적성 증명: $\widehat\beta(k)$는 벌점 목적함수의 최소해이므로 모든 $\beta$에 대하여
+
+$$
+\|y-X\widehat\beta(k)\|^2 +k\|\widehat\beta(k)\|^2 \leq \|y-X\beta\|^2+k\|\beta\|^2
+$$
+
+이다.
+
+$c=\|\widehat\beta(k)\|^2$이고 $\|\beta\|^2\leq c$라면
+
+$$
+\begin{aligned}
+\|y-X\widehat\beta(k)\|^2+kc
+&\leq \|y-X\beta\|^2+k\|\beta\|^2\\
+&\leq \|y-X\beta\|^2+kc.
+\end{aligned}
+$$
+
+양변에서 $kc$를 제거하면
+
+$$
+\|y-X\widehat\beta(k)\|^2 \leq \|y-X\beta\|^2
+$$
+
+가 된다. 따라서 $\widehat\beta(k)$는 제약 최소화문제의 해이다.
+
+---
+
+(2) 일반능형회귀의 경우
+
+일반능형회귀추정량을 $\widehat\beta^{\mathrm{ridge}}=(X^TX+k\Omega)^{-1}X^Ty$ 라고 하자. 여기서는 일반적으로 $\Omega=\Omega^T\succeq0$이고 $X^TX+k\Omega$가 비특이행렬이라고 가정한다.
+
+다음 제약 최소화문제를 생각한다.
+
+$$
+\min_\beta (y-X\beta)^T(y-X\beta)
+\quad\text{subject to}\quad
+\beta^T\Omega\beta\leq c.
+$$
+
+라그랑주 함수는 $L(\beta,k)=(y-X\beta)^T(y-X\beta)+k(\beta^T\Omega\beta-c)$이다. $\Omega$가 대칭행렬이므로 $\nabla_\beta(\beta^T\Omega\beta)=2\Omega\beta$ 이다. 따라서 일차 최적조건은 $-2X^T(y-X\beta)+2k\Omega\beta=0$ 이고, 이를 정리하면
+
+$$
+(X^TX+k\Omega)\beta=X^Ty
+$$
+
+가 된다. 그러므로
+
+$$
+\boxed{
+\beta=(X^TX+k\Omega)^{-1}X^Ty=\widehat\beta^{\mathrm{ridge}}
+}
+$$
+
+주어진 $k>0$에 대해서는
+
+$$
+c=c(k) =\widehat\beta^{\mathrm{ridge}\,T} \Omega \widehat\beta^{\mathrm{ridge}}
+$$
+
+로 선택하면 된다. 결국
+
+$$
+\boxed{
+\min_\beta
+\left\{
+\|y-X\beta\|^2+k\beta^T\Omega\beta
+\right\}
+}
+$$
+
+의 해와
+
+$$
+\boxed{
+\min_\beta\|y-X\beta\|^2
+\quad\text{subject to}\quad
+\beta^T\Omega\beta\leq c(k)
+}
+$$
+
+의 해가 동일하다.
+
+일반 능형회귀에서 $\Omega$는 계수마다 서로 다른 축소 정도를 부여한다. $\Omega=I_p$로 두면 통상적인 능형회귀로 돌아간다.
+
+---
+
+## $k$와 $c$의 관계
+
+* $k$가 증가하면 계수에 대한 벌점이 커져 $c(k)$는 감소한다.
+* $k\to\infty$이면 일반적으로 $\widehat\beta(k)\to0$이고 $c(k)\to0$이다.
+* $k=0$이면 제약이 비활성화된 통상적인 최소제곱문제에 해당한다.
+* $k>0$이면 일반적으로 제약이 활성화되어 $\|\widehat\beta(k)\|^2=c$ 또는 $\widehat\beta^T\Omega\widehat\beta=c$가 된다.
+
+따라서 $k$는 라그랑주 승수이고, $c$는 허용되는 계수 크기를 나타내는 제약반경이다.
 
 ## 15.2 주성분회귀 (Principal Component Regression)
 
@@ -264,19 +384,19 @@ $$\mathbf{y}=XPP^T\boldsymbol{\beta}+\boldsymbol{\varepsilon}=Z\boldsymbol{\alph
 ### 15.2.2 저차원 자료 $(n>p)$에서의 주성분회귀추정량 (PCR Estimator for Low-Dimensional Data)
 
 $n>p$인 경우, 주성분회귀모형
-$\mathbf{y}=Z_g\boldsymbol{\alpha}_g+\boldsymbol{\varepsilon}$ 에서 $\boldsymbol{\alpha}_g$에 대한 최소제곱추정량은
+$\mathbf{y}=Z_g\boldsymbol{\alpha}_g+\boldsymbol{\varepsilon}$ 에서 $\boldsymbol{\alpha}_g$에 대한 최소제곱추정량은 특잇값 분해로 정리하면
 
-$$\hat{\boldsymbol{\alpha}}_g=(Z_g^TZ_g)^{-1}Z_g^T\mathbf{y}$$
+$$
+\begin{aligned}
+\hat{\boldsymbol{\alpha}}_g &=(Z_g^TZ_g)^{-1}Z_g^T\mathbf{y}\\
+&= (P_g^TX^TXP_g)^{-1}P_g^TX^T\mathbf{y} \\
+&= (P_g^TPD^TU^TUDP^TP_g)^{-1} P_g^TPD^TU^T\mathbf{y} \\
+&= (I_{g\times p} D^TD I_{p\times g})^{-1} I_{g\times p}D^TU^T\mathbf{y} \\
+&=(D_g^TD_g)^{-1}D_g^TU^T\mathbf{y}
+\end{aligned}
+$$
 
-이를 특잇값 분해로 정리하면
-
-$$\hat{\boldsymbol{\alpha}}_g = (P_g^TX^TXP_g)^{-1}P_g^TX^T\mathbf{y}$$
-
-이고, 다시 전개하면
-
-$$\hat{\boldsymbol{\alpha}}_g =(D_g^TD_g)^{-1}D_g^TU^T\mathbf{y}$$
-
-가 된다. 여기서 $D_g$는 $D$ 행렬에서 왼쪽 앞의 $g$개 열만 남기고 나머지 $p-g$개 열은 제거한 행렬이다. 따라서 $g$개의 주성분을 사용한 회귀추정량은 (아래 증명 참고)
+가 된다. 여기서 $D_g$는 $D$ 행렬에서 왼쪽 앞의 $g$개 열만 남긴 행렬이다. 따라서 $g$개의 주성분을 사용한 회귀추정량은
 
 $$\hat{\boldsymbol{\beta}}_g=P_g\hat{\boldsymbol{\alpha}}_g = P_g(D_g^TD_g)^{-1}D_g^TU^T\mathbf{y} \tag{17.8}$$
 
@@ -291,31 +411,22 @@ $$\hat{\boldsymbol{\beta}}_g=\hat{\boldsymbol{\beta}}$$
 
 가 되어 주성분회귀추정량은 최소제곱추정량과 같아진다.
 
->**증명: 주성분회귀추정량의 유도 (Derivation of PCR Estimator)**
->
->$Z_g=XP_g$이므로
->
->$$Z_g^TZ_g=P_g^TX^TXP_g,\quad Z_g^T\mathbf{y}=P_g^TX^T\mathbf{y}\\
->\therefore \hat{\boldsymbol{\alpha}}_g=(P_g^TX^TXP_g)^{-1}P_g^TX^T\mathbf{y}$$
->
->이제 특잇값 분해 $X=UDP^T$ 를 대입하면 $X^TX=PD^TDP^T$ 이고, $P_g$는 $P$의 앞쪽 $g$개 열벡터로 이루어지므로
->
->$$P_g^TX^TXP_g=D_g^TD_g$$
->
->또한 $P_g^TX^T\mathbf{y}=D_g^TU^T\mathbf{y}$ 이므로
->
->$$\hat{\boldsymbol{\alpha}}_g=(D_g^TD_g)^{-1}D_g^TU^T\mathbf{y} \\
-\hat{\boldsymbol{\beta}}_g=P_g\hat{\boldsymbol{\alpha}}_g=P_g(D_g^TD_g)^{-1}D_g^TU^T\mathbf{y}$$
-
 ### 15.2.3 고차원 자료 $(p>n)$에서의 주성분회귀 (PCR for High-Dimensional Data)
 
 이제 $p>n$인 고차원 자료를 생각한다. 이 경우 설명변수 행렬 $X$의 계수(rank)는 최대 $n$이고, 이에 따라 특잇값 분해는 0이 아닌 특잇값만 남긴 형태로 간단히 쓸 수 있다.
 
 $$X=UDP^T=\sum_{l=1}^n d_l\mathbf{u}_l\mathbf{p}_l^T \tag{17.9}$$
 
-* $U^TU=I_n$이다.
-* $PP^T\neq I_p$이다.
+* $U$는 $n\times n$ 직교행렬 
+* $P$는 $p\times n$ 행렬, 
+* $U^TU= UU^T = P^TP = I_n, \quad PP^T\neq I_p$
 * 대각행렬 $D$에서 0이 아닌 대각원소는 최대 $n$개이다.
+
+$$ 
+D = \begin{pmatrix}
+D_{n\times n} & 0_{n\times (p-n)}
+\end{pmatrix}
+$$
 
 이때 $X^TX$의 고유값 분해는
 
@@ -334,44 +445,45 @@ $$ X^TX=P\Lambda P^T =
 $$ \hat{\boldsymbol{\beta}}_g=P_g\Lambda_g^{-1}P_g^TX^T\mathbf{y} \tag{17.11} $$
 
 가 된다. 여기서 $g<n$이다.  
-즉, 저차원 자료에서는 주성분 개수 $g$가 $p$보다 작을 수 있었고, 고차원 자료에서는 주성분 개수 $g$가 $n$보다 작을 수 있을 뿐이라는 차이만 있을 뿐, 추정의 핵심 구조는 동일하다.
+즉, 저차원 자료에서는 주성분 개수 $g$가 $p$보다 작은 경우였고, 고차원 자료에서는 주성분 개수 $g$가 $n$보다 작을 수 있을 뿐이라는 차이만 있을 뿐, 추정의 핵심 구조는 동일하다.
 
 ### 15.2.4 주성분회귀추정량의 기대값 (Expectation of PCR Estimator)
 
-식 (17.11)의 기대값을 계산하면
+식 (17.11)의 기대값을 계산하면 $X^TX=\sum_{k=1}^{n}\lambda_k \mathbf p_k \mathbf p_k^T$ 이므로
 
-$$ E(\hat{\boldsymbol{\beta}}_g) = P_g\Lambda_g^{-1}P_g^TX^TX\boldsymbol{\beta}$$
-
-이다. 그런데 $X^TX=\sum_{k=1}^{n}\lambda_kp_kp_k^T$ 이므로
-
-$$ E(\hat{\boldsymbol{\beta}}_g) =
-\left(\sum_{j=1}^g\frac{1}{\lambda_j}p_jp_j^T\right)
-\left(\sum_{k=1}^{n}\lambda_kp_kp_k^T\right)\boldsymbol{\beta}
+$$ 
+\begin{aligned}
+E(\hat{\boldsymbol{\beta}}_g) &= P_g\Lambda_g^{-1}P_g^TX^TX\boldsymbol{\beta} \\
+&= \left(\sum_{j=1}^g\frac{1}{\lambda_j} \mathbf p_j \mathbf p_j^T\right) \left(\sum_{k=1}^{n}\lambda_k \mathbf p_k \mathbf p_k^T\right)\boldsymbol{\beta} \\
+&=\left(\sum_{j=1}^g  \mathbf p_j \mathbf p_j^T\right)\boldsymbol{\beta} &\because\text{고유벡터들은 직교}\\
+&= \sum_{j=1}^g (\mathbf p_j^T\boldsymbol\beta)\mathbf p_j =  P_gP_g^T\boldsymbol\beta
+\end{aligned}
 $$
 
-이고, 직교성 때문에
+이때 $\boldsymbol{\beta}=\sum_{j=1}^{n}(\mathbf p_j^T\boldsymbol{\beta})\mathbf  p_j+ \sum_{j=n+1}^{p}(\mathbf p_j^T\boldsymbol{\beta})\mathbf p_j$ 이므로,
 
-$$E(\hat{\boldsymbol{\beta}}_g)=\left(\sum_{j=1}^g p_jp_j^T\right)\boldsymbol{\beta}$$
+$$
+= \boldsymbol{\beta} - \sum_{j=n+1}^{p}(\mathbf p_j^T\boldsymbol{\beta})\mathbf p_j
+$$
 
-가 된다. 마지막으로 전체 직교기저를 기준으로 분해하면
 
-$$\boldsymbol{\beta}=\sum_{j=1}^{n}(p_j^T\boldsymbol{\beta})p_j+\sum_{j=n+1}^{p}(p_j^T\boldsymbol{\beta})p_j$$
 
-이지만 주성분회귀는 앞의 $g$개 방향만 남기므로
-
-$$E(\hat{\boldsymbol{\beta}}_g)=\boldsymbol{\beta}-\sum_{j=g+1}^{n}(p_j^T\boldsymbol{\beta})p_j$$
 
 이 식은 주성분회귀가 불편추정량 (unbiased estimator)이 아님을 보여 준다. 즉, 상위 $g$개 주성분 방향만 남기고 나머지 방향을 제거하므로, 제거된 방향에 투영된 $\boldsymbol{\beta}$ 성분만큼 편의가 발생한다.
-
 
 ### 15.2.5 주성분회귀추정량의 분산 (Variance of PCR Estimator)
 
 추정량의 분산을 계산하면
 
-$$ \mathrm{Var}(\hat{\boldsymbol{\beta}}_g) = \sigma^2P_g\Lambda_g^{-1}P_g^TX^TXP_g\Lambda_g^{-1}P_g^T \\
-= \sigma^2(\sum_{j=1}^{g}\frac{1}{\lambda_j}\mathbf{p}_j\mathbf{p}_j^T)(\sum_{k=1}^{n}\lambda_k\mathbf{p}_k\mathbf{p}_k^T)(\sum_{l=1}^{g}\frac{1}{\lambda_l}\mathbf{p}_l\mathbf{p}_l^T) \\
-= \sigma^2\left(\sum_{j=1}^{g}\frac{1}{\lambda_j}\mathbf{p}_j\mathbf{p}_j^T\right) \tag{17.14}
+$$ 
+\begin{aligned}
+\mathrm{Var}(\hat{\boldsymbol{\beta}}_g) &= \sigma^2P_g\Lambda_g^{-1}P_g^TX^TXP_g\Lambda_g^{-1}P_g^T \\
+&= \sigma^2(\sum_{j=1}^{g}\frac{1}{\lambda_j}\mathbf{p}_j\mathbf{p}_j^T)(\sum_{k=1}^{n}\lambda_k\mathbf{p}_k\mathbf{p}_k^T)(\sum_{l=1}^{g}\frac{1}{\lambda_l}\mathbf{p}_l\mathbf{p}_l^T) \\
+&= \sigma^2\left(\sum_{j=1}^{g}\frac{1}{\lambda_j}\mathbf{p}_j\mathbf{p}_j^T\right) \tag{17.14}
+\end{aligned}
 $$
+
+$X^TX$는 대칭행렬이므로 고유벡터들을 서로 직교정규가 되도록 선택할 수 있다. 따라서 같은 인덱스의 원소만 1로 남고 나머지는 0이므로 식이 간단해진다.
 
 이 식은 상위 $g$개 주성분 방향에 대해서만 분산이 존재하고, 제거된 나머지 방향에 대해서는 더 이상 분산 기여가 없음을 뜻한다. 즉, 작은 고유값에 해당하는 불안정한 방향을 제거함으로써 분산을 감소시키는 효과가 생긴다.
 
@@ -399,7 +511,7 @@ $$
 
 ### 15.2.7 주성분회귀의 해석과 한계 (Interpretation and Limitation of PCR)
 
-주성분회귀는 설명변수들에 대한 선형결합으로 설명변수들의 전체 변동을 가장 잘 설명하는 방향을 먼저 찾는다. 이때 주성분분석 (principal component analysis, PCA)의 목적은 기본적으로 차원축소이다. 따라서 주성분은 반응변수 $y$를 고려하지 않고 오직 설명변수 행렬 $X$만으로 결정된다.
+주성분회귀는 설명변수들에 대한 선형결합으로 설명변수들의 전체 변동을 가장 잘 설명하는 방향을 먼저 찾는다. 이때 주성분분석의 목적은 기본적으로 차원축소이다. 따라서 주성분은 반응변수 $y$를 고려하지 않고 오직 설명변수 행렬 $X$만으로 결정된다.
 
 이 점에서 주성분회귀는 다음과 같은 특징을 가진다.
 
@@ -412,7 +524,7 @@ $$
 
 ## 15.3 부분최소제곱회귀 (Partial Least Squares Regression)
 
-부분최소제곱회귀 (partial least squares regression, PLS)는 주성분회귀와 함께 대표적인 차원축소방법이다. 두 방법은 모두 설명변수들을 새로운 저차원 축으로 변환한다는 공통점을 가지지만, 주성분의 선택 원리가 다르다.
+부분최소제곱회귀 (partial least squares regression, PLS)는 주성분회귀와 함께 대표적인 차원축소방법으로, 13.4절에서 다뤘다. 두 방법은 모두 설명변수들을 새로운 저차원 축으로 변환한다는 공통점을 가지지만, 주성분의 선택 원리가 다르다.
 
 주성분회귀에서는 설명변수들만을 이용하여 전체 변동이 큰 순서대로 주성분을 결정한다. 따라서 낮은 순위의 주성분이 오히려 반응변수 예측에 더 중요할 수도 있다는 한계가 있다. 반면 부분최소제곱회귀에서는 주성분과 유사한 잠재성분 (latent components)을 결정할 때 반응변수와의 연관성까지 함께 고려한다. 따라서 같은 개수의 성분을 사용하더라도 주성분회귀보다 부분최소제곱회귀가 더 높은 예측력을 보이는 경향이 있다.
 
