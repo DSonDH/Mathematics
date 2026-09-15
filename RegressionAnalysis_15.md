@@ -83,14 +83,14 @@ $$ \hat{\boldsymbol{\beta}}(k) = P(D^TD+kI_p)^{-1}D^TU^T\mathbf{y} \tag{17.6}$$
 
 이 식은 능형회귀가 최소제곱추정량과 비교하여 각 방향별 계수를 축소시키는 구조를 명확히 보여 준다.
 
-#### 증명: 능형회귀의 축소 성질 (Shrinkage Property)
-
-식 (17.4)와 식 (17.6)을 비교하면 최소제곱추정량은 각 방향에 대하여 $\frac{d_j}{d_j^2}$ 의 계수를 가지는 반면, 능형회귀추정량은 $\frac{d_j}{d_j^2+k}$
-의 계수를 가진다. $k>0$이면 
-
-$$\frac{d_j}{d_j^2}>\frac{d_j}{d_j^2+k}$$
-
-이므로 능형회귀추정량은 최소제곱추정량보다 더 작은 크기로 회귀계수를 줄인다. 따라서 능형회귀는 최소제곱추정량을 축소하는 추정량이다.
+>**증명: 능형회귀의 축소 성질 (Shrinkage Property)**
+>
+>식 (17.4)와 식 (17.6)을 비교하면 최소제곱추정량은 각 방향에 대하여 $\frac{d_j}{d_j^2}$ 의 계수를 가지는 반면, 능형회귀추정량은 $\frac{d_j}{d_j^2+k}$
+>의 계수를 가진다. $k>0$이면 
+>
+>$$\frac{d_j}{d_j^2}>\frac{d_j}{d_j^2+k}$$
+>
+>이므로 능형회귀추정량은 최소제곱추정량보다 더 작은 크기로 회귀계수를 줄인다. 따라서 능형회귀는 최소제곱추정량을 축소하는 추정량이다.
 
 ### 15.1.3 고차원 자료 $(p>n)$에서의 능형회귀 (Ridge Regression for High-Dimensional Data)
 
@@ -164,25 +164,25 @@ $$(E[\hat{\boldsymbol{\beta}}(k)]-\boldsymbol{\beta})^T(E[\hat{\boldsymbol{\beta
 =k^2\boldsymbol{\beta}^TP(D^TD+kI_p)^{-2}P^T\boldsymbol{\beta}
 $$
 
-#### 증명: 능형회귀의 기대값 계산 (Derivation of Expectation)
-
-선형모형 $\mathbf{y}=\mathbf{X}\boldsymbol{\beta}+\boldsymbol{\varepsilon},\quad E(\boldsymbol{\varepsilon})=0$ 에서 식 (17.5)에 기대값을 취하면
-
-$$
-E[\hat{\boldsymbol{\beta}}(k)] =
-(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\mathbf{X}^TE(\mathbf{y})
-= (\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\mathbf{X}^T\mathbf{X}\boldsymbol{\beta}
-$$
-
-가 된다. 여기에 $\mathbf{X}^T\mathbf{X}=(\mathbf{X}^T\mathbf{X}+kI_p)-kI_p$ 를 대입하면
-
-$$
-E[\hat{\boldsymbol{\beta}}(k)]
-= (\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\{(\mathbf{X}^T\mathbf{X}+kI_p)-kI_p\}\boldsymbol{\beta}
-= \boldsymbol{\beta}-k(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\boldsymbol{\beta}
-$$
-
-를 얻는다. 따라서 능형회귀는 일반적으로 불편추정량 (unbiased estimator)이 아니며, $k>0$일 때 편의를 가진다.
+>**증명: 능형회귀의 기대값 계산 (Derivation of Expectation)**
+>
+>선형모형 $\mathbf{y}=\mathbf{X}\boldsymbol{\beta}+\boldsymbol{\varepsilon},\quad E(\boldsymbol{\varepsilon})=0$ 에서 식 (17.5)에 기대값을 취하면
+>
+>$$
+>E[\hat{\boldsymbol{\beta}}(k)] =
+>(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\mathbf{X}^TE(\mathbf{y})
+>= (\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\mathbf{X}^T\mathbf{X}\boldsymbol{\beta}
+>$$
+>
+>가 된다. 여기에 $\mathbf{X}^T\mathbf{X}=(\mathbf{X}^T\mathbf{X}+kI_p)-kI_p$ 를 대입하면
+>
+>$$
+>E[\hat{\boldsymbol{\beta}}(k)]
+>= (\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\{(\mathbf{X}^T\mathbf{X}+kI_p)-kI_p\}\boldsymbol{\beta}
+>= \boldsymbol{\beta}-k(\mathbf{X}^T\mathbf{X}+kI_p)^{-1}\boldsymbol{\beta}
+>$$
+>
+>를 얻는다. 따라서 능형회귀는 일반적으로 불편추정량 (unbiased estimator)이 아니며, $k>0$일 때 편의를 가진다.
 
 ### 15.1.6 능형회귀의 분산과 평균제곱오차 (Variance and Mean Squared Error)
 
@@ -228,7 +228,7 @@ $$
 
 이 표현을 사용하면 $p\times p$ 행렬이 아니라 $n\times n$ 행렬만 역행렬 계산에 필요하므로 계산량이 크게 줄어든다. 예를 들어 $n=100$이면 $100\times100$ 행렬의 계산만으로 충분하다. 따라서 고차원 자료에서는 SVD 기반 표현이 계산상 매우 중요하다.
 
-#### 예제: 마이크로어레이 자료의 계산 부담 완화 (Microarray Example)
+**예제: 마이크로어레이 자료의 계산 부담 완화 (Microarray Example)**
 
 자료가 $n=100$, $p=4000$인 경우를 생각하자. 직접 능형회귀를 계산하면 $4000\times4000$ 행렬의 역행렬이 필요하므로 일반적인 계산 환경에서는 부담이 매우 크다. 그러나 특잇값 분해를 이용하여 $n\times n$ 차원으로 계산을 바꾸면, 실질적으로 $100\times100$ 행렬의 연산만 수행하면 된다. 따라서 계산 복잡도가 크게 감소하며, 고차원 자료에 대한 능형회귀의 실제 적용이 가능해진다.
 
@@ -291,20 +291,20 @@ $$\hat{\boldsymbol{\beta}}_g=\hat{\boldsymbol{\beta}}$$
 
 가 되어 주성분회귀추정량은 최소제곱추정량과 같아진다.
 
-#### 증명: 주성분회귀추정량의 유도 (Derivation of PCR Estimator)
-
-$Z_g=XP_g$이므로
-
-$$Z_g^TZ_g=P_g^TX^TXP_g,\quad Z_g^T\mathbf{y}=P_g^TX^T\mathbf{y}\\
-\therefore \hat{\boldsymbol{\alpha}}_g=(P_g^TX^TXP_g)^{-1}P_g^TX^T\mathbf{y}$$
-
-이제 특잇값 분해 $X=UDP^T$ 를 대입하면 $X^TX=PD^TDP^T$ 이고, $P_g$는 $P$의 앞쪽 $g$개 열벡터로 이루어지므로
-
-$$P_g^TX^TXP_g=D_g^TD_g$$
-
-또한 $P_g^TX^T\mathbf{y}=D_g^TU^T\mathbf{y}$ 이므로
-
-$$\hat{\boldsymbol{\alpha}}_g=(D_g^TD_g)^{-1}D_g^TU^T\mathbf{y} \\
+>**증명: 주성분회귀추정량의 유도 (Derivation of PCR Estimator)**
+>
+>$Z_g=XP_g$이므로
+>
+>$$Z_g^TZ_g=P_g^TX^TXP_g,\quad Z_g^T\mathbf{y}=P_g^TX^T\mathbf{y}\\
+>\therefore \hat{\boldsymbol{\alpha}}_g=(P_g^TX^TXP_g)^{-1}P_g^TX^T\mathbf{y}$$
+>
+>이제 특잇값 분해 $X=UDP^T$ 를 대입하면 $X^TX=PD^TDP^T$ 이고, $P_g$는 $P$의 앞쪽 $g$개 열벡터로 이루어지므로
+>
+>$$P_g^TX^TXP_g=D_g^TD_g$$
+>
+>또한 $P_g^TX^T\mathbf{y}=D_g^TU^T\mathbf{y}$ 이므로
+>
+>$$\hat{\boldsymbol{\alpha}}_g=(D_g^TD_g)^{-1}D_g^TU^T\mathbf{y} \\
 \hat{\boldsymbol{\beta}}_g=P_g\hat{\boldsymbol{\alpha}}_g=P_g(D_g^TD_g)^{-1}D_g^TU^T\mathbf{y}$$
 
 ### 15.2.3 고차원 자료 $(p>n)$에서의 주성분회귀 (PCR for High-Dimensional Data)

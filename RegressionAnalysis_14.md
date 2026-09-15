@@ -64,8 +64,8 @@ $$
 연결함수의 선택에 따라 여러 모형이 나온다.
 
 - 로지스틱 회귀모형(logistic regression model)
-- 겜벨 모형(Gumbel model)
-- 프로빗 모형(probit model)
+- 겜벨 모형(Gumbel model, 검벨모형)
+- 프로빗 모형(probit model): 표준정규분포함수의 역함수 
 
 그 중 로지스틱 모형은 결과 해석이 상대적으로 쉽기 때문에 가장 널리 사용된다. 특히 회귀계수를 오즈와 오즈비 관점에서 직접 해석할 수 있다는 장점이 있다.
 
@@ -82,16 +82,14 @@ $$
 ### 14.1.5 오즈 (Odds)와 오즈비 (Odds Ratio)
 
 로지스틱 회귀에서 회귀계수의 해석은 오즈와 오즈비를 통해 이루어진다.  
-먼저 성공의 오즈는
+먼저 성공의 오즈는 $P(y=1)=\pi$ 라 할때
 
 $$
-\frac{\pi(x)}{1-\pi(x)}
-=\exp(\beta_0+\beta_1x)
-=e^{\beta_0}(e^{\beta_1})^x
-\tag{16.5}
+\frac{\pi(x)}{1-\pi(x)} = P(y=1) / P(y=0) =\exp(\beta_0+\beta_1x)
+=e^{\beta_0}(e^{\beta_1})^x\tag{16.5}
 $$
 
-이 식은 $x$가 한 단위 증가할 때마다 오즈가 $e^{\beta_1}$배가 됨을 의미한다. 따라서 $e^{\beta_1}$는 오즈비(odds ratio)로 해석된다.  
+로 정의한다. 이 식은 $x$가 한 단위 증가할 때마다 오즈가 $e^{\beta_1}$배가 됨을 의미한다. 따라서 $e^{\beta_1}$는 오즈비(odds ratio)로 해석된다. $[0, \infty)$ 의 값을 가질 수 있고, $\pi = odds/(1+odds)$ 관계다.  
 오즈비를 식으로 쓰면
 
 $$
@@ -101,9 +99,9 @@ $$
 \tag{16.6}
 $$
 
-즉, 설명변수 $x$가 1 증가할 때 성공 오즈가 얼마나 배수적으로 변하는지를 나타내는 값이 $\exp(\beta_1)$이다.
+즉, 오즈비는 설명변수 $x$가 1 증가할 때 성공 오즈가 얼마나 배수적으로 변하는지를 나타내는 값고, $\exp(\beta_1)$ 와 같다.
 
-#### 예제: 회귀계수의 오즈비 해석 (Interpretation of Odds Ratio)
+**예제: 회귀계수의 오즈비 해석 (Interpretation of Odds Ratio)**
 
 $x$를 소득, $y$를 어떤 상품의 구입 여부라 하자. 여기서 $y=1$은 구입, $y=0$은 미구입이다. 만약 $\beta_1=3.72$이면 $\exp(3.72)\approx 42$ 이므로, 소득이 한 단위 증가할 때 그 상품을 구매할 오즈가 약 42배 증가한다고 해석한다.
 
@@ -152,8 +150,7 @@ $$
 \ln L(\boldsymbol{\beta})
 =\sum_{i=1}^{n}
 \Big[
-y_i\ln \pi(\mathbf{x}_i^T\boldsymbol{\beta})
-+ (1-y_i)\log(1-\pi(\mathbf{x}_i^T\boldsymbol{\beta}))
+y_i\ln \pi(\mathbf{x}_i^T\boldsymbol{\beta}) + (1-y_i)\log(1-\pi(\mathbf{x}_i^T\boldsymbol{\beta}))
 \Big]
 \tag{16.9}
 $$
@@ -202,12 +199,11 @@ $$
 
 $$
 \hat{\boldsymbol{\beta}}^{(t+1)}
-= \boldsymbol{\beta}^{(t)}
-+ \left[\mathbf{X}^T W(\boldsymbol{\beta}^{(t)}) \mathbf{X}\right]^{-1}
-\mathbf{X}^T\{\mathbf{y}-\pi(\boldsymbol{\beta}^{(t)})\} \tag{16.10}
+= \boldsymbol{\beta}^{(t)} + \left[\mathbf{X}^T W(\boldsymbol{\beta}^{(t)}) \mathbf{X}\right]^{-1} \mathbf{X}^T\{\mathbf{y}-\pi(\boldsymbol{\beta}^{(t)})\} \tag{16.10} \\
+= \left[\mathbf{X}^T W(\boldsymbol{\beta}^{(t)}) \mathbf{X}\right]^{-1} \mathbf{X}^T W(\boldsymbol{\beta}^{(t)}) z(\boldsymbol{\beta}^{(t)})
 $$
 
-또는 같은 식을 다음의 보조변수 $z(\boldsymbol{\beta}^{(t)})$를 이용하여 표현할 수 있다.
+여기서, 보조변수 $z(\boldsymbol{\beta}^{(t)})$:
 
 $$
 z(\boldsymbol{\beta}^{(t)})
@@ -227,9 +223,9 @@ $$
 \leftarrow
 \arg\min_{\boldsymbol{\beta}}
 \left\{
-[z(\boldsymbol{\beta}^{(t)})-\mathbf{X}\boldsymbol{\beta}]^T
+[z(\boldsymbol{\beta}^{(t)})-\mathbf{X}\boldsymbol{\beta}^{(t)}]^T
 W(\boldsymbol{\beta}^{(t)})
-[z(\boldsymbol{\beta}^{(t)})-\mathbf{X}\boldsymbol{\beta}]
+[z(\boldsymbol{\beta}^{(t)})-\mathbf{X}\boldsymbol{\beta}^{(t)}]
 \right\}
 $$
 
@@ -274,7 +270,7 @@ $$
 
 2×2 분할표는 이러한 연구들에서 공통적으로 등장하며, 연구설계가 다르더라도 오즈비를 통해 관련성의 강도를 비교할 수 있다.
 
-#### 예제: 코호트 연구 (Cohort Study Example)
+**예제: 코호트 연구 (Cohort Study Example)**
 
 Pauling(1971)의 연구에서는 환자들을 임의로 두 집단으로 나누어 비타민 C와 위약 (placebo)을 투여하고, 각 집단에서 감기환자가 얼마나 발생하는지를 조사하였다. 이를 통해 비타민 C가 감기 예방에 도움이 되는가를 평가하고자 하였다.
 
@@ -285,7 +281,7 @@ Pauling(1971)의 연구에서는 환자들을 임의로 두 집단으로 나누�
 
 이 표는 처리변수와 질병 발생 여부로 이루어진 전형적인 2×2 분할표이다. 여기서 관심사는 비타민 C 처리가 감기 발생확률을 낮추는지 여부이다.
 
-#### 예제: 사례-대조군 연구 (Case-Control Study Example)
+**예제: 사례-대조군 연구 (Case-Control Study Example)**
 
 Keller(1965)는 구강암과 흡연의 관계를 조사하기 위하여 구강암 환자와 정상인을 구분한 뒤 흡연 여부를 조사하였다. 이를 통해 흡연이 구강암과 관련이 있는지, 관련이 있다면 흡연자의 구강암 발생 가능성이 비흡연자에 비하여 얼마나 큰지를 알고자 하였다.
 
@@ -296,13 +292,181 @@ Keller(1965)는 구강암과 흡연의 관계를 조사하기 위하여 구강�
 
 이 자료에서는 질병 발생 여부가 먼저 고정되어 있고, 그 안에서 노출 여부를 조사한다는 점이 코호트 연구와 다르다. 그럼에도 오즈비를 통해 관련성을 측정할 수 있다.
 
-### 왜 분할표만이 아니라 로지스틱 회귀를 사용하는가 (Why Use Logistic Regression Beyond a Simple Table)
+**왜 분할표만이 아니라 로지스틱 회귀를 사용하는가?**
 
-표본비율과 오즈비만으로도 2×2 분할표의 관련성을 설명할 수 있으므로, 굳이 로지스틱 회귀모형을 사용할 필요가 있는지 의문이 생길 수 있다. 그러나 실제 역학연구에서는 관심 위험요인 외에도 결과에 영향을 미칠 수 있는 여러 다른 요인들이 존재한다.
+표본비율과 오즈비 만으로도 2×2 분할표의 관련성을 설명할 수 있으므로, 굳이 로지스틱 회귀모형을 사용할 필요가 있는지 의문이 생길 수 있다. 그러나 실제 역학연구에서는 관심 위험요인 외에도 결과에 영향을 미칠 수 있는 여러 다른 요인들이 존재한다.
 
 실험연구에서 랜덤화 (randomization)를 수행하더라도 이미 알려진 위험요인이나 관심 밖의 요인의 효과를 완전히 무시할 수는 없다. 따라서 이들 교란요인 (confounding factors)의 효과를 통제해야 한다. 로지스틱 회귀는 관련 변수들을 동시에 모형에 포함시켜, 관심 있는 위험요인의 순수한 효과를 추정할 수 있게 한다.
 
 즉, 2×2 분할표는 단순 관련성 파악에는 유용하지만, 다수의 설명변수를 함께 고려하고 조정된 오즈비 (adjusted odds ratio)를 구하려면 로지스틱 회귀가 필요하다.
+
+
+### (추가)
+질병 여부를 $D$, 노출 여부를 $E$라고 하자.
+
+$$
+D=
+\begin{cases}
+1,&\text{질병 발생}\\
+0,&\text{질병 미발생}
+\end{cases},
+\quad
+E=
+\begin{cases}
+1,&\text{위험요인 노출}\\
+0,&\text{위험요인 비노출}
+\end{cases}
+$$
+
+또한 노출군과 비노출군의 질병확률을 각각 $\pi_1=P(D=1\mid E=1), \quad \pi_0=P(D=1\mid E=0)$ 라고 정의한다.
+
+1. 코호트연구와 단면연구의 오즈비
+
+노출군의 질병 오즈는 $\frac{P(D=1\mid E=1)}{P(D=0\mid E=1)}=\frac{\pi_1}{1-\pi_1}$ 이고, 비노출군의 질병 오즈는 $\frac{P(D=1\mid E=0)}{P(D=0\mid E=0)}=\frac{\pi_0}{1-\pi_0}$ 이다. 따라서 질병 오즈비는
+
+$$
+OR_D = \frac{\pi_1/(1-\pi_1)} {\pi_0/(1-\pi_0)}
+$$
+
+코호트연구에서 $\pi_1$과 $\pi_0$는 일정 기간의 질병 발생확률이다. 반면 단면연구에서는 조사 시점의 질병 유병확률이다. 따라서 단면연구에서 계산되는 오즈비는 엄밀하게는 유병 오즈비다.
+
+2. 사례대조연구의 오즈비
+
+사례대조연구에서는 다음과 같이 정의한다. $q_1=P(E=1\mid D=1), \quad q_0=P(E=1\mid D=0)$
+
+여기서 $q_1$은 사례군에서 위험요인에 노출된 비율이고, $q_0$는 대조군에서 위험요인에 노출된 비율이다.
+
+사례군의 노출 오즈는 $\frac{q_1}{1-q_1} =\frac{P(E=1\mid D=1)}{P(E=0\mid D=1)}$ 이고, 대조군의 노출 오즈는 $\frac{q_0}{1-q_0} = \frac{P(E=1\mid D=0)}{P(E=0\mid D=0)}$ 이다. 따라서 사례대조연구의 노출 오즈비는
+
+$$
+OR_E = \frac{q_1/(1-q_1)}{q_0/(1-q_0)}
+$$
+
+3. $2\times2$ 분할표를 이용한 증명
+
+자료를 다음과 같이 나타내자.
+
+| 노출 여부 | $D=1$ | $D=0$ |    합계 |
+| ----- | ----: | ----: | ----: |
+| $E=1$ |   $a$ |   $b$ | $a+b$ |
+| $E=0$ |   $c$ |   $d$ | $c+d$ |
+
+노출군과 비노출군의 질병확률은 $\pi_1=\frac{a}{a+b}, \quad \pi_0=\frac{c}{c+d}$ 따라서 노출군의 질병 오즈는 $\frac{\pi_1}{1-\pi_1} = \frac{a/(a+b)}{b/(a+b)} = \frac{a}{b}$ 이고, 비노출군의 질병 오즈는 $\frac{\pi_0}{1-\pi_0} = \frac{c/(c+d)}{d/(c+d)} = \frac{c}{d}$ 이다.  
+그러므로 질병 오즈비는 $OR_D = \frac{a/b}{c/d} = \frac{ad}{bc}$ 이다.
+
+한편 사례군과 대조군에서 위험요인에 노출된 비율은 $q_1=\frac{a}{a+c}, \quad q_0=\frac{b}{b+d}$ 이다. 사례군의 노출 오즈는 $\frac{q_1}{1-q_1} = \frac{a/(a+c)}{c/(a+c)} = \frac{a}{c}$ 이고, 대조군의 노출 오즈는 $\frac{q_0}{1-q_0} = \frac{b/(b+d)}{d/(b+d)} = \frac{b}{d}$ 이다.  
+따라서 노출 오즈비는 $OR_E = \frac{a/c}{b/d} = \frac{ad}{bc}$ 이다.
+
+결국
+
+$$
+\boxed{
+\frac{\pi_1/(1-\pi_1)}
+{\pi_0/(1-\pi_0)}
+=
+\frac{ad}{bc}
+=
+\frac{q_1/(1-q_1)}
+{q_0/(1-q_0)}
+}
+$$
+
+이므로
+
+$$
+\boxed{OR_D=OR_E}
+$$
+
+즉, 노출군과 비노출군에서 비교한 질병 오즈비와 사례군과 대조군에서 비교한 노출 오즈비는 모두 동일한 교차곱비 $ad/(bc)$가 된다.
+
+4. Bayes 정리를 이용한 증명
+
+모집단에서 노출확률을 $p=P(E=1)$  이라고 하자. 그러면 $P(E=0)=1-p$이다.  Bayes 정리를 이용하면 사례군의 노출 오즈는
+
+$$
+\begin{aligned}
+\frac{q_1}{1-q_1}
+&= \frac{P(E=1\mid D=1)} {P(E=0\mid D=1)} \\
+&= \frac{P(D=1\mid E=1)P(E=1)} {P(D=1\mid E=0)P(E=0)}\\
+&= \frac{\pi_1p}{\pi_0(1-p)}
+\end{aligned}
+$$
+
+마찬가지로 대조군의 노출 오즈는
+
+$$
+\begin{aligned}
+\frac{q_0}{1-q_0}
+&=\frac{P(E=1\mid D=0)}{P(E=0\mid D=0)}\\
+&=\frac{P(D=0\mid E=1)P(E=1)}{P(D=0\mid E=0)P(E=0)}\\
+&=\frac{(1-\pi_1)p}{(1-\pi_0)(1-p)}
+\end{aligned}
+$$
+
+따라서 두 노출 오즈의 비는
+
+$$
+\begin{aligned}
+OR_E
+&=\frac{q_1/(1-q_1)}{q_0/(1-q_0)}\\
+&=\frac{\pi_1p/\{\pi_0(1-p)\}}{(1-\pi_1)p/\{(1-\pi_0)(1-p)\}}\\
+&=\frac{\pi_1(1-\pi_0)}{\pi_0(1-\pi_1)}\\
+&=\frac{\pi_1/(1-\pi_1)}{\pi_0/(1-\pi_0)}\\
+&=OR_D
+\end{aligned}
+$$
+
+노출의 주변 오즈인 $p/(1-p)$가 분자와 분모에서 소거되므로 두 오즈비가 동일해진다.
+
+5. 사례와 대조의 표본 수를 임의로 정할 수 있는 이유
+
+사례의 표본추출률을 $s_1$, 대조의 표본추출률을 $s_0$라고 하자. 표본에서 기대되는 도수는 다음과 같다.
+
+| 노출 여부 |  표본 사례 |  표본 대조 |
+| ----- | -----: | -----: |
+| $E=1$ | $s_1a$ | $s_0b$ |
+| $E=0$ | $s_1c$ | $s_0d$ |
+
+표본 오즈비를 계산하면
+
+$$
+\begin{aligned}
+OR_{\mathrm{sample}}
+&=\frac{(s_1a)(s_0d)}{(s_0b)(s_1c)}\\
+&=\frac{s_1s_0ad}{s_1s_0bc}\\
+&=\frac{ad}{bc}
+\end{aligned}
+$$
+
+즉, 사례와 대조의 표본추출률 $s_1,s_0$가 소거된다. 따라서 연구자가 사례와 대조의 수를 인위적으로 정했더라도 오즈비는 추정할 수 있다.
+
+그러나 사례대조연구의 표본에서 계산한
+
+$$
+P(D=1\mid E=1) \quad\text{및}\quad P(D=1\mid E=0)
+$$
+
+은 모집단의 $\pi_1,\pi_0$를 직접 추정하지 못한다. 사례와 대조의 수가 연구설계에 의해 인위적으로 결정되기 때문이다.
+
+6. 오즈비와 상대위험도의 구분
+
+오즈비는 $OR=\frac{\pi_1/(1-\pi_1)}{\pi_0/(1-\pi_0)}$ 이고, 상대위험도는 $RR=\frac{\pi_1}{\pi_0}$ 이다. 따라서 일반적으로 $OR$과 $RR$은 같지 않다.
+
+질병이 드문 경우에는 $\pi_1\approx0, \quad \pi_0\approx0$  이므로 $1-\pi_1\approx1, \quad 1-\pi_0\approx1$ 이다. 따라서
+
+$$
+OR = \frac{\pi_1/(1-\pi_1)} {\pi_0/(1-\pi_0)} \approx \frac{\pi_1}{\pi_0} =RR
+$$
+
+가 된다.
+
+중요한 점은 사례대조연구의 노출 오즈비와 코호트연구의 질병 오즈비가 동일하다는 사실에는 희귀질환 가정이 필요하지 않다는 것이다.
+
+$$
+\boxed{OR_E=OR_D}
+$$
+
+는 항상 성립하는 대수적 동일성이다. 희귀질환 가정은 오즈비를 상대위험도와 비슷한 값으로 해석할 때만 필요하다.
 
 
 ## 14.4 로지스틱 모형을 이용한 분류분석 (Classification using Logistic Model)
@@ -330,7 +494,7 @@ Keller(1965)는 구강암과 흡연의 관계를 조사하기 위하여 구강�
 
 셋째, 문제영역의 전문가 판단, 민감도 (sensitivity), 특이도 (specificity) 같은 성능 기준도 함께 고려할 수 있다.
 
-#### 예제: 스팸 메일 분류에서의 절단값 (Cut-off in Spam Classification)
+**예제: 스팸 메일 분류에서의 절단값 (Cut-off in Spam Classification)**
 
 이메일을 정상 메일과 스팸 메일로 분류하는 문제를 생각하자. 정상 메일을 스팸으로 잘못 분류하면 중요한 메일이 필터링되어 사용자에게 큰 불편을 줄 수 있다. 반면 스팸 메일을 정상으로 분류하는 경우의 손실은 상대적으로 작을 수 있다. 이 경우에는 정상 메일을 스팸으로 오분류하는 손실을 크게 보아, 절단값을 조정함으로써 그러한 오류를 줄이도록 설계할 수 있다.
 
@@ -338,16 +502,14 @@ Keller(1965)는 구강암과 흡연의 관계를 조사하기 위하여 구강�
 
 ### 14.4.3 로지스틱 회귀 기반 분류기의 선형성 (Linearity of Logistic Regression Classifier)
 
-위와 같이 정의한 로지스틱 회귀 기반 분류자는 선형분류자 (linear classifier)이다. 이를 보이기 위해 $P(y=1\mid \mathbf{x})>c$ 라는 분류규칙을 로짓 형태로 바꾸어 본다. 먼저
+위와 같이 정의한 로지스틱 회귀 기반 분류자는 선형분류자 (linear classifier)이다. 이를 보이기 위해 $P(y=1\mid \mathbf{x})>c$ 라는 분류규칙을 로짓 형태로 바꾸어 본다. 먼저 $P(y=1\mid \mathbf{x})>c \iff \frac{P(y=1\mid \mathbf{x})}{1-P(y=1\mid \mathbf{x})}>\frac{c}{1-c}$ 이므로 양변에 로그를 취하면,
 
-$$ \log\left[\frac{P(y=1\mid \mathbf{x})}{1-P(y=1\mid \mathbf{x})}\right]
-> \ln\left(\frac{c}{1-c}\right)
+$$ \log\left[\frac{P(y=1\mid \mathbf{x})}{1-P(y=1\mid \mathbf{x})}\right] > \ln\left(\frac{c}{1-c}\right)
 $$
 
 이면 범주 1로 분류하는 것과 동일하다. 로지스틱 회귀모형에서
 
-$$\log\left[\frac{P(y=1\mid \mathbf{x})}{1-P(y=1\mid \mathbf{x})}\right]
-= \beta_0+\beta_1x_1+\cdots+\beta_px_p$$
+$$\log\left[\frac{P(y=1\mid \mathbf{x})}{1-P(y=1\mid \mathbf{x})}\right] = \beta_0+\beta_1x_1+\cdots+\beta_px_p$$
 
 이므로, 위 규칙은
 
@@ -355,24 +517,6 @@ $$ \beta_0+\beta_1x_1+\cdots+\beta_px_p > \ln\left(\frac{c}{1-c}\right) $$
 
 와 같아진다.  
 따라서 분류경계 (decision boundary)는 설명변수에 대한 선형식으로 주어진다. 즉, 로지스틱 회귀는 확률모형으로는 비선형적인 S자형 반응함수를 사용하지만, 실제 분류규칙의 경계는 선형이다.
-
-이미지에 제시된 단일 설명변수 표기에서는
-
-$$\beta_0+\beta_1x>\log(c^*)$$
-
-의 형태로 정리되며, 여기서 $c^*=\frac{c}{1-c}$ 이다. 이 역시 분류경계가 선형임을 보여 준다.
-
-#### 증명: 로지스틱 분류경계의 선형성 (Proof of Linear Decision Boundary)
-
-분류규칙 $P(y=1\mid \mathbf{x})>c$에서 출발한다.
-
-$$ P(y=1\mid \mathbf{x})>c \iff \frac{P(y=1\mid \mathbf{x})}{1-P(y=1\mid \mathbf{x})}>\frac{c}{1-c}$$
-
-이고, 양변에 로그를 취하면
-
-$$ \log\left[\frac{P(y=1\mid \mathbf{x})}{1-P(y=1\mid \mathbf{x})}\right] >\log\left(\frac{c}{1-c}\right)$$
-
-을 얻는다. 그런데 로지스틱 회귀에서 좌변은 설명변수의 선형식이므로, 최종 분류규칙도 설명변수의 선형부등식으로 표현된다. 따라서 로지스틱 회귀 기반 분류자는 선형분류자이다.
 
 ### 14.4.4 분류분석에서의 해석 (Interpretation in Classification)
 
