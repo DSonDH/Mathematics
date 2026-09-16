@@ -56,7 +56,7 @@ $$
   * $f$는 $x=a$에서 우미분가능
   * $f$는 $x=b$에서 좌미분가능
 
-## (2) 미분계수의 연산 *(Rules of Differentiation)*
+## (2) 미분계수의 연산 *(Rules of Differentiation)*ㅋ
 
 $f,g:D\to\mathbb{R}$가 $a\in D$에서 미분가능하면 다음이 성립한다.
 1. $(f+g)'(a)=f'(a)+g'(a)$

@@ -1,31 +1,5 @@
 ## 삼각함수 공식 정리
 
-### 홀함수와 짝함수
-
-**짝함수**
-
-함수 $f$가 $f(-x)=f(x)$ 를 만족하면 짝함수라고 한다. 그래프가 $y$축에 대하여 대칭이다. 코사인은 $\cos(-x)=\cos x$ 를 만족하므로 짝함수다.
-
-짝함수는 대칭구간에서 다음을 만족한다.
-
-$$
-\boxed{
-\int_{-a}^{a}f(x),dx = 2\int_0^a f(x),dx
-}
-$$
-
-**홀함수**
-
-함수 $f$가 $f(-x)=-f(x)$ 를 만족하면 홀함수라고 한다. 그래프가 원점에 대하여 대칭이다. 사인은 $\sin(-x)=-\sin x$ 를 만족하므로 홀함수다.
-
-홀함수는 대칭구간에서 다음을 만족한다.
-
-$$
-\boxed{
-\int_{-a}^{a}f(x),dx=0
-}
-$$
-
 ### 홀짝함수의 곱
 
 | 첫 번째 함수 | 두 번째 함수 | 곱   |
@@ -64,6 +38,45 @@ $$
 \cos(A-B)=\cos A\cos B+\sin A\sin B \\
 $$
 
+#### 증명
+
+단위원 위의 점 $(\cos B,\sin B)$를 원점 주위로 $A$만큼 회전시키면 그 좌표는
+
+$$
+\begin{pmatrix}
+\cos A&-\sin A\\
+\sin A&\cos A
+\end{pmatrix}
+\begin{pmatrix}
+\cos B\\
+\sin B
+\end{pmatrix}
+=
+\begin{pmatrix}
+\cos A\cos B-\sin A\sin B\\
+\sin A\cos B+\cos A\sin B
+\end{pmatrix}
+$$
+
+이다. 한편 회전한 점의 좌표는 $(\cos(A+B),\sin(A+B))$이므로 좌표를 비교하면 (혹은 피타고라스 정리로 삼각형 대각선 길이 계산하는걸 생각해도 됨.)
+
+$$
+\cos(A+B)=\cos A\cos B-\sin A\sin B,
+\qquad
+\sin(A+B)=\sin A\cos B+\cos A\sin B
+$$
+
+를 얻는다. 여기서 $B$를 $-B$로 바꾸고
+$\cos(-B)=\cos B$, $\sin(-B)=-\sin B$를 사용하면
+
+$$
+\cos(A-B)=\cos A\cos B+\sin A\sin B,
+\qquad
+\sin(A-B)=\sin A\cos B-\cos A\sin B
+$$
+
+가 성립한다. 따라서 네 덧셈정리가 모두 증명된다.
+
 ### 배각공식
 
 덧셈정리에서 $A=B=\theta$로 놓으면 다음을 얻는다.
@@ -86,8 +99,6 @@ $$
 
 이는 $\sin^2\theta$와 $\cos^2\theta$를 적분할 때 중요하다.
 
-예를 들어
-
 $$
 \begin{aligned}
 \int\cos^2x,dx
@@ -99,7 +110,7 @@ $$
 \end{aligned}
 $$
 
-### 곱을 합으로 바꾸는 공식
+### 응용: 곱을 합으로 바꾸는 공식
 
 푸리에 급수에서 매우 중요한 공식이다.
 
@@ -117,9 +128,7 @@ $$
 \sin(mx)\sin(nx) = \frac12 \left[\cos((m-n)x)-\cos((m+n)x)\right]
 $$
 
-### 합을 곱으로 바꾸는 공식
-
-곱을 합으로 바꾸는 공식과 반대 방향의 공식이다.
+반대로하면: 합을 곱으로 바꾸는 공식이 된다.
 
 $$
 \sin A+\sin B = 2\sin\left(\frac{A+B}{2}\right) \cos\left(\frac{A-B}{2}\right) \\
@@ -137,25 +146,6 @@ $$
 \int\sin(nx),dx = -\frac{1}{n}\cos(nx)+C, \quad \int\cos(nx),dx = \frac{1}{n}\sin(nx)+C
 $$
 
-두 번 미분하면 다음과 같다.
-
-$$
-\frac{d^2}{dx^2}\sin(nx) = -n^2\sin(nx) \\ \frac{d^2}{dx^2}\cos(nx) = -n^2\cos(nx)
-$$
-
-이 성질 때문에 사인과 코사인이 파동방정식의 해에 자연스럽게 등장한다.
-
-### 주기
-
-$\sin x$와 $\cos x$의 기본주기는 $2\pi$다.
-
-$$
-\sin(x+2\pi)=\sin x, \quad \cos(x+2\pi)=\cos x
-$$
-
-$\sin(nx)$와 $\cos(nx)$의 주기는 $\frac{2\pi}{|n|}$ 이다.  
-$n$이 커질수록 주기는 짧아지고, 같은 구간에서 더 빠르게 진동한다.
-
 ### 직교성의 의미
 
 함수의 내적을 다음과 같이 정의한다.
@@ -167,90 +157,12 @@ $$
 두 함수의 내적이 $0$이면 두 함수가 서로 직교한다고 한다.
 
 $$
-\langle f,g\rangle=0
-\quad\Longrightarrow\quad
-f\perp g
+\langle f,g\rangle=0 \quad\Longrightarrow\quad f\perp g
 $$
 
 이는 유클리드 공간에서 두 벡터의 내적이 $0$이면 서로 수직인 것과 같은 개념이다.
 
-### 직교와 정규직교의 차이
-
-함수의 길이 또는 노름을 다음과 같이 정의한다.
-
-$$
-|f| = \sqrt{\langle f,f\rangle} = \sqrt{\int_{-\pi}^{\pi}|f(x)|^2,dx}
-$$
-
-상수함수 $1$의 길이는
-
-$$|1| = \sqrt{\int_{-\pi}^{\pi}1,dx} = \sqrt{2\pi}$$
-
-이다.
-
-사인과 코사인의 길이는
-
-$$|\cos(nx)|=\sqrt{\pi}, \quad |\sin(nx)|=\sqrt{\pi}$$
-
-이다.
-
-따라서 다음 함수계는 서로 직교하고 각각의 길이가 $1$인 정규직교 함수계다.
-
-$$
-\boxed{
-{
-\frac1{\sqrt{2\pi}},
-\frac{\cos x}{\sqrt\pi},
-\frac{\sin x}{\sqrt\pi},
-\frac{\cos2x}{\sqrt\pi},
-\frac{\sin2x}{\sqrt\pi},
-\ldots}
-}
-$$
-
-이러한 직교성 때문에 푸리에 급수에서 각 주파수의 계수를 다른 항의 간섭 없이 개별적으로 구할 수 있다.
-
-
-## 조건부 확률 
-### 곱셈법칙 (Multiplication Rule)
-
-$$P(A \cap B) = P(A) P(B|A) = P(B) P(A|B)$$
-
-**증명**: 조건부 확률의 정의에서
-$$P(B|A) = \frac{P(A \cap B)}{P(A)} \implies P(A \cap B) = P(A) P(B|A)$$
-
-### 확장: 연쇄법칙 (Chain Rule)
-
-$n$개의 사건 $A_1, A_2, \ldots, A_n$에 대해
-
-$$P(A_1 \cap A_2 \cap \cdots \cap A_n) = P(A_1) P(A_2|A_1) P(A_3|A_1 \cap A_2) \cdots P(A_n|A_1 \cap \cdots \cap A_{n-1})$$
-
-**증명**: 귀납법으로 곱셈법칙을 반복 적용
-
-**변수 표기 예시**: 조건부 변수 분리
-
-$$P(Y, X_E \mid X_C) = P(Y \mid X_C) P(X_E \mid Y, X_C)$$
-
-(단, $X_C$는 조건부 변수, $X_E$는 추가 변수, $Y$는 반응변수)
-
-### 베이즈 정리 (Bayes' Theorem)
-
-$$P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{\sum_i P(B|A_i)P(A_i)}$$
-
-(단, $\{A_i\}$는 표본공간의 분할)
-
-**증명**: $P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B|A)P(A)}{P(B)}$에서 전확률 공식 적용
-
-**일반형**: 다중 조건부 변수
-
-$$P(Y \mid X_C) = \frac{P(X_C \mid Y) P(Y)}{P(X_C)} = \frac{P(X_C \mid Y) P(Y)}{\sum_y P(X_C \mid Y=y) P(Y=y)}$$
-
-### 활용
-
-* 베이지안 추론: 사전확률 → 사후확률
-* 의료진단: 검사양성일 때 실제 질병 보유 확률
-* 혼합분포: 성분별 기여도 계산
-* 그래프 모형: 조건부 독립성 구조 표현
+(직교행렬: $AA^T = I$)
 
 ## 랜덤표본 분포 변환
 
@@ -288,9 +200,7 @@ $$f_{Y_i}(y) = \frac{d}{dy}P(Y_i \le y) = \frac{1}{\theta} e^{-y/\theta}$$
 
 즉, $Y_i \sim \text{Exp}(\theta)$가 된다.
 
-이때 gamma 분포의 정의에 따라, $Y_i$의 합인 $\sum Y_i$는 $\text{Gamma}(n, \theta)$이 된다. 따라서
-
-$$-\theta \log\sum X_i = \sum Y_i \sim \text{Gamma}(n, \theta)$$
+이때 gamma 분포의 정의에 따라, $Y_i$의 합인 $\sum Y_i$는 $\text{Gamma}(n, \theta)$이 된다. 
 
 $-2\sum \log X_i$의 $\chi^2$ 분포 유도: 앞에서 $Y_i=-\theta\log X_i\sim \mathrm{Exp}(\theta)$ (scale $\theta$) 이므로
 
@@ -313,15 +223,12 @@ $$\frac{2S}{\theta}=\frac{-2\theta\sum \log X_i}{\theta}=-2\sum_{i=1}^n \log X_i
 
 $$\sum_{i=1}^n Z_i \sim \mathrm{Gamma}(n,1)\quad\Rightarrow\quad 2\sum_{i=1}^n Z_i \sim \mathrm{Gamma}(n,2)=\chi^2(2n)$$
 
-즉 최종적으로
+즉 최종적으로 $-2\sum_{i=1}^n \log X_i \sim \chi^2(2n)$ 
 
-$$-2\sum_{i=1}^n \log X_i \sim \chi^2(2n)$$
+그리고 동치로 $-2\theta\sum_{i=1}^n \log X_i \sim \mathrm{Gamma}(n,2\theta)$
 
-그리고 동치로
-
-$$-2\theta\sum_{i=1}^n \log X_i \sim \mathrm{Gamma}(n,2\theta)$$
-
-**베타-감마 관계 증명**: $Y_1 \sim \text{Gamma}(\alpha,\theta)$, $Y_2 \sim \text{Gamma}(\beta,\theta)$ 독립이면, $U = \frac{Y_1}{Y_1+Y_2}$는 $\text{Beta}(\alpha,\beta)$를 따른다.
+**베타-감마 관계 증명**  
+$Y_1 \sim \text{Gamma}(\alpha,\theta)$, $Y_2 \sim \text{Gamma}(\beta,\theta)$ 독립이면, $U = \frac{Y_1}{Y_1+Y_2}$는 $\text{Beta}(\alpha,\beta)$를 따른다.
 
 $Y_1$과 $Y_2$의 결합확률밀도함수(pdf)는 
 
@@ -329,21 +236,22 @@ $$f_{Y_1,Y_2}(y_1,y_2) = \frac{1}{\Gamma(\alpha)\theta^\alpha} y_1^{\alpha-1} e^
 
 $$= \frac{1}{\Gamma(\alpha)\Gamma(\beta)\theta^{\alpha+\beta}} y_1^{\alpha-1} y_2^{\beta-1} e^{-(y_1+y_2)/\theta}$$
 
-$U = \frac{Y_1}{Y_1+Y_2}$와 $V = Y_1 + Y_2$로 변수변환을 하면, 역변환은 $Y_1 = UV$, $Y_2 = (1-U)V$가 된다. 이때 야코비안은
+$U = \frac{Y_1}{Y_1+Y_2}$와 $V = Y_1 + Y_2$로 변수변환을 하면, 역변환은 $Y_1 = UV$, $Y_2 = (1-U)V$가 된다.  
+이때 야코비안은
 
 $$J = \begin{vmatrix}\frac{\partial Y_1}{\partial U} & \frac{\partial Y_1}{\partial V} \\ \frac{\partial Y_2}{\partial U} & \frac{\partial Y_2}{\partial V}\end{vmatrix} = \begin{vmatrix}V & U \\ -V & 1-U\end{vmatrix} = V$$
 
 따라서 $U$의 확률밀도함수(pdf)는 다음과 같이 계산된다.
 
-$$f_U(u) = \int_0^\infty f_{Y_1,Y_2}(uv,(1-u)v) \cdot J \, dv$$
-
-$$= \int_0^\infty \frac{1}{\Gamma(\alpha)\Gamma(\beta)\theta^{\alpha+\beta}} (uv)^{\alpha-1} ((1-u)v)^{\beta-1} e^{-v/\theta} \cdot v \, dv$$
-
-$$= \frac{u^{\alpha-1}(1-u)^{\beta-1}}{\Gamma(\alpha)\Gamma(\beta)\theta^{\alpha+\beta}} \int_0^\infty v^{\alpha+\beta-1} e^{-v/\theta} dv$$
-
-$$= \frac{u^{\alpha-1}(1-u)^{\beta-1}}{\Gamma(\alpha)\Gamma(\beta)\theta^{\alpha+\beta}} \cdot \Gamma(\alpha+\beta) \theta^{\alpha+\beta}$$
-
-$$= \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)} u^{\alpha-1}(1-u)^{\beta-1}$$
+$$
+\begin{aligned}
+f_U(u) &= \int_0^\infty f_{Y_1,Y_2}(uv,(1-u)v) \cdot J \, dv\\
+&= \int_0^\infty \frac{1}{\Gamma(\alpha)\Gamma(\beta)\theta^{\alpha+\beta}} (uv)^{\alpha-1} ((1-u)v)^{\beta-1} e^{-v/\theta} \cdot v \, dv\\
+&= \frac{u^{\alpha-1}(1-u)^{\beta-1}}{\Gamma(\alpha)\Gamma(\beta)\theta^{\alpha+\beta}} \int_0^\infty v^{\alpha+\beta-1} e^{-v/\theta} dv\\
+&= \frac{u^{\alpha-1}(1-u)^{\beta-1}}{\Gamma(\alpha)\Gamma(\beta)\theta^{\alpha+\beta}} \cdot \Gamma(\alpha+\beta) \theta^{\alpha+\beta}\\
+&= \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)} u^{\alpha-1}(1-u)^{\beta-1}
+\end{aligned}
+$$
 
 따라서 $U$는 $\text{Beta}(\alpha,\beta)$를 따른다. 특히 $\text{Beta}(\theta,1)$의 경우, $X \sim \text{Beta}(\theta,1)$이면 $-\log X \sim \text{Exp}(1)$이 된다. 왜냐하면 $\text{Beta}(\theta,1)$의 확률밀도함수(pdf)는
 
@@ -359,9 +267,7 @@ $$f_Y(y) = f_X(e^{-y}) \cdot \left| \frac{d}{dy} e^{-y} \right| = \theta e^{-\th
 
 $Y_1$과 $Y_2$의 확률밀도함수(pdf)는 각각
 
-$$f_{Y_1}(y_1) = \frac{1}{2^m \Gamma(m)} y_1^{m-1} e^{-y_1/2}$$
-
-$$f_{Y_2}(y_2) = \frac{1}{2^n \Gamma(n)} y_2^{n-1} e^{-y_2/2}$$
+$$f_{Y_1}(y_1) = \frac{1}{2^m \Gamma(m)} y_1^{m-1} e^{-y_1/2}, \quad f_{Y_2}(y_2) = \frac{1}{2^n \Gamma(n)} y_2^{n-1} e^{-y_2/2}$$
 
 따라서 $F = \frac{Y_1/m}{Y_2/n}$와 $V = Y_2$로 변수변환을 하면, 역변환은 $Y_1 = mF \cdot \frac{V}{n}$, $Y_2 = V$가 된다. 이때 야코비안은
 
@@ -369,69 +275,18 @@ $$J = \begin{vmatrix}\frac{\partial Y_1}{\partial F} & \frac{\partial Y_1}{\part
 
 따라서 $F$의 확률밀도함수(pdf)는 다음과 같이 계산된다.
 
-$$f_F(f) = \int_0^\infty f_{Y_1,Y_2}\left(\frac{mV}{n}f, V\right) \cdot J \, dV$$
-
-$$= \int_0^\infty \frac{1}{2^m \Gamma(m)} \left(\frac{mV}{n}f\right)^{m-1} e^{-\frac{mV}{2n}f} \cdot \frac{1}{2^n \Gamma(n)} V^{n-1} e^{-V/2} \cdot \frac{mV}{n} \, dV$$
-
-$$= \frac{m^m f^{m-1}}{n^m 2^{m+n} \Gamma(m) \Gamma(n)} \int_0^\infty V^{m+n-1} e^{-\frac{V}{2}\left(1+\frac{mf}{n}\right)} dV$$
-
-$$= \frac{m^m f^{m-1}}{n^m 2^{m+n} \Gamma(m) \Gamma(n)} \cdot \Gamma(m+n) \left(\frac{2}{1+\frac{mf}{n}}\right)^{m+n}$$
-
-$$= \frac{\Gamma(m+n)}{\Gamma(m)\Gamma(n)} \left(\frac{m}{n}\right)^m \frac{f^{m-1}}{\left(1+\frac{mf}{n}\right)^{m+n}}$$
+$$
+\begin{aligned}
+f_F(f) &= \int_0^\infty f_{Y_1,Y_2}\left(\frac{mV}{n}f, V\right) \cdot J \, dV \\
+&= \int_0^\infty \frac{1}{2^m \Gamma(m)} \left(\frac{mV}{n}f\right)^{m-1} e^{-\frac{mV}{2n}f} \cdot \frac{1}{2^n \Gamma(n)} V^{n-1} e^{-V/2} \cdot \frac{mV}{n} \, dV \\
+&= \frac{m^m f^{m-1}}{n^m 2^{m+n} \Gamma(m) \Gamma(n)} \int_0^\infty V^{m+n-1} e^{-\frac{V}{2}\left(1+\frac{mf}{n}\right)} dV \\
+&= \frac{m^m f^{m-1}}{n^m 2^{m+n} \Gamma(m) \Gamma(n)} \cdot \Gamma(m+n) \left(\frac{2}{1+\frac{mf}{n}}\right)^{m+n}\\
+&= \frac{\Gamma(m+n)}{\Gamma(m)\Gamma(n)} \left(\frac{m}{n}\right)^m \frac{f^{m-1}}{\left(1+\frac{mf}{n}\right)^{m+n}}
+\end{aligned}
+$$
 
 따라서 $F$는 $F(m,n)$을 따른다.
-
-## 혼합분포 (Mixture Distribution)
-
-### 기본 정의
-
-확률변수 $X$가 혼합분포를 따를 때:
-
-$$X \sim (1-\epsilon)F_1 + \epsilon F_2$$
-
-여기서 $\epsilon \in [0,1]$은 혼합 비율(mixing weight)이다.
-
-### 평균 (Mean)
-
-$$E[X] = (1-\epsilon)\mu_1 + \epsilon\mu_2$$
-
-**증명**: 전확률 공식(law of total probability)
-
-$$E[X] = E[E[X|Z]] = P(Z=1)E[X|Z=1] + P(Z=2)E[X|Z=2] = (1-\epsilon)\mu_1 + \epsilon\mu_2$$
-
-(단, $Z$는 어느 분포에서 샘플링할지 결정하는 지시변수)
-
-### 분산 (Variance)
-
-$$\text{Var}(X) = (1-\epsilon)\text{Var}(X|F_1) + \epsilon\text{Var}(X|F_2) + (1-\epsilon)\epsilon(\mu_1-\mu_2)^2$$
-
-**증명**: 조건부 분산 공식
-
-$$\text{Var}(X) = E[\text{Var}(X|Z)] + \text{Var}(E[X|Z])$$
-
-첫 번째 항:
-
-$$E[\text{Var}(X|Z)] = (1-\epsilon)\sigma_1^2 + \epsilon\sigma_2^2$$
-
-두 번째 항:
-
-$$\text{Var}(E[X|Z]) = \text{Var}((1-\epsilon)\mu_1 + \epsilon\mu_2)\\
-= (1-\epsilon)\epsilon(\mu_1-\mu_2)^2$$
-
-따라서 합하면 위 공식을 얻는다.
-
-### 해석
-
-- **첫 두 항**: 각 성분 내 분산 (within-component variance)
-- **세 번째 항**: 성분 간 평균 차이로 인한 추가 분산 (between-component variance)
-
-### 활용
-
-- Outlier/anomaly detection: $\epsilon$가 작을 때, 컨섯 $F_2$로 이상치 모델링
-- EM 알고리즘의 기초 구조
-- Robust 통계: 오염된 분포 모델
-
-
+ 
 ## 정규분포 관련
 
 ### 표준정규분포의 주요 모멘트
@@ -452,8 +307,6 @@ $$E[Z^2] = \int_{-\infty}^{\infty} z^2 \phi(z) dz = 1$$
 
 표준정규분포의 분산은 1. 그런데 평균이 0이므로 $E[Z^2] = 1$.
 
-따라서 $\text{Var}(Z) = E[Z^2] - (E[Z])^2 = 1$
-
 **4차 모멘트**
 
 $$E[Z^4] = \int_{-\infty}^{\infty} z^4 \phi(z) dz = 3$$
@@ -473,71 +326,6 @@ $$E[(X-\mu)^4] = 3\sigma^4$$
 - 이차형식 $\sum Z_i^2 \sim \chi^2(n)$ 유도의 기초
 
 
-## 1. 평균 중심화 (Mean-Centering Trick)
-
-가장 많이 등장하는 전개이다.
-
-$$x_i=(x_i-\bar{x})+\bar{x}$$
-
-이를 이용하면 $\sum (x_i-\bar{x})=0$ 가 성립한다.
-
-### 대표 활용
-
-* 공분산 전개
-* 표본분산 공식
-* 회귀식 전개
-* ANOVA 분해
-
-### 예
-
-$$\sum (x_i-\bar{x})(y_i-\bar{y}) 
-= \sum (x_i y_i - x_i \bar{y} - \bar{x} y_i + \bar{x}\bar{y}) = \sum x_i y_i - n\bar{x}\bar{y}$$
-
-### 중심화행렬을 이용한 편차제곱합과 공분산의 표현
-
-벡터 $Z = (Z_1, \ldots, Z_n)^T$, $W = (W_1, \ldots, W_n)^T$라 하고,
-
-$$M_1 = I - \frac{1}{n}\mathbf{1}\mathbf{1}^T$$
-
-를 중심화행렬(centering matrix)이라 하면, 다음과 같이 표현할 수 있다:
-
-**편차제곱합**:
-
-$$S_{ZZ} = \sum_{i=1}^{n}(Z_i - \bar{Z})^2 = Z^T M_1 Z$$
-
-$$S_{WW} = \sum_{i=1}^{n}(W_i - \bar{W})^2 = W^T M_1 W$$
-
-**공분산(편차곱의 합)**:
-
-$$S_{ZW} = \sum_{i=1}^{n}(Z_i - \bar{Z})(W_i - \bar{W}) = Z^T M_1 W$$
-
-**해석**:
-* 중심화행렬 $M_1$은 벡터의 각 성분에서 평균을 제거하는 역할을 한다
-* $M_1 Z$는 $Z$를 중심화한 벡터 $(Z_1 - \bar{Z}, \ldots, Z_n - \bar{Z})^T$를 생성한다
-* 편차제곱합과 공분산은 중심화행렬을 이용한 이차형식으로 간결하게 표현된다
-
-**응용: 표본상관계수**
-
-표본상관계수(sample correlation coefficient)는 다음과 같이 표현된다:
-
-$$r_{ZW} = \frac{S_{ZW}}{\sqrt{S_{ZZ} \cdot S_{WW}}} = \frac{Z^T M_1 W}{\sqrt{Z^T M_1 Z \cdot W^T M_1 W}}$$
-
-**응용: 정규화 편차제곱합과 F-통계량**
-
-회귀분석에서 총편차제곱합(TSS), 회귀제곱합(RSS), 잔차제곱합(ESS)을 분해할 때:
-
-$$Y^T M_1 Y = \hat{Y}^T M_1 \hat{Y} + e^T e$$
-
-여기서 $\hat{Y} = \Pi_X Y$는 예측값, $e = (I - \Pi_X)Y$는 잔차, $\Pi_X$는 정사영행렬이다.
-
-**성질**:
-* $M_1 \mathbf{1} = \mathbf{0}$ (중심화행렬은 상수벡터를 영벡터로 변환)
-* $M_1^2 = M_1$ (멱등성)
-* $M_1^T = M_1$ (대칭성)
-* $\text{rank}(M_1) = n-1$ (자유도)
-* $\text{tr}(M_1) = n - 1$ (대각합 = 계수 = 자유도)
-
-
 ## 8. 이차형식 전개 (Quadratic Form Expansion)
 
 다변량 통계에서 자주 등장한다.
@@ -549,18 +337,6 @@ $$\mathbf{x}'A\mathbf{x} = \sum_i\sum_j a_{ij}x_ix_j$$
 * 다변량 정규분포
 * Wishart 분포
 * 회귀분석
-
-## 9. 직교분해 (Orthogonal Decomposition)
-
-정규분포에서 매우 중요한 구조이다.
-
-$$|\mathbf{x}|^2 = |P\mathbf{x}|^2 + |(I-P)\mathbf{x}|^2$$
-
-### 사용
-
-* 카이제곱 분포
-* 회귀분석
-* ANOVA
 
 ## Quadratic Form Decomposition 
 아래 식이 성립한다.
@@ -637,27 +413,54 @@ $$\mathbf{Z}^T A \mathbf{Z} \perp \mathbf{Z}^T B \mathbf{Z}$$
 
 (독립)이 되는 필요충분조건은 $AB = 0$
 
-#### 증명
+>#### 증명
+>**필요조건**: 이차형식들이 독립이면 $AB = 0$임을 보인다.
+>
+>여기서 $A,B$는 대칭 멱등행렬이라고 하자. 즉,
+> $A^T=A$, $B^T=B$, $A^2=A$, $B^2=B$이다. 다음과 같이 놓는다.
+> $$Q_A=\mathbf Z^T A\mathbf Z,\qquad Q_B=\mathbf Z^T B\mathbf Z.$$
+>
+> $Q_A$와 $Q_B$가 독립이라고 가정하면, 독립인 확률변수의 공분산은 0이므로
+> $$\text{Cov}(Q_A,Q_B)=0$$
+> 이다. 표준정규벡터 $\mathbf Z\sim N(\mathbf 0,I)$에 대한 이차형식의 공분산 공식에 의해
+> $$
+> \text{Cov}(\mathbf Z^T A\mathbf Z,\mathbf Z^T B\mathbf Z)
+> =2\text{tr}(AB)
+> $$
+> 이다. (대칭이 아닌 경우에는 일반적으로 $2\text{tr}(A B)$ 대신
+> $2\text{tr}(A B)$에 대칭부분을 반영한 형태가 필요하지만, 여기서는
+> $A,B$가 대칭이므로 위 공식이 그대로 적용된다.) 따라서
+> $$2\text{tr}(AB)=0,
+> \qquad\text{즉}\qquad \text{tr}(AB)=0$$
+> 을 얻는다.
+>
+> 단순히 $\text{tr}(AB)=0$이라는 사실만으로는 일반 행렬에 대해
+> $AB=0$이라고 결론 내릴 수 없다. 이제 대칭 멱등성 조건을 사용한다.
+> Frobenius 노름의 제곱을 계산하면
+> $$
+> \begin{aligned}
+> \|AB\|_F^2
+> &=\text{tr}\left((AB)^T(AB)\right)\\
+> &=\text{tr}(BAAB) && (A^T=A,\ B^T=B)\\
+> &=\text{tr}(BAB) && (A^2=A)\\
+> &=\text{tr}(ABB) && (trace의 순환성)\\
+> &=\text{tr}(AB) && (B^2=B)\\
+> &=0.
+> \end{aligned}
+> $$
+> Frobenius 노름은 행렬 원소들의 제곱합의 제곱근이므로
+> $$\|AB\|_F^2=\sum_{i,j}(AB)_{ij}^2=0$$
+> 이면 모든 원소가 0이다. 따라서
+> $$\boxed{AB=0}$$
+> 이다. 
+>
+>**충분조건**: $AB = 0$이면 독립임을 보인다.
+>
+>$\text{Cov}(A\mathbf{Z}, B\mathbf{Z}) = A \mathbb{E}[\mathbf{Z}\mathbf{Z}^T] B^T = AB = 0$
+>
+> $\mathbf Z^T A\mathbf Z = \mathbf Z^T A^T A \mathbf Z = \|AZ\|^2$ 으로 $AZ$의 함수이다. $BZ$도 마찬가지.  
+> 따라서 $\mathbf{Z}^T A \mathbf{Z} \perp \mathbf{Z}^T B \mathbf{Z}$
 
-**필요조건**: $AB = 0$이면 독립임을 보인다.
-
-$\mathbf{Z} \sim N(\mathbf{0}, I_n)$일 때, $A, B$가 idempotent ($A^2=A, B^2=B$)이면
-
-$\mathbb{E}[\mathbf{Z}^T A \mathbf{Z} \cdot \mathbf{Z}^T B \mathbf{Z}]$를 계산한다.
-
->$X$와 $Y$가 독립이면, 임의의 함수 $g_1, g_2$에 대하여 확률변수 $g_1(X)$와 $g_2(Y)$도 서로 독립이다.
-
-$AB = 0$이면 $A\mathbf{Z}$와 $B\mathbf{Z}$는 **직교**(orthogonal)이고, 정규성에 의해 **독립**이다.
-
-더 정확히: 정규벡터의 선형변환 $A\mathbf{Z}$와 $B\mathbf{Z}$가 uncorrelated이면 독립.
-
-$$\text{Cov}(A\mathbf{Z}, B\mathbf{Z}) = A \mathbb{E}[\mathbf{Z}\mathbf{Z}^T] B^T = AB$$
-
-따라서 $AB = 0 \Rightarrow \text{Cov}(A\mathbf{Z}, B\mathbf{Z}) = 0$ 이고, 정규성에 의해 독립.
-
-**충분조건**: 이차형식들이 독립이면 $AB = 0$임을 보인다.
-
-만약 $AB \ne 0$이면, 공분산이 0이 아니므로 독립이 아님.
 
 ### 예시: ANOVA/회귀분석 χ² 분해의 직교투영 해석
 
@@ -687,61 +490,30 @@ $$\Pi_{1|0}(I - \Pi_{0,1}) = (\Pi_{0,1} - \Pi_0)(I - \Pi_{0,1})\\
 
 $\mathbf{Y}$를 표준화하면 $\mathbf{Z} = (\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})/\sigma \sim N(\mathbf{0}, I_n)$
 
-두 idempotent 행렬 $A = \Pi_{1|0}$, $B = I - \Pi_{0,1}$에 대해
+두 idempotent 행렬 $A = \Pi_{1|0}$, $B = I - \Pi_{0,1}$에 대해 $AB = 0 \iff \mathbf{Z}^T A \mathbf{Z} \perp \mathbf{Z}^T B \mathbf{Z}$ (정규벡터의 이차형식 독립성 원리)
 
-$$AB = 0 \implies \mathbf{Z}^T A \mathbf{Z} \perp \mathbf{Z}^T B \mathbf{Z}$$
-
-(정규벡터의 이차형식 독립성 원리)
-
-이를 원래 변수로 돌리면
-
-$$R(1|0) = \mathbf{Y}^T\Pi_{1|0}\mathbf{Y} \perp SSE = \mathbf{Y}^T(I-\Pi_{0,1})\mathbf{Y}$$
+이를 원래 변수로 돌리면 $R(1|0) = \mathbf{Y}^T\Pi_{1|0}\mathbf{Y} \perp SSE = \mathbf{Y}^T(I-\Pi_{0,1})\mathbf{Y}$
 
 
 ## 26. 기댓값과 대각합(trace) 연산 순서 교환 (Expectation-Trace Interchange)
 
-선형연산자 $\text{trace}$와 기댓값 $E[\cdot]$는 교환 가능하다.
+선형연산자 $\text{trace}$와 기댓값 $E[\cdot]$는 교환 가능하다. 
+$E[\text{trace}(\mathbf{A})] = \text{trace}(E[\mathbf{A}])$
 
-$$E[\text{trace}(\mathbf{A})] = \text{trace}(E[\mathbf{A}])$$
-
->**증명**
->
->$\mathbf{X} = (X_{ij})$를 $p \times p$ 확률행렬이라 하면
->
->$$\text{trace}(\mathbf{X}) = \sum_{i=1}^{p} X_{ii}$$
->
->따라서
->
->$$E[\text{trace}(\mathbf{X})] = E\left[\sum_{i=1}^{p} X_{ii}\right] = \sum_{i=1}^{p} E[X_{ii}] = \text{trace}(E[\mathbf{X}])$$
->
-**핵심**: 대각합은 선형연산자(linear operator)이므로, 선형성(linearity of expectation)에 의해 기댓값과 교환 가능.
+대각합은 선형연산자(linear operator)이므로, 선형성(linearity of expectation)에 의해 기댓값과 교환 가능.
 
 ### 일반화: 선형연산자와 기댓값
 
-모든 선형연산자 $L$에 대해
-
-$$E[L(\mathbf{X})] = L(E[\mathbf{X}])$$
+모든 선형연산자 $L$에 대해 $E[L(\mathbf{X})] = L(E[\mathbf{X}])$
 
 **예시**
 - $\text{trace}(\mathbf{X})$: 선형 ✓
 - $\|\mathbf{X}\|_F^2 = \text{trace}(\mathbf{X}^\top\mathbf{X})$: 이차형식이므로 선형 아님 ✗
 
-**예시2**
-
-회귀잔차 분산 계산:
-
-$$E[\text{trace}[(I - \Pi) \mathbf{e} \mathbf{e}^\top]] = \text{trace}[E[(I - \Pi) \mathbf{e} \mathbf{e}^\top]]$$
+$E[\text{trace}[(I - \Pi) \mathbf{e} \mathbf{e}^\top]] = \text{trace}[E[(I - \Pi) \mathbf{e} \mathbf{e}^\top]]$
 
 **예시3**
-유한한 합에 대해서는
-
-$$
-\boxed{
-E\left[\sum_r c_rX_r\right] = \sum_r c_rE[X_r]
-}
-$$
-
-가 항상 성립한다. 여기서 $c_r$은 확률변수가 아닌 상수다. **확률변수들이 독립일 필요도 없다.**
+유한한 합에 대해서는 $E\left[\sum_r c_rX_r\right] = \sum_r c_rE[X_r]$ 가 항상 성립한다. 여기서 $c_r$은 확률변수가 아닌 상수다. **확률변수들이 독립일 필요도 없다.**
 
 
 먼저 $x^TAx=\sum_{i=1}^n\sum_{j=1}^n a_{ij}x_ix_j$ 이고 $x^TA\mu = \sum_{k=1}^n x_k(A\mu)_k.$
@@ -757,14 +529,7 @@ $$
 \end{aligned}
 $$
 
-여기서 일반적인 합의 분배법칙
-
-$$
-\left(\sum_{i,j}u_{ij}\right)
-\left(\sum_kv_k\right) = \sum_{i,j,k}u_{ij}v_k
-$$
-
-를 적용하면
+여기서 일반적인 합의 분배법칙 $\left(\sum_{i,j}u_{ij}\right) \left(\sum_kv_k\right) = \sum_{i,j,k}u_{ij}v_k$ 를 적용하면
 
 $$
 \begin{aligned}
@@ -804,12 +569,6 @@ $$
 
 주의할 점은 **곱은 이렇게 분리할 수 없다는 것**이다. $X,Y$가 독립인 경우 등에만 $E[XY]=E[X]E[Y]$가 성립한다.
 
-### 관련 개념
-
-- **선형성**: $E[a\mathbf{X} + b\mathbf{Y}] = aE[\mathbf{X}] + bE[\mathbf{Y}]$
-- **Cyclic property of trace**: $\text{trace}(\mathbf{ABC}) = \text{trace}(\mathbf{BCA})$
-- **Trace-Inner product**: $\text{trace}(\mathbf{A}^\top\mathbf{B}) = \langle \mathbf{A}, \mathbf{B} \rangle_F$
-
 
 ## 27. trace와 Variance
 
@@ -830,8 +589,7 @@ $$
 한편 외적 $\mathbf d\mathbf d^T$은
 
 $$
-\mathbf d\mathbf d^T
-=
+\mathbf d\mathbf d^T =
 \begin{pmatrix}
 d_1^2&d_1d_2&\cdots&d_1d_p\\
 d_2d_1&d_2^2&\cdots&d_2d_p\\
@@ -846,9 +604,7 @@ $$
 
 $$
 \boxed{
-\|\mathbf d\|^2
-=\mathbf d^T\mathbf d
-=\text{tr}(\mathbf d\mathbf d^T)
+\|\mathbf d\|^2 =\mathbf d^T\mathbf d =\text{tr}(\mathbf d\mathbf d^T)
 }
 $$
 
@@ -859,25 +615,14 @@ $$
 $$
 \begin{aligned}
 \text{Cov}(\mathbf d)
-&=
-E\left[
+&= E\left[
 \mathbf d\mathbf d^T -\mathbf d\boldsymbol\mu_d^T -\boldsymbol\mu_d\mathbf d^T +\boldsymbol\mu_d\boldsymbol\mu_d^T
 \right]\\
-&=
-E[\mathbf d\mathbf d^T] -\boldsymbol\mu_d\boldsymbol\mu_d^T -\boldsymbol\mu_d\boldsymbol\mu_d^T +\boldsymbol\mu_d\boldsymbol\mu_d^T\\
-&=
-E[\mathbf d\mathbf d^T] -\boldsymbol\mu_d\boldsymbol\mu_d^T.
+&= E[\mathbf d\mathbf d^T] -\boldsymbol\mu_d\boldsymbol\mu_d^T.
 \end{aligned}
 $$
 
-따라서
-
-$$
-\boxed{
-E[\mathbf d\mathbf d^T] = \text{Cov}(\mathbf d) + E(\mathbf d)E(\mathbf d)^T
-}
-$$
-
+따라서 $E[\mathbf d\mathbf d^T] = \text{Cov}(\mathbf d) + E(\mathbf d)E(\mathbf d)^T$  
 이 식의 trace를 취하면
 
 $$
@@ -980,33 +725,7 @@ $$
 주의할 점은 $E[\text{tr}(M)] = \text{tr}(E[M])$ 은 항상 선형성으로 성립하지만, 일반적으로 $E[AB]\neq E[A]E[B]$ 이다. 특히 $E[\mathbf d\mathbf d^T] \neq E[\mathbf d]E[\mathbf d]^T$ 이며, 두 행렬의 차이가 바로 공분산행렬이다.
 
 ### 고윳값과 trace
-
-
-## 13. Gram-Schmidt Orthogonalization
-
-상관을 제거하는 방법이다.
-
-예
-
-$$W=\frac{Y-\rho X}{\sqrt{1-\rho^2}}$$
-
-### 활용
-
-* 표본상관계수 분포
-* 다변량 정규변환
-
-## 14. χ² 분해 (Chi-Square Decomposition)
-
-정규변수 제곱합
-
-$$\sum Z_i^2 \sim \chi^2(n)$$
-
-또한
-
-$$\sum (Z_i-\bar{Z})^2 \sim \chi^2(n-1)$$
-
-### 예
-$Z_i \sim N(0,1)$ 독립 → $\sum Z_i^2 \sim \chi^2(n)$
+: linear_algebra_05_EigenValue_Diagonalization.md에 고윳값의 합과 곱 참고
 
 ## 15. 분산분해 (ANOVA Decomposition)
 
@@ -1015,60 +734,30 @@ $$SST = SSR + SSE$$
 즉
 
 $$\sum (y_i-\bar{y})^2 = \sum (\hat{y}_i-\bar{y})^2 + \sum (y_i-\hat{y}_i)^2$$
-### 증명
 
-$\sum (y_i-\bar{y})^2 = \sum (y_i-\hat{y}_i+\hat{y}_i-\bar{y})^2$
-
-$= \sum [(y_i-\hat{y}_i)+(\hat{y}_i-\bar{y})]^2$
-
-$= \sum (y_i-\hat{y}_i)^2 + 2\sum(y_i-\hat{y}_i)(\hat{y}_i-\bar{y}) + \sum(\hat{y}_i-\bar{y})^2$
+**증명** 
 
 회귀잔차 성질에 의해 $\sum(y_i-\hat{y}_i)(\hat{y}_i-\bar{y})=0$이므로
 
-$\sum (y_i-\bar{y})^2 = \sum (y_i-\hat{y}_i)^2 + \sum(\hat{y}_i-\bar{y})^2$
+$$
+\begin{aligned}
+\sum (y_i-\bar{y})^2 &= \sum (y_i-\hat{y}_i+\hat{y}_i-\bar{y})^2 \\
+&= \sum [(y_i-\hat{y}_i)+(\hat{y}_i-\bar{y})]^2 \\
+&= \sum (y_i-\hat{y}_i)^2 + 2\sum(y_i-\hat{y}_i)(\hat{y}_i-\bar{y}) + \sum(\hat{y}_i-\bar{y})^2 \\
+&= \sum (y_i-\hat{y}_i)^2 + \sum(\hat{y}_i-\bar{y})^2
+\end{aligned}
+$$
 
+## 20. Conditioning Trick: $E[X] = E[E[X|Y]]$
 
-### 의미
-총변동 = 회귀변동 + 잔차변동
-
-## 16. 로그우도 전개 (Log-Likelihood Expansion)
-
-MLE에서 자주 등장한다.
-
-$$\log L(\theta) = \sum \log f(x_i|\theta)$$
-
-이후 미분으로 극값을 찾는다.
-
-$$\frac{d}{d\theta}\log L(\theta) = 0$$
-
-### 예
-정규분포 MLE: $\hat{\mu}=\bar{x}, \hat{\sigma}^2=\frac{1}{n}\sum (x_i-\bar{x})^2$
-
-## 19. Delta Method
-
-비선형 통계량 분포 계산
-
-$$g(\hat{\theta}) \approx g(\theta) + g'(\theta)(\hat{\theta}-\theta)$$
-
-따라서
-
-$$\sqrt{n}(g(\hat{\theta})-g(\theta)) \xrightarrow{d} N(0, [g'(\theta)]^2\sigma^2)$$
-
-### 예
-$\hat{p}$가 정규분포 거의 따를 때, $\arcsin\sqrt{\hat{p}}$의 분포 계산
-
-## 20. Conditioning Trick
-
-정규분포에서 매우 자주 사용된다.
-
-$$E[X] = E[E[X|Y]]$$
-
-
-$$\text{Var}(X) 
-= E(X^2) - E(X)^2 \\
-= E[E(X^2|Y)] - E[E(X|Y)]^2 \\
-= E[E(X^2|Y) - E(X|Y)^2] + E[E(X|Y)^2] - E[E(X|Y)]^2 \\
-= E[\text{Var}(X|Y)] + \text{Var}(E[X|Y])$$
+$$
+\begin{aligned}
+\text{Var}(X) &= E(X^2) - E(X)^2 \\
+&= E[E(X^2|Y)] - E[E(X|Y)]^2 \\
+&= E[E(X^2|Y) - E(X|Y)^2] + E[E(X|Y)^2] - E[E(X|Y)]^2 \\
+&= E[\text{Var}(X|Y)] + \text{Var}(E[X|Y])
+\end{aligned}
+$$
 
 
 ## 22. 대칭성 이용 (Symmetry)
@@ -1080,37 +769,6 @@ $$\text{Var}(X)
 $$\int_{-\infty}^{\infty} x \phi(x)dx = 0 \quad (\text{홀함수와 짝함수의 곱})$$
 
 **증명**: $\phi(-x) = \phi(x)$ (짝함수)이고, $x$는 홀함수이므로 $x\phi(x)$는 홀함수. 따라서 대칭 구간에서의 적분은 0.
-
-### 확장: 차수별 정리
-
-$Z \sim N(0,1)$, $\phi(z) = \frac{1}{\sqrt{2\pi}}e^{-z^2/2}$ (표준정규분포)
-
-| 차수 | 적분 | 성질 |
-|------|------|------|
-| 1차 | $\int z \phi(z)dz = 0$ | 홀함수 |
-| 2차 | $\int z^2 \phi(z)dz = 1$ | 짝함수 ✓ |
-| 3차 | $\int z^3 \phi(z)dz = 0$ | 홀함수 |
-| 4차 | $\int z^4 \phi(z)dz = 3$ | 짝함수 ✓ |
-
-**일반 규칙**
-- 홀수 차: $E[Z^{2k+1}] = 0$ (대칭성)
-- 짝수 차: $E[Z^{2k}] = (2k-1)!! = (2k-1) \times (2k-3) \times \cdots \times 3 \times 1$
-
-### 혼합 항의 소거
-
-$X, Y$가 모두 0 중심 대칭 분포를 따를 때:
-
-$$E[XY] \text{ 계산 시 홀함수 항은 소거}$$
-
-예: $E[X(X^2-1)] = E[X^3] - E[X] = 0 - 0 = 0$
-
-### 활용
-
-* 기댓값 계산 단순화 (홀함수 항 제거)
-* 모멘트 계산 (짝수 차만 남음)
-* 다변량 정규분포의 고차 모멘트
-* 정규성 검정: skewness = 0, kurtosis = 3
-
 
 ## 23. 기댓값의 미분적분 (Differentiation Under Integration)
 
@@ -1130,11 +788,9 @@ $$\frac{d}{d\theta}E[g(X;\theta)] = E\left[\frac{\partial}{\partial\theta}g(X;\t
 * MLE 최적성 증명
 * 점근이론
 
-### 예
-
 $$\frac{d}{d\theta}\int g(x;\theta)f(x)dx = \int \frac{\partial g(x;\theta)}{\partial\theta}f(x)dx$$
 
-### 특수 경우: Leibniz Rule
+**특수 경우: Leibniz Rule**
 
 $$\frac{d}{d\theta}\int_{a(\theta)}^{b(\theta)} g(x;\theta)dx = \int_{a(\theta)}^{b(\theta)} \frac{\partial g}{\partial\theta}dx + g(b;\theta)b'(\theta) - g(a;\theta)a'(\theta)$$
 
@@ -1146,11 +802,7 @@ $$\frac{d}{d\theta}\int_{a(\theta)}^{b(\theta)} g(x;\theta)dx = \int_{a(\theta)}
 
 ### 기본 형태
 
-임의의 $\varepsilon>0$, $M>0$에 대해  
-
-$$\{|X_n Z_n|>\varepsilon\}
-\subset
-\{|X_n|>M\} \cup \left\{|Z_n|>\frac{\varepsilon}{M}\right\}$$
+임의의 $\varepsilon>0$, $M>0$에 대해  $\{|X_n Z_n|>\varepsilon\} \subset \{|X_n|>M\} \cup \left\{|Z_n|>\frac{\varepsilon}{M}\right\}$
 
 다르게 표현하면,
 
@@ -1172,44 +824,11 @@ $$
 - **몫**  
   $Y_n$이 0에 가까워지는 경우를 제외하면,
 
-  $$ \left\{\left|\frac{X_n}{Y_n}\right| > \varepsilon\right\} \subset \{|X_n| > \varepsilon M\} \cup \{|Y_n| < 1/M\}$$
+  $$ \left\{\left|\frac{X_n}{Y_n}\right| > \varepsilon\right\} \subset \{|X_n| > \varepsilon/ M\} \cup \{|Y_n| < 1/M\}$$
 
-  (단, $|Y_n| > 1/M$로 제한)
-
-### 왜 성립하는가
-
-**대우(contrapositive)** 를 사용하면 간단하다.  
-예를 들어, $|X_n| \le M$이고 $|Z_n| \le \frac{\varepsilon}{M}$이면  
-
-$$|X_n Z_n| \le M \cdot \frac{\varepsilon}{M} = \varepsilon$$
-
+증명: 대우로 보인다.  
+예를 들어, $|X_n| \le M$이고 $|Z_n| \le \frac{\varepsilon}{M}$이면 $|X_n Z_n| \le M \cdot \frac{\varepsilon}{M} = \varepsilon$  
 즉, $|X_n Z_n| > \varepsilon$가 되려면 둘 중 하나는 반드시 조건을 벗어나야 한다.
-
-### 바로 나오는 확률 상계
-
-union bound를 적용하면
-
-$$P(|X_n Z_n|>\varepsilon) \le P(|X_n|>M) + P\left(|Z_n|>\frac{\varepsilon}{M}\right)$$
-
-합/차:
-
-$$P(|X_n + Y_n| > \varepsilon) \le P(|X_n| > \varepsilon/2) + P(|Y_n| > \varepsilon/2)$$
-
-몫:
-
-$$P\left(\left|\frac{X_n}{Y_n}\right| > \varepsilon\right) \le P(|X_n| > \varepsilon M) + P(|Y_n| < 1/M)$$
-
-### 전형적 사용 패턴
-
-1. $M$ 또는 $\varepsilon/2$ 등 임계값을 잡아 각 항의 확률을 분리
-2. 각각의 확률이 0으로 가는지 확인
-3. union bound로 전체 사건의 확률을 상계
-
-### 기억 포인트
-
-> **합/차/곱/몫이 크려면, 적어도 하나의 성분이 충분히 커야 한다.**
-
-복잡한 연산의 사건을 각각의 크기 조건으로 분해하는 것이 핵심.
 
 ### 관련 증명 습관
 
@@ -1218,9 +837,7 @@ $$P\left(\left|\frac{X_n}{Y_n}\right| > \varepsilon\right) \le P(|X_n| > \vareps
 - 임의의 $M$을 도입해 **bounded part**와 **small remainder**를 분리한다.
 - 이후 union bound, convergence in probability, tightness와 연결한다.
 
-## 25. 
-
-### 로그-가중 적분 공식 ($\mathrm{Beta}(\theta,1)$ 핵심 항)
+## 로그-가중 적분 공식 ($\mathrm{Beta}(\theta,1)$ 핵심 항)
 
 $$\theta>0,\qquad \int_0^1 \log x \cdot \theta x^{\theta-1}\,dx = -\frac{1}{\theta}$$
 
@@ -1228,19 +845,30 @@ $$\theta>0,\qquad \int_0^1 \log x \cdot \theta x^{\theta-1}\,dx = -\frac{1}{\the
 
 $$E[\log X]=-\frac{1}{\theta},\qquad E[-\log X]=\frac{1}{\theta}$$
 
-### 빠른 유도 1 (치환)
-
-$$u=x^\theta \;\Rightarrow\; du=\theta x^{\theta-1}dx,\quad \log x=\frac1\theta\log u \\
-\int_0^1 \log x\cdot \theta x^{\theta-1}dx
-= \frac1\theta\int_0^1 \log u\,du
-= \frac1\theta(-1)
-= -\frac1\theta$$
+>**증명**
+>
+>$$u=x^\theta \;\Rightarrow\; du=\theta x^{\theta-1}dx,\quad \log x=\frac1\theta\log u \\
+>\int_0^1 \log x\cdot \theta x^{\theta-1}dx
+>= \frac1\theta\int_0^1 \log u\,du
+>= \frac1\theta(-1)
+>= -\frac1\theta$$
+>
+>>**적분 참고** 
+>>
+>>$\int_0^1\log u\,du=\lim_{a\downarrow0}\int_a^1\log u\,du
+>>=\lim_{a\downarrow0}\left[u\log u-u\right]_a^1
+>>=-1-\lim_{a\downarrow0}(a\log a-a)=-1.$
+>>
+>>왜냐하면 $a\log a\to0$이기 때문이다. 실제로 $a=1/t$로 두면
+>>$a\log a=-\frac{\log t}{t}\to0$ ($t\to\infty$)이다.
+>>
+>>따라서 $\frac1\theta\int_0^1\log u\,du=-\frac1\theta$이다.
 
 ### 빠른 유도 2 (파라미터 미분)
 
 $$\int_0^1 x^{\theta-1}dx=\frac1\theta$$
 
-양변을 $\theta$로 미분하면
+양변을 $\theta$로 미분하면 (analysis에 정리 8.4.6. 적분기호 속의 미분)
 
 $$\int_0^1 x^{\theta-1}\log x\,dx=-\frac1{\theta^2}$$
 
@@ -1303,18 +931,6 @@ $$J_{\mathbf{f}}(\mathbf{x}) = \begin{pmatrix}
 - $n=1$ (곡선): $J_{\mathbf{f}} = (\mathbf{f}'(t))^T$
 
 **활용**: 변수변환(change of variables), 야코비안 행렬식 → 확률변수 변환의 밀도함수
-
-### 4. 야코비안 행렬식 (Jacobian Determinant) $|J|$, $\det(J)$
-
-**정의**: $n = m$일 때, 야코비안의 행렬식
-
-$$|J_{\mathbf{f}}(\mathbf{x})| = \det(J_{\mathbf{f}}(\mathbf{x}))$$
-
-**활용**: 다변량 확률변수 변환
-
-$$f_{\mathbf{Y}}(\mathbf{y}) = f_{\mathbf{X}}(g^{-1}(\mathbf{y})) \cdot |J_{g^{-1}}(\mathbf{y})|$$
-
-(단, $\mathbf{Y} = g(\mathbf{X})$, $\mathbf{X} = g^{-1}(\mathbf{Y})$)
 
 ### 5. 라플라시안 (Laplacian) $\nabla^2$, $\Delta$
 
@@ -1409,49 +1025,21 @@ $$\frac{\partial f}{\partial \mathbf{X}} = \begin{pmatrix}
 
 # 주요 부등식 정리 (Summary of Key Inequalities)
 
-## 거듭제곱과 부등식 (Inequalities under Power)
-
-a < b 인 상황에서 거듭제곱을 취했을 때 부등식이 어떻게 변하는지 경우를 정리한다. 모든 경우에서 정의역(특히 음수의 제곱근 등)을 먼저 확인해야 한다.
-
-1) 양의 실수 지수 $p$ ($p > 0$), 정의역 $x > 0$:
-
-  - 함수 $f(x)=x^p$는 $(0,\infty)$에서 단조증가하므로 $a<b\,(>0)$ 이면 $a^p < b^p$.
-
-2) 음의 실수 지수 $p$ ($p < 0$), 정의역 $x > 0$:
-
-  - $f(x)=x^p$는 $(0,\infty)$에서 단조감소하므로 $a<b\,(>0)$ 이면 $a^p > b^p$.
-
-3) 정수 지수 $p$:
-
-  - $p$이 홀수 정수이면 $f(x)=x^p$는 전체 실수에서 단조증가한다. 따라서 임의의 실수 $a<b$이면 $a^p < b^p$.
-  - $p$이 짝수 정수이면 $f(x)=x^p$는 $[0,\infty)$에서 단조증가, $(-\infty,0]$에서는 단조감소이다. 특히 음수 $a,b$가 있고 $a<b$이면 (예: $a=-3,b=-1$) $a^p > b^p$가 될 수 있다. 일반적으로 짝수 거듭제곱은 부호를 없애므로 부등호 방향은 부호에 따라 달라진다.
-
-4) 유리수 지수 $p = m/n$ (기약분수), $n$이 짝수인 경우:
-
-  - 정의역은 $x \ge 0$이다. $x\mapsto x^{m/n}$는 $[0,\infty)$에서 $m$의 부호와 관계없이 단조증가(또는 감소) 규칙은 분자의 부호에 따라 위 1),2) 규칙을 따른다. 일반적으로 양의 $m$(또는 전체 $p>0$)이면 증가, $p<0$이면 감소.
-
-5) 실수 지수 일반 $p$:
-
-  - 지수함수 $x^p$는 정의역(주로 $x>0$)에서 $p>0$이면 단조증가, $p<0$이면 단조감소.
-
 
 ## 로그 부등식 (Logarithmic Inequality)
 
 모든 $t \geq 0$에 대해 $\log t \leq t - 1$  
+
 등호는 $t = 1$일 때만 성립.
 
-**증명**
-
-$f(t) = t - 1 - \log t$로 정의하면
-
-$$f'(t) = 1 - \frac{1}{t} = \frac{t-1}{t}$$
-
-- $0 < t < 1$일 때 $f'(t) < 0$ (감소)
-- $t > 1$일 때 $f'(t) > 0$ (증가)
-
-따라서 $t = 1$에서 최솟값 $f(1) = 0$을 가지므로 $f(t) \geq 0$, 즉
-
-$$\log t \leq t - 1$$
+>**증명**
+>
+>$f(t) = t - 1 - \log t$로 정의하면 $f'(t) = 1 - \frac{1}{t} = \frac{t-1}{t}$
+>
+>- $0 < t < 1$일 때 $f'(t) < 0$ (감소)
+>- $t > 1$일 때 $f'(t) > 0$ (증가)
+>
+>따라서 $t = 1$에서 최솟값 $f(1) = 0$을 가지므로 $f(t) \geq 0$, 즉 $\log t \leq t - 1$
 
 **활용**
 
@@ -1460,28 +1048,20 @@ $$\log t \leq t - 1$$
 - MLE 수렴성 증명
 - Gibbs 부등식의 선행 정리
 
-**확장형**
-
-$t > 0$에 대해
-
-$$\log t \leq \frac{t}{\alpha} - 1 - \log \alpha \quad (\alpha > 0)$$
-
+**확장형**  
 치환 $t \to t/\alpha$를 사용하면 일반화 가능.
 
+$t > 0$에 대해 $\log t \leq \frac{t}{\alpha} - 1 + \log \alpha \quad (\alpha > 0)$
+
+
 ## 삼각부등식 (Triangle Inequality)
-임의의 실수 $a, b$에 대해
+임의의 실수 $a, b$에 대해 $|a + b| \leq |a| + |b|$
 
-$$
-|a + b| \leq |a| + |b|
-$$
+확률변수 $X, Y$에 대해서도 $|X + Y| \leq |X| + |Y| \implies E[|X + Y|] \leq E[|X|] + E[|Y|]$
 
-확률변수 $X, Y$에 대해서도
+### 역삼각부등식 
+TODO:
 
-$$
-|X + Y| \leq |X| + |Y| \implies E[|X + Y|] \leq E[|X|] + E[|Y|]
-$$
-
-### 역삼각부등식
 삼각부등식 $|a| \leq |a-b| + |b|$에서 $|a| - |b| \leq |a-b|$이고, $|b| - |a| \leq |b-a| = |a-b|$이므로
 
 $$ -|a-b| \leq |a| - |b| \leq |a-b| $$
@@ -1500,20 +1080,12 @@ $$
 $$
 
 **증명**  
-삼각부등식 $|a| \leq |a-b| + |b|$에서 $|a| - |b| \leq |a-b|$이고, $|b| - |a| \leq |b-a| = |a-b|$이므로, 두 경우를 합치면 $||a| - |b|| \leq |a-b|$.
+역삼각부등식의 왼쪽, 오른쪽 부등식 두 경우를 합치면 $||a| - |b|| \leq |a-b|$.
 
-확률변수 $X, Y$에 대해서도
-
-$$
-||X| - |Y|| \leq |X - Y|
-$$
+확률변수 $X, Y$에 대해서도 $||X| - |Y|| \leq |X - Y|$
 
 ## 절댓값의 곱과 합 부등식
-임의의 실수 $a, b$에 대해
-
-$$
-|ab| \leq \frac{a^2 + b^2}{2}
-$$
+임의의 실수 $a, b$에 대해 $|ab| \leq \frac{a^2 + b^2}{2}$
 
 이는 $2ab \leq a^2 + b^2$에서 유도된다.
 
@@ -1531,28 +1103,6 @@ $$
 (1 + x)^r \geq 1 + r x
 $$
 
-## Grönwall 부등식 (Grönwall's Inequality, 적분부등식)
-$u(t) \leq a + b \int_0^t u(s)\,ds$이면
-
-$$
-u(t) \leq a e^{b t}
-$$
-
-## Markov의 역부등식 (Reverse Markov Inequality)
-$X \geq 0$, $a < E[X]$이면
-
-$$
-P(X > a) \geq \frac{E[X] - a}{\sup X - a}
-$$
-
-(단, $X$의 상한 $\sup X < \infty$일 때)
-
-## Pinsker 부등식 (정보이론)
-두 분포 $P, Q$에 대해 변분거리 $d_{TV}$와 Kullback-Leibler 발산 $D_{KL}$ 사이
-
-$$
-d_{TV}(P, Q) \leq \sqrt{\frac{1}{2} D_{KL}(P \| Q)}
-$$
 
 ## Chernoff 부등식 (Chernoff Bound)
 $X$ 임의의 확률변수, $t > 0$에 대해
