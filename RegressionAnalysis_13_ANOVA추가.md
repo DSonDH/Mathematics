@@ -49,7 +49,7 @@ $$
 | $\boldsymbol\theta$        | $\mu,\alpha_i,\beta_j,(\alpha\beta)_{ij}$ 등을 모은 모수벡터 |
 | $C$                        | 어떤 평균이나 효과를 비교할지 지정하는 행렬                             |
 | $\mathbf d$                | 귀무가설에서 주장하는 값으로, 보통 $\mathbf0$                       |
-| $q=\operatorname{rank}(C)$ | 독립적인 제약조건의 개수이자 분자 자유도                               |
+| $q=\text{rank}(C)$ | 독립적인 제약조건의 개수이자 분자 자유도                               |
 
 완전모형과 축소모형을 이용하면
 
@@ -332,7 +332,7 @@ $$
 | $\boldsymbol\theta$        | $\mu$, $\alpha_i$, $\beta_j$, $(\alpha\beta)_{ij}$ 등을 포함한 모수벡터다 |
 | $C$                        | 어떤 모수들의 선형조합을 검정할지 지정하는 행렬이다                                    |
 | $\mathbf d$                | 귀무가설에서 지정하는 값이며 보통 $\mathbf0$이다                                 |
-| $q=\operatorname{rank}(C)$ | 독립적인 제약조건의 개수이며 분자 자유도다                                         |
+| $q=\text{rank}(C)$ | 독립적인 제약조건의 개수이며 분자 자유도다                                         |
 
 완전모형과 축소모형을 비교하는 검정통계량은
 

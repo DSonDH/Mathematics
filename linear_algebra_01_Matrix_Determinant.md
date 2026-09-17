@@ -1146,7 +1146,7 @@ $i$번째 성분만 1이고 나머지는 0인 벡터
 $$\mathbf{e}_i = (0, \ldots, 0, 1, 0, \ldots, 0)^T$$
 
 **성질**:
-* $\mathbf{e}_i^T \mathbf{e}_j = \delta_{ij}$ (크로네커 델타)
+* $\mathbf{e}_i^T \mathbf{e}_j = \delta_{ij}$ (크로네커 델타, $i$와 $j$가 같으면 1, 다른 모든 경우는 0. indicator function기능.)
 * $\mathbf{I}_n = [\mathbf{e}_1\ \mathbf{e}_2\ \cdots\ \mathbf{e}_n]$
 * 임의의 벡터 $x$는 $x = \sum_{i=1}^{n} x_i \mathbf{e}_i$로 표현
 * $\mathbf{e}_i^T x = x_i$ ($x$의 $i$번째 성분 추출)

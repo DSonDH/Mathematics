@@ -19,7 +19,7 @@ $$
 
 또한 다음이 성립한다.
 * $\Sigma$가 **양의 정부호(positive definite)**  
-  ⇔ 모든 고유값이 양수: $\lambda_i>0,\ \forall i$  
+  ⇔ 모든 고유값이 양수: $\lambda_i>0,\ \forall i$   
   ⇔ $\Sigma$가 정칙행렬(invertible)
 
 * $\Sigma$가 **특이(singular)**  

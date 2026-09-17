@@ -706,28 +706,154 @@ $$A = U^TU$$
 **응용:** 중회귀모형 회귀계수 추정
 
 ### 특잇값 분해 (singular value decomposition, SVD)
-FIXME: ??? 내용이 일반적이지 않은것같음. 다시 정리하기.
+$n\times p$ 행렬 $X$에 대하여 $n>p$라고 하자.
 
-$A$를 계수(rank) $r$인 $m \times n$ 행렬이라 하자 ($m \leq n$). 그러면 $m \times m$ 직교행렬 $P$와 $n \times n$ 직교행렬 $Q$가 존재하여
+1. $X$의 특잇값분해
 
-$$A = PDQ^T$$
+$X$의 특잇값분해는 다음과 같다.
 
-를 만족한다. 여기서
-- $D$는 $m \times m$ 대각행렬로, 비음의 대각원소 $d_i$ ($i = 1, 2, \ldots, m$)를 갖는다.
-- $D$의 양의 대각원소들은 $A^TA$ (또는 $AA^T$)의 양의 고유치들의 양의 제곱근이며, 이들을 $A$의 **특이치(singular value)** 라 한다.
-- $m = n$인 경우, $P^TAQ = D$이다.
-- $A$가 대칭인 경우 $P = Q$이고, $D$의 대각원소들은 $A$의 고유치들의 절댓값과 같다.
+$$
+X=U\Sigma V^{\mathsf T}
+$$
 
-**관례:**
-- 특이치는 보통 크기 순서대로 배열한다: $d_1 \geq d_2 \geq \cdots \geq d_r > 0$
-- 계수가 $r$이면 $r$개의 양의 특이치와 $(m-r)$개의 0을 갖는다.
+여기서
 
-$$A = U\Sigma V^T$$
+* $U$는 $n\times n$ 직교행렬이다.
+* $\Sigma$는 $n\times p$ 직사각 대각행렬이다.
+* $V$는 $p\times p$ 직교행렬이다.
+* $U^{\mathsf T}U=I_n$, $V^{\mathsf T}V=I_p$이다.
 
-형태로도 표기하며, 여기서
-- $U$: $m \times m$ 직교행렬 (좌특이벡터들)
-- $\Sigma$: $m \times n$ 직사각 대각행렬 (특이치들)
-- $V$: $n \times n$ 직교행렬 (우특이벡터들)
+$n>p$이므로 $\Sigma$는 다음과 같은 형태이다.
+
+$$
+\Sigma=
+\begin{pmatrix}
+\sigma_1 & & 0\\
+&\ddots&\\
+0&&\sigma_p\\
+\hline
+&0&
+\end{pmatrix},
+\qquad
+\sigma_1\geq\sigma_2\geq\cdots\geq\sigma_p\geq0
+$$
+
+$\sigma_1,\ldots,\sigma_p$를 $X$의 특잇값이라고 한다.
+
+$X$의 계수가 $r=\text{rank}(X)$이면
+
+$$
+\sigma_1\geq\cdots\geq\sigma_r>0, \qquad \sigma_{r+1}=\cdots=\sigma_p=0
+$$
+
+이다.
+
+축약형 특잇값분해를 사용하면
+
+$$
+X=U_pDV^{\mathsf T}
+$$
+
+로 나타낼 수도 있다. 여기서 $U_p$는 $n\times p$ 행렬이고,
+
+$$
+D=\text{diag}(\sigma_1,\ldots,\sigma_p)
+$$
+
+이다.
+
+2. $X^{\mathsf T}X$의 고윳값분해
+
+특잇값분해를 이용하면
+
+$$
+\begin{aligned}
+X^{\mathsf T}X
+&=(U\Sigma V^{\mathsf T})^{\mathsf T} (U\Sigma V^{\mathsf T})\\
+&=V\Sigma^{\mathsf T}U^{\mathsf T}U\Sigma V^{\mathsf T}\\
+&=V\Sigma^{\mathsf T}\Sigma V^{\mathsf T}
+\end{aligned}
+$$
+
+이다. $U^{\mathsf T}U=I_n$이고,
+
+$$
+\Sigma^{\mathsf T}\Sigma = \text{diag}(\sigma_1^2,\ldots,\sigma_p^2)
+$$
+
+이므로
+
+$$
+\boxed{
+X^{\mathsf T}X = V \text{diag}(\sigma_1^2,\ldots,\sigma_p^2) V^{\mathsf T}
+}
+$$
+
+를 얻는다. 이것이 $X^{\mathsf T}X$의 고윳값분해이다.
+
+따라서 $X^{\mathsf T}X$의 고윳값은
+
+$$
+\boxed{\lambda_j=\sigma_j^2,\qquad j=1,\ldots,p}
+$$
+
+이고, 이에 대응하는 정규직교 고유벡터는 $V$의 열벡터 $v_j$이다.
+
+실제로 $Xv_j=\sigma_j u_j$이므로
+
+$$
+\begin{aligned}
+X^{\mathsf T}Xv_j
+&=X^{\mathsf T}(\sigma_j u_j)\\
+&=\sigma_jX^{\mathsf T}u_j\\
+&=\sigma_j^2v_j
+\end{aligned}
+$$
+
+이다. 따라서 $v_j$는 $X^{\mathsf T}X$의 고유벡터이고, 대응하는 고윳값은 $\sigma_j^2$이다.
+
+3. 두 분해의 관계
+
+두 분해의 관계를 정리하면 다음과 같다.
+
+| $X$의 특잇값분해                 | $X^{\mathsf T}X$의 고윳값분해                   |
+| -------------------------- | ----------------------------------------- |
+| 오른쪽 특이벡터 $v_j$             | 고유벡터 $v_j$                                |
+| 특잇값 $\sigma_j$             | 고윳값 $\lambda_j=\sigma_j^2$                |
+| 왼쪽 특이벡터 $u_j$              | $\displaystyle u_j=\frac{Xv_j}{\sigma_j}$ |
+| $\text{rank}(X)=r$ | 양의 고윳값 개수는 $r$                            |
+
+특히 $\sigma_j>0$인 경우 왼쪽 특이벡터는
+
+$$
+u_j=\frac{Xv_j}{\sigma_j} =\frac{Xv_j}{\sqrt{\lambda_j}}
+$$
+
+로 구할 수 있다.
+
+$X^{\mathsf T}X$는 $p\times p$ 대칭 양의 준정부호행렬이므로 서로 직교하는 고유벡터들을 가지며, 모든 고윳값이 음이 아니다. 이 고유벡터들을 열로 갖는 행렬이 $V$이고, 고윳값의 제곱근이 $X$의 특잇값이다.
+
+즉,
+
+$$
+\boxed{
+X^{\mathsf T}X=V\Lambda V^{\mathsf T}
+\quad\Longleftrightarrow\quad
+X=U\Sigma V^{\mathsf T}
+}
+$$
+
+이며,
+
+$$
+\boxed{
+\Lambda=\Sigma^{\mathsf T}\Sigma,
+\qquad
+\sigma_j=\sqrt{\lambda_j}
+}
+$$
+
+이다. 따라서 $X$의 특잇값분해는 $X^{\mathsf T}X$의 고윳값분해를 이용하여 구할 수 있다.
 
 #### 따름정리 (SVD와 고유벡터의 관계)
 위 정리의 행렬 $Q$의 열벡터들은 $A^TA$의 서로 정규직교(orthonormal)인 고유벡터들이다.

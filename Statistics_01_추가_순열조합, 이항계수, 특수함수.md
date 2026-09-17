@@ -31,11 +31,80 @@ $$
 - $\binom{n}{r} = \binom{n}{n-r}$ (대칭성)
 
 ### 여러 원소가 있는 경우
-$n$개의 원소 중 $n_1$개, $n_2$개, $\ldots$, $n_k$개가 각각 같을 때 ($n_1 + n_2 + \cdots + n_k = n$)에서 $r$개를 선택하는 경우의 수는 다음과 같이 계산할 수 있다.    
 
-$$\sum_{\substack{r_1 + r_2 + \cdots + r_k = r \\ 0 \le r_i \le n_i}} \frac{n_1!}{r_1!(n_1-r_1)!} \cdot \frac{n_2!}{r_2!(n_2-r_2)!} \cdots \frac{n_k!}{r_k!(n_k-r_k)!} \\
-= \sum_{\substack{r_1 + r_2 + \cdots + r_k = r \\ 0 \le r_i \le n_i}} \binom{n_1}{r_1} \binom{n_2}{r_2} \cdots \binom{n_k}{r_k} \\
-= \sum_{\substack{r_1 + r_2 + \cdots + r_k = r \\ 0 \le r_i \le n_i}} \prod_{i=1}^k \binom{n_i}{r_i}$$
+$n$개의 서로 구별되는 원소가 $k$개의 집단으로 나뉘어 있고, 각 집단에 속한 원소의 수가 각각 $n_1,n_2,\ldots,n_k$라고 하자. 이때 $n_1+n_2+\cdots+n_k=n$ 이다.
+
+전체 원소 중 $r$개를 선택한다고 하자. $i$번째 집단에서 선택하는 원소의 수를 $r_i$라고 하면 $r_1+r_2+\cdots+r_k=r$ 이고 각 $r_i$는 $0\leq r_i\leq n_i$ 를 만족해야 한다.
+
+주어진 $r_1,\ldots,r_k$에 대하여 $i$번째 집단에서 $r_i$개를 선택하는 경우의 수는 
+
+$$\binom{n_i}{r_i}$$
+
+따라서 각 집단에서 원소를 선택하는 경우의 수는 곱셈법칙에 의해
+
+$$
+\prod_{i=1}^k\binom{n_i}{r_i}
+$$
+
+가능한 모든 $r_1,\ldots,r_k$에 대해 합하면 전체 경우의 수는
+
+$$
+\sum_{\substack{
+r_1+r_2+\cdots+r_k=r\\
+0\leq r_i\leq n_i
+}}
+\binom{n_1}{r_1}
+\binom{n_2}{r_2}
+\cdots
+\binom{n_k}{r_k}
+$$
+
+이다. 곱 기호를 사용하면 다음과 같이 간단히 나타낼 수 있다.
+
+$$
+\boxed{
+\sum_{\substack{
+r_1+r_2+\cdots+r_k=r\\
+0\leq r_i\leq n_i
+}}
+\prod_{i=1}^k\binom{n_i}{r_i}
+}
+$$
+
+한편, 전체 $n$개의 원소 중 집단 구분과 관계없이 $r$개를 직접 선택하는 경우의 수는 $\binom nr$이다. 따라서 다음의 일반화된 반데르몽 항등식이 성립한다.
+
+$$
+\boxed{
+\sum_{\substack{
+r_1+r_2+\cdots+r_k=r\\
+0\leq r_i\leq n_i
+}}
+\prod_{i=1}^k\binom{n_i}{r_i}
+=
+\binom nr
+}
+$$
+
+여기서 “각각 같다”는 표현에는 주의해야 한다. 위 공식은 각 집단에 속한 원소들이 같은 종류로 분류되어 있더라도, 개별 원소는 서로 구별되는 경우에 적용된다.
+
+만약 같은 종류에 속한 원소들이 실제로 서로 구별되지 않는다면, 선택 결과는 단순히 $(r_1,\ldots,r_k)$로 결정된다. 이 경우의 수는
+
+$$
+\boxed{
+\sum_{\substack{
+r_1+r_2+\cdots+r_k=r\\
+0\leq r_i\leq n_i
+}}
+1
+}
+$$
+
+이며, 일반적으로 위의 이항계수 곱과는 다르다. 생성함수로는 다음 다항식에서 $x^r$의 계수와 같다.
+
+$$
+\prod_{i=1}^k
+\left(1+x+x^2+\cdots+x^{n_i}\right)
+$$
 
 ### 다항계수
 $n$개의 원소를 $k$개의 그룹으로 나누되, 각 그룹에 $n_1, n_2, \ldots, n_k$개씩 배치 ($n_1 + n_2 + \cdots + n_k = n$)하는 경우의 수는 다항계수로 표현할 수 있다.
@@ -53,7 +122,7 @@ $$\binom{n}{n_1, n_2, \ldots, n_k} = \frac{n!}{n_1! n_2! \cdots n_k!}$$
    4C0 4C1 4C2 4C3 4C4
 ```
 
-$nCk = (n-1)C(k-1) + (n-1)Ck$라는 파스칼 항등식이 성립한다.
+$nCk = {}_{(n-1)}C_{(k-1)} + {}_{(n-1)}C_k$라는 파스칼 항등식이 성립한다.
 
 $$\binom{n}{r} = \binom{n-1}{r-1} + \binom{n-1}{r}$$
 
@@ -164,58 +233,13 @@ $$P(X=x) = \frac{\binom{K}{x}\binom{n-K}{r-x}}{\binom{n}{r}}$$
 
 이 항등식을 이용하여 다양한 형태의 초기하분포 식을 상호 변환할 수 있다.
 
-
-# 이항계수
-정의 (Definition): $n \choose k$, 서로 다른 $n$개 중에서 순서 없이 $k$개를 고르는 경우의 수의 실수 확장버전.  
-실수(또는 복소수) $\alpha$와 음이 아닌 정수 $k\ge 0$에 대해
-
-$$\binom{\alpha}{k}=\frac{\alpha(\alpha-1)(\alpha-2)\cdots(\alpha-k+1)}{k!}$$
-
-로 정의한다. 이는 $\alpha$가 음수인 경우도 포함한다. 또한 편의상
-
-$$\binom{n}{k}=0\quad (k<0 \text{ 또는 } k>n)$$
-
-로 두기도 한다.
-
-## 기본 성질 (Basic identities)
-
-대칭성 (Symmetry): $\binom{n}{k}=\binom{n}{n-k}$  
-
-파스칼 항등식 (Pascal identity): $\binom{n}{k}=\binom{n-1}{k}+\binom{n-1}{k-1}\quad (1\le k\le n-1)$
-
-#### 조합론적 증명 (Combinatorial proof)
-$n$개 중 $k$개를 고를 때, 특정 원소(예: $n$번째 원소)를 **포함하지 않는 경우**는 $\binom{n-1}{k}$, **포함하는 경우**는 $\binom{n-1}{k-1}$이므로 합이 전체 경우의 수 $\binom{n}{k}$이다. □
-
-## 이항정리 (Binomial theorem)
-정수 $n\ge 0$에 대해
-
-$$(a+b)^n=\sum_{k=0}^{n}\binom{n}{k}a^{n-k}b^{k}$$
-
-#### 증명 (Proof)
-
-$(a+b)^n$을 $n$개의 괄호 $(a+b)$의 곱으로 보고 전개하면, 각 괄호에서 $b$를 $k$번 선택하고 나머지는 $a$를 선택한 항이 $a^{n-k}b^k$를 만든다.
-그러한 선택의 수가 $\binom{n}{k}$이므로 위 식이 성립한다. □
-
 ## 곱셈 형태 항등식 (Multiplicative identities)
-
-### 관계식 $k\binom{n}{k}=n\binom{n-1}{k-1}$
 
 $$k\binom{n}{k}=n\binom{n-1}{k-1}$$
 
 이는 양변을 팩토리얼 정의로 직접 계산하면 된다.
 
-### 관계식 $(n-k)\binom{n}{k}=n\binom{n-1}{k}$
-
 $$(n-k)\binom{n}{k}=n\binom{n-1}{k}$$
-
-## 반덜몬드 항등식 (Vandermonde identity)
-정수 $r,s\ge 0$에 대해
-
-$$\sum_{k=0}^{n}\binom{r}{k}\binom{s}{n-k}=\binom{r+s}{n}$$
-
-#### 증명
-$r+s$개의 원소가 두 그룹(크기 $r$, 크기 $s$)로 나뉘어 있을 때, 전체에서 $n$개를 고르는 방법 수는 $\binom{r+s}{n}$이다.
-한편 첫 그룹에서 $k$개, 둘째 그룹에서 $n-k$개를 고르는 경우의 수는 $\binom{r}{k}\binom{s}{n-k}$이고, $k$에 대해 합하면 전체 경우의 수가 된다. □
 
 ## 일반화된 이항계수 (Generalized binomial coefficient)
 
@@ -223,11 +247,7 @@ $r+s$개의 원소가 두 그룹(크기 $r$, 크기 $s$)로 나뉘어 있을 때
 
 $$\binom{\alpha}{n}=\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}$$
 
-로 정의한다. 
-
-특히 $\alpha=\frac{1}{2}$인 경우가
-$$\sqrt{1+x}=(1+x)^{1/2}$$
-테일러급수에 등장한다.
+로 정의한다.  특히 $\alpha=\frac{1}{2}$인 경우가 $\sqrt{1+x}=(1+x)^{1/2}$  테일러급수에 등장한다.
 
 ## 일반화된 이항정리 (Generalized binomial series)
 
@@ -256,32 +276,33 @@ $$\binom{-r}{y} = \frac{(-r)(-r-1)\cdots(-r-y+1)}{y!} \\ = (-1)^y \frac{r(r+1)\c
 
 $$x(x-1)\cdots(x-r+1)\binom{n}{x}=n(n-1)\cdots(n-r+1)\binom{n-r}{x-r}$$
 
-### 증명
-**좌변:**
-
-$$x(x-1)\cdots(x-r+1)\binom{n}{x}=x(x-1)\cdots(x-r+1)\cdot\frac{n!}{x!(n-x)!}$$
-
-$$=\frac{x(x-1)\cdots(x-r+1) \cdot n!}{x(x-1)\cdots 1 \cdot (n-x)!}$$
-
-$$=\frac{n!}{(x-r)!(n-x)!}$$
-
-**우변:**
-
-$$n(n-1)\cdots(n-r+1)\binom{n-r}{x-r}=n(n-1)\cdots(n-r+1)\cdot\frac{(n-r)!}{(x-r)!(n-x)!}$$
-
-$$=\frac{n(n-1)\cdots(n-r+1)(n-r)!}{(x-r)!(n-x)!}$$
-
-$$=\frac{n!}{(x-r)!(n-x)!}$$
-
-따라서 좌변 = 우변. □
-
-### 대안 증명 (조합론적)
-$n$개의 원소 중 $x$개를 선택하고, 그 중에서 순서를 고려하여 $r$개를 배열하는 경우의 수를 두 가지 방법으로 센다.
-
-- **방법 1**: 먼저 $x$개를 선택($\binom{n}{x}$), 그 중 $r$개를 순서대로 배열($x(x-1)\cdots(x-r+1)$)
-- **방법 2**: 먼저 $n$개 중 $r$개를 순서대로 선택($n(n-1)\cdots(n-r+1)$), 나머지 $n-r$개 중 $x-r$개를 선택($\binom{n-r}{x-r}$)
-
-두 방법 모두 같은 결과를 세므로 등식이 성립한다. □
+>증명
+>
+>**좌변:**
+>
+>$$x(x-1)\cdots(x-r+1)\binom{n}{x}=x(x-1)\cdots(x-r+1)\cdot\frac{n!}{x!(n-x)!}$$
+>
+>$$=\frac{x(x-1)\cdots(x-r+1) \cdot n!}{x(x-1)\cdots 1 \cdot (n-x)!}$$
+>
+>$$=\frac{n!}{(x-r)!(n-x)!}$$
+>
+>**우변:**
+>
+>$$n(n-1)\cdots(n-r+1)\binom{n-r}{x-r}=n(n-1)\cdots(n-r+1)\cdot\frac{(n-r)!}{(x-r)!(n-x)!}$$
+>
+>$$=\frac{n(n-1)\cdots(n-r+1)(n-r)!}{(x-r)!(n-x)!}$$
+>
+>$$=\frac{n!}{(x-r)!(n-x)!}$$
+>
+>따라서 좌변 = 우변. □
+>
+>대안 증명 (조합론적)
+>$n$개의 원소 중 $x$개를 선택하고, 그 중에서 순서를 고려하여 $r$개를 배열하는 경우의 수를 두 가지 방법으로 센다.
+>
+>- **방법 1**: 먼저 $x$개를 선택($\binom{n}{x}$), 그 중 $r$개를 순서대로 배열($x(x-1)\cdots(x-r+1)$)
+>- **방법 2**: 먼저 $n$개 중 $r$개를 순서대로 선택($n(n-1)\cdots(n-r+1)$), 나머지 $n-r$개 중 $x-r$개를 선택($\binom{n-r}{x-r}$)
+>
+>두 방법 모두 같은 결과를 세므로 등식이 성립한다. □
 
 # 특수함수
 ## 베타 함수
@@ -323,29 +344,30 @@ $$\ln(n!) \approx n\ln(n) - n + \frac{1}{2}\ln(2\pi n)$$
 
 이 공식은 조합론, 확률론, 통계학에서 큰 $n$의 이항계수나 확률을 근사할 때 매우 유용하다.
 
-#### 증명
-Stirling의 공식은 감마 함수의 적분 표현에서 라플라스 방법(Laplace's method)을 적용하여 유도된다.
-
-$$m! = \Gamma(m+1) = \int_0^{\infty} x^m e^{-x} \, dx$$
-
-지수를 정리하면
-
-$$\int_0^{\infty} e^{m\ln x - x} \, dx$$
-
-라플라스 방법: 피적분함수 $e^{m\ln x - x}$는 $x = m$에서 최댓값을 가진다. $z = \sqrt{m}(x - m)$으로 치환하면, $x = m + \frac{z}{\sqrt{m}}$이고
-
-$$m! = \int_{-\infty}^{\infty} e^{m\ln(m + z/\sqrt{m}) - (m + z/\sqrt{m})} \, \frac{dz}{\sqrt{m}}$$
-
-$\ln(m + z/\sqrt{m}) \approx \ln m + \frac{z}{m\sqrt{m}} - \frac{z^2}{2m^2}$ 근처에서 테일러 전개하면
-
-$$m! \approx m^m e^{-m} \sqrt{m} \int_{-\infty}^{\infty} e^{-z^2/(2m)} \, dz = m^m e^{-m} \sqrt{m} \cdot \sqrt{2\pi m}$$
-
-따라서
-
-$$m! \sim \sqrt{2\pi m} \left(\frac{m}{e}\right)^m, \quad m \to \infty$$
-
-이항분포 $B(n, p)$의 누적확률은 정규분포로 근사되며, Stirling의 공식을 이용하면 이 근사의 오차를 정량화할 수 있습니다.
-
+>**증명**
+>
+>Stirling의 공식은 감마 함수의 적분 표현에서 라플라스 방법(Laplace's method)을 적용하여 유도된다.
+>
+>$$m! = \Gamma(m+1) = \int_0^{\infty} x^m e^{-x} \, dx$$
+>
+>지수를 정리하면
+>
+>$$\int_0^{\infty} e^{m\ln x - x} \, dx$$
+>
+>라플라스 방법: 피적분함수 $e^{m\ln x - x}$는 $x = m$에서 최댓값을 가진다. $z = \sqrt{m}(x - m)$으로 치환하면, $x = m + \frac{z}{\sqrt{m}}$이고
+>
+>$$m! = \int_{-\infty}^{\infty} e^{m\ln(m + z/\sqrt{m}) - (m + z/\sqrt{m})} \, \frac{dz}{\sqrt{m}}$$
+>
+>$\ln(m + z/\sqrt{m}) \approx \ln m + \frac{z}{m\sqrt{m}} - \frac{z^2}{2m^2}$ 근처에서 테일러 전개하면
+>
+>$$m! \approx m^m e^{-m} \sqrt{m} \int_{-\infty}^{\infty} e^{-z^2/(2m)} \, dz = m^m e^{-m} \sqrt{m} \cdot \sqrt{2\pi m}$$
+>
+>따라서
+>
+>$$m! \sim \sqrt{2\pi m} \left(\frac{m}{e}\right)^m, \quad m \to \infty$$
+>
+>이항분포 $B(n, p)$의 누적확률은 정규분포로 근사되며, Stirling의 공식을 이용하면 이 근사의 오차를 정량화할 수 있다.
+>
 ### 이항확률의 정규 근사
 **(a) 이항확률의 정규근사**  
 $q = 1 - p$라 할 때, $a \le \frac{x-np}{\sqrt{npq}} \le b$인 $x$에 대해
@@ -357,23 +379,24 @@ $$P(X=x) = \binom{n}{x} p^x q^{n-x} \sim \frac{1}{\sqrt{2\pi npq}} e^{-\frac{(x-
 $$\sum_{\substack{x: a \le \frac{x-np}{\sqrt{npq}} \le b}} P(X=x) 
 = \sum_{\substack{x: a \le \frac{x-np}{\sqrt{npq}} \le b}} \binom{n}{x} p^x q^{n-x} \sim \int_a^b \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}z^2} \, dz, \quad n \to \infty$$
 
-이는 **중심극한정리**의 직접적인 결과이며, $n$이 충분히 클 때 이항분포 $B(n,p)$를 정규분포 $N(np, npq)$로 근사할 수 있음을 의미합니다.
+이는 **중심극한정리**의 직접적인 결과이며, $n$이 충분히 클 때 이항분포 $B(n,p)$를 정규분포 $N(np, npq)$로 근사할 수 있음을 의미한다.
 
-#### 증명
-$X_1, X_2, \ldots, X_n$을 독립적인 베르누이 확률변수라 하고, $X = \sum_{i=1}^n X_i$라 하면 $X \sim B(n,p)$.
-
-중심극한정리에 의해
-
-$$Z_n = \frac{X - np}{\sqrt{npq}} \xrightarrow{d} N(0,1), \quad n \to \infty$$
-
-따라서 충분히 큰 $n$에 대해
-
-$$P\left(a \le \frac{X-np}{\sqrt{npq}} \le b\right) \approx \Phi(b) - \Phi(a) = \int_a^b \frac{1}{\sqrt{2\pi}} e^{-z^2/2} \, dz$$
-
-여기서 $\Phi$는 표준정규분포의 누적분포함수.
-
-(a)의 경우, Stirling 공식을 이용하여 $\binom{n}{x}p^x q^{n-x}$의 합을 리만 합 근사로 적분으로 변환할 수 있습니다. $x$가 $np$ 근처에서 $\sqrt{npq}$ 스케일로 변할 때, 
-
-$$\binom{n}{x}p^x q^{n-x} \approx \frac{1}{\sqrt{2\pi npq}} \exp\left(-\frac{(x-np)^2}{2npq}\right)$$
-
-가 성립하며, 이를 이용하여 (b)의 적분 표현을 얻습니다. □
+>**증명**
+>
+>$X_1, X_2, \ldots, X_n$을 독립적인 베르누이 확률변수라 하고, $X = \sum_{i=1}^n X_i$라 하면 $X \sim B(n,p)$.
+>
+>중심극한정리에 의해
+>
+>$$Z_n = \frac{X - np}{\sqrt{npq}} \xrightarrow{d} N(0,1), \quad n \to \infty$$
+>
+>따라서 충분히 큰 $n$에 대해
+>
+>$$P\left(a \le \frac{X-np}{\sqrt{npq}} \le b\right) \approx \Phi(b) - \Phi(a) = \int_a^b \frac{1}{\sqrt{2\pi}} e^{-z^2/2} \, dz$$
+>
+>여기서 $\Phi$는 표준정규분포의 누적분포함수.
+>
+>(a)의 경우, Stirling 공식을 이용하여 $\binom{n}{x}p^x q^{n-x}$의 합을 리만 합 근사로 적분으로 변환할 수 있다. $x$가 $np$ 근처에서 $\sqrt{npq}$ 스케일로 변할 때, 
+>
+>$$\binom{n}{x}p^x q^{n-x} \approx \frac{1}{\sqrt{2\pi npq}} \exp\left(-\frac{(x-np)^2}{2npq}\right)$$
+>
+>가 성립하며, 이를 이용하여 (b)의 적분 표현을 얻는다. □

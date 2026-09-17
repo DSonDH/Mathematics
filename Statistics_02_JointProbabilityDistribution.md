@@ -474,41 +474,25 @@ $$
 여기서 $\mu_{X+Y}=E(X+Y)=E(X)+E(Y)=\mu_X+\mu_Y$이므로
 
 $$
-\begin{align}
+\begin{aligneded}
 \mathrm{Cov}(X + Y,Z) &= E[(X-\mu_X+Y-\mu_Y)(Z-\mu_Z)] \\
 &= E[(X-\mu_X)(Z-\mu_Z)+(Y-\mu_Y)(Z-\mu_Z)] \\
 &= E[(X-\mu_X)(Z-\mu_Z)]+E[(Y-\mu_Y)(Z-\mu_Z)] \\
 &= \mathrm{Cov}(X,Z)+\mathrm{Cov}(Y,Z)
-\end{align}
+\end{aligneded}
 $$
 
 $\mathrm{Cov}(X - Y,Z)$의 경우도 동일한 방법으로 증명된다.
 
 **(6) 증명**
 
-코시–슈바르츠 부등식을 $U=X-\mu_X$, $V=Y-\mu_Y$에 적용하면
+코시–슈바르츠 부등식을 $U=X-\mu_X$, $V=Y-\mu_Y$에 적용하면 $|E(UV)|\le\sqrt{E(U^2)}\sqrt{E(V^2)}$
 
-$$
-|E(UV)|\le\sqrt{E(U^2)}\sqrt{E(V^2)}
-$$
+즉 $|E[(X-\mu_X)(Y-\mu_Y)]|\le\sqrt{E[(X-\mu_X)^2]}\sqrt{E[(Y-\mu_Y)^2]}$
 
-즉
+따라서 $|\mathrm{Cov}(X,Y)|\le\sqrt{\mathrm{Var}(X)}\sqrt{\mathrm{Var}(Y)}$
 
-$$
-|E[(X-\mu_X)(Y-\mu_Y)]|\le\sqrt{E[(X-\mu_X)^2]}\sqrt{E[(Y-\mu_Y)^2]}
-$$
-
-따라서
-
-$$
-|\mathrm{Cov}(X,Y)|\le\sqrt{\mathrm{Var}(X)}\sqrt{\mathrm{Var}(Y)}
-$$
-
-양변을 제곱하면
-
-$$
-\mathrm{Cov}(X,Y)^2\le\mathrm{Var}(X)\mathrm{Var}(Y)
-$$
+양변을 제곱하면 $\mathrm{Cov}(X,Y)^2\le\mathrm{Var}(X)\mathrm{Var}(Y)$
 
 **(7) 증명**  
 공분산의 성질 **(5)** 를 반복 적용하여 증명한다.  
@@ -552,20 +536,20 @@ $|\rho|=1$ ⇔ $P\left(\frac{Y-\mu_Y}{\sigma_Y}=\rho\frac{X-\mu_X}{\sigma_X}\rig
     - $\rho=-1$ ⇔ $P\left(\frac{Y-\mu_Y}{\sigma_Y}=-\frac{X-\mu_X}{\sigma_X}\right) = 1$
     - 직선관계를 나타내는 특성치: 상관계수 절댓값이 커질수록 $(X, Y)$ 분포는 직선에 가깝게 분포한다.
 
-#### 증명
+**증명**  
 
 **(1) 증명**  
 분산의 정의와 공분산의 성질을 이용하면
 
 $$
-\begin{align}
+\begin{aligned}
 \mathrm{Var}\left(\frac{Y-\mu_Y}{\sigma_Y}-\rho\frac{X-\mu_X}{\sigma_X}\right)
 &= E\left[(\frac{Y-\mu_Y}{\sigma_Y}-\rho\frac{X-\mu_X}{\sigma_X})^2\right]\\
 &= \mathrm{Var}\left(\frac{Y-\mu_Y}{\sigma_Y}\right) + \rho^2\mathrm{Var}\left(\frac{X-\mu_X}{\sigma_X}\right) - 2\rho\mathrm{Cov}\left(\frac{Y-\mu_Y}{\sigma_Y}, \frac{X-\mu_X}{\sigma_X}\right)\\
 &= 1 + \rho^2 - 2\rho\cdot\frac{\mathrm{Cov}(X,Y)}{\sigma_X\sigma_Y}\\
 &= 1 + \rho^2 - 2\rho^2\\
 &= 1 - \rho^2.
-\end{align}
+\end{aligned}
 $$
 
 **(2) 증명**  
@@ -585,13 +569,7 @@ $$
 >이 되고, 이는 $|\rho|\le 1$과 동일하다. 
 
 **(3) 증명**  
-($\Leftarrow$) $Y=aX+b$ (a.s.)이면  
-
-$$
-\mathrm{Cov}(X,Y)=a\mathrm{Var}(X), \quad \mathrm{Var}(Y)=a^2\mathrm{Var}(X)
-$$
-
-이므로
+($\Leftarrow$) $Y=aX+b$ (a.s.)이면 $\mathrm{Cov}(X,Y)=a\mathrm{Var}(X), \quad \mathrm{Var}(Y)=a^2\mathrm{Var}(X)$ 이므로
 
 $$
 \rho=\frac{a\mathrm{Var}(X)}{|a|\mathrm{Var}(X)}=\mathrm{sign}(a)=\pm 1
@@ -688,12 +666,12 @@ $$
 로 놓고, 이를 대입하여 $t_1, t_2$의 오름차순으로 정리하면 다음을 얻는다:
 
 $$
-\begin{align}
+\begin{aligned}
 \log(1+A) &= A - \frac{A^2}{2} + \cdots \\
 &= \left(\frac{m_{1,0}}{1!}t_1 + \frac{m_{0,1}}{1!}t_2 + \cdots\right) - \frac{1}{2}\left(\frac{m_{1,0}}{1!}t_1 + \frac{m_{0,1}}{1!}t_2 + \cdots\right)^2 + \cdots \\
 &= m_{1,0}t_1 + m_{0,1}t_2 + \frac{1}{2}(m_{2,0} - m_{1,0}^2)t_1^2 + (m_{1,1} - m_{1,0}m_{0,1})t_1t_2 \\
 &\quad + \frac{1}{2}(m_{0,2} - m_{0,1}^2)t_2^2 + \cdots
-\end{align}
+\end{aligned}
 $$
 
 이를 누율생성함수의 전개식 $C(t_1,t_2) = \sum_{r,s} \frac{c_{r,s}}{r!s!}t_1^r t_2^s$와 계수를 비교하면,
@@ -730,13 +708,7 @@ $$
 
 ### 정리 2.2.4 결합적률생성함수와 결합누율생성함수의 성질 *(Properties of Joint MGF and Joint CGF)*
 
-확률벡터 $(X,Y)$의 결합적률생성함수를
-
-$$
-M(t_1,t_2)=E\left(e^{t_1X+t_2Y}\right)
-$$
-
-라 하자.
+확률벡터 $(X,Y)$의 결합적률생성함수를 $M(t_1,t_2)=E\left(e^{t_1X+t_2Y}\right)$ 라 하자.
 
 **(1) 결합적률 생성성 (Moment generation)**  
 $M(t_1,t_2)$가 $(0,0)$를 포함하는 어떤 열린근방에서 유한하며, 해당 근방에서 필요한 차수만큼 편미분 가능하다고 가정하자.
@@ -764,7 +736,7 @@ $$
 즉, 결합적률생성함수는 (존재하는 경우) 결합확률분포를 유일하게 결정한다.
 - 결합적률생성함수가 결합분포의 완전한 특성치(characterization) 임을 의미한다.
 
-#### 증명 (개요)
+**증명**  (개요)
 (1)은 $e^{t_1X+t_2Y}$를 거듭제곱급수로 전개하고 미분-기대값 교환을 정당화(지배수렴 또는 균등적분가능성 조건)하면 얻어진다.
 
 (2)는 0 근방에서 MGF가 존재하면 라플라스 변환이 근방에서 일치하고, 해석적 연장(analytic continuation) 또는 특성함수(characteristic function)로의 연결을 통해 분포가 유일하게 결정됨을 사용한다. □
@@ -775,22 +747,19 @@ $$
 **1) 결합적률생성함수 $M(t_1,t_2)$ 계산**
 
 $$
-M(t_1,t_2)=E(e^{t_1X+t_2Y})
-=\int_0^\infty\int_{y=x}^\infty 2e^{-x-y}e^{t_1x+t_2y} dy dx
+M(t_1,t_2)=E(e^{t_1X+t_2Y}) = \int_0^\infty\int_{y=x}^\infty 2e^{-x-y}e^{t_1x+t_2y} dy dx
 $$
 
 내적분이 수렴하려면 $t_2<1$이 필요하고,
 
 $$
-\int_{y=x}^\infty 2e^{(t_1-1)x+(t_2-1)y} dy
-=\frac{2}{1-t_2}e^{(t_1+t_2-2)x}
+\int_{y=x}^\infty 2e^{(t_1-1)x+(t_2-1)y} dy =\frac{2}{1-t_2}e^{(t_1+t_2-2)x}
 $$
 
 바깥 적분이 수렴하려면 $t_1+t_2<2$가 필요하다. 바깥 적분 계산과정 생략. 따라서
 
 $$
-M(t_1,t_2)=\frac{2}{(1-t_2)(2-t_1-t_2)},
-\quad (t_1,t_2)\ \text{가}\ t_2<1,\ t_1+t_2<2\ \text{를 만족할 때}
+M(t_1,t_2)=\frac{2}{(1-t_2)(2-t_1-t_2)}, \quad (t_1,t_2)\ \text{가}\ t_2<1,\ t_1+t_2<2\ \text{를 만족할 때}
 $$
 
 **2) 결합누율생성함수 $C(t_1,t_2)$**
@@ -1043,21 +1012,21 @@ $$
   $$P(a\le X\le b,\ c\le Y\le d)
   =  \int_a^b P(c\le Y\le d\mid X=x)f_1(x)dx  $$
 
-#### 증명 (연속형)
-연속형에서
-
-$$
-P(c\le Y\le d\mid X=x)=\int_c^d f_{2|1}(y\mid x)dy
-$$
-
-이고 $f_{2|1}(y\mid x)=\frac{f_{1,2}(x,y)}{f_1(x)}$이므로,
-
-$$
-\int_a^b P(c\le Y\le d\mid X=x)f_1(x)dx
-=\int_a^b\left(\int_c^d \frac{f_{1,2}(x,y)}{f_1(x)}dy\right)f_1(x)dx \\
-=\int_a^b\int_c^d f_{1,2}(x,y)dydx =P(a\le X\le b,\ c\le Y\le d)$$
-
-□ (이산형도 같은 방법으로 증명 가능)  
+>**증명**  (연속형)
+>연속형에서
+>
+>$$
+>P(c\le Y\le d\mid X=x)=\int_c^d f_{2|1}(y\mid x)dy
+>$$
+>
+>이고 $f_{2|1}(y\mid x)=\frac{f_{1,2}(x,y)}{f_1(x)}$이므로,
+>
+>$$
+>\int_a^b P(c\le Y\le d\mid X=x)f_1(x)dx
+>=\int_a^b\left(\int_c^d \frac{f_{1,2}(x,y)}{f_1(x)}dy\right)f_1(x)dx \\
+>=\int_a^b\int_c^d f_{1,2}(x,y)dydx =P(a\le X\le b,\ c\le Y\le d)$$
+>
+>□ (이산형도 같은 방법으로 증명 가능)  
 
 #### 예 2.3.3 *(Consistency check using conditioning)*
 앞의 예들과 동일한 상황에서
@@ -1146,45 +1115,46 @@ $g_1(Y) \le g_2(Y)$ a.s.이면
 
 $$E[g_1(Y) \mid X=x] \le E[g_2(Y) \mid X=x]$$
 
-#### 증명
-**(1)** 조건부확률밀도함수(또는 확률질량함수)에 대한 적분(또는 합)의 선형성에서 직접 따른다.
-
-**(2)** $X=x$가 주어졌을 때, $v(x)$는 상수이므로
-
-$$E[v(x)g(Y) \mid X=x] = v(x)E[g(Y) \mid X=x]$$
-
-**(3)** 연속형의 경우,
-
-$$
-E[E(g(Y) \mid X)] = \int_{-\infty}^{\infty} E[g(Y) \mid X=x]f_1(x)\ dx \\
-= \int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty} g(y)f_{2|1}(y \mid x)\ dy\right)f_1(x)\ dx \\
-= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(y)f_{1,2}(x,y)\ dy\ dx \\
-= \int_{-\infty}^{\infty} g(y)\left(\int_{-\infty}^{\infty} f_{1,2}(x,y)\,dx\right)dy \quad \text{(Fubini 정리에 의해 적분 순서 교환)} \\
-= \int_{-\infty}^{\infty} g(y)f_2(y)\,dy = E[g(Y)]
-$$
-
-이산형의 경우도 동일한 방식으로 증명된다. □
-
-**(4)** $g_1(Y) \le g_2(Y)$ a.s.이면 $g_2(Y) - g_1(Y) \ge 0$ a.s.이므로
-
-연속형의 경우,
-
-$$
-E[g_2(Y) - g_1(Y) \mid X=x] = \int_{-\infty}^{\infty} (g_2(y) - g_1(y))f_{2|1}(y \mid x)\,dy \ge 0
-$$
-
-이산형의 경우,
-
-$$
-E[g_2(Y) - g_1(Y) \mid X=x] = \sum_y (g_2(y) - g_1(y))f_{2|1}(y \mid x) \ge 0
-$$
-
-선형성 **(1)** 을 적용하면
-
-$$
-E[g_2(Y) \mid X=x] - E[g_1(Y) \mid X=x] \ge 0 \\
-\therefore E[g_1(Y) \mid X=x] \le E[g_2(Y) \mid X=x]
-$$
+>**증명**  
+>**(1)** 조건부확률밀도함수(또는 확률질량함수)에 대한 적분(또는 합)의 선형성에서 직접 따른다.
+>
+>**(2)** $X=x$가 주어졌을 때, $v(x)$는 상수이므로
+>
+>$$E[v(x)g(Y) \mid X=x] = v(x)E[g(Y) \mid X=x]$$
+>
+>**(3)** 연속형의 경우,
+>
+>$$
+>\begin{aligned}
+>E[E(g(Y) \mid X)] &= \int_{-\infty}^{\infty} E[g(Y) \mid X=x]f_1(x)\ dx \\
+>&= \int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty} g(y)f_{2|1}(y \mid x)\ dy\right)f_1(x)\ dx \\
+>&= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(y)f_{1,2}(x,y)\ dy\ dx \\
+>&= \int_{-\infty}^{\infty} g(y)\left(\int_{-\infty}^{\infty} f_{1,2}(x,y)\,dx\right)dy &\text{(적분 순서 교환 by Fubini 정리)} \\
+>&= \int_{-\infty}^{\infty} g(y)f_2(y)\,dy = E[g(Y)]
+>\end{aligned}
+>$$
+>
+>이산형의 경우도 동일한 방식으로 증명된다. □
+>
+>**(4)** $g_1(Y) \le g_2(Y)$ a.s.이면 $g_2(Y) - g_1(Y) \ge 0$ a.s.이므로
+>
+>연속형의 경우,
+>
+>$$
+>E[g_2(Y) - g_1(Y) \mid X=x] = \int_{-\infty}^{\infty} (g_2(y) - g_1(y))f_{2|1}(y \mid x)\,dy \ge 0
+>$$
+>
+>이산형의 경우,
+>
+>$$
+>E[g_2(Y) - g_1(Y) \mid X=x] = \sum_y (g_2(y) - g_1(y))f_{2|1}(y \mid x) \ge 0
+>$$
+>
+>선형성 **(1)** 을 적용하면
+>
+>$$
+>E[g_2(Y) \mid X=x] - E[g_1(Y) \mid X=x] \ge 0 \\ \therefore E[g_1(Y) \mid X=x] \le E[g_2(Y) \mid X=x]
+>$$
 
 ### 조건부분산 *(Conditional Variance)*
 조건부기대값이 있으면, 조건부분산도 같은 방식으로 정의한다.  
@@ -1200,32 +1170,17 @@ $$
 
 $$\mathrm{Var}(Y\mid X=x)=E(Y^2\mid X=x)-\{E(Y\mid X=x)\}^2$$
 
-#### 증명
-
-$$
-\mathrm{Var}(Y\mid X=x)=E[(Y-\mu_{2|1}(x))^2\mid X=x]  \\
-= E[Y^2-2\mu_{2|1}(x)Y+\mu_{2|1}(x)^2\mid X=x] \\
-=E(Y^2\mid X=x)-2\mu_{2|1}(x)E(Y\mid X=x)+\mu_{2|1}(x)^2
-$$
-
-인데 $E(Y\mid X=x)=\mu_{2|1}(x)$이므로
-
-$$=E(Y^2\mid X=x)-\mu_{2|1}(x)^2$$
-
-#### 예 2.3.5 *(Conditional variance computation)*
-예 2.3.4에서 $E(Y\mid X=x)=\frac{1-x}{2}$
-이고, 같은 조건부밀도 $f_{2|1}$를 이용하여
-
-$$
-E(Y^2\mid X=x)=\int_0^{1-x} y^2\cdot \frac{6y(1-x-y)}{(1-x)^3}dy
-$$
-
-를 계산하면
-
-$$
-\mathrm{Var}(Y\mid X=x)=E(Y^2\mid X=x)-\left(\frac{1-x}{2}\right)^2
-=\frac{(1-x)^2}{20}
-$$
+>**증명**
+>
+>$$
+>\mathrm{Var}(Y\mid X=x)=E[(Y-\mu_{2|1}(x))^2\mid X=x]  \\
+>= E[Y^2-2\mu_{2|1}(x)Y+\mu_{2|1}(x)^2\mid X=x] \\
+>=E(Y^2\mid X=x)-2\mu_{2|1}(x)E(Y\mid X=x)+\mu_{2|1}(x)^2
+>$$
+>
+>이때 $E(Y\mid X=x)=\mu_{2|1}(x)$이므로
+>
+>$$=E(Y^2\mid X=x)-\mu_{2|1}(x)^2$$
 
 ### 확률변수로서의 조건부기대값 *(Conditional Expectation as a Random Variable)*
 함수 $h(x)=E(g(Y)\mid X=x)$ 를 정의하면, $X$는 확률변수이므로 $h(X)$도 확률변수가 된다. 이를
@@ -1250,28 +1205,27 @@ $$\forall v(X),\ \mathrm{Cov}(Y-E(Y\mid X),\ v(X))=0$$
 
 - 이는 $Y$에서 $X$로 설명 가능한 부분을 제거한 잔차(residual)가 $X$의 함수들과 비상관임을 의미한다.
 
-#### 증명 
-(1) (연속형)
-
-$$
-E[E(Y\mid X)]
-=\int\left(\int y f_{2|1}(y\mid x)dy\right)f_1(x)dx
-=\int\int yf_{1,2}(x,y)dydx
-=E(Y)
-$$
-
-(2) $E(Y\mid X)$는 $X$의 함수이므로, $X=x$가 주어진 조건에서 $E(Y\mid X)$는 상수 $E(Y\mid x)$가 되므로, 
-
-$$E[E(Y\mid X)\mid X=x]=E(Y\mid x)\cdot 1=E(Y\mid x)$$
-
-(3) $Z=Y-E(Y\mid X)$라 두면, 조건부기대값의 정의상  
-$E(Z\mid X)=E(Y\mid X)-E(E(Y\mid X)\mid X)=E(Y\mid X)-E(Y\mid X)=0$ 이므로 $E(Z)=E(E(Z\mid X))=0$  
-따라서
-
-$$
-\mathrm{Cov}(Z,v(X))=E[Zv(X)]-E(Z)E(v(X))=E[Zv(X)] \\
-=E(E[Zv(X)\mid X])=E(v(X)E[Z\mid X])=E(v(X)\cdot 0)=0
-$$
+>**증명**  
+>(1) (연속형)
+>
+>$$
+>E[E(Y\mid X)]
+>=\int\left(\int y f_{2|1}(y\mid x)dy\right)f_1(x)dx
+>=\int\int yf_{1,2}(x,y)dydx
+>=E(Y)
+>$$
+>
+>(2) $E(Y\mid X)$는 $X$의 함수이므로, $X=x$가 주어진 조건에서 $E(Y\mid X)$는 상수 $E(Y\mid x)$가 되므로, 
+>
+>$$E[E(Y\mid X)\mid X=x]=E(Y\mid x)\cdot 1=E(Y\mid x)$$
+>
+>(3) $Z=Y-E(Y\mid X)$라 두면, 조건부기대값의 정의상  
+>$E(Z\mid X)=E(Y\mid X)-E(E(Y\mid X)\mid X)=E(Y\mid X)-E(Y\mid X)=0$ 이므로 $E(Z)=E(E(Z\mid X))=0$  
+>따라서
+>
+>$$
+>\mathrm{Cov}(Z,v(X))=E[Zv(X)]-E(Z)E(v(X))=E[Zv(X)] \\ =E(E[Zv(X)\mid X])=E(v(X)E[Z\mid X])=E(v(X)\cdot 0)=0
+>$$
 
 ### 정리 2.3.5 최소제곱예측자 *(Least Squares Predictor)*
 조건부평균 $E(Y\mid X)$는 $Y$를 예측하는 "가장 좋은" $X$의 함수라는 뜻을 가지고 있고, 흔히 회귀함수(Regression Function)이라 한다.  
@@ -1292,6 +1246,7 @@ $$
 E[(Y-E(Y\mid X))^2]=E[\mathrm{Var}(Y\mid X)]
 $$
 
+> 약속: 직교하는 합 또는 비상관합  
 > 앞으로 확률변수의 합을 $X \oplus Y$로 표기할 때에는,  
 > 확률변수 $X$와 $Y$가 서로 **비상관(uncorrelated)** 임을 전제로 한다. 즉,
 >
@@ -1311,42 +1266,31 @@ $$
 > - $\oplus$ 표기는 독립성을 요구하지 않으며, 오직 비상관성만을 전제로 한다.  
 > - 이 표기는 특히 분산의 가법성(additivity of variance)이 중요한 맥락에서 유용하다.
 
-#### 증명
-임의의 $X$의 함수 $u(X)$에 대하여, 다음과 같이 분해한다.
-
-$$Y-u(X)=(Y-E(Y\mid X))\oplus(E(Y\mid X)-u(X))$$
-
->이 분해가 $\oplus$로 가능함을 확인하자.  
->$E(Y\mid X)-u(X)$는 $X$의 함수이므로, 정리 2.3.4(직교성 성질)에 의해
+>**증명**  
+>임의의 $X$의 함수 $u(X)$에 대하여, 다음과 같이 분해한다.
 >
->$$\mathrm{Cov}(Y-E(Y\mid X),\ E(Y\mid X)-u(X))=0$$
+>$$Y-u(X)=(Y-E(Y\mid X))\oplus(E(Y\mid X)-u(X))$$
 >
->가 성립한다. 따라서 두 항은 서로 비상관이며, $\oplus$ 표기가 정당하다.
-
-이제 양변의 제곱의 기댓값을 취하면, $\oplus$의 정의에 의해 분산이 가법적으로 분해되어
-
-$$
-E[(Y-u(X))^2]=E[(Y-E(Y\mid X))^2]+E[(E(Y\mid X)-u(X))^2] \\ + 2E[(Y-E(Y\mid X))(E(Y\mid X)-u(X))] \quad (\text{이 마지막 항은 0임})
-$$
-
-두 번째 항은 항상 비음이므로
-
-$$E[(Y-u(X))^2]\ge E[(Y-E(Y\mid X))^2]$$
-
-가 성립하며, 등호는
-
-$$E(Y\mid X)-u(X)=0\quad\text{a.s.}$$
-
-즉 $u(X)=E(Y\mid X)$일 때, 그리고 그때에만 성립한다.  
-따라서 $E[(Y-u(X))^2]$를 최소화하는 $X$의 함수는
-
-$$u(X)=E(Y\mid X)$$
-
-마지막으로 최소값은 조건부기대값의 정의를 이용하면 보일 수 있다.
-
-$$
-E[(Y-E(Y\mid X))^2]=E[E((Y-E(Y\mid X))^2\mid X)]=E[\mathrm{Var}(Y\mid X)]
-$$
+>>이 분해가 $\oplus$로 가능함을 확인하자.  
+>>$E(Y\mid X)-u(X)$는 $X$의 함수이므로, 정리 2.3.4(직교성 성질)에 의해
+>>
+>>$$\mathrm{Cov}(Y-E(Y\mid X),\ E(Y\mid X)-u(X))=0$$
+>>
+>>가 성립한다. 따라서 두 항은 서로 비상관이며, $\oplus$ 표기가 정당하다.
+>
+>이제 양변의 제곱의 기댓값을 취하면, $\oplus$의 정의에 의해 분산이 가법적으로 분해되어
+>
+>$$
+>E[(Y-u(X))^2]=E[(Y-E(Y\mid X))^2]+E[(E(Y\mid X)-u(X))^2] \\ + 2E[(Y-E(Y\mid X))(E(Y\mid X)-u(X))] \quad (\text{이 마지막 항은 0임})
+>$$
+>
+>두 번째 항은 항상 비음이므로 $E[(Y-u(X))^2]\ge E[(Y-E(Y\mid X))^2]$ 가 성립하며, 등호는 $u(X)=E(Y\mid X)$일 때만 성립한다.  
+>
+>마지막으로 최소값은 조건부기대값의 정의를 이용하면 보일 수 있다.
+>
+>$$
+>E[(Y-E(Y\mid X))^2]=E[E((Y-E(Y\mid X))^2\mid X)]=E[\mathrm{Var}(Y\mid X)]
+>$$
 
 ### 정리 2.3.6 분산의 분해 *(Variance Decomposition)*
 
@@ -1354,24 +1298,22 @@ $$
 \mathrm{Var}(Y)=E[\mathrm{Var}(Y\mid X)]+\mathrm{Var}(E(Y\mid X))
 $$
 
-#### 증명
-$\mu = E(Y)$라 하자.  
-$Y-\mu$를 다음과 같이 분해한다:
-
-$$Y-\mu=(Y-E(Y\mid X))+(E(Y\mid X)-\mu)$$
-
-양변을 제곱하고 기댓값을 취하면 $\mathrm{Var}(Y)=E[(Y-E(Y\mid X))^2]+E[(E(Y\mid X)-\mu)^2]+2E[(Y-E(Y\mid X))(E(Y\mid X)-\mu)]$
-
-정리 2.3.4(3)의 직교성 성질에 의해 교차항은  
-$E[(Y-E(Y\mid X))(E(Y\mid X)-\mu)]=\mathrm{Cov}(Y-E(Y\mid X),\ E(Y\mid X)-\mu)=0$
-
-또한 정리 2.3.4(1)에 의해 $E(E(Y\mid X))=E(Y)=\mu$이므로
-
-$$
-E[(E(Y\mid X)-\mu)^2]=\mathrm{Var}(E(Y\mid X)) \\
-E[(Y-E(Y\mid X))^2]=E[\mathrm{Var}(Y\mid X)] \\
-\therefore \mathrm{Var}(Y)=E[\mathrm{Var}(Y\mid X)]+\mathrm{Var}(E(Y\mid X))
-$$
+>**증명**  
+>$\mu = E(Y)$라 하자.  
+>$Y-\mu$를 다음과 같이 분해한다: $Y-\mu=(Y-E(Y\mid X))+(E(Y\mid X)-\mu)$
+>
+>양변을 제곱하고 기댓값을 취하면 $\mathrm{Var}(Y)=E[(Y-E(Y\mid X))^2]+E[(E(Y\mid X)-\mu)^2]+2E[(Y-E(Y\mid X))(E(Y\mid X)-\mu)]$
+>
+>정리 2.3.4(3)의 직교성 성질에 의해 교차항은  
+>$E[(Y-E(Y\mid X))(E(Y\mid X)-\mu)]=\mathrm{Cov}(Y-E(Y\mid X),\ E(Y\mid X)-\mu)=0$
+>
+>또한 정리 2.3.4(1)에 의해 $E(E(Y\mid X))=E(Y)=\mu$이므로 $E[(E(Y\mid X)-\mu)^2]=\mathrm{Var}(E(Y\mid X))$
+>
+>또한 이전문제의 증명과정에서 $E[(Y-E(Y\mid X))^2]=E[\mathrm{Var}(Y\mid X)]$
+>
+>따라서 
+>
+>$$ \mathrm{Var}(Y)=E[\mathrm{Var}(Y\mid X)]+\mathrm{Var}(E(Y\mid X))$$
 
 #### 예 2.3.8 *(Verification for the Beta-like example)*
 예 2.3.6에서 $E(Y\mid X)=\frac{1-X}{2},\quad \mathrm{Var}(Y\mid X)=\frac{(1-X)^2}{20}$이고,  
@@ -1405,27 +1347,27 @@ $$
 \mathrm{Var}(X-E(X\mid Y))=E[\mathrm{Var}(X\mid Y)]
 $$
 
-#### 증명
-$Z=X-E(X\mid Y)$라 두면, 조건부기대값의 성질에 의해
-
-$$
-E(Z\mid Y)=E(X\mid Y)-E(E(X\mid Y)\mid Y)=E(X\mid Y)-E(X\mid Y)=0 \\
-\therefore E(Z)=E(E(Z\mid Y))=0
-$$
-
-이므로
-
-$$
-\mathrm{Var}(Z)=E(Z^2)-[E(Z)]^2=E(Z^2)\\
-=E[(X-E(X\mid Y))^2] \\
-=E[E((X-E(X\mid Y))^2\mid Y)] \quad \text{(조건부기대값의 정의)}
-$$
-
-마지막으로, 조건부분산의 정의에 의해 $E[(X-E(X\mid Y))^2\mid Y]=\mathrm{Var}(X\mid Y)$ 이므로
-
-$$
-\mathrm{Var}(X-E(X\mid Y))=E[\mathrm{Var}(X\mid Y)]
-$$
+>**증명**  
+>$Z=X-E(X\mid Y)$라 두면, 조건부기대값의 성질에 의해
+>
+>$$
+>E(Z\mid Y)=E(X\mid Y)-E(E(X\mid Y)\mid Y)=E(X\mid Y)-E(X\mid Y)=0 \\
+>\therefore E(Z)=E(E(Z\mid Y))=0
+>$$
+>
+>이므로
+>
+>$$
+>\mathrm{Var}(Z)=E(Z^2)-[E(Z)]^2=E(Z^2)\\
+>=E[(X-E(X\mid Y))^2] \\
+>=E[E((X-E(X\mid Y))^2\mid Y)]
+>$$
+>
+>마지막으로, 조건부분산의 정의에 의해 $E[(X-E(X\mid Y))^2\mid Y]=\mathrm{Var}(X\mid Y)$ 이므로
+>
+>$$
+>\mathrm{Var}(X-E(X\mid Y))=E[\mathrm{Var}(X\mid Y)]
+>$$
 
 #### 예시
 
@@ -1542,45 +1484,22 @@ $$
 
 #### 예시 2.4.1 (독립인 경우)
 
-결합확률밀도함수가
-
-$$
-f_{X,Y}(x,y)=2e^{-x-2y}\mathbf{1}_{{x\ge0,y\ge0}}
-$$
+결합확률밀도함수가 $f_{X,Y}(x,y)=2e^{-x-2y}\mathbf{1}_{{x\ge0,y\ge0}}$
 
 주변확률밀도함수는
 
 $$
-f_X(x)=\int_0^\infty 2e^{-x-2y}dy=e^{-x}\mathbf{1}_{{x\ge0}}
-$$
-
-$$
+f_X(x)=\int_0^\infty 2e^{-x-2y}dy=e^{-x}\mathbf{1}_{{x\ge0}} \\
 f_Y(y)=\int_0^\infty 2e^{-x-2y}dx=2e^{-2y}\mathbf{1}_{{y\ge0}}
 $$
 
-따라서
-
-$$
-f_{X,Y}(x,y)=f_X(x)f_Y(y)
-$$
-
-이므로 $X$와 $Y$는 서로 독립이다. □
+따라서 $f_{X,Y}(x,y)=f_X(x)f_Y(y)$ 이므로 $X$와 $Y$는 서로 독립이다. □
 
 #### 예시 2.4.2 (독립이 아닌 경우)
 
-결합확률밀도함수가
+결합확률밀도함수가 $f_{X,Y}(x,y)=2e^{-x-y}\mathbf{1}_{{0\le x\le y}}$
 
-$$
-f_{X,Y}(x,y)=2e^{-x-y}\mathbf{1}_{{0\le x\le y}}
-$$
-
-주변밀도 $f_X, f_Y$는 각각 존재하지만,
-
-$$
-f_{X,Y}(x,y)\neq f_X(x)f_Y(y)
-$$
-
-이므로 $X$와 $Y$는 독립이 아니다. □
+주변밀도 $f_X, f_Y$는 각각 존재하지만, $f_{X,Y}(x,y)\neq f_X(x)f_Y(y)$ 이므로 $X$와 $Y$는 독립이 아니다. □
 
 TODO:
 ### 정리 2.4.2 (독립 확률변수의 함수)
@@ -1588,27 +1507,21 @@ TODO:
 $X$와 $Y$가 독립이면, 임의의 함수 $g_1, g_2$에 대하여
 확률변수 $g_1(X)$와 $g_2(Y)$도 서로 독립이다.
 
-#### 증명
-
-임의의 집합 $A,B$에 대해
-
-$$
-\{g_1(X)\in A,\ g_2(Y)\in B\} = \{X\in g_1^{-1}(A),\ Y\in g_2^{-1}(B)\}
-$$
-
-$X,Y$가 독립이므로
-
-$$
-P(X\in g_1^{-1}(A),Y\in g_2^{-1}(B)) = P(X\in g_1^{-1}(A))P(Y\in g_2^{-1}(B))
-$$
-
-이는 곧
-
-$$
-P(g_1(X)\in A)P(g_2(Y)\in B)
-$$
-
-이므로 $g_1(X)$와 $g_2(Y)$는 독립이다. □
+>**증명**  
+>
+>임의의 집합 $A,B$에 대해
+>
+>$$
+>\{g_1(X)\in A,\ g_2(Y)\in B\} = \{X\in g_1^{-1}(A),\ Y\in g_2^{-1}(B)\}
+>$$
+>
+>$X,Y$가 독립이므로
+>
+>$$
+>P(X\in g_1^{-1}(A),Y\in g_2^{-1}(B)) = P(X\in g_1^{-1}(A))P(Y\in g_2^{-1}(B))
+>$$
+>
+>이는 곧 $P(g_1(X)\in A)P(g_2(Y)\in B)$ 이므로 $g_1(X)$와 $g_2(Y)$는 독립이다. □
 
 ### 정리 2.4.3 (독립 확률변수의 곱의 기댓값)
 
@@ -1618,18 +1531,18 @@ $$
 E[g_1(X)g_2(Y)]=E[g_1(X)]E[g_2(Y)]
 $$
 
-#### 증명 (연속형)
-
-$$
-E[g_1(X)g_2(Y)] = \int\int g_1(x)g_2(y)f_{X,Y}(x,y)\,dy\,dx
-$$
-
-독립성이므로 $f_{X,Y}(x,y)=f_X(x)f_Y(y)$이고,
-Fubini 정리에 의해
-
-$$
-=\left(\int g_1(x)f_X(x)\,dx\right)\left(\int g_2(y)f_Y(y)\,dy\right) =E[g_1(X)]E[g_2(Y)]
-$$
+>**증명**  (연속형)
+>
+>$$
+>E[g_1(X)g_2(Y)] = \int\int g_1(x)g_2(y)f_{X,Y}(x,y)\,dy\,dx
+>$$
+>
+>독립성이므로 $f_{X,Y}(x,y)=f_X(x)f_Y(y)$이고,
+>Fubini 정리에 의해
+>
+>$$
+>=\left(\int g_1(x)f_X(x)\,dx\right)\left(\int g_2(y)f_Y(y)\,dy\right) =E[g_1(X)]E[g_2(Y)]
+>$$
 
 ### 정리 2.4.4 (독립성과 상관관계)
 
@@ -1649,19 +1562,9 @@ $$
 f_{X,Y}(x,y)=\frac{9}{40}(1+x^2y^2)\mathbf{1}_{{-1\le x\le1,-1\le y\le1}}
 $$
 
-일 때,
+일 때, $E(X)=E(Y)=E(XY)=0 \Rightarrow \mathrm{Cov}(X,Y)=0$
 
-$$
-E(X)=E(Y)=E(XY)=0 \Rightarrow \mathrm{Cov}(X,Y)=0
-$$
-
-그러나
-
-$$
-f_{X,Y}(x,y)\neq f_X(x)f_Y(y)
-$$
-
-이므로 $X,Y$는 독립이 아니다. □
+그러나 $f_{X,Y}(x,y)\neq f_X(x)f_Y(y)$ 이므로 $X,Y$는 독립이 아니다. □
 
 ### 정리 2.4.5 (확률변수의 합의 분산)
 
@@ -1671,32 +1574,27 @@ $$
 \mathrm{Var}(X+Y)=\mathrm{Var}(X)+\mathrm{Var}(Y)+2\mathrm{Cov}(X,Y)
 $$
 
-특히 $X,Y$가 독립이면
+특히 $X,Y$가 독립이면 $\mathrm{Var}(X+Y)=\mathrm{Var}(X)+\mathrm{Var}(Y)$
 
-$$
-\mathrm{Var}(X+Y)=\mathrm{Var}(X)+\mathrm{Var}(Y)
-$$
-
-#### 증명
-
-분산의 정의와 전개를 이용하면
-
-$$
-\begin{align}
-\mathrm{Var}(X+Y) &= E[(X+Y)^2] - [E(X+Y)]^2 \\
-&= E(X^2 + 2XY + Y^2) - [E(X) + E(Y)]^2 \\
-&= E(X^2) + 2E(XY) + E(Y^2) - [E(X)]^2 - 2E(X)E(Y) - [E(Y)]^2 \\
-&= \mathrm{Var}(X) + \mathrm{Var}(Y) + 2[E(XY) - E(X)E(Y)] \\
-&= \mathrm{Var}(X) + \mathrm{Var}(Y) + 2\mathrm{Cov}(X,Y)
-\end{align}
-$$
-
-특히 $X$와 $Y$가 독립이면 $\mathrm{Cov}(X,Y) = 0$이므로
-
-$$
-\mathrm{Var}(X+Y) = \mathrm{Var}(X) + \mathrm{Var}(Y)
-$$
-
+>**증명**  
+>
+>분산의 정의와 전개를 이용하면
+>
+>$$
+>\begin{aligned}
+>\mathrm{Var}(X+Y) &= E[(X+Y)^2] - [E(X+Y)]^2 \\
+>&= E(X^2 + 2XY + Y^2) - [E(X) + E(Y)]^2 \\
+>&= E(X^2) + 2E(XY) + E(Y^2) - [E(X)]^2 - 2E(X)E(Y) - [E(Y)]^2 \\
+>&= \mathrm{Var}(X) + \mathrm{Var}(Y) + 2[E(XY) - E(X)E(Y)] \\
+>&= \mathrm{Var}(X) + \mathrm{Var}(Y) + 2\mathrm{Cov}(X,Y)
+>\end{aligned}
+>$$
+>
+>특히 $X$와 $Y$가 독립이면 $\mathrm{Cov}(X,Y) = 0$이므로
+>
+>$$
+>\mathrm{Var}(X+Y) = \mathrm{Var}(X) + \mathrm{Var}(Y)
+>$$
 
 
 ## 2.5 다차원 확률변수의 분포 *(Distributions of Multivariate Random Variables)*
@@ -2020,26 +1918,12 @@ $$
 
 확률변수 행렬 $V=(V_{ij})$, $W=(W_{ij})$와 원소가 상수인 행렬 $C,D$에 대하여 기댓값이 존재한다고 하자. 그러면 다음과 같은 선형성을 가진다.
 
-(a)
+(a) $E(CWD)=CE(W)D$
 
-$$
-E(CWD)=CE(W)D
-$$
-
-(b)
-
-$$
-E(V+W)=E(V)+E(W)
-$$
+(b) $E(V+W)=E(V)+E(W)$
 
 **설명**  
-행렬의 기댓값은 성분별로 정의한다. 즉,
-
-$$
-E(W)=(E(W_{ij}))
-$$
-
-로 둔다. 그러면 (a), (b)는 기댓값의 선형성을 성분별로 적용하여 얻는다.
+행렬의 기댓값은 성분별로 정의한다. 즉, $E(W)=(E(W_{ij}))$ 로 둔다. 그러면 (a), (b)는 기댓값의 선형성을 성분별로 적용하여 얻는다.
 
 ### 분산행렬과 공분산행렬의 표현 방법 정리
 
@@ -2118,14 +2002,8 @@ $$
 확률벡터 $\mathbf{X}=(X_1,X_2,X_3)^T$가
 
 $$
-E(X_1)=1,\quad E(X_2)=2,\quad E(X_3)=3
-$$
-
-$$
-\mathrm{Var}(X_1)=4,\quad \mathrm{Var}(X_2)=5,\quad \mathrm{Var}(X_3)=6
-$$
-
-$$
+E(X_1)=1,\quad E(X_2)=2,\quad E(X_3)=3 \\
+\mathrm{Var}(X_1)=4,\quad \mathrm{Var}(X_2)=5,\quad \mathrm{Var}(X_3)=6 \\
 \mathrm{Cov}(X_1,X_2)=1,\quad \mathrm{Cov}(X_1,X_3)=2,\quad \mathrm{Cov}(X_2,X_3)=3
 $$
 
@@ -2176,46 +2054,20 @@ $$
 
 확률벡터 $\mathbf{X}\in\mathbb{R}^k$, $\mathbf{Y}\in\mathbb{R}^\ell$과 상수행렬 $A,C$, 상수벡터 $\mathbf{b},\mathbf{d}$에 대하여(필요한 기댓값이 존재한다고 가정한다)
 
-(a)
+(a) $E(A\mathbf{X}+\mathbf{b})=AE(\mathbf{X})+\mathbf{b}$
 
-$$
-E(A\mathbf{X}+\mathbf{b})=AE(\mathbf{X})+\mathbf{b}
-$$
+(b) $\mathrm{Var}(A\mathbf{X}+\mathbf{b})=A\mathrm{Var}(\mathbf{X})A^T$
 
-(b)
+(c) $\mathrm{Cov}(A\mathbf{X}+\mathbf{b},\ C\mathbf{Y}+\mathbf{d})=A\mathrm{Cov}(\mathbf{X},\mathbf{Y})C^T$
 
-$$
-\mathrm{Var}(A\mathbf{X}+\mathbf{b})=A\mathrm{Var}(\mathbf{X})A^T
-$$
-
-(c)
-
-$$
-\mathrm{Cov}(A\mathbf{X}+\mathbf{b},\ C\mathbf{Y}+\mathbf{d})=A\mathrm{Cov}(\mathbf{X},\mathbf{Y})C^T
-$$
-
-(d)
-
-$$
-\mathrm{Cov}(\mathbf{X}+\mathbf{Y},\ \mathbf{Z})
+(d) $\mathrm{Cov}(\mathbf{X}+\mathbf{Y},\ \mathbf{Z})
 =\mathrm{Cov}(\mathbf{X},\mathbf{Z})+\mathrm{Cov}(\mathbf{Y},\mathbf{Z}), \\
 \mathrm{Cov}(\mathbf{X},\ \mathbf{Z}+\mathbf{W})
-=\mathrm{Cov}(\mathbf{X},\mathbf{Z})+\mathrm{Cov}(\mathbf{X},\mathbf{W})
-$$
+=\mathrm{Cov}(\mathbf{X},\mathbf{Z})+\mathrm{Cov}(\mathbf{X},\mathbf{W})$
 
-(e)
+(e) $\mathrm{Cov}(\mathbf{Y},\mathbf{X})=\mathrm{Cov}(\mathbf{X},\mathbf{Y})^T, \quad \mathrm{Var}(\mathbf{X})=\mathrm{Cov}(\mathbf{X},\mathbf{X})$
 
-$$
-\mathrm{Cov}(\mathbf{Y},\mathbf{X})=\mathrm{Cov}(\mathbf{X},\mathbf{Y})^T, \\
-\mathrm{Var}(\mathbf{X})=\mathrm{Cov}(\mathbf{X},\mathbf{X})
-$$
-
-(f)
-
-$$
-\mathrm{Var}(\mathbf{X}+\mathbf{Y})
-= \mathrm{Var}(\mathbf{X})+\mathrm{Var}(\mathbf{Y}) +\mathrm{Cov}(\mathbf{X},\mathbf{Y})+\mathrm{Cov}(\mathbf{Y},\mathbf{X})
-$$
+(f) $\mathrm{Var}(\mathbf{X}+\mathbf{Y}) = \mathrm{Var}(\mathbf{X})+\mathrm{Var}(\mathbf{Y}) +\mathrm{Cov}(\mathbf{X},\mathbf{Y})+\mathrm{Cov}(\mathbf{Y},\mathbf{X})$
 
 > #### 추가 정리
 >
@@ -2231,60 +2083,54 @@ $$
 >-\mathrm{Cov}(\mathbf{A},\mathbf{B})C^T-C\mathrm{Cov}(\mathbf{B},\mathbf{A})$$
 >
 
-#### 증명
-
-공분산행렬의 정의를
-
-$$
-\mathrm{Cov}(\mathbf{X},\mathbf{Y})
-=E\big[(\mathbf{X}-E\mathbf{X})(\mathbf{Y}-E\mathbf{Y})^T\big]
-$$
-
-로 두고, 정리 2.5.1의 선형성을 성분별로 적용하면 된다.
-예를 들어 (c)는
-
-$$
-\mathrm{Cov}(A\mathbf{X}+\mathbf{b},\ C\mathbf{Y}+\mathbf{d})
-=E[(A\mathbf{X}+ \mathbf{b}-AE\mathbf{X}-\mathbf{b})(C\mathbf{Y}+\mathbf{d}-CE\mathbf{Y}-\mathbf{d})^T] \\
-=E[A(\mathbf{X}-E\mathbf{X})(\mathbf{Y}-E\mathbf{Y})^T C^T]
-=A\mathrm{Cov}(\mathbf{X},\mathbf{Y})C^T
-$$
-
-로 얻는다. 나머지도 동일한 방식이다. □
-
-**추가정리 증명**
-
-$\mathbf{Z}=\mathbf{A}+C\mathbf{B}$라 하면, 분산의 정의에 의해
-
-$$
-\mathrm{Var}(\mathbf{Z})
-=E[(\mathbf{Z}-E\mathbf{Z})(\mathbf{Z}-E\mathbf{Z})^T]
-$$
-
-여기서 $E(\mathbf{Z})=E(\mathbf{A})+CE(\mathbf{B})$이므로
-
-$$
-\mathbf{Z}-E\mathbf{Z}
-=(\mathbf{A}+C\mathbf{B})-(E\mathbf{A}+CE\mathbf{B})
-=(\mathbf{A}-E\mathbf{A})+C(\mathbf{B}-E\mathbf{B})
-$$
-
-따라서
-
-$$
-\begin{align}
-\mathrm{Var}(\mathbf{A}+C\mathbf{B})
-&= E[(\mathbf{A}-E\mathbf{A}+C(\mathbf{B}-E\mathbf{B}))(\mathbf{A}-E\mathbf{A}+C(\mathbf{B}-E\mathbf{B}))^T] \\
-&= E[(\mathbf{A}-E\mathbf{A})(\mathbf{A}-E\mathbf{A})^T + (\mathbf{A}-E\mathbf{A})(\mathbf{B}-E\mathbf{B})^TC^T \\
-&\quad + C(\mathbf{B}-E\mathbf{B})(\mathbf{A}-E\mathbf{A})^T + C(\mathbf{B}-E\mathbf{B})(\mathbf{B}-E\mathbf{B})^TC^T] \\
-&= \mathrm{Var}(\mathbf{A}) + E[(\mathbf{A}-E\mathbf{A})(\mathbf{B}-E\mathbf{B})^T]C^T \\
-&\quad + CE[(\mathbf{B}-E\mathbf{B})(\mathbf{A}-E\mathbf{A})^T] + C\mathrm{Var}(\mathbf{B})C^T \\
-&= \mathrm{Var}(\mathbf{A}) + \mathrm{Cov}(\mathbf{A},\mathbf{B})C^T + C\mathrm{Cov}(\mathbf{B},\mathbf{A}) + C\mathrm{Var}(\mathbf{B})C^T
-\end{align}
-$$
-
-뺄셈의 경우도 동일한 방법으로 증명된다. □
-
+>**증명**  
+>
+>공분산행렬의 정의를 $\mathrm{Cov}(\mathbf{X},\mathbf{Y})=E\big[(\mathbf{X}-E\mathbf{X})(\mathbf{Y}-E\mathbf{Y})^T\big]$
+>
+>로 두고, 정리 2.5.1의 선형성을 성분별로 적용하면 된다.
+>예를 들어 (c)는
+>
+>$$
+>\mathrm{Cov}(A\mathbf{X}+\mathbf{b},\ C\mathbf{Y}+\mathbf{d})
+>=E[(A\mathbf{X}+ \mathbf{b}-AE\mathbf{X}-\mathbf{b})(C\mathbf{Y}+\mathbf{d}-CE\mathbf{Y}-\mathbf{d})^T] \\
+>=E[A(\mathbf{X}-E\mathbf{X})(\mathbf{Y}-E\mathbf{Y})^T C^T]
+>=A\mathrm{Cov}(\mathbf{X},\mathbf{Y})C^T
+>$$
+>
+>로 얻는다. 나머지도 동일한 방식이다. □
+>
+>**추가정리 증명**
+>
+>$\mathbf{Z}=\mathbf{A}+C\mathbf{B}$라 하면, 분산의 정의에 의해
+>
+>$$
+>\mathrm{Var}(\mathbf{Z})
+>=E[(\mathbf{Z}-E\mathbf{Z})(\mathbf{Z}-E\mathbf{Z})^T]
+>$$
+>
+>여기서 $E(\mathbf{Z})=E(\mathbf{A})+CE(\mathbf{B})$이므로
+>
+>$$
+>\mathbf{Z}-E(\mathbf{Z})
+>=(\mathbf{A}+C\mathbf{B})-(E(\mathbf{A})+CE(\mathbf{B}))
+>=(\mathbf{A}-E(\mathbf{A}))+C(\mathbf{B}-E(\mathbf{B}))
+>$$
+>
+>따라서
+>
+>$$
+>\begin{aligned}
+>\mathrm{Var}(\mathbf{A}+C\mathbf{B})
+>&= E[(\mathbf{A}-E(\mathbf{A})+C(\mathbf{B}-E(\mathbf{B})))(\mathbf{A}-E(\mathbf{A})+C(\mathbf{B}-E(\mathbf{B})))^T] \\
+>&= E[(\mathbf{A}-E(\mathbf{A}))(\mathbf{A}-E(\mathbf{A}))^T + (\mathbf{A}-E(\mathbf{A}))(\mathbf{B}-E(\mathbf{B}))^TC^T \\
+>&\quad + C(\mathbf{B}-E(\mathbf{B}))(\mathbf{A}-E(\mathbf{A}))^T + C(\mathbf{B}-E(\mathbf{B}))(\mathbf{B}-E(\mathbf{B}))^TC^T] \\
+>&= \mathrm{Var}(\mathbf{A}) + E[(\mathbf{A}-E(\mathbf{A}))(\mathbf{B}-E(\mathbf{B}))^T]C^T \\
+>&\quad + CE[(\mathbf{B}-E(\mathbf{B}))(\mathbf{A}-E(\mathbf{A}))^T] + C\mathrm{Var}(\mathbf{B})C^T \\
+>&= \mathrm{Var}(\mathbf{A}) + \mathrm{Cov}(\mathbf{A},\mathbf{B})C^T + C\mathrm{Cov}(\mathbf{B},\mathbf{A}) + C\mathrm{Var}(\mathbf{B})C^T
+>\end{aligned}
+>$$
+>
+>뺄셈의 경우도 동일한 방법으로 증명된다. □
 
 #### 예시 2.5.8
 
@@ -2347,19 +2193,13 @@ $$
 a^T\mathrm{Var}(\mathbf{X})a\ge0\ \ (\forall a\in\mathbb{R}^k)
 $$
 
-#### 증명
-
-대칭성은
-
-$$
-\mathrm{Var}(\mathbf{X})=(\mathrm{Cov}(X_i,X_j))
-$$
-
-에서 $\mathrm{Cov}(X_i,X_j)=\mathrm{Cov}(X_j,X_i)$이므로 즉시 따른다.
-
-이제 임의의 $a\in\mathbb{R}^k$에 대해 $a^T\mathbf{X}$는 실수값 확률변수이므로 $\mathrm{Var}(a^T\mathbf{X})\ge0$  한편, 분산은 항상 비음이므로 정리 2.5.3(b)에 의해 $\mathrm{Var(a^T\mathbf{X})} = a^T\mathrm{Var}(\mathbf{X})a \ge0$
-
-**참고: Statistics_02_분산행렬의 스펙트럼 분해와 기하학적 해석.md**
+>**증명**  
+>
+>대칭성은 $\mathrm{Var}(\mathbf{X})=(\mathrm{Cov}(X_i,X_j))$ 에서 $\mathrm{Cov}(X_i,X_j)=\mathrm{Cov}(X_j,X_i)$이므로 즉시 따른다.
+>
+>이제 임의의 $a\in\mathbb{R}^k$에 대해 $a^T\mathbf{X}$는 실수값 확률변수이므로 $\mathrm{Var}(a^T\mathbf{X})\ge0$  한편, 분산은 항상 비음이므로 정리 2.5.3(b)에 의해 $\mathrm{Var(a^T\mathbf{X})} = a^T\mathrm{Var}(\mathbf{X})a \ge0$
+>
+>**참고: Statistics_02_분산행렬의 스펙트럼 분해와 기하학적 해석.md**
 
 ### 다차원 결합적률과 결합적률생성함수 *(Multivariate Joint Moments and Joint Moment Generating Functions)*
 
@@ -2450,15 +2290,11 @@ $$
 결합누율생성함수 $C(\mathbf{t})$에 대하여 다음이 성립한다.
 
 $$
-\left| \frac{\partial C(\mathbf{t})}{\partial t_i}
-\right|_{t_1=\cdots=t_k=0}
-=E(X_i)
+\left| \frac{\partial C(\mathbf{t})}{\partial t_i} \right|_{t_1=\cdots=t_k=0} =E(X_i)
 $$
 
 $$
-\left| \frac{\partial^2 C(\mathbf{t})}{\partial t_i\partial t_j}
-\right|_{t_1=\cdots=t_k=0}
-=\mathrm{Cov}(X_i,X_j)
+\left| \frac{\partial^2 C(\mathbf{t})}{\partial t_i\partial t_j} \right|_{t_1=\cdots=t_k=0} =\mathrm{Cov}(X_i,X_j)
 $$
 
 일차 편도함수 벡터
@@ -2472,8 +2308,7 @@ $$
 \right)^T
 $$
 
-를 **기울기 벡터(gradient vector)** 라 하며,
-
+를 **기울기 벡터(gradient vector)** 라 하며,  
 이차 편도함수 행렬
 
 $$
@@ -2493,21 +2328,15 @@ $$
 
 #### 예시 2.5.9 *(Computation via CGF)*
 
-확률벡터 $\mathbf{X}=(X_1,X_2,X_3)^T$의 결합확률밀도함수는
-
-$$
-f(x_1,x_2,x_3)
-=6e^{-x_1-x_2-x_3}
-\mathbf{1}_{\{0\le x_1\le x_2\le x_3\}}
-$$
-
+확률벡터 $\mathbf{X}=(X_1,X_2,X_3)^T$의 결합확률밀도함수는 $f(x_1,x_2,x_3) =6e^{-x_1-x_2-x_3} \mathbf{1}_{\{0\le x_1\le x_2\le x_3\}}$  
 이때 결합적률생성함수는
 
 $$
-M_\mathbf{X}(t_1,t_2,t_3)
-=\int_0^\infty\int_{x_1}^\infty\int_{x_2}^\infty e^{t_1x_1+t_2x_2+t_3x_3}6e^{-x_1-x_2-x_3}dx_3\,dx_2\,dx_1 \\
-= 6\int_0^\infty e^{(t_1-1)x_1}\left[\int_{x_1}^\infty e^{(t_2-1)x_2}\left(\int_{x_2}^\infty e^{(t_3-1)x_3}dx_3\right)dx_2\right]dx_1 \\
-=\frac{6}{(3-t_1-t_2-t_3)(2-t_2-t_3)(1-t_3)}
+\begin{aligned}
+M_\mathbf{X}(t_1,t_2,t_3) &=\int_0^\infty\int_{x_1}^\infty\int_{x_2}^\infty e^{t_1x_1+t_2x_2+t_3x_3}6e^{-x_1-x_2-x_3}dx_3\,dx_2\,dx_1 \\
+&= 6\int_0^\infty e^{(t_1-1)x_1}\left[\int_{x_1}^\infty e^{(t_2-1)x_2}\left(\int_{x_2}^\infty e^{(t_3-1)x_3}dx_3\right)dx_2\right]dx_1 \\
+&=\frac{6}{(3-t_1-t_2-t_3)(2-t_2-t_3)(1-t_3)}
+\end{aligned}
 $$
 
 이며,$t_1+t_2+t_3<3,\quad t_2+t_3<2,\quad t_3<1$ 에서 정의된다.
@@ -2527,8 +2356,7 @@ $$
 -\log(1-A)=A+\frac{A^2}{2}+\frac{A^3}{3}+\cdots \quad(-1<A<1)
 $$
 
-를 이용하여 $C(\mathbf{t})$를 전개하면,
-일차항과 이차항의 계수로부터
+를 이용하여 $C(\mathbf{t})$를 전개하면, 일차항과 이차항의 계수로부터
 
 $$
 E(\mathbf{X}) = 
@@ -2536,7 +2364,7 @@ E(\mathbf{X}) =
 1/3\\
 5/6\\
 11/6
-\end{pmatrix}, \\
+\end{pmatrix}, \quad
 \mathrm{Var}(\mathbf{X})
 = \frac{1}{36}
 \begin{pmatrix}
@@ -2606,49 +2434,47 @@ $$
 ### 정리 2.5.7 분산행렬의 분해 *(Variance Decomposition / Law of Total Variance)*
 
 $$
-\mathrm{Var}(\mathbf{Y})
-= E[\mathrm{Var}(\mathbf{Y}\mid \mathbf{X})]
-+ \mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X}))
+\mathrm{Var}(\mathbf{Y}) = E[\mathrm{Var}(\mathbf{Y}\mid \mathbf{X})] + \mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X}))
 $$
 
-#### 증명
-
-$\mu = E(\mathbf{Y})$라 하자. $\mathbf{Y}-\mu$를 다음과 같이 분해한다:
-
-$$
-\mathbf{Y}-\mu=(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus(E(\mathbf{Y}\mid \mathbf{X})-\mu)
-$$
-
->이 분해가 $\oplus$로 가능함을 확인하자.  
->$E(\mathbf{Y}\mid \mathbf{X})-\mu$는 $\mathbf{X}$의 함수이므로, 정리 2.5.6(b)의 직교성 성질에 의해 $\mathrm{Cov}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}),\ E(\mathbf{Y}\mid \mathbf{X})-\mu)=\mathbf{0}$ 가 성립한다. 따라서 두 항은 서로 비상관이며, $\oplus$ 표기가 정당하다.
-
-이제 양변에서 분산을 구하면, $\oplus$의 정의에 의해 분산이 가법적으로 분해되어
-
-$$
-\mathrm{Var}(\mathbf{Y})=\mathrm{Var}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus\mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X})-\mu) \\
-=\mathrm{Var}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))+\mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X}))
-$$
-
-여기서
-
-$$
-\mathrm{Var}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))
-=E[(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T]
-$$
-
-조건부기댓값의 타워 성질과 정리 2.5.6(a)를 이용하면
-
-$$
-E[(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T] \\
-=E[E((\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T\mid \mathbf{X})] =E[\mathrm{Var}(\mathbf{Y}\mid \mathbf{X})]
-$$
-
-따라서
-
-$$
-\mathrm{Var}(\mathbf{Y})
-=E[\mathrm{Var}(\mathbf{Y}\mid \mathbf{X})]+\mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X}))
-$$
+>**증명**  
+>
+>$\mu = E(\mathbf{Y})$라 하자. $\mathbf{Y}-\mu$를 다음과 같이 분해한다:
+>
+>$$
+>\mathbf{Y}-\mu=(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus(E(\mathbf{Y}\mid \mathbf{X})-\mu)
+>$$
+>
+>>이 분해가 $\oplus$로 가능함을 확인하자.  
+>>$E(\mathbf{Y}\mid \mathbf{X})-\mu$는 $\mathbf{X}$의 함수이므로, 정리 2.5.6(b)의 직교성 성질에 의해 $\mathrm{Cov}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}),\ E(\mathbf{Y}\mid \mathbf{X})-\mu)=\mathbf{0}$ 가 성립한다. 따라서 두 항은 서로 비상관이며, $\oplus$ 표기가 정당하다.
+>
+>이제 양변에서 분산을 구하면, $\oplus$의 정의에 의해 분산이 가법적으로 분해되어
+>
+>$$
+>\mathrm{Var}(\mathbf{Y})=\mathrm{Var}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus\mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X})-\mu) \\
+>=\mathrm{Var}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))+\mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X}))
+>$$
+>
+>여기서
+>
+>$$
+>\mathrm{Var}(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))
+>=E[(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T]
+>$$
+>
+>조건부기댓값의 타워 성질과 정리 2.5.6(a)를 이용하면
+>
+>$$
+>E[(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T] \\
+>=E[E((\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))^T\mid \mathbf{X})] =E[\mathrm{Var}(\mathbf{Y}\mid \mathbf{X})]
+>$$
+>
+>따라서
+>
+>$$
+>\mathrm{Var}(\mathbf{Y})
+>=E[\mathrm{Var}(\mathbf{Y}\mid \mathbf{X})]+\mathrm{Var}(E(\mathbf{Y}\mid \mathbf{X}))
+>$$
 
 ### 정리 2.5.8 다차원 확률변수의 최소제곱예측자 *(Minimum Mean Square Error Estimator)*
 
@@ -2666,36 +2492,36 @@ $$
 
 즉, 조건부기댓값은 평균제곱오차(mean squared error) 기준에서 최적 예측자이다.
 
-#### 증명
-
-임의의 $\mathbf{X}$의 벡터값 함수 $u(\mathbf{X})=(u_1(\mathbf{X}),\dots,u_\ell(\mathbf{X}))^T$에 대하여, 다음과 같이 분해한다.
-
-$$
-\mathbf{Y}-u(\mathbf{X})=(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus(E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X}))
-$$
-
-이 분해는 정리 2.5.6(b)의 직교성 성질에 의해 $\oplus$로 가능하다.  
-이제 양변의 제곱 노름의 기댓값을 취하면
-
-$$
-E\|\mathbf{Y}-u(\mathbf{X})\|^2
-=E\|(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus(E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X}))\|^2 \\
-=E\|\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X})\|^2+E\|E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X})\|^2
-$$
-
-두 번째 항은 항상 비음이므로
-
-$$
-E\|\mathbf{Y}-u(\mathbf{X})\|^2\ge E\|\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X})\|^2
-$$
-
-등호는
-
-$$
-E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X})=\mathbf{0}\quad\text{a.s.}
-$$
-
-즉 $u(\mathbf{X})=E(\mathbf{Y}\mid \mathbf{X})$일 때, 그리고 그때에만 성립한다. □
+>**증명**  
+>
+>임의의 $\mathbf{X}$의 벡터값 함수 $u(\mathbf{X})=(u_1(\mathbf{X}),\dots,u_\ell(\mathbf{X}))^T$에 대하여, 다음과 같이 분해한다.
+>
+>$$
+>\mathbf{Y}-u(\mathbf{X})=(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus(E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X}))
+>$$
+>
+>이 분해는 정리 2.5.6(b)의 직교성 성질에 의해 $\oplus$로 가능하다.  
+>이제 양변의 제곱 노름의 기댓값을 취하면
+>
+>$$
+>E\|\mathbf{Y}-u(\mathbf{X})\|^2
+>=E\|(\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X}))\oplus(E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X}))\|^2 \\
+>=E\|\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X})\|^2+E\|E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X})\|^2
+>$$
+>
+>두 번째 항은 항상 비음이므로
+>
+>$$
+>E\|\mathbf{Y}-u(\mathbf{X})\|^2\ge E\|\mathbf{Y}-E(\mathbf{Y}\mid \mathbf{X})\|^2
+>$$
+>
+>등호는
+>
+>$$
+>E(\mathbf{Y}\mid \mathbf{X})-u(\mathbf{X})=\mathbf{0}\quad\text{a.s.}
+>$$
+>
+>즉 $u(\mathbf{X})=E(\mathbf{Y}\mid \mathbf{X})$일 때, 그리고 그때에만 성립한다. □
 
 TODO:
 ### 추가: 최적 선형 예측 *(Optimal Linear Prediction)*
@@ -2707,70 +2533,63 @@ $$
 
 여기서 **회귀행렬(regression matrix)** 는 $\mathbf{B} = \mathrm{Cov}(\mathbf{Y},\mathbf{X})[\mathrm{Var}(\mathbf{X})]^{-1}$ 로 정의되며, 이는 다차원 다중회귀의 기본 형태이다.
 
-#### 증명
-
-선형 예측값을 $\widehat{\mathbf{Y}} = \mathbf{a} + \mathbf{B}\mathbf{X}$ (단, $\mathbf{B}$는 $\ell\times k$ 행렬)로 두고, 평균제곱오차
-
-$$
-L(\mathbf{a},\mathbf{B}) = E\|\mathbf{Y}-\mathbf{a}-\mathbf{B}\mathbf{X}\|^2
-$$
-
-를 최소화한다.  
-a,B에 대해 이차식(quadratic function), Var(X)가 positive definite이면 이차식이 strictly convex하므로, $\mathbf{a}$와 $\mathbf{B}$에 대한 편미분을 구하여 최적해를 찾는다.
-
-첫째, $\mathbf{a}$에 대한 미분:
-
-$$
-\frac{\partial L}{\partial \mathbf{a}} = -2E[\mathbf{Y}-\mathbf{a}-\mathbf{B}\mathbf{X}] = \mathbf{0}
-$$
-
-이로부터 $\mathbf{a} = E(\mathbf{Y}) - \mathbf{B}E(\mathbf{X})$
-
-둘째, $\mathbf{B}$에 대한 미분(vec 연산자 사용):
-
-$$
-\frac{\partial L}{\partial \mathrm{vec}(\mathbf{B})} = -2E[(\mathbf{Y}-\mathbf{a}-\mathbf{B}\mathbf{X})\mathbf{X}^T] = \mathbf{0}
-$$
-
-앞서 구한 $\mathbf{a}$를 대입하면, 
-
-$$
-E[(\mathbf{Y}-E(\mathbf{Y})+\mathbf{B}E(\mathbf{X})-\mathbf{B}\mathbf{X})\mathbf{X}^T] = \mathbf{0}\\
-E[(\mathbf{Y}-E(\mathbf{Y}))\mathbf{X}^T] - E[\mathbf{B}(\mathbf{X}-E(\mathbf{X}))\mathbf{X}^T] = \mathbf{0} \\
-E[(\mathbf{Y}-E(\mathbf{Y}))\mathbf{X}^T] - \mathbf{B}E[(\mathbf{X}-E(\mathbf{X}))\mathbf{X}^T] = \mathbf{0}
-$$
-
-**첫 번째 항**  
-$E[(\mathbf{Y}-E(\mathbf{Y}))\mathbf{X}^T]$에서 $\mathbf{X}=(\mathbf{X}-E(\mathbf{X}))+E(\mathbf{X})$를 대입하면
-
-$$
-E[(\mathbf{Y}-E(\mathbf{Y}))(\mathbf{X}-E(\mathbf{X}))^T] + E[\mathbf{Y}-E(\mathbf{Y})]E[\mathbf{X}]^T
-$$
-
-$E[\mathbf{Y}-E(\mathbf{Y})]=\mathbf{0}$이므로 두 번째 항은 0이므로 $\mathrm{Cov}(\mathbf{Y},\mathbf{X})$
-
-**두 번째 항**
-
-$E[(\mathbf{X}-E(\mathbf{X}))\mathbf{X}^T]$에서 $\mathbf{X}=(\mathbf{X}-E(\mathbf{X}))+E(\mathbf{X})$를 대입하면
-
-$$
-E[(\mathbf{X}-E(\mathbf{X}))(\mathbf{X}-E(\mathbf{X}))^T] + E[(\mathbf{X}-E(\mathbf{X}))]E[\mathbf{X}]^T
-$$
-
-두 번째 항은 0이므로 $\mathrm{Var}(\mathbf{X})$
-
-따라서
-
-$$
-\mathrm{Cov}(\mathbf{Y},\mathbf{X}) - \mathbf{B}\mathrm{Var}(\mathbf{X}) = \mathbf{0} \\
-\therefore \mathbf{B} = \mathrm{Cov}(\mathbf{Y},\mathbf{X})[\mathrm{Var}(\mathbf{X})]^{-1}
-$$
-
-결과적으로
-
-$$
-\widehat{\mathbf{Y}} = E(\mathbf{Y}) + \mathrm{Cov}(\mathbf{Y},\mathbf{X})[\mathrm{Var}(\mathbf{X})]^{-1}(\mathbf{X}-E(\mathbf{X}))
-$$
+>**증명**  
+>
+>선형 예측값을 $\widehat{\mathbf{Y}} = \mathbf{a} + \mathbf{B}\mathbf{X}$ (단, $\mathbf{B}$는 $\ell\times k$ 행렬)로 두고, 평균제곱오차 $L(\mathbf{a},\mathbf{B}) = E\|\mathbf{Y}-\mathbf{a}-\mathbf{B}\mathbf{X}\|^2$ 를 최소화한다.  
+>a,B에 대해 이차식(quadratic function), Var(X)가 positive definite이면 이차식이 strictly convex하므로, $\mathbf{a}$와 $\mathbf{B}$에 대한 편미분을 구하여 최적해를 찾는다.
+>
+>첫째, $\mathbf{a}$에 대한 미분:
+>
+>$$
+>\frac{\partial L}{\partial \mathbf{a}} = -2E[\mathbf{Y}-\mathbf{a}-\mathbf{B}\mathbf{X}] = \mathbf{0}
+>$$
+>
+>이로부터 $\mathbf{a} = E(\mathbf{Y}) - \mathbf{B}E(\mathbf{X})$
+>
+>둘째, $\mathbf{B}$에 대한 미분(vec 연산자 사용):
+>
+>$$
+>\frac{\partial L}{\partial \mathrm{vec}(\mathbf{B})} = -2E[(\mathbf{Y}-\mathbf{a}-\mathbf{B}\mathbf{X})\mathbf{X}^T] = \mathbf{0}
+>$$
+>
+>앞서 구한 $\mathbf{a}$를 대입하면, 
+>
+>$$
+>E[(\mathbf{Y}-E(\mathbf{Y})+\mathbf{B}E(\mathbf{X})-\mathbf{B}\mathbf{X})\mathbf{X}^T] = \mathbf{0}\\
+>E[(\mathbf{Y}-E(\mathbf{Y}))\mathbf{X}^T] - E[\mathbf{B}(\mathbf{X}-E(\mathbf{X}))\mathbf{X}^T] = \mathbf{0} \\
+>E[(\mathbf{Y}-E(\mathbf{Y}))\mathbf{X}^T] - \mathbf{B}E[(\mathbf{X}-E(\mathbf{X}))\mathbf{X}^T] = \mathbf{0}
+>$$
+>
+>**첫 번째 항**  
+>$\mathbf{X}=(\mathbf{X}-E(\mathbf{X}))+E(\mathbf{X})$를 대입하면
+>
+>$$
+>E[(\mathbf{Y}-E(\mathbf{Y}))(\mathbf{X}-E(\mathbf{X}))^T] + E[\mathbf{Y}-E(\mathbf{Y})]E[\mathbf{X}]^T
+>$$
+>
+>$E[\mathbf{Y}-E(\mathbf{Y})]=\mathbf{0}$이므로 두 번째 항은 0이므로 $\mathrm{Cov}(\mathbf{Y},\mathbf{X})$ 가 된다.  
+>
+>**두 번째 항**  
+>$E[(\mathbf{X}-E(\mathbf{X}))\mathbf{X}^T]$에서 $\mathbf{X}=(\mathbf{X}-E(\mathbf{X}))+E(\mathbf{X})$를 대입하면
+>
+>$$
+>E[(\mathbf{X}-E(\mathbf{X}))(\mathbf{X}-E(\mathbf{X}))^T] + E[(\mathbf{X}-E(\mathbf{X}))]E[\mathbf{X}]^T
+>$$
+>
+>두 번째 항은 0이므로 $\mathrm{Var}(\mathbf{X})$ 가 된다.
+>
+>따라서
+>
+>$$
+>\mathrm{Cov}(\mathbf{Y},\mathbf{X}) - \mathbf{B}\mathrm{Var}(\mathbf{X}) = \mathbf{0} \\
+>\therefore \mathbf{B} = \mathrm{Cov}(\mathbf{Y},\mathbf{X})[\mathrm{Var}(\mathbf{X})]^{-1}
+>$$
+>
+>결과적으로
+>
+>$$
+>\widehat{\mathbf{Y}} = E(\mathbf{Y}) + \mathrm{Cov}(\mathbf{Y},\mathbf{X})[\mathrm{Var}(\mathbf{X})]^{-1}(\mathbf{X}-E(\mathbf{X}))
+>$$
 
 >**참고: 일변량 vs 다변량**  
 >일변량 경우 $A, B$로 두면 최적 선형 예측량은
@@ -2802,8 +2621,7 @@ $$
 (각 MGF가 원점 근방에서 존재함을 가정).
 
 >**참고: 독립성 판정 시 인수분해 기준**  
->독립성을 판정할 때 반드시 주변확률밀도함수나 주변적률생성함수를 명시적으로 구할 필요는 없다.
->
+>독립성을 판정할 때 반드시 주변확률밀도함수나 주변적률생성함수를 명시적으로 구할 필요는 없다.  
 >결합확률밀도함수가 각 확률벡터에만 의존하는 함수들의 곱으로 인수분해되면, 즉
 >
 >$$f_{1,\dots,n}(\mathbf{x}_1,\dots,\mathbf{x}_n) = g_1(\mathbf{x}_1) \cdot g_2(\mathbf{x}_2) \cdots g_n(\mathbf{x}_n)$$
@@ -2833,48 +2651,40 @@ $$
 M_{X_1+\cdots+X_n}(t) = M_{X_1}(t)\cdots M_{X_n}(t)
 $$
 
-#### 증명
-
-**분산의 경우**  
-분산은 공분산의 특수한 경우이므로
-$\mathrm{Var}(Y)=\mathrm{Cov}(Y,Y)$
-를 이용한다. 따라서
-
-$$
-\mathrm{Var}(X_1+\cdots+X_n)
-=\mathrm{Cov}\left(\sum_{i=1}^n X_i,\,\sum_{j=1}^n X_j\right)
-$$
-
-공분산의 이중 선형성(bilinearity)에 의해
-
-$$
-\mathrm{Cov}\left(\sum_{i=1}^n X_i,\,\sum_{j=1}^n X_j\right)
-=\sum_{i=1}^n\sum_{j=1}^n \mathrm{Cov}(X_i,X_j)
-$$
-
-독립성에 의해 $i\neq j$이면 $\mathrm{Cov}(X_i,X_j)=0$
-이고, $i=j$이면 $\mathrm{Cov}(X_i,X_i)=\mathrm{Var}(X_i).$
-
-$$
-\therefore \mathrm{Var}(X_1+\cdots+X_n)
-=\sum_{i=1}^n \mathrm{Var}(X_i)
-$$
-
-**적률생성함수의 경우**  
-적률생성함수의 정의에 의해
-
-$$
-M_{X_1+\cdots+X_n}(t)
-=E\left[e^{t(X_1+\cdots+X_n)}\right]
-=E\left[\prod_{i=1}^n e^{tX_i}\right]
-$$
-
-확률변수 $X_1,\dots,X_n$이 서로 독립이므로
-함수 $e^{tX_1},\dots,e^{tX_n}$ 역시 서로 독립이고,
-따라서
-
-$$
-E\left[\prod_{i=1}^n e^{tX_i}\right]
-=\prod_{i=1}^n E[e^{tX_i}]
-=\prod_{i=1}^n M_{X_i}(t)
-$$
+>**증명**  
+>
+>**분산의 경우**  
+>분산은 공분산의 특수한 경우이므로
+>$\mathrm{Var}(Y)=\mathrm{Cov}(Y,Y)$
+>를 이용한다. 따라서
+>
+>$$
+>\mathrm{Var}(X_1+\cdots+X_n) =\mathrm{Cov}\left(\sum_{i=1}^n X_i,\,\sum_{j=1}^n X_j\right)
+>$$
+>
+>공분산의 이중 선형성(bilinearity)에 의해
+>
+>$$
+>\mathrm{Cov}\left(\sum_{i=1}^n X_i,\,\sum_{j=1}^n X_j\right) =\sum_{i=1}^n\sum_{j=1}^n \mathrm{Cov}(X_i,X_j)
+>$$
+>
+>독립성에 의해 $i\neq j$이면 $\mathrm{Cov}(X_i,X_j)=0$
+>이고, $i=j$이면 $\mathrm{Cov}(X_i,X_i)=\mathrm{Var}(X_i).$
+>
+>$$
+>\therefore \mathrm{Var}(X_1+\cdots+X_n) =\sum_{i=1}^n \mathrm{Var}(X_i)
+>$$
+>
+>**적률생성함수의 경우**  
+>적률생성함수의 정의에 의해
+>
+>$$
+>M_{X_1+\cdots+X_n}(t) =E\left[e^{t(X_1+\cdots+X_n)}\right] =E\left[\prod_{i=1}^n e^{tX_i}\right]
+>$$
+>
+>확률변수 $X_1,\dots,X_n$이 서로 독립이므로 함수 $e^{tX_1},\dots,e^{tX_n}$ 역시 서로 독립이고, 따라서
+>
+>$$
+>E\left[\prod_{i=1}^n e^{tX_i}\right] =\prod_{i=1}^n E[e^{tX_i}] =\prod_{i=1}^n M_{X_i}(t)
+>$$
+>

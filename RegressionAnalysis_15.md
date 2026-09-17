@@ -30,7 +30,7 @@ $X^TX$ 가 비정칙행렬 (singular matrix)이 되어 최소제곱추정량 $(X
 
 ### 15.1.1 특잇값 분해와 최소제곱추정량 (SVD and Least Squares Estimator)
 
-먼저 $n>p$이고 $X$가 완전 열계수, 즉 $\operatorname{rank}(X)=p$라고 가정하자. $n\times p$ 설명변수 행렬 $\mathbf{X}$의 특잇값 분해는
+먼저 $n>p$이고 $X$가 완전 열계수, 즉 $\text{rank}(X)=p$라고 가정하자. $n\times p$ 설명변수 행렬 $\mathbf{X}$의 특잇값 분해는
 
 $$\mathbf{X}=UDP^T=\sum_{l=1}^p d_l\mathbf{u}_l\mathbf{p}_l^T \tag{17.2} $$
 
@@ -199,7 +199,7 @@ $$
 
 #### 연습문제 17.2
 
-$X\in\mathbb R^{n\times p},\qquad p>n,\qquad \operatorname{rank}(X)=n$ 이고 축약 특잇값분해를 $X=UDP^T=RP^T$ 라고 하자. 여기서 $U,D,R\in\mathbb R^{n\times n},\quad P\in\mathbb R^{p\times n},\quad P^TP=I_n$ 이고 $D$와 $R=UD$는 비특이행렬이다.
+$X\in\mathbb R^{n\times p},\qquad p>n,\qquad \text{rank}(X)=n$ 이고 축약 특잇값분해를 $X=UDP^T=RP^T$ 라고 하자. 여기서 $U,D,R\in\mathbb R^{n\times n},\quad P\in\mathbb R^{p\times n},\quad P^TP=I_n$ 이고 $D$와 $R=UD$는 비특이행렬이다.
 
 (1) 일반적인 능형회귀와 제약 최소제곱의 관계
 
