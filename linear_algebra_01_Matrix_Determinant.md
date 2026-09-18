@@ -2806,14 +2806,14 @@ $$(u^Tv)^2 \leq (u^TAu)(v^TA^{-1}v)$$
 
 > 💡 **응용**: 최적 추정 방향, 크래머-라오 하한(Cramér-Rao lower bound) 증명
 
-**증명**  
-$A$가 양정치행렬이므로 $A = LL^T$로 분해할 수 있다.  
-$u^TAu = u^TLL^Tu = (L^Tu)^T(L^Tu) = \|L^Tu\|_2^2$  
-$v^TA^{-1}v = v^T(L^{-1})^TL^{-1}v = (L^{-1}v)^T(L^{-1}v) = \|L^{-1}v\|_2^2$  
-$u^Tv = (L^Tu)^T(L^{-1}v)$  
-따라서:
-
-$$(u^Tv)^2 = [(L^Tu)^T(L^{-1}v)]^2 \leq \|L^Tu\|_2^2 \cdot \|L^{-1}v\|_2^2 = (u^TAu)(v^TA^{-1}v)$$
+>**증명**  
+>$A$가 양정치행렬이므로 $A = LL^T$로 분해할 수 있다.  
+>$u^TAu = u^TLL^Tu = (L^Tu)^T(L^Tu) = \|L^Tu\|_2^2$  
+>$v^TA^{-1}v = v^T(L^{-1})^TL^{-1}v = (L^{-1}v)^T(L^{-1}v) = \|L^{-1}v\|_2^2$  
+>$u^Tv = (L^Tu)^T(L^{-1}v)$  
+>따라서:
+>
+>$$(u^Tv)^2 = [(L^Tu)^T(L^{-1}v)]^2 \leq \|L^Tu\|_2^2 \cdot \|L^{-1}v\|_2^2 = (u^TAu)(v^TA^{-1}v)$$
 
 ### 아다마르 부등식 (Hadamard Inequality)
 $A \succeq 0$이면:

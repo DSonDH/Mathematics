@@ -474,12 +474,12 @@ $$
 여기서 $\mu_{X+Y}=E(X+Y)=E(X)+E(Y)=\mu_X+\mu_Y$이므로
 
 $$
-\begin{aligneded}
+\begin{aligned}
 \mathrm{Cov}(X + Y,Z) &= E[(X-\mu_X+Y-\mu_Y)(Z-\mu_Z)] \\
 &= E[(X-\mu_X)(Z-\mu_Z)+(Y-\mu_Y)(Z-\mu_Z)] \\
 &= E[(X-\mu_X)(Z-\mu_Z)]+E[(Y-\mu_Y)(Z-\mu_Z)] \\
 &= \mathrm{Cov}(X,Z)+\mathrm{Cov}(Y,Z)
-\end{aligneded}
+\end{aligned}
 $$
 
 $\mathrm{Cov}(X - Y,Z)$의 경우도 동일한 방법으로 증명된다.
@@ -1501,7 +1501,6 @@ $$
 
 주변밀도 $f_X, f_Y$는 각각 존재하지만, $f_{X,Y}(x,y)\neq f_X(x)f_Y(y)$ 이므로 $X$와 $Y$는 독립이 아니다. □
 
-TODO:
 ### 정리 2.4.2 (독립 확률변수의 함수)
 
 $X$와 $Y$가 독립이면, 임의의 함수 $g_1, g_2$에 대하여
@@ -2523,7 +2522,6 @@ $$
 >
 >즉 $u(\mathbf{X})=E(\mathbf{Y}\mid \mathbf{X})$일 때, 그리고 그때에만 성립한다. □
 
-TODO:
 ### 추가: 최적 선형 예측 *(Optimal Linear Prediction)*
 $\mathbf{Y}$를 $\mathbf{X}$의 선형함수로 예측할 때, 평균제곱오차를 최소화하는 최적 선형 예측량은
 

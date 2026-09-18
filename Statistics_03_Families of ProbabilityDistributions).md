@@ -1,8 +1,7 @@
 # 제3장 여러 가지 확률분포 (Families of Probability Distributions)
 
-## 3.1 초기하분포 (Hypergeometric Distribution)
+## 모집단과 표본, 단순랜덤추출
 
-### 모집단과 표본, 단순랜덤추출
 통계 조사에서 관심의 대상이 되는 전체를 **모집단** (population)이라 하고, 모집단의 개체 수를 $N$이라 하자.
 모집단에서 $n$개의 개체를 **랜덤하게** 선택하여 조사한 뒤, 이를 바탕으로 모집단 전체에 대한 추론을 수행한다.
 
@@ -17,7 +16,8 @@
 이 방법을 **단순랜덤추출** (simple random sampling)이라 한다.
 이때 추출된 $n$개의 개체를 **랜덤표본** (random sample), 또는 간단히 **표본** (sample)이라 한다.
 
-### 두 가지 분류의 모집단
+## 3.1 초기하분포 (Hypergeometric Distribution)
+
 각 개체의 특성이 두 가지 값만을 갖는 경우를 고려한다. 예를 들면
 * 양호 / 불량
 * 성공 / 실패
@@ -30,9 +30,7 @@ $$
 p = \frac{D}{N}
 $$
 
-을 **모비율** (population proportion)이라 한다.
-
-이 모집단의 분포는 값 $1$에 확률 $p$, 값 $0$에 확률 $1-p$를 대응시키는 분포다.
+을 **모비율** (population proportion)이라 한다. 이 모집단의 분포는 값 $1$에 확률 $p$, 값 $0$에 확률 $1-p$를 대응시키는 분포다.
 
 ### 초기하분포의 정의
 위와 같은 모집단에서 $n$개를 단순랜덤추출할 때, 표본에 포함된 $1$의 개수를 확률변수 $X$라 하자. 그러면 $X$의 확률질량함수는 다음과 같다.
@@ -49,8 +47,6 @@ $$
 X \sim H(n; N, D)
 $$
 
-로 나타낸다.
-
 ### 정리 3.1.1 (초기하분포의 평균과 분산)
 $X \sim H(n; N, D)$이고 $p=D/N$이면
 
@@ -58,20 +54,20 @@ $$
 E(X) = np, \qquad \mathrm{Var}(X) = \frac{N-n}{N-1} \cdot np(1-p)
 $$
 
-#### 증명
-**(평균)** 조합 항등식 $x\binom{D}{x} = D\binom{D-1}{x-1}$과 $\sum_x \binom{D-1}{x-1}\binom{N-D}{n-x} = \binom{N-1}{n-1}$을 이용하면
-
-$$
-E(X) = \sum_x x \frac{\binom{D}{x}\binom{N-D}{n-x}}{\binom{N}{n}} = D \frac{\binom{N-1}{n-1}}{\binom{N}{n}} = \frac{nD}{N} = np
-$$
-
-**(분산)** 항등식 $x(x-1)\binom{D}{x} = D(D-1)\binom{D-2}{x-2}$로부터
-
-$$
-E[X(X-1)] = \frac{n(n-1)D(D-1)}{N(N-1)}
-$$
-
-이고, $\mathrm{Var}(X) = E[X(X-1)] + E[X] - (E[X])^2$에 대입하면 결과를 얻는다. □
+>**증명**  
+>**(평균)** 조합 항등식 $x\binom{D}{x} = D\binom{D-1}{x-1}$과 반데르몽드 식에 의해 $\sum_x \binom{D-1}{x-1}\binom{N-D}{n-x} = \binom{N-1}{n-1}$ 이므로
+>
+>$$
+>E(X) = \sum_x x \frac{\binom{D}{x}\binom{N-D}{n-x}}{\binom{N}{n}} = D \frac{\binom{N-1}{n-1}}{\binom{N}{n}} = \frac{nD}{N} = np
+>$$
+>
+>**(분산)** 항등식 $x(x-1)\binom{D}{x} = D(D-1)\binom{D-2}{x-2}$로부터
+>
+>$$
+>E[X(X-1)] = \frac{n(n-1)D(D-1)}{N(N-1)}
+>$$
+>
+>이고, $\mathrm{Var}(X) = E[X(X-1)] + E[X] - (E[X])^2$에 대입하면 결과를 얻는다. □
 
 #### 예제 3.1.1
 $N=60$개의 제품 중 불량품이 $D=6$개(불량률 $10%$)인 로트에서
@@ -81,18 +77,10 @@ $n=5$개를 단순랜덤추출하여 검사한다고 하자.
 불량 로트를 불합격시킬 확률을 $1%$ 이하로 하려면,
 허용 불량 개수 $c$는 얼마로 해야 하는가?
 
-합격 조건을 "불량품 개수 $\le c$"라 하면
+합격 조건을 "불량품 개수 $\le c$"라 하면 $P(X \le c) \ge 0.99$ 여야 한다. 즉
 
 $$
-P(X \le c) \ge 0.99
-$$
-
-여야 한다. 즉
-
-$$
-\sum_{x=0}^c
-\frac{\binom{6}{x}\binom{54}{5-x}}{\binom{60}{5}}
-\ge 0.99
+\sum_{x=0}^c \frac{\binom{6}{x}\binom{54}{5-x}}{\binom{60}{5}} \ge 0.99
 $$
 
 을 만족하는 최소의 $c$를 찾는다.
@@ -138,21 +126,21 @@ $$
 E(X)=np,\qquad \mathrm{Var}(X)=np(1-p)
 $$
 
-#### 증명
-
-$X$를 $n$개의 독립인 베르누이 확률변수 $Z_1, \ldots, Z_n$의 합으로 나타내면
-
-$$
-X = Z_1 + \cdots + Z_n, \quad Z_i \sim \text{Bernoulli}(p)
-$$
-
-각 $Z_i$에 대해 $E(Z_i) = p$, $\text{Var}(Z_i) = p(1-p)$이므로,
-독립합의 성질에 의해
-
-$$
-E(X) = \sum_{i=1}^n E(Z_i) = np \\
-\text{Var}(X) = \sum_{i=1}^n \text{Var}(Z_i) = np(1-p)
-$$
+>**증명**  
+>
+>$X$를 $n$개의 독립인 베르누이 확률변수 $Z_1, \ldots, Z_n$의 합으로 나타내면
+>
+>$$
+>X = Z_1 + \cdots + Z_n, \quad Z_i \sim \text{Bernoulli}(p)
+>$$
+>
+>각 $Z_i$에 대해 $E(Z_i) = p$, $\text{Var}(Z_i) = p(1-p)$이므로,
+>독립합의 성질에 의해
+>
+>$$
+>E(X) = \sum_{i=1}^n E(Z_i) = np \\
+>\text{Var}(X) = \sum_{i=1}^n \text{Var}(Z_i) = np(1-p)
+>$$
 
 ### 이항분포의 **대의적 정의** (representational definition)
 
@@ -184,36 +172,30 @@ $$
 X_1 + X_2 \sim B(n_1 + n_2, p)
 $$
 
-#### 증명
-
-**(a)** 베르누이분포의 적률생성함수는
-
-$$
-M_{Z_i}(t) = E(e^{tZ_i}) = pe^t + q
-$$
-
-이므로, $X = Z_1 + \cdots + Z_n$이고 $Z_i$들이 독립이므로
-
-$$
-M_X(t) = \prod_{i=1}^n M_{Z_i}(t) = (pe^t + q)^n
-$$
-
-**(b)** $X_1 = \sum_{i=1}^{n_1} Z_i$, $X_2 = \sum_{j=1}^{n_2} W_j$이고  
-모든 $Z_i, W_j \overset{iid}{\sim} \text{Bernoulli}(p)$이며 서로 독립이므로
-
-$$
-X_1 + X_2 = \sum_{i=1}^{n_1+n_2} Y_i, \quad Y_i \overset{iid}{\sim} \text{Bernoulli}(p)
-$$
-
-따라서 $X_1 + X_2 \sim B(n_1 + n_2, p)$이다.
-
-또는 적률생성함수를 이용하면
-
-$$
-M_{X_1+X_2}(t) = M_{X_1}(t) \cdot M_{X_2}(t) = (pe^t+q)^{n_1}(pe^t+q)^{n_2} = (pe^t+q)^{n_1+n_2}
-$$
-
-이므로 $X_1+X_2 \sim B(n_1+n_2, p)$이다. □
+>**증명**  
+>
+>**(a)** 베르누이분포의 적률생성함수는 $M_{Z_i}(t) = E(e^{tZ_i}) = pe^t + q$ 이므로, $X = Z_1 + \cdots + Z_n$이고 $Z_i$들이 독립이므로
+>
+>$$
+>M_X(t) = \prod_{i=1}^n M_{Z_i}(t) = (pe^t + q)^n
+>$$
+>
+>**(b)** $X_1 = \sum_{i=1}^{n_1} Z_i$, $X_2 = \sum_{j=1}^{n_2} W_j$이고  
+>모든 $Z_i, W_j \overset{iid}{\sim} \text{Bernoulli}(p)$이며 서로 독립이므로
+>
+>$$
+>X_1 + X_2 = \sum_{i=1}^{n_1+n_2} Y_i, \quad Y_i \overset{iid}{\sim} \text{Bernoulli}(p)
+>$$
+>
+>따라서 $X_1 + X_2 \sim B(n_1 + n_2, p)$이다.
+>
+>또는 적률생성함수를 이용하면
+>
+>$$
+>M_{X_1+X_2}(t) = M_{X_1}(t) \cdot M_{X_2}(t) = (pe^t+q)^{n_1}(pe^t+q)^{n_2} = (pe^t+q)^{n_1+n_2}
+>$$
+>
+>이므로 $X_1+X_2 \sim B(n_1+n_2, p)$이다. □
 
 #### 예 3.2.1
 
@@ -226,80 +208,77 @@ $$
 
 임을 보이자.
 
-**증명**
-
-$Y = \sum_{i=1}^D X_i$라 하고, $S = \sum_{i=1}^N X_i = n$이라 하자.
-
-조건부 확률을 계산하면
-
-$$
-P(Y = y \mid S = n) = \frac{P(Y = y, S = n)}{P(S = n)}
-$$
-
-**분자:** $Y = y$이고 $S = n$이면 $\sum_{i=D+1}^N X_i = n - y$이어야 한다.
-$X_i$들이 독립이므로
-
-$$
-P(Y = y, S = n) = P(Y = y) \cdot P\left(\sum_{i=D+1}^N X_i = n-y\right)
-$$
-
-$Y \sim B(D, p)$이고 $\sum_{i=D+1}^N X_i \sim B(N-D, p)$이므로
-
-$$
-P(Y = y, S = n) = \binom{D}{y}p^y(1-p)^{D-y} \cdot \binom{N-D}{n-y}p^{n-y}(1-p)^{N-D-n+y} \\
-= \binom{D}{y}\binom{N-D}{n-y} p^n(1-p)^{N-n}
-$$
-
-**분모:** $S = \sum_{i=1}^N X_i \sim B(N, p)$이므로
-
-$$
-P(S = n) = \binom{N}{n}p^n(1-p)^{N-n}
-$$
-
-따라서
-
-$$
-P(Y = y \mid S = n) = \frac{\binom{D}{y}\binom{N-D}{n-y} p^n(1-p)^{N-n}}{\binom{N}{n}p^n(1-p)^{N-n}} = \frac{\binom{D}{y}\binom{N-D}{n-y}}{\binom{N}{n}}
-$$
-
-이는 $H(n; N, D)$의 확률질량함수이다. □
+>**증명**
+>
+>$Y = \sum_{i=1}^D X_i$라 하고, $S = \sum_{i=1}^N X_i = n$이라 하자.
+>
+>조건부 확률을 계산하면
+>
+>$$
+>P(Y = y \mid S = n) = \frac{P(Y = y, S = n)}{P(S = n)}
+>$$
+>
+>**분자:** $Y = y$이고 $S = n$이면 $\sum_{i=D+1}^N X_i = n - y$이어야 한다.
+>$X_i$들이 독립이므로
+>
+>$$
+>P(Y = y, S = n) = P(Y = y) \cdot P\left(\sum_{i=D+1}^N X_i = n-y\right)
+>$$
+>
+>$Y \sim B(D, p)$이고 $\sum_{i=D+1}^N X_i \sim B(N-D, p)$이므로
+>
+>$$
+>P(Y = y, S = n) = \binom{D}{y}p^y(1-p)^{D-y} \cdot \binom{N-D}{n-y}p^{n-y}(1-p)^{N-D-n+y} \\
+>= \binom{D}{y}\binom{N-D}{n-y} p^n(1-p)^{N-n}
+>$$
+>
+>**분모:** $S = \sum_{i=1}^N X_i \sim B(N, p)$이므로
+>
+>$$
+>P(S = n) = \binom{N}{n}p^n(1-p)^{N-n}
+>$$
+>
+>따라서
+>
+>$$
+>P(Y = y \mid S = n) = \frac{\binom{D}{y}\binom{N-D}{n-y} p^n(1-p)^{N-n}}{\binom{N}{n}p^n(1-p)^{N-n}} = \frac{\binom{D}{y}\binom{N-D}{n-y}}{\binom{N}{n}}
+>$$
+>
+>이는 $H(n; N, D)$의 확률질량함수이다. □
 
 ### 추가: 스털링(Stirling) 의 공식
 이항분포의 확률질량함수는 스털링의 근사공식을 이용하여 적분으로 근사할 수 있다.
 
 $$m! \sim m^{m+1/2} e^{-m}\sqrt{2\pi},\quad m \to \infin$$
 
-#### 증명
-
-$$m! = \Gamma(m+1) = \int_0^\infty x^m e^{-x} dx = \int_0^\infty e^{m \log x - x} dx \\
-= \int_0^\infty e^{m \log my - my} m\ dy = m^{m+1} \int_0^\infty e^{m(\log y - y)} dy \\
-= m^{m+1}e^{-m} \int_0^\infty e^{m(\log y - y + 1)} dy \\
-= m^{m+1}e^{-m} \int_0^\infty exp\left [m\left(-\frac{(y-1)^2}{2} + \frac{(y-1)^3}{3} - \cdots\right) \right ] dy \\
-= m^{m+1}e^{-m} \int_0^\infty e^{-\frac{m(y-1)^2}{2}} exp\left [m\left(\frac{(y-1)^3}{3} - \cdots\right) \right ] dy $$
-
-여기서 $z=\sqrt{m}(y-1)$로 치환하면
-
-$$= m^{m+1}e^{-m} \int_{-\sqrt{m}}^\infty e^{-\frac{z^2}{2}} exp\left [m\left(\frac{(z/\sqrt{m})^3}{3} - \frac{(z/\sqrt{m})^4}{4} + \cdots\right) \right ] \frac{dz}{\sqrt{m}} \\
-= m^{m+1/2}e^{-m} \sqrt{2\pi} \cdot \int_{-\sqrt{m}}^\infty \frac{1}{\sqrt{2\pi}} e^{-\frac{z^2}{2}} \times \left[ 1 + \frac{m}{3}\left(\frac{z}{\sqrt{m}}\right)^3 - \frac{m}{4}\left(\frac{z}{\sqrt{m}}\right)^4 + \cdots \right] dz \\
-\sim m^{m+1/2}e^{-m} \sqrt{2\pi}, \quad m \to \infty
-$$
+>**증명**  
+>
+>$$
+>\begin{aligned}
+>m! &= \Gamma(m+1) = \int_0^\infty x^m e^{-x} dx = \int_0^\infty e^{m \log x - x} dx \\
+>&= \int_0^\infty e^{m \log my - my} m\ dy = m^{m+1} \int_0^\infty e^{m(\log y - y)} dy \\
+>&= m^{m+1}e^{-m} \int_0^\infty e^{m(\log y - y + 1)} dy \\
+>&= m^{m+1}e^{-m} \int_0^\infty exp\left [m\left(-\frac{(y-1)^2}{2} + \frac{(y-1)^3}{3} - \cdots\right) \right ] dy \\
+>&= m^{m+1}e^{-m} \int_0^\infty e^{-\frac{m(y-1)^2}{2}} exp\left [m\left(\frac{(y-1)^3}{3} - \cdots\right) \right ] dy 
+>\end{aligned}
+>$$
+>
+>여기서 $z=\sqrt{m}(y-1)$로 치환하면
+>
+>$$
+>\begin{aligned}
+>&= m^{m+1}e^{-m} \int_{-\sqrt{m}}^\infty e^{-\frac{z^2}{2}} exp\left [m\left(\frac{(z/\sqrt{m})^3}{3} - \frac{(z/\sqrt{m})^4}{4} + \cdots\right) \right ] \frac{dz}{\sqrt{m}} \\
+>&= m^{m+1/2}e^{-m} \sqrt{2\pi} \cdot \int_{-\sqrt{m}}^\infty \frac{1}{\sqrt{2\pi}} e^{-\frac{z^2}{2}} \times \left[ 1 + \frac{m}{3}\left(\frac{z}{\sqrt{m}}\right)^3 - \frac{m}{4}\left(\frac{z}{\sqrt{m}}\right)^4 + \cdots \right] dz \\
+>&\sim m^{m+1/2}e^{-m} \sqrt{2\pi}, \quad m \to \infty
+>\end{aligned}
+>$$
 
 ### 다항분포 (Multinomial Distribution)
 
-각 시행의 결과가 $k$개의 범주 중 하나로 나타나고,
-각 범주의 확률이 $p_1,\dots,p_k$ ($\sum p_i=1$)일 때,
-$n$번의 독립 시행에서 각 범주의 발생 횟수를
+각 시행의 결과가 $k$개의 범주 중 하나로 나타나고, 각 범주의 확률이 $p_1,\dots,p_k$ ($\sum p_i=1$)일 때, $n$번의 독립 시행에서 각 범주의 발생 횟수를 $X=(X_1,\dots,X_k)^t$ 라 하면,
 
 $$
-X=(X_1,\dots,X_k)^t
-$$
-
-라 하면,
-
-$$
-P(X_1=x_1,\dots,X_k=x_k)
-=\frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k},
-\quad \sum_{i=1}^k x_i=n
+P(X_1=x_1,\dots,X_k=x_k) =\frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k}, \quad \sum_{i=1}^k x_i=n
 $$
 
   - $\frac{n!}{x_1!\cdots x_k!} = \binom{n}{x_1, x_2, \dots, x_k}$: multinomial coefficient  
@@ -327,29 +306,22 @@ $$
 $X\sim \mathrm{Multi}(n;p_1,\dots,p_k)$이면
 
 $$
-E(X_i)=np_i \\
+E(X_i)=np_i, \quad
 \mathrm{Var}(X_i)=np_i(1-p_i) \\
 \mathrm{Cov}(X_i,X_j)=-np_ip_j\quad(i\ne j) \\
 M_X(t) = \left(\sum_{i=1}^k p_i e^{t_i}\right)^n
 $$
 
-(적률생성함수, $t=(t_1,\dots,t_k)^\top$)
-이다.
+($t=(t_1,\dots,t_k)^\top$)
 
-#### 증명
-
-다항분포 역시 $X=Z_1+\cdots+Z_n $으로 표현되며, 각 $Z_i$는 $\mathrm{Multi}(1;p_1,\dots,p_k)$를 따른다.
-독립합의 성질과 베르누이 벡터의 공분산 계산으로부터 결과가 따른다. □
+>**증명**  
+>
+>다항분포 역시 $X=Z_1+\cdots+Z_n $으로 표현되며, 각 $Z_i$는 $\mathrm{Multi}(1;p_1,\dots,p_k)$를 따른다.
+>독립합의 성질과 베르누이 벡터의 공분산 계산으로부터 결과가 따른다. □
 
 ## 기하분포와 음이항분포 (Geometric and Negative Binomial Distributions)
 
-서로 독립이고 성공확률이 $p$인 베르누이 시행
-
-$$
-X_1,X_2,\dots
-$$
-
-을 관측한다고 하자. 여기서 각 $X_i$는 성공이면 1, 실패이면 0을 취한다.
+서로 독립이고 성공확률이 $p$인 베르누이 시행 $X_1,X_2,\dots$ 을 관측한다고 하자. 여기서 각 $X_i$는 성공이면 1, 실패이면 0을 취한다.
 
 ### 기하분포 (Geometric distribution)
 
@@ -384,47 +356,43 @@ $$
 E(W_1) = \frac{1}{p}, \qquad \mathrm{Var}(W_1) = \frac{1-p}{p^2}
 $$
 
-#### 증명
-
-**(a) 적률생성함수**
-
-정의에 의해
-
-$$
-\mathrm{mgf}_{W_1}(t)=E(e^{tW_1})
-=\sum_{x=1}^\infty e^{tx}(1-p)^{x-1}p \\
-= p e^t \sum_{x=1}^\infty \big((1-p)e^t\big)^{x-1} =\frac{p e^t}{1-(1-p)e^t},\quad t<-\log(1-p)
-$$
-
-**(b) 평균과 분산**
-
-기하분포의 누율생성함수는
-
-$$
-\mathrm{cgf}_{W_1}(t)
-=\log \mathrm{mgf}_{W_1}(t)
-= -\log\{1-(1-p)e^t\}+t+\log p
-$$
-
-로그함수의 멱급수 전개
-
-$$
--\log(1-A)=A+\frac{A^2}{2}+\frac{A^3}{3}+\cdots \quad(|A|<1)
-$$
-
-를 이용하여 전개하고 $t$의 멱차수별로 정리하면
-
-$$
-\mathrm{cgf}_{W_1}(t)
-=\frac{1}{p}t+\frac{1-p}{2p^2}t^2+\cdots
-$$
-
-따라서
-
-$$
-E(W_1)=\mathrm{cgf}'_{W_1}(0)=\frac{1}{p},
-\quad \mathrm{Var}(W_1)=\mathrm{cgf}''_{W_1}(0)=\frac{1-p}{p^2}
-$$
+>**증명**  
+>
+>**(a) 적률생성함수**
+>
+>정의에 의해
+>
+>$$
+>\mathrm{mgf}_{W_1}(t)=E(e^{tW_1})
+>=\sum_{x=1}^\infty e^{tx}(1-p)^{x-1}p \\
+>= p e^t \sum_{x=1}^\infty \big((1-p)e^t\big)^{x-1} =\frac{p e^t}{1-(1-p)e^t},\quad t<-\log(1-p)
+>$$
+>
+>**(b) 평균과 분산**
+>
+>기하분포의 누율생성함수는
+>
+>$$
+>\mathrm{cgf}_{W_1}(t) =\log \mathrm{mgf}_{W_1}(t) = -\log\{1-(1-p)e^t\}+t+\log p
+>$$
+>
+>로그함수의 멱급수 전개
+>
+>$$
+>-\log(1-A)=A+\frac{A^2}{2}+\frac{A^3}{3}+\cdots \quad(|A|<1)
+>$$
+>
+>를 이용하여 전개하고 $t$의 멱차수별로 정리하면
+>
+>$$
+>\mathrm{cgf}_{W_1}(t) =\frac{1}{p}t+\frac{1-p}{2p^2}t^2+\cdots
+>$$
+>
+>따라서
+>
+>$$
+>E(W_1)=\mathrm{cgf}'_{W_1}(0)=\frac{1}{p}, \quad \mathrm{Var}(W_1)=\mathrm{cgf}''_{W_1}(0)=\frac{1-p}{p^2}
+>$$
 
 ### 기하분포의 무기억증 (Memoryless Property)
 
@@ -434,14 +402,14 @@ $$
 P(W_1 > s+t \mid W_1 > s) = P(W_1 > t)
 $$
 
-#### 증명
-
-$W_1 > s+t$이면서 $W_1 > s$이면 $W_1 > s+t$이므로
-
-$$
-P(W_1 > s+t \mid W_1 > s) = \frac{P(W_1 > s+t)}{P(W_1 > s)}
-= \frac{(1-p)^{s+t}}{(1-p)^s} = (1-p)^t = P(W_1 > t)
-$$
+>**증명**  
+>
+>$W_1 > s+t$이면서 $W_1 > s$이면 $W_1 > s+t$이므로
+>
+>$$
+>P(W_1 > s+t \mid W_1 > s) = \frac{P(W_1 > s+t)}{P(W_1 > s)}
+>= \frac{(1-p)^{s+t}}{(1-p)^s} = (1-p)^t = P(W_1 > t)
+>$$
 
 ### 음이항분포 (Negative binomial distribution)
 
@@ -454,9 +422,7 @@ $W_r=x$라는 사건은 다음을 의미한다.
 따라서
 
 $$
-P(W_r=x)
-=\binom{x-1}{r-1}p^{r}(1-p)^{x-r},
-\quad x=r,r+1,\dots
+P(W_r=x) =\binom{x-1}{r-1}p^{r}(1-p)^{x-r}, \quad x=r,r+1,\dots
 $$
 
 이며, 이 분포를 **음이항분포**라 하고, 기호로는
@@ -595,8 +561,7 @@ $$
 이항분포의 확률질량함수는
 
 $$
-P(X_n=x)
-=\binom{n}{x}p_n^x(1-p_n)^{n-x}
+P(X_n=x)  =\binom{n}{x}p_n^x(1-p_n)^{n-x}
 $$
 
 여기서 $p_n=\lambda/n$으로 두면
@@ -611,9 +576,7 @@ $$
 $n\to\infty$로 보내면
 
 $$
-\frac{n(n-1)\cdots(n-x+1)}{n^x}\to1,
-\qquad
-\left(1-\frac{\lambda}{n}\right)^n\to e^{-\lambda} \\
+\frac{n(n-1)\cdots(n-x+1)}{n^x}\to1, \qquad \left(1-\frac{\lambda}{n}\right)^n\to e^{-\lambda} \\
 \therefore P(X_n=x)\to e^{-\lambda}\frac{\lambda^x}{x!}
 $$
 
@@ -640,44 +603,40 @@ $$
 X_1 + X_2 \sim \mathrm{Poisson}(\lambda_1 + \lambda_2)
 $$
 
-#### 증명
+>**증명**  
+>
+>**(a) 적률생성함수**
+>
+>$$
+>M_X(t) = E(e^{tX})
+>= \sum_{x=0}^\infty e^{tx} e^{-\lambda}\frac{\lambda^x}{x!} 
+>= e^{-\lambda}\sum_{x=0}^\infty \frac{(\lambda e^t)^x}{x!}\\
+>= e^{-\lambda}e^{\lambda e^t}
+>= \exp\{\lambda(e^t-1)\}
+>$$
+>
+>이며 $-\infty < t < \infty$에서 정의된다.
+>
+>**(b) 평균과 분산**
+>
+>누율생성함수는 $\mathrm{cgf}_X(t) = \log M_X(t) = \lambda(e^t-1)$
+>
+>$$
+>\therefore E(X) = \mathrm{cgf}'_X(0) = \lambda, \quad \mathrm{Var}(X) = \mathrm{cgf}''_X(0) = \lambda
+>$$
+>
+>**(c) 재생성**
+>
+>$X_1 \sim \mathrm{Poisson}(\lambda_1)$, $X_2 \sim \mathrm{Poisson}(\lambda_2)$가 서로 독립이면, 적률생성함수의 곱셈 성질로부터
+>
+>$$
+>M_{X_1+X_2}(t) = M_{X_1}(t) \cdot M_{X_2}(t) = \exp\{(\lambda_1+\lambda_2)(e^t-1)\}
+>$$
+>
+>$$
+>\therefore X_1 + X_2 \sim \mathrm{Poisson}(\lambda_1+\lambda_2)
+>$$
 
-**(a) 적률생성함수**
-
-$$
-M_X(t) = E(e^{tX})
-= \sum_{x=0}^\infty e^{tx} e^{-\lambda}\frac{\lambda^x}{x!} 
-= e^{-\lambda}\sum_{x=0}^\infty \frac{(\lambda e^t)^x}{x!}\\
-= e^{-\lambda}e^{\lambda e^t}
-= \exp\{\lambda(e^t-1)\}
-$$
-
-이며 $-\infty < t < \infty$에서 정의된다.
-
-**(b) 평균과 분산**
-
-누율생성함수는 $\mathrm{cgf}_X(t) = \log M_X(t) = \lambda(e^t-1)$
-
-$$
-\therefore E(X) = \mathrm{cgf}'_X(0) = \lambda, \quad
-\mathrm{Var}(X) = \mathrm{cgf}''_X(0) = \lambda
-$$
-
-**(c) 재생성**
-
-$X_1 \sim \mathrm{Poisson}(\lambda_1)$, $X_2 \sim \mathrm{Poisson}(\lambda_2)$가 서로 독립이면, 적률생성함수의 곱셈 성질로부터
-
-$$
-M_{X_1+X_2}(t)
-= M_{X_1}(t) \cdot M_{X_2}(t)
-= \exp\{(\lambda_1+\lambda_2)(e^t-1)\}
-$$
-
-$$
-\therefore X_1 + X_2 \sim \mathrm{Poisson}(\lambda_1+\lambda_2)
-$$
-
-TODO:
 ### 포아송과정
 
 **포아송과정 (Poisson process)** 은 시간 또는 공간에서 사건이 발생하는 현상(갯수)을 모델링하는 확률과정이다.
@@ -726,34 +685,34 @@ $$
 N_t \sim \mathrm{Poisson}(\lambda t)
 $$
 
-#### 증명
-미소 시간구간 $(t, t+h]$를 고려하자. 포아송과정의 성질로부터
-
-$$
-P(N_{t+h} - N_t = 0) = 1 - \lambda h + o(h) \\
-P(N_{t+h} - N_t = 1) = \lambda h + o(h) \\
-P(N_{t+h} - N_t \geq 2) = o(h)
-$$
-
-$P_n(t) = P(N_t = n)$이라 하면, 정상성과 독립증분성으로부터
-
-$$
-P_n(t+h) = P(N_{t+h} = n) \\
-= P(N_t = n, N_{t+h} - N_t = 0) + P(N_t = n-1, N_{t+h} - N_t = 1) + \cdots \\
-= P_n(t) \cdot (1-\lambda h + o(h)) + P_{n-1}(t) \cdot (\lambda h + o(h)) + o(h)
-$$
-
-정리하면 $P_n(t+h) - P_n(t) = -\lambda h P_n(t) + \lambda h P_{n-1}(t) + o(h)$  
-양변을 $h$로 나누고 $h \to 0$으로 극한을 취하면
-
-$$
-P_n'(t) = -\lambda P_n(t) + \lambda P_{n-1}(t)
-$$
-
-초기조건 $P_0(0) = 1$, $P_n(0) = 0$ ($n \geq 1$)과 함께 이 미분방정식을 풀면  
-$n=0$일 때: $P_0'(t) = -\lambda P_0(t)$이므로 $P_0(t) = e^{-\lambda t}$  
-귀납적으로 $P_n(t) = e^{-\lambda t} \frac{(\lambda t)^n}{n!}$을 얻는다.  
-따라서 $N_t \sim \mathrm{Poisson}(\lambda t)$이다. □
+>**증명**  
+>미소 시간구간 $(t, t+h]$를 고려하자. 포아송과정의 성질로부터
+>
+>$$
+>P(N_{t+h} - N_t = 0) = 1 - \lambda h + o(h) \\
+>P(N_{t+h} - N_t = 1) = \lambda h + o(h) \\
+>P(N_{t+h} - N_t \geq 2) = o(h)
+>$$
+>
+>$P_n(t) = P(N_t = n)$이라 하면, 정상성과 독립증분성으로부터
+>
+>$$
+>P_n(t+h) = P(N_{t+h} = n) \\
+>= P(N_t = n, N_{t+h} - N_t = 0) + P(N_t = n-1, N_{t+h} - N_t = 1) + \cdots \\
+>= P_n(t) \cdot (1-\lambda h + o(h)) + P_{n-1}(t) \cdot (\lambda h + o(h)) + o(h)
+>$$
+>
+>정리하면 $P_n(t+h) - P_n(t) = -\lambda h P_n(t) + \lambda h P_{n-1}(t) + o(h)$  
+>양변을 $h$로 나누고 $h \to 0$으로 극한을 취하면
+>
+>$$
+>P_n'(t) = -\lambda P_n(t) + \lambda P_{n-1}(t)
+>$$
+>
+>초기조건 $P_0(0) = 1$, $P_n(0) = 0$ ($n \geq 1$)과 함께 이 미분방정식을 풀면  
+>$n=0$일 때: $P_0'(t) = -\lambda P_0(t)$이므로 $P_0(t) = e^{-\lambda t}$  
+>귀납적으로 $P_n(t) = e^{-\lambda t} \frac{(\lambda t)^n}{n!}$을 얻는다.  
+>따라서 $N_t \sim \mathrm{Poisson}(\lambda t)$이다. □
 
 #### 예제 3.4.1 (포아송과정에서 결점 수의 확률 계산)
 단위 길이당 평균 결점 수가 0.05로 알려진 전선을 생산하는 공정에서 나타나는 결점 수 모형으로서 포아송과정이 타당하다고 할 때, 100단위 길이에 해당하는 전선에서 10개 이상의 결점이 나타날 확률을 구하자.
@@ -811,19 +770,19 @@ $$
 \mathrm{mgf}_{W_1}(t)=E(e^{tW_1})=(1-t/\lambda)^{-1},\quad t<\lambda
 $$
 
-**증명**
-
-$$
-E(e^{tW_1})
-=\int_{-\infty}^{+\infty} e^{tx}\lambda e^{-\lambda x}\mathbf{1}(x\ge 0)\,dx
-=\lambda\int_{0}^{\infty} e^{-(\lambda-t)x}\,dx
-$$
-
-이며 $t<\lambda$일 때 $\int_0^\infty e^{-ax}dx=1/a$를 써서
-
-$$
-E(e^{tW_1})=\frac{\lambda}{\lambda-t}=\left(1-\frac{t}{\lambda}\right)^{-1}
-$$
+>**증명**
+>
+>$$
+>E(e^{tW_1})
+>=\int_{-\infty}^{+\infty} e^{tx}\lambda e^{-\lambda x}\mathbf{1}(x\ge 0)\,dx
+>=\lambda\int_{0}^{\infty} e^{-(\lambda-t)x}\,dx
+>$$
+>
+>이며 $t<\lambda$일 때 $\int_0^\infty e^{-ax}dx=1/a$를 써서
+>
+>$$
+>E(e^{tW_1})=\frac{\lambda}{\lambda-t}=\left(1-\frac{t}{\lambda}\right)^{-1}
+>$$
 
 **(b) 평균과 분산**
 
@@ -833,32 +792,32 @@ $$
 E(W_1)=\frac{1}{\lambda},\qquad \mathrm{Var}(W_1)=\frac{1}{\lambda^2}
 $$
 
-**증명**
-
-$$
-\mathrm{cgf}_{W_1}(t)=\log \mathrm{mgf}_{W_1}(t)=-\log\left(1-\frac{t}{\lambda}\right),\quad t<\lambda
-$$
-
-로그의 멱급수 전개
-
-$$
--\log(1-A)=A+\frac{A^2}{2}+\frac{A^3}{3}+\cdots\quad (|A|<1)
-$$
-
-를 $A=t/\lambda$에 적용하면
-
-$$
-\mathrm{cgf}_{W_1}(t)=\frac{t}{\lambda}+\frac{1}{2}\left(\frac{t}{\lambda}\right)^2+\cdots
-$$
-
-$$
-\therefore E(W_1)=\mathrm{cgf}'_{W_1}(0)=\frac{1}{\lambda},\qquad
-\mathrm{Var}(W_1)=\mathrm{cgf}''_{W_1}(0)=\frac{1}{\lambda^2}
-$$
+>**증명**
+>
+>$$
+>\mathrm{cgf}_{W_1}(t)=\log \mathrm{mgf}_{W_1}(t)=-\log\left(1-\frac{t}{\lambda}\right),\quad t<\lambda
+>$$
+>
+>로그의 멱급수 전개
+>
+>$$
+>-\log(1-A)=A+\frac{A^2}{2}+\frac{A^3}{3}+\cdots\quad (|A|<1)
+>$$
+>
+>를 $A=t/\lambda$에 적용하면
+>
+>$$
+>\mathrm{cgf}_{W_1}(t)=\frac{t}{\lambda}+\frac{1}{2}\left(\frac{t}{\lambda}\right)^2+\cdots
+>$$
+>
+>$$
+>\therefore E(W_1)=\mathrm{cgf}'_{W_1}(0)=\frac{1}{\lambda},\qquad
+>\mathrm{Var}(W_1)=\mathrm{cgf}''_{W_1}(0)=\frac{1}{\lambda^2}
+>$$
 
 ### 감마분포 (Gamma Distribution)
 
-#### 감마분포의 도입: $r$번째 사건까지의 대기시간
+**감마분포의 도입: $r$번째 사건까지의 대기시간**
 
 포아송과정에서 $r$번째 사건이 시각 $t$ 이후에 발생한다는 것은, 시각 $t$까지 사건이 $r-1$번 이하로 발생했다는 것과 동치이므로  
 $(W_r>t)\iff (N_t\le r-1)$ 이다. 따라서
@@ -882,7 +841,7 @@ $$
 
 감마분포의 모양은 모수 $r$에 따라 달라진다. 여기서 $r$을 형상모수(shape parameter)라고 하고, $\beta=1/\lambda$를 척도모수(scale parameter)로 둔다. 일반적으로는 shape가 자연수로 제한되지 않고 양수(real positive)일 수 있으므로 $r$ 대신 $\alpha$를 쓰기도 한다.
 
-#### 감마함수 (Gamma Function)와 일반형 감마분포
+**감마함수 (Gamma Function)와 일반형 감마분포**
 
 $\alpha>0$에 대해 감마함수는
 
@@ -927,70 +886,70 @@ $$
 X_1+X_2\sim \mathrm{Gamma}(\alpha_1+\alpha_2,\beta)
 $$
 
-**증명**
-
-**(a) 평균과 분산**
-
-먼저 $E(X)$는
-
-$$
-E(X)=\int_0^\infty x\cdot \frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta}\,dx
-=\frac{1}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty x^{\alpha}e^{-x/\beta}\,dx
-$$
-
-여기서 $x/\beta=y$ (즉 $x=\beta y,\,dx=\beta dy$)로 치환하면
-
-$$
-E(X)=\frac{1}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty (\beta y)^{\alpha}e^{-y}\beta\,dy
-=\frac{\beta}{\Gamma(\alpha)}\int_0^\infty y^{\alpha}e^{-y}\,dy
-=\frac{\beta\Gamma(\alpha+1)}{\Gamma(\alpha)}=\alpha\beta
-$$
-
-또한
-
-$$
-E(X^2)=\int_0^\infty x^2 f(x)\,dx
-=\frac{1}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty x^{\alpha+1}e^{-x/\beta}\,dx
-$$
-
-에 같은 치환 $x=\beta y$를 쓰면
-
-$$
-E(X^2)=\frac{\beta^2}{\Gamma(\alpha)}\int_0^\infty y^{\alpha+1}e^{-y}\,dy
-=\frac{\beta^2\Gamma(\alpha+2)}{\Gamma(\alpha)}
-=\alpha(\alpha+1)\beta^2
-$$
-
-따라서
-
-$$
-\mathrm{Var}(X)=E(X^2)-\{E(X)\}^2=\alpha(\alpha+1)\beta^2-(\alpha\beta)^2=\alpha\beta^2
-$$
-
-**(b) 적률생성함수(mgf)**
-
-$$
-\mathrm{mgf}_X(t)=E(e^{tX})
-=\int_0^\infty e^{tx}\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta}\,dx
-=\frac{1}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty x^{\alpha-1}e^{-(1/\beta-t)x}\,dx
-$$
-
-여기서 $1/\beta-t>0$ (즉 $t<1/\beta$)일 때 $y=(1/\beta-t)x$로 치환하면
-
-$$
-\mathrm{mgf}_X(t)=\frac{1}{\Gamma(\alpha)\beta^\alpha}\cdot \frac{1}{(1/\beta-t)^\alpha}\int_0^\infty y^{\alpha-1}e^{-y}\,dy
-=\frac{1}{\beta^\alpha(1/\beta-t)^\alpha}
-=(1-\beta t)^{-\alpha}
-$$
-
-**(c) 같은 $\beta$를 갖는 감마분포의 합**
-
-$$
-\mathrm{mgf}_{X_1+X_2}(t)=\mathrm{mgf}_{X_1}(t)\mathrm{mgf}_{X_2}(t)
-=(1-\beta t)^{-\alpha_1}(1-\beta t)^{-\alpha_2}=(1-\beta t)^{-(\alpha_1+\alpha_2)}
-$$
-
-이므로 mgf의 분포결정성으로 결론이 성립한다. □
+>**증명**
+>
+>**(a) 평균과 분산**
+>
+>먼저 $E(X)$는
+>
+>$$
+>E(X)=\int_0^\infty x\cdot \frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta}\,dx
+>=\frac{1}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty x^{\alpha}e^{-x/\beta}\,dx
+>$$
+>
+>여기서 $x/\beta=y$ (즉 $x=\beta y,\,dx=\beta dy$)로 치환하면
+>
+>$$
+>E(X)=\frac{1}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty (\beta y)^{\alpha}e^{-y}\beta\,dy
+>=\frac{\beta}{\Gamma(\alpha)}\int_0^\infty y^{\alpha}e^{-y}\,dy
+>=\frac{\beta\Gamma(\alpha+1)}{\Gamma(\alpha)}=\alpha\beta
+>$$
+>
+>또한
+>
+>$$
+>E(X^2)=\int_0^\infty x^2 f(x)\,dx
+>=\frac{1}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty x^{\alpha+1}e^{-x/\beta}\,dx
+>$$
+>
+>에 같은 치환 $x=\beta y$를 쓰면
+>
+>$$
+>E(X^2)=\frac{\beta^2}{\Gamma(\alpha)}\int_0^\infty y^{\alpha+1}e^{-y}\,dy
+>=\frac{\beta^2\Gamma(\alpha+2)}{\Gamma(\alpha)}
+>=\alpha(\alpha+1)\beta^2
+>$$
+>
+>따라서
+>
+>$$
+>\mathrm{Var}(X)=E(X^2)-\{E(X)\}^2=\alpha(\alpha+1)\beta^2-(\alpha\beta)^2=\alpha\beta^2
+>$$
+>
+>**(b) 적률생성함수(mgf)**
+>
+>$$
+>\mathrm{mgf}_X(t)=E(e^{tX})
+>=\int_0^\infty e^{tx}\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x/\beta}\,dx
+>=\frac{1}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty x^{\alpha-1}e^{-(1/\beta-t)x}\,dx
+>$$
+>
+>여기서 $1/\beta-t>0$ (즉 $t<1/\beta$)일 때 $y=(1/\beta-t)x$로 치환하면
+>
+>$$
+>\mathrm{mgf}_X(t)=\frac{1}{\Gamma(\alpha)\beta^\alpha}\cdot \frac{1}{(1/\beta-t)^\alpha}\int_0^\infty y^{\alpha-1}e^{-y}\,dy
+>=\frac{1}{\beta^\alpha(1/\beta-t)^\alpha}
+>=(1-\beta t)^{-\alpha}
+>$$
+>
+>**(c) 같은 $\beta$를 갖는 감마분포의 합**
+>
+>$$
+>\mathrm{mgf}_{X_1+X_2}(t)=\mathrm{mgf}_{X_1}(t)\mathrm{mgf}_{X_2}(t)
+>=(1-\beta t)^{-\alpha_1}(1-\beta t)^{-\alpha_2}=(1-\beta t)^{-(\alpha_1+\alpha_2)}
+>$$
+>
+>이므로 mgf의 분포결정성으로 결론이 성립한다. □
 
 #### 형상모수가 자연수인 감마분포의 대의적 정의
 
@@ -1061,62 +1020,56 @@ $$
 
 는 적분값이 1이 되는 함수로서 표준정규분포(standard normal distribution) $N(0,1)$의 pdf로 정의된다.
 
-TODO:  
-**De Moivre–Laplace 정리 증명**  
-$X_n \sim B(n,p)$이고 $\mu=np$, $\sigma^2=np(1-p)$라 하자. 표준화된 확률변수 $Z_n = \frac{X_n - np}{\sqrt{np(1-p)}}$ 의 적률생성함수를 고려하면
-
-$$
-M_{Z_n}(t) = E(e^{tZ_n}) = e^{-\mu t/\sigma} M_{X_n}(t/\sigma)
-$$
-
-이고, 이항분포의 mgf $M_{X_n}(t) = (pe^t + 1-p)^n$을 이용하면
-
-$$
-M_{Z_n}(t) = e^{-\mu t/\sigma} \left(pe^{t/\sigma} + 1-p\right)^n
-$$
-
-$pe^{t/\sigma} + 1-p$를 테일러 전개하면
-
-$$
-pe^{t/\sigma} + 1-p = 1 + p\left(\frac{t}{\sigma} + \frac{t^2}{2\sigma^2} + O(t^3/\sigma^3)\right) \\
-= 1 + \frac{pt}{\sigma} + \frac{pt^2}{2\sigma^2} + O(t^3/\sigma^3) \\
-\therefore \log M_{Z_n}(t) = -\frac{\mu t}{\sigma} + n\log\left(1 + \frac{pt}{\sigma} + \frac{pt^2}{2\sigma^2} + O(t^3/\sigma^3)\right)
-$$
-
-$\log(1+A) = A - A^2/2 + O(A^3)$를 적용하고 $\mu = np$, $\sigma^2 = np(1-p)$ 사용하여 $n\to\infty$일 때 주도항만 남기면
-
-$$
-= -\frac{\mu t}{\sigma} + n\left(\frac{pt}{\sigma} + \frac{pt^2}{2\sigma^2} + O(t^3/\sigma^3)\right) = -\frac{\mu t}{\sigma} + \frac{npt}{\sigma} + \frac{n(p-p^2)t^2}{2\sigma^2} + O(n t^3/\sigma^3) \\
-= \frac{t^2}{2} + O(n^{-1/2}) \\
-\therefore \log M_{Z_n}(t) \to \frac{t^2}{2}
-$$
-
-이는 표준정규분포 $N(0,1)$의 mgf이다. 적률생성함수의 연속성 정리에 의해 $Z_n$은 분포수렴하여 $N(0,1)$로 근사된다. □
-
-**$\phi$의 적분값이 1 증명**
-
-$$
-I = \int_{-\infty}^{\infty} \phi(z)\,dz = \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-z^2/2}\,dz
-$$
-
-양변을 제곱하면
-
-$$
-I^2 = \left(\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-x^2/2}\,dx\right)\left(\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-y^2/2}\,dy\right) \\
-= \frac{1}{2\pi}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} e^{-(x^2+y^2)/2}\,dx\,dy
-$$
-
-극좌표 $(x,y) = (r\cos\theta, r\sin\theta)$로 변환하면 $dx\,dy = r\,dr\,d\theta$이고 $x^2+y^2=r^2$이므로
-
-$$
-I^2 = \frac{1}{2\pi}\int_{0}^{2\pi}\int_{0}^{\infty} e^{-r^2/2} r\,dr\,d\theta
-$$
-
-$u = r^2/2$로 치환하면 $du = r\,dr$이므로
-
-$$
-\therefore I^2 = \frac{1}{2\pi}\int_{0}^{2\pi}\,d\theta \int_{0}^{\infty} e^{-u}\,du = \frac{1}{2\pi} \cdot 2\pi \cdot 1 = 1
-$$
+>**De Moivre–Laplace 정리 증명**  
+>$X_n \sim B(n,p)$이고 $\mu=np$, $\sigma^2=np(1-p)$라 하자.  
+>표준화된 확률변수 $Z_n = \frac{X_n - np}{\sqrt{np(1-p)}}$ 의 적률생성함수를 고려하면 $M_{Z_n}(t) = E(e^{tZ_n}) = e^{-\mu t/\sigma} M_{X_n}(t/\sigma)$ 이고, 이항분포의 mgf $M_{X_n}(t) = (pe^t + 1-p)^n$을 이용하면
+>
+>$$
+>M_{Z_n}(t) = e^{-\mu t/\sigma} \left(pe^{t/\sigma} + 1-p\right)^n
+>$$
+>
+>$pe^{t/\sigma} + 1-p$를 테일러 전개하면
+>
+>$$
+>pe^{t/\sigma} + 1-p = 1 + p\left(\frac{t}{\sigma} + \frac{t^2}{2\sigma^2} + O(t^3/\sigma^3)\right) 
+>= 1 + \frac{pt}{\sigma} + \frac{pt^2}{2\sigma^2} + O(t^3/\sigma^3) \\
+>\therefore \log M_{Z_n}(t) = -\frac{\mu t}{\sigma} + n\log\left(1 + \frac{pt}{\sigma} + \frac{pt^2}{2\sigma^2} + O(t^3/\sigma^3)\right)
+>$$
+>
+>$\log(1+A) = A - A^2/2 + O(A^3)$를 적용하고 $\mu = np$, $\sigma^2 = np(1-p)$ 사용하여 $n\to\infty$일 때 주도항만 남기면 (A 약간 복잡한데, 자세한 전개는 생략.)
+>
+>$$
+>= -\frac{\mu t}{\sigma} + n\left(\frac{pt}{\sigma} + \frac{pt^2}{2\sigma^2} + O(t^3/\sigma^3)\right) = -\frac{\mu t}{\sigma} + \frac{npt}{\sigma} + \frac{n(p-p^2)t^2}{2\sigma^2} + O(n t^3/\sigma^3) \\
+>= \frac{t^2}{2} + O(n^{-1/2}) \\
+>\therefore \log M_{Z_n}(t) \to \frac{t^2}{2}
+>$$
+>
+>이는 표준정규분포 $N(0,1)$의 mgf이다. 적률생성함수의 연속성 정리에 의해 $Z_n$은 분포수렴하여 $N(0,1)$로 근사된다. □
+>
+>**$\phi$의 적분값이 1 증명**
+>
+>$$
+>I = \int_{-\infty}^{\infty} \phi(z)\,dz = \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-z^2/2}\,dz
+>$$
+>
+>양변을 제곱하면
+>
+>$$
+>I^2 = \left(\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-x^2/2}\,dx\right)\left(\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-y^2/2}\,dy\right) \\
+>= \frac{1}{2\pi}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} e^{-(x^2+y^2)/2}\,dx\,dy
+>$$
+>
+>극좌표 $(x,y) = (r\cos\theta, r\sin\theta)$로 변환하면 $dx\,dy = r\,dr\,d\theta$이고 $x^2+y^2=r^2$이므로
+>
+>$$
+>I^2 = \frac{1}{2\pi}\int_{0}^{2\pi}\int_{0}^{\infty} e^{-r^2/2} r\,dr\,d\theta
+>$$
+>
+>$u = r^2/2$로 치환하면 $du = r\,dr$이므로
+>
+>$$
+>\therefore I^2 = \frac{1}{2\pi}\int_{0}^{2\pi}\,d\theta \int_{0}^{\infty} e^{-u}\,du = \frac{1}{2\pi} \cdot 2\pi \cdot 1 = 1
+>$$
 
 ### 정규분포의 정의
 
@@ -1139,11 +1092,7 @@ $$
 
 **(a) 평균과 분산**
 
-$X\sim N(\mu,\sigma^2)$이면
-
-$$
-E(X)=\mu,\qquad \mathrm{Var}(X)=\sigma^2
-$$
+$X\sim N(\mu,\sigma^2)$이면 $E(X)=\mu,\quad \mathrm{Var}(X)=\sigma^2$
 
 **(b) 적률생성함수(mgf)**
 
@@ -1161,67 +1110,61 @@ $$
 X_1+X_2\sim N(\mu_1+\mu_2,\ \sigma_1^2+\sigma_2^2)
 $$
 
-#### 증명
-
-**(a) 평균과 분산**
-
-$z=(x-\mu)/\sigma$로 치환하면 $\phi(z)$를 이용해
-
-$$
-E(X)=\int_{-\infty}^{\infty} x\cdot \frac{1}{\sigma}\phi\left(\frac{x-\mu}{\sigma}\right)\,dx
-=\sigma\int_{-\infty}^{\infty} z\phi(z)\,dz+\mu
-$$
-
-인데, $z\phi(z)$는 홀함수이므로 적분이 0이 되어 $E(X)=\mu$이다.
-
-분산은
-
-$$
-\mathrm{Var}(X)=\int_{-\infty}^{\infty}(x-\mu)^2\cdot \frac{1}{\sigma}\phi\left(\frac{x-\mu}{\sigma}\right)\,dx
-=\sigma^2\int_{-\infty}^{\infty} z^2\phi(z)\,dz
-$$
-
-로 된다. 감마함수 성질을 이용해
-
-$$
-\int_{-\infty}^{\infty} z^2\phi(z)\,dz=1
-$$
-
-을 보이고, 따라서 $\mathrm{Var}(X)=\sigma^2$를 얻는다($\Gamma(3/2)$와 $\Gamma(1/2)=\sqrt{\pi}$ 사용). □
-
-**(b) 적률생성함수(mgf)**
-
-$$
-\mathrm{mgf}_X(t)=E(e^{tX})
-=\int_{-\infty}^{\infty} e^{tx}\frac{1}{\sigma}\phi\left(\frac{x-\mu}{\sigma}\right)\,dx
-=\int_{-\infty}^{\infty} e^{t(\sigma z+\mu)}\phi(z)dz \\
-=e^{\mu t}\int_{-\infty}^{\infty} e^{\sigma tz}\phi(z)\,dz
-$$
-
-여기서 지수항을 $\exp\{-(z^2/2)+\sigma tz\}$로 합쳐 제곱완성을 하면
-
-$$
--\frac{z^2}{2}+\sigma tz=-\frac{(z-\sigma t)^2}{2}+\frac{\sigma^2 t^2}{2}
-$$
-
-이므로
-
-$$
-\int_{-\infty}^{\infty} e^{\sigma tz}\phi(z)\,dz
-=e^{\sigma^2 t^2/2}\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}e^{-(z-\sigma t)^2/2}\,dz
-=e^{\sigma^2 t^2/2}
-$$
-
-마지막 적분은 평균이 $\sigma t$인 정규 pdf의 적분이므로 1이다. □
-
-**(c) 독립 정규의 합**
-
-$$
-\mathrm{mgf}_{X_1+X_2}(t)=\mathrm{mgf}_{X_1}(t)\mathrm{mgf}_{X_2}(t)
-=\exp\left((\mu_1+\mu_2)t+\frac{1}{2}(\sigma_1^2+\sigma_2^2)t^2\right)
-$$
-
-이므로 분포결정성으로 결론이 나온다. □
+>**증명**  
+>
+>**(a) 평균과 분산**
+>
+>$z=(x-\mu)/\sigma$로 치환하면 $\phi(z)$를 이용해
+>
+>$$
+>E(X)=\int_{-\infty}^{\infty} x\cdot \frac{1}{\sigma}\phi\left(\frac{x-\mu}{\sigma}\right)\,dx
+>=\sigma\int_{-\infty}^{\infty} z\phi(z)\,dz+\mu
+>$$
+>
+>인데, $z\phi(z)$는 홀함수이므로 적분이 0이 되어 $E(X)=\mu$이다.
+>
+>분산은
+>
+>$$
+>\mathrm{Var}(X)=\int_{-\infty}^{\infty}(x-\mu)^2\cdot \frac{1}{\sigma}\phi\left(\frac{x-\mu}{\sigma}\right)\,dx
+>=\sigma^2\int_{-\infty}^{\infty} z^2\phi(z)\,dz
+>$$
+>
+>로 된다. 감마함수 성질을 이용해 $\int_{-\infty}^{\infty} z^2\phi(z)\,dz=1$ 을 보이고, 따라서 $\mathrm{Var}(X)=\sigma^2$를 얻는다($\Gamma(3/2)$와 $\Gamma(1/2)=\sqrt{\pi}$ 사용). □
+>
+>**(b) 적률생성함수(mgf)**
+>
+>$$
+>\mathrm{mgf}_X(t)=E(e^{tX})
+>=\int_{-\infty}^{\infty} e^{tx}\frac{1}{\sigma}\phi\left(\frac{x-\mu}{\sigma}\right)\,dx
+>=\int_{-\infty}^{\infty} e^{t(\sigma z+\mu)}\phi(z)dz \\
+>=e^{\mu t}\int_{-\infty}^{\infty} e^{\sigma tz}\phi(z)\,dz
+>$$
+>
+>여기서 지수항을 $\exp\{-(z^2/2)+\sigma tz\}$로 합쳐 제곱완성을 하면
+>
+>$$
+>-\frac{z^2}{2}+\sigma tz=-\frac{(z-\sigma t)^2}{2}+\frac{\sigma^2 t^2}{2}
+>$$
+>
+>이므로
+>
+>$$
+>\int_{-\infty}^{\infty} e^{\sigma tz}\phi(z)\,dz
+>=e^{\sigma^2 t^2/2}\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}e^{-(z-\sigma t)^2/2}\,dz
+>=e^{\sigma^2 t^2/2}
+>$$
+>
+>마지막 적분은 평균이 $\sigma t$인 정규 pdf의 적분이므로 1이다. □
+>
+>**(c) 독립 정규의 합**
+>
+>$$
+>\mathrm{mgf}_{X_1+X_2}(t)=\mathrm{mgf}_{X_1}(t)\mathrm{mgf}_{X_2}(t)
+>=\exp\left((\mu_1+\mu_2)t+\frac{1}{2}(\sigma_1^2+\sigma_2^2)t^2\right)
+>$$
+>
+>이므로 분포결정성으로 결론이 나온다. □
 
 ### 정리 3.6.2 정규분포의 대의적 정의
 
@@ -1240,24 +1183,24 @@ $$
 X\sim N(\mu,\sigma^2)\iff \frac{X-\mu}{\sigma}\sim N(0,1)\iff X\overset{d}{\equiv}\sigma Z+\mu,\ Z\sim N(0,1)
 $$
 
-#### 증명
-
-**(a) 선형변환**
-
-$$
-\mathrm{mgf}_{aX+b}(t)=E(e^{t(aX+b)})=e^{bt}\mathrm{mgf}_X(at)
-=e^{bt}\exp\left(\mu(at)+\frac{1}{2}\sigma^2(at)^2\right)
-$$
-
-$$
-=\exp\left((a\mu+b)t+\frac{1}{2}(a^2\sigma^2)t^2\right)
-$$
-
-이 mgf는 $N(a\mu+b,a^2\sigma^2)$의 mgf이므로 결론. □
-
-**(b) 표준화**
-
-이는 (a)의 특별한 경우로 $a=1/\sigma$, $b=-\mu/\sigma$를 대입하면 된다. □
+>**증명**  
+>
+>**(a) 선형변환**
+>
+>$$
+>\mathrm{mgf}_{aX+b}(t)=E(e^{t(aX+b)})=e^{bt}\mathrm{mgf}_X(at)
+>=e^{bt}\exp\left(\mu(at)+\frac{1}{2}\sigma^2(at)^2\right)
+>$$
+>
+>$$
+>=\exp\left((a\mu+b)t+\frac{1}{2}(a^2\sigma^2)t^2\right)
+>$$
+>
+>이 mgf는 $N(a\mu+b,a^2\sigma^2)$의 mgf이므로 결론. □
+>
+>**(b) 표준화**
+>
+>이는 (a)의 특별한 경우로 $a=1/\sigma$, $b=-\mu/\sigma$를 대입하면 된다. □
 
 ### 누적분포함수(cdf)와 표준정규표
 
@@ -1306,14 +1249,8 @@ $$
 P(Z>z_\alpha)=\alpha\quad (0<\alpha<1)
 $$
 
-를 만족하는 $z_\alpha$를 상방 $\alpha$ 분위수라고 한다. 예로 $z_{0.025}=1.96$, $z_{0.05}=1.645$가 제시된다.  
-정리 3.6.2로부터 $X\sim N(\mu,\sigma^2)$이면
-
-$$
-P(X>\mu+\sigma z_\alpha)=\alpha
-$$
-
-가 성립하므로 분위수 계산에 사용한다.
+를 만족하는 $z_\alpha$를 상방 $\alpha$ 분위수라고 한다. 예로 **$z_{0.025}=1.96$, $z_{0.05}=1.645$** 가 대표적이다.  
+정리 3.6.2로부터 $X\sim N(\mu,\sigma^2)$이면 $P(X>\mu+\sigma z_\alpha)=\alpha$ 가 성립하므로 분위수 계산에 사용한다.
 
 #### 예 3.6.2
 
