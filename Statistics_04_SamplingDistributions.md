@@ -40,7 +40,7 @@ $$\Omega=\{(\mu,\sigma^2):-\infty<\mu<+\infty,\ \sigma^2>0\}$$
 
 $$X_1,X_2,\dots,X_n \overset{iid}{\sim} f(x;\theta),\quad \theta\in\Omega$$
 
-를 뜻하고, 통계량 $u(X_1,X_2,\dots,X_n)$이란 랜덤표본의 함수로서 랜덤표본의 값이 주어지면 그 값이 정해지는 함수를 뜻한다.
+를 뜻하고, 통계량 $u(X_1,X_2,\dots,X_n)$이란 랜덤표본의 함수로서 랜덤표본의 값이 주어지면 그 값이 정해지는 함수다. 미지의 모수 $\theta$에 의존하지 않는다.
 
 #### 예 4.1.2
 
@@ -124,8 +124,6 @@ P(Y\in y\pm|\Delta y|)=P(u(\mathbf{X})\in y\pm|\Delta y|)
 \approx\sum_{\mathbf{x}:u(\mathbf{x})=y}\text{pdf}_X(\mathbf{x})|\Delta \mathbf{x}|
 $$
 
-이러한 정의를 통하여 다변수 변환에서의 확률밀도함수를 일반적으로 구하는 방법을 다음 정리로 나타낼 수 있다.
-
 #### 예 4.1.4
 (a) 서로 독립이고 각각 이항분포 $Bin(n_1,p)$, $Bin(n_2,p)$를 따르는 확률변수 $X_1,X_2$에 대하여 $Y=X_1+X_2$의 확률밀도함수는 $Y\sim \text{Bin}(n_1+n_2,p)$
 
@@ -133,22 +131,21 @@ $$
 
 (c) 표준정규분포를 따르는 확률변수 $X$에 대하여 $Y=X^2$이면 $Y\sim \text{Gamma}\left(\frac12,2\right)$
 
-#### (c) 증명
-$Y = X^2$이므로 $y > 0$에 대하여
+>**(c) 증명**  
+>$Y = X^2$이므로 $y > 0$에 대하여 $F_Y(y) = P(Y \le y) = P(X^2 \le y) = P(-\sqrt{y} \le X \le \sqrt{y})$  
+>확률밀도함수를 구하기 위해 미분하면
+>
+>$$f_Y(y) = \frac{d}{dy}F_Y(y) = f_X(\sqrt{y})\cdot\frac{1}{2\sqrt{y}} + f_X(-\sqrt{y})\cdot\frac{1}{2\sqrt{y}}$$
+>
+>$X \sim N(0,1)$이므로 $f_X(x) = \frac{1}{\sqrt{2\pi}}e^{-x^2/2}$이고, 대칭성에 의해 $f_X(\sqrt{y}) = f_X(-\sqrt{y})$이므로
+>
+>$$f_Y(y) = 2 \cdot \frac{1}{\sqrt{2\pi}}e^{-y/2} \cdot \frac{1}{2\sqrt{y}} = \frac{1}{\sqrt{2\pi y}}e^{-y/2}, \quad y > 0$$
+>
+>이는 $Gamma\left(\frac{1}{2}, 2\right)$의 확률밀도함수와 일치한다. (단, $\Gamma(1/2) = \sqrt{\pi}$)
+>
+>$$f(y) = \frac{1}{\Gamma(1/2) \cdot 2^{1/2}}y^{-1/2}e^{-y/2} = \frac{1}{\sqrt{2\pi y}}e^{-y/2}$$
 
-$$F_Y(y) = P(Y \le y) = P(X^2 \le y) = P(-\sqrt{y} \le X \le \sqrt{y})$$
-
-확률밀도함수를 구하기 위해 미분하면
-
-$$f_Y(y) = \frac{d}{dy}F_Y(y) = f_X(\sqrt{y})\cdot\frac{1}{2\sqrt{y}} + f_X(-\sqrt{y})\cdot\frac{1}{2\sqrt{y}}$$
-
-$X \sim N(0,1)$이므로 $f_X(x) = \frac{1}{\sqrt{2\pi}}e^{-x^2/2}$이고, 대칭성에 의해 $f_X(\sqrt{y}) = f_X(-\sqrt{y})$이므로
-
-$$f_Y(y) = 2 \cdot \frac{1}{\sqrt{2\pi}}e^{-y/2} \cdot \frac{1}{2\sqrt{y}} = \frac{1}{\sqrt{2\pi y}}e^{-y/2}, \quad y > 0$$
-
-이는 $Gamma\left(\frac{1}{2}, 2\right)$의 확률밀도함수와 일치한다. (단, $\Gamma(1/2) = \sqrt{\pi}$)
-
-$$f(y) = \frac{1}{\Gamma(1/2) \cdot 2^{1/2}}y^{-1/2}e^{-y/2} = \frac{1}{\sqrt{2\pi y}}e^{-y/2}$$
+이러한 정의를 통하여 다변수 변환에서의 확률밀도함수를 일반적으로 구하는 방법을 다음 정리로 나타낼 수 있다.
 
 ### 정리 4.1.1 (연속형 변수의 일대일 변환과 확률밀도함수)
 연속형 $k$차원 확률변수 $\mathbf{X}=(X_1,\dots,X_k)^T$ 와 함수 $\mathbf{u}=(u_1,\dots,u_k)^T:\mathcal X\to\mathcal Y$ 에 대하여 다음이 성립한다고 하자.
@@ -157,14 +154,15 @@ $$f(y) = \frac{1}{\Gamma(1/2) \cdot 2^{1/2}}y^{-1/2}e^{-y/2} = \frac{1}{\sqrt{2\
 
 (b) $\mathbf{u}$는 정의역 $\mathcal X$, 치역 $\mathcal Y$인 일대일 함수
 
-(c) $\mathcal X$는 열린집합이고 $\mathbf{u}$는 미분 가능하며 야코비안 $J_\mathbf{u}(\mathbf{x})=\det\left(\frac{\partial \mathbf{y}}{\partial \mathbf{x}}\right)\neq0$  
+(c) $\mathcal X$는 열린집합이고 $\mathbf{u}$는 미분 가능하며 야코비안 행렬식 $J_\mathbf{u}(\mathbf{x})=\det\left(\frac{\partial \mathbf{y}}{\partial \mathbf{x}}\right)\neq0$  
 이때 $Y=\mathbf{u}(\mathbf{X})$의 확률밀도함수는
 
 $$\text{pdf}_Y(\mathbf{y})=\text{pdf}_X(\mathbf{x})\left|\det\left(\frac{\partial \mathbf{y}}{\partial \mathbf{x}}\right)\right|^{-1}$$
 
+- 야코비안행렬식 역수를 넣는 이유: 공간이 늘어난 만큼 밀도를 낮추고, 공간이 줄어든 만큼 밀도를 높이는 보정값
 > Jacobian 계산 시 행렬순서는 중요하지 않음 (transpose되도 상관없음) 원본 확률변수들인 X가 분자인지 분모인지만 중요함.
 
-#### 증명
+**증명**  
 치환적분법으로부터
 
 $$
@@ -206,8 +204,7 @@ $$\text{pdf}_X(x)
 $$
 N(\mu,\sigma^2)\ \overset{d}{\equiv}\ \sigma N(0,1)+\mu\\
 \text{pdf}_X(x)
-=\frac{1}{\sigma}\phi\left(\frac{x-\mu}{\sigma}\right),
-\qquad
+=\frac{1}{\sigma}\phi\left(\frac{x-\mu}{\sigma}\right), \qquad
 \phi(z)=\frac{1}{\sqrt{2\pi}}e^{-\frac12 z^2},
 \quad -\infty<z<+\infty \\
 X\sim N(\mu,\sigma^2)
@@ -220,8 +217,7 @@ $$
 $$
 L(\mu,\sigma)\ \overset{d}{\equiv}\ \sigma L(0,1)+\mu\\
 \text{pdf}_X(x)
-=\frac{1}{\sigma}f\left(\frac{x-\mu}{\sigma}\right),
-\qquad
+=\frac{1}{\sigma}f\left(\frac{x-\mu}{\sigma}\right), \qquad
 f(z)=\frac{e^{z}}{(1+e^{z})^2},
 \quad -\infty<z<+\infty \\
 X\sim L(\mu,\sigma)
@@ -234,8 +230,7 @@ $$
 $$
 DE(\mu,\sigma)\ \overset{d}{\equiv}\ \sigma DE(0,1)+\mu\\
 \text{pdf}_X(x)
-=\frac{1}{\sigma}f\left(\frac{x-\mu}{\sigma}\right),
-\qquad
+=\frac{1}{\sigma}f\left(\frac{x-\mu}{\sigma}\right), \qquad
 f(z)=\frac12 e^{-|z|},
 \quad -\infty<z<+\infty \\
 X\sim DE(\mu,\sigma)
@@ -248,8 +243,7 @@ $$
 $$
 C(\mu,\sigma)\ \overset{d}{\equiv}\ \sigma C(0,1)+\mu\\
 \text{pdf}_X(x)
-=\frac{1}{\sigma}f\left(\frac{x-\mu}{\sigma}\right),
-\qquad
+=\frac{1}{\sigma}f\left(\frac{x-\mu}{\sigma}\right), \qquad
 f(z)=\frac{1}{\pi(1+z^2)},
 \quad -\infty<z<+\infty \\
 X\sim C(\mu,\sigma)
@@ -262,8 +256,7 @@ $$
 $$
 \mathrm{Exp}(\sigma)\ \overset{d}{\equiv}\ \sigma \mathrm{Exp}(1) \\
 \text{pdf}_X(x)
-=\frac{1}{\sigma}f\left(\frac{x}{\sigma}\right),
-\qquad
+=\frac{1}{\sigma}f\left(\frac{x}{\sigma}\right), \qquad
 f(z)=e^{-z}I_{(0,\infty)}(z) \\
 X\sim \mathrm{Exp}(\sigma)
 \Leftrightarrow
@@ -275,8 +268,7 @@ $$
 $$
 \mathrm{Gamma}(\alpha,\beta)\ \overset{d}{\equiv}\ \beta \mathrm{Gamma}(\alpha,1) \\
 \text{pdf}_X(x)
-=\frac{1}{\beta}f\left(\frac{x}{\beta}\right),
-\qquad
+=\frac{1}{\beta}f\left(\frac{x}{\beta}\right), \qquad
 f(z)=\frac{1}{\Gamma(\alpha)}z^{\alpha-1}e^{-z}I_{(0,\infty)}(z) \\
 X\sim \mathrm{Gamma}(\alpha,\beta)
 \Leftrightarrow
@@ -364,8 +356,7 @@ $$
 u:\begin{cases}
 y=(x_1+x_2)/2 \\
 z=(x_1-x_2)/2
-\end{cases},
-\qquad
+\end{cases}, \qquad
 u^{-1}:\begin{cases}
 x_1=y+z \\
 x_2=y-z
@@ -389,17 +380,10 @@ $$
 따라서 <정리 4.1.1>로부터 $Y,Z$의 결합확률밀도함수는
 
 $$
-\text{pdf}_{Y,Z}(y,z)
-=I_{(0<y+z<1,\ 0<y-z<1)}|-2|
+\text{pdf}_{Y,Z}(y,z) =I_{(0<y+z<1,\ 0<y-z<1)}|-2|
 $$
 
-이로부터 $Y$의 주변확률밀도함수를 구하기 위하여, 지표함수의 연립부등식을 $z$에 대한 부등식으로 나타내면
-
-$$
--y<z<1-y,\quad y-1<z<y
-$$
-
-즉 $a\vee b=\max(a,b)$, $a\wedge b=\min(a,b)$라고 하면
+이로부터 $Y$의 주변확률밀도함수를 구하기 위하여, 지표함수의 연립부등식을 $z$에 대한 부등식으로 나타내면 $-y<z<1-y,\quad y-1<z<y$, 즉 $a\vee b=\max(a,b)$, $a\wedge b=\min(a,b)$라고 하면
 
 $$
 (-y)\vee(y-1)<z<(1-y)\wedge y
@@ -409,9 +393,7 @@ $$
 
 (i) $y\le\frac12$인 경우
 
-$(-y)\vee(y-1)=-y,\quad (1-y)\wedge y=y$
-
-이고 $-y<y\Leftrightarrow y>0$이므로
+$(-y)\vee(y-1)=-y,\quad (1-y)\wedge y=y$ 이고 $-y<y\Leftrightarrow y>0$이므로
 
 $$
 \text{pdf}_Y(y)
@@ -422,9 +404,7 @@ $$
 
 (ii) $y>\frac12$인 경우
 
-$(-y)\vee(y-1)=y-1,\quad (1-y)\wedge y=1-y$
-
-이고 $y-1<1-y\Leftrightarrow y<1$이므로
+$(-y)\vee(y-1)=y-1,\quad (1-y)\wedge y=1-y$ 이고 $y-1<1-y\Leftrightarrow y<1$이므로
 
 $$
 \text{pdf}_Y(y)
@@ -446,58 +426,16 @@ $$
 
 한편, 일반적인 구간 $(a,b)$에서의 균등분포는 다음과 같이 정의한다.
 
->## (추가) 표본분포 간 생성 구조와 해석: 지수 → 감마 → 베타 계보
->
->### 서론: 단순 계보를 넘어 "의미 있는 해석"으로
->
->표본분포들(지수, 감마, 베타)은 단순한 수학적 정의가 아니라 **구조적 생성 관계(construction)** 와 **우도-켤레성(likelihood-conjugacy)** 에 의해 연결되어 있다. 각 단계에서 파라미터가 무엇을 의미하는지 이해하면, "성공확률의 불확실성"이라는 해석이 단순 비유가 아닌 수학적 필연이 됨을 알 수 있다.
->
->## 1단계: 지수분포 → 감마분포 "대기시간의 누적"
->### 지수분포의 역할
->
->$$X \sim \text{Exp}(\lambda), \quad \text{pdf}_X(x) = \lambda e^{-\lambda x}I_{(0,\infty)}(x)$$
->
->* **λ (rate parameter)**: 단위시간당 사건 발생률
->* **X**: 첫 번째 사건까지의 대기시간
->* Memoryless property: $P(X > s+t \mid X > s) = P(X > t)$
->* 포아송 과정의 기본 구성 요소
->
->### 감마분포의 생성
->
->$$T = X_1 + X_2 + \cdots + X_{\alpha}, \quad X_i \overset{iid}{\sim} \text{Exp}(\lambda) \\ \therefore T \sim \text{Gamma}(\alpha, \lambda) \\ \text{pdf}_T(t) = \frac{\lambda^{\alpha}}{\Gamma(\alpha)}t^{\alpha-1}e^{-\lambda t}I_{(0,\infty)}(t)$$
->
->* **α (shape)**: **사건 개수** — 누적하는 지수분포의 개수  
->* **λ (rate)**: 각 지수분포의 발생률 (변하지 않음)  
->
->**결과적 의미:**: $T$ = $α$번째 사건까지의 총 대기시간  
->**핵심 구조:** 시간 축에서의 누적(random accumulation)
->
->## 2단계: 감마분포 → 베타분포 "비율의 확률화"
->### 베타분포의 핵심 생성 공식
->두 개의 독립 감마분포를 정의하되, **척도 모수를 1로 동일화**:
->
->$$X \sim \text{Gamma}(\alpha, 1), \quad Y \sim \text{Gamma}(\beta, 1), \quad X \perp Y$$
->
->**비율 정의:**
->$$P := \frac{X}{X+Y}$$
->
->**결과:**
->$$P \sim \text{Beta}(\alpha, \beta)$$
->
->$$\text{pdf}_P(p) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}p^{\alpha-1}(1-p)^{\beta-1}I_{(0,1)}(p)$$
->
->### 직관적 해석
->* **X**: 성공에 해당하는 누적 사건 발생량
->* **Y**: 실패에 해당하는 누적 사건 발생량  
->* **X + Y**: 전체 누적 사건 발생량
->
->$$P = \frac{X}{X+Y} = \frac{\text{성공 누적량}}{\text{전체 누적량}}$$
->
->→ **전체 중 성공이 차지하는 비율**
->
->## 3단계: 베타분포 ↔ 베르누이 모델 "켤레성의 정당화"
->### 베르누이/이항 모델
->$X_i \sim \text{Bernoulli}(p), \quad i=1,\ldots,n$  
+### 균등분포의 정의
+
+$$
+U(a,b)\ \overset{d}{\equiv}\ (b-a)U(0,1)+a \\
+\Leftrightarrow \text{pdf}_X(x)=\frac{1}{b-a}I_{(a,b)}(x)\\
+\Leftrightarrow X\overset{d}{\equiv}(b-a)Z+a,\quad Z\sim U(0,1)
+$$
+
+>## (추가) 표본분포 간 생성 구조와 해석: 베타분포 ↔ 베르누이 모델 "켤레성의 정당화"
+>$X_i \sim \text{Bernoulli}(p), \quad i=1,\cdots,n$  
 >* **p (unknown)**: 성공확률 자체
 >* 우도함수: $L(p \mid \text{data}) \propto p^s(1-p)^f$ (s: 성공 개수, f: 실패 개수)
 >
@@ -528,14 +466,6 @@ $$
 >| **2** | 감마 | 지수 합 | α (개수), λ | α번째 사건까지의 시간 | 포아송 개수 |
 >| **3** | 베타 | 감마 비율 | α, β (counts) | 성공/전체 비율 | **베르누이** |
 >
-
-### 균등분포의 정의
-
-$$
-U(a,b)\ \overset{d}{\equiv}\ (b-a)U(0,1)+a \\
-\Leftrightarrow \text{pdf}_X(x)=\frac{1}{b-a}I_{(a,b)}(x)\\
-\Leftrightarrow X\overset{d}{\equiv}(b-a)Z+a,\quad Z\sim U(0,1)
-$$
 
 #### 예 4.1.8
 서로 독립이고 표준정규분포 $N(0,1)$를 따르는 확률변수 $X,Y$에 대하여, 극좌표 변환
@@ -635,7 +565,6 @@ x_{k+1} = (1-y_1-\cdots-y_k)y_{k+1}
 \end{cases}
 $$
 
-야코비안을 계산하면
 
 $$
 J = \det\begin{pmatrix}
@@ -648,19 +577,21 @@ y_{k+1} & 0 & \cdots & 0 & y_1 \\
 = y_{k+1}^k
 $$
 
-$X_1, \ldots, X_{k+1}$이 독립이므로 결합확률밀도함수는
+이때 행렬 기본 행 연산은 행렬식을 바꾸지 않고, 여기선 맨 아래 행을 $(0, \cdots, 1)$로 만들어 상삼각행렬을 만들 수 있다. 상삼각행렬의 행렬식은 대각원소의 곱임을 이용했다.
+
+$X_1, \cdots, X_{k+1}$이 독립이므로 결합확률밀도함수는
 
 $$
-f_{X_1,\ldots,X_{k+1}}(x_1,\ldots,x_{k+1}) = \prod_{i=1}^{k+1} \frac{1}{\Gamma(\alpha_i)\beta^{\alpha_i}}x_i^{\alpha_i-1}e^{-x_i/\beta}
+f_{X_1,\cdots,X_{k+1}}(x_1,\cdots,x_{k+1}) = \prod_{i=1}^{k+1} \frac{1}{\Gamma(\alpha_i)\beta^{\alpha_i}}x_i^{\alpha_i-1}e^{-x_i/\beta}
 $$
 
 정리 4.1.1에 의해
 
 $$
-f_{Y_1,\ldots,Y_k,Y_{k+1}}(y_1,\ldots,y_k,y_{k+1}) = f_{X_1,\ldots,X_{k+1}}(x_1,\ldots,x_{k+1}) \cdot y_{k+1}^k \\
+f_{Y_1,\cdots,Y_k,Y_{k+1}}(y_1,\cdots,y_k,y_{k+1}) = f_{X_1,\cdots,X_{k+1}}(x_1,\cdots,x_{k+1}) \cdot y_{k+1}^k \\
 = \prod_{i=1}^{k+1} \frac{1}{\Gamma(\alpha_i)\beta^{\alpha_i}}(x_i)^{\alpha_i-1}e^{-x_{i}/\beta} \cdot y_{k+1}^k \\
 = \left[\prod_{i=1}^{k+1}\frac{1}{\Gamma(\alpha_i)\beta^{\alpha_i}} \right]\left[\prod_{i=1}^{k}(y_iy_{k+1})^{\alpha_i-1} \right]{y_{k+1}(1-y_1-\cdots-y_k)}^{\alpha_{k+1}-1}e^{-y_{k+1}/\beta} \cdot y_{k+1}^k\\
-=\left[\prod_{i=1}^{k}\frac{1}{\Gamma(\alpha_i)}y_i^{\alpha_i -1} \right] (1-y_1-\cdots-y_k)^{\alpha_{k+1}-1}I_{y_1>0,\ldots,y_k>0, y_1+\cdots+y_k<1} \\
+=\left[\prod_{i=1}^{k}\frac{1}{\Gamma(\alpha_i)}y_i^{\alpha_i -1} \right] (1-y_1-\cdots-y_k)^{\alpha_{k+1}-1}I_{y_1>0,\cdots,y_k>0, y_1+\cdots+y_k<1} \\
 \times \frac{1}{\Gamma(\alpha_{k+1})\beta^{\alpha_1+\cdots+\alpha_{k+1}}}y_{k+1}^{\alpha_1+\cdots+\alpha_{k+1}-1}e^{-y_{k+1}/\beta}I_{y_{k+1}>0}\\
 $$
 
@@ -673,26 +604,26 @@ $$
 이므로, $Y_1, \dots, Y_{k+1}$의 결합확률밀도함수를 $y_{k+1}$에 대해 적분하면
 
 $$
-f_{Y_1,\ldots,Y_k}(y_1,\ldots,y_k) = \int_{-\infty}^{+\infty} f_{Y_1,\ldots,Y_k,Y_{k+1}}(y_1,\ldots,y_k,y_{k+1}) dy_{k+1} \\
-= \frac{\Gamma(\alpha_1+\cdots+\alpha_{k+1})}{\Gamma(\alpha_1)\cdots\Gamma(\alpha_{k+1})}\prod_{i=1}^k y_i^{\alpha_i-1}(1-y_1-\cdots-y_k)^{\alpha_{k+1}-1}I_{y_1>0,\ldots,y_k>0, y_1+\cdots+y_k<1}
+f_{Y_1,\cdots,Y_k}(y_1,\cdots,y_k) = \int_{-\infty}^{+\infty} f_{Y_1,\cdots,Y_k,Y_{k+1}}(y_1,\cdots,y_k,y_{k+1}) dy_{k+1} \\
+= \frac{\Gamma(\alpha_1+\cdots+\alpha_{k+1})}{\Gamma(\alpha_1)\cdots\Gamma(\alpha_{k+1})}\prod_{i=1}^k y_i^{\alpha_i-1}(1-y_1-\cdots-y_k)^{\alpha_{k+1}-1}I_{y_1>0,\cdots,y_k>0, y_1+\cdots+y_k<1}
 $$
 
 이 예에서 구한 $Y_1,\dots,Y_k$의 결합분포는 베타분포를 다차원으로 일반화 한 분포로서, Dirichlet분포라 하며 정의는 아래와 같다.
 
 ### 디리클레분포의 정의 *(Dirichlet Distribution)*
 
-모수 $\alpha_1,\ldots,\alpha_{k+1}>0$에 대하여 다음과 같이 정의된다.
+모수 $\alpha_1,\cdots,\alpha_{k+1}>0$에 대하여 다음과 같이 정의된다.
   - 참고: 알파의 의미
     - **감마분포** $\text{Gamma}(\alpha, \beta)$: 알파: 누적된 사건 수에 대응하는 shape 파라미터, 베타: 단위당 사건 발생률
-    - **디리클레분포** $\text{Dirichlet}(\alpha_1,\ldots,\alpha_{k+1})$: 정규화되기 전 각 범주에 대응하는 감마분포의 shape 파라미터이며, 통계적으로는 해당 범주의 가상 관측 횟수를 의미
+    - **디리클레분포** $\text{Dirichlet}(\alpha_1,\cdots,\alpha_{k+1})$: 정규화되기 전 각 범주에 대응하는 감마분포의 shape 파라미터이며, 통계적으로는 해당 범주의 가상 관측 횟수를 의미
     - (**베타분포** $\text{Beta}(\alpha_1, \alpha_2)$: 성공 횟수 관련 모수)
 
-서로 독립인 $X_1\sim\text{Gamma}(\alpha_1,\beta),\ldots,X_{k+1}\sim\text{Gamma}(\alpha_{k+1},\beta)$에 대하여
+서로 독립인 $X_1\sim\text{Gamma}(\alpha_1,\beta),\cdots,X_{k+1}\sim\text{Gamma}(\alpha_{k+1},\beta)$에 대하여
 
 $$
-(Y_1,\ldots,Y_k)\sim\text{Dirichlet}(\alpha_1,\ldots,\alpha_k,\alpha_{k+1}) \\
+(Y_1,\cdots,Y_k)\sim\text{Dirichlet}(\alpha_1,\cdots,\alpha_k,\alpha_{k+1}) \\
 \Leftrightarrow
-(Y_1,\ldots,Y_k)\overset{d}{\equiv}\left(\frac{X_1}{X_1\oplus\cdots\oplus X_{k+1}},\ldots,\frac{X_k}{X_1\oplus\cdots\oplus X_{k+1}}\right)
+(Y_1,\cdots,Y_k)\overset{d}{\equiv}\left(\frac{X_1}{X_1\oplus\cdots\oplus X_{k+1}},\cdots,\frac{X_k}{X_1\oplus\cdots\oplus X_{k+1}}\right)
 $$
 
 즉, 디리클레분포는 감마분포들의 합으로 정규화된 비율들의 결합분포이다.
@@ -704,19 +635,22 @@ $$
 =\frac{\Gamma(\alpha_1+\cdots+\alpha_{k+1})}
 {\Gamma(\alpha_1)\cdots\Gamma(\alpha_{k+1})}
 \prod_{i=1}^k y_i^{\alpha_i-1}
-(1-y_1-\cdots-y_k)^{\alpha_{k+1}-1}I_{y_1>0,\ldots,y_k>0, y_1+\cdots+y_k<1}
+(1-y_1-\cdots-y_k)^{\alpha_{k+1}-1}I_{y_1>0,\cdots,y_k>0, y_1+\cdots+y_k<1}
 $$
 
 >일대일 변환 뿐만 아니라, 다대일 함수에도 변환을 적용할 수 있다.  
 >정의역을 분할하고 각각의 정의역에서의 일대일 변환에 대해 치환적분의 원리를 이용한다.
 
 ### 정리 4.1.2 (연속형 변수의 다대일 변환과 확률밀도함수)
+- 기존 확률변수 변환과의 차이: 한 $y$에 여러 $x$가 대응될 수 있는 상황.
+  - 기존: 한 역상의 기여분
+  - 지금 정리: 모든 역상의 기여분의 합
 
 연속형의 $k$차원 확률변수 $X=(X_1,\dots,X_k)^T$와 함수 $u=(u_1,\dots,u_k)^T:\mathcal X\to\mathcal Y$ 에 대하여 다음이 성립한다고 하자.
 
 (a) $P(X\in\mathcal X)=1$
 
-(b) 벡터값 함수 $u=(u_1,\dots,u_k)^T:\mathcal X\to\mathcal Y$는 정의역이 $\mathcal X$이고 치역이 $\mathcal Y$인 다대일 함수이다.
+(b) 벡터값 함수 $u=(u_1,\dots,u_k)^T:\mathcal X\to\mathcal Y$는 정의역이 $\mathcal X$이고 치역이 $\mathcal Y$인 다대일 함수
 
 (c) 함수 $u=(u_1,\dots,u_k)^T$의 정의역 $\mathcal X$는 서로 공통 부분이 없는 열린집합 $\mathcal X_1,\dots,\mathcal X_m$의 합집합으로 나타낼 수 있고, 함수 $u$에서 정의역을 $\mathcal X_r\ (r=1,\dots,m)$로 제한한 함수 $u^{(r)}(x)=u(x),\quad x\in\mathcal X_r$ 는 각각 $\mathcal X_r$에서 $\mathcal Y$로의 일대일 함수로서 미분가능하며, 1차 편도함수가 연속함수로서 0이 아닌 야코비안(Jacobian) 행렬식을 갖는다. 즉 $u^{(r)}(x)=(u_1^{(r)}(x),\dots,u_k^{(r)}(x))^T$ 라고 할 때
 
@@ -724,7 +658,7 @@ $$
 J_{u^{(r)}}(x)=\det\left(\frac{\partial u_j^{(r)}(x)}{\partial x_i}\right)\neq0,\quad \forall x\in\mathcal X_r
 $$
 
-이러한 조건하에서 확률변수 $X=(X_1,\dots,X_k)^T$와 함수 $u$를 이용하여 정의된 $k$차원 확률변수
+위 (a, b, c)를 만족할 때, 확률변수 $X=(X_1,\dots,X_k)^T$와 함수 $u$를 이용하여 정의된 $k$차원 확률변수
 
 $$
 Y=u(X),\quad \text{즉 } Y=(Y_1,\dots,Y_k)^T=(u_1(X),\dots,u_k(X))^T
@@ -742,46 +676,39 @@ $$
 \text{pdf}_Y(y)=\sum_{x:\ u(x)=y}\text{pdf}_X(x)\left|\det\left(\frac{\partial u(x)}{\partial x}\right)\right|^{-1},\quad y\in\mathcal Y
 $$
 
-#### 증명
-
-<정리 4.1.1>의 증명에서와 같이 분할된 각각의 정의역 $\mathcal X_r\ (r=1,\dots,m)$에서의 일대일 함수 $y=u^{(r)}(x)$의 역함수 $x=(u^{(r)})^{-1}(y)$를 이용한 치환적분법을 적용하면, $\mathcal Y$의 임의의 부분집합 $B$에 대하여 다음이 성립함을 알 수 있다.
-
-$$
-P(Y\in B)=P(u(X)\in B) \\
-=\sum_{r=1}^m P(u^{(r)}(X)\in B,\ X\in\mathcal X_r) =\sum_{r=1}^m\int_{x\in(u^{(r)})^{-1}(B)}\text{pdf}_X(x)\ dx \\
-=\int_{y\in B}\sum_{r=1}^m\text{pdf}_X\left((u^{(r)})^{-1}(y)\right)\left|J_{(u^{(r)})^{-1}}(y)\right|\,dy\quad (\because x=(u^{(r)})^{-1}(y))
-$$
-
-따라서
-
-$$
-\text{pdf}_Y(y)=\sum_{r=1}^m\text{pdf}_X\left((u^{(r)})^{-1}(y)\right)\left|J_{(u^{(r)})^{-1}}(y)\right|,\quad y\in\mathcal Y
-$$
-
-이고, 이는
-
-$$
-\text{pdf}_Y(y)=\sum_{x:\ u(x)=y}\text{pdf}_X(x)\left|\det\left(\frac{\partial u(x)}{\partial x}\right)\right|^{-1},\quad y\in\mathcal Y
-$$
-
-과 같다.
+>**증명**  
+>
+><정리 4.1.1>의 증명에서와 같이 분할된 각각의 정의역 $\mathcal X_r\ (r=1,\dots,m)$에서의 일대일 함수 $y=u^{(r)}(x)$의 역함수 $x=(u^{(r)})^{-1}(y)$를 이용한 치환적분법을 적용하면, $\mathcal Y$의 임의의 부분집합 $B$에 대하여 다음이 성립함을 알 수 있다.
+>
+>$$
+>\begin{aligned}
+>P(Y\in B)&=P(u(X)\in B) \\
+>&=\sum_{r=1}^m P(u^{(r)}(X)\in B,\ X\in\mathcal X_r) \\
+>&=\sum_{r=1}^m\int_{x\in(u^{(r)})^{-1}(B)}\text{pdf}_X(x)\ dx \\
+>&=\int_{y\in B}\sum_{r=1}^m\text{pdf}_X\left((u^{(r)})^{-1}(y)\right)\left|J_{(u^{(r)})^{-1}}(y)\right|\,dy &(\because x=(u^{(r)})^{-1}(y))
+>\end{aligned}
+>$$
+>
+>따라서
+>
+>$$
+>\text{pdf}_Y(y)=\sum_{r=1}^m\text{pdf}_X\left((u^{(r)})^{-1}(y)\right)\left|J_{(u^{(r)})^{-1}}(y)\right|,\quad y\in\mathcal Y \\
+>=\sum_{x:\ u(x)=y}\text{pdf}_X(x)\left|\det\left(\frac{\partial u(x)}{\partial x}\right)\right|^{-1},\quad y\in\mathcal Y
+>$$
 
 #### 예 4.1.10
 
 $(-1,1)$에서 균등분포를 따르는 확률변수 $X$에 대하여 $Y=X^2$의 확률밀도함수를 구하여라.
 
 **풀이**  
-$X \sim U(-1,1)$이므로 $\text{pdf}_X(x) = \frac{1}{2}I_{(-1,1)}(x)$
-
+$X \sim U(-1,1)$이므로 $\text{pdf}_X(x) = \frac{1}{2}I_{(-1,1)}(x)$  
 $Y = X^2$이고, $y > 0$일 때 $u(x) = x^2 = y$를 만족하는 $x$는 두 개 존재한다: $x_1 = \sqrt{y}, \quad x_2 = -\sqrt{y}$
 
 정의역을 분할하면:
 - $\mathcal{X}_1 = (0,1)$에서 $u^{(1)}(x) = x^2$, 역함수는 $x = \sqrt{y}$
 - $\mathcal{X}_2 = (-1,0)$에서 $u^{(2)}(x) = x^2$, 역함수는 $x = -\sqrt{y}$
 
-각각의 야코비안은: $J_{u^{(1)}}(x) = 2x, \quad J_{u^{(2)}}(x) = 2x$
-
-따라서
+각각의 야코비안 행렬식은: $J_{u^{(1)}}(x) = 2x, \quad J_{u^{(2)}}(x) = 2x$. 따라서
 
 $$
 \left|J_{(u^{(1)})^{-1}}(y)\right| = \left|\frac{1}{2\sqrt{y}}\right| = \frac{1}{2\sqrt{y}}, \quad
@@ -802,13 +729,7 @@ $$
 \text{pdf}_X(x_1,x_2)=\frac1\pi I_{(0<x_1^2+x_2^2<1)}
 $$
 
-일 때,
-
-$$
-Y_1=X_1^2+X_2^2,\quad Y_2=\frac{X_1^2}{X_1^2+X_2^2}
-$$
-
-로 정의된 $Y=(Y_1,Y_2)^T$의 결합확률밀도함수를 구하여라.
+일 때, $Y_1=X_1^2+X_2^2,\quad Y_2=\frac{X_1^2}{X_1^2+X_2^2}$ 로 정의된 $Y=(Y_1,Y_2)^T$의 결합확률밀도함수를 구하여라.
 
 **풀이**  
 변환 $y_1 = x_1^2 + x_2^2$, $y_2 = \frac{x_1^2}{x_1^2+x_2^2}$의 역변환을 구하면: $x_1^2 = y_1 y_2, \quad x_2^2 = y_1(1-y_2)$
@@ -830,7 +751,7 @@ $$
 \end{aligned}
 $$
 
-야코비안을 계산하면 ($\mathcal{X}_1$의 경우):
+야코비안행렬식을 계산하면 ($\mathcal{X}_1$의 경우):
 
 $$
 J = \det\begin{pmatrix}
@@ -868,20 +789,14 @@ $$
 서로 독립이고 표준정규분포 $N(0,1)$를 따르는 확률변수들 $X_1,\dots,X_r$에 대하여 $Y=X_1^2+\cdots+X_r^2$ 의 확률밀도함수를 구하여라.
 
 **풀이**  
-<예 4.1.4>의 (c)로부터 $X_i^2\ (i=1,\dots,r)$는 각각 $\text{Gamma}(1/2,2)$ 분포를 따르고 이들이 서로 독립이므로, <정리 3.5.2>에 주어진 감마분포의 성질로부터
-
-$$
-Y=X_1^2+\cdots+X_r^2 \sim \text{Gamma}(r/2,2)
-$$
-
+<예 4.1.4>의 (c)로부터 $X_i^2\ (i=1,\dots,r)$는 각각 $\text{Gamma}(1/2,2)$ 분포를 따르고 이들이 서로 독립이므로, <정리 3.5.2>에 주어진 감마분포의 성질로부터 $Y=X_1^2+\cdots+X_r^2 \sim \text{Gamma}(r/2,2)$  
 따라서
 
 $$
-\text{pdf}_Y(y)
-=\frac{1}{\Gamma(r/2)2^{r/2}}y^{r/2-1}e^{-y/2}I_{(0,\infty)}(y)
+\text{pdf}_Y(y) =\frac{1}{\Gamma(r/2)2^{r/2}}y^{r/2-1}e^{-y/2}I_{(0,\infty)}(y)
 $$
 
-<예 4.2.1>에서의 분포인 $\text{Gamma}(r/2,2)$ 분포를 자유도(degrees of freedom)가 $r$인 **카이제곱분포(chi-squared distribution)** 라고 하며 기호로는
+이 $\text{Gamma}(r/2,2)$ 분포를 자유도(degrees of freedom)가 $r$인 **카이제곱분포(chi-squared distribution)** 라고 하며 기호로는
 
 $$
 Y\sim\chi^2(r)
@@ -903,20 +818,15 @@ $$
 $$
 
 $$
-Y\sim\chi^2(r)\ (r>0)
-\Leftrightarrow
-Y\sim\text{Gamma}(r/2,2)
+Y\sim\chi^2(r)\ (r>0) \Leftrightarrow Y\sim\text{Gamma}(r/2,2)
 $$
 
 $$
-\Leftrightarrow
-\text{pdf}_Y(y)
-=\frac{1}{\Gamma(r/2)2^{r/2}}y^{r/2-1}e^{-y/2}I_{(0,\infty)}(y)
+\Leftrightarrow \text{pdf}_Y(y) =\frac{1}{\Gamma(r/2)2^{r/2}}y^{r/2-1}e^{-y/2}I_{(0,\infty)}(y)
 $$
 
 $$
-\Leftrightarrow
-Y=X_1^2+\cdots+X_r^2,\quad X_i\overset{iid}{\sim} N(0,1)\ (i=1,\dots,r,\ r\text{이 자연수인 경우})
+\Leftrightarrow Y=X_1^2+\cdots+X_r^2,\quad X_i\overset{iid}{\sim} N(0,1)\ (i=1,\dots,r,\ r\text{이 자연수인 경우})
 $$
 
 표준정규분포의 경우와 같이, $Y\sim\chi^2(r)$일 때
@@ -962,33 +872,23 @@ $$
 Y_1+Y_2\sim\chi^2(r_1+r_2)
 $$
 
-#### 증명
-카이제곱분포 $\chi^2(r)$는 감마분포 $\text{Gamma}(r/2,2)$이므로 이 정리는 <정리 3.5.2>에 주어진 감마분포의 성질을 특별한 경우에 정리해 놓은 것이다.
-
-구체적으로, 감마분포 $\text{Gamma}(\alpha,\beta)$의 적률생성함수는 $(1-\beta t)^{-\alpha}$이므로 $\mathrm{mgf}_Y(t) = (1-2t)^{-r/2}$
-
-이고, 이로부터 평균과 분산을 구하면
-
-$$
-E(Y) = \mathrm{mgf}_Y'(0) = r, \quad \mathrm{Var}(Y) = \mathrm{mgf}_Y''(0) - [\mathrm{mgf}_Y'(0)]^2 = 2r
-$$
-
-또한 (c)는 독립인 감마분포의 합에 대한 성질을 이용한다.
+>**증명**  
+>카이제곱분포 $\chi^2(r)$는 감마분포 $\text{Gamma}(r/2,2)$이므로 이 정리는 <정리 3.5.2>에 주어진 감마분포의 성질을 특별한 경우에 정리해 놓은 것이다.
+>
+>구체적으로, 감마분포 $\text{Gamma}(\alpha,\beta)$의 적률생성함수는 $(1-\beta t)^{-\alpha}$이므로 $\mathrm{mgf}_Y(t) = (1-2t)^{-r/2}$  
+>이고, 이로부터 평균과 분산을 구하면
+>
+>$$
+>E(Y) = \mathrm{mgf}_Y'(0) = r, \quad \mathrm{Var}(Y) = \mathrm{mgf}_Y''(0) - [\mathrm{mgf}_Y'(0)]^2 = 2r
+>$$
+>
+>또한 (c)는 독립인 감마분포의 합에 대한 성질을 이용한다.
 
 #### 예 4.2.3
 두 확률변수 $Z$와 $V$가 서로 독립이고 $Z\sim N(0,1)$, $V\sim\chi^2(r)$일 때 $X=\frac{Z}{\sqrt{V/r}}$ 의 확률밀도함수를 구하여라.
 
 **풀이**  
-$Y=V$라고 하면, $(Z,V)$에서 $(X,Y)$로의 변환은 그 역변환이
-
-$$
-\begin{cases}
-Z=X\sqrt{Y/r}\\
-V=Y
-\end{cases}
-$$
-
-로 주어지는 일대일 변환이다. 야코비안을 계산하면
+$Y=V$라고 하면, $(Z,V)$에서 $(X,Y)$로의 변환은 그 역변환이 $Z=X\sqrt{Y/r}, \quad V=Y$ 로 주어지는 일대일 변환이다. 야코비안행렬식을 계산하면
 
 $$
 J = \det\begin{pmatrix}
@@ -1011,7 +911,7 @@ $$
 정리 4.1.1에 의해
 
 $$
-\text{pdf}_{X,Y}(x,y) = \text{pdf}_{Z,V}(z,v)|J| = \frac{1}{\sqrt{2\pi}}e^{-xy/(2r)} \cdot \frac{1}{\Gamma(r/2)2^{r/2}}y^{r/2-1}e^{-y/2} \cdot \sqrt{y/r}
+\text{pdf}_{X,Y}(x,y) = \text{pdf}_{Z,V}(z,v)|J| = \frac{1}{\sqrt{2\pi}}e^{-x^2y/(2r)} \cdot \frac{1}{\Gamma(r/2)2^{r/2}}y^{r/2-1}e^{-y/2} \cdot \sqrt{y/r}
 $$
 
 $X$의 주변확률밀도함수를 구하기 위해 $y$에 대해 적분하면
@@ -1064,7 +964,7 @@ $$
 
 를 만족한다. 대칭성에 의해 $t_{1-\alpha}(r) = -t_\alpha(r)$이다.
 
-TODO: 암기!!!!!!!!!!
+TODO:
 ### 정리 4.2.2 정규모집단 경우의 표본분포에 관한 기본 정리
 정규분포 $N(\mu,\sigma^2)$에서의 랜덤표본을 $X_1,\dots,X_n$이라 할 때, 다음이 성립한다.
 
@@ -1080,65 +980,62 @@ $$S^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar X)^2\text{와 표본평균 } \bar X\tex
 
 $$\frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)$$
 
-#### 증명
-(a) 표준화 변환 $Z_i = \frac{X_i - \mu}{\sigma} \sim N(0,1), \quad i=1,\ldots,n \quad \bar Z = \frac{1}{n}\sum_{i=1}^n Z_i = \frac{\bar X - \mu}{\sigma}$  
-이고, $Z_i$들이 서로 독립이고 동일하게 $N(0,1)$를 따르므로 적률생성함수를 이용하면
-
-$$\mathrm{mgf}_{\bar Z}(t) = E\left[e^{t\bar Z}\right] = E\left[e^{t(Z_1+\cdots+Z_n)/n}\right] = \prod_{i=1}^n E\left[e^{tZ_i/n}\right] =\prod_{i=1}^n e^{t^2/(2n^2)} = e^{t^2/(2n)}$$
-
-따라서 $\bar Z \sim N(0, 1/n)$이고, 이는 $\bar X \sim N(\mu, \sigma^2/n)$을 의미한다.  
-
-(b) $\bar{X}$와 $S^2$의 독립성  
-표본분산 $S^2$는 $(X_1-\bar{X}, \ldots, X_n-\bar{X})^T$의 함수이다. 독립인 확률변수들의 함수들도 독립이므로, $\bar{X}$와 $(X_1-\bar{X}, \ldots, X_n-\bar{X})^T$가 독립임을 밝히면 $\bar{X}$와 $S^2$도 독립임을 알 수 있다.
-
-$Y = (X_1-\bar{X}, \ldots, X_n-\bar{X})^T$이고, $\bar{t} = \frac{1}{n}\sum_{j=1}^n t_j$라고 하자.  
-$\bar{X}$와 $Y$의 결합적률생성함수를 구하면
-
-$$\text{mgf}_{\bar{X},Y}(s,t) = E\left[e^{s\bar{X} + t^T Y}\right] = E\left[\exp\left(s\bar{X} + \sum_{i=1}^n t_i(X_i-\bar{X})\right)\right] \\
-= E\left[\exp\left(\left(s - \sum_{i=1}^n t_i\right)\bar{X} + \sum_{i=1}^n t_i X_i\right)\right] \\
-= E\left[\exp\left(\sum_{i=1}^n \left(\frac{s}{n} - \frac{1}{n}\sum_{j=1}^n t_j + t_i\right) X_i\right)\right] \\
-= E\left[\exp\left(\sum_{i=1}^n \left(\frac{s}{n} + t_i - \bar{t}\right) X_i\right)\right]$$
-
-$X_i$들이 독립이므로
-
-$$= \prod_{i=1}^n E\left[\exp\left(\left(\frac{s}{n} + t_i - \bar{t}\right) X_i\right)\right]$$
-
-$X_i \sim N(\mu, \sigma^2)$이므로
-
-$$= \prod_{i=1}^n \exp\left(\mu\left(\frac{s}{n} + t_i - \bar{t}\right) + \frac{\sigma^2}{2}\left(\frac{s}{n} + t_i - \bar{t}\right)^2\right)$$
-
-이제 $\sum_{i=1}^n (t_i - \bar{t}) = 0$임을 이용하여 정리하면
-
-$$= \exp\left(\mu s + \frac{\sigma^2 s^2}{2n}\right) \cdot \exp\left(\frac{\sigma^2}{2}\sum_{i=1}^n (t_i - \bar{t})^2\right)$$
-
-즉 $s$의 함수와 $t$의 함수로 분해됨을 보일 수 있다. 따라서 $\bar{X}$와 $Y$는 독립이고, 결과적으로 $\bar{X}$와 $S^2$도 독립이다.
-
-(c) $(n-1)S^2/\sigma^2$의 분포  
-(a)로부터 $\bar{X} \sim N(\mu, \sigma^2/n)$이므로 $\frac{\bar{X}-\mu}{\sigma/\sqrt{n}} \sim N(0,1)$ 이고, $\frac{n(\bar{X}-\mu)^2}{\sigma^2} \sim \chi^2(1)$  
-한편
-
-$$\sum_{i=1}^n \frac{(X_i-\mu)^2}{\sigma^2} = \sum_{i=1}^n \left(\frac{X_i-\mu}{\sigma}\right)^2 \sim \chi^2(n) \\
-\sum_{i=1}^n (X_i-\mu)^2 = \sum_{i=1}^n (X_i-\bar X + \bar X-\mu)^2 =\sum_{i=1}^n (X_i-\bar{X})^2 + n(\bar{X}-\mu)^2$$
-
-이므로
-
-$$U = \sum_{i=1}^n(X_i-\mu)^2/\sigma^2, \quad
-V = \sum_{i=1}^n(X_i-\bar{X})^2/\sigma^2 = (n-1)S^2/\sigma^2, \quad
-W = n(\bar X-\mu)^2/\sigma^2$$
-
-라 하면 $U = V+W$이고, (b)로부터 $V$와 $W$는 독립이다. 따라서 
-
-$$\mathrm{mgf}_U(t) = \mathrm{mgf}_V(t)\mathrm{mgf}_W(t)$$
-
-한편, $(X_i-\mu)/\sigma$는 서로 독립이고 표준정규분포를 따르므로
-
-$$U = \sum_{i=1}^n\left(\frac{X_i-\mu}{\sigma}\right)^2 \sim \chi^2(n) \quad \text{즉 } \mathrm{mgf}_U(t) = (1-2t)^{-n/2}I_{(t<1/2)}$$
-
-또한 (a)로부터 $(\bar X-\mu)/(\sigma/\sqrt n)$도 표준정규분포를 따르므로
-
-$$W= \left(\frac{\bar X-\mu}{\sigma/\sqrt n}\right)^2 \sim \chi^2(1) \text{즉 } \mathrm{mgf}_W(t) = (1-2t)^{-1/2}I_{(t<1/2)} \\
-\therefore \mathrm{mgf}_V(t) = \frac{\mathrm{mgf}_U(t)}{\mathrm{mgf}_W(t)} = (1-2t)^{-(n-1)/2}I_{(t<1/2)} \\
-\text{즉 } V = (n-1)S^2/\sigma^2 \sim \chi^2(n-1)$$
+>**증명**  
+>(a) 표준화 변환 $Z_i = \frac{X_i - \mu}{\sigma} \sim N(0,1), \quad i=1,\cdots,n \quad \bar Z = \frac{1}{n}\sum_{i=1}^n Z_i = \frac{\bar X - \mu}{\sigma}$  
+>이고, $Z_i$들이 서로 독립이고 동일하게 $N(0,1)$를 따르므로 적률생성함수를 이용하면
+>
+>$$\mathrm{mgf}_{\bar Z}(t) = E\left[e^{t\bar Z}\right] = E\left[e^{t(Z_1+\cdots+Z_n)/n}\right] = \prod_{i=1}^n E\left[e^{tZ_i/n}\right] =\prod_{i=1}^n e^{t^2/(2n^2)} = e^{t^2/(2n)}$$
+>
+>따라서 $\bar Z \sim N(0, 1/n)$이고, 이는 $\bar X \sim N(\mu, \sigma^2/n)$을 의미한다.  
+>
+>(b) $\bar{X}$와 $S^2$의 독립성  
+>표본분산 $S^2$는 $(X_1-\bar{X}, \cdots, X_n-\bar{X})^T$의 함수이다. 독립인 확률변수들의 함수들도 독립이므로, $\bar{X}$와 $(X_1-\bar{X}, \cdots, X_n-\bar{X})^T$가 독립임을 밝히면 $\bar{X}$와 $S^2$도 독립임을 알 수 있다.
+>
+>$Y = (X_1-\bar{X}, \cdots, X_n-\bar{X})^T$이고, $\bar{t} = \frac{1}{n}\sum_{j=1}^n t_j$라고 하자.  
+>$\bar{X}$와 $Y$의 결합적률생성함수를 구하면
+>
+>$$
+>\begin{aligned}
+>\text{mgf}_{\bar{X},Y}(s,t) &= E\left[e^{s\bar{X} + t^T Y}\right] \\
+>&= E\left[\exp\left(s\bar{X} + \sum_{i=1}^n t_i(X_i-\bar{X})\right)\right] \\
+>&= E\left[\exp\left(\left(s - \sum_{i=1}^n t_i\right)\bar{X} + \sum_{i=1}^n t_i X_i\right)\right] \\
+>&= E\left[\exp\left(\sum_{i=1}^n \left(\frac{s}{n} - \frac{1}{n}\sum_{j=1}^n t_j + t_i\right) X_i\right)\right] \\
+>&= E\left[\exp\left(\sum_{i=1}^n \left(\frac{s}{n} + t_i - \bar{t}\right) X_i\right)\right] \\
+>&= \prod_{i=1}^n E\left[\exp\left(\left(\frac{s}{n} + t_i - \bar{t}\right) X_i\right)\right] &(X_1,\ldots,X_n\text{은 서로 독립})\\
+>&= \prod_{i=1}^n \exp\left(\mu\left(\frac{s}{n} + t_i - \bar{t}\right) + \frac{\sigma^2}{2}\left(\frac{s}{n} + t_i - \bar{t}\right)^2\right) &(X_i\sim N(\mu,\sigma^2)\text{의 MGF}) \\
+>&= \exp\left(\mu s + \frac{\sigma^2 s^2}{2n}\right) \cdot \exp\left(\frac{\sigma^2}{2}\sum_{i=1}^n (t_i - \bar{t})^2\right) & ( \sum_{i=1}^n (t_i - \bar{t}) = 0)
+>
+>\end{aligned}
+>$$
+>
+>즉 $s$의 함수와 $t$의 함수로 분해됨을 보일 수 있다. 따라서 $\bar{X}$와 $Y$는 독립이고, 결과적으로 $\bar{X}$와 $S^2$도 독립이다.
+>
+>(c) $(n-1)S^2/\sigma^2$의 분포  
+>(a)로부터 $\bar{X} \sim N(\mu, \sigma^2/n)$이므로 $\frac{\bar{X}-\mu}{\sigma/\sqrt{n}} \sim N(0,1)$ 이고, $\frac{n(\bar{X}-\mu)^2}{\sigma^2} \sim \chi^2(1)$  
+>한편
+>
+>$$\sum_{i=1}^n \frac{(X_i-\mu)^2}{\sigma^2} = \sum_{i=1}^n \left(\frac{X_i-\mu}{\sigma}\right)^2 \sim \chi^2(n) \\
+>\sum_{i=1}^n (X_i-\mu)^2 = \sum_{i=1}^n (X_i-\bar X + \bar X-\mu)^2 =\sum_{i=1}^n (X_i-\bar{X})^2 + n(\bar{X}-\mu)^2$$
+>
+>이므로
+>
+>$$U = \sum_{i=1}^n(X_i-\mu)^2/\sigma^2, \quad
+>V = \sum_{i=1}^n(X_i-\bar{X})^2/\sigma^2 = (n-1)S^2/\sigma^2, \quad
+>W = n(\bar X-\mu)^2/\sigma^2$$
+>
+>라 하면 $U = V+W$이고, (b)로부터 $V$와 $W$는 독립이다. 따라서 
+>
+>$$\mathrm{mgf}_U(t) = \mathrm{mgf}_V(t)\mathrm{mgf}_W(t)$$
+>
+>한편, $(X_i-\mu)/\sigma$는 서로 독립이고 표준정규분포를 따르므로
+>
+>$$U = \sum_{i=1}^n\left(\frac{X_i-\mu}{\sigma}\right)^2 \sim \chi^2(n) \quad \text{즉 } \mathrm{mgf}_U(t) = (1-2t)^{-n/2}I_{(t<1/2)}$$
+>
+>또한 (a)로부터 $(\bar X-\mu)/(\sigma/\sqrt n)$도 표준정규분포를 따르므로
+>
+>$$W= \left(\frac{\bar X-\mu}{\sigma/\sqrt n}\right)^2 \sim \chi^2(1) \text{즉 } \mathrm{mgf}_W(t) = (1-2t)^{-1/2}I_{(t<1/2)} \\
+>\therefore \mathrm{mgf}_V(t) = \frac{\mathrm{mgf}_U(t)}{\mathrm{mgf}_W(t)} = (1-2t)^{-(n-1)/2}I_{(t<1/2)} \\
+>\text{즉 } V = (n-1)S^2/\sigma^2 \sim \chi^2(n-1)$$
 
 ### 정리 4.2.3 정규모집단에서 모평균의 추론
 
@@ -1151,20 +1048,20 @@ P\left(
 \bar X+t_{\alpha/2}(n-1)\frac{S}{\sqrt n}
 \right)=1-\alpha$$ 
 
-#### 증명
-정리 4.2.2로부터
-
-$$\frac{\bar X-\mu}{\sigma/\sqrt{n}} \sim N(0,1), \quad \frac{(n-1)S^2}{\sigma^2} \sim \chi^2(n-1)$$
-
-이고, $\bar X$와 $S^2$는 독립이다. 따라서 t 분포의 정의에 의해
-
-$$\frac{\bar X-\mu}{S/\sqrt{n}} = \frac{(\bar X-\mu)/(\sigma/\sqrt{n})}{\sqrt{(n-1)S^2/\sigma^2/(n-1)}} \sim t(n-1)$$
-
-분위수 ($\alpha$ quantile)의 정의에 따라
-
-$$P\left(-t_{\alpha/2}(n-1) \le \frac{\bar X-\mu}{S/\sqrt{n}} \le t_{\alpha/2}(n-1)\right) = 1-\alpha$$
-
-이므로 $\mu$에 대해 정리하면 결과를 얻는다.
+>**증명**  
+>정리 4.2.2로부터
+>
+>$$\frac{\bar X-\mu}{\sigma/\sqrt{n}} \sim N(0,1), \quad \frac{(n-1)S^2}{\sigma^2} \sim \chi^2(n-1)$$
+>
+>이고, $\bar X$와 $S^2$는 독립이다. 따라서 t 분포의 정의에 의해
+>
+>$$\frac{\bar X-\mu}{S/\sqrt{n}} = \frac{(\bar X-\mu)/(\sigma/\sqrt{n})}{\sqrt{(n-1)S^2/\sigma^2/(n-1)}} \sim t(n-1)$$
+>
+>분위수 ($\alpha$ quantile)의 정의에 따라
+>
+>$$P\left(-t_{\alpha/2}(n-1) \le \frac{\bar X-\mu}{S/\sqrt{n}} \le t_{\alpha/2}(n-1)\right) = 1-\alpha$$
+>
+>이므로 $\mu$에 대해 정리하면 결과를 얻는다.
 
 이 $\mu$에 관한 구간을 **신뢰수준(confidence level)** $(1-\alpha)$의 **신뢰구간(confidence interval)** 이라 하며, 신뢰수준이란 표본으로부터 계산되는 구간이 미지의 모수 $\mu$를 포함하게 되는 경우가 전체의 $100(1-\alpha)\%$일 것이라는 적중률을 의미한다.
 
@@ -1180,14 +1077,14 @@ $$P\left(
 \frac{(n-1)S^2}{\chi^2_{1-\alpha/2}(n-1)}
 \right)=1-\alpha$$
 
-#### 증명
-정리 4.2.2 (c)로부터 $(n-1)S^2/\sigma^2 \sim \chi^2(n-1)$이므로
-
-$$P\left(\chi^2_{1-\alpha/2}(n-1) \le \frac{(n-1)S^2}{\sigma^2} \le \chi^2_{\alpha/2}(n-1)\right) = 1-\alpha$$
-
-$\sigma^2$에 대해 정리하면
-
-$$P\left(\frac{(n-1)S^2}{\chi^2_{\alpha/2}(n-1)} \le \sigma^2 \le \frac{(n-1)S^2}{\chi^2_{1-\alpha/2}(n-1)}\right) = 1-\alpha$$
+>**증명**  
+>정리 4.2.2 (c)로부터 $(n-1)S^2/\sigma^2 \sim \chi^2(n-1)$이므로
+>
+>$$P\left(\chi^2_{1-\alpha/2}(n-1) \le \frac{(n-1)S^2}{\sigma^2} \le \chi^2_{\alpha/2}(n-1)\right) = 1-\alpha$$
+>
+>$\sigma^2$에 대해 정리하면
+>
+>$$P\left(\frac{(n-1)S^2}{\chi^2_{\alpha/2}(n-1)} \le \sigma^2 \le \frac{(n-1)S^2}{\chi^2_{1-\alpha/2}(n-1)}\right) = 1-\alpha$$
 
 #### 예 4.2.4
 
@@ -1198,16 +1095,13 @@ $$X=\frac{V_1/r_1}{V_2/r_2}$$
 의 확률밀도함수를 구하여라.
 
 **풀이**  
-$Y=V_2$라고 하면 $(V_1,V_2)$에서 $(X,Y)$로의 변환은 역변환이
+$Y=V_2$라고 하면 일대일 변환:
 
 $$\begin{cases}
-V_1 = X \cdot \frac{r_1}{r_2} \cdot Y \\
-V_2 = Y
+V_1 = X \cdot \frac{r_1}{r_2} \cdot Y \\ V_2 = Y
 \end{cases}$$
 
-로 주어지는 일대일 변환이다.
-
-야코비안을 계산하면
+야코비안행렬식을 계산하면
 
 $$J = \det\begin{pmatrix}
 \frac{r_1 y}{r_2} & \frac{r_1 x}{r_2} \\
@@ -1219,11 +1113,7 @@ $V_1$과 $V_2$가 독립이므로
 
 $$\text{pdf}_{V_1,V_2}(v_1,v_2) = \frac{1}{\Gamma(r_1/2)2^{r_1/2}}v_1^{r_1/2-1}e^{-v_1/2} \cdot \frac{1}{\Gamma(r_2/2)2^{r_2/2}}v_2^{r_2/2-1}e^{-v_2/2}$$
 
-정리 4.1.1에 의해
-
-$$\text{pdf}_{X,Y}(x,y) = \text{pdf}_{V_1,V_2}(v_1,v_2)|J|$$
-
-$X$의 주변확률밀도함수를 구하기 위해 $y$에 대해 적분하고 정리하면
+정리 4.1.1에 의해 $\text{pdf}_{X,Y}(x,y) = \text{pdf}_{V_1,V_2}(v_1,v_2)|J|$ 인데, $X$의 주변확률밀도함수를 구하기 위해 $y$에 대해 적분하고 정리하면
 
 $$\text{pdf}_X(x) = \frac{\Gamma((r_1+r_2)/2)}{\Gamma(r_1/2)\Gamma(r_2/2)} \left(\frac{r_1}{r_2}\right)^{r_1/2} \frac{x^{r_1/2-1}}{(1+r_1x/r_2)^{(r_1+r_2)/2}}I_{(0,\infty)}(x)$$
 
@@ -1249,11 +1139,7 @@ $$P(X > F_\alpha(r_1,r_2)) = \alpha$$
 
 ### 정리 4.2.5 F 분포의 성질
 
-**(a) 역수 관계**
-
-$$
-X \sim F(r_1,r_2) \Rightarrow \frac{1}{X} \sim F(r_2,r_1)
-$$
+**(a) 역수 관계**: $X \sim F(r_1,r_2) \Rightarrow \frac{1}{X} \sim F(r_2,r_1)$
 
 따라서
 
@@ -1261,11 +1147,7 @@ $$
 F_{1-\alpha}(r_1,r_2) = \frac{1}{F_\alpha(r_2,r_1)}
 $$
 
-**(b) t 분포와의 관계**
-
-$$
-X \sim t(r) \Rightarrow X^2 \sim F(1,r)
-$$
+**(b) t 분포와의 관계**: $X \sim t(r) \Rightarrow X^2 \sim F(1,r)$
 
 따라서
 
@@ -1273,58 +1155,57 @@ $$
 t^2_{\alpha/2}(r) = F_\alpha(1,r)
 $$
 
-#### 증명
-
-**(a) 역수 관계의 증명**
-
-$X \sim F(r_1,r_2)$이면 정의에 의해
-
-$$
-X = \frac{V_1/r_1}{V_2/r_2}, \quad V_1 \sim \chi^2(r_1), \quad V_2 \sim \chi^2(r_2), \quad V_1 \perp V_2
-$$
-
-따라서
-
-$$
-\frac{1}{X} = \frac{V_2/r_2}{V_1/r_1} \sim F(r_2,r_1)
-$$
-
-분위수의 관계는 다음과 같이 유도된다:  
-상측 $\alpha$ 분위수를 $P(X > F_\alpha(r_1,r_2)) = \alpha$ 로 정의하자.  
-$Y = 1/X$라 두면 $Y \sim F(r_2,r_1)$이다. 그러면
-
-$$\alpha = P(X > F_\alpha(r_1,r_2)) = P\left(\frac{1}{X} < \frac{1}{F_\alpha(r_1,r_2)}\right) = P\left(Y < \frac{1}{F_\alpha(r_1,r_2)}\right) \\
-\therefore P\left(Y > \frac{1}{F_\alpha(r_1,r_2)}\right) = 1-\alpha$$
-
-그런데 $Y \sim F(r_2,r_1)$이고, 상측 $(1-\alpha)$ 분위수의 정의에 의해 $P(Y > F_{1-\alpha}(r_2,r_1)) = 1-\alpha$  
-연속분포에서 상측 분위수는 유일하므로
-
-$$\frac{1}{F_\alpha(r_1,r_2)} = F_{1-\alpha}(r_2,r_1), \quad F_{1-\alpha}(r_1,r_2) = \frac{1}{F_\alpha(r_2,r_1)}$$
-
-**(b) t 분포와의 관계 증명**
-
-t 분포의 정의로부터 $X \sim t(r)$이면
-
-$$
-X = \frac{Z}{\sqrt{V/r}}, \quad Z \sim N(0,1), \quad V \sim \chi^2(r), \quad Z \perp V
-$$
-
-따라서 $X^2 = \frac{Z^2}{V/r}$에서,  
-<예 4.1.4>의 (c)로부터 $Z^2 \sim \chi^2(1)$이고, $Z^2 \perp V$이므로 F 분포의 정의에 의해
-
-$$
-X^2 = \frac{Z^2/1}{V/r} \sim F(1,r)
-$$
-
-분위수의 관계는 다음과 같이 유도된다:
-
-$$
-\alpha = P(X^2 > t^2_{\alpha/2}(r)) = P(|X| > t_{\alpha/2}(r))
-$$
-
-한편 $X^2 \sim F(1,r)$이므로 $\alpha = P(X^2 > F_\alpha(1,r))$
-
-따라서 $t^2_{\alpha/2}(r) = F_\alpha(1,r)$
+>**증명**  
+>
+>**(a) 역수 관계의 증명**
+>
+>$X \sim F(r_1,r_2)$이면 정의에 의해
+>
+>$$
+>X = \frac{V_1/r_1}{V_2/r_2}, \quad V_1 \sim \chi^2(r_1), \quad V_2 \sim \chi^2(r_2), \quad V_1 \perp V_2
+>$$
+>
+>따라서
+>
+>$$
+>\frac{1}{X} = \frac{V_2/r_2}{V_1/r_1} \sim F(r_2,r_1)
+>$$
+>
+>분위수의 관계는 다음과 같이 유도된다:  
+>상측 $\alpha$ 분위수를 $P(X > F_\alpha(r_1,r_2)) = \alpha$ 로 정의하자.  
+>$Y = 1/X$라 두면 $Y \sim F(r_2,r_1)$이다. 그러면
+>
+>$$\alpha = P(X > F_\alpha(r_1,r_2)) = P\left(\frac{1}{X} < \frac{1}{F_\alpha(r_1,r_2)}\right) = P\left(Y < \frac{1}{F_\alpha(r_1,r_2)}\right) \\
+>\therefore P\left(Y > \frac{1}{F_\alpha(r_1,r_2)}\right) = 1-\alpha$$
+>
+>그런데 $Y \sim F(r_2,r_1)$이고, 상측 $(1-\alpha)$ 분위수의 정의에 의해 $P(Y > F_{1-\alpha}(r_2,r_1)) = 1-\alpha$  
+>연속분포에서 상측 분위수는 유일하므로
+>
+>$$\frac{1}{F_\alpha(r_1,r_2)} = F_{1-\alpha}(r_2,r_1), \quad F_{1-\alpha}(r_1,r_2) = \frac{1}{F_\alpha(r_2,r_1)}$$
+>
+>**(b) t 분포와의 관계 증명**
+>
+>t 분포의 정의로부터 $X \sim t(r)$이면
+>
+>$$
+>X = \frac{Z}{\sqrt{V/r}}, \quad Z \sim N(0,1), \quad V \sim \chi^2(r), \quad Z \perp V
+>$$
+>
+>따라서 $X^2 = \frac{Z^2}{V/r}$에서,  
+><예 4.1.4>의 (c)로부터 $Z^2 \sim \chi^2(1)$이고, $Z^2 \perp V$이므로 F 분포의 정의에 의해
+>
+>$$
+>X^2 = \frac{Z^2/1}{V/r} \sim F(1,r)
+>$$
+>
+>분위수의 관계는 다음과 같이 유도된다:
+>
+>$$
+>\alpha = P(X^2 > t^2_{\alpha/2}(r)) = P(|X| > t_{\alpha/2}(r))
+>$$
+>
+>한편 $X^2 \sim F(1,r)$이므로 $\alpha = P(X^2 > F_\alpha(1,r))$  
+>따라서 $t^2_{\alpha/2}(r) = F_\alpha(1,r)$
 
 ### 정리 4.2.6 두 정규모집단 모분산 비교
 
@@ -1347,103 +1228,94 @@ $$
 $$
 P\left(
 \frac{S_1^2/S_2^2}{F_{\alpha/2}(n_1-1,n_2-1)}
-\le
-\frac{\sigma_1^2}{\sigma_2^2}
-\le
-\frac{S_1^2/S_2^2}{F_{\alpha/2}(n_2-1,n_1-1)}
+\le \frac{\sigma_1^2}{\sigma_2^2} \le (S_1^2/S_2^2)F_{\alpha/2}(n_2-1,n_1-1)
 \right)=1-\alpha
 $$
 
-#### 증명
+>**증명**  
+>
+>정리 4.2.2로부터
+>
+>$$
+>\frac{(n_1-1)S_1^2}{\sigma_1^2}\sim\chi^2(n_1-1), \quad \frac{(n_2-1)S_2^2}{\sigma_2^2}\sim\chi^2(n_2-1)
+>$$
+>
+>이며, 두 랜덤표본이 서로 독립이므로 $S_1^2$와 $S_2^2$도 서로 독립이다. 따라서 F 분포의 정의에 의해
+>
+>$$
+>\frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2}\sim F(n_1-1,n_2-1)
+>$$
+>
+>확률식은 위 분포식에 양변을 적절히 변형하여 얻는다.
 
-정리 4.2.2로부터
-
-$$
-\frac{(n_1-1)S_1^2}{\sigma_1^2}\sim\chi^2(n_1-1), \quad \frac{(n_2-1)S_2^2}{\sigma_2^2}\sim\chi^2(n_2-1)
-$$
-
-이며, 두 랜덤표본이 서로 독립이므로 $S_1^2$와 $S_2^2$도 서로 독립이다. 따라서 F 분포의 정의에 의해
-
-$$
-\frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2}\sim F(n_1-1,n_2-1)
-$$
-
-확률식은 위 분포식에 양변을 적절히 변형하여 얻는다.
-
-TODO: 손으로 쓰기
 ### 정리 4.2.7 여러 개의 정규모집단에서 모평균의 비교
+여러 모집단을 비교할 때 각 모집단 분산이 동일하다는 전제 하에서 모평균을 비교하는 경우가 많다. 이 비교를 목적으로 가장 흔히 사용하는 모형이 **일원분류모형(one-way classification model)** 이다. 이는 분산이 동일한 여러 개의 정규모집단 $N(\mu_i, \sigma^2)$ 에서 서로 독립인 랜덤표본 $X_{i1}, \cdots, X_{in_i}, \ i = 1, \cdots, k$을 관측한다는 뜻이다.
 
-다음의 **일원분류모형(one-way classification model)** 에서, 다음이 성립한다.
+$\bar X_i = \frac{1}{n_i}\sum_{j=1}^{n_i} X_{ij}, \quad \bar X = \frac{1}{n}\sum_{i=1}^k \sum_{j=1}^{n_i} X_{ij}, \quad \bar\mu = \frac{1}{n}\sum_{i=1}^k n_i\mu_i$  
+
+> 주의: $\bar\mu = \frac{1}{k}\sum_{i=1}^k \mu_i$ 라 하면 안된다.  
+> 평균의 평균은 전체 성분 합한 후 평균낸것과 값이 다르다. (단, 그룹 별 갯수가 모두 동일하면 같음)
 
 $$ \begin{cases}
 X_{ij} = \mu_i + e_{ij} \\
-e_{ij} \sim N(0, \sigma^2), i = 1, \dots, k, \quad j = 1, \dots, n_i \end{cases}$$
+e_{ij} \sim N(0, \sigma^2),\quad i = 1, \dots, k, \quad j = 1, \dots, n_i \end{cases}$$
 
-**(a)**
+**(a)** $\sum_{i=1}^k n_i(\bar X_i-\bar X-(\mu_i-\bar\mu))^2/\sigma^2 \sim \chi^2(k-1)$
+- 중심화된 집단평균 효과 $(\mu_i-\bar\mu)$ 를 추정하는 오차의 $\sigma^2$ 표준화 제곱합 
 
-$$\sum_{i=1}^k n_i(\bar X_i-\bar X-(\mu_i-\bar\mu))^2/\sigma^2 \sim \chi^2(k-1)$$
+**(b)** $\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2/\sigma^2 \sim \chi^2(n-k)$ 
+- 각 집단의 평균으로 설명되지 않고 집단 내부에 남아 있는 오차변동의 $\sigma^2$ 표준화 값
 
-**(b)**
+**(c)** (a)와 (b)는 서로 독립이다. 따라서 $\hat{\sigma^2} = \sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2/(n-k)$로 정의하면
 
-$$\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2/\sigma^2 \sim \chi^2(n-k)$$
-
-**(c)**  
-
-(a)와 (b)는 서로 독립이다. 따라서 $\hat{\sigma^2} = \sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2/(n-k)$로 정의하면
-
-$$\frac{\frac{1}{k-1}\sum_{i=1}^k n_i(\bar X_i-\bar X-(\mu_i-\bar\mu))^2}{\frac{1}{n-k}\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2} \sim F(k-1,n-k)$$
+$$\frac{\sum_{i=1}^k n_i(\bar X_i-\bar X-(\mu_i-\bar\mu))^2}{\frac{1}{n-k}\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2} \sim F(k-1,n-k)$$
 
 $$P\left(\sum_{i=1}^k n_i(\mu_i-\bar\mu-(\bar X_i-\bar X))^2 \le (k-1)\hat{\sigma}^2 F_{\alpha}(k-1,n-k)\right) = 1 - \alpha$$
+- 이 두 통계량이 서로 독립임을 나타내며, 이를 이용하여 F 분포를 따르는 검정통계량을 구성할 수 있다. 이 검정통계량은 여러 정규모집단에서 모평균이 모두 동일한지 여부를 검정하는 데 사용된다.
 
-**의의**  
-(a)는 집단 간 변동이 모평균의 편차에 의해 설명되는 정도를 나타내는 통계량의 분포를 나타내고,  
-(b)는 집단 내 변동이 오차에 의해 설명되는 정도를 나타내는 통계량의 분포를 나타낸다.  
-(c)는 이 두 통계량이 서로 독립임을 나타내며, 이를 이용하여 F 분포를 따르는 검정통계량을 구성할 수 있다. 이 검정통계량은 여러 정규모집단에서 모평균이 모두 동일한지 여부를 검정하는 데 사용된다.
-
-#### 증명
-
-정규분포 $N(\mu_i,\sigma^2)$에서의 랜덤표본 $X_{i1},\dots,X_{in_i}$에 대해 정리 4.2.2를 적용하면
-
-$$\bar X_i\sim N(\mu_i,\sigma^2/n_i), \qquad \frac{(n_i-1)S_i^2}{\sigma^2}\sim\chi^2(n_i-1)$$
-
-이며, $\bar X_i$와 $S_i^2$는 서로 독립이다.  
-또한 서로 다른 집단의 표본들은 독립이므로 $\bar X_1,\dots,\bar X_k$와 $S_1^2,\dots,S_k^2$는 서로 독립이다. 독립인 변수들의 함수들도 독립이므로, (c)가 성립한다.  
-
-정리 4.2.1의 카이제곱분포의 가법성으로
-
-$$\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2/\sigma^2 \sim\chi^2\left(\sum_{i=1}^k(n_i-1)\right) =\chi^2(n-k)$$
-
-이므로 (b)가 성립한다.
-
-(a)의 일반적인 증명은 예 4.4.5에서 다룬다.  
-여기선, $n_1=\cdots=n_k=\bar n$인 경우만 고려하면,
-
-$$Z_i = \frac{\bar X_i - \mu_i}{\sigma/\sqrt{\bar{n}}} \sim N(0,1), \quad i=1,\ldots,k$$
-
-는 서로 독립이고 각각 $N(0,1)$을 따르는 확률변수다.  
-정리 4.2.2를 랜덤표본 $Z_1,\ldots,Z_k$에 적용하면 $\sum_{i=1}^k (Z_i - \bar Z)^2 \sim \chi^2(k-1)$  
-여기서 전체 표본평균과 전체 모평균은  $\bar X = \frac{1}{k}\sum_{i=1}^k \bar X_i, \quad \bar\mu = \frac{1}{k}\sum_{i=1}^k \mu_i$  
-
-$$\sum_{i=1}^k (Z_i - \bar Z)^2 = \sum_{i=1}^k \left(\frac{\bar X_i - \mu_i}{\sigma/\sqrt{\bar{n}}} - \frac{\bar X - \bar\mu}{\sigma/\sqrt{\bar{n}}}\right)^2 = \sum_{i=1}^k \frac{\bar{n}}{\sigma^2}(\bar X_i - \bar X - (\mu_i - \bar\mu))^2$$
-
-이므로 성립한다.  
-
-한편, F 분포의 정의와 (a), (b), (c)로부터
-
-$$\frac{\sum_{i=1}^k n_i(\bar X_i-\bar X-(\mu_i-\bar\mu))^2/\sigma^2/(k-1)}{\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2/\sigma^2/(n-k)} \sim F(k-1,n-k)$$
-
-분모를 $\hat\sigma^2 = \frac{1}{n-k}\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2$로 나타내면
-
-$$\frac{\sum_{i=1}^k n_i(\bar X_i-\bar X-(\mu_i-\bar\mu))^2}{(k-1)\hat\sigma^2} \sim F(k-1,n-k)$$
-
-따라서 F 분포의 상방 $\alpha$ 분위수의 정의에 의해
-
-$$P\left(\frac{\sum_{i=1}^k n_i(\bar X_i-\bar X-(\mu_i-\bar\mu))^2}{(k-1)\hat\sigma^2} \le F_\alpha(k-1,n-k)\right) = 1-\alpha\\
-P\left(\sum_{i=1}^k n_i(\bar X_i-\bar X-(\mu_i-\bar\mu))^2 \le (k-1)\hat\sigma^2 F_\alpha(k-1,n-k)\right) = 1-\alpha$$
-
-양변에 음수를 곱하고 $\mu_i - \bar\mu$와 $\bar X_i - \bar X$의 순서를 바꾸면
-
-$$P\left(\sum_{i=1}^k n_i(\mu_i-\bar\mu-(\bar X_i-\bar X))^2 \le (k-1)\hat\sigma^2 F_\alpha(k-1,n-k)\right) = 1-\alpha$$
+>**증명**  
+>
+>정규분포 $N(\mu_i,\sigma^2)$에서의 랜덤표본 $X_{i1},\dots,X_{in_i}$에 대해 정리 4.2.2를 적용하면
+>
+>$$\bar X_i\sim N(\mu_i,\sigma^2/n_i), \qquad \frac{(n_i-1)S_i^2}{\sigma^2}\sim\chi^2(n_i-1)$$
+>
+>이며, $\bar X_i$와 $S_i^2$는 서로 독립이다.  
+>또한 서로 다른 집단의 표본들은 독립이므로 $\bar X_1,\dots,\bar X_k$와 $S_1^2,\dots,S_k^2$는 서로 독립이다. 독립인 변수들의 함수들도 독립이므로, (c)가 성립한다.  
+>
+>정리 4.2.1의 카이제곱분포의 가법성으로
+>
+>$$\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2/\sigma^2 \sim\chi^2\left(\sum_{i=1}^k(n_i-1)\right) =\chi^2(n-k)$$
+>
+>이므로 (b)가 성립한다.
+>
+>(a)의 일반적인 증명은 예 4.4.5에서 다룬다.  
+>여기선, $n_1=\cdots=n_k=\bar n$인 경우만 고려하면,
+>
+>$$Z_i = \frac{\bar X_i - \mu_i}{\sigma/\sqrt{\bar{n}}} \sim N(0,1), \quad i=1,\cdots,k$$
+>
+>는 서로 독립이고 각각 $N(0,1)$을 따르는 확률변수다.  
+>정리 4.2.2를 랜덤표본 $Z_1,\cdots,Z_k$에 적용하면 $\sum_{i=1}^k (Z_i - \bar Z)^2 \sim \chi^2(k-1)$  
+>
+>$$\sum_{i=1}^k (Z_i - \bar Z)^2 = \sum_{i=1}^k \left(\frac{\bar X_i - \mu_i}{\sigma/\sqrt{\bar{n}}} - \frac{\bar X - \bar\mu}{\sigma/\sqrt{\bar{n}}}\right)^2 = \sum_{i=1}^k \frac{\bar{n}}{\sigma^2}(\bar X_i - \bar X - (\mu_i - \bar\mu))^2$$
+>
+>이므로 성립한다.  
+>
+>한편, F 분포의 정의와 (a), (b), (c)로부터
+>
+>$$\frac{\sum_{i=1}^k n_i(\bar X_i-\bar X-(\mu_i-\bar\mu))^2/(k-1)\sigma^2}{\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2/(n-k)\sigma^2} \sim F(k-1,n-k)$$
+>
+>분모를 $\hat\sigma^2 = \frac{1}{n-k}\sum_{i=1}^k\sum_{j=1}^{n_i}(X_{ij}-\bar X_i)^2$로 나타내면
+>
+>$$\frac{\sum_{i=1}^k n_i(\bar X_i-\bar X-(\mu_i-\bar\mu))^2}{(k-1)\hat\sigma^2} \sim F(k-1,n-k)$$
+>
+>따라서 F 분포의 상방 $\alpha$ 분위수의 정의에 의해
+>
+>$$P\left(\frac{\sum_{i=1}^k n_i(\bar X_i-\bar X-(\mu_i-\bar\mu))^2}{(k-1)\hat\sigma^2} \le F_\alpha(k-1,n-k)\right) = 1-\alpha\\
+>P\left(\sum_{i=1}^k n_i(\bar X_i-\bar X-(\mu_i-\bar\mu))^2 \le (k-1)\hat\sigma^2 F_\alpha(k-1,n-k)\right) = 1-\alpha$$
+>
+>양변에 음수를 곱하고 $\mu_i - \bar\mu$와 $\bar X_i - \bar X$의 순서를 바꾸면
+>
+>$$P\left(\sum_{i=1}^k n_i(\mu_i-\bar\mu-(\bar X_i-\bar X))^2 \le (k-1)\hat\sigma^2 F_\alpha(k-1,n-k)\right) = 1-\alpha$$
 
 **참고**  
 여기서 주어진 $\mu_i-\bar\mu$에 관한 집합은 신뢰수준 $100(1-\alpha)$%의 신뢰집합(confidence set)이라고 하며 이는 신뢰구간을 일반화한 것이다. 이의 이해를 위하여 두 모평균 비교를 하는 경우인 $k=2$인 경우를 살펴보자.
@@ -1487,13 +1359,8 @@ $$
 순서통계량을 나타내는 함수를 $u(X_1,X_2,X_3)=(X_{(1)},X_{(2)},X_{(3)})^T$ 라고 하자. 함수 $u$는
 
 $$
-\mathcal{X}=\{(x_1,x_2,x_3)^T: x_i>0\ (i=1,2,3),\ x_1\neq x_2,\ x_2\neq x_3,\ x_3\neq x_1\}
-$$
-
-에서
-
-$$
-\mathcal{Y}=\{(y_1,y_2,y_3)^T: 0<y_1<y_2<y_3\}
+\mathcal{X}=\{(x_1,x_2,x_3)^T: x_i>0\ (i=1,2,3),\ x_1\neq x_2,\ x_2\neq x_3,\ x_3\neq x_1\} \\
+\to \mathcal{Y}=\{(y_1,y_2,y_3)^T: 0<y_1<y_2<y_3\}
 $$
 
 로의 $3!$ 대일 함수이며, 다대일 변환에 관한 정리(정리 4.1.2)의 조건을 만족한다.  
@@ -1555,52 +1422,52 @@ $$
 =n!f(y_1)\cdots f(y_n)I_{(y_1<\cdots<y_n)}
 $$
 
-#### 증명
-
-순서통계량을 나타내는 함수를 $u(X_1,\dots,X_n)=(X_{(1)},\dots,X_{(n)})^T$라고 하자.  
-함수 $u$는 $\mathcal{X}=\{(x_1,\dots,x_n)^T:f(x_i)>0,\ x_1,\dots,x_n\ \text{서로 다른 실수}\}$에서
-
-$$
-\mathcal{Y}=\{(y_1,\dots,y_n)^T:f(y_i)>0,\ y_1<\cdots<y_n\}
-$$
-
-로의 $n!$대일 함수로서 정리 4.1.2를 만족한다.  
-집합 $\{1,\dots,n\}$에서의 치환(permutation)을 $\pi$로 나타내고
-
-$$
-\mathcal{X}_\pi=\{(x_1,\dots,x_n)^T:f(x_i)>0,\ x_{\pi_1}<\cdots<x_{\pi_n}\}
-$$
-
-라 하면, 함수 $u$에서 정의역을 $\mathcal{X}_\pi$로 제한한 함수 $u^\pi(x_1,\dots,x_n)=(x_{\pi_1},\dots,x_{\pi_n})^T$ 는 $\mathcal{X}_\pi$에서 $\mathcal{Y}$로의 일대일 함수이며 미분가능하다.  
-이때 야코비안 행렬은 단위행렬의 행과 열을 치환한 행렬이므로
-
-$$
-J_{u^\pi}(x)=\det\left(\frac{\partial x_{\pi_j}}{\partial x_i}\right)=\pm1
-$$
-
-따라서 다대일 변환에 관한 정리(정리 4.1.2)에 의해
-
-$$
-\text{pdf}_Y(y)
-=\sum_\pi\text{pdf}_X\left((u^\pi)^{-1}(y)\right)\left|J_{(u^\pi)^{-1}}(y)\right|
-$$
-
-한편 $\text{pdf}_X(x_1,\dots,x_n)=f(x_1)\cdots f(x_n)$ 이고 치환의 개수는 $n!$개이므로
-
-$$
-\text{pdf}_Y(y_1,\dots,y_n) =n!f(y_1)\cdots f(y_n)I_{(y_1<\cdots<y_n)}
-$$
+>**증명**  
+>
+>순서통계량을 나타내는 함수를 $u(X_1,\dots,X_n)=(X_{(1)},\dots,X_{(n)})^T$라고 하자.  
+>함수 $u$는 $\mathcal{X}=\{(x_1,\dots,x_n)^T:f(x_i)>0,\ x_1,\dots,x_n\ \text{서로 다른 실수}\}$에서
+>
+>$$
+>\mathcal{Y}=\{(y_1,\dots,y_n)^T:f(y_i)>0,\ y_1<\cdots<y_n\}
+>$$
+>
+>로의 $n!$대일 함수로서 정리 4.1.2를 만족한다.  
+>집합 $\{1,\dots,n\}$에서의 치환(permutation)을 $\pi$로 나타내고
+>
+>$$
+>\mathcal{X}_\pi=\{(x_1,\dots,x_n)^T:f(x_i)>0,\ x_{\pi_1}<\cdots<x_{\pi_n}\}
+>$$
+>
+>라 하면, 함수 $u$에서 정의역을 $\mathcal{X}_\pi$로 제한한 함수 $u^\pi(x_1,\dots,x_n)=(x_{\pi_1},\dots,x_{\pi_n})^T$ 는 $\mathcal{X}_\pi$에서 $\mathcal{Y}$로의 일대일 함수이며 미분가능하다.  
+>이때 야코비안 행렬은 단위행렬의 행과 열을 치환한 행렬이므로 야코비안행렬식은
+>
+>$$
+>J_{u^\pi}(x)=\det\left(\frac{\partial x_{\pi_j}}{\partial x_i}\right)=\pm1
+>$$
+>
+>따라서 다대일 변환에 관한 정리(정리 4.1.2)에 의해
+>
+>$$
+>\text{pdf}_Y(y)
+>=\sum_\pi\text{pdf}_X\left((u^\pi)^{-1}(y)\right)\left|J_{(u^\pi)^{-1}}(y)\right|
+>$$
+>
+>한편 $\text{pdf}_X(x_1,\dots,x_n)=f(x_1)\cdots f(x_n)$ 이고 치환의 개수는 $n!$개이므로
+>
+>$$
+>\text{pdf}_Y(y_1,\dots,y_n) =n!f(y_1)\cdots f(y_n)I_{(y_1<\cdots<y_n)}
+>$$
 
 **정리 4.3.2 아이디어**
 
-순서통계량 $X_{(r)}$이 $x$ 근방에 있을 사건 $(x < X_{(r)} \le x + |\Delta x|)$는 $X_1, \ldots, X_n$들 중에서
+순서통계량 $X_{(r)}$이 $x$ 근방에 있을 사건 $(x < X_{(r)} \le x + |\Delta x|)$는 $X_1, \cdots, X_n$들 중에서
 
 - $(r-1)$개는 $x$ 이하
 - $1$개는 $x$와 $x+|\Delta x|$ 사이
 - 나머지 $(n-r)$개는 $x+|\Delta x|$를 초과
 
 하는 사건이다.  
-$X_1,\ldots,X_n$은 iid이므로 이런 사건의 확률은
+$X_1,\cdots,X_n$은 iid이므로 이런 사건의 확률은
 
 $$
 c_r[F(x)]^{r-1}[F(x+|\Delta x|)-F(x)][1-F(x+|\Delta x|)]^{n-r}
@@ -1626,118 +1493,101 @@ $$
 **(a) 단일 순서통계량의 확률밀도함수**
 
 $$
-\text{pdf}_{X_{(r)}}(x)
-=\frac{n!}{(r-1)!(n-r)!}
-[F(x)]^{r-1}f(x)[1-F(x)]^{n-r},
-\quad 1\le r\le n
+\text{pdf}_{X_{(r)}}(x) =\frac{n!}{(r-1)!(n-r)!} [F(x)]^{r-1}f(x)[1-F(x)]^{n-r}, \quad 1\le r\le n
 $$
 
 **(b) 두 순서통계량의 결합확률밀도함수**
 
 $$
-\text{pdf}_{X_{(r)},X_{(s)}}(x,y)
-=\frac{n!}{(r-1)!(s-r-1)!(n-s)!}
-[F(x)]^{r-1}f(x)
-[F(y)-F(x)]^{s-r-1}f(y)
-[1-F(y)]^{n-s}
+\text{pdf}_{X_{(r)},X_{(s)}}(x,y) =\frac{n!}{(r-1)!(s-r-1)!(n-s)!} [F(x)]^{r-1}f(x) [F(y)-F(x)]^{s-r-1}f(y) [1-F(y)]^{n-s} \\
+\quad (1\le r<s\le n,\ x<y)
 $$
 
-$$
-\quad 1\le r<s\le n,\ x<y
-$$
-
-#### 증명
-
-정리 4.3.1에서 얻은 결합확률밀도함수
-
-$$
-\text{pdf}_Y(y_1,\dots,y_n)=n!f(y_1)\cdots f(y_n)I_{(y_1<\cdots<y_n)}
-$$
-
-를 적분하여 주변확률밀도함수를 계산하면 된다.
-
-**(a)** $X_{(r)}$의 주변확률밀도함수를 구하기 위해 $y_r=x$로 고정하고 나머지 변수들에 대해 적분한다:
-
-$$
-\text{pdf}_{X_{(r)}}(x)
-=\int_{-\infty<y_1<\cdots<y_{r-1}<x<y_{r+1}<\cdots<y_n<\infty}
-n!f(y_1)\cdots f(y_{r-1})f(x)f(y_{r+1})\cdots f(y_n)\,dy_1\cdots dy_{r-1}dy_{r+1}\cdots dy_n
-$$
-
-이 적분을 계산하면
-
-$$
-\text{pdf}_{X_{(r)}}(x)
-=n!f(x)\int_{-\infty}^{x}\cdots\int_{-\infty}^{y_2}f(y_1)dy_1\cdots dy_{r-1}
-\int_{x}^{\infty}\cdots\int_{y_{n-1}}^{\infty}f(y_n)dy_n\cdots dy_{r+1}
-$$
-
-**첫 번째 적분 ($y_1, \ldots, y_{r-1}$ 부분):**
-
-$-\infty<y_1<\cdots<y_{r-1}<x$ 영역에서 적분한다. $y_{r-1}$부터 역순으로 적분하면:
-
-$$
-\int_{-\infty}^{x}f(y_{r-1})\int_{-\infty}^{y_{r-1}}f(y_{r-2})\cdots\int_{-\infty}^{y_2}f(y_1)dy_1\cdots dy_{r-1}
-$$
-
-가장 안쪽 적분부터 계산:
-
-$$
-\int_{-\infty}^{y_2}f(y_1)dy_1=F(y_2)
-$$
-
-다음 적분:
-
-$$
-\int_{-\infty}^{y_3}f(y_2)F(y_2)dy_2=\int_{-\infty}^{y_3}F(y_2)dF(y_2)=\frac{[F(y_3)]^2}{2}
-$$
-
-이런 식으로 계속하면:
-
-$$
-\int_{-\infty}^{x}f(y_{r-1})\cdot\frac{[F(y_{r-1})]^{r-2}}{(r-2)!}dy_{r-1}
-=\int_{-\infty}^{x}\frac{[F(y_{r-1})]^{r-2}}{(r-2)!}dF(y_{r-1})
-=\frac{[F(x)]^{r-1}}{(r-1)!}
-$$
-
-마찬가지로 $x<y_{r+1}<\cdots<y_n<\infty$ 영역에서 적분하면:
-
-$$
-\int_{x}^{\infty}f(y_{r+1})\cdots\int_{y_{n-1}}^{\infty}f(y_n)dy_n\cdots dy_{r+1}
-=\frac{[1-F(x)]^{n-r}}{(n-r)!}
-$$
-
-따라서
-
-$$
-\text{pdf}_{X_{(r)}}(x)
-=n!f(x)\cdot\frac{[F(x)]^{r-1}}{(r-1)!}\cdot\frac{[1-F(x)]^{n-r}}{(n-r)!}
-$$
-
-**(b)** 마찬가지로 $y_r=x$, $y_s=y$로 고정하고 나머지 변수들에 대해 적분하면
-
-$$
-\text{pdf}_{X_{(r)},X_{(s)}}(x,y)
-=\frac{n!}{(r-1)!(s-r-1)!(n-s)!}
-[F(x)]^{r-1}f(x)
-[F(y)-F(x)]^{s-r-1}f(y)
-[1-F(y)]^{n-s}
-$$
+>**증명**  
+>
+>정리 4.3.1에서 얻은 결합확률밀도함수
+>
+>$$
+>\text{pdf}_Y(y_1,\dots,y_n)=n!f(y_1)\cdots f(y_n)I_{(y_1<\cdots<y_n)}
+>$$
+>
+>를 적분하여 주변확률밀도함수를 계산하면 된다.
+>
+>**(a)** $X_{(r)}$의 주변확률밀도함수를 구하기 위해 $y_r=x$로 고정하고 나머지 변수들에 대해 적분한다:
+>
+>$$
+>\text{pdf}_{X_{(r)}}(x)
+>=\int_{-\infty<y_1<\cdots<y_{r-1}<x<y_{r+1}<\cdots<y_n<\infty} n! \\ 
+>\cdot f(y_1)\cdots f(y_{r-1})f(x)f(y_{r+1})\cdots f(y_n)\,dy_1\cdots dy_{r-1}dy_{r+1}\cdots dy_n
+>$$
+>
+>이 적분을 계산하면
+>
+>$$
+>\text{pdf}_{X_{(r)}}(x)
+>=n!f(x)\int_{-\infty}^{x}\cdots\int_{-\infty}^{y_2}f(y_1)dy_1\cdots dy_{r-1}
+>\int_{x}^{\infty}\cdots\int_{y_{n-1}}^{\infty}f(y_n)dy_n\cdots dy_{r+1}
+>$$
+>
+>**첫 번째 적분 ($y_1, \cdots, y_{r-1}$ 부분):**
+>
+>$-\infty<y_1<\cdots<y_{r-1}<x$ 영역에서 적분한다. $y_{r-1}$부터 역순으로 적분하면:
+>
+>$$
+>\int_{-\infty}^{x}f(y_{r-1})\int_{-\infty}^{y_{r-1}}f(y_{r-2})\cdots\int_{-\infty}^{y_2}f(y_1)dy_1\cdots dy_{r-1}
+>$$
+>
+>가장 안쪽 적분부터 계산:
+>
+>$$
+>\int_{-\infty}^{y_2}f(y_1)dy_1=F(y_2)
+>$$
+>
+>다음 적분:
+>
+>$$
+>\int_{-\infty}^{y_3}f(y_2)F(y_2)dy_2=\int_{-\infty}^{y_3}F(y_2)dF(y_2)=\frac{[F(y_3)]^2}{2}
+>$$
+>
+>이런 식으로 계속하면:
+>
+>$$
+>\int_{-\infty}^{x}f(y_{r-1})\cdot\frac{[F(y_{r-1})]^{r-2}}{(r-2)!}dy_{r-1}
+>=\int_{-\infty}^{x}\frac{[F(y_{r-1})]^{r-2}}{(r-2)!}dF(y_{r-1}) =\frac{[F(x)]^{r-1}}{(r-1)!}
+>$$
+>
+>마찬가지로 $x<y_{r+1}<\cdots<y_n<\infty$ 영역에서 적분하면:
+>
+>$$
+>\int_{x}^{\infty}f(y_{r+1})\cdots\int_{y_{n-1}}^{\infty}f(y_n)dy_n\cdots dy_{r+1} =\frac{[1-F(x)]^{n-r}}{(n-r)!}
+>$$
+>
+>따라서
+>
+>$$
+>\text{pdf}_{X_{(r)}}(x) =n!f(x)\cdot\frac{[F(x)]^{r-1}}{(r-1)!}\cdot\frac{[1-F(x)]^{n-r}}{(n-r)!}
+>$$
+>
+>**(b)** 마찬가지로 $y_r=x$, $y_s=y$로 고정하고 나머지 변수들에 대해 적분하면
+>
+>$$
+>\text{pdf}_{X_{(r)},X_{(s)}}(x,y)
+>=\frac{n!}{(r-1)!(s-r-1)!(n-s)!}
+>[F(x)]^{r-1}f(x)
+>[F(y)-F(x)]^{s-r-1}f(y)
+>[1-F(y)]^{n-s}
+>$$
 
 #### 예 4.3.2
 
 (a)  
-균등분포 $U(0,1)$에서의 순서통계량 $X_{(r)}$는
-
-$$X_{(r)}\sim\text{Beta}(r,n-r+1)$$
+균등분포 $U(0,1)$에서의 순서통계량 $X_{(r)}$는 $X_{(r)}\sim\text{Beta}(r,n-r+1)$
 
 (b)  
-$Z_i = U_{(i)} - U_{(i-1)}, \quad i=1,\ldots,n$
+$Z_i = U_{(i)} - U_{(i-1)}, \quad i=1,\cdots,n$ 로 정의하자. 여기서 $U_{(0)}=0$로 정의한다.  
+그러면 $(Z_1,\cdots,Z_{n}) \sim \text{Dirichlet}(1,\cdots,1)$이다. 즉, 
 
-로 정의하자. 여기서 $U_{(0)}=0$로 정의한다.  
-그러면 $(Z_1,\ldots,Z_{n}) \sim \text{Dirichlet}(1,\ldots,1)$이다. 즉, 
-
-$$\text{pdf}_{Z}(z_1,\ldots,z_{n}) = \frac{\Gamma(n+1)}{\Gamma(1)\cdots\Gamma(1)} I_{(z_i>0, \sum_{i=1}^{n}z_i<1)}$$
+$$\text{pdf}_{Z}(z_1,\cdots,z_{n}) = \frac{\Gamma(n+1)}{\Gamma(1)\cdots\Gamma(1)} I_{(z_i>0, \sum_{i=1}^{n}z_i<1)}$$
 
 **풀이**  
 **(a)**  
@@ -1750,11 +1600,7 @@ x^{r-1}(1-x)^{n-r}I_{(0,1)}(x)$$
 이는 $\text{Beta}(r,n-r+1)$의 확률밀도함수이다.
 
 **(b)**  
-균등분포 $U(0,1)$에서의 순서통계량 $U_{(1)}<\cdots<U_{(n)}$에 대하여
-
-$$Z_i = U_{(i)} - U_{(i-1)}, \quad i=1,\ldots,n+1$$
-
-로 정의하자. 여기서 $U_{(0)}=0$, $U_{(n+1)}=1$로 정의한다.
+균등분포 $U(0,1)$에서의 순서통계량 $U_{(1)}<\cdots<U_{(n)}$에 대하여 $Z_i = U_{(i)} - U_{(i-1)}, \quad i=1,\cdots,n+1$ 로 정의하자. 여기서 $U_{(0)}=0$, $U_{(n+1)}=1$로 정의한다.
 
 변환
 
@@ -1775,7 +1621,7 @@ u_2 = z_1 + z_2\\
 u_n = z_1 + z_2 + \cdots + z_n
 \end{cases}$$
 
-야코비안을 계산하면
+야코비안행렬식을 계산하면
 
 $$J = \det\begin{pmatrix}
 1 & 0 & \cdots & 0\\
@@ -1784,13 +1630,13 @@ $$J = \det\begin{pmatrix}
 1 & 1 & \cdots & 1
 \end{pmatrix} = 1$$
 
-<예 4.3.2> (a)로부터 $(U_{(1)},\ldots,U_{(n)})$의 결합확률밀도함수는
+<예 4.3.2> (a)로부터 $(U_{(1)},\cdots,U_{(n)})$의 결합확률밀도함수는
 
-$$\text{pdf}_{U_{(1)},\ldots,U_{(n)}}(u_1,\ldots,u_n) = n! I_{(0<u_1<\cdots<u_n<1)}$$
+$$\text{pdf}_{U_{(1)},\cdots,U_{(n)}}(u_1,\cdots,u_n) = n! I_{(0<u_1<\cdots<u_n<1)}$$
 
 정리 4.1.1에 의해
 
-$$\text{pdf}_{Z_1,\ldots,Z_{n+1}}(z_1,\ldots,z_{n+1}) = n! \cdot |J| \cdot I_{(z_i>0, \sum_{i=1}^{n+1}z_i=1)} \\
+$$\text{pdf}_{Z_1,\cdots,Z_{n+1}}(z_1,\cdots,z_{n+1}) = n! \cdot |J| \cdot I_{(z_i>0, \sum_{i=1}^{n+1}z_i=1)} \\
 = \frac{\Gamma(n+1)}{\Gamma(1)\cdots\Gamma(1)} I_{(z_i>0, \sum_{i=1}^{n+1}z_i=1)}$$
 
 #### 예 4.3.3 지수분포에서의 순서통계량
@@ -1825,7 +1671,7 @@ y_2=z_1/3+z_2/2\\
 y_3=z_1/3+z_2/2+z_3
 \end{cases}$$
 
-야코비안은
+야코비안 행렬식은
 
 $$J=\det\begin{pmatrix}
 1/3 & 0 & 0\\
@@ -1841,8 +1687,8 @@ $$\text{pdf}_{Z_1,Z_2,Z_3}(z_1,z_2,z_3)
 
 즉 $Z_1,Z_2,Z_3$는 서로 독립이고 각각 $\text{Exp}(1)$을 따른다.
 
-> 참고: 일반화된 야코비안 계산 *(Generalized Jacobian Calculation)*  
-> 순서통계량 $(X_{(1)}, \ldots, X_{(n)})$에서 간격(spacing)으로의 변환
+> 참고: 일반화된 야코비안 행렬식 계산  
+> 순서통계량 $(X_{(1)}, \cdots, X_{(n)})$에서 간격(spacing)으로의 변환
 > 
 > $$\begin{cases}
 > Z_1 = n X_{(1)} \\
@@ -1904,26 +1750,27 @@ $$x_1 < x_2 \to F(x_1) < F(x_2)$$
 **(b)** $U\sim U(0,1)\Rightarrow F^{-1}(U)\overset{d}{\equiv}X$
   - $F^{-1}(U)$의 누적함수는 $F$로서 $F^{-1}(U)$와 $X$는 같은 분포를 갖는다
 
-#### 증명
+>**증명**  
+>
+>$F$가 순증가함수이므로 역함수 $F^{-1}$가 존재하며 다음이 성립한다.
+>
+>$$F(x)\le u\ \Leftrightarrow\ x\le F^{-1}(u) \\
+>F^{-1}(u)\le x\ \Leftrightarrow\ u\le F(x) \\
+>F(F^{-1}(u))=u$$
+>
+>$U \sim U(0,1)$이므로 $P(U \le u) = u$ ($0 \le u \le 1$)
+>
+>**(a)** $F(X) \sim U(0,1)$임을 보이기 위해, $Y = F(X)$로 정의하고 $Y$의 누적분포함수를 구한다.  
+>$0 \le u \le 1$에 대하여 $P(F(X)\le u)=P(X\le F^{-1}(u))$ 누적확률 표기를 활용하면, $=F(F^{-1}(u))=u$  
+>이는 $F(X)$가 균등분포 $U(0,1)$의 누적분포함수를 가짐을 의미한다. 따라서 $F(X) \sim U(0,1)$
+>
+>**(b)** $U \sim U(0,1)$일 때, $F^{-1}(U)$의 누적분포함수를 구한다.  
+>임의의 $x$에 대하여 $P(F^{-1}(U)\le x)=P(U\le F(x))=F(x)$  
+>따라서 $F^{-1}(U)$의 누적분포함수가 $F$와 같으므로, $F^{-1}(U) \overset{d}{\equiv} X$가 성립한다.
+>
+>**참고**: 이 정리는 난수 생성에 중요하게 활용된다. 균등분포를 따르는 난수 $U$를 생성한 후, 원하는 분포 $F$의 역함수를 적용하면 $F$를 따르는 난수를 얻을 수 있다.
 
-$F$가 순증가함수이므로 역함수 $F^{-1}$가 존재하며 다음이 성립한다.
-
-$$F(x)\le u\ \Leftrightarrow\ x\le F^{-1}(u) \\
-F^{-1}(u)\le x\ \Leftrightarrow\ u\le F(x) \\
-F(F^{-1}(u))=u$$
-
-$U \sim U(0,1)$이므로 $P(U \le u) = u$ ($0 \le u \le 1$)
-
-**(a)** $F(X) \sim U(0,1)$임을 보이기 위해, $Y = F(X)$로 정의하고 $Y$의 누적분포함수를 구한다.  
-$0 \le u \le 1$에 대하여 $P(F(X)\le u)=P(X\le F^{-1}(u))=F(F^{-1}(u))=u$  
-이는 $F(X)$가 균등분포 $U(0,1)$의 누적분포함수를 가짐을 의미한다. 따라서 $F(X) \sim U(0,1)$
-
-**(b)** $U \sim U(0,1)$일 때, $F^{-1}(U)$의 누적분포함수를 구한다.  
-임의의 $x$에 대하여 $P(F^{-1}(U)\le x)=P(U\le F(x))=F(x)$  
-따라서 $F^{-1}(U)$의 누적분포함수가 $F$와 같으므로, $F^{-1}(U) \overset{d}{\equiv} X$가 성립한다.
-
-**참고**: 이 정리는 난수 생성에 중요하게 활용된다. 균등분포를 따르는 난수 $U$를 생성한 후, 원하는 분포 $F$의 역함수를 적용하면 $F$를 따르는 난수를 얻을 수 있다.
-
+- (추가: 엄밀히는) $F^{−1}$ 의 정의역은 $[0,1]$이 아니라 $(0,1)$이다. 따라서 (a)의 계산을 $u=0,1$에 그대로 적용할 수 없다. "순증가이므로 역함수가 존재한다"는 표현에는 역함수의 정의역과 치역을 명시해야 한다.
 #### 예 4.3.4
 
 균등분포 $U(0,1)$에서의 순서통계량 $U_{(1)}<\cdots<U_{(n)}$과 지수분포 $\text{Exp}(1)$에서의 순서통계량 $X_{(1)}<\cdots<X_{(n)}$ 사이에는 다음 관계가 성립한다:
@@ -1962,37 +1809,37 @@ $$
 h(y)=F^{-1}(1-e^{-y})
 $$
 
-#### 증명
-<예 4.3.3>으로부터  
-$Z_1=nX_{(1)},\quad Z_1+Z_2=n X_{(1)}+(n-1)(X_{(2)}-X_{(1)})=(n-1)X_{(2)}+X_{(1)}$
-
-일반적으로 $Z_1+\cdots+Z_r=(n-r+1)X_{(r)}+\cdots+2X_{(n-1)}+X_{(n)}$ 이므로  
-$X_{(r)}=\frac{Z_1}{n}+\frac{Z_2}{n-1}+\cdots+\frac{Z_r}{n-r+1}$
-
-<예 4.3.4>로부터 $U_{(r)}=1-e^{-X_{(r)}}$ 이고, 정리 4.3.3에 의해 $X_{(r)}=F^{-1}(U_{(r)})$ 따라서
-
-$$
-X_{(r)}=F^{-1}(1-e^{-X_{(r)}})=h\left(\frac{Z_1}{n}+\cdots+\frac{Z_r}{n-r+1}\right)
-$$
+>**증명**  
+><예 4.3.3>으로부터  
+>$Z_1=nX_{(1)},\quad Z_1+Z_2=n X_{(1)}+(n-1)(X_{(2)}-X_{(1)})=(n-1)X_{(2)}+X_{(1)}$
+>
+>일반적으로 $Z_1+\cdots+Z_r=(n-r+1)X_{(r)}+\cdots+2X_{(n-1)}+X_{(n)}$ 이므로  
+>$X_{(r)}=\frac{Z_1}{n}+\frac{Z_2}{n-1}+\cdots+\frac{Z_r}{n-r+1}$
+>
+><예 4.3.4>로부터 $U_{(r)}=1-e^{-X_{(r)}}$ 이고, 정리 4.3.3에 의해 $X_{(r)}=F^{-1}(U_{(r)})$ 따라서
+>
+>$$
+>X_{(r)}=F^{-1}(1-e^{-X_{(r)}})=h\left(\frac{Z_1}{n}+\cdots+\frac{Z_r}{n-r+1}\right)
+>$$
 
 ### 순서통계량 분석의 여사건 접근법 *(Complement Event Approach for Order Statistics)*
 
 순서통계량의 분포, 특히 최소값(minimum)과 최대값(maximum)을 분석할 때 직접 누적분포함수 $F_Y(y) = P(Y \le y)$를 계산하기보다는 **여사건을 이용한 생존함수(survival function)** $\bar{F}_Y(y) = P(Y > y)$를 먼저 계산하는 것이 효율적이다.
 
 **최소값의 경우**  
-$X_{(1)} = \min(X_1, \ldots, X_n)$에 대하여
+$X_{(1)} = \min(X_1, \cdots, X_n)$에 대하여
 
 $$
-P(X_{(1)} > y) = P(X_1 > y, \ldots, X_n > y) = \prod_{i=1}^n P(X_i > y) = [1-F(y)]^n \\
+P(X_{(1)} > y) = P(X_1 > y, \cdots, X_n > y) = \prod_{i=1}^n P(X_i > y) = [1-F(y)]^n \\
 \therefore F_{X_{(1)}}(y) = 1 - [1-F(y)]^n \\
 \text{pdf}_{X_{(1)}}(y) = n[1-F(y)]^{n-1}f(y)
 $$
 
 **최대값의 경우**  
-$X_{(n)} = \max(X_1, \ldots, X_n)$에 대하여
+$X_{(n)} = \max(X_1, \cdots, X_n)$에 대하여
 
 $$
-P(X_{(n)} \le y) = P(X_1 \le y, \ldots, X_n \le y) = \prod_{i=1}^n P(X_i \le y) = [F(y)]^n \\
+P(X_{(n)} \le y) = P(X_1 \le y, \cdots, X_n \le y) = \prod_{i=1}^n P(X_i \le y) = [F(y)]^n \\
 \therefore F_{X_{(n)}}(y) = [F(y)]^n \\
 \text{pdf}_{X_{(n)}}(y) = n[F(y)]^{n-1}f(y)
 $$
@@ -2039,59 +1886,51 @@ $$
 \text{mgf}_X(t) = \exp\left( \mu^T t+\frac12 t^T\Sigma t \right),\quad t\in\mathbb{R}^n
 $$
 
-#### 증명
-
-$Z=(Z_1,\dots,Z_n)^T$의 확률밀도함수와 적률생성함수는
-
-$$
-\text{pdf}_Z(z)=(2\pi)^{-n/2}\exp\left(-\frac12 z^T z\right),\quad \text{mgf}_Z(s)=\exp\left(\frac12 s^T s\right)
-$$
-
-**(a)** $X=u(Z)=AZ+\mu$라 하면 $A$가 정칙행렬이므로 $u$는 일대일 함수이며 역변환은 $u^{-1}(x)=A^{-1}(x-\mu)$ 이고, 야코비안은 $|J_{u^{-1}}|=|\det(A^{-1})|=|\det(A)|^{-1}$  
-정리 4.1.1의 치환공식에 의해
-
-$$
-\text{pdf}_X(x)=\text{pdf}_Z(A^{-1}(x-\mu))|\det(A)|^{-1} \\
-=(2\pi)^{-n/2}\exp\left(-\frac12(A^{-1}(x-\mu))^T(A^{-1}(x-\mu))\right)|\det(A)|^{-1}
-$$
-
-여기서 $(A^{-1}(x-\mu))^T(A^{-1}(x-\mu))=(x-\mu)^T(A^{-1})^TA^{-1}(x-\mu)$이고,
-$\Sigma=AA^T$이므로 $\Sigma^{-1}=(AA^T)^{-1}=(A^T)^{-1}A^{-1}$이다.  
-또한 $\det(\Sigma)=\det(AA^T)=(\det A)^2$ 이므로  
-$|\det(A)|=(\det(\Sigma))^{1/2}, \quad |\det(A)|^{-1}=(\det(\Sigma))^{-1/2}$  
-그리고 $\det (aB) = a^n\det (B)$ 이므로  
-pdf의 정규화상수는
-
-$$
-\text{pdf}_X(x) = (\det(2\pi\Sigma))^{-1/2} \exp\left\{ -\frac12(x-\mu)^T\Sigma^{-1}(x-\mu) \right\}
-$$
-
-**(b)** 적률생성함수의 정의에 의해
-
-$$
-\text{mgf}_X(t)=E[e^{t^TX}]=E[e^{t^T(AZ+\mu)}]=E[e^{t^TAZ+t^T\mu}]=e^{t^T\mu}E[e^{(A^Tt)^TZ}]
-$$
-
-$Z$의 적률생성함수를 이용하면
-
-$$
-\text{mgf}_X(t)=e^{t^T\mu}\text{mgf}_Z(A^Tt)=e^{t^T\mu}\exp\left(\frac12(A^Tt)^T(A^Tt)\right)
-$$
-
-$(A^Tt)^T(A^Tt)=t^TAA^Tt=t^T\Sigma t$이므로
-
-$$
-\text{mgf}_X(t)=\exp\left(\mu^Tt+\frac12 t^T\Sigma t\right)
-$$
+>**증명**  
+>
+>$Z=(Z_1,\dots,Z_n)^T$의 확률밀도함수와 적률생성함수는
+>
+>$$
+>\text{pdf}_Z(z)=(2\pi)^{-n/2}\exp\left(-\frac12 z^T z\right),\quad \text{mgf}_Z(s)=\exp\left(\frac12 s^T s\right)
+>$$
+>
+>**(a)** $X=u(Z)=AZ+\mu$라 하면 $A$가 정칙행렬이므로 $u$는 일대일 함수이며 역변환은 $u^{-1}(x)=A^{-1}(x-\mu)$ 이고, 야코비안행렬식은 $|J_{u^{-1}}|=|\det(A^{-1})|=|\det(A)|^{-1}$  
+>정리 4.1.1의 치환공식에 의해
+>
+>$$
+>\text{pdf}_X(x)=\text{pdf}_Z(A^{-1}(x-\mu))|\det(A)|^{-1} \\
+>=(2\pi)^{-n/2}\exp\left(-\frac12(A^{-1}(x-\mu))^T(A^{-1}(x-\mu))\right)|\det(A)|^{-1}
+>$$
+>
+>여기서 $(A^{-1}(x-\mu))^T(A^{-1}(x-\mu))=(x-\mu)^T(A^{-1})^TA^{-1}(x-\mu)$이고,
+>$\Sigma=AA^T$이므로 $\Sigma^{-1}=(AA^T)^{-1}=(A^T)^{-1}A^{-1}$이다.  
+>또한 $\det(\Sigma)=\det(AA^T)=(\det A)^2$ 이므로 $|\det(A)|=(\det(\Sigma))^{1/2}, \quad |\det(A)|^{-1}=(\det(\Sigma))^{-1/2}$ 그리고 $\det (aB) = a^n\det (B)$ 이므로  
+>pdf의 정규화상수는
+>
+>$$
+>\text{pdf}_X(x) = (\det(2\pi\Sigma))^{-1/2} \exp\left\{ -\frac12(x-\mu)^T\Sigma^{-1}(x-\mu) \right\}
+>$$
+>
+>**(b)** 적률생성함수의 정의에 의해
+>
+>$$
+>\text{mgf}_X(t)=E[e^{t^TX}]=E[e^{t^T(AZ+\mu)}]=E[e^{t^TAZ+t^T\mu}]=e^{t^T\mu}E[e^{(A^Tt)^TZ}]
+>$$
+>
+>$Z$의 적률생성함수를 이용하면
+>
+>$$
+>\text{mgf}_X(t)=e^{t^T\mu}\text{mgf}_Z(A^Tt)=e^{t^T\mu}\exp\left(\frac12(A^Tt)^T(A^Tt)\right) =\exp\left(\mu^Tt+\frac12 t^T\Sigma t\right)
+>$$
 
 ### 다변량 정규분포의 정의 *(Definition of Multivariate Normal Distribution)*
 
 $n$차원 확률벡터 $X$가 다음 조건들 중 하나를 만족하면 X의 분포를 정칙다변량정규분포(nonsingular multivariate normal distribution)라 한다: $X\sim N_n(\mu,\Sigma) \quad \text{or} \quad X\sim N(\mu,\Sigma)$  
 여기서 $\mu$는 $n$차원 평균벡터(mean vector), $\Sigma$는 $n\times n$ 공분산행렬(covariance matrix).
 
-1. $X=AZ+\mu$, $Z\sim N_n(0,I)$, $AA^T=\Sigma$
+1. $X=AZ+\mu, \quad Z\sim N_n(0,I), \quad AA^T=\Sigma$
     - A = nxm행렬이어도 됨
-2. $X=\Sigma^{1/2}Z+\mu$, $Z\sim N_n(0,I)$
+2. $X=\Sigma^{1/2}Z+\mu, \quad Z\sim N_n(0,I)$
 3. $\text{mgf}_X(t)=\exp(\mu^Tt+\frac12 t^T\Sigma t)$
 4. $\Sigma$가 정칙행렬이고 $pdf_X(x) = (\det (2\pi\Sigma))^{-1/2} \exp\left\{-\frac12(x-\mu)^T\Sigma^{-1}(x-\mu)\right\}$
     - $\Sigma$가 정칙행렬이 아니면: 특이다변량정규분포(singular multivariate normal distribution)라 함. 이 경우 확률밀도함수가 존재하지 않음 (대학원 수준에선 있긴함.)
@@ -2103,40 +1942,35 @@ $n$차원 확률벡터 $X$가 다음 조건들 중 하나를 만족하면 X의 �
 >  - $\Sigma^{1/2}\Sigma^{1/2}=\Sigma$인 실수가 원소인 대칭행렬 $\Sigma^{1/2}$가 존재함
 >  - 참고: Statistics_02_추가_분산행렬의 스펙트럼 분해와 기하학적 해석.md
 
-$$
-\text{pdf}_X(x) = (\det(2\pi\Sigma))^{-1/2} \exp\left\{-\frac12(x-\mu)^T\Sigma^{-1}(x-\mu)\right\},\quad x\in\mathbb{R}^n
-$$
-
-TODO:
 ### 정리 4.4.2 평균벡터와 분산행렬 *(Mean Vector and Covariance Matrix)*
 
 (a) $X\sim N_n(\mu,\Sigma)$이면: $E(X)=\mu,\quad \text{Var}(X)=\Sigma$
 
 (b) $X\sim N(\mu,\Sigma) \Leftrightarrow X\overset{d}{\equiv}\Sigma^{1/2}Z+\mu,\quad Z\sim N_n(0,I)$
 
-#### 증명
-
-**(a)** 누율생성함수의 미분으로 증명가능하지만, $X=AZ+\mu$, $Z\sim N_n(0,I)$의 표현을 이용한다.
-
-**평균벡터:** $E(X)=E(AZ+\mu)=AE(Z)+\mu=A\cdot 0+\mu=\mu$
-
-**공분산행렬:** $\text{Var}(X)=E[(X-E(X))(X-E(X))^T]=E[(AZ)(AZ)^T] =E[AZZ^TA^T]=AE[ZZ^T]A^T$
-
-$Z\sim N_n(0,I)$이므로 $E[ZZ^T]=I$이다. 따라서 $\text{Var}(X)=AIA^T=AA^T=\Sigma$
-
-**(b)** 다변량 정규분포의 특성화는 적률생성함수로도 가능하다.
-
-$(\Rightarrow)$ $X\sim N(\mu,\Sigma)$이면 정리 4.4.1 (b)에 의해  
-$\text{mgf}_X(t)=\exp\left(\mu^Tt+\frac12 t^T\Sigma t\right)$
-
-$(\Leftarrow)$ $Y=\Sigma^{1/2}Z+\mu$로 정의하면
-
-$$
-\text{mgf}_Y(t)=E[e^{t^TY}]=E[e^{t^T(\Sigma^{1/2}Z+\mu)}]=e^{t^T\mu}E[e^{t^T\Sigma^{1/2}Z}] =e^{t^T\mu}E[e^{(\Sigma^{1/2}t)^TZ}] \\
-=e^{t^T\mu}\text{mgf}_Z(\Sigma^{1/2}t) =e^{t^T\mu}\exp\left(\frac12(\Sigma^{1/2}t)^T(\Sigma^{1/2}t)\right)=\exp\left(\mu^Tt+\frac12 t^T\Sigma t\right)
-$$
-
-적률생성함수가 같으므로 $X\overset{d}{\equiv}Y=\Sigma^{1/2}Z+\mu \sim N(\mu,\Sigma)$이다.
+>**증명**  
+>
+>**(a)** 누율생성함수의 미분으로 증명가능하지만, $X=AZ+\mu$, $Z\sim N_n(0,I)$의 표현을 이용한다.
+>
+>**평균벡터:** $E(X)=E(AZ+\mu)=AE(Z)+\mu=A\cdot 0+\mu=\mu$
+>
+>**공분산행렬:** $\text{Var}(X)=E[(X-E(X))(X-E(X))^T]=E[(AZ)(AZ)^T] =E[AZZ^TA^T]=AE[ZZ^T]A^T$
+>
+>$Z\sim N_n(0,I)$이므로 $E[ZZ^T]=I$이다. 따라서 $\text{Var}(X)=AIA^T=AA^T=\Sigma$
+>
+>**(b)** 다변량 정규분포의 특성화는 적률생성함수로도 가능하다.
+>
+>$(\Rightarrow)$ $X\sim N(\mu,\Sigma)$이면 정리 4.4.1 (b)에 의해  
+>$\text{mgf}_X(t)=\exp\left(\mu^Tt+\frac12 t^T\Sigma t\right)$
+>
+>$(\Leftarrow)$ $Y=\Sigma^{1/2}Z+\mu$로 정의하면
+>
+>$$
+>\text{mgf}_Y(t)=E[e^{t^TY}]=E[e^{t^T(\Sigma^{1/2}Z+\mu)}]=e^{t^T\mu}E[e^{t^T\Sigma^{1/2}Z}] =e^{t^T\mu}E[e^{(\Sigma^{1/2}t)^TZ}] \\
+>=e^{t^T\mu}\text{mgf}_Z(\Sigma^{1/2}t) =e^{t^T\mu}\exp\left(\frac12(\Sigma^{1/2}t)^T(\Sigma^{1/2}t)\right)=\exp\left(\mu^Tt+\frac12 t^T\Sigma t\right)
+>$$
+>
+>적률생성함수가 같으므로 $X\overset{d}{\equiv}Y=\Sigma^{1/2}Z+\mu \sim N(\mu,\Sigma)$이다.
 
 #### 예 4.4.1 이변량 정규분포 *(Bivariate Normal Distribution)*
 
@@ -2183,7 +2017,6 @@ $P\left(\frac{X_2-\mu_2}{\sigma_2}=-\frac{X_1-\mu_1}{\sigma_1}\right)=1$
 $X\sim N_n(\mu,\Sigma)$이고 $A$가 $m\times n$ 상수행렬, $b$가 $m$차원 상수벡터이면
 
 $$
-
 AX+b\sim N_m(A\mu+b,A\Sigma A^T)
 $$
 
@@ -2201,24 +2034,24 @@ $$
 **(c) 선형변환의 독립성**  
 $A$, $B$가 상수행렬이고 $\text{Cov}(AX,BX)=A\Sigma B^T=0$ 이면 $AX\perp BX$
 
-#### 증명
-
-**(a)** $X=\Sigma^{1/2}Z+\mu$, $Z\sim N_n(0,I)$로 표현하면  
-$AX+b=A(\Sigma^{1/2}Z+\mu)+b=A\Sigma^{1/2}Z+(A\mu+b)$
-
-$A\Sigma^{1/2}Z$는 표준정규분포를 따르는 확률변수들의 선형결합이므로 다변량 정규분포를 따르며, 평균은 $A\mu+b$이고 공분산행렬은  
-$(A\Sigma^{1/2})(A\Sigma^{1/2})^T=A\Sigma^{1/2}(\Sigma^{1/2})^TA^T=A\Sigma A^T$
-
-**(b)** 적률생성함수를 이용한다. $X=(X_1^T,X_2^T)^T$에 대해
-
-$$
-\text{mgf}_{X_1,X_2}(t_1,t_2)=\exp\left(\mu^T\begin{pmatrix}t_1\\t_2\end{pmatrix}+\frac12\begin{pmatrix}t_1^T & t_2^T\end{pmatrix}\Sigma\begin{pmatrix}t_1\\t_2\end{pmatrix}\right)
-$$
-
-$\text{Cov}(X_1,X_2)=0$이면 $\Sigma$가 블록대각행렬이 되어 $\text{mgf}_{X_1,X_2}(t_1,t_2)=\text{mgf}_{X_1}(t_1)\cdot\text{mgf}_{X_2}(t_2)$  
-따라서 $X_1$과 $X_2$는 독립이다.
-
-**(c)** (a)에 의해 $(AX,BX)^T$도 다변량 정규분포를 따르고, 공분산이 0이므로 (b)에 의해 독립이다.
+>**증명**  
+>
+>**(a)** $X=\Sigma^{1/2}Z+\mu$, $Z\sim N_n(0,I)$로 표현하면  
+>$AX+b=A(\Sigma^{1/2}Z+\mu)+b=A\Sigma^{1/2}Z+(A\mu+b)$
+>
+>$A\Sigma^{1/2}Z$는 표준정규분포를 따르는 확률변수들의 선형결합이므로 다변량 정규분포를 따르며, 평균은 $A\mu+b$이고 공분산행렬은  
+>$(A\Sigma^{1/2})(A\Sigma^{1/2})^T=A\Sigma^{1/2}(\Sigma^{1/2})^TA^T=A\Sigma A^T$
+>
+>**(b)** 적률생성함수를 이용한다. $X=(X_1^T,X_2^T)^T$에 대해
+>
+>$$
+>\text{mgf}_{X_1,X_2}(t_1,t_2)=\exp\left(\mu^T\begin{pmatrix}t_1\\t_2\end{pmatrix}+\frac12\begin{pmatrix}t_1^T & t_2^T\end{pmatrix}\Sigma\begin{pmatrix}t_1\\t_2\end{pmatrix}\right)
+>$$
+>
+>$\text{Cov}(X_1,X_2)=0$이면 $\Sigma$가 블록대각행렬이 되어 $\text{mgf}_{X_1,X_2}(t_1,t_2)=\text{mgf}_{X_1}(t_1)\cdot\text{mgf}_{X_2}(t_2)$  
+>따라서 $X_1$과 $X_2$는 독립이다.
+>
+>**(c)** (a)에 의해 $(AX,BX)^T$도 다변량 정규분포를 따르고, 공분산이 0이므로 (b)에 의해 독립이다.
 
 #### 예 4.4.2 이변량 정규분포에서의 독립성
 
@@ -2254,76 +2087,77 @@ N\left(\mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1),
 \Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}\right)
 $$
 
-#### 증명
-
-**(a)** 정리 4.4.3 (a)를 이용한다. $A=(I_{k_1},0)$로 선택하면
-
-$$
-
-AX=X_1\sim N(A\mu,A\Sigma A^T)=N(\mu_1,\Sigma_{11})
-$$
-
-**(b)** 조건부분포를 두 가지 방법으로 유도할 수 있다. 책에서도 두가지 모두 소개함.  
-
-**방법 1: 조건부 확률밀도함수 직접 계산**  
-결합확률밀도함수를 주변확률밀도함수로 나누어 조건부 확률밀도함수를 구한다.
-
-$$
-\text{pdf}_{X_2|X_1}(x_2|x_1) = \frac{\text{pdf}_{X_1,X_2}(x_1,x_2)}{\text{pdf}_{X_1}(x_1)}
-$$
-
-결합확률밀도함수는 $\text{pdf}_{X_1,X_2}(x_1,x_2) = (\det(2\pi\Sigma))^{-1/2}\exp\left\{-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)\right\}$
-
-주변확률밀도함수는 (a)로부터 $\text{pdf}_{X_1}(x_1) = (\det(2\pi\Sigma_{11}))^{-1/2}\exp\left\{-\frac{1}{2}(x_1-\mu_1)^T\Sigma_{11}^{-1}(x_1-\mu_1)\right\}$
-
-분할된 역행렬 공식(partitioned inverse formula)에 의해
-
-$$
-\Sigma^{-1} = \begin{pmatrix}
-\Sigma_{11}^{-1}+\Sigma_{11}^{-1}\Sigma_{12}M^{-1}\Sigma_{21}\Sigma_{11}^{-1} & -\Sigma_{11}^{-1}\Sigma_{12}M^{-1} \\
--M^{-1}\Sigma_{21}\Sigma_{11}^{-1} & M^{-1}
-\end{pmatrix}
-$$
-
-여기서 $M=\Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}$이다.  
-이차형식을 전개하면
-
-$$
-(x-\mu)^T\Sigma^{-1}(x-\mu) = (x_1-\mu_1)^T\Sigma_{11}^{-1}(x_1-\mu_1)\\
-+ (x_2-\mu_2-\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1))^TM^{-1}(x_2-\mu_2-\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1))
-$$
-
-$$
-\therefore \text{pdf}_{X_2|X_1}(x_2|x_1) = (\det(2\pi M))^{-1/2}\exp\left\{-\frac{1}{2}(x_2-\mu_{2|1})^TM^{-1}(x_2-\mu_{2|1})\right\}
-$$
-
-여기서 $\mu_{2|1}=\mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1)$  
-즉, $X_2|X_1=x_1 \sim N(\mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1), \Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})$
-
-**방법 2: 선형변환을 이용한 유도**  
-새로운 확률변수를 정의한다: $Y = X_2 - \mu_2 - \Sigma_{21}\Sigma_{11}^{-1}(X_1-\mu_1)$
-
-정리 4.4.3 (a)에 의해 $Y$도 정규분포를 따르며, 평균은  
-$E(Y) = E(X_2) - \mu_2 - \Sigma_{21}\Sigma_{11}^{-1}E(X_1-\mu_1) = \mu_2 - \mu_2 - 0 = 0$
-
-분산행렬은 ($\text{Var}(A+CB)=\text{Var}(A)+C\text{Var}(B)C^T+\text{Cov}(A,B)C^T+C\text{Cov}(B,A)$)이므로
-
-$$
-\text{Var}(Y) = \text{Var}(X_2 - \Sigma_{21}\Sigma_{11}^{-1}(X_1-\mu_1)) \\
-= \text{Var}(X_2) - \Sigma_{21}\Sigma_{11}^{-1}\text{Cov}(X_1,X_2)^T - \text{Cov}(X_2,X_1)\Sigma_{11}^{-1}\Sigma_{21}^T\\
-+ \Sigma_{21}\Sigma_{11}^{-1}\text{Var}(X_1)\Sigma_{11}^{-1}\Sigma_{21}^T\\
-= \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12} + \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{11}\Sigma_{11}^{-1}\Sigma_{12}\\
-= \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}
-$$
-
-또한 $Y$와 $X_1$의 공분산을 계산하면  
-$\text{Cov}(Y,X_1) = \text{Cov}(X_2,X_1) - \Sigma_{21}\Sigma_{11}^{-1}\text{Var}(X_1) = \Sigma_{21} - \Sigma_{21} = 0$
-
-따라서 정리 4.4.3 (b)에 의해 $Y \perp X_1$이고, 이는 $Y$의 분포가 $X_1$의 값에 무관함을 의미한다.
-
-$$
-\therefore X_2 | (X_1=x_1) \\ = Y + \mu_2 + \Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1) \sim N(0+\mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1), \Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})
-$$
+>**증명**  
+>
+>**(a)** 정리 4.4.3 (a)를 이용한다. $A=(I_{k_1},0)$로 선택하면
+>
+>$$
+>AX=X_1\sim N(A\mu,A\Sigma A^T)=N(\mu_1,\Sigma_{11})
+>$$
+>
+>**(b)** 조건부분포를 두 가지 방법으로 유도할 수 있다. 책에서도 두가지 모두 소개함.  
+>
+>**방법 1: 조건부 확률밀도함수 직접 계산**  
+>결합확률밀도함수를 주변확률밀도함수로 나누어 조건부 확률밀도함수를 구한다.
+>
+>$$
+>\text{pdf}_{X_2|X_1}(x_2|x_1) = \frac{\text{pdf}_{X_1,X_2}(x_1,x_2)}{\text{pdf}_{X_1}(x_1)}
+>$$
+>
+>결합확률밀도함수는 $\text{pdf}_{X_1,X_2}(x_1,x_2) = (\det(2\pi\Sigma))^{-1/2}\exp\left\{-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)\right\}$
+>
+>주변확률밀도함수는 (a)로부터 $\text{pdf}_{X_1}(x_1) = (\det(2\pi\Sigma_{11}))^{-1/2}\exp\left\{-\frac{1}{2}(x_1-\mu_1)^T\Sigma_{11}^{-1}(x_1-\mu_1)\right\}$
+>
+>분할된 역행렬 공식(partitioned inverse formula)에 의해
+>
+>$$
+>\Sigma^{-1} = \begin{pmatrix}
+>\Sigma_{11}^{-1}+\Sigma_{11}^{-1}\Sigma_{12}M^{-1}\Sigma_{21}\Sigma_{11}^{-1} & -\Sigma_{11}^{-1}\Sigma_{12}M^{-1} \\
+>-M^{-1}\Sigma_{21}\Sigma_{11}^{-1} & M^{-1}
+>\end{pmatrix}
+>$$
+>
+>여기서 $M=\Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}$이다.  
+>이차형식을 전개하면
+>
+>$$
+>(x-\mu)^T\Sigma^{-1}(x-\mu) = (x_1-\mu_1)^T\Sigma_{11}^{-1}(x_1-\mu_1)\\
+>+ (x_2-\mu_2-\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1))^TM^{-1}(x_2-\mu_2-\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1))
+>$$
+>
+> 행렬식 부분은 슈어 보수행렬식 공식에 따라 $det(\Sigma)=det(\Sigma_{11}​)det(M)$ 을 사용한다. (참고: 분할행렬의 행렬식과 역행렬)
+>
+>$$
+>\therefore \text{pdf}_{X_2|X_1}(x_2|x_1) = (\det(2\pi M))^{-1/2}\exp\left\{-\frac{1}{2}(x_2-\mu_{2|1})^TM^{-1}(x_2-\mu_{2|1})\right\}
+>$$
+>
+>여기서 $\mu_{2|1}=\mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1)$  
+>즉, $X_2|X_1=x_1 \sim N(\mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1), \Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})$
+>
+>**방법 2: 선형변환을 이용한 유도**  
+>새로운 확률변수를 정의한다: $Y = X_2 - \mu_2 - \Sigma_{21}\Sigma_{11}^{-1}(X_1-\mu_1)$
+>
+>정리 4.4.3 (a)에 의해 $Y$도 정규분포를 따르며, 평균은  
+>$E(Y) = E(X_2) - \mu_2 - \Sigma_{21}\Sigma_{11}^{-1}E(X_1-\mu_1) = \mu_2 - \mu_2 - 0 = 0$
+>
+>분산행렬은 ($\text{Var}(A+CB)=\text{Var}(A)+C\text{Var}(B)C^T+\text{Cov}(A,B)C^T+C\text{Cov}(B,A)$)이므로
+>
+>$$
+>\text{Var}(Y) = \text{Var}(X_2 - \Sigma_{21}\Sigma_{11}^{-1}(X_1-\mu_1)) \\
+>= \text{Var}(X_2) + \Sigma_{21}\Sigma_{11}^{-1}\text{Var}(X_1)\Sigma_{11}^{-1}\Sigma_{21}^T - \text{Cov}(X_2,X_1)\Sigma_{11}^{-1}\Sigma_{21}^T - \Sigma_{21}\Sigma_{11}^{-1}\text{Cov}(X_1,X_2) \\
+>= \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12} + \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}\\
+>= \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}
+>$$
+>
+>또한 $Y$와 $X_1$의 공분산을 계산하면  
+>$\text{Cov}(Y,X_1) = \text{Cov}(X_2,X_1) - \Sigma_{21}\Sigma_{11}^{-1}\text{Var}(X_1) = \Sigma_{21} - \Sigma_{21} = 0$
+>
+>따라서 정리 4.4.3 (b)에 의해 $Y \perp X_1$이고, 이는 $Y$의 분포가 $X_1$의 값에 무관함을 의미한다.  
+>또한 $x_1$이 조건으로 주어졌으므로 $X_1$관련 항은 상수항이 되므로,
+>
+>$$
+>\therefore X_2 | (X_1=x_1) \\ = Y + \mu_2 + \Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1) \sim N(0+\mu_2+\Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1), \Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})
+>$$
 
 #### 예 4.4.3 이변량 정규분포의 조건부분포
 
@@ -2351,7 +2185,7 @@ $$
 
 조건부 분산: $\Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}=\sigma_2^2-\rho\sigma_1\sigma_2\cdot\frac{1}{\sigma_1^2}\cdot\rho\sigma_1\sigma_2=\sigma_2^2(1-\rho^2)$
 
-(TODO: 암기!!!!!!!!)
+TODO:  
 ### 정리 4.4.5 이차형식의 분포 *(Distribution of Quadratic Forms)*
 
 **(a) 이차형식의 카이제곱분포**
@@ -2369,40 +2203,40 @@ $$Z^TAZ\sim\chi^2(r),\quad r=\text{trace}(A)$$
 **각주**  
 일반적으로 $x^TAx = x^T\left(\frac{A+A^T}{2}\right)x$이므로 $Z^TAZ$에서 행렬 $A$는 언제나 대칭행렬인 것으로 가정되어 있으며, (b)에서의 조건 $A^2=A$는 $Z^TAZ\sim\chi^2(r)$이기 위한 필요충분조건으로 알려져 있다.
 
-#### 증명
-
-**(a)** $X=\Sigma^{1/2}Z+\mu, \quad Z\sim N_k(0,I)$로 표현하면
-
-$$
-X-\mu=\Sigma^{1/2}Z \\
-\therefore (X-\mu)^T\Sigma^{-1}(X-\mu)=(\Sigma^{1/2}Z)^T\Sigma^{-1}(\Sigma^{1/2}Z)=Z^T(\Sigma^{1/2})^T\Sigma^{-1}\Sigma^{1/2}Z
-$$
-
-$\Sigma^{1/2}$는 대칭행렬이므로 $(\Sigma^{1/2})^T=\Sigma^{1/2}$이고, $\Sigma^{1/2}\Sigma^{1/2}=\Sigma$이므로
-
-$$
-(\Sigma^{1/2})^T\Sigma^{-1}\Sigma^{1/2}=\Sigma^{1/2}\Sigma^{-1}\Sigma^{1/2}=\Sigma^{-1/2}\Sigma\Sigma^{-1/2}=I \\
-\therefore (X-\mu)^T\Sigma^{-1}(X-\mu)=Z^TZ=\sum_{i=1}^k Z_i^2
-$$
-
-$Z_i\overset{iid}{\sim} N(0,1)$이므로 카이제곱분포의 정의에 의해 $Z^TZ=\sum_{i=1}^k Z_i^2\sim\chi^2(k)$
-
-**(b)** $A$가 대칭 멱등행렬이므로 스펙트럴 분해(spectral decomposition)를 이용하면 $A=P\Lambda P^T$
-
-여기서 $P$는 직교행렬($P^TP=PP^T=I$), $\Lambda=\text{diag}(\lambda_1,\ldots,\lambda_n)$는 고유값 대각행렬이다: $P\Lambda P^TP\Lambda P^T=P\Lambda^2P^T=P\Lambda P^T$
-
-양변에 $P^T$를 왼쪽에서, $P$를 오른쪽에서 곱하면 $\Lambda^2=\Lambda$를 얻는다. 따라서 모든 고유값 $\lambda_i$는 $\lambda_i^2=\lambda_i$를 만족하므로 $\lambda_i\in\{0,1\}$이다.  
-처음 $r$개의 고유값이 1이라고 가정하면 $\Lambda=\begin{pmatrix}I_r & 0\\0 & 0\end{pmatrix}$  
-
-$W=P^TZ$로 정의하면, $P$가 직교행렬이고 $Z\sim N_n(0,I)$이므로
-
-$$
-W\sim N_n(P^T\cdot 0, P^TIP)=N_n(0,I) \\
-\therefore Z^TAZ=Z^TP\Lambda P^TZ=(P^TZ)^T\Lambda(P^TZ)=W^T\Lambda W \\
-=\sum_{i=1}^r W_i^2\cdot 1+\sum_{i=r+1}^n W_i^2\cdot 0=\sum_{i=1}^r W_i^2
-$$
-
-$W_i\overset{iid}{\sim} N(0,1)$ 이므로 카이제곱분포의 정의에 의해 $Z^TAZ=\sum_{i=1}^r W_i^2\sim\chi^2(r)$
+>**증명**  
+>
+>**(a)** $X=\Sigma^{1/2}Z+\mu, \quad Z\sim N_k(0,I)$로 표현하면
+>
+>$$
+>X-\mu=\Sigma^{1/2}Z \\
+>\therefore (X-\mu)^T\Sigma^{-1}(X-\mu)=(\Sigma^{1/2}Z)^T\Sigma^{-1}(\Sigma^{1/2}Z)=Z^T(\Sigma^{1/2})^T\Sigma^{-1}\Sigma^{1/2}Z
+>$$
+>
+>$\Sigma^{1/2}$는 대칭행렬이므로 $(\Sigma^{1/2})^T=\Sigma^{1/2}$이고, $\Sigma^{1/2}\Sigma^{1/2}=\Sigma$이므로
+>
+>$$
+>(\Sigma^{1/2})^T\Sigma^{-1}\Sigma^{1/2}=\Sigma^{1/2}\Sigma^{-1}\Sigma^{1/2}=\Sigma^{-1/2}\Sigma\Sigma^{-1/2}=I \\
+>\therefore (X-\mu)^T\Sigma^{-1}(X-\mu)=Z^TZ=\sum_{i=1}^k Z_i^2
+>$$
+>
+>$Z_i\overset{iid}{\sim} N(0,1)$이므로 카이제곱분포의 정의에 의해 $Z^TZ=\sum_{i=1}^k Z_i^2\sim\chi^2(k)$
+>
+>**(b)** $A$가 대칭 멱등행렬이므로 스펙트럴 분해(spectral decomposition)를 이용하면 $A=P\Lambda P^T$
+>
+>여기서 $P$는 직교행렬($P^TP=PP^T=I$), $\Lambda=\text{diag}(\lambda_1,\cdots,\lambda_n)$는 고유값 대각행렬이다: $P\Lambda P^TP\Lambda P^T=P\Lambda^2P^T=P\Lambda P^T$
+>
+>양변에 $P^T$를 왼쪽에서, $P$를 오른쪽에서 곱하면 $\Lambda^2=\Lambda$를 얻는다. 따라서 모든 고유값 $\lambda_i$는 $\lambda_i^2=\lambda_i$를 만족하므로 $\lambda_i\in\{0,1\}$이다.  
+>처음 $r$개의 고유값이 1이라고 가정하면 $\Lambda=\begin{pmatrix}I_r & 0\\0 & 0\end{pmatrix}$  
+>
+>$W=P^TZ$로 정의하면, $P$가 직교행렬이고 $Z\sim N_n(0,I)$이므로
+>
+>$$
+>W\sim N_n(P^T\cdot 0, P^TIP)=N_n(0,I) \\
+>\therefore Z^TAZ=Z^TP\Lambda P^TZ=(P^TZ)^T\Lambda(P^TZ)=W^T\Lambda W \\
+>=\sum_{i=1}^r W_i^2\cdot 1+\sum_{i=r+1}^n W_i^2\cdot 0=\sum_{i=1}^r W_i^2
+>$$
+>
+>$W_i\overset{iid}{\sim} N(0,1)$ 이므로 카이제곱분포의 정의에 의해 $Z^TAZ=\sum_{i=1}^r W_i^2\sim\chi^2(r)$
 
 TODO:  
 #### 예 4.4.4 일원분류모형에서의 표본분포 *(Sampling Distribution in One-Way Classification Model)*
@@ -2410,7 +2244,7 @@ TODO:
 정리 4.2.7의 (a)에 따르면, 일원분류모형에서 정규분포 $N(\mu_i,\sigma^2/n_i)$를 따르는 서로 독립인 표본평균 $\bar{X}_i \quad (i=1, \dots, k)$ 에 대하여 $\sum_{i=1}^k n_i(\bar{X}_i-\bar{X}-(\mu_i-\bar{\mu}))^2/\sigma^2 \sim \chi^2(k-1)$ 가 성립한다. 이를 **정리 4.4.5**를 이용하여 증명하라
 
 **풀이**  
-$Y_i = \bar X_i - \bar X -(\mu_i -\bar\mu) \quad (i=1,\dots,k)$이때, $\sum_{i=1}^{k} n_i Y_i = 0$ 이므로 $Y_k = -\frac{1}{n_k}\sum_{i=1}^{k-1} n_i Y_i$ 로 표현할 수 있다. 따라서 $Y=(Y_1,\ldots,Y_r)^T$, $r=k-1$로 두면 충분하다.
+$Y_i = \bar X_i - \bar X -(\mu_i -\bar\mu) \quad (i=1,\dots,k)$이때, $\sum_{i=1}^{k} n_i Y_i = 0$ 이므로 $Y_k = -\frac{1}{n_k}\sum_{i=1}^{k-1} n_i Y_i$ 로 표현할 수 있다. 따라서 $Y=(Y_1,\cdots,Y_r)^T$, $r=k-1$로 두면 충분하다.
 
 $\bar X = \sum_{i=1}^k n_i\bar X_i / n, \quad \bar\mu = \sum_{i=1}^k n_i\mu_i / n, \quad n=n_1 + \cdots + n_k \\ Y=(Y_1,\dots,Y_r)^T, \quad r=k-1$ 라 하면
 
@@ -2419,11 +2253,14 @@ $E(Y_i) = E(\bar{X}_i - \mu_i) - E(\bar{X} - \bar{\mu}) = \mu_i - \mu_i - (\bar{
 >$\text{Var}(Y_i) = \text{Var}(\bar{X}_i - \mu_i) + \text{Var}(\bar{X} - \bar{\mu}) - 2\text{Cov}(\bar{X}_i - \mu_i, \bar{X} - \bar{\mu})$  
 >각 항을 계산하면:
 >
->$$\text{Var}(\bar{X}_i - \mu_i) = \text{Var}(\bar{X}_i) = \frac{\sigma^2}{n_i} \\
->\text{Var}(\bar{X} - \bar{\mu}) = \frac{1}{n^2}\sum_{j=1}^k n_j^2 \cdot \frac{\sigma^2}{n_j} = \frac{\sigma^2}{n} \\
->\text{Cov}(\bar{X}_i - \mu_i, \bar{X} - \bar{\mu}) = \frac{1}{n}n_i \text{Var}(\bar{X}_i - \mu_i) = \frac{1}{n}n_i \cdot \frac{\sigma^2}{n_i} = \frac{\sigma^2}{n}$$
->
->$$\therefore \text{Var}(Y_i) = \frac{\sigma^2}{n_i} + \frac{\sigma^2}{n} - 2 \cdot \frac{\sigma^2}{n} = \left(\frac{1}{n_i} - \frac{1}{n}\right)\sigma^2$$
+>$$
+>\begin{aligned}
+>\text{Var}(\bar{X}_i - \mu_i) &= \text{Var}(\bar{X}_i) = \frac{\sigma^2}{n_i} \\
+>\text{Var}(\bar{X} - \bar{\mu}) &= \frac{1}{n^2}\sum_{j=1}^k n_j^2 \cdot \frac{\sigma^2}{n_j} = \frac{\sigma^2}{n} \\
+>\text{Cov}(\bar{X}_i - \mu_i, \bar{X} - \bar{\mu}) &= \frac{1}{n}n_i \text{Var}(\bar{X}_i - \mu_i) = \frac{1}{n}n_i \cdot \frac{\sigma^2}{n_i} = \frac{\sigma^2}{n} \\
+>\therefore \text{Var}(Y_i) &= \frac{\sigma^2}{n_i} + \frac{\sigma^2}{n} - 2 \cdot \frac{\sigma^2}{n} = \left(\frac{1}{n_i} - \frac{1}{n}\right)\sigma^2
+>\end{aligned}
+>$$
 >
 >한편, 공분산은
 >
@@ -2471,6 +2308,7 @@ $$
 
 TODO:
 #### 예 4.4.5 표본분산의 표본분포 *(Sampling Distribution of Sample Variance)*
+(정리 4.2.2 증명의 다른 버전임.)
 
 정규분포 $N(\mu,\sigma^2)$에서의 랜덤표본 $X_1,\dots,X_n$에 대하여
 
@@ -2481,21 +2319,22 @@ $$
 
 라 하면, $\bar{X}$와 $S^2$는 서로 독립이며 $\frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)$
 
-**풀이**  
-벡터 $X=(X_1,\dots,X_n)^T$는 다변량 정규분포를 따른다: $X\sim N_n(\mu \mathbf{1},\sigma^2 I), \quad \mathbf{1} = (1, \dots, 1)^T$  
-또한 $\bar{X} = n^{-1}\mathbf{1}^TX, \quad (n-1)S^2 = \sum_{i=1}^n (X_i-\bar{X})^2 = X^T(I-n^{-1}\mathbf{1}\mathbf{1}^T)X$ 으로 표현할 수 있다.  
-
-한편 $I-n^{-1}\mathbf{1}\mathbf{1}^T = A$라 하면, $A$는 대칭 멱등행렬이고 $\mathbf{1}^TA=0$이므로  
-$\text{Cov}(\bar{X},AX) = \text{Cov}(n^{-1}\mathbf{1}^TX,AX)
-=n^{-1}\mathbf{1}^T\text{Var}(X)A^T =n^{-1}\mathbf{1}^T(\sigma^2 I)A=0$.  
-즉, $\bar{X}$와 $AX$는 모두 $X$의 선형변환이므로 joint normal이며, 정리 4.4.3 (c)에 의해 $\bar{X}$와 $AX$는 서로 독립이다.
-
-$A^2 = A$ 이므로 $X^TAX = (AX)^T AX$.  
-즉, $(n-1)S^2$는 $AX$의 함수이므로 역시  $\bar X$와 독립이다.
-
-또한, $X^T AX /\sigma^2 = (X-\mu\mathbf{1})^T A (X-\mu\mathbf{1})/\sigma^2 = Z^T A Z$ 이고  
-($Z=(X-\mu\mathbf{1})/\sigma \sim N_n(0,I)$)  
-$\text{trace}(A) = n-1$이므로 정리 4.4.5 (b)에 의해 $Z^T A Z \sim \chi^2(n-1)$ 이다.
+>**증명**  
+>벡터 $X=(X_1,\dots,X_n)^T$는 다변량 정규분포를 따른다: $X\sim N_n(\mu \mathbf{1},\sigma^2 I), \quad \mathbf{1} = (1, \dots, 1)^T$  
+>또한 $\bar{X} = n^{-1}\mathbf{1}^TX, \quad (n-1)S^2 = \sum_{i=1}^n (X_i-\bar{X})^2 = X^T(I-n^{-1}\mathbf{1}\mathbf{1}^T)X$ 으로 표현할 수 있다.  
+>
+>한편 $I-n^{-1}\mathbf{1}\mathbf{1}^T = A$라 하면, $A$는 대칭 멱등행렬이고 $\mathbf{1}^TA=0$이므로  
+>$\text{Cov}(\bar{X},AX) = \text{Cov}(n^{-1}\mathbf{1}^TX,AX)
+>=n^{-1}\mathbf{1}^T\text{Var}(X)A^T =n^{-1}\mathbf{1}^T(\sigma^2 I)A=0$.  
+>즉, $\bar{X}$와 $AX$는 모두 $X$의 선형변환이므로 joint normal이며, 정리 4.4.3 (c)에 의해 $\bar{X}$와 $AX$는 서로 독립이다.
+>
+>$A^2 = A$ 이므로 $X^TAX = (AX)^T AX$.  
+>즉, $(n-1)S^2$는 $AX$의 함수이므로 역시  $\bar X$와 독립이다.
+>
+>또한, $X^T AX /\sigma^2 = (X-\mu\mathbf{1})^T A (X-\mu\mathbf{1})/\sigma^2 = Z^T A Z$ 이고  
+>($Z=(X-\mu\mathbf{1})/\sigma \sim N_n(0,I)$)  
+>$\text{trace}(A) = n-1$이므로 정리 4.4.5 (b)에 의해 $Z^T A Z \sim \chi^2(n-1)$ 이다.
+>
 
 ### 선형회귀모형 *(Linear Regression Model)*
 
@@ -2506,21 +2345,21 @@ $\text{trace}(A) = n-1$이므로 정리 4.4.5 (b)에 의해 $Z^T A Z \sim \chi^2
 정규 오차항을 갖는 경우의 관측값은 다음과 같이 표현된다:
 
 $$
-Y_i = \beta_0x_{i0} + \beta_1 x_{i1} + \cdots + \beta_p x_{ip} + e_i, \quad i=1,\ldots,n
+Y_i = \beta_0x_{i0} + \beta_1 x_{i1} + \cdots + \beta_p x_{ip} + e_i, \quad i=1,\cdots,n
 $$
 
 여기서 오차항은 $e_i \overset{iid}{\sim} N(0,\sigma^2)$
 
 이를 행렬 형태로 정리하면 $Y = X\beta + e$
 
-- $Y = (Y_1,\ldots,Y_n)^T$: $n$차원 반응벡터
+- $Y = (Y_1,\cdots,Y_n)^T$: $n$차원 반응벡터
 - $X = \begin{pmatrix} 1 & x_{11} & \cdots & x_{1p} \\ \vdots & \vdots & \ddots & \vdots \\ 1 & x_{n1} & \cdots & x_{np} \end{pmatrix}$: $n \times (p+1)$ 설계행렬
-- $\beta = (\beta_0, \beta_1, \ldots, \beta_p)^T$: $(p+1)$차원 회귀계수벡터
-- $e = (e_1,\ldots,e_n)^T \sim N_n(0,\sigma^2 I)$: $n$차원 오차벡터
+- $\beta = (\beta_0, \beta_1, \cdots, \beta_p)^T$: $(p+1)$차원 회귀계수벡터
+- $e = (e_1,\cdots,e_n)^T \sim N_n(0,\sigma^2 I)$: $n$차원 오차벡터
 
 따라서 $Y \sim N_n(X\beta, \sigma^2 I)$이다.
 
-선형회귀모형에서 $X$는 $n\times(p+1)$ 설계행렬(design matrix)이며, 설계행렬 $X$의 계수(rank)가 $p+1$인 것으로 가정하고, 선형관계의 구체적 형태를 나타내는 $\beta = (\beta_0, \beta_1, \ldots, \beta_p)^T$를 **회귀계수(regression coefficient)** 라 하며, 이의 추측값으로는  
+선형회귀모형에서 $X$는 $n\times(p+1)$ 설계행렬(design matrix)이며, 설계행렬 $X$의 계수(rank)가 $p+1$인 것으로 가정하고, 선형관계의 구체적 형태를 나타내는 $\beta = (\beta_0, \beta_1, \cdots, \beta_p)^T$를 **회귀계수(regression coefficient)** 라 하며, 이의 추측값으로는  
 흔히 $\hat{\beta} = (X^TX)^{-1}X^TY$ 로 정의되는 **표본회귀계수(sample regression coefficient)** 또는 **최소제곱추정량(least squares estimator)** 을 사용한다.  
 이 추정량은 잔차제곱합(residual sum of squares)
 
@@ -2534,9 +2373,7 @@ $$
 
 선형회귀모형에서 $p=1$이고, $x_0 = 1$인 경우, 즉
 
-$$Y_i = \beta_0 + \beta_1 x_i + e_i, \quad i=1,\ldots,n$$
-
-$$e_i \overset{iid}{\sim} N(0, \sigma^2)$$
+$$Y_i = \beta_0 + \beta_1 x_i + e_i, \quad i=1,\cdots,n, \quad e_i \overset{iid}{\sim} N(0, \sigma^2)$$
 
 로 나타내어지는 모형을 **단순선형회귀모형(simple linear regression model)** 이라 한다. 이 경우는
 
@@ -2585,65 +2422,65 @@ $$\hat{\beta}\sim N_{p+1}(\beta,\sigma^2(X^TX)^{-1})$$
 
 $$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-p-1)$$
 
-#### 증명
-
-**(a)** $Y\sim N_n(X\beta,\sigma^2I)$이므로 정리 4.4.3 (a)에 의해
-
-$$\hat{\beta}=(X^TX)^{-1}X^TY\sim N_{p+1}((X^TX)^{-1}X^TX\beta,\sigma^2(X^TX)^{-1}X^TI X(X^TX)^{-1}) \\
-=N_{p+1}(\beta,\sigma^2(X^TX)^{-1})$$
-
-**(b)** 추정량의 독립성
-
-투영행렬(projection matrix) $H=X(X^TX)^{-1}X^T$를 정의하면, $H$는 대칭 멱등행렬이다.  
-이를 이용하면 예측값과 잔차를 다음과 같이 표현할 수 있다:
-
-$$\hat{Y}=X\hat{\beta}=HY, \quad Y-X\hat{\beta}=(I-H)Y$$
-
-$\hat{\beta}$와 $(I-H)Y$의 공분산을 계산하면
-
-$$\text{Cov}(\hat{\beta},(I-H)Y)=(X^TX)^{-1}X^T\text{Var}(Y)(I-H)^T$$
-
-$$=(X^TX)^{-1}X^T\cdot\sigma^2I\cdot(I-H)=\sigma^2(X^TX)^{-1}X^T(I-H)$$
-
-여기서
-
-$$X^T(I-H)=X^T-X^TH=X^T-X^TX(X^TX)^{-1}X^T=X^T-X^T=0$$
-
-따라서
-
-$$\text{Cov}(\hat{\beta},(I-H)Y)=0$$
-
-정리 4.4.3 (c)에 의해, 다변량 정규분포를 따르는 확률변수들의 공분산이 0이면 독립이므로 $\hat{\beta}$와 $(I-H)Y$는 독립이고, $(I-H)Y$의 함수인 $\hat{\sigma}^2$도 $\hat{\beta}$와 독립이다.
-
-**(c)** 오차분산 추정량의 분포
-
-$Z=(Y-X\beta)/\sigma\sim N_n(0,I)$로 표준화하면
-
-$$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}=\frac{1}{\sigma^2}(Y-X\hat{\beta})^T(Y-X\hat{\beta})$$
-
-$Y-X\hat{\beta}=(I-H)Y$이고, $(I-H)$의 성질 $(I-H)X=X-HX=X-X=0$
-
-$$\therefore (I-H)X\beta=0$$
-
-따라서
-
-$$Y-X\hat{\beta}=(I-H)Y=(I-H)(Y-X\beta)+(I-H)X\beta=(I-H)(Y-X\beta)$$
-
-이를 이용하면
-
-$$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}=\frac{1}{\sigma^2}(Y-X\beta)^T(I-H)(Y-X\beta)=Z^T(I-H)Z$$
-
-행렬 $A=I-H$는 대칭 멱등행렬이며:
-- 대칭성: $A^T=(I-H)^T=I-H^T=I-H=A$
-- 멱등성: $A^2=(I-H)^2=I-2H+H^2=I-2H+H=I-H=A$
-
-이때 $\text{trace}(A)=\text{trace}(I-H)=\text{trace}(I)-\text{trace}(H)$ 이고  
-$\text{trace}(H)=\text{trace}(X(X^TX)^{-1}X^T)=\text{trace}(X^TX(X^TX)^{-1})=\text{trace}(I_{p+1})=p+1$  
-따라서 $\text{trace}(A)=n-(p+1)$
-
-정리 4.4.5 (b)에 의해, $Z\sim N_n(0,I)$이고 $A$가 대칭 멱등행렬이면 $Z^TAZ\sim\chi^2(\text{trace}(A))$이므로
-
-$$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-p-1)$$
+>**증명**  
+>
+>**(a)** $Y\sim N_n(X\beta,\sigma^2I)$이므로 정리 4.4.3 (a)에 의해
+>
+>$$\hat{\beta}=(X^TX)^{-1}X^TY\sim N_{p+1}((X^TX)^{-1}X^TX\beta,\sigma^2(X^TX)^{-1}X^TI X(X^TX)^{-1}) \\
+>=N_{p+1}(\beta,\sigma^2(X^TX)^{-1})$$
+>
+>**(b)** 추정량의 독립성
+>
+>투영행렬(projection matrix) $H=X(X^TX)^{-1}X^T$를 정의하면, $H$는 대칭 멱등행렬이다.  
+>이를 이용하면 예측값과 잔차를 다음과 같이 표현할 수 있다:
+>
+>$$\hat{Y}=X\hat{\beta}=HY, \quad Y-X\hat{\beta}=(I-H)Y$$
+>
+>$\hat{\beta}$와 $(I-H)Y$의 공분산을 계산하면
+>
+>$$\text{Cov}(\hat{\beta},(I-H)Y)=(X^TX)^{-1}X^T\text{Var}(Y)(I-H)^T$$
+>
+>$$=(X^TX)^{-1}X^T\cdot\sigma^2I\cdot(I-H)=\sigma^2(X^TX)^{-1}X^T(I-H)$$
+>
+>여기서
+>
+>$$X^T(I-H)=X^T-X^TH=X^T-X^TX(X^TX)^{-1}X^T=X^T-X^T=0$$
+>
+>따라서
+>
+>$$\text{Cov}(\hat{\beta},(I-H)Y)=0$$
+>
+>정리 4.4.3 (c)에 의해, 다변량 정규분포를 따르는 확률변수들의 공분산이 0이면 독립이므로 $\hat{\beta}$와 $(I-H)Y$는 독립이고, $(I-H)Y$의 함수인 $\hat{\sigma}^2$도 $\hat{\beta}$와 독립이다.
+>
+>**(c)** 오차분산 추정량의 분포
+>
+>$Z=(Y-X\beta)/\sigma\sim N_n(0,I)$로 표준화하면
+>
+>$$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}=\frac{1}{\sigma^2}(Y-X\hat{\beta})^T(Y-X\hat{\beta})$$
+>
+>$Y-X\hat{\beta}=(I-H)Y$이고, $(I-H)$의 성질 $(I-H)X=X-HX=X-X=0$
+>
+>$$\therefore (I-H)X\beta=0$$
+>
+>따라서
+>
+>$$Y-X\hat{\beta}=(I-H)Y=(I-H)(Y-X\beta)+(I-H)X\beta=(I-H)(Y-X\beta)$$
+>
+>이를 이용하면
+>
+>$$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}=\frac{1}{\sigma^2}(Y-X\beta)^T(I-H)(Y-X\beta)=Z^T(I-H)Z$$
+>
+>행렬 $A=I-H$는 대칭 멱등행렬이며:
+>- 대칭성: $A^T=(I-H)^T=I-H^T=I-H=A$
+>- 멱등성: $A^2=(I-H)^2=I-2H+H^2=I-2H+H=I-H=A$
+>
+>이때 $\text{trace}(A)=\text{trace}(I-H)=\text{trace}(I)-\text{trace}(H)$ 이고  
+>$\text{trace}(H)=\text{trace}(X(X^TX)^{-1}X^T)=\text{trace}(X^TX(X^TX)^{-1})=\text{trace}(I_{p+1})=p+1$  
+>따라서 $\text{trace}(A)=n-(p+1)$
+>
+>정리 4.4.5 (b)에 의해, $Z\sim N_n(0,I)$이고 $A$가 대칭 멱등행렬이면 $Z^TAZ\sim\chi^2(\text{trace}(A))$이므로
+>
+>$$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-p-1)$$
 
 #### 예 4.4.8 단순선형회귀모형에서의 표본분포 *(Sampling Distribution in Simple Linear Regression Model)*
 
@@ -2652,51 +2489,53 @@ $$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-p-1)$$
 $$\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2}{n-2}
 = \sum_{i=1}^n(Y_i - \bar Y - \hat{\beta}_1 (x_{i1} - \bar{x_1}))^2/(n-2)$$
 
-증명: 예 4.4.6에서 구한
-
-$$X^TX = \begin{pmatrix} n & n\bar{x} \\ n\bar{x} & \sum_{i=1}^n x_i^2 \end{pmatrix}, \quad
-S_{xx} = \sum_{i=1}^n (x_i - \bar{x})^2 = \sum_{i=1}^n x_i^2 - n\bar{x}^2$$
-
-를 이용하면
-
-$$(X^TX)^{-1} = \frac{1}{nS_{xx}} \begin{pmatrix} \sum_{i=1}^n x_i^2 & -n\bar{x} \\ -n\bar{x} & n \end{pmatrix}
-= \frac{1}{S_{xx}} \begin{pmatrix} \sum_{i=1}^n x_i^2/n & -\bar{x} \\ -\bar{x} & 1 \end{pmatrix}$$
-
-따라서 정리 4.4.6 (a)에 의해
-
-$$\hat{\beta} = \begin{pmatrix}\hat{\beta}_0\\\hat{\beta}_1\end{pmatrix}
-\sim N_2\left(
-\begin{pmatrix}\beta_0\\\beta_1\end{pmatrix},
-\frac{\sigma^2}{S_{xx}}
-\begin{pmatrix}
-\sum_{i=1}^n x_i^2/n & -\bar{x}\\
--\bar{x} & 1
-\end{pmatrix}
-\right) \\
-\hat{\beta}_1 \sim N\left(\beta_1, \frac{\sigma^2}{S_{xx}}\right)$$
-
-정리 4.4.6 (c)에 의해
-
-$$\frac{(n-2)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-2)$$
-
-이고 정리 4.4.6 (b)에 의해 $\hat{\beta}$와 $\hat{\sigma}^2$는 서로 독립이다. 따라서 t분포의 대의적 정의로부터
-
-$$\frac{\hat{\beta}_1-\beta_1}{\sqrt{\hat{\sigma}^2/S_{xx}}}
-= \frac{(\hat{\beta}_1-\beta_1)/\sqrt{\sigma^2/S_{xx}}}{\sqrt{(n-2)\hat{\sigma}^2/\sigma^2/(n-2)}}
-\sim t(n-2)$$
-
-이 경우에 평균오차제곱합은 다음의 공식을 이용하여 계산할 수 있다:
-
-$$\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2}{n-2} = \frac{S_{YY}-(S_{xY})^2/S_{xx}}{n-2} \\
-\text{where} \ S_{YY}=\sum_{i=1}^n(Y_i-\bar{Y})^2, \quad S_{xY}=\sum_{i=1}^n(x_i-\bar{x})(Y_i-\bar{Y})$$
+>**증명**
+>
+>예 4.4.6에서 구한
+>
+>$$X^TX = \begin{pmatrix} n & n\bar{x} \\ n\bar{x} & \sum_{i=1}^n x_i^2 \end{pmatrix}, \quad
+>S_{xx} = \sum_{i=1}^n (x_i - \bar{x})^2 = \sum_{i=1}^n x_i^2 - n\bar{x}^2$$
+>
+>를 이용하면
+>
+>$$(X^TX)^{-1} = \frac{1}{nS_{xx}} \begin{pmatrix} \sum_{i=1}^n x_i^2 & -n\bar{x} \\ -n\bar{x} & n \end{pmatrix}
+>= \frac{1}{S_{xx}} \begin{pmatrix} \sum_{i=1}^n x_i^2/n & -\bar{x} \\ -\bar{x} & 1 \end{pmatrix}$$
+>
+>따라서 정리 4.4.6 (a)에 의해
+>
+>$$\hat{\beta} = \begin{pmatrix}\hat{\beta}_0\\\hat{\beta}_1\end{pmatrix}
+>\sim N_2\left(
+>\begin{pmatrix}\beta_0\\\beta_1\end{pmatrix},
+>\frac{\sigma^2}{S_{xx}}
+>\begin{pmatrix}
+>\sum_{i=1}^n x_i^2/n & -\bar{x}\\
+>-\bar{x} & 1
+>\end{pmatrix}
+>\right) \\
+>\hat{\beta}_1 \sim N\left(\beta_1, \frac{\sigma^2}{S_{xx}}\right)$$
+>
+>정리 4.4.6 (c)에 의해
+>
+>$$\frac{(n-2)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-2)$$
+>
+>이고 정리 4.4.6 (b)에 의해 $\hat{\beta}$와 $\hat{\sigma}^2$는 서로 독립이다. 따라서 t분포의 대의적 정의로부터
+>
+>$$\frac{\hat{\beta}_1-\beta_1}{\sqrt{\hat{\sigma}^2/S_{xx}}}
+>= \frac{(\hat{\beta}_1-\beta_1)/\sqrt{\sigma^2/S_{xx}}}{\sqrt{(n-2)\hat{\sigma}^2/\sigma^2/(n-2)}}
+>\sim t(n-2)$$
+>
+>이 경우에 평균오차제곱합은 다음의 공식을 이용하여 계산할 수 있다:
+>
+>$$\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2}{n-2} = \frac{S_{YY}-(S_{xY})^2/S_{xx}}{n-2} \\
+>\text{where} \ S_{YY}=\sum_{i=1}^n(Y_i-\bar{Y})^2, \quad S_{xY}=\sum_{i=1}^n(x_i-\bar{x})(Y_i-\bar{Y})$$
 
 ### 다변량 정규분포의 성질 정리
 
 $X \sim N_n(\mu, \Sigma)$일 때, 다음의 성질들이 성립한다.
 
-**(1) 표준형 표현 *(Standard Form Representation)***
+**(1) 표준형 표현 *(Standard Form Representation)***  
 
-$$X \sim N(\mu, \Sigma) \Leftrightarrow X \overset{d}{\equiv} \Sigma^{1/2}Z + \mu, \quad Z \sim N_n(0,I)$$
+$X \sim N(\mu, \Sigma) \Leftrightarrow X \overset{d}{\equiv} \Sigma^{1/2}Z + \mu, \quad Z \sim N_n(0,I)$
 
 **(2) 선형변환에 대한 불변성 *(Closure under Linear Transformations)***
 
@@ -2712,9 +2551,7 @@ $$X_1 + X_2 \sim N_n(\mu_1+\mu_2, \Sigma_1+\Sigma_2)$$
 
 **(4) 공분산과 독립성의 동치 *(Equivalence of Zero Covariance and Independence)***
 
-임의의 상수행렬 $A$, $B$에 대하여
-
-$$AX \perp BX \Leftrightarrow \text{Cov}(AX, BX) = A\Sigma B^T = 0$$
+임의의 상수행렬 $A$, $B$에 대하여 $AX \perp BX \Leftrightarrow \text{Cov}(AX, BX) = A\Sigma B^T = 0$
 
 **(5) 조건부분포의 정규성 *(Normality of Conditional Distribution)***
 
@@ -2732,19 +2569,15 @@ N\left(
 
 (a) **주변분포:** $X_1 \sim N(\mu_1, \Sigma_{11})$
 
-(b) **조건부분포:**
-
-$$X_2 \mid X_1=x_1 \sim N\left(\mu_2 + \Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1), \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}\right)$$
+(b) **조건부분포:** $X_2 \mid X_1=x_1 \sim N\left(\mu_2 + \Sigma_{21}\Sigma_{11}^{-1}(x_1-\mu_1), \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}\right)$
 
 **(6) 이차형식의 카이제곱분포 *(Chi-squared Distribution of Quadratic Forms)***
 
 $Z \sim N_n(0,I)$이고 $A$가 $n \times n$ 대칭행렬일 때
 
-$$Z^TAZ \sim \chi^2(r) \Leftrightarrow A^2 = A \text{ (멱등성)}, \quad r = \text{trace}(A)$$
+$Z^TAZ \sim \chi^2(r) \Leftrightarrow A^2 = A \text{ (멱등성)}, \quad r = \text{trace}(A)$
 
-일반적으로, $X \sim N_n(\mu, \Sigma)$이고 $\Sigma$가 정칙행렬이면
-
-$$(X-\mu)^T\Sigma^{-1}(X-\mu) \sim \chi^2(n)$$
+일반적으로, $X \sim N_n(\mu, \Sigma)$이고 $\Sigma$가 정칙행렬이면 $(X-\mu)^T\Sigma^{-1}(X-\mu) \sim \chi^2(n)$
 
 
 ## 대표적 표본분포 정리 
@@ -2755,4 +2588,4 @@ $$(X-\mu)^T\Sigma^{-1}(X-\mu) \sim \chi^2(n)$$
 | **t 분포**<br>*(Student's t distribution)*<br>$X\sim t(r)$<br>분산을 모르고 평균을 표준화했을 때의 불확실성 | **대의적 정의:** $X\overset{d}{\equiv}\frac{Z}{\sqrt{V/r}},\quad Z\sim N(0,1),\ V\sim\chi^2(r),\ Z\perp V$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma((r+1)/2)}{\sqrt{\pi r}\Gamma(r/2)}\left(1+\frac{x^2}{r}\right)^{-(r+1)/2}$ | $E(X)=0$ $(r>1)$ | $\text{Var}(X)=\frac{r}{r-2}$ $(r>2)$ |
 | **F 분포**<br>*(F distribution)*<br>$X\sim F(r_1,r_2)$<br>두 변동성의 상대적 크기 비교 | **대의적 정의:** $X\overset{d}{\equiv}\frac{V_1/r_1}{V_2/r_2},\quad V_1\sim\chi^2(r_1),\ V_2\sim\chi^2(r_2),\ V_1\perp V_2$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma((r_1+r_2)/2)}{\Gamma(r_1/2)\Gamma(r_2/2)}\left(\frac{r_1}{r_2}\right)^{r_1/2}\frac{x^{r_1/2-1}}{(1+r_1x/r_2)^{(r_1+r_2)/2}}I_{(0,\infty)}(x)$ | $E(X)=\frac{r_2}{r_2-2}$ $(r_2>2)$ | $\text{Var}(X)=\frac{2r_2^2(r_1+r_2-2)}{r_1(r_2-2)^2(r_2-4)}$ $(r_2>4)$ |
 | **베타분포**<br>*(Beta distribution)*<br>$X\sim\text{Beta}(\alpha_1,\alpha_2)$<br>성공확률이 얼마일지에 대한 불확실성 | **대의적 정의:** $X\overset{d}{\equiv}\frac{Y_1}{Y_1+Y_2},\quad Y_i\sim\text{Gamma}(\alpha_i,\beta),\ Y_1\perp Y_2$<br><br>**확률밀도함수:**<br>$\text{pdf}_X(x)=\frac{\Gamma(\alpha_1+\alpha_2)}{\Gamma(\alpha_1)\Gamma(\alpha_2)}x^{\alpha_1-1}(1-x)^{\alpha_2-1}I_{(0,1)}(x)$ | $E(X)=\frac{\alpha_1}{\alpha_1+\alpha_2}$ | $\text{Var}(X)=\frac{\alpha_1\alpha_2}{(\alpha_1+\alpha_2)^2(\alpha_1+\alpha_2+1)}$ |
-| **디리클레분포**<br>*(Dirichlet distribution)*<br>$(Y_1,\ldots,Y_k)\sim$<br>$\text{Dirichlet}(\alpha_1,\ldots,\alpha_{k+1})$<br>범주별 성공확률에 대한 불확실성 | **대의적 정의:** $(Y_1,\ldots,Y_k)\overset{d}{\equiv}\left(\frac{X_1}{\sum_{j=1}^{k+1}X_j},\ldots,\frac{X_k}{\sum_{j=1}^{k+1}X_j}\right)$<br>$X_i\overset{ind}{\sim}\text{Gamma}(\alpha_i,\beta)$<br><br>**확률밀도함수:**<br>$\text{pdf}(y_1,\ldots,y_k)=\frac{\Gamma(\alpha_1+\cdots+\alpha_{k+1})}{\Gamma(\alpha_1)\cdots\Gamma(\alpha_{k+1})}\prod_{i=1}^k y_i^{\alpha_i-1}(1-y_1-\cdots-y_k)^{\alpha_{k+1}-1}$ | $E(Y_i)=\frac{\alpha_i}{\alpha_0}$<br>$(\alpha_0=\sum_{j=1}^{k+1}\alpha_j)$ | $\text{Var}(Y_i)=\frac{\alpha_i(\alpha_0-\alpha_i)}{\alpha_0^2(\alpha_0+1)}$ |
+| **디리클레분포**<br>*(Dirichlet distribution)*<br>$(Y_1,\cdots,Y_k)\sim$<br>$\text{Dirichlet}(\alpha_1,\cdots,\alpha_{k+1})$<br>범주별 성공확률에 대한 불확실성 | **대의적 정의:** $(Y_1,\cdots,Y_k)\overset{d}{\equiv}\left(\frac{X_1}{\sum_{j=1}^{k+1}X_j},\cdots,\frac{X_k}{\sum_{j=1}^{k+1}X_j}\right)$<br>$X_i\overset{ind}{\sim}\text{Gamma}(\alpha_i,\beta)$<br><br>**확률밀도함수:**<br>$\text{pdf}(y_1,\cdots,y_k)=\frac{\Gamma(\alpha_1+\cdots+\alpha_{k+1})}{\Gamma(\alpha_1)\cdots\Gamma(\alpha_{k+1})}\prod_{i=1}^k y_i^{\alpha_i-1}(1-y_1-\cdots-y_k)^{\alpha_{k+1}-1}$ | $E(Y_i)=\frac{\alpha_i}{\alpha_0}$<br>$(\alpha_0=\sum_{j=1}^{k+1}\alpha_j)$ | $\text{Var}(Y_i)=\frac{\alpha_i(\alpha_0-\alpha_i)}{\alpha_0^2(\alpha_0+1)}$ |

@@ -1053,6 +1053,13 @@ $$ \{a_0,a_1,a_2,\ldots\} \quad\longleftrightarrow\quad A(s)=\sum_{k=0}^{\infty}
 
 생성함수라는 개념은 조합론이나 수열 문제에서 먼저 자연스럽게 등장하며, 확률론에서는 수열 $a_k$ 자리에 확률 $P(X=k)$를 넣어 사용한다.
 
+[참고]
+- $s$ 와 $t$는 모두 생성함수의 독립변수 또는 인자(argument)다. 문맥에 따라 보조변수(dummy variable), 변환변수(transform variable), 생성변수라고도 한다.
+- $s$는 수열을 한 멱급수에 넣을 수 있게한다
+- $s=0$ 이면 확률질량을 추출
+- $s=1$이면 계승적률을 추출
+- 확률의 합성곱을 보통의 함수 곱셈으로 바꾸는 역할도 한다.
+
 #### 성질 (Properties of PGF)
 (a) **확률질량함수 복원 (PMF Recovery)**  
 
