@@ -2011,6 +2011,7 @@ $P\left(\frac{X_2-\mu_2}{\sigma_2}=-\frac{X_1-\mu_1}{\sigma_1}\right)=1$
 즉, $X_2=\mu_2-\frac{\sigma_2}{\sigma_1}(X_1-\mu_1)$ (완전한 음의 선형관계)  
 이 경우 $(X_1,X_2)$의 결합분포는 일차원 직선 위에 집중되어 있어 2차원 확률밀도함수가 존재하지 않는다.
 
+TODO:
 ### 정리 4.4.3 다변량 정규분포의 성질 *(Properties of Multivariate Normal Distribution)*
 
 **(a) 선형변환(linear transformation)**  
@@ -2051,7 +2052,11 @@ $A$, $B$가 상수행렬이고 $\text{Cov}(AX,BX)=A\Sigma B^T=0$ 이면 $AX\perp
 >$\text{Cov}(X_1,X_2)=0$이면 $\Sigma$가 블록대각행렬이 되어 $\text{mgf}_{X_1,X_2}(t_1,t_2)=\text{mgf}_{X_1}(t_1)\cdot\text{mgf}_{X_2}(t_2)$  
 >따라서 $X_1$과 $X_2$는 독립이다.
 >
->**(c)** (a)에 의해 $(AX,BX)^T$도 다변량 정규분포를 따르고, 공분산이 0이므로 (b)에 의해 독립이다.
+>**(c)** (a)에 의해 
+>
+> $$\begin{pmatrix}AX\\BX\end{pmatrix}=\begin{pmatrix}A\\B\end{pmatrix}X \sim N\left(\begin{pmatrix}A\mu\\B\mu\end{pmatrix}, \begin{pmatrix}A\Sigma A^T & A\Sigma B^T \\ B\Sigma A^T & B\Sigma B^T\end{pmatrix} \right)$$
+>
+> $(AX,BX)^T$도 다변량 정규분포를 따르고, 공분산이 0이므로 (b)에 의해 독립이다.
 
 #### 예 4.4.2 이변량 정규분포에서의 독립성
 
@@ -2118,7 +2123,7 @@ $$
 >$$
 >
 >여기서 $M=\Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}$이다.  
->이차형식을 전개하면
+>이차형식을 전개하면 (좀 더러움 혹은 $LDL^T$분해 사용)
 >
 >$$
 >(x-\mu)^T\Sigma^{-1}(x-\mu) = (x_1-\mu_1)^T\Sigma_{11}^{-1}(x_1-\mu_1)\\
@@ -2244,7 +2249,7 @@ TODO:
 정리 4.2.7의 (a)에 따르면, 일원분류모형에서 정규분포 $N(\mu_i,\sigma^2/n_i)$를 따르는 서로 독립인 표본평균 $\bar{X}_i \quad (i=1, \dots, k)$ 에 대하여 $\sum_{i=1}^k n_i(\bar{X}_i-\bar{X}-(\mu_i-\bar{\mu}))^2/\sigma^2 \sim \chi^2(k-1)$ 가 성립한다. 이를 **정리 4.4.5**를 이용하여 증명하라
 
 **풀이**  
-$Y_i = \bar X_i - \bar X -(\mu_i -\bar\mu) \quad (i=1,\dots,k)$이때, $\sum_{i=1}^{k} n_i Y_i = 0$ 이므로 $Y_k = -\frac{1}{n_k}\sum_{i=1}^{k-1} n_i Y_i$ 로 표현할 수 있다. 따라서 $Y=(Y_1,\cdots,Y_r)^T$, $r=k-1$로 두면 충분하다.
+$Y_i = \bar X_i - \bar X -(\mu_i -\bar\mu) \quad (i=1,\dots,k)$이때, $\sum_{i=1}^{k} n_i Y_i = 0$ 이므로 $Y_k = -\frac{1}{n_k}\sum_{i=1}^{k-1} n_i Y_i$ 로 표현할 수 있다. 즉 $k$ 자유도가 1 줄어든다. 따라서 $Y=(Y_1,\cdots,Y_r)^T$, $r=k-1$로 두면 충분하다.
 
 $\bar X = \sum_{i=1}^k n_i\bar X_i / n, \quad \bar\mu = \sum_{i=1}^k n_i\mu_i / n, \quad n=n_1 + \cdots + n_k \\ Y=(Y_1,\dots,Y_r)^T, \quad r=k-1$ 라 하면
 
@@ -2344,13 +2349,14 @@ $$
 
 정규 오차항을 갖는 경우의 관측값은 다음과 같이 표현된다:
 
+>주의: 오차항은 잔차랑 다름. 잔차는 $e$, 오차항은 $\varepsilon$로 회귀분석에서는 엄밀히 나누지만, 여기 수리통계학에서는 오차항을 $e$로 표기한다.
+
 $$
-Y_i = \beta_0x_{i0} + \beta_1 x_{i1} + \cdots + \beta_p x_{ip} + e_i, \quad i=1,\cdots,n
+Y_i = \beta_0x_{i0} + \beta_1 x_{i1} + \cdots + \beta_p x_{ip} + e_i, \quad x_{i0} = \mathbf 1, \quad i=1,\cdots,n \\
+\Leftrightarrow Y = X\beta + e
 $$
 
 여기서 오차항은 $e_i \overset{iid}{\sim} N(0,\sigma^2)$
-
-이를 행렬 형태로 정리하면 $Y = X\beta + e$
 
 - $Y = (Y_1,\cdots,Y_n)^T$: $n$차원 반응벡터
 - $X = \begin{pmatrix} 1 & x_{11} & \cdots & x_{1p} \\ \vdots & \vdots & \ddots & \vdots \\ 1 & x_{n1} & \cdots & x_{np} \end{pmatrix}$: $n \times (p+1)$ 설계행렬
@@ -2407,10 +2413,7 @@ $$\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2
 TODO:
 ### 정리 4.4.6 선형회귀모형에서의 표본분포 *(Sampling Distribution in Linear Regression Model)*
 
-선형회귀모형에서 주어진 상수의 행렬 X의 계수가 p+1이라 가정하면 다음이 성립한다:
-
-> rank가 p+1이라는 말은, 설계행렬 X의 열들이 선형독립이라는 말로, 즉 회귀계수 $\beta$의 모든 원소가 모형에서 유의미한 역할을 한다는 것을 의미한다.  
-> 이는 회귀계수 추정량 $\hat{\beta}$가 고유하게 정의되는 것을 보장한다. 만약 X의 계수가 p+1보다 작다면, 즉 X의 열들이 선형종속이라면, 회귀계수 $\beta$의 일부 원소는 모형에서 유의미한 역할을 하지 않게 되고, 이로 인해 $\hat{\beta}$가 고유하게 정의되지 않게 된다.
+선형회귀모형에서 주어진 상수의 행렬 X의 계수가 p+1이라 가정하면 (즉 full rank) 다음이 성립한다:
 
 **(a)** 회귀계수 추정량의 분포
 
@@ -2431,8 +2434,7 @@ $$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-p-1)$$
 >
 >**(b)** 추정량의 독립성
 >
->투영행렬(projection matrix) $H=X(X^TX)^{-1}X^T$를 정의하면, $H$는 대칭 멱등행렬이다.  
->이를 이용하면 예측값과 잔차를 다음과 같이 표현할 수 있다:
+>투영행렬(projection matrix) $H=X(X^TX)^{-1}X^T$를 정의하면, $H$는 대칭 멱등행렬이다. 이를 이용하면 예측값과 잔차를 다음과 같이 표현할 수 있다:
 >
 >$$\hat{Y}=X\hat{\beta}=HY, \quad Y-X\hat{\beta}=(I-H)Y$$
 >
@@ -2442,11 +2444,7 @@ $$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-p-1)$$
 >
 >$$=(X^TX)^{-1}X^T\cdot\sigma^2I\cdot(I-H)=\sigma^2(X^TX)^{-1}X^T(I-H)$$
 >
->여기서
->
->$$X^T(I-H)=X^T-X^TH=X^T-X^TX(X^TX)^{-1}X^T=X^T-X^T=0$$
->
->따라서
+>여기서 $X^T(I-H)=X^T-X^TH=X^T-X^TX(X^TX)^{-1}X^T=X^T-X^T=0$ 따라서
 >
 >$$\text{Cov}(\hat{\beta},(I-H)Y)=0$$
 >
@@ -2458,11 +2456,7 @@ $$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-p-1)$$
 >
 >$$\frac{(n-p-1)\hat{\sigma}^2}{\sigma^2}=\frac{1}{\sigma^2}(Y-X\hat{\beta})^T(Y-X\hat{\beta})$$
 >
->$Y-X\hat{\beta}=(I-H)Y$이고, $(I-H)$의 성질 $(I-H)X=X-HX=X-X=0$
->
->$$\therefore (I-H)X\beta=0$$
->
->따라서
+>$Y-X\hat{\beta}=(I-H)Y$이고, $(I-H)X=0$ 이므로 $(I-H)X\beta=0$ 이므로
 >
 >$$Y-X\hat{\beta}=(I-H)Y=(I-H)(Y-X\beta)+(I-H)X\beta=(I-H)(Y-X\beta)$$
 >
