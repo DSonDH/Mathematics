@@ -3,7 +3,7 @@
 ## 5.1 중심극한정리 *(Central Limit Theorem)*
 
 ### 5.1.1 이항분포와 정규근사
-이항분포의 누적확률은 적절한 표준화를 거치면 표준정규분포의 누적확률로 근사될 수 있다. 즉, 다음과 같은 근사식이 성립한다.
+이항분포의 누적확률은 적절한 표준화를 거치면 표준정규분포의 누적확률로 근사될 수 있다. 즉, 다음과 같은 근사식이 성립한다. ((제3장 제6절)에서 이미 소개된 바 있다.)
 
 $$
 \sum_{x:\, a \le \frac{x-np}{\sqrt{np(1-p)}} \le b}
@@ -12,8 +12,7 @@ $$
 \int_a^b \frac{1}{\sqrt{2\pi}}e^{-z^2/2}\,dz,
 \quad n \to \infty
 $$
-
-이는 앞선 장(제3장 제6절)에서 이미 소개된 바 있다.  
+  
 한편, 확률변수 $X_1, X_2, \dots, X_n$이 서로 독립이고 동일한 베르누이분포 $Bernoulli(p)$를 따른다고 하자.
 이때 불량품의 총 개수는 $X_1 + \cdots + X_n \sim \text{Binomial}(n,p)$ 를 따른다.
 
@@ -52,60 +51,49 @@ $$
 라고 하면, 표준정규분포 $N(0,1)$를 따르는 확률변수 $Z$에 대하여 다음이 성립한다.
 
 $$
-\lim_{n\to\infty}
-P\left(
-\frac{(X_1+\cdots+X_n)/n - \mu}{\sigma/\sqrt{n}} \le x
-\right)
-= P(Z \le x),
-\quad \forall x\in\mathbb{R}
+\lim_{n\to\infty} P\left(\frac{(X_1+\cdots+X_n)/n - \mu}{\sigma/\sqrt{n}} \le x\right) = P(Z \le x), \quad \forall x\in\mathbb{R}
 $$
 
-> 극한분포로 표기하면,  
-> 
-> $$\frac{\sqrt{n}(\bar X_n-\mu)}{\sigma} \xrightarrow{d} N(0,1)$$
+극한분포로 표기하면,  
+ 
+$$\frac{\sqrt{n}(\bar X_n-\mu)}{\sigma} \xrightarrow{d} N(0,1)$$
 
-#### 증명 (적률생성함수 방법)
-이 정리는 주어진 조건보다 더 일반적인 조건에서도 성립하지만, 여기서는 추가 조건으로 $X_1$의 적률생성함수(mgf, moment generating function)가 존재하는 경우만 다룬다.
+- 참고: $X_1$의 기댓값과 분산만 특별히 사용한 것이 아니다. $X_1,\dots,X_n$이 동일한 분포를 따르기 때문에, 어느 확률변수를 선택해도 기댓값과 분산이 같아서 대표로 $X_1$을 적은 것이다.
 
-표준화된 표본평균을
-
-$$\frac{\sqrt{n}(\bar X_n-\mu)}{\sigma} = \frac{(X_1+\cdots+X_n)/n - \mu}{\sigma/\sqrt{n}}$$
-
-이라 하자.
-
-누적분포함수 대신 적률생성함수를 이용하여, 위 확률변수의 적률생성함수가 표준정규분포의 적률생성함수 $\mathrm{mgf}_Z(t)=\exp(t^2/2)$ 로 수렴함을 보이면 충분하다. 즉,
-
-$$\lim_{n\to\infty} \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t) = \mathrm{mgf}_Z(t) = \exp(t^2/2)$$
-
-독립성에 의해
-
-$$
-\mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t)
-= E\left[\exp\left(
-\frac{t}{\sqrt{n}}\sum_{i=1}^n \frac{X_i-\mu}{\sigma}
-\right)\right]
-= \left[\mathrm{mgf}_{(X_1-\mu)/\sigma}\left(\frac{t}{\sqrt{n}}\right)\right]^n
-$$
-
-$m(s)=\mathrm{mgf}_{(X_1-\mu)/\sigma}(s)$라 두면 $Y=\frac{X_1-\mu}{\sigma}$라 하면 $m_Y^{(k)}(s) = E(Y^k e^{sY})$이므로, 테일러 전개로
-
-$$m\left(\frac{t}{\sqrt{n}}\right)
-= m(0) + \frac{m'(0)}{1!}\frac{t}{\sqrt{n}} + \frac{m''(0)}{2!}\left(\frac{t}{\sqrt{n}}\right)^2 + R_{n,t}$$
-
-$$= 1 + E(\frac{X_1-\mu}{\sigma})\frac{t}{1!\sqrt{n}} + E\left(\frac{X_1-\mu}{\sigma}\right)^2\frac{t^2}{2!n} + R_{n,t}$$
-
-$E((X_1-\mu)/\sigma)=0$이고 $E((X_1-\mu)/\sigma)^2=1$이므로
-
-$$= 1+\frac{1}{2}\frac{t^2}{n}+R_{n,t},\quad \lim_{n\to\infty} nR_{n,t}=0$$
-
-따라서 $\log(1+x)$의 테일러 전개를 활용하면,
-
-$$
-\log \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t)
-= n\log\left(1+\frac{1}{2n}t^2+R_{n,t}\right)
-= \frac{1}{2}t^2 + nr_{n,t}, \quad \lim_{n\to\infty}nr_{n,t}=0 \\
-\therefore \lim_{n\to\infty} \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t) = \exp(t^2/2)
-$$
+>**증명** (적률생성함수 방법)  
+>이 정리는 주어진 조건보다 더 일반적인 조건에서도 성립하지만, 여기서는 추가 조건으로 $X_1$의 적률생성함수(mgf, moment generating function)가 존재하는 경우만 다룬다.
+>
+>표준화된 표본평균을
+>
+>$$\frac{\sqrt{n}(\bar X_n-\mu)}{\sigma} = \frac{(X_1+\cdots+X_n)/n - \mu}{\sigma/\sqrt{n}}$$
+>
+>이라 하자.  
+>누적분포함수 대신 적률생성함수를 이용하여, 위 확률변수의 적률생성함수가 표준정규분포의 적률생성함수 $\mathrm{mgf}_Z(t)=\exp(t^2/2)$ 로 수렴함을 보이면 충분하다: $\lim_{n\to\infty} \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t) = \mathrm{mgf}_Z(t) = \exp(t^2/2)$
+>
+>독립성에 의해
+>
+>$$
+>\mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t)
+>= E\left[\exp\left( \frac{t}{\sqrt{n}}\sum_{i=1}^n \frac{X_i-\mu}{\sigma} \right)\right]
+>= \left[\mathrm{mgf}_{(X_1-\mu)/\sigma}\left(\frac{t}{\sqrt{n}}\right)\right]^n
+>$$
+>
+>$m(s)=\mathrm{mgf}_{(X_1-\mu)/\sigma}(s)$라 두면 $Y=\frac{X_1-\mu}{\sigma}$라 하면 $m_Y^{(k)}(s) = E(Y^k e^{sY})$이므로, 테일러 전개로
+>
+>$$m\left(\frac{t}{\sqrt{n}}\right) = m(0) + \frac{m'(0)}{1!}\frac{t}{\sqrt{n}} + \frac{m''(0)}{2!}\left(\frac{t}{\sqrt{n}}\right)^2 + R_{n,t}\\ = 1 + E(\frac{X_1-\mu}{\sigma})\frac{t}{1!\sqrt{n}} + E\left(\frac{X_1-\mu}{\sigma}\right)^2\frac{t^2}{2!n} + R_{n,t}$$
+>
+>$E((X_1-\mu)/\sigma)=0$이고 $E((X_1-\mu)/\sigma)^2=1$이므로
+>
+>$$= 1+\frac{1}{2}\frac{t^2}{n}+R_{n,t},\quad \lim_{n\to\infty} nR_{n,t}=0$$
+>
+>따라서 $\log(1+x)$의 테일러 전개를 활용하면,
+>
+>$$
+>\log \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t)
+>= n\log\left(1+\frac{1}{2n}t^2+R_{n,t}\right)
+>\simeq \frac{1}{2}t^2 + nR_{n,t}, \quad \lim_{n\to\infty}nR_{n,t}=0 \\
+>\therefore \lim_{n\to\infty} \mathrm{mgf}_{\sqrt{n}(\bar X_n-\mu)/\sigma}(t) = \exp(t^2/2)
+>$$
 
 >각주  
 >샘플 개수 n에 의해 정의되는 확률변수 X의 분포함수들을 함수열(function sequence)로 본 것.  
@@ -131,9 +119,7 @@ $$
 또한 $X_1+\cdots+X_n\sim\text{Poisson}(n\lambda)$이므로
 
 $$
-\lim_{n\to\infty}
-\sum_{k:\, (k-n\lambda)/\sqrt{n\lambda}\le x}
-\frac{e^{-n\lambda}(n\lambda)^k}{k!}
+\lim_{n\to\infty} \sum_{k:\, (k-n\lambda)/\sqrt{n\lambda}\le x} \frac{e^{-n\lambda}(n\lambda)^k}{k!}
 = \int_{-\infty}^x \frac{1}{\sqrt{2\pi}}e^{-z^2/2}dz
 $$
 
@@ -152,10 +138,7 @@ $X_1,\dots,X_n\sim\text{Gamma}(\alpha,\beta)$라 하면 $E(X_1)=\alpha\beta,\qua
 
 $$
 \lim_{n\to\infty}
-P\left(
-\frac{(X_1+\cdots+X_n)/n-\alpha\beta}{\sqrt{\alpha\beta^2/n}} \le x
-\right)
-= P(Z\le x)
+P\left(\frac{(X_1+\cdots+X_n)/n-\alpha\beta}{\sqrt{\alpha\beta^2/n}} \le x\right) = P(Z\le x)
 $$
 
 이므로 표준정규분포로 근사할 수 있다. 특히 $Y_n\sim\chi^2(n)$인 경우, $Y_n$은 $n$개의 독립인 $\chi^2(1)$ 확률변수의 합이므로 $\text{Gamma}(n/2, 2)$와 같다. 따라서 $\alpha=n/2$, $\beta=2$를 대입하면
@@ -194,15 +177,13 @@ $$
 가 성립한다. 참고로,
 
 $$
-\lim_{n\to\infty}
-P\left(
-\sqrt{n}(\bar X_n - \mu) \le x
-\right)
-= P(Z \le x),
-\quad \forall x\in\mathbb{R}^k,\quad Z\sim N_k(0,\Sigma)
+\lim_{n\to\infty} P\left(\sqrt{n}(\bar X_n - \mu) \le x\right)
+= P(Z \le x), \quad \forall x\in\mathbb{R}^k,\quad Z\sim N_k(0,\Sigma)
 $$
 
 로 나타내기도 한다. 여기서 $\bar X_n = (X_1+\cdots+X_n)/n$이고, 부등호는 성분별(componentwise) 부등호를 의미한다.
+
+- 아래첨자 $n$은 벡터길이가 아니라, 샘플갯수를 말하니 주의.
 
 > **주의**  
 > 중심극한정리는 $\sqrt{n}\,(\bar X_n-\mu)\xrightarrow{d}N_k(0,\Sigma)$
@@ -309,8 +290,7 @@ X_n \xrightarrow{d} Z
 \quad \forall x\in\mathrm{Conti}(\mathrm{cdf}_Z)
 $$
 
-**극한분포의 의의**
-
+**극한분포의 의의**  
 극한분포는 표본크기가 커질 때 통계량의 분포가 어떤 분포로 수렴하는지 설명해 준다. 이를 통해 복잡한 표본분포를 단순한 분포(정규분포, 포아송분포 등)로 근사할 수 있으며, 신뢰구간 계산, 검정 등 통계적 추론의 이론적 근거를 제공한다. 실제로 많은 통계량의 분포는 극한분포로 근사하여 실용적으로 활용된다.
 
 #### 예 5.2.2. 이항분포의 포아송 근사
@@ -342,11 +322,7 @@ $$
 균등분포 $U(0,1)$에서의 랜덤표본 $n$개에 기초한 순서통계량을 $U_{(1)}<\cdots<U_{(n)}$이라 하자.
 
 $$
-P\{n(1-U_{(n)})\le x\}
-= 1-P\left\{U_{(n)}<1-\frac{x}{n}\right\}
-$$
-
-$$
+P\{n(1-U_{(n)})\le x\} = 1-P\left\{U_{(n)}<1-\frac{x}{n}\right\} \\
 P\left\{U_{(n)}<1-\frac{x}{n}\right\}
 =\begin{cases}
 0, & x>n \\
@@ -358,8 +334,7 @@ $$
 따라서
 
 $$
-\lim_{n\to\infty}
-P\left\{U_{(n)}<1-\frac{x}{n}\right\}
+\lim_{n\to\infty} P\left\{U_{(n)}<1-\frac{x}{n}\right\}
 = \begin{cases}
 e^{-x}, & x>0 \\
 1, & x\le 0
@@ -369,8 +344,7 @@ $$
 이므로
 
 $$
-\lim_{n\to\infty}
-P\{n(1-U_{(n)})\le x\}
+\lim_{n\to\infty} P\{n(1-U_{(n)})\le x\}
 = \begin{cases}
 1-e^{-x}, & x\ge 0 \\
 0, & x<0
@@ -408,72 +382,55 @@ $$
 $$
 X_n\xrightarrow{d}X,\;P(X=c)=1
 \;\Longleftrightarrow\;
-\lim_{n\to\infty}P(|X_n-c|\ge\varepsilon)=0
+\lim_{n\to\infty}P(\|X_n-c\|\ge\varepsilon)=0
 \quad \forall\varepsilon>0
 $$
 
-#### 증명
-($\Rightarrow$)  
-$P(X=c)=1$이면, $\mathrm{cdf}_X(x)$는 $x=c$를 제외한 모든 점에서 연속이다.  
-극한분포의 정의에 따라
-
-$$\lim_{n\to\infty}\mathrm{cdf}_{X_n}(x)=\mathrm{cdf}_X(x)\quad(x\neq c)$$
-
-임의의 $\varepsilon>0$에 대해,
-
-$$P(|X_n-c|\ge\varepsilon)
-= P(X_n\le c-\varepsilon) + P(X_n\ge c+\varepsilon)
-= \mathrm{cdf}_{X_n}(c-\varepsilon) + 1 - \mathrm{cdf}_{X_n}(c+\varepsilon)$$
-
-$n\to\infty$로 보낼 때, 극한분포의 정의에 의해
-
-$$\mathrm{cdf}_{X_n}(c-\varepsilon) \to \mathrm{cdf}_X(c-\varepsilon),\quad \mathrm{cdf}_{X_n}(c+\varepsilon) \to \mathrm{cdf}_X(c+\varepsilon)$$
-
-이고, $X$가 상수 $c$이므로 $\mathrm{cdf}_X(c-\varepsilon) = 0,\quad \mathrm{cdf}_X(c+\varepsilon) = 1$이다.  
-따라서
-
-$$\lim_{n\to\infty}P(|X_n-c|\ge\varepsilon) = 0 + 1 - 1 = 0$$
-
-($\Leftarrow$)  
-주어진 조건 $\lim_{n\to\infty}P(|X_n-c|\ge\varepsilon)=0$ 에서, $x < c$인 경우
-
-$$\mathrm{cdf}_{X_n}(x) = P(X_n \le x) \le P(X_n \le c-\varepsilon) \le P(|X_n-c|\ge\varepsilon)$$
-
-이므로 $\lim_{n\to\infty}\mathrm{cdf}_{X_n}(x)=0=\mathrm{cdf}_X(x)$이다.
-
-$x > c$인 경우
-
-$$
-1-\mathrm{cdf}_{X_n}(x) = P(X_n > x) \le P(X_n \ge c+\varepsilon) \le P(|X_n-c|\ge\varepsilon)
-$$
-
-이므로 $\lim_{n\to\infty}\mathrm{cdf}_{X_n}(x)=1=\mathrm{cdf}_X(x)$이다.
-
-따라서 모든 $x\neq c$에 대해
-
-$$
-\lim_{n\to\infty}\mathrm{cdf}_{X_n}(x)=\mathrm{cdf}_X(x)
-$$
-
-가 성립한다. $\square$
+>**증명**  
+>($\Rightarrow$)  
+>$P(X=c)=1$이면, $\mathrm{cdf}_X(x)$는 $x=c$를 제외한 모든 점에서 연속이다.  
+>극한분포의 정의에 따라 $\lim_{n\to\infty}\mathrm{cdf}_{X_n}(x)=\mathrm{cdf}_X(x)\quad(x\neq c)$
+>
+>임의의 $\varepsilon>0$에 대해,
+>
+>$$P(\|X_n-c\|\ge\varepsilon) = P(X_n\le c-\varepsilon) + P(X_n\ge c+\varepsilon) = \mathrm{cdf}_{X_n}(c-\varepsilon) + 1 - \mathrm{cdf}_{X_n}(c+\varepsilon)$$
+>
+>$n\to\infty$로 보낼 때, 극한분포의 정의에 의해
+>
+>$$\mathrm{cdf}_{X_n}(c-\varepsilon) \to \mathrm{cdf}_X(c-\varepsilon),\quad \mathrm{cdf}_{X_n}(c+\varepsilon) \to \mathrm{cdf}_X(c+\varepsilon)$$
+>
+>이고, $X$가 상수 $c$이므로 $\mathrm{cdf}_X(c-\varepsilon) = 0,\quad \mathrm{cdf}_X(c+\varepsilon) = 1$이다.  
+>따라서 $\lim_{n\to\infty}P(\|X_n-c\|\ge\varepsilon) = 0 + 1 - 1 = 0$
+>
+>($\Leftarrow$)  
+>주어진 조건 $\lim_{n\to\infty}P(\|X_n-c\|\ge\varepsilon)=0$ 에서, $x < c$인 경우
+>
+>$$\mathrm{cdf}_{X_n}(x) = P(X_n \le x) \le P(X_n \le c-\varepsilon) \le P(\|X_n-c\|\ge\varepsilon)$$
+>
+>이므로 $\lim_{n\to\infty}\mathrm{cdf}_{X_n}(x)=0=\mathrm{cdf}_X(x)$이다.
+>
+>$x > c$인 경우
+>
+>$$
+>1-\mathrm{cdf}_{X_n}(x) = P(X_n > x) \le P(X_n \ge c+\varepsilon) \le P(\|X_n-c\|\ge\varepsilon)
+>$$
+>
+>이므로 $\lim_{n\to\infty}\mathrm{cdf}_{X_n}(x)=1=\mathrm{cdf}_X(x)$이다.
+>
+>따라서 모든 $x\neq c$에 대해 $\lim_{n\to\infty}\mathrm{cdf}_{X_n}(x)=\mathrm{cdf}_X(x)$ 가 성립한다. $\square$
 
 ### 정의: 확률수렴
 
 정리 5.2.1의 조건이 성립할 때, 확률변수 $X_n$이 상수 $c$로 **확률수렴(convergence in probability)** 한다고 하며
 
 $$
-X_n\xrightarrow{P}c
-\quad\text{또는}\quad
-\mathrm{plim}_{n\to\infty}X_n=c
+X_n\xrightarrow{P}c \quad\text{또는}\quad \mathrm{plim}_{n\to\infty}X_n=c
 $$
 
 로 쓴다. 즉,
 
 $$
-\mathrm{plim}_{n\to\infty}X_n=c
-\;\Longleftrightarrow\;
-\lim_{n\to\infty}P(|X_n-c|\ge\varepsilon)=0
-\quad \forall\varepsilon>0
+\mathrm{plim}_{n\to\infty}X_n=c \Longleftrightarrow \lim_{n\to\infty}P(\|X_n-c\|\ge\varepsilon)=0 \quad \forall\varepsilon>0
 $$
 
 ### 정리 5.2.2. 큰수의 법칙 (대수의 법칙) *(Law of Large Numbers)*
@@ -484,18 +441,16 @@ $$
 \mathrm{plim}_{n\to\infty}\frac{1}{n}\sum_{i=1}^n X_i = E(X_1)
 $$
 
-#### 증명
+>**증명**  
+>
+>주어진 조건하에서 일반적으로 성립하지만, 조건부 증명만 소개한다.  
+>추가 조건 $\mathrm{Var}(X_1)<\infty$ 하에서 체비셰프 부등식을 적용하면
+>
+>$$P(|\bar X_n-E(X_1)|\ge\varepsilon) \le \frac{\mathrm{Var}(\bar X_n)}{\varepsilon^2} =\frac{\mathrm{Var}(X_1)}{n\varepsilon^2}$$
+>
+>이고, $n\to\infty$로 보내면 확률이 $0$으로 수렴한다. $\square$
 
-주어진 조건하에서 일반적으로 성립하지만, 조건부 증명만 소개한다.  
-추가 조건 $\mathrm{Var}(X_1)<\infty$ 하에서 체비셰프 부등식을 적용하면
-
-$$P(|\bar X_n-E(X_1)|\ge\varepsilon)
-\le \frac{\mathrm{Var}(\bar X_n)}{\varepsilon^2}
-=\frac{\mathrm{Var}(X_1)}{n\varepsilon^2}$$
-
-이고, $n\to\infty$로 보내면 확률이 $0$으로 수렴한다. $\square$
-
-**큰수의 법칙 해석**  
+**큰수의 법칙 응용**  
 랜덤표본 $X_1, \dots, X_n$을 관측할 때, 집합 $A$에 속하는 관측값의 **상대도수(relative frequency)** 는
 
 $$\frac{1}{n}\sum_{i=1}^n I_A(X_i)$$
@@ -507,6 +462,7 @@ $$\mathrm{plim}_{n\to\infty}\frac{1}{n}\sum_{i=1}^n I_A(X_i) = E(I_A(X_1)) = P(X
 즉, 시행 횟수 $n$이 커질수록 상대도수는 확률 $P(X_1 \in A)$에 한없이 가까워진다.  
 
 통계적 추론 관점에서는 표본크기 $n$이 커질수록 이러한 통계량이 모집단의 진짜 값(모수)에 가까워진다는 것을 의미한다. 즉, 표본평균이 모집단 평균에, 표본분산이 모집단 분산에 확률적으로 수렴한다는 사실은 추정량의 **일치성(consistency)**  을 보장한다.
+- 내생각: 모평균 $\mu$랑 직접 계산가능한 확률의 가중치인 $E[X_1]$은 엄밀히는 다르다. 그런데 교재에서는 일단 같다고 가정한듯.
 
 이 개념을 많은 통계량에 적용하려면 이 정의를 아래의 다차원 확률변수로 확장시킬 필요가 있다.
 
@@ -514,13 +470,13 @@ $$\mathrm{plim}_{n\to\infty}\frac{1}{n}\sum_{i=1}^n I_A(X_i) = E(I_A(X_1)) = P(X
 
 다차원 확률변수 $X_n=(X_{n1},\dots,X_{nk})^t$와 상수벡터 $c=(c_1,\dots,c_k)^t$에 대해
 
-$$ |X_n-c| = \sqrt{(X_{n1}-c_1)^2+\cdots+(X_{nk}-c_k)^2}$$
+$$ \|X_n-c\| = \sqrt{(X_{n1}-c_1)^2+\cdots+(X_{nk}-c_k)^2}$$
 
 로 정의하면,
 
 $$\mathrm{plim}_{n\to\infty}X_n=c
 \;\Longleftrightarrow\;
-\lim_{n\to\infty}P(|X_n-c|\ge\varepsilon)=0 \quad \forall\varepsilon>0 $$
+\lim_{n\to\infty}P(\|X_n-c\|\ge\varepsilon)=0 \quad \forall\varepsilon>0 $$
 
 ### 정리 5.2.3. 성분별 확률수렴
 
@@ -532,43 +488,45 @@ $$\mathrm{plim}_{n\to\infty}X_n=c
 
 (c) 모든 $i=1,\dots,k$에 대해 $\displaystyle\mathrm{plim}_{n\to\infty}X_{ni}=c_i$
 
-#### 증명
-
-벡터 노름의 성질을 이용하여 각 조건의 동치성을 보인다.
-
-**(a) ⇒ (b):**  
-(a)에서 확률수렴의 정의에 따라, 임의의 $\varepsilon>0$에 대해 $\lim_{n\to\infty}P(|X_n-c|\ge\varepsilon)=0$ 이다.  
-벡터 노름의 성질에 의해 $\max_{1\le i\le k}|X_{ni}-c_i| \le |X_n-c|$ 이므로
-
-$$P\left(\max_{1\le i\le k}|X_{ni}-c_i|\ge\varepsilon\right)
-\le P(|X_n-c|\ge\varepsilon)$$
-
-따라서 (a)에서 (b)가 성립한다.
-
-**(b) ⇒ (a):**  
-반대로, 벡터 노름의 삼각부등식에 의해
-
-$$|X_n-c| \le \sum_{i=1}^k|X_{ni}-c_i| \le k\max_{1\le i\le k}|X_{ni}-c_i|$$
-
-이므로
-
-$$P(|X_n-c|\ge\varepsilon)
-\le P\left(\max_{1\le i\le k}|X_{ni}-c_i|\ge\varepsilon/k\right)$$
-
-(b)에서 임의의 $\varepsilon>0$에 대해
-
-$$\lim_{n\to\infty}P\left(\max_{1\le i\le k}|X_{ni}-c_i|\ge\varepsilon/k\right)=0$$
-
-이므로 (a)가 성립한다.
-
-**(b) ⇔ (c):**  
-(b)는 모든 성분 $i$에 대해 $|X_{ni}-c_i|$가 $\varepsilon$ 이상일 확률이 0으로 수렴함을 의미한다. 이는 각 성분별로
-
-$$\lim_{n\to\infty}P(|X_{ni}-c_i|\ge\varepsilon)=0$$
-
-임을 뜻하므로 (c)와 동치이다.
-
-따라서 (a), (b), (c)는 서로 동치이다. $\square$
+>**증명**  
+>
+>벡터 노름의 성질을 이용하여 각 조건의 동치성을 보인다.
+>
+>**(a) ⇒ (b):**  
+>(a)에서 확률수렴의 정의에 따라, 임의의 $\varepsilon>0$에 대해 $\lim_{n\to\infty}P(\|X_n-c\|\ge\varepsilon)=0$ 이다.  
+>벡터 노름의 성질에 의해 
+>
+>$$\max_{1\le i\le k}|X_{ni}-c_i| \le \|X_n-c\|$$
+>
+>이므로
+>
+>$$P\left(\max_{1\le i\le k}|X_{ni}-c_i|\ge\varepsilon\right) \le P(\|X_n-c\|\ge\varepsilon)$$
+>
+>따라서 (a)에서 (b)가 성립한다.
+>
+>**(b) ⇒ (a):**  
+>반대로, 벡터 노름의 삼각부등식에 의해
+>
+>$$\|X_n-c\| \le \sum_{i=1}^k|X_{ni}-c_i| \le k\max_{1\le i\le k}|X_{ni}-c_i|$$
+>
+>이므로
+>
+>$$P(\|X_n-c\|\ge\varepsilon) \le P\left(\max_{1\le i\le k}|X_{ni}-c_i|\ge\varepsilon/k\right)$$
+>
+>(b)에서 임의의 $\varepsilon>0$에 대해
+>
+>$$\lim_{n\to\infty}P\left(\max_{1\le i\le k}|X_{ni}-c_i|\ge\varepsilon/k\right)=0$$
+>
+>이므로 (a)가 성립한다.
+>
+>**(b) ⇔ (c):**  
+>(b)는 모든 성분 $i$에 대해 $|X_{ni}-c_i|$가 $\varepsilon$ 이상일 확률이 0으로 수렴함을 의미한다. 이는 각 성분별로
+>
+>$$\lim_{n\to\infty}P(|X_{ni}-c_i|\ge\varepsilon)=0$$
+>
+>임을 뜻하므로 (c)와 동치이다.
+>
+>따라서 (a), (b), (c)는 서로 동치이다. $\square$
 
 ### 정리 5.2.4. 다차원 큰수의 법칙
 
@@ -580,9 +538,9 @@ $$X_1 = (X_{11}, \dots, X_{1k})^T, \dots, X_n = (X_{n1}, \dots, X_{nk})^T$$
 
 $$\mathrm{plim}_{n\to\infty} \frac{1}{n} \sum_{i=1}^n X_i = E(X_1)$$
 
-#### 증명
-
-각 성분별로 큰수의 법칙이 성립하므로, 정리 5.2.3(성분별 확률수렴)에 의해 결론이 성립한다. $\square$
+>**증명**  
+>
+>각 성분별로 큰수의 법칙이 성립하므로, 정리 5.2.3(성분별 확률수렴)에 의해 결론이 성립한다. $\square$
 
 #### 예 5.2.4. 표본적률의 확률수렴
 
@@ -605,29 +563,17 @@ $X_n\xrightarrow{P}c$이고 실수값 함수 $g$가 $c$에서 연속이면
 
 $$\mathrm{plim}_{n\to\infty}g(X_n)=g(c)$$
 
-#### 증명
-
-연속성의 정의에 따라 임의의 $\varepsilon>0$에 대해 어떤 $\delta>0$가 존재하여
-
-$$|x-c|<\delta \;\Longrightarrow\; |g(x)-g(c)|<\varepsilon$$
-
-가 성립한다. 이를 대우(contrapositive)로 바꾸면
-
-$$|g(x)-g(c)|\ge\varepsilon \;\Longrightarrow\; |x-c|\ge\delta$$
-
-따라서 확률변수 $X_n$에 대해 사건의 포함관계는
-
-$$\{|g(X_n)-g(c)|\ge\varepsilon\} \subseteq \{|X_n-c|\ge\delta\}$$
-
-따라서
-
-$$P(|g(X_n)-g(c)|\ge\varepsilon) \le P(|X_n-c|\ge\delta)$$
-
-이때 확률수렴의 정의에 따라 $\lim_{n\to\infty}P(|X_n-c|\ge\delta)=0$ 이므로
-
-$$\lim_{n\to\infty}P(|g(X_n)-g(c)|\ge\varepsilon)=0$$
-
-즉, $g(X_n)\xrightarrow{P}g(c)$임을 알 수 있다. $\square$
+>**증명**  
+>
+>연속성의 정의에 따라 임의의 $\varepsilon>0$에 대해 어떤 $\delta>0$가 존재하여 $|x-c|<\delta \;\Longrightarrow\; |g(x)-g(c)|<\varepsilon$ 가 성립한다. 이를 대우(contrapositive)로 바꾸면 $|g(x)-g(c)|\ge\varepsilon \;\Longrightarrow\; |x-c|\ge\delta$
+>
+>따라서 확률변수 $X_n$에 대해 사건의 포함관계는 $\{|g(X_n)-g(c)|\ge\varepsilon\} \subseteq \{\|X_n-c\|\ge\delta\}$
+>
+>따라서 $P(|g(X_n)-g(c)|\ge\varepsilon) \le P(\|X_n-c\|\ge\delta)$
+>
+>이때 확률수렴의 정의에 따라 $\lim_{n\to\infty}P(\|X_n-c\|\ge\delta)=0$ 이므로 $\lim_{n\to\infty}P(|g(X_n)-g(c)|\ge\varepsilon)=0$
+>
+>즉, $g(X_n)\xrightarrow{P}g(c)$임을 알 수 있다. $\square$
 
 ### 정리 5.2.6. 확률수렴과 사칙연산
 
@@ -641,15 +587,15 @@ $X_n\xrightarrow{P}a$, $Y_n\xrightarrow{P}b$이면 다음이 성립한다.
 
 (d) $\mathrm{plim}(X_n/Y_n)=a/b\;(b\neq0)$
 
-#### 증명
-
-정리 5.2.3에 의해 $(X_n,Y_n)^t\xrightarrow{P}(a,b)^t$임을 알 수 있다. 이제 각 사칙연산에 대해 다음과 같이 보일 수 있다.
-
-(a), (b): 덧셈과 뺄셈 함수 $g(x,y)=x+y$, $g(x,y)=x-y$는 $(a,b)$에서 연속이므로, 정리 5.2.5(연속함수와 확률수렴)에 의해 $\mathrm{plim}(X_n+Y_n) = a+b,\quad \mathrm{plim}(X_n-Y_n) = a-b$
-
-(c): 곱셈 함수 $g(x,y)=xy$도 $(a,b)$에서 연속이므로 $\mathrm{plim}(X_nY_n) = ab$
-
-(d): 나눗셈 함수 $g(x,y)=x/y$는 $b\neq0$일 때 $(a,b)$에서 연속이므로 $\mathrm{plim}(X_n/Y_n) = a/b$
+>**증명**  
+>
+>정리 5.2.3에 의해 $(X_n,Y_n)^t\xrightarrow{P}(a,b)^t$임을 알 수 있다. 이제 각 사칙연산에 대해 다음과 같이 보일 수 있다.
+>
+>(a), (b): 덧셈과 뺄셈 함수 $g(x,y)=x+y$, $g(x,y)=x-y$는 $(a,b)$에서 연속이므로, 정리 5.2.5(연속함수와 확률수렴)에 의해 $\mathrm{plim}(X_n+Y_n) = a+b,\quad \mathrm{plim}(X_n-Y_n) = a-b$
+>
+>(c): 곱셈 함수 $g(x,y)=xy$도 $(a,b)$에서 연속이므로 $\mathrm{plim}(X_nY_n) = ab$
+>
+>(d): 나눗셈 함수 $g(x,y)=x/y$는 $b\neq0$일 때 $(a,b)$에서 연속이므로 $\mathrm{plim}(X_n/Y_n) = a/b$
 
 #### 예 5.2.5. 표본분산과 표본표준편차의 확률수렴
 
@@ -658,10 +604,7 @@ $X_n\xrightarrow{P}a$, $Y_n\xrightarrow{P}b$이면 다음이 성립한다.
 $$
 S_n^2
 = \frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2
-= \frac{n}{n-1}\left\{
-\frac{1}{n}\sum_{i=1}^n X_i^2
-- \left(\frac{1}{n}\sum_{i=1}^n X_i\right)^2
-\right\}
+= \frac{n}{n-1}\left\{\frac{1}{n}\sum_{i=1}^n X_i^2 - \left(\frac{1}{n}\sum_{i=1}^n X_i\right)^2 \right\}
 $$
 
 즉, $(\frac{1}{n}\sum_{i=1}^n X_i,\, \frac{1}{n}\sum_{i=1}^n X_i^2)^T$의 함수로 $S_n^2$를 표현할 수 있다.
@@ -669,17 +612,14 @@ $$
 한편 예 5.2.4 및 큰수의 법칙으로부터, $E(X_1^2)<+\infty$이면
 
 $$
-\mathrm{plim}_{n\to\infty}\frac{1}{n}\sum_{i=1}^n X_i^2=E(X_1^2),
-\quad \mathrm{plim}_{n\to\infty}\frac{1}{n}\sum_{i=1}^n X_i=E(X_1)
+\mathrm{plim}_{n\to\infty}\frac{1}{n}\sum_{i=1}^n X_i^2=E(X_1^2), \quad \mathrm{plim}_{n\to\infty}\frac{1}{n}\sum_{i=1}^n X_i=E(X_1)
 $$
 
 따라서 정리 5.2.6(사칙연산의 보존성)에 의해
 
 $$ \mathrm{plim}_{n\to\infty} S_n^2 = 1\times\{E(X_1^2)-[E(X_1)]^2\}  =\mathrm{Var}(X_1)=\sigma^2 $$
 
-즉, 모분산 $\sigma^2$가 양의 실수이면
-
-$$ \mathrm{plim}_{n\to\infty} S_n^2=\sigma^2 $$
+즉, 모분산 $\sigma^2$가 양의 실수이면 $\mathrm{plim}_{n\to\infty} S_n^2=\sigma^2$
 
 또한 표본표준편차 $S_n=\sqrt{S_n^2}$에 대해, 제곱근 함수는 연속이므로 정리 5.2.5로부터
 
@@ -689,29 +629,17 @@ $$ \mathrm{plim}_{n\to\infty} S_n = \sqrt{\mathrm{plim}_{n\to\infty}S_n^2} =\sig
 
 큰수의 법칙을 적용하기 어려운 경우에 확률수렴을 밝히는 데 유용한 정리다.
 
-분산이 실수로 정의될 수 있는 확률변수 $X_n,(n=1,2,\dots)$에 대해 $\lim_{n\to\infty}\mathrm{Var}(X_n)=0,
-\quad
-\lim_{n\to\infty}E(X_n)=a$ 이면
+분산이 실수로 정의될 수 있는 확률변수 $X_n,(n=1,2,\dots)$ 에 대해  
+$\lim_{n\to\infty}\mathrm{Var}(X_n)=0, \quad \lim_{n\to\infty}E(X_n)=a \rightarrow \mathrm{plim}_{n\to\infty}X_n=a$
 
-$$ \mathrm{plim}_{n\to\infty}X_n=a $$
-
-#### 증명
-
-마르코프 부등식으로부터 임의의 $\varepsilon>0$에 대해
-
-$$ P(|X_n-a|\ge\varepsilon) \le \frac{E[(X_n-a)^2]}{\varepsilon^2} $$
-
-한편
-
-$$ E[(X_n-a)^2] = \mathrm{Var}(X_n)+\{E(X_n)-a\}^2 $$
-
-이고, 가정에 의해 $\lim_{n\to\infty}E[(X_n-a)^2]=0$
-이다.  
-따라서
-
-$$ 0\le \lim_{n\to\infty}P(|X_n-a|\ge\varepsilon) \le 0 $$
-
-이 되어 결론이 성립한다. $\square$
+>**증명**  
+>
+>마르코프 부등식으로부터 임의의 $\varepsilon>0$에 대해
+>
+>$$ P(|X_n-a|\ge\varepsilon) \le \frac{E[(X_n-a)^2]}{\varepsilon^2} $$
+>
+>한편 $E[(X_n-a)^2] = \mathrm{Var}(X_n)+\{E(X_n)-a\}^2$ 이고, 가정에 의해 $\lim_{n\to\infty}E[(X_n-a)^2]=0$ 이다.  
+>따라서 $ 0\le \lim_{n\to\infty}P(|X_n-a|\ge\varepsilon) \le 0$ 이 되어 결론이 성립한다. $\square$
 
 #### 예 5.2.6. 최대 순서통계량의 확률수렴
 
@@ -761,9 +689,7 @@ $$ E(Y_n)\sim \int_0^\alpha \frac{1}{1-x}\,dx=-\log(1-\alpha) \\
 \mathrm{Var}(Y_n)\sim \int_0^\alpha \frac{1}{n(1-x)^2}\,dx=\frac{1}{n}\cdot\frac{\alpha}{1-\alpha}\\
 \therefore \lim_{n\to\infty}\mathrm{Var}(Y_n)=0, \quad \lim_{n\to\infty}E(Y_n)=-\log(1-\alpha) $$
 
-이고, 정리 5.2.7에 의해
-
-$$ \mathrm{plim}_{n\to\infty}Y_n=-\log(1-\alpha) $$
+이고, 정리 5.2.7에 의해 $\mathrm{plim}_{n\to\infty}Y_n=-\log(1-\alpha)$
 
 함수 $h$가 연속이므로 정리 5.2.5에 의해 $\mathrm{plim}_{n\to\infty} h(Y_n) = h(-\log(1-\alpha)) =F^{-1}(\alpha)$  
 즉,
@@ -781,60 +707,59 @@ $$ \mathrm{plim}_{n\to\infty}X_{(r_n)}=F^{-1}(\alpha) $$
 
 **정리:**
 
-확률변수열 $X_n, Y_n$과 확률변수 $Z$, 상수 $c$에 대해
-
-$$X_n \xrightarrow{d} Z, \qquad \mathrm{plim}_{n\to\infty} Y_n = c$$
-
-이면 다음이 성립한다.
+확률변수열 $X_n, Y_n$과 확률변수 $Z$, 상수 $c$에 대해 $X_n \xrightarrow{d} Z, \quad \mathrm{plim}_{n\to\infty} Y_n = c$ 이면 다음이 성립한다.
 
 - (a) $X_n + Y_n \xrightarrow{d} Z + c$
 - (b) $X_n - Y_n \xrightarrow{d} Z - c$
 - (c) $Y_n X_n \xrightarrow{d} cZ$
 - (d) $X_n / Y_n \xrightarrow{d} Z / c \quad (c \neq 0)$
 
-$X_n$이 분포수렴하고 $Y_n$이 상수로 확률수렴하면, 이들의 합, 차, 곱, 몫 역시 각각의 연산에 맞는 극한분포로 수렴한다.
+즉, $X_n$이 분포수렴하고 $Y_n$이 상수로 확률수렴하면, 이들의 합, 차, 곱, 몫 역시 각각의 연산에 맞는 극한분포로 수렴한다.
 
-#### 증명
-
-이 정리는 일반적인 경우에 성립하지만, Z의 누적분포함수가 연속함수인 경우만 증명하기로 한다. 증명은 분포함수의 연속성과 확률수렴의 정의를 이용한다.
-
-**(a) $X_n + Y_n \xrightarrow{d} Z + c$**  
-$F_Z$가 연속인 점 $z$에 대해 $P(X_n + Y_n \le z)$의 극한을 구한다. 임의의 $\varepsilon > 0$에 대해
-
-$$P(X_n +Y_n \le z) = P(X_n +Y_n \le z, |Y_n - c| < \varepsilon) + P(X_n + Y_n \le z, |Y_n - c| \ge \varepsilon)$$
-
-이때 $P(X_n +Y_n \le z, |Y_n - c| < \varepsilon) \le P(X_n \le z - c + \varepsilon)$ 이고, $P(X_n + Y_n \le z, |Y_n - c| \ge \varepsilon) \le P(|Y_n - c| \ge \varepsilon)$ 이므로
-
-$$\le P(X_n \le z - c + \varepsilon) + P(|Y_n - c| \ge \varepsilon)$$
-
-$Y_n \xrightarrow{P} c$이므로 $P(|Y_n - c| \ge \varepsilon) \to 0$, $X_n \xrightarrow{d} Z$이므로 $P(X_n \le x) \to P(Z \le x)$이다. 같은방법으로 하계도 구하면,
-
-$$\limsup_{n \to \infty} P(X_n + Y_n \le z) \le P(Z \le z - c + \varepsilon) \\
-\liminf_{n \to \infty} P(X_n + Y_n \le z) \ge P(Z \le z - c - \varepsilon)$$
-
-$F_Z$가 연속이므로 $\varepsilon \downarrow 0$으로 보내면
-
-$$\lim_{n \to \infty} P(X_n + Y_n \le z) = P(Z \le z - c) = P(Z + c \le z)$$
-
-즉, $X_n + Y_n \xrightarrow{d} Z + c$가 성립한다.
-
-**(b) $X_n - Y_n \xrightarrow{d} Z - c$**
-
-$Y_n \xrightarrow{P} c$이면 $-Y_n \xrightarrow{P} -c$이다. (a)를 $X_n + (-Y_n)$에 적용하면 $X_n - Y_n \xrightarrow{d} Z - c$가 성립한다.
-
-**(c) $Y_n X_n \xrightarrow{d} cZ$**
-
-먼저 $c=0$인 경우, 임의의 $\varepsilon > 0$, $k > 0$에 대해
-
-$$P(|Y_n X_n| \ge \varepsilon) \le P(|X_n| > k) + P(|Y_n| \ge \varepsilon / k)$$
-
-$X_n \xrightarrow{d} Z$이므로 $\limsup_{n \to \infty} P(|X_n| > k) \le P(|Z| > k)$, $Y_n \xrightarrow{P} 0$이므로 $P(|Y_n| \ge \varepsilon / k) \to 0$. $k \to \infty$로 보내면 $P(|Y_n X_n| \ge \varepsilon) \to 0$, 즉 $Y_n X_n \xrightarrow{P} 0$.
-
-일반 $c$에 대해 $Y_n X_n = (Y_n - c) X_n + c X_n$. 위 결과와 (a)에 의해 $(Y_n - c) X_n \xrightarrow{P} 0$, $c X_n \xrightarrow{d} cZ$이므로 $Y_n X_n \xrightarrow{d} cZ$.
-
-**(d) $X_n / Y_n \xrightarrow{d} Z / c\ (c \neq 0)$**
-
-$Y_n \xrightarrow{P} c$이고 $c \neq 0$이므로 $1 / Y_n \xrightarrow{P} 1 / c$. (c)를 $X_n$과 $1 / Y_n$에 적용하면 $X_n / Y_n \xrightarrow{d} Z / c$가 성립한다.
+>**증명**  
+>
+>이 정리는 일반적인 경우에 성립하지만, Z의 누적분포함수가 연속함수인 경우만 증명하기로 한다. 증명은 분포함수의 연속성과 확률수렴의 정의를 이용한다.
+>
+>**(a) $X_n + Y_n \xrightarrow{d} Z + c$**  
+>$F_Z$가 연속인 점 $z$에 대해 $P(X_n + Y_n \le z)$의 극한을 구한다. 임의의 $\varepsilon > 0$에 대해
+>
+>$$P(X_n +Y_n \le z) = P(X_n +Y_n \le z, |Y_n - c| < \varepsilon) + P(X_n + Y_n \le z, |Y_n - c|c \ge \varepsilon)$$
+>
+>이때 우변에 각 항별로 살펴보면,  
+>$P(X_n +Y_n \le z, |Y_n - c| < \varepsilon) \le P(X_n \le z - c + \varepsilon)$ 이고,  
+>$P(X_n + Y_n \le z, |Y_n - c| \ge \varepsilon) \le P(|Y_n - c| \ge \varepsilon)$ 이므로
+>
+>$$P(X_n +Y_n \le z) \le P(X_n \le z - c + \varepsilon) + P(|Y_n - c| \ge \varepsilon)$$
+>
+>$Y_n \xrightarrow{P} c$이므로 $P(|Y_n - c| \ge \varepsilon) \to 0$, $X_n \xrightarrow{d} Z$이므로 $P(X_n \le x) \to P(Z \le x)$이다. 같은방법으로 하계도 구하면,
+>
+>$$\limsup_{n \to \infty} P(X_n + Y_n \le z) \le P(Z \le z - c + \varepsilon) \\
+>\liminf_{n \to \infty} P(X_n + Y_n \le z) \ge P(Z \le z - c - \varepsilon)$$
+>
+>$F_Z$가 연속이므로 $\varepsilon \downarrow 0$으로 보내면
+>
+>$$\lim_{n \to \infty} P(X_n + Y_n \le z) = P(Z \le z - c) = P(Z + c \le z)$$
+>
+>즉, $X_n + Y_n \xrightarrow{d} Z + c$가 성립한다.
+>
+>**(b) $X_n - Y_n \xrightarrow{d} Z - c$**
+>
+>$Y_n \xrightarrow{P} c$이면 $-Y_n \xrightarrow{P} -c$이다. (a)를 $X_n + (-Y_n)$에 적용하면 $X_n - Y_n \xrightarrow{d} Z - c$가 성립한다.
+>
+>**(c) $Y_n X_n \xrightarrow{d} cZ$**
+>
+>먼저 $c=0$인 경우, 임의의 $\varepsilon > 0$, $k > 0$에 대해
+>
+>$$P(|Y_n X_n| \ge \varepsilon) \le P(|X_n| > k) + P(|Y_n| \ge \varepsilon / k)$$
+>
+>$X_n \xrightarrow{d} Z$이므로 $\limsup_{n \to \infty} P(|X_n| > k) \le P(|Z| > k)$,  
+>$Y_n \xrightarrow{P} 0$이므로 $P(|Y_n| \ge \varepsilon / k) \to 0$. $k \to \infty$로 보내면 $P(|Y_n X_n| \ge \varepsilon) \to 0$, 즉 $Y_n X_n \xrightarrow{P} 0$.
+>
+>일반 $c$에 대해 $Y_n X_n = (Y_n - c) X_n + c X_n$. 위 결과와 (a)에 의해 $(Y_n - c) X_n \xrightarrow{P} 0$, $c X_n \xrightarrow{d} cZ$이므로 $Y_n X_n \xrightarrow{d} cZ$.
+>
+>**(d) $X_n / Y_n \xrightarrow{d} Z / c\ (c \neq 0)$**
+>
+>$Y_n \xrightarrow{P} c$이고 $c \neq 0$이므로 $1 / Y_n \xrightarrow{P} 1 / c$. (c)를 $X_n$과 $1 / Y_n$에 적용하면 $X_n / Y_n \xrightarrow{d} Z / c$가 성립한다.
 
 TODO:
 #### 예 5.3.1. 스튜던트화된 표본평균의 극한분포
@@ -843,31 +768,24 @@ TODO:
 
 $$T_n = \frac{\bar X_n - \mu}{S_n / \sqrt{n}}$$
 
-- **중심극한정리:** 에 의해
+- 중심극한정리에 의해
 
-    $$\frac{\bar X_n - \mu}{\sigma / \sqrt{n}} \xrightarrow{d} N(0,1)$$
+$$\frac{\bar X_n - \mu}{\sigma / \sqrt{n}} \xrightarrow{d} N(0,1)$$
 
-- 예 5.2.5 에 의해
-
-    $$\mathrm{plim}_{n\to\infty} S_n = \sigma$$
+- 예 5.2.5 에 의해 $\mathrm{plim}_{n\to\infty} S_n = \sigma$
 
 따라서 슬럿츠키의 정리에 의해
 
 $$\frac{\bar X_n - \mu}{S_n / \sqrt{n}} = \frac{\bar X_n - \mu}{\sigma / \sqrt{n}}/\frac{S_n}{\sigma} \xrightarrow{d} Z/1 = Z,\quad Z\sim N(0,1)$$
 
-즉, 정규모집단이 아니더라도 표본크기가 커지면 $t$분포가 표준정규분포로 근사된다.
-
+즉, 정규모집단이 아니더라도 표본크기가 커지면 $t$분포가 표준정규분포로 근사된다.  
 특히, 모집단 분포가 정규분포 $N(\mu, \sigma^2)$인 경우에는
 
 $$T_n = \frac{\bar X_n - \mu}{S_n / \sqrt{n}} \sim t_{n-1}$$
 
-이므로, 자유도가 충분히 크면 $t_{n-1}$ 분포는 표준정규분포 $N(0,1)$로 근사된다. 즉,
+이므로, 자유도가 충분히 크면 $t_{n-1}$ 분포는 표준정규분포 $N(0,1)$로 근사된다. 즉, $t_{n-1} \approx N(0,1),\quad n \to \infty$
 
-$$t_{n-1} \approx N(0,1),\quad n \to \infty$$
-
-또한 모집단의 분포가 무엇이든 $\sigma^2 > 0$만 정의되면
-
-$$\lim_{n \to \infty} P\left(-z_{\alpha/2} < T_n \le z_{\alpha/2}\right) = 1 - \alpha$$
+또한 모집단의 분포가 무엇이든 $\sigma^2 > 0$만 정의되면 $\lim_{n \to \infty} P\left(-z_{\alpha/2} < T_n \le z_{\alpha/2}\right) = 1 - \alpha$
 
 따라서
 
@@ -883,15 +801,7 @@ $$\left(\bar X_n - z_{\alpha/2} \frac{S_n}{\sqrt{n}},\;\; \bar X_n + z_{\alpha/2
 
 $$S_n^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar X_n)^2 = \frac{1}{n-1} \sum_{i=1}^n \left\{ (X_i - \mu) - (\bar X_n - \mu) \right\}^2\\ = \frac{1}{n-1} \left\{ \sum_{i=1}^n (X_i - \mu)^2 - n(\bar X_n - \mu)^2 \right\} = \frac{n}{n-1} \left\{ \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 - (\bar X_n - \mu)^2 \right\}$$
 
-이제 $Y_i = (X_i - \mu)^2$라 하면 $Y_1, \dots, Y_n$은 서로 독립이고 동일한 분포를 따르며
-
-$$E(Y_1) = E[(X_1 - \mu)^2] = \sigma^2$$
-
-이다. $E[(X_1 - \mu)^4] < +\infty$라 가정하면
-
-$$\text{Var}(Y_1) = E[(X_1 - \mu)^4] - \sigma^4$$
-
-이므로 중심극한정리에 의해
+이제 $Y_i = (X_i - \mu)^2$라 하면 $Y_1, \dots, Y_n$은 서로 독립이고 동일한 분포를 따르며 $E(Y_1) = E[(X_1 - \mu)^2] = \sigma^2$ 이다. $E[(X_1 - \mu)^4] < +\infty$라 가정하면 $\text{Var}(Y_1) = E[(X_1 - \mu)^4] - \sigma^4$ 이므로 중심극한정리에 의해
 
 $$\sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n Y_i - \sigma^2 \right) = \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 - \sigma^2 \right) \xrightarrow{d} W,\\ 
 W \sim N\left(0,\, E[(X_1 - \mu)^4] - \sigma^4\right)$$
@@ -900,7 +810,7 @@ W \sim N\left(0,\, E[(X_1 - \mu)^4] - \sigma^4\right)$$
 큰수의 법칙에 의해 $\bar X_n - \mu \xrightarrow{P} 0$ 이므로 슬럿츠키의 정리에 의해 $\sqrt{n} (\bar X_n - \mu)^2 \xrightarrow{P} 0$  
 따라서
 
-$$\sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n (X_i - \bar X_n)^2 - \sigma^2 \right) = \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 - \sigma^2 \right) - \sqrt{n} (\bar X_n - \mu)^2 \\ \xrightarrow{d} W$$
+$$\sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n (X_i - \bar X_n)^2 - \sigma^2 \right) = \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 - \sigma^2 \right) - \sqrt{n} (\bar X_n - \mu)^2 \xrightarrow{d} W$$
 
 $S_n^2$와 $\frac{1}{n} \sum_{i=1}^n (X_i - \bar X_n)^2$의 차이는 계수 $\frac{n}{n-1}$에서만 발생한다. 실제로
 
@@ -914,23 +824,15 @@ $$S_n^2 - \sigma^2 = \left( \frac{1}{n} \sum_{i=1}^n (X_i - \bar X_n)^2 - \sigma
 
 $$\sqrt{n}(S_n^2 - \sigma^2) = \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n (X_i - \bar X_n)^2 - \sigma^2 \right) + \frac{\sqrt{n}}{n-1} \cdot \frac{1}{n} \sum_{i=1}^n (X_i - \bar X_n)^2$$
 
-$\frac{\sqrt{n}}{n-1} \to 0$이고, $S_n^2$가 확률적으로 $\sigma^2$에 수렴하므로
+$\frac{\sqrt{n}}{n-1} \to 0$이고, $S_n^2$가 확률적으로 $\sigma^2$에 수렴하므로 $\frac{1}{\sqrt{n}} S_n^2 \xrightarrow{P} 0$
 
-$$\frac{1}{\sqrt{n}} S_n^2 \xrightarrow{P} 0$$
-
-따라서
-
-$$\sqrt{n}(S_n^2 - \sigma^2) \xrightarrow{d} W,\quad W \sim N\left(0,\, E[(X_1 - \mu)^4] - \sigma^4\right)$$
+따라서 $\sqrt{n}(S_n^2 - \sigma^2) \xrightarrow{d} W,\quad W \sim N\left(0,\, E[(X_1 - \mu)^4] - \sigma^4\right)$
 
 이제 $E[(X_1 - \mu)^4]$를 첨도 $\rho_4$로 표현하면, $\rho_4 = E\left[ \left( \frac{X_1 - \mu}{\sigma} \right)^4 \right] - 3$이므로
 
 $$E[(X_1 - \mu)^4] = \sigma^4 (\rho_4 + 3)$$
 
-따라서
-
-$$E[(X_1 - \mu)^4] - \sigma^4 = (\rho_4 + 2)\sigma^4$$
-
-결국
+따라서 $E[(X_1 - \mu)^4] - \sigma^4 = (\rho_4 + 2)\sigma^4$ 결국
 
 $$\sqrt{n}(S_n^2 - \sigma^2) \xrightarrow{d} N\left(0,\, (\rho_4 + 2)\sigma^4\right)$$
 
@@ -1015,13 +917,7 @@ $$ \sum_{j=1}^k \frac{(X_{nj}-np_j)^2}{np_j} \xrightarrow{d} \chi^2(k-1) $$
 
 ### 정리 5.3.3 일차근사를 이용한 극한분포 계산: 델타 방법 (Delta Method)
 
-다차원 확률변수 $X_n$에 대해
-
-$$
-\sqrt{n}(X_n - \theta) \xrightarrow{d} Z
-$$
-
-이고, 함수 $g$가 $\theta$에서 미분가능(일차원에서는 도함수 $g'(\theta)$, 다차원에서는 그레디언트 $\nabla g(\theta)$ 존재)하면
+다차원 확률변수 $X_n$에 대해 $\sqrt{n}(X_n - \theta) \xrightarrow{d} Z$ 이고, 함수 $g$가 $\theta$에서 미분가능(일차원에서는 도함수 $g'(\theta)$, 다차원에서는 그레디언트 $\nabla g(\theta)$ 존재)하면
 
 $$
 \sqrt{n}(g(X_n) - g(\theta)) \xrightarrow{d} g'(\theta) Z
@@ -1031,25 +927,25 @@ $$
 
 **설명:**  
 델타 방법(Delta Method)은 중심극한정리로부터 얻은 표본평균 등 통계량의 극한분포를, 미분가능한 함수 $g$에 적용한 새로운 통계량의 극한분포로 확장하는 데 사용된다.  
-함수 $g$가 $\theta$에서 미분가능하면, $X_n$이 $\theta$ 근처에서 $g(X_n)$을 1차 테일러 전개로 근사할 수 있다.  
-즉, $ g(X_n) \approx g(\theta) + g'(\theta)(X_n - \theta)$  
-따라서 $\sqrt{n}(g(X_n) - g(\theta)) \approx g'(\theta) \sqrt{n}(X_n - theta)$  
+
+함수 $g$가 $\theta$에서 미분가능하면, $X_n$이 $\theta$ 근처에서 $g(X_n)$을 1차 테일러 전개로 근사할 수 있다. 즉, $ g(X_n) \approx g(\theta) + g'(\theta)(X_n - \theta)$  따라서 $\sqrt{n}(g(X_n) - g(\theta)) \approx g'(\theta) \sqrt{n}(X_n - theta)$  
+
 $X_n$의 중심화된 극한분포가 $Z$라면, $g(X_n)$의 극한분포는 $g'(\theta)Z$가 된다.
 
-**증명:**  
-(일차원 $X_n$의 경우)  
-$g$가 $\theta$에서 미분가능하므로, 임의의 $X_n$에 대해
-
-$$ g(X_n) = g(\theta) + g'(\theta)(X_n - \theta) + r_n $$
-
-따라서
-
-$$ \sqrt{n}(g(X_n) - g(\theta)) = g'(\theta)\sqrt{n}(X_n - \theta) + \sqrt{n} r_n$$
-
-$X_n \xrightarrow{P} \theta$이므로 $|X_n - \theta| \xrightarrow{P} 0$, $r_n = o(|X_n - \theta|)$이므로 $\sqrt{n} r_n = o_P(\sqrt{n}|X_n - \theta|)$.  
-또한 $\sqrt{n}(X_n - \theta) \xrightarrow{d} Z$이므로, 슬럿츠키의 정리에 의해 $\sqrt{n} r_n \xrightarrow{P} 0$이 되어 전체 극한분포는 $g'(\theta)Z$가 된다.
-
-(다차원 $X_n$의 경우도, $g$의 그레디언트 $\nabla g(\theta)$를 사용하여 동일하게 증명된다.)
+>**증명:**  
+>(일차원 $X_n$의 경우)  
+>$g$가 $\theta$에서 미분가능하므로, 임의의 $X_n$에 대해
+>
+>$$ g(X_n) = g(\theta) + g'(\theta)(X_n - \theta) + r_n $$
+>
+>따라서
+>
+>$$ \sqrt{n}(g(X_n) - g(\theta)) = g'(\theta)\sqrt{n}(X_n - \theta) + \sqrt{n} r_n$$
+>
+>$X_n \xrightarrow{P} \theta$이므로 $|X_n - \theta| \xrightarrow{P} 0$, $r_n = o(|X_n - \theta|)$이므로 $\sqrt{n} r_n = o_P(\sqrt{n}|X_n - \theta|)$.  
+>또한 $\sqrt{n}(X_n - \theta) \xrightarrow{d} Z$이므로, 슬럿츠키의 정리에 의해 $\sqrt{n} r_n \xrightarrow{P} 0$이 되어 전체 극한분포는 $g'(\theta)Z$가 된다.
+>
+>(다차원 $X_n$의 경우도, $g$의 그레디언트 $\nabla g(\theta)$를 사용하여 동일하게 증명된다.)
 
 >### 추가: 극한분포 계산의 핵심 도구들의 관계
 >**중심극한정리(CLT)와 델타 방법(Delta Method)의 역할 구분**
@@ -1143,21 +1039,24 @@ W \sim N\left(0, \text{Var}\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2}
 
 이전 예제에서 더 나아가, 이변량 정규분포 $N(\mu_1, \mu_2; \sigma_1^2, \sigma_2^2, \rho)$ ($\sigma_1>0, \sigma_2>0, -1<\rho<1$)에서 표본상관계수의 극한분포를 살펴보자.
 
-이 경우 $(Y_1 - \rho X_1 \mid X_1 = x_1) \sim N(0, 1-\rho^2)$로, 조건부분포가 $x_1$에 의존하지 않으므로 서로 독립이다. 따라서 $\mu_1 = \mu_2 = 0$, $\sigma_1 = \sigma_2 = 1$인 경우에
-
-$$ T = \frac{Y_1 - \rho X_1}{\sqrt{1-\rho^2}} $$
-
-에서 $X_1$과 $T$는 서로 독립이고 각각 $N(0,1)$을 따른다.
+이 경우 $(Y_1 - \rho X_1 \mid X_1 = x_1) \sim N(0, 1-\rho^2)$로, 조건부분포가 $x_1$에 의존하지 않으므로 서로 독립이다. 따라서 $\mu_1 = \mu_2 = 0$, $\sigma_1 = \sigma_2 = 1$인 경우에 $T = \frac{Y_1 - \rho X_1}{\sqrt{1-\rho^2}}$ 에서 $X_1$과 $T$는 서로 독립이고 각각 $N(0,1)$을 따른다.
 
 $Y_1 = \rho X_1 + \sqrt{1-\rho^2} T$를 표본상관계수의 극한분포식 $X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2$에 대입하면 $\frac{\rho}{2}(1-\rho^2) X_1^2 + (1-\rho^2)^{3/2} X_1 T - \frac{\rho}{2}(1-\rho^2) T^2$
 
 이를 활용하여 표준정규분포의 적률과 공분산 성질을 이용하여 계산하면, 
 
-$$ \text{Var}\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right) = E\left[\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right)^2\right] \\
-= \frac{\rho^2}{4}(1-\rho^2)^2 E(X_1^4) + (1-\rho^2)^3 E(X_1^2) E(T^2) + \frac{\rho^2}{4}(1-\rho^2)^2 E(T^4) \\
-= \frac{\rho^2}{4}(1-\rho^2)^2 \cdot 3 + (1-\rho^2)^3 \cdot 1 \cdot 1 + \frac{\rho^2}{4}(1-\rho^2)^2 \cdot 3 \\
-= (1-\rho^2)^2 \\
-\therefore \sqrt{n}(\hat\rho_n - \rho) \xrightarrow{d} W,\quad W \sim N(0, (1-\rho^2)^2) $$
+$$
+\begin{aligned} 
+&\text{Var}\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right) = E\left[\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right)^2\right] \\
+&= \frac{\rho^2}{4}(1-\rho^2)^2 E(X_1^4) + (1-\rho^2)^3 E(X_1^2) E(T^2) - \frac{\rho^2}{2}(1-\rho^2)^2 E(X_1^2) E(T^2) + \frac{\rho^2}{4}(1-\rho^2)^2 E(T^4) \\
+&= \frac{\rho^2}{4}(1-\rho^2)^2 \cdot 3 + (1-\rho^2)^3 \cdot 1 \cdot 1 - \frac{\rho^2}{2}(1-\rho^2)^2+ \frac{\rho^2}{4}(1-\rho^2)^2 \cdot 3 \\
+&= (1-\rho^2)^2
+\end{aligned}
+$$
+
+$$
+\therefore \sqrt{n}(\hat\rho_n - \rho) \xrightarrow{d} W,\quad W \sim N(0, (1-\rho^2)^2) 
+$$
 
 이제 $\hat\rho_n$의 함수 $g(\hat\rho_n)$의 극한분포를 구하면, 정리 5.3.3에 의해
 
@@ -1198,11 +1097,7 @@ $$ \sqrt{n}\big(Y_n + \log(1-\alpha)\big) \xrightarrow{d} \sqrt{\frac{\alpha}{1-
 
 $$ \sqrt{n}\big(h(Y_n) - h(-\log(1-\alpha))\big) \xrightarrow{d} \dot h(-\log(1-\alpha)) \sqrt{\frac{\alpha}{1-\alpha}}\, W $$
 
-여기서
-
-$$ \dot h(-\log(1-\alpha)) = \frac{1-\alpha}{f(F^{-1}(\alpha))},\quad f = F' $$
-
-이므로
+여기서 $ \dot h(-\log(1-\alpha)) = \frac{1-\alpha}{f(F^{-1}(\alpha))},\quad f = F'$ 이므로
 
 $$ \sqrt{n}\big(X_{(r_n)} - F^{-1}(\alpha)\big) \xrightarrow{d} Z,\quad
 Z \sim N\left(0, \frac{\alpha(1-\alpha)}{[f(F^{-1}(\alpha))]^2}\right) $$
@@ -1230,15 +1125,9 @@ $$ f(z)=\frac{e^z}{(1+e^z)^2}, \qquad
 F(z)=1-\frac{1}{1+e^z}, \quad -\infty<z<\infty $$
 
 로 주어진다.
-이로부터 누적분포함수의 역함수는
-
-$$ F^{-1}(u) = \log\frac{u}{1-u} $$
-
-임을 알 수 있다. 따라서 정리 4.3.3에 의해 균등분포 $U(0,1)$를 따르는 확률변수 $U$에 대해
+이로부터 누적분포함수의 역함수는 $F^{-1}(u) = \log\frac{u}{1-u}$ 임을 알 수 있다. 따라서 정리 4.3.3에 의해 균등분포 $U(0,1)$를 따르는 확률변수 $U$에 대해
 
 $$ Z = \log\frac{U}{1-U} \sim L(0,1) $$
-
-이 된다.
 
 이를 이용하면 일반적인 로지스틱분포 $L(\mu,\sigma)$에 대해서도
 
@@ -1246,12 +1135,7 @@ $$ \sigma Z + \mu = \sigma\log\frac{U}{1-U} + \mu \sim L(\mu,\sigma) $$
 
 와 같이 난수를 생성할 수 있다.
 
-같은 방식으로, 균등분포 $U(0,1)$를 따르는 확률변수 $U$에 대해
-
-$$ -\log(1-U) \sim \mathrm{Exp}(1), \qquad
-\sigma(-\log(1-U)) \sim \mathrm{Exp}(\sigma) $$
-
-임을 이용하면 지수분포의 난수 생성이 가능하며, 또한 표준정규분포의 누적분포함수 $\Phi$의 역함수 $\Phi^{-1}(u)$를 이용하여
+같은 방식으로, 균등분포 $U(0,1)$를 따르는 확률변수 $U$에 대해 $-\log(1-U) \sim \mathrm{Exp}(1), \quad \sigma(-\log(1-U)) \sim \mathrm{Exp}(\sigma)$ 임을 이용하면 지수분포의 난수 생성이 가능하며, 또한 표준정규분포의 누적분포함수 $\Phi$의 역함수 $\Phi^{-1}(u)$를 이용하여
 
 $$ \Phi^{-1}(U) \sim N(0,1), \qquad
 \sigma\Phi^{-1}(U) + \mu \sim N(\mu, \sigma^2) $$

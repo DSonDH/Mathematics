@@ -2515,7 +2515,7 @@ $$\hat{\sigma}^2 = \frac{\sum_{i=1}^n(Y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2
 >이고 정리 4.4.6 (b)에 의해 $\hat{\beta}$와 $\hat{\sigma}^2$는 서로 독립이다. 따라서 t분포의 대의적 정의로부터
 >
 >$$\frac{\hat{\beta}_1-\beta_1}{\sqrt{\hat{\sigma}^2/S_{xx}}}
->= \frac{(\hat{\beta}_1-\beta_1)/\sqrt{\sigma^2/S_{xx}}}{\sqrt{(n-2)\hat{\sigma}^2/\sigma^2/(n-2)}}
+>= \frac{(\hat{\beta}_1-\beta_1)/\sqrt{\sigma^2/S_{xx}}}{\sqrt{(n-2)(\hat{\sigma}^2/\sigma^2)/(n-2)}}
 >\sim t(n-2)$$
 >
 >이 경우에 평균오차제곱합은 다음의 공식을 이용하여 계산할 수 있다:
