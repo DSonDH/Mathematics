@@ -11,11 +11,9 @@
     - $\lim_{n\to\infty} P(|\hat\eta_n - \eta| \ge \epsilon) = 0$ for all $\epsilon > 0$
 
 >**일치성(Consistency)과 불편성(Unbiasedness)의 관계**  
->추정량이 갖춰야 할 두 가지 중요한 성질인 **일치성**과 **불편성**은 서로 독립적인 개념이다.  
->- 일치성은 표본크기 $n$이 커질수록 추정량 $\hat\theta_n$이 참값 $\theta$로 확률수렴하는 성질 $\hat\theta_n \xrightarrow{P} \theta$를 의미하며,  
->- 불편성은 모든 표본크기에서 $E[\hat\theta_n] = \theta$가 성립하는 성질을 의미한다. 중요한 점은 **일치성과 불편성 사이에는 함축 관계가 없다** 는 것이다.  
+>추정량이 갖춰야 할 두 가지 중요한 성질인 **일치성**과 **불편성**은 서로 독립적인 개념이다 (**일치성과 불편성 사이에는 함축 관계가 없다.**)  
 >
->즉, 일치적이지만 편향된(biased) 추정량이 매우 흔하게 존재한다. 예를 들어, 정규분포에서 표본분산 $S_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X)^2$는 모분산 $\sigma^2$에 대해 불편추정량이 아니지만(분모가 $n-1$이므로), 표본크기가 커질수록 $\sigma^2$에 수렴하므로 일치성을 가진다.  
+>일치적이지만 편향된(biased) 추정량이 매우 흔하게 존재한다. 예를 들어, 정규분포에서 표본분산 $S_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X)^2$는 모분산 $\sigma^2$에 대해 불편추정량이 아니지만(분모가 $n-1$이므로), 표본크기가 커질수록 $\sigma^2$에 수렴하므로 일치성을 가진다.  
 >따라서 추정량을 평가할 때는 **큰 표본에서의 수렴 성질(일치성)** 과 **고정된 표본크기에서의 평균적 성질(불편성)** 을 모두 고려하여, 상황에 맞는 최적의 추정량을 선택해야 한다.
 
 3. 충분성(sufficiency)
@@ -31,6 +29,8 @@
     - 동일한 일치성을 가진 추정량 중에서 평균제곱오차가 가장 작은 성질
     - $E[(\hat\eta - \eta)^2] \le E[(\hat\eta' - \eta)^2]$ for all 일치추정량 $\hat\eta'$
 
+6. 식별가능성
+    - $f(\cdot; \theta) = f(\cdot; \theta^0) \Rightarrow \theta = \theta^0$ 
 
 ## 6.1 적률이용 추정법 *(Method of Moments Estimation, MME)*
 
@@ -56,9 +56,7 @@ $$\hat\eta = g(\hat m_1, \dots, \hat m_k)$$
 #### 예 6.1.1: 모분산과 모표준편차의 적률이용 추정량
 
 모분산이 $\sigma^2 \ (0 \le \sigma^2 < \infty)$인 모집단에서 랜덤표본 $X_1, \dots, X_n$을 관측했다고 하자.  
-모분산은
-
-$$\sigma^2 = \mathrm{Var}(X_1) = E(X_1^2) - (E(X_1))^2 = m_2 - m_1^2$$
+모분산은 $\sigma^2 = \mathrm{Var}(X_1) = E(X_1^2) - (E(X_1))^2 = m_2 - m_1^2$
 
 이에 대응하는 적률이용 추정량은
 
@@ -71,11 +69,7 @@ $$
 
 #### 예 6.1.2: 적률이용 추정량의 비유일성 *(Non-uniqueness)*
 
-포아송 분포 $Poisson(\lambda)$ $(\lambda>0)$에서 랜덤표본 $X_1, \dots, X_n$을 관측했다고 하자. 이 분포에서는
-
-$$E(X_1) = \lambda, \quad \mathrm{Var}(X_1) = \lambda$$
-
-이므로, $\lambda = m_1$ 또는 $\lambda = m_2 - m_1^2$의 두 가지 표현이 모두 성립한다. 따라서 적률이용 추정량은
+포아송 분포 $Poisson(\lambda)$ $(\lambda>0)$에서 랜덤표본 $X_1, \dots, X_n$을 관측했다고 하자. 이 분포에서는 $E(X_1) = \lambda, \quad \mathrm{Var}(X_1) = \lambda$ 이므로, $\lambda = m_1$ 또는 $\lambda = m_2 - m_1^2$의 두 가지 표현이 모두 성립한다. 따라서 적률이용 추정량은
 
 $$
 \hat\lambda_1^{\mathrm{MME}} = \hat m_1 = \bar X, \quad \hat\lambda_2^{\mathrm{MME}} = \hat m_2 - (\hat m_1)^2 = \frac{1}{n}\sum_{i=1}^n (X_i - \bar X)^2
@@ -123,7 +117,7 @@ $$\hat\eta_n^{\mathrm{MME}} = g(\hat m_1,\dots,\hat m_k)\xrightarrow{p} \eta$$
 
 > **설명**: 표본적률이 대수의 법칙에 의해 모적률로 수렴하고, 연속함수 정리에 의해 적률이용 추정량도 모수로 수렴한다.
 
-#### 증명 개요
+**증명 개요**  
 표본적률 벡터의 확률수렴과 연속함수 정리를 결합하여 얻는다.
 
 ### 추정량의 일치성 *(Consistency of Estimators)*
@@ -136,20 +130,13 @@ $$\hat\eta(X_1, \dots, X_n)$$
 즉, 모든 $\theta \in \Omega$에 대해
 
 $$
-\hat\eta_n \xrightarrow{p_\theta} \eta(\theta)
-\quad \Leftrightarrow \quad
-\lim_{n\to\infty} P_\theta\left(|\hat\eta_n - \eta(\theta)| \ge \epsilon\right) = 0
-\quad \forall\, \epsilon > 0
+\hat\eta_n \xrightarrow{p_\theta} \eta(\theta) \quad \Leftrightarrow \quad \lim_{n\to\infty} P_\theta\left(|\hat\eta_n - \eta(\theta)| \ge \epsilon\right) = 0 \quad \forall\, \epsilon > 0
 $$
 
 가 성립하면, $\hat\eta_n$은 $\eta$에 대해 일치적(consisitent)이라고 한다. **다차원의 경우에도 같은 정리가 성립한다.**
 
 #### 예 6.1.4: 모분산 적률이용 추정량의 일치성
-모분산을 $\sigma^2 = g(m_1,m_2) = m_2 - m_1^2$로 표현하면, $g$는 연속함수이므로 정리6.1.1로부터 예6.1.1에서의 적률이용추정량
-
-$${\hat\sigma_n^2}^{\mathrm{MME}} = \frac{1}{n}\sum_{i=1}^n (X_i-\bar X)^2$$
-
-는 $\sigma^2$에 대해 일치성을 가진다. 표본분산도 역시 일치성을 가진다.
+모분산을 $\sigma^2 = g(m_1,m_2) = m_2 - m_1^2$로 표현하면, $g$는 연속함수이므로 정리6.1.1로부터 예6.1.1에서의 적률이용추정량 ${\hat\sigma_n^2}^{\mathrm{MME}} = \frac{1}{n}\sum_{i=1}^n (X_i-\bar X)^2$ 는 $\sigma^2$에 대해 일치성을 가진다. 표본분산도 역시 일치성을 가진다.
 
 $$S_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2 = \frac{n}{n-1}{\hat\sigma_n^2}^{\mathrm{MME}}$$
 
@@ -161,33 +148,29 @@ $$
 \sigma^2 = (\nabla g(m))^\top \Sigma \nabla g(m), \quad \Sigma = (m_{r+s} - m_rm_s)
 $$
 
-#### 증명
-
-$i=1,\dots,n$에 대해 $Y_i=(X_i,\dots,X_i^k)^\top\in\mathbb{R}^k$ 로 두면 $E(Y_i)=m$이고 $\text{Cov}(Y_i)=\Sigma, \Sigma_{rs}=\text{Cov}(X_i^r,X_i^s)=E(X_i^{r+s})-E(X_i^r)E(X_i^s)=m_{r+s}-m_rm_s$ 가 된다. 가정 $E(X_1^{2k})<\infty$로 각 성분의 2차 모멘트가 유한하므로 다변량 중심극한정리에 의해
-
-$$ \sqrt n(\hat m-m) =\sqrt n\left(\frac1n\sum_{i=1}^n Y_i-E(Y_1)\right) \xrightarrow{d}N_k(0,\Sigma)$$
-
-이제 $\hat\eta_n-\eta=g(\hat m)-g(m)$에 대해, $g$의 미분 가능성을 이용하면 (delta method)
-
-$$ g(\hat m)-g(m) =\nabla g(m)^\top(\hat m-m)+r_n,\quad
-\frac{r_n}{\|\hat m-m\|}\xrightarrow{p}0$$
-
-따라서
-
-$$\sqrt n(\hat\eta_n-\eta) =\nabla g(m)^\top\sqrt n(\hat m-m)+\sqrt n\,r_n$$
-
-또한 $\hat m\xrightarrow{p}m$이므로 $\hat m-m=O_p(n^{-1/2})$, hence $\sqrt n\,r_n=o_p(1)$. Slutsky 정리에 의해
-
-$$\sqrt n(\hat\eta_n-\eta)
-\xrightarrow{d}\nabla g(m)^\top Z,\quad Z\sim N_k(0,\Sigma)$$
-
-정규벡터의 선형결합은 정규분포이므로
-
-$$\nabla g(m)^\top Z\sim N\left(0,(\nabla g(m))^\top\Sigma\nabla g(m)\right)$$
-
-즉,
-
-$$\sqrt n(\hat\eta_n-\eta)\xrightarrow{d}N(0,\sigma^2),\quad \sigma^2=(\nabla g(m))^\top\Sigma\nabla g(m)$$
+>**증명**  
+>
+>$i=1,\dots,n$에 대해 $Y_i=(X_i,\dots,X_i^k)^\top\in\mathbb{R}^k$ 로 두면 $E(Y_i)=m$이고 $\text{Cov}(Y_i)=\Sigma, \Sigma_{rs}=\text{Cov}(X_i^r,X_i^s)=E(X_i^{r+s})-E(X_i^r)E(X_i^s)=m_{r+s}-m_rm_s$ 가 된다. 가정 $E(X_1^{2k})<\infty$로 각 성분의 2차 모멘트가 유한하므로 다변량 중심극한정리에 의해
+>
+>$$ \sqrt n(\hat m-m) =\sqrt n\left(\frac1n\sum_{i=1}^n Y_i-E(Y_1)\right) \xrightarrow{d}N_k(0,\Sigma)$$
+>
+>이제 $\hat\eta_n-\eta=g(\hat m)-g(m)$에 대해, $g$의 미분 가능성을 이용하면 (delta method)
+>
+>$$ g(\hat m)-g(m) =\nabla g(m)^\top(\hat m-m)+r_n,\quad
+>\frac{r_n}{\|\hat m-m\|}\xrightarrow{p}0$$
+>
+>따라서 $\sqrt n(\hat\eta_n-\eta) =\nabla g(m)^\top\sqrt n(\hat m-m)+\sqrt n\,r_n$
+>
+>또한 $\hat m\xrightarrow{p}m$이므로 $\hat m-m=O_p(n^{-1/2})$, hence $\sqrt n\,r_n=o_p(1)$. Slutsky 정리에 의해
+>
+>$$\sqrt n(\hat\eta_n-\eta)
+>\xrightarrow{d}\nabla g(m)^\top Z,\quad Z\sim N_k(0,\Sigma)$$
+>
+>정규벡터의 선형결합은 정규분포이므로
+>
+>$$\nabla g(m)^\top Z\sim N\left(0,(\nabla g(m))^\top\Sigma\nabla g(m)\right)$$
+>
+>즉, $\sqrt n(\hat\eta_n-\eta)\xrightarrow{d}N(0,\sigma^2),\quad \sigma^2=(\nabla g(m))^\top\Sigma\nabla g(m)$
 
 >추가: 참고
 >| 항목     | MOM              | MLE       |
@@ -196,7 +179,6 @@ $$\sqrt n(\hat\eta_n-\eta)\xrightarrow{d}N(0,\sigma^2),\quad \sigma^2=(\nabla g(
 >| 비선형성   | 명시적으로 존재         | 내부적으로 처리됨 |
 >| CLT 적용 | (\bar X)에만 직접 적용 | score에 적용 |
 >| 추가 도구  | delta method 필요  | 불필요       |
-
 
 
 ## 6.2 최대가능도 추정법 *(Maximum Likelihood Estimation, MLE)*
@@ -274,17 +256,17 @@ $\ell(\theta)$가 열린구간 $\Omega_0$에서 두 번 미분 가능하고, 이
 
 $$\ell''(\theta)<0, \forall\theta \in \Omega_0 \ \text{and} \ \ell'(\hat\theta)=0, \hat\theta \in \Omega_0 \rightarrow \ \hat\theta = \arg\max_{\theta\in\Omega_0} \ell(\theta)$$
 
-#### 증명
-
-$\ell(\theta)$가 $\Omega_0$에서 두 번 미분 가능하다고 가정하자. $\ell'(\hat\theta)=0$이고 $\ell''(\hat\theta)<0$일 때, $\hat\theta$가 극대점임을 보이기 위해 $\theta$를 $\hat\theta$ 근방에서 테일러 전개하면,
-
-$$\ell(\theta) = \ell(\hat\theta) + \ell'(\hat\theta)(\theta-\hat\theta) + \frac{1}{2}\ell''(\hat\theta)(\theta-\hat\theta)^2 + o((\theta-\hat\theta)^2)$$
-
-여기서 $\ell'(\hat\theta)=0$이므로,
-
-$$\ell(\theta) = \ell(\hat\theta) + \frac{1}{2}\ell''(\hat\theta)(\theta-\hat\theta)^2 + o((\theta-\hat\theta)^2)$$
-
-$\ell''(\hat\theta)<0$이므로 $\theta=\hat\theta$에서 $\ell(\theta)$가 최대값을 가짐을 알 수 있다.
+>**증명**  
+>
+>$\ell(\theta)$가 $\Omega_0$에서 두 번 미분 가능하다고 가정하자. $\ell'(\hat\theta)=0$이고 $\ell''(\hat\theta)<0$일 때, $\hat\theta$가 극대점임을 보이기 위해 $\theta$를 $\hat\theta$ 근방에서 테일러 전개하면,
+>
+>$$\ell(\theta) = \ell(\hat\theta) + \ell'(\hat\theta)(\theta-\hat\theta) + \frac{1}{2}\ell''(\hat\theta)(\theta-\hat\theta)^2 + o((\theta-\hat\theta)^2)$$
+>
+>여기서 $\ell'(\hat\theta)=0$이므로,
+>
+>$$\ell(\theta) = \ell(\hat\theta) + \frac{1}{2}\ell''(\hat\theta)(\theta-\hat\theta)^2 + o((\theta-\hat\theta)^2)$$
+>
+>$\ell''(\hat\theta)<0$이므로 $\theta=\hat\theta$에서 $\ell(\theta)$가 최대값을 가짐을 알 수 있다.
 
 #### 예 6.2.2: 이항분포에서의 최대가능도 추정
 
@@ -341,27 +323,23 @@ $$l(\alpha \theta_1 + (1-\alpha)\theta_2) > \alpha l(\theta_1) + (1-\alpha) l(\t
     * $\partial(\Omega_0)$는 수직선 위의 구간 $\Omega_0$의 경계(boundary)를 나타내는 기호
     * $\theta \to \partial(\Omega_0)$는 유한구간의 경우엔 구간의 끝점으로 가까이 가고, 무한구간의 경우에는 무한히 커지거나 작아지는 것을 뜻한다.
 
-그러면 방정식
-
-$$\dot l(\theta)=0,\quad \theta\in\Omega_0$$
-
-의 해 $\hat\theta$는 **존재하며 유일**하고,
+그러면 방정식 $\dot l(\theta)=0,\quad \theta\in\Omega_0$ 의 해 $\hat\theta$는 **존재하며 유일**하고,
 
 $$l(\hat\theta)=\max_{\theta\in\Omega_0} l(\theta)$$
 
 를 만족한다.
 
-#### 증명
-
-정의역이 무한구간으로서 $\Omega_0 = (-\infty, +\infty)$인 경우에 증명하기로 한다.  
-$\ell(\theta)$는 $\ddot l(\theta)<0$이므로 순오목 함수이다. 또한 $\lim_{\theta\to\pm\infty} l(\theta) = -\infty$이므로, $l(\theta)$는 $\mathbb{R}$ 전체에서 최대값을 갖는다. 순오목 함수의 최대점은 유일하므로, $\dot l(\theta)=0$의 해 $\hat\theta$가 존재하며 유일하다. 따라서 $l(\hat\theta)=\max_{\theta\in\Omega_0} l(\theta)$가 성립한다.
-
-정리 6.2.2에서 $\ell(\theta)$가 순오목(strictly concave)이므로, 만약 $\hat\theta_1 \neq \hat\theta_2$에서 모두 최대값을 가진다면,
-$\ell(\hat\theta_1) = \ell(\hat\theta_2) = M$ 이고, $0 < \alpha < 1$에 대해 $\theta^* = \alpha\hat\theta_1 + (1-\alpha)\hat\theta_2$라 하면,
-
-$$\ell(\theta^*) > \alpha \ell(\hat\theta_1) + (1-\alpha)\ell(\hat\theta_2) = M$$
-
-이 되어 $\theta^*$에서 더 큰 값을 가지므로, $\hat\theta_1, \hat\theta_2$가 최대점이라는 가정과 모순이다. 따라서 최대점은 유일하다.
+>**증명**  
+>
+>정의역이 무한구간으로서 $\Omega_0 = (-\infty, +\infty)$인 경우에 증명하기로 한다.  
+>$\ell(\theta)$는 $\ddot l(\theta)<0$이므로 순오목 함수이다. 또한 $\lim_{\theta\to\pm\infty} l(\theta) = -\infty$이므로, $l(\theta)$는 $\mathbb{R}$ 전체에서 최대값을 갖는다. 순오목 함수의 최대점은 유일하므로, $\dot l(\theta)=0$의 해 $\hat\theta$가 존재하며 유일하다. 따라서 $l(\hat\theta)=\max_{\theta\in\Omega_0} l(\theta)$가 성립한다.
+>
+>순오목(strictly concave)이므로, 만약 $\hat\theta_1 \neq \hat\theta_2$에서 모두 최대값을 가진다면,
+>$\ell(\hat\theta_1) = \ell(\hat\theta_2) = M$ 이고, $0 < \alpha < 1$에 대해 $\theta^* = \alpha\hat\theta_1 + (1-\alpha)\hat\theta_2$라 하면,
+>
+>$$\ell(\theta^*) > \alpha \ell(\hat\theta_1) + (1-\alpha)\ell(\hat\theta_2) = M$$
+>
+>이 되어 $\theta^*$에서 더 큰 값을 가지므로, $\hat\theta_1, \hat\theta_2$가 최대점이라는 가정과 모순이다. 따라서 최대점은 유일하다.
 
 ### 6.2.4 가능도방정식의 반복해법 *(Iterative Solution of Likelihood Equation)*
 
@@ -414,11 +392,7 @@ l(\theta) = -n\log\theta - \frac{n\bar x}{\theta}\\
 
 로, $\theta > 0$에서 항상 음이 아님을 알 수 있다. 즉, $\bar x > \theta/2$일 때만 $\ddot l(\theta) < 0$이므로, 전체 구간에서 순오목함수가 아니다. 따라서 $\theta$에 대해 정리 6.2.2을 바로 적용할 수 없고, 증가·감소를 직접 조사해야 한다.  
 
-이때 $\lambda = 1/\theta$로 치환하면
-
-$$l(\lambda) = n\log\lambda - n\bar x\lambda \\ \ddot l(\lambda) = -\frac{n}{\lambda^2} < 0$$
-
-로, $\lambda > 0$에서 항상 음이므로 순오목함수가 된다. 따라서 정리 6.2.2을 적용할 수 있다.
+이때 $\lambda = 1/\theta$로 치환하면 $l(\lambda) = n\log\lambda - n\bar x\lambda, \quad \ddot l(\lambda) = -\frac{n}{\lambda^2} < 0$ 로, $\lambda > 0$에서 항상 음이므로 순오목함수가 된다. 따라서 정리 6.2.2을 적용할 수 있다.
 
 가능도방정식 $\frac{d}{d\lambda} l(\lambda) = \frac{n}{\lambda} - n\bar x = 0$ 의 해는 $\hat\lambda^{\mathrm{MLE}} = \frac{1}{\bar X}$ 이고, 정리 6.2.3(불변성)에 의해
 
@@ -429,8 +403,8 @@ $$\hat\theta^{\mathrm{MLE}} = \bar X$$
 >
 > $$f(x;\eta) = \exp\{\eta T(x) - A(\eta) + S(x)\}$$
 >
-> 여기서 $\eta$는 모수(parameter), $T(x)$는 충분통계량, $A(\eta)$는 정규화 상수, $S(x)$는 $x$에만 의존하는 함수.
-> - $T(x)$: **충분통계량(sufficient statistic)** 역할을 하는 함수로, 표본 $x$의 정보를 요약하여 모수 $\eta$와 관련된 부분만 남기는 함수. 예를 들어, 베르누이 분포에서는 $T(x) = x$.
+> - $\eta$: 모수(parameter)
+> - $T(x)$: **충분통계량(sufficient statistic)** 역할을 하는 함수로, 표본 $x$의 정보를 요약하여 모수 $\eta$와 관련된 부분만 남기는 함수. 예를 들어, 베르누이 분포에서 $T(x) = x$.
 > - $A(\eta)$: **정규화 상수(normalizing constant)** 또는 **누율생성함수(cumulant generating function)** 로, 분포가 적분해서 1이 되도록 조정하는 $\eta$의 함수.
 > - $S(x)$: $x$에만 의존하는 함수로, 모수 $\eta$와는 무관한 부분. (많은 경우 $S(x)=0$이거나 상수.)
 >
@@ -450,25 +424,19 @@ $$pdf(x;\eta) = \exp\{\eta T(x)-A(\eta)+S(x)\}, \quad x\in\mathcal X,\ \eta\in N
 (참고: 이런 조건을 만족하는 확률밀도함수 형태의 집합을 단일모수 지수족(single parameter exponential family of pdf's)라 한다.)  
 여기서 아래의 가능도방정식의 근 $\hat\eta$이 존재하면 $\hat\eta$는 $\eta$의 최대가능도 추정값이다.
 
-$$A'(\hat\eta)=E_{\eta}[T(X_1)] = \frac{1}{n}\sum_{i=1}^n T(x_i)$$
+$$A'(\eta)=E_{\eta}[T(X_1)] = \frac{1}{n}\sum_{i=1}^n T(x_i), \quad \eta \in N$$
 
-#### 증명
-
-가능도함수의 로그를 $\eta$에 대해 미분하면 $A'(\eta) = E_\eta[T(X_1)]$가 된다.  
-가능도함수의 로그는
-
-$$l(\eta) = n\eta \bar T - nA(\eta) + \sum_{i=1}^n S(x_i)$$
-
-이고, $\bar T = \frac{1}{n}\sum_{i=1}^n T(x_i)$. 미분하면
-
-$$\frac{d}{d\eta} l(\eta) = n\bar T - nA'(\eta)$$
-
-가능도방정식은 $A'(\hat\eta) = \bar T$
-
-조건 1: $\mathcal X$가 $\eta$에 의존하지 않으므로 $l(\eta)$는 $\eta$에 대해 두 번 미분 가능.  
-조건 2: $N$이 열린구간이므로 극대점이 내부에 존재.  
-조건 3: $\mathrm{Var}_\eta(T(X_1)) > 0$이므로 $A''(\eta) > 0$이고, $l(\eta)$는 순오목함수.  
-따라서 $A'(\hat\eta) = \bar T$의 해 $\hat\eta$는 존재하며 유일하고, 최대가능도 추정값이 된다.
+>**증명**  
+>
+>가능도함수의 로그를 $\eta$에 대해 미분하면 $A'(\eta) = E_\eta[T(X_1)]$가 된다.  
+>가능도함수의 로그는 $l(\eta) = n\eta \bar T - nA(\eta) + \sum_{i=1}^n S(x_i)$ 이고, $\bar T = \frac{1}{n}\sum_{i=1}^n T(x_i)$.  
+>미분하면 $\frac{d}{d\eta} l(\eta) = n\bar T - nA'(\eta)$  
+>가능도방정식은 $A'(\hat\eta) = \bar T$
+>
+>조건 1: $\mathcal X$가 $\eta$에 의존하지 않으므로 $l(\eta)$는 $\eta$에 대해 두 번 미분 가능.  
+>조건 2: $N$이 열린구간이므로 극대점이 내부에 존재.  
+>조건 3: $\mathrm{Var}_\eta(T(X_1)) > 0$이므로 $A''(\eta) > 0$이고, $l(\eta)$는 순오목함수.  
+>따라서 $A'(\hat\eta) = \bar T$의 해 $\hat\eta$는 존재하며 유일하고, 최대가능도 추정값이 된다.
 
 #### 지수족에서 모수의 일대일 변환과 가능도방정식
 
@@ -594,9 +562,7 @@ $$f(x;\theta) = \begin{cases} \frac{1}{\theta}, & 0 \le x \le \theta \\ 0, & \te
 
 $$L(\theta) = \prod_{i=1}^n f(x_i;\theta) = \begin{cases} \theta^{-n}, & \theta \ge X_{(n)} \\ 0, & \text{otherwise} \end{cases}$$
 
-여기서 $X_{(n)} = \max\{x_1, \dots, x_n\}$이다. 즉, 모든 표본값이 $\theta$ 이하일 때만 가능도함수가 0이 아니고, $\theta$가 $X_{(n)}$ 이상일 때 $L(\theta) = \theta^{-n}$이다. $\theta$가 커질수록 $L(\theta)$는 감소하므로, 최대값은 $\theta = X_{(n)}$에서 달성된다. 따라서 $\theta$의 최대가능도 추정량은 $X_{(n)}$이다.
-
-$$\hat\theta^{\mathrm{MLE}} = X_{(n)} = \max\{X_1, \dots, X_n\}$$
+여기서 $X_{(n)} = \max\{x_1, \dots, x_n\}$이다. 즉, 모든 표본값이 $\theta$ 이하일 때만 가능도함수가 0이 아니다. $\theta$가 커질수록 $L(\theta)$는 감소하므로, 최대값은 $\theta = X_{(n)}$에서 달성된다. 따라서 $\theta$의 최대가능도 추정량은 $X_{(n)}$이다.
 
 #### 예 6.2.8: 최대가능도 추정량이 유일하지 않은 경우
 
@@ -630,16 +596,11 @@ $$X_{(n)} - 1 \le \hat\theta^{\mathrm{MLE}} \le X_{(1)} + 1$$
 
 모집단 분포의 확률밀도함수가 $f(x; \theta), \ \theta = (\theta_1, \dots, \theta_k)^\top \in \Omega$이고, 랜덤표본 $X_1, \dots, X_n$의 관측값이 $x = (x_1, \dots, x_n)$일 때, **가능도함수(likelihood function)** 는
 
-$$ L(\theta; x) = \prod_{i=1}^n f(x_i; \theta) \\
-l(\theta; x) = \log L(\theta; x) = \sum_{i=1}^n \log f(x_i; \theta)$$
+$$ L(\theta; x) = \prod_{i=1}^n f(x_i; \theta), \quad l(\theta; x) = \log L(\theta; x) = \sum_{i=1}^n \log f(x_i; \theta)$$
 
 #### (b) 모수 벡터의 최대가능도 추정 *(MLE of Parameter Vector)*
 
-가능도함수를 최대화하는
-
-$$\hat\theta^{\mathrm{MLE}}(x) = \arg\max_{\theta \in \Omega} L(\theta; x)$$
-
-를 **최대가능도 추정값(maximum likelihood estimator, MLE)** 이라 한다.
+가능도함수를 최대화하는 $\hat\theta^{\mathrm{MLE}}(x) = \arg\max_{\theta \in \Omega} L(\theta; x)$ 를 **최대가능도 추정값(maximum likelihood estimator, MLE)** 이라 한다.
 
 #### (c) 각 성분의 최대가능도 추정 *(MLE for Each Component)*
 
@@ -697,7 +658,7 @@ $$
 
 (1) $\mu$에 대한 최대화:
 
-$$\sum_{i=1}^n (x_i-\mu)^2 = \sum_{i=1}^n (x_i-\bar x)^2 + n(\bar x-\mu)^2$$
+$\sum_{i=1}^n (x_i-\mu)^2 = \sum_{i=1}^n (x_i-\bar x)^2 + n(\bar x-\mu)^2$
 
 따라서 $\mu$에 대해 최대화하면, $l(\mu, \sigma^2)$의 $\mu$계수가 음수이므로, $\hat\mu = \bar x = \frac{1}{n}\sum_{i=1}^n x_i$ 에서 최대가 된다.
 
@@ -736,14 +697,14 @@ $$
 \hat\eta_j^{\mathrm{MLE}} = g_j(\hat\theta^{\mathrm{MLE}})
 $$
 
-#### 증명
-
-$\eta = g(\theta)$가 일대일대응함수 이므로, $\theta$와 $\eta$ 사이에 역함수 $\theta = h(\eta)$가 존재한다. 따라서
-
-$$L_\eta(\eta; x) = L_\theta(h(\eta); x) \\
-\max_\eta L_\eta(\eta; x) = \max_\theta L_\theta(\theta; x)$$
-
-그러므로 $\theta$의 최대가능도 추정값 $\hat\theta^{\mathrm{MLE}}$에 대응하는 $\hat\eta^{\mathrm{MLE}} = g(\hat\theta^{\mathrm{MLE}})$ 가 $\eta$의 최대가능도 추정값이 된다.
+>**증명**  
+>
+>$\eta = g(\theta)$가 일대일대응함수 이므로, $\theta$와 $\eta$ 사이에 역함수 $\theta = h(\eta)$가 존재한다. 따라서
+>
+>$$L_\eta(\eta; x) = L_\theta(h(\eta); x) \\
+>\max_\eta L_\eta(\eta; x) = \max_\theta L_\theta(\theta; x)$$
+>
+>그러므로 $\theta$의 최대가능도 추정값 $\hat\theta^{\mathrm{MLE}}$에 대응하는 $\hat\eta^{\mathrm{MLE}} = g(\hat\theta^{\mathrm{MLE}})$ 가 $\eta$의 최대가능도 추정값이 된다.
 
 #### 예시 6.3.3 모수의 함수에 대한 최대가능도 추정 *(MLE for Function of Parameter)*
 
@@ -758,7 +719,7 @@ $$
 
 (2) 베르누이 분포에서 분산의 최대가능도 추정
 
-$Bernoulli(p), \ 0 < p < 1$ 에서 $\theta = p$ 라고 하자. 분산(variance)은 $\sigma^2 = p(1-p)$  
+$Bernoulli(p), \ 0 < p < 1$ 에서 $\theta = p$ 라고 하자. 분산은 $\sigma^2 = p(1-p)$  
 베르누이 분포의 최대가능도 추정량은 $\hat p^{\mathrm{MLE}} = \bar X$ 이므로, 정리 6.3.1에 의해
 
 $$\hat\sigma^{2, \mathrm{MLE}} = \hat p^{\mathrm{MLE}} (1 - \hat p^{\mathrm{MLE}}) = \bar X (1 - \bar X)$$
@@ -843,11 +804,7 @@ $$
 
 **모수의 일대일 변환과 최대가능도 추정**
 
-모수 $\eta = g(\theta)$가 $\theta$의 **일대일 변환(one-to-one transformation)** 이면, $\theta$의 최대가능도 추정량 $\hat\theta^{\mathrm{MLE}}$을 이용해
-
-$$\hat\eta^{\mathrm{MLE}} = g(\hat\theta^{\mathrm{MLE}})$$
-
-로 $\eta$의 최대가능도 추정량을 얻을 수 있다. 즉, 모수의 함수도 최대가능도 추정량을 통해 직접 추정할 수 있다.
+모수 $\eta = g(\theta)$가 $\theta$의 **일대일 변환(one-to-one transformation)** 이면, $\theta$의 최대가능도 추정량 $\hat\theta^{\mathrm{MLE}}$을 이용해 $\hat\eta^{\mathrm{MLE}} = g(\hat\theta^{\mathrm{MLE}})$ 로 $\eta$의 최대가능도 추정량을 얻을 수 있다. 즉, 모수의 함수도 최대가능도 추정량을 통해 직접 추정할 수 있다.
 
 $$E_\theta[T(X_1)]= \frac{1}{n} \sum_{i=1}^n T_j(x_i),\ \theta \in \Omega$$
 
@@ -878,7 +835,7 @@ $$pdf(x; \eta) = \exp\left\{ \eta_1 x + \eta_2 x^2 - A(\eta) \right\}$$
 
 의 꼴로 쓸 수 있다. 여기서 $A(\eta)$는 정규화 상수로, $\eta_1, \eta_2$에 대해
 
-$$A(\eta) = -\frac{\eta_1^2}{4\eta_2} + \frac{1}{2}\log(-2\eta_2) + \frac{1}{2}\log 2\pi$$
+$$A(\eta) = -\frac{\eta_1^2}{4\eta_2} - \frac{1}{2}\log(-2\eta_2) + \frac{1}{2}\log 2\pi$$
 
 가능도방정식은
 
@@ -1040,8 +997,8 @@ $$\sqrt{n}(\hat\lambda_n^{\mathrm{MLE}} - \lambda) \xrightarrow{d} N(0, \lambda)
 
 **(c) 지수분포 $Exp(\theta)$, $\theta > 0$**  
 
-MLE: $\hat\theta_n^{\mathrm{MLE}} = \bar X = \frac{1}{n}\sum_{i=1}^n X_i$ (예 6.2.4, 6.2.5 참고)
-
+MLE: $\hat\theta_n^{\mathrm{MLE}} = \bar X = \frac{1}{n}\sum_{i=1}^n X_i$ (예 6.2.4, 6.2.5 참고)  
+(여기서 $\theta_n$: 크기 $n$ 의 표본으로 계산한 추정량)
 - 일치성:  
 
 $$\hat\theta_n^{\mathrm{MLE}} \xrightarrow{P_\theta} \theta$$
@@ -1052,7 +1009,8 @@ $$\sqrt{n}(\hat\theta_n^{\mathrm{MLE}} - \theta) \xrightarrow{d} N(0, \theta^2)$
 
 **(d) 정규분포 $N(\mu, \sigma^2)$**  
 
-MLE: $\hat\mu_n^{\mathrm{MLE}} = \bar X$, $\hat\sigma_n^{2,\mathrm{MLE}} = \frac{1}{n}\sum_{i=1}^n (X_i - \bar X)^2$ (예 6.3.4 참고)
+MLE: $\hat\mu_n^{\mathrm{MLE}} = \bar X$, $\hat\sigma_n^{2,\mathrm{MLE}} = \frac{1}{n}\sum_{i=1}^n (X_i - \bar X)^2$ (예 6.3.4 참고)  
+(여기서 $\mu_n, \sigma_n$: 크기 $n$ 의 표본으로 계산한 추정량)
 
 - 일치성:  
 
@@ -1067,7 +1025,7 @@ $$\sqrt{n}(\bar X - \mu) \sim N(0, \sigma^2) \text{  (표본크기 관계없음,
 
 $$\frac{n\hat\sigma_n^{2,\mathrm{MLE}}}{\sigma^2} \sim \chi^2(n-1) \text{  (표본크기 관계없음, 정리4.2.2)}$$
 
-$$\sqrt{n}(\hat\sigma_n^{2,\mathrm{MLE}} - \sigma^2) \xrightarrow{d} N(0, 2\sigma^4)$$
+$$\sqrt{n}(\hat\sigma_n^{2,\mathrm{MLE}} - \sigma^2) \xrightarrow{d} N(0, 2\sigma^4) \text{  (예 5.3.2)}$$
 
 **(e) 이변량 정규분포 $N(\mu_1, \mu_2; \sigma_1^2, \sigma_2^2, \rho)$**  
 
@@ -1095,6 +1053,8 @@ $$
 
 $$\bar\ell_n(\theta) =\frac{1}{n}\sum_{i=1}^n \log f(X_i; \theta)\xrightarrow{P_{\theta^0}} E_{\theta^0}[\log f(X_1; \theta)]$$
 
+- 우항에 $X_1$은 실제 샘플을 여러번 뽑은것. n개 X 각각 뽑는게 아님. 직관적으론, 이론적 모집단을 따르는 변수로 보면 됨.
+
 따라서, 아래와 같은 추측을 할 수 있다 (최대가능도 추정량이 유일하게 정해질 수 있다는 전제하에 argmax사용가능)  
 
 $$\hat\theta_n = \arg\max_{\theta \in \Omega} \bar\ell_n(\theta)
@@ -1104,6 +1064,7 @@ $$\hat\theta_n = \arg\max_{\theta \in \Omega} \bar\ell_n(\theta)
 - 이 추측은 "표본 로그가능도 평균 $\bar\ell_n(\theta)$를 최대화하는 $\hat\theta_n$이, 표본크기 $n$이 커질수록 참값 $\theta^0$에 가까워진다"는 직관을 표현한 것이다.
 - 이 직관을 엄밀화하기 위해 **쿨백–라이블러 괴리도(Kullback–Leibler divergence)** 를 도입한다.
 - 결론은 이 추측은 참으로, 확률수렴하는 일치성을 보여준다.
+
 ### 정리 6.4.1 쿨백–라이블러 괴리도
 쿨백–라이블러 괴리도는 두 분포가 서로 다른 정도를 나타내는 측도이다.  
 확률밀도함수 $f(x; \theta)$, $\theta \in \Omega$가  
@@ -1118,24 +1079,24 @@ $$KL(\theta, \theta^0) = -E_{\theta^0}\left[\log\frac{f(X; \theta)}{f(X; \theta^
 - $KL(\theta, \theta^0) \ge 0$  
 - $KL(\theta, \theta^0) = 0 \iff \theta = \theta^0$
 
-#### 증명
-(i) **$KL(\theta, \theta^0) \ge 0$의 증명**  
-- (R1) 공통 토대 조건에 의해 $f(x; \theta^0) > 0$이면 $f(x; \theta) > 0$이므로, $T(x) := \frac{f(x; \theta)}{f(x; \theta^0)}$는 $X$에서 양수이고 $P_{\theta^0}$ 거의 모든 곳에서 정의된다.
-- 모든 $t > 0$에 대해 $-\log t \ge 1 - t$ (볼록함수의 성질, $t=1$에서 등호). 즉, $-\log T(X) \ge 1 - T(X)$.
-- 양변에 $E_{\theta^0}$를 취하면
-    
-    $$KL(\theta, \theta^0) = -E_{\theta^0}\left[\log T(X)\right] \ge 1 - E_{\theta^0}[T(X)]$$
-
-- $E_{\theta^0}[T(X)] = \int_X \frac{f(x; \theta)}{f(x; \theta^0)} f(x; \theta^0) dx = \int_X f(x; \theta) dx = 1$.
-- 따라서 $KL(\theta, \theta^0) \ge 0$.
-
-(ii) **$KL(\theta, \theta^0) = 0 \iff \theta = \theta^0$의 증명**  
-- 위 부등식에서 등호는 $T(X) = 1$ 일 때만 성립.
-  - 즉, $f(X; \theta) = f(X; \theta^0)$ $P_{\theta^0}$-a.s.
-- (R1) 공통 토대에 의해 $P_{\theta^0}$-거의 모든 곳은 $X$ 전체에서 "거의 모든 $x$"와 동치.
-- 따라서 $f(\cdot; \theta) = f(\cdot; \theta^0)$ (거의 모든 $x \in X$).
-- (R0) 식별가능성에 의해 $\theta = \theta^0$.
-- 역방향($\theta = \theta^0 \implies KL(\theta, \theta^0) = 0$)은 정의에서 즉시 성립.
+>**증명**  
+>(i) **$KL(\theta, \theta^0) \ge 0$의 증명**  
+>- (R1) 공통 토대 조건에 의해 $f(x; \theta^0) > 0$이면 $f(x; \theta) > 0$이므로, $T(x) := \frac{f(x; \theta)}{f(x; \theta^0)}$는 $X$에서 양수이고 $P_{\theta^0}$ 거의 모든 곳에서 정의된다.
+>- 모든 $t > 0$에 대해 $-\log t \ge 1 - t$ (볼록함수의 성질, $t=1$에서 등호). 즉, $-\log T(X) \ge 1 - T(X)$.
+>- 양변에 $E_{\theta^0}$를 취하면, 기댓값의 단조성에 의해
+>    
+>    $$KL(\theta, \theta^0) = -E_{\theta^0}\left[\log T(X)\right] \ge 1 - E_{\theta^0}[T(X)]$$
+>
+>- $E_{\theta^0}[T(X)] = \int_X \frac{f(x; \theta)}{f(x; \theta^0)} f(x; \theta^0) dx = \int_X f(x; \theta) dx = 1$.
+>- 따라서 $KL(\theta, \theta^0) \ge 0$.
+>
+>(ii) **$KL(\theta, \theta^0) = 0 \iff \theta = \theta^0$의 증명**  
+>- 위 부등식에서 등호는 $T(X) = 1$ 일 때만 성립.
+>  - 즉, $f(X; \theta) = f(X; \theta^0)$ $P_{\theta^0}$-a.s.
+>- (R1) 공통 토대에 의해 $P_{\theta^0}$-거의 모든 곳은 $X$ 전체에서 "거의 모든 $x$"와 동치.
+>- 따라서 $f(\cdot; \theta) = f(\cdot; \theta^0)$ (거의 모든 $x \in X$).
+>- (R0) 식별가능성에 의해 $\theta = \theta^0$.
+>- 역방향($\theta = \theta^0 \implies KL(\theta, \theta^0) = 0$)은 정의에서 즉시 성립.
 
 ### 최대가능도 추정량의 일치성: 일반 조건
 1. **균등 확률수렴성**  
@@ -1249,7 +1210,7 @@ $$\sqrt{n}\Big(n^{-1}\sum_{i=1}^n \frac{\partial}{\partial\theta}\log f(X_i;\the
 \therefore  \sqrt{n}\Big(\bar l_n'(\theta) - E_\theta\left[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\right]\Big)
 \ \xrightarrow{d}\ N\Big(0,\ \mathrm{Var}_\theta\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)\Big)$$
 
-또한 아래에서 보이듯(정리 6.4.3) 적절한 조건하에
+또한 이따가 보일 정리 6.4.3의 적절한 조건하에
 
 $$E_\theta\Big[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big] 
 = \int \left(\frac{\partial}{\partial\theta}\log f(x;\theta) \right) f(x;\theta)\,dx \\
@@ -1320,23 +1281,24 @@ $$E_\theta\Big[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big]=0$$
 
 $$I(\theta)=\mathrm{Var}_\theta\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)=E_\theta\Big[-\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big]$$
 
-#### 증명
-이산형, 다차원의 경우도 같은 방법으로 증명가능하므로 일차원 연속형만 증명한다.  
-* 항등식: $\int_{\mathcal{X}} f(x;\theta)\ dx = 1$, $\int_{\mathcal{X}} \exp(\log f(x;\theta))\ dx = 1$
-* 조건 (R2)~(R4)로부터 위 항등식 양변을 $\theta$에 대해 미분하면, $\exp(\log f(x;\theta))=f(x;\theta)$ 이므로 (위에 더 자세한 식 전개 나옴)
-
-$$\int_{\mathcal{X}} \left[\frac{\partial}{\partial\theta}\log f(x;\theta)\right]\exp(\log f(x;\theta))\,dx = 0 \\
-\therefore E_\theta\Big[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big]=0$$
-
-* 한 번 더 미분하여 정리하면
-    
-    $$\int_{\mathcal{X}} \left[\left(\frac{\partial}{\partial\theta}\log f(x;\theta)\right)^2 + \frac{\partial^2}{\partial\theta^2}\log f(x;\theta)\right] \exp(\log f(x;\theta))\,dx = 0 \\
-    \Rightarrow E_\theta\Big[\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)^2\Big] + E_\theta\Big[\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big] = 0 \\ 
-    \therefore E_\theta\Big[\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)^2\Big]
-    =-E_\theta\Big[\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big] \\
-    \therefore \mathrm{Var}_\theta\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big) = -E_\theta\Big[\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big]$$
-
-    이고 (a)로 평균이 0이므로 분산과 연결되어 (b)가 나온다.
+>**증명**  
+>이산형, 다차원의 경우도 같은 방법으로 증명가능하므로 일차원 연속형만 증명한다.  
+> (참고: 적분 내에서는 $X_1$이 취할 수 있는 값인 $x$로 정하는게 엄밀하다 (
+>* 항등식: $\int_{\mathcal{X}} f(x;\theta)\ dx = \int_{\mathcal{X}} \exp(\log f(x;\theta))\ dx = 1$
+>* 조건 (R2)~(R4)로부터 위 항등식 양변을 $\theta$에 대해 미분하면, 
+>
+>$$\int_{\mathcal{X}} \left[\frac{\partial}{\partial\theta}\log f(x;\theta)\right]\exp(\log f(x;\theta))\,dx = 0 \\
+>\therefore E_\theta\Big[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big]=0$$
+>
+>* 한 번 더 미분하여 정리하면
+>    
+>    $$\int_{\mathcal{X}} \left[\left(\frac{\partial}{\partial\theta}\log f(x;\theta)\right)^2 + \frac{\partial^2}{\partial\theta^2}\log f(x;\theta)\right] \exp(\log f(x;\theta))\,dx = 0 \\
+>    \Rightarrow E_\theta\Big[\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)^2\Big] + E_\theta\Big[\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big] = 0 \\ 
+>    \therefore E_\theta\Big[\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)^2\Big]
+>    =-E_\theta\Big[\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big] \\
+>    \therefore \mathrm{Var}_\theta\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big) = -E_\theta\Big[\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big]$$
+>
+>    이고 (a)로 평균이 0이므로 분산과 연결되어 (b)가 나온다.
 
 ### 정리 6.4.4 최대가능도 추정량의 점근 정규성 (Asymptotic Normality of MLE)
 전제(기본 조건: (R0)~(R5))
@@ -1354,83 +1316,83 @@ $$\int_{\mathcal{X}} \left[\frac{\partial}{\partial\theta}\log f(x;\theta)\right
 
 $$\sqrt{n}\,(\hat\theta_n^{\mathrm{MLE}}-\theta)\ \xrightarrow{d}\ N\left(0\,,\,[I(\theta)]^{-1}\right)$$
 
-#### 증명
-다차원 모수의 경우도 같은 방법으로 밝힐 수 있으므로 일차원의 경우만 증명한다.  
-표현을 간단히 하기 위해 "표본당(per-observation)" 표기를 둔다.
-- $\bar l'_n(\theta)=l'_n(\theta)/n$ (점수의 평균)
-- $\ddot{\bar{l}_n}(\theta) = \frac{1}{n} \ddot{l}_n(\theta)$ (2차 도함수의 평균)
-- $\bar l_n^{(3)}(\theta)=\partial_\theta^3 l_n(\theta)/n$
-
-**(1단계) 가능도방정식의 1차 근사 + 잉여항(remainder)**  
-가능도방정식 $\bar{\dot{l}_n}(\hat\theta_n)=0$에 대해 테일러 전개를 적용하면
-
-$$
-0 = \bar{\dot{l}_n}(\hat\theta_n)
-= \bar{\dot{l}_n}(\theta)
-+ \bar l_n''(\theta)(\hat\theta_n - \theta)
-+ \frac{1}{2}\bar l_n^{(3)}(\theta_n^*)(\hat\theta_n - \theta)^2,
-\quad (|\theta_n^* - \theta| \leq |\hat\theta_n - \theta|)
-$$
-
-**(2단계) 잉여항의 확률수렴**  
-
-$$R_n = \frac{1}{2}\,\bar l_n^{(3)}(\theta_n^*)(\hat\theta_n - \theta)$$
-
-라 하면, 임의의 양수 $\epsilon > 0$과 $K > 0$에 대하여
-
-$$
-P_\theta(|R_n| \geq \epsilon)
-= P_\theta\left(\left|\bar l_n^{(3)}(\theta_n^*)\right| \gt K, |R_n| \geq \epsilon\right) + P_\theta\left(\left|\bar l_n^{(3)}(\theta_n^*)\right| \leq K, |R_n| \geq \epsilon\right) \\
-\leq P_\theta\left(|\bar l_n^{(3)}(\theta_n^*)| \gt K\right) + P_\theta\left(|\hat\theta_n - \theta| \geq \frac{2\epsilon}{K}\right)
-$$
-
-우변의 좌항은, 조건 (R7)에 의해 $|\bar l_n^{(3)}(\theta_n^*)| \le \frac{1}{n}\sum_{i=1}^n M(X_i)$이고, 마르코프 부등식에 의해
-
-$$\{\bar l_n^{(3)}(\theta_n^*) > K\} \subset \left\{\frac{1}{n}\sum_{i=1}^n M(X_i) > K\right\} \\
-\therefore P_\theta\left(|\bar l_n^{(3)}(\theta_n^*)| \gt K\right) \leq P_\theta\left(\frac{1}{n}\sum_{i=1}^n M(X_i) \geq K\right) \\
-\leq E_\theta\left[\frac{1}{n}\sum_{i=1}^n M(X_i)\right]/K
- = \frac{E_\theta[M(X_1)]}{K}
-$$
-
-우변의 우항은, 조건 (R6)의 일치성에 의해 $P_\theta\left(|\hat\theta_n - \theta| \geq \frac{2\epsilon}{K}\right) \to 0 \quad (n \to \infty)$  
-따라서 $K \to \infty$로 보내면, $E_\theta[M(X_1)]<\infty$이므로
-
-$$0 \leq \limsup_{n \to \infty} P_\theta(|R_n| \geq \epsilon) \leq \frac{E_\theta[M(X_1)]}{K} \to 0$$
-
-즉,
-
-$$R_n \xrightarrow{P_\theta} 0$$
-
-**(3단계) $\hat\theta_n-\theta$를 점수로 표현**  
-(1), (2) 결과를 합치면
-
-$$0=\bar{\dot{l}_n}(\theta)+\big(\bar{\ddot l}_n(\theta)+R_n\big)(\hat\theta_n-\theta), \ R_n \xrightarrow{P_\theta}0$$
-
-조건(R5), 정리6.4.3과 큰수의 법칙을 활용하면,
-
-$$-\bar{\ddot l}_n(\theta)=\frac1n\sum_{i=1}^n\Big[-\partial_\theta^2\log f(X_i;\theta)\Big]
-\xrightarrow{P_\theta}E_\theta\Big[-\partial_\theta^2\log f(X_1;\theta)\Big]=I(\theta) \\
-\therefore \sqrt{n}(\hat\theta_n-\theta)=\big(I(\theta)+r_n\big)^{-1}\sqrt{n}\,\bar{\dot{l}_n}(\theta),
-\qquad r_n\xrightarrow{P_\theta}0$$
-
-**(마지막 4단계) 중심극한정리(CLT) + 슬럿스키(Slutsky)**  
-점수(score) 함수의 평균 $\bar{\dot{l}_n}(\theta)$는 독립 동일분포(i.i.d.) 표본 $X_1, \dots, X_n$에 대해  
-
-$$\bar{\dot{l}_n}(\theta) = \frac{1}{n}\sum_{i=1}^n \frac{\partial}{\partial\theta}\log f(X_i;\theta)$$
-
-각 항 $\frac{\partial}{\partial\theta}\log f(X_i;\theta)$는 평균이 0(정리 6.4.3(a) 참고), 분산 $I(\theta)$를 갖는 i.i.d. 확률변수  
-따라서 중심극한정리(CLT)에 의해  
-
-$$
-\sqrt{n}\left(\bar{\dot{l}_n}(\theta) - E_\theta\left[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\right]\right)
-= \sqrt{n}\left(\frac{1}{n}\sum_{i=1}^n \frac{\partial}{\partial\theta}\log f(X_i;\theta) - 0\right)
-\xrightarrow{d} N(0, I(\theta))
-$$
-
-즉, 점수의 표본평균은 $\sqrt{n}$으로 정규화하면 평균 0, 분산 $I(\theta)$인 정규분포로 수렴.  
-따라서 3단계의 점수화와 정리5.3.1의 극한분포 계산법으로부터
-
-$$\sqrt{n}(\hat\theta_n-\theta) = (I(\theta)+r_n)^{-1}\sqrt n \bar{\dot{l}_n}(\theta), \quad r_n\xrightarrow{P_\theta}0\\
+>**증명**  
+>다차원 모수의 경우도 같은 방법으로 밝힐 수 있으므로 일차원의 경우만 증명한다.  
+>표현을 간단히 하기 위해 "표본당(per-observation)" 표기를 둔다.
+>- $\bar l'_n(\theta)=l'_n(\theta)/n$ (점수의 평균)
+>- $\ddot{\bar{l}_n}(\theta) = \frac{1}{n} \ddot{l}_n(\theta)$ (2차 도함수의 평균)
+>- $\bar l_n^{(3)}(\theta)=\partial_\theta^3 l_n(\theta)/n$
+>
+>**(1단계) 가능도방정식의 1차 근사 + 잉여항(remainder)**  
+>가능도방정식 $\bar{\dot{l}_n}(\hat\theta_n)=0$에 대해 테일러 전개를 적용하면
+>
+>$$
+>0 = \bar{\dot{l}_n}(\hat\theta_n)
+>= \bar{\dot{l}_n}(\theta)
+>+ \bar l_n''(\theta)(\hat\theta_n - \theta)
+>+ \frac{1}{2}\bar l_n^{(3)}(\theta_n^*)(\hat\theta_n - \theta)^2,
+>\quad (|\theta_n^* - \theta| \leq |\hat\theta_n - \theta|)
+>$$
+>
+>**(2단계) 잉여항의 확률수렴**  
+>
+>$$R_n = \frac{1}{2}\,\bar l_n^{(3)}(\theta_n^*)(\hat\theta_n - \theta)$$
+>
+>라 하면, 임의의 양수 $\epsilon > 0$과 $K > 0$에 대하여
+>
+>$$
+>P_\theta(|R_n| \geq \epsilon)
+>= P_\theta\left(\left|\bar l_n^{(3)}(\theta_n^*)\right| \gt K, |R_n| \geq \epsilon\right) + P_\theta\left(\left|\bar l_n^{(3)}(\theta_n^*)\right| \leq K, |R_n| \geq \epsilon\right) \\
+>\leq P_\theta\left(|\bar l_n^{(3)}(\theta_n^*)| \gt K\right) + P_\theta\left(|\hat\theta_n - \theta| \geq \frac{2\epsilon}{K}\right)
+>$$
+>
+>우변의 좌항은, 조건 (R7)에 의해 $|\bar l_n^{(3)}(\theta_n^*)| \le \frac{1}{n}\sum_{i=1}^n M(X_i)$이고, 확률의 단조성과 마르코프 부등식에 의해
+>
+>$$\{\bar l_n^{(3)}(\theta_n^*) > K\} \subset \left\{\frac{1}{n}\sum_{i=1}^n M(X_i) > K\right\} \\
+>\therefore P_\theta\left(|\bar l_n^{(3)}(\theta_n^*)| \gt K\right) \leq P_\theta\left(\frac{1}{n}\sum_{i=1}^n M(X_i) \geq K\right) 
+>\leq E_\theta\left[\frac{1}{n}\sum_{i=1}^n M(X_i)\right]/K \\
+> = \frac{E_\theta[M(X_1)]}{K}
+>$$
+>
+>우변의 우항은, 조건 (R6)의 일치성에 의해 $P_\theta\left(|\hat\theta_n - \theta| \geq \frac{2\epsilon}{K}\right) \to 0 \quad (n \to \infty)$  
+>따라서 $K \to \infty$로 보내면, $E_\theta[M(X_1)]<\infty$이므로
+>
+>$$0 \leq \limsup_{n \to \infty} P_\theta(|R_n| \geq \epsilon) \leq \frac{E_\theta[M(X_1)]}{K} \to 0$$
+>
+>즉,
+>
+>$$R_n \xrightarrow{P_\theta} 0$$
+>
+>**(3단계) $\hat\theta_n-\theta$를 점수로 표현**  
+>(1), (2) 결과를 합치면
+>
+>$$0=\bar{\dot{l}_n}(\theta)+\big(\bar{\ddot l}_n(\theta)+R_n\big)(\hat\theta_n-\theta), \ R_n \xrightarrow{P_\theta}0$$
+>
+>조건(R5), 정리6.4.3과 큰수의 법칙을 활용하면,
+>
+>$$-\bar{\ddot l}_n(\theta)=\frac1n\sum_{i=1}^n\Big[-\partial_\theta^2\log f(X_i;\theta)\Big]
+>\xrightarrow{P_\theta}E_\theta\Big[-\partial_\theta^2\log f(X_1;\theta)\Big]=I(\theta) \\
+>\therefore \sqrt{n}(\hat\theta_n-\theta)=\big(I(\theta)+r_n\big)^{-1}\sqrt{n}\,\bar{\dot{l}_n}(\theta),
+>\qquad r_n\xrightarrow{P_\theta}0$$
+>
+>**(마지막 4단계) 중심극한정리(CLT) + 슬럿츠키(Slutsky)**  
+>점수(score) 함수의 평균 $\bar{\dot{l}_n}(\theta)$는 독립 동일분포(i.i.d.) 표본 $X_1, \dots, X_n$에 대해  
+>
+>$$\bar{\dot{l}_n}(\theta) = \frac{1}{n}\sum_{i=1}^n \frac{\partial}{\partial\theta}\log f(X_i;\theta)$$
+>
+>각 항 $\frac{\partial}{\partial\theta}\log f(X_i;\theta)$는 평균이 0(정리 6.4.3(a) 참고), 분산 $I(\theta)$를 갖는 i.i.d. 확률변수  
+>따라서 중심극한정리(CLT)에 의해  
+>
+>$$
+>\sqrt{n}\left(\bar{\dot{l}_n}(\theta) - E_\theta\left[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\right]\right)
+>= \sqrt{n}\left(\frac{1}{n}\sum_{i=1}^n \frac{\partial}{\partial\theta}\log f(X_i;\theta) - 0\right)
+>\xrightarrow{d} N(0, I(\theta))
+>$$
+>
+>즉, 점수의 표본평균은 $\sqrt{n}$으로 정규화하면 평균 0, 분산 $I(\theta)$인 정규분포로 수렴.  
+>따라서 3단계의 점수화와 정리5.3.1의 극한분포 계산법으로부터
+>
+>$$\sqrt{n}(\hat\theta_n-\theta) = (I(\theta)+r_n)^{-1}\sqrt n \bar{\dot{l}_n}(\theta), \quad r_n\xrightarrow{P_\theta}0\\
 \sqrt{n}(\hat\theta_n-\theta) \xrightarrow{d} [I(\theta)]^{-1}Z, \quad Z\sim N(0, I(\theta))\\
 \therefore \sqrt{n}(\hat\theta_n-\theta) \xrightarrow{d}N\left(0,[I(\theta)]^{-1}\right)$$
 
@@ -1606,7 +1568,7 @@ $$\hat \mu^{LSE}(x) = \widehat{E}(Y \mid x) = x^\top \hat{\boldsymbol{\beta}}^{L
 
 $$\Pi = \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top$$
 
-를 정의한다. $\Pi$는 $\mathbf{Y}$를 $\mathbf{X}$의 열공간(column space)으로 직교투영(정사영, orthogonal projection)하는 행렬이다.
+를 정의한다. $\Pi$는 $\mathbf{Y}$를 $\mathbf{X}$의 열공간(column space)으로 직교투영(정사영, orthogonal projection)하는 행렬이다. 해트행렬(hat matrix) 이라고도 부른다.
 
 **(a) 투영행렬의 성질**
 
@@ -1632,35 +1594,35 @@ $$\boxed{\hat{\boldsymbol{\beta}}^{LSE} = (\mathbf{X}^\top \mathbf{X})^{-1} \mat
 
 $$\widehat{\mathbf{Y}} = \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = \Pi \mathbf{Y}$$
 
-#### 증명
-
-**(a)**
-
-- $\Pi^\top = (\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top)^\top = \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top = \Pi$
-
-- $\Pi^\top (I - \Pi) = \Pi (I - \Pi) = \Pi - \Pi^2 = \Pi - \Pi = 0$
-
-- $\Pi \mathbf{X} = \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{X} = \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} (\mathbf{X}^\top \mathbf{X}) = \mathbf{X} I = \mathbf{X}$
-
-**(b)**
-
-$\mathbf{Y} - \mathbf{X}\boldsymbol{\beta} = \Pi(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta}) + (I - \Pi)\mathbf{Y}$ 이므로  
-$|\mathbf{Y} - \mathbf{X}\boldsymbol{\beta}|^2 = |\Pi(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})|^2 + |(I - \Pi)\mathbf{Y}|^2 + 2(\Pi(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta}))^\top (I - \Pi)\mathbf{Y}$
-
-$\Pi^\top(I-\Pi) = 0$이므로 $(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})^\top \Pi^\top (I - \Pi)\mathbf{Y} = 0$
-
-따라서 $|\mathbf{Y} - \mathbf{X}\boldsymbol{\beta}|^2 = |\Pi(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})|^2 + |(I - \Pi)\mathbf{Y}|^2$  
-
-$|\Pi(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})|^2 = |\Pi\mathbf{Y} - \Pi \mathbf{X}\boldsymbol{\beta}|^2 = |\Pi \mathbf{Y} - \mathbf{X}\boldsymbol{\beta}|^2 = |\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{Y} - \mathbf{X}\boldsymbol{\beta}|^2$ 이므로  
-$\boldsymbol{\beta}$에 대한 최소값은 $\mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = \Pi \mathbf{Y}$를 만족하는 $\hat{\boldsymbol{\beta}}^{LSE}$에서 달성된다.  
-$\text{rank}(\mathbf{X}) = p+1$이므로 $\hat{\boldsymbol{\beta}}^{LSE}$는 유일하게 존재하며, $\hat{\boldsymbol{\beta}}^{LSE} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{Y}$가 된다.
+>**증명**  
+>
+>**(a)**
+>
+>- $\Pi^\top = (\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top)^\top = \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top = \Pi$
+>
+>- $\Pi^\top (I - \Pi) = \Pi (I - \Pi) = \Pi - \Pi^2 = \Pi - \Pi = 0$
+>
+>- $\Pi \mathbf{X} = \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{X} = \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} (\mathbf{X}^\top \mathbf{X}) = \mathbf{X} I = \mathbf{X}$
+>
+>**(b)**
+>
+>$\mathbf{Y} - \mathbf{X}\boldsymbol{\beta} = \Pi(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta}) + (I - \Pi)\mathbf{Y}$ 이므로  
+>$|\mathbf{Y} - \mathbf{X}\boldsymbol{\beta}|^2 = |\Pi(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})|^2 + |(I - \Pi)\mathbf{Y}|^2 + 2(\Pi(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta}))^\top (I - \Pi)\mathbf{Y}$
+>
+>$\Pi^\top(I-\Pi) = 0$이므로 $(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})^\top \Pi^\top (I - \Pi)\mathbf{Y} = 0$
+>
+>따라서 $|\mathbf{Y} - \mathbf{X}\boldsymbol{\beta}|^2 = |\Pi(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})|^2 + |(I - \Pi)\mathbf{Y}|^2$  
+>
+> 여기서 우항은 상수행렬이므로 좌항을 살펴보면 최소가 되는 지점을 판단할 수 있다:  
+>$|\Pi(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})|^2 = |\Pi\mathbf{Y} - \Pi \mathbf{X}\boldsymbol{\beta}|^2 = |\Pi \mathbf{Y} - \mathbf{X}\boldsymbol{\beta}|^2 = |\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{Y} - \mathbf{X}\boldsymbol{\beta}|^2$ 이므로  
+>$\boldsymbol{\beta}$에 대한 최소값은 $\mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = \Pi \mathbf{Y}$를 만족하는 $\hat{\boldsymbol{\beta}}^{LSE}$에서 달성된다.  
+>$\text{rank}(\mathbf{X}) = p+1$이므로 $\hat{\boldsymbol{\beta}}^{LSE}$는 유일하게 존재하며, $\hat{\boldsymbol{\beta}}^{LSE} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{Y}$가 된다.
 
 ### 정리 6.5.2: 최소제곱 추정량의 성질(불편성, 분산, 정규성)
 
-선형회귀모형 $\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{e}$,  
-$E(\mathbf{e}) = 0$, $\text{Var}(\mathbf{e}) = \sigma^2 I_n$, $\text{rank}(\mathbf{X}) = p+1$에서  
+선형회귀모형 $\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{e}$, $E(\mathbf{e}) = 0$, $\text{Var}(\mathbf{e}) = \sigma^2 I_n$, $\text{rank}(\mathbf{X}) = p+1$ (오차항의 정규분포가정은 아님)
 
-오차항 분산의 추정량으로 아래식의 평균오차제곱(MSE)을 사용한다. 분모 $n - p - 1$은 자유도(표본크기 $n$에서 추정한 모수 개수 $p+1$을 뺀 값)이다.
+에서 오차항 분산의 추정량으로 아래식의 평균오차제곱(MSE)을 사용한다. 분모 $n - p - 1$은 자유도(표본크기 $n$에서 추정한 모수 개수 $p+1$을 뺀 값)이다.
 
 $$\hat\sigma^2 = \frac{|\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE}|^2}{n - p - 1}$$
 
@@ -1686,55 +1648,56 @@ $E(\hat\sigma^2) = \sigma^2$ 따라서 $\hat\sigma^2$도 **불편추정량**이�
 - $\hat\beta^{LSE}$와 $\hat\sigma^2$는 서로 독립이다.
 >이는 회귀분석의 $t$-검정, $F$-검정, 신뢰구간의 표준 결과로 연결되는 출발점이다.
 
-#### 증명
-
-**(a)**
-
-$\hat\beta^{LSE} = (X^\top X)^{-1} X^\top Y$이므로
-
-$$E(\hat\beta^{LSE}) = (X^\top X)^{-1} X^\top E(Y) = (X^\top X)^{-1} X^\top X \beta = \beta$$
-
-즉, 불편추정량이다. 분산의 경우:
-
-$$\text{Var}(\hat{\boldsymbol{\beta}}^{LSE}) = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \text{Var}(\mathbf{Y}) \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top (\sigma^2 I) \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} = \sigma^2 (\mathbf{X}^\top \mathbf{X})^{-1}$$
-
-> $\text{Var}(Y) = \text{Var}(X\beta + e) = \text{Var}(e) = \sigma^2 I$
-
-**(b)**
-
-정리 6.5.1에서 $\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{e}$이고, $\Pi = \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top$이므로
-
-$$\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = \mathbf{Y} - \Pi \mathbf{Y} = (I - \Pi)\mathbf{Y} = (I - \Pi)(\mathbf{X}\boldsymbol{\beta} + \mathbf{e}) \\
-= (I - \Pi)\mathbf{X}\boldsymbol{\beta} + (I - \Pi)\mathbf{e} = \mathbf{X}\boldsymbol{\beta} - \mathbf{X}\boldsymbol{\beta} + (I - \Pi)\mathbf{e} = (I - \Pi)\mathbf{e}$$
-
-$$\hat{\sigma}^2 = \frac{|\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE}|^2}{n - p - 1} = \frac{\mathbf{e}^\top (I - \Pi) \mathbf{e}}{n - p - 1}$$
-
-$\mathbf{e}^\top (I - \Pi) \mathbf{e} = \text{trace}\big((I - \Pi) \mathbf{e} \mathbf{e}^\top\big), \quad E[\mathbf{e} \mathbf{e}^\top] = \sigma^2 I_n$ 이므로  
-$(n - p - 1) E(\hat\sigma^2) = E\big[\mathbf{e}^\top (I - \Pi) \mathbf{e}\big] = E\big[\text{trace}((I - \Pi) \mathbf{e} \mathbf{e}^\top)\big] \\ 
-= \text{trace}\big((I - \Pi) E[\mathbf{e} \mathbf{e}^\top]\big) = \text{trace}\big((I - \Pi) \sigma^2 I_n\big) = \sigma^2 \text{trace}(I - \Pi)$
-
-한편 $\text{trace}(A + B) = \text{trace}(A) + \text{trace}(B)$, $\text{trace}(AB) = \text{trace}(BA)$ 이므로  
-$\text{trace}(I_n - \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top) = n - \text{trace}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top)$ 이고,  
-$\text{trace}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top) = \text{trace}((\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{X}) = \text{trace}(I_{p+1}) = p+1$
-
-따라서 $\text{trace}(I_n - \Pi) = n - (p+1) = n - p - 1$  
-결국 $(n - p - 1) E(\hat\sigma^2) = \sigma^2 (n - p - 1) \implies E(\hat\sigma^2) = \sigma^2$
-
-**(c)**
-
-$e \sim N_n(0, \sigma^2 I)$이므로 $\hat\beta^{LSE}$는 선형변환된 정규분포이므로, $\hat\beta^{LSE} \sim N(\beta, \sigma^2 (X^\top X)^{-1})$  
-또한 $(I - \Pi)Y$는 $n - p - 1$차원의 정규분포의 제곱합이므로
-
-$$\frac{|Y - X\hat\beta^{LSE}|^2}{\sigma^2} = \frac{e^\top (I - \Pi) e}{\sigma^2} \sim \chi^2(n - p - 1) \\
-\therefore \frac{(n - p - 1)\hat\sigma^2}{\sigma^2} \sim \chi^2(n - p - 1)$$
-
-$\hat\beta^{LSE}$와 $\hat\sigma^2$는 서로 독립이다. 왜냐하면 $\hat\beta^{LSE}$는 $\Pi Y$에 의해 결정되고, $\hat\sigma^2$는 $(I - \Pi)Y$에 의해 결정되는데, $\Pi$와 $(I - \Pi)$가 서로 직교이므로 이 둘은 서로 독립이 된다.  
-수식으로 표현하면, 
-
-$$ \text{Cov}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top Y, (I - \Pi)Y) \\
-= \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \text{Var}(Y) (I - \Pi)^\top
-= 0
-$$
+>**증명**  
+>
+>**(a)**
+>
+>$\hat\beta^{LSE} = (X^\top X)^{-1} X^\top Y$이므로
+>
+>$$E(\hat\beta^{LSE}) = (X^\top X)^{-1} X^\top E(Y) = (X^\top X)^{-1} X^\top X \beta = \beta$$
+>
+>즉, 불편추정량이다. 분산의 경우:
+>
+>$$\text{Var}(\hat{\boldsymbol{\beta}}^{LSE}) = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \text{Var}(\mathbf{Y}) \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top (\sigma^2 I) \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} \\ 
+>= \sigma^2 (\mathbf{X}^\top \mathbf{X})^{-1}$$
+>
+>($\text{Var}(Y) = \text{Var}(X\beta + e) = \text{Var}(e) = \sigma^2 I$)
+>
+>**(b)**
+>
+>정리 6.5.1에서 $\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{e}$이고, $\Pi = \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top$이므로
+>
+>$$\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE} = \mathbf{Y} - \Pi \mathbf{Y} = (I - \Pi)\mathbf{Y} = (I - \Pi)(\mathbf{X}\boldsymbol{\beta} + \mathbf{e}) \\
+>= (I - \Pi)\mathbf{X}\boldsymbol{\beta} + (I - \Pi)\mathbf{e} = \mathbf{X}\boldsymbol{\beta} - \mathbf{X}\boldsymbol{\beta} + (I - \Pi)\mathbf{e} = (I - \Pi)\mathbf{e}$$
+>
+>$$\hat{\sigma}^2 = \frac{|\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}^{LSE}|^2}{n - p - 1} = \frac{\mathbf{e}^\top (I - \Pi) \mathbf{e}}{n - p - 1}$$
+>
+>$\mathbf{e}^\top (I - \Pi) \mathbf{e} = \text{trace}\big((I - \Pi) \mathbf{e} \mathbf{e}^\top\big), \quad E[\mathbf{e} \mathbf{e}^\top] = \sigma^2 I_n$ 이므로  
+>$(n - p - 1) E(\hat\sigma^2) = E\big[\mathbf{e}^\top (I - \Pi) \mathbf{e}\big] = E\big[\text{trace}((I - \Pi) \mathbf{e} \mathbf{e}^\top)\big] \\ 
+>= \text{trace}\big((I - \Pi) E[\mathbf{e} \mathbf{e}^\top]\big) = \text{trace}\big((I - \Pi) \sigma^2 I_n\big) = \sigma^2 \text{trace}(I - \Pi)$
+>
+>한편 $\text{trace}(A + B) = \text{trace}(A) + \text{trace}(B)$, $\text{trace}(AB) = \text{trace}(BA)$ 이므로  
+>$\text{trace}(I_n - \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top) = n - \text{trace}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top)$ 이고,  
+>$\text{trace}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top) = \text{trace}((\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{X}) = \text{trace}(I_{p+1}) = p+1$
+>
+>따라서 $\text{trace}(I_n - \Pi) = n - (p+1) = n - p - 1$  
+>결국 $(n - p - 1) E(\hat\sigma^2) = \sigma^2 (n - p - 1) \implies E(\hat\sigma^2) = \sigma^2$
+>
+>**(c)**
+>
+>$e \sim N_n(0, \sigma^2 I)$이므로 $\hat\beta^{LSE}$는 선형변환된 정규분포이므로, $\hat\beta^{LSE} \sim N(\beta, \sigma^2 (X^\top X)^{-1})$  
+>또한 $(I - \Pi)Y$는 $n - p - 1$차원의 정규분포의 제곱합이므로
+>
+>$$\frac{|Y - X\hat\beta^{LSE}|^2}{\sigma^2} = \frac{e^\top (I - \Pi) e}{\sigma^2} \sim \chi^2(n - p - 1) \\
+>\therefore \frac{(n - p - 1)\hat\sigma^2}{\sigma^2} \sim \chi^2(n - p - 1)$$
+>
+>$\hat\beta^{LSE}$와 $\hat\sigma^2$는 서로 독립이다. 왜냐하면 $\hat\beta^{LSE}$는 $\Pi Y$에 의해 결정되고, $\hat\sigma^2$는 $(I - \Pi)Y$에 의해 결정되는데, $\Pi$와 $(I - \Pi)$가 서로 직교이므로 이 둘은 서로 독립이 된다.  
+>수식으로 표현하면, 
+>
+>$$ \text{Cov}(\mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top Y, (I - \Pi)Y) \\
+>= \mathbf{X}(\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \text{Var}(Y) (I - \Pi)^\top
+>= 0
+>$$
 
 ### 설명변수 직교화(orthogonalization) introduction
 설명변수 행렬 $X$의 열들이 서로 직교(orthogonal)하면 $X^\top X$가 대각행렬이 되어 계산과 해석이 쉽다. 하지만 일반적으로는 직교하지 않으므로, **열공간을 보존하면서(동일한 모형공간) 직교화된 표현으로 바꾸어** 추정과 해석을 편하게 할 수 있다.
@@ -1764,27 +1727,27 @@ $$\Pi = \Pi_0 + \Pi_{1|0}$$
 처럼 "서로 직교인 두 투영의 합"으로 분해된다는 점이 핵심이다.
 (즉 $\Pi_0^\top \Pi_{1|0} = 0$)
 
-#### 보조정리: $\Pi=\Pi_0+\Pi_{1|0}$ 증명
-let $P:=\Pi_0+\Pi_{1|0}$  
-먼저 $X_{1|0}=(I-\Pi_0)X_1$ 이므로 $X_{1|0}$의 열들은 $C(X_0)$에 직교한다. 따라서 $X_0^\top X_{1|0}=0$ 이고, 이로부터
-
-$$\Pi_0\Pi_{1|0} = X_0(X_0^\top X_0)^{-1}(X_0^\top X_{1|0})(X_{1|0}^\top X_{1|0})^{-1}X_{1|0}^\top =0$$
-
-가 된다. 마찬가지로 $\Pi_{1|0}\Pi_0=0$
-
-또 $\Pi_0,\Pi_{1|0}$는 각각 직교투영행렬이므로 대칭이고 멱등이다. 따라서 $P^\top = (\Pi_0+\Pi_{1|0})^\top = \Pi_0^\top+\Pi_{1|0}^\top=\Pi_0+\Pi_{1|0}=P \\ 
-P^2 = (\Pi_0+\Pi_{1|0})^2 = \Pi_0^2+\Pi_{1|0}^2+\Pi_0\Pi_{1|0}+\Pi_{1|0}\Pi_0 = \Pi_0+\Pi_{1|0} = P $  
-이므로 $P$는 대칭 멱등행렬, 즉 직교투영행렬이다.
-
-이제 $P$의 상을 보면, $\text{Im}(P) = C(X_0)+C(X_{1|0})$ 이다.  
-한편 $X_{1|0}=(I-\Pi_0)X_1=X_1-\Pi_0X_1$ 이므로  
-$C(X_{1|0}) \subset C[(X_0,X_1])=C(X)$이고, 또한 $X_1=\Pi_0X_1+X_{1|0}$ 이므로 $C(X_1)\subset C(X_0)+C(X_{1|0})$이다. 따라서
-
-$$C(X_0)+C(X_{1|0})=C(X_0,X_1)=C(X)$$
-
-결국 $P$는 $C(X)$로의 직교투영행렬이다. 그런데 $C(X)$로의 직교투영행렬은 유일하므로
-
-$$P=\Pi \\ \therefore \Pi=\Pi_0+\Pi_{1|0}$$
+>**보조정리: $\Pi=\Pi_0+\Pi_{1|0}$ 증명**  
+>let $P:=\Pi_0+\Pi_{1|0}$  
+>먼저 $X_{1|0}=(I-\Pi_0)X_1$ 이므로 $X_{1|0}$의 열들은 $C(X_0)$에 직교한다. 따라서 $X_0^\top X_{1|0}=0$ 이고, 이로부터
+>
+>$$\Pi_0\Pi_{1|0} = X_0(X_0^\top X_0)^{-1}(X_0^\top X_{1|0})(X_{1|0}^\top X_{1|0})^{-1}X_{1|0}^\top =0$$
+>
+>가 된다. 마찬가지로 $\Pi_{1|0}\Pi_0=0$
+>
+>또 $\Pi_0,\Pi_{1|0}$는 각각 직교투영행렬이므로 대칭이고 멱등이다. 따라서 $P^\top = (\Pi_0+\Pi_{1|0})^\top = \Pi_0^\top+\Pi_{1|0}^\top=\Pi_0+\Pi_{1|0}=P \\ 
+>P^2 = (\Pi_0+\Pi_{1|0})^2 = \Pi_0^2+\Pi_{1|0}^2+\Pi_0\Pi_{1|0}+\Pi_{1|0}\Pi_0 = \Pi_0+\Pi_{1|0} = P $  
+>이므로 $P$는 대칭 멱등행렬, 즉 직교투영행렬이다.
+>
+>이제 $P$의 상을 보면, $\text{Im}(P) = C(X_0)+C(X_{1|0})$ 이다.  
+>한편 $X_{1|0}=(I-\Pi_0)X_1=X_1-\Pi_0X_1$ 이므로 $C(X_{1|0}) \subset C[(X_0,X_1])=C(X)$이고,  
+>또한 $X_1=\Pi_0X_1+X_{1|0}$ 이므로 $C(X_1)\subset C(X_0)+C(X_{1|0})$이다. 따라서 $C(X_0)+C(X_{1|0}) \subset C(X_0,X_1)=C(X)$
+>반대로 $C(X_0,X_1) = C(X_0)+C(X_1)\subset C(X_0)+C(X_{1|0})$  
+>따라서 $\text{Im}(P) = C(X)$, 결국 $P$는 $C(X)$로의 투영행렬이다.
+>
+>그런데 $C(X)$로의 직교투영행렬은 유일하므로 $P=\Pi$
+>
+>$$\therefore \Pi=\Pi_0+\Pi_{1|0}$$
 
 **(2) 평균반응의 재표현**
 
@@ -1816,41 +1779,41 @@ E(\hat\beta_1^{LSE}) = \beta_1,\quad \text{Var}(\hat\beta_1^{LSE}) = \sigma^2 (X
 
 즉 $X_1$을 "$X_0$의 영향 제거 후"에 회귀하는 형태로 분산이 정리된다.
 
-#### 증명
-**(a)**  
-$X\hat\beta^{LSE} = \Pi Y$이므로, $\Pi = \Pi_0 + \Pi_{1|0}$에서 
-
-$$X\hat\beta^{LSE} = \Pi Y = \Pi_0 Y + \Pi_{1|0} Y$$
-
-$\Pi_0 Y = X_0\hat\gamma_0^{LSE}$이므로 $\hat\gamma_0^{LSE} = (X_0^\top X_0)^{-1} X_0^\top Y$,  
-$\Pi_{1|0} Y = X_{1|0}\hat\beta_1^{LSE}$이므로 $\hat\beta_1^{LSE} = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top Y$가 된다.  
-
-$\hat\beta_0^{LSE}$ 유도: 
-
-$$
-\begin{aligned}
-X\hat\beta^{LSE} 
-&= X_0\hat\gamma_0^{LSE} + X_{1|0}\hat\beta_1^{LSE} \\
-&= X_0\hat\gamma_0^{LSE} + X_1\hat\beta_1^{LSE} - X_0(X_0^\top X_0)^{-1}X_0^\top X_1\hat\beta_1^{LSE} \\
-&= X_0\left[\hat\gamma_0^{LSE} - (X_0^\top X_0)^{-1}X_0^\top X_1\hat\beta_1^{LSE}\right] + X_1\hat\beta_1^{LSE}.
-\end{aligned}
-$$
-
-**(b)**  
-$\text{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = \text{Cov}((X_0^\top X_0)^{-1} X_0^\top Y, (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top Y)$이므로 $Y$의 공분산이 $\sigma^2 I$이며, $X_0X_{1|0}^\top = 0$이므로 
-
-> 왜냐하면, $X_{1|0} = (I - \Pi_0) X_1$이므로 $X_0^\top X_{1|0} = X_0^\top (I - \Pi_0) X_1 = X_0^\top X_1 - X_0^\top \Pi_0 X_1$ 이다. $\Pi_0$는 $X_0$의 열공간으로의 투영이므로 $X_0^\top \Pi_0 = X_0^\top$ 이고, 따라서 $X_0^\top \Pi_0 X_1 = X_0^\top X_1$
-
-$$\text{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top \sigma^2 I X_{1|0} (X_{1|0}^\top X_{1|0})^{-1} \\ 
-= \sigma^2 (X_0^\top X_0)^{-1} X_0^\top X_{1|0} (X_{1|0}^\top X_{1|0})^{-1}
-= 0
-$$
-
-$E(\hat\gamma_0^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top E(Y) = (X_0^\top X_0)^{-1} X_0^\top X\beta = (X_0^\top X_0)^{-1} X_0^\top(X_0\gamma_0 + X_{1|0}\beta_1) = \gamma_0$,  
-$E(\hat\beta_1^{LSE}) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top E(Y) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top X\beta = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top(X_0\gamma_0 + X_{1|0}\beta_1) = \beta_1$
-
-$\text{Var}(\hat\gamma_0^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top \sigma^2 I X_0 (X_0^\top X_0)^{-1} = \sigma^2 (X_0^\top X_0)^{-1}$,  
-$\text{Var}(\hat\beta_1^{LSE}) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top \sigma^2 I X_{1|0} (X_{1|0}^\top X_{1|0})^{-1} = \sigma^2 (X_{1|0}^\top X_{1|0})^{-1}$
+>**증명**  
+>**(a)**  
+>$X\hat\beta^{LSE} = \Pi Y$이므로, $\Pi = \Pi_0 + \Pi_{1|0}$에서 
+>
+>$$X\hat\beta^{LSE} = \Pi Y = \Pi_0 Y + \Pi_{1|0} Y$$
+>
+>$\Pi_0 Y = X_0\hat\gamma_0^{LSE}$이므로 $\hat\gamma_0^{LSE} = (X_0^\top X_0)^{-1} X_0^\top Y$,  
+>$\Pi_{1|0} Y = X_{1|0}\hat\beta_1^{LSE}$이므로 $\hat\beta_1^{LSE} = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top Y$가 된다.  
+>
+>$\hat\beta_0^{LSE}$ 유도: 
+>
+>$$
+>\begin{aligned}
+>X\hat\beta^{LSE} 
+>&= X_0\hat\gamma_0^{LSE} + X_{1|0}\hat\beta_1^{LSE} \\
+>&= X_0\hat\gamma_0^{LSE} + X_1\hat\beta_1^{LSE} - X_0(X_0^\top X_0)^{-1}X_0^\top X_1\hat\beta_1^{LSE} \\
+>&= X_0\left[\hat\gamma_0^{LSE} - (X_0^\top X_0)^{-1}X_0^\top X_1\hat\beta_1^{LSE}\right] + X_1\hat\beta_1^{LSE}.
+>\end{aligned}
+>$$
+>
+>**(b)**  
+>$\text{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = \text{Cov}((X_0^\top X_0)^{-1} X_0^\top Y, (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top Y)$이므로 $Y$의 공분산이 $\sigma^2 I$이며, $X_0X_{1|0}^\top = 0$이므로 
+>
+>> 왜냐하면, $X_{1|0} = (I - \Pi_0) X_1$이므로 $X_0^\top X_{1|0} = X_0^\top (I - \Pi_0) X_1 = X_0^\top X_1 - X_0^\top \Pi_0 X_1$ 이다. $\Pi_0$는 $X_0$의 열공간으로의 투영이므로 $X_0^\top \Pi_0 = X_0^\top$ 이고, 따라서 $X_0^\top \Pi_0 X_1 = X_0^\top X_1$
+>
+>$$\text{Cov}(\hat\gamma_0^{LSE}, \hat\beta_1^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top \sigma^2 I X_{1|0} (X_{1|0}^\top X_{1|0})^{-1} \\ 
+>= \sigma^2 (X_0^\top X_0)^{-1} X_0^\top X_{1|0} (X_{1|0}^\top X_{1|0})^{-1}
+>= 0
+>$$
+>
+>$E(\hat\gamma_0^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top E(Y) = (X_0^\top X_0)^{-1} X_0^\top X\beta = (X_0^\top X_0)^{-1} X_0^\top(X_0\gamma_0 + X_{1|0}\beta_1) = \gamma_0$,  
+>$E(\hat\beta_1^{LSE}) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top E(Y) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top X\beta = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top(X_0\gamma_0 + X_{1|0}\beta_1) = \beta_1$
+>
+>$\text{Var}(\hat\gamma_0^{LSE}) = (X_0^\top X_0)^{-1} X_0^\top \sigma^2 I X_0 (X_0^\top X_0)^{-1} = \sigma^2 (X_0^\top X_0)^{-1}$,  
+>$\text{Var}(\hat\beta_1^{LSE}) = (X_{1|0}^\top X_{1|0})^{-1} X_{1|0}^\top \sigma^2 I X_{1|0} (X_{1|0}^\top X_{1|0})^{-1} = \sigma^2 (X_{1|0}^\top X_{1|0})^{-1}$
 
 #### 예 6.5.1: 절편이 포함된 선형회귀모형(중심화로 직교화)
 

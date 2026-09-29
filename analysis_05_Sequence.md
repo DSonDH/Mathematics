@@ -35,6 +35,7 @@ $$|a_{n_k}-L|<\varepsilon\quad(\forall k\ge N).$$
 $\exists M>0$ s.t. $\forall n\in\mathbb N,\ |a_n|\le M$이면
 $\{a_n\}$을 **유계 수열**이라 한다.
 
+TODO:
 ### ⭐ Thm. 단조수렴정리: 유계인 단조 실수열은 항상 수렴한다. **[Monotone Convergence Theorem]**
 #### 증명
 $\{a_n\}$이 단조증가하고 유계인 경우만 증명한다. (감소의 경우도 유사)  
@@ -476,7 +477,7 @@ $\mathbb R$의 공집합이 아닌 부분집합이 위로 유계이면
 $(b_n)$이 감소수열이고 모든 $n\in \mathbb N$에 대해 $b_n\ge0$이면, $\sum_{n=1}^\infty b_n$은 수렴한다 $\iff$ $\sum_{n=0}^\infty 2^n b_{2^n}$이 수렴한다.
 
 #### 증명
-(충분조건 증명)  
+($leftarrow$ 증명)  
 
 $\sum_{n=1}^\infty 2^n b_n$이 수렴한다고 하자. 수렴하는 수열은 모두 유계이므로 $\exists M>0$ s.t. $\forall N\in\mathbb N,\ \sum_{n=1}^N 2^n b_n\le M$이다.  
 
@@ -489,7 +490,7 @@ $$s_{2^{k+1}-1} = b_1 + (b_2+b_3) + (b_4+b_5+b_6+b_7) + \cdots + (b_{2^k}+\cdots
 
 따라서 $s_m \leq M$이므로 $\sum_{n=1}^\infty b_n$은 단조수렴정리에 의해 수렴한다.
 
-(필요조건 증명)
+($rightarrow$ 증명)
 
 급수 $\sum_{n=0}^\infty b_{2^n}$이 수렴한다고 하자. 
 $\sum_{n=0}^\infty 2^n b_{2^n}$이 수렴함을 보이면 충분하다.

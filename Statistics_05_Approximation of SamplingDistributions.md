@@ -1035,6 +1035,7 @@ $$ (\dot g(\theta))^T Z_1 = X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^
 $$ \sqrt{n}(\hat\rho_n - \rho) \xrightarrow{d} W,\quad
 W \sim N\left(0, \text{Var}\left(X_1 Y_1 - \frac{\rho}{2} X_1^2 - \frac{\rho}{2} Y_1^2\right)\right) $$
 
+TODO:
 #### 예 5.3.7 표본상관계수와 분산안정변환 (variance stabilizing transformation)
 
 이전 예제에서 더 나아가, 이변량 정규분포 $N(\mu_1, \mu_2; \sigma_1^2, \sigma_2^2, \rho)$ ($\sigma_1>0, \sigma_2>0, -1<\rho<1$)에서 표본상관계수의 극한분포를 살펴보자.
