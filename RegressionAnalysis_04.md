@@ -990,7 +990,7 @@ $$F_0\sim F(p,n-p-1)$$
 
 절편과 $p$개의 설명변수를 포함하는 중회귀모형을 다음과 같이 두 부분으로 나눈다: 
 
-$$\mathbf y=X_1\boldsymbol\beta_1 + X_2\boldsymbol\beta_2\boldsymbol\varepsilon \\
+$$\mathbf y=X_1\boldsymbol\beta_1 + X_2\boldsymbol\beta_2 + \boldsymbol\varepsilon \\
 \mathbf y=
 \begin{pmatrix}
 y_1\\
@@ -1035,7 +1035,7 @@ y_i = \mathbf x_{1i}^T\boldsymbol\beta_1 + \mathbf x_{2i}^T\boldsymbol\beta_2 + 
 \mathbf x_{2i}^T = (x_{i,q+1},\ldots,x_{ip})
 $$
 
-이때, $X_1^TX_1$ 및 $X_2^T(I_n-H_1)X_2$ 가 가역행렬이라고 가정한다. 이는 $X_1$ 자체에 완전한 다중공선성이 없고, $X_1$의 영향을 제거한 후에도 $X_2$에 독립적인 정보가 남아 있음을 의미한다.
+이때, $X_1^TX_1$ 및 $X_2^T(I_n-H_1)X_2$ 가 가역행렬이라고 가정한다. 이는 $X_1$ 자체에 완전한 다중공선성이 없고, $X_1$의 영향을 제거한 후에도 $X_2$에 선형독립적인 정보가 남아 있음을 의미한다.
 
 그리고 $X_1$에 대한 투영행렬과 잔차생성행렬을 정의한다: 
 
@@ -1101,8 +1101,7 @@ $$
 
 $$
 X_1^T \left(\mathbf y-X_1\hat{\boldsymbol\beta}_1 -X_2\hat{\boldsymbol\beta}_2 \right) = \mathbf0 \\
-X_2^T
-\left(\mathbf y-X_1\hat{\boldsymbol\beta}_1 -X_2\hat{\boldsymbol\beta}_2 \right) = \mathbf0
+X_2^T \left(\mathbf y-X_1\hat{\boldsymbol\beta}_1 -X_2\hat{\boldsymbol\beta}_2 \right) = \mathbf0
 $$
 
 첫 번째 정규방정식에서 $X_1^T X_1\hat{\boldsymbol\beta}_1 = X_1^T \left(\mathbf y-X_2\hat{\boldsymbol\beta}_2\right)$ 이므로 $\hat{\boldsymbol\beta}_1 = (X_1^TX_1)^{-1}X_1^T \left(\mathbf y-X_2\hat{\boldsymbol\beta}_2\right)$. 이를 두 번째 정규방정식에 대입한다.
@@ -1115,17 +1114,8 @@ X_2^T
 = \mathbf0
 $$
 
-$H_1=X_1(X_1^TX_1)^{-1}X_1^T$를 사용하면
-
-$$
-X_2^T
-\left[
-\mathbf y-H_1\mathbf y +H_1X_2\hat{\boldsymbol\beta}_2 -X_2\hat{\boldsymbol\beta}_2
-\right]
-= \mathbf0
-$$
-
-이다. 괄호 안을 정리하면 $X_2^T \left[ M_1\mathbf y-M_1X_2\hat{\boldsymbol\beta}_2 \right] = \mathbf0$ 이므로 $X_2^TM_1X_2\hat{\boldsymbol\beta}_2 = X_2^TM_1\mathbf y$ 이다. 따라서
+$H_1=X_1(X_1^TX_1)^{-1}X_1^T$를 사용하면 $X_2^T \left[\mathbf y-H_1\mathbf y +H_1X_2\hat{\boldsymbol\beta}_2 -X_2\hat{\boldsymbol\beta}_2\right] = \mathbf0$ 이다.  
+괄호 안을 정리하면 $X_2^T \left[ M_1\mathbf y-M_1X_2\hat{\boldsymbol\beta}_2 \right] = \mathbf0$ 이므로 $X_2^TM_1X_2\hat{\boldsymbol\beta}_2 = X_2^TM_1\mathbf y$ 이다. 따라서
 
 $$
 \boxed{
@@ -1138,13 +1128,7 @@ $$
 
 **4. 전체 모형과 단계별 회귀의 잔차가 같은 이유**
 
-전체 모형의 예측값은 $\hat{\mathbf y} = X_1\hat{\boldsymbol\beta}_1 + X_2\hat{\boldsymbol\beta}_2$ 이다. 앞에서 구한 $\hat{\boldsymbol\beta}_1 = (X_1^TX_1)^{-1}X_1^T (\mathbf y-X_2\hat{\boldsymbol\beta}_2)$ 를 이용하면
-
-$$
-X_1\hat{\boldsymbol\beta}_1 = H_1\mathbf y-H_1X_2\hat{\boldsymbol\beta}_2
-$$
-
-이다. 따라서
+전체 모형의 예측값은 $\hat{\mathbf y} = X_1\hat{\boldsymbol\beta}_1 + X_2\hat{\boldsymbol\beta}_2$ 이다. 앞에서 구한 $\hat{\boldsymbol\beta}_1 = (X_1^TX_1)^{-1}X_1^T (\mathbf y-X_2\hat{\boldsymbol\beta}_2)$ 를 이용하면 $X_1\hat{\boldsymbol\beta}_1 = H_1\mathbf y-H_1X_2\hat{\boldsymbol\beta}_2$ 이다. 따라서
 
 $$
 \begin{aligned}
@@ -1178,7 +1162,7 @@ $$
 따라서 전체 모형을 한 번에 적합하든, 직교화한 후 단계적으로 적합하든 다음이 모두 같다.
 
 * $X_2$에 대한 회귀계수
-* 최종 예측값
+* 최종 예측값 (잔차회귀의 예측값에 $H_1\mathbf y$를 더하여 복원한 값이 전체 모형의 예측값과 같다.)
 * 최종 잔차
 * 잔차제곱합
 
@@ -1263,16 +1247,7 @@ $$
 {\mathbf x_{2\cdot1}^T\mathbf x_{2\cdot1}}
 $$
 
-이다.
-
-$\mathbf x_2$를 $X_1$에 회귀했을 때의 결정계수를 $R_2^2$라고 하면
-
-$$
-\mathbf x_{2\cdot1}^T\mathbf x_{2\cdot1} = (1-R_2^2)
-\sum_{i=1}^n(x_{i2}-\bar x_2)^2
-$$
-
-이므로
+$\mathbf x_2$를 $X_1$에 회귀했을 때의 결정계수를 $R_2^2$라고 하면 $\mathbf x_{2\cdot1}^T\mathbf x_{2\cdot1} = (1-R_2^2) \sum_{i=1}^n(x_{i2}-\bar x_2)^2$ 이므로
 
 $$
 \boxed{
@@ -1288,16 +1263,7 @@ $R_2^2$가 $1$에 가까울수록 $\mathbf x_2$가 $X_1$에 의해 거의 설명
 
 **7. 최종 해석**
 
-Frisch–Waugh–Lovell 정리에 따라
-
-$$
-\boxed{
-\hat{\boldsymbol\beta}_2 = \left[
-X_2^T(I_n-H_1)X_2
-\right]^{-1}
-X_2^T(I_n-H_1)\mathbf y
-}
-$$
+Frisch–Waugh–Lovell 정리에 따라 $\boxed{\hat{\boldsymbol\beta}_2 = \left[ X_2^T(I_n-H_1)X_2 \right]^{-1} X_2^T(I_n-H_1)\mathbf y}$
 
 이를 단계적으로 해석하면 다음과 같다.
 

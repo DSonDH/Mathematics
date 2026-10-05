@@ -415,7 +415,7 @@ $$\hat\theta^{\mathrm{MLE}} = \bar X$$
 
 $$pdf(x;\eta) = \exp\{\eta T(x)-A(\eta)+S(x)\}, \quad x\in\mathcal X,\ \eta\in N$$
 
-확률밀도함수 형태이 이러하며, 다음을 만족한다고 하자.
+확률밀도함수 형태가 이러하며, 다음을 만족한다고 하자.
 
 1. 지지집합 $\mathcal X$는 $\eta$에 의존하지 않는다. 즉 분포의 토대 $\mathcal X$가 모수에 따라 변하지 않음.
 2. $N$은 열린구간이다. 모수공간 N이 수직선 위의 열린구간.
@@ -428,15 +428,83 @@ $$A'(\eta)=E_{\eta}[T(X_1)] = \frac{1}{n}\sum_{i=1}^n T(x_i), \quad \eta \in N$$
 
 >**증명**  
 >
->가능도함수의 로그를 $\eta$에 대해 미분하면 $A'(\eta) = E_\eta[T(X_1)]$가 된다.  
->가능도함수의 로그는 $l(\eta) = n\eta \bar T - nA(\eta) + \sum_{i=1}^n S(x_i)$ 이고, $\bar T = \frac{1}{n}\sum_{i=1}^n T(x_i)$.  
->미분하면 $\frac{d}{d\eta} l(\eta) = n\bar T - nA'(\eta)$  
->가능도방정식은 $A'(\hat\eta) = \bar T$
+>이 증명의 핵심은 $T(X_1)$의 누율생성함수가
 >
->조건 1: $\mathcal X$가 $\eta$에 의존하지 않으므로 $l(\eta)$는 $\eta$에 대해 두 번 미분 가능.  
->조건 2: $N$이 열린구간이므로 극대점이 내부에 존재.  
->조건 3: $\mathrm{Var}_\eta(T(X_1)) > 0$이므로 $A''(\eta) > 0$이고, $l(\eta)$는 순오목함수.  
->따라서 $A'(\hat\eta) = \bar T$의 해 $\hat\eta$는 존재하며 유일하고, 최대가능도 추정값이 된다.
+>$$
+>K_\eta(s) :=\log E_\eta[e^{sT(X_1)}] =A(\eta+s)-A(\eta)
+>$$
+>
+>로 표현된다는 사실이다.
+>
+>먼저 연속형의 경우를 생각한다. 조건 2에 의해, 각 $\eta\in N$에 대해 어떤 $\epsilon=\epsilon(\eta)>0$이 존재하여 $(\eta-\epsilon,\eta+\epsilon)\subset N$ 이 성립한다. 따라서 $|s|<\epsilon$이면 $\eta+s\in N$이다.
+>
+>조건 1에 의해 $\eta$와 $\eta+s$에서 지지집합이 같으므로,
+>
+>$$
+>\begin{aligned}
+>E_\eta[e^{sT(X_1)}]
+>&=\int_{\mathcal X} e^{sT(x)} \exp\{\eta T(x)-A(\eta)+S(x)\}\,dx\\
+>&=\int_{\mathcal X} \exp\{(\eta+s)T(x)-A(\eta)+S(x)\}\,dx\\
+>&=\exp\{A(\eta+s)-A(\eta)\} \int_{\mathcal X} \exp\{(\eta+s)T(x)-A(\eta+s)+S(x)\}\,dx\\
+>&=\exp\{A(\eta+s)-A(\eta)\}.
+>\end{aligned}
+>$$
+>
+>마지막 적분은 모수가 $\eta+s$인 확률밀도함수의 적분이므로 $1$이다. 이산형에서도 적분을 합으로 바꾸면 동일하게 증명된다. 따라서 $K_\eta(s) =A(\eta+s)-A(\eta), \quad |s|<\epsilon$ 이다. 
+>
+>적률생성함수가 원점 주변의 열린구간에서 유한하므로, 누율생성함수를 원점에서 미분하여 평균과 분산을 구할 수 있다.
+>
+>일차 누율은 평균이므로
+>
+>$$
+>E_\eta[T(X_1)] =K_\eta'(0) =\left.\frac{d}{ds} \{A(\eta+s)-A(\eta)\}\right|_{s=0} =A'(\eta)
+>$$
+>
+>이다. 이차 누율은 분산이므로
+>
+>$$
+>\text{Var}_\eta[T(X_1)] =K_\eta''(0) =\left.\frac{d^2}{ds^2}\{A(\eta+s)-A(\eta)\}\right|_{s=0} =A''(\eta)
+>$$
+>
+>조건 3에 의해 $A''(\eta) =\text{Var}_\eta[T(X_1)]>0, \quad \eta\in N$ 이다.
+>
+>한편 독립성에 의해, 지지집합에 속하는 관측값 $x_1,\ldots,x_n$의 로그가능도는
+>
+>$$
+>\ell(\eta) =\eta\sum_{i=1}^nT(x_i) -nA(\eta)+\sum_{i=1}^nS(x_i)
+>$$
+>
+>이다. 따라서
+>
+>$$
+>\ell'(\eta)=\sum_{i=1}^nT(x_i)-nA'(\eta)
+>$$
+>
+>이며,
+>
+>$$
+>\ell''(\eta) =-nA''(\eta) =-n\text{Var}_\eta[T(X_1)]<0
+>$$
+>
+>이다. 그러므로 $\ell(\eta)$는 열린구간 $N$에서 순오목함수이다.
+>
+>이제 가능도방정식의 근 $\hat\eta\in N$이 존재한다고 하자. 그러면
+>
+>$$
+>\ell'(\hat\eta) =\sum_{i=1}^nT(x_i)-nA'(\hat\eta)=0
+>$$
+>
+>이므로
+>
+>$$
+>A'(\hat\eta) =E_{\hat\eta}[T(X_1)] =\frac1n\sum_{i=1}^nT(x_i)
+>$$
+>
+>이다.
+>
+>로그가능도가 순오목하므로 이 정지점은 유일한 전역 최대점이다. 따라서 $\hat\eta$는 $\eta$의 유일한 최대가능도 추정값이다.
+>
+>단, 위 조건들은 가능도방정식의 근이 존재한다는 것까지 보장하지 않는다. 근이 존재하여 자연모수공간 $N$ 안에 있는지는 별도로 확인해야 한다.
 
 #### 지수족에서 모수의 일대일 변환과 가능도방정식
 
@@ -1097,6 +1165,35 @@ $$KL(\theta, \theta^0) = -E_{\theta^0}\left[\log\frac{f(X; \theta)}{f(X; \theta^
 >- 따라서 $f(\cdot; \theta) = f(\cdot; \theta^0)$ (거의 모든 $x \in X$).
 >- (R0) 식별가능성에 의해 $\theta = \theta^0$.
 >- 역방향($\theta = \theta^0 \implies KL(\theta, \theta^0) = 0$)은 정의에서 즉시 성립.
+
+> 참고: 정보이론의 기본 개념
+>- **엔트로피(Entropy)** 는 확률변수 $X$의 불확실성을 측정한다. 이산형 변수에 대해
+>
+>    $$H(X)=-\sum_x p(x)\log p(x)$$
+>
+>- **교차 엔트로피(Cross entropy)** 는 실제 분포 $P$에 대해 근사 분포 $Q$를 사용했을 때의 평균 정보량이다.
+>
+>    $$H(P,Q)=-\sum_x p(x)\log q(x)=H(P)+D_{KL}(P\|Q)$$
+>
+>    여기서 $P$와 $Q$의 확률질량함수는 각각 $p$와 $q$이다. 따라서 교차 엔트로피는 실제 분포의 엔트로피와 KL 괴리도의 합이며, $q(x)=0$인 곳에서 $p(x)>0$이면 무한대가 된다.
+>
+>- **조건부 엔트로피(Conditional entropy)** 는 $Y$를 관측한 뒤에도 남는 $X$의 불확실성이다.
+>
+>    $$H(X\mid Y)=-\sum_{x,y}p(x,y)\log p(x\mid y)$$
+>
+>- **상호정보량(Mutual information)** 은 $X$와 $Y$가 공유하는 정보량이며, 한 변수를 알 때 줄어드는 다른 변수의 불확실성과 같다.
+>
+>    $$I(X;Y)=H(X)-H(X\mid Y)=H(Y)-H(Y\mid X)$$
+>
+>    또한 결합분포와 주변분포의 곱 사이의 KL 괴리도로 표현된다.
+>
+>    $$I(X;Y)=D_{KL}\bigl(p(x,y)\,\|\,p(x)p(y)\bigr)\ge 0$$
+>
+>- **KL 괴리도(Kullback–Leibler divergence)** 는 분포 $P$를 분포 $Q$로 근사할 때의 정보 손실을 나타낸다.
+>
+>    $$D_{KL}(P\|Q)=\sum_x p(x)\log\frac{p(x)}{q(x)}\ge 0$$
+>
+>    일반적으로 대칭이 아니며, 두 분포가 같을 때(거의 모든 곳에서) 0이다. 연속형 변수에서는 합을 적분으로 바꾸고 확률질량함수 대신 밀도함수를 사용한다.
 
 ### 최대가능도 추정량의 일치성: 일반 조건
 1. **균등 확률수렴성**  
