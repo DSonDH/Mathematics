@@ -19,7 +19,7 @@ $$\mathrm{MSE}(\hat\eta,\theta) = E_\theta\left[(\hat\eta(X_1,\dots,X_n)-\eta(\t
 
 각각의 평균제곱오차는
 
-$$\mathrm{MSE}(\hat\theta^{\mathrm{MLE}},\theta) = E_\theta[(X_{(n)}-\theta)^2] = \frac{2}{(n+1)(n+2)}\theta^2 \\
+$$\mathrm{MSE}(\hat\theta^{\mathrm{MLE}},\theta) = E_\theta[(X_{(n)}-\theta)^2] = \frac{2}{(n+1)(n+2)}\theta^2 \\ 
 \mathrm{MSE}(\hat\theta^{\mathrm{MME}},\theta) = E_\theta[(2\bar X-\theta)^2] = \frac{1}{3n}\theta^2$$
 
 따라서 모든 $\theta>0$에 대해

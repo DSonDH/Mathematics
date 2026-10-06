@@ -937,6 +937,57 @@ $$
 
 로 나타낸다.
 
+#### 추가: 지수분포와 카이제곱분포 관계
+$\theta$가 평균인 모수화에서, $H_0$의 경계 $\theta=\theta_0$일 때
+
+$$
+X_i\overset{\mathrm{iid}}{\sim}\operatorname{Exp}(\theta_0),
+\qquad
+f_{X_i}(x)=\frac1{\theta_0}e^{-x/\theta_0},\quad x>0
+$$
+
+이다. **적률생성함수로 증명한다.**
+
+**1. $X_i$의 적률생성함수를 구한다.**
+
+$$
+\begin{aligned}
+M_{X_i}(t)
+&=E(e^{tX_i})\\
+&=\int_0^\infty e^{tx}\frac1{\theta_0}e^{-x/\theta_0}\,dx\\
+&=\frac1{\theta_0}\int_0^\infty e^{-(1/\theta_0-t)x}\,dx\\
+&=\frac1{1-\theta_0t},
+\qquad t<\frac1{\theta_0}.
+\end{aligned}
+$$
+
+**2. $Y=\dfrac{2n\bar X}{\theta_0}=\dfrac2{\theta_0}\sum_{i=1}^nX_i$의 적률생성함수를 구한다.**
+
+$X_1,\ldots,X_n$이 서로 독립이므로
+
+$$
+\begin{aligned}
+M_Y(t)
+&=E\!\left[
+\exp\!\left(\frac{2t}{\theta_0}\sum_{i=1}^nX_i\right)
+\right]\\
+&=\prod_{i=1}^n
+E\!\left[\exp\!\left(\frac{2t}{\theta_0}X_i\right)\right]\\
+&=\prod_{i=1}^nM_{X_i}\!\left(\frac{2t}{\theta_0}\right)\\
+&=(1-2t)^{-n},\qquad t<\frac12.
+\end{aligned}
+$$
+
+자유도 $\nu$인 카이제곱분포의 적률생성함수는 $M_{\chi^2_\nu}(t)=(1-2t)^{-\nu/2}$ 이다. 여기에 $\nu=2n$을 대입하면 $M_{\chi^2_{2n}}(t)=(1-2t)^{-n}=M_Y(t)$ 이다.
+
+따라서 **0의 근방에서 적률생성함수가 같으면 분포가 같다는 유일성 정리**에 의해
+
+$$
+\boxed{\frac{2n\bar X}{\theta_0}\sim\chi^2_{2n}}
+$$
+
+이다. 이는 점근적 근사가 아니라 **모든 표본크기 $n$에 대해 성립하는 정확한 분포**이다.
+
 ### t 분포의 정의 *(Student's t Distribution)*
 
 $$

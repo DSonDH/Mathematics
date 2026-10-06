@@ -1,5 +1,8 @@
 # 제11장 베이지안 추론 *(Bayesian Inference)*
 
+>추가: Bayesian 관점 vs Frequentist 관점
+
+
 ## 사전분포와 사후분포 *(Prior and Posterior Distributions)*
 
 ## 베이지안 추론 *(Bayesian Inference)*
