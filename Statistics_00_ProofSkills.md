@@ -286,7 +286,11 @@ f_F(f) &= \int_0^\infty f_{Y_1,Y_2}\left(\frac{mV}{n}f, V\right) \cdot J \, dV \
 $$
 
 따라서 $F$는 $F(m,n)$을 따른다.
- 
+
+### 분포 변환 관련
+$\Gamma(m+1) = m^{(m+1)/2}e^{-m}\sqrt{2\pi}(1+O(1/m))$ (Stirling 근사)
+
+
 ## 정규분포 관련
 
 ### 표준정규분포의 주요 모멘트

@@ -790,3 +790,467 @@ $$
 
 푸리에 급수는 열전도 방정식과 파동 방정식의 해를 구하고, 소리와 전기 신호를 주파수별로 분석하며, 이미지 압축과 필터 설계에 활용된다. 비주기 함수는 푸리에 변환을 통해 연속적인 주파수 성분으로 분석할 수 있다.
 
+
+# 푸리에 변환
+
+**2. 푸리에 급수와 푸리에 변환의 차이**
+
+| 구분 | 푸리에 급수 | 푸리에 변환 |
+|---|---|---|
+| 기본 대상 | 주기함수이다. | 실수 전체에서 정의된 함수를 다룬다. 주기성은 요구하지 않는다. |
+| 주파수 | 기본 주파수의 정수배로 이산적이다. | 실수 $\omega$에 따라 연속적으로 변한다. |
+| 분석 결과 | 계수열 $(c_n)$이다. | 주파수의 함수 $\widehat f(\omega)$이다. |
+| 복원 방식 | 주파수 성분을 합한다. | 주파수 성분을 적분한다. |
+
+푸리에 급수는 복소수 형태로
+
+$$
+f(x)\sim\sum_{n\in\mathbb Z}c_ne^{inx},
+\qquad
+c_n=\frac1{2\pi}\int_{-\pi}^{\pi}f(x)e^{-inx}\,dx
+$$
+
+라고 쓸 수 있다. 푸리에 변환은 이에 대응하여 **연속적인 주파수 성분을 계산한다.** [math.columbia.edu](https://www.math.columbia.edu/~woit/fourier-analysis/fouriernotes.pdf?utm_source=chatgpt.com)
+
+**3. 푸리에 변환의 정의**
+
+아래에서는 각주파수 $\omega$를 사용하는 다음 규약으로 통일한다.
+
+$$
+\boxed{
+\widehat f(\omega)
+=\mathcal F\{f\}(\omega)
+:=\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx.
+}
+$$
+
+오일러 공식
+
+$$
+e^{-i\omega x}=\cos(\omega x)-i\sin(\omega x)
+$$
+
+에 의해
+
+$$
+\widehat f(\omega)
+=\int_{\mathbb R}f(x)\cos(\omega x)\,dx
+-i\int_{\mathbb R}f(x)\sin(\omega x)\,dx.
+$$
+
+따라서 실수값 함수에서는 실수부와 허수부가 각각 코사인·사인 성분의 정보를 담는다.
+
+**주의할 점은 정규화 규약이 여러 가지라는 것이다.** 어떤 교재는 $e^{-2\pi i\xi x}$를 사용하며, 어떤 교재는 변환과 역변환에 $1/\sqrt{2\pi}$를 나누어 넣는다. 규약이 달라도 내용은 같지만 상수 계수는 달라진다.
+
+**4. 존재 조건과 기본 성질**
+
+$f\in L^1(\mathbb R)$, 즉
+
+$$
+\int_{\mathbb R}|f(x)|\,dx<\infty
+$$
+
+이면 변환은 모든 $\omega$에서 절대수렴한다. 실제로 $|e^{-i\omega x}|=1$이므로
+
+$$
+\boxed{
+|\widehat f(\omega)|
+\le\int_{\mathbb R}|f(x)|\,dx
+=\|f\|_1.
+}
+$$
+
+또한 $\widehat f$는 연속이다. $\omega_m\to\omega$이면
+
+$$
+f(x)e^{-i\omega_mx}\to f(x)e^{-i\omega x}
+$$
+
+이고, 절댓값이 적분 가능한 $|f(x)|$로 지배되므로 지배수렴정리에 의해
+
+$$
+\widehat f(\omega_m)\to\widehat f(\omega)
+$$
+
+이다.
+
+$f\notin L^1$인 경우에도 $L^2$ 이론이나 분포 이론으로 변환을 정의할 수 있지만, 아래의 직접 적분 계산과는 구분해야 한다.
+
+**5. 주요 성질과 증명**
+
+적분 순서 교환 등이 필요한 식에는 관련 절대적분 가능성을 가정한다. 아래 성질들은 표준 푸리에 변환 성질이며, 다음 증명은 위 정규화에 맞춘 직접 계산이다. [MIT OpenCourseWare](https://ocw.mit.edu/courses/res-6-007-signals-and-systems-spring-2011/resources/lecture-9-fourier-transform-properties/?utm_source=chatgpt.com)
+
+**① 선형성**
+
+$$
+\boxed{
+\mathcal F\{af+bg\}
+=a\widehat f+b\widehat g.
+}
+$$
+
+적분의 선형성으로
+
+$$
+\int_{\mathbb R}[af(x)+bg(x)]e^{-i\omega x}\,dx
+=a\widehat f(\omega)+b\widehat g(\omega)
+$$
+
+이다.
+
+**② 평행이동**
+
+$$
+\boxed{
+\mathcal F\{f(x-a)\}(\omega)
+=e^{-i\omega a}\widehat f(\omega).
+}
+$$
+
+$u=x-a$로 치환하면
+
+$$
+\begin{aligned}
+\int_{\mathbb R}f(x-a)e^{-i\omega x}\,dx
+&=\int_{\mathbb R}f(u)e^{-i\omega(u+a)}\,du\\
+&=e^{-i\omega a}\widehat f(\omega).
+\end{aligned}
+$$
+
+즉, 함수의 위치를 옮기면 주파수 성분의 위상이 변한다.
+
+**③ 복소지수 곱셈에 따른 주파수 이동**
+
+$$
+\boxed{
+\mathcal F\{e^{iax}f(x)\}(\omega)
+=\widehat f(\omega-a).
+}
+$$
+
+이는
+
+$$
+e^{iax}e^{-i\omega x}=e^{-i(\omega-a)x}
+$$
+
+를 정의에 대입하면 바로 얻는다.
+
+**④ 척도변환**
+
+$a\ne0$이면
+
+$$
+\boxed{
+\mathcal F\{f(ax)\}(\omega)
+=\frac1{|a|}\widehat f\left(\frac{\omega}{a}\right).
+}
+$$
+
+$u=ax$로 치환한다. $a<0$이면 적분 방향도 반전되므로 최종 계수는 $1/|a|$이다.
+
+$$
+\int_{\mathbb R}f(ax)e^{-i\omega x}\,dx
+=\frac1{|a|}\int_{\mathbb R}f(u)e^{-i(\omega/a)u}\,du.
+$$
+
+**⑤ 미분**
+
+$f$가 국소 절대연속이고 $f,f'\in L^1(\mathbb R)$이면
+
+$$
+\boxed{
+\mathcal F\{f'\}(\omega)=i\omega\widehat f(\omega).
+}
+$$
+
+이 조건에서는 $f(x)\to0$이 $x\to\pm\infty$에서 성립한다. 부분적분으로
+
+$$
+\begin{aligned}
+\int_{\mathbb R}f'(x)e^{-i\omega x}\,dx
+&=\left[f(x)e^{-i\omega x}\right]_{-\infty}^{\infty}
++i\omega\int_{\mathbb R}f(x)e^{-i\omega x}\,dx\\
+&=i\omega\widehat f(\omega).
+\end{aligned}
+$$
+
+필요한 조건을 각 단계에 가정하면
+
+$$
+\boxed{
+\mathcal F\{f^{(m)}\}(\omega)
+=(i\omega)^m\widehat f(\omega).
+}
+$$
+
+즉, **원래 변수에서의 미분이 주파수 영역에서는 곱셈으로 바뀐다.**
+
+**⑥ $x$의 곱셈**
+
+$f,xf\in L^1(\mathbb R)$이면
+
+$$
+\boxed{
+\mathcal F\{xf(x)\}(\omega)
+=i\widehat f'(\omega).
+}
+$$
+
+적분 안에서 미분하면
+
+$$
+\begin{aligned}
+\widehat f'(\omega)
+&=\int_{\mathbb R}f(x)(-ix)e^{-i\omega x}\,dx\\
+&=-i\mathcal F\{xf(x)\}(\omega).
+\end{aligned}
+$$
+
+양변에 $i$를 곱하면 된다. 일반적으로
+
+$$
+\mathcal F\{x^mf(x)\}(\omega)
+=i^m\widehat f^{(m)}(\omega)
+$$
+
+이다.
+
+**⑦ 합성곱**
+
+$f,g\in L^1(\mathbb R)$이고
+
+$$
+(f*g)(x)=\int_{\mathbb R}f(u)g(x-u)\,du
+$$
+
+라면
+
+$$
+\boxed{
+\mathcal F\{f*g\}(\omega)
+=\widehat f(\omega)\widehat g(\omega).
+}
+$$
+
+$v=x-u$로 치환하면
+
+$$
+\begin{aligned}
+\mathcal F\{f*g\}(\omega)
+&=\int_{\mathbb R}\int_{\mathbb R}
+f(u)g(x-u)e^{-i\omega x}\,du\,dx\\
+&=\int_{\mathbb R}\int_{\mathbb R}
+f(u)g(v)e^{-i\omega(u+v)}\,dv\,du\\
+&=\widehat f(\omega)\widehat g(\omega).
+\end{aligned}
+$$
+
+**⑧ 실수값 함수의 대칭성**
+
+$f$가 실수값이면
+
+$$
+\boxed{
+\widehat f(-\omega)=\overline{\widehat f(\omega)}.
+}
+$$
+
+실제로
+
+$$
+\overline{\widehat f(\omega)}
+=\int_{\mathbb R}f(x)e^{i\omega x}\,dx
+=\widehat f(-\omega).
+$$
+
+따라서 실수값 짝함수의 변환은 실수값 짝함수이며, 실수값 홀함수의 변환은 순허수값 홀함수이다.
+
+**6. 역변환과 유일성**
+
+$f,\widehat f\in L^1(\mathbb R)$이면 거의 모든 $x$에서
+
+$$
+\boxed{
+f(x)=\frac1{2\pi}
+\int_{\mathbb R}\widehat f(\omega)e^{i\omega x}\,d\omega.
+}
+$$
+
+이것이 **푸리에 역변환 공식**이다. $f$가 연속인 점에서는 그 점의 함수값을 복원한다. $f\in L^1$만으로는 $\widehat f\in L^1$이 자동으로 보장되지 않으므로 조건을 구분해야 한다. [ocw.mit.edu](https://ocw.mit.edu/courses/res-18-015-topics-in-fourier-analysis-spring-2024/mitres_18_015_s24_lec08.pdf?utm_source=chatgpt.com)
+
+역변환의 증명 구조는 **가우스 가중치를 넣고 제거하는 것**이다. $\varepsilon>0$에 대해
+
+$$
+f_\varepsilon(x)
+=\frac1{2\pi}\int_{\mathbb R}
+\widehat f(\omega)e^{i\omega x}e^{-\varepsilon\omega^2}\,d\omega
+$$
+
+로 두면, 적분 순서를 바꾸고 가우스 적분을 계산하여
+
+$$
+f_\varepsilon=f*K_\varepsilon,\qquad
+K_\varepsilon(v)
+=\frac1{\sqrt{4\pi\varepsilon}}
+e^{-v^2/(4\varepsilon)}
+$$
+
+를 얻는다.
+
+$K_\varepsilon$는 적분이 1이고 $\varepsilon\downarrow0$에서 0 근처로 집중하므로
+
+$$
+f*K_\varepsilon\to f
+$$
+
+가 $L^1$에서 성립한다. 한편 $\widehat f\in L^1$이면 지배수렴정리에 의해
+
+$$
+f_\varepsilon(x)\to
+\frac1{2\pi}\int_{\mathbb R}
+\widehat f(\omega)e^{i\omega x}\,d\omega.
+$$
+
+두 극한을 비교하면 역변환 공식을 얻는다. 가우스 커널을 이용한 이 접근은 표준적인 증명 방법이다. [ms.uky.edu](https://www.ms.uky.edu/~rbrown/courses/ma773/notes.pdf?utm_source=chatgpt.com)
+
+그 결과 **유일성**도 얻는다.
+
+$$
+\boxed{
+f\in L^1,\quad \widehat f(\omega)=0\ \forall\omega
+\quad\Longrightarrow\quad
+f=0\ \text{거의 모든 점에서}.
+}
+$$
+
+변환이 0이면 그 변환은 당연히 $L^1$이므로 역변환 공식을 적용할 수 있다. 두 함수의 변환이 같으면 차이의 변환이 0이므로 두 함수는 거의 모든 점에서 같다.
+
+**7. Parseval–Plancherel 공식**
+
+주파수 영역에서도 내적과 제곱노름을 계산할 수 있다.
+
+$$
+\boxed{
+\int_{\mathbb R}f(x)\overline{g(x)}\,dx
+=\frac1{2\pi}\int_{\mathbb R}
+\widehat f(\omega)\overline{\widehat g(\omega)}\,d\omega.
+}
+$$
+
+특히
+
+$$
+\boxed{
+\|f\|_2^2=\frac1{2\pi}\|\widehat f\|_2^2.
+}
+$$
+
+먼저 충분히 매끄럽고 빠르게 감소하는 함수에서 역변환을 사용하면
+
+$$
+\overline{g(x)}
+=\frac1{2\pi}\int_{\mathbb R}
+\overline{\widehat g(\omega)}e^{-i\omega x}\,d\omega
+$$
+
+이므로
+
+$$
+\begin{aligned}
+\int_{\mathbb R}f(x)\overline{g(x)}\,dx
+&=\frac1{2\pi}\int_{\mathbb R}
+\overline{\widehat g(\omega)}
+\left[\int_{\mathbb R}f(x)e^{-i\omega x}\,dx\right]d\omega\\
+&=\frac1{2\pi}\int_{\mathbb R}
+\widehat f(\omega)\overline{\widehat g(\omega)}\,d\omega.
+\end{aligned}
+$$
+
+이 결과를 조밀성과 연속성을 통해 $L^2$ 전체로 확장한 것이 Plancherel 정리이다. [dlmf.nist.gov](https://dlmf.nist.gov/1.14?utm_source=chatgpt.com)
+
+**8. 간단한 계산 예**
+
+$a>0$에 대해
+
+$$
+f(x)=e^{-ax}I_{\{x\ge0\}}
+$$
+
+이면
+
+$$
+\begin{aligned}
+\widehat f(\omega)
+&=\int_0^\infty e^{-ax}e^{-i\omega x}\,dx\\
+&=\int_0^\infty e^{-(a+i\omega)x}\,dx\\
+&=\boxed{\frac1{a+i\omega}}.
+\end{aligned}
+$$
+
+이에 대응하는 단측 라플라스 변환은
+
+$$
+\mathcal L\{e^{-ax}\}(s)=\frac1{a+s}.
+$$
+
+이 예에서는 $s=i\omega$를 대입하면 푸리에 변환을 얻는다.
+
+**9. 라플라스 변환과의 관계**
+
+양측 라플라스 변환을
+
+$$
+L_f(s)=\int_{\mathbb R}f(x)e^{-sx}\,dx
+$$
+
+로 정의하고 $s=\alpha+i\omega$로 쓰면
+
+$$
+\boxed{
+L_f(\alpha+i\omega)
+=\mathcal F\{e^{-\alpha x}f(x)\}(\omega).
+}
+$$
+
+즉, **양측 라플라스 변환은 지수 가중치를 곱한 함수의 푸리에 변환**이다.
+
+특히 $f\in L^1(\mathbb R)$이면
+
+$$
+L_f(i\omega)=\widehat f(\omega).
+$$
+
+단측 라플라스 변환과 비교할 때는 $x<0$에서 함수를 0으로 확장해야 한다. 또한 허수축에서 적분이 존재하는지 확인하지 않고 단순히 $s=i\omega$를 대입해서는 안 된다.
+
+**10. 통계학에서의 연결: 특성함수**
+
+확률밀도함수 $p$를 가진 확률변수의 특성함수는
+
+$$
+\varphi_X(t)=E[e^{itX}]
+=\int_{\mathbb R}p(x)e^{itx}\,dx
+$$
+
+이다. 따라서 위 규약에서는
+
+$$
+\boxed{\varphi_X(t)=\widehat p(-t)}
+$$
+
+이다.
+
+독립인 $X,Y$에 대해서는
+
+$$
+\begin{aligned}
+\varphi_{X+Y}(t)
+&=E[e^{itX}e^{itY}]\\
+&=E[e^{itX}]E[e^{itY}]\\
+&=\varphi_X(t)\varphi_Y(t).
+\end{aligned}
+$$
+
+이는 **독립변수 합의 밀도가 합성곱이고, 합성곱의 푸리에 변환이 곱이라는 사실**과 대응한다.
+
+강의록에서는 기존 푸리에 급수의 직교성 설명 뒤에 이 내용을 추가하면 된다. 다만 **급수의 삼각함수들은 유한 구간의 $L^2$에서 실제 직교기저인 반면, $\mathbb R$ 위의 $e^{i\omega x}$는 $L^2(\mathbb R)$ 함수가 아니다.** 따라서 푸리에 변환을 설명할 때 “같은 직교기저 정사영을 그대로 적용한다”는 표현보다는, 연속 주파수에 의한 분해라는 설명이 정확하다.

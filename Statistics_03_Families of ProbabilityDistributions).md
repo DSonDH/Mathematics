@@ -249,7 +249,7 @@ $$
 ### 추가: 스털링(Stirling) 의 공식
 이항분포의 확률질량함수는 스털링의 근사공식을 이용하여 적분으로 근사할 수 있다.
 
-$$m! \sim m^{m+1/2} e^{-m}\sqrt{2\pi},\quad m \to \infin$$
+$$\Gamma(m+1)= m! \sim m^{m+1/2} e^{-m}\sqrt{2\pi},\quad m \to \infin$$
 
 >**증명**  
 >
