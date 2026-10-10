@@ -1,6 +1,9 @@
 # 제9장 검정의 비교 *(Comparison of Tests)*
 
+이전 7장의 검정 개념은 가설검정의 기본 형식 논리다. 검정법 비교기준은 그 기본 틀에서 유의수준을 고정하고 검정력을 비교하는 원리이며, 최강력 검정·UMP·UMPU는 그 비교 원리를 각각 단순 대립가설, 복합 대립가설, 불편검정류에 대해 최적화한 개념이다. 비모수 검정은 같은 검정 틀을 유지하되 분포가정을 약하게 둔 방법이고, 검정력 근사는 검정력 함수를 정확히 계산하기 어려울 때 점근분포 등을 이용해 근사하는 계산 기술이다. 7장의 LRT(Likelihood Ratio Test)와 점근 LRT는 이 전체 구조 중 parametric 검정과 asymptotic approximation에 해당한다.
+
 ## 검정법 비교의 기준 *(Criteria for Comparing Tests)*
+
 **[단순 가설(simple hypothesis)]**: 귀무가설과 대립가설이 각각 하나의 확률밀도함수로 주어지므로, 검정 방법의 비교 기준을 이해하기 쉽다.  
 - 모집단 분포: 확률밀도함수 $f(x;\theta)$
 - 모수 공간: $\theta \in \Omega = \{\theta_0, \theta_1\}$
@@ -16,31 +19,26 @@
 
 **[검정과 오류 확률]**  
 **(1) 비랜덤화 검정**  
-기각역 $C \subset \mathcal{X}^n$에 대해
-
-$$X \in C \Rightarrow H_0 \text{ 기각}$$
+기각역 $C \subset \mathcal{X}^n$에 대해 $X \in C \Rightarrow H_0 \text{ 기각}$
 
 오류 확률 (검정이 실패할 확률):
 - 제1종 오류: $P_{\theta_0}(X \in C)$
 - 제2종 오류: $P_{\theta_1}(X \notin C) = 1 - P_{\theta_1}(X \in C)$
 
 **(2) 랜덤화 검정**  
-검정 함수:
+검정 함수: $\phi(X) = \phi(X_1,\dots,X_n), \quad 0 \le \phi(X) \le 1$
 
-$$\phi(X) = \phi(X_1,\dots,X_n), \quad 0 \le \phi(X) \le 1$$
-
-- $\phi(X)$: 귀무가설을 기각할 확률
+- $\phi(X)$: 자료 $x$를 관찰했을 때, 귀무가설을 기각할 확률
 
 오류 확률 (검정력 함수, power function (검정함수랑 다름)):
 - 제1종 오류: $E_{\theta_0}[\phi(X)]$
 - 제2종 오류: $E_{\theta_1}[1 - \phi(X)]$
 
-> **(추가) 용어설명: 검정함수 $\phi(x)$**  
-> - **검정함수 $\phi(x)$**: 관측값 $x$에 대해 귀무가설 $H_0$를 기각할 확률을 나타내는 함수. $\phi(x) \in [0,1]$의 값을 가지며, $\phi(x)=1$이면 $H_0$를 반드시 기각, $\phi(x)=0$이면 $H_0$를 절대 기각하지 않음, $0<\phi(x)<1$이면 확률적으로 기각(랜덤화 검정).
-> - **비랜덤화 검정**: 기각역 $C$에 대해 $\phi(x) = \mathbb{I}(x \in C)$로 정의할 수 있으며, 이때 $E_\theta[\phi(X)] = P_\theta(X \in C)$로 기존의 오류 확률 표현과 동일하다.
-> - **랜덤화 검정**: $\phi(x)$가 $[0,1]$의 임의의 값을 가질 수 있어, 관측값에 따라 확률적으로 기각 여부를 결정한다.
-> 
-> 검정함수 $\phi(x)$는 비랜덤화/랜덤화 검정 모두에 적용되는 일반적인 표현이다.
+| 구분 | 검정함수 $\phi(x)$ | 검정력함수 $\gamma_\phi(\theta)$ |
+|---|---|---|
+| 입력 | 관측자료 $x$ | 모수 값 $\theta$ |
+| 의미 | 그 자료에서 정한 기각확률 | 실제 모수가 $\theta$일 때 전체 기각확률 |
+| 역할 | 검정 규칙을 정의한다. | 그 규칙의 성능을 평가한다. |
 
 1종오류, 2종오류 확률을 동시에 작게 만드는 검정이 이상적이지만, 한쪽 오류 확률을 줄이면 다른 쪽 오류 확률이 커지는 trade-off가 존재한다. 따라서 오류를 종합적으로 평가하는 기준이 필요하다.
 
@@ -50,9 +48,7 @@ $$\phi(X) = \phi(X_1,\dots,X_n), \quad 0 \le \phi(X) \le 1$$
 
 **(a) 최대오류확률 기준 *(Maximum Error Probability Criterion)***
 
-$$\max\left\{ E_{\theta_0}[\phi(X)],\; E_{\theta_1}[1-\phi(X)] \right\}$$
-
-값이 작을수록 좋은 검정이다.
+$\max\left\{ E_{\theta_0}[\phi(X)],\; E_{\theta_1}[1-\phi(X)] \right\}$ 값이 작을수록 좋은 검정이다.
 
 **(b) 베이지안 평균오류확률 기준 *(Bayesian Average Error Probability Criterion)***
 
@@ -76,45 +72,44 @@ $$
 을 만족하는 검정은 베이지안 평균오류확률을 최소로 한다.
 > 여기서 양수 나누기 0은, 양의 무한대값으로 취급하며, 어떤 실수보다도 큰 것으로 약속한다.
 
-#### 증명
-베이지안 평균오류확률은
-
-$$
-\pi_0 E_{\theta_0}[\phi(X)] + \pi_1 E_{\theta_1}[1-\phi(X)] \\
-= \int \left[ \pi_0 \phi(x) pdf(x;\theta_0) + \pi_1 (1-\phi(x)) pdf(x;\theta_1) \right] dx
-$$
-
-이를 $\phi(x)$에 대해 최소화하려면, 각 $x$에 대해 integrand
-$$
-\pi_0 \phi(x) pdf(x;\theta_0) + \pi_1 (1-\phi(x)) pdf(x;\theta_1)
-
-$$
-
-을 최소화하는 $\phi(x)$를 선택하면 된다.
-
-$\phi(x)$는 $[0,1]$ 사이의 값(랜덤화 검정)도 가능하지만, integrand가 $\phi(x)$에 대해 선형이므로, 극값은 $\phi(x)=0$ 또는 $\phi(x)=1$에서만 달성된다(비랜덤화 검정).
-
-- $\phi(x)=1$일 때: 값은 $\pi_0 pdf(x;\theta_0)$
-- $\phi(x)=0$일 때: 값은 $\pi_1 pdf(x;\theta_1)$
-
-따라서 $\phi(x)=1$이 더 작으려면
-
-$$
-\pi_0 pdf(x;\theta_0) < \pi_1 pdf(x;\theta_1)
-\implies
-\frac{pdf(x;\theta_1)}{pdf(x;\theta_0)} > \frac{\pi_0}{\pi_1}
-$$
-
-이므로, 이 경우 $\phi(x)=1$로 하고, 그렇지 않으면 $\phi(x)=0$으로 한다. 즉,
-
-$$
-\phi^\pi(x) =
-\begin{cases}
-1, & \dfrac{pdf(x;\theta_1)}{pdf(x;\theta_0)} > \dfrac{\pi_0}{\pi_1} \\
-0, & \text{otherwise}
-\end{cases}$$
-
-가 베이지안 평균오류확률을 최소로 한다.
+>**증명**  
+>베이지안 평균오류확률은
+>
+>$$
+>\pi_0 E_{\theta_0}[\phi(X)] + \pi_1 E_{\theta_1}[1-\phi(X)] = \int \left[ \pi_0 \phi(x) pdf(x;\theta_0) + \pi_1 (1-\phi(x)) pdf(x;\theta_1) \right] dx
+>$$
+>
+>이를 $\phi(x)$에 대해 최소화하려면, 각 $x$에 대해 integrand
+>$$
+>\pi_0 \phi(x) pdf(x;\theta_0) + \pi_1 (1-\phi(x)) pdf(x;\theta_1)
+>
+>$$
+>
+>을 최소화하는 $\phi(x)$를 선택하면 된다.
+>
+>$\phi(x)$는 $[0,1]$ 사이의 값(랜덤화 검정)도 가능하지만, integrand가 $\phi(x)$에 대해 선형이므로, 극값은 $\phi(x)=0$ 또는 $\phi(x)=1$에서만 달성된다(비랜덤화 검정).
+>
+>- $\phi(x)=1$일 때: 값은 $\pi_0 pdf(x;\theta_0)$
+>- $\phi(x)=0$일 때: 값은 $\pi_1 pdf(x;\theta_1)$
+>
+>따라서 $\phi(x)=1$이 더 작으려면
+>
+>$$
+>\pi_0 pdf(x;\theta_0) < \pi_1 pdf(x;\theta_1)
+>\implies
+>\frac{pdf(x;\theta_1)}{pdf(x;\theta_0)} > \frac{\pi_0}{\pi_1}
+>$$
+>
+>이므로, 이 경우 $\phi(x)=1$로 하고, 그렇지 않으면 $\phi(x)=0$으로 한다. 즉,
+>
+>$$
+>\phi^\pi(x) =
+>\begin{cases}
+>1, & \dfrac{pdf(x;\theta_1)}{pdf(x;\theta_0)} > \dfrac{\pi_0}{\pi_1} \\
+>0, & \text{otherwise}
+>\end{cases}$$
+>
+>가 베이지안 평균오류확률을 최소로 한다.
 
 #### 예 9.1.1 (정규분포)
 표본: $X_1,\dots,X_n \sim N(\mu,1)$  
@@ -185,114 +180,122 @@ $$\phi^*(x)=\begin{cases}
 0, & \dfrac{pdf(x;\theta_1)}{pdf(x;\theta_0)} < k
 \end{cases}$$
 
-(즉, 우도비가 큰 순서대로 위에서 아래로 채운다. 단, $0 \le \gamma \le 1$, $k \ge 0$)  
+(즉, 우도비가 큰 순서대로 위에서 아래로 채운다. ($0 \le \gamma \le 1,\quad$ $k \ge 0$)  
+
 조건2: 다음 조건을 만족할 때, 유의수준 $\alpha$의 **최강력 검정**이다.
 
 $$E_{\theta_0}[\phi^*(X)] = \alpha$$
 
-- $k$ 찾는법: $k$는 $pdf(x;\theta_1)/pdf(x;\theta_0)$의 분포에 따라 결정된다. 일반적으로 $k$를 증가시키면서 $E_{\theta_0}[\phi^*(X)]$가 $\alpha$보다 작아지는 지점을 찾는다.
-- $\gamma$ 찾는법: $k$를 정한 후, $E_{\theta_0}[\phi^*(X)]$가 $\alpha$보다 작으면 $\gamma$를 1로, 크면 0으로 설정한다. 만약 $E_{\theta_0}[\phi^*(X)]$가 정확히 $\alpha$보다 크거나 작은 경우에는 $\gamma$를 적절히 조절하여 정확히 $\alpha$가 되도록 한다.
+- $k$ 찾는법: 우도비 $R(X)=\dfrac{pdf(X;\theta_1)}{pdf(X;\theta_0)}$의 귀무가설 하 분포를 이용하여
 
-> **참고:** 이 기준은 제7장의 전통적 접근으로, 귀무가설에만 제약을 두고 대립가설에서 검정력을 최대화한다는 점에서 (a), (b)와 다르다.  
+  $$P_{\theta_0}(R(X)>k) \le \alpha \le P_{\theta_0}(R(X)\ge k)$$
+
+  를 만족하는 $k$를 선택한다. 이 조건은 제1종 오류 확률이 $\alpha$를 넘지 않으면서 가능한 한 큰 검정력을 갖도록 하는 임계값을 고르는 기준이 된다.
+
+- $\gamma$ 찾는법: $R(X)=k$인 구간의 확률이 양수일 때,
+
+  $$\alpha = E_{\theta_0}[\phi^*(X)] = P_{\theta_0}(R(X)>k) + \gamma P_{\theta_0}(R(X)=k)$$
+
+  이므로
+
+  $$\gamma = \frac{\alpha - P_{\theta_0}(R(X)>k)}{P_{\theta_0}(R(X)=k)}$$
+
+  로 정한다. 위의 $k$ 선택 조건 때문에 $0\le \gamma \le 1$이며, 따라서 정확히 $E_{\theta_0}[\phi^*(X)] = \alpha$가 된다.
+
+> **참고:** 이 기준은 제7장의 전통적 접근으로, 귀무가설에만 제약을 두고 대립가설에서 검정력을 최대화한다는 점에서 최대오류확률, 베이지안평균오류확률 기준과 다르다.  
 > frequentist 관점의 접근법이다.
 
 >각주: 일반적으로 위 두 조건을 만족시키는 $k, \gamma$가 존재하는 것이 알려져 있다.
 
 > 각주: 조건1에서, $\gamma$가 $x$에 의존해도 된다고 알려져 있다.
 
-#### 증명
-먼저, 임의의 검정 함수 $\phi(X)$에 대해 다음 식을 살펴보자.
-
-$$E_{\theta_1}[\phi(X)] - k E_{\theta_0}[\phi(X)]$$
-
-여기서 $E_{\theta_1}[\phi(X)]$는 대립가설 $\theta_1$ 하에서의 검정력, $E_{\theta_0}[\phi(X)]$는 귀무가설 $\theta_0$ 하에서의 제1종 오류 확률, $k$는 상수이다.
-
-확률밀도함수 $pdf(X;\theta)$를 이용해 위 식을 다음과 같이 변형할 수 있다.
-
-$$
-E_{\theta_1}[\phi(X)] - k E_{\theta_0}[\phi(X)]
-= \int \phi(x) [pdf(x;\theta_1) - k\, pdf(x;\theta_0)] dx
-$$
-
-이제 $pdf(x;\theta_0) > 0$인 부분과 $pdf(x;\theta_0) = 0$인 부분으로 나누어 생각하면,
-
-$$= \int_{pdf(x;\theta_0)>0} \phi(x) [pdf(x;\theta_1) - k\, pdf(x;\theta_0)] dx + \int_{pdf(x;\theta_0)=0} \phi(x) pdf(x;\theta_1) dx$$
-
-첫 번째 항은 $pdf(x;\theta_0)>0$인 부분에서 $pdf(x;\theta_1)/pdf(x;\theta_0) - k$로 쓸 수 있으므로,
-
-$$= \int_{pdf(x;\theta_0)>0} \phi(x) pdf(x;\theta_0) \left( \frac{pdf(x;\theta_1)}{pdf(x;\theta_0)} - k \right) dx + \int_{pdf(x;\theta_0)=0} \phi(x) pdf(x;\theta_1) dx \\
-= E_{\theta_0}\left[ \phi(X) \left( \frac{pdf(X;\theta_1)}{pdf(X;\theta_0)} - k \right) \right] + E_{\theta_1}\left[ \phi(X) I(pdf(X;\theta_0)=0) \right]$$
-
-이제 최강력 검정 $\phi^*(X)$와 임의의 검정 $\phi(X)$의 차이를 비교해보자.
-
-$$
-\Delta = \left( E_{\theta_1}[\phi^*(X)] - k E_{\theta_0}[\phi^*(X)] \right)
-- \left( E_{\theta_1}[\phi(X)] - k E_{\theta_0}[\phi(X)] \right) \\
-= E_{\theta_0}\left[ (\phi^*(X) - \phi(X)) \left( \frac{pdf(X;\theta_1)}{pdf(X;\theta_0)} - k \right) \right]
-+ E_{\theta_1}\left[ (\phi^*(X) - \phi(X)) I(pdf(X;\theta_0)=0) \right]
-$$
-
-최강력 검정 $\phi^*(X)$는 가능도비 $\frac{pdf(X;\theta_1)}{pdf(X;\theta_0)}$가 $k$보다 크면 1, 작으면 0, 같으면 $\gamma$로 정의된다. 따라서 $(\phi^*(X) - \phi(X)) \left( \frac{pdf(X;\theta_1)}{pdf(X;\theta_0)} - k \right)$는 항상 0 이상이므로,
-
-$$\Delta \ge 0$$
-
-즉,
-
-$$
-E_{\theta_1}[\phi^*(X)] - k E_{\theta_0}[\phi^*(X)] \ge E_{\theta_1}[\phi(X)] - k E_{\theta_0}[\phi(X)]
-$$
-
-이제, $E_{\theta_0}[\phi(X)] \le \alpha$를 만족하는 임의의 $\phi(X)$에 대해, $k$와 $\gamma$를 적절히 선택하여 $E_{\theta_0}[\phi^*(X)] = \alpha$가 되도록 하면,
-
-$$
-E_{\theta_1}[\phi^*(X)] - E_{\theta_1}[\phi(X)] \ge k \left( E_{\theta_0}[\phi^*(X)] - E_{\theta_0}[\phi(X)] \right) = k (\alpha - E_{\theta_0}[\phi(X)]) \ge 0
-$$
-
-따라서 $\phi^*(X)$는 유의수준 $\alpha$에서 대립가설 하에서 검정력이 최대가 되는, 즉 최강력 검정임을 알 수 있다.
-
-#### 다른 증명 (최적화 관점에서의 네이만–피어슨 정리)
-단순가설 $H_0:\theta=\theta_0$ vs $H_1:\theta=\theta_1$에서, 검정 함수 $\phi(x)\in[0,1]$에 대해  
-최적화 문제:
-
-$$
-\max_\phi\; E_{\theta_1}[\phi(X)] \quad \text{subject to} \quad E_{\theta_0}[\phi(X)] \le \alpha
-$$
-
-기댓값을 적분으로 쓰면,
-
-$$
-E_{\theta_1}[\phi(X)] = \int \phi(x) f_1(x)\,dx,\quad
-E_{\theta_0}[\phi(X)] = \int \phi(x) f_0(x)\,dx
-$$
-
-여기서 $f_i(x) = f(x;\theta_i)$.  
-라그랑주 승수 $k\ge 0$를 도입하여 목적함수로 표현:
-
-$$
-L(\phi) = \int \phi(x) [f_1(x) - k f_0(x)]\,dx + k\alpha
-$$
-
-$\phi(x)$는 각 $x$에서 독립적으로 값을 가질 수 있으므로, 각 $x$에 대해 integrand $[f_1(x) - k f_0(x)]$를 최대화하는 $\phi(x)$를 선택하면 된다.
-
-- $f_1(x) - k f_0(x) > 0$이면 $\phi(x)=1$이 최적
-- $f_1(x) - k f_0(x) < 0$이면 $\phi(x)=0$이 최적
-- $f_1(x) - k f_0(x) = 0$이면 $\phi(x)\in[0,1]$ 임의 (랜덤화 가능)
-
-즉,
-
-$$
-\phi^*(x) =
-\begin{cases}
-1, & \frac{f_1(x)}{f_0(x)} > k \\
-\gamma, & \frac{f_1(x)}{f_0(x)} = k \\
-0, & \frac{f_1(x)}{f_0(x)} < k
-\end{cases}
-$$
-
-$(0\le\gamma\le 1)$  
-여기서 $k,\gamma$는 $E_{\theta_0}[\phi^*(X)] = \alpha$를 만족하도록 선택한다.
-
-결론: 가능도비 검정이 네이만–피어슨 문제의 유일한 해임이 점별 최적화로부터 필연적으로 도출된다.
+**증명**  
+>먼저, 임의의 검정 함수 $\phi(X)$에 대해 다음 식을 살펴보자. $E_{\theta_1}[\phi(X)] - k E_{\theta_0}[\phi(X)]$
+>
+>여기서 $E_{\theta_1}[\phi(X)]$는 대립가설 $\theta_1$ 하에서의 검정력, $E_{\theta_0}[\phi(X)]$는 귀무가설 $\theta_0$ 하에서의 제1종 오류 확률, $k$는 상수이다.
+>
+>확률밀도함수 $pdf(X;\theta)$를 이용해 위 식을 다음과 같이 변형할 수 있다.
+>
+>$$
+>E_{\theta_1}[\phi(X)] - k E_{\theta_0}[\phi(X)]
+>= \int \phi(x) [pdf(x;\theta_1) - k\, pdf(x;\theta_0)] dx
+>$$
+>
+>이제 $pdf(x;\theta_0) > 0$인 부분과 $pdf(x;\theta_0) = 0$인 부분으로 나누어 생각하면,
+>
+>$$= \int_{pdf(x;\theta_0)>0} \phi(x) [pdf(x;\theta_1) - k\, pdf(x;\theta_0)] dx + \int_{pdf(x;\theta_0)=0} \phi(x) pdf(x;\theta_1) dx$$
+>
+>첫 번째 항은 $pdf(x;\theta_0)>0$인 부분에서 $pdf(x;\theta_1)/pdf(x;\theta_0) - k$로 쓸 수 있으므로,
+>
+>$$= \int_{pdf(x;\theta_0)>0} \phi(x) pdf(x;\theta_0) \left( \frac{pdf(x;\theta_1)}{pdf(x;\theta_0)} - k \right) dx + \int_{pdf(x;\theta_0)=0} \phi(x) pdf(x;\theta_1) dx \\
+>= E_{\theta_0}\left[ \phi(X) \left( \frac{pdf(X;\theta_1)}{pdf(X;\theta_0)} - k \right) \right] + E_{\theta_1}\left[ \phi(X) I(pdf(X;\theta_0)=0) \right]$$
+>
+>이제 최강력 검정 $\phi^*(X)$와 임의의 검정 $\phi(X)$의 차이를 비교해보자.
+>
+>$$
+>\Delta = \left( E_{\theta_1}[\phi^*(X)] - k E_{\theta_0}[\phi^*(X)] \right)
+>- \left( E_{\theta_1}[\phi(X)] - k E_{\theta_0}[\phi(X)] \right) \\
+>= E_{\theta_0}\left[ (\phi^*(X) - \phi(X)) \left( \frac{pdf(X;\theta_1)}{pdf(X;\theta_0)} - k \right) \right]
+>+ E_{\theta_1}\left[ (\phi^*(X) - \phi(X)) I(pdf(X;\theta_0)=0) \right]
+>$$
+>
+>최강력 검정 $\phi^*(X)$는 가능도비 $\frac{pdf(X;\theta_1)}{pdf(X;\theta_0)}$가 $k$보다 크면 1, 작으면 0, 같으면 $\gamma$로 정의된다. 따라서 $(\phi^*(X) - \phi(X)) \left( \frac{pdf(X;\theta_1)}{pdf(X;\theta_0)} - k \right)$는 항상 0 이상이므로,
+>
+>$$\Delta \ge 0$$
+>
+>즉,
+>
+>$$
+>E_{\theta_1}[\phi^*(X)] - k E_{\theta_0}[\phi^*(X)] \ge E_{\theta_1}[\phi(X)] - k E_{\theta_0}[\phi(X)]
+>$$
+>
+>이제, $E_{\theta_0}[\phi(X)] \le \alpha$를 만족하는 임의의 $\phi(X)$에 대해, $k$와 $\gamma$를 적절히 선택하여 $E_{\theta_0}[\phi^*(X)] = \alpha$가 되도록 하면,
+>
+>$$
+>E_{\theta_1}[\phi^*(X)] - E_{\theta_1}[\phi(X)] \ge k \left( E_{\theta_0}[\phi^*(X)] - E_{\theta_0}[\phi(X)] \right) = k (\alpha - E_{\theta_0}[\phi(X)]) \ge 0
+>$$
+>
+>따라서 $\phi^*(X)$는 유의수준 $\alpha$에서 대립가설 하에서 검정력이 최대가 되는, 즉 최강력 검정임을 알 수 있다.
+>
+>**다른 증명 (최적화 관점에서의 네이만–피어슨 정리)**  
+>단순가설 $H_0:\theta=\theta_0$ vs $H_1:\theta=\theta_1$에서, 검정 함수 $\phi(x)\in[0,1]$에 대해  
+>최적화 문제: $\max_\phi\; E_{\theta_1}[\phi(X)] \quad \text{subject to} \quad E_{\theta_0}[\phi(X)] \le \alpha$
+>
+>기댓값을 적분으로 쓰면,
+>
+>$$
+>E_{\theta_1}[\phi(X)] = \int \phi(x) f_1(x)\,dx,\quad
+>E_{\theta_0}[\phi(X)] = \int \phi(x) f_0(x)\,dx
+>$$
+>
+>여기서 $f_i(x) = f(x;\theta_i)$.  
+>라그랑주 승수 $k\ge 0$를 도입하여 목적함수로 표현:
+>
+>$$
+>L(\phi) = \int \phi(x) [f_1(x) - k f_0(x)]\,dx + k\alpha
+>$$
+>
+>$\phi(x)$는 각 $x$에서 독립적으로 값을 가질 수 있으므로, 각 $x$에 대해 integrand $[f_1(x) - k f_0(x)]$를 최대화하는 $\phi(x)$를 선택하면 된다.
+>
+>- $f_1(x) - k f_0(x) > 0$이면 $\phi(x)=1$이 최적
+>- $f_1(x) - k f_0(x) < 0$이면 $\phi(x)=0$이 최적
+>- $f_1(x) - k f_0(x) = 0$이면 $\phi(x)\in[0,1]$ 임의 (랜덤화 가능)
+>
+>즉,
+>
+>$$
+>\phi^*(x) =
+>\begin{cases}
+>1, & \frac{f_1(x)}{f_0(x)} > k \\
+>\gamma, & \frac{f_1(x)}{f_0(x)} = k \\
+>0, & \frac{f_1(x)}{f_0(x)} < k
+>\end{cases}
+>$$
+>
+>$(0\le\gamma\le 1)$  
+>여기서 $k,\gamma$는 $E_{\theta_0}[\phi^*(X)] = \alpha$를 만족하도록 선택한다.
+>
+>결론: 가능도비 검정이 네이만–피어슨 문제의 유일한 해임이 점별 최적화로부터 필연적으로 도출된다.
 
 #### 예 9.1.2 (포아송 분포)
 - 표본: $X_1,\dots,X_{100} \sim \mathrm{Poisson}(\theta)$
@@ -312,9 +315,7 @@ $$
 
 귀무가설 $H_0:\theta=0.1$ 하에서 $\sum_{i=1}^{100} X_i \sim \mathrm{Poisson}(10)$이다.
 
-유의수준 조건:
-
-$$E_{\theta_0}[\phi^*(X)] = P_{\theta_0}\left(\sum X_i \le c-1\right) + \gamma \, P_{\theta_0}\left(\sum X_i = c\right) = 0.05$$
+유의수준 조건: $E_{\theta_0}[\phi^*(X)] = P_{\theta_0}\left(\sum X_i \le c-1\right) + \gamma \, P_{\theta_0}\left(\sum X_i = c\right) = 0.05$
 
 포아송 누적분포함수 표에서 $\mathrm{Poisson}(10)$의 누적확률을 확인하면:
 - $P(\sum X_i \le 4) = 0.0293$
@@ -358,12 +359,8 @@ $$E_{\theta_1}\phi^{UMP}_\alpha(X)\ge E_{\theta_1}\phi(X),
 \forall\phi:\max_{\theta\in\Omega_0}E_\theta\phi(X)\le\alpha$$
 
 > 참고: MP와의 차이  
-> **MP 검정(Most Powerful Test)** 는 단순가설($H_0:\theta=\theta_0$ vs $H_1:\theta=\theta_1$)에서 유의수준 $\alpha$ 하에 대립가설 한 점($\theta_1$)에서 검정력이 최대가 되는 검정이다.  
-> **UMP 검정(Uniformly Most Powerful Test)**  는 복수의 대립가설($\theta\in\Omega_1$)에 대해 유의수준 $\alpha$ 하에서 대립가설 전체에 대해 항상(모든 $\theta_1\in\Omega_1$에서) 검정력이 최대가 되는 검정이다.  
-> 즉, MP는 한 점에서, UMP는 대립가설 전체에서 "최강력" 조건을 만족한다는 차이가 있다.
-> - MP: 단순가설(점 대 점), 특정 $\theta_1$에서만 최강력
-> - UMP: 복합가설(구간 등), 대립가설 전체에서 항상 최강력
-> - UMP 검정은 모든 상황에서 존재하지 않음(특히 양쪽 검정 등)
+> **MP 검정(Most Powerful Test)** 지정한 대립 모수 값 $\theta_1$에서, 비교 대상 검정 중 검정력이 최대이다.
+> **UMP 검정(Uniformly Most Powerful Test)**  하나의 동일한 검정이 모든 $\theta_1\in\Omega_1$에서 검정력이 최대이다.
 
 #### 예 9.2.1
 정규분포 $N(\mu,1)$에서의 랜덤표본을 이용하여 유의수준 $\alpha$에서 검정할 때
@@ -387,9 +384,7 @@ $$\frac{pdf(x;\mu_1)}{pdf(x;\mu_0)}
 \left(\bar{x}-\frac{\mu_1+\mu_0}{2}\right) \right]$$
 
 가 임계값 $k$보다 큰 경우 귀무가설을 기각한다.  
-$\mu_1 > \mu_0$일 때, 가능도비는 $\bar{x}$의 증가함수이므로, 기각역은  
-
-$$\bar{x} \ge c$$
+$\mu_1 > \mu_0$일 때, 가능도비는 $\bar{x}$의 증가함수이므로, 기각역은 $\bar{x} \ge c$
 
 유의수준 $\alpha$를 만족시키기 위해 $P_{\mu_0}(\bar{X} \ge c) = \alpha$ 이다. $\bar{X} \sim N(\mu_0, 1/n)$이므로  
 
@@ -409,40 +404,180 @@ $$\phi^*(x) = \begin{cases}
 정규분포 $N(\mu,1)$에서 $H_0(-):\mu\le\mu_0,\ H_1:\mu>\mu_0$ 을 검정할 때, 예 9.2.1의 검정이 유의수준 $\alpha$의 전역최강력 검정임을 보여라.
 
 **풀이**  
-예 9.2.1의 검정함수 $\phi^*$와 검정력 함수는
+$0<\alpha<1$이고, $z_\alpha$는 $P(Z\ge z_\alpha)=\alpha,\quad Z\sim N(0,1)$ 를 만족하는 표준정규분포의 상측 분위수라 하자.
 
-$$\phi^*(x) = \begin{cases}
-1, & \bar{x} - \mu_0 \ge z_\alpha/\sqrt{n} \\
-0, & \bar{x} - \mu_0 < z_\alpha/\sqrt{n}
-\end{cases} \\
-\gamma_{\phi^*}(\mu) = E_\mu[\phi^*(X)] = P_\mu\left(\bar{X} - \mu_0 \ge \frac{z_\alpha}{\sqrt{n}}\right)$$
+**1. 예 9.2.1의 검정을 후보로 택한다.**
 
-이다. $\bar{X} \sim N(\mu, 1/n)$이므로,
+문제에서 예 9.2.1의 검정이 이번 문제에서도 UMP임을 보이라고 하였으므로, 다음 검정함수를 후보로 택한다.
 
 $$
-P_\mu\left(\bar{X} - \mu_0 \ge \frac{z_\alpha}{\sqrt{n}}\right)
-= P\left(\frac{\bar{X} - \mu}{1/\sqrt{n}} \ge \frac{\frac{z_\alpha}{\sqrt{n}} + \mu_0 - \mu}{1/\sqrt{n}}\right)
-= P\left(Z \ge z_\alpha + \sqrt{n}(\mu_0 - \mu)\right) \\
-Z \sim N(0,1)
+\phi^*(x)=
+\begin{cases}
+1,&\bar x-\mu_0\ge z_\alpha/\sqrt n,\\
+0,&\bar x-\mu_0<z_\alpha/\sqrt n.
+\end{cases}
 $$
 
-이 함수는 $\mu$의 증가함수이므로, $\mu$가 커질수록 검정력이 커진다. 따라서
+이 검정은 표본평균이 기준값 이상이면 귀무가설을 기각한다.
+
+**후보 검정함수를 선택했다고 해서 이번 문제에서도 UMP임이 보장되는 것은 아니다.** 다음 두 조건을 증명해야 한다.
+
+- 후보 $\phi^*$가 모든 $\mu\le\mu_0$에서 제1종 오류 확률을 $\alpha$ 이하로 유지한다.
+- 이번 문제에서 유의수준 $\alpha$를 지키는 모든 다른 검정과 비교하여, $\phi^*$가 모든 $\mu_1>\mu_0$에서 검정력이 크거나 같다.
+
+**2. 후보의 검정력함수를 계산한다.**
+
+검정력함수는 실제 모수가 $\mu$일 때의 기각확률이다. $\gamma_{\phi^*}(\mu) =E_\mu[\phi^*(X)] = P_\mu\left(\bar X-\mu_0\ge\frac{z_\alpha}{\sqrt n}\right).$
+
+이 함수는 귀무가설과 대립가설의 모수 영역 모두에서 정의된다. 귀무가설 영역에서는 제1종 오류 확률이고, 대립가설 영역에서는 검정력이다.
+
+$\bar X\sim N(\mu,1/n)$이므로, 실제 모수가 $\mu$일 때 $Z=\frac{\bar X-\mu}{1/\sqrt n}\sim N(0,1)$ 이다. 따라서
 
 $$
-\max_{\mu \le \mu_0} E_\mu[\phi^*(X)] = E_{\mu_0}[\phi^*(X)] = P_{\mu_0}\left(\bar{X} - \mu_0 \ge \frac{z_\alpha}{\sqrt{n}}\right) = P(Z \ge z_\alpha) = \alpha
+\begin{aligned}
+\gamma_{\phi^*}(\mu)
+&= P_\mu\left(\bar X-\mu_0\ge\frac{z_\alpha}{\sqrt n}\right)\\
+&= P_\mu\left(\bar X-\mu \ge\frac{z_\alpha}{\sqrt n}+\mu_0-\mu \right)\\
+&= P_\mu\left(\frac{\bar X-\mu}{1/\sqrt n} \ge \frac{z_\alpha/\sqrt n+\mu_0-\mu}{1/\sqrt n} \right)\\
+&= P\left(Z\ge z_\alpha+\sqrt n(\mu_0-\mu)\right)\\
+&= 1-\Phi\left(z_\alpha+\sqrt n(\mu_0-\mu)\right).
+\end{aligned}
 $$
 
-이제, 임의의 검정 $\phi$에 대해
+여기서 $\Phi$는 표준정규분포의 누적분포함수이다. **이 계산에서는 아직 $\mu\le\mu_0$를 가정하지 않았다.**
+
+**3. 귀무가설 전체에서 유의수준을 확인한다.**
+
+$\mu$가 증가하면 문턱값 $z_\alpha+\sqrt n(\mu_0-\mu)$ 이 감소하므로, 이를 초과할 확률인 $\gamma_{\phi^*}(\mu)$는 증가한다.
+
+따라서 귀무가설 영역 $\mu\le\mu_0$에서 기각확률의 최댓값은 경계점 $\mu=\mu_0$에서 달성된다.
 
 $$
-\{\phi : \max_{\mu \le \mu_0} E_\mu[\phi(X)] \le \alpha, \; 0 \leq \phi(X) \le 1\} \subseteq \{\phi : E_{\mu_0}[\phi(X)] \le \alpha, \; 0 \leq \phi(X) \le 1\}
+\begin{aligned}
+\sup_{\mu\le\mu_0}E_\mu[\phi^*(X)]
+&= \max_{\mu\le\mu_0}E_\mu[\phi^*(X)]\\
+&= E_{\mu_0}[\phi^*(X)]\\
+&= P_{\mu_0}\left(\bar X-\mu_0\ge\frac{z_\alpha}{\sqrt n}\right)\\
+&= P(Z\ge z_\alpha)\\
+&=\alpha.
+\end{aligned}
 $$
 
-이므로, $\phi^*$는 유의수준 $\alpha$를 만족한다.
+따라서 $E_\mu[\phi^*(X)]\le\alpha \quad\forall\mu\le\mu_0$ 이며, **후보 $\phi^*$는 이번 문제의 유의수준 조건을 만족한다.**
 
-또한, 네이만–피어슨 정리에 의해 $\phi^*$는 $H_0: \mu = \mu_0$ 대 $H_1: \mu = \mu_1\ (\mu_1 > \mu_0)$에서 최강력 검정이므로, 모든 $\mu_1 > \mu_0$에 대해 검정력이 최대가 된다.
+이 단계는 후보의 오류 확률을 확인한 것이다. 다른 검정보다 검정력이 큰지는 다음 단계에서 증명한다.
 
-따라서 $\phi^*$는 $H_0: \mu \le \mu_0$ 대 $H_1: \mu > \mu_0$에 대한 유의수준 $\alpha$의 전역최강력 검정(UMP test)임을 알 수 있다.
+**4. 이번 문제의 비교 검정들이 이전 문제의 비교 집합에 포함됨을 확인한다.**
+
+후보 $\phi^*$와 구별하기 위해 다른 검정함수를 $\psi$라고 쓰겠다. 각 검정함수는 측정 가능한 함수 $\psi:\mathcal X\to[0,1]$이다.
+
+이번 문제에서 유의수준 $\alpha$를 만족하는 검정들의 집합은 
+
+$$
+\mathcal T_{\le} = \left\{ \psi: \sup_{\mu\le\mu_0}E_\mu[\psi(X)]\le\alpha \right\}
+$$
+
+예 9.2.1의 점 귀무가설에서 유의수준 $\alpha$를 만족하는 검정들의 집합은 귀무가설 모수가 $\mu_0$ 밖에 없으므로 sup을 생략하고,
+
+$$
+\mathcal T_{=} = \left\{ \psi: E_{\mu_0}[\psi(X)]\le\alpha \right\}
+$$
+
+이제 임의의 $\psi\in\mathcal T_{\le}$를 택하자. 상한은 그 집합의 모든 원소 이상이므로 (달리 표현하면, $\mu_0$는 상한을 구하는 모수집합 $(-\infty,\mu_0]$에 포함되므로,
+
+$$
+E_{\mu_0}[\psi(X)] \le \sup_{\mu\le\mu_0}E_\mu[\psi(X)] \le\alpha.
+$$
+
+따라서 $\psi\in\mathcal T_{=}$이다. 임의의 $\psi\in\mathcal T_{\le}$에 대해 이 결론이 성립하므로,
+
+$$
+\boxed{\mathcal T_{\le}\subseteq\mathcal T_{=}}.
+$$
+
+이다. 이를 풀어 쓰면
+
+$$
+\left\{\psi:\sup_{\mu\le\mu_0}E_\mu[\psi(X)]\le\alpha,\ 0\le\psi\le1 \right\}
+\subseteq
+\left\{\psi:E_{\mu_0}[\psi(X)]\le\alpha,\ 0\le\psi\le1\right\}.
+$$
+
+**이는 검정함수들의 포함관계이다.** 왼쪽은 더 많은 귀무 모수 값에서 오류 확률을 제한하므로, 허용되는 검정의 범위가 오른쪽보다 좁다.
+
+**5. 예 9.2.1에서 얻은 최강력성이 무엇인지 확인한다.**
+
+예 9.2.1에서는 임의의 $\mu_1>\mu_0$를 고정하고 $H_0:\mu=\mu_0,\quad H_1:\mu=\mu_1$ 을 검정하였다. 전체 표본의 결합밀도를 $f_\mu(x)$라고 하면 가능도비는
+
+$$
+R_{\mu_1}(x)
+= \frac{f_{\mu_1}(x)}{f_{\mu_0}(x)}
+= \exp\left[n(\mu_1-\mu_0)\left(\bar x-\frac{\mu_1+\mu_0}{2}\right)\right].
+$$
+
+$\mu_1-\mu_0>0$이므로 가능도비는 $\bar x$의 증가함수이다. 따라서 가능도비가 클 때 기각하는 검정은 표본평균이 클 때 기각하는 검정과 같다.
+
+구체적으로
+
+$$
+c=\mu_0+\frac{z_\alpha}{\sqrt n},\quad k_{\mu_1}
+= \exp\left[ n(\mu_1-\mu_0) \left(c-\frac{\mu_1+\mu_0}{2}\right) \right]
+$$
+
+로 두면 $R_{\mu_1}(x)\ge k_{\mu_1} \iff \bar x\ge c.$
+
+따라서 후보 $\phi^*$ 는 이 단순가설 검정의 가능도비 검정이며, $E_{\mu_0}[\phi^*(X)]=\alpha$이다. 경계에서는 기각확률을 1로 둔 형태이고, 연속분포이므로 경계 선택은 오류 확률과 검정력에 영향을 주지 않는다.
+
+네이만–피어슨 정리에 의해 $E_{\mu_1}[\phi^*(X)] \ge E_{\mu_1}[\psi(X)] \quad \forall\psi\in\mathcal T_{=}.$
+
+어떤 $\mu_1>\mu_0$를 택해도 같은 후보 $\phi^*$가 나오므로,
+
+$$
+\boxed{
+E_{\mu_1}[\phi^*(X)]
+\ge E_{\mu_1}[\psi(X)]
+\qquad
+\forall\mu_1>\mu_0,\quad
+\forall\psi\in\mathcal T_{=}
+}
+$$
+
+이다. **이것이 예 9.2.1에서 이미 증명한 대립가설 전체에서의 최강력성이다.** [stat210a.berkeley.edu](https://stat210a.berkeley.edu/fall-2024/reader/hypothesis-testing.html?utm_source=chatgpt.com)
+
+**6. 이번 문제의 모든 비교 검정에 최강력성을 적용한다.**
+
+이번 문제에서 유의수준 $\alpha$를 만족하는 검정 중 임의의 $\psi\in\mathcal T_{\le}$를 택한다.  
+이 검정은 선택 조건에 의해 모든 $\mu\le\mu_0$에서 오류 확률을 지킨다. 따라서 특히 $E_{\mu_0}[\psi(X)]\le\alpha$ 이며, $\psi\in\mathcal T_{=}$이다.
+
+그러므로 예 9.2.1의 결과를 적용하여 $E_{\mu_1}[\phi^*(X)] \ge E_{\mu_1}[\psi(X)] \quad\forall\mu_1>\mu_0$ 를 얻는다.  
+$\psi$는 $\mathcal T_{\le}$에서 임의로 선택했으므로,
+
+$$
+\boxed{
+E_{\mu_1}[\phi^*(X)] \ge E_{\mu_1}[\psi(X)] \qquad \forall\mu_1>\mu_0,\quad \forall\psi\in\mathcal T_{\le}
+}
+$$
+
+여기서 비교 검정에 요구한 $\alpha$ 제약은 **귀무가설 아래의 오류 확률에 대한 자격 조건**이다. 대립가설 아래의 검정력을 $\alpha$ 이하로 제한한 것이 아니다.
+
+**7. UMP의 두 조건을 결합한다.**
+
+후보 $\phi^*$에 대해 다음을 모두 증명하였다. $\sup_{\mu\le\mu_0}E_\mu[\phi^*(X)]=\alpha$ 이고,
+
+$$
+E_{\mu_1}[\phi^*(X)] \ge E_{\mu_1}[\psi(X)] \qquad \forall\mu_1>\mu_0,\quad \forall\psi\in\mathcal T_{\le}.
+$$
+
+따라서 $\phi^*$는 이번 문제에서 유의수준 $\alpha$를 지키며, 허용되는 모든 다른 검정보다 모든 대립점에서 검정력이 크거나 같다. 그러므로
+
+$$
+\boxed{
+\phi^*(x)= \mathbf1\left\{\bar x-\mu_0\ge\frac{z_\alpha}{\sqrt n}\right\}
+}
+$$
+
+는 $H_0:\mu\le\mu_0$ 대 $H_1:\mu>\mu_0$에 대한 유의수준 $\alpha$의 전역최강력 검정이다.
+
 
 ### 정리 9.2.1 단일모수 지수족과 전역최강력 한쪽 검정
 모집단 분포의 확률밀도함수가
@@ -473,59 +608,61 @@ $$
 **(b) (검정의 크기)**  
 $E_{\theta_0}\phi^*(X)=\alpha$
 
-#### 증명
-네이만–피어슨 정리에 따라, $H_0:\theta = \theta_0$ 대 $H_1:\theta = \theta_1 > \theta_0$에서 최강력 검정은 가능도비
-
-$$
-\frac{f(x;\theta_1)}{f(x;\theta_0)} = \exp\{[g(\theta_1) - g(\theta_0)]T(x) - [B(\theta_1) - B(\theta_0)]\}$$
-
-가 임계값 $k$보다 큰 경우 귀무가설을 기각한다.  
-$g(\theta_1) > g(\theta_0)$이므로, 가능도비는 $T(x)$의 증가함수이다. 따라서 검정함수는
-
-$$
-\phi^*(x) =
-\begin{cases}
-1, & T(x_1) + \cdots + T(x_n) > c \\
-\gamma, & T(x_1) + \cdots + T(x_n) = c \\
-0, & T(x_1) + \cdots + T(x_n) < c
-\end{cases}
-$$
-
-이 검정은 모든 $\theta_1 > \theta_0$에 대해 동일하게 적용되므로, 대립가설 전체에서 검정력이 최대가 되는 전역최강력 검정(UMP test)이다.
-
-임계값 $c, \gamma$는 $E_{\theta_0}[\phi^*(X)] = \alpha$ 를 만족하도록 선택한다.
-
-따라서 단일모수 지수족에서 $g(\theta)$가 증가함수일 때, 위와 같은 꼴의 검정이 유의수준 $\alpha$의 전역최강력 검정임이 증명된다.
-
-#### 증명 다른방법
-$\phi^*(x)$의 검정력 함수 $E_\theta[\phi^*(X)]$가 $\theta$의 증가함을 보이자.
-
-모수공간 임의의 $\theta', \theta''$ ($\theta' < \theta''$)에 대해 $\alpha' = E_{\theta'}\phi^*(X)$라 하고, 단순가설 $H_0(\theta'):\theta = \theta'$ vs $H_1(\theta''):\theta = \theta''$을 유의수준 $\alpha'$에서 검정한다고 하자. 이때 항상 $\alpha'$의 확률로 기각하는 랜덤화검정 $\phi_{\alpha'}(x)$는 유의수준 $\alpha'$의 검정이므로, 이 경우의 최강력검정 $\phi^{MP}_{\alpha'}$보다 검정력이 작거나 같다. 즉,
-
-$$E_{\theta''}\phi_{\alpha'}(X) \leq E_{\theta''}\phi^{MP}_{\alpha'}(X)$$
-
-그런데 정리 9.1.2(네이만–피어슨 정리)로부터, 이 경우의 최강력검정 $\phi^{MP}_{\alpha'}$는 (a) 가능도비 검정 꼴과 (b) $E_{\theta'}[\phi^{MP}_{\alpha'}(X)] = \alpha'$에 의해 정해진다. $\phi^*$는 바로 이 조건을 만족하므로 $\phi^{MP}_{\alpha'} = \phi^*$이다.
-
-따라서
-
-$$E_{\theta''}\phi^*(X) = E_{\theta''}\phi^{MP}_{\alpha'}(X) \geq E_{\theta''}\phi_{\alpha'}(X) = \alpha' = E_{\theta'}\phi^*(X)$$
-
-즉, $E_\theta[\phi^*(X)]$는 $\theta$의 증가함수임이 증명된다.
-
-이를 증명했으므로, 
-검정 $\phi^*$는 귀무가설이 $H_0: \theta \leq \theta_0$인 경우에도 유의수준 $\alpha$의 검정이다. 즉,
-
-$$
-\max_{\theta \leq \theta_0} E_\theta[\phi^*(X)] = E_{\theta_0}[\phi^*(X)] = \alpha
-$$
-
-이다. 또한
-
-$$
-\left\{ \phi : \max_{\theta \leq \theta_0} E_\theta[\phi(X)] \leq \alpha \right\} \subseteq \left\{ \phi : E_{\theta_0}[\phi(X)] \leq \alpha \right\}
-$$
-
-이므로, $\phi^*$는 $H_0: \theta \leq \theta_0$ 대 $H_1: \theta > \theta_0$에 대한 유의수준 $\alpha$의 전역최강력 검정(UMP test)임을 알 수 있다.
+>**증명**  
+>**Step 1**  
+>네이만–피어슨 정리에 따라, $H_0:\theta = \theta_0$ 대 $H_1:\theta = \theta_1 > \theta_0$에서 최강력 검정은 가능도비
+>
+>$$
+>\frac{f(x;\theta_1)}{f(x;\theta_0)} = \exp\{[g(\theta_1) - g(\theta_0)](T(x_1) + \cdots + T(x_n)) - [B(\theta_1) - B(\theta_0)]\}$$
+>
+>가 임계값 $k$보다 큰 경우 귀무가설을 기각한다.  
+>$g(\theta_1) > g(\theta_0)$이므로, 가능도비는 $T(x_1) + \cdots + T(x_n)$의 증가함수이다. 따라서 검정함수는
+>
+>$$
+>\phi^*(x) =
+>\begin{cases}
+>1, & T(x_1) + \cdots + T(x_n) > c \\
+>\gamma, & T(x_1) + \cdots + T(x_n) = c \\
+>0, & T(x_1) + \cdots + T(x_n) < c
+>\end{cases}
+>$$
+>
+>이 검정은 모든 $\theta_1 > \theta_0$에 대해 동일하게 적용되므로, 대립가설 전체에서 검정력이 최대가 되는 전역최강력 검정(UMP test)이다.
+>
+>임계값 $c, \gamma$는 $E_{\theta_0}[\phi^*(X)] = \alpha$ 를 만족하도록 선택한다.
+>
+>따라서 단일모수 지수족에서 $g(\theta)$가 증가함수일 때, 위와 같은 꼴의 검정이 유의수준 $\alpha$의 전역최강력 검정이다.
+>
+>**Step 2**  
+>$\phi^*(x)$의 검정력 함수 $E_\theta[\phi^*(X)]$가 $\theta$의 증가함을 보이자.
+>
+>모수공간 임의의 $\theta', \theta''$ ($\theta' < \theta''$)에 대해 $\alpha' = E_{\theta'}\phi^*(X)$라 하고, 단순가설 $H_0(\theta'):\theta = \theta'$ vs $H_1(\theta''):\theta = \theta''$을 유의수준 $\alpha'$에서 검정한다고 하자. 이때 항상 $\alpha'$의 확률로 기각하는 랜덤화검정 $\phi_{\alpha'}(x)$는 유의수준 $\alpha'$의 검정이므로, 이 경우의 최강력검정 $\phi^{MP}_{\alpha'}$보다 검정력이 작거나 같다. 즉,
+>
+>$$E_{\theta''}\phi_{\alpha'}(X) \leq E_{\theta''}\phi^{MP}_{\alpha'}(X)$$
+>
+>그런데 정리 9.1.2(네이만–피어슨 정리)로부터, 이 경우의 최강력검정 $\phi^{MP}_{\alpha'}$는 (a) 가능도비 검정 꼴과 (b) $E_{\theta'}[\phi^{MP}_{\alpha'}(X)] = \alpha'$에 의해 정해진다. $\phi^*$는 바로 이 조건을 만족하므로 $\phi^{MP}_{\alpha'} = \phi^*$이다.
+>
+>따라서
+>
+>$$E_{\theta''}\phi^*(X) = E_{\theta''}\phi^{MP}_{\alpha'}(X) \geq E_{\theta''}\phi_{\alpha'}(X) = \alpha' = E_{\theta'}\phi^*(X)$$
+>
+>즉, $E_\theta[\phi^*(X)]$는 $\theta$의 증가함수임이 증명된다.
+>
+>**Step 3**  
+>이를 증명했으므로, 
+>검정 $\phi^*$는 귀무가설이 $H_0: \theta \leq \theta_0$인 경우에도 유의수준 $\alpha$의 검정이다. 즉,
+>
+>$$
+>\max_{\theta \leq \theta_0} E_\theta[\phi^*(X)] = E_{\theta_0}[\phi^*(X)] = \alpha
+>$$
+>
+>이다. 또한
+>
+>$$
+>\left\{ \phi : \max_{\theta \leq \theta_0} E_\theta[\phi(X)] \leq \alpha \right\} \subseteq \left\{ \phi : E_{\theta_0}[\phi(X)] \leq \alpha \right\}
+>$$
+>
+>이므로, $\phi^*$는 $H_0: \theta \leq \theta_0$ 대 $H_1: \theta > \theta_0$에 대한 유의수준 $\alpha$의 전역최강력 검정(UMP test)임을 알 수 있다.
 
 #### 예 9.2.3
 포아송분포 $\mathrm{Poisson}(\theta)$, $0<\theta<+\infty$에서 $n=100$개의 랜덤표본을 이용하여
@@ -622,148 +759,148 @@ $$
 $$
 
 에 대해 다음을 보여라.  
-(a) 
-$E_{\theta_0}[\phi^*(X)] = \alpha, \quad
-\left \frac{d}{d\theta}E_\theta[\phi^*(X)]\right|_{\theta=\theta_0} = 0$
+(a) $E_{\theta_0}[\phi^*(X)] = \alpha, \quad \frac{d}{d\theta}E_\theta \left[\phi^*(X) \right] |_{\theta=\theta_0} = 0$
 
 (b) 
 $\forall\phi:\ E_{\theta_0}[\phi(X)] = \alpha,\ 
-\left \frac{d}{d\theta}E_\theta[\phi(X)]\right|_{\theta=\theta_0} = 0, \quad E_{\theta_1}[\phi^*(X)] \ge E_{\theta_1}[\phi(X)],\ \forall\theta_1: \theta_1 \ne\theta_0$
+\frac{d}{d\theta}E_\theta \left[\phi(X) \right] |_{\theta=\theta_0} = 0, \quad E_{\theta_1}[\phi^*(X)] \ge E_{\theta_1}[\phi(X)],\ \forall\theta_1: \theta_1 \ne\theta_0$
 
-**[증명]**  
-(a) 검정 $\phi^*(X)$의 검정력 함수는 표준정규분포의 누적분포함수 $\Phi(z)$를 이용하여 나타낸다.
-
-검정 $\phi^*(X)$의 기각역은 $\sqrt{n}|\bar{X}-\theta_0| \ge z_{\alpha/2}$이므로,  
-
-$$E_\theta[\phi^*(X)] = P_\theta\left(\sqrt{n}|\bar{X}-\theta_0| \ge z_{\alpha/2}\right) = P_\theta\left(\bar{X} \ge \theta_0 + \frac{z_{\alpha/2}}{\sqrt{n}}\right) + P_\theta\left(\bar{X} \le \theta_0 - \frac{z_{\alpha/2}}{\sqrt{n}}\right) \\
-= P\left(Z \ge z_{\alpha/2} - \sqrt{n}(\theta-\theta_0)\right) + P\left(Z \le -z_{\alpha/2} - \sqrt{n}(\theta-\theta_0)\right)$$
-
-여기서 $Z \sim N(0,1)$, $\delta = \sqrt{n}(\theta-\theta_0)$로 두면, $E_\theta[\phi^*(X)] = 1-\Phi(z_{\alpha/2}-\delta) + \Phi(-z_{\alpha/2}-\delta)$  
-
-따라서 $E_{\theta_0}[\phi^*(X)] = 1-\Phi(z_{\alpha/2}) + \Phi(-z_{\alpha/2}) = \alpha$ 이고, $\frac{d}{d\theta}E_\theta[\phi^*(X)]|_{\theta=\theta_0} = \sqrt{n}\frac{d}{d\delta}E_\theta[\phi^*(X)]|_{\delta=0} = \phi(z_{\alpha/2}) - \phi(-z_{\alpha/2}) = 0$ 이다.
-
-(b) $E_\theta[\phi(X)]$의 $\theta$에 대한 도함수는  
-
-> **(미적분 교환 정당화: $\frac{d}{d\theta}\int = \int \frac{\partial}{\partial\theta}$)**  
-> 아래와 같은 표준 충분조건이 성립하면, 기대값 미분에서 미분과 적분의 교환이 가능하다.
+>**증명**  
+>(a) 검정 $\phi^*(X)$의 검정력 함수는 표준정규분포의 누적분포함수 $\Phi(z)$를 이용하여 나타낸다.
 >
-> 1. **밀도의 $\theta$-미분 가능성** : $p_\theta(x)$가 $\theta$에 대해 미분 가능(거의 모든 $x$).
+>검정 $\phi^*(X)$의 기각역은 $\sqrt{n}|\bar{X}-\theta_0| \ge z_{\alpha/2}$이므로,  
 >
-> 2. **지배함수 존재 (Dominated Convergence 형태)** : 어떤 적분가능 함수 $g(x)$가 존재하여, $\theta_0$의 근방에서
->    
->    $$\left|\phi(x)\frac{\partial}{\partial\theta}p_\theta(x)\right|\le g(x), \quad \int g(x)\,dx<\infty$$
->    
-> 3. **검정함수의 유계성** : 보통 $0\le \phi(x)\le 1$ 이므로 $\phi$는 자동으로 bounded.
+>$$E_\theta[\phi^*(X)] = P_\theta\left(\sqrt{n}|\bar{X}-\theta_0| \ge z_{\alpha/2}\right) = P_\theta\left(\bar{X} \ge \theta_0 + \frac{z_{\alpha/2}}{\sqrt{n}}\right) + P_\theta\left(\bar{X} \le \theta_0 - \frac{z_{\alpha/2}}{\sqrt{n}}\right) \\
+>= P\left(Z \ge z_{\alpha/2} - \sqrt{n}(\theta-\theta_0)\right) + P\left(Z \le -z_{\alpha/2} - \sqrt{n}(\theta-\theta_0)\right)$$
 >
-> 위 세 조건을 만족하므로, 따라서
-> 
-> $$\frac{d}{d\theta}E_\theta[\phi(X)]
-> =\frac{d}{d\theta}\int \phi(x)p_\theta(x)\,dx
-> =\int \phi(x)\frac{\partial}{\partial\theta}p_\theta(x)\,dx$$
-> 
-> 가 정당화된다.  
-> (실무적으로는 3번 덕분에 2번 확인이 크게 단순화된다.)
-
-$$\frac{d}{d\theta}E_\theta[\phi(X)] = \int \phi(x) \frac{\partial}{\partial\theta} pdf(x;\theta)\,dx
-= \int \phi(x) \frac{p'_\theta(x)}{p_\theta(x)} p_\theta(x)\,dx
-= E_\theta\left[\phi(X)\frac{p'_\theta(X)}{p_\theta(X)}\right] \\
-\therefore \left \frac{d}{d\theta}E_\theta[\phi(X)]\right|_{\theta=\theta_0}
-= E_{\theta_0}\left[\phi(X)\frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right]
-$$
-
-이제, 정리9.1.2처럼 $E_{\theta_0}[\phi(X)] = \alpha$이고 $\left \frac{d}{d\theta}E_\theta[\phi(X)]\right|_{\theta=\theta_0} = 0$을 만족하는 임의의 검정 $\phi$에 대해, $\phi^*$가 모든 $\theta \ne \theta_0$에서 검정력이 최대임을 보인다.
-
-$\theta_1 \neq \theta_0$에 대해 미정승수 $k_1, k_2$를 도입하여 다음 식을 최대로하는 검정 $\phi^{**}$를 알아보자:  
-이때, $p_\theta(x)$는 $X$의 확률밀도함수, $p'_{\theta_0}(x) = \left \frac{\partial}{\partial\theta}p_\theta(x)\right|_{\theta=\theta_0}$  
-
-$$
-E_{\theta_1}[\phi(X)] - k_1 E_{\theta_0}[\phi(X)] - k_2 E_{\theta_0}\left[\phi(X)\frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right] \\ = E_{\theta_0}\left[\phi(X)\left\{\frac{p_{\theta_1}(X)}{p_{\theta_0}(X)} - k_1 - k_2 \frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right\}\right]
-$$
-
-이 기대값을 $\phi(X)$에 대해 최대화하려면, 각 $x$에 대해
-- 괄호 $\{\}$ 안이 양수이면 $\phi(X)=1$,
-- 음수이면 $\phi(X)=0$
-로 하는 것이 최적이다.
-
-따라서 최적의 검정은
-
-$$
-\phi^{**}(x) =
-\begin{cases}
-1, & \frac{p_{\theta_1}(x)}{p_{\theta_0}(x)} - k_1 - k_2 \frac{p'_{\theta_0}(x)}{p_{\theta_0}(x)} > 0 \\
-0, & \text{otherwise}
-\end{cases}
-$$
-
-따라서
-
-$$
-E_{\theta_1}[\phi^{**}(X)] - k_1 E_{\theta_0}[\phi^{**}(X)] - k_2 E_{\theta_0}\left[\phi^{**}(X)\frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right] \\
-\geq E_{\theta_1}[\phi(X)] - k_1 E_{\theta_0}[\phi(X)] - k_2 E_{\theta_0}\left[\phi(X)\frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right]
-$$
-
-이므로
-
-$$
-E_{\theta_1}[\phi^{**}(X)] - E_{\theta_1}[\phi(X)]
-\geq
-k_1 \left( E_{\theta_0}[\phi^{**}(X)] - E_{\theta_0}[\phi(X)] \right) \\
-+ k_2 \left( E_{\theta_0}\left[\phi^{**}(X)\frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right] - E_{\theta_0}\left[\phi(X)\frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right] \right)
-$$
-
-이제 $\phi^{**}$가 조건 (a)를 만족하도록 $k_1, k_2$를 적절히 정할 수 있다면, (자세한 증명 생략)
-
-$$E_{\theta_1}[\phi^{**}(X)] \geq E_{\theta_1}[\phi(X)]$$
-
-가 모든 $\theta_1: \theta_1 \neq \theta_0$ 및 조건 (a)를 만족하는 임의의 $\phi$에 대해 성립한다.  
-
-마지막으로, $\phi^{**}$가 조건 (a)를 만족하도록 $k_1, k_2$를 적절히 정할 수 있다면 $\phi^{**}$가 바로 $\phi^*$로 주어지는 것을 밝힐 수 있다: 
-
-**최적검정의 기각조건**: 라그랑주 미정승수 방법에서 최적검정 $\phi^{**}$의 기각역은
-
-$$\frac{p_{\theta_1}(x)}{p_{\theta_0}(x)} - k_1 - k_2 \frac{p'_{\theta_0}(x)}{p_{\theta_0}(x)} > 0$$
-
-을 정리하면
-
-$$\exp\left\{n(\theta_1-\theta_0)\bar{x} - \frac{n}{2}(\theta_1^2-\theta_0^2)\right\} - k_1 - k_2 n(\bar{x}-\theta_0) > 0$$
-
-$a := n(\theta_1-\theta_0)$, $b := -\frac{n}{2}(\theta_1^2-\theta_0^2)$로 두면
-
-$$\exp\{a\bar{x}+b\} > k_1 + k_2 n(\bar{x}-\theta_0)$$
-
-**$c_1, c_2$ 결정: 대칭성 활용**: 조건 (a)에서 $E_{\theta_0}[\phi^{**}(X)] = \alpha$를 만족하고, 조건 (b)에서 도함수 조건 $\left|\frac{d}{d\theta}E_\theta[\phi^{**}(X)]\right|_{\theta=\theta_0} = 0$ 이 성립해야 한다. 이는 검정력 함수가 $\theta=\theta_0$에서 **극값**(최솟값)을 가진다는 뜻. 정규분포의 대칭성으로부터, 양측검정의 기각역은 $\theta_0$에 대해 대칭이어야 하므로
-
-$$\phi^{**}(x) = \begin{cases}
-1, & \bar{x} \le c_1 \text{ 또는 } \bar{x} \ge c_2 \\
-0, & c_1 < \bar{x} < c_2
-\end{cases}$$
-
-형태가 되며, 대칭성에 의해 $c_1 = \theta_0 - d$, $c_2 = \theta_0 + d$ (어떤 $d>0$)로 놓을 수 있다.
-
-**임계값 확정: 유의수준 조건**: 유의수준 조건 $E_{\theta_0}[\phi^{**}(X)] = \alpha$에서
-
-$$P_{\theta_0}(\bar{X} \le \theta_0-d) + P_{\theta_0}(\bar{X} \ge \theta_0+d) = \alpha$$
-
-대칭성으로
-
-$$2P_{\theta_0}\left(\bar{X} \ge \theta_0+d\right) = \alpha, \quad P_{\theta_0}\left(\frac{\bar{X}-\theta_0}{1/\sqrt{n}} \ge \sqrt{n}d\right) = \frac{\alpha}{2}$$
-
-표준정규분포에서
-
-$$\sqrt{n}d = z_{\alpha/2} \quad \Rightarrow \quad d = \frac{z_{\alpha/2}}{\sqrt{n}}$$
-
-따라서
-
-$$\boxed{c_1 = \theta_0 - \frac{z_{\alpha/2}}{\sqrt{n}}, \quad c_2 = \theta_0 + \frac{z_{\alpha/2}}{\sqrt{n}}}$$
-
-**결론: 최적 양측검정**: 조건 (a), (b)를 모두 만족하는 불편(unbiased) 검정은
-
-$$\phi^*(x) = \begin{cases}
-1, & \sqrt{n}|\bar{x}-\theta_0| \ge z_{\alpha/2} \\
-0, & \sqrt{n}|\bar{x}-\theta_0| < z_{\alpha/2}
-\end{cases}$$
-
-이며, 이는 정규분포의 평균에 대한 양측검정에서 **전역최강력불편검정(UMPU test)**
+>여기서 $Z \sim N(0,1)$, $\delta = \sqrt{n}(\theta-\theta_0)$로 두면, $E_\theta[\phi^*(X)] = 1-\Phi(z_{\alpha/2}-\delta) + \Phi(-z_{\alpha/2}-\delta)$  
+>
+>따라서 $E_{\theta_0}[\phi^*(X)] = 1-\Phi(z_{\alpha/2}) + \Phi(-z_{\alpha/2}) = \alpha$ 이고, $\frac{d}{d\theta}E_\theta[\phi^*(X)]|_{\theta=\theta_0} = \sqrt{n}\frac{d}{d\delta}E_\theta[\phi^*(X)]|_{\delta=0} = \phi(z_{\alpha/2}) - \phi(-z_{\alpha/2}) = 0$ 이다.
+>
+>(b) $E_\theta[\phi(X)]$의 $\theta$에 대한 도함수는  
+>
+>> **(미적분 교환 정당화: $\frac{d}{d\theta}\int = \int \frac{\partial}{\partial\theta}$)**  
+>> 아래와 같은 표준 충분조건이 성립하면, 기대값 미분에서 미분과 적분의 교환이 가능하다.
+>>
+>> 1. **밀도의 $\theta$-미분 가능성** : $p_\theta(x)$가 $\theta$에 대해 미분 가능(거의 모든 $x$).
+>>
+>> 2. **지배함수 존재 (Dominated Convergence 형태)** : 어떤 적분가능 함수 $g(x)$가 존재하여, $\theta_0$의 근방에서
+>>    
+>>    $$\left|\phi(x)\frac{\partial}{\partial\theta}p_\theta(x)\right|\le g(x), \quad \int g(x)\,dx<\infty$$
+>>    
+>> 3. **검정함수의 유계성** : 보통 $0\le \phi(x)\le 1$ 이므로 $\phi$는 자동으로 bounded.
+>>
+>> 위 세 조건을 만족하므로, 따라서
+>> 
+>> $$\frac{d}{d\theta}E_\theta[\phi(X)]
+>> =\frac{d}{d\theta}\int \phi(x)p_\theta(x)\,dx
+>> =\int \phi(x)\frac{\partial}{\partial\theta}p_\theta(x)\,dx$$
+>> 
+>> 가 정당화된다.  
+>> (실무적으로는 3번 덕분에 2번 확인이 크게 단순화된다.)
+>
+>$$
+>\begin{aligned}
+>\frac{d}{d\theta}E_\theta[\phi(X)] &= \int \phi(x) \frac{\partial}{\partial\theta} pdf(x;\theta)\,dx \\
+>&= \int \phi(x) \frac{p'_\theta(x)}{p_\theta(x)} p_\theta(x)\,dx \\
+>&= E_\theta\left[\phi(X)\frac{p'_\theta(X)}{p_\theta(X)}\right] \\ \therefore \frac{d}{d\theta}E_\theta[\phi(X)] \mid_{\theta=\theta_0}
+>&= E_{\theta_0}\left[\phi(X)\frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right]
+>\end{aligned}
+>$$
+>
+>이제, 정리9.1.2처럼 $E_{\theta_0}[\phi(X)] = \alpha$이고 $\frac{d}{d\theta}E_\theta[\phi(X)]\mid_{\theta=\theta_0} = 0$을 만족하는 임의의 검정 $\phi$에 대해, $\phi^*$가 모든 $\theta \ne \theta_0$에서 검정력이 최대임을 보인다.
+>
+>$\theta_1 \neq \theta_0$에 대해 미정승수 $k_1, k_2$를 도입하여 다음 식을 최대로하는 검정 $\phi^{**}$를 알아보자:  
+>이때, $p_\theta(x)$는 $X$의 확률밀도함수, $p'_{\theta_0}(x) = \frac{\partial}{\partial\theta}p_\theta(x) \mid_{\theta=\theta_0}$  
+>
+>$$
+>E_{\theta_1}[\phi(X)] - k_1 E_{\theta_0}[\phi(X)] - k_2 E_{\theta_0}\left[\phi(X)\frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right] \\ = E_{\theta_0}\left[\phi(X)\left\{\frac{p_{\theta_1}(X)}{p_{\theta_0}(X)} - k_1 - k_2 \frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right\}\right]
+>$$
+>
+>이 기대값을 $\phi(X)$에 대해 최대화하려면, 각 $x$에 대해
+>- 괄호 $\{\}$ 안이 양수이면 $\phi(X)=1$,
+>- 음수이면 $\phi(X)=0$
+>로 하는 것이 최적이다.
+>
+>따라서 최적의 검정은
+>
+>$$
+>\phi^{**}(x) =
+>\begin{cases}
+>1, & \frac{p_{\theta_1}(x)}{p_{\theta_0}(x)} - k_1 - k_2 \frac{p'_{\theta_0}(x)}{p_{\theta_0}(x)} > 0 \\
+>0, & \text{otherwise}
+>\end{cases}
+>$$
+>
+>따라서
+>
+>$$
+>E_{\theta_1}[\phi^{**}(X)] - k_1 E_{\theta_0}[\phi^{**}(X)] - k_2 E_{\theta_0}\left[\phi^{**}(X)\frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right] \\
+>\geq E_{\theta_1}[\phi(X)] - k_1 E_{\theta_0}[\phi(X)] - k_2 E_{\theta_0}\left[\phi(X)\frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right]
+>$$
+>
+>이므로
+>
+>$$
+>E_{\theta_1}[\phi^{**}(X)] - E_{\theta_1}[\phi(X)]
+>\geq
+>k_1 \left( E_{\theta_0}[\phi^{**}(X)] - E_{\theta_0}[\phi(X)] \right) \\
+>+ k_2 \left( E_{\theta_0}\left[\phi^{**}(X)\frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right] - E_{\theta_0}\left[\phi(X)\frac{p'_{\theta_0}(X)}{p_{\theta_0}(X)}\right] \right)
+>$$
+>
+>이제 $\phi^{**}$가 조건 (a)를 만족하도록 $k_1, k_2$를 적절히 정할 수 있다면, (자세한 증명 생략)
+>
+>$$E_{\theta_1}[\phi^{**}(X)] \geq E_{\theta_1}[\phi(X)]$$
+>
+>가 모든 $\theta_1: \theta_1 \neq \theta_0$ 및 조건 (a)를 만족하는 임의의 $\phi$에 대해 성립한다.  
+>
+>마지막으로, $\phi^{**}$가 조건 (a)를 만족하도록 $k_1, k_2$를 적절히 정할 수 있다면 $\phi^{**}$가 바로 $\phi^*$로 주어지는 것을 밝힐 수 있다: 
+>
+>**최적검정의 기각조건**: 라그랑주 미정승수 방법에서 최적검정 $\phi^{**}$의 기각역은
+>
+>$$\frac{p_{\theta_1}(x)}{p_{\theta_0}(x)} - k_1 - k_2 \frac{p'_{\theta_0}(x)}{p_{\theta_0}(x)} > 0$$
+>
+>을 정리하면
+>
+>$$\exp\left\{n(\theta_1-\theta_0)\bar{x} - \frac{n}{2}(\theta_1^2-\theta_0^2)\right\} - k_1 - k_2 n(\bar{x}-\theta_0) > 0$$
+>
+>$a := n(\theta_1-\theta_0)$, $b := -\frac{n}{2}(\theta_1^2-\theta_0^2)$로 두면
+>
+>$$\exp\{a\bar{x}+b\} > k_1 + k_2 n(\bar{x}-\theta_0)$$
+>
+>**$c_1, c_2$ 결정: 대칭성 활용**: 조건 (a)에서 $E_{\theta_0}[\phi^{**}(X)] = \alpha$를 만족하고, 조건 (b)에서 도함수 조건 $\left|\frac{d}{d\theta}E_\theta[\phi^{**}(X)]\right|_{\theta=\theta_0} = 0$ 이 성립해야 한다. 이는 검정력 함수가 $\theta=\theta_0$에서 **극값**(최솟값)을 가진다는 뜻. 정규분포의 대칭성으로부터, 양측검정의 기각역은 $\theta_0$에 대해 대칭이어야 하므로
+>
+>$$\phi^{**}(x) = \begin{cases}
+>1, & \bar{x} \le c_1 \text{ 또는 } \bar{x} \ge c_2 \\
+>0, & c_1 < \bar{x} < c_2
+>\end{cases}$$
+>
+>형태가 되며, 대칭성에 의해 $c_1 = \theta_0 - d$, $c_2 = \theta_0 + d$ (어떤 $d>0$)로 놓을 수 있다.
+>
+>**임계값 확정: 유의수준 조건**: 유의수준 조건 $E_{\theta_0}[\phi^{**}(X)] = \alpha$에서
+>
+>$$P_{\theta_0}(\bar{X} \le \theta_0-d) + P_{\theta_0}(\bar{X} \ge \theta_0+d) = \alpha$$
+>
+>대칭성으로
+>
+>$$2P_{\theta_0}\left(\bar{X} \ge \theta_0+d\right) = \alpha, \quad P_{\theta_0}\left(\frac{\bar{X}-\theta_0}{1/\sqrt{n}} \ge \sqrt{n}d\right) = \frac{\alpha}{2}$$
+>
+>표준정규분포에서
+>
+>$$\sqrt{n}d = z_{\alpha/2} \quad \Rightarrow \quad d = \frac{z_{\alpha/2}}{\sqrt{n}}$$
+>
+>따라서
+>
+>$$\boxed{c_1 = \theta_0 - \frac{z_{\alpha/2}}{\sqrt{n}}, \quad c_2 = \theta_0 + \frac{z_{\alpha/2}}{\sqrt{n}}}$$
+>
+>**결론: 최적 양측검정**: 조건 (a), (b)를 모두 만족하는 불편(unbiased) 검정은
+>
+>$$\phi^*(x) = \begin{cases}
+>1, & \sqrt{n}|\bar{x}-\theta_0| \ge z_{\alpha/2} \\
+>0, & \sqrt{n}|\bar{x}-\theta_0| < z_{\alpha/2}
+>\end{cases}$$
+>
+>이며, 이는 정규분포의 평균에 대한 양측검정에서 **전역최강력불편검정(UMPU test)**
 
 > TODO: 왜 여기선 대립가설에서 검정력이 \alpha 이상일까? 
 
@@ -783,22 +920,8 @@ $$\phi^*(x) = \begin{cases}
 모집단 분포에 특정한 형태를 가정하지 않는 경우의 검정에 대해 살펴보자. 
 
 #### 예 9.3.1 위치모수 모형에서 부호검정
-예 8.4.3에서와 같이, 모집단 분포가 연속형이고 확률밀도함수가 $f(x-\theta)$, $-\infty<\theta<+\infty$의 꼴로서 $\theta$에 관해 대칭($f(-x)=f(x)$)이고, $f$에 대응하는 누적분포함수 $F$가 순증가함수인 모형을 생각한다. 랜덤표본 $X_1,\dots,X_n$을 이용하여
-
-$$
-H_0(\theta_0):\theta=\theta_0 ,\quad H_1:\theta>\theta_0
-$$
-
-을 유의수준 $\alpha$에서 검정할 때, 통계량 $S_n = \sum_{i=1}^n I(X_i > \theta_0)$을 이용해보자. 즉, 개별 데이터를 가지고 $\theta_0$보다 큰지 작은지를 판단하여, $\theta_0$보다 큰 데이터의 개수를 세는 검정이다.  
-$S_n$의 분포는
-
-$$S_n \sim B(n, p(\theta)),\quad p(\theta) = P_\theta(X_1 > \theta_0) = 1 - F(\theta_0 - \theta)$$
-
-이고, 위의 가설이 $p(\theta)$에 관한 가설
-
-$$H_0(1/2):p(\theta)=1/2 ,\quad H_1:p(\theta)>1/2$$
-
-에 대응하므로 다음과 같은 검정을 유의수준 $\alpha$의 검정으로 사용할 수 있다:
+예 8.4.3에서와 같이, 모집단 분포가 연속형이고 확률밀도함수가 $f(x-\theta)$, $-\infty<\theta<+\infty$의 꼴로서 $\theta$에 관해 대칭($f(-x)=f(x)$)이고, $f$에 대응하는 누적분포함수 $F$가 순증가함수인 모형을 생각한다. 랜덤표본 $X_1,\dots,X_n$을 이용하여 $H_0(\theta_0):\theta=\theta_0 ,\quad H_1:\theta>\theta_0$를 유의수준 $\alpha$에서 검정할 때, 통계량 $S_n = \sum_{i=1}^n I(X_i > \theta_0)$을 이용해보자. 즉, 개별 데이터를 가지고 $\theta_0$보다 큰지 작은지를 판단하여, $\theta_0$보다 큰 데이터의 개수를 세는 검정이다.  
+$S_n$의 분포는 $S_n \sim B(n, p(\theta)),\quad p(\theta) = P_\theta(X_1 > \theta_0) = 1 - F(\theta_0 - \theta)$ 이고, 위의 가설이 $p(\theta)$에 관한 가설 $H_0(1/2):p(\theta)=1/2 ,\quad H_1:p(\theta)>1/2$ 에 대응하므로 다음과 같은 검정을 유의수준 $\alpha$의 검정으로 사용할 수 있다:
 
 $$
 \phi_s(X_1,\dots,X_n) = 
@@ -814,15 +937,11 @@ $$
 
 $$\sum_{k=c+1}^n \binom{n}{k}(1/2)^n + \gamma \binom{n}{c}(1/2)^n = \alpha$$
 
-$\phi_s(x_1,\dots,x_n)$은 각 성분 $x_i$의 증가함수이므로
-
-$$\max_{\theta \le \theta_0} E_\theta[\phi_s(X)] = E_{\theta_0}[\phi_s(X)] = \alpha$$
-
-따라서 $\phi_s$는 $H_0:\theta \le \theta_0 ,\quad H_1:\theta > \theta_0$ 에 대한 유의수준 $\alpha$의 검정이다.  
+$\phi_s(x_1,\dots,x_n)$은 각 성분 $x_i$의 증가함수이므로 $\max_{\theta \le \theta_0} E_\theta[\phi_s(X)] = E_{\theta_0}[\phi_s(X)] = \alpha$. 따라서 $\phi_s$는 $H_0:\theta \le \theta_0 ,\quad H_1:\theta > \theta_0$ 에 대한 유의수준 $\alpha$의 검정이다.  
 
 > 이와 같이 $S_n$을 사용하여 연속형 분포의 중앙값에 대한 검정을 하는 방법을 **부호검정(sign test)** 이라고 한다.
 > 
-> 분포의 대칭성은 중앙값을 위치모수로 해석하기 위해 흔히 가정되는데, 필수는 아님.
+> 분포의 대칭성은 중앙값을 위치모수로 해석하기 위해 흔히 가정되는데, 필수는 아님.  
 > 부호검정은 모집단 분포에 특정한 함수 형태를 가정하지 않고 사용할 수 있는 반면(범용성, robustness가 있다), 특정 모집단에 적용하면 효율성이 떨어질 수 있다. 이런 효율성 판단에는 특정 대립가설에서의 검정력을 일정 수준으로 유지하기 위한 표본크기를 비교기준으로 한다.
 
 #### 예 9.3.2 위치모수 모형에서 부호검정의 검정력 근사
@@ -896,12 +1015,6 @@ $$
 \therefore n \simeq \left( \frac{z_\alpha + z_{1-\gamma}}{2f(0)(\theta_{1n} - \theta_0)} \right)^2
 $$
 
-> **정리: $z_{1-\gamma}$의 의미 (표준정규 분위수)**  
-> 표준정규분포 $Z\sim N(0,1)$의 누적분포함수 $\Phi$에 대해  
-> $\Phi\left(z_{1-\gamma}\right)=1-\gamma \quad\Big(\Leftrightarrow\ P(Z\le z_{1-\gamma})=1-\gamma\Big)$  
-> 따라서 오른쪽 꼬리확률은 $P(Z>z_{1-\gamma})=\gamma$이 된다.  
-> 예: $\gamma=0.05$이면 $z_{0.95}\approx 1.645$.
-
 ### 정리 9.3.1 검정력의 근사와 표본크기 *(Power Approximation and Sample Size)*
 실수 모수 $\theta$에 관한 가설 $H_0(\theta_0):\theta=\theta_0 ,\quad H_1:\theta>\theta_0$  
 을 유의수준 $\alpha$에서 검정할 때, 크기 $n$인 랜덤표본에 기초한 검정통계량 $T_n$을 이용한 크기 $\alpha$의 기각역이
@@ -940,118 +1053,118 @@ $$
 > - $\sigma(\theta_0)$는 $T_n$의 표준편차로서, 검정통계량의 변동성을 나타낸다. 
 > - 따라서 $\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}$가 클수록, 즉 기대값이 모수 변화에 민감하고 변동성이 낮을수록, 검정의 효율성이 높아진다고 볼 수 있다.
  
-**[증명]**  
-가설검정의 기각역이 $\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n$
-이고 검정의 크기(size)가 $\alpha$이므로
-
-$$P_{\theta_0}\left(\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n\right)=\alpha$$
-
-가 되도록 $t_n$을 정한다.
-
-**1) $t_n\simeq z_\alpha$ (임계값의 근사)**  
-정리의 가정(점근정규성)으로부터
-
-$$\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ \xrightarrow{d}\ N(0,1)$$
-
-이므로 큰 $n$에서
-
-$$
-P_{\theta_0}\left(\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n\right)
-\approx P(Z\ge t_n)=1-\Phi(t_n)
-$$
-
-왼쪽이 $\alpha$가 되게 하려면 $1-\Phi(t_n)\approx \alpha$, 즉 $t_n \approx \Phi^{-1}(1-\alpha)=z_\alpha$ 이 된다. 따라서 $t_n\simeq z_\alpha$.
-
-**2) 고정된 대립가설 $\theta=\theta_1$에서의 검정력 근사**  
-검정력은
-
-$$
-\gamma_n(\theta_1)=P_{\theta_1}\left(\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n\right)
-$$
-
-이때
-
-$$
-\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n
-\iff \sqrt{n}\frac{T_n-\mu(\theta_1)}{\sigma(\theta_1)} \ge \frac{\sigma(\theta_0)}{\sigma(\theta_1)}t_n -\sqrt{n}\frac{\mu(\theta_1)-\mu(\theta_0)}{\sigma(\theta_)}
-$$
-
-이고, 점근정규성으로 $\sqrt{n}\frac{T_n-\mu(\theta_1)}{\sigma(\theta_1)}\approx Z\sim N(0,1)$ 이므로
-
-$$
-\gamma_n(\theta_1)
-\approx
-P\left(
-Z \ge \frac{\sigma(\theta_0)}{\sigma(\theta_1)}t_n -\sqrt{n}\frac{\mu(\theta_1)-\mu(\theta_0)}{\sigma(\theta_1)} \right)
-= 1-\Phi\left( \frac{\sigma(\theta_0)}{\sigma(\theta_1)}t_n
--\sqrt{n}\frac{\mu(\theta_1)-\mu(\theta_0)}{\sigma(\theta_1)}
-\right)
-$$
-
-여기서 $t_n\simeq z_\alpha$를 대입하면
-
-$$
-\gamma_n(\theta_1) \simeq 1 - \Phi\left(
--\sqrt{n} \frac{\mu(\theta_1) - \mu(\theta_0)}{\sigma(\theta_1)} + \frac{\sigma(\theta_0)}{\sigma(\theta_1)} z_\alpha
-\right)
-$$
-
-**3) 로컬 대립가설 $\theta_{1n}\simeq \theta_0+\dfrac{K}{\sqrt{n}}$에서의 근사**  
-$\mu,\sigma$가 $\theta_0$에서 미분가능이므로 테일러 전개로
-
-$$
-\mu(\theta_{1n})-\mu(\theta_0)
-= \dot\mu(\theta_0)(\theta_{1n}-\theta_0)+o(\theta_{1n}-\theta_0),
-\quad \sigma(\theta_{1n})=\sigma(\theta_0)+o(1)
-$$
-
-또한 $\theta_{1n}-\theta_0=O(n^{-1/2})$이므로
-
-$$
-\sqrt{n}\big(\mu(\theta_{1n})-\mu(\theta_0)\big)
-= \sqrt{n}(\theta_{1n}-\theta_0)\dot\mu(\theta_0)+o(1),
-\quad \frac{\sigma(\theta_0)}{\sigma(\theta_{1n})}=1+o(1)
-$$
-
-이를 (2)의 검정력 근사식에 대입하면
-
-$$
-\gamma_n(\theta_{1n})
-\simeq
-1-\Phi\left(
--\sqrt{n}(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}
-+z_\alpha
-\right)
-$$
-
-**4) 목표 검정력 $\gamma$를 위한 표본크기 근사**  
-
-$$
-\gamma_n(\theta_{1n})\simeq \gamma
-\iff 1-\Phi(A)\simeq \gamma
-\iff \Phi(A)\simeq 1-\gamma
-\iff A\simeq z_{1-\gamma}, \\
-A=-\sqrt{n}(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)} +z_\alpha$$
-
-따라서
-
-$$-\sqrt{n}(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}+z_\alpha \simeq -z_{1-\gamma}$$
-
-이고, 이를 $n$에 대해 풀면
-
-$$
-\sqrt{n}\,(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}
-\simeq z_\alpha + z_{1-\gamma}
-$$
-
-결국
-
-$$
-N(T_n;\gamma,\theta_{1n})
-\simeq
-\left(\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}\right)^{-2}
-\left(\frac{z_\alpha+z_{1-\gamma}}{\theta_{1n}-\theta_0}\right)^2
-$$
+>**[증명]**  
+>가설검정의 기각역이 $\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n$
+>이고 검정의 크기(size)가 $\alpha$이므로
+>
+>$$P_{\theta_0}\left(\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n\right)=\alpha$$
+>
+>가 되도록 $t_n$을 정한다.
+>
+>**1) $t_n\simeq z_\alpha$ (임계값의 근사)**  
+>정리의 가정(점근정규성)으로부터
+>
+>$$\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ \xrightarrow{d}\ N(0,1)$$
+>
+>이므로 큰 $n$에서
+>
+>$$
+>P_{\theta_0}\left(\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n\right)
+>\approx P(Z\ge t_n)=1-\Phi(t_n)
+>$$
+>
+>왼쪽이 $\alpha$가 되게 하려면 $1-\Phi(t_n)\approx \alpha$, 즉 $t_n \approx \Phi^{-1}(1-\alpha)=z_\alpha$ 이 된다. 따라서 $t_n\simeq z_\alpha$.
+>
+>**2) 고정된 대립가설 $\theta=\theta_1$에서의 검정력 근사**  
+>검정력은
+>
+>$$
+>\gamma_n(\theta_1)=P_{\theta_1}\left(\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n\right)
+>$$
+>
+>이때
+>
+>$$
+>\sqrt{n}\frac{T_n-\mu(\theta_0)}{\sigma(\theta_0)}\ge t_n
+>\iff \sqrt{n}\frac{T_n-\mu(\theta_1)}{\sigma(\theta_1)} \ge \frac{\sigma(\theta_0)}{\sigma(\theta_1)}t_n -\sqrt{n}\frac{\mu(\theta_1)-\mu(\theta_0)}{\sigma(\theta_)}
+>$$
+>
+>이고, 점근정규성으로 $\sqrt{n}\frac{T_n-\mu(\theta_1)}{\sigma(\theta_1)}\approx Z\sim N(0,1)$ 이므로
+>
+>$$
+>\gamma_n(\theta_1)
+>\approx
+>P\left(
+>Z \ge \frac{\sigma(\theta_0)}{\sigma(\theta_1)}t_n -\sqrt{n}\frac{\mu(\theta_1)-\mu(\theta_0)}{\sigma(\theta_1)} \right)
+>= 1-\Phi\left( \frac{\sigma(\theta_0)}{\sigma(\theta_1)}t_n
+>-\sqrt{n}\frac{\mu(\theta_1)-\mu(\theta_0)}{\sigma(\theta_1)}
+>\right)
+>$$
+>
+>여기서 $t_n\simeq z_\alpha$를 대입하면
+>
+>$$
+>\gamma_n(\theta_1) \simeq 1 - \Phi\left(
+>-\sqrt{n} \frac{\mu(\theta_1) - \mu(\theta_0)}{\sigma(\theta_1)} + \frac{\sigma(\theta_0)}{\sigma(\theta_1)} z_\alpha
+>\right)
+>$$
+>
+>**3) 로컬 대립가설 $\theta_{1n}\simeq \theta_0+\dfrac{K}{\sqrt{n}}$에서의 근사**  
+>$\mu,\sigma$가 $\theta_0$에서 미분가능이므로 테일러 전개로
+>
+>$$
+>\mu(\theta_{1n})-\mu(\theta_0)
+>= \dot\mu(\theta_0)(\theta_{1n}-\theta_0)+o(\theta_{1n}-\theta_0),
+>\quad \sigma(\theta_{1n})=\sigma(\theta_0)+o(1)
+>$$
+>
+>또한 $\theta_{1n}-\theta_0=O(n^{-1/2})$이므로
+>
+>$$
+>\sqrt{n}\big(\mu(\theta_{1n})-\mu(\theta_0)\big)
+>= \sqrt{n}(\theta_{1n}-\theta_0)\dot\mu(\theta_0)+o(1),
+>\quad \frac{\sigma(\theta_0)}{\sigma(\theta_{1n})}=1+o(1)
+>$$
+>
+>이를 (2)의 검정력 근사식에 대입하면
+>
+>$$
+>\gamma_n(\theta_{1n})
+>\simeq
+>1-\Phi\left(
+>-\sqrt{n}(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}
+>+z_\alpha
+>\right)
+>$$
+>
+>**4) 목표 검정력 $\gamma$를 위한 표본크기 근사**  
+>
+>$$
+>\gamma_n(\theta_{1n})\simeq \gamma
+>\iff 1-\Phi(A)\simeq \gamma
+>\iff \Phi(A)\simeq 1-\gamma
+>\iff A\simeq z_{1-\gamma}, \\
+>A=-\sqrt{n}(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)} +z_\alpha$$
+>
+>따라서
+>
+>$$-\sqrt{n}(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}+z_\alpha \simeq -z_{1-\gamma}$$
+>
+>이고, 이를 $n$에 대해 풀면
+>
+>$$
+>\sqrt{n}\,(\theta_{1n}-\theta_0)\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}
+>\simeq z_\alpha + z_{1-\gamma}
+>$$
+>
+>결국
+>
+>$$
+>N(T_n;\gamma,\theta_{1n})
+>\simeq
+>\left(\frac{\dot\mu(\theta_0)}{\sigma(\theta_0)}\right)^{-2}
+>\left(\frac{z_\alpha+z_{1-\gamma}}{\theta_{1n}-\theta_0}\right)^2
+>$$
 
 >$N(T_n;\gamma,\theta_{1n})$는 "검정통계량 $T_n$을 이용한 검정에서, 대립가설 $\theta_{1n}$에서의 검정력이 $\gamma$가 되도록 하는 표본크기"를 나타내는 표기다.  
 
@@ -1073,11 +1186,7 @@ $$
 
 > **관례적 약기(abuse of notation)**  
 > 여기서 $\mathrm{ARE}(T_{1n},T_{2n})$의 $T_{in}$은 "통계량"을 뜻하는 기호이지만, 실제로는 각 $n$에 대해 $T_{in}$으로 **정의되는 검정 절차(임계값 선택까지 포함한 크기 $\alpha$의 검정) 전체의 열** $\{\phi_{i,n}\}_{n\ge1}$을 대표해서 적는 관례적 표기이다.  
-> 즉, 엄밀히는
-> 
-> $$\mathrm{ARE}\big(\{\phi_{1,n}\},\{\phi_{2,n}\}\big)$$
-> 
-> 처럼 "검정들의 열"에 대한 점근 비교이지만, 독자가 "ARE는 점근 개념이며 $n$에 따른 절차의 열을 비교한다"는 전제를 안다고 보고 교재에서는 중괄호(또는 $\{\cdot\}$ 표기)를 생략해 $\mathrm{ARE}(T_{1n},T_{2n})$로 쓴다.
+> 즉, 엄밀히는 $\mathrm{ARE}\big(\{\phi_{1,n}\},\{\phi_{2,n}\}\big)$ 처럼 "검정들의 열"에 대한 점근 비교이지만, 독자가 "ARE는 점근 개념이며 $n$에 따른 절차의 열을 비교한다"는 전제를 안다고 보고 교재에서는 중괄호(또는 $\{\cdot\}$ 표기)를 생략해 $\mathrm{ARE}(T_{1n},T_{2n})$로 쓴다.
 
 > **점근상대효율성의 의의**  
 > 점근상대효율성(ARE)은 두 검정 절차의 성능을 대립가설이 귀무가설에 가까워지는 상황에서 비교하는 지표로, 다음과 같은 의미를 갖는다:
@@ -1220,6 +1329,7 @@ $X=(2.1,\ -0.4,\ 1.3,\ -2.0,\ 0.7)$
 
 $W_5=5+(-1)+4+(-3)+2=7$
 
+TODO:
 ### 정리 9.3.2 부호순위 검정통계량의 귀무가설하의 분포
 귀무가설 $H_0(\theta_0):\theta=\theta_0$ 하에서 부호순위 검정통계량의 분포는 다음과 같다.
 
@@ -1236,93 +1346,92 @@ $$
 E_{\theta_0}(W_n) = 0,\quad \mathrm{Var}_{\theta_0}(W_n) = \sum_{j=1}^n j^2 = \frac{n(n+1)(2n+1)}{6}
 $$
 
-#### 증명
-증명 과정에서 부호 벡터와 순위 벡터를 각각 다음과 같이 나타내기로 한다.
-
-$$
-S=(S(1),\cdots,S(n))^t=(\mathrm{sgn}(X_1-\theta_0),\cdots,\mathrm{sgn}(X_n-\theta_0))^t, \\
-R=(R(1),\cdots,R(n))^t=(R(|X_1-\theta_0|),\cdots,R(|X_n-\theta_0|))^t
-$$
-
-**(a)** 첫째로 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 $X_1$의 분포가 $\theta_0$에 관하여 대칭이므로
-
-$$
-P_{\theta_0}(|X_1-\theta_0|\le x,\mathrm{sgn}(X_1-\theta_0)=+1) \\
-= P_{\theta_0}(0<X_1-\theta_0\le x) \\
-= \frac{1}{2}P_{\theta_0}(|X_1-\theta_0|\le x) \\
-= P_{\theta_0}(|X_1-\theta_0|\le x)P_{\theta_0}(\mathrm{sgn}(X_1-\theta_0)=+1)
-$$
-
-$$
-P_{\theta_0}(|X_1-\theta_0|\le x,\mathrm{sgn}(X_1-\theta_0)=-1) \\
-= P_{\theta_0}(|X_1-\theta_0|\le x)P_{\theta_0}(\mathrm{sgn}(X_1-\theta_0)=-1)
-$$
-
-즉 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 $|X_i-\theta_0|$와 $\mathrm{sgn}(X_i-\theta_0)$가 서로 독립이고, 부호 벡터 $S=(S(1),\cdots,S(n))^t$ 와 순위 벡터 $R=(R(1),\cdots,R(n))^t$ 는 서로 독립이다.
-
-둘째로 $R(i)=j$일 때 $i=R^{-1}(j)$로 나타내는 역순위 벡터를 $
-R^{-1}=(R^{-1}(1),\cdots,R^{-1}(n))$ 라고 하면 부호순위 검정통계량을 다음과 같이 나타낼 수 있다.
-
-$$
-W_n=\sum_{i=1}^n \mathrm{sgn}(X_i-\theta_0)R(|X_i-\theta_0|)
-=\sum_{i=1}^n S(i)R(i)
-=\sum_{j=1}^n S(R^{-1}(j))j
-$$
-
-한편 $X_1,\cdots,X_n$이 서로 독립이고 동일한 분포를 따르므로, ${1,2,\cdots,n}$의 임의의 치환 $\pi$에 대하여 다음이 성립함을 알 수 있다.
-
-$$
-(S(\pi^{-1}(j)))_{1\le j\le n} = (\mathrm{sgn}(X_{\pi^{-1}(j)}-\theta_0))_{1\le j\le n}
-\overset{d}{\equiv}(\mathrm{sgn}(X_j-\theta_0))_{1\le j\le n} \\
-=(S(j))_{1\le j\le n}
-$$
-
-또한 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서, $S=(S(1),\cdots,S(n))^t$ 와 $R=(R(1),\cdots,R(n))^t$ 의 독립성으로부터 다음이 성립함을 알 수 있다.
-
-$$
-P_{\theta_0}(S(R^{-1}(1))=s_1,\cdots,S(R^{-1}(n))=s_n) \\
-=\sum_{\pi\in\Pi}P_{\theta_0}(S(R^{-1}(1))=s_1,\cdots,S(R^{-1}(n))=s_n,R=\pi) \\
-=\sum_{\pi\in\Pi}P_{\theta_0}(S(\pi^{-1}(1))=s_1,\cdots,S(\pi^{-1}(n))=s_n,R=\pi) \\
-=\sum_{\pi\in\Pi}P_{\theta_0}(S(\pi^{-1}(1))=s_1,\cdots,S(\pi^{-1}(n))=s_n)P_{\theta_0}(R=\pi) \\
-=\sum_{\pi\in\Pi}P_{\theta_0}(S(1)=s_1,\cdots,S(n)=s_n)P_{\theta_0}(R=\pi) \\
-= P_{\theta_0}(S(1)=s_1,\cdots,S(n)=s_n)
-$$
-
-따라서 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 다음이 성립함을 알 수 있다.
-
-$$
-W_n=\sum_{j=1}^n S(R^{-1}(j))j \overset{d}{\equiv} \sum_{j=1}^n jS(j)
-$$
-
-또한 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 $X_j$의 분포가 $\theta_0$에 관하여 대칭이므로
-
-$$
-P_{\theta_0}(S(j)=-1)=P_{\theta_0}(S(j)=+1)=1/2
-$$
-
-이고, (a)가 성립하는 것을 알 수 있다.
-
-(b) $\sigma_n=\sqrt{\mathrm{Var}_{\theta_0}(W_n)}, \quad Z_n=W_n/\sigma_n$ 이라고 하면, (a)로부터
-
-$$
-E_{\theta_0}(W_n)=0,\qquad \sigma_n^2=\mathrm{Var}_{\theta_0}(W_n)=\sum_{j=1}^n j^2=\frac{n(n+1)(2n+1)}{6}
-$$
-
-또한 (a)로부터 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 $Z_n$의 누율생성함수를 다음과 같이 근사할 수 있다.
-
-$$
-cgf_{Z_n}(t;\theta_0)=\sum_{j=1}^n \log{(\exp(-jt/\sigma_n)+\exp(jt/\sigma_n))/2} \\
-=\sum_{j=1}^n \log\left\{1+\frac{1}{2}\frac{j^2}{\sigma_n^2}t^2+\frac{1}{4!}\frac{j^4}{\sigma_n^4}t^4+\cdots\right\} \\
-=\sum_{j=1}^n \left\{\left(\frac{1}{2}\frac{j^2}{\sigma_n^2}t^2+\frac{1}{4!}\frac{j^4}{\sigma_n^4}t^4+\cdots\right)-\frac{1}{2}\left(\frac{1}{2}\frac{j^2}{\sigma_n^2}t^2+\cdots\right)^2+\cdots\right\} \\
-\simeq \sum_{j=1}^n \frac{1}{2}\frac{j^2}{\sigma_n^2}t^2+\cdots \\
-\simeq \frac{1}{2}t^2+\cdots
-$$
-
-따라서 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 $W_n$의 점근정규성이 성립한다. 즉
-
-$$
-\frac{W_n-E_{\theta_0}W_n}{\sqrt{\mathrm{Var}_{\theta_0}(W_n)}}=Z_n \overset{d}{\longrightarrow} N(0,1)
-$$
+>**증명**  
+>증명 과정에서 부호 벡터와 순위 벡터를 각각 다음과 같이 나타내기로 한다.
+>
+>$$
+>S=(S(1),\cdots,S(n))^t=(\mathrm{sgn}(X_1-\theta_0),\cdots,\mathrm{sgn}(X_n-\theta_0))^t, \\
+>R=(R(1),\cdots,R(n))^t=(R(|X_1-\theta_0|),\cdots,R(|X_n-\theta_0|))^t
+>$$
+>
+>**(a)** 첫째로 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 $X_1$의 분포가 $\theta_0$에 관하여 대칭이므로
+>
+>$$
+>P_{\theta_0}(|X_1-\theta_0|\le x,\mathrm{sgn}(X_1-\theta_0)=+1) \\
+>= P_{\theta_0}(0<X_1-\theta_0\le x) \\
+>= \frac{1}{2}P_{\theta_0}(|X_1-\theta_0|\le x) \\
+>= P_{\theta_0}(|X_1-\theta_0|\le x)P_{\theta_0}(\mathrm{sgn}(X_1-\theta_0)=+1)
+>$$
+>
+>$$
+>P_{\theta_0}(|X_1-\theta_0|\le x,\mathrm{sgn}(X_1-\theta_0)=-1) = P_{\theta_0}(|X_1-\theta_0|\le x)P_{\theta_0}(\mathrm{sgn}(X_1-\theta_0)=-1)
+>$$
+>
+>즉 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 $|X_i-\theta_0|$와 $\mathrm{sgn}(X_i-\theta_0)$가 서로 독립이고, 부호 벡터 $S=(S(1),\cdots,S(n))^t$ 와 순위 벡터 $R=(R(1),\cdots,R(n))^t$ 는 서로 독립이다.
+>
+>둘째로 $R(i)=j$일 때 $i=R^{-1}(j)$로 나타내는 역순위 벡터를 $
+>R^{-1}=(R^{-1}(1),\cdots,R^{-1}(n))$ 라고 하면 부호순위 검정통계량을 다음과 같이 나타낼 수 있다.
+>
+>$$
+>W_n=\sum_{i=1}^n \mathrm{sgn}(X_i-\theta_0)R(|X_i-\theta_0|)
+>=\sum_{i=1}^n S(i)R(i)
+>=\sum_{j=1}^n S(R^{-1}(j))j
+>$$
+>
+>한편 $X_1,\cdots,X_n$이 서로 독립이고 동일한 분포를 따르므로, ${1,2,\cdots,n}$의 임의의 치환 $\pi$에 대하여 다음이 성립함을 알 수 있다.
+>
+>$$
+>(S(\pi^{-1}(j)))_{1\le j\le n} = (\mathrm{sgn}(X_{\pi^{-1}(j)}-\theta_0))_{1\le j\le n}
+>\overset{d}{\equiv}(\mathrm{sgn}(X_j-\theta_0))_{1\le j\le n} \\
+>=(S(j))_{1\le j\le n}
+>$$
+>
+>또한 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서, $S=(S(1),\cdots,S(n))^t$ 와 $R=(R(1),\cdots,R(n))^t$ 의 독립성으로부터 다음이 성립함을 알 수 있다.
+>
+>$$
+>P_{\theta_0}(S(R^{-1}(1))=s_1,\cdots,S(R^{-1}(n))=s_n) \\
+>=\sum_{\pi\in\Pi}P_{\theta_0}(S(R^{-1}(1))=s_1,\cdots,S(R^{-1}(n))=s_n,R=\pi) \\
+>=\sum_{\pi\in\Pi}P_{\theta_0}(S(\pi^{-1}(1))=s_1,\cdots,S(\pi^{-1}(n))=s_n,R=\pi) \\
+>=\sum_{\pi\in\Pi}P_{\theta_0}(S(\pi^{-1}(1))=s_1,\cdots,S(\pi^{-1}(n))=s_n)P_{\theta_0}(R=\pi) \\
+>=\sum_{\pi\in\Pi}P_{\theta_0}(S(1)=s_1,\cdots,S(n)=s_n)P_{\theta_0}(R=\pi) \\
+>= P_{\theta_0}(S(1)=s_1,\cdots,S(n)=s_n)
+>$$
+>
+>따라서 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 다음이 성립함을 알 수 있다.
+>
+>$$
+>W_n=\sum_{j=1}^n S(R^{-1}(j))j \overset{d}{\equiv} \sum_{j=1}^n jS(j)
+>$$
+>
+>또한 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 $X_j$의 분포가 $\theta_0$에 관하여 대칭이므로
+>
+>$$
+>P_{\theta_0}(S(j)=-1)=P_{\theta_0}(S(j)=+1)=1/2
+>$$
+>
+>이고, (a)가 성립하는 것을 알 수 있다.
+>
+>(b) $\sigma_n=\sqrt{\mathrm{Var}_{\theta_0}(W_n)}, \quad Z_n=W_n/\sigma_n$ 이라고 하면, (a)로부터
+>
+>$$
+>E_{\theta_0}(W_n)=0,\qquad \sigma_n^2=\mathrm{Var}_{\theta_0}(W_n)=\sum_{j=1}^n j^2=\frac{n(n+1)(2n+1)}{6}
+>$$
+>
+>또한 (a)로부터 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 $Z_n$의 누율생성함수를 다음과 같이 근사할 수 있다.
+>
+>$$
+>cgf_{Z_n}(t;\theta_0)=\sum_{j=1}^n \log{(\exp(-jt/\sigma_n)+\exp(jt/\sigma_n))/2} \\
+>=\sum_{j=1}^n \log\left\{1+\frac{1}{2}\frac{j^2}{\sigma_n^2}t^2+\frac{1}{4!}\frac{j^4}{\sigma_n^4}t^4+\cdots\right\} \\
+>=\sum_{j=1}^n \left\{\left(\frac{1}{2}\frac{j^2}{\sigma_n^2}t^2+\frac{1}{4!}\frac{j^4}{\sigma_n^4}t^4+\cdots\right)-\frac{1}{2}\left(\frac{1}{2}\frac{j^2}{\sigma_n^2}t^2+\cdots\right)^2+\cdots\right\} \\
+>\simeq \sum_{j=1}^n \frac{1}{2}\frac{j^2}{\sigma_n^2}t^2+\cdots 
+>\simeq \frac{1}{2}t^2+\cdots
+>$$
+>
+>따라서 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 $W_n$의 점근정규성이 성립한다. 즉
+>
+>$$
+>\frac{W_n-E_{\theta_0}W_n}{\sqrt{\mathrm{Var}_{\theta_0}(W_n)}}=Z_n \overset{d}{\longrightarrow} N(0,1)
+>$$
 
 ### 정리 9.3.3 부호순위 검정통계량의 표현
 $R(|X_i-\theta_0|)$를 $|X_1-\theta_0|,\dots,|X_n-\theta_0|$의 순위라 하고, $\text{sgn}(x)$를 부호 함수라 하고, 부호순위 검정통계량을 아래로 정의하자.
@@ -1341,57 +1450,57 @@ W_n^+ \overset{d}{\equiv} \sum_{j=1}^n j B_j,\qquad B_j \overset{iid}{\sim} \mat
 \frac{W_n^+ - n(n+1)/4}{\sqrt{n(n+1)(2n+1)/24}} \overset{d}{\to} N(0,1)\quad(n\to\infty)
 $$
 
-#### 증명
-**(a)** 각 관측치에 대해
-
-$$
-\text{sgn}(X_i-\theta_0)=
-\begin{cases}
-+1,& X_i-\theta_0>0\\
--1,& X_i-\theta_0<0
-\end{cases}
-= 2*\mathbf{1}(X_i-\theta_0>0)-1 \\
-\begin{aligned}
-\therefore W_n
-&=\sum_{i=1}^n\big(2*\mathbf{1}(X_i-\theta_0>0)-1\big)\,R(|X_i-\theta_0|)\\
-&=2W_n^+-\sum_{i=1}^n R(|X_i-\theta_0|).
-\end{aligned}
-$$
-
-순위의 합은 항상 $1+2+\cdots+n=n(n+1)/2$ 이므로
-
-$$W_n=2W_n^+-\frac{n(n+1)}{2}$$
-
-**(b)** 
-
-$$
-W_n \ \overset{d}{\equiv}\ \sum_{j=1}^n j\,S(j),\quad S(j): \text{iid},\ P(S(j)=\pm1)=\tfrac12 \\
-W_n^+=\frac{W_n+\frac{n(n+1)}{2}}{2}
-\ \overset{d}{\equiv}\
-\sum_{j=1}^n j\,\frac{S(j)+1}{2}
-$$
-
-여기서
-
-$$B_j:=\frac{S(j)+1}{2}\in\{0,1\},\quad P(B_j=1)=P(S(j)=1)=\tfrac12$$
-
-이므로 $B_j \overset{iid}{\sim}\mathrm{Bernoulli}(1/2)$. 따라서
-
-$$W_n^+ \ \overset{d}{\equiv}\ \sum_{j=1}^n j\,B_j$$
-
-또한 $E(B_j)=\tfrac12,\ \mathrm{Var}(B_j)=\tfrac14$ 이고 서로 독립이므로
-
-$$
-E_{\theta_0}(W_n^+)=\sum_{j=1}^n j\,E(B_j)=\frac12\sum_{j=1}^n j=\frac{n(n+1)}{4}, \\
-\mathrm{Var}_{\theta_0}(W_n^+)=\sum_{j=1}^n j^2\,\mathrm{Var}(B_j)
-=\frac14\sum_{j=1}^n j^2 =\frac{n(n+1)(2n+1)}{24}
-$$
-
-가중합 $\sum_{j=1}^n j(B_j-\tfrac12)$에 중심극한정리를 적용하면
-
-$$
-\frac{W_n^+ - n(n+1)/4}{\sqrt{n(n+1)(2n+1)/24}} \overset{d}{\to}\ N(0,1)\quad(n\to\infty)
-$$
+>**증명**  
+>**(a)** 각 관측치에 대해
+>
+>$$
+>\text{sgn}(X_i-\theta_0)=
+>\begin{cases}
+>+1,& X_i-\theta_0>0\\
+>-1,& X_i-\theta_0<0
+>\end{cases}
+>= 2*\mathbf{1}(X_i-\theta_0>0)-1 \\
+>\begin{aligned}
+>\therefore W_n
+>&=\sum_{i=1}^n\big(2*\mathbf{1}(X_i-\theta_0>0)-1\big)\,R(|X_i-\theta_0|)\\
+>&=2W_n^+-\sum_{i=1}^n R(|X_i-\theta_0|).
+>\end{aligned}
+>$$
+>
+>순위의 합은 항상 $1+2+\cdots+n=n(n+1)/2$ 이므로
+>
+>$$W_n=2W_n^+-\frac{n(n+1)}{2}$$
+>
+>**(b)** 
+>
+>$$
+>W_n \ \overset{d}{\equiv}\ \sum_{j=1}^n j\,S(j),\quad S(j): \text{iid},\ P(S(j)=\pm1)=\tfrac12 \\
+>W_n^+=\frac{W_n+\frac{n(n+1)}{2}}{2}
+>\ \overset{d}{\equiv}\
+>\sum_{j=1}^n j\,\frac{S(j)+1}{2}
+>$$
+>
+>여기서
+>
+>$$B_j:=\frac{S(j)+1}{2}\in\{0,1\},\quad P(B_j=1)=P(S(j)=1)=\tfrac12$$
+>
+>이므로 $B_j \overset{iid}{\sim}\mathrm{Bernoulli}(1/2)$. 따라서
+>
+>$$W_n^+ \ \overset{d}{\equiv}\ \sum_{j=1}^n j\,B_j$$
+>
+>또한 $E(B_j)=\tfrac12,\ \mathrm{Var}(B_j)=\tfrac14$ 이고 서로 독립이므로
+>
+>$$
+>E_{\theta_0}(W_n^+)=\sum_{j=1}^n j\,E(B_j)=\frac12\sum_{j=1}^n j=\frac{n(n+1)}{4}, \\
+>\mathrm{Var}_{\theta_0}(W_n^+)=\sum_{j=1}^n j^2\,\mathrm{Var}(B_j)
+>=\frac14\sum_{j=1}^n j^2 =\frac{n(n+1)(2n+1)}{24}
+>$$
+>
+>가중합 $\sum_{j=1}^n j(B_j-\tfrac12)$에 중심극한정리를 적용하면
+>
+>$$
+>\frac{W_n^+ - n(n+1)/4}{\sqrt{n(n+1)(2n+1)/24}} \overset{d}{\to}\ N(0,1)\quad(n\to\infty)
+>$$
 
 ### 정리 9.3.4 한쪽 가설에 대한 부호순위 검정
 정리9.3.2로부터 귀무가설 $H_0(\theta_0): \theta = \theta_0$하에서 부호순위 검정통계량 $W_n$의 분포는 모집단분포의 확률밀도함수 형태와 관계없다는 것을 알 수 있고, $W_n$의 큰 값은 대립가설에 대한 증거라 할 수 있다. 따라서  
@@ -1411,58 +1520,58 @@ $$
 
 $$\max_{\theta\le \theta_0} E_\theta[\phi_{SR}(X)] = E_{\theta_0}[\phi_{SR}(X)] = \alpha$$
 
-#### 증명
-**(a)** $Y_i:=X_i-\theta_0$라 두고 $W_n^+$를 다음과 같이 변형한다:
-
-$$
-W_n^+ =\sum_{i=1}^n \mathbf{1}(Y_i>0)\,R(|Y_i|) \\
-= \sum_{i=1}^n \mathbf{1}(Y_i>0)\left(1+\sum_{j=1}^n \mathbf{1}(|Y_j|<|Y_i|)\right) \\
-= \sum_{i=1}^n \mathbf{1}(Y_i>0) + \sum_{i=1}^n \sum_{j=1}^n \mathbf{1}(Y_i>0, -Y_i < Y_j < Y_i) $$
-
-정렬표본을 $Y_{(1)}\le \cdots \le Y_{(n)}$라 하면, $Y_{(i)}>0$일 때 $Y_{(j)}<Y_{(i)}$는 $j<i$와 동치다. 또한 $Y_{(i)}>0$이면 $-Y_{(i)}<0<Y_{(j)}$이므로 $-Y_{(i)} < Y_{(j)}$는 항상 성립한다. 따라서
-
-$$= \sum_{i=1}^n \mathbf{1}(Y_{(i)}>0) + \sum_{i=1}^n \sum_{j<i} \mathbf{1}(Y_{(i)}>0, -Y_{(i)} < Y_{(j)}) $$
-
-또한 $j<i$이고 $Y_{(i)}+Y_{(j)}>0$이면 자동으로 $Y_{(i)}>0$이어야 한다. 왜냐하면 $Y_{(j)}\le Y_{(i)}$이므로, 만약 $Y_{(i)}\le 0$라면 $Y_{(j)}\le 0$도 되어 합이 양수가 될 수 없기 때문이다.
-
-$$
-= \sum_{i=1}^n \mathbf{1}(Y_{(i)}>0) + \sum_{i=1}^n \sum_{j<i} \mathbf{1}(Y_{(i)}+Y_{(j)}>0) \\
-= \sum_{i=1}^n \mathbf{1}(Y_i>0) + \sum_{i=1}^n \sum_{j<i} \mathbf{1}(Y_i+Y_j>0) $$
-
-이제 대각선 항 $i=j$와 비대각선 항 $j<i$를 하나의 합으로 묶은 것이다. $i=j$이면 $Y_i+Y_j=2Y_i>0$이므로 $i=j$인 항은 $Y_i>0$인 항과 정확히 일치한다. 따라서
-
-$$
-= \sum\sum_{1\le i\le j\le n} \mathbf{1}(Y_i+Y_j>0)
-$$
-
-$$\therefore \boxed{
-W_n^+ = \sum\sum_{1\le i\le j\le n}\mathbf{1}(X_i+X_j>2\theta_0)
-}
-$$
-
-**(b)** 부호순위 검정의 정의상 $\phi_{SR}(X)$는 $W_n^+$에 대한 (비감소) 함수이다. 그리고 (a)에서
-
-$$W_n^+=\sum_{1\le i\le j\le n}\mathbf{1}(X_i+X_j>2\theta_0)$$
-
-로 나타났으므로, 각 항 $\mathbf{1}(X_i+X_j>2\theta_0)$는 $(X_1,\dots,X_n)$의 각 성분에 대한 증가함수이고, 합 $W_n^+$ 역시 각 성분에 대한 증가함수이다. 따라서 $\phi_{SR}(X)$도 각 성분에 대한 증가함수이다.
-
-이제 위치모수 모형에서 $X_i=\theta+Z_i$ ($Z_i$ iid, 밀도 $f$)로 둘 수 있다. $\theta'<\theta''$에 대해 같은 $Z=(Z_1,\dots,Z_n)$로 결합(coupling)하면
-
-$$X(\theta'')=\theta''+Z \ \ge\ \theta'+Z=X(\theta') \quad(\text{성분별})$$
-
-그리고 $\phi_{SR}$가 증가함수이므로
-
-$$\phi_{SR}(X(\theta''))\ge \phi_{SR}(X(\theta'))$$
-
-양변에 기댓값을 취하면
-
-$$E_{\theta''}[\phi_{SR}(X)]\ge E_{\theta'}[\phi_{SR}(X)]$$
-
-즉 검정력 함수 $\gamma_{\phi_{SR}}(\theta)=E_\theta[\phi_{SR}(X)]$는 $\theta$의 증가함수이다. 그러므로
-
-$$\max_{\theta\le \theta_0}E_\theta[\phi_{SR}(X)]=E_{\theta_0}[\phi_{SR}(X)]=\alpha$$
-
-가 된다(임계값 $c,\gamma$를 $E_{\theta_0}[\phi_{SR}(X)]=\alpha$가 되도록 잡았으므로). 따라서 $\phi_{SR}$는 유의수준 $\alpha$의 검정이다.
+>**증명**  
+>**(a)** $Y_i:=X_i-\theta_0$라 두고 $W_n^+$를 다음과 같이 변형한다:
+>
+>$$
+>W_n^+ =\sum_{i=1}^n \mathbf{1}(Y_i>0)\,R(|Y_i|) \\
+>= \sum_{i=1}^n \mathbf{1}(Y_i>0)\left(1+\sum_{j=1}^n \mathbf{1}(|Y_j|<|Y_i|)\right) \\
+>= \sum_{i=1}^n \mathbf{1}(Y_i>0) + \sum_{i=1}^n \sum_{j=1}^n \mathbf{1}(Y_i>0, -Y_i < Y_j < Y_i) $$
+>
+>정렬표본을 $Y_{(1)}\le \cdots \le Y_{(n)}$라 하면, $Y_{(i)}>0$일 때 $Y_{(j)}<Y_{(i)}$는 $j<i$와 동치다. 또한 $Y_{(i)}>0$이면 $-Y_{(i)}<0<Y_{(j)}$이므로 $-Y_{(i)} < Y_{(j)}$는 항상 성립한다. 따라서
+>
+>$$= \sum_{i=1}^n \mathbf{1}(Y_{(i)}>0) + \sum_{i=1}^n \sum_{j<i} \mathbf{1}(Y_{(i)}>0, -Y_{(i)} < Y_{(j)}) $$
+>
+>또한 $j<i$이고 $Y_{(i)}+Y_{(j)}>0$이면 자동으로 $Y_{(i)}>0$이어야 한다. 왜냐하면 $Y_{(j)}\le Y_{(i)}$이므로, 만약 $Y_{(i)}\le 0$라면 $Y_{(j)}\le 0$도 되어 합이 양수가 될 수 없기 때문이다.
+>
+>$$
+>= \sum_{i=1}^n \mathbf{1}(Y_{(i)}>0) + \sum_{i=1}^n \sum_{j<i} \mathbf{1}(Y_{(i)}+Y_{(j)}>0) \\
+>= \sum_{i=1}^n \mathbf{1}(Y_i>0) + \sum_{i=1}^n \sum_{j<i} \mathbf{1}(Y_i+Y_j>0) $$
+>
+>이제 대각선 항 $i=j$와 비대각선 항 $j<i$를 하나의 합으로 묶은 것이다. $i=j$이면 $Y_i+Y_j=2Y_i>0$이므로 $i=j$인 항은 $Y_i>0$인 항과 정확히 일치한다. 따라서
+>
+>$$
+>= \sum\sum_{1\le i\le j\le n} \mathbf{1}(Y_i+Y_j>0)
+>$$
+>
+>$$\therefore \boxed{
+>W_n^+ = \sum\sum_{1\le i\le j\le n}\mathbf{1}(X_i+X_j>2\theta_0)
+>}
+>$$
+>
+>**(b)** 부호순위 검정의 정의상 $\phi_{SR}(X)$는 $W_n^+$에 대한 (비감소) 함수이다. 그리고 (a)에서
+>
+>$$W_n^+=\sum_{1\le i\le j\le n}\mathbf{1}(X_i+X_j>2\theta_0)$$
+>
+>로 나타났으므로, 각 항 $\mathbf{1}(X_i+X_j>2\theta_0)$는 $(X_1,\dots,X_n)$의 각 성분에 대한 증가함수이고, 합 $W_n^+$ 역시 각 성분에 대한 증가함수이다. 따라서 $\phi_{SR}(X)$도 각 성분에 대한 증가함수이다.
+>
+>이제 위치모수 모형에서 $X_i=\theta+Z_i$ ($Z_i$ iid, 밀도 $f$)로 둘 수 있다. $\theta'<\theta''$에 대해 같은 $Z=(Z_1,\dots,Z_n)$로 결합(coupling)하면
+>
+>$$X(\theta'')=\theta''+Z \ \ge\ \theta'+Z=X(\theta') \quad(\text{성분별})$$
+>
+>그리고 $\phi_{SR}$가 증가함수이므로
+>
+>$$\phi_{SR}(X(\theta''))\ge \phi_{SR}(X(\theta'))$$
+>
+>양변에 기댓값을 취하면
+>
+>$$E_{\theta''}[\phi_{SR}(X)]\ge E_{\theta'}[\phi_{SR}(X)]$$
+>
+>즉 검정력 함수 $\gamma_{\phi_{SR}}(\theta)=E_\theta[\phi_{SR}(X)]$는 $\theta$의 증가함수이다. 그러므로
+>
+>$$\max_{\theta\le \theta_0}E_\theta[\phi_{SR}(X)]=E_{\theta_0}[\phi_{SR}(X)]=\alpha$$
+>
+>가 된다(임계값 $c,\gamma$를 $E_{\theta_0}[\phi_{SR}(X)]=\alpha$가 되도록 잡았으므로). 따라서 $\phi_{SR}$는 유의수준 $\alpha$의 검정이다.
 
 ### 정리 9.3.5 부호순위 검정의 점근정규성
 정리9.3.4에서 알 수 있듯이, 연속형 대칭인 분포의 중앙값에 대한 한쪽가설이나 양쪽가설의 검정에 부호순위 검정을 사용할 수 있고, 이는 비모수적 검정이다. 이런 부호순위 검정의 효율성을 알아보려면 아래 정리와 같은 점근 정규성이 필요하다. 이 정리의 증명은 이 책의 수준을 넘으므로 생략한다.
@@ -1498,16 +1607,16 @@ $$
 N(W_n^+;\gamma,\theta_{1n}) \simeq \left( \sqrt{12} \int_{-\infty}^{\infty} f^2(x)\,dx \right)^{-2} \left( \frac{z_\alpha + z_{1-\gamma}}{\theta_{1n} - \theta_0} \right)^2
 $$
 
-#### 증명
-정리 9.3.5로부터 $\mu(\theta), \sigma^2(\theta_0)$를 구해보면
-
-$$
-\mu(\theta) = \frac{1}{2} \int_{-\infty}^{\infty} (1-F(2\theta_0 -2\theta -x))f(x)dx \\
-\sigma^2(\theta_0) = E[(1-F(-Z))^2] - (E[1-F(-Z)])^2, \quad Z\sim f \\
-= E(U^2) - (E[U])^2, \quad U\sim \mathrm{Uniform}(0,1) \\
-$$
-
-이므로 정리 9.3.1로부터 (a), (b)가 성립.
+>**증명**  
+>정리 9.3.5로부터 $\mu(\theta), \sigma^2(\theta_0)$를 구해보면
+>
+>$$
+>\mu(\theta) = \frac{1}{2} \int_{-\infty}^{\infty} (1-F(2\theta_0 -2\theta -x))f(x)dx \\
+>\sigma^2(\theta_0) = E[(1-F(-Z))^2] - (E[1-F(-Z)])^2, \quad Z\sim f \\
+>= E(U^2) - (E[U])^2, \quad U\sim \mathrm{Uniform}(0,1) \\
+>$$
+>
+>이므로 정리 9.3.1로부터 (a), (b)가 성립.
 
 #### 예 9.3.5 부호순위 검정의 $t$-검정에 대한 점근상대효율성(ARE)
 대칭 위치-척도 모형:
@@ -1541,319 +1650,3 @@ $$
     - $N(\mu,\sigma^2)$: $3/\pi \approx 0.954$
     - $L(\mu,\sigma)$: $\pi^2/9 \approx 1.096$
     - $DE(\mu,\sigma)$: $1.5$
-
-
->## 보충: 전통 검정론의 한계와 현대 통계학의 확장
->
->**검정론만으로는 부족한 이유**  
->제7장과 제9장에서 다룬 검정 이론은 통계학의 핵심적 기초이지만, 현대 응용통계와 인과추론 분야에서는 검정 이론만으로는 충분하지 않다는 점을 이해하는 것이 중요하다.
->
->- "유의하다"와 "중요하다"의 구분
->  - $p$-값이 0.05 미만이어서 "통계적으로 유의"하다는 것과 그 결과가 "실질적으로 중요"하다는 것은 다르다. 특히 표본 크기 $n$이 크면, 아주 작고 무시할 수 있는 효과도 통계적으로 유의할 수 있다.
->
->- 기각 여부만으로는 효과를 이해하기 어렵다
->  - 검정은 "귀무가설을 기각하는가/하지 않는가"라는 이진 결정만 제공한다. 하지만 실무에서는 다음 질문들이 더 중요하다:
->    - 효과의 크기(effect size)는 얼마나 되는가?
->    - 신뢰구간은 어떻게 되는가?
->    - 실질적 유의성(practical significance)은 어느 정도인가?
->
->- 인과질문에는 단순 검정이 부족하다
->  - 상관관계 검정은 "두 변수가 서로 관련이 있는가"를 답하지만, 인과추론의 핵심 질문인 "변수 A를 개입(intervention)했을 때 변수 B에 미치는 인과효과는 얼마인가"는 답하지 못한다. 교란변수(confounder)의 통제, 역인과성(reverse causality), 선택편향(selection bias) 같은 문제를 다루려면 검정 이론 그 이상이 필요하다.
->
->- 모델 구조와 식별 가능성이 더 근본적이다
->  - 특히 인과추론에서는 다음이 전통적 검정 패러다임보다 우선한다:
->    - 데이터 생성 과정(data generating process)이 무엇인가?
->    - 관심 모수(parameter of interest)를 "식별할 수 있는가(identifiable)"?
->    - 관측 데이터에서 과연 무엇을 추정할 수 있는가?
->
->  - "0과의 통계적 차이"보다는 "무엇을 추정할 수 있고 없는가"가 더 중요한 질문이 된 것이다.
->
->**현대 통계학의 확장된 관심사**
->
->제7~9장: **전통 검정론 중심**
->- 모수를 얼마나 잘 추정할 것인가
->- 유의수준 $\alpha$에서 최강력 검정은 무엇인가
->- 충분통계량, UMP, UMPU 같은 최적성 이론
->
->**현대 응용통계학 및 인과추론**
->- 실제 데이터 생성 과정이 무엇인가
->- 모델이 데이터에 얼마나 잘 맞는가
->- 교란을 어떻게 통제할 것인가
->- 표본 외 예측(out-of-sample prediction)은 어떤가
->- 인과효과를 동정(identification)할 수 있는가
->
->이러한 확장은 검정론을 부정하거나 대체하는 것이 아니라, 그것을 포함하면서 더 넓은 맥락에서 데이터와 의사결정을 다루는 방향으로의 진화를 의미한다.
-
-7장의 검정 개념은 가설검정의 기본 형식 논리다. 검정법 비교기준은 그 기본 틀에서 유의수준을 고정하고 검정력을 비교하는 원리이며, 최강력 검정·UMP·UMPU는 그 비교 원리를 각각 단순 대립가설, 복합 대립가설, 불편검정류에 대해 최적화한 개념이다. 비모수 검정은 같은 검정 틀을 유지하되 분포가정을 약하게 둔 방법이고, 검정력 근사는 검정력 함수를 정확히 계산하기 어려울 때 점근분포 등을 이용해 근사하는 계산 기술이다. 7장의 LRT와 점근 LRT는 이 전체 구조 중 parametric 검정과 asymptotic approximation에 해당한다.
-
-## 1. 7장에서 다루는 것은 무엇인가
-
-7장은 다음을 중심으로 설명하고 있다.
-
-* 검정은 귀무가설과 대립가설을 세우고, 자료가 귀무가설과 얼마나 부합하는지 보고 기각 여부를 결정하는 절차라는 점 
-* 기각역은 유의수준 제약
-  $$
-  \sup_{\theta\in\Omega_0}P_\theta(X\in C_\alpha)\le \alpha
-  $$
-  을 만족해야 한다는 점 
-* 같은 유의수준 안에서는 검정력을 크게 하는 방향이 바람직하다는 점 
-* 검정력 함수
-  $$
-  \gamma_\phi(\theta)=E_\theta[\phi(X)]
-  $$
-  와 검정의 크기(size)를 정의하는 점 
-* 최대가능도비 검정(LRT)은 귀무가설 하 최대가능도와 전체 모수공간 최대가능도를 비교하여 검정통계량을 만든다는 점 
-* 큰 표본에서는 가능도비 통계량을 $\chi^2$로 근사하는 점근적 검정 아이디어가 나온다는 점 
-
-즉 7장은 **검정의 형식 논리 + 검정력 + LRT + 점근 LRT**까지의 기본 틀을 제공한다.
-
-## 2. "검정법 비교기준들"은 7장의 어디서 출발하는가
-
-검정법 비교기준은 7장에 이미 씨앗이 들어 있다.
-7장은 "유의수준을 만족시키면서 검정력을 최대화하는 것이 바람직하다"고 설명한다. 
-
-여기서 바로 검정법 비교기준이 나온다. 보통 비교기준은 다음 순서로 정리된다.
-
-### (1) 크기(size) 또는 유의수준(level)
-
-먼저 같은 오류 통제를 만족해야 비교가 가능하다.
-
-$$
-\sup_{\theta\in\Omega_0}E_\theta[\phi(X)]\le \alpha
-$$
-
-7장도 바로 이 조건을 검정의 기본 제약으로 둔다. 
-
-### (2) 검정력 함수(power function)
-
-그 다음 대립가설 아래에서 기각확률이 큰 검정이 더 좋다.
-
-$$
-\gamma_\phi(\theta)=E_\theta[\phi(X)],\qquad \theta\in\Omega_1
-$$
-
-이 역시 7장의 핵심 정의다. 
-
-### (3) 전역 비교 기준
-
-대립가설이 한 점이 아니라 여러 값이면, 검정력 함수 전체를 비교해야 한다.
-이때 "모든 $\theta\in\Omega_1$에서 더 큰가?"라는 질문이 생기고, 여기서 **최강력, UMP, UMPU**가 나온다.
-
-즉, **검정법 비교기준은 7장의 ‘유의수준 + 검정력’ 정의를 한 단계 더 밀고 나간 것**이다.
-
-## 3. 최강력 검정(Most Powerful test)은 무엇이며 7장과 무슨 관계인가
-
-최강력 검정은 보통 **단순 귀무가설 vs 단순 대립가설**
-
-$$
-H_0:\theta=\theta_0
-\quad\text{vs}\quad
-H_1:\theta=\theta_1
-$$
-
-에서 정의된다.
-
-유의수준 $\alpha$인 검정들 중에서
-
-$$
-E_{\theta_1}[\phi(X)]
-$$
-
-를 가장 크게 만드는 검정이 $\theta_1$에 대한 **최강력 검정**이다.
-
-### 7장과의 관계
-
-7장은 이미 "유의수준 제약 아래 검정력을 크게 하는 것이 목표"라고 말한다. 
-최강력 검정은 바로 그 문장을 **가장 엄밀한 최적화 문제**로 만든 것이다.
-
-즉,
-
-* 7장: "좋은 검정은 같은 $\alpha$에서 검정력이 커야 한다."
-* 최강력 검정: "그러면 특정 대립가설 한 점 $\theta_1$에서 검정력이 가장 큰 검정을 정의하자."
-
-따라서 최강력 검정은 7장 개념의 **정밀화**다.
-
-## 4. 전역최강력검정(UMP)은 무엇이며 왜 더 어려운가
-
-UMP는 단순 대립가설 한 점이 아니라, **복합 대립가설 전체**에서 가장 좋은 검정이다.
-
-예를 들어
-
-$$
-H_0:\theta\le \theta_0
-\quad\text{vs}\quad
-H_1:\theta>\theta_0
-$$
-
-에서 유의수준 $\alpha$ 검정 $\phi^*$가 모든 $\theta>\theta_0$에 대해
-
-$$
-E_\theta[\phi^*(X)] \ge E_\theta[\phi(X)]
-$$
-
-를 만족하면 UMP다.
-
-### 7장과의 관계
-
-7장은 복합가설과 검정력 함수를 이미 도입했다.
-특히 검정의 크기를
-
-$$
-\sup_{\theta\in\Omega_0}E_\theta[\phi(X)]
-$$
-
-로 정의하므로, 귀무가설이 복합일 수 있다는 틀을 이미 제공한다. 
-
-UMP는 여기서 한 걸음 더 나아가,
-
-* 귀무가설은 복합이고,
-* 대립가설도 보통 복합이며,
-* 그 전체에서 uniformly, 즉 **전 구간에서 동시에** 가장 큰 검정력을 요구한다.
-
-그래서 UMP는 7장의 "검정력 최대화"를 **복합 대립가설 전체에 대해 전역화한 개념**이다.
-
-## 5. UMPU 검정은 왜 필요한가
-
-양측가설에서 UMP가 존재하지 않는 경우가 많다.
-대표적으로
-
-$$
-H_0:\mu=\mu_0
-\quad\text{vs}\quad
-H_1:\mu\ne\mu_0
-$$
-
-같은 양측 검정에서는 한쪽 꼬리에 유리한 검정이 다른 쪽 꼬리에서는 불리해질 수 있어서, 모든 대립가설 점에서 동시에 최고인 UMP가 대개 없다.
-
-그래서 조건을 조금 바꾼다.
-그냥 "전역적으로 제일 큰 검정력"이 아니라, **불편(unbiased)** 한 검정들만 후보로 제한한 뒤 그 안에서 최강력을 찾는다.
-
-불편검정의 표준적 의미는 보통
-
-$$
-E_\theta[\phi(X)] \le \alpha \quad (\theta\in\Omega_0),\qquad
-E_\theta[\phi(X)] \ge \alpha \quad (\theta\in\Omega_1)
-$$
-
-이다.
-
-즉 대립가설 아래에서는 적어도 귀무가설 경계에서의 기각확률보다 작아지지 않아야 한다.
-
-### 7장과의 관계
-
-7장은 불편성 자체를 직접 다루지는 않지만,
-이미 "같은 유의수준 하에서 검정력을 비교한다"는 관점을 제공한다. 
-UMPU는 그 비교를 할 때 **비교대상을 무작정 전체 검정으로 두지 않고, 합리적인 검정군으로 제한한 것**이다.
-
-정리하면
-
-* MP: 한 점 대립가설에서 최고
-* UMP: 대립가설 전체에서 최고
-* UMPU: UMP가 없을 때, 불편검정 집합 안에서 최고
-
-## 6. 비모수 검정은 7장의 "검정 개념"과 어떻게 다른가
-
-비모수 검정은 **검정의 기본 논리 자체가 다른 것**이 아니라,
-**모형 가정이 덜 강한 검정**이다.
-
-7장의 많은 예시는 정규분포, 포아송분포, 지수분포처럼 **구체적 분포모형**을 놓고 검정을 만든다. 또한 LRT는 애초에 가능도함수 $f(x;\theta)$를 명시해야 한다. 
-
-반면 비모수 검정은 보통
-
-* 정확한 분포형태를 완전히 지정하지 않거나,
-* 위치 대칭성, 연속성 같은 약한 가정만 두고,
-* 순위(rank), 부호(sign), 순열(permutation) 같은 구조를 이용한다.
-
-예를 들어 부호검정, Wilcoxon 부호순위검정, Mann–Whitney 검정 등이 여기에 속한다.
-
-### 7장과의 관계
-
-비모수 검정도 여전히
-
-* 귀무가설을 세우고,
-* 유의수준을 통제하고,
-* 검정력을 논하고,
-* 기각역을 정한다.
-
-즉 **검정의 형식 논리는 7장과 완전히 같다.**
-다만 차이는 **확률모형의 강도**다.
-
-* 7장의 많은 예: 분포를 구체적으로 지정한 모수적(parametric) 검정
-* 비모수 검정: 분포를 덜 가정한 검정
-
-따라서 비모수 검정은 7장과 대립되는 개념이 아니라, **7장의 검정 틀 안에 들어오는 한 종류의 검정법**이다.
-
-## 7. 검정력 근사는 7장의 무엇과 연결되는가
-
-검정력 근사는 말 그대로 **검정력 함수를 정확히 계산하기 어려울 때 근사하는 방법**이다.
-
-7장은 검정력 함수를 정의하고, 몇몇 단순 예에서는 정확식을 쓴다. 예를 들어 정규 평균 검정에서는 검정력 함수를 직접 적는다. 
-또한 7.3에서는 큰 표본에서 가능도비 통계량 분포를 근사하는 점근 검정을 소개한다. 
-
-검정력 근사는 바로 여기서 나온다.
-
-### 대표적 상황
-
-1. 검정통계량의 정확 분포는 너무 복잡하다.
-2. 표본이 크므로 정규근사, $\chi^2$ 근사, 비중심분포 근사를 쓴다.
-3. 이를 통해
-   $$
-   P_\theta(\text{기각})
-   $$
-   를 근사한다.
-
-### 7장과의 관계
-
-즉 검정력 근사는
-
-* 7장의 **검정력 함수** 개념을 실제 계산 가능하게 만드는 기술이며, 
-* 7장의 **점근 가능도비 검정**과 직접 연결된다. 
-
-다시 말해, 7장에서 "검정력은 중요하다", "큰 표본에서는 분포를 근사할 수 있다"고 했다면,
-검정력 근사는 그 두 문장을 합쳐서 **실제 대안 모수값들에서 power curve를 계산하는 도구**다.
-
-## 8. 한 장으로 정리하면: 서로의 관계
-
-아래 구조로 보면 정리가 가장 쉽다.
-
-### A. 7장의 기본 골격
-
-* 귀무가설 / 대립가설
-* 기각역 / 유의수준
-* 제1종오류 / 제2종오류
-* 검정력 함수
-* 가능도비 검정
-* 점근 근사 검정
-
-### B. 그 위의 "비교 원리"
-
-* 같은 유의수준이면 검정력을 더 크게 하는 검정이 더 좋다.
-  이것이 검정법 비교기준이다. 
-
-### C. 그 비교 원리를 최적화 개념으로 만든 것
-
-* 한 점 대립가설에서 최고 → **최강력 검정**
-* 대립가설 전체에서 최고 → **UMP**
-* UMP가 없을 때 불편검정류 안에서 최고 → **UMPU**
-
-### D. 모형 가정을 완화한 가지
-
-* parametric 검정: 정규, 포아송, 지수 등 분포를 구체적으로 둔다. 7장의 주 예시가 여기에 가깝다. 
-* nonparametric 검정: 순위, 부호, 순열 기반으로 더 약한 가정만 둔다.
-
-### E. 계산 기술
-
-* exact power가 가능하면 그대로 계산
-* 어렵다면 asymptotic distribution을 써서 **검정력 근사**
-  이것이 7장의 7.3과 이어진다. 
-
-## 9. 사용자가 지금 공부하는 문맥에서 특히 중요한 연결
-
-사용자가 최근 보고 있는 부호순위 검정 같은 내용까지 연결하면 다음처럼 보면 된다.
-
-* **부호검정 / 부호순위검정**: 비모수 검정의 대표 예다.
-* 이 검정도 여전히 유의수준과 검정력으로 평가한다.
-* "이 검정이 한쪽 대립가설에서 단조성을 가지는가", "유의수준 $\alpha$를 만족하는가", "다른 검정보다 power가 어떤가" 같은 질문은 모두 7장의 기본 검정 프레임에서 나온다.
-* 다만 LRT처럼 완전한 parametric likelihood를 쓰는 것이 아니라, 순위 구조나 대칭성 가정을 활용한다.
-
-즉 **비모수 검정은 7장의 대체물이 아니라, 그 프레임 안에서 likelihood 대신 rank/sign structure를 쓰는 버전**이다.
