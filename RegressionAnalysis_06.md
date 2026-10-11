@@ -987,6 +987,8 @@ $$
 ($\hat{\beta}_0$를 구하고 싶지 않으면 변수의 평균 중심화를 수행하여 $\hat{\beta}_0$가 $\bar{y}$가 되도록 하면 된다.)
 
 ### 6.4.5 동시신뢰구간 (Simultaneous Confidence Interval)
+> 참고: Statistics_10 정리 10.1.4  일원분류 정규분포모형에서의 대비에 대한 동시신뢰구간 
+
 공동신뢰영역과 관련된 개념으로 동시신뢰구간(simultaneous confidence interval)이 있다.  
 이는 각 $\beta_j$에 대한 구간
 
