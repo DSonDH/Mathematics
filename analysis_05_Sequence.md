@@ -224,6 +224,7 @@ $$L - \varepsilon < a_n \le b_n \le c_n < L + \varepsilon$$
 >- $\sup a_n = \frac{1}{2}$ (최댓값, $n=2$일 때)
 >- $\inf a_n = -\frac{1}{2}$ (최솟값, $n=1$일 때)
 >
+> TODO:
 >### 추가: 실수 수열의 상극한과 하극한 *(Limit Superior and Limit Inferior)*
 >실수 수열 $\{a_n\}$에 대하여
 >

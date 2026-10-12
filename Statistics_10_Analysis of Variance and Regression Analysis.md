@@ -455,6 +455,18 @@ $$
     $$
 
     - ab가 빠지는 이유: 각 셀의 평균을 추정하는 데 사용된 자유도를 고려하여 모분산의 불편추정량을 계산하기 위해 분모에서 ab를 뺀다.
+      - 자유도: 여기선 전체 관측수에서 평균 모형의 독립적인 차원을 뺀 값
+      - $ab$개 셀이 있고, 각 셀별로 $r-1$ 자유도를 사용하여 평균을 추정하므로, 총 자유도 $ab(r-1)$를 고려하여 $n-ab$로 조정한다.
+      - 또 다른 해석으로, 셀 평균 $\bar X_{ij\cdot}$를 통해 추정되는 모평균 $\mu_{ij}$는 총 $ab$개의 매개변수를 가지며, 이는
+
+        $$
+        \underbrace{1}_{\text{전체평균}} + \underbrace{(a-1)}_{\text{요인 A의 주효과}} + \underbrace{(b-1)}_{\text{요인 B의 주효과}} + \underbrace{(a-1)(b-1)}_{\text{교호작용 효과}} = ab
+        $$
+
+      - 일반적으로 정규 선형모형을 $\boldsymbol X=D\boldsymbol\gamma+\boldsymbol e, \quad \boldsymbol e\sim N_n(\boldsymbol 0,\sigma^2I)$ 로 쓰면, 평균벡터가 움직일 수 있는 공간은 $D$의 열공간이고 그 차원은 $q=\text{rank}(D)$이다. 최소제곱 적합은 $\boldsymbol X$를 이 공간에 직교투영한다. 투영행렬을 $P$라 하면 잔차는 $\widehat{\boldsymbol e}=(I-P)\boldsymbol X$ 이며, 평균 공간에 수직인 공간에 놓인다. 이 잔차 공간의 차원은 $n-q$이므로 $\frac{SSE}{\sigma^2} =\frac{\boldsymbol X^{\mathsf T}(I-P)\boldsymbol X}{\sigma^2} \sim\chi^2_{n-q}, \quad \text{trace}(I-P)=n-\text{rank}(D).$  
+      따라서 '관측수에서 모수 개수를 뺀다'는 자유도 계산은 잔차 공간의 차원을 계산한 것이다. 이 이원분류 모형에서는 $q=ab$이므로 자유도는 $n-ab$이다.
+
+
 
 **(b) 표본평균**  
 * $\hat\mu_{ij}=\bar X_{ij\cdot}$들은 서로 독립이고

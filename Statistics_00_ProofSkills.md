@@ -465,7 +465,6 @@ $$\mathbf{Z}^T A \mathbf{Z} \perp \mathbf{Z}^T B \mathbf{Z}$$
 > $\mathbf Z^T A\mathbf Z = \mathbf Z^T A^T A \mathbf Z = \|AZ\|^2$ 으로 $AZ$의 함수이다. $BZ$도 마찬가지.  
 > 따라서 $\mathbf{Z}^T A \mathbf{Z} \perp \mathbf{Z}^T B \mathbf{Z}$
 
-
 ### 예시: ANOVA/회귀분석 χ² 분해의 직교투영 해석
 
 다변량 정규분포에서 이차형식의 독립성을 이용하면, 회귀분석의 분산분해 구조를 엄밀하게 증명할 수 있다.
@@ -497,6 +496,49 @@ $\mathbf{Y}$를 표준화하면 $\mathbf{Z} = (\mathbf{Y} - \mathbf{X}\boldsymbo
 두 idempotent 행렬 $A = \Pi_{1|0}$, $B = I - \Pi_{0,1}$에 대해 $AB = 0 \iff \mathbf{Z}^T A \mathbf{Z} \perp \mathbf{Z}^T B \mathbf{Z}$ (정규벡터의 이차형식 독립성 원리)
 
 이를 원래 변수로 돌리면 $R(1|0) = \mathbf{Y}^T\Pi_{1|0}\mathbf{Y} \perp SSE = \mathbf{Y}^T(I-\Pi_{0,1})\mathbf{Y}$
+
+### 헤시안 행렬의 음의 정부호성
+
+행렬식과 첫 번째 대각성분의 부호를 이용해 다음 대칭 행렬 $H$의 음의 정부호성을 확인하자.
+
+$$
+H=-\begin{pmatrix}
+\sum_i w_i & \sum_i w_i x_i\\
+\sum_i w_i x_i & \sum_i w_i x_i^2
+\end{pmatrix},
+\qquad w_i=n_i p_i(1-p_i)>0.
+$$
+
+대칭 $2\times2$ 행렬의 음의 정부호 조건은 $H_{11}<0$ 및 $\det H>0$이다. 먼저,
+
+$$H_{11}=-\sum_i w_i<0.$$
+
+행렬식은
+
+$$
+\det H=\left(\sum_i w_i\right)\left(\sum_i w_i x_i^2\right)-\left(\sum_i w_i x_i\right)^2.
+$$
+
+$W=\sum_i w_i$, $\bar{x}_w=\frac{1}{W}\sum_i w_i x_i$로 놓으면,
+
+$$
+\begin{aligned}
+W\sum_i w_i(x_i-\bar{x}_w)^2
+&=W\left(\sum_i w_i x_i^2-2\bar{x}_w\sum_i w_i x_i+\bar{x}_w^2W\right)\\
+&=W\sum_i w_i x_i^2-\left(\sum_i w_i x_i\right)^2\\
+&=\det H.
+\end{aligned}
+$$
+
+따라서 $x_i$들이 모두 같지 않으면 $\det H>0$이고, $H$는 음의 정부호이다. 만약 모든 $x_i$가 같으면 $\det H=0$이므로 $H$는 음의 준정부호이다.
+
+또는, 임의의 벡터 $z=(z_1,z_2)^T$에 대해
+
+$$
+z^T H z = -\sum_i w_i (z_1 + z_2 x_i)^2 \le 0
+$$
+
+로써, $z^T H z=0$이 되려면 $z_1 + z_2 x_i=0$이 모든 $i$에 대해 성립해야 한다. 즉, 모든 $x_i$가 같지 않으면 $z_1=z_2=0$이 되어야 하므로, $H$는 음의 정부호이다.
 
 
 ## 26. 기댓값과 대각합(trace) 연산 순서 교환 (Expectation-Trace Interchange)
@@ -751,6 +793,130 @@ $$
 &= \sum (y_i-\hat{y}_i)^2 + \sum(\hat{y}_i-\bar{y})^2
 \end{aligned}
 $$
+
+## 선형회귀 정규분포모형에서 회귀계수의 유의성 검정
+
+**일부 회귀계수 블록 검정 *(partial/regression block test)***   
+
+$$
+Y=\mathbf{X}_0\boldsymbol\beta_0 + \mathbf{X}_1\boldsymbol\beta_1 + e, \quad
+\boldsymbol\beta_0\in\mathbb{R}^{p_0},\quad \boldsymbol\beta_1\in\mathbb{R}^{p_1},\quad
+\mathbf{X}_0\in\mathbb{R}^{n\times p_0},\quad \mathbf{X}_1\in\mathbb{R}^{n\times p_1}, \\
+e\sim N_n(0,\sigma^2 I_n),\quad \sigma^2>0, \quad
+\mathrm{rank}(\mathbf{X}_0,\mathbf{X}_1)=p_0+p_1,\quad \mathrm{rank}(\mathbf{X}_0)=p_0,\quad \mathrm{rank}(\mathbf{X}_1)=p_1
+$$
+
+회귀계수 유의성에 대한 가설: $H_0:\boldsymbol\beta_1=0\quad \text{vs}\quad H_1:\boldsymbol\beta_1\neq 0$
+
+위 가설의 최대가능도비 검정에 대해 아래가 성립한다.  
+**(a) 투영행렬과 분해**  
+* $\mathbf{X}_0$로의 정사영행렬: $\Pi_0 = \mathbf{X}_0(\mathbf{X}_0^\top \mathbf{X}_0)^{-1}\mathbf{X}_0^\top$
+* $\mathbf{X}_0$를 제거한 $\mathbf{X}_1$: $\mathbf{X}_{1|0}=(I-\Pi_0)\mathbf{X}_1$
+* 그 열공간으로의 정사영행렬: $\Pi_{1|0}=\mathbf{X}_{1|0}(\mathbf{X}_{1|0}^\top \mathbf{X}_{1|0})^{-1}\mathbf{X}_{1|0}^\top$
+
+이면, 
+
+$$
+\boxed{\ \min_{\boldsymbol\beta_0}\|Y-\mathbf{X}_0\boldsymbol\beta_0\|^2
+= \min_{\boldsymbol\beta_0,\boldsymbol\beta_1}\|Y-\mathbf{X}_0\boldsymbol\beta_0-\mathbf{X}_1\boldsymbol\beta_1\|^2
++Y^\top\Pi_{1|0}Y\ }
+$$
+
+**(b) 검정통계량 (최대가능도비 검정과 동치 형태)**  
+* 회귀로 설명되는 제곱합: $R(1|0)=Y^\top\Pi_{1|0}Y$
+  * 즉, 추가 설명력 
+  * (R: regression sum of squares)
+* 오차제곱합: $SSE = Y^\top(I-\Pi_0-\Pi_{1|0})Y$
+
+검정통계량 $F$-통계량은
+
+$$F_n=\frac{R(1|0)/p_1}{SSE/(n-p_0-p_1)}$$
+
+이고, 수준 $\alpha$의 기각역은 $F_n \ge F_\alpha(p_1,\ n-p_0-p_1)$
+
+**(c) 대립가설 하 분포와 검정력 *(power)***  
+* 대립가설 하에서 검정통계량에 대해
+    
+    $$F_n = \frac{R(1|0)/p_1}{SSE/(n-p_0-p_1)} \sim F(p_1,\ n-p_0-p_1;\ \delta)$$
+
+    이 성립하고, 여기서 $\delta$는 비중심도모수 *(noncentrality parameter)*:
+    
+    $$
+    \delta = \frac{\beta_1^\top X_1^\top\Pi_{1|0}X_1\beta_1}{\sigma^2}
+    $$
+
+* 검정력 함수는 $\delta$의 증가함수다: $\pi(\delta)=P_\delta\left(F_n\ge F_\alpha(p_1,n-p_0-p_1)\right)$
+    
+    * 해석: 효과크기($\beta_1$)가 커지거나, 잡음($\sigma^2$)이 작아지거나, 설계가 좋아져 $\Pi_{1|0}$ 방향으로 신호가 커질수록 검정력이 증가한다.
+
+>**증명**  
+>$Y=X_0\boldsymbol\beta_0 + X_1\boldsymbol\beta_1 + e$, $e\sim N_n(0,\sigma^2 I)$를 가정한다.  
+>이 경우에 $X=(X_0,X_1),\ \Pi_{0,1}=X(X^tX)^{-1}X^t,\ \Pi_0=X_0(X_0^tX_0)^{-1}X_0^t$라고 하면 $\Pi_{0,1},\ \Pi_0,\ \Pi_{1|0}$는 모두 정사영행렬이고 다음이 성립하는 것을 정리 6.5.3에서 알고 있다.
+>
+>$$
+>\Pi_{0,1}=\Pi_0+\Pi_{1|0},\qquad \Pi_0^t\Pi_{1|0}=0 \\
+>\therefore I-\Pi_0=(I-\Pi_{0,1})+\Pi_{1|0}
+>$$
+>
+>아래 두 식의 증명은 정리 6.5.1을 따른다.  
+> 6.5.1 (b)의 두번째 항은 $\beta$에 의존하지 않는 상수행렬이고, 첫번째 항은 적절한 $\beta$를 선택하면 0이 될 수 있으므로, 최소값은 두번째 항으로 결정된다.
+>
+>$$
+>\min_{\beta_0\in R^{p_0},\beta_1\in R^{p_1}}|Y-X_0\beta_0|^2 =Y^t(I-\Pi_0)Y \\
+>\min_{\beta_0\in R^{p_0},\beta_1\in R^{p_1}}|Y-X_0\beta_0-X_1\beta_1|^2 =Y^t(I-\Pi_{0,1})Y
+>$$
+>
+>따라서 두 식의 관계에 따라 (a)가 성립한다.
+>
+>한편, 이 경우에 $Y \sim N_n(X_0\beta_0+X_1\beta_1, \sigma^2 I_n)$이므로 로그가능도는
+>
+>$$
+>l(\theta)=-\frac{1}{2\sigma^2}|y-X_0\beta_0-X_1\beta_1|^2-\frac{n}{2}\log(2\pi\sigma^2) \\
+>\dot l(\theta) = \begin{pmatrix}\frac{\partial l}{\partial \beta_0} \\ \frac{\partial l}{\partial \beta_1} \\ \frac{\partial l}{\partial \sigma^2}\end{pmatrix}
+>= \begin{pmatrix} \frac{1}{\sigma^2}X_0^t(y-X_0\beta_0-X_1\beta_1) \\ \frac{1}{\sigma^2}X_1^t(y-X_0\beta_0-X_1\beta_1) \\ -\frac{n}{2\sigma^2}+\frac{1}{2\sigma^4}|y-X_0\beta_0-X_1\beta_1|^2 \end{pmatrix}
+>$$
+>
+>이므로, $\sigma^2$에 관해 미분하여 얻은 전체 모수공간과 귀무가설하에서의 최대가능도 추정량:
+>
+>$$
+>\hat{\sigma^2}_\Omega=\min_{\beta_0\in R^{p_0},\beta_1\in R^{p_1}}|Y-X_0\beta_0-X_1\beta_1|^2/n=SSE/n \\
+>\hat{\sigma^2}_0=\min_{\beta_0\in R^{p_0}}|Y-X_0\beta_0|^2/n=(SSE+Y^t\Pi_{1|0}Y)/n \\
+>\therefore\ 2\bigl(l({\hat\theta}^\Omega)-l(\hat\theta^0)\bigr)
+>=n\log(\hat{\sigma^2}_0/\hat{\sigma^2}_\Omega)
+>=n\log\left(1+\frac{Y^t\Pi_{1|0}Y}{SSE}\right)
+>$$
+>
+>이는 $Y^t\Pi_{1|0}Y/SSE$의 증가함수이므로, 최대가능도비 검정과 $F_n$ 검정은 동치이다.  
+>따라서 검정통계량은 $F_n$으로 주어지고 기각역은 $F_n$의 큰 값으로 주어진다.
+>
+>한편 $\Pi_{1|0}$가 멱등행렬이고  
+>$\mathrm{trace}(\Pi_{1|0}) =\mathrm{trace}{X_{1|0}(X_{1|0}^tX_{1|0})^{-1}X_{1|0}^t} =\mathrm{trace}{(X_{1|0}^tX_{1|0})^{-1}X_{1|0}^tX_{1|0}} =p_1$ 이므로,  
+>
+>정리 10.3.2로부터  
+>$R(1|0)/\sigma^2=Y^t\Pi_{1|0}Y/\sigma^2\sim\chi^2(p_1;\delta),\quad
+>\delta=(X_0\beta_0+X_1\beta_1)^t\Pi_{1|0}(X_0\beta_0+X_1\beta_1)/\sigma^2$  
+>그런데 $\Pi_{1|0}X_0=0$이므로 $\delta=\beta_1^tX_1^t\Pi_{1|0}X_1\beta_1/\sigma^2$  
+>또한 같은 방법으로 $SSE/\sigma^2=Y^t(I-\Pi_{0,1})Y/\sigma^2\sim\chi^2(n-p_0-p_1)$  
+>
+>이때 $\Pi_{1|0}(I-\Pi_{0,1}) =\Pi_{1|0}(I-\Pi_0-\Pi_{1|0}) = \Pi_{1|0}-0-\Pi_{1|0}^2= \Pi_{1|0} - \Pi_{1|0} = 0$ 이므로 $\Pi_{1|0}Y$와 $(I-\Pi_{0,1})Y$는 공분산이 0이다.  
+>또한 $Y$가 정규분포를 따르므로 두 벡터는 결합정규분포(jointly normal)이고, 따라서 서로 독립이다: $\Pi_{1|0}Y \perp\!\!\!\perp (I-\Pi_{0,1})Y$  
+>그러므로 각각의 제곱노름인 $R(1|0)=Y^\top\Pi_{1|0}Y$와 $SSE=Y^\top(I-\Pi_{0,1})^\top(I-\Pi_{0,1})Y$도 독립이다: 
+>
+>$$
+>R(1|0)=Y^t\Pi_{1|0}Y \perp SSE=Y^t(I-\Pi_0-\Pi_{1|0})Y
+>$$
+>
+>따라서 일반적으로
+>
+>$$
+>F_n=\frac{R(1|0)/p_1}{SSE/(n-p_0-p_1)} \sim F(p_1,n-p_0-p_1;\delta)
+>$$
+>
+>한편 귀무가설 $H_0:\beta_1=0$하에서는 $\Pi_{1|0}X_0=0$이므로 $\delta=\beta_1^tX_0^t\Pi_{1|0}X_0\beta_1/\sigma^2=0$  
+>따라서 크기 $\alpha(0<\alpha<1)$인 기각역은 (b)에서와 같이 $F_n\ge F_\alpha(p_1,n-p_0-p_1)$ 로 주어진다.
+>
+>또한 예 10.3.1과 같은 방법으로 이 검정의 검정력 함수가 $\delta$의 증가함수인 것을 밝힐 수 있다.
+
 
 ## 20. Conditioning Trick: $E[X] = E[E[X|Y]]$
 
@@ -1182,6 +1348,8 @@ $a, b, c, d \in \mathbb{R}$에 대해
 $$
 ac + bd \leq \sqrt{a^2 + b^2} \sqrt{c^2 + d^2}
 $$
+
+절댓값 부등식의 경우, $|ab| \leq \sqrt{a^2} \sqrt{b^2}$
 
 확률변수 $X, Y$에 대해 $E[X^2], E[Y^2] < \infty$이면
 

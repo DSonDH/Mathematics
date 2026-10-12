@@ -1728,7 +1728,7 @@ $$A^{1/2} = (X^TX)^{1/2}$$
 - **행렬 로그**: $\log(A) = Q(\log(\Lambda))Q^T$ (양정치 대칭행렬)
 - **행렬 지수**: $e^A = Q e^{\Lambda} Q^T$ (대칭행렬)
 
-
+TODO:
 ## (9) 정사영행렬 (Projection Matrix)
 **정의**: 정사각행렬 $P$가 **정사영행렬(orthogonal projection matrix)** 이 되기 위한 필요충분조건은
 
@@ -2128,7 +2128,7 @@ $X_0$의 효과를 제거한 후 $X_1$과 $Y$의 상관을 구할 때:
 $$r_{\text{partial}} = \frac{\text{Cov}[(I - \Pi_0)Y, (I - \Pi_0)X_1]}{\sqrt{\text{Var}[(I - \Pi_0)Y] \cdot \text{Var}
 [(I - \Pi_0)X_1]}}$$
 
-
+TODO:
 ### 대칭 멱등행렬의 동등 조건
 $n \times n$ 실수 대칭행렬 $A, B$에 대해 다음 세 조건은 동등하다:
 1. $A, B$가 멱등행렬이고 $AB = 0$

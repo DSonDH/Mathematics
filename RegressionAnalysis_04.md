@@ -857,10 +857,7 @@ $$
 
 $$
 \boxed{
-\text{Var}(Y_0-\hat y_0) = \sigma^2
-\left[
-1+\mathbf x_0^T(X^TX)^{-1}\mathbf x_0
-\right]
+\text{Var}(Y_0-\hat y_0) = \sigma^2 \left[1+\mathbf x_0^T(X^TX)^{-1}\mathbf x_0\right]
 }
 $$
 
@@ -880,13 +877,12 @@ $$
 >
 >를 $p$차원 행렬로 확장한 결과이다. 다만 절편이 없기 때문에 총제곱합의 기준점이 표본평균 $\bar y$가 아니라 원점 $0$으로 바뀌며, 이에 따라 전체 자유도가 $n-1$에서 $n$으로 바뀐다.
 
+TODO:
 ## 4.7 제곱합의 분포 (Distribution of Sum of Squares)
 분산분석표에 나타나는 제곱합(SST, SSR, SSE)의 분포를 이론적으로 분석하고, 왜 $F_0$가 $F$분포를 따르는지 설명한다.
 
 **기본 가정**  
-중회귀모형 $y = X\beta + \varepsilon, \quad \varepsilon \sim N(0_n, \sigma^2 I_n)$ 즉,
-
-$$y \sim N(X\beta, \sigma^2 I_n)$$
+중회귀모형 $y = X\beta + \varepsilon, \quad \varepsilon \sim N(0_n, \sigma^2 I_n)$ 즉, $y \sim N(X\beta, \sigma^2 I_n)$
 
 **SST 분포** 
 

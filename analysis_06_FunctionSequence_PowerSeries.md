@@ -68,6 +68,7 @@ $$
 이면 $\{f_n\}$은 $D$에서 $f$로 **점별수렴** *(pointwise convergence)* 한다.
 - 즉, 실수열 $f_n(x)$가 $f(x)$로 수렴할 때.
 - $f_n\to f$ 혹은 $\lim f_n = f$ 혹은 $\lim_{n\to \infty} f_n(x) = f(x)$로 표기한다.
+  - 이 함수 $f$를 함수열 $\{f_n\}$의 점별극한 *(pointwise limit)* 이라 한다.
 - 점별수렴의 문제점이 있어 더 강한 조건인 균등수렴이 제안된다.
   - 점별수렴에서는 $N$이 $x$에 의존할 수 있다.
   - 그러나 연속성을 증명하려면 하나의 $\delta>0$에 대해 $|x-c|<\delta$인 **모든** $x$에서 부등식이 동시에 성립해야 한다.
@@ -79,6 +80,7 @@ $$
 $$\exists N\in\mathbb N\ \text{s.t.}\ \forall x\in D,\ n\ge N \Rightarrow |f_n(x)-f(x)|<\varepsilon$$
 
 이면 $\{f_n\}$은 $D$에서 $f$로 **균등수렴** *(uniform convergence)* 한다.
+- 이 함수 $f$를 함수열 $\{f_n\}$의 균등극한 *(uniform limit)* 이라 한다.
 - ①은 각 $x$마다 서로 다른 $N$을 선택 가능
 - ②는 ①과 달리 $N$이 $x$에 무관하게 존재
 - 고르게 수렴한다 고도 함 (Uniformly converge)

@@ -754,7 +754,7 @@ $$
 야코비안행렬식을 계산하면 ($\mathcal{X}_1$의 경우):
 
 $$
-J = \det\begin{pmatrix}
+\det(J) = \det\begin{pmatrix}
 \frac{\partial x_1}{\partial y_1} & \frac{\partial x_1}{\partial y_2} \\
 \frac{\partial x_2}{\partial y_1} & \frac{\partial x_2}{\partial y_2}
 \end{pmatrix}

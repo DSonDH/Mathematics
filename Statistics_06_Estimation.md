@@ -199,6 +199,8 @@ $$L(\theta;x) = \prod_{i=1}^n f(x_i;\theta),\quad \theta \in \Omega$$
 
 로 정의된 함수를 **가능도함수(likelihood function)** 또는 우도함수라 한다.
 
+- 모수와 무관한 상수항은 생략할 수 있다.
+
 > **가능도(likelihood)와 확률(probability)의 차이**
 >
 > - **확률(probability)** 은 모수 $\theta$가 고정되어 있을 때, 어떤 데이터 $x$가 관측될 확률을 의미한다. 즉, $P(X = x \mid \theta)$처럼 **데이터의 함수**이다.
