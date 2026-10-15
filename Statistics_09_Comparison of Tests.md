@@ -1357,10 +1357,12 @@ $$
 >**(a)** 첫째로 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 $X_1$의 분포가 $\theta_0$에 관하여 대칭이므로
 >
 >$$
->P_{\theta_0}(|X_1-\theta_0|\le x,\quad \mathrm{sgn}(X_1-\theta_0)=+1) \\
->= P_{\theta_0}(0<X_1-\theta_0\le x) \\
->= \frac{1}{2}P_{\theta_0}(|X_1-\theta_0|\le x) \\
->= P_{\theta_0}(|X_1-\theta_0|\le x)P_{\theta_0}(\mathrm{sgn}(X_1-\theta_0)=+1)
+>\begin{aligned}
+>P_{\theta_0}(|X_1-\theta_0|&\le x,\quad \mathrm{sgn}(X_1-\theta_0)=+1) \\
+>&= P_{\theta_0}(0<X_1-\theta_0\le x) \\
+>&= \frac{1}{2}P_{\theta_0}(|X_1-\theta_0|\le x) \\
+>&= P_{\theta_0}(|X_1-\theta_0|\le x)P_{\theta_0}(\mathrm{sgn}(X_1-\theta_0)=+1)
+>\end{aligned}
 >$$
 >
 >$$
@@ -1480,11 +1482,7 @@ $$
 >\sum_{j=1}^n j\,\frac{S(j)+1}{2}
 >$$
 >
->여기서
->
->$$B_j:=\frac{S(j)+1}{2}\in\{0,1\},\quad P(B_j=1)=P(S(j)=1)=\tfrac12$$
->
->이므로 $B_j \overset{iid}{\sim}\mathrm{Bernoulli}(1/2)$. 따라서
+>여기서 $B_j:=\frac{S(j)+1}{2}\in\{0,1\},\quad P(B_j=1)=P(S(j)=1)=\tfrac12$ 이므로 $B_j \overset{iid}{\sim}\mathrm{Bernoulli}(1/2)$. 따라서
 >
 >$$W_n^+ \ \overset{d}{\equiv}\ \sum_{j=1}^n j\,B_j$$
 >
