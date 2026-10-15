@@ -994,6 +994,7 @@ $$
 >= \sum_{k=0}^\infty pdf_{P(\delta/2)}(k) \cdot pdf_{\chi^2(r+2k)}(y)
 >$$
 
+TODO:
 ### 정리 10.3.2 이차형식의 분포
 아래 정리는 정리4.4.5를 일반화한 것으로, 서로 독립인 정규분포를 따르는 확률변수들의 이차형식의 분포가 비중심 카이제곱분포일 조건을 주고 있다.  
 $X\sim N(\mu,I)$이고 $A^2=A$이면 다음이 성립한다:
@@ -1469,18 +1470,16 @@ $$F_n=\frac{R(1|0)/p_1}{SSE/(n-p_0-p_1)}$$
 >\hat{\sigma^2}_\Omega=\min_{\beta_0\in R^{p_0},\beta_1\in R^{p_1}}|Y-X_0\beta_0-X_1\beta_1|^2/n=SSE/n \\
 >\hat{\sigma^2}_0=\min_{\beta_0\in R^{p_0}}|Y-X_0\beta_0|^2/n=(SSE+Y^t\Pi_{1|0}Y)/n \\
 >\therefore\ 2\bigl(l({\hat\theta}^\Omega)-l(\hat\theta^0)\bigr)
+>= 2(-\frac{n}{2}\log(2\pi\hat{\sigma^2}_\Omega)-\frac{n}{2}+\frac{n}{2}\log(2\pi\hat{\sigma^2}_0)+\frac{n}{2}) \\
 >=n\log(\hat{\sigma^2}_0/\hat{\sigma^2}_\Omega)
 >=n\log\left(1+\frac{Y^t\Pi_{1|0}Y}{SSE}\right)
 >$$
 >
->이는 $Y^t\Pi_{1|0}Y/SSE$의 증가함수이므로, 최대가능도비 검정과 $F_n$ 검정은 동치이다.  
->따라서 검정통계량은 $F_n$으로 주어지고 기각역은 $F_n$의 큰 값으로 주어진다.
+>이는 $Y^t\Pi_{1|0}Y/SSE$의 증가함수이고, 검정통계량은 이 증가함수에 의해 결정된다.  
+>이제 이 식이 어떻게 $F$-통계량으로 변환되는지 살펴보자.
 >
->한편 $\Pi_{1|0}$가 멱등행렬이고  
->$\mathrm{trace}(\Pi_{1|0}) =\mathrm{trace}{X_{1|0}(X_{1|0}^tX_{1|0})^{-1}X_{1|0}^t} =\mathrm{trace}{(X_{1|0}^tX_{1|0})^{-1}X_{1|0}^tX_{1|0}} =p_1$ 이므로,  
->
->정리 10.3.2로부터  
->$R(1|0)/\sigma^2=Y^t\Pi_{1|0}Y/\sigma^2\sim\chi^2(p_1;\delta),\quad
+> $\Pi_{1|0}$가 멱등행렬이고 $\mathrm{trace}(\Pi_{1|0}) =\mathrm{trace}{X_{1|0}(X_{1|0}^tX_{1|0})^{-1}X_{1|0}^t} =\mathrm{trace}{(X_{1|0}^tX_{1|0})^{-1}X_{1|0}^tX_{1|0}} =p_1$ 이므로,  
+>정리 10.3.2로부터 $R(1|0)/\sigma^2=Y^t\Pi_{1|0}Y/\sigma^2\sim\chi^2(p_1;\delta),\quad
 >\delta=(X_0\beta_0+X_1\beta_1)^t\Pi_{1|0}(X_0\beta_0+X_1\beta_1)/\sigma^2$  
 >그런데 $\Pi_{1|0}X_0=0$이므로 $\delta=\beta_1^tX_1^t\Pi_{1|0}X_1\beta_1/\sigma^2$  
 >또한 같은 방법으로 $SSE/\sigma^2=Y^t(I-\Pi_{0,1})Y/\sigma^2\sim\chi^2(n-p_0-p_1)$  
@@ -1504,6 +1503,7 @@ $$F_n=\frac{R(1|0)/p_1}{SSE/(n-p_0-p_1)}$$
 >
 >또한 예 10.3.1과 같은 방법으로 이 검정의 검정력 함수가 $\delta$의 증가함수인 것을 밝힐 수 있다.
 
+TODO:
 ### 정리 10.4.4 회귀계수의 선형결합에 대한 유의성 검정 *(general linear hypothesis test)*
 일반 선형가설 $H_0: C^\top\beta=0\quad \text{vs}\quad H_1:C^\top\beta\neq 0$  
 $C$는 $(p+1)\times r$, $\mathrm{rank}(C)=r$  
@@ -1521,8 +1521,8 @@ $$
 
 $$
 \boxed{\ 
-\min_{\beta,\ C^\top\beta=0}\ \|Y-X\beta\|^2
-= \min_{\beta}\ \|Y-X\beta\|^2
+\min_{\beta \in \mathbb{R}^{p+1},\ C^\top\beta=0}\ \|Y-X\beta\|^2
+= \min_{\beta\in \mathbb{R}^{p+1}}\ \|Y-X\beta\|^2
 +Y^\top\Pi_{1|0}Y\ }
 $$
 
@@ -1550,7 +1550,7 @@ F_n\sim F(r,\ n-p-1;\ \delta), \quad \delta = \frac{\beta^\top C\Big(C^\top(X^\t
 $$
 
 >**증명**  
->증명의 핵심은 이 정리에서의 가설 검정을 <정리 10.4.3>의 가설 검정으로 대응하여 인지하는 것이다. 이러한 대응을 이해하기 위하여, 행렬 $C$의 열벡터공간의 정규직교기저(orthonormal basis) 벡터를 열로 갖는 $(p+1)\times r$ 행렬을 $C_1$이라고 하고 이를 확장하여 $\mathbb{R}^{p+1}$의 정규직교기저 벡터를 열로 갖는 $(p+1)\times(p+1)$ 행렬을 $(C_0\ C_1)$이라고 하자. $C_0$는 $C$의 열벡터공간의 정규직교기저 벡터를 열로 갖는 $(p+1)\times(p+1-r)$ 행렬이다.
+>증명의 핵심은 이 정리에서의 가설 검정을 <정리 10.4.3>의 가설 검정으로 대응하여 인지하는 것이다. 이러한 대응을 이해하기 위하여, 행렬 $C$의 열벡터공간의 정규직교기저(orthonormal basis) 벡터를 열로 갖는 $(p+1)\times r$ 행렬을 $C_1$이라고 하고 이를 확장하여 $\mathbb{R}^{p+1}$의 정규직교기저 벡터를 열로 갖는 $(p+1)\times(p+1)$ 행렬을 $(C_0\ C_1)$이라고 하자. $C_0$는 $(p+1)\times(p+1-r)$ 행렬이다.
 >즉
 >
 >$$
@@ -1577,13 +1577,13 @@ $$
 >이므로, <정리 10.4.3>의 (a)로부터 행렬 $(D_0, D_1)$의 열벡터공간
 >
 >$$
->\text{col}((D_0, D_1)) = {D_0 \gamma_0 + D_1 \gamma_1 : \gamma_0 \in \mathbb{R}^{p+1-r},\ \gamma_1 \in \mathbb{R}^r}
+>\text{col}((D_0, D_1)) = \{D_0 \gamma_0 + D_1 \gamma_1 : \gamma_0 \in \mathbb{R}^{p+1-r},\ \gamma_1 \in \mathbb{R}^r\}
 >$$
 >
 >에서 행렬 $D_0$의 열벡터공간의 직교여공간(orthogonal complement)
 >
 >$$
->\text{col}(D_{1|0}) = {a \in \text{col}((D_0, D_1)) : a^t D_0 = 0}
+>\text{col}(D_{1|0}) = \{a \in \text{col}((D_0, D_1)) : a^t D_0 = 0\}
 >$$
 >
 >으로의 정사영행렬을 $\Pi_{1|0}$라고 하면 다음이 성립하는 것을 알고 있다.
@@ -1595,8 +1595,8 @@ $$
 >한편 $(D_0, D_1) = X(C_0\ C_1)$이므로
 >
 >$$
->\text{col}((D_0, D_1)) = {X(C_0 \gamma_0 + C_1 \gamma_1) : \gamma_0 \in \mathbb{R}^{p+1-r},\ \gamma_1 \in \mathbb{R}^r} \\
->= {X\beta : \beta \in \mathbb{R}^{p+1}} = \text{col}(X)
+>\text{col}((D_0, D_1)) = \{X(C_0 \gamma_0 + C_1 \gamma_1) : \gamma_0 \in \mathbb{R}^{p+1-r},\ \gamma_1 \in \mathbb{R}^r\} \\
+>= \{X\beta : \beta \in \mathbb{R}^{p+1}\} = \text{col}(X)
 >$$
 >
 >임을 알 수 있고, 행렬 $D_0$의 열벡터공간의 직교여공간 $\text{col}(D_{1|0})$이 행렬 $S = X(X^t X)^{-1} C$ 의 열벡터공간임을 다음으로부터 알 수 있다.
@@ -1607,7 +1607,7 @@ $$
 >&= \{a \in \text{col}(X) : a^t X C_0 = 0\} \\
 >&= \{X\beta : \beta^t X^t X C_0 = 0\} \\
 >&= \{X\beta : X^t X \beta \in \text{col}(C)\} \\
->&= \{X(X^t X)^{-1} C \xi : \xi \in \mathbb{R}^r\} \\
+>&= \{X(X^t X)^{-1} C \xi : \xi \in \mathbb{R}^r\} &(\because \beta=(X^t X)^{-1} C\xi) \\
 >&= \text{col}(X(X^t X)^{-1} C)
 >\end{aligned}
 >$$

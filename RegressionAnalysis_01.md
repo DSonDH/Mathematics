@@ -169,7 +169,7 @@ $$\hat{\beta}_0 n+\hat{\beta}_1\sum x_i=\sum y_i \\
 앞서 S를 편미분결과를 0으로 두고 해를 구했는데, 실제로 이 해가 S를 최소화 하는 보장이 없어 필요조건에 불과하다. 충분조건은 이차편미분 행렬이 양정치 (positive definite)이어야 한다는 것이다. 실베스터 판정법을 활용해야 한다.
   
 $$
-J 
+H 
 = \begin{bmatrix}
 \frac{\partial^2 S}{\partial \beta_0^2} & \frac{\partial^2 S}{\partial \beta_0 \partial \beta_1} \\
 \frac{\partial^2 S}{\partial \beta_1 \partial \beta_0} & \frac{\partial^2 S}{\partial \beta_1^2}
@@ -180,11 +180,11 @@ J
 \end{bmatrix}
 $$
 
-우선, $J_{11}$성분이 양수여야 한다. $\frac{\partial^2 S}{\partial \beta_0^2}=2n>0$
+우선, $H_{11}$성분이 양수여야 한다. $\frac{\partial^2 S}{\partial \beta_0^2}=2n>0$
 
 $2\times2$행렬이므로, 행렬식(determinant)을 추가로 검사하면 된다.
 
-$$\text{det}(J) = (2n)(2\sum x_i^2) - (2\sum x_i)^2 
+$$\text{det}(H) = (2n)(2\sum x_i^2) - (2\sum x_i)^2 
 =4\left(n\sum x_i^2 - \left(\sum x_i\right)^2\right)$$
 
 여기서 $\left(\sum x_i\right)^2 = n^2\bar{x}^2 = n\cdot n\bar{x}^2$ 이므로
@@ -196,13 +196,13 @@ $$n\sum x_i^2 - \left(\sum x_i\right)^2
 
 이므로
 
-$$\text{det}(J) = 4n\sum (x_i-\bar{x})^2 \ge 0$$
+$$\text{det}(H) = 4n\sum (x_i-\bar{x})^2 \ge 0$$
 
 이고, 자료가 적어도 하나 이상 변동하여 $x_i \ne \bar{x}$인 경우가 존재하면 $\sum (x_i-\bar{x})^2 > 0$이므로
 
-$$\text{det}(J) > 0$$
+$$\text{det}(H) > 0$$
 
-이 된다. 즉, Hessian 행렬 $J$는 양정치(positive definite)이며, 이 경우 목적함수 $S$는 이 점에서 최소값을 갖는다. 따라서 앞서 구한 해는 실제로 최소제곱문제의 최소해가 됨이 보장된다.
+이 된다. 즉, Hessian 행렬 $H$는 양정치(positive definite)이며, 이 경우 목적함수 $S$는 이 점에서 최소값을 갖는다. 따라서 앞서 구한 해는 실제로 최소제곱문제의 최소해가 됨이 보장된다.
 
 $$\hat{\beta}_1=\frac{\sum x_i y_i-\frac{(\sum x_i)(\sum y_i)}{n}}{\sum x_i^2-\frac{(\sum x_i)^2}{n}} =\frac{\sum x_i y_i - n(\sum x_i/n)(\sum y_i/n)}{\sum x_i^2 - n(\sum x_i/n)^2} = \frac{\sum x_i y_i - n \bar{x} \bar{y}}{\sum x_i^2 - n \bar{x}^2}$$
 
@@ -269,8 +269,10 @@ $$e_i=y_i-\hat{y}_i$$
 #### (1) 잔차의 합은 0
 
 $$\sum e_i
-= \sum (y_i - \hat y) = \sum(y_i -\hat\beta_0 - \hat\beta_1x_1) = \sum y_i - n\hat\beta_0 -\hat\beta_1\sum x_i = 0\\
+= \sum (y_i - \hat y) = \sum(y_i -\hat\beta_0 - \hat\beta_1x_i) = \sum y_i - n\hat\beta_0 -\hat\beta_1\sum x_i = 0\\
 \therefore \sum y_i=\sum \hat{y}_i$$
+
+- 마지막은 정규방정식에 의함
 
 #### (2) 잔차제곱합은 최소
 
@@ -281,6 +283,8 @@ $$\sum e_i^2$$
 #### (3) 잔차와 $x_i$의 가중합은 0
 
 $$\sum x_i e_i= \sum x_i(y_i-\hat y_i) = \sum x_i(y_i-\hat \beta_0-\hat\beta_1 x_i)=0$$
+
+- 마지막은 정규방정식에 의함
 
 #### (4) 잔차와 적합값의 가중합은 0
 
@@ -306,7 +310,46 @@ $(\bar{x},\bar{y})$는 적합된 회귀직선 위에 있다.
 
 회귀식을 적합한 뒤 잔차(residual) $e_i = y_i - \hat{y}_i$를 정의하면, (잔차는 오차항이랑 다름. 기호도 다름.) 오차분산 $\sigma^2$의 불편추정량(unbiased estimator)은 (mean squre deviation from the regression line이라고도 함)
 
-$$s_{y \cdot x}^2=\frac{\sum (y_i - \hat{y}_i)^2}{n-2}$$
+$x_i$는 고정되어 있고 모두 같지는 않으며 $n>2$라고 하자.
+
+$$
+E[\varepsilon_i]=0,\qquad
+\text{Var}(\varepsilon_i)=\sigma^2,\qquad
+\text{Cov}(\varepsilon_i,\varepsilon_j)=0\quad(i\ne j)
+$$
+
+정규분포 가정은 필요하지 않다. 단순선형회귀를 행렬로 나타내면
+
+$$
+Y=X\beta+\varepsilon,\qquad
+X=\begin{pmatrix}
+1&x_1\\
+\vdots&\vdots\\
+1&x_n
+\end{pmatrix},\qquad
+\text{Var}(\varepsilon)=\sigma^2I_n
+$$
+
+이다. 최소제곱 적합값과 잔차벡터는 $\widehat Y=HY,\quad e=(I-H)Y,\quad H=X(X^\top X)^{-1}X^\top$ 이며, $HX=X$이므로 $e=(I-H)\varepsilon$이다. 따라서 $E[e]=0, \text{Var}(e)=(I-H)\sigma^2I_n(I-H)^\top=\sigma^2(I-H)$ 이다. 여기서 $I-H$는 대칭·멱등 행렬이다. 그러므로 각 잔차에 대해 $E[e_i^2]=\text{Var}(e_i)+(E[e_i])^2=\sigma^2(1-h_{ii})$ 이고, 이를 합하면
+
+$$
+E\!\left[\sum_{i=1}^n e_i^2\right]
+=\sigma^2\sum_{i=1}^n(1-h_{ii}) =\sigma^2\bigl(n-\text{tr}(H)\bigr).
+$$
+
+$X$의 두 열이 선형독립이므로 $\text{tr}(H) =\text{tr}\!\left(X(X^\top X)^{-1}X^\top\right) =\text{tr}(I_2)=2$
+
+따라서 
+
+$$
+\boxed{
+E[s_{y\cdot x}^2]
+=E\!\left[\frac{\sum_{i=1}^n(y_i-\hat{y}_i)^2}{n-2}\right]
+=\sigma^2
+}
+$$
+
+분모가 $n-2$인 이유는 절편과 기울기, 두 회귀계수를 추정하면서 잔차공간의 차원이 $n-2$가 되기 때문이다. 불편추정량은 $s_{y\cdot x}^{\,2}$이며, 그 제곱근 $s_{y\cdot x}$가 $\sigma$의 불편추정량이라는 뜻은 아니다.
 
 따라서 추정값의 표준오차는
 

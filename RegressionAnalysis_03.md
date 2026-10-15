@@ -1,4 +1,5 @@
 # Chapter 3 기초적 회귀분석의 기타 논제 (Additional Topics in Basic Regression)
+
 본 장은 단순선형회귀(simple linear regression)와 관련하여 기존 장에서 다루지 않은 주요 주제들을 정리한 것이다. 특히 비선형관계를 선형모형으로 변환하는 방법, 역변환, Box–Cox 변환 등 실무적 자료분석에서 자주 활용되는 기법들을 체계적으로 다룬다.
 
 ## 3.1 모형의 변환 (Model Transformation)
@@ -17,9 +18,7 @@ $$y = a_0 a_1^x \varepsilon$$
 * $(a_0, a_1)$: 회귀모수(regression parameters)
 * $(\varepsilon)$: 오차항(error term), 평균 1, 분산 $\sigma^2$
 
-양변에 로그(logarithm)를 취하면
-
-$$\log y = \log a_0 + x \log a_1 + \log \varepsilon$$
+양변에 로그(logarithm)를 취하면: $\log y = \log a_0 + x \log a_1 + \log \varepsilon$
 
 변수 치환:
 * $y' = \log y$
@@ -27,9 +26,7 @@ $$\log y = \log a_0 + x \log a_1 + \log \varepsilon$$
 * $\beta_1 = \log a_1$
 * $\varepsilon' = \log \varepsilon$
 
-선형모형으로 변환됨:
-
-$$y' = \beta_0 + \beta_1 x + \varepsilon'$$
+선형모형으로 변환됨: $y' = \beta_0 + \beta_1 x + \varepsilon'$
 
 최소제곱추정(least squares estimation)을 통해 $(\hat{\beta}_0, \hat{\beta}_1)$을 구한 후,
 
@@ -237,11 +234,7 @@ $$\mathrm{Var}(\hat{\beta}_1) = \sigma^2 \left[ \frac{1}{\sum (x_i - \bar{x})^2}
 \mathrm{Var}(\hat{y}_0) = \sigma^2 \left[ 1 + \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum (x_i - \bar{x})^2} \right]$$
 
 **기울기 추정 정밀화**  
-기울기 분산 최소화를 위해서는
-
-$$S_{xx} = \sum (x_i - \bar{x})^2$$
-
-를 최대화해야 한다.
+기울기 분산 최소화를 위해서는 $S_{xx} = \sum (x_i - \bar{x})^2$ 를 최대화해야 한다.
 
 실험영역(experimental region) $[x_a, x_b]$에서
 * $n/2$를 $x_a$
@@ -310,18 +303,14 @@ $$F_0 = \frac{[SSE(R) - SSE(F)]/(df_R - df_F)}{SSE(F)/df_F}$$
   - 증명 step3: $[SSE(R) - SSE(F)]/\sigma^2$는 자유도 2인 카이제곱분포를 따른다.
   
 **순서4: 가설검정**  
-판정:
-
-$$F_0 > F_{\alpha}(2, n_1 + n_2 - 4) \Rightarrow H_0 \text{ 기각}$$
+판정: $F_0 > F_{\alpha}(2, n_1 + n_2 - 4) \Rightarrow H_0 \text{ 기각}$
 
 두 회귀직선이 통계적으로 유의하게 다르다고 결론 내린다.
 
 ### 3.4.2 두 기울기의 검정 (Test of Equality of Slopes)
 회귀직선이 동일하지 않을 경우 기울기만 비교할 수 있다.
 
-가설:
-
-$$H_0: \beta_{11} - \beta_{12} = 0$$
+가설: $H_0: \beta_{11} - \beta_{12} = 0$
 
 검정통계량:
 
@@ -331,13 +320,9 @@ $$t_0 = \frac{\hat{\beta}_{11} - \hat{\beta}_{12}}{\sqrt{\mathrm{Var}(\hat{\beta
 
 $$\mathrm{Var}(\hat{\beta}_{11} - \hat{\beta}_{12}) = MSE(F) \left[ \frac{1}{\sum (x_{1j} - \bar{x}_1)^2} + \frac{1}{\sum (x_{2j} - \bar{x}_2)^2} \right]$$
 
-자유도:
+자유도: $df = n_1 + n_2 - 4$
 
-$$df = n_1 + n_2 - 4$$
-
-판정:
-
-$$|t_0| > t_{\alpha/2}(df) \Rightarrow H_0 \text{ 기각}$$
+판정: $|t_0| > t_{\alpha/2}(df) \Rightarrow H_0 \text{ 기각}$
 
 
 ## 3.5 이차형식의 분포 (Distribution of Quadratic Forms)
@@ -395,199 +380,101 @@ $$E(\mathbf{y}^T \mathbf{A} \mathbf{y})=\mathrm{tr}(\mathbf{A}\mathbf{V})+\mathb
 
 >**증명**
 >
->$$
->E(\mathbf{y}\mathbf{y}^T) 
->= E[(\mathbf{y}-\mathbf{\mu})(\mathbf{y}-\mathbf{\mu})^T+\mathbf{y}\mathbf{\mu}^T+\mathbf{\mu}\mathbf{y}^T-\mathbf{\mu}\mathbf{\mu}^T] 
->= V+\mathbf{\mu}\mathbf{\mu}^T
->$$
+>$\mathbf{U}=\mathbf{y}-\mathbf{\mu}$라 두면 $\mathbf{y}^T\mathbf{A}\mathbf{y} =\mathbf{\mu}^T\mathbf{A}\mathbf{\mu} +2\mathbf{\mu}^T\mathbf{A}\mathbf{U} +\mathbf{U}^T\mathbf{A}\mathbf{U}$
 >
->를 활용한다.
->
->$$E(\mathbf{y}^T \mathbf{A} \mathbf{y}) = E[\mathrm{tr}(\mathbf{y}^T \mathbf{A} \mathbf{y})] = E[\mathrm{tr}(\mathbf{A} \mathbf{y} \mathbf{y}^T)] = \mathrm{tr}(\mathbf{A} E[\mathbf{y}\mathbf{y}^T]) \\
->= \mathrm{tr}(\mathbf{A} (\mathbf{V} + \mathbf{\mu}\mathbf{\mu}^T)) = \mathrm{tr}(\mathbf{A}\mathbf{V}) + \mathrm{tr}(\mathbf{A}\mathbf{\mu}\mathbf{\mu}^T) = \mathrm{tr}(\mathbf{A}\mathbf{V}) + \mathbf{\mu}^T \mathbf{A}\mathbf{\mu}$$
->
->$$\mathrm{Cov}(\mathbf{y},\mathbf{y}^T \mathbf{A} \mathbf{y}) = E[(\mathbf{y} - \mathbf{\mu})(\mathbf{y}^T \mathbf{A} \mathbf{y} - E(\mathbf{y}^T \mathbf{A} \mathbf{y}))] 
->= E[(\mathbf{y} - \mathbf{\mu})\left(\mathbf{y}^T \mathbf{A} \mathbf{y} - \mathrm{tr}(\mathbf{A}\mathbf{V}) - \mathbf{\mu}^T \mathbf{A}\mathbf{\mu}\right)] \\
->= E[(\mathbf{y} - \mathbf{\mu})\left((\mathbf{y}-\mathbf{\mu}+\mathbf{\mu})^T \mathbf{A}(\mathbf{y}-\mathbf{\mu}+\mathbf{\mu}) - \mathrm{tr}(\mathbf{A}\mathbf{V}) - \mathbf{\mu}^T \mathbf{A}\mathbf{\mu}\right)] \\
->= E[(\mathbf{y} - \mathbf{\mu})\Big( (\mathbf{y}-\mathbf{\mu})^T \mathbf{A}(\mathbf{y}-\mathbf{\mu}) + (\mathbf{y}-\mathbf{\mu})^T \mathbf{A}\mathbf{\mu} + \mathbf{\mu}^T \mathbf{A}(\mathbf{y}-\mathbf{\mu}) + \mathbf{\mu}^T \mathbf{A}\mathbf{\mu} -\mathrm{tr}(\mathbf{A}\mathbf{V}) - \mathbf{\mu}^T \mathbf{A}\mathbf{\mu} \Big)]
->$$
->
->이때 $\mathbf{A}=\mathbf{A}^T$이므로, 
->$\mu^T\mathbf{A}(\mathbf{y}-\mu) =\left[\mu^T\mathbf{A}(\mathbf{y}-\mu)\right]^T =(\mathbf{y}-\mu)^T\mathbf{A}^T\mu =(\mathbf{y}-\mu)^T\mathbf{A}\mu$ 이므로 두 교차항은 같고, 
->$(\mathbf{y}-\mu)^T\mathbf{A}\mu+\mu^T\mathbf{A}(\mathbf{y}-\mu)
->=2(\mathbf{y}-\mu)^T\mathbf{A}\mu.$  
->따라서 
+>$E(\mathbf{U})=\mathbf{0}$이므로 가운데 항의 기댓값은 0이다. 또한
+>$\mathbf{U}^T\mathbf{A}\mathbf{U}=\mathrm{tr}(\mathbf{A}\mathbf{U}\mathbf{U}^T)$이므로
 >
 >$$
->= E[(\mathbf{y} - \mathbf{\mu})\Big( (\mathbf{y}-\mathbf{\mu})^T \mathbf{A}(\mathbf{y}-\mathbf{\mu}) - \mathrm{tr}(\mathbf{A}\mathbf{V}) + 2(\mathbf{y}-\mathbf{\mu})^T \mathbf{A}\mathbf{\mu} \Big)] \\
->= E[(\mathbf{y} - \mathbf{\mu})\left((\mathbf{y}-\mathbf{\mu})^T \mathbf{A}(\mathbf{y}-\mathbf{\mu}) - \mathrm{tr}(\mathbf{A}\mathbf{V})\right) + 2E(\mathbf{y} - \mathbf{\mu})(\mathbf{y}-\mathbf{\mu})^T \mathbf{A}\mathbf{\mu}]
->\\ = E[(\mathbf{y} - \mathbf{\mu})(\mathbf{y}-\mathbf{\mu})^T \mathbf{A}(\mathbf{y}-\mathbf{\mu})] - E[(\mathbf{y} - \mathbf{\mu})\mathrm{tr}(\mathbf{A}\mathbf{V})] + 2E(\mathbf{y} - \mathbf{\mu})(\mathbf{y}-\mathbf{\mu})^T \mathbf{A}\mathbf{\mu}]$$
->
->마지막 식의 첫 항이 0인 이유는 중심 정규분포의 3차 모멘트(변수 세개를 곱합것의 기댓값)가 원점대칭 홀함수라서 0이기 때문이다. $\mathbf{x}=\mathbf{y}-\mathbf{\mu}$ 라 두면 $\mathbf{x}\sim N(\mathbf{0},\mathbf{V})$ 이고, 성분으로 풀었을 때 $i$번째 성분은
->
->$$E[x_i(\mathbf{x}^T\mathbf{A}\mathbf{x})]
->=E\left[x_i\sum_{j,k}A_{jk}x_jx_k\right]
->=\sum_{j,k}A_{jk}E[x_ix_jx_k].$$
->
->중심 다변량 정규분포에서는 모든 홀수 차 모멘트가 0이므로 $E[x_ix_jx_k]=0$ 이다. 따라서 $E[\mathbf{x}(\mathbf{x}^T\mathbf{A}\mathbf{x})]=\mathbf{0}.$  
->두번째 항은 자명하게 0이고 세번째 항은 분산 정의에 의한다. 따라서
->
+>E(\mathbf{U}^T\mathbf{A}\mathbf{U}) =\mathrm{tr} \{\mathbf{A}E(\mathbf{U}\mathbf{U}^T)\} =\mathrm{tr}(\mathbf{A}\mathbf{V}).
 >$$
->= \mathbf{0} + \mathbf{0} + 2\mathbf{V}\mathbf{A}\mathbf{\mu}
->$$
+>
+>따라서 $E(\mathbf{y}^T\mathbf{A}\mathbf{y}) =\mathrm{tr}(\mathbf{A}\mathbf{V})+\mathbf{\mu}^T\mathbf{A}\mathbf{\mu}$
+>
+>이 결과에는 정규성이 필요하지 않다.
+
 
 #### 정리 3.2
 
 $$\mathrm{Var}(\mathbf{y}^T \mathbf{A} \mathbf{y}) = 2\mathrm{tr}[(\mathbf{A}\mathbf{V})^2]+4\mathbf{\mu}^T \mathbf{A} \mathbf{V} \mathbf{A}\mathbf{\mu}$$
 
 >**증명**
+> $\mathbf A$가 대칭행렬이라고 하자. $\mathbf X=\mathbf V^{-1/2}(\mathbf y-\mathbf\mu)$, $\boldsymbol\delta=\mathbf V^{-1/2}\mathbf\mu$, $\mathbf C=\mathbf V^{1/2}\mathbf A\mathbf V^{1/2}$라 두면 $\mathbf X\sim N(\mathbf 0,\mathbf I)$이고
 >
->$x=y-\mu$ 라 두면 $x\sim N(0,V)$
+> $$
+> \mathbf y^T\mathbf A\mathbf y = (\mathbf X+\boldsymbol\delta)^T\mathbf C(\mathbf X+\boldsymbol\delta).
+> $$
 >
->그러면 $y^TAy =(x+\mu)^TA(x+\mu) =x^TAx+2x^TA\mu+\mu^TA\mu.$
+> $\mathbf C$는 대칭행렬이므로 직교행렬 $\mathbf Q$와 대각행렬 $\boldsymbol\Lambda=\text{diag}(\lambda_1,\ldots,\lambda_n)$를 사용해 $\mathbf C=\mathbf Q\boldsymbol\Lambda\mathbf Q^T$로 대각화한다.  
+>$\mathbf Z=\mathbf Q^T\mathbf X$, 그리고 $\mathbf m=\mathbf Q^T\boldsymbol\delta$라 두면 $Z_1,\ldots,Z_n$은 서로 독립인 표준정규 확률변수이며
 >
->$\mu^TA\mu$ 는 상수이므로 $\text{Var}(y^TAy) = \text{Var}(x^TAx+2x^TA\mu).$  
->일반적으로 두 확률변수 $U,V$에 대해
->$\text{Var}(U+V) =\text{Var}(U)+\text{Var}(V)+\text{Cov}(U,V)+\text{Cov}(V,U)$ 이므로
+> $$
+> \mathbf y^T\mathbf A\mathbf y=(\mathbf Z+\mathbf m)^T \boldsymbol\Lambda (\mathbf Z+\mathbf m) =\sum_{i=1}^n\lambda_i(m_i+Z_i)^2.
+> $$
 >
+> 표준정규분포의 적률 $E(Z_i)=E(Z_i^3)=0$, $E(Z_i^2)=1$, $E(Z_i^4)=3$을 이용하면
 >
->$$\text{Var}(y^TAy) = \text{Var}(x^TAx)+4\text{Var}(x^TA\mu) +4\text{Cov}(x^TAx,x^TA\mu).$$
+> $$
+> \text{Var}\{(m_i+Z_i)^2\}=0 + 4m_i^2\text{Var}(Z_i) + \text{Var}(Z_i^2)= 4m_i^2+2.
+> $$
 >
->이제 각 항을 계산하면 된다. 먼저 $\text{Cov}(x^TAx,x^TA\mu)=0$ 이다. 실제로 $E[x^TA\mu]=0$ 이므로
+> 각 항이 독립이므로
 >
->$$
->\begin{aligned}
->\text{Cov}(x^TAx,x^TA\mu)
->&=
->E[(x^TAx)(x^TA\mu)]\\
->&=
->E\left[
->\left(\sum_{i,j}a_{ij}x_ix_j\right)
->\left(\sum_k (A\mu)_k x_k\right)
->\right]\\
->&=
->\sum_{i,j,k}a_{ij}(A\mu)_kE[x_ix_jx_k]\\
->&=0.
->\end{aligned}
->$$
+> $$
+> \begin{aligned}
+> \text{Var}(\mathbf y^T\mathbf A\mathbf y)
+> &= \text{Var}\left\{\sum_{i=1}^n\lambda_i(m_i+Z_i)^2\right\} \\
+> &= \sum_{i=1}^n\lambda_i^2\text{Var}\{(m_i+Z_i)^2\}\\
+> &=\sum_{i=1}^n\lambda_i^2(4m_i^2+2)\\
+> &=4\boldsymbol\delta^T\mathbf C^2\boldsymbol\delta+2\text{tr}(\mathbf C^2)\\
+> &=4\mathbf\mu^T\mathbf A\mathbf V\mathbf A\mathbf\mu+2\text{tr}[(\mathbf A\mathbf V)^2].
+> \end{aligned}
+> $$
 >
->마지막 등식은 평균이 $0$ 인 정규분포에서 세 변수의 곱의 기댓값이 $0$ 이기 때문이다.
+> 마지막 등식에서는 $\boldsymbol\delta=\mathbf V^{-1/2}\boldsymbol\mu$와 $\mathbf C=\mathbf V^{1/2}\mathbf A\mathbf V^{1/2}$를 대입한다. 여기서 $\mathbf V$는 대칭 양의 정부호 행렬이고, $\mathbf V^{1/2}$는 대칭 제곱근행렬이므로 $\mathbf V^{-1/2}$도 대칭이다. 먼저
 >
->다음으로 $x^TA\mu$ 는 스칼라이므로
+> $$
+> \begin{aligned}
+> \mathbf C^2
+> &=(\mathbf V^{1/2}\mathbf A\mathbf V^{1/2})
+>   (\mathbf V^{1/2}\mathbf A\mathbf V^{1/2})\\
+> &=\mathbf V^{1/2}\mathbf A
+>   \underbrace{\mathbf V^{1/2}\mathbf V^{1/2}}_{\mathbf V}
+>   \mathbf A\mathbf V^{1/2}\\
+> &=\mathbf V^{1/2}\mathbf A\mathbf V\mathbf A\mathbf V^{1/2}.
+> \end{aligned}
+> $$
 >
->$$
->\text{Var}(x^TA\mu) =E[(x^TA\mu)^2] =E[x^TA\mu\mu^TAx]\\
->=E[\mu^TAxx^TA\mu] =\mu^TAE[xx^T]A\mu =\mu^TAVA\mu. \\
->\therefore 4\text{Var}(x^TA\mu)  = \boxed{4\mu^TAVA\mu}.
->$$
+> **첫째 항**은 $\mathbf V^{-1/2}$와 $\mathbf V^{1/2}$의 곱을 인접한 위치에서 정리한다. 행렬의 순서는 바꾸지 않고 결합법칙만 사용하면
 >
->이제 $\text{Var}(x^TAx)$ 를 보자.  
->$E[x^TAx]=\text{tr}(AV)$ 이므로, $\text{Var}(x^TAx) = E[(x^TAx)^2] - [\text{tr}(AV)]^2.$
+> $$
+> \begin{aligned}
+> \boldsymbol\delta^T\mathbf C^2\boldsymbol\delta
+> &=\boldsymbol\mu^T\mathbf V^{-1/2}
+>   (\mathbf V^{1/2}\mathbf A\mathbf V\mathbf A\mathbf V^{1/2})
+>   \mathbf V^{-1/2}\boldsymbol\mu\\
+> &=\boldsymbol\mu^T
+>   \underbrace{(\mathbf V^{-1/2}\mathbf V^{1/2})}_{\mathbf I}
+>   \mathbf A\mathbf V\mathbf A
+>   \underbrace{(\mathbf V^{1/2}\mathbf V^{-1/2})}_{\mathbf I}
+>   \boldsymbol\mu\\
+> &=\boldsymbol\mu^T\mathbf A\mathbf V\mathbf A\boldsymbol\mu.
+> \end{aligned}
+> $$
 >
->이제 $x^TAx=\sum_{i,j}a_{ij}x_ix_j$ 이므로
+> **둘째 항**에서는 대각합의 순환 성질 $\operatorname{tr}(B_1B_2\cdots B_k)=\operatorname{tr}(B_2\cdots B_kB_1)$을 적용한다. 즉, 곱의 맨 앞 행렬을 맨 뒤로 옮기면
 >
->$$
->\begin{aligned}
->E[(x^TAx)^2]
->&=
->E\left[
->\sum_{i,j}a_{ij}x_ix_j
->\sum_{k,l}a_{kl}x_kx_l
->\right]\\
->&=
->\sum_{i,j,k,l}
->a_{ij}a_{kl}
->E[x_ix_jx_kx_l].
->\end{aligned}
->$$
+> $$
+> \begin{aligned}
+> \operatorname{tr}(\mathbf C^2)
+> &=\operatorname{tr}(\mathbf V^{1/2}\mathbf A\mathbf V\mathbf A\mathbf V^{1/2})\\
+> &=\operatorname{tr}(\mathbf A\mathbf V\mathbf A
+>   \underbrace{\mathbf V^{1/2}\mathbf V^{1/2}}_{\mathbf V})\\
+> &=\operatorname{tr}(\mathbf A\mathbf V\mathbf A\mathbf V)
+> =\operatorname{tr}[(\mathbf A\mathbf V)^2].
+> \end{aligned}
+> $$
 >
->평균이 $0$ 인 다변량 정규분포에서는
->
->$$
->\boxed{
->E[x_ix_jx_kx_l]
->=
->V_{ij}V_{kl}
->+
->V_{ik}V_{jl}
->+
->V_{il}V_{jk}
->}
->$$
->
->가 성립한다 (정규분포의 **4차 모멘트 공식(Isserlis/Wick 공식)**). 이를 대입하면
->
->$$
->\begin{aligned}
->E[(x^TAx)^2]
->&=
->\sum_{i,j,k,l}
->a_{ij}a_{kl}V_{ij}V_{kl}\\
->&\quad+
->\sum_{i,j,k,l}
->a_{ij}a_{kl}V_{ik}V_{jl}\\
->&\quad+
->\sum_{i,j,k,l}
->a_{ij}a_{kl}V_{il}V_{jk}.
->\end{aligned}
->$$
->
->첫 번째 항은 $\left(\sum_{i,j}a_{ij}V_{ij}\right)^2 = [\text{tr}(AV)]^2.$  
->나머지 두 항은 $A,V$ 가 대칭이므로 각각 $\text{tr}(AVAV) = \text{tr}((AV)^2)$ 가 된다. 따라서
->
->$$
->E[(x^TAx)^2]
->= [\text{tr}(AV)]^2 + 2\text{tr}((AV)^2).
->$$
->
->그러므로
->
->$$
->\begin{aligned}
->\text{Var}(x^TAx)
->&=
->E[(x^TAx)^2]
->-
->[E(x^TAx)]^2\\
->&=
->[\text{tr}(AV)]^2
->+
->2\text{tr}((AV)^2)
->-
->[\text{tr}(AV)]^2\\
->&=
->\boxed{2\text{tr}((AV)^2)}.
->\end{aligned}
->$$
->
->이들을 합치면
->
->$$
->\begin{aligned}
->\text{Var}(y^TAy)
->&=
->\text{Var}(x^TAx)
->+4\text{Var}(x^TA\mu)
->+4\text{Cov}(x^TAx,x^TA\mu)\\
->&=
->2\text{tr}((AV)^2)
->+
->4\mu^TAVA\mu
->+0.
->\end{aligned}
->$$
->
->따라서
->
->$$
->\boxed{
->\text{Var}(y^TAy)
->=
->2\text{tr}((AV)^2)
->+
->4\mu^TAVA\mu
->}
->$$
 
 #### 정리 3.3
 
@@ -613,17 +500,7 @@ $AVAV=AV$ 즉, $(AV)^2=AV$ 이어서 $AV$가 멱등행렬인 것이다.
 > - 두 번째 인수 $\lambda=\frac12\mu^T A\mu$는 비중심성 모수(noncentrality parameter)다.
 > - $\mu\neq 0$이면 분포의 중심이 오른쪽으로 이동한다.
 >
-> 반면 인수가 하나인
->
-> $$
-> \chi^2(r(A))\quad\text{또는}\quad \chi^2_{r(A)}
-> $$
->
-> 는 중심 카이제곱분포를 뜻하며,
->
-> $$
-> \chi^2(r(A)) = \chi^2(r(A),0)
-> $$
+> 반면 인수가 하나인 $\chi^2(r(A))\quad\text{또는}\quad \chi^2_{r(A)}$ 는 중심 카이제곱분포를 뜻하며, $\chi^2(r(A)) = \chi^2(r(A),0)$
 
 >**증명**
 >
@@ -865,74 +742,74 @@ $$
 
 인 것이다.
 
-**충분성 증명**
-
-$\mathbf B\mathbf V\mathbf A=0$ 이라고 하자.  
-$\mathbf A\mathbf y$와 $\mathbf B\mathbf y$는 정규벡터 $\mathbf y$의 선형변환이므로 결합정규분포를 따른다. 두 벡터 사이의 공분산행렬은
-
-$$
-\text{Cov}(\mathbf A\mathbf y,\mathbf B\mathbf y)
-= \mathbf A\text{Cov}(\mathbf y)\mathbf B^T = \mathbf A\mathbf V\mathbf B^T.
-$$
-
-$\mathbf A$, $\mathbf B$, $\mathbf V$가 모두 대칭이므로 $(\mathbf B\mathbf V\mathbf A)^T = \mathbf A\mathbf V\mathbf B = \mathbf A\mathbf V\mathbf B^T=0$.  
-공동정규벡터는 공분산이 $0$이면 독립이므로 $\mathbf A\mathbf y \perp\!\!\!\perp \mathbf B\mathbf y.$  
-마지막으로 $\mathbf y^T\mathbf A\mathbf y = (\mathbf A\mathbf y)^T(\mathbf A\mathbf y)$ 는 $\mathbf A\mathbf y$의 함수이므로 $\mathbf y^T\mathbf A\mathbf y \perp\!\!\!\perp \mathbf B\mathbf y$
-
-**필요성 증명**
-
-다음과 같이 중심화한다: $\boldsymbol\varepsilon = \mathbf y-\boldsymbol\mu \sim N_n(\mathbf0, \mathbf V).$ 
-
-$\mathbf B\boldsymbol\mu$는 상수벡터이고 $\mathbf B\boldsymbol\varepsilon = \mathbf B\mathbf y-\mathbf B\boldsymbol\mu$ 이므로 $\mathbf y^T\mathbf A\mathbf y \perp\!\!\!\perp \mathbf B\boldsymbol\varepsilon.$ 따라서 임의의 $\mathbf c\in\mathbb R^n$에 대해 $\mathbf y^T\mathbf A\mathbf y \perp\!\!\!\perp (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2.$
-
-그러므로 $\text{Cov} \left(
-\mathbf y^T\mathbf A\mathbf y, (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2 \right)=0.$
-
-한편 $\mathbf y=\boldsymbol\mu+\boldsymbol\varepsilon$ 이므로 $\mathbf y^T\mathbf A\mathbf y = \boldsymbol\mu^T\mathbf A\boldsymbol\mu + 2\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon + \boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon.$
-
-따라서 공분산의 선형성에 의해
-
-$$
-0 = \text{Cov}
-\left(
-\boldsymbol\mu^T\mathbf A\boldsymbol\mu, (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2
-\right) +
-\text{Cov}
-\left(
-2\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon, (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2
-\right) +
-\text{Cov}
-\left(
-\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon, (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2
-\right).
-$$
-
-첫 번째 항은 $\boldsymbol\mu^T\mathbf A\boldsymbol\mu$가 상수이므로 $0$이다.
-
-두 번째 항에서 $E[\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon]=0$ 이고, $(\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon) (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2$ 은 $\boldsymbol\varepsilon$에 관한 총 3차 다항식이다. 중심정규벡터의 홀수 총차수 적률은 $0$이므로 두 번째 항도 $0$이다.  
-따라서 $\text{Cov} \left(\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon,(\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2\right)=\text{Cov} \left(\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon,\boldsymbol\varepsilon^T \mathbf B\mathbf c\mathbf c^T\mathbf B \boldsymbol\varepsilon\right)=0$ 이다.
-
-중심정규벡터의 두 이차형식에 대해서는 
-$\text{Cov} \left(\boldsymbol\varepsilon^T\mathbf M\boldsymbol\varepsilon, \boldsymbol\varepsilon^T\mathbf N\boldsymbol\varepsilon\right) =2\text{tr}(\mathbf M\mathbf V\mathbf N\mathbf V)$ 가 성립한다. 
-
->왜냐하면, $Q=\boldsymbol\varepsilon^T\mathbf M\boldsymbol\varepsilon, \quad R=\boldsymbol\varepsilon^T\mathbf N\boldsymbol\varepsilon
->$ 라고 하자. 그러면 $\text{Var}(Q+R) = \text{Var}(Q)+\text{Var}(R) +2\text{Cov}(Q,R)$ 중심정규벡터에 대한 정리 3.2에 의해 $\text{Var} \left(\boldsymbol\varepsilon^T\mathbf M\boldsymbol\varepsilon\right) = 2\text{tr}\bigl[(\mathbf M\mathbf V)^2\bigr].$
+>**충분성 증명**
 >
->따라서 $2\text{Cov}(Q,R) = 2\text{tr} \left[\{(\mathbf M+\mathbf N)\mathbf V\}^2\right] - 2\text{tr}\bigl[(\mathbf M\mathbf V)^2\bigr] - 2\text{tr}\bigl[(\mathbf N\mathbf V)^2\bigr]\\ = 2\text{tr}(\mathbf M\mathbf V\mathbf N\mathbf V) + 2\text{tr}(\mathbf N\mathbf V\mathbf M\mathbf V).$
+>$\mathbf B\mathbf V\mathbf A=0$ 이라고 하자.  
+>$\mathbf A\mathbf y$와 $\mathbf B\mathbf y$는 정규벡터 $\mathbf y$의 선형변환이므로 결합정규분포를 따른다. 두 벡터 사이의 공분산행렬은
 >
->Trace의 순환성에 의해 $\text{tr}(\mathbf N\mathbf V\mathbf M\mathbf V) = \text{tr}(\mathbf M\mathbf V\mathbf N\mathbf V)$ 이므로 $2\text{Cov}(Q,R) = 4\text{tr}(\mathbf M\mathbf V\mathbf N\mathbf V).$
-
-
-따라서 $0 = 2\text{tr} \left( \mathbf A\mathbf V \mathbf B\mathbf c\mathbf c^T\mathbf B \mathbf V \right) = 2\mathbf c^T \mathbf B\mathbf V\mathbf A\mathbf V\mathbf B \mathbf c.$  
-$\mathbf A$가 대칭 멱등행렬이므로 $\mathbf A=\mathbf A^T\mathbf A.$ 따라서
-
-$$
-\mathbf c^T \mathbf B\mathbf V\mathbf A\mathbf V\mathbf B \mathbf c
-= \mathbf c^T \mathbf B\mathbf V\mathbf A^T\mathbf A \mathbf V\mathbf B\mathbf c =(\mathbf A\mathbf V\mathbf B\mathbf c)^T (\mathbf A\mathbf V\mathbf B\mathbf c) = \|\mathbf A\mathbf V\mathbf B\mathbf c\|^2.
-$$
-
-그러므로 모든 $\mathbf c\in\mathbb R^n$에 대해 $\|\mathbf A\mathbf V\mathbf B\mathbf c\|^2=0.$ 이고, $\mathbf A\mathbf V\mathbf B=0.$  
-이를 전치하면 $\mathbf B\mathbf V\mathbf A=0$ 이다.
+>$$
+>\text{Cov}(\mathbf A\mathbf y,\mathbf B\mathbf y)
+>= \mathbf A\text{Cov}(\mathbf y)\mathbf B^T = \mathbf A\mathbf V\mathbf B^T.
+>$$
+>
+>$\mathbf A$, $\mathbf B$, $\mathbf V$가 모두 대칭이므로 $(\mathbf B\mathbf V\mathbf A)^T = \mathbf A\mathbf V\mathbf B = \mathbf A\mathbf V\mathbf B^T=0$.  
+>공동정규벡터는 공분산이 $0$이면 독립이므로 $\mathbf A\mathbf y \perp\!\!\!\perp \mathbf B\mathbf y.$  
+>마지막으로 $\mathbf y^T\mathbf A\mathbf y = (\mathbf A\mathbf y)^T(\mathbf A\mathbf y)$ 는 $\mathbf A\mathbf y$의 함수이므로 $\mathbf y^T\mathbf A\mathbf y \perp\!\!\!\perp \mathbf B\mathbf y$
+>
+>**필요성 증명**
+>
+>다음과 같이 중심화한다: $\boldsymbol\varepsilon = \mathbf y-\boldsymbol\mu \sim N_n(\mathbf0, \mathbf V).$ 
+>
+>$\mathbf B\boldsymbol\mu$는 상수벡터이고 $\mathbf B\boldsymbol\varepsilon = \mathbf B\mathbf y-\mathbf B\boldsymbol\mu$ 이므로 $\mathbf y^T\mathbf A\mathbf y \perp\!\!\!\perp \mathbf B\boldsymbol\varepsilon.$ 따라서 임의의 $\mathbf c\in\mathbb R^n$에 대해 $\mathbf y^T\mathbf A\mathbf y \perp\!\!\!\perp (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2.$
+>
+>그러므로 $\text{Cov} \left(
+>\mathbf y^T\mathbf A\mathbf y, (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2 \right)=0.$
+>
+>한편 $\mathbf y=\boldsymbol\mu+\boldsymbol\varepsilon$ 이므로 $\mathbf y^T\mathbf A\mathbf y = \boldsymbol\mu^T\mathbf A\boldsymbol\mu + 2\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon + \boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon.$
+>
+>따라서 공분산의 선형성에 의해
+>
+>$$
+>0 = \text{Cov}
+>\left(
+>\boldsymbol\mu^T\mathbf A\boldsymbol\mu, (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2
+>\right) +
+>\text{Cov}
+>\left(
+>2\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon, (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2
+>\right) +
+>\text{Cov}
+>\left(
+>\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon, (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2
+>\right).
+>$$
+>
+>첫 번째 항은 $\boldsymbol\mu^T\mathbf A\boldsymbol\mu$가 상수이므로 $0$이다.
+>
+>두 번째 항에서 $E[\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon]=0$ 이고, $(\boldsymbol\mu^T\mathbf A\boldsymbol\varepsilon) (\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2$ 은 $\boldsymbol\varepsilon$에 관한 총 3차 다항식이다. 중심정규벡터의 홀수 총차수 적률은 $0$이므로 두 번째 항도 $0$이다.  
+>따라서 $\text{Cov} \left(\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon,(\mathbf c^T\mathbf B\boldsymbol\varepsilon)^2\right)=\text{Cov} \left(\boldsymbol\varepsilon^T\mathbf A\boldsymbol\varepsilon,\boldsymbol\varepsilon^T \mathbf B\mathbf c\mathbf c^T\mathbf B \boldsymbol\varepsilon\right)=0$ 이다.
+>
+>중심정규벡터의 두 이차형식에 대해서는 
+>$\text{Cov} \left(\boldsymbol\varepsilon^T\mathbf M\boldsymbol\varepsilon, \boldsymbol\varepsilon^T\mathbf N\boldsymbol\varepsilon\right) =2\text{tr}(\mathbf M\mathbf V\mathbf N\mathbf V)$ 가 성립한다. 
+>
+>>왜냐하면, $Q=\boldsymbol\varepsilon^T\mathbf M\boldsymbol\varepsilon, \quad R=\boldsymbol\varepsilon^T\mathbf N\boldsymbol\varepsilon
+>>$ 라고 하자. 그러면 $\text{Var}(Q+R) = \text{Var}(Q)+\text{Var}(R) +2\text{Cov}(Q,R)$ 중심정규벡터에 대한 정리 3.2에 의해 $\text{Var} \left(\boldsymbol\varepsilon^T\mathbf M\boldsymbol\varepsilon\right) = 2\text{tr}\bigl[(\mathbf M\mathbf V)^2\bigr].$
+>>
+>>따라서 $2\text{Cov}(Q,R) = 2\text{tr} \left[\{(\mathbf M+\mathbf N)\mathbf V\}^2\right] - 2\text{tr}\bigl[(\mathbf M\mathbf V)^2\bigr] - 2\text{tr}\bigl[(\mathbf N\mathbf V)^2\bigr]\\ = 2\text{tr}(\mathbf M\mathbf V\mathbf N\mathbf V) + 2\text{tr}(\mathbf N\mathbf V\mathbf M\mathbf V).$
+>>
+>>Trace의 순환성에 의해 $\text{tr}(\mathbf N\mathbf V\mathbf M\mathbf V) = \text{tr}(\mathbf M\mathbf V\mathbf N\mathbf V)$ 이므로 $2\text{Cov}(Q,R) = 4\text{tr}(\mathbf M\mathbf V\mathbf N\mathbf V).$
+>
+>
+>따라서 $0 = 2\text{tr} \left( \mathbf A\mathbf V \mathbf B\mathbf c\mathbf c^T\mathbf B \mathbf V \right) = 2\mathbf c^T \mathbf B\mathbf V\mathbf A\mathbf V\mathbf B \mathbf c.$  
+>$\mathbf A$가 대칭 멱등행렬이므로 $\mathbf A=\mathbf A^T\mathbf A.$ 따라서
+>
+>$$
+>\mathbf c^T \mathbf B\mathbf V\mathbf A\mathbf V\mathbf B \mathbf c
+>= \mathbf c^T \mathbf B\mathbf V\mathbf A^T\mathbf A \mathbf V\mathbf B\mathbf c =(\mathbf A\mathbf V\mathbf B\mathbf c)^T (\mathbf A\mathbf V\mathbf B\mathbf c) = \|\mathbf A\mathbf V\mathbf B\mathbf c\|^2.
+>$$
+>
+>그러므로 모든 $\mathbf c\in\mathbb R^n$에 대해 $\|\mathbf A\mathbf V\mathbf B\mathbf c\|^2=0.$ 이고, $\mathbf A\mathbf V\mathbf B=0.$  
+>이를 전치하면 $\mathbf B\mathbf V\mathbf A=0$ 이다.
 
 
 #### 정리 3.6
@@ -1171,15 +1048,7 @@ $$
 >r(\mathbf C) = \sum_{j=1}^p r(\mathbf C_j).
 >$$
 >
->한편
->
->$$
->\dim\left(
->\mathcal R(\mathbf C_1)+\cdots+\mathcal R(\mathbf C_p)
->\right)
->\leq
->\sum_{j=1}^p r(\mathbf C_j).
->$$
+>한편 $\dim(\mathcal R(\mathbf C_1)+\cdots+\mathcal R(\mathbf C_p)) \leq \sum_{j=1}^p r(\mathbf C_j)$
 >
 >따라서
 >
@@ -1193,8 +1062,6 @@ $$
 >}
 >$$
 >
->이다.
->
 >임의의 $\mathbf x\in\mathcal R(\mathbf C_i)$를 택한다. 그러면 $\mathbf C$가 멱등이므로 $\mathbf x\in\mathcal R(\mathbf C) \iff \mathbf C\mathbf x=\mathbf x.$
 >
 >그런데
@@ -1204,11 +1071,7 @@ $$
 >\qquad \mathbf C_j\mathbf x\in\mathcal R(\mathbf C_j).
 >$$
 >
->위의 합은 직합이므로 표현의 유일성에 의해
->
->$$
->\mathbf C_i\mathbf x=\mathbf x, \quad \mathbf C_j\mathbf x=0 \quad(j\neq i).
->$$
+>위의 합은 직합이므로 표현의 유일성에 의해 $\mathbf C_i\mathbf x=\mathbf x, \quad \mathbf C_j\mathbf x=0 \quad(j\neq i)$
 >
 >모든 $\mathbf u\in\mathbb R^n$에 대해 $\mathbf C_i\mathbf u\in\mathcal R(\mathbf C_i)$ 이므로 $\mathbf C_i^2\mathbf u = \mathbf C_i\mathbf u.$
 >
@@ -1367,11 +1230,8 @@ $$
 
 ### F-검정
 
-$$F_0=\frac{MSR}{MSE}$$
-
-가설:
-
-$$H_0:\beta_1=0 \quad H_1:\beta_1\neq0$$
+통계량: $F_0=\frac{MSR}{MSE}$  
+가설: $H_0:\beta_1=0 \quad H_1:\beta_1\neq0$
 
 | 요인 | 제곱합 | 자유도 | 평균제곱 | 평균제곱의 기대값 |
 |------|--------|--------|---------|-------------------|

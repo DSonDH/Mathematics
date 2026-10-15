@@ -31,70 +31,15 @@ $$SSR = SS(\hat{\beta}_1, \dots, \hat{\beta}_p \mid \hat{\beta}_0) = \sum_{i=1}^
 
 > 절편만 포함하는 모형 $y_i=\beta_0+\varepsilon_i,\quad i=1,\ldots,n$ 을 고려한다. 설계행렬을 $X_0=\mathbf1\in\mathbb R^{n\times1}$이라고 하면 정규방정식은 $X_0^T(\mathbf y-X_0\hat\beta_0)=0$ 이다. 따라서
 >
-> $\mathbf1^T(\mathbf y-\mathbf1\hat\beta_0)=0$ 이고, $\sum_{i=1}^ny_i-n\hat\beta_0=0$ 이므로
+> $\mathbf1^T(\mathbf y-\mathbf1\hat\beta_0)=0$ 이고, $\sum_{i=1}^ny_i-n\hat\beta_0=0$ 이므로 $\hat\beta_0=\bar y$ 이다. 따라서 이 모형의 적합벡터는 $\hat{\mathbf y}_0=X_0\hat\beta_0=\bar y\mathbf1$ 이다.
 >
-> $$
-> \boxed{\hat\beta_0=\bar y}
-> $$
+> $SS(\hat\beta_0)$로 표시하는 절편항의 비보정 제곱합, 즉 수정항(Corrected Factor)은 $CF :=SS_U(X_0) =\hat{\mathbf y}_0^T\hat{\mathbf y}_0 =\hat\beta_0^2\mathbf1^T\mathbf1 =n\hat\beta_0^2 =n\bar y^2.$
 >
-> 이다. 따라서 이 모형의 적합벡터는 $\hat{\mathbf y}_0=X_0\hat\beta_0=\bar y\mathbf1$ 이다.
+> 정규방정식 $\mathbf1^T\mathbf y=n\hat\beta_0$을 이용하면 이를 $CF =\hat\beta_0\mathbf1^T\mathbf y =\hat\beta_0X_0^T\mathbf y =n\bar y^2$ 로도 나타낼 수 있다. 이 절편 방향의 비보정 제곱합은 자유도 $\text{rank}(H_0)=1$ 을 갖는다.
 >
-> $SS(\hat\beta_0)$로 표시하는 절편항의 비보정 제곱합, 즉 수정항(Corrected Factor)은
+> 한편 통상적인 회귀제곱합 $SSR$은 표본평균을 기준으로 정의된다. 절편만 있는 모형에서는 모든 적합값이 $\bar y$이므로 $SSR_0 =\sum_{i=1}^n(\hat y_{0i}-\bar y)^2 =\sum_{i=1}^n(\bar y-\bar y)^2 =0$
 >
-> $$
-> \begin{aligned}
-> CF
-> :=SS_U(X_0)
-> &=\hat{\mathbf y}_0^T\hat{\mathbf y}_0\\
-> &=\hat\beta_0^2\mathbf1^T\mathbf1\\
-> &=n\hat\beta_0^2\\
-> &=n\bar y^2.
-> \end{aligned}
-> $$
->
-> 정규방정식 $\mathbf1^T\mathbf y=n\hat\beta_0$을 이용하면 이를
->
-> $$
-> \begin{aligned}
-> CF
-> &=\hat\beta_0\mathbf1^T\mathbf y\\
-> &=\hat\beta_0X_0^T\mathbf y\\
-> &=n\bar y^2
-> \end{aligned}
-> $$
->
-> 로도 나타낼 수 있다. 이 절편 방향의 비보정 제곱합은 자유도
->
-> $$
-> \text{rank}(H_0)=1
-> $$
->
-> 을 갖는다.
->
-> 한편 통상적인 회귀제곱합 $SSR$은 표본평균을 기준으로 정의된다. 절편만 있는 모형에서는 모든 적합값이 $\bar y$이므로
->
-> $$
-> \begin{aligned}
-> SSR_0
-> &=\sum_{i=1}^n(\hat y_{0i}-\bar y)^2\\
-> &=\sum_{i=1}^n(\bar y-\bar y)^2\\
-> &=0.
-> \end{aligned}
-> $$
->
-> 따라서
->
-> $$
-> \boxed{CF=SS_U(X_0)=n\bar y^2}
-> $$
->
-> 와
->
-> $$
-> \boxed{SSR_0=0}
-> $$
->
-> 을 구분해야 한다. 전자는 원점 기준 절편항의 비보정 제곱합이며 자유도는 1이고, 후자는 평균 기준 회귀제곱합이며 절편을 제외한 회귀 자유도는 0이다.
+> 따라서 $\boxed{CF=SS_U(X_0)=n\bar y^2}$ 와 $\boxed{SSR_0=0}$ 을 구분해야 한다. 전자는 원점 기준 절편항의 비보정 제곱합이며 자유도는 1이고, 후자는 평균 기준 회귀제곱합이며 절편을 제외한 회귀 자유도는 0이다.
 
 따라서 
 
@@ -163,11 +108,7 @@ $(H - H_1)$은 멱등행렬(idempotent matrix)이며, 그 계수(rank)는 $p - q
 
 >**증명**  
 >1. 멱등성: $(H - H_1)^2 = H - H_1$  
->   $X=(X_1,X_2)$이므로 $X_1$의 각 열은 $X$의 열공간에 포함된다. 따라서 전체모형의 투영행렬 $H$는 $X_1$의 열공간에 속한 벡터를 그대로 두며,
->   
->   $$HX_1=X_1$$
->   
->   이다. 또한 $H$와 $H_1$은 대칭행렬이므로 위 식의 양변을 전치하면
+>   $X=(X_1,X_2)$이므로 $X_1$의 각 열은 $X$의 열공간에 포함된다. 따라서 전체모형의 투영행렬 $H$는 $X_1$의 열공간에 속한 벡터를 그대로 두며, $HX_1=X_1$ 이다. 또한 $H$와 $H_1$은 대칭행렬이므로 위 식의 양변을 전치하면
 >   
 >   $$X_1^T H=X_1^T$$
 >   

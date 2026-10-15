@@ -1289,9 +1289,8 @@ $$0=\bar l_n'(\hat\theta_n)\approx \bar l_n'(\theta)+\bar l_n''(\theta)(\hat\the
 \therefore \sqrt{n}(\hat\theta_n-\theta)\approx \big(-\bar l_n''(\theta)\big)^{-1}\sqrt{n}\,\bar l_n'(\theta)$$
 
 **정보량(information) 정의로의 연결**  
->정보량(information): $I(\theta) = \lim_{n\to\infty} -\bar l_n''(\theta)$
-
-큰수의 법칙을 쓰면(적절한 조건하에서)
+>정보량(information): $I(\theta) = \lim_{n\to\infty} -\bar l_n''(\theta)$  
+>피셔 정보량(Fisher information): $I(\theta) = E_\theta\Big[-\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big]$
 
 $$-\bar l_n''(\theta)
 =\frac{1}{n}\sum_{i=1}^n\Big[-\frac{\partial^2}{\partial\theta^2}\log f(X_i;\theta)\Big]
@@ -1364,7 +1363,7 @@ $$
 
     $$I(\theta)=\mathrm{Var}_\theta\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)$$
 
-    가 (스칼라 또는 행렬로) 잘 정의되며, 그 역수(또는 역행렬)가 존재한다.
+    가 (스칼라 또는 행렬)로 잘 정의되며, 그 역수(또는 역행렬)가 존재한다.
 
 **$l_n'(\theta)$를 점수함수(score function)** 라고 부른다. 이는 최대가능도 추정량의 성질을 아래 정리와 같이 잘 보여주는 함수다.
 
@@ -1376,7 +1375,7 @@ $$
 
 $$E_\theta\Big[\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big]=0$$
 
-**(b) 정보량의 두 표현(바틀렛 항등식 형태, Bartlett identity)**
+**(b) 정보량의 두 표현(바틀렛 항등식 형태, Bartlett identity, 피셔정보, Fisher Information)**
 
 $$I(\theta)=\mathrm{Var}_\theta\Big(\frac{\partial}{\partial\theta}\log f(X_1;\theta)\Big)=E_\theta\Big[-\frac{\partial^2}{\partial\theta^2}\log f(X_1;\theta)\Big]$$
 

@@ -541,6 +541,24 @@ $$
 =\mathrm{rank}(A)+\mathrm{rank}(B)
 $$
 
+### 열공간의 직교성과 rank
+
+두 행렬 $A,B$의 열공간이 직교한다는 것은 행 수가 같고 $\mathrm{Col}(A)\perp\mathrm{Col}(B) \to A^TB=0$ 임을 뜻한다.
+
+- 수평 결합행렬은 열공간이 직교할 때 $\mathrm{rank}([A\;B])=\mathrm{rank}(A)+\mathrm{rank}(B)$ 를 만족한다. 두 열공간의 교집합이 영공간뿐인 직합이기 때문이다. 일반적으로는 $\mathrm{rank}([A\;B])\leq\mathrm{rank}(A)+\mathrm{rank}(B)$이다.
+- 열공간의 직교성만으로는 $\mathrm{rank}(A+B)=\mathrm{rank}(A)+\mathrm{rank}(B)$가 보장되지 않는다. 예를 들어 $A=\begin{pmatrix}1\\0\end{pmatrix}$, $B=\begin{pmatrix}0\\1\end{pmatrix}$이면 열공간은 직교하지만 $\mathrm{rank}(A+B)=1$이고 rank의 합은 $2$이다.
+- 다만 $A,B$가 같은 크기의 대칭 정사각행렬이고 열공간이 직교하면
+  $$
+  \mathrm{rank}(A+B)=\mathrm{rank}(A)+\mathrm{rank}(B)
+  $$
+  이다. 대칭성으로 $A^TB=0$에서 $AB=BA=0$을 얻는다. 따라서 $\ker(A+B)=\ker(A)\cap\ker(B)$이고, 이 교집합은 $(\mathrm{Col}(A)+\mathrm{Col}(B))^\perp$이다. 열공간들이 직교하므로 그 차원은 $n-\mathrm{rank}(A)-\mathrm{rank}(B)$이며, rank-nullity 정리로 결론을 얻는다.
+
+한편, 곱이 정의되는 크기의 행렬에 대해서는 일반적으로
+$$
+\mathrm{rank}(AB)\leq\min\{\mathrm{rank}(A),\mathrm{rank}(B)\}
+$$
+일 뿐이며 $\mathrm{rank}(AB)=\mathrm{rank}(A)\mathrm{rank}(B)$는 성립하지 않는다. 또한 $\mathrm{rank}([A\;B])$는 두 rank의 **곱**이 아니라, 열공간이 직교할 때 두 rank의 **합**이다.
+
 ### 연립선형방정식
 
 $A\mathbf x = \mathbf b$.

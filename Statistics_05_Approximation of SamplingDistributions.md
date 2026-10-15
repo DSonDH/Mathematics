@@ -625,6 +625,8 @@ $$ \mathrm{plim}_{n\to\infty} S_n^2 = 1\times\{E(X_1^2)-[E(X_1)]^2\}  =\mathrm{V
 
 $$ \mathrm{plim}_{n\to\infty} S_n = \sqrt{\mathrm{plim}_{n\to\infty}S_n^2} =\sigma $$
 
+즉, 일치성을 가짐을 알 수 있다.
+
 ### 정리 5.2.7. 평균제곱수렴과 확률수렴
 
 큰수의 법칙을 적용하기 어려운 경우에 확률수렴을 밝히는 데 유용한 정리다.
@@ -723,7 +725,7 @@ $$ \mathrm{plim}_{n\to\infty}X_{(r_n)}=F^{-1}(\alpha) $$
 >**(a) $X_n + Y_n \xrightarrow{d} Z + c$**  
 >$F_Z$가 연속인 점 $z$에 대해 $P(X_n + Y_n \le z)$의 극한을 구한다. 임의의 $\varepsilon > 0$에 대해
 >
->$$P(X_n +Y_n \le z) = P(X_n +Y_n \le z, |Y_n - c| < \varepsilon) + P(X_n + Y_n \le z, |Y_n - c|c \ge \varepsilon)$$
+>$$P(X_n +Y_n \le z) = P(X_n +Y_n \le z, |Y_n - c| < \varepsilon) + P(X_n + Y_n \le z, |Y_n - c| \ge \varepsilon)$$
 >
 >이때 우변에 각 항별로 살펴보면,  
 >$P(X_n +Y_n \le z, |Y_n - c| < \varepsilon) \le P(X_n \le z - c + \varepsilon)$ 이고,  

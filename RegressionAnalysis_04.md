@@ -892,7 +892,7 @@ $SST = y^T\left(I_n - \frac{J_n}{n}\right)y$에서 행렬 $A = I_n - \frac{J_n}{
 
 $$\frac{SST}{\sigma^2} \sim \chi^2\left(n-1, \frac{\beta^T X^T (I-\frac{J}{n}) X\beta}{2\sigma^2}\right)$$
 
-**4. SSR의 분포** 
+**SSR의 분포** 
  
 $$
 SSR = y^T\left[X(X^TX)^{-1}X^T - \frac{J_n}{n}\right]y
@@ -912,7 +912,7 @@ $$\lambda = \frac{\beta^T X^T (I-\frac{J}{n}) X\beta}{2\sigma^2}$$
 
 $$\frac{SSR}{\sigma^2} \sim \chi^2(p,\lambda)$$
 
-**5. SSE의 분포** 
+**SSE의 분포** 
  
 $$SSE = y^T\left[I_n - X(X^TX)^{-1}X^T\right]y$$
 
@@ -926,7 +926,7 @@ $$\frac{SSE}{\sigma^2} \sim \chi^2(n-p-1)$$
 
 (중심 카이제곱분포)
 
-**6. SSR과 SSE의 독립성**  
+**SSR과 SSE의 독립성**  
 두 $y$의 이차형식인 $\frac{SSR}{\sigma^2}$과 $\frac{SSE}{\sigma^2}$가 서로 독립인지 확인해보자. 정리 3.6을 사용한다.
 
 $$\mathbf{y} \sim N(X\beta, \sigma^2 I_n), \quad
@@ -943,7 +943,7 @@ $$AVB = A\sigma^2 I B = \mathbf{0}_{n \times n}$$
 
 이 성립한다. 따라서 SSR과 SSE는 독립이다.
 
-**7. F-통계량의 분포**  
+**F-통계량의 분포**  
 noncentral F distrubution이론에서 논의된 바와 같이 $\frac{SSR}{\sigma^2} \sim \chi^2(p,\lambda)$이고 $\frac{SSE}{\sigma^2} \sim \chi^2(n-p-1)$이며 두 카이제곱이 서로 독립이므로,
 
 $$F_0 = \frac{MSR}{MSE} = \frac{(SSR/p)}{(SSE/(n-p-1))}$$
@@ -1026,9 +1026,7 @@ $i$번째 관측값에 대해서는
 
 $$
 y_i = \mathbf x_{1i}^T\boldsymbol\beta_1 + \mathbf x_{2i}^T\boldsymbol\beta_2 + \varepsilon_i \\
-\mathbf x_{1i}^T = (1,x_{i1},\ldots,x_{iq}),
-\qquad
-\mathbf x_{2i}^T = (x_{i,q+1},\ldots,x_{ip})
+\mathbf x_{1i}^T = (1,x_{i1},\ldots,x_{iq}), \quad \mathbf x_{2i}^T = (x_{i,q+1},\ldots,x_{ip})
 $$
 
 이때, $X_1^TX_1$ 및 $X_2^T(I_n-H_1)X_2$ 가 가역행렬이라고 가정한다. 이는 $X_1$ 자체에 완전한 다중공선성이 없고, $X_1$의 영향을 제거한 후에도 $X_2$에 선형독립적인 정보가 남아 있음을 의미한다.
@@ -1292,3 +1290,115 @@ $$
 따라서 $\hat{\boldsymbol\beta}_2$는 $X_1$을 일정하게 통제했을 때 $X_2$와 $\mathbf y$ 사이에 남아 있는 선형관계를 나타낸다.
 
 다만 $X_2$가 여러 개의 변수를 포함하는 경우, $\hat{\boldsymbol\beta}_2$는 $X_2$ 변수들을 하나씩 독립적으로 회귀한 결과가 아니라 $X_2$의 모든 변수를 동시에 포함하여 얻은 계수벡터이다. 따라서 $\boldsymbol\beta_2$의 각 성분은 $X_1$뿐 아니라 $X_2$에 포함된 다른 변수들도 통제한 부분회귀계수로 해석해야 한다.
+
+**8. 잔차화된 설명변수의 투영과 SSE 감소량**
+
+앞서 $X_2^TM_1X_2$가 가역이라고 가정했다. 전체 설계행렬 $X=(X_1,X_2)$의 열들이 선형독립이면 이 조건이 성립한다. 실제로 $b\ne0$에 대해
+
+$$
+b^TX_2^TM_1X_2b=\|M_1X_2b\|^2.
+$$
+
+이 값이 $0$이라면 $X_2b\in\mathcal C(X_1)$이므로 어떤 $a$에 대해 $X_2b=X_1a$이다. 그러면 $X\begin{pmatrix}-a\\b\end{pmatrix}=0$이 되어 $X$의 열들이 선형독립이라는 가정에 모순이다. 따라서 $X_2^TM_1X_2$는 양의 정부호이며 가역이다.
+
+$Z=M_1X_2$라 두면 $X_1^TZ=0$이므로 $\mathcal C(X_1)$과 $\mathcal C(Z)$는 직교한다. 또한 $X_2=H_1X_2+Z$이므로
+
+$$
+\mathcal C(X)=\mathcal C(X_1)\oplus\mathcal C(Z).
+$$
+
+$P_Z=Z(Z^TZ)^{-1}Z^T$를 $\mathcal C(Z)$로의 직교사영행렬이라 하면 $H_1P_Z=P_ZH_1=0$이다. 따라서 $H_1+P_Z$는 대칭 멱등행렬이고 그 열공간은 $\mathcal C(X)$이므로 전체 모형의 사영행렬은
+
+$$
+\boxed{H=H_1+P_Z}.
+$$
+
+이에 따라 $X_1$만 포함한 축소모형에서 $X_2$를 추가할 때의 잔차제곱합 감소량은
+
+$$
+\boxed{
+SSE_R-SSE_F=y^TP_Zy
+=\hat{\boldsymbol\beta}_2^T(X_2^TM_1X_2)\hat{\boldsymbol\beta}_2
+}.
+$$
+
+**9. 햇행렬의 대각원소와 잔차의 분포**
+
+햇행렬 $H=(h_{ij})$에 대하여 다음을 증명하라.
+
+1. $0\le h_{ii}\le1$이며 $\sum_{i=1}^n h_{ii}=p$이다.
+2. 절편을 포함하면 $h_{ii}\ge1/n$이다.
+3. $\epsilon\sim N_n(0,\sigma^2I)$일 때
+  $$
+  \operatorname{Var}(e_i)=\sigma^2(1-h_{ii}),\qquad
+  \operatorname{Cov}(e_i,e_j)=-\sigma^2h_{ij}\quad(i\ne j).
+  $$
+4. $h_{ii}<1$이면
+  $$
+  \frac{e_i}{\sigma\sqrt{1-h_{ii}}}\sim N(0,1)
+  $$
+  이지만, 이를 근거로 표준화된 잔차들이 독립이라고 할 수는 없다.
+
+**풀이**
+
+① $u_i$를 $i$번째 표준기저벡터라 두면 $H$는 대칭 멱등행렬이므로
+
+$$
+h_{ii}=u_i^THu_i=\|Hu_i\|^2\ge0.
+$$
+
+또한 $I-H$도 대칭 멱등행렬이므로
+
+$$
+1-h_{ii}=u_i^T(I-H)u_i\ge0.
+$$
+
+따라서 $0\le h_{ii}\le1$이다. 그리고 $H$의 계수는 $p$이므로
+
+$$
+\boxed{\sum_{i=1}^n h_{ii}=\operatorname{tr}(H)=p}.
+$$
+
+② 절편을 포함하면 상수벡터의 열공간이 $\mathcal C(X)$에 포함되므로, $J=\frac1n\mathbf 1\mathbf 1^T$에 대해 $HJ=JH=J$이다. 따라서 $H-J$는 대칭 멱등행렬이다. 그러므로
+
+$$
+h_{ii}-\frac1n=u_i^T(H-J)u_i\ge0,
+$$
+
+즉
+
+$$
+\boxed{\frac1n\le h_{ii}\le1}.
+$$
+
+③ $e=(I-H)y=(I-H)\epsilon$이므로
+
+$$
+e\sim N_n\bigl(0,\sigma^2(I-H)\bigr).
+$$
+
+공분산행렬의 대각 및 비대각 성분을 읽으면
+
+$$
+\boxed{\operatorname{Var}(e_i)=\sigma^2(1-h_{ii})},\qquad
+\boxed{\operatorname{Cov}(e_i,e_j)=-\sigma^2h_{ij}\quad(i\ne j)}.
+$$
+
+④ 각 $e_i$의 주변분포는
+
+$$
+e_i\sim N\bigl(0,\sigma^2(1-h_{ii})\bigr)
+$$
+
+이므로 $h_{ii}<1$일 때 요구한 표준정규분포가 성립한다. 그러나 $i\ne j$에 대해 표준화된 잔차들의 공분산은
+
+$$
+\operatorname{Cov}\left(
+\frac{e_i}{\sigma\sqrt{1-h_{ii}}},
+\frac{e_j}{\sigma\sqrt{1-h_{jj}}}
+\right)
+=-\frac{h_{ij}}{\sqrt{(1-h_{ii})(1-h_{jj})}},
+$$
+
+이며 일반적으로 $0$이 아니다. 즉, 원래 오차 $\epsilon_i$들이 독립이어도 추정된 잔차 $e_i$들은 일반적으로 독립이 아니다.
+

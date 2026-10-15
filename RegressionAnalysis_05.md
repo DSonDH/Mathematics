@@ -75,7 +75,8 @@ $$\hat{\beta}=(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$$
 즉, 모든 선형(linear)이고 불편(unbiased)인 추정량 중에서 분산이 최소이다 (minimum variance linear unbiased estimator, MVLUE).
   - 최량(bets)라는 표현을 써서, 최량 선형 불편추정량이라고도 함.
 
->**증명**
+>**증명**  
+>스케치: 임의의 선형 불편추정량 $\tilde\beta=A\mathbf y$에 대해, $\text{Var}(\tilde\beta) - \text{Var}(\hat\beta) \succeq 0$임을 보이면 된다.
 >
 >먼저 $ C=(\mathbf X^T\mathbf X)^{-1}\mathbf X^T $ 라고 두면 $\hat\beta=C\mathbf y$이다.
 >
@@ -238,9 +239,7 @@ $$
 \mathbf{C}\mathbf{\tilde\beta} = \mathbf{m}
 $$
 
-정리하면 
-
-$C\mathbf{\tilde\beta} = C[\mathbf{\hat\beta}- (X^TX)^{-1}C^T\theta] = \mathbf{m}$ 이고, $\theta = [C(X^TX)^{-1}C^T]^{-1}(C\hat\beta - \mathbf{m})$ 이므로, 이를 $\tilde\beta$에 대입하면 제한추정량은:
+정리하면 $\tilde\beta = \hat\beta - (X^TX)^{-1}C^T\theta$ 이므로 $C\mathbf{\tilde\beta} = C[\mathbf{\hat\beta}- (X^TX)^{-1}C^T\theta] = \mathbf{m}$ 이고, $\theta = [C(X^TX)^{-1}C^T]^{-1}(C\hat\beta - \mathbf{m})$ 이므로, 이를 $\tilde\beta$에 대입하면 제한추정량은:
 
 $$\mathbf{\tilde\beta} = \mathbf{\hat\beta} - (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T[\mathbf{C}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{C}^T]^{-1}(\mathbf{C}\mathbf{\hat\beta}-\mathbf{m}) \tag{5.29}$$
 
@@ -438,6 +437,7 @@ $$F_0 = \frac{MS_{LF}}{MS_{PE}} \sim F(k-p-1, n-k)$$
 
 
 ## 5.6 잔차의 검토 (Residual Analysis)
+
 잔차분석은 회귀가정의 타당성을 진단하는 절차이다.
 
 ### 5.6.1 잔차의 기본 성질
@@ -470,7 +470,7 @@ $$
 \sum \hat y_i e_i = \sum (\hat\beta_0 + \hat\beta_1 x_{i1} + \cdots + \hat\beta_p x_{ip}) (e_i) \\ = \sum \hat\beta_0 e_i + \sum_{j=1}^p \hat\beta_j \sum_{i=1}^n x_{ij} e_i = 0
 $$
 
-**(4) 잔차 $\varepsilon_i$간 상관관계 존재**  
+**(4) 잔차 $e_i$간 상관관계 존재**  
 
 $\mathbf{e} = \mathbf{y} - \mathbf{X}\hat{\beta} = [I - X(X^TX)^{-1}X^T]\mathbf{y}$이므로, 
 
@@ -506,77 +506,21 @@ $$ E(\mathbf{e}) = 0, \quad Var(\mathbf{e}) = \sigma^2 [I - X(X^TX)^{-1}X^T]$$
 ---
 [연습문제 7.6]
 
-중회귀모형을 $\mathbf y=\mathbf X\beta+\varepsilon,\quad E(\varepsilon)=0,\quad \text{Var}(\varepsilon)=\sigma^2I_n$ 이라고 하자. 다음 행렬을 정의한다.
+중회귀모형을 $\mathbf y=\mathbf X\beta+\varepsilon,\quad E(\varepsilon)=0,\quad \text{Var}(\varepsilon)=\sigma^2I_n$ 이라고 하자. 다음 행렬을 정의한다. $H=\mathbf X(\mathbf X^T\mathbf X)^{-1}\mathbf X^T, \quad M=I_n-H.$
 
-$$
-H=\mathbf X(\mathbf X^T\mathbf X)^{-1}\mathbf X^T,
-\quad
-M=I_n-H.
-$$
+그러면 적합값과 잔차벡터는 각각 $\hat{\mathbf y}=H\mathbf y,\quad \mathbf e=\mathbf y-\hat{\mathbf y}=M\mathbf y$
 
-그러면 적합값과 잔차벡터는 각각
-
-$$
-\hat{\mathbf y}=H\mathbf y,\quad
-\mathbf e=\mathbf y-\hat{\mathbf y}=M\mathbf y
-$$
-
-$H$와 $M$은 대칭 멱등행렬이며
-
-$$
-H^T=H,\quad M^T=M,\quad
-H^2=H,\quad M^2=M,\quad
-MH=HM=0
-$$
-
-을 만족한다. 또한 $M\mathbf X=0,\quad \mathbf X^TM=0$ 이다.
+$H$와 $M$은 대칭 멱등행렬이며 $H^T=H,\quad M^T=M,\quad H^2=H,\quad M^2=M,\quad MH=HM=0$ 을 만족한다. 또한 $M\mathbf X=0,\quad \mathbf X^TM=0$ 이다.
 
 (1) $\text{Cov}(\mathbf e,\mathbf y)$
 
-$\mathbf e=M\mathbf y$ 이므로
-
-$$
-\begin{aligned}
-\text{Cov}(\mathbf e,\mathbf y)
-&=\text{Cov}(M\mathbf y,\mathbf y)\\
-&=M\text{Var}(\mathbf y)\\
-&=M(\sigma^2I_n)\\
-&=\sigma^2M.
-\end{aligned}
-$$
-
-따라서
-
-$$
-\boxed{
-\text{Cov}(\mathbf e,\mathbf y) = \sigma^2
-\left[
-I_n-\mathbf X(\mathbf X^T\mathbf X)^{-1}\mathbf X^T
-\right]
-}
-$$
+$\mathbf e=M\mathbf y$ 이므로  
+$\text{Cov}(\mathbf e,\mathbf y) =\text{Cov}(M\mathbf y,\mathbf y) =M\text{Var}(\mathbf y) =M(\sigma^2I_n) =\sigma^2M$
 
 (2) $\text{Cov}(\mathbf e,\hat{\mathbf y})$
 
-$\mathbf e=M\mathbf y,\quad \hat{\mathbf y}=H\mathbf y$ 이므로
-
-$$
-\begin{aligned}
-\text{Cov}(\mathbf e,\hat{\mathbf y})
-&=\text{Cov}(M\mathbf y,H\mathbf y)\\
-&=M\text{Var}(\mathbf y)H^T\\
-&=\sigma^2MH\\
-&=0.
-\end{aligned}
-$$
-
-따라서
-
-$$
-\boxed{
-\text{Cov}(\mathbf e,\hat{\mathbf y})=O_n
-}
-$$
+$\mathbf e=M\mathbf y,\quad \hat{\mathbf y}=H\mathbf y$ 이므로  
+$\text{Cov}(\mathbf e,\hat{\mathbf y}) =\text{Cov}(M\mathbf y,H\mathbf y) =M\text{Var}(\mathbf y)H^T =\sigma^2MH = O_n$
 
 정규오차를 가정하면 $\mathbf e$와 $\hat{\mathbf y}$는 결합정규분포를 따르므로 무상관일 뿐만 아니라 서로 독립이다.
 
@@ -587,29 +531,11 @@ $\hat\beta =(\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y$ 이므로
 $$
 \begin{aligned}
 \text{Cov}(\mathbf e,\hat\beta)
-&=
-\text{Cov}
-\left(
-M\mathbf y,\,
-(\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y
-\right)\\
-&=
-M\text{Var}(\mathbf y)
-\left[
-(\mathbf X^T\mathbf X)^{-1}\mathbf X^T
-\right]^T\\
-&=
-\sigma^2M\mathbf X(\mathbf X^T\mathbf X)^{-1}\\
+&= \text{Cov} \left( M\mathbf y,\, (\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y \right)\\
+&= M\text{Var}(\mathbf y) \left[ (\mathbf X^T\mathbf X)^{-1}\mathbf X^T \right]^T\\
+&= \sigma^2M\mathbf X(\mathbf X^T\mathbf X)^{-1}\\
 &=0.
 \end{aligned}
-$$
-
-따라서
-
-$$
-\boxed{
-\text{Cov}(\mathbf e,\hat\beta) = O_{n\times(p+1)}
-}
 $$
 
 마찬가지로 정규오차를 가정하면 $\mathbf e\perp\!\!\!\perp\hat\beta$ 도 성립한다.
@@ -621,63 +547,27 @@ $$
 $$
 \begin{aligned}
 \text{Cov}(\varepsilon,\hat\beta)
-&=
-\text{Cov}
-\left(
-\varepsilon,\,
-(\mathbf X^T\mathbf X)^{-1}\mathbf X^T\varepsilon
-\right)\\
-&=
-\text{Var}(\varepsilon)
-\left[
-(\mathbf X^T\mathbf X)^{-1}\mathbf X^T
-\right]^T\\
-&=
-\sigma^2I_n\mathbf X(\mathbf X^T\mathbf X)^{-1}.
+&= \text{Cov} \left(\varepsilon,\, (\mathbf X^T\mathbf X)^{-1}\mathbf X^T\varepsilon \right)\\
+&= \text{Var}(\varepsilon)
+\left[(\mathbf X^T\mathbf X)^{-1}\mathbf X^T\right]^T\\
+&= \sigma^2I_n\mathbf X(\mathbf X^T\mathbf X)^{-1} = \sigma^2\mathbf X(\mathbf X^T\mathbf X)^{-1}.
 \end{aligned}
 $$
 
-따라서
-
-$$
-\boxed{
-\text{Cov}(\varepsilon,\hat\beta) = \sigma^2\mathbf X(\mathbf X^T\mathbf X)^{-1}
-}
-$$
 
 주의할 점은 잔차 $\mathbf e$와 참오차 $\varepsilon$가 다르다는 것이다.  
 $\text{Cov}(\mathbf e,\hat\beta)=0$ 이지만 일반적으로 $\text{Cov}(\varepsilon,\hat\beta)\neq0$ 이다. 추정량 $\hat\beta$가 오차 $\varepsilon$를 이용하여 계산되기 때문이다.
 
 (5) $\displaystyle \sum_{i=1}^n e_i y_i=SSE$
 
-벡터로 나타내면
+벡터로 나타내면 $\sum_{i=1}^n e_i y_i =\mathbf e^T\mathbf y.$  
+그런데 $\mathbf y=\hat{\mathbf y}+\mathbf e$ 이므로 $\mathbf e^T\mathbf y =\mathbf e^T(\hat{\mathbf y}+\mathbf e) =\mathbf e^T\hat{\mathbf y}+\mathbf e^T\mathbf e.$
 
-$$
-\sum_{i=1}^n e_i y_i
-=\mathbf e^T\mathbf y.
-$$
+잔차와 적합값은 직교하므로 $\mathbf e^T\hat{\mathbf y}=0.$  
 
-그런데 $\mathbf y=\hat{\mathbf y}+\mathbf e$ 이므로
+또한 $\mathbf e^T\mathbf e =\sum_{i=1}^ne_i^2 =SSE.$
 
-$$
-\mathbf e^T\mathbf y =\mathbf e^T(\hat{\mathbf y}+\mathbf e) =\mathbf e^T\hat{\mathbf y}+\mathbf e^T\mathbf e.
-$$
-
-잔차와 적합값은 직교하므로 $\mathbf e^T\hat{\mathbf y}=0.$ 또한
-
-$$
-\mathbf e^T\mathbf e
-=\sum_{i=1}^ne_i^2
-=SSE.
-$$
-
-따라서
-
-$$
-\boxed{
-\sum_{i=1}^ne_i y_i=SSE
-}
-$$
+따라서 $\sum_{i=1}^ne_i y_i=SSE$
 
 행렬로 직접 계산해도 된다.
 
@@ -692,55 +582,12 @@ $$
 \end{aligned}
 $$
 
-여기서는 $M^T=M$, $M^2=M$을 이용했다.
-
 (6) $\displaystyle \sum_{i=1}^ne_i\hat y_i=0$
 
-벡터로 나타내면
-
-$$
-\sum_{i=1}^ne_i\hat y_i
-=\mathbf e^T\hat{\mathbf y}.
-$$
-
-$$
-\mathbf e=M\mathbf y,\quad
-\hat{\mathbf y}=H\mathbf y
-$$
-
-이므로
-
-$$
-\begin{aligned}
-\mathbf e^T\hat{\mathbf y}
-&=(M\mathbf y)^TH\mathbf y\\
-&=\mathbf y^TM^TH\mathbf y\\
-&=\mathbf y^TMH\mathbf y\\
-&=0.
-\end{aligned}
-$$
-
-따라서
-
-$$
-\boxed{
-\sum_{i=1}^ne_i\hat y_i=0
-}
-$$
+벡터로 나타내면 $\sum_{i=1}^ne_i\hat y_i =\mathbf e^T\hat{\mathbf y}.$  
+$\mathbf e=M\mathbf y,\quad \hat{\mathbf y}=H\mathbf y$ 이므로 $\mathbf e^T\hat{\mathbf y} =(M\mathbf y)^TH\mathbf y =\mathbf y^TM^TH\mathbf y =\mathbf y^TMH\mathbf y =0.$
 
 정규방정식으로도 증명할 수 있다. $\hat{\mathbf y}=\mathbf X\hat\beta$이므로 $\mathbf e^T\hat{\mathbf y} =\mathbf e^T\mathbf X\hat\beta =(\mathbf X^T\mathbf e)^T\hat\beta =0$ 이다. 여기서 OLS 정규방정식 $\mathbf X^T\mathbf e=0$ 을 사용했다.
-
----
-
-**절편이 없는 중회귀모형**
-
-절편이 없는 모형에서는 $\mathbf X$의 열에 모든 성분이 1인 벡터 $\mathbf 1_n$이 포함되지 않을 뿐이다.
-
-투영행렬 $H=\mathbf X(\mathbf X^T\mathbf X)^{-1}\mathbf X^T$ 과 잔차생성행렬 $M=I_n-H$ 의 성질은 그대로 유지된다. 따라서 문제의 (1)∼(6)은 절편이 없어도 모두 그대로 성립한다.
-
-다만 절편이 있는 모형에서 추가로 성립하는 $\sum_{i=1}^ne_i=0$ 은 절편이 없는 모형에서는 일반적으로 성립하지 않는다.
-
-절편이 있으면 $\mathbf 1_n$이 $\mathbf X$의 열공간에 포함되므로 $\mathbf 1_n^T\mathbf e=0$ 이지만, 절편이 없으면 $\mathbf 1_n$이 $\mathbf X$의 열공간에 포함된다는 보장이 없기 때문이다.
 
 ---
 
@@ -755,22 +602,12 @@ $$
 (\beta-\hat\beta).
 $$
 
-여기서 식의 $\beta$는 참모수라기보다 최소화할 목적함수의 임의의 후보값을 의미한다. 혼동을 피하기 위해 임의의 후보값을 $b$라고 쓰겠다.
-
-$$
-SSE(b)=(\mathbf y-\mathbf Xb)^T(\mathbf y-\mathbf Xb)
-$$
-
-라고 하자.
+여기서 식의 $\beta$는 참모수라기보다 최소화할 목적함수의 임의의 후보값을 의미한다. 혼동을 피하기 위해 임의의 후보값을 $b$라고 쓰겠다: $SSE(b)=(\mathbf y-\mathbf Xb)^T(\mathbf y-\mathbf Xb)$
 
 **1단계: 잔차 분해**
 
 $$
-\begin{aligned}
-\mathbf y-\mathbf Xb
-&=\mathbf y-\mathbf X\hat\beta +\mathbf X\hat\beta-\mathbf Xb\\
-&=(\mathbf y-\mathbf X\hat\beta) +\mathbf X(\hat\beta-b).
-\end{aligned}
+\mathbf y-\mathbf Xb =\mathbf y-\mathbf X\hat\beta +\mathbf X\hat\beta-\mathbf Xb =(\mathbf y-\mathbf X\hat\beta) +\mathbf X(\hat\beta-b).
 $$
 
 따라서
@@ -797,66 +634,48 @@ $$
 
 OLS 추정량은 정규방정식 $\mathbf X^T(\mathbf y-\mathbf X\hat\beta)=0$ 을 만족한다. 따라서 교차항은 $2(\hat\beta-b)^T \mathbf X^T(\mathbf y-\mathbf X\hat\beta)=0$
 
-그러므로
+그러므로$SSE(b) = SSE(\hat\beta) + (\hat\beta-b)^T\mathbf X^T\mathbf X(\hat\beta-b).$
 
-$$
-SSE(b) = SSE(\hat\beta) + (\hat\beta-b)^T\mathbf X^T\mathbf X(\hat\beta-b).
-$$
+이차형식은 부호를 바꾸어도 같으므로 $(\hat\beta-b)^T\mathbf X^T\mathbf X(\hat\beta-b) = (b-\hat\beta)^T\mathbf X^T\mathbf X(b-\hat\beta).$
 
-이차형식은 부호를 바꾸어도 같으므로
-
-$$
-(\hat\beta-b)^T\mathbf X^T\mathbf X(\hat\beta-b) = (b-\hat\beta)^T\mathbf X^T\mathbf X(b-\hat\beta).
-$$
-
-따라서
-
-$$
-\boxed{
-SSE(b) = SSE(\hat\beta) + (b-\hat\beta)^T
-\mathbf X^T\mathbf X
-(b-\hat\beta)
-}
-$$
-
-를 얻는다.
+따라서 $SSE(b) = SSE(\hat\beta) + (b-\hat\beta)^T \mathbf X^T\mathbf X (b-\hat\beta)$
 
 **3단계: 최소성**
 
-두 번째 항은
+두 번째 항은 $(b-\hat\beta)^T \mathbf X^T\mathbf X (b-\hat\beta) = [\mathbf X(b-\hat\beta)]^T [\mathbf X(b-\hat\beta)] = \|\mathbf X(b-\hat\beta)\|^2 \geq 0$
 
-$$
-\begin{aligned}
-(b-\hat\beta)^T
-\mathbf X^T\mathbf X
-(b-\hat\beta)
-&=
-[\mathbf X(b-\hat\beta)]^T
-[\mathbf X(b-\hat\beta)]\\
-&=
-\|\mathbf X(b-\hat\beta)\|^2\\
-&\geq0
-\end{aligned}
-$$
+따라서 모든 $b$에 대하여 $SSE(b)\geq SSE(\hat\beta).$ 즉, $\hat\beta = \arg\min_b (\mathbf y-\mathbf Xb)^T(\mathbf y-\mathbf Xb)$
 
-따라서 모든 $b$에 대하여 $SSE(b)\geq SSE(\hat\beta).$ 즉,
-
-$$
-\boxed{
-\hat\beta = \arg\min_b
-(\mathbf y-\mathbf Xb)^T(\mathbf y-\mathbf Xb)
-}
-$$
-
-또한 $\mathbf X$가 full column rank이면 $\mathbf X^T\mathbf X$는 양의 정부호이므로
-
-$$
-(b-\hat\beta)^T\mathbf X^T\mathbf X(b-\hat\beta)=0
-\iff b=\hat\beta.
-$$
+또한 $\mathbf X$가 full column rank이면 $\mathbf X^T\mathbf X$는 양의 정부호이므로 $(b-\hat\beta)^T\mathbf X^T\mathbf X(b-\hat\beta)=0 \iff b=\hat\beta.$
 
 따라서 최소제곱해는 유일하다.
 
 반대로 $\mathbf X$가 full column rank가 아니라면 $\mathbf X(b-\hat\beta)=0$ 을 만족하는 $b\neq\hat\beta$가 존재할 수 있으므로 최소제곱해가 유일하지 않을 수 있다.
 
 이 식은 기하학적으로 잔차벡터 $\mathbf y-\mathbf X\hat\beta$ 와 추가 변화량 $\mathbf X(\hat\beta-b)$ 가 서로 직교하기 때문에 성립하는 피타고라스 정리이다.
+
+
+[추가 문제]
+
+절편을 포함하는 선형회귀모형에서 $H$를 해트행렬, $J=\frac{1}{n}\mathbf1\mathbf1^T$라 하자. $H-J$와 $I-H$가 대칭 멱등행렬이며, 각각의 계수가 $p-1$과 $n-p$임을 보여라.
+
+설계행렬 $\mathbf X$는 열 계수가 $p$이고 절편을 포함하므로, 어떤 벡터 $a$에 대해 $\mathbf X a=\mathbf1$이다. 해트행렬 $H=\mathbf X(\mathbf X^T\mathbf X)^{-1}\mathbf X^T$에 이를 대입하면
+
+$$
+H\mathbf1=H\mathbf X a=\mathbf X(\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf X a=\mathbf X a=\mathbf1.
+$$
+
+따라서 $HJ=J$이고, $H$와 $J$가 대칭이므로 $JH=J$이다. 또한 $H^2=H$ 및 $J^2=J$이므로
+
+$$
+(H-J)^2=H-J,\qquad (I-H)^2=I-H.
+$$
+
+$H$와 $J$가 대칭이므로 $H-J$와 $I-H$도 대칭이다. 즉, 두 행렬은 대칭 멱등행렬이다. 대칭 멱등행렬의 계수는 대각합과 같고, $\text{rank}(H)=\text{tr}(H)=p$, $\text{rank}(J)=\text{tr}(J)=1$이므로
+
+$$
+\text{rank}(H-J)=\text{tr}(H-J)=p-1,\qquad
+\text{rank}(I-H)=\text{tr}(I-H)=n-p.
+$$
+
+마지막으로 두 행렬은 서로 직교한다. $(H-J)(I-H)=0.$

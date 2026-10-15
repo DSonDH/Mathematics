@@ -221,6 +221,7 @@ $$\rho_{ij} =\frac{-h_{ij}\sigma^2}{\sqrt{\sigma^4(1-h_{ii})(1-h_{jj})}}
 
 즉, 잔차들은 서로 독립(independent)이 아니며, 해트 행렬의 비대각원소(off-diagonal element)에 의해 상관되어 있다. 이 점은 이상점 판별에서 단순한 독립 정규표본처럼 취급할 수 없음을 뜻한다.
 
+TODO:
 ### 8.3.2 이상점을 찾는 방법 (Methods for Detecting Outliers)
 이 절에서는 이상점을 찾는 대표적인 방법으로 다음 두 가지를 다룬다.
 
@@ -237,7 +238,9 @@ $$e_i \sim N(0,\sigma^2(1-h_{ii}))$$
 
 $$\frac{e_i}{\sigma\sqrt{1-h_{ii}}} \sim N(0,1)$$
 
-를 생각할 수 있다. 그러나 $\sigma$는 보통 미지(unknown)이므로, 이를 불편추정량(unbiased estimator)
+를 생각할 수 있다. 
+
+그러나 $\sigma$는 보통 미지(unknown)이므로, 이를 불편추정량(unbiased estimator)
 
 $$s = \sqrt{\frac{\mathbf{e}^T\mathbf{e}}{n-p-1}} = \sqrt{\frac{\mathbf{y}^T(I_n-H)\mathbf{y}}{n-p-1}}$$
 

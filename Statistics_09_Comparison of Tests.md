@@ -1304,6 +1304,7 @@ $$
 - 모집단 분포 $DE(\mu,\sigma)$: $2$
 
 부호검정처럼 모집단 분포의 형태를 가정하지 않고 사용할 수 있는 검정 방법을 **비모수적(nonparametric) 검정**이라 하며, 모집단 분포에 대한 가정이 어려운 경우에 유용하다. 대표적 비모수적 검정인 크기 순서를 이용하는 방법을 살펴보자.
+
 #### 예 9.3.4 위치모수 모형에서 부호순위 검정통계량
 모집단 분포가 연속형이고 확률밀도함수가 $f(x-\theta),\quad -\infty<\theta<+\infty$의 꼴로서 $\theta$에 대해 대칭($f(-x)=f(x)$)인 경우, 랜덤표본 $X_1,\dots,X_n$을 이용하여 $H_0(\theta_0):\theta=\theta_0 ,\quad H_1:\theta>\theta_0$을 검정한다. 이때 $|X_1-\theta_0|,\dots,|X_n-\theta_0|$을 크기순으로 나열할 때 $|X_i-\theta_0|$의 순위를 $R(|X_i-\theta_0|)$라 하며,
 
@@ -1329,7 +1330,6 @@ $X=(2.1,\ -0.4,\ 1.3,\ -2.0,\ 0.7)$
 
 $W_5=5+(-1)+4+(-3)+2=7$
 
-TODO:
 ### 정리 9.3.2 부호순위 검정통계량의 귀무가설하의 분포
 귀무가설 $H_0(\theta_0):\theta=\theta_0$ 하에서 부호순위 검정통계량의 분포는 다음과 같다.
 
@@ -1357,7 +1357,7 @@ $$
 >**(a)** 첫째로 귀무가설 $H_0(\theta_0):\theta=\theta_0$하에서 $X_1$의 분포가 $\theta_0$에 관하여 대칭이므로
 >
 >$$
->P_{\theta_0}(|X_1-\theta_0|\le x,\mathrm{sgn}(X_1-\theta_0)=+1) \\
+>P_{\theta_0}(|X_1-\theta_0|\le x,\quad \mathrm{sgn}(X_1-\theta_0)=+1) \\
 >= P_{\theta_0}(0<X_1-\theta_0\le x) \\
 >= \frac{1}{2}P_{\theta_0}(|X_1-\theta_0|\le x) \\
 >= P_{\theta_0}(|X_1-\theta_0|\le x)P_{\theta_0}(\mathrm{sgn}(X_1-\theta_0)=+1)

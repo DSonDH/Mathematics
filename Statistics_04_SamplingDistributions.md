@@ -941,7 +941,7 @@ $$
 $\theta$가 평균인 모수화에서, $H_0$의 경계 $\theta=\theta_0$일 때
 
 $$
-X_i\overset{\mathrm{iid}}{\sim}\operatorname{Exp}(\theta_0),
+X_i\overset{\mathrm{iid}}{\sim}\text{Exp}(\theta_0),
 \qquad
 f_{X_i}(x)=\frac1{\theta_0}e^{-x/\theta_0},\quad x>0
 $$

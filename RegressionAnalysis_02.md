@@ -387,13 +387,8 @@ $$
 y_{i1}, y_{i2}, \dots, y_{in_i} \ \text{for } i=1,2,\dots,k
 $$
 
-전체 표본수는
-
-$$n = \sum_{i=1}^{k} n_i$$
-
-최소제곱추정에 의한 회귀식은
-
-$$\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i$$
+전체 표본수는 $n = \sum_{i=1}^{k} n_i$  
+최소제곱추정에 의한 회귀식은 $\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i$
 
 하나의 점 $x_i$에서는 $n_i$개의 관측값이 존재하지만, 회귀모형에 의한 예측값은 하나뿐이다. 따라서 오차제곱합은
 
@@ -437,7 +432,7 @@ $$F_0 = \frac{MSLF}{MSPE}$$
 
 $$E(MSPE) = \sigma^2, \quad E(MSLF) = \sigma^2+\frac{\sum_{i=1}^k n_i[E(y_i)-E(\hat y_i)]^2}{k-2}$$
 
-이 성립한다. $E(\hat y_i) = E(y_i) = \beta_0 + \beta_1x_i$이면 $E(MSLF) = \sigma^2$와 같다. 따라서 $F_0$값이 1에 가까우면 회귀직선모형이 옳고, $F_0$값이 커지면 옳지 않은 가정이라는 의미가 된다.
+이 성립한다. $E(\hat y_i) = E(y_i) = \beta_0 + \beta_1x_i$이면 $E(MSLF) = \sigma^2$와 같다. $F_0$가 충분히 크면 선형모형의 적합결여를 뒷받침하지만, 검정에서 기각하지 못했다고 선형모형이 옳다고 확정할 수는 없다. 정확한 $F$분포에 의한 검정에는 독립 정규오차 가정이 추가로 필요하다.
 
 가설:
 
@@ -446,9 +441,62 @@ F_0 > F_\alpha(k-2, n-k)$$
 
 이면 선형모형이 부적절하다고 판단한다.
 
-**증명** TODO:
-$$E(MSPE) = \sigma^2, \quad E(MSLF) = \sigma^2+\frac{\sum_{i=1}^k n_i[E(y_i)-E(\hat y_i)]^2}{k-2}$$
+**증명**
 
+회귀직선이 옳다고 가정하지 않고, 각 수준의 참평균을 $\mu_i=E[Y_{ij}]$라 하자. $x_i$는 서로 다른 고정값이고,
+
+$$Y_{ij}=\mu_i+\varepsilon_{ij},\qquad E[\varepsilon_{ij}]=0,\qquad \text{Var}(\varepsilon_{ij})=\sigma^2$$
+
+이며 서로 다른 관측의 오차는 무상관이라 가정한다. 또한 $n>k>2$라 한다. 아래 두 기댓값의 증명에는 정규분포 가정이 필요하지 않다.
+
+**① $E(MSPE)=\sigma^2$**
+
+각 수준에서 다음 항등식이 성립한다. $\sum_{j=1}^{n_i}(Y_{ij}-\bar Y_i)^2 =\sum_{j=1}^{n_i}(Y_{ij}-\mu_i)^2-n_i(\bar Y_i-\mu_i)^2.$
+
+$E[\bar Y_i]=\mu_i$ 및 $\text{Var}(\bar Y_i)=\sigma^2/n_i$이므로
+
+$$
+E\left[\sum_{j=1}^{n_i}(Y_{ij}-\bar Y_i)^2\right]
+=n_i\sigma^2-n_i\frac{\sigma^2}{n_i} =(n_i-1)\sigma^2.
+$$
+
+따라서 $E[SSPE]=\sum_{i=1}^k(n_i-1)\sigma^2=(n-k)\sigma^2$ 이므로
+
+$$\boxed{E[MSPE]=\frac{E[SSPE]}{n-k}=\sigma^2}.$$
+
+이 결과는 $\mu_i$들이 직선 위에 있는지와 무관하다.
+
+**② $E(MSLF)$**
+
+반복측정 전체에 대한 최소제곱 추정은 제곱합 분해에 의해 $\min_{\beta_0,\beta_1}\sum_{i=1}^k n_i(\bar Y_i-\beta_0-\beta_1x_i)^2$ 와 같으므로, 수준별 평균에 대한 가중최소제곱이다. 다음과 같이 정의하자.
+
+$$W=\text{diag}(n_1,\dots,n_k),\qquad
+\bar Y=(\bar Y_1,\dots,\bar Y_k)^\top,\qquad
+\mu=(\mu_1,\dots,\mu_k)^\top,$$
+
+$$T=\begin{pmatrix}1&x_1\\\vdots&\vdots\\1&x_k\end{pmatrix},\qquad
+Z=W^{1/2}\bar Y,\qquad A=W^{1/2}T.$$
+
+그러면 $E[Z]=W^{1/2}\mu$이고, 서로 다른 관측의 오차가 무상관이므로 $\text{Var}(Z)=\sigma^2I_k$이다. $A$의 열공간으로의 정사영행렬을 $P=A(A^\top A)^{-1}A^\top$ 라 하면 가중 적합값은 $W^{1/2}\widehat Y=PZ$이고,
+
+$$SSLF=\|W^{1/2}(\bar Y-\widehat Y)\|^2=\|(I-P)Z\|^2.$$
+
+$U=(I-P)Z$라 두고 $E[U^\top U]=\text{tr}(\text{Var}(U))+\|E[U]\|^2$를 적용한다. $I-P$가 대칭·멱등이고 $A$의 계수가 2이므로 $\text{Var}(U)=\sigma^2(I-P),\qquad \text{tr}(I-P)=k-2.$
+
+따라서 $E[SSLF]=(k-2)\sigma^2+\|(I-P)W^{1/2}\mu\|^2.$
+
+한편 $E[\widehat Y]=W^{-1/2}PW^{1/2}\mu$이므로
+
+$$
+\|(I-P)W^{1/2}\mu\|^2 =\|W^{1/2}(\mu-E[\widehat Y])\|^2 =\sum_{i=1}^k n_i\bigl(\mu_i-E[\widehat Y_i]\bigr)^2.
+$$
+
+양변을 $k-2$로 나누면
+
+$$\boxed{E[MSLF]=\sigma^2+
+\frac{\displaystyle\sum_{i=1}^k n_i\bigl(\mu_i-E[\widehat Y_i]\bigr)^2}{k-2}}.$$
+
+귀무가설 아래에서는 $\mu=T\beta$이므로 $W^{1/2}\mu\in\text{col}(A)$이고 추가항이 0이 된다. 따라서 $E[MSLF]=E[MSPE]=\sigma^2$이다.
 
 
 ### 2.4.2 잔차의 검토 (Residual Analysis)
@@ -485,9 +533,7 @@ $$\mathrm{Cov}(e_i,e_j) = -\left[ \frac{1}{n} + \frac{(x_i-\bar{x})(x_j-\bar{x})
 >[잔차의 분산]
 >
 >$$
->\text{Var}(e_i)
->=\text{Var}\left[(y_i-\bar y)-d_i\hat\beta_1\right]\\
->=\text{Var}(y_i-\bar y)
+>\text{Var}(e_i) =\text{Var}\left[(y_i-\bar y)-d_i\hat\beta_1\right] =\text{Var}(y_i-\bar y)
 >+d_i^2\text{Var}(\hat\beta_1)
 >-2d_i\text{Cov}(y_i-\bar y,\hat\beta_1)
 >$$
@@ -512,7 +558,7 @@ $$\mathrm{Cov}(e_i,e_j) = -\left[ \frac{1}{n} + \frac{(x_i-\bar{x})(x_j-\bar{x})
 >
 >2. $\text{Var}(\hat\beta_1)$
 >
->최소제곱 추정량은 $\hat\beta_1= \frac{S_{xy}}{S_{xx}} =\frac{\sum_k(x_k-\bar x)(y_k-\bar y)}{S_{xx}} \sum_{k=1}^n \frac{x_k-\bar x}{S_{xx}}y_k$
+>최소제곱 추정량은 $\hat\beta_1= \frac{S_{xy}}{S_{xx}} =\frac{\sum_k(x_k-\bar x)(y_k-\bar y)}{S_{xx}}= \sum_{k=1}^n \frac{x_k-\bar x}{S_{xx}}y_k$
 >
 >따라서 $y_k$들이 서로 독립이므로
 >
@@ -723,9 +769,7 @@ $$d = \frac{\sum_{i=2}^{n}(e_i - e_{i-1})^2}{\sum_{i=1}^{n} e_i^2} = \frac{\sum 
 * 음의 자기상관($\rho<0$)이면 $d>2$
 
 #### 양의 자기상관 검정
-가설:
-
-$$H_0: \rho=0 \qquad H_1: \rho>0$$
+가설: $H_0: \rho=0 \qquad H_1: \rho>0$
 
 판정:
 * $d < d_L$ → $H_0$ 기각
@@ -733,10 +777,7 @@ $$H_0: \rho=0 \qquad H_1: \rho>0$$
 * $d_L < d < d_U$ → 불확정
 
 #### 음의 자기상관 검정
-
-$$H_0: \rho=0 \qquad H_1: \rho<0$$
-
-상한과 하한을
+$H_0: \rho=0 \qquad H_1: \rho<0$ 상한과 하한을
 
 $$d_L^* = 4 - d_U, \qquad d_U^* = 4 - d_L$$
 
