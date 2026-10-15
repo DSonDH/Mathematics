@@ -36,11 +36,7 @@ $$y = \beta_0 + \beta_1 x + \beta_2 x^2 + \cdots + \beta_k x^k + \epsilon$$
 ### 7.1.2 다항회귀의 선형회귀 표현 (Linear Representation of Polynomial Regression)
 다항회귀는 이름과 달리 **모수(parameter)에 대해 선형(linear in parameters)** 이다.
 따라서 **중회귀분석(multiple regression)** 형태로 변환하여 분석할 수 있다.  
-예를 들어 $y = \beta_0 + \beta_1 x + \beta_2 x^2 + \epsilon$ 에서
-
-$$x_1 = x,\quad x_2 = x^2$$
-
-라고 두면
+예를 들어 $y = \beta_0 + \beta_1 x + \beta_2 x^2 + \epsilon$ 에서 $x_1 = x,\quad x_2 = x^2$ 라고 두면
 
 $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon$$
 

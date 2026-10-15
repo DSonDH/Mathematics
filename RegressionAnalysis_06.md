@@ -153,113 +153,91 @@ $$
 $\frac{1}{\sigma^2} SS(\beta_2 \mid \beta_1)$는 자유도가 $p$이고 비중심도가 $\lambda = \frac{1}{2\sigma^2} \beta_2^T X_2^T (I - H_1) X_2 \beta_2$ 인 카이제곱분포(chi-square distribution)를 따르고, 잔차제곱합 $SSE = \mathbf{y}^T(I - H)\mathbf{y}$ 와 서로 독립이다.
 
 >**증명**
-
-$X=(X_1,X_2)$라 놓고, $H_1$과 $H$를 각각 $\mathcal C(X_1)$과 $\mathcal C(X)$ 위로의 직교투영행렬이라고 하자.  
-또한 $p=\text{rank}(X)-\text{rank}(X_1) =\text{rank}\bigl((I-H_1)X_2\bigr)$ 라고 하자.  
-다음과 같이 행렬을 정의한다. $A=H-H_1,\quad B=I-H.$
-
-1. $A=H-H_1$이 랭크 $p$인 대칭 멱등행렬임을 보인다
-
-$\mathcal C(X_1)\subseteq\mathcal C(X)$이므로 중첩된 직교투영행렬의 성질에 따라 $HH_1=H_1H=H_1$ 이 성립한다 (정리 6.1 1번 증명내용 참고).  
-$H$와 $H_1$이 대칭행렬이므로 $A=H-H_1$도 대칭행렬이다. 또한
-
-$$
-\begin{aligned}
-A^2
-&=(H-H_1)^2\\
-&=H^2-HH_1-H_1H+H_1^2\\
-&=H-H_1-H_1+H_1\\
-&=A
-\end{aligned}
-$$
-
-이므로 $A$는 멱등행렬이다.
-
-또한 $\text{rank}(A) = \text{rank}(H)-\text{rank}(H_1) =p$ 이다.
-
-한편, $AX_1=(H-H_1)X_1=X_1-X_1=0$ 이다. 그리고 $X_2$의 각 열은 $\mathcal C(X)$에 속하므로 $HX_2=X_2$ 이다. 따라서
-
-$$
-AX_2=(H-H_1)X_2=(I-H_1)X_2
-$$
-
-가 성립한다.
-
-2. 추가제곱합의 분포를 구한다
-
-완전모형은 $y=X_1\beta_1+X_2\beta_2+\varepsilon, \quad \varepsilon\sim N(0,\sigma^2I_n)$ 이므로 $y\sim N(\mu,\sigma^2I_n), \quad \mu=X_1\beta_1+X_2\beta_2$ 이다.
-
-표준화된 확률벡터를 $z=\frac{y}{\sigma}$ 라고 놓으면 $z\sim N\left(\frac{\mu}{\sigma},I_n\right)$ 이다.
-
-또한 $\frac{1}{\sigma^2}SS(\beta_2\mid\beta_1) =\frac{1}{\sigma^2}y^TAy =z^TAz$ 이다.
-
-앞에서 $A$가 랭크 $p$인 대칭 멱등행렬임을 보였다. 따라서 정리 3.4의 3번에 의해
-
-$$
-z^TAz \sim \chi^2\left(
-p,\frac{1}{2\sigma^2}\mu^TA\mu
-\right)
-$$
-
-이제 비중심도를 계산한다. $AX_1=0$이므로 $A\mu =A(X_1\beta_1+X_2\beta_2) =(I-H_1)X_2\beta_2$  
-$A$가 대칭 멱등행렬이므로 $\mu^TA\mu = \mu^TA^TA\mu = (A\mu)^T(A\mu)$ 이다. 따라서
-
-$$
-\begin{aligned}
-\mu^TA\mu
-&= \bigl((I-H_1)X_2\beta_2\bigr)^T \bigl((I-H_1)X_2\beta_2\bigr)\\
-&= \beta_2^TX_2^T(I-H_1)^T(I-H_1)X_2\beta_2 \\
-&= \beta_2^TX_2^T(I-H_1)X_2\beta_2
-\end{aligned}
-$$
-
-따라서
-
-$$
-\boxed{
-\frac{SS(\beta_2\mid\beta_1)}{\sigma^2}
-\sim
-\chi^2\left(
-p,
-\frac{1}{2\sigma^2}
-\beta_2^TX_2^T(I-H_1)X_2\beta_2
-\right)
-}
-$$
-
-3. 추가제곱합과 잔차제곱합의 독립성을 보인다
-
-잔차제곱합은 $SSE=y^T(I-H)y=y^TBy =(By)^T(By)$. 즉, $SSE$는 잔차벡터 $By$의 함수이다.
-
-정리 3.5를 적용하기 위해 $B\text{Var}(y)A$를 계산한다. $\text{Var}(y)=\sigma^2I_n$이므로
-
-$$
-\begin{aligned}
-B\text{Var}(y)A
-&=(I-H)(\sigma^2I_n)(H-H_1)\\
-&=\sigma^2(I-H)(H-H_1).
-\end{aligned}
-$$
-
-그런데 $(I-H)H=H-H^2=0$ 이고, $(I-H)H_1=H_1-HH_1=0$ 이므로 $B\text{Var}(y)A =0.$ 따라서 정리 3.5에 의해 $y^TAy$ 와 $By$ 는 서로 독립이다.
-
-$SSE=(By)^T(By)$는 $By$의 함수이므로 $y^TAy\;\perp\;SSE$ 이다. 양의 상수 $\sigma^2$로 나누어도 독립성이 유지되므로
-
-$$
-\boxed{
-\frac{1}{\sigma^2}SS(\beta_2\mid\beta_1)
-\;\perp\;
-SSE
-}
-$$
-
-특히 귀무가설 $H_0:\beta_2=0$ 아래에서는 $\lambda=0$이므로
-
-$$
-\frac{1}{\sigma^2}SS(\beta_2\mid\beta_1) \sim\chi_p^2
-$$
-
-가 된다. $\square$
+>
+>$X=(X_1,X_2)$라 놓고, $H_1$과 $H$를 각각 $\mathcal C(X_1)$과 $\mathcal C(X)$ 위로의 직교투영행렬이라고 하자.  
+>또한 $p=\text{rank}(X)-\text{rank}(X_1) =\text{rank}\bigl((I-H_1)X_2\bigr)$ 라고 하자.  
+>다음과 같이 행렬을 정의한다. $A=H-H_1,\quad B=I-H.$
+>
+>1. $A=H-H_1$이 랭크 $p$인 대칭 멱등행렬임을 보인다
+>
+>$\mathcal C(X_1)\subseteq\mathcal C(X)$이므로 중첩된 직교투영행렬의 성질에 따라 $HH_1=H_1H=H_1$ 이 성립한다 (정리 6.1 1번 증명내용 참고).  
+>$H$와 $H_1$이 대칭행렬이므로 $A=H-H_1$도 대칭행렬이다. 또한
+>
+>$$
+>\begin{aligned}
+>A^2
+>&=(H-H_1)^2\\
+>&=H^2-HH_1-H_1H+H_1^2\\
+>&=H-H_1-H_1+H_1\\
+>&=A
+>\end{aligned}
+>$$
+>
+>이므로 $A$는 멱등행렬이다.
+>
+>또한 $\text{rank}(A) = \text{rank}(H)-\text{rank}(H_1) =p$ 이다.
+>
+>한편, $AX_1=(H-H_1)X_1=X_1-X_1=0$ 이다. 그리고 $X_2$의 각 열은 $\mathcal C(X)$에 속하므로 $HX_2=X_2$ 이다. 따라서
+>
+>$$
+>AX_2=(H-H_1)X_2=(I-H_1)X_2
+>$$
+>
+>가 성립한다.
+>
+>2. 추가제곱합의 분포를 구한다
+>
+>완전모형은 $y=X_1\beta_1+X_2\beta_2+\varepsilon, \quad \varepsilon\sim N(0,\sigma^2I_n)$ 이므로 $y\sim N(\mu,\sigma^2I_n), \quad \mu=X_1\beta_1+X_2\beta_2$ 이다. 표준화된 확률벡터를 $z=\frac{y}{\sigma}$ 라고 놓으면 $z\sim N\left(\frac{\mu}{\sigma},I_n\right)$ 이다.
+>
+>또한 $\frac{1}{\sigma^2}SS(\beta_2\mid\beta_1) =\frac{1}{\sigma^2}y^TAy =z^TAz$ 이다.
+>
+>앞에서 $A$가 랭크 $p$인 대칭 멱등행렬임을 보였다. 따라서 정리 3.4의 3번에 의해
+>
+>$$
+>z^TAz \sim \chi^2\left(
+>p,\frac{1}{2\sigma^2}\mu^TA\mu
+>\right)
+>$$
+>
+>이제 비중심도를 계산한다. $AX_1=0$이므로 $A\mu =A(X_1\beta_1+X_2\beta_2) =(I-H_1)X_2\beta_2$  
+>$A$가 대칭 멱등행렬이므로 $\mu^TA\mu = \mu^TA^TA\mu = (A\mu)^T(A\mu)$ 이다. 따라서
+>
+>$$
+>\begin{aligned}
+>\mu^TA\mu
+>&= \bigl((I-H_1)X_2\beta_2\bigr)^T \bigl((I-H_1)X_2\beta_2\bigr)\\
+>&= \beta_2^TX_2^T(I-H_1)^T(I-H_1)X_2\beta_2 \\
+>&= \beta_2^TX_2^T(I-H_1)X_2\beta_2
+>\end{aligned}
+>$$
+>
+>따라서
+>
+>$$
+>\boxed{
+>\frac{SS(\beta_2\mid\beta_1)}{\sigma^2} \sim \chi^2\left(p, \frac{1}{2\sigma^2} \beta_2^TX_2^T(I-H_1)X_2\beta_2 \right)
+>}
+>$$
+>
+>3. 추가제곱합과 잔차제곱합의 독립성을 보인다
+>
+>잔차제곱합은 $SSE=y^T(I-H)y=y^TBy =(By)^T(By)$. 즉, $SSE$는 잔차벡터 $By$의 함수이다.
+>
+>정리 3.5를 적용하기 위해 $B\text{Var}(y)A$를 계산한다. $\text{Var}(y)=\sigma^2I_n$이므로
+>
+>$$ B\text{Var}(y)A =(I-H)(\sigma^2I_n)(H-H_1) =\sigma^2(I-H)(H-H_1)$$
+>
+>그런데 $(I-H)H=H-H^2=0$ 이고, $(I-H)H_1=H_1-HH_1=0$ 이므로 $B\text{Var}(y)A =0.$ 따라서 정리 3.5에 의해 $y^TAy$ 와 $By$ 는 서로 독립이다.
+>
+>$SSE=(By)^T(By)$는 $By$의 함수이므로 $y^TAy\;\perp\;SSE$ 이다. 양의 상수 $\sigma^2$로 나누어도 독립성이 유지되므로
+>
+>$$ \boxed{ \frac{1}{\sigma^2}SS(\beta_2\mid\beta_1) \;\perp\; SSE } $$
+>
+>특히 귀무가설 $H_0:\beta_2=0$ 아래에서는 $\lambda=0$이므로
+>
+>$$\frac{1}{\sigma^2}SS(\beta_2\mid\beta_1) \sim\chi_p^2$$
+>
+>가 된다. $\square$
 
 ### 6.1.5 부분 F-검정 (Partial F-Test)
 귀무가설 $H_0: \beta_{q+1} = \cdots = \beta_p = 0$ 을 검정하기 위한 통계량은
@@ -318,8 +296,7 @@ $$
 >직교하기 위해서는 $\sum x_i = 0$이어야 한다. 즉, $x_1$이 중심화(centering)되어야 한다. 1번모형은 절편없는 회귀 이므로
 >
 >$$ 
->SSR = SS(\hat\beta_1) = \hat\beta^T X^T y = \hat\beta_1\sum x_{i1} y_i \\
->= \frac{(\sum x_{i1} y_i)^2}{\sum x_{i1}^2}
+>SSR = SS(\hat\beta_1) = \hat\beta^T X^T y = \hat\beta_1\sum x_{i1} y_i = \frac{(\sum x_{i1} y_i)^2}{\sum x_{i1}^2}
 >$$
 >
 >2번모형은 절편있는 모형의 회귀제곱합은 
@@ -345,11 +322,9 @@ $$
 >절편을 제외한 회귀제곱합은
 >
 >$$
->\begin{aligned}
 >SSR(x_1,x_2\mid x_0)
->&= \hat\beta_1x_1^Ty+\hat\beta_2x_2^Ty\\
->&= \frac{(x_1^Ty)^2}{x_1^Tx_1} + \frac{(x_2^Ty)^2}{x_2^Tx_2}.
->\end{aligned}
+>= \hat\beta_1x_1^Ty+\hat\beta_2x_2^Ty
+>= \frac{(x_1^Ty)^2}{x_1^Tx_1} + \frac{(x_2^Ty)^2}{x_2^Tx_2}.
 >$$
 >
 >따라서
@@ -458,126 +433,126 @@ $$
 
 위 결과는 설계행렬을 두 블록이 아니라 $q$개의 블록으로 분할해도, 서로 다른 블록의 열공간이 쌍별로 직교하면 회귀제곱합과 추가제곱합이 블록별로 분해된다.
 
-**증명**
-
-전체모형의 정규방정식 $X^TX\hat\beta=X^Ty$ 이고, 쌍별 직교조건에 의해 $X_i^TX_j=0, \quad i\neq j$ 이므로
-
-$$
-X^TX =
-\begin{pmatrix}
-X_1^TX_1 & 0 & \cdots & 0\\
-0 & X_2^TX_2 & \cdots & 0\\
-\vdots & \vdots & \ddots & \vdots\\
-0 & 0 & \cdots & X_q^TX_q
-\end{pmatrix}.
-$$
-
-따라서 정규방정식은 블록별로 분리된다: $X_j^TX_j\hat\beta_j=X_j^Ty, \quad j=1,\ldots,q.$ 그러므로 $\hat\beta_j = (X_j^TX_j)^{-1}X_j^Ty$ 이다.
-
-따라서 각 블록의 회귀계수 추정량은 다른 블록의 포함 여부와 무관하다.
-
-그리고 블록별 투영행렬의 직교성: $H_iH_j=H_jH_i=0, \quad i\neq j$ 이 성립함을 간단한 연산으로 보일 수 있다. 이는 각 투영행렬의 열공간이 서로 직교한다는 것을 의미한다.
-
-전체 투영행렬의 분해:
-
-다음 행렬을 생각하자. $H_\ast=\sum_{j=1}^qH_j.$ 각 $H_j$가 대칭행렬이므로
-
-$$
-H_\ast^T = \sum_{j=1}^qH_j^T = \sum_{j=1}^qH_j = H_\ast
-$$
-
-이다. 따라서 $H_\ast$는 대칭행렬이다.
-
-또한, 각 $H_j$가 멱등행렬이고 $i\neq j$일 때 $H_iH_j=0$이므로
-
-$$
-H_\ast^2 = \left(\sum_{i=1}^qH_i\right) \left(\sum_{j=1}^qH_j\right) = \sum_{j=1}^qH_j^2 + \sum_{i\neq j}H_iH_j =H_\ast
-$$
-
-따라서 $H_\ast$는 대칭 멱등행렬이다.
-
-한편, 쌍별 직교성에 의해 전체 설계행렬의 열공간은 직교직합으로 표현된다.
-
-$$
-\mathcal C(X) = \mathcal C(X_1) \oplus \mathcal C(X_2) \oplus\cdots\oplus \mathcal C(X_q).
-$$
-
-$H_\ast$는 바로 이 열공간 위로의 직교투영행렬이다. 직교투영행렬은 유일하므로
-
-$$
-\boxed{H = H_\ast = \sum_{j=1}^qH_j }
-$$
-
-한편, 전체모형의 수정하지 않은 회귀제곱합은 $SS(\hat\beta_1,\ldots,\hat\beta_q) = y^THy$ 이다.
-
-앞에서 구한 투영행렬의 분해를 적용하면
-
-$$
-\begin{aligned}
-SS(\hat\beta_1,\ldots,\hat\beta_q)
-&=
-y^T\left(\sum_{j=1}^qH_j\right)y\\
-&=
-\sum_{j=1}^qy^TH_jy.
-\end{aligned}
-$$
-
-각 블록의 회귀제곱합을 $SS(\hat\beta_j)=y^TH_jy$ 라고 정의하면
-
-$$
-\begin{aligned}
-SS(\hat\beta_j)
-&=y^TH_jy\\
-&=
-y^TX_j(X_j^TX_j)^{-1}X_j^Ty\\
-&=
-\hat\beta_j^TX_j^Ty\\
-&=
-\hat\beta_j^TX_j^TX_j\hat\beta_j.
-\end{aligned}
-$$
-
-따라서 전체 회귀제곱합은 각 블록에 의해 설명되는 제곱합의 합이다.
-
-임의의 $j$를 고정하고, $X_j$를 제외한 나머지 모든 블록을
-
-$$
-X_{-j} =
-\begin{pmatrix}
-X_1&\cdots&X_{j-1}&X_{j+1}&\cdots&X_q
-\end{pmatrix}
-$$
-
-라고 하자.
-
-$X_{-j}$에 대한 투영행렬은 블록들의 직교성에 의해
-
-$$
-H_{-j} = \sum_{\substack{k=1\\k\neq j}}^qH_k
-$$
-
-이다. 전체모형의 투영행렬은 $H = \sum_{k=1}^qH_k$ 이므로
-
-$$
-H-H_{-j} = \sum_{k=1}^qH_k - \sum_{\substack{k=1\\k\neq j}}^qH_k =H_j.
-$$
-
-따라서 나머지 모든 블록이 이미 포함된 상태에서 $X_j$를 추가할 때의 추가제곱합은
-
-$$
-SS(\hat\beta_j\mid\hat\beta_{-j}) = y^T(H-H_{-j})y =y^TH_jy =SS(\hat\beta_j) 
-$$
-
-즉,
-
-$$
-\boxed{
-SS(\hat\beta_j\mid
-\hat\beta_1,\ldots,\hat\beta_{j-1},
-\hat\beta_{j+1},\ldots,\hat\beta_q)
-= SS(\hat\beta_j)
-}
-$$
+>**증명**
+>
+>전체모형의 정규방정식 $X^TX\hat\beta=X^Ty$ 이고, 쌍별 직교조건에 의해 $X_i^TX_j=0, \quad i\neq j$ 이므로
+>
+>$$
+>X^TX =
+>\begin{pmatrix}
+>X_1^TX_1 & 0 & \cdots & 0\\
+>0 & X_2^TX_2 & \cdots & 0\\
+>\vdots & \vdots & \ddots & \vdots\\
+>0 & 0 & \cdots & X_q^TX_q
+>\end{pmatrix}.
+>$$
+>
+>따라서 정규방정식은 블록별로 분리된다: $X_j^TX_j\hat\beta_j=X_j^Ty, \quad j=1,\ldots,q.$ 그러므로 $\hat\beta_j = (X_j^TX_j)^{-1}X_j^Ty$ 이다.
+>
+>따라서 각 블록의 회귀계수 추정량은 다른 블록의 포함 여부와 무관하다.
+>
+>그리고 블록별 투영행렬의 직교성: $H_iH_j=H_jH_i=0, \quad i\neq j$ 이 성립함을 간단한 연산으로 보일 수 있다. 이는 각 투영행렬의 열공간이 서로 직교한다는 것을 의미한다.
+>
+>전체 투영행렬의 분해:
+>
+>다음 행렬을 생각하자. $H_\ast=\sum_{j=1}^qH_j.$ 각 $H_j$가 대칭행렬이므로
+>
+>$$
+>H_\ast^T = \sum_{j=1}^qH_j^T = \sum_{j=1}^qH_j = H_\ast
+>$$
+>
+>이다. 따라서 $H_\ast$는 대칭행렬이다.
+>
+>또한, 각 $H_j$가 멱등행렬이고 $i\neq j$일 때 $H_iH_j=0$이므로
+>
+>$$
+>H_\ast^2 = \left(\sum_{i=1}^qH_i\right) \left(\sum_{j=1}^qH_j\right) = \sum_{j=1}^qH_j^2 + \sum_{i\neq j}H_iH_j =H_\ast
+>$$
+>
+>따라서 $H_\ast$는 대칭 멱등행렬이다.
+>
+>한편, 쌍별 직교성에 의해 전체 설계행렬의 열공간은 직교직합으로 표현된다.
+>
+>$$
+>\mathcal C(X) = \mathcal C(X_1) \oplus \mathcal C(X_2) \oplus\cdots\oplus \mathcal C(X_q).
+>$$
+>
+>$H_\ast$는 바로 이 열공간 위로의 직교투영행렬이다. 직교투영행렬은 유일하므로
+>
+>$$
+>\boxed{H = H_\ast = \sum_{j=1}^qH_j }
+>$$
+>
+>한편, 전체모형의 수정하지 않은 회귀제곱합은 $SS(\hat\beta_1,\ldots,\hat\beta_q) = y^THy$ 이다.
+>
+>앞에서 구한 투영행렬의 분해를 적용하면
+>
+>$$
+>\begin{aligned}
+>SS(\hat\beta_1,\ldots,\hat\beta_q)
+>&=
+>y^T\left(\sum_{j=1}^qH_j\right)y\\
+>&=
+>\sum_{j=1}^qy^TH_jy.
+>\end{aligned}
+>$$
+>
+>각 블록의 회귀제곱합을 $SS(\hat\beta_j)=y^TH_jy$ 라고 정의하면
+>
+>$$
+>\begin{aligned}
+>SS(\hat\beta_j)
+>&=y^TH_jy\\
+>&=
+>y^TX_j(X_j^TX_j)^{-1}X_j^Ty\\
+>&=
+>\hat\beta_j^TX_j^Ty\\
+>&=
+>\hat\beta_j^TX_j^TX_j\hat\beta_j.
+>\end{aligned}
+>$$
+>
+>따라서 전체 회귀제곱합은 각 블록에 의해 설명되는 제곱합의 합이다.
+>
+>임의의 $j$를 고정하고, $X_j$를 제외한 나머지 모든 블록을
+>
+>$$
+>X_{-j} =
+>\begin{pmatrix}
+>X_1&\cdots&X_{j-1}&X_{j+1}&\cdots&X_q
+>\end{pmatrix}
+>$$
+>
+>라고 하자.
+>
+>$X_{-j}$에 대한 투영행렬은 블록들의 직교성에 의해
+>
+>$$
+>H_{-j} = \sum_{\substack{k=1\\k\neq j}}^qH_k
+>$$
+>
+>이다. 전체모형의 투영행렬은 $H = \sum_{k=1}^qH_k$ 이므로
+>
+>$$
+>H-H_{-j} = \sum_{k=1}^qH_k - \sum_{\substack{k=1\\k\neq j}}^qH_k =H_j.
+>$$
+>
+>따라서 나머지 모든 블록이 이미 포함된 상태에서 $X_j$를 추가할 때의 추가제곱합은
+>
+>$$
+>SS(\hat\beta_j\mid\hat\beta_{-j}) = y^T(H-H_{-j})y =y^TH_jy =SS(\hat\beta_j) 
+>$$
+>
+>즉,
+>
+>$$
+>\boxed{
+>SS(\hat\beta_j\mid
+>\hat\beta_1,\ldots,\hat\beta_{j-1},
+>\hat\beta_{j+1},\ldots,\hat\beta_q)
+>= SS(\hat\beta_j)
+>}
+>$$
 
 ## 6.2 F-검정과 축차 F-검정 (Partial and Sequential F-Test)
 
@@ -621,10 +596,10 @@ $$
 변수를 하나씩 추가해 가며 검정하는 방법이다.
 
 **1단계:**  
-$SS(\hat{\beta}_1 \mid \hat{\beta}_0)$를 구하고 부분F검정을 거쳐 유의한것 중 가장 큰 추가제곱합을 갖는 변수를 우선선택
+$SS(\hat{\beta}_j \mid \hat{\beta}_0)$를 구하고 부분F검정을 거쳐 유의한것 중 가장 큰 추가제곱합을 갖는 변수를 우선선택. (예시로 index 1이 선택됬다 하자.)
 
 **2단계:**  
-$SS(\hat{\beta}_2 \mid \hat{\beta}_0,\hat{\beta}_1)$를 구하고 부분F검정을 거쳐 유의한것 중 가장 큰 추가제곱합을 갖는 변수를 선택  
+$SS(\hat{\beta}_j \mid \hat{\beta}_0,\hat{\beta}_1)$를 구하고 부분F검정을 거쳐 유의한것 중 가장 큰 추가제곱합을 갖는 변수를 선택  
 
 이와 같이 순차적으로 추가한다.
 

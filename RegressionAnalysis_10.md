@@ -124,7 +124,7 @@ $$E[SSE(\hat{\boldsymbol{\beta}}^*)] = E[(\mathbf{e}^*)^TV^{-1}(\mathbf{e}^*)] =
 = \text{tr}[V^{-1}(\sigma^2V - \sigma^2X(X^\top V^{-1}X)^{-1}X^\top)] \\
 = \sigma^2 \text{tr}[I_n - V^{-1}X(X^\top V^{-1}X)^{-1}X^\top] \\
 = \sigma^2 (\text{tr}[I_n] -\text{tr}[I_q]) \\
-\sigma^2 (n-p-1)$$
+=\sigma^2 (n-p-1)$$
 
 따라서 $\sigma^2$의 불편추정량은
 
@@ -141,12 +141,12 @@ $$\widehat{\text{Var}}(\hat{\boldsymbol{\beta}}^*)=\tilde{\sigma}^2 (X^TV^{-1}X)
 
 만약 OLS에서 사용한 
 
-$$\tilde{\sigma}^2=MSE = \frac{(\mathbf{y}-X\hat{\boldsymbol{\beta}})^T(\mathbf{y}-X\hat{\boldsymbol{\beta}})}{(n-p-1)} = \frac{\mathbf{y}\left[I_n - X(X^\top X)^{-1}X^\top \right]\mathbf{y}}{n-p-1}$$
+$$\tilde{\sigma}^2=MSE = \frac{(\mathbf{y}-X\hat{\boldsymbol{\beta}})^T(\mathbf{y}-X\hat{\boldsymbol{\beta}})}{(n-p-1)} = \frac{\mathbf{y}^T\left[I_n - X(X^\top X)^{-1}X^\top \right]\mathbf{y}}{n-p-1}$$
 
 를 그대로 사용하면 $\hat{\sigma}^2 (X^TV^{-1}X)^{-1}$ 은 $\text{Var}(\hat{\boldsymbol{\beta}}^*)$의 불편추정량이 아니다. 왜냐하면 정리3.1을 사용하면
 
 $$
-E(\hat{\sigma}^2) = \frac1{n-p-1}E[\mathbf{y}\left[I_n - X(X^\top X)^{-1}X^\top \right]\mathbf{y}] \\
+E(\hat{\sigma}^2) = \frac1{n-p-1}E[\mathbf{y}^T\left[I_n - X(X^\top X)^{-1}X^\top \right]\mathbf{y}] \\
 = \frac{\sigma^2}{n-p-1}[\text{tr}(V)-\text{tr}(X(X^\top X)^{-1}X^\top V)]
 \neq \sigma^2
 

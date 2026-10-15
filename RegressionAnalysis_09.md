@@ -285,27 +285,25 @@ $\text{Var}(\hat{y}) \ge \text{Var}(\tilde{y}_k)$
 완전모형은 예측에서 불편하지만 분산이 크다. 축소모형은 편향이 있으나 분산이 작다. 그런데 어떤 조건 아래에서는 축소모형의 평균제곱오차가 완전모형의 분산보다 더 작아질 수 있다. 즉, **약간의 편향을 감수하더라도 분산 감소 효과가 더 크다면 축소모형이 오히려 더 좋은 선택**이 된다.  
 이것이 변수 제거를 정당화하는 이론적 배경이다.
 
-**증명**
-
-
-$\text{Var}(\hat{\mathbf y}) = H\text{Var}(\mathbf y)H^T = \sigma^2H^2 = \sigma^2H$  
-마찬가지로 축소모형의 적합값은 $\tilde{\mathbf y}_k=H_k\mathbf y$ 이므로 $\text{Var}(\tilde{\mathbf y}_k) = \sigma^2H_k$ 이다.
-
-따라서 $\text{Var}(\hat{\mathbf y}) - \text{Var}(\tilde{\mathbf y}_k) = \sigma^2(H-H_k)$ 이다.
-
-축소모형은 완전모형에 포함되어 있으므로 $\mathcal C(X_k)\subseteq\mathcal C(X)$ 이다. $H_k$는 $\mathcal C(X_k)$로의 직교투영행렬이고, $H$는 $\mathcal C(X)$로의 직교투영행렬이다.
-
-따라서 임의의 벡터 $\mathbf a$에 대하여 $\mathbf a^T(H-H_k)\mathbf a = \left\|(H-H_k)\mathbf a\right\|^2
-\geq 0$ 이다.  
-즉, $H-H_k$ 는 양반정치행렬이다.
-
-따라서
-
-$$
-\boxed{
-\text{Var}(\hat{\mathbf y}) - \text{Var}(\tilde{\mathbf y}_k) = \sigma^2(H-H_k) \geq0
-}
-$$
+>**증명**  
+>$\text{Var}(\hat{\mathbf y}) = H\text{Var}(\mathbf y)H^T = \sigma^2H^2 = \sigma^2H$  
+>마찬가지로 축소모형의 적합값은 $\tilde{\mathbf y}_k=H_k\mathbf y$ 이므로 $\text{Var}(\tilde{\mathbf y}_k) = \sigma^2H_k$ 이다.
+>
+>따라서 $\text{Var}(\hat{\mathbf y}) - \text{Var}(\tilde{\mathbf y}_k) = \sigma^2(H-H_k)$ 이다.
+>
+>축소모형은 완전모형에 포함되어 있으므로 $\mathcal C(X_k)\subseteq\mathcal C(X)$ 이다. $H_k$는 $\mathcal C(X_k)$로의 직교투영행렬이고, $H$는 $\mathcal C(X)$로의 직교투영행렬이다.
+>
+>따라서 임의의 벡터 $\mathbf a$에 대하여 $\mathbf a^T(H-H_k)\mathbf a = \left\|(H-H_k)\mathbf a\right\|^2
+>\geq 0$ 이다.  
+>즉, $H-H_k$ 는 양반정치행렬이다.
+>
+>따라서
+>
+>$$
+>\boxed{
+>\text{Var}(\hat{\mathbf y}) - \text{Var}(\tilde{\mathbf y}_k) = \sigma^2(H-H_k) \geq0
+>}
+>$$
 
 
 ### 정리 9.3
@@ -316,69 +314,67 @@ $$\text{Var}(\hat{y}) \ge \text{MSE}(\tilde{y}_k)$$
 
 즉, 이 정리의 조건이 만족되면, 축소모형이 완전모형보다 더 바람직하다는 뜻이다.
 
-**증명**
-
-
-참된 평균벡터를 $\boldsymbol\mu = E(\mathbf y) = X_k\boldsymbol\beta_k+X_r\boldsymbol\beta_r$ 라고 하자.
-
-벡터 추정량 $\mathbf t$의 평균제곱오차행렬은 $\text{MSE}(\mathbf t) = \text{Var}(\mathbf t) + \text{Bias}(\mathbf t) \text{Bias}(\mathbf t)^T$ 로 분해된다.
-
-축소모형 적합값의 기댓값은 $E(\tilde{\mathbf y}_k) = E(H_k\mathbf y) = H_k(X_k\boldsymbol\beta_k+X_r\boldsymbol\beta_r) = X_k\boldsymbol\beta_k+H_kX_r\boldsymbol\beta_r$ 이다. 따라서 축소모형 적합값의 편향은
-
-$$
-\begin{aligned}
-\text{Bias}(\tilde{\mathbf y}_k)
-&= E(\tilde{\mathbf y}_k)-\boldsymbol\mu\\
-&= H_kX_r\boldsymbol\beta_r-X_r\boldsymbol\beta_r\\
-&= -(I-H_k)X_r\boldsymbol\beta_r\\
-&= -M_kX_r\boldsymbol\beta_r
-\end{aligned}
-$$
-
-그러므로 편향의 외적은 $\text{Bias}(\tilde{\mathbf y}_k) \text{Bias}(\tilde{\mathbf y}_k)^T = M_kX_r \boldsymbol\beta_r\boldsymbol\beta_r^T X_r^TM_k$ 이다.
-
-정리 9.2에서 $\text{Var}(\tilde{\mathbf y}_k) = \sigma^2H_k$ 이므로 $\text{MSE}(\tilde{\mathbf y}_k) = \sigma^2H_k + M_kX_r \boldsymbol\beta_r\boldsymbol\beta_r^T X_r^TM_k$ 이다.
-
-한편 완전모형에서 $\boldsymbol\beta_r$의 추정량은 $\hat{\boldsymbol\beta}_r = (X_r^TM_kX_r)^{-1}X_r^TM_k\mathbf y$ 이고, 그 분산은 $\text{Var}(\hat{\boldsymbol\beta}_r) = \sigma^2(X_r^TM_kX_r)^{-1}$ 이다.
-
-또한 완전모형과 축소모형의 hat matrix 차이는 $H-H_k = M_kX_r(X_r^TM_kX_r)^{-1}X_r^TM_k$ 이다. 따라서
-
-$$
-\begin{aligned}
-\text{Var}(\hat{\mathbf y}) - \text{Var}(\tilde{\mathbf y}_k)
-&= \sigma^2(H-H_k)\\
-&= M_kX_r \left[ \sigma^2(X_r^TM_kX_r)^{-1} \right] X_r^TM_k\\
-&= M_kX_r \text{Var}(\hat{\boldsymbol\beta}_r) X_r^TM_k.
-\end{aligned}
-$$
-
-이제 완전모형 적합값의 분산과 축소모형 적합값의 MSE 차이를 계산하면
-
-$$
-\begin{aligned}
-&\text{Var}(\hat{\mathbf y}) - \text{MSE}(\tilde{\mathbf y}_k) \\
-&= \text{Var}(\hat{\mathbf y}) - \text{Var}(\tilde{\mathbf y}_k) - \text{Bias}(\tilde{\mathbf y}_k) \text{Bias}(\tilde{\mathbf y}_k)^T \\
-&= M_kX_r \text{Var}(\hat{\boldsymbol\beta}_r) X_r^TM_k - M_kX_r \boldsymbol\beta_r\boldsymbol\beta_r^T X_r^TM_k\\
-&= M_kX_r \left[\text{Var}(\hat{\boldsymbol\beta}_r) - \boldsymbol\beta_r\boldsymbol\beta_r^T \right] X_r^TM_k.
-\end{aligned}
-$$
-
-가정에 따라 $A= \text{Var}(\hat{\boldsymbol\beta}_r) - \boldsymbol\beta_r\boldsymbol\beta_r^T$ 는 양반정치행렬이다. 임의의 벡터 $\mathbf a$에 대하여
-
-$$
-\mathbf a^T
-\left[ M_kX_rAX_r^TM_k\right] \mathbf a = (X_r^TM_k\mathbf a)^T A (X_r^TM_k\mathbf a) \geq0
-$$
-
-이므로 $M_kX_rAX_r^TM_k$ 도 양반정치행렬이다.
-
-따라서
-
-$$
-\boxed{
-\text{Var}(\hat{\mathbf y}) - \text{MSE}(\tilde{\mathbf y}_k) = M_kX_r \left[ \text{Var}(\hat{\boldsymbol\beta}_r) - \boldsymbol\beta_r\boldsymbol\beta_r^T \right] X_r^TM_k \geq0
-}
-$$
+>**증명**  
+>참된 평균벡터를 $\boldsymbol\mu = E(\mathbf y) = X_k\boldsymbol\beta_k+X_r\boldsymbol\beta_r$ 라고 하자.
+>
+>벡터 추정량 $\mathbf t$의 평균제곱오차행렬은 $\text{MSE}(\mathbf t) = \text{Var}(\mathbf t) + \text{Bias}(\mathbf t) \text{Bias}(\mathbf t)^T$ 로 분해된다.
+>
+>축소모형 적합값의 기댓값은 $E(\tilde{\mathbf y}_k) = E(H_k\mathbf y) = H_k(X_k\boldsymbol\beta_k+X_r\boldsymbol\beta_r) = X_k\boldsymbol\beta_k+H_kX_r\boldsymbol\beta_r$ 이다. 따라서 축소모형 적합값의 편향은
+>
+>$$
+>\begin{aligned}
+>\text{Bias}(\tilde{\mathbf y}_k)
+>&= E(\tilde{\mathbf y}_k)-\boldsymbol\mu\\
+>&= H_kX_r\boldsymbol\beta_r-X_r\boldsymbol\beta_r\\
+>&= -(I-H_k)X_r\boldsymbol\beta_r\\
+>&= -M_kX_r\boldsymbol\beta_r
+>\end{aligned}
+>$$
+>
+>그러므로 편향의 외적은 $\text{Bias}(\tilde{\mathbf y}_k) \text{Bias}(\tilde{\mathbf y}_k)^T = M_kX_r \boldsymbol\beta_r\boldsymbol\beta_r^T X_r^TM_k$ 이다.
+>
+>정리 9.2에서 $\text{Var}(\tilde{\mathbf y}_k) = \sigma^2H_k$ 이므로 $\text{MSE}(\tilde{\mathbf y}_k) = \sigma^2H_k + M_kX_r \boldsymbol\beta_r\boldsymbol\beta_r^T X_r^TM_k$ 이다.
+>
+>한편 완전모형에서 $\boldsymbol\beta_r$의 추정량은 $\hat{\boldsymbol\beta}_r = (X_r^TM_kX_r)^{-1}X_r^TM_k\mathbf y$ 이고, 그 분산은 $\text{Var}(\hat{\boldsymbol\beta}_r) = \sigma^2(X_r^TM_kX_r)^{-1}$ 이다.
+>
+>또한 완전모형과 축소모형의 hat matrix 차이는 $H-H_k = M_kX_r(X_r^TM_kX_r)^{-1}X_r^TM_k$ 이다. 따라서
+>
+>$$
+>\begin{aligned}
+>\text{Var}(\hat{\mathbf y}) - \text{Var}(\tilde{\mathbf y}_k)
+>&= \sigma^2(H-H_k)\\
+>&= M_kX_r \left[ \sigma^2(X_r^TM_kX_r)^{-1} \right] X_r^TM_k\\
+>&= M_kX_r \text{Var}(\hat{\boldsymbol\beta}_r) X_r^TM_k.
+>\end{aligned}
+>$$
+>
+>이제 완전모형 적합값의 분산과 축소모형 적합값의 MSE 차이를 계산하면
+>
+>$$
+>\begin{aligned}
+>&\text{Var}(\hat{\mathbf y}) - \text{MSE}(\tilde{\mathbf y}_k) \\
+>&= \text{Var}(\hat{\mathbf y}) - \text{Var}(\tilde{\mathbf y}_k) - \text{Bias}(\tilde{\mathbf y}_k) \text{Bias}(\tilde{\mathbf y}_k)^T \\
+>&= M_kX_r \text{Var}(\hat{\boldsymbol\beta}_r) X_r^TM_k - M_kX_r \boldsymbol\beta_r\boldsymbol\beta_r^T X_r^TM_k\\
+>&= M_kX_r \left[\text{Var}(\hat{\boldsymbol\beta}_r) - \boldsymbol\beta_r\boldsymbol\beta_r^T \right] X_r^TM_k.
+>\end{aligned}
+>$$
+>
+>가정에 따라 $A= \text{Var}(\hat{\boldsymbol\beta}_r) - \boldsymbol\beta_r\boldsymbol\beta_r^T$ 는 양반정치행렬이다. 임의의 벡터 $\mathbf a$에 대하여
+>
+>$$
+>\mathbf a^T
+>\left[ M_kX_rAX_r^TM_k\right] \mathbf a = (X_r^TM_k\mathbf a)^T A (X_r^TM_k\mathbf a) \geq0
+>$$
+>
+>이므로 $M_kX_rAX_r^TM_k$ 도 양반정치행렬이다.
+>
+>따라서
+>
+>$$
+>\boxed{
+>\text{Var}(\hat{\mathbf y}) - \text{MSE}(\tilde{\mathbf y}_k) = M_kX_r \left[ \text{Var}(\hat{\boldsymbol\beta}_r) - \boldsymbol\beta_r\boldsymbol\beta_r^T \right] X_r^TM_k \geq0
+>}
+>$$
 
 ### 평균제곱오차의 해석: 분산과 편향의 제곱의 합
 
